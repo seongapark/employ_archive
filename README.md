@@ -20,7 +20,7 @@
 ```bash
 pip install -r requirements.txt
 python -m pytest                              # 파이썬 테스트 (네트워크 불필요)
-node --test core/tests/ hub/tests/ domains/forecast/tests/web/   # 웹 테스트
+node --test "core/tests/*.mjs" "hub/tests/*.mjs" "domains/forecast/tests/web/*.mjs"   # 웹 테스트
 python -m tools.serve                         # 로컬 서버 (http://127.0.0.1:8642/)
 python -m domains.forecast.pipeline.collect   # 전망 수집 1회
 ```
