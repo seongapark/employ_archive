@@ -1,0 +1,12 @@
+{
+  "artboards": [
+    { "file": "Main.dc.html", "title": "① 홈 — 최신 전망", "x": 0, "y": 0, "w": 390, "h": 844 },
+    { "file": "Org.dc.html", "title": "② 기관 — 수정 이력", "x": 490, "y": 0, "w": 390, "h": 844 },
+    { "file": "Compare.dc.html", "title": "③ 비교", "x": 980, "y": 0, "w": 390, "h": 844 },
+    { "file": "Timeline.dc.html", "title": "④ 타임라인", "x": 1470, "y": 0, "w": 390, "h": 844 }
+  ],
+  "annotations": [
+    { "id": "data-note", "x": 0, "y": -170, "w": 420, "text": "데이터 출처 표시\nOECD·IMF 수치 = 실제 수집 데이터 (2026-08-29 파이프라인 첫 실행분)\n한국은행·KDI·노동연 수치 = 화면기획서 예시 샘플 (아직 PDF 파서 미구현)\n\n② 기관 화면의 26.08 행은 '펼친 상태'(근거 전문·태그·원문 링크)를 보여주는 예시" }
+  ],
+  "launch": { "view": "canvas" }
+}

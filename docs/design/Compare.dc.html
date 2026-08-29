@@ -1,0 +1,132 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+  <style>
+    body { margin: 0; font-family: 'IBM Plex Sans KR', 'Malgun Gothic', system-ui, sans-serif; color: #191d24; }
+    a { color: #23508f; } a:hover { color: #1a3c6e; }
+    .num { font-variant-numeric: tabular-nums; letter-spacing: -0.01em; }
+    .card { background: #ffffff; border: 1px solid #e2e5ea; border-radius: 10px; }
+  </style>
+</helmet>
+<div style="width: 390px; height: 844px; background: #eef0f3; display: flex; flex-direction: column; overflow: hidden;">
+
+  <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 16px 10px 16px; background: #ffffff; border-bottom: 1px solid #e2e5ea;">
+    <div style="font-size: 17px; font-weight: 700;">고용전망</div>
+    <div style="font-size: 12px; color: #667085;" class="num">08.29 갱신</div>
+  </div>
+
+  <div style="display: flex; flex-direction: column; gap: 10px; padding: 14px 16px 0 16px;">
+    <div style="font-size: 18px; font-weight: 700;" class="num">2027년 성장률 비교</div>
+    <div style="display: flex; gap: 8px;">
+      <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; background: #ffffff; border: 1px solid #e2e5ea; padding: 6px 12px; border-radius: 8px;">
+        성장률
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div style="display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; background: #ffffff; border: 1px solid #e2e5ea; padding: 6px 12px; border-radius: 8px;" class="num">
+        2027
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#667085" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+      </div>
+      <div style="margin-left: auto; display: flex; gap: 6px;">
+        <div style="font-size: 12px; font-weight: 600; color: #ffffff; background: #23508f; padding: 6px 10px; border-radius: 999px;">전체</div>
+        <div style="font-size: 12px; font-weight: 500; color: #667085; background: #ffffff; border: 1px solid #e2e5ea; padding: 6px 10px; border-radius: 999px;">국내</div>
+        <div style="font-size: 12px; font-weight: 500; color: #667085; background: #ffffff; border: 1px solid #e2e5ea; padding: 6px 10px; border-radius: 999px;">국제</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin: 12px 16px 0 16px; padding: 14px; display: flex; flex-direction: column; gap: 12px;">
+
+    <div style="display: flex; align-items: center; gap: 10px; opacity: 0.45;">
+      <div style="width: 62px; font-size: 13px; font-weight: 600;">ADB</div>
+      <div style="flex: 1; height: 18px; background: #eef0f3; border-radius: 4px; overflow: hidden;">
+        <div style="width: 100%; height: 18px; background: #7f9dc4; border-radius: 4px;"></div>
+      </div>
+      <div style="width: 30px; font-size: 14px; font-weight: 700; text-align: right;" class="num">2.4</div>
+      <div style="width: 38px; font-size: 11px; color: #98a2b3; text-align: right;" class="num">06.15</div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 62px; font-size: 13px; font-weight: 600;">한국은행</div>
+      <div style="flex: 1; height: 18px; background: #eef0f3; border-radius: 4px; overflow: hidden;">
+        <div style="width: 88%; height: 18px; background: #23508f; border-radius: 4px;"></div>
+      </div>
+      <div style="width: 30px; font-size: 14px; font-weight: 700; text-align: right;" class="num">2.1</div>
+      <div style="width: 38px; font-size: 11px; color: #98a2b3; text-align: right;" class="num">08.28</div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 62px; font-size: 13px; font-weight: 600;">IMF</div>
+      <div style="flex: 1; height: 18px; background: #eef0f3; border-radius: 4px; overflow: hidden;">
+        <div style="width: 88%; height: 18px; background: #23508f; border-radius: 4px;"></div>
+      </div>
+      <div style="width: 30px; font-size: 14px; font-weight: 700; text-align: right;" class="num">2.1</div>
+      <div style="width: 38px; font-size: 11px; color: #98a2b3; text-align: right;" class="num">08.29</div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 62px; font-size: 13px; font-weight: 600;">OECD</div>
+      <div style="flex: 1; height: 18px; background: #eef0f3; border-radius: 4px; overflow: hidden;">
+        <div style="width: 79%; height: 18px; background: #23508f; border-radius: 4px;"></div>
+      </div>
+      <div style="width: 30px; font-size: 14px; font-weight: 700; text-align: right;" class="num">1.9</div>
+      <div style="width: 38px; font-size: 11px; color: #98a2b3; text-align: right;" class="num">08.29</div>
+    </div>
+
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <div style="width: 62px; font-size: 13px; font-weight: 600;">KDI</div>
+      <div style="flex: 1; height: 18px; background: #eef0f3; border-radius: 4px; overflow: hidden;">
+        <div style="width: 67%; height: 18px; background: #23508f; border-radius: 4px;"></div>
+      </div>
+      <div style="width: 30px; font-size: 14px; font-weight: 700; text-align: right;" class="num">1.6</div>
+      <div style="width: 38px; font-size: 11px; color: #98a2b3; text-align: right;" class="num">08.12</div>
+    </div>
+  </div>
+
+  <div style="margin: 10px 16px 0 16px; padding: 10px 14px; background: #e7edf6; border-radius: 10px; display: flex; align-items: center; justify-content: space-between;">
+    <div style="font-size: 13px; font-weight: 600; color: #23508f;" class="num">격차 0.8%p · 평균 2.0%</div>
+    <div style="font-size: 12px; color: #667085;" class="num">5개 기관</div>
+  </div>
+
+  <div style="margin: 8px 16px 0 16px; padding: 10px 14px; background: #faf0dc; border-radius: 10px; display: flex; gap: 8px; align-items: flex-start;">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#9a6b15" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><path d="M12 3 2 20h20L12 3z"></path><line x1="12" y1="10" x2="12" y2="14"></line><circle cx="12" cy="17" r="0.5" fill="#9a6b15"></circle></svg>
+    <div style="font-size: 12px; line-height: 1.5; color: #7a5510;">발표 시점이 상이하므로 단순 비교에 유의하세요. 3개월 이상 지난 전망(ADB)은 흐리게 표시됩니다.</div>
+  </div>
+
+  <div style="margin: 10px 16px 0 16px; display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; background: #ffffff; border: 1px solid #cfd6df; border-radius: 10px; font-size: 14px; font-weight: 600; color: #23508f;">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#23508f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="14" x2="21" y2="14"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
+    표로 보기 (보고서용 복사)
+  </div>
+
+  <div style="flex: 1;"></div>
+
+  <div style="font-size: 10px; color: #98a2b3; text-align: center; padding: 4px 16px;">본 서비스는 개인이 제작한 비공식 참고자료이며, 각 기관 원문이 정본입니다.</div>
+
+  <div style="display: flex; background: #ffffff; border-top: 1px solid #e2e5ea; padding: 8px 8px 14px 8px;">
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; color: #98a2b3;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#98a2b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>
+      <div style="font-size: 10px; font-weight: 500;">홈</div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; color: #98a2b3;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#98a2b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3" width="14" height="18"></rect><path d="M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"></path></svg>
+      <div style="font-size: 10px; font-weight: 500;">기관</div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; color: #23508f;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#23508f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"></path></svg>
+      <div style="font-size: 10px; font-weight: 700;">비교</div>
+    </div>
+    <div style="flex: 1; display: flex; flex-direction: column; align-items: center; gap: 3px; color: #98a2b3;">
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="#98a2b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15.5 14"></polyline></svg>
+      <div style="font-size: 10px; font-weight: 500;">타임라인</div>
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>
