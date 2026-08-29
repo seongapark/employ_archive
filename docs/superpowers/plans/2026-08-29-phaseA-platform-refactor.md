@@ -12,6 +12,10 @@
 
 ## Global Constraints
 
+- **`git add -A` / `git commit -a` 를 쓰지 않는다.** 나중에 이 저장소에서 두 세션이
+  병렬로 작업할 수 있고, 그때 `-A` 한 번이면 상대 세션의 작업 중인 파일이 통째로
+  딸려 들어간다. 항상 그 태스크가 만든 경로만 명시해서 add 한다.
+
 - **화면 변화 0.** 이 단계는 순수 리팩터다. 눈에 보이는 동작·레이아웃이 바뀌면 실패다.
 - **절대경로 금지.** 배포 사이트 루트는 `/` 가 아니라 `/employ_archive/` 다(GitHub 저장소명이 `employ_archive`). `/core/tokens.css` 같은 절대경로는 전부 깨진다. 항상 상대경로를 쓴다.
 - **`core/`는 작게 유지한다.** 도메인이 무엇을 다루는지 몰라도 되는 것만 넣는다. 라우터·차트·데이터 스키마·도메인 색 토큰은 넣지 않는다.
@@ -401,7 +405,7 @@ Expected: `data True`
 - [ ] **Step 8: 커밋**
 
 ```bash
-git add -A
+git add domains/ .github/ README.md
 git commit -m "refactor: 전망 파이프라인·데이터·테스트를 domains/forecast로 이동"
 ```
 
@@ -706,7 +710,7 @@ Run: `python -m tools.serve`
 - [ ] **Step 16: 커밋**
 
 ```bash
-git add -A
+git add core/ domains/ tools/
 git commit -m "refactor: core 추출 + 전망 웹앱을 domains/forecast/app으로 이동"
 ```
 
@@ -966,7 +970,7 @@ Run: `python -m tools.serve`
 - [ ] **Step 9: 커밋**
 
 ```bash
-git add -A
+git add hub/
 git commit -m "feat: 허브 런처 + 구 서비스워커 폐기"
 ```
 
@@ -1152,7 +1156,7 @@ Expected: `_site`에 `index.html`, `core`, `forecast` / `_site/forecast`에 `ind
 - [ ] **Step 7: 커밋**
 
 ```bash
-git add -A
+git add .github/ README.md docs/
 git commit -m "ci: 도메인별 수집 워크플로 분리 + 조립 도구 기반 배포"
 ```
 
