@@ -66,8 +66,8 @@ a:hover { color: var(--link-hover); }
   font-weight: 600;
   text-align: center;
   padding: 6px 16px;
-  color: var(--badge-extracted-fg);
-  background: var(--badge-extracted-bg);
+  color: var(--warn-fg);
+  background: var(--warn-bg);
 }
 
 .offline-banner[hidden] { display: none; }

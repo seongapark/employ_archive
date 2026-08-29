@@ -11,8 +11,3 @@ export async function loadJson(path) {
   }
   return null;
 }
-
-// 사이트가 /employ_archive/ 하위에 배포되므로 절대경로를 쓰면 안 된다.
-export function hubHref() {
-  return '../';
-}
