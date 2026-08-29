@@ -1,6 +1,6 @@
 from datetime import date, datetime
 import pytest
-from src.models import ForecastRecord, make_id, VALUE_RANGES, INDICATOR_META
+from domains.forecast.pipeline.models import ForecastRecord, make_id, VALUE_RANGES, INDICATOR_META
 
 
 def base_kwargs(**over):

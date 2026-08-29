@@ -1,5 +1,5 @@
 from datetime import date
-from src.collectors import imf
+from domains.forecast.pipeline.collectors import imf
 
 TODAY = date(2026, 8, 29)
 

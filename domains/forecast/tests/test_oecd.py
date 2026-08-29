@@ -1,6 +1,6 @@
 from datetime import date
 from pathlib import Path
-from src.collectors import oecd
+from domains.forecast.pipeline.collectors import oecd
 
 FIXTURE = (Path(__file__).parent / "fixtures" / "oecd_eo119_kor.csv").read_text(
     encoding="utf-8"

@@ -1,6 +1,6 @@
 from datetime import date, datetime
-from src.models import ForecastRecord, make_id
-from src import store
+from domains.forecast.pipeline.models import ForecastRecord, make_id
+from domains.forecast.pipeline import store
 
 
 def rec(month: int, value: float, year: int = 2027, org: str = "OECD",

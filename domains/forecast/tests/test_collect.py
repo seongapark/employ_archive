@@ -1,7 +1,7 @@
 import json
 from datetime import date, datetime
-from src.models import ForecastRecord, make_id
-from src import collect, store
+from domains.forecast.pipeline.models import ForecastRecord, make_id
+from domains.forecast.pipeline import collect, store
 
 
 def fake_record(value: float, pub: date) -> ForecastRecord:
