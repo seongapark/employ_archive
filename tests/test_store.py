@@ -55,3 +55,24 @@ def test_save_and_load_roundtrip(tmp_path):
 
 def test_load_missing_file_returns_empty(tmp_path):
     assert store.load_forecasts(tmp_path / "nope.json") == []
+
+
+def test_backfill_out_of_order_links_to_immediate_predecessor():
+    # Merge Jan(2.0) first
+    after_jan = store.merge([], [rec(1, 2.0)]).records
+    # Then merge Aug(2.5) which should have prev_value=2.0 from Jan
+    after_aug = store.merge(after_jan, [rec(8, 2.5)]).records
+    aug_rec = [r for r in after_aug if r.id == "oecd-2026-08-gdp_growth-2027"][0]
+    assert aug_rec.prev_value == 2.0
+    assert aug_rec.revision == 0.5
+
+    # Now backfill June(2.3) which should link to Jan (immediate predecessor)
+    result = store.merge(after_aug, [rec(6, 2.3)])
+    june_rec = [r for r in result.records if r.id == "oecd-2026-06-gdp_growth-2027"][0]
+    assert june_rec.prev_value == 2.0
+    assert june_rec.revision == 0.3
+
+    # Aug's record should remain unchanged
+    aug_stored = [r for r in result.records if r.id == "oecd-2026-08-gdp_growth-2027"][0]
+    assert aug_stored.prev_value == 2.0  # unchanged
+    assert aug_stored.revision == 0.5  # unchanged

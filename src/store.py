@@ -31,12 +31,14 @@ def save_forecasts(path: Path | str, records: list[ForecastRecord]) -> None:
     )
 
 
-def latest_record(records, org, indicator, target_year, target_period="annual"):
+def latest_record(records, org, indicator, target_year, target_period="annual", before=None):
     matches = [
         r for r in records
         if r.org == org and r.indicator == indicator
         and r.target_year == target_year and r.target_period == target_period
     ]
+    if before is not None:
+        matches = [r for r in matches if r.published_at < before]
     return max(matches, key=lambda r: r.published_at) if matches else None
 
 
@@ -56,8 +58,9 @@ def merge(existing: list[ForecastRecord], new: list[ForecastRecord]) -> MergeRes
         prev = latest_record(
             result.records, cand.org, cand.indicator,
             cand.target_year, cand.target_period,
+            before=cand.published_at,
         )
-        if prev is not None and prev.published_at < cand.published_at:
+        if prev is not None:
             cand = cand.model_copy(update={
                 "prev_value": prev.value,
                 "revision": round(cand.value - prev.value, 2),
