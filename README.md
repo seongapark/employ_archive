@@ -20,3 +20,5 @@ pip install -r requirements.txt
 python -m pytest        # 테스트 (네트워크 불필요)
 python -m src.collect   # 실제 수집 1회
 ```
+
+웹앱: `web/` (GitHub Pages 자동 배포, 로컬은 `python -m http.server` 후 `/web/` 접속)
