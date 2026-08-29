@@ -1,0 +1,10 @@
+STRUCTURE,STRUCTURE_ID,STRUCTURE_NAME,ACTION,REF_AREA,Reference area,MEASURE,Measure,FREQ,Frequency of observation,TIME_PERIOD,Time period,OBS_VALUE
+DATAFLOW,OECD.ECO.MAD:DSD_EO@DF_EO(1.5),Economic Outlook 119,I,KOR,Korea,GDPV_ANNPCT,"Gross domestic product, volume, growth",A,Annual,2026,,2.63042316286754
+DATAFLOW,OECD.ECO.MAD:DSD_EO@DF_EO(1.5),Economic Outlook 119,I,KOR,Korea,GDPV_ANNPCT,"Gross domestic product, volume, growth",A,Annual,2027,,1.94194557395251
+DATAFLOW,OECD.ECO.MAD:DSD_EO@DF_EO(1.5),Economic Outlook 119,I,KOR,Korea,UNR,Unemployment rate,A,Annual,2026,,2.80954835858754
+DATAFLOW,OECD.ECO.MAD:DSD_EO@DF_EO(1.5),Economic Outlook 119,I,KOR,Korea,UNR,Unemployment rate,A,Annual,2027,,2.70743323396456
+DATAFLOW,OECD.ECO.MAD:DSD_EO@DF_EO(1.5),Economic Outlook 119,I,KOR,Korea,CPI_YTYPCT,Headline inflation,A,Annual,2026,,2.62332364473214
+DATAFLOW,OECD.ECO.MAD:DSD_EO@DF_EO(1.5),Economic Outlook 119,I,KOR,Korea,CPI_YTYPCT,Headline inflation,A,Annual,2027,,2.24154762674348
+DATAFLOW,OECD.ECO.MAD:DSD_EO@DF_EO(1.5),Economic Outlook 119,I,KOR,Korea,ET,Total employment (labour force survey basis),A,Annual,2025,,28769250
+DATAFLOW,OECD.ECO.MAD:DSD_EO@DF_EO(1.5),Economic Outlook 119,I,KOR,Korea,ET,Total employment (labour force survey basis),A,Annual,2026,,28974095.8552047
+DATAFLOW,OECD.ECO.MAD:DSD_EO@DF_EO(1.5),Economic Outlook 119,I,KOR,Korea,ET,Total employment (labour force survey basis),A,Annual,2027,,29097415.1525657
