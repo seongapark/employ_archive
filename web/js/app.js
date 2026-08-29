@@ -52,11 +52,19 @@ function setActiveTab(tabbarEl, routeName) {
   });
 }
 
+// 타임라인 화면은 픽셀 스펙(Timeline.dc.html)에서 전역 헤더 타이틀을 '최근 발표'로
+// 표시한다. org 화면은 자체 뒤로가기 헤더를 화면 안에서 그리므로(org.js) 전역
+// 타이틀은 건드리지 않고 기본값 '고용전망'을 유지한다.
+export function headerTitleFor(routeName) {
+  return routeName === 'timeline' ? '최근 발표' : '고용전망';
+}
+
 async function boot() {
   const offlineBanner = document.getElementById('offlineBanner');
   const screenEl = document.getElementById('screen');
   const tabbarEl = document.getElementById('tabbar');
   const headerDateEl = document.getElementById('headerDate');
+  const headerTitleEl = document.getElementById('headerTitle');
 
   const [records, orgs, indicators, schedule] = await Promise.all([
     loadJson('data/forecasts.json'),
@@ -134,6 +142,7 @@ async function boot() {
 
     ctx.params = parsed.params;
     setActiveTab(tabbarEl, parsed.name);
+    headerTitleEl.textContent = headerTitleFor(parsed.name);
 
     const screenFn = screens[parsed.name] || home;
     screenEl.innerHTML = '';

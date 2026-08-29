@@ -44,8 +44,25 @@ function renderBanner(entry) {
     </div>`;
 }
 
+// 이벤트 안에는 같은 지표가 여러 target_year로 중복 존재할 수 있다
+// (예: OECD 한 회차가 2026/2027 두 연도를 함께 발표). 요약 줄은 지표당
+// 1개만 보여줘야 하므로, 지표별로 가장 최신 target_year 레코드만 남기고
+// (최초 등장 순서는 유지) 그 다음에 4개로 자른다.
+function dedupeByIndicatorLatestYear(items) {
+  const latestByIndicator = new Map();
+  const order = [];
+  for (const rec of items) {
+    if (!latestByIndicator.has(rec.indicator)) order.push(rec.indicator);
+    const existing = latestByIndicator.get(rec.indicator);
+    if (!existing || rec.target_year > existing.target_year) {
+      latestByIndicator.set(rec.indicator, rec);
+    }
+  }
+  return order.map(indicator => latestByIndicator.get(indicator));
+}
+
 function renderSummaryLine(items) {
-  const parts = items.slice(0, 4).map(rec => {
+  const parts = dedupeByIndicatorLatestYear(items).slice(0, 4).map(rec => {
     const abbr = ABBR[rec.indicator] || rec.indicator;
     const delta = fmtDelta(rec);
     const svg = (delta.dir === 'up' || delta.dir === 'down') ? ` ${DELTA_SVG_SMALL[delta.dir]}` : '';
