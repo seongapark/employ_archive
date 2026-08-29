@@ -6,6 +6,13 @@ const FILTERS = [
   { code: 'intl', label: '국제' },
 ];
 
+// 클릭 직후 표시되는 일시적 라벨('복사됨')을 되돌릴 원본 텍스트.
+// 클릭 핸들러 안에서 매번 copyLabel.textContent를 읽어 "원본"으로 삼으면,
+// 1.5초 타이머가 끝나기 전에 다시 클릭했을 때 그 순간의 임시 라벨('복사됨')을
+// 원본으로 착각해 이후 영구히 '복사됨'으로 고정되는 버그가 생긴다.
+// 라벨 문구 자체는 바뀌지 않으므로 모듈 상수로 고정해 둔다.
+const COPY_LABEL_DEFAULT = '표로 보기 (보고서용 복사)';
+
 function yearsForIndicator(records, indicator) {
   const years = new Set(records.filter(r => r.indicator === indicator).map(r => r.target_year));
   return Array.from(years).sort((a, b) => a - b);
@@ -108,7 +115,7 @@ function renderCopyButton() {
   return `
     <button type="button" id="copyBtn" style="margin:10px 16px 0 16px;display:flex;align-items:center;justify-content:center;gap:8px;padding:12px;background:var(--card);border:1px solid #cfd6df;border-radius:10px;font-size:14px;font-weight:600;color:var(--accent);min-height:44px;cursor:pointer;">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="1"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="3" y1="14" x2="21" y2="14"></line><line x1="12" y1="4" x2="12" y2="20"></line></svg>
-      <span id="copyLabel">표로 보기 (보고서용 복사)</span>
+      <span id="copyLabel">${esc(COPY_LABEL_DEFAULT)}</span>
     </button>
     <div id="copyFallback" style="display:none;margin:8px 16px 0 16px;">
       <textarea id="copyTextarea" readonly style="width:100%;min-height:100px;font-size:12px;font-family:inherit;padding:8px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--text);box-sizing:border-box;"></textarea>
@@ -185,6 +192,7 @@ export function render(el, ctx) {
   const copyLabel = el.querySelector('#copyLabel');
   const copyFallback = el.querySelector('#copyFallback');
   const copyTextarea = el.querySelector('#copyTextarea');
+  let copyRestoreTimer = null;
   if (copyBtn) {
     copyBtn.addEventListener('click', async () => {
       const text = buildTableText(set, orgs);
@@ -193,9 +201,10 @@ export function render(el, ctx) {
         await navigator.clipboard.writeText(text);
         if (copyFallback) copyFallback.style.display = 'none';
         if (copyLabel) {
-          const original = copyLabel.textContent;
           copyLabel.textContent = '복사됨';
-          setTimeout(() => { copyLabel.textContent = original; }, 1500);
+          // 연속 클릭 시 먼저 걸린 타이머가 나중에 발화해 라벨을 되돌리는 걸 막는다.
+          clearTimeout(copyRestoreTimer);
+          copyRestoreTimer = setTimeout(() => { copyLabel.textContent = COPY_LABEL_DEFAULT; }, 1500);
         }
       } catch {
         if (copyTextarea) copyTextarea.value = text;
