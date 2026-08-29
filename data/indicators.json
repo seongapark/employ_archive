@@ -1,0 +1,9 @@
+[
+  {"code": "emp_change", "name_ko": "취업자 증감", "unit": "만명", "decimals": 1, "range": [-100, 100]},
+  {"code": "emp_rate", "name_ko": "고용률", "unit": "%", "decimals": 1, "range": [40, 80]},
+  {"code": "unemp_rate", "name_ko": "실업률", "unit": "%", "decimals": 1, "range": [0, 15]},
+  {"code": "gdp_growth", "name_ko": "경제성장률", "unit": "%", "decimals": 1, "range": [-10, 10]},
+  {"code": "cpi", "name_ko": "소비자물가 상승률", "unit": "%", "decimals": 1, "range": [-5, 15]},
+  {"code": "emp_rate_youth", "name_ko": "청년 고용률", "unit": "%", "decimals": 1, "range": [0, 80]},
+  {"code": "labor_force", "name_ko": "경제활동참가율", "unit": "%", "decimals": 1, "range": [40, 80]}
+]
