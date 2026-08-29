@@ -60,6 +60,27 @@ def test_build_site_clears_previous_output(tmp_path):
     assert not (out_dir / "stale.html").exists()
 
 
+def test_build_site_excludes_tests_dirs(tmp_path):
+    # 테스트 소스가 공개 배포본에 실릴 이유가 없다. core/, hub/, 도메인 app/ 밑의
+    # tests/ 는 조립에서 제외한다.
+    repo = make_repo(tmp_path)
+    (repo / "core" / "tests").mkdir()
+    (repo / "core" / "tests" / "shell.test.mjs").write_text("test", encoding="utf-8")
+    (repo / "hub" / "tests").mkdir()
+    (repo / "hub" / "tests" / "state.test.mjs").write_text("test", encoding="utf-8")
+    (repo / "domains" / "forecast" / "app" / "tests").mkdir()
+    (repo / "domains" / "forecast" / "app" / "tests" / "app.test.mjs").write_text(
+        "test", encoding="utf-8"
+    )
+
+    out = build_site(repo, tmp_path / "_site")
+
+    assert not (out / "core" / "tests").exists()
+    assert not (out / "tests").exists()
+    assert not (out / "forecast" / "core" / "tests").exists()
+    assert not (out / "forecast" / "tests").exists()
+
+
 def test_build_site_without_hub_still_builds_domains(tmp_path):
     # hub/ 가 아직 없는 저장소(예: Task 3 시점)에서도 도메인만으로 조립이
     # 성공해야 한다.

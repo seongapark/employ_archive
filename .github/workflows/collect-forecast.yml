@@ -1,4 +1,4 @@
-name: collect
+name: collect-forecast
 
 on:
   schedule:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: collect
+  group: collect-forecast
   cancel-in-progress: false
 
 jobs:
@@ -22,14 +22,14 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       - run: python -m pytest -q
-      - run: python -m src.collect
+      - run: python -m domains.forecast.pipeline.collect
       - name: Commit data
         run: |
           git config user.name "forecast-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/
+          git add domains/forecast/data/
           git diff --cached --quiet || git commit -m "data: daily collect $(date -u +%F)"
           git push
       - name: Fail on collector errors
         run: |
-          python -c "import json,sys; errs=json.load(open('data/last_run.json',encoding='utf-8'))['errors']; print('\n'.join(errs)); sys.exit(1 if errs else 0)"
+          python -c "import json,sys; errs=json.load(open('domains/forecast/data/last_run.json',encoding='utf-8'))['errors']; print('\n'.join(errs)); sys.exit(1 if errs else 0)"

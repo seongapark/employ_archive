@@ -31,14 +31,17 @@ def build_site(repo: Path, out: Path) -> Path:
 
     core = repo / "core"
     hub = repo / "hub"
+    # 테스트 소스는 배포본에 실릴 이유가 없으므로 조립 시 제외한다. data/ 복사에는
+    # 적용하지 않는다 — 데이터에 "tests"라는 이름이 있을 이유가 없고 의미도 다르다.
+    skip_tests = shutil.ignore_patterns("tests")
     if hub.is_dir():
-        shutil.copytree(hub, out, dirs_exist_ok=True)
-    shutil.copytree(core, out / "core")
+        shutil.copytree(hub, out, dirs_exist_ok=True, ignore=skip_tests)
+    shutil.copytree(core, out / "core", ignore=skip_tests)
 
     for name in discover_domains(repo):
         dest = out / name
-        shutil.copytree(repo / "domains" / name / "app", dest)
-        shutil.copytree(core, dest / "core")
+        shutil.copytree(repo / "domains" / name / "app", dest, ignore=skip_tests)
+        shutil.copytree(core, dest / "core", ignore=skip_tests)
         data = repo / "domains" / name / "data"
         if data.is_dir():
             shutil.copytree(data, dest / "data")

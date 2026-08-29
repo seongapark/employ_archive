@@ -3,7 +3,12 @@ name: pages
 on:
   push:
     branches: [main]
-    paths: ["web/**", "data/**", ".github/workflows/pages.yml"]
+    paths:
+      - "hub/**"
+      - "core/**"
+      - "domains/**"
+      - "tools/build.py"
+      - ".github/workflows/pages.yml"
   schedule:
     - cron: "20 7 * * *" # 16:20 KST — 일일 수집(16:00) 20분 후 재배포
   workflow_dispatch:
@@ -25,12 +30,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
       - name: Build site
-        run: |
-          mkdir -p _site
-          cp -r web/. _site/
-          mkdir -p _site/data
-          cp data/*.json _site/data/
+        run: python -m tools.build
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
