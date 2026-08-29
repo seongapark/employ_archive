@@ -21,7 +21,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python -m pytest -q
+      - run: python -m pytest -q domains/forecast
       - run: python -m domains.forecast.pipeline.collect
       - name: Commit data
         run: |

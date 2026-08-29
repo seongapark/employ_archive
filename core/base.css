@@ -51,6 +51,7 @@ a:hover { color: var(--link-hover); }
 .header__title {
   font-size: 17px;
   font-weight: 700;
+  margin-right: auto;
 }
 
 .header__meta {

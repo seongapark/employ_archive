@@ -7,7 +7,6 @@ from __future__ import annotations
 import argparse
 import functools
 import http.server
-import socketserver
 
 from .build import REPO, build_site
 
@@ -19,7 +18,7 @@ def main() -> int:
 
     out = build_site(REPO, REPO / "_site")
     handler = functools.partial(http.server.SimpleHTTPRequestHandler, directory=str(out))
-    with socketserver.TCPServer(("127.0.0.1", args.port), handler) as httpd:
+    with http.server.ThreadingHTTPServer(("127.0.0.1", args.port), handler) as httpd:
         print(f"serving {out} at http://127.0.0.1:{args.port}/")
         httpd.serve_forever()
     return 0
