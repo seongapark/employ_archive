@@ -42,6 +42,8 @@ def parse(raw_csv: str, today: date) -> list[ForecastRecord]:
     for row in rows:
         if row["REF_AREA"] != "KOR" or row["FREQ"] != "A":
             continue
+        if not row.get("OBS_VALUE", "").strip():
+            continue
         values[(row["MEASURE"], int(row["TIME_PERIOD"]))] = float(row["OBS_VALUE"])
 
     target_years = [today.year, today.year + 1]

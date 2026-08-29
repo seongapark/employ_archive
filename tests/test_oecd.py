@@ -39,3 +39,17 @@ def test_parse_record_fields():
 def test_parse_covers_current_and_next_year_only():
     years = {r.target_year for r in oecd.parse(FIXTURE, TODAY)}
     assert years == {2026, 2027}
+
+
+def test_parse_skips_blank_obs_value():
+    blank_row = (
+        "DATAFLOW,OECD.ECO.MAD:DSD_EO@DF_EO(1.5),Economic Outlook 119,I,KOR,Korea,"
+        "CPI_YTYPCT,Headline inflation,A,Annual,2026,,\n"
+    )
+    augmented = FIXTURE + blank_row
+    got = by_key(oecd.parse(augmented, TODAY))
+    assert got[("gdp_growth", 2026)].value == 2.6
+    assert got[("gdp_growth", 2027)].value == 1.9
+    assert got[("unemp_rate", 2026)].value == 2.8
+    assert got[("cpi", 2027)].value == 2.2
+    assert got[("cpi", 2026)].value == 2.6  # unaffected by the blank row
