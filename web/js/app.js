@@ -148,4 +148,8 @@ async function boot() {
   route();
 }
 
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('./sw.js').catch(() => {});
+}
+
 boot();
