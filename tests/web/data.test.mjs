@@ -105,7 +105,7 @@ test('esc escapes html', () => {
 test('compareSet cross-month stale boundary', () => {
   const rs = [
     rec({ published_at: '2026-01-01', value: 2.4 }),
-    rec({ published_at: '2026-06-01', value: 2.1 }),
+    rec({ org: 'BOK', published_at: '2026-06-01', value: 2.1 }),
   ];
   const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-04-02', orgsMeta: ORGS, filter: 'all' });
   assert.equal(set[0].rec.published_at, '2026-01-01');
@@ -128,4 +128,42 @@ test('SHORT_LABELS covers all 7 indicator codes', () => {
     assert.equal(typeof SHORT_LABELS[code], 'string');
     assert.ok(SHORT_LABELS[code].length > 0, `missing short label for ${code}`);
   }
+});
+
+test('fmtDelta: revision 0 is flat, not down', () => {
+  assert.deepEqual(fmtDelta(rec({ revision: 0 })), { dir: 'flat', text: '—' });
+});
+
+test('compareSet reduces to latest edition per org (F1)', () => {
+  const rs = [
+    rec({ org: 'BOK', published_at: '2026-05-01', value: 1.8, id: 'old' }),
+    rec({ org: 'BOK', published_at: '2026-08-01', value: 2.2, id: 'new' }),
+  ];
+  const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-08-29', orgsMeta: ORGS, filter: 'all' });
+  assert.equal(set.length, 1);
+  assert.equal(set[0].rec.id, 'new');
+  assert.equal(set[0].rec.value, 2.2);
+});
+
+test('latestRecords and seriesFor ignore non-annual target_period (F5)', () => {
+  const rs = [
+    rec({ id: 'annual', target_period: 'annual' }),
+    rec({ id: 'h1', target_period: 'h1', published_at: '2026-08-30', value: 5 }),
+  ];
+  const latest = latestRecords(rs, { indicator: 'gdp_growth', targetYear: 2027 });
+  assert.deepEqual(latest.map((r) => r.id), ['annual']);
+
+  const series = seriesFor(rs, { org: 'OECD', indicator: 'gdp_growth', targetYear: 2027 });
+  assert.deepEqual(series.map((r) => r.id), ['annual']);
+});
+
+test('compareSet stale boundary at exactly 90/91 days', () => {
+  const rs = [
+    rec({ org: 'OECD', published_at: '2026-05-31', value: 2.0, id: 'boundary90' }),
+    rec({ org: 'BOK', published_at: '2026-05-30', value: 2.1, id: 'boundary91' }),
+  ];
+  const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-08-29', orgsMeta: ORGS, filter: 'all' });
+  const byId = Object.fromEntries(set.map((e) => [e.rec.id, e]));
+  assert.equal(byId.boundary90.stale, false);
+  assert.equal(byId.boundary91.stale, true);
 });

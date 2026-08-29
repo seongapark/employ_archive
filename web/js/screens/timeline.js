@@ -68,7 +68,8 @@ function renderEventCard(event, today) {
     ? event.report_title
     : `${event.org_name_ko} ${event.report_title}`;
   const confLabel = CONF_LABEL[firstRec.confidence] || firstRec.confidence || '';
-  const subLine = `${mmdd(event.published_at)} · ${event.items.length}개 지표 갱신 · ${confLabel}`;
+  const indicatorCount = dedupeByIndicatorLatestYear(event.items).length;
+  const subLine = `${mmdd(event.published_at)} · ${indicatorCount}개 지표 갱신 · ${confLabel}`;
   const summaryHtml = renderSummaryLine(event.items);
 
   return `
@@ -111,7 +112,7 @@ export function render(el, ctx) {
 
   el.querySelectorAll('[data-org]').forEach(card => {
     card.addEventListener('click', () => {
-      ctx.navigate('#/org/' + card.dataset.org);
+      ctx.navigate('#/org/' + encodeURIComponent(card.dataset.org));
     });
   });
 }

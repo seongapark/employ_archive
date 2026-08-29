@@ -184,7 +184,7 @@ export function render(el, ctx) {
 
   el.querySelectorAll('[data-org]').forEach(row => {
     row.addEventListener('click', () => {
-      ctx.navigate('#/org/' + row.dataset.org);
+      ctx.navigate('#/org/' + encodeURIComponent(row.dataset.org));
     });
   });
 

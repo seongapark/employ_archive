@@ -72,9 +72,11 @@ function renderCard(rec, ctx) {
   const deltaCls = delta.dir === 'up' ? 'delta-up' : delta.dir === 'down' ? 'delta-down' : 'delta-flat';
   const deltaSvg = DELTA_SVG[delta.dir] || '';
   const date = dateLabel(rec, ctx.orgs);
+  const orgMeta = ctx.orgs.find(o => o.org === rec.org);
+  const isApi = orgMeta && orgMeta.method === 'api';
   const rationale = rec.rationale && rec.rationale.trim()
     ? rec.rationale
-    : `${rec.report_title} · API 수집`;
+    : (isApi ? `${rec.report_title} · API 수집` : rec.report_title);
 
   const [value, unitSuffix] = splitValueUnit(fmtValue(rec));
 
@@ -119,6 +121,10 @@ function lastCollectedLabel(records) {
 
 export function render(el, ctx) {
   const { records, orgs, state } = ctx;
+
+  if (!PILLS.some(p => p.code === state.indicator)) {
+    state.indicator = 'emp_change';
+  }
 
   const availableYears = yearsForIndicator(records, state.indicator);
   if (availableYears.length && !availableYears.includes(state.year)) {
@@ -186,7 +192,7 @@ export function render(el, ctx) {
 
   el.querySelectorAll('[data-org]').forEach(card => {
     card.addEventListener('click', () => {
-      ctx.navigate('#/org/' + card.dataset.org);
+      ctx.navigate('#/org/' + encodeURIComponent(card.dataset.org));
     });
   });
 }

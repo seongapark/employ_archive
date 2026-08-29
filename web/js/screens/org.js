@@ -25,10 +25,11 @@ function yymm(dateStr) {
   return `${y.slice(2)}.${m}`;
 }
 
-function rationaleText(rec) {
-  return rec.rationale && rec.rationale.trim()
-    ? rec.rationale
-    : `${rec.report_title} · API 수집`;
+function rationaleText(rec, orgsMeta) {
+  if (rec.rationale && rec.rationale.trim()) return rec.rationale;
+  const orgMeta = (orgsMeta || []).find(o => o.org === rec.org);
+  const isApi = orgMeta && orgMeta.method === 'api';
+  return isApi ? `${rec.report_title} · API 수집` : rec.report_title;
 }
 
 function yearsForOrg(records, org) {
@@ -177,7 +178,7 @@ function renderChart(series) {
 
   return `
     <div class="card" style="margin:8px 16px 0 16px;padding:12px 14px 6px 14px;">
-      <svg width="330" height="110" viewBox="0 0 330 110" fill="none">
+      <svg width="100%" height="110" viewBox="0 0 330 110" fill="none">
         <line x1="8" y1="88" x2="322" y2="88" stroke="#e2e5ea" stroke-width="1"></line>
         <line x1="8" y1="52" x2="322" y2="52" stroke="#eef0f3" stroke-width="1"></line>
         <line x1="8" y1="16" x2="322" y2="16" stroke="#eef0f3" stroke-width="1"></line>
@@ -209,7 +210,7 @@ function renderSourceLine(rec) {
   return `<div style="font-size:12px;color:#98a2b3;">원문 링크 확인 필요</div>`;
 }
 
-function renderRow(rec, isExpanded) {
+function renderRow(rec, isExpanded, orgsMeta) {
   const badgeInfo = BADGE[rec.confidence] || { cls: 'badge--extracted', label: rec.confidence || '' };
   const delta = fmtDelta(rec);
   // DELTA_SVG.flat already renders its own "—", so don't also append delta.text
@@ -218,7 +219,7 @@ function renderRow(rec, isExpanded) {
     ? DELTA_SVG.flat
     : `${DELTA_SVG[delta.dir] || ''}<span class="num">${esc(delta.text)}</span>`;
   const monthLabel = mmdd(rec.published_at);
-  const rationale = rationaleText(rec);
+  const rationale = rationaleText(rec, orgsMeta);
 
   if (isExpanded) {
     const tags = (rec.rationale_tags || []).map(t => `<div style="font-size:11px;color:#23508f;background:#e7edf6;padding:2px 8px;border-radius:999px;">${esc(t)}</div>`).join('');
@@ -254,7 +255,7 @@ function renderRow(rec, isExpanded) {
     </button>`;
 }
 
-function renderHistory(series) {
+function renderHistory(series, orgsMeta) {
   if (!series.length) {
     return `<div style="padding:16px;text-align:center;font-size:13px;color:#98a2b3;">이 연도에는 데이터가 없습니다</div>`;
   }
@@ -262,7 +263,7 @@ function renderHistory(series) {
   const rows = series
     .slice()
     .reverse() // 최신 위
-    .map(rec => renderRow(rec, singleEdition || expandedIds.has(rec.id)))
+    .map(rec => renderRow(rec, singleEdition || expandedIds.has(rec.id), orgsMeta))
     .join('');
   return `<div style="display:flex;flex-direction:column;gap:6px;padding:8px 16px;">${rows}</div>`;
 }
@@ -308,7 +309,7 @@ export function render(el, ctx) {
     ${renderSummaryCard(ctx, orgCode, indicators, currentYear, records)}
     ${indicators.length ? renderYearAndPills(currentYear, indicatorYears, indicators, currentIndicator, ctx) : ''}
     ${renderChart(seriesCurrent)}
-    ${indicators.length ? renderHistory(seriesCurrent) : ''}
+    ${indicators.length ? renderHistory(seriesCurrent, ctx.orgs) : ''}
   `;
 
   wireBack(el, ctx);

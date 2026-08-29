@@ -19,16 +19,26 @@ function dayDiff(dateStrA, dateStrB) {
   return (msA - msB) / (24 * 60 * 60 * 1000);
 }
 
-export function latestRecords(records, { indicator, targetYear }) {
-  const filtered = records.filter(r => r.indicator === indicator && r.target_year === targetYear);
-  const latest = new Map();
+function isAnnual(r) {
+  return (r.target_period ?? 'annual') === 'annual';
+}
 
-  for (const r of filtered) {
+// 같은 org의 레코드들 중 (Map 삽입 순서와 무관하게) published_at 최대값 하나만 남긴다.
+// latestRecords/compareSet이 같은 규칙을 공유해야 회차가 늘어도 기관당 1건으로 축약된다.
+function reduceLatestPerOrg(records) {
+  const latest = new Map();
+  for (const r of records) {
     const existing = latest.get(r.org);
     if (!existing || r.published_at > existing.published_at) {
       latest.set(r.org, r);
     }
   }
+  return latest;
+}
+
+export function latestRecords(records, { indicator, targetYear }) {
+  const filtered = records.filter(r => r.indicator === indicator && r.target_year === targetYear && isAnnual(r));
+  const latest = reduceLatestPerOrg(filtered);
 
   return Array.from(latest.values()).sort((a, b) => b.published_at.localeCompare(a.published_at));
 }
@@ -57,7 +67,7 @@ export function summarize(latest) {
 
 export function seriesFor(records, { org, indicator, targetYear }) {
   return records
-    .filter(r => r.org === org && r.indicator === indicator && r.target_year === targetYear)
+    .filter(r => r.org === org && r.indicator === indicator && r.target_year === targetYear && isAnnual(r))
     .sort((a, b) => a.published_at.localeCompare(b.published_at));
 }
 
@@ -73,14 +83,17 @@ export function orgIndicators(records, org) {
 }
 
 export function compareSet(records, { indicator, targetYear, today, orgsMeta, filter }) {
-  const filtered = records.filter(r => r.indicator === indicator && r.target_year === targetYear);
+  const filtered = records.filter(r => r.indicator === indicator && r.target_year === targetYear && isAnnual(r));
+
+  // 기관당 최신 회차 1건으로 축약 (같은 org에 개정판이 여러 건 쌓여도 중복 표시/집계되지 않도록)
+  const latestPerOrg = Array.from(reduceLatestPerOrg(filtered).values());
 
   // Apply org filter
-  let filtered2 = filtered;
+  let filtered2 = latestPerOrg;
   if (filter === 'domestic') {
-    filtered2 = filtered.filter(r => !INTL_ORGS.has(r.org));
+    filtered2 = latestPerOrg.filter(r => !INTL_ORGS.has(r.org));
   } else if (filter === 'intl') {
-    filtered2 = filtered.filter(r => INTL_ORGS.has(r.org));
+    filtered2 = latestPerOrg.filter(r => INTL_ORGS.has(r.org));
   }
 
   // Map to result format and sort by value desc
@@ -97,9 +110,11 @@ export function compareSet(records, { indicator, targetYear, today, orgsMeta, fi
 }
 
 export function timelineGroups(records) {
+  const annualRecords = records.filter(isAnnual);
+
   // Group by month
   const monthMap = new Map();
-  for (const r of records) {
+  for (const r of annualRecords) {
     const month = r.published_at.substring(0, 7).replace('-', '.');
     if (!monthMap.has(month)) {
       monthMap.set(month, []);
@@ -130,7 +145,8 @@ export function timelineGroups(records) {
       eventMap.get(key).items.push(r);
     }
 
-    const events = Array.from(eventMap.values());
+    const events = Array.from(eventMap.values())
+      .sort((a, b) => b.published_at.localeCompare(a.published_at));
 
     // Sort items in each event by INDICATOR_ORDER
     for (const event of events) {

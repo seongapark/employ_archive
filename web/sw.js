@@ -62,8 +62,16 @@ self.addEventListener('fetch', (event) => {
   event.respondWith(
     fetch(request, { cache: 'no-cache' })
       .then((response) => {
-        const copy = response.clone();
-        caches.open(CACHE).then((cache) => cache.put(request, copy));
+        // 캐시에는 우리 오리진의 정상 응답(2xx 상태 코드가 있는 것)만 저장한다.
+        // - 실패 응답(404 등)을 캐시하면 다음 오프라인 접속 때 그 실패가 그대로 재생된다.
+        // - 크로스오리진/opaque 응답(Google Fonts 등)은 상태를 읽을 수 없고 용량만 차지한다.
+        // - 206(Range 응답)은 cache.put이 던지므로 반드시 걸러야 한다.
+        const sameOrigin = new URL(request.url).origin === self.location.origin;
+        if (response.ok && sameOrigin) {
+          const copy = response.clone();
+          // 응답은 즉시 반환하고, 캐시 저장은 waitUntil로 SW가 살아있는 동안 완료시킨다.
+          event.waitUntil(caches.open(CACHE).then((cache) => cache.put(request, copy)));
+        }
         return response;
       })
       .catch(() => caches.match(request))

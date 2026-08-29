@@ -38,7 +38,13 @@ function parseRoute(hash) {
   const h = (hash || '').replace(/^#/, '') || '/';
   if (h === '/' || h === '') return { name: 'home', params: {} };
   const orgMatch = h.match(/^\/org\/(.+)$/);
-  if (orgMatch) return { name: 'org', params: { org: decodeURIComponent(orgMatch[1]) } };
+  if (orgMatch) {
+    try {
+      return { name: 'org', params: { org: decodeURIComponent(orgMatch[1]) } };
+    } catch {
+      return { name: 'home', params: {} };
+    }
+  }
   if (h === '/org') return { name: 'org-redirect', params: {} };
   if (h === '/compare') return { name: 'compare', params: {} };
   if (h === '/timeline') return { name: 'timeline', params: {} };
@@ -74,9 +80,19 @@ async function boot() {
   ]);
 
   const anyMissing = records === null || orgs === null || indicators === null || schedule === null;
-  if (anyMissing) {
+  if (anyMissing || !navigator.onLine) {
     offlineBanner.hidden = false;
   }
+
+  // network-first SW가 오프라인에서도 캐시된 200을 그대로 돌려주므로 loadJson은
+  // 오프라인이어도 null을 반환하지 않을 수 있다. anyMissing만으로는 배너가 절대
+  // 뜨지 않는 경우가 생기므로, navigator.onLine/online·offline 이벤트로 직접 토글한다.
+  window.addEventListener('offline', () => {
+    offlineBanner.hidden = false;
+  });
+  window.addEventListener('online', () => {
+    offlineBanner.hidden = true;
+  });
 
   if (records === null) {
     screenEl.textContent = '데이터를 불러올 수 없습니다. 네트워크 연결을 확인한 뒤 다시 시도해 주세요.';
