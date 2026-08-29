@@ -41,6 +41,8 @@ body {
   color: var(--text);
 }
 
+button { font-family: inherit; font-size: inherit; color: inherit; }
+
 a { color: var(--accent); text-decoration: none; }
 a:hover { color: var(--accent-hover); }
 
