@@ -6,8 +6,9 @@
   --text-secondary: #667085;
   --text-muted: #98a2b3;
   --accent: #23508f;
-  --accent-hover: #1a3c6e;
   --accent-light: #e7edf6;
+  --link: #23508f;
+  --link-hover: #1a3c6e;
   --up: #c73e3a;
   --down: #2f6bd0;
   --badge-verified-fg: #17714a;
@@ -26,6 +27,8 @@
     --text: #e6e9ee;
     --text-secondary: #8b95a3;
     --accent-light: #1d2c42;
+    --link: #7ea6dd;
+    --link-hover: #9dbde8;
     --badge-verified-bg: #123526;
     --badge-extracted-bg: #3a2d10;
     --badge-reviewed-bg: #152b4a;
@@ -43,8 +46,8 @@ body {
 
 button { font-family: inherit; font-size: inherit; color: inherit; }
 
-a { color: var(--accent); text-decoration: none; }
-a:hover { color: var(--accent-hover); }
+a { color: var(--link); text-decoration: none; }
+a:hover { color: var(--link-hover); }
 
 .num {
   font-variant-numeric: tabular-nums;
@@ -232,4 +235,29 @@ a:hover { color: var(--accent-hover); }
 .band__meta {
   font-size: 12px;
   color: var(--text-secondary);
+}
+
+/* Missing-orgs row (home) */
+
+.missing-row {
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.missing-row__names {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.missing-row__label {
+  font-size: 12px;
+  color: var(--text-muted);
+  white-space: nowrap;
 }

@@ -1,19 +1,9 @@
-import { timelineGroups, fmtValue, fmtDelta, isNew, esc } from '../data.js';
+import { timelineGroups, fmtValue, fmtDelta, isNew, esc, SHORT_LABELS } from '../data.js';
 
 const CONF_LABEL = {
   verified: 'API 검증',
   extracted: '자동추출',
   reviewed: '확인완료',
-};
-
-const ABBR = {
-  emp_change: '취업자',
-  unemp_rate: '실업률',
-  gdp_growth: '성장률',
-  cpi: '물가',
-  emp_rate: '고용률',
-  emp_rate_youth: '청년고용률',
-  labor_force: '경활참가율',
 };
 
 // 요약 줄 전용 소형 삼각형 (org.js/home.js의 10x9 배지형보다 작은 8x7 인라인 아이콘)
@@ -63,7 +53,7 @@ function dedupeByIndicatorLatestYear(items) {
 
 function renderSummaryLine(items) {
   const parts = dedupeByIndicatorLatestYear(items).slice(0, 4).map(rec => {
-    const abbr = ABBR[rec.indicator] || rec.indicator;
+    const abbr = SHORT_LABELS[rec.indicator] || rec.indicator;
     const delta = fmtDelta(rec);
     const svg = (delta.dir === 'up' || delta.dir === 'down') ? ` ${DELTA_SVG_SMALL[delta.dir]}` : '';
     return `${esc(abbr)} ${esc(fmtValue(rec))}${svg}`;

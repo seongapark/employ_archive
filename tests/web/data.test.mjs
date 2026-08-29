@@ -2,8 +2,10 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
   latestRecords, summarize, seriesFor, orgIndicators, compareSet,
-  timelineGroups, fmtValue, fmtDelta, dateLabel, isNew, esc,
+  timelineGroups, fmtValue, fmtDelta, dateLabel, isNew, esc, SHORT_LABELS,
 } from '../../web/js/data.js';
+
+const INDICATOR_CODES = ['emp_change', 'emp_rate', 'unemp_rate', 'gdp_growth', 'cpi', 'emp_rate_youth', 'labor_force'];
 
 const ORGS = [
   { org: 'OECD', name_ko: 'OECD', method: 'api', track: 'A' },
@@ -119,4 +121,11 @@ test('isNew cross-month boundary', () => {
 
 test('esc escapes single quotes', () => {
   assert.equal(esc("a'b"), 'a&#39;b');
+});
+
+test('SHORT_LABELS covers all 7 indicator codes', () => {
+  for (const code of INDICATOR_CODES) {
+    assert.equal(typeof SHORT_LABELS[code], 'string');
+    assert.ok(SHORT_LABELS[code].length > 0, `missing short label for ${code}`);
+  }
 });

@@ -1,10 +1,11 @@
-import { latestRecords, summarize, fmtValue, fmtDelta, dateLabel, esc } from '../data.js';
+import { latestRecords, summarize, fmtValue, fmtDelta, dateLabel, esc, SHORT_LABELS } from '../data.js';
 
+// 홈의 첫 필만 목업대로 '취업자 증감'을 온전히 유지하고, 나머지는 공유 축약 라벨을 쓴다.
 const PILLS = [
   { code: 'emp_change', label: '취업자 증감' },
-  { code: 'unemp_rate', label: '실업률' },
-  { code: 'gdp_growth', label: '성장률' },
-  { code: 'cpi', label: '물가' },
+  { code: 'unemp_rate', label: SHORT_LABELS.unemp_rate },
+  { code: 'gdp_growth', label: SHORT_LABELS.gdp_growth },
+  { code: 'cpi', label: SHORT_LABELS.cpi },
 ];
 
 const BADGE = {
@@ -103,9 +104,9 @@ function renderMissingRow(missingOrgs) {
   if (!missingOrgs.length) return '';
   const names = missingOrgs.map(o => o.name_ko).join(' · ');
   return `
-    <div style="background:#f7f8fa;border:1px dashed #d5dae1;border-radius:10px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:8px;">
-      <div style="font-size:13px;font-weight:500;color:#98a2b3;">${esc(names)}</div>
-      <div style="font-size:12px;color:#98a2b3;white-space:nowrap;">이 지표 미제공</div>
+    <div class="missing-row">
+      <div class="missing-row__names">${esc(names)}</div>
+      <div class="missing-row__label">이 지표 미제공</div>
     </div>`;
 }
 

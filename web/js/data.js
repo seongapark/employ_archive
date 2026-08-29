@@ -1,6 +1,18 @@
 const INDICATOR_ORDER = ['emp_change', 'unemp_rate', 'gdp_growth', 'cpi', 'emp_rate', 'emp_rate_youth', 'labor_force'];
 const INTL_ORGS = new Set(['IMF', 'OECD', 'ADB']);
 
+// 화면 전반(홈 필/기관 요약카드·필/타임라인 요약줄)에서 공유하는 지표 축약 라벨.
+// 각 화면이 자체적으로 라벨 테이블을 두면 표기가 어긋나므로 여기 한 곳에서만 관리한다.
+export const SHORT_LABELS = {
+  emp_change: '취업자',
+  emp_rate: '고용률',
+  unemp_rate: '실업률',
+  gdp_growth: '성장률',
+  cpi: '물가',
+  emp_rate_youth: '청년고용률',
+  labor_force: '경활률',
+};
+
 function dayDiff(dateStrA, dateStrB) {
   const msA = Date.parse(dateStrA + 'T00:00:00Z');
   const msB = Date.parse(dateStrB + 'T00:00:00Z');

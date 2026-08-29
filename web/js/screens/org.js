@@ -1,4 +1,4 @@
-import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, esc } from '../data.js';
+import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, esc, SHORT_LABELS } from '../data.js';
 
 // 펼침 상태는 화면 방문 동안 유지 (모듈 스코프 — 여러 회차 행이 동시에 펼쳐질 수 있음)
 const expandedIds = new Set();
@@ -91,12 +91,11 @@ function renderSummaryCard(ctx, orgCode, indicators, currentYear, records) {
     const series = seriesFor(records, { org: orgCode, indicator: code, targetYear: currentYear });
     if (!series.length) continue;
     const latest = series[series.length - 1];
-    const meta = ctx.indicatorMeta[code];
     const delta = fmtDelta(latest);
     const deltaSvg = DELTA_SVG[delta.dir] || '';
     items.push(`
       <button type="button" class="num" data-indicator="${esc(code)}" style="display:flex;align-items:center;gap:6px;font-size:13px;background:none;border:none;padding:2px 0;text-align:left;cursor:pointer;min-height:44px;">
-        <span style="color:#667085;">${esc(meta ? meta.name_ko : code)}</span>
+        <span style="color:#667085;">${esc(SHORT_LABELS[code] || code)}</span>
         <span style="font-weight:700;">${esc(fmtValue(latest))}</span>
         ${deltaSvg}
         ${sparkline(series.map(r => r.value))}
@@ -123,9 +122,8 @@ function renderSummaryCard(ctx, orgCode, indicators, currentYear, records) {
 function renderYearAndPills(currentYear, years, indicators, currentIndicator, ctx) {
   const hasYears = years.length > 0;
   const pills = indicators.map(code => {
-    const meta = ctx.indicatorMeta[code];
     const active = code === currentIndicator;
-    return `<button type="button" class="pill${active ? ' pill--active' : ''}" data-indicator="${esc(code)}" style="min-height:44px;">${esc(meta ? meta.name_ko : code)}</button>`;
+    return `<button type="button" class="pill${active ? ' pill--active' : ''}" data-indicator="${esc(code)}" style="min-height:44px;">${esc(SHORT_LABELS[code] || code)}</button>`;
   }).join('');
 
   const yearSwitch = hasYears
@@ -203,8 +201,8 @@ function renderSourceLine(rec) {
   if (url) {
     const pageSuffix = rec.source_page ? ` (p.${esc(String(rec.source_page))})` : '';
     return `
-      <a href="${esc(url)}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:#23508f;">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#23508f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"></path><path d="M21 3 11 13"></path><path d="M19 14v6H4V5h6"></path></svg>
+      <a href="${esc(url)}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:var(--link);">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"></path><path d="M21 3 11 13"></path><path d="M19 14v6H4V5h6"></path></svg>
         원문 보기${pageSuffix} · ${esc(rec.report_title)}
       </a>`;
   }
@@ -311,7 +309,6 @@ export function render(el, ctx) {
     ${indicators.length ? renderYearAndPills(currentYear, indicatorYears, indicators, currentIndicator, ctx) : ''}
     ${renderChart(seriesCurrent)}
     ${indicators.length ? renderHistory(seriesCurrent) : ''}
-    <div class="notice">본 서비스는 개인이 제작한 비공식 참고자료이며, 각 기관 원문이 정본입니다.</div>
   `;
 
   wireBack(el, ctx);
