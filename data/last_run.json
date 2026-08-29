@@ -1,0 +1,17 @@
+{
+  "run_at": "2026-08-29T15:06:55.311583+09:00",
+  "collectors": {
+    "oecd": {
+      "ok": true,
+      "fetched": 8,
+      "added": 0
+    },
+    "imf": {
+      "ok": true,
+      "fetched": 6,
+      "added": 0
+    }
+  },
+  "conflicts": [],
+  "errors": []
+}
