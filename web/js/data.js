@@ -1,6 +1,12 @@
 const INDICATOR_ORDER = ['emp_change', 'unemp_rate', 'gdp_growth', 'cpi', 'emp_rate', 'emp_rate_youth', 'labor_force'];
 const INTL_ORGS = new Set(['IMF', 'OECD', 'ADB']);
 
+function dayDiff(dateStrA, dateStrB) {
+  const msA = Date.parse(dateStrA + 'T00:00:00Z');
+  const msB = Date.parse(dateStrB + 'T00:00:00Z');
+  return (msA - msB) / (24 * 60 * 60 * 1000);
+}
+
 export function latestRecords(records, { indicator, targetYear }) {
   const filtered = records.filter(r => r.indicator === indicator && r.target_year === targetYear);
   const latest = new Map();
@@ -65,14 +71,10 @@ export function compareSet(records, { indicator, targetYear, today, orgsMeta, fi
     filtered2 = filtered.filter(r => INTL_ORGS.has(r.org));
   }
 
-  // Calculate stale threshold (90 days before today)
-  const todayUTC = Date.UTC(...today.split('-').map(Number));
-  const ninetyDaysMs = 90 * 24 * 60 * 60 * 1000;
-
   // Map to result format and sort by value desc
   const result = filtered2.map(rec => {
-    const pubUTC = Date.UTC(...rec.published_at.split('-').map(Number));
-    const stale = (todayUTC - pubUTC) > ninetyDaysMs;
+    const daysSince = dayDiff(today, rec.published_at);
+    const stale = daysSince > 90;
     const [year, month, day] = rec.published_at.split('-');
     const monthLabel = `${month}.${day}`;
 
@@ -169,10 +171,8 @@ export function dateLabel(rec, orgsMeta) {
 }
 
 export function isNew(rec, today) {
-  const todayUTC = Date.UTC(...today.split('-').map(Number));
-  const recUTC = Date.UTC(...rec.published_at.split('-').map(Number));
-  const sevenDaysMs = 7 * 24 * 60 * 60 * 1000;
-  return (todayUTC - recUTC) <= sevenDaysMs;
+  const daysSince = dayDiff(today, rec.published_at);
+  return daysSince <= 7;
 }
 
 export function esc(s) {
@@ -180,5 +180,6 @@ export function esc(s) {
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
 }

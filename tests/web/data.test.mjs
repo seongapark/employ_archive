@@ -99,3 +99,24 @@ test('isNew within 7 days', () => {
 test('esc escapes html', () => {
   assert.equal(esc('<b>&"'), '&lt;b&gt;&amp;&quot;');
 });
+
+test('compareSet cross-month stale boundary', () => {
+  const rs = [
+    rec({ published_at: '2026-01-01', value: 2.4 }),
+    rec({ published_at: '2026-06-01', value: 2.1 }),
+  ];
+  const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-04-02', orgsMeta: ORGS, filter: 'all' });
+  assert.equal(set[0].rec.published_at, '2026-01-01');
+  assert.equal(set[0].stale, true);
+  assert.equal(set[1].rec.published_at, '2026-06-01');
+  assert.equal(set[1].stale, false);
+});
+
+test('isNew cross-month boundary', () => {
+  assert.equal(isNew(rec({ published_at: '2026-01-22' }), '2026-02-01'), false);
+  assert.equal(isNew(rec({ published_at: '2026-08-22' }), '2026-08-29'), true);
+});
+
+test('esc escapes single quotes', () => {
+  assert.equal(esc("a'b"), 'a&#39;b');
+});
