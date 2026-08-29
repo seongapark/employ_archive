@@ -191,11 +191,19 @@ function renderChart(series) {
     </div>`;
 }
 
+// B트랙(KEIS 등, method: "llm")은 스크래핑 문서에 대한 LLM 추출을 거치므로
+// source_url/landing_url이 신뢰할 수 없는 채널에서 올 수 있다. javascript: 등
+// 위험한 스킴이 href에 들어가지 않도록 http(s)만 허용한다.
+function safeUrl(u) {
+  return typeof u === 'string' && /^https?:\/\//i.test(u) ? u : null;
+}
+
 function renderSourceLine(rec) {
-  if (rec.source_url) {
+  const url = safeUrl(rec.source_url);
+  if (url) {
     const pageSuffix = rec.source_page ? ` (p.${esc(String(rec.source_page))})` : '';
     return `
-      <a href="${esc(rec.source_url)}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:#23508f;">
+      <a href="${esc(url)}" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:5px;font-size:12px;font-weight:600;color:#23508f;">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#23508f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7"></path><path d="M21 3 11 13"></path><path d="M19 14v6H4V5h6"></path></svg>
         원문 보기${pageSuffix} · ${esc(rec.report_title)}
       </a>`;
@@ -216,8 +224,9 @@ function renderRow(rec, isExpanded) {
 
   if (isExpanded) {
     const tags = (rec.rationale_tags || []).map(t => `<div style="font-size:11px;color:#23508f;background:#e7edf6;padding:2px 8px;border-radius:999px;">${esc(t)}</div>`).join('');
-    const landing = rec.landing_url
-      ? `<a href="${esc(rec.landing_url)}" target="_blank" rel="noopener" style="font-size:11px;color:#667085;">기관 자료실</a>`
+    const landingUrl = safeUrl(rec.landing_url);
+    const landing = landingUrl
+      ? `<a href="${esc(landingUrl)}" target="_blank" rel="noopener" style="font-size:11px;color:#667085;">기관 자료실</a>`
       : '';
     return `
       <div class="card" style="border-color:#b9c9e2;display:flex;flex-direction:column;padding:0;">
