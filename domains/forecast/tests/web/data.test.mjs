@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
   latestRecords, summarize, seriesFor, orgIndicators, compareSet,
   timelineGroups, fmtValue, fmtDelta, dateLabel, isNew, esc, SHORT_LABELS,
-} from '../../web/js/data.js';
+} from '../../app/js/data.js';
 
 const INDICATOR_CODES = ['emp_change', 'emp_rate', 'unemp_rate', 'gdp_growth', 'cpi', 'emp_rate_youth', 'labor_force'];
 

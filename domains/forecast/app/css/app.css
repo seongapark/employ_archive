@@ -1,16 +1,5 @@
+/* confidence 배지는 전망 도메인 전용 개념이므로 토큰도 이 앱이 갖는다. */
 :root {
-  --bg: #eef0f3;
-  --card: #ffffff;
-  --border: #e2e5ea;
-  --text: #191d24;
-  --text-secondary: #667085;
-  --text-muted: #98a2b3;
-  --accent: #23508f;
-  --accent-light: #e7edf6;
-  --link: #23508f;
-  --link-hover: #1a3c6e;
-  --up: #c73e3a;
-  --down: #2f6bd0;
   --badge-verified-fg: #17714a;
   --badge-verified-bg: #e5f3ec;
   --badge-extracted-fg: #9a6b15;
@@ -21,93 +10,10 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #15181d;
-    --card: #1e232b;
-    --border: #2c333d;
-    --text: #e6e9ee;
-    --text-secondary: #8b95a3;
-    --accent-light: #1d2c42;
-    --link: #7ea6dd;
-    --link-hover: #9dbde8;
     --badge-verified-bg: #123526;
     --badge-extracted-bg: #3a2d10;
     --badge-reviewed-bg: #152b4a;
   }
-}
-
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  font-family: 'IBM Plex Sans KR', 'Malgun Gothic', system-ui, sans-serif;
-  background: var(--bg);
-  color: var(--text);
-}
-
-button { font-family: inherit; font-size: inherit; color: inherit; }
-
-a { color: var(--link); text-decoration: none; }
-a:hover { color: var(--link-hover); }
-
-.num {
-  font-variant-numeric: tabular-nums;
-  letter-spacing: -0.01em;
-}
-
-/* App shell */
-
-.app {
-  max-width: 480px;
-  margin: 0 auto;
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  background: var(--bg);
-}
-
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px 16px 10px 16px;
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
-}
-
-.header__title {
-  font-size: 17px;
-  font-weight: 700;
-}
-
-.header__meta {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: var(--text-secondary);
-  font-size: 12px;
-}
-
-.offline-banner {
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  padding: 6px 16px;
-  color: var(--badge-extracted-fg);
-  background: var(--badge-extracted-bg);
-}
-
-.offline-banner[hidden] { display: none; }
-
-.screen {
-  flex: 1;
-  overflow-y: auto;
-}
-
-.notice {
-  font-size: 10px;
-  color: var(--text-muted);
-  text-align: center;
-  padding: 4px 16px;
 }
 
 /* Tab bar */
@@ -141,25 +47,6 @@ a:hover { color: var(--link-hover); }
 
 .tab--active span {
   font-weight: 700;
-}
-
-/* Card */
-
-.card {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 12px 14px;
-  min-height: 44px;
-}
-
-/* Badge */
-
-.badge {
-  font-size: 11px;
-  font-weight: 600;
-  padding: 2px 8px;
-  border-radius: 999px;
 }
 
 .badge--verified {
@@ -199,20 +86,6 @@ a:hover { color: var(--link-hover); }
   background: var(--accent);
   border-color: var(--accent);
 }
-
-/* Delta (revision indicator) */
-
-.delta {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.delta-up { color: var(--up); }
-.delta-down { color: var(--down); }
-.delta-flat { color: var(--text-muted); }
 
 /* Summary band */
 

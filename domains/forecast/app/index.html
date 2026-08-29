@@ -8,11 +8,16 @@
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icons/icon-192.png">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
-  <link rel="stylesheet" href="./css/styles.css">
+  <link rel="stylesheet" href="./core/tokens.css">
+  <link rel="stylesheet" href="./core/base.css">
+  <link rel="stylesheet" href="./css/app.css">
 </head>
 <body>
   <div class="app">
     <header class="header">
+      <a class="header__home" href="../" aria-label="홈으로">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>
+      </a>
       <div class="header__title" id="headerTitle">고용전망</div>
       <div class="header__meta"><span class="num" id="headerDate"></span></div>
     </header>

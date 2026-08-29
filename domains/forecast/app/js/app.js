@@ -2,19 +2,9 @@ import { render as home } from './screens/home.js';
 import { render as org } from './screens/org.js';
 import { render as compare } from './screens/compare.js';
 import { render as timeline } from './screens/timeline.js';
+import { loadJson } from '../core/shell.js';
 
 const screens = { home, org, compare, timeline };
-
-async function loadJson(path) {
-  // 배포(사이트 루트에 data/ 복사)에선 ./data/…, 로컬(저장소 루트 서빙)에선 ../data/… 폴백
-  for (const base of ['./', '../']) {
-    try {
-      const res = await fetch(base + path, { cache: 'no-cache' });
-      if (res.ok) return await res.json();
-    } catch { /* 다음 후보 */ }
-  }
-  return null;
-}
 
 function computeDefaultYear(records, today) {
   const todayYear = parseInt(today.slice(0, 4), 10);
@@ -73,10 +63,10 @@ async function boot() {
   const headerTitleEl = document.getElementById('headerTitle');
 
   const [records, orgs, indicators, schedule] = await Promise.all([
-    loadJson('data/forecasts.json'),
-    loadJson('data/orgs.json'),
-    loadJson('data/indicators.json'),
-    loadJson('data/schedule.json'),
+    loadJson('./data/forecasts.json'),
+    loadJson('./data/orgs.json'),
+    loadJson('./data/indicators.json'),
+    loadJson('./data/schedule.json'),
   ]);
 
   const anyMissing = records === null || orgs === null || indicators === null || schedule === null;

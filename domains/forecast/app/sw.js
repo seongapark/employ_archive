@@ -3,7 +3,10 @@ const CACHE = 'forecast-v1';
 const SHELL_ASSETS = [
   './',
   './index.html',
-  './css/styles.css',
+  './core/tokens.css',
+  './core/base.css',
+  './core/shell.js',
+  './css/app.css',
   './js/app.js',
   './js/data.js',
   './js/screens/home.js',

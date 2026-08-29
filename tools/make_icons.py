@@ -11,7 +11,7 @@ from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-OUT_DIR = Path(__file__).resolve().parent.parent / "web" / "icons"
+OUT_DIR = Path(__file__).resolve().parent.parent / "domains" / "forecast" / "app" / "icons"
 BG_COLOR = "#23508f"
 FG_COLOR = "#ffffff"
 SIZE = 512
