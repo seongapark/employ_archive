@@ -41,4 +41,8 @@ def main(last_run_path: Path = DATA_DIR / "last_run.json", *,
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    # 워크플로는 UTF-8 이지만 로컬 콘솔은 아닐 수 있다(윈도우 cp949).
+    # 판정 결과를 쓰다 터지면 멀쩡한 실행이 실패로 둔갑한다.
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    path = Path(sys.argv[1]) if len(sys.argv) > 1 else DATA_DIR / "last_run.json"
+    raise SystemExit(main(path))

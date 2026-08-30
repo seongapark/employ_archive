@@ -57,18 +57,30 @@ def test_reads_the_known_down_list_from_the_environment(monkeypatch):
     assert check_run.known_down_from_env() == set()
 
 
-def test_entry_point_prints_on_a_console_that_is_not_utf8(tmp_path):
-    # 워크플로는 UTF-8 이지만 로컬 콘솔은 아닐 수 있다(윈도우 cp949).
-    # 화면에 쓰다 터지면 판정 자체가 실패로 둔갑한다.
+def run_entry_point(path, **env_over):
     import os
     import subprocess
     import sys
 
-    path = write_run(tmp_path, {"kdi": {"ok": False}},
-                     ["kdi: HTTPError: HTTP Error 502: Bad Gateway"])
-    proc = subprocess.run(
+    return subprocess.run(
         [sys.executable, "-m", "domains.forecast.pipeline.check_run", str(path)],
-        env={**os.environ, "PYTHONIOENCODING": "ascii", "KNOWN_DOWN": "kdi"},
+        env={**os.environ, "KNOWN_DOWN": "kdi", **env_over},
         capture_output=True, text=True, encoding="utf-8",
     )
-    assert proc.returncode == 0, proc.stderr
+
+
+def test_entry_point_judges_the_file_named_on_the_command_line(tmp_path):
+    path = write_run(tmp_path, {"bok": {"ok": False}},
+                     ["bok: ValueError: 요약표 페이지를 찾지 못했다"])
+    proc = run_entry_point(path)
+    assert proc.returncode == 1, proc.stdout + proc.stderr
+    assert "::error::bok" in proc.stdout
+
+
+def test_entry_point_prints_on_a_console_that_is_not_utf8(tmp_path):
+    # 워크플로는 UTF-8 이지만 로컬 콘솔은 아닐 수 있다(윈도우 cp949).
+    # 화면에 쓰다 터지면 판정 자체가 실패로 둔갑한다.
+    path = write_run(tmp_path, {"kdi": {"ok": False}},
+                     ["kdi: HTTPError: HTTP Error 502: Bad Gateway"])
+    proc = run_entry_point(path, PYTHONIOENCODING="ascii")
+    assert proc.returncode == 0, proc.stdout + proc.stderr
