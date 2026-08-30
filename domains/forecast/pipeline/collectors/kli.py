@@ -108,8 +108,13 @@ def collect_issue(issue: Issue) -> list[ForecastRecord]:
     url = DOWNLOAD_URL.format(no=_list_no(issue.url))
     pages = pdf.page_texts(http.get(url).content)
     for page_no, text in enumerate(pages, start=1):
-        if _TABLE_CAPTION.search(text):
+        if not _TABLE_CAPTION.search(text):
+            continue
+        try:
             return parse(text, issue, url, page_no)
+        except ValueError:
+            # 표 차례에도 같은 캡션이 나온다 — 표가 아닌 쪽은 건너뛴다
+            continue
     raise ValueError(f"{issue.title}: 고용 전망 표를 실은 쪽을 찾지 못했다")
 
 
