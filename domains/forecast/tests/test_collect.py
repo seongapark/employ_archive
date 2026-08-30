@@ -52,3 +52,15 @@ def test_main_records_collector_failure_and_continues(tmp_path):
 
 def test_collectors_registry_covers_the_pdf_track_orgs():
     assert set(collect.COLLECTORS) == {"oecd", "imf", "bok", "kdi"}
+
+
+def test_main_records_a_compact_error_without_local_paths(tmp_path):
+    # last_run.json 은 공개 저장소에 커밋된다. 트레이스백을 그대로 담으면
+    # 돌린 사람의 절대경로가 함께 실린다.
+    def boom(today):
+        raise RuntimeError("HTTP Error 502: Bad Gateway")
+
+    collect.main(data_dir=tmp_path, collectors={"kdi": boom})
+    summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
+    (error,) = summary["errors"]
+    assert error == "kdi: RuntimeError: HTTP Error 502: Bad Gateway"

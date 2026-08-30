@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import traceback
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable
@@ -60,9 +59,11 @@ def main(data_dir: Path = DATA_DIR,
             summary["collectors"][name] = {
                 "ok": True, "fetched": len(candidates), "added": len(result.added),
             }
-        except Exception:
+        except Exception as exc:
+            # last_run.json 은 저장소에 커밋된다 — 트레이스백을 담으면 돌린 사람의
+            # 절대경로까지 함께 실린다. 무엇이 왜 실패했는지만 한 줄로 남긴다.
             summary["collectors"][name] = {"ok": False, "fetched": 0, "added": 0}
-            summary["errors"].append(f"{name}: {traceback.format_exc(limit=3)}")
+            summary["errors"].append(f"{name}: {type(exc).__name__}: {exc}")
 
     if len(merged) != len(existing):
         store.save_forecasts(forecasts_path, merged)
