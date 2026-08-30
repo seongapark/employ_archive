@@ -1,4 +1,4 @@
-import { latestRecords, summarize, fmtValue, fmtDelta, dateLabel, esc, SHORT_LABELS } from '../data.js';
+import { latestRecords, summarize, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS } from '../data.js';
 
 // 홈의 첫 필만 목업대로 '취업자 증감'을 온전히 유지하고, 나머지는 공유 축약 라벨을 쓴다.
 const PILLS = [
@@ -79,6 +79,7 @@ function renderCard(rec, ctx) {
     : (isApi ? `${rec.report_title} · API 수집` : rec.report_title);
 
   const [value, unitSuffix] = splitValueUnit(fmtValue(rec));
+  const halves = halfYearLabel(ctx.records, rec);
 
   return `
     <button type="button" class="card" data-org="${esc(rec.org)}" style="display:flex;flex-direction:column;gap:4px;text-align:left;width:100%;cursor:pointer;">
@@ -90,6 +91,7 @@ function renderCard(rec, ctx) {
         <div class="num" style="font-size:28px;font-weight:700;">${esc(value)}<span style="font-size:15px;font-weight:600;">${esc(unitSuffix)}</span></div>
         <div class="delta ${deltaCls}">${deltaSvg}<span class="num">${esc(delta.text)}</span></div>
       </div>
+      <div class="num" style="font-size:12px;color:#667085;">${esc(halves)}</div>
       <div style="display:flex;gap:8px;font-size:12px;color:#667085;">
         <span class="num">${esc(date)}</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(rationale)}</span>
       </div>

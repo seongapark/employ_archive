@@ -45,3 +45,15 @@ def test_meta_loaded_from_indicators_json():
     assert set(VALUE_RANGES) == set(INDICATOR_META)
     assert VALUE_RANGES["gdp_growth"] == (-10, 10)
     assert INDICATOR_META["emp_change"]["unit"] == "만명"
+
+
+def test_make_id_keeps_annual_ids_unchanged():
+    assert make_id("BOK", date(2026, 8, 27), "emp_change", 2026, "annual") == \
+        "bok-2026-08-emp_change-2026"
+
+
+def test_make_id_separates_half_year_records():
+    assert make_id("BOK", date(2026, 8, 27), "emp_change", 2026, "h1") == \
+        "bok-2026-08-emp_change-2026-h1"
+    assert make_id("BOK", date(2026, 8, 27), "emp_change", 2026, "h2") == \
+        "bok-2026-08-emp_change-2026-h2"

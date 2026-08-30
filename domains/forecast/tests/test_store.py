@@ -115,3 +115,30 @@ def test_intra_month_revision_reidentified_dup_is_skipped():
     assert not result.conflicts
     day_ids = [r.id for r in result.records if r.id == "oecd-2026-06-20-gdp_growth-2027"]
     assert len(day_ids) == 1
+
+
+def half(period: str, value: float, day: int = 15) -> ForecastRecord:
+    pub = date(2026, 6, day)
+    return ForecastRecord(
+        id=make_id("BOK", pub, "gdp_growth", 2027, period), org="BOK", org_name_ko="한국은행",
+        report_title="test", published_at=pub, target_year=2027, target_period=period,
+        indicator="gdp_growth", value=value, unit="%",
+        source_url="https://example.com/a", landing_url="https://example.com",
+        confidence="extracted", collected_at=datetime(2026, 6, day, 16, 0),
+    )
+
+
+def test_half_year_records_do_not_collide_with_the_annual_one():
+    result = store.merge([], [half("annual", 2.0), half("h1", 1.6), half("h2", 2.4)])
+    assert len(result.records) == 3
+    assert not result.conflicts
+    assert {r.value for r in result.records} == {2.0, 1.6, 2.4}
+
+
+def test_intra_month_revision_keeps_half_year_records_apart():
+    # 같은 달 두 번째 판이 day 단위 id로 재부여될 때 상·하반이 한 id로 뭉치면
+    # 한쪽 값이 충돌로 버려진다
+    first = store.merge([], [half("h1", 1.6), half("h2", 2.4)]).records
+    result = store.merge(first, [half("h1", 1.8), half("h2", 2.6)])
+    assert not result.conflicts
+    assert len(result.records) == 4

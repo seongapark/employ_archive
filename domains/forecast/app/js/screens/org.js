@@ -1,4 +1,4 @@
-import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, esc, SHORT_LABELS } from '../data.js';
+import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS } from '../data.js';
 
 // 펼침 상태는 화면 방문 동안 유지 (모듈 스코프 — 여러 회차 행이 동시에 펼쳐질 수 있음)
 const expandedIds = new Set();
@@ -210,7 +210,7 @@ function renderSourceLine(rec) {
   return `<div style="font-size:12px;color:#98a2b3;">원문 링크 확인 필요</div>`;
 }
 
-function renderRow(rec, isExpanded, orgsMeta) {
+function renderRow(rec, isExpanded, orgsMeta, records) {
   const badgeInfo = BADGE[rec.confidence] || { cls: 'badge--extracted', label: rec.confidence || '' };
   const delta = fmtDelta(rec);
   // DELTA_SVG.flat already renders its own "—", so don't also append delta.text
@@ -239,6 +239,7 @@ function renderRow(rec, isExpanded, orgsMeta) {
         </button>
         <div style="border-top:1px solid #eef0f3;padding:10px 14px;display:flex;flex-direction:column;gap:8px;">
           <div style="font-size:13px;line-height:1.5;color:#344054;">${esc(rationale)}</div>
+          <div class="num" style="font-size:12px;color:#667085;">${esc(halfYearLabel(records, rec, { unit: true }))}</div>
           ${tags || landing ? `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">${tags}<div class="badge ${badgeInfo.cls}" style="margin-left:auto;">${esc(badgeInfo.label)}</div></div>` : `<div class="badge ${badgeInfo.cls}" style="align-self:flex-end;">${esc(badgeInfo.label)}</div>`}
           ${renderSourceLine(rec)}
           ${landing}
@@ -255,7 +256,7 @@ function renderRow(rec, isExpanded, orgsMeta) {
     </button>`;
 }
 
-function renderHistory(series, orgsMeta) {
+function renderHistory(series, orgsMeta, records) {
   if (!series.length) {
     return `<div style="padding:16px;text-align:center;font-size:13px;color:#98a2b3;">이 연도에는 데이터가 없습니다</div>`;
   }
@@ -263,7 +264,7 @@ function renderHistory(series, orgsMeta) {
   const rows = series
     .slice()
     .reverse() // 최신 위
-    .map(rec => renderRow(rec, singleEdition || expandedIds.has(rec.id), orgsMeta))
+    .map(rec => renderRow(rec, singleEdition || expandedIds.has(rec.id), orgsMeta, records))
     .join('');
   return `<div style="display:flex;flex-direction:column;gap:6px;padding:8px 16px;">${rows}</div>`;
 }
@@ -309,7 +310,7 @@ export function render(el, ctx) {
     ${renderSummaryCard(ctx, orgCode, indicators, currentYear, records)}
     ${indicators.length ? renderYearAndPills(currentYear, indicatorYears, indicators, currentIndicator, ctx) : ''}
     ${renderChart(seriesCurrent)}
-    ${indicators.length ? renderHistory(seriesCurrent, ctx.orgs) : ''}
+    ${indicators.length ? renderHistory(seriesCurrent, ctx.orgs, ctx.records) : ''}
   `;
 
   wireBack(el, ctx);

@@ -48,3 +48,7 @@ def test_main_records_collector_failure_and_continues(tmp_path):
     summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
     assert summary["collectors"]["bad"]["ok"] is False
     assert len(summary["errors"]) == 1
+
+
+def test_collectors_registry_covers_the_pdf_track_orgs():
+    assert set(collect.COLLECTORS) == {"oecd", "imf", "bok", "kdi"}

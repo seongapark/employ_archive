@@ -163,9 +163,39 @@ export function timelineGroups(records) {
   return groups;
 }
 
+// 퍼센트 지표는 63 처럼 정수로 떨어져도 63.0% 로 적는다. 62.9% 옆에 63% 가
+// 붙으면 정밀도가 달라 보인다. 만명 단위는 기관이 쓴 자릿수를 그대로 둔다.
+function fmtNumber(value, unit) {
+  return unit === '만명' ? String(value) : value.toFixed(1);
+}
+
 export function fmtValue(rec) {
   const suffix = rec.unit || '%';
-  return `${rec.value}${suffix}`;
+  return `${fmtNumber(rec.value, suffix)}${suffix}`;
+}
+
+// 이 회차 시점에 유효한 반기 전망. 수집기는 값이 그대로면 반기를 다시 저장하지
+// 않으므로(collect.drop_unchanged), 발표일이 똑같은 것만 찾으면 기관이 실제로 낸
+// 반기가 사라진다. 회차 발표일 이하의 가장 최근 반기를 쓴다.
+// 반기를 내지 않는 기관은 null 이며, 화면에서 '-' 로 표시한다.
+export function halfYears(records, rec) {
+  const latest = { h1: null, h2: null };
+  for (const r of records) {
+    if (r.org !== rec.org || r.indicator !== rec.indicator) continue;
+    if (r.target_year !== rec.target_year) continue;
+    if (r.target_period !== 'h1' && r.target_period !== 'h2') continue;
+    if (r.published_at > rec.published_at) continue;
+    const kept = latest[r.target_period];
+    if (!kept || r.published_at > kept.published_at) latest[r.target_period] = r;
+  }
+  return { h1: latest.h1?.value ?? null, h2: latest.h2?.value ?? null };
+}
+
+export function halfYearLabel(records, rec, { unit = false } = {}) {
+  const { h1, h2 } = halfYears(records, rec);
+  const suffix = rec.unit || '%';
+  const cell = v => (v === null ? '-' : `${fmtNumber(v, suffix)}${unit ? suffix : ''}`);
+  return `상반 ${cell(h1)} · 하반 ${cell(h2)}`;
 }
 
 export function fmtDelta(rec) {
