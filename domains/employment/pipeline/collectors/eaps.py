@@ -55,20 +55,39 @@ def _header_labels(rows: list[list[str]]) -> dict[int, str]:
     return labels
 
 
-def _period_rows(rows: list[list[str]]) -> list[tuple[str, list[str]]]:
-    """연도 행과 월 행을 (YYYY-MM, 행) 으로 바꾼다.
+_MONTH_START = re.compile(r"^(\d{4})\.(\d{1,2})$")
+_MONTH_ONLY = re.compile(r"^(\d{1,2})$")
 
-    첫 칸이 4자리면 연도 행(그 해 연평균)이라 건너뛰고, 1~12 면 직전 연도의 월이다.
+
+def _period_rows(rows: list[list[str]]) -> list[tuple[str, list[str]]]:
+    """월별 행만 골라 (YYYY-MM, 행) 으로 바꾼다.
+
+    첫 칸에는 연평균(단독 4자리, 예: '2025'), 분기('2025.1/4'), 월별 값이
+    한 표에 섞여 있다. 월은 연도가 바뀌는 시작 행에서만 'YYYY.  M' 처럼
+    연도를 달고, 그 뒤로는 숫자만 온다 — 그래서 4자리 단독 행을 연도로
+    오인해 이어붙이면 월 시작 행(연도가 붙은 행)은 정규식에 안 걸려 버려지고,
+    그 다음 숫자만 있는 행들은 훨씬 전에 마지막으로 봤던 연평균 연도에
+    잘못 붙는다 — 다음 해로 넘어간 월이 이전 해로 주저앉는다. 빈 행은 표의
+    블록 경계이므로 연도 문맥을 끊는다.
     """
     out: list[tuple[str, list[str]]] = []
     year: str | None = None
     for row in rows:
         first = _norm(row[0]) if row else ""
-        if re.fullmatch(r"\d{4}", first):
-            year = first
+        if not first:
+            year = None
             continue
-        if year and re.fullmatch(r"\d{1,2}", first) and 1 <= int(first) <= 12:
-            out.append((f"{year}-{int(first):02d}", row))
+        m = _MONTH_START.fullmatch(first)
+        if m:
+            year, month = m.group(1), int(m.group(2))
+            if 1 <= month <= 12:
+                out.append((f"{year}-{month:02d}", row))
+            continue
+        m = _MONTH_ONLY.fullmatch(first)
+        if year and m:
+            month = int(m.group(1))
+            if 1 <= month <= 12:
+                out.append((f"{year}-{month:02d}", row))
     return out
 
 

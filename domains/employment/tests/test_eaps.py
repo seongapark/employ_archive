@@ -44,15 +44,28 @@ def test_mining_is_absent_because_the_release_folds_it_into_manufacturing(record
     assert "B" not in {r.category for r in records if r.breakdown == "industry"}
 
 
-def test_aggregate_columns_are_not_mistaken_for_industries(records):
-    # '광공업'과 '사회간접자본 및 기타서비스'는 집계 열이다. 산업으로 들어오면
-    # 제조업·서비스업이 이중 계상된다.
-    assert all(r.category != "광공업" for r in records if r.category)
-    manufacturing = [r for r in records
-                     if r.breakdown == "industry" and r.category == "C"]
-    assert manufacturing
-    newest = max(manufacturing, key=lambda r: r.period)
-    assert 3000 < newest.value < 5500     # 제조업 취업자 400만명대
+def test_industry_values_do_not_double_count(records):
+    # '광공업'과 '사회간접자본 및 기타서비스'는 집계 열이다. 산업으로 새어
+    # 들어오면 제조업·서비스업이 이중 계상돼 산업별 합이 전체취업자를 넘는다.
+    # 경활은 광업(B)만 빠지므로 정상이면 합이 전체보다 아주 조금 작다.
+    latest = max(r.period for r in records)
+    total = next(r.value for r in records
+                 if r.breakdown == "total" and r.period == latest)
+    parts = sum(r.value for r in records
+                if r.breakdown == "industry" and r.period == latest)
+    assert parts < total
+    assert parts > total * 0.99
+
+
+def test_reads_monthly_rows_not_annual_or_quarterly(records):
+    # 같은 표에 연평균(단독 4자리) 과 분기('YYYY.Q/4') 행이 월별 행과 섞여
+    # 있다. 연도가 바뀌는 월 시작 행에서만 연도가 붙고 그 뒤로는 숫자만 오므로,
+    # 연도 문맥을 잘못 이어붙이면 최신월이 실제보다 낮은 연도로 주저앉거나
+    # 서로 다른 실제월이 같은 period 로 겹쳐 덮어써진다.
+    totals = [r for r in records if r.breakdown == "total"]
+    periods = [r.period for r in totals]
+    assert len(periods) == len(set(periods))
+    assert max(periods) == "2026-07"
 
 
 def test_carries_year_over_year_change(records):
