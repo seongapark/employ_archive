@@ -81,7 +81,11 @@ def parse(rows: list[dict], *, released_at: date, release_url: str,
     return records
 
 
-def fetch(api_key: str, months: int = 26) -> list[dict]:
+# 36 을 요청하지만 KOSIS 는 있는 만큼만 준다. 이 표는 2024-01 부터다 —
+# 그 이전은 다른 산업분류 체계의 별도 표(DT_118N_MON056)에 있고 이어붙이지
+# 않는다. 이어붙이면 전년동월대비가 재분류 효과를 고용 변화로 둔갑시킨다.
+# 그래서 증감이 붙는 달은 2025-01 부터다.
+def fetch(api_key: str, months: int = 36) -> list[dict]:
     params = {"method": "getList", "apiKey": api_key, "orgId": ORG_ID,
               "tblId": TBL_ID, "itmId": ITEM_TOTAL_EMPLOYEES_CODE, "objL1": "ALL",
               "objL2": SIZE_TOTAL_CODE, "prdSe": "M", "newEstPrdCnt": str(months),

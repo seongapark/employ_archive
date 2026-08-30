@@ -76,3 +76,13 @@ def test_coverage_check_fails_loudly_when_an_industry_vanishes(records):
                if not (r.period == latest and r.category == "C")]
     with pytest.raises(ValueError, match="빠진 산업"):
         est.check_coverage(thinned)
+
+
+def test_year_over_year_starts_only_after_twelve_months_of_data(records):
+    # 이 표는 2024-01 부터다. 그 앞은 분류 체계가 달라 이어붙이지 않는다.
+    # 이어붙이면 재분류 효과가 고용 변화로 둔갑한다.
+    with_yoy = sorted({r.period for r in records if r.yoy is not None})
+    without = sorted({r.period for r in records if r.yoy is None})
+    assert without and with_yoy
+    assert max(without) < min(with_yoy)      # 경계가 하나뿐이다
+    assert len(with_yoy) >= 12               # 최소한 1년치는 나온다
