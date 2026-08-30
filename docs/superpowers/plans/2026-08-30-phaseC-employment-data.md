@@ -1311,7 +1311,7 @@ key = dict(l.split("=", 1) for l in
            Path(".env").read_text(encoding="utf-8").strip().splitlines())["KOSIS_API_KEY"]
 p = {"method": "getList", "apiKey": key, "orgId": "118", "tblId": "DT_118N_MON066",
      "itmId": "ALL", "objL1": "ALL", "objL2": "ALL", "prdSe": "M",
-     "newEstPrdCnt": "26", "format": "json", "jsonVD": "Y"}
+     "newEstPrdCnt": "36", "format": "json", "jsonVD": "Y"}
 rows = requests.get("https://kosis.kr/openapi/Param/statisticsParameterData.do",
                     params=p, timeout=120).json()
 keep = [r for r in rows if r.get("C2_NM") == "전체" and r.get("ITM_NM") == "종사자_전체"]
@@ -1321,7 +1321,7 @@ print(len(rows), "->", len(keep), "행", out.stat().st_size, "bytes")
 EOF
 ```
 
-`newEstPrdCnt=26` 은 24개월치 증감을 계산하려면 12개월 전 값이 필요해 여유를 둔 것이다.
+`newEstPrdCnt=36` 이다. 증감은 12개월 전 값에서 계산하므로 26개월만 받으면 증감이 붙는 달이 14개뿐이라 24개월 시계열을 못 그린다. 36개월이면 24개월치 증감이 나온다.
 저장 시 규모(`C2_NM`)와 항목(`ITM_NM`)을 좁히지 않으면 픽스처가 수십 MB 가 된다.
 
 - [ ] **Step 2: 실패하는 테스트를 쓴다**
@@ -1493,7 +1493,7 @@ def parse(rows: list[dict], *, released_at: date, release_url: str,
     return records
 
 
-def fetch(api_key: str, months: int = 26) -> list[dict]:
+def fetch(api_key: str, months: int = 36) -> list[dict]:
     params = {"method": "getList", "apiKey": api_key, "orgId": ORG_ID,
               "tblId": TBL_ID, "itmId": "ALL", "objL1": "ALL", "objL2": "ALL",
               "prdSe": "M", "newEstPrdCnt": str(months),
@@ -1555,15 +1555,25 @@ git commit -m "feat(employment): 사업체노동력조사 수집기 (KOSIS API)"
 ### Task 7: 고용행정통계 수집기
 
 **Files:**
+- Create: `domains/employment/pipeline/periods.py` — 기간 칸 파싱 공유 모듈
 - Create: `domains/employment/pipeline/collectors/ei.py`
 - Create: `domains/employment/tests/test_ei.py`
+- Create: `domains/employment/tests/test_periods.py`
+- Modify: `domains/employment/pipeline/collectors/eaps.py` — 자체 `_period_rows`·`_norm` 을 지우고 공유 모듈을 쓴다
+
+**왜 공유 모듈인가.** 경활 xlsx 와 고용행정 hwpx 가 기간 칸에 **같은 관례**를 쓴다 — 연평균·분기·월이 한 열에 섞이고, 월은 연도가 바뀔 때만 연도를 단다(`2026. 1` 다음은 `2`, `3` …). Task 5 가 이 규칙을 어렵게 알아냈다(처음엔 2026년 데이터를 2025년으로 기록했다). 두 번째 수집기에 복사하면 한쪽만 고쳐지는 날이 온다.
+
+`periods.py` 의 내용은 Task 5 가 이미 검증한 `eaps._period_rows` 를 그대로 옮긴 것이다. 옮긴 뒤 `eaps.py` 가 공유 모듈을 쓰도록 바꾸고, **Task 5 의 테스트 10개가 전부 그대로 통과해야 한다.**
 
 **Interfaces:**
 - Consumes: `hwpx.tables` (Task 4), `models.SeriesRecord`·`make_id` (Task 1)
 - Produces:
   - `ei.LEAD_COLUMNS: dict[int, str]`, `ei.CONT_COLUMNS: dict[int, str]` — 열 위치 → KSIC 코드
   - `ei.check_layout(lead, cont) -> None` — 헤더 이름이 기대 위치에 있는지 검증, 아니면 `ValueError`
+  - `periods.squash(text) -> str`, `periods.month_rows(rows, column=0) -> list[tuple[str, list[str]]]` — 기간 칸 파싱 공유 모듈
   - `ei.find_tables(tables) -> tuple[list, list, list, list]` — (수준, 수준이어짐, 증감, 증감이어짐)
+  - `ei.TOTAL_KEY`, `ei._series_by_period(lead, cont) -> dict[str, dict[str, float]]`
+  - `ei.EXPECTED_CODES: set[str]`, `ei.check_coverage(records) -> None`
   - `ei.headline_delta(tables) -> float | None` — p1 요약문에서 총량 증감(천명)을 뽑는다
   - `ei.parse(data: bytes, *, released_at, release_url, attachments, collected_at) -> list[SeriesRecord]`
   - `ei.latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]`
@@ -1578,6 +1588,102 @@ git commit -m "feat(employment): 사업체노동력조사 수집기 (KOSIS API)"
 **집계 열 두 개를 반드시 뺀다.** 앞 표의 `서비스업`(6번 열)과 이어지는 표의 `기타*`(11번 열)는 대분류가 아니라 집계다. 넣으면 서비스 산업들이 이중 계상된다. 경활의 `광공업`과 같은 함정이다.
 
 **대조 검증 (스파이크 6장).** p1 `<주요 특징>` 박스에 총량 증감이 문장으로 나온다("‘26.7월 고용보험 가입자는 27만 7천명 증가"). 증감 표의 전산업 값과 일치해야 한다. 어긋나면 서식이 바뀐 것이므로 **조용히 잘못된 숫자를 넣지 말고 실패시킨다.**
+
+- [ ] **Step 0: 기간 파싱을 공유 모듈로 옮긴다**
+
+Task 5 가 알아낸 기간 칸 규칙을 두 수집기가 함께 쓴다. 먼저 테스트를 쓴다.
+
+`domains/employment/tests/test_periods.py`:
+
+```python
+from domains.employment.pipeline.periods import month_rows, squash
+
+
+def test_squash_removes_every_space():
+    assert squash(" 농림 어업 ") == "농림어업"
+    assert squash(None) == ""
+
+
+def test_reads_a_month_start_row_and_the_bare_months_after_it():
+    rows = [["2024.  7", "a"], ["8", "b"], ["9", "c"]]
+    assert [p for p, _ in month_rows(rows)] == ["2024-07", "2024-08", "2024-09"]
+
+
+def test_a_new_year_row_switches_the_year():
+    rows = [["2025.  12", "a"], ["2026.  1", "b"], ["2", "c"]]
+    assert [p for p, _ in month_rows(rows)] == ["2025-12", "2026-01", "2026-02"]
+
+
+def test_annual_and_quarterly_rows_are_dropped():
+    rows = [["2021", "a"], ["2025", "b"], ["2026.1/4", "c"], ["2/4", "d"]]
+    assert month_rows(rows) == []
+
+
+def test_a_blank_row_ends_the_year_context():
+    # 표의 블록 경계다. 이어지면 연평균 블록 뒤의 숫자가 엉뚱한 해에 붙는다.
+    rows = [["2024.  7", "a"], ["", ""], ["8", "b"]]
+    assert [p for p, _ in month_rows(rows)] == ["2024-07"]
+
+
+def test_a_bare_month_before_any_year_is_ignored():
+    assert month_rows([["8", "a"]]) == []
+```
+
+Run: `python -m pytest domains/employment/tests/test_periods.py -q`
+Expected: FAIL — `ModuleNotFoundError: No module named 'domains.employment.pipeline.periods'`
+
+그다음 `domains/employment/pipeline/periods.py` 를 만든다. 내용은 Task 5 가 이미 검증한 `eaps._period_rows` 를 그대로 옮긴 것이다 — 로직을 새로 쓰지 말고 **현재 `eaps.py` 의 것을 읽어 옮겨라**:
+
+```python
+"""보도자료 표의 기간 칸을 읽는다.
+
+경활 xlsx 와 고용행정 hwpx 가 같은 관례를 쓴다 — 연평균·분기·월이 한 열에 섞이고,
+월은 연도가 바뀔 때만 연도를 단다. 두 수집기에 복사하면 한쪽만 고쳐지는 날이 온다.
+"""
+from __future__ import annotations
+
+import re
+
+_MONTH_START = re.compile(r"^(\d{4})\.(\d{1,2})$")
+_MONTH_ONLY = re.compile(r"^(\d{1,2})$")
+
+
+def squash(text: str | None) -> str:
+    """공백을 모두 지운다. 두 줄로 접힌 셀을 한 낱말로 되돌린다."""
+    return re.sub(r"\s+", "", text or "")
+
+
+def month_rows(rows: list[list[str]], *,
+               column: int = 0) -> list[tuple[str, list[str]]]:
+    """월 행만 (YYYY-MM, 행) 으로. 연평균·분기·주석은 버린다."""
+    out: list[tuple[str, list[str]]] = []
+    year: str | None = None
+    for row in rows:
+        first = squash(row[column]) if len(row) > column else ""
+        if not first:
+            year = None            # 빈 행은 표의 블록 경계다
+            continue
+        started = _MONTH_START.fullmatch(first)
+        if started:
+            year, month = started.group(1), int(started.group(2))
+            if 1 <= month <= 12:
+                out.append((f"{year}-{month:02d}", row))
+            continue
+        only = _MONTH_ONLY.fullmatch(first)
+        if year and only:
+            month = int(only.group(1))
+            if 1 <= month <= 12:
+                out.append((f"{year}-{month:02d}", row))
+    return out
+```
+
+Run: `python -m pytest domains/employment/tests/test_periods.py -q`
+Expected: PASS (6 passed)
+
+이제 `eaps.py` 가 공유 모듈을 쓰게 한다 — `_MONTH_START`·`_MONTH_ONLY`·`_period_rows`·`_norm` 을 지우고 `from ..periods import month_rows, squash` 로 바꾼다. `_norm` 을 쓰던 자리는 `squash` 로 바꾼다.
+
+Run: `python -m pytest domains/employment/tests/test_eaps.py -q`
+Expected: PASS (10 passed) — **Task 5 의 테스트가 하나도 바뀌지 않고 그대로 통과해야 한다.** 하나라도 깨지면 옮기는 과정에서 동작이 달라진 것이므로 멈추고 보고하라.
 
 - [ ] **Step 1: 실패하는 테스트를 쓴다**
 
@@ -1671,6 +1777,39 @@ def test_ids_are_unique(records):
     assert len(ids) == len(set(ids))
 
 
+def test_reads_every_month_in_the_table_not_just_the_latest(records):
+    # 표는 28개월치를 담고 있다. 마지막 행만 읽으면 24개월 시계열을 모으는 데
+    # 2년이 걸린다.
+    totals = [r for r in records if r.breakdown == "total"]
+    periods = [r.period for r in totals]
+    assert len(periods) == len(set(periods)), "같은 기간이 여러 번 나왔다"
+    assert len(periods) >= 24
+    assert max(periods) >= "2026-01"
+
+
+def test_industry_sum_tracks_the_total(records):
+    # 열이 밀리거나 집계 열('서비스업', '기타*')이 섞이면 합이 전체에서 벗어난다.
+    latest = max(r.period for r in records)
+    total = next(r.value for r in records
+                 if r.breakdown == "total" and r.period == latest)
+    parts = sum(r.value for r in records
+                if r.breakdown == "industry" and r.period == latest)
+    # 광업·가구내고용·국제기관이 '기타'로 빠지므로 합이 전체보다 조금 작다
+    assert 0.97 < parts / total < 1.0
+
+
+def test_coverage_check_passes_on_a_complete_month(records):
+    ei.check_coverage(records)
+
+
+def test_coverage_check_fails_loudly_when_an_industry_vanishes(records):
+    latest = max(r.period for r in records)
+    thinned = [r for r in records
+               if not (r.period == latest and r.category == "C")]
+    with pytest.raises(ValueError, match="빠진 산업"):
+        ei.check_coverage(thinned)
+
+
 def test_parse_fails_loudly_when_the_summary_disagrees(data, monkeypatch):
     # 서식이 바뀌어 표를 잘못 읽으면 조용히 틀린 숫자를 넣지 말고 실패해야 한다
     monkeypatch.setattr(ei, "headline_delta", lambda tables: 999.0)
@@ -1703,6 +1842,7 @@ import requests
 
 from .. import hwpx
 from ..models import Attachment, SeriesRecord, make_id
+from ..periods import month_rows, squash
 
 KST = timezone(timedelta(hours=9))
 LIST_URL = "https://www.moel.go.kr/news/enews/report/enewsList.do"
@@ -1736,7 +1876,6 @@ _CONT_HEADER = {1: "정보통신업", 8: "보건복지", 11: "기타*"}
 
 def check_layout(lead: list[list[str]], cont: list[list[str]]) -> None:
     # 비교 전에 공백을 지운다 — 헤더가 두 줄로 접히면 '정보 통신업' 처럼 온다.
-    squash = lambda t: re.sub(r"\s+", "", t or "")
     for col, expected in _LEAD_HEADER.items():
         got = lead[0][col] if col < len(lead[0]) else ""
         if squash(got) != expected:
@@ -1765,7 +1904,7 @@ def _flat(cells) -> str:
     셀 안 공백만 지우고 셀 사이는 띄운다. 전부 이어붙이면 키워드가 두 셀
     경계를 걸쳐 가짜로 매칭될 수 있다 — 앞 셀 끝 '산' + 뒤 셀 시작 '업'.
     """
-    return " ".join(re.sub(r"\s+", "", c or "") for c in cells)
+    return " ".join(squash(c) for c in cells)
 
 
 def find_tables(tables) -> tuple[list, list, list, list]:
@@ -1808,21 +1947,39 @@ def headline_delta(tables) -> float | None:
     return None
 
 
-def _series_from(level_a, level_b, delta_a, delta_b) -> dict[str, dict[str, float]]:
-    """마지막 행(최신월)의 KSIC 코드 -> 값. 수준과 증감을 각각."""
-    def row_map(table, columns):
-        last = table[-1]
-        out = {}
-        for col, code in columns.items():
-            if col < len(last):
-                v = _num(last[col])
-                if v is not None:
-                    out[code] = v
-        return out
+TOTAL_KEY = "__total__"
 
-    level = {**row_map(level_a, LEAD_COLUMNS), **row_map(level_b, CONT_COLUMNS)}
-    delta = {**row_map(delta_a, LEAD_COLUMNS), **row_map(delta_b, CONT_COLUMNS)}
-    return {"level": level, "delta": delta}
+
+def _series_by_period(lead, cont) -> dict[str, dict[str, float]]:
+    """{기간: {KSIC 코드 또는 TOTAL_KEY: 값}}.
+
+    마지막 행만 읽지 않는다. 이 표는 28개월치를 담고 있고, 한 회차에서 전 기간을
+    가져와야 24개월 시계열이 첫 수집만으로 채워진다. 최신월만 읽으면 24개월을
+    모으는 데 2년이 걸린다.
+    """
+    out: dict[str, dict[str, float]] = {}
+
+    for period, row in month_rows(lead):
+        bucket = out.setdefault(period, {})
+        if TOTAL_COLUMN < len(row):
+            value = _num(row[TOTAL_COLUMN])
+            if value is not None:
+                bucket[TOTAL_KEY] = value
+        for col, code in LEAD_COLUMNS.items():
+            if col < len(row):
+                value = _num(row[col])
+                if value is not None:
+                    bucket[code] = value
+
+    for period, row in month_rows(cont):
+        bucket = out.setdefault(period, {})
+        for col, code in CONT_COLUMNS.items():
+            if col < len(row):
+                value = _num(row[col])
+                if value is not None:
+                    bucket[code] = value
+
+    return out
 
 
 def parse(data: bytes, *, released_at: date, release_url: str,
@@ -1832,39 +1989,61 @@ def parse(data: bytes, *, released_at: date, release_url: str,
     check_layout(level_a, level_b)
     check_layout(delta_a, delta_b)
 
-    total_level = _num(level_a[-1][TOTAL_COLUMN])
-    total_delta = _num(delta_a[-1][TOTAL_COLUMN])
+    levels = _series_by_period(level_a, level_b)
+    deltas = _series_by_period(delta_a, delta_b)
+    if not levels:
+        raise ValueError("수준 표에서 월 행을 찾지 못했다")
 
-    # 문서가 스스로 검증 대조점을 갖고 있다. 어긋나면 서식이 바뀐 것이다.
+    # 문서가 스스로 검증 대조점을 갖고 있다 — 최신월 총량 증감이 요약문에 문장으로
+    # 나온다. 어긋나면 서식이 바뀐 것이므로 조용히 틀린 숫자를 넣지 않고 실패한다.
+    latest = max(levels)
     stated = headline_delta(tables)
+    total_delta = deltas.get(latest, {}).get(TOTAL_KEY)
     if stated is not None and total_delta is not None and abs(stated - total_delta) > 1.0:
         raise ValueError(
             f"요약문과 증감표가 대조에 실패했다: 요약 {stated} vs 표 {total_delta}")
 
-    # 기준월은 발표일의 전월이다 (매월 초 전월 기준으로 공표된다).
-    ref = date(released_at.year, released_at.month, 1) - timedelta(days=1)
-    period = f"{ref.year}-{ref.month:02d}"
-
     records: list[SeriesRecord] = []
-    if total_level is not None:
-        records.append(SeriesRecord(
-            id=make_id("ei", period, "total", None), source="ei",
-            breakdown="total", category=None, period=period,
-            value=total_level, yoy=total_delta, released_at=released_at,
-            release_url=release_url, attachments=attachments,
-            collected_at=collected_at,
-        ))
-
-    series = _series_from(level_a, level_b, delta_a, delta_b)
-    for code, value in series["level"].items():
-        records.append(SeriesRecord(
-            id=make_id("ei", period, "industry", code), source="ei",
-            breakdown="industry", category=code, period=period,
-            value=value, yoy=series["delta"].get(code),
-            released_at=released_at, release_url=release_url,
-            attachments=attachments, collected_at=collected_at,
-        ))
+    for period, values in levels.items():
+        delta = deltas.get(period, {})
+        if TOTAL_KEY in values:
+            records.append(SeriesRecord(
+                id=make_id("ei", period, "total", None), source="ei",
+                breakdown="total", category=None, period=period,
+                value=values[TOTAL_KEY], yoy=delta.get(TOTAL_KEY),
+                released_at=released_at, release_url=release_url,
+                attachments=attachments, collected_at=collected_at,
+            ))
+        for code, value in values.items():
+            if code == TOTAL_KEY:
+                continue
+            records.append(SeriesRecord(
+                id=make_id("ei", period, "industry", code), source="ei",
+                breakdown="industry", category=code, period=period,
+                value=value, yoy=delta.get(code),
+                released_at=released_at, release_url=release_url,
+                attachments=attachments, collected_at=collected_at,
+            ))
     return records
+
+
+EXPECTED_CODES = set("ACDEFGHIJKLMNOPQRS")
+
+
+def check_coverage(records: list[SeriesRecord]) -> None:
+    """최신월에 기대한 대분류가 다 왔는지 본다.
+
+    열 위치가 밀리거나 값이 비면 그 산업이 조용히 빠진다. 화면에서는 그냥
+    없는 칸으로 보일 뿐 아무 흔적도 남지 않는다. 형제 수집기 둘도 같은 가드를 갖는다.
+    """
+    if not records:
+        raise ValueError("수집된 레코드가 없다")
+    latest = max(r.period for r in records)
+    got = {r.category for r in records
+           if r.period == latest and r.breakdown == "industry"}
+    missing = EXPECTED_CODES - got
+    if missing:
+        raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
 
 
 def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
@@ -1894,9 +2073,13 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
 
 
 def collect(today: date) -> list[SeriesRecord]:
+    # today 는 쓰지 않는다 — 기준월은 보도자료 표 자체가 갖고 있다.
+    # 오케스트레이터가 세 수집기를 같은 시그니처로 부르므로 인자는 유지한다.
     title, released_at, view, data, attachments = latest_issue()
-    return parse(data, released_at=released_at, release_url=view,
-                 attachments=attachments, collected_at=datetime.now(KST))
+    records = parse(data, released_at=released_at, release_url=view,
+                    attachments=attachments, collected_at=datetime.now(KST))
+    check_coverage(records)
+    return records
 ```
 
 - [ ] **Step 4: 통과를 확인한다**
