@@ -42,7 +42,7 @@ def _norm(s: str) -> str:
 
 
 def _header_labels(rows: list[list[str]]) -> dict[int, str]:
-    """헤더가 4~6행에 걸쳐 있으므로 열마다 위아래 조각을 이어붙인다."""
+    """헤더가 4~7행에 걸쳐 있으므로(rows[3:7]) 열마다 위아래 조각을 이어붙인다."""
     width = max((len(r) for r in rows[:8]), default=0)
     labels: dict[int, str] = {}
     for col in range(width):
@@ -149,6 +149,22 @@ def parse(data: bytes, *, released_at: date, release_url: str,
     return records
 
 
+def check_coverage(records: list[SeriesRecord]) -> None:
+    """최신월에 기대한 산업이 다 왔는지 본다.
+
+    헤더 철자가 조금만 달라져도 그 열은 INDUSTRY_COLUMNS 에 안 걸려 조용히
+    빠진다. 빠진 산업은 화면에서 그냥 없는 칸으로 보일 뿐 아무 흔적도 남기지 않는다.
+    """
+    if not records:
+        raise ValueError("수집된 레코드가 없다")
+    latest = max(r.period for r in records)
+    got = {r.category for r in records
+           if r.period == latest and r.breakdown == "industry"}
+    missing = set(INDUSTRY_COLUMNS.values()) - got
+    if missing:
+        raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
+
+
 def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
     html = requests.get(BOARD, params=BOARD_PARAMS, headers=HEADERS,
                         timeout=30).text.replace("&amp;", "&")
@@ -175,6 +191,10 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
 
 
 def collect(today: date) -> list[SeriesRecord]:
+    # today 는 쓰지 않는다 — 기준월은 보도자료 자체가 갖고 있다.
+    # 오케스트레이터가 세 수집기를 같은 시그니처로 부르므로 인자는 유지한다.
     title, released_at, view_url, data, attachments = latest_issue()
-    return parse(data, released_at=released_at, release_url=view_url,
-                 attachments=attachments, collected_at=datetime.now(KST))
+    records = parse(data, released_at=released_at, release_url=view_url,
+                    attachments=attachments, collected_at=datetime.now(KST))
+    check_coverage(records)
+    return records

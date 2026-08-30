@@ -77,3 +77,16 @@ def test_carries_year_over_year_change(records):
 def test_ids_are_unique(records):
     ids = [r.id for r in records]
     assert len(ids) == len(set(ids))
+
+
+def test_coverage_check_passes_on_a_complete_month(records):
+    eaps.check_coverage(records)          # 예외가 나면 실패
+
+
+def test_coverage_check_fails_loudly_when_an_industry_vanishes(records):
+    # 헤더 철자가 바뀌어 산업이 빠지면 화면에서 빈 칸으로만 보인다
+    latest = max(r.period for r in records)
+    thinned = [r for r in records
+               if not (r.period == latest and r.category == "C")]
+    with pytest.raises(ValueError, match="빠진 산업"):
+        eaps.check_coverage(thinned)
