@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-08-29T15:06:55.311583+09:00",
+  "run_at": "2026-08-30T09:33:15.293051+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -10,8 +10,20 @@
       "ok": true,
       "fetched": 6,
       "added": 0
+    },
+    "bok": {
+      "ok": true,
+      "fetched": 10,
+      "added": 10
+    },
+    "kdi": {
+      "ok": false,
+      "fetched": 0,
+      "added": 0
     }
   },
   "conflicts": [],
-  "errors": []
+  "errors": [
+    "kdi: Traceback (most recent call last):\n  File \"C:\\Users\\seong\\Desktop\\고용전망-작업\\domains\\forecast\\pipeline\\collect.py\", line 55, in main\n    candidates = collect_fn(today)\n  File \"C:\\Users\\seong\\Desktop\\고용전망-작업\\domains\\forecast\\pipeline\\collectors\\kdi.py\", line 105, in collect\n    page_html = http.get(LIST_URL).text\n                ~~~~~~~~^^^^^^^^^^\n  File \"C:\\Users\\seong\\Desktop\\고용전망-작업\\domains\\forecast\\pipeline\\http.py\", line 35, in get\n    return retrying(once, tries=tries)\ncurl_cffi.requests.exceptions.HTTPError: HTTP Error 502: Bad Gateway\n"
+  ]
 }
