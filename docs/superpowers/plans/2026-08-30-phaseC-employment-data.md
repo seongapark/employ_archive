@@ -1284,6 +1284,7 @@ git commit -m "feat(employment): 경제활동인구조사 수집기 (보도자�
 - Produces:
   - `est.MAJOR_CODE_RE` — 대분류 판별 정규식
   - `est.parse(rows: list[dict], *, released_at, release_url, collected_at) -> list[SeriesRecord]`
+  - `est.EXPECTED_CODES: set[str]`, `est.check_coverage(records) -> None` — 최신월에 기대한 대분류가 다 왔는지 검증, 아니면 `ValueError`
   - `est.fetch(api_key: str, months: int = 24) -> list[dict]` — 네트워크
   - `est.collect(today: date) -> list[SeriesRecord]`
 
@@ -1393,6 +1394,19 @@ def test_year_over_year_is_computed_from_twelve_months_earlier(records):
 def test_oldest_records_have_no_year_over_year(records):
     oldest = min(r.period for r in records)
     assert all(r.yoy is None for r in records if r.period == oldest)
+
+
+def test_coverage_check_passes_on_a_complete_month(records):
+    est.check_coverage(records)          # 예외가 나면 실패
+
+
+def test_coverage_check_fails_loudly_when_an_industry_vanishes(records):
+    # 코드 체계가 바뀌어 산업이 조용히 빠지면 화면에서 빈 칸으로만 보인다.
+    latest = max(r.period for r in records)
+    thinned = [r for r in records
+               if not (r.period == latest and r.category == "C")]
+    with pytest.raises(ValueError, match="빠진 산업"):
+        est.check_coverage(thinned)
 ```
 
 - [ ] **Step 3: 실패를 확인한다**
@@ -1490,6 +1504,25 @@ def fetch(api_key: str, months: int = 26) -> list[dict]:
     return payload
 
 
+EXPECTED_CODES = set("BCDEFGHIJKLMNOPQRS")
+
+
+def check_coverage(records: list[SeriesRecord]) -> None:
+    """최신월에 기대한 대분류가 다 왔는지 본다.
+
+    KOSIS 의 분류 코드 체계가 바뀌면 MAJOR_CODE_RE 가 산업을 조용히 흘린다.
+    빠진 산업은 화면에서 그냥 없는 칸으로 보일 뿐 아무 오류도 남기지 않는다.
+    """
+    if not records:
+        raise ValueError("수집된 레코드가 없다")
+    latest = max(r.period for r in records)
+    got = {r.category for r in records
+           if r.period == latest and r.breakdown == "industry"}
+    missing = EXPECTED_CODES - got
+    if missing:
+        raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
+
+
 def collect(today: date) -> list[SeriesRecord]:
     api_key = os.environ.get("KOSIS_API_KEY", "").strip()
     if not api_key:
@@ -1499,8 +1532,10 @@ def collect(today: date) -> list[SeriesRecord]:
     year, month = (int(x) for x in latest.split("-"))
     # 표에 발표일이 없다. 해당 월 다음다음 달 말에 공표되므로 근사치를 쓴다.
     released = date(year + (month + 1) // 12, (month + 1) % 12 + 1, 1) - timedelta(days=1)
-    return parse(rows, released_at=released, release_url=STAT_URL,
-                 collected_at=datetime.now(KST))
+    records = parse(rows, released_at=released, release_url=STAT_URL,
+                    collected_at=datetime.now(KST))
+    check_coverage(records)
+    return records
 ```
 
 - [ ] **Step 5: 통과를 확인한다**
