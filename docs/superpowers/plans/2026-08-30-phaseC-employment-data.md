@@ -1507,6 +1507,8 @@ git commit -m "feat(employment): 사업체노동력조사 수집기 (KOSIS API)"
 
 **헤더를 이름으로 재구성하지 마라 — 열 위치를 쓴다.** 이 표는 헤더가 0행과 1행에 나뉘어 있고, 병합셀 때문에 1행에는 0행의 빈 자리를 채우는 셀만 들어 있다(0행이 `['', '전산업', '농림어업', '제조업', '전기·가스', '건설업', '서비스업', '', '', '', '']`, 1행이 `['수도·하수·폐기업', '도소매', '운수창고', '숙박음식']`). 이름으로 짜맞추는 것보다 **고정 인덱스로 읽고 헤더 이름을 검증**하는 편이 단순하고, 서식이 바뀌면 조용히 틀리는 대신 즉시 실패한다.
 
+**헤더 비교는 공백을 지우고 한다.** hwpx 리더(Task 4)가 셀 안 문단을 공백으로 이어붙이므로, 두 줄로 접힌 헤더가 `농림 어업`·`정보 통신업`·`전기· 가스` 처럼 나온다. 실측으로 확인했다 — 공백을 그대로 두고 `농림어업` 을 찾으면 **상시가입자 표(64·66)가 후보에서 빠지고 뒤쪽 구직급여 표가 첫 후보가 된다.** 크기 검증이 막아줄 수도 있지만 기대지 마라.
+
 **집계 열 두 개를 반드시 뺀다.** 앞 표의 `서비스업`(6번 열)과 이어지는 표의 `기타*`(11번 열)는 대분류가 아니라 집계다. 넣으면 서비스 산업들이 이중 계상된다. 경활의 `광공업`과 같은 함정이다.
 
 **대조 검증 (스파이크 6장).** p1 `<주요 특징>` 박스에 총량 증감이 문장으로 나온다("‘26.7월 고용보험 가입자는 27만 7천명 증가"). 증감 표의 전산업 값과 일치해야 한다. 어긋나면 서식이 바뀐 것이므로 **조용히 잘못된 숫자를 넣지 말고 실패시킨다.**
@@ -1667,14 +1669,16 @@ _CONT_HEADER = {1: "정보통신업", 8: "보건복지", 11: "기타*"}
 
 
 def check_layout(lead: list[list[str]], cont: list[list[str]]) -> None:
+    # 비교 전에 공백을 지운다 — 헤더가 두 줄로 접히면 '정보 통신업' 처럼 온다.
+    squash = lambda t: re.sub(r"\s+", "", t or "")
     for col, expected in _LEAD_HEADER.items():
         got = lead[0][col] if col < len(lead[0]) else ""
-        if got != expected:
+        if squash(got) != expected:
             raise ValueError(f"앞 표의 열 배치가 바뀌었다: {col}번은 {expected!r} 여야 하는데 {got!r}")
     header = cont[1] if len(cont) > 1 else []
     for col, expected in _CONT_HEADER.items():
         got = header[col] if col < len(header) else ""
-        if got != expected:
+        if squash(got) != expected:
             raise ValueError(f"이어지는 표의 열 배치가 바뀌었다: {col}번은 {expected!r} 여야 하는데 {got!r}")
 
 
@@ -1685,10 +1689,20 @@ def _num(cell: str) -> float | None:
     return float(raw)
 
 
+def _flat(cells) -> str:
+    """헤더 비교용. 공백을 지운다.
+
+    hwpx 리더가 셀 안 문단을 공백으로 잇기 때문에 두 줄로 접힌 헤더가
+    '농림 어업', '정보 통신업' 처럼 나온다. 공백을 그대로 두고 매칭하면
+    상시가입자 표를 놓치고 뒤쪽 구직급여 표를 집는다.
+    """
+    return re.sub(r"\s+", "", " ".join(cells))
+
+
 def find_tables(tables) -> tuple[list, list, list, list]:
     cand = [
         i for i, g in enumerate(tables)
-        if g and len(g[0]) > 5 and all(k in " ".join(g[0]) for k in HEADER_KEYS)
+        if g and len(g[0]) > 5 and all(k in _flat(g[0]) for k in HEADER_KEYS)
     ]
     if len(cand) < 2:
         raise ValueError(f"수준·증감 표를 찾지 못했다 (후보 {cand})")
