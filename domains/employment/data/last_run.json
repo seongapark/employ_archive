@@ -1,0 +1,25 @@
+{
+  "run_at": "2026-08-30T20:56:39.210641+09:00",
+  "collectors": {
+    "eaps": {
+      "ok": true,
+      "fetched": 588,
+      "added": 588,
+      "updated": 0
+    },
+    "est": {
+      "ok": true,
+      "fetched": 570,
+      "added": 570,
+      "updated": 0
+    },
+    "ei": {
+      "ok": true,
+      "fetched": 532,
+      "added": 532,
+      "updated": 0
+    }
+  },
+  "conflicts": [],
+  "errors": []
+}

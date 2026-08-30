@@ -1,0 +1,43 @@
+name: collect-employment
+
+on:
+  schedule:
+    - cron: "10 7 * * *" # 07:10 UTC = 16:10 KST — 전망 수집(16:00)과 겹치지 않게
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: collect-employment
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q domains/employment
+      - run: python -m domains.employment.pipeline.collect
+        env:
+          KOSIS_API_KEY: ${{ secrets.KOSIS_API_KEY }}
+      - name: Commit data
+        run: |
+          git config user.name "employment-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add domains/employment/data/
+          git diff --cached --quiet || git commit -m "data: employment collect $(date -u +%F)"
+          git push
+      - name: Fail on collector errors
+        env:
+          # 원인을 이미 아는 외부 장애. 이 수집기의 실패는 로그로만 남기고 통과시켜,
+          # 다른 수집기가 깨진 날을 매일 뜨는 빨간 X 속에 묻지 않는다.
+          # 기한은 반드시 붙인다 — 기한이 지나거나 그 수집기가 되살아나면 다시
+          # 빨개져서, 이 줄을 지우거나 미루기 전에는 초록으로 돌아가지 않는다.
+          # 형식: 콤마로 구분한 "name@YYYY-MM-DD" 목록, 예) kdi@2026-09-30
+          KNOWN_DOWN: ""
+        run: python -m domains.employment.pipeline.check_run

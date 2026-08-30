@@ -1,0 +1,35 @@
+[
+  {
+    "code": "eaps",
+    "name_ko": "경제활동인구조사",
+    "agency": "국가데이터처",
+    "type": "가구조사",
+    "headline_ko": "취업자수",
+    "coverage": "15세 이상 인구 · 조사대상주간 1시간 이상 취업",
+    "release_rule": "매월 중순, 전월 기준",
+    "caveat": "자영업자·무급가족종사자를 포함한다",
+    "board_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&ref_bid=210,211,11109,11113,11814"
+  },
+  {
+    "code": "est",
+    "name_ko": "사업체노동력조사",
+    "agency": "고용노동부",
+    "type": "사업체조사",
+    "headline_ko": "종사자수",
+    "coverage": "1인 이상 사업체 · 농림어업 등 제외",
+    "release_rule": "매월 말, 전전월 기준",
+    "caveat": "사업체 조사이므로 자영업자·무급가족종사자는 포함되지 않는다",
+    "board_url": "https://kosis.kr/statHtml/statHtml.do?orgId=118&tblId=DT_118N_MON066"
+  },
+  {
+    "code": "ei",
+    "name_ko": "고용행정 통계로 본 노동시장 동향",
+    "agency": "고용노동부",
+    "type": "행정자료",
+    "headline_ko": "상시가입자수",
+    "coverage": "고용보험 가입 상시가입자",
+    "release_rule": "매월 초, 전월 기준",
+    "caveat": "고용보험 미가입 자영업자·특수형태근로 등은 포함되지 않는다",
+    "board_url": "https://www.moel.go.kr/news/enews/report/enewsList.do"
+  }
+]
