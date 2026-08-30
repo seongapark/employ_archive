@@ -96,3 +96,28 @@ def merge(existing: list[ForecastRecord], new: list[ForecastRecord]) -> MergeRes
             continue
         _add(result, by_id, cand)
     return result
+
+
+def recompute_revisions(records: list[ForecastRecord]) -> list[ForecastRecord]:
+    """모든 계열의 prev_value·revision 을 발표 순서대로 다시 계산한다.
+
+    `_add` 는 레코드를 넣는 시점에 존재하는 것만 보고 계산한다. 백필은 과거 회차를
+    나중에 넣으므로, 먼저 저장돼 있던 최신 회차의 수정폭이 비어 있는 채로 남는다.
+    (8월호를 먼저 넣고 5월호를 뒤에 넣으면 8월호가 계속 '수정 없음'으로 보인다.)
+    백필 끝에 이 함수로 전 계열을 다시 계산한다.
+    """
+    by_series: dict[tuple[str, str, int, str], list[ForecastRecord]] = {}
+    for rec in records:
+        key = (rec.org, rec.indicator, rec.target_year, rec.target_period)
+        by_series.setdefault(key, []).append(rec)
+
+    fixed: list[ForecastRecord] = []
+    for series in by_series.values():
+        prev = None
+        for rec in sorted(series, key=lambda r: r.published_at):
+            fixed.append(rec.model_copy(update={
+                "prev_value": None if prev is None else prev.value,
+                "revision": None if prev is None else round(rec.value - prev.value, 2),
+            }))
+            prev = rec
+    return fixed

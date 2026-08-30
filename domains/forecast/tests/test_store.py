@@ -142,3 +142,54 @@ def test_intra_month_revision_keeps_half_year_records_apart():
     result = store.merge(first, [half("h1", 1.8), half("h2", 2.6)])
     assert not result.conflicts
     assert len(result.records) == 4
+
+def series_rec(pub: date, value: float, *, org="BOK", indicator="gdp_growth",
+               year=2026, period="annual") -> ForecastRecord:
+    return ForecastRecord(
+        id=make_id(org, pub, indicator, year, period), org=org, org_name_ko=org,
+        report_title="t", published_at=pub, target_year=year, target_period=period,
+        indicator=indicator, value=value, unit="%",
+        source_url="https://example.com/a", landing_url="https://example.com",
+        confidence="extracted", collected_at=datetime(2026, 8, 30, 16, 0),
+    )
+
+
+def test_recompute_revisions_fills_a_series_in_publication_order():
+    out = {r.published_at: r for r in store.recompute_revisions([
+        series_rec(date(2026, 2, 26), 2.0),
+        series_rec(date(2026, 8, 27), 3.3),
+        series_rec(date(2026, 5, 28), 2.5),
+    ])}
+    assert (out[date(2026, 2, 26)].prev_value, out[date(2026, 2, 26)].revision) == (None, None)
+    assert (out[date(2026, 5, 28)].prev_value, out[date(2026, 5, 28)].revision) == (2.0, 0.5)
+    assert (out[date(2026, 8, 27)].prev_value, out[date(2026, 8, 27)].revision) == (2.5, 0.8)
+
+
+def test_recompute_revisions_fixes_a_record_stored_before_its_predecessor():
+    # 백필의 핵심. 8월호가 먼저 저장돼 revision 이 비어 있고, 5월호가 나중에 들어온다.
+    august = series_rec(date(2026, 8, 27), 3.3)
+    assert august.revision is None
+    out = {r.published_at: r for r in store.recompute_revisions(
+        [august, series_rec(date(2026, 5, 28), 2.5)])}
+    assert out[date(2026, 8, 27)].revision == 0.8
+
+
+def test_recompute_revisions_keeps_series_apart():
+    out = store.recompute_revisions([
+        series_rec(date(2026, 5, 28), 2.5),
+        series_rec(date(2026, 8, 27), 3.3),
+        series_rec(date(2026, 8, 27), 62.9, indicator="emp_rate"),
+        series_rec(date(2026, 8, 27), 3.8, period="h1"),
+        series_rec(date(2026, 8, 27), 2.6, org="OECD"),
+    ])
+    alone = [r for r in out
+             if r.indicator == "emp_rate" or r.target_period == "h1" or r.org == "OECD"]
+    assert len(alone) == 3
+    assert all(r.revision is None for r in alone)
+
+
+def test_recompute_revisions_touches_only_prev_value_and_revision():
+    before = series_rec(date(2026, 5, 28), 2.5)
+    after = store.recompute_revisions([before])[0]
+    keys = {"prev_value", "revision"}
+    assert after.model_dump(exclude=keys) == before.model_dump(exclude=keys)
