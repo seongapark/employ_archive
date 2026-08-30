@@ -31,5 +31,10 @@ jobs:
           git diff --cached --quiet || git commit -m "data: daily collect $(date -u +%F)"
           git push
       - name: Fail on collector errors
-        run: |
-          python -c "import json,sys; errs=json.load(open('domains/forecast/data/last_run.json',encoding='utf-8'))['errors']; print('\n'.join(errs)); sys.exit(1 if errs else 0)"
+        env:
+          # 원인을 이미 아는 외부 장애. 이 수집기의 실패는 로그로만 남기고 통과시켜,
+          # 다른 수집기가 깨진 날을 매일 뜨는 빨간 X 속에 묻지 않는다.
+          # 복구되면 워크플로가 알려주니 그때 지운다.
+          #   kdi — www.kdi.re.kr 사이트 전체 502 (2026-08-30 확인)
+          KNOWN_DOWN: kdi
+        run: python -m domains.forecast.pipeline.check_run
