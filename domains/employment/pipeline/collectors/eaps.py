@@ -13,6 +13,7 @@ import requests
 
 from .. import xlsx
 from ..models import Attachment, SeriesRecord, make_id
+from ..periods import month_rows, squash
 
 KST = timezone(timedelta(hours=9))
 BOARD = "https://mods.go.kr/board.es"
@@ -37,10 +38,6 @@ INDUSTRY_COLUMNS: dict[str, str] = {
 TOTAL_COLUMN = "전체취업자"
 
 
-def _norm(s: str) -> str:
-    return re.sub(r"\s+", "", s or "")
-
-
 def _header_labels(rows: list[list[str]]) -> dict[int, str]:
     """헤더가 4~7행에 걸쳐 있으므로(rows[3:7]) 열마다 위아래 조각을 이어붙인다."""
     width = max((len(r) for r in rows[:8]), default=0)
@@ -49,52 +46,16 @@ def _header_labels(rows: list[list[str]]) -> dict[int, str]:
         parts = []
         for row in rows[3:7]:
             if col < len(row) and row[col]:
-                parts.append(_norm(row[col]))
+                parts.append(squash(row[col]))
         if parts:
             labels[col] = "".join(parts)
     return labels
 
 
-_MONTH_START = re.compile(r"^(\d{4})\.(\d{1,2})$")
-_MONTH_ONLY = re.compile(r"^(\d{1,2})$")
-
-
-def _period_rows(rows: list[list[str]]) -> list[tuple[str, list[str]]]:
-    """월별 행만 골라 (YYYY-MM, 행) 으로 바꾼다.
-
-    첫 칸에는 연평균(단독 4자리, 예: '2025'), 분기('2025.1/4'), 월별 값이
-    한 표에 섞여 있다. 월은 연도가 바뀌는 시작 행에서만 'YYYY.  M' 처럼
-    연도를 달고, 그 뒤로는 숫자만 온다 — 그래서 4자리 단독 행을 연도로
-    오인해 이어붙이면 월 시작 행(연도가 붙은 행)은 정규식에 안 걸려 버려지고,
-    그 다음 숫자만 있는 행들은 훨씬 전에 마지막으로 봤던 연평균 연도에
-    잘못 붙는다 — 다음 해로 넘어간 월이 이전 해로 주저앉는다. 빈 행은 표의
-    블록 경계이므로 연도 문맥을 끊는다.
-    """
-    out: list[tuple[str, list[str]]] = []
-    year: str | None = None
-    for row in rows:
-        first = _norm(row[0]) if row else ""
-        if not first:
-            year = None
-            continue
-        m = _MONTH_START.fullmatch(first)
-        if m:
-            year, month = m.group(1), int(m.group(2))
-            if 1 <= month <= 12:
-                out.append((f"{year}-{month:02d}", row))
-            continue
-        m = _MONTH_ONLY.fullmatch(first)
-        if year and m:
-            month = int(m.group(1))
-            if 1 <= month <= 12:
-                out.append((f"{year}-{month:02d}", row))
-    return out
-
-
 def _numbers(rows: list[list[str]], labels: dict[int, str]) -> dict[str, dict[str, float]]:
     """{기간: {열이름: 값}}"""
     table: dict[str, dict[str, float]] = {}
-    for period, row in _period_rows(rows):
+    for period, row in month_rows(rows):
         bucket = table.setdefault(period, {})
         for col, name in labels.items():
             if col >= len(row):
