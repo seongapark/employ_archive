@@ -174,18 +174,21 @@ export function fmtValue(rec) {
   return `${fmtNumber(rec.value, suffix)}${suffix}`;
 }
 
-// 같은 회차(기관·지표·연도·발표일이 같은 레코드)의 반기 전망.
+// 이 회차 시점에 유효한 반기 전망. 수집기는 값이 그대로면 반기를 다시 저장하지
+// 않으므로(collect.drop_unchanged), 발표일이 똑같은 것만 찾으면 기관이 실제로 낸
+// 반기가 사라진다. 회차 발표일 이하의 가장 최근 반기를 쓴다.
 // 반기를 내지 않는 기관은 null 이며, 화면에서 '-' 로 표시한다.
 export function halfYears(records, rec) {
-  const half = { h1: null, h2: null };
+  const latest = { h1: null, h2: null };
   for (const r of records) {
     if (r.org !== rec.org || r.indicator !== rec.indicator) continue;
-    if (r.target_year !== rec.target_year || r.published_at !== rec.published_at) continue;
-    if (r.target_period === 'h1' || r.target_period === 'h2') {
-      half[r.target_period] = r.value;
-    }
+    if (r.target_year !== rec.target_year) continue;
+    if (r.target_period !== 'h1' && r.target_period !== 'h2') continue;
+    if (r.published_at > rec.published_at) continue;
+    const kept = latest[r.target_period];
+    if (!kept || r.published_at > kept.published_at) latest[r.target_period] = r;
   }
-  return half;
+  return { h1: latest.h1?.value ?? null, h2: latest.h2?.value ?? null };
 }
 
 export function halfYearLabel(records, rec, { unit = false } = {}) {

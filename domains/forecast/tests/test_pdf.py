@@ -26,8 +26,8 @@ KDI_LABELS = {
 }
 
 
-def test_normalize_bold_collapses_tripled_heading():
-    assert pdf.normalize_bold("<<<국국국내내내경경경제제제 전전전망망망>>>") == "<국내경제 전망>"
+def test_unbold_line_restores_a_tripled_heading():
+    assert pdf.unbold_line("<<<국국국내내내경경경제제제 전전전망망망>>>") == "<국내경제 전망>"
 
 
 def test_parses_bok_seven_column_layout():
@@ -149,3 +149,31 @@ def test_raises_when_a_period_column_has_no_year_to_attach_to():
     # AttributeError로 터지면 페이지 탐색이 중단되므로 ValueError여야 한다.
     with pytest.raises(ValueError):
         pdf.parse_summary_table("2026\n하반기 연간\n국내총생산 1.0 2.0\n", KDI_LABELS)
+
+
+def _bolden(line: str) -> str:
+    """PDF 가짜 볼드처럼 글자마다 3번씩 찍는다(공백은 그대로)."""
+    return " ".join("".join(c * 3 for c in token) for token in line.split())
+
+
+def test_parses_a_data_row_the_report_printed_in_bold():
+    # 한국은행 추출본은 볼드를 글자 3중 인쇄로 내놓는다(픽스처의 제목 줄이 그렇다).
+    # 지표 행이 볼드로 나오는 회차가 오면 라벨도 숫자도 못 읽어 수집이 통째로 실패한다.
+    text = load("bok_2026-08_summary.txt")
+    plain = [ln for ln in text.split("\n") if ln.startswith("취업자수증감")]
+    assert plain, "픽스처에 취업자수증감 행이 있어야 한다"
+    bolded = text.replace(plain[0], _bolden(plain[0]))
+
+    got = pdf.parse_summary_table(bolded, BOK_LABELS)
+    assert got[("emp_change", 2026, "annual")] == 14.0
+    assert got[("emp_change", 2026, "h1")] == 11.0
+    assert got[("emp_change", 2026, "h2")] == 18.0
+
+
+def test_bold_undo_keeps_repeated_digits_of_a_thousands_separator():
+    # 3중 인쇄를 되돌릴 때 000 을 0 으로 접으면 1,000 이 1,0 이 된다
+    assert pdf.unbold_line(_bolden("경상수지(억달러) 1,231 1,910")) == "경상수지(억달러) 1,231 1,910"
+
+
+def test_bold_undo_leaves_an_ordinary_line_alone():
+    assert pdf.unbold_line("경상수지(억달러) 1,000 2,000") == "경상수지(억달러) 1,000 2,000"

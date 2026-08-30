@@ -26,15 +26,28 @@ _FOOTNOTE = re.compile(r"\d+\)")
 _UNIT_PAREN = re.compile(r"\((?:%|%p|만명|억달러|달러/배럴)\)")
 
 
-def normalize_bold(text: str) -> str:
-    """볼드 오버프린트로 글자가 3번씩 찍혀 나온 제목을 원래대로 되돌린다.
+def is_bold_overprint(line: str) -> bool:
+    """줄의 모든 낱말이 글자마다 3번씩 찍혔는지 본다(공백은 겹치지 않는다)."""
+    tokens = line.split()
+    if not tokens:
+        return False
+    return all(
+        len(token) % 3 == 0
+        and all(token[i] == token[i + 1] == token[i + 2] for i in range(0, len(token), 3))
+        for token in tokens
+    )
 
-    숫자에도 적용되므로(1,000,000 → 1,0) 제목 탐지에만 쓰고 데이터 행에는 쓰지 않는다.
+
+def unbold_line(line: str) -> str:
+    """볼드 오버프린트로 3번씩 찍힌 줄을 원래대로 되돌린다.
+
+    세 글자마다 하나만 남기므로 1,000 처럼 같은 숫자가 이어져도 잃지 않는다.
+    (연달아 3개를 하나로 접는 방식은 1,000 을 1,0 으로 망가뜨린다.)
+    3중 인쇄가 아닌 줄은 손대지 않는다.
     """
-    prev = None
-    while prev != text:
-        prev, text = text, re.sub(r"(.)\1\1", r"\1", text)
-    return text
+    if not is_bold_overprint(line):
+        return line
+    return " ".join(token[::3] for token in line.split())
 
 
 def page_texts(data: bytes) -> list[str]:
@@ -146,7 +159,8 @@ def parse_summary_table(
 
     labels 는 표의 행 이름(공백·단위·각주를 뗀 형태) → 내부 지표코드.
     """
-    lines = [line for line in text.split("\n") if line.strip()]
+    # 보고서가 볼드로 인쇄한 줄은 글자가 3번씩 찍혀 나온다 — 라벨도 숫자도 못 읽으므로 먼저 되돌린다
+    lines = [unbold_line(line) for line in text.split("\n") if line.strip()]
     years, periods = _header_tokens(_header_lines(lines))
     columns = _columns(years, periods)
 

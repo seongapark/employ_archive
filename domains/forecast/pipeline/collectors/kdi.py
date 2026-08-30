@@ -107,9 +107,14 @@ def collect(today: date) -> list[ForecastRecord]:
     page_html = http.get(LIST_URL).text
     issue = parse_issue(page_html, LIST_URL)
     for _, url in parse_chapters(page_html):
-        found = pdf.find_summary_table(
-            pdf.page_texts(http.get(url).content), LABEL_TO_INDICATOR, REQUIRED_INDICATORS
-        )
+        # 장은 본문 순서대로 나오지만 표가 어디 실릴지는 회차마다 다르다. 앞 장이
+        # 502거나 표 없는 첨부여도 뒷 장을 마저 봐야 하므로 장 단위로 실패를 가둔다.
+        try:
+            found = pdf.find_summary_table(
+                pdf.page_texts(http.get(url).content), LABEL_TO_INDICATOR, REQUIRED_INDICATORS
+            )
+        except Exception:
+            continue
         if found is None:
             continue
         page_no, text = found

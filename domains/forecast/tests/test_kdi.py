@@ -1,6 +1,8 @@
 from datetime import date
 from pathlib import Path
 
+import pytest
+
 from domains.forecast.pipeline.collectors import kdi
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -100,3 +102,42 @@ def test_parse_issue_ignores_earlier_headings_on_the_page():
     decoy = '<h2><b>연구</b><p>KDI는 "미래를 여는 연구"를 통해 정책 대안을 제시합니다.</p></h2>'
     issue = kdi.parse_issue(decoy + PAGE, "https://www.kdi.re.kr/research/economy")
     assert issue.title == "KDI 경제전망 | 수정, 2026년 8월"
+
+
+class _Resp:
+    def __init__(self, text="", content=b""):
+        self.text = text
+        self.content = content
+
+
+def test_collect_skips_a_chapter_whose_download_fails(monkeypatch):
+    # 장은 본문 순서대로 시도한다. 앞 장 내려받기가 502로 죽으면 표가 실린
+    # 뒷 장은 시도조차 못 하고 수집기 전체가 실패한다.
+    chapters = kdi.parse_chapters(PAGE)
+    failing = chapters[0][1]
+
+    def fake_get(url, **kwargs):
+        if url == kdi.LIST_URL:
+            return _Resp(text=PAGE)
+        if url == failing:
+            raise ConnectionError("HTTP Error 502: Bad Gateway")
+        return _Resp(content=b"%PDF")
+
+    monkeypatch.setattr(kdi.http, "get", fake_get)
+    monkeypatch.setattr(kdi.pdf, "page_texts", lambda data: [TABLE])
+
+    records = kdi.collect(date(2026, 8, 30))
+    assert records
+    assert records[0].source_url == chapters[1][1]
+
+
+def test_collect_raises_when_every_chapter_fails(monkeypatch):
+    def fake_get(url, **kwargs):
+        if url == kdi.LIST_URL:
+            return _Resp(text=PAGE)
+        raise ConnectionError("HTTP Error 502: Bad Gateway")
+
+    monkeypatch.setattr(kdi.http, "get", fake_get)
+
+    with pytest.raises(ValueError):
+        kdi.collect(date(2026, 8, 30))

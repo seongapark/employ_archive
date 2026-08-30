@@ -223,3 +223,30 @@ test('halfYearLabel can carry the unit for the detail view', () => {
   const only = [rec({ org: 'OECD', indicator: 'gdp_growth', value: 1.9, unit: '%' })];
   assert.equal(halfYearLabel(only, only[0], { unit: true }), '상반 - · 하반 -');
 });
+
+test('halfYears keeps halves whose value did not change since an earlier round', () => {
+  // 수집기는 직전 회차와 값이 같은 반기를 다시 저장하지 않는다(drop_unchanged).
+  // 발표일이 정확히 같은 것만 찾으면, 기관이 실제로 낸 반기가 미발표로 지워진다.
+  const rs = [
+    rec({ org: 'BOK', indicator: 'emp_rate', target_year: 2027, unit: '%',
+      published_at: '2026-05-28', target_period: 'h1', value: 62.8, id: 'h1-may' }),
+    rec({ org: 'BOK', indicator: 'emp_rate', target_year: 2027, unit: '%',
+      published_at: '2026-05-28', target_period: 'h2', value: 63.3, id: 'h2-may' }),
+    rec({ org: 'BOK', indicator: 'emp_rate', target_year: 2027, unit: '%',
+      published_at: '2026-08-27', target_period: 'annual', value: 63.0, id: 'annual-aug' }),
+  ];
+  const annual = rs[2];
+  assert.deepEqual(halfYears(rs, annual), { h1: 62.8, h2: 63.3 });
+  assert.equal(halfYearLabel(rs, annual), '상반 62.8 · 하반 63.3');
+});
+
+test('halfYears does not borrow halves published after the round', () => {
+  // 5월호 카드에 8월호 반기가 새어 들어오면 회차 스냅샷이 아니게 된다.
+  const rs = [
+    rec({ org: 'BOK', indicator: 'emp_rate', target_year: 2027, unit: '%',
+      published_at: '2026-05-28', target_period: 'annual', value: 63.1, id: 'annual-may' }),
+    rec({ org: 'BOK', indicator: 'emp_rate', target_year: 2027, unit: '%',
+      published_at: '2026-08-27', target_period: 'h1', value: 62.8, id: 'h1-aug' }),
+  ];
+  assert.deepEqual(halfYears(rs, rs[0]), { h1: null, h2: null });
+});
