@@ -1,7 +1,7 @@
 [
   {"org": "BOK", "name_ko": "한국은행", "homepage": "https://www.bok.or.kr", "report": "경제전망보고서", "track": "A", "method": "pdf"},
   {"org": "KDI", "name_ko": "KDI", "homepage": "https://www.kdi.re.kr", "report": "경제전망", "track": "A", "method": "pdf"},
-  {"org": "KLI", "name_ko": "한국노동연구원", "homepage": "https://www.kli.re.kr", "report": "고용전망(노동리뷰)", "track": "A", "method": "pdf"},
+  {"org": "KLI", "name_ko": "한국노동연구원", "homepage": "https://www.kli.re.kr", "report": "노동시장 평가와 전망(노동리뷰)", "track": "A", "method": "pdf"},
   {"org": "MOEF", "name_ko": "기획재정부", "homepage": "https://www.moef.go.kr", "report": "경제정책방향", "track": "A", "method": "hwp"},
   {"org": "IMF", "name_ko": "IMF", "homepage": "https://www.imf.org", "report": "WEO / WEO Update", "track": "A", "method": "api"},
   {"org": "OECD", "name_ko": "OECD", "homepage": "https://www.oecd.org", "report": "Economic Outlook / Interim", "track": "A", "method": "api"},
