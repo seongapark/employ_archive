@@ -22,19 +22,6 @@ COLLECTORS: dict[str, Callable[[date], list[ForecastRecord]]] = {
 }
 
 
-def drop_unchanged(existing: list[ForecastRecord],
-                   candidates: list[ForecastRecord]) -> list[ForecastRecord]:
-    fresh = []
-    for cand in candidates:
-        latest = store.latest_record(
-            existing, cand.org, cand.indicator, cand.target_year, cand.target_period
-        )
-        if latest is not None and latest.value == cand.value:
-            continue
-        fresh.append(cand)
-    return fresh
-
-
 def main(data_dir: Path = DATA_DIR,
          collectors: dict[str, Callable[[date], list[ForecastRecord]]] = COLLECTORS,
          ) -> int:
@@ -54,8 +41,10 @@ def main(data_dir: Path = DATA_DIR,
     for name, collect_fn in collectors.items():
         try:
             candidates = collect_fn(today)
-            fresh = drop_unchanged(merged, candidates)
-            result = store.merge(merged, fresh)
+            # 값이 그대로여도 버리지 않는다. published_at 이 발표일이 된 뒤로 id 가
+            # 회차마다 고정돼, 값 비교로 거르면 그 회차가 통째로 사라진다.
+            # 같은 회차를 다시 받은 경우는 store.merge 가 id 로 걸러낸다.
+            result = store.merge(merged, candidates)
             merged = result.records
             summary["conflicts"].extend(result.conflicts)
             summary["collectors"][name] = {
