@@ -1,4 +1,4 @@
-import { compareSet, summarize, fmtValue, dateLabel, esc } from '../data.js';
+import { compareSet, summarize, fmtValue, fmtNumber, dateLabel, esc } from '../data.js';
 
 const FILTERS = [
   { code: 'all', label: '전체' },
@@ -93,8 +93,8 @@ function renderBand(set, indicatorMeta) {
 
   const unit = indicatorMeta ? indicatorMeta.unit : '';
   const gapUnit = unit === '만명' ? '만명' : '%p';
-  const gapText = (summary.max.value - summary.min.value).toFixed(1);
-  const avgText = summary.avg.toFixed(1);
+  const gapText = fmtNumber(summary.max.value - summary.min.value, unit);
+  const avgText = fmtNumber(summary.avg, unit);
 
   return `
     <div style="margin:10px 16px 0 16px;padding:10px 14px;background:var(--accent-light);border-radius:10px;display:flex;align-items:center;justify-content:space-between;gap:8px;">

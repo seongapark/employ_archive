@@ -1,4 +1,4 @@
-import { latestRecords, summarize, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS } from '../data.js';
+import { latestRecords, summarize, fmtValue, fmtNumber, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS } from '../data.js';
 
 // 홈의 첫 필만 목업대로 '취업자 증감'을 온전히 유지하고, 나머지는 공유 축약 라벨을 쓴다.
 const PILLS = [
@@ -53,11 +53,11 @@ function renderBand(latest, indicatorMeta) {
 
   const titleText = summary.count === 1
     ? '1개 기관 수집'
-    : `${summary.count}개 기관 평균 ${summary.avg}${esc(unit)} <span style="font-weight:400;color:#667085;">· 발표시점 상이</span>`;
+    : `${summary.count}개 기관 평균 ${fmtNumber(summary.avg, unit)}${esc(unit)} <span style="font-weight:400;color:#667085;">· 발표시점 상이</span>`;
 
   const metaText = summary.count === 1
     ? ''
-    : `<div class="band__meta num">최고 ${summary.max.value} (${esc(summary.max.org_name_ko)}) · 최저 ${summary.min.value} (${esc(summary.min.org_name_ko)})</div>`;
+    : `<div class="band__meta num">최고 ${fmtNumber(summary.max.value, unit)} (${esc(summary.max.org_name_ko)}) · 최저 ${fmtNumber(summary.min.value, unit)} (${esc(summary.min.org_name_ko)})</div>`;
 
   return `
     <div class="band">

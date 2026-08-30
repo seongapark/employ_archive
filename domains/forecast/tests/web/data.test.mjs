@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
   latestRecords, summarize, seriesFor, orgIndicators, compareSet,
   timelineGroups, fmtValue, fmtDelta, dateLabel, isNew, esc, SHORT_LABELS,
-  halfYears, halfYearLabel,
+  halfYears, halfYearLabel, fmtNumber,
 } from '../../app/js/data.js';
 
 const INDICATOR_CODES = ['emp_change', 'emp_rate', 'unemp_rate', 'gdp_growth', 'cpi', 'emp_rate_youth', 'labor_force'];
@@ -249,4 +249,21 @@ test('halfYears does not borrow halves published after the round', () => {
       published_at: '2026-08-27', target_period: 'h1', value: 62.8, id: 'h1-aug' }),
   ];
   assert.deepEqual(halfYears(rs, rs[0]), { h1: null, h2: null });
+});
+
+test('fmtNumber pins percent figures to one decimal', () => {
+  assert.equal(fmtNumber(63, '%'), '63.0');
+  assert.equal(fmtNumber(62.9, '%'), '62.9');
+  assert.equal(fmtNumber(2, '%p'), '2.0');
+});
+
+test('fmtNumber leaves 만명 counts as published', () => {
+  assert.equal(fmtNumber(20, '만명'), '20');
+  assert.equal(fmtNumber(12.3, '만명'), '12.3');
+});
+
+test('fmtDelta pins a whole-number percent revision to one decimal', () => {
+  // 카드가 63.0% 인데 옆의 수정폭이 +1%p 면 정밀도가 달라 보인다
+  assert.deepEqual(fmtDelta(rec({ revision: 1, unit: '%' })), { dir: 'up', text: '+1.0%p' });
+  assert.deepEqual(fmtDelta(rec({ revision: -2, unit: '%' })), { dir: 'down', text: '-2.0%p' });
 });

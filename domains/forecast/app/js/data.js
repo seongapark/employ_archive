@@ -165,7 +165,8 @@ export function timelineGroups(records) {
 
 // 퍼센트 지표는 63 처럼 정수로 떨어져도 63.0% 로 적는다. 62.9% 옆에 63% 가
 // 붙으면 정밀도가 달라 보인다. 만명 단위는 기관이 쓴 자릿수를 그대로 둔다.
-function fmtNumber(value, unit) {
+// 카드·밴드·비교표·수정폭이 모두 이 하나를 거쳐야 같은 화면에서 자릿수가 어긋나지 않는다.
+export function fmtNumber(value, unit) {
   return unit === '만명' ? String(value) : value.toFixed(1);
 }
 
@@ -207,7 +208,7 @@ export function fmtDelta(rec) {
   const dir = isPositive ? 'up' : 'down';
 
   const suffix = rec.unit === '만명' ? '만명' : '%p';
-  const absRevision = Math.abs(rec.revision);
+  const absRevision = fmtNumber(Math.abs(rec.revision), rec.unit);
   const sign = isPositive ? '+' : '-';
   const text = `${sign}${absRevision}${suffix}`;
 
