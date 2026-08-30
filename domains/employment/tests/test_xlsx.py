@@ -26,13 +26,19 @@ def test_reads_the_industry_level_sheet(data):
     assert "건설업" in joined
 
 
-def test_keeps_empty_cells_in_place(data):
-    # 빈 셀을 건너뛰면 산업 열이 통째로 밀린다. 헤더 행에 빈 칸이 남아 있어야 한다.
+def test_places_cells_by_coordinate_not_document_order(data):
+    # 빈 셀을 건너뛰고 순서대로 이어붙이는 리더는 이 셀을 앞으로 당겨 놓는다.
+    # 값이 어딘가에 있는지가 아니라 '몇 번 열에 있는지'를 봐야 판별이 된다.
     rows = xlsx.read_sheet(data, "3.산업(신)")
-    header = rows[3]
-    assert "" in header
+    assert rows[2][11] == "(단위: 천명)"
 
 
 def test_unknown_sheet_raises(data):
     with pytest.raises(KeyError):
         xlsx.read_sheet(data, "없는시트")
+
+
+def test_malformed_cell_reference_fails_loudly():
+    from domains.employment.pipeline.xlsx import _col_index
+    with pytest.raises(ValueError, match="셀 참조"):
+        _col_index("")

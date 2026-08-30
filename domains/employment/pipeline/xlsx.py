@@ -20,9 +20,12 @@ _CELL_REF = re.compile(r"^([A-Z]+)(\d+)$")
 def _col_index(ref: str) -> int:
     """'A' -> 0, 'B' -> 1, 'AA' -> 26."""
     m = _CELL_REF.match(ref)
-    letters = m.group(1) if m else ref
+    if m is None:
+        # 여기서 조용히 넘어가면 좌표 배치가 순진한 append 로 퇴화한다 —
+        # 이 모듈이 존재하는 이유인 그 결함이다.
+        raise ValueError(f"셀 참조를 읽을 수 없다: {ref!r}")
     n = 0
-    for ch in letters:
+    for ch in m.group(1):
         n = n * 26 + (ord(ch) - ord("A") + 1)
     return n - 1
 
@@ -67,6 +70,8 @@ def read_sheet(data: bytes, name: str) -> list[list[str]]:
             idx = _col_index(c.get("r") or "")
             while len(cells) < idx:
                 cells.append("")
+            if c.get("t") == "inlineStr":
+                raise ValueError("inlineStr 셀은 아직 지원하지 않는다")
             v = c.find("m:v", NS)
             if v is None or v.text is None:
                 cells.append("")
