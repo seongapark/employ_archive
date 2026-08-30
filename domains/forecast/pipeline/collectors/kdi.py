@@ -8,13 +8,11 @@ from __future__ import annotations
 
 import html as html_lib
 import re
-from datetime import date, datetime, timedelta, timezone
-from typing import NamedTuple
+from datetime import date, datetime
 
-from .. import http, pdf
-from ..models import ForecastRecord, INDICATOR_META, make_id
-
-KST = timezone(timedelta(hours=9))
+from .. import http, pdf, report
+from ..models import ForecastRecord
+from ..report import Issue  # 두 수집기가 같은 회차 표현을 쓴다
 
 BASE = "https://www.kdi.re.kr"
 LIST_URL = f"{BASE}/research/economy"
@@ -43,12 +41,6 @@ _CHAPTER = re.compile(
 )
 
 
-class Issue(NamedTuple):
-    title: str
-    published_at: date
-    url: str
-
-
 def _text(fragment: str) -> str:
     return re.sub(r"\s+", " ", html_lib.unescape(re.sub(r"<[^>]+>", " ", fragment))).strip()
 
@@ -73,34 +65,11 @@ def parse_chapters(page_html: str) -> list[tuple[str, str]]:
 
 
 def parse(text: str, issue: Issue, source_url: str, source_page: int) -> list[ForecastRecord]:
-    values = pdf.parse_summary_table(text, LABEL_TO_INDICATOR)
-    collected_at = datetime.now(KST)
-    records = []
-    for (indicator, year, period), value in sorted(values.items()):
-        # 발표연도보다 앞선 해는 전망이 아니라 실적이다
-        if year < issue.published_at.year:
-            continue
-        meta = INDICATOR_META[indicator]
-        records.append(ForecastRecord(
-            id=make_id("KDI", issue.published_at, indicator, year, period),
-            org="KDI",
-            org_name_ko="KDI",
-            report_title=issue.title,
-            published_at=issue.published_at,
-            target_year=year,
-            target_period=period,
-            indicator=indicator,
-            value=round(value, meta["decimals"]),
-            unit=meta["unit"],
-            source_url=source_url,
-            source_page=source_page,
-            landing_url=issue.url,
-            confidence="extracted",
-            collected_at=collected_at,
-        ))
-    return records
-
-
+    return report.records_from_table(
+        text, LABEL_TO_INDICATOR,
+        org="KDI", org_name_ko="KDI",
+        issue=issue, source_url=source_url, source_page=source_page,
+    )
 
 
 def collect(today: date) -> list[ForecastRecord]:

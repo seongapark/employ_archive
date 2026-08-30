@@ -7,18 +7,15 @@
 from __future__ import annotations
 
 import re
-from datetime import date, datetime, timedelta, timezone
+from datetime import date
 from email.utils import parsedate_to_datetime
-from typing import NamedTuple
 
-from .. import http, pdf
-from ..models import ForecastRecord, INDICATOR_META, make_id
-
-KST = timezone(timedelta(hours=9))
+from .. import http, pdf, report
+from ..models import ForecastRecord
+from ..report import Issue  # 두 수집기가 같은 회차 표현을 쓴다
 
 BASE = "https://www.bok.or.kr"
 RSS_URL = f"{BASE}/portal/bbs/P0002359/news.rss?menuNo=200066"
-LANDING_URL = f"{BASE}/portal/singl/newsData/list.do?menuNo=200066"
 
 # 요약표로 인정하는 최소 지표. 앞쪽에 실린 부분 표(성장률·물가만 있는 표 등)를 거른다
 REQUIRED_INDICATORS = {"gdp_growth", "cpi", "emp_change", "unemp_rate"}
@@ -35,12 +32,6 @@ LABEL_TO_INDICATOR = {
 _ITEM = re.compile(r"<item>(.*?)</item>", re.S)
 _ISSUE_TITLE = re.compile(r"경제전망보고서\(\s*\d{4}년\s*\d{1,2}월\s*\)")
 _PDF_HREF = re.compile(r'href="(/fileSrc/[^"]+\.pdf)"')
-
-
-class Issue(NamedTuple):
-    title: str
-    published_at: date
-    url: str
 
 
 def _tag(item: str, name: str) -> str:
@@ -75,34 +66,11 @@ def parse_pdf_link(html: str) -> str:
 
 
 def parse(text: str, issue: Issue, source_url: str, source_page: int) -> list[ForecastRecord]:
-    values = pdf.parse_summary_table(text, LABEL_TO_INDICATOR)
-    collected_at = datetime.now(KST)
-    records = []
-    for (indicator, year, period), value in sorted(values.items()):
-        # 발표연도보다 앞선 해는 전망이 아니라 실적이다
-        if year < issue.published_at.year:
-            continue
-        meta = INDICATOR_META[indicator]
-        records.append(ForecastRecord(
-            id=make_id("BOK", issue.published_at, indicator, year, period),
-            org="BOK",
-            org_name_ko="한국은행",
-            report_title=issue.title,
-            published_at=issue.published_at,
-            target_year=year,
-            target_period=period,
-            indicator=indicator,
-            value=round(value, meta["decimals"]),
-            unit=meta["unit"],
-            source_url=source_url,
-            source_page=source_page,
-            landing_url=issue.url,
-            confidence="extracted",
-            collected_at=collected_at,
-        ))
-    return records
-
-
+    return report.records_from_table(
+        text, LABEL_TO_INDICATOR,
+        org="BOK", org_name_ko="한국은행",
+        issue=issue, source_url=source_url, source_page=source_page,
+    )
 
 
 def collect(today: date) -> list[ForecastRecord]:
