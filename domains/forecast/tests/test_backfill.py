@@ -112,4 +112,11 @@ def test_bok_rounds_come_from_the_issue_list(monkeypatch):
 
 
 def test_registered_sources_cover_the_backfillable_orgs():
-    assert set(backfill.SOURCES) == {"oecd", "bok"}
+    assert set(backfill.SOURCES) == {"oecd", "oecd_interim", "bok"}
+
+
+def test_oecd_interim_rounds_come_from_the_edition_table():
+    labels = [(r.label, r.published_at) for r in backfill.oecd_interim_rounds()]
+    assert ("March 2026", date(2026, 3, 26)) in labels
+    assert ("September 2025", date(2025, 9, 23)) in labels
+    assert ("March 2025", date(2025, 3, 17)) in labels

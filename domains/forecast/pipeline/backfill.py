@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Callable, NamedTuple
 
 from . import store
-from .collectors import bok, oecd
+from .collectors import bok, oecd, oecd_interim
 from .models import ForecastRecord
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -58,8 +58,16 @@ def bok_rounds() -> list[Round]:
     ]
 
 
+def oecd_interim_rounds() -> list[Round]:
+    return [
+        Round(label, pub, lambda label=label: oecd_interim.collect_edition(label))
+        for label, (pub, _) in sorted(oecd_interim.EDITIONS.items(), key=lambda kv: kv[1][0])
+    ]
+
+
 SOURCES: dict[str, Callable[[], list[Round]]] = {
     "oecd": oecd_rounds,
+    "oecd_interim": oecd_interim_rounds,
     "bok": bok_rounds,
 }
 

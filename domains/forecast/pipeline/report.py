@@ -31,7 +31,24 @@ def records_from_table(
     source_page: int,
 ) -> list[ForecastRecord]:
     """요약표 페이지 원문을 그 회차의 전망 레코드로 옮긴다."""
-    values = pdf.parse_summary_table(text, labels)
+    return records_from_values(
+        pdf.parse_summary_table(text, labels),
+        org=org, org_name_ko=org_name_ko, issue=issue,
+        source_url=source_url, source_page=source_page,
+    )
+
+
+def records_from_values(
+    values: Mapping[tuple[str, int, str], float],
+    *,
+    org: str,
+    org_name_ko: str,
+    issue: Issue,
+    source_url: str,
+    source_page: int,
+    confidence: str = "extracted",
+) -> list[ForecastRecord]:
+    """{(지표, 연도, 기간): 값} 을 그 회차의 전망 레코드로 옮긴다."""
     collected_at = datetime.now(KST)
     records = []
     for (indicator, year, period), value in sorted(values.items()):
@@ -53,7 +70,7 @@ def records_from_table(
             source_url=source_url,
             source_page=source_page,
             landing_url=issue.url,
-            confidence="extracted",
+            confidence=confidence,
             collected_at=collected_at,
         ))
     return records
