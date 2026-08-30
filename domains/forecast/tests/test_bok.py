@@ -96,3 +96,50 @@ def test_parse_handles_the_may_issue_layout():
     assert got[("emp_change", 2026)].value == 18.0
     assert got[("emp_rate", 2027)].value == 63.1
     assert got[("emp_change", 2026)].id == "bok-2026-05-emp_change-2026"
+
+
+
+class _Resp:
+    def __init__(self, text="", content=b""):
+        self.text = text
+        self.content = content
+
+
+def test_list_issues_returns_rounds_newest_first(monkeypatch):
+    monkeypatch.setattr(bok.http, "get", lambda url, **kw: _Resp(text=RSS))
+    issues = bok.list_issues()
+    assert [i.published_at for i in issues] == sorted(
+        [i.published_at for i in issues], reverse=True)
+    assert issues[0].title.startswith("경제전망보고서")
+
+
+def test_collect_issue_reads_one_named_round(monkeypatch):
+    issue = bok.Issue("경제전망보고서(2026년 8월)", date(2026, 8, 27), "https://x/view")
+
+    def fake_get(url, **kw):
+        if url == issue.url:
+            return _Resp(text='<a href="/fileSrc/x.pdf">첨부</a>')
+        assert url == "https://www.bok.or.kr/fileSrc/x.pdf"
+        return _Resp(content=b"%PDF")
+
+    monkeypatch.setattr(bok.http, "get", fake_get)
+    monkeypatch.setattr(bok.pdf, "page_texts", lambda data: ["표지", TABLE])
+
+    records = bok.collect_issue(issue)
+    got = {(r.indicator, r.target_year, r.target_period): r for r in records}
+    assert got[("emp_change", 2026, "annual")].value == 14.0
+    assert got[("emp_change", 2026, "annual")].source_page == 2
+    assert got[("emp_change", 2026, "annual")].published_at == date(2026, 8, 27)
+
+
+def test_collect_uses_the_newest_round(monkeypatch):
+    seen = []
+
+    monkeypatch.setattr(bok, "list_issues", lambda: [
+        bok.Issue("경제전망보고서(2026년 8월)", date(2026, 8, 27), "u-new"),
+        bok.Issue("경제전망보고서(2026년 5월)", date(2026, 5, 28), "u-old"),
+    ])
+    monkeypatch.setattr(bok, "collect_issue", lambda issue: seen.append(issue) or [])
+
+    bok.collect(date(2026, 8, 30))
+    assert [i.url for i in seen] == ["u-new"]

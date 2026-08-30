@@ -51,8 +51,16 @@ def oecd_rounds() -> list[Round]:
     ]
 
 
+def bok_rounds() -> list[Round]:
+    return [
+        Round(issue.title, issue.published_at, lambda issue=issue: bok.collect_issue(issue))
+        for issue in bok.list_issues()
+    ]
+
+
 SOURCES: dict[str, Callable[[], list[Round]]] = {
     "oecd": oecd_rounds,
+    "bok": bok_rounds,
 }
 
 

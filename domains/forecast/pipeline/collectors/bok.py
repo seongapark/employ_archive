@@ -73,11 +73,16 @@ def parse(text: str, issue: Issue, source_url: str, source_page: int) -> list[Fo
     )
 
 
-def collect(today: date) -> list[ForecastRecord]:
+def list_issues() -> list[Issue]:
+    """게시판에 남아 있는 회차를 최신순으로 준다(2014년까지 남는다)."""
     issues = parse_rss(http.get(RSS_URL).text)
     if not issues:
         raise ValueError("RSS에서 경제전망보고서 회차를 찾지 못했다")
-    issue = issues[0]
+    return issues
+
+
+def collect_issue(issue: Issue) -> list[ForecastRecord]:
+    """회차 하나의 본문에서 PDF를 받아 요약표를 읽는다."""
     pdf_url = parse_pdf_link(http.get(issue.url).text)
     found = pdf.find_summary_table(
         pdf.page_texts(http.get(pdf_url).content), LABEL_TO_INDICATOR, REQUIRED_INDICATORS
@@ -86,3 +91,7 @@ def collect(today: date) -> list[ForecastRecord]:
         raise ValueError(f"{issue.title}: 요약표 페이지를 찾지 못했다")
     page_no, text = found
     return parse(text, issue, pdf_url, page_no)
+
+
+def collect(today: date) -> list[ForecastRecord]:
+    return collect_issue(list_issues()[0])

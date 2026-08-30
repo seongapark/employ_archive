@@ -96,3 +96,20 @@ def test_only_the_named_sources_run(tmp_path):
     }
     backfill.run(src, data_dir=tmp_path, since=date(2024, 11, 1), only=["oecd"])
     assert called == ["oecd"]
+
+
+def test_bok_rounds_come_from_the_issue_list(monkeypatch):
+    from domains.forecast.pipeline.collectors import bok
+    monkeypatch.setattr(bok, "list_issues", lambda: [
+        bok.Issue("경제전망보고서(2026년 8월)", date(2026, 8, 27), "u1"),
+        bok.Issue("경제전망보고서(2026년 5월)", date(2026, 5, 28), "u2"),
+    ])
+    got = backfill.bok_rounds()
+    assert [(r.label, r.published_at) for r in got] == [
+        ("경제전망보고서(2026년 8월)", date(2026, 8, 27)),
+        ("경제전망보고서(2026년 5월)", date(2026, 5, 28)),
+    ]
+
+
+def test_registered_sources_cover_the_backfillable_orgs():
+    assert set(backfill.SOURCES) == {"oecd", "bok"}
