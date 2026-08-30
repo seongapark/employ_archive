@@ -1,4 +1,8 @@
 :root {
+  /* 라이트 전용 플랫폼. 이 선언이 없으면 OS 다크모드에서 브라우저가
+     스크롤바·폼 컨트롤·초기 배경을 어둡게 그린다. */
+  color-scheme: light;
+
   --bg: #eef0f3;
   --card: #ffffff;
   --border: #e2e5ea;
@@ -13,18 +17,4 @@
   --down: #2f6bd0;
   --warn-fg: #9a6b15;
   --warn-bg: #faf0dc;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #15181d;
-    --card: #1e232b;
-    --border: #2c333d;
-    --text: #e6e9ee;
-    --text-secondary: #8b95a3;
-    --accent-light: #1d2c42;
-    --link: #7ea6dd;
-    --link-hover: #9dbde8;
-    --warn-bg: #3a2d10;
-  }
 }

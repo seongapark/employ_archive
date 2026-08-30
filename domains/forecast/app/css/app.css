@@ -8,14 +8,6 @@
   --badge-reviewed-bg: #e5edfa;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --badge-verified-bg: #123526;
-    --badge-extracted-bg: #3a2d10;
-    --badge-reviewed-bg: #152b4a;
-  }
-}
-
 /* Tab bar */
 
 .tabbar {
