@@ -1,8 +1,12 @@
 import json
+from datetime import date
 
 import pytest
 
 from domains.forecast.pipeline import check_run
+
+TODAY = date(2026, 8, 30)
+KDI_UNTIL_SEP = {"kdi": date(2026, 9, 30)}
 
 
 def write_run(tmp_path, collectors, errors):
@@ -16,23 +20,38 @@ def write_run(tmp_path, collectors, errors):
     return path
 
 
+def judge(path, known_down=KDI_UNTIL_SEP, today=TODAY):
+    return check_run.main(path, known_down=known_down, today=today)
+
+
 def test_passes_when_every_collector_succeeded(tmp_path):
-    path = write_run(tmp_path, {"bok": {"ok": True}}, [])
-    assert check_run.main(path, known_down=set()) == 0
+    assert judge(write_run(tmp_path, {"bok": {"ok": True}}, []), known_down={}) == 0
 
 
 def test_fails_on_an_error_nobody_expected(tmp_path, capsys):
     path = write_run(tmp_path, {"bok": {"ok": False}},
                      ["bok: ValueError: 요약표 페이지를 찾지 못했다"])
-    assert check_run.main(path, known_down={"kdi"}) == 1
+    assert judge(path) == 1
     assert "::error::bok: ValueError" in capsys.readouterr().out
 
 
-def test_passes_when_only_a_known_outage_failed(tmp_path, capsys):
+def test_passes_while_a_known_outage_is_still_within_its_deadline(tmp_path, capsys):
     path = write_run(tmp_path, {"kdi": {"ok": False}},
                      ["kdi: HTTPError: HTTP Error 502: Bad Gateway"])
-    assert check_run.main(path, known_down={"kdi"}) == 0
+    assert judge(path) == 0
     assert "kdi: HTTPError" in capsys.readouterr().out
+
+
+def test_suppression_holds_on_the_deadline_day_itself(tmp_path):
+    path = write_run(tmp_path, {"kdi": {"ok": False}}, ["kdi: HTTPError: 502"])
+    assert judge(path, today=date(2026, 9, 30)) == 0
+
+
+def test_fails_once_the_deadline_has_passed(tmp_path, capsys):
+    # 장애가 안 끝나도 언젠가 다시 들여다보게 만든다 — 유예가 영구 면제가 되면 안 된다
+    path = write_run(tmp_path, {"kdi": {"ok": False}}, ["kdi: HTTPError: 502"])
+    assert judge(path, today=date(2026, 10, 1)) == 1
+    assert "유예" in capsys.readouterr().out
 
 
 def test_still_fails_when_a_known_outage_hides_a_real_break(tmp_path):
@@ -40,21 +59,41 @@ def test_still_fails_when_a_known_outage_hides_a_real_break(tmp_path):
         "kdi: HTTPError: HTTP Error 502: Bad Gateway",
         "bok: ValueError: 요약표 페이지를 찾지 못했다",
     ])
-    assert check_run.main(path, known_down={"kdi"}) == 1
+    assert judge(path) == 1
 
 
-def test_asks_to_clear_the_list_when_a_known_outage_recovers(tmp_path, capsys):
-    # 목록에 남겨둔 채 잊으면 그 수집기가 조용히 빠져도 모른다
+def test_fails_when_a_known_outage_recovers_so_the_entry_gets_removed(tmp_path, capsys):
+    # 초록 실행에 붙은 경고는 아무도 안 본다. 목록에 남은 채 잊히면
+    # 그 수집기가 조용히 빠져도 모르므로, 지울 때까지 빨갛게 둔다.
     path = write_run(tmp_path, {"kdi": {"ok": True}}, [])
-    assert check_run.main(path, known_down={"kdi"}) == 0
-    assert "::warning::" in capsys.readouterr().out
+    assert judge(path) == 1
+    out = capsys.readouterr().out
+    assert "::error::" in out and "KNOWN_DOWN" in out
 
 
-def test_reads_the_known_down_list_from_the_environment(monkeypatch):
-    monkeypatch.setenv("KNOWN_DOWN", " kdi , bok ")
-    assert check_run.known_down_from_env() == {"kdi", "bok"}
-    monkeypatch.setenv("KNOWN_DOWN", "")
-    assert check_run.known_down_from_env() == set()
+def test_parses_entries_with_their_deadline():
+    assert check_run.parse_known_down(" kdi@2026-09-30 , bok@2026-12-01 ") == {
+        "kdi": date(2026, 9, 30), "bok": date(2026, 12, 1),
+    }
+    assert check_run.parse_known_down("") == {}
+
+
+def test_rejects_an_entry_without_a_deadline():
+    # 기한 없는 유예는 그대로 굳는다
+    with pytest.raises(ValueError):
+        check_run.parse_known_down("kdi")
+
+
+def test_rejects_an_unreadable_deadline():
+    with pytest.raises(ValueError):
+        check_run.parse_known_down("kdi@언젠가")
+
+
+def test_fails_loudly_when_the_known_down_list_is_malformed(tmp_path, capsys, monkeypatch):
+    monkeypatch.setenv("KNOWN_DOWN", "kdi")
+    path = write_run(tmp_path, {"kdi": {"ok": False}}, ["kdi: HTTPError: 502"])
+    assert check_run.main(path, today=TODAY) == 1
+    assert "::error::" in capsys.readouterr().out
 
 
 def run_entry_point(path, **env_over):
@@ -64,7 +103,7 @@ def run_entry_point(path, **env_over):
 
     return subprocess.run(
         [sys.executable, "-m", "domains.forecast.pipeline.check_run", str(path)],
-        env={**os.environ, "KNOWN_DOWN": "kdi", **env_over},
+        env={**os.environ, "KNOWN_DOWN": "kdi@2099-01-01", **env_over},
         capture_output=True, text=True, encoding="utf-8",
     )
 
