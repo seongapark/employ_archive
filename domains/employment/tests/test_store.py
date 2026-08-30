@@ -65,14 +65,22 @@ def test_load_returns_empty_when_the_file_is_missing(tmp_path):
 
 
 def test_upsert_writes_to_the_right_slot_when_ids_repeat():
-    # 값 비교로 자리를 찾으면 앞쪽 중복에 써서 진짜 대상이 남는다
+    # 값 비교로 자리를 찾으면 by_id 가 가리키는 뒤쪽이 아니라 앞쪽 중복을 덮는다.
+    # 그래서 '어느 값이 어딘가에 있다'가 아니라 '어느 자리가 덮였다'를 봐야 한다.
     dup = rec(period="2026-06", value=15855.0, released=date(2026, 7, 14))
     other = rec(period="2026-07")
-    existing = [dup, other, dup.model_copy()]
-    incoming = [rec(period="2026-06", value=15856.0, released=date(2026, 8, 11))]
-    r = store.upsert(existing, incoming)
-    updated = [x for x in r.records if x.period == "2026-06"]
-    assert any(x.value == 15856.0 for x in updated)
+    twin = dup.model_copy()
+    existing = [dup, other, twin]
+    cand = rec(period="2026-06", value=15856.0, released=date(2026, 8, 11))
+
+    r = store.upsert(existing, [cand])
+
+    # by_id 는 뒤에 온 twin 을 가리키므로 덮여야 하는 것은 인덱스 2다.
+    assert r.records[2] is cand
+    # 앞쪽 중복은 손대지 않아야 한다 — 값 비교였다면 여기가 cand 로 바뀐다.
+    assert r.records[0] is dup
+    assert r.records[0].value == 15855.0
+    assert r.updated == [cand.id]
 
 
 def test_load_series_rejects_duplicate_ids(tmp_path):
