@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-08-30T21:30:57.935953+09:00",
+  "run_at": "2026-08-30T21:47:36.688143+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -19,6 +19,16 @@
     "kdi": {
       "ok": false,
       "fetched": 0,
+      "added": 0
+    },
+    "kli": {
+      "ok": true,
+      "fetched": 9,
+      "added": 0
+    },
+    "kiet": {
+      "ok": true,
+      "fetched": 3,
       "added": 0
     }
   },
