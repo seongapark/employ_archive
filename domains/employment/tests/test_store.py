@@ -1,5 +1,7 @@
 from datetime import date, datetime
 
+import pytest
+
 from domains.employment.pipeline.models import SeriesRecord
 from domains.employment.pipeline import store
 
@@ -60,3 +62,23 @@ def test_save_and_load_round_trip(tmp_path):
 
 def test_load_returns_empty_when_the_file_is_missing(tmp_path):
     assert store.load_series(tmp_path / "nope.json") == []
+
+
+def test_upsert_writes_to_the_right_slot_when_ids_repeat():
+    # 값 비교로 자리를 찾으면 앞쪽 중복에 써서 진짜 대상이 남는다
+    dup = rec(period="2026-06", value=15855.0, released=date(2026, 7, 14))
+    other = rec(period="2026-07")
+    existing = [dup, other, dup.model_copy()]
+    incoming = [rec(period="2026-06", value=15856.0, released=date(2026, 8, 11))]
+    r = store.upsert(existing, incoming)
+    updated = [x for x in r.records if x.period == "2026-06"]
+    assert any(x.value == 15856.0 for x in updated)
+
+
+def test_load_series_rejects_duplicate_ids(tmp_path):
+    import json as _json
+    path = tmp_path / "series.json"
+    row = rec().model_dump(mode="json")
+    path.write_text(_json.dumps([row, row], ensure_ascii=False), encoding="utf-8")
+    with pytest.raises(ValueError, match="중복"):
+        store.load_series(path)
