@@ -2473,10 +2473,16 @@ git commit -m "data(employment): 초기 적재"
 - `python -m pytest -q` 통과 (전망 도메인 테스트가 하나도 깨지지 않음)
 - `python -m domains.employment.pipeline.collect` 가 세 수집기 모두 `ok: true` 로 끝남
 - `domains/employment/data/series.json` 에 세 출처 × 최근 24개월 × (총량 + 산업 대분류) 레코드가 적재됨
-- 허브(`/`)를 열면 **고용동향 버튼이 자동으로 활성화**된다 — `last_run.json` 이 생겼기 때문이며, 허브 코드는 한 줄도 고치지 않는다. A단계에서 만든 느슨한 결합이 실제로 작동하는지 여기서 확인된다
+- ~~허브의 고용동향 버튼 자동 활성화~~ — **C단계에서는 확인되지 않는다.** `tools/build.py` 의 `discover_domains()` 가 `domains/<이름>/app/` 이 있어야 도메인으로 인정하는데, 고용동향은 아직 화면이 없다(D단계 몫). 그래서 `_site` 에 배포되지 않고 허브는 계속 "준비중" 으로 둔다.
+
+  **이것이 옳은 동작이다.** 화면 없는 도메인의 버튼을 켜면 눌렀을 때 404 가 난다. 데이터만 있는 상태에서 "준비중" 은 거짓이 아니라 사실이다. `build.py` 를 넓혀 데이터만 있는 도메인을 배포하게 만들지 마라 — 그러면 갈 곳 없는 버튼이 생긴다.
+
+  느슨한 결합이 실제로 작동하는지는 **D단계에서** 확인된다. `domains/employment/app/` 이 생기는 순간 허브 코드를 한 줄도 안 고쳤는데 버튼이 켜져야 한다
 - `.github/workflows/collect-employment.yml` 이 등록되고 `KOSIS_API_KEY` 시크릿이 있음
 
 ## D단계로 넘길 것
+
+- **허브 자동 활성화 확인.** `domains/employment/app/` 이 생기면 `tools/build.py` 가 도메인을 인식해 `_site/employment/` 를 배포하고, 허브가 `data/last_run.json` 을 받아 버튼을 켠다. **허브 코드를 고쳐야 한다면 A단계의 느슨한 결합이 실패한 것이다.**
 
 - 화면 3개(총괄·산업별·출처비교)와 증감 비교 시트 — 스펙 7.5·7.6
 - **미발표와 미제공의 구분** — 스펙 11장. 출처마다 최신월이 달라, 아직 안 나온 달은
