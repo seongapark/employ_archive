@@ -18,7 +18,9 @@ PDF_URL = "https://www.bok.or.kr/fileSrc/portal/x/1/y.pdf"
 
 
 def by_key(records):
-    return {(r.indicator, r.target_year): r for r in records}
+    """연간 레코드만 (지표, 연도) 로 뽑는다 — 반기는 별도 테스트에서 본다."""
+    return {(r.indicator, r.target_year): r
+            for r in records if r.target_period == "annual"}
 
 
 def test_parse_rss_returns_issues_newest_first():
@@ -58,10 +60,18 @@ def test_parse_reads_annual_values_of_the_summary_table():
     assert got[("cpi", 2027)].value == 2.3
 
 
-def test_parse_covers_forecast_years_only_and_annual_only():
+def test_parse_covers_forecast_years_only():
     records = bok.parse(TABLE, ISSUE, PDF_URL, source_page=16)
     assert {r.target_year for r in records} == {2026, 2027}  # 2025는 실적이라 제외
-    assert {r.target_period for r in records} == {"annual"}
+
+
+def test_parse_keeps_half_year_forecasts_alongside_the_annual_one():
+    records = {(r.indicator, r.target_year, r.target_period): r
+               for r in bok.parse(TABLE, ISSUE, PDF_URL, source_page=16)}
+    assert records[("emp_change", 2026, "h1")].value == 11.0
+    assert records[("emp_change", 2026, "h2")].value == 18.0
+    assert records[("gdp_growth", 2027, "h1")].value == 2.5
+    assert records[("emp_change", 2026, "h1")].id == "bok-2026-08-emp_change-2026-h1"
 
 
 def test_parse_record_fields():

@@ -23,8 +23,12 @@ VALUE_RANGES: dict[str, tuple[float, float]] = {
 }
 
 
-def make_id(org: str, published_at: date, indicator: str, target_year: int) -> str:
-    return f"{org.lower()}-{published_at:%Y-%m}-{indicator}-{target_year}"
+def make_id(org: str, published_at: date, indicator: str, target_year: int,
+            target_period: str = "annual") -> str:
+    # 연간 id에는 접미사를 붙이지 않는다 — 이미 쌓인 레코드의 id가 바뀌면
+    # 같은 전망치가 새 레코드로 다시 들어와 수정 이력이 어긋난다
+    suffix = "" if target_period == "annual" else f"-{target_period}"
+    return f"{org.lower()}-{published_at:%Y-%m}-{indicator}-{target_year}{suffix}"
 
 
 class ForecastRecord(BaseModel):

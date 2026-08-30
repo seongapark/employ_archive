@@ -79,18 +79,18 @@ def parse(text: str, issue: Issue, source_url: str, source_page: int) -> list[Fo
     collected_at = datetime.now(KST)
     records = []
     for (indicator, year, period), value in sorted(values.items()):
-        # 반기값은 id 체계가 연·지표·기관까지만 구분해 아직 담을 곳이 없고,
         # 발표연도보다 앞선 해는 전망이 아니라 실적이다
-        if period != "annual" or year < issue.published_at.year:
+        if year < issue.published_at.year:
             continue
         meta = INDICATOR_META[indicator]
         records.append(ForecastRecord(
-            id=make_id("BOK", issue.published_at, indicator, year),
+            id=make_id("BOK", issue.published_at, indicator, year, period),
             org="BOK",
             org_name_ko="한국은행",
             report_title=issue.title,
             published_at=issue.published_at,
             target_year=year,
+            target_period=period,
             indicator=indicator,
             value=round(value, meta["decimals"]),
             unit=meta["unit"],

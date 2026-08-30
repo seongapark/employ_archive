@@ -43,9 +43,10 @@ def latest_record(records, org, indicator, target_year, target_period="annual", 
 
 
 def _day_id(cand: ForecastRecord) -> str:
+    suffix = "" if cand.target_period == "annual" else f"-{cand.target_period}"
     return (
         f"{cand.org.lower()}-{cand.published_at:%Y-%m-%d}-"
-        f"{cand.indicator}-{cand.target_year}"
+        f"{cand.indicator}-{cand.target_year}{suffix}"
     )
 
 

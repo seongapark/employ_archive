@@ -17,7 +17,9 @@ PDF_URL = "https://www.kdi.re.kr/file/download?atch_no=x"
 
 
 def by_key(records):
-    return {(r.indicator, r.target_year): r for r in records}
+    """연간 레코드만 (지표, 연도) 로 뽑는다 — 반기는 별도 테스트에서 본다."""
+    return {(r.indicator, r.target_year): r
+            for r in records if r.target_period == "annual"}
 
 
 def test_parse_issue_reads_title_and_publication_date():
@@ -50,10 +52,19 @@ def test_parse_omits_indicators_absent_from_the_kdi_table():
     assert "emp_rate" not in {r.indicator for r in records}  # KDI 표에는 고용률이 없다
 
 
-def test_parse_covers_forecast_years_only_and_annual_only():
+def test_parse_covers_forecast_years_only():
     records = kdi.parse(TABLE, ISSUE, PDF_URL, source_page=20)
     assert {r.target_year for r in records} == {2026, 2027}
-    assert {r.target_period for r in records} == {"annual"}
+
+
+def test_parse_keeps_half_year_forecasts_where_the_table_has_them():
+    records = {(r.indicator, r.target_year, r.target_period): r
+               for r in kdi.parse(TABLE, ISSUE, PDF_URL, source_page=20)}
+    assert records[("emp_change", 2026, "h1")].value == 11.0
+    assert records[("emp_change", 2026, "h2")].value == 12.0
+    assert records[("emp_change", 2026, "h1")].id == "kdi-2026-08-emp_change-2026-h1"
+    # 수정호 표는 2027년을 연간만 싣는다 — 없는 반기를 지어내면 안 된다
+    assert ("emp_change", 2027, "h1") not in records
 
 
 def test_parse_record_fields():

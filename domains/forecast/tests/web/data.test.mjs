@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import {
   latestRecords, summarize, seriesFor, orgIndicators, compareSet,
   timelineGroups, fmtValue, fmtDelta, dateLabel, isNew, esc, SHORT_LABELS,
+  halfYears, halfYearLabel,
 } from '../../app/js/data.js';
 
 const INDICATOR_CODES = ['emp_change', 'emp_rate', 'unemp_rate', 'gdp_growth', 'cpi', 'emp_rate_youth', 'labor_force'];
@@ -166,4 +167,59 @@ test('compareSet stale boundary at exactly 90/91 days', () => {
   const byId = Object.fromEntries(set.map((e) => [e.rec.id, e]));
   assert.equal(byId.boundary90.stale, false);
   assert.equal(byId.boundary91.stale, true);
+});
+
+
+test('fmtValue keeps one decimal on percent indicators', () => {
+  assert.equal(fmtValue(rec({ indicator: 'emp_rate', value: 63, unit: '%' })), '63.0%');
+  assert.equal(fmtValue(rec({ indicator: 'emp_rate', value: 62.9, unit: '%' })), '62.9%');
+});
+
+test('fmtValue leaves 만명 counts as published', () => {
+  assert.equal(fmtValue(rec({ indicator: 'emp_change', value: 20, unit: '만명' })), '20만명');
+  assert.equal(fmtValue(rec({ indicator: 'emp_change', value: 12.3, unit: '만명' })), '12.3만명');
+});
+
+function halfSet() {
+  const base = { org: 'BOK', indicator: 'emp_change', target_year: 2026,
+    published_at: '2026-08-27', unit: '만명' };
+  return [
+    rec({ ...base, id: 'a', target_period: 'annual', value: 14 }),
+    rec({ ...base, id: 'b', target_period: 'h1', value: 11 }),
+    rec({ ...base, id: 'c', target_period: 'h2', value: 18 }),
+  ];
+}
+
+test('halfYears finds the halves of the same round', () => {
+  const rs = halfSet();
+  assert.deepEqual(halfYears(rs, rs[0]), { h1: 11, h2: 18 });
+});
+
+test('halfYears ignores other rounds and other orgs', () => {
+  const rs = halfSet().concat([
+    rec({ org: 'BOK', indicator: 'emp_change', target_year: 2026, published_at: '2026-05-28',
+      target_period: 'h1', value: 18, id: 'old' }),
+    rec({ org: 'KDI', indicator: 'emp_change', target_year: 2026, published_at: '2026-08-27',
+      target_period: 'h1', value: 11, id: 'other' }),
+  ]);
+  assert.deepEqual(halfYears(rs, rs[0]), { h1: 11, h2: 18 });
+});
+
+test('halfYears returns nulls when the org publishes annual figures only', () => {
+  const only = [rec({ org: 'OECD', target_period: 'annual', value: 1.9 })];
+  assert.deepEqual(halfYears(only, only[0]), { h1: null, h2: null });
+});
+
+test('halfYearLabel writes a dash for a half the org does not publish', () => {
+  const only = [rec({ org: 'OECD', indicator: 'gdp_growth', value: 1.9, unit: '%' })];
+  assert.equal(halfYearLabel(only, only[0]), '상반 - · 하반 -');
+  const rs = halfSet();
+  assert.equal(halfYearLabel(rs, rs[0]), '상반 11 · 하반 18');
+});
+
+test('halfYearLabel can carry the unit for the detail view', () => {
+  const rs = halfSet();
+  assert.equal(halfYearLabel(rs, rs[0], { unit: true }), '상반 11만명 · 하반 18만명');
+  const only = [rec({ org: 'OECD', indicator: 'gdp_growth', value: 1.9, unit: '%' })];
+  assert.equal(halfYearLabel(only, only[0], { unit: true }), '상반 - · 하반 -');
 });
