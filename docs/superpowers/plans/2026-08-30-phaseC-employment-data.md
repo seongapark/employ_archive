@@ -1695,8 +1695,11 @@ def _flat(cells) -> str:
     hwpx 리더가 셀 안 문단을 공백으로 잇기 때문에 두 줄로 접힌 헤더가
     '농림 어업', '정보 통신업' 처럼 나온다. 공백을 그대로 두고 매칭하면
     상시가입자 표를 놓치고 뒤쪽 구직급여 표를 집는다.
+
+    셀 안 공백만 지우고 셀 사이는 띄운다. 전부 이어붙이면 키워드가 두 셀
+    경계를 걸쳐 가짜로 매칭될 수 있다 — 앞 셀 끝 '산' + 뒤 셀 시작 '업'.
     """
-    return re.sub(r"\s+", "", " ".join(cells))
+    return " ".join(re.sub(r"\s+", "", c or "") for c in cells)
 
 
 def find_tables(tables) -> tuple[list, list, list, list]:
