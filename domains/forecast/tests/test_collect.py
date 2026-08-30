@@ -51,7 +51,7 @@ def test_main_records_collector_failure_and_continues(tmp_path):
 
 
 def test_collectors_registry_covers_the_pdf_track_orgs():
-    assert set(collect.COLLECTORS) == {"oecd", "imf", "bok", "kdi"}
+    assert set(collect.COLLECTORS) == {"oecd", "imf", "bok", "kdi", "kli", "kiet"}
 
 
 def test_main_records_a_compact_error_without_local_paths(tmp_path):
