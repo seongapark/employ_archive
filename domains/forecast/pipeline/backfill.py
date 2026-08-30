@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Callable, NamedTuple
 
 from . import store
-from .collectors import bok, kiet, kli, oecd, oecd_interim
+from .collectors import bok, imf, kiet, kli, oecd, oecd_interim
 from .models import ForecastRecord
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -65,6 +65,14 @@ def oecd_interim_rounds() -> list[Round]:
     ]
 
 
+def imf_rounds() -> list[Round]:
+    """보관된 지난 회차. 현행 회차는 일상 수집기가 발표일과 함께 가져온다."""
+    return [
+        Round(label, pub, lambda label=label: imf.collect_vintage(label))
+        for label, (_, _, pub) in imf.VINTAGES.items()
+    ]
+
+
 def kiet_rounds() -> list[Round]:
     return [
         Round(issue.title, issue.published_at, lambda issue=issue: kiet.collect_issue(issue))
@@ -85,6 +93,7 @@ SOURCES: dict[str, Callable[[], list[Round]]] = {
     "bok": bok_rounds,
     "kli": kli_rounds,
     "kiet": kiet_rounds,
+    "imf": imf_rounds,
 }
 
 
