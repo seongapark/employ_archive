@@ -1234,10 +1234,29 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
     return title, released_at, view_url, data, attachments
 
 
+MAX_MONTHS_BEHIND = 2      # 전월 기준으로 매월 공표된다 (sources.json 의 release_rule)
+
+
+def check_freshness(records: list[SeriesRecord], today: date) -> None:
+    """최신월이 오늘로부터 너무 뒤처졌으면 실패시킨다.
+
+    파싱이 조용히 잘리면 check_coverage 는 못 잡는다 — latest 를 자기가 읽은
+    것에서 뽑으므로 골대가 같이 움직인다. 발표 주기를 아는 쪽은 여기뿐이다.
+    """
+    latest = max(r.period for r in records)
+    year, month = (int(x) for x in latest.split("-"))
+    behind = (today.year - year) * 12 + (today.month - month)
+    if behind > MAX_MONTHS_BEHIND:
+        raise ValueError(
+            f"최신 기간이 {latest} 로 {behind}개월 뒤처졌다 — 수집이 잘렸거나 공표가 멈췄다")
+
+
 def collect(today: date) -> list[SeriesRecord]:
     title, released_at, view_url, data, attachments = latest_issue()
-    return parse(data, released_at=released_at, release_url=view_url,
-                 attachments=attachments, collected_at=datetime.now(KST))
+    records = parse(data, released_at=released_at, release_url=view_url,
+                    attachments=attachments, collected_at=datetime.now(KST))
+    check_freshness(records, today)
+    return records
 ```
 
 - [ ] **Step 4: 통과를 확인한다**
@@ -1285,7 +1304,7 @@ git commit -m "feat(employment): 경제활동인구조사 수집기 (보도자�
   - `est.MAJOR_CODE_RE` — 대분류 판별 정규식
   - `est.parse(rows: list[dict], *, released_at, release_url, collected_at) -> list[SeriesRecord]`
   - `est.EXPECTED_CODES: set[str]`, `est.check_coverage(records) -> None` — 최신월에 기대한 대분류가 다 왔는지 검증, 아니면 `ValueError`
-  - `est.fetch(api_key: str, months: int = 24) -> list[dict]` — 네트워크
+  - `est.fetch(api_key: str, months: int = 36) -> list[dict]` — 네트워크
   - `est.collect(today: date) -> list[SeriesRecord]`
 
 **대분류 판별은 이름이 아니라 코드로 한다 (스파이크 실측).** `C1_NM` 은 `B.광업(05~08)` 처럼 코드범위가 붙기도 하고 `D.전기 가스…(35)` 처럼 단일이기도 해서 이름 규칙이 흔들린다. `C1` 코드는 일정하다:
@@ -1309,20 +1328,22 @@ import json, requests
 from pathlib import Path
 key = dict(l.split("=", 1) for l in
            Path(".env").read_text(encoding="utf-8").strip().splitlines())["KOSIS_API_KEY"]
+# itmId=ALL, objL2=ALL 은 쓰지 않는다 — 월당 16,650행(90 산업 x 5 규모 x 36 항목)이
+# 나와 36개월이면 40만 행을 넘어 KOSIS 의 4만 행 상한(err=31)에 걸린다. 필요한
+# 조합(전체 규모·종사자_전체 항목)만 서버에 요청한다.
 p = {"method": "getList", "apiKey": key, "orgId": "118", "tblId": "DT_118N_MON066",
-     "itmId": "ALL", "objL1": "ALL", "objL2": "ALL", "prdSe": "M",
-     "newEstPrdCnt": "36", "format": "json", "jsonVD": "Y"}
+     "itmId": "16118MF_1", "objL1": "ALL", "objL2": "13102732820SIZES.0",
+     "prdSe": "M", "newEstPrdCnt": "36", "format": "json", "jsonVD": "Y"}
 rows = requests.get("https://kosis.kr/openapi/Param/statisticsParameterData.do",
                     params=p, timeout=120).json()
-keep = [r for r in rows if r.get("C2_NM") == "전체" and r.get("ITM_NM") == "종사자_전체"]
 out = Path("domains/employment/tests/fixtures/est_kosis.json")
-out.write_text(json.dumps(keep, ensure_ascii=False, indent=1), encoding="utf-8")
-print(len(rows), "->", len(keep), "행", out.stat().st_size, "bytes")
+out.write_text(json.dumps(rows, ensure_ascii=False, indent=1), encoding="utf-8")
+print(len(rows), "행", out.stat().st_size, "bytes")
 EOF
 ```
 
 `newEstPrdCnt=36` 이다. 증감은 12개월 전 값에서 계산하므로 26개월만 받으면 증감이 붙는 달이 14개뿐이라 24개월 시계열을 못 그린다. 36개월이면 24개월치 증감이 나온다.
-저장 시 규모(`C2_NM`)와 항목(`ITM_NM`)을 좁히지 않으면 픽스처가 수십 MB 가 된다.
+규모(`objL2`)와 항목(`itmId`)을 이미 좁혀 요청했으므로 응답 자체가 필요한 조합만 담고 있다 — 저장 전 따로 걸러낼 필요가 없다.
 
 - [ ] **Step 2: 실패하는 테스트를 쓴다**
 
@@ -1438,6 +1459,11 @@ ORG_ID = "118"
 TBL_ID = "DT_118N_MON066"
 STAT_URL = f"https://kosis.kr/statHtml/statHtml.do?orgId={ORG_ID}&tblId={TBL_ID}"
 
+# 규모(C2) 는 '전체'만 쓴다. 코드는 KOSIS 메타데이터의 고정 식별자다.
+SIZE_TOTAL_CODE = "13102732820SIZES.0"
+# 항목(ITM) 도 '종사자_전체' 하나만 쓴다 — 아래 fetch() 참고.
+ITEM_TOTAL_EMPLOYEES_CODE = "16118MF_1"
+
 # 대분류는 코드가 알파벳으로 끝나고(...11SD), 중분류는 뒤에 숫자가 붙는다(...11SD35).
 # 이름(C1_NM)은 코드범위 표기가 흔들려 판별 기준으로 못 쓴다.
 MAJOR_CODE_RE = re.compile(r"INDUSTRY_\w*?S([A-Z])$")
@@ -1494,9 +1520,12 @@ def parse(rows: list[dict], *, released_at: date, release_url: str,
 
 
 def fetch(api_key: str, months: int = 36) -> list[dict]:
+    # itmId=ALL, objL2=ALL 로 받으면 월당 16,650행(90 산업 x 5 규모 x 36 항목)이
+    # 나와 36개월이면 40만 행을 넘어 KOSIS 의 4만 행 상한(err=31)에 걸린다.
+    # 필요한 조합(전체 규모·종사자_전체 항목)만 서버에 요청한다.
     params = {"method": "getList", "apiKey": api_key, "orgId": ORG_ID,
-              "tblId": TBL_ID, "itmId": "ALL", "objL1": "ALL", "objL2": "ALL",
-              "prdSe": "M", "newEstPrdCnt": str(months),
+              "tblId": TBL_ID, "itmId": ITEM_TOTAL_EMPLOYEES_CODE, "objL1": "ALL",
+              "objL2": SIZE_TOTAL_CODE, "prdSe": "M", "newEstPrdCnt": str(months),
               "format": "json", "jsonVD": "Y"}
     payload = requests.get(API, params=params, timeout=120).json()
     if isinstance(payload, dict):
@@ -1508,7 +1537,7 @@ EXPECTED_CODES = set("BCDEFGHIJKLMNOPQRS")
 
 
 def check_coverage(records: list[SeriesRecord]) -> None:
-    """최신월에 기대한 대분류가 다 왔는지 본다.
+    """최신월에 기대한 대분류와 전체 행이 다 왔는지 본다.
 
     KOSIS 의 분류 코드 체계가 바뀌면 MAJOR_CODE_RE 가 산업을 조용히 흘린다.
     빠진 산업은 화면에서 그냥 없는 칸으로 보일 뿐 아무 오류도 남기지 않는다.
@@ -1516,11 +1545,31 @@ def check_coverage(records: list[SeriesRecord]) -> None:
     if not records:
         raise ValueError("수집된 레코드가 없다")
     latest = max(r.period for r in records)
+    if not any(r.period == latest and r.breakdown == "total" for r in records):
+        raise ValueError(f"{latest} 에 전체 종사자 행이 없다")
     got = {r.category for r in records
            if r.period == latest and r.breakdown == "industry"}
     missing = EXPECTED_CODES - got
     if missing:
         raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
+
+
+def _end_of_month(year: int, month: int) -> date:
+    if month == 12:
+        return date(year + 1, 1, 1) - timedelta(days=1)
+    return date(year, month + 1, 1) - timedelta(days=1)
+
+
+def _published_at(period: str) -> date:
+    """조사대상월의 다음다음 달 말. sources.json 의 '매월 말, 전전월 기준' 이다.
+
+    표에 발표일이 없어 규칙에서 계산한다.
+    """
+    year, month = (int(x) for x in period.split("-"))
+    month += 2
+    if month > 12:
+        year, month = year + 1, month - 12
+    return _end_of_month(year, month)
 
 
 def collect(today: date) -> list[SeriesRecord]:
@@ -1529,10 +1578,7 @@ def collect(today: date) -> list[SeriesRecord]:
         raise ValueError("KOSIS_API_KEY 가 없다")
     rows = fetch(api_key)
     latest = max(_period(str(r.get("PRD_DE", ""))) for r in rows)
-    year, month = (int(x) for x in latest.split("-"))
-    # 표에 발표일이 없다. 해당 월 다음다음 달 말에 공표되므로 근사치를 쓴다.
-    released = date(year + (month + 1) // 12, (month + 1) % 12 + 1, 1) - timedelta(days=1)
-    records = parse(rows, released_at=released, release_url=STAT_URL,
+    records = parse(rows, released_at=_published_at(latest), release_url=STAT_URL,
                     collected_at=datetime.now(KST))
     check_coverage(records)
     return records
@@ -2046,6 +2092,23 @@ def check_coverage(records: list[SeriesRecord]) -> None:
         raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
 
 
+MAX_MONTHS_BEHIND = 2      # 전월 기준으로 매월 공표된다 (sources.json 의 release_rule)
+
+
+def check_freshness(records: list[SeriesRecord], today: date) -> None:
+    """최신월이 오늘로부터 너무 뒤처졌으면 실패시킨다.
+
+    파싱이 조용히 잘리면 check_coverage 는 못 잡는다 — latest 를 자기가 읽은
+    것에서 뽑으므로 골대가 같이 움직인다. 발표 주기를 아는 쪽은 여기뿐이다.
+    """
+    latest = max(r.period for r in records)
+    year, month = (int(x) for x in latest.split("-"))
+    behind = (today.year - year) * 12 + (today.month - month)
+    if behind > MAX_MONTHS_BEHIND:
+        raise ValueError(
+            f"최신 기간이 {latest} 로 {behind}개월 뒤처졌다 — 수집이 잘렸거나 공표가 멈췄다")
+
+
 def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
     html = requests.post(LIST_URL, data=SEARCH,
                          headers={**HEADERS, "Referer": LIST_URL}, timeout=30).text
@@ -2054,6 +2117,8 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
         raise ValueError("게시판에서 회차를 찾지 못했다")
     seq = m.group(1)
     title = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", m.group(2))).strip()
+    if "고용행정" not in title:
+        raise ValueError(f"고용행정통계 회차가 아니다: {title}")
 
     view = f"{VIEW_URL}?news_seq={seq}"
     detail = requests.get(view, headers=HEADERS, timeout=30).text.replace("&amp;", "&")
@@ -2061,9 +2126,11 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
     if link is None:
         raise ValueError(f"hwpx 첨부를 찾지 못했다: {title}")
 
-    posted = re.search(r"(\d{4})[.\-](\d{1,2})[.\-](\d{1,2})", detail)
+    # 페이지 아무 데서나 날짜 모양을 찾으면 스크립트 버전·바닥글의 무관한
+    # 날짜에 걸릴 수 있다. 상세 화면의 '등록일' 라벨에 붙은 값만 취한다.
+    posted = re.search(r"<dt>등록일</dt>\s*<dd>\s*(\d{4})-(\d{2})-(\d{2})", detail)
     if posted is None:
-        raise ValueError(f"발표일을 찾지 못했다: {title}")
+        raise ValueError(f"등록일을 찾지 못했다: {title}")
     released_at = date(int(posted.group(1)), int(posted.group(2)), int(posted.group(3)))
 
     data = requests.get("https://www.moel.go.kr" + link.group(1),
@@ -2073,12 +2140,11 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
 
 
 def collect(today: date) -> list[SeriesRecord]:
-    # today 는 쓰지 않는다 — 기준월은 보도자료 표 자체가 갖고 있다.
-    # 오케스트레이터가 세 수집기를 같은 시그니처로 부르므로 인자는 유지한다.
     title, released_at, view, data, attachments = latest_issue()
     records = parse(data, released_at=released_at, release_url=view,
                     attachments=attachments, collected_at=datetime.now(KST))
     check_coverage(records)
+    check_freshness(records, today)
     return records
 ```
 
@@ -2316,50 +2382,98 @@ Expected: PASS (5 passed)
 
 - [ ] **Step 6: `check_run.py` 를 만든다**
 
-전망 도메인의 것과 같은 규약이다(`KNOWN_DOWN` 으로 아는 장애를 넘기고 나머지만 실패시킨다).
+전망 도메인의 것을 그대로 옮긴 것이다(포크 시점 이후 전망 쪽에서 규약이 한 번 더
+단단해졌다) — `KNOWN_DOWN` 각 항목에 `name@YYYY-MM-DD` 형태로 유예 기한을
+반드시 붙인다. 기한 없는 유예는 그대로 굳어서 나중에 그 수집기가 조용히
+빠져도 아무도 모르게 된다. 그래서 기한이 지나면 다시 실패시키고, 유예해 둔
+수집기가 되살아나도 (초록 실행의 경고는 아무도 안 보므로) 실패시켜 목록에서
+지울 때까지 빨갛게 둔다. 두 도메인의 `check_run.py` 는 `DATA_DIR` 이 가리키는
+경로만 다르고 나머지는 동일하다.
 
 ```python
 """수집 결과를 보고 그날 실행을 실패로 볼지 판정한다(워크플로 마지막 스텝).
 
 수집기 하나가 오래 죽어 있으면 매일 빨개져서, 정작 다른 수집기가 깨진 날을
 알아채지 못한다. 원인을 이미 아는 장애는 KNOWN_DOWN 에 적어 로그로만 남긴다.
+
+유예에는 기한을 반드시 붙인다(`kdi@2026-09-30`). 기한 없는 유예는 그대로
+굳어서, 나중에 그 수집기가 조용히 빠져도 아무도 모르게 된다. 그래서
+ - 기한이 지나면 다시 실패시킨다. 장애가 안 끝났으면 기한만 미루면 된다.
+ - 적어둔 수집기가 되살아나면 실패시킨다. 초록 실행에 붙은 경고는 아무도
+   보지 않으므로, 목록에서 지울 때까지 빨갛게 둔다.
 """
 from __future__ import annotations
 
 import json
 import os
+import sys
+from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
+KST = timezone(timedelta(hours=9))
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 
-def known_down_from_env() -> set[str]:
-    return {n.strip() for n in os.environ.get("KNOWN_DOWN", "").split(",") if n.strip()}
+def parse_known_down(text: str) -> dict[str, date]:
+    """`kdi@2026-09-30, bok@2026-12-01` 을 {수집기: 유예 만료일} 로 읽는다."""
+    entries: dict[str, date] = {}
+    for chunk in text.split(","):
+        chunk = chunk.strip()
+        if not chunk:
+            continue
+        name, sep, deadline = chunk.partition("@")
+        if not sep:
+            raise ValueError(f"KNOWN_DOWN 항목에 기한이 없다: {chunk!r} — 'kdi@2026-09-30' 형태로 적는다")
+        try:
+            entries[name.strip()] = datetime.strptime(deadline.strip(), "%Y-%m-%d").date()
+        except ValueError:
+            raise ValueError(f"KNOWN_DOWN 기한을 읽을 수 없다: {chunk!r} — YYYY-MM-DD 로 적는다") from None
+    return entries
 
 
 def main(last_run_path: Path = DATA_DIR / "last_run.json", *,
-         known_down: set[str] | None = None) -> int:
-    known = known_down_from_env() if known_down is None else known_down
-    run = json.loads(Path(last_run_path).read_text(encoding="utf-8"))
+         known_down: dict[str, date] | None = None,
+         today: date | None = None) -> int:
+    if today is None:
+        today = datetime.now(KST).date()
+    if known_down is None:
+        try:
+            known_down = parse_known_down(os.environ.get("KNOWN_DOWN", ""))
+        except ValueError as exc:
+            print(f"::error::{exc}")
+            return 1
 
-    unexpected = []
+    run = json.loads(Path(last_run_path).read_text(encoding="utf-8"))
+    failed = False
+
     for error in run["errors"]:
         name = error.split(":", 1)[0].strip()
-        if name in known:
-            print(f"::notice::알고 있는 장애라 넘어간다 — {error}")
-        else:
-            unexpected.append(error)
+        deadline = known_down.get(name)
+        if deadline is None:
+            failed = True
             print(f"::error::{error}")
+        elif today > deadline:
+            failed = True
+            print(f"::error::{name} 유예가 {deadline} 로 끝났다 — 아직 못 고쳤으면 "
+                  f"KNOWN_DOWN 의 기한을 미루고, 고칠 수 있으면 고친다. {error}")
+        else:
+            print(f"::notice::알고 있는 장애라 {deadline} 까지 넘어간다 — {error}")
 
-    for name in sorted(known):
+    for name, deadline in sorted(known_down.items()):
         if run["collectors"].get(name, {}).get("ok"):
-            print(f"::warning::{name} 가 다시 수집됐다 — 워크플로의 KNOWN_DOWN 에서 지울 것")
+            failed = True
+            print(f"::error::{name} 가 다시 수집됐다 — 워크플로의 KNOWN_DOWN 에서 "
+                  f"'{name}@{deadline}' 를 지울 것. 남겨두면 다음에 조용히 빠져도 모른다")
 
-    return 1 if unexpected else 0
+    return 1 if failed else 0
 
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    # 워크플로는 UTF-8 이지만 로컬 콘솔은 아닐 수 있다(윈도우 cp949).
+    # 판정 결과를 쓰다 터지면 멀쩡한 실행이 실패로 둔갑한다.
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    path = Path(sys.argv[1]) if len(sys.argv) > 1 else DATA_DIR / "last_run.json"
+    raise SystemExit(main(path))
 ```
 
 - [ ] **Step 7: 워크플로를 만든다**
@@ -2403,6 +2517,7 @@ jobs:
           git push
       - name: Fail on collector errors
         env:
+          # 형식: 콤마로 구분한 "name@YYYY-MM-DD" 목록, 예) kdi@2026-09-30
           KNOWN_DOWN: ""
         run: python -m domains.employment.pipeline.check_run
 ```
