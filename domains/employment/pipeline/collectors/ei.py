@@ -85,6 +85,9 @@ def find_tables(tables) -> tuple[list, list, list, list]:
     ]
     if len(cand) < 2:
         raise ValueError(f"수준·증감 표를 찾지 못했다 (후보 {cand})")
+    # 문서 안에서 상시가입자 표(수준·증감)가 구직급여 표보다 먼저 나온다는
+    # 순서 가정이다. 이게 깨지면 check_layout 은 못 잡고(헤더가 같으므로)
+    # 아래 크기 검증만이 뒤바뀜을 막는다.
     level_i, delta_i = cand[0], cand[1]
 
     level, delta = tables[level_i], tables[delta_i]
@@ -104,9 +107,9 @@ def headline_delta(tables) -> float | None:
         text = " ".join(" ".join(r) for r in g)
         if "주요 특징" not in text and "고용보험" not in text:
             continue
-        m = re.search(r"고용보험\s*가입자는\s*([\d,]+)\s*만\s*([\d,]+)?\s*천?명\s*(증가|감소)", text)
+        m = re.search(r"고용보험\s*가입자는\s*([\d,]+)\s*만\s*([\d,]+)?\s*천?\s*명[이가]?\s*(증가|감소)", text)
         if m is None:
-            m2 = re.search(r"고용보험\s*가입자는\s*([\d,]+)\s*천명\s*(증가|감소)", text)
+            m2 = re.search(r"고용보험\s*가입자는\s*([\d,]+)\s*천\s*명[이가]?\s*(증가|감소)", text)
             if m2 is None:
                 continue
             value = float(m2.group(1).replace(",", ""))
@@ -167,10 +170,20 @@ def parse(data: bytes, *, released_at: date, release_url: str,
 
     # 문서가 스스로 검증 대조점을 갖고 있다 — 최신월 총량 증감이 요약문에 문장으로
     # 나온다. 어긋나면 서식이 바뀐 것이므로 조용히 틀린 숫자를 넣지 않고 실패한다.
+    #
+    # 요약문을 못 읽는 것도 실패다. 정규식이 안 맞는다는 건 서식이 바뀌었다는
+    # 뜻이고, 그게 바로 이 대조가 막으려는 상황이다. 여기서 넘어가면 가드가
+    # 정작 위험할 때만 침묵하게 된다.
     latest = max(levels)
     stated = headline_delta(tables)
+    if stated is None:
+        raise ValueError("주요 특징 박스에서 총량 증감 문장을 읽지 못했다 — 서식이 바뀌었을 수 있다")
+
     total_delta = deltas.get(latest, {}).get(TOTAL_KEY)
-    if stated is not None and total_delta is not None and abs(stated - total_delta) > 1.0:
+    if total_delta is None:
+        raise ValueError(f"{latest} 증감표에 전산업 값이 없다")
+
+    if abs(stated - total_delta) > 1.0:
         raise ValueError(
             f"요약문과 증감표가 대조에 실패했다: 요약 {stated} vs 표 {total_delta}")
 

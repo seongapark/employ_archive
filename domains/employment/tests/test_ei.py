@@ -125,3 +125,24 @@ def test_parse_fails_loudly_when_the_summary_disagrees(data, monkeypatch):
         ei.parse(data, released_at=date(2026, 8, 11),
                  release_url="https://x/view", attachments=[],
                  collected_at=datetime(2026, 8, 30, 9, 0))
+
+
+def test_parse_fails_when_the_summary_cannot_be_read(data, monkeypatch):
+    # 요약문을 못 읽는 것이 곧 '서식이 바뀌었다' 는 신호다. 건너뛰면 가드가
+    # 정작 위험할 때만 침묵한다.
+    monkeypatch.setattr(ei, "headline_delta", lambda tables: None)
+    with pytest.raises(ValueError, match="읽지 못했다"):
+        ei.parse(data, released_at=date(2026, 8, 11),
+                 release_url="https://x/view", attachments=[],
+                 collected_at=datetime(2026, 8, 30, 9, 0))
+
+
+def test_headline_delta_tolerates_spacing_and_particles():
+    # 문구가 조금 달라진 것만으로 수집이 멈추면 안 된다.
+    make = lambda s: [[[s]]]
+    for text in [
+        "○ ‘26.7월 고용보험 가입자는 27만 7천명 증가",
+        "○ ‘26.7월 고용보험 가입자는 27만 7천 명 증가",
+        "○ ‘26.7월 고용보험 가입자는 27만 7천명이 증가",
+    ]:
+        assert ei.headline_delta(make(text)) == pytest.approx(277.0)
