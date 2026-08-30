@@ -1016,15 +1016,27 @@ def test_mining_is_absent_because_the_release_folds_it_into_manufacturing(record
     assert "B" not in {r.category for r in records if r.breakdown == "industry"}
 
 
-def test_aggregate_columns_are_not_mistaken_for_industries(records):
-    # '광공업'과 '사회간접자본 및 기타서비스'는 집계 열이다. 산업으로 들어오면
-    # 제조업·서비스업이 이중 계상된다.
-    assert all(r.category != "광공업" for r in records if r.category)
-    manufacturing = [r for r in records
-                     if r.breakdown == "industry" and r.category == "C"]
-    assert manufacturing
-    newest = max(manufacturing, key=lambda r: r.period)
-    assert 3000 < newest.value < 5500     # 제조업 취업자 400만명대
+def test_industry_values_do_not_double_count(records):
+    # '광공업'과 '사회간접자본및기타서비스업'은 집계 열이다. 산업으로 새어들면
+    # 제조업·서비스업이 이중 계상되어 산업 합이 전체를 넘어선다.
+    # 경활은 광업(B)만 빠지므로 정상이면 합이 전체보다 아주 조금 작다.
+    latest = max(r.period for r in records)
+    total = next(r.value for r in records
+                 if r.breakdown == "total" and r.period == latest)
+    parts = sum(r.value for r in records
+                if r.breakdown == "industry" and r.period == latest)
+    assert parts < total, f"산업 합 {parts} 이 전체 {total} 을 넘었다 — 집계 열이 섞였다"
+    assert parts > total * 0.99
+
+
+def test_reads_monthly_rows_not_annual_or_quarterly(records):
+    # 연평균·분기 행이 섞이거나 월 시작 행을 놓치면 같은 기간이 중복되고
+    # 최신월이 과거로 주저앉는다.
+    totals = [r for r in records if r.breakdown == "total"]
+    periods = [r.period for r in totals]
+    assert len(periods) == len(set(periods)), "같은 기간이 여러 번 나왔다"
+    assert len(set(periods)) >= 24
+    assert max(periods) >= "2026-01"
 
 
 def test_carries_year_over_year_change(records):
@@ -1103,20 +1115,39 @@ def _header_labels(rows: list[list[str]]) -> dict[int, str]:
     return labels
 
 
-def _period_rows(rows: list[list[str]]) -> list[tuple[str, list[str]]]:
-    """연도 행과 월 행을 (YYYY-MM, 행) 으로 바꾼다.
+_MONTH_START = re.compile(r"^(\d{4})\.(\d{1,2})$")
+_MONTH_ONLY = re.compile(r"^(\d{1,2})$")
 
-    첫 칸이 4자리면 연도 행(그 해 연평균)이라 건너뛰고, 1~12 면 직전 연도의 월이다.
+
+def _period_rows(rows: list[list[str]]) -> list[tuple[str, list[str]]]:
+    """월 행만 (YYYY-MM, 행) 으로 바꾼다.
+
+    기간 칸에는 세 가지가 섞여 있다(실측):
+
+        '2021'…'2025'          연평균
+        '2024.2/4' '3/4' …     분기
+        '2021.  7' … '2024.  7' '8' '9' … '2026.  1' '2' … '7'   월
+
+    월은 연도가 바뀔 때만 '2026.  1' 처럼 연도를 달고 그다음부터 숫자만 온다.
+    "4자리면 연도, 1~2자리면 그 연도의 월" 로 읽으면 세 가지가 다 어긋난다 —
+    월 시작 행을 통째로 건너뛰고, 뒤따르는 숫자가 마지막으로 본 연평균 연도에
+    붙어 2026년 데이터가 2025년으로 기록되며, 같은 기간이 중복 생성된다.
+    연평균과 분기는 버린다.
     """
     out: list[tuple[str, list[str]]] = []
     year: str | None = None
     for row in rows:
         first = _norm(row[0]) if row else ""
-        if re.fullmatch(r"\d{4}", first):
-            year = first
-            continue
-        if year and re.fullmatch(r"\d{1,2}", first) and 1 <= int(first) <= 12:
-            out.append((f"{year}-{int(first):02d}", row))
+        started = _MONTH_START.match(first)
+        if started:
+            year, month = started.group(1), int(started.group(2))
+        else:
+            only = _MONTH_ONLY.match(first)
+            if only is None or year is None:
+                continue
+            month = int(only.group(1))
+        if 1 <= month <= 12:
+            out.append((f"{year}-{month:02d}", row))
     return out
 
 
