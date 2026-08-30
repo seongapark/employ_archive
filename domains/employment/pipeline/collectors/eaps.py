@@ -111,19 +111,40 @@ def parse(data: bytes, *, released_at: date, release_url: str,
 
 
 def check_coverage(records: list[SeriesRecord]) -> None:
-    """최신월에 기대한 산업이 다 왔는지 본다.
+    """최신월에 기대한 산업과 전체 행이 다 왔는지 본다.
 
     헤더 철자가 조금만 달라져도 그 열은 INDUSTRY_COLUMNS 에 안 걸려 조용히
     빠진다. 빠진 산업은 화면에서 그냥 없는 칸으로 보일 뿐 아무 흔적도 남기지 않는다.
+    TOTAL_COLUMN 철자가 바뀌면 총괄 행 자체가 통째로 빠질 수 있다 — 산업별
+    표는 가득 찬 채 총괄 화면만 빈다.
     """
     if not records:
         raise ValueError("수집된 레코드가 없다")
     latest = max(r.period for r in records)
+    if not any(r.period == latest and r.breakdown == "total" for r in records):
+        raise ValueError(f"{latest} 에 전체 취업자 행이 없다")
     got = {r.category for r in records
            if r.period == latest and r.breakdown == "industry"}
     missing = set(INDUSTRY_COLUMNS.values()) - got
     if missing:
         raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
+
+
+MAX_MONTHS_BEHIND = 2      # 전월 기준으로 매월 공표된다 (sources.json 의 release_rule)
+
+
+def check_freshness(records: list[SeriesRecord], today: date) -> None:
+    """최신월이 오늘로부터 너무 뒤처졌으면 실패시킨다.
+
+    파싱이 조용히 잘리면 check_coverage 는 못 잡는다 — latest 를 자기가 읽은
+    것에서 뽑으므로 골대가 같이 움직인다. 발표 주기를 아는 쪽은 여기뿐이다.
+    """
+    latest = max(r.period for r in records)
+    year, month = (int(x) for x in latest.split("-"))
+    behind = (today.year - year) * 12 + (today.month - month)
+    if behind > MAX_MONTHS_BEHIND:
+        raise ValueError(
+            f"최신 기간이 {latest} 로 {behind}개월 뒤처졌다 — 수집이 잘렸거나 공표가 멈췄다")
 
 
 def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
@@ -152,10 +173,9 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
 
 
 def collect(today: date) -> list[SeriesRecord]:
-    # today 는 쓰지 않는다 — 기준월은 보도자료 자체가 갖고 있다.
-    # 오케스트레이터가 세 수집기를 같은 시그니처로 부르므로 인자는 유지한다.
     title, released_at, view_url, data, attachments = latest_issue()
     records = parse(data, released_at=released_at, release_url=view_url,
                     attachments=attachments, collected_at=datetime.now(KST))
     check_coverage(records)
+    check_freshness(records, today)
     return records

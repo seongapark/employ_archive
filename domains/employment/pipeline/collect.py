@@ -61,17 +61,24 @@ def main(data_dir: Path = DATA_DIR,
             summary["collectors"][name] = {
                 "ok": True, "fetched": len(candidates),
                 "added": len(result.added), "updated": len(result.updated),
+                "rejected": len(result.rejected),
             }
         except Exception as exc:
             summary["collectors"][name] = {
-                "ok": False, "fetched": 0, "added": 0, "updated": 0,
+                "ok": False, "fetched": 0, "added": 0, "updated": 0, "rejected": 0,
             }
             summary["errors"].append(f"{name}: {type(exc).__name__}: {exc}")
 
     # 수기 입력은 마지막에 얹어 수집 결과를 이긴다.
-    manual = load_manual(data_dir)
-    if manual:
-        merged = store.upsert(merged, manual).records
+    # 손으로 급히 채운 파일이 깨져 있어도 이미 수집한 세 결과를 버리지 않는다 —
+    # 여기서 예외가 새면 series.json·last_run.json 이 통째로 안 쓰여, 어제자
+    # 초록 결과가 오늘도 그대로 남아 실행이 있었는지조차 알 수 없게 된다.
+    try:
+        manual = load_manual(data_dir)
+        if manual:
+            merged = store.upsert(merged, manual).records
+    except Exception as exc:
+        summary["errors"].append(f"manual: {type(exc).__name__}: {exc}")
 
     store.save_series(series_path, merged)
     last_run_path.write_text(

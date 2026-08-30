@@ -105,6 +105,30 @@ def test_publication_date_is_two_months_after_the_reference_month():
     assert est._published_at("2026-12") == date(2027, 2, 28)
 
 
+def _shift(period: str, months: int) -> str:
+    year, month = (int(x) for x in period.split("-"))
+    total = year * 12 + (month - 1) - months
+    return f"{total // 12}-{total % 12 + 1:02d}"
+
+
+def test_freshness_check_fails_when_the_series_is_truncated(records):
+    from datetime import date as _date
+    # est 는 API 라 잘리지 않지만, 표 갱신이 멈추면 이 가드만이 눈치챈다.
+    latest = max(r.period for r in records)
+    year, month = (int(x) for x in latest.split("-"))
+    cutoff = _shift(latest, est.MAX_MONTHS_BEHIND + 1)
+    truncated = [r for r in records if r.period <= cutoff]
+    with pytest.raises(ValueError, match="뒤처졌다"):
+        est.check_freshness(truncated, _date(year, month, 28))
+
+
+def test_freshness_check_passes_on_a_current_series(records):
+    from datetime import date as _date
+    latest = max(r.period for r in records)
+    year, month = (int(x) for x in latest.split("-"))
+    est.check_freshness(records, _date(year, month, 28))
+
+
 def test_industry_sum_matches_the_total(records):
     # 중분류가 섞여 대분류 값을 덮으면 합이 전체에서 벗어난다.
     # 이 조사는 B~S 만 다루므로 정상이면 합이 전체와 거의 같다.

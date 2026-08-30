@@ -215,7 +215,7 @@ EXPECTED_CODES = set("ACDEFGHIJKLMNOPQRS")
 
 
 def check_coverage(records: list[SeriesRecord]) -> None:
-    """최신월에 기대한 대분류가 다 왔는지 본다.
+    """최신월에 기대한 대분류와 전체 행이 다 왔는지 본다.
 
     열 위치가 밀리거나 값이 비면 그 산업이 조용히 빠진다. 화면에서는 그냥
     없는 칸으로 보일 뿐 아무 흔적도 남지 않는다. 형제 수집기 둘도 같은 가드를 갖는다.
@@ -223,11 +223,30 @@ def check_coverage(records: list[SeriesRecord]) -> None:
     if not records:
         raise ValueError("수집된 레코드가 없다")
     latest = max(r.period for r in records)
+    if not any(r.period == latest and r.breakdown == "total" for r in records):
+        raise ValueError(f"{latest} 에 전체 상시가입자 행이 없다")
     got = {r.category for r in records
            if r.period == latest and r.breakdown == "industry"}
     missing = EXPECTED_CODES - got
     if missing:
         raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
+
+
+MAX_MONTHS_BEHIND = 2      # 전월 기준으로 매월 공표된다 (sources.json 의 release_rule)
+
+
+def check_freshness(records: list[SeriesRecord], today: date) -> None:
+    """최신월이 오늘로부터 너무 뒤처졌으면 실패시킨다.
+
+    파싱이 조용히 잘리면 check_coverage 는 못 잡는다 — latest 를 자기가 읽은
+    것에서 뽑으므로 골대가 같이 움직인다. 발표 주기를 아는 쪽은 여기뿐이다.
+    """
+    latest = max(r.period for r in records)
+    year, month = (int(x) for x in latest.split("-"))
+    behind = (today.year - year) * 12 + (today.month - month)
+    if behind > MAX_MONTHS_BEHIND:
+        raise ValueError(
+            f"최신 기간이 {latest} 로 {behind}개월 뒤처졌다 — 수집이 잘렸거나 공표가 멈췄다")
 
 
 def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
@@ -238,6 +257,8 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
         raise ValueError("게시판에서 회차를 찾지 못했다")
     seq = m.group(1)
     title = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", " ", m.group(2))).strip()
+    if "고용행정" not in title:
+        raise ValueError(f"고용행정통계 회차가 아니다: {title}")
 
     view = f"{VIEW_URL}?news_seq={seq}"
     detail = requests.get(view, headers=HEADERS, timeout=30).text.replace("&amp;", "&")
@@ -245,9 +266,11 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
     if link is None:
         raise ValueError(f"hwpx 첨부를 찾지 못했다: {title}")
 
-    posted = re.search(r"(\d{4})[.\-](\d{1,2})[.\-](\d{1,2})", detail)
+    # 페이지 아무 데서나 날짜 모양을 찾으면 안 된다 — 스크립트 버전, 바닥글의
+    # 무관한 날짜에 걸릴 수 있다. 상세 화면의 '등록일' 라벨에 붙은 값만 취한다.
+    posted = re.search(r"<dt>등록일</dt>\s*<dd>\s*(\d{4})-(\d{2})-(\d{2})", detail)
     if posted is None:
-        raise ValueError(f"발표일을 찾지 못했다: {title}")
+        raise ValueError(f"등록일을 찾지 못했다: {title}")
     released_at = date(int(posted.group(1)), int(posted.group(2)), int(posted.group(3)))
 
     data = requests.get("https://www.moel.go.kr" + link.group(1),
@@ -257,10 +280,9 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
 
 
 def collect(today: date) -> list[SeriesRecord]:
-    # today 는 쓰지 않는다 — 기준월은 보도자료 표 자체가 갖고 있다.
-    # 오케스트레이터가 세 수집기를 같은 시그니처로 부르므로 인자는 유지한다.
     title, released_at, view, data, attachments = latest_issue()
     records = parse(data, released_at=released_at, release_url=view,
                     attachments=attachments, collected_at=datetime.now(KST))
     check_coverage(records)
+    check_freshness(records, today)
     return records

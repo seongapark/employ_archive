@@ -83,6 +83,14 @@ def test_upsert_writes_to_the_right_slot_when_ids_repeat():
     assert r.updated == [cand.id]
 
 
+def test_a_stale_release_is_recorded_as_rejected():
+    fresh = [rec(period="2026-06", value=15856.0, released=date(2026, 8, 11))]
+    stale = [rec(period="2026-06", value=15855.0, released=date(2026, 7, 14))]
+    r = store.upsert(fresh, stale)
+    assert r.rejected == ["ei-2026-06-headcount-total"]
+    assert r.records[0].value == 15856.0
+
+
 def test_load_series_rejects_duplicate_ids(tmp_path):
     import json as _json
     path = tmp_path / "series.json"

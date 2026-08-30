@@ -18,7 +18,7 @@ _CELL_REF = re.compile(r"^([A-Z]+)(\d+)$")
 
 
 def _col_index(ref: str) -> int:
-    """'A' -> 0, 'B' -> 1, 'AA' -> 26."""
+    """'A1' -> 0, 'B3' -> 1, 'AA12' -> 26."""
     m = _CELL_REF.match(ref)
     if m is None:
         # 여기서 조용히 넘어가면 좌표 배치가 순진한 append 로 퇴화한다 —

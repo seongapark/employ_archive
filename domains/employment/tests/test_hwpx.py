@@ -22,10 +22,11 @@ def test_reads_many_tables(data):
 def test_finds_the_industry_level_table(data):
     tables = hwpx.tables(data)
     # 헤더 라벨은 셀 안에서 두 문단으로 줄바꿈되기도 한다("농림"+"어업").
-    # 문단은 이제 공백으로 이어지므로("농림 어업") 키워드 매칭 전에 공백을
-    # 지운다 — 셀 경계 구분이 아니라 줄바꿈 흔적일 뿐이다.
+    # 문단은 이제 공백으로 이어지므로("농림 어업") 키워드 매칭 전에 셀 안
+    # 공백만 지운다. 셀 사이는 띄운 채로 둔다 — 전부 이어붙이면 키워드가
+    # 두 셀 경계를 걸쳐 가짜로 매칭될 수 있다(앞 셀 끝 '산' + 뒤 셀 시작 '업').
     def flat(header):
-        return "".join(header).replace(" ", "")
+        return " ".join(cell.replace(" ", "") for cell in header)
 
     hits = [t for t in tables
             if t and len(t[0]) > 5

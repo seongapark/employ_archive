@@ -63,3 +63,17 @@ def test_revised_values_replace_the_old_ones(tmp_path):
     rows = json.loads((tmp_path / "series.json").read_text(encoding="utf-8"))
     assert len(rows) == 1
     assert rows[0]["value"] == 15856.0
+
+
+def test_a_broken_manual_file_does_not_discard_the_run(tmp_path):
+    manual = tmp_path / "manual"
+    manual.mkdir()
+    (manual / "2026-07.json").write_text('[{"id": "oops"}]', encoding="utf-8")
+
+    code = collect.main(tmp_path, {"ei": lambda today: [rec()]})
+
+    assert code == 0
+    rows = json.loads((tmp_path / "series.json").read_text(encoding="utf-8"))
+    assert rows, "수집 결과가 버려졌다"
+    summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
+    assert any(e.startswith("manual:") for e in summary["errors"])

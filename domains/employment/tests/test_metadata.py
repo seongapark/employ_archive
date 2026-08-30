@@ -53,3 +53,14 @@ def test_known_gaps_are_recorded():
     # 제조업·건설업·보건복지는 세 출처 모두 제공한다
     for code in ("C", "F", "Q"):
         assert all(by_code[code].values()), code
+
+
+def test_industries_metadata_matches_what_the_collectors_produce():
+    # provided 가 화면의 '미제공' 판정 근거다. 수집기와 어긋나면 실제 공백이
+    # 허깨비 공백으로, 또는 그 반대로 표시된다.
+    from domains.employment.pipeline.collectors import eaps, est, ei
+    provided = {s: {r["code"] for r in load("industries.json") if r["provided"][s]}
+                for s in SOURCES}
+    assert provided["eaps"] == set(eaps.INDUSTRY_COLUMNS.values())
+    assert provided["est"] == est.EXPECTED_CODES
+    assert provided["ei"] == ei.EXPECTED_CODES

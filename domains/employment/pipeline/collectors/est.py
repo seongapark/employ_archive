@@ -117,6 +117,24 @@ def check_coverage(records: list[SeriesRecord]) -> None:
         raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
 
 
+MAX_MONTHS_BEHIND = 3      # 전전월 기준이다 (sources.json 의 release_rule)
+
+
+def check_freshness(records: list[SeriesRecord], today: date) -> None:
+    """최신월이 오늘로부터 너무 뒤처졌으면 실패시킨다.
+
+    est 는 API 라 eaps 처럼 파싱이 잘리지는 않지만, KOSIS 가 표 갱신을
+    멈추면 이 표가 없으면 영원히 ok:true 로 계속 보고된다. 발표 주기를
+    아는 쪽은 여기뿐이다.
+    """
+    latest = max(r.period for r in records)
+    year, month = (int(x) for x in latest.split("-"))
+    behind = (today.year - year) * 12 + (today.month - month)
+    if behind > MAX_MONTHS_BEHIND:
+        raise ValueError(
+            f"최신 기간이 {latest} 로 {behind}개월 뒤처졌다 — 수집이 잘렸거나 공표가 멈췄다")
+
+
 def _end_of_month(year: int, month: int) -> date:
     if month == 12:
         return date(year + 1, 1, 1) - timedelta(days=1)
@@ -145,4 +163,5 @@ def collect(today: date) -> list[SeriesRecord]:
     records = parse(rows, released_at=_published_at(latest), release_url=STAT_URL,
                     collected_at=datetime.now(KST))
     check_coverage(records)
+    check_freshness(records, today)
     return records

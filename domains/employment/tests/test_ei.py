@@ -118,6 +118,38 @@ def test_coverage_check_fails_loudly_when_an_industry_vanishes(records):
         ei.check_coverage(thinned)
 
 
+def test_coverage_check_fails_when_the_total_row_vanishes(records):
+    latest = max(r.period for r in records)
+    thinned = [r for r in records
+               if not (r.period == latest and r.breakdown == "total")]
+    with pytest.raises(ValueError, match="전체"):
+        ei.check_coverage(thinned)
+
+
+def _shift(period: str, months: int) -> str:
+    year, month = (int(x) for x in period.split("-"))
+    total = year * 12 + (month - 1) - months
+    return f"{total // 12}-{total % 12 + 1:02d}"
+
+
+def test_freshness_check_fails_when_the_series_is_truncated(records):
+    from datetime import date as _date
+    # 파싱이 조용히 잘리면 check_coverage 는 못 잡는다 — 여기서 잡아야 한다.
+    latest = max(r.period for r in records)
+    year, month = (int(x) for x in latest.split("-"))
+    cutoff = _shift(latest, ei.MAX_MONTHS_BEHIND + 1)
+    truncated = [r for r in records if r.period <= cutoff]
+    with pytest.raises(ValueError, match="뒤처졌다"):
+        ei.check_freshness(truncated, _date(year, month, 28))
+
+
+def test_freshness_check_passes_on_a_current_series(records):
+    from datetime import date as _date
+    latest = max(r.period for r in records)
+    year, month = (int(x) for x in latest.split("-"))
+    ei.check_freshness(records, _date(year, month, 28))
+
+
 def test_parse_fails_loudly_when_the_summary_disagrees(data, monkeypatch):
     # 서식이 바뀌어 표를 잘못 읽으면 조용히 틀린 숫자를 넣지 말고 실패해야 한다
     monkeypatch.setattr(ei, "headline_delta", lambda tables: 999.0)

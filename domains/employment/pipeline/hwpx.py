@@ -47,8 +47,9 @@ def _cell_text(el) -> str:
         if text.strip():
             paragraphs.append(text.strip())
     if not paragraphs:
-        # 문단 구조가 없는 셀은 예전처럼 통째로 긁는다 (중첩 표는 제외)
-        paragraphs = ["".join(t.text or "" for t in _iter_own(el, "t"))]
+        # 문단 구조가 없는 셀은 예전처럼 통째로 긁는다 (중첩 표는 제외).
+        # 문단 경로와 마찬가지로 공백으로 잇는다 — 붙이면 값이 뭉개진다.
+        paragraphs = [" ".join(t.text or "" for t in _iter_own(el, "t"))]
     return re.sub(r"\s+", " ", " ".join(paragraphs)).strip()
 
 
