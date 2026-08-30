@@ -100,7 +100,7 @@ EXPECTED_CODES = set("BCDEFGHIJKLMNOPQRS")
 
 
 def check_coverage(records: list[SeriesRecord]) -> None:
-    """최신월에 기대한 대분류가 다 왔는지 본다.
+    """최신월에 기대한 대분류와 전체 행이 다 왔는지 본다.
 
     KOSIS 의 분류 코드 체계가 바뀌면 MAJOR_CODE_RE 가 산업을 조용히 흘린다.
     빠진 산업은 화면에서 그냥 없는 칸으로 보일 뿐 아무 오류도 남기지 않는다.
@@ -108,11 +108,32 @@ def check_coverage(records: list[SeriesRecord]) -> None:
     if not records:
         raise ValueError("수집된 레코드가 없다")
     latest = max(r.period for r in records)
+    if not any(r.period == latest and r.breakdown == "total" for r in records):
+        raise ValueError(f"{latest} 에 전체 종사자 행이 없다")
     got = {r.category for r in records
            if r.period == latest and r.breakdown == "industry"}
     missing = EXPECTED_CODES - got
     if missing:
         raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
+
+
+def _end_of_month(year: int, month: int) -> date:
+    if month == 12:
+        return date(year + 1, 1, 1) - timedelta(days=1)
+    return date(year, month + 1, 1) - timedelta(days=1)
+
+
+def _published_at(period: str) -> date:
+    """조사대상월의 다음다음 달 말. sources.json 의 '매월 말, 전전월 기준' 이다.
+
+    표에 발표일이 없어 규칙에서 계산한다. 실제로 2026-08-30 시점의 최신 기간이
+    2026-06 인 것이 이 주기와 맞는다 — 7월 말 공표였다면 7월 자료가 나와 있어야 한다.
+    """
+    year, month = (int(x) for x in period.split("-"))
+    month += 2
+    if month > 12:
+        year, month = year + 1, month - 12
+    return _end_of_month(year, month)
 
 
 def collect(today: date) -> list[SeriesRecord]:
@@ -121,10 +142,7 @@ def collect(today: date) -> list[SeriesRecord]:
         raise ValueError("KOSIS_API_KEY 가 없다")
     rows = fetch(api_key)
     latest = max(_period(str(r.get("PRD_DE", ""))) for r in rows)
-    year, month = (int(x) for x in latest.split("-"))
-    # 표에 발표일이 없다. 해당 월 다음다음 달 말에 공표되므로 근사치를 쓴다.
-    released = date(year + (month + 1) // 12, (month + 1) % 12 + 1, 1) - timedelta(days=1)
-    records = parse(rows, released_at=released, release_url=STAT_URL,
+    records = parse(rows, released_at=_published_at(latest), release_url=STAT_URL,
                     collected_at=datetime.now(KST))
     check_coverage(records)
     return records
