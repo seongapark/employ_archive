@@ -517,11 +517,46 @@
   color: var(--text-secondary);
 }
 
-.stable__wrap {
+/* 밀 수 있다는 것을 보이게 한다. 표가 화면보다 넓다는 사실은 눌러보기 전에는
+   드러나지 않아서, 세 출처를 비교하는 표인 줄 모르고 지나칠 수 있다.
+   페이드(오른쪽 그늘)와 늘 보이는 스크롤바를 함께 쓴다 — 터치 기기는 스크롤바를
+   숨기는 쪽이 많아 둘 중 하나만으로는 안 보이는 조합이 생긴다. */
+.stable__frame {
+  position: relative;
   margin-top: 8px;
+}
+
+.stable__frame--more::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 28px;
+  pointer-events: none;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0), var(--card));
+}
+
+.stable__wrap {
   overflow-x: auto;
   /* 고정 열이 스크롤 중에 배경 없이 겹쳐 보이지 않도록 */
   background: var(--card);
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) var(--bg);
+}
+
+.stable__wrap::-webkit-scrollbar {
+  height: 8px;
+  -webkit-appearance: none;
+}
+
+.stable__wrap::-webkit-scrollbar-thumb {
+  background: var(--text-muted);
+  border-radius: 999px;
+}
+
+.stable__wrap::-webkit-scrollbar-track {
+  background: var(--bg);
 }
 
 .stable {
@@ -599,6 +634,10 @@
      sticky 첫 열과 overflow-x 가 서로 부딪혀 표가 왼쪽으로 밀려 나갔다.
      플랫폼의 폭 규칙과 싸우지 않는다 — 문장이 몇 줄 접히는 편이 낫다. */
   .rotate-hint { display: none; }
+  /* 가로에서는 밀 것이 없으므로 페이드도 스크롤바도 지운다 */
+  .stable__frame--more::after { display: none; }
+  .stable__wrap { scrollbar-width: none; }
+  .stable__wrap::-webkit-scrollbar { display: none; }
   .stable { min-width: 0; width: 100%; }
   .stable td { min-width: 0; }
 }
