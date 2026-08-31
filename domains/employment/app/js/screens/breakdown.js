@@ -1,6 +1,7 @@
-import { segmentsOf, breakdownMatrix, categoryTimeline, fmtDelta, monthLabel, esc, SOURCE_ORDER, SOURCE_COLORS } from '../data.js';
-
-const EMPTY_LABEL = { notProvided: '―', unpublished: '미발표', noDelta: '증감없음' };
+import {
+  segmentsOf, breakdownMatrix, categoryTimeline, fmtDelta, deltaTone, monthLabel,
+  EMPTY_LABEL, emptyLabel, esc, SOURCE_ORDER, SOURCE_COLORS,
+} from '../data.js';
 
 // 사업체노동력조사가 성·연령에서 통째로 비는 이유를 화면이 말한다.
 // 열을 지우면 "안 잡는다"는 사실 자체가 사라진다.
@@ -14,9 +15,10 @@ function tabs(segments, current) {
 
 function cell(state, yoy) {
   if (state === 'value') {
-    return `<td class="num ${yoy >= 0 ? 'is-up' : 'is-down'}">${esc(fmtDelta(yoy))}</td>`;
+    return `<td class="num ${deltaTone(yoy)}">${esc(fmtDelta(yoy))}</td>`;
   }
-  return `<td class="cell--empty">${esc(EMPTY_LABEL[state])}</td>`;
+  // 매트릭스 칸은 좁으므로 `― ` 없이 문구만 쓴다. 문구 자체는 data.js 가 갖는다.
+  return `<td class="cell--empty">${esc(EMPTY_LABEL[state] || '―')}</td>`;
 }
 
 export function render(el, ctx) {
@@ -48,7 +50,7 @@ export function render(el, ctx) {
       <button type="button" class="sortbtn${sort === 'code' ? ' is-on' : ''}" data-sort="code">분류순</button>
     </div>
     <table class="matrix">${head}<tbody>${body}</tbody></table>
-    <p class="legend">― 미제공 · 미발표 = 아직 그 달을 내지 않음 · 증감없음 = 전년동월대비를 낼 수 없음</p>`;
+    <p class="legend">미제공 = 그 출처가 공표하지 않는 분류 · 미발표 = 아직 그 달을 내지 않음 · 증감없음 = 전년동월대비를 낼 수 없음</p>`;
 
   el.querySelectorAll('.sortbtn').forEach(btn => btn.addEventListener('click', () => {
     ctx.state.sort = btn.dataset.sort;
@@ -63,12 +65,20 @@ export function render(el, ctx) {
 function expanded(ctx, breakdown, row) {
   const timeline = categoryTimeline(ctx.series, { breakdown, category: row.code, months: 24 });
   const lines = SOURCE_ORDER.map(s => {
-    const points = timeline[s];
-    if (!points.length) return '';
-    const last = points[points.length - 1];
     const name = (ctx.sources.find(m => m.code === s) || {}).name_ko || s;
-    return `<li><span class="dot" style="background:${esc(SOURCE_COLORS[s])}"></span>
-      ${esc(name)} · ${esc(monthLabel(last.period))} ${esc(last.yoy === null ? '증감없음' : fmtDelta(last.yoy))}</li>`;
+    const dot = `<span class="dot" style="background:${esc(SOURCE_COLORS[s])}"></span>`;
+    const points = timeline[s];
+    // 점이 없다고 행을 지우지 않는다. 사업체노동력조사가 농림어업을 잡지 않는다는
+    // 사실 자체가 정보다(상위 스펙 7.6) — 시트의 막대는 이미 이걸 지키는데
+    // 이 화면만 어겼다. 왜 비었는지는 매트릭스 칸이 이미 들고 있는 cellState
+    // 판정을 그대로 쓴다. 여기서 세 번째 판정을 만들지 않는다.
+    if (!points.length) {
+      return `<li>${dot}${esc(name)} · ${esc(emptyLabel(row.cells[s].state))}</li>`;
+    }
+    const last = points[points.length - 1];
+    const label = last.yoy === null ? emptyLabel('noDelta') : fmtDelta(last.yoy);
+    return `<li>${dot}
+      ${esc(name)} · ${esc(monthLabel(last.period))} ${esc(label)}</li>`;
   }).join('');
   return `<tr class="expand"><td colspan="4"><ul class="expand__list">${lines}</ul></td></tr>`;
 }
