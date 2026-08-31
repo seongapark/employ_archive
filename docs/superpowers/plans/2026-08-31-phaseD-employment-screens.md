@@ -2,7 +2,7 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 고용동향 도메인에 총괄·단면별·출처비교 세 화면과 증감 비교 시트를 만들고, 그 화면이 요구하는 성별·연령별 데이터를 수집기에 추가한다.
+**Goal:** 고용동향 도메인에 총괄·속성별·출처비교 세 화면과 증감 비교 시트를 만들고, 그 화면이 요구하는 성별·연령별 데이터를 수집기에 추가한다.
 
 **Architecture:** 전망 도메인과 같은 구조다 — 순수 함수(`data.js`·`chart.js`)와 렌더(`screens/*.js`)를 나누고, 순수 함수만 `node:test` 로 DOM 없이 검증한다. 시트는 화면이 아니라 셸(`app.js`+`sheet.js`)이 소유해 세그먼트를 옮겨도 살아 있다. 파이썬 쪽은 기존 수집기에 시트·표를 더할 뿐 산업 경로를 건드리지 않는다.
 
@@ -39,7 +39,7 @@
 | `domains/employment/app/js/chart.js` (생성) | 순수 SVG 문자열 생성 |
 | `domains/employment/app/js/sheet.js` (생성) | 시트 렌더와 열고닫기 |
 | `domains/employment/app/js/screens/overview.js` (생성) | 총괄 |
-| `domains/employment/app/js/screens/breakdown.js` (생성) | 단면별 |
+| `domains/employment/app/js/screens/breakdown.js` (생성) | 속성별 |
 | `domains/employment/app/js/screens/sources.js` (생성) | 출처비교 |
 | `domains/employment/app/css/app.css` (생성) | 이 앱 전용 스타일·3색 토큰 |
 | `domains/employment/tests/web/data.test.mjs` (생성) | `data.js` 검증 |
@@ -47,7 +47,7 @@
 
 ---
 
-### Task 1: 스키마에 sex·age 단면을 연다
+### Task 1: 스키마에 sex·age 속성을 연다
 
 지금 `Breakdown` 은 `total`·`industry` 뿐이라 성·연령 레코드를 만들 수 없다. 먼저 열어야 수집기 두 개가 따라온다.
 
@@ -133,7 +133,7 @@ Expected: PASS — 249 passed 이상. 기존 산업 id 형식이 그대로여야
 
 ```bash
 git add domains/employment/pipeline/models.py domains/employment/tests/test_models.py
-git commit -m "feat(employment): 스키마에 성별·연령별 단면을 연다"
+git commit -m "feat(employment): 스키마에 성별·연령별 속성을 연다"
 ```
 
 ---
@@ -365,7 +365,7 @@ Expected: FAIL — `find_demo_tables` 가 없다(`AttributeError`).
 
 ```python
 DEMO_HEADER_KEYS = ("전체", "남성", "여성", "29세이하", "60세이상")
-# 열 위치 → (단면, 분류코드). 1번 열(전체)은 산업 표에서 이미 total 로 나오므로 뺀다.
+# 열 위치 → (속성, 분류코드). 1번 열(전체)은 산업 표에서 이미 total 로 나오므로 뺀다.
 DEMO_COLUMNS: dict[int, tuple[str, str]] = {
     2: ("sex", "M"), 3: ("sex", "F"),
     4: ("age", "15-29"), 5: ("age", "30-39"), 6: ("age", "40-49"),
@@ -608,7 +608,7 @@ for bd in ('sex', 'age'):
         print(bd, src, round(sum(p['value'] for p in part), 1), 'vs total', total['value'])
 PY
 ```
-Expected: `est` 에는 `sex`·`age` 가 없고, `eaps`·`ei` 는 각 단면 합이 `total` 과 일치한다.
+Expected: `est` 에는 `sex`·`age` 가 없고, `eaps`·`ei` 는 각 속성 합이 `total` 과 일치한다.
 
 - [ ] **Step 4: 전체 테스트**
 
@@ -766,8 +766,8 @@ export function fmtDelta(cheon) {
   return `${sign}${Math.abs(man).toFixed(1)}만명`;
 }
 
-// 기준월 하한은 세 출처의 total 이 모두 있는 첫 달이다. 단면으로 재면
-// 성·연령에는 사업체노동력조사가 아예 없어 하한이 단면마다 달라진다.
+// 기준월 하한은 세 출처의 total 이 모두 있는 첫 달이다. 속성으로 재면
+// 성·연령에는 사업체노동력조사가 아예 없어 하한이 속성마다 달라진다.
 export function monthOptions(series) {
   const totals = series.filter(r => r.breakdown === 'total');
   const bySources = new Map();
@@ -849,7 +849,7 @@ git commit -m "feat(employment): 기간·포맷·출처 카드 조회 함수"
 
 ---
 
-### Task 7: `data.js` — 단면 정규화와 매트릭스
+### Task 7: `data.js` — 속성 정규화와 매트릭스
 
 산업·성·연령이 한 코드를 타게 만드는 지점이다.
 
@@ -993,7 +993,7 @@ Expected: PASS (9 tests)
 
 ```bash
 git add domains/employment/app/js/data.js domains/employment/tests/web/data.test.mjs
-git commit -m "feat(employment): 단면 정규화와 3출처 매트릭스"
+git commit -m "feat(employment): 속성 정규화와 3출처 매트릭스"
 ```
 
 ---
@@ -1009,7 +1009,7 @@ git commit -m "feat(employment): 단면 정규화와 3출처 매트릭스"
 - Produces:
   - `categoryTimeline(series, {breakdown, category, months}) -> {eaps: [{period, value, yoy}], est: [...], ei: [...]}` — 기간 오름차순, `months` 기본 24, 최신월 기준으로 자른다
   - `sheetData(series, {period, breakdown, category, months}) -> {snapshot: [{source, state, yoy}], timeline: {...}, latest: string}`
-    - `breakdown` 이 `null` 이면 전체(`breakdown: 'total'`) 단면
+    - `breakdown` 이 `null` 이면 전체(`breakdown: 'total'`) 속성
     - `snapshot` 은 `SOURCE_ORDER` 순서를 유지하며 미제공 출처도 자리를 지킨다
 
 - [ ] **Step 1: 실패하는 테스트를 쓴다**
@@ -1373,7 +1373,7 @@ git commit -m "feat(employment): 증감 비교 차트 SVG 생성기"
     </header>
     <nav class="segments" id="segments" role="tablist">
       <a class="segment" href="#/" data-route="overview" role="tab">총괄</a>
-      <a class="segment" href="#/b/industry" data-route="breakdown" role="tab">단면별</a>
+      <a class="segment" href="#/b/industry" data-route="breakdown" role="tab">속성별</a>
       <a class="segment" href="#/sources" data-route="sources" role="tab">출처비교</a>
     </nav>
     <div id="offlineBanner" class="offline-banner" hidden>오프라인 · 마지막으로 받은 데이터를 표시 중</div>
@@ -1646,7 +1646,7 @@ git commit -m "feat(employment): 앱 셸과 총괄 화면"
 
 ---
 
-### Task 11: 단면별 화면
+### Task 11: 속성별 화면
 
 **Files:**
 - Create: `domains/employment/app/js/screens/breakdown.js`
@@ -1746,7 +1746,7 @@ Expected: 사업체노동력조사 열이 전부 `―` 이고 위에 안내 문�
 
 ```bash
 git add domains/employment/app/js/screens/breakdown.js domains/employment/app/css/app.css domains/employment/app/sw.js
-git commit -m "feat(employment): 단면별 화면 — 산업·성·연령"
+git commit -m "feat(employment): 속성별 화면 — 산업·성·연령"
 ```
 
 ---
@@ -1774,7 +1774,7 @@ const NOTES = [
   ['시계열이 시작하는 달이 다르다',
    '사업체노동력조사의 전년동월대비는 2025년 1월부터다. 2024년 1월 이전은 다른 산업분류 체계의 별도 표에 있고, 이어붙이면 재분류 효과가 고용 변화로 둔갑하므로 잇지 않는다. 짧은 선이 틀린 선보다 낫다.'],
   ['성·연령별은 두 출처만 있다',
-   '사업체노동력조사는 성·연령별 종사자수를 공표하지 않는다. 그 단면에서는 경제활동인구조사와 고용행정통계 둘만 비교된다.'],
+   '사업체노동력조사는 성·연령별 종사자수를 공표하지 않는다. 그 속성에서는 경제활동인구조사와 고용행정통계 둘만 비교된다.'],
   ['같은 분류를 다르게 부른다',
    '경제활동인구조사는 남자·여자·15∼29세로, 고용행정통계는 남성·여성·29세이하로 쓴다. 이 앱은 남자·여자·29세 이하로 통일해 표기한다.'],
 ];
@@ -1908,7 +1908,7 @@ export function mountSheet(sheetEl, handleEl, labelEl, ctx) {
 
 - [ ] **Step 3: 확인한다**
 
-- 총괄에서 핸들을 열고 `단면별 → 성별 → 여자` 로 이동해도 시트가 **열린 채** 남고 헤더가 `증감 비교 · 2026.07 · 여자` 로 바뀐다
+- 총괄에서 핸들을 열고 `속성별 → 성별 → 여자` 로 이동해도 시트가 **열린 채** 남고 헤더가 `증감 비교 · 2026.07 · 여자` 로 바뀐다
 - 사업체노동력조사 행이 `― 미제공` 으로 자리를 지킨다
 - `표로 보기` 를 누르면 표가 나오고 다시 누르면 그래프로 돌아온다
 - 기준월을 2025-03 으로 바꿔도 시계열은 2026-07 까지 그려지고 2025-03 에 표식선이 선다
@@ -1978,7 +1978,7 @@ Expected: **빈 출력**. 허브 코드와 `build.py` 를 고치지 않고 버�
 1. 세그먼트 3개 전환
 2. 연·월 스위처로 2025-03 선택 → 카드 세 장이 그 달로 바뀐다
 3. 사업체노동력조사 미발표 카드에 직전달 값이 회색으로 붙는다
-4. 단면별 → 성별에서 사업체노동력조사 열이 `―` 이고 안내 문장이 보인다
+4. 속성별 → 성별에서 사업체노동력조사 열이 `―` 이고 안내 문장이 보인다
 5. 시트를 열고 세그먼트를 옮겨도 열린 채 유지된다
 6. `표로 보기` 가 동작한다
 
@@ -2008,9 +2008,9 @@ git commit -m "docs: 고용동향 화면 공개 반영"
 | 3.2 `segments.json` | Task 4 |
 | 4 `data.js` 함수 표면 | Task 6·7·8 |
 | 5 총괄 화면(미발표 카드·KOSIS 갱신일·coverage 상시) | Task 10 |
-| 6 단면별 화면(토글·정렬·펼침·안내문) | Task 11 |
+| 6 속성별 화면(토글·정렬·펼침·안내문) | Task 11 |
 | 7 출처비교 화면 | Task 12 |
-| 8 시트(셸 소유·기준 단면·색·값 라벨·표로 보기) | Task 9·13 |
+| 8 시트(셸 소유·기준 속성·색·값 라벨·표로 보기) | Task 9·13 |
 | 9 수집기 확장(중첩 열 배제·세 표 판별·커버리지) | Task 2·3 |
 | 10 앱 셸·허브 무수정 | Task 10 Step 4, Task 14 Step 3 |
 | 11 테스트(판별력 왕복) | 전 태스크 Step 5 |

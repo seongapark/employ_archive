@@ -27,7 +27,7 @@ export function render(el, ctx) {
   const segment = segments.find(s => s.breakdown === current) || segments[0];
   const sort = ctx.state.sort || 'delta';
   // breakdown 은 필수 인자다 — 산업 F(건설업)와 성별 F(여자)처럼 분류 코드가
-  // 단면을 넘어 충돌하므로, 어느 단면인지를 매트릭스 조회 키에 반드시 실어야 한다.
+  // 속성을 넘어 충돌하므로, 어느 속성인지를 매트릭스 조회 키에 반드시 실어야 한다.
   const rows = breakdownMatrix(ctx.series, segment.categories, ctx.state.period, { sort, breakdown: current });
 
   const note = current === 'industry' ? '' : `<p class="note note--est">${esc(EST_NOTE)}</p>`;

@@ -297,7 +297,7 @@
   color: var(--text);
 }
 
-/* Breakdown (단면별: 산업·성·연령 매트릭스) */
+/* Breakdown (속성별: 산업·성·연령 매트릭스) */
 
 .btabs {
   display: flex;
