@@ -1,6 +1,5 @@
-import { compareSet, summarize, fmtValue, fmtNumber, dateLabel, esc, isOcrSourced } from '../data.js';
+import { compareSet, summarize, fmtValue, fmtNumber, dateLabel, esc, isOcrSourced, OCR_WARNING_TITLE } from '../data.js';
 
-const OCR_BADGE_TITLE = 'PDF 이미지를 OCR로 읽은 수치입니다 — 원문과 대조해 확인하세요.';
 // 복사용 표는 배지를 못 그리니 각주 방식(별표 + 하단 설명)으로 같은 경고를 낸다.
 // 탭으로 구분되는 표 형식을 깨지 않도록 기관명 칸에 별표 하나만 덧붙인다.
 const OCR_EXPORT_MARK = '*';
@@ -67,7 +66,7 @@ function renderBars(set, orgsMeta) {
     const barColor = stale ? '#7f9dc4' : '#23508f';
     const [valueText] = splitValueUnit(fmtValue(rec));
     const ocrBadge = isOcrSourced(rec, orgsMeta)
-      ? `<div class="badge badge--ocr" style="flex-shrink:0;" title="${esc(OCR_BADGE_TITLE)}">확인필요</div>`
+      ? `<div class="badge badge--ocr" style="flex-shrink:0;" title="${esc(OCR_WARNING_TITLE)}">확인필요</div>`
       : '';
 
     return `

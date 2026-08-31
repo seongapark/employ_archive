@@ -1,4 +1,4 @@
-import { latestRecords, summarize, fmtValue, fmtNumber, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced } from '../data.js';
+import { latestRecords, summarize, fmtValue, fmtNumber, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced, OCR_WARNING_TITLE } from '../data.js';
 
 // 홈의 첫 필만 목업대로 '취업자 증감'을 온전히 유지하고, 나머지는 공유 축약 라벨을 쓴다.
 const PILLS = [
@@ -13,8 +13,6 @@ const BADGE = {
   extracted: { cls: 'badge--extracted', label: '자동' },
   reviewed: { cls: 'badge--reviewed', label: '확인' },
 };
-
-const OCR_BADGE_TITLE = 'PDF 이미지를 OCR로 읽은 수치입니다 — 원문과 대조해 확인하세요.';
 
 const DELTA_SVG = {
   up: '<svg width="10" height="9" viewBox="0 0 10 9"><polygon points="5,0 10,9 0,9" fill="#c73e3a"></polygon></svg>',
@@ -83,7 +81,7 @@ function renderCard(rec, ctx) {
   const [value, unitSuffix] = splitValueUnit(fmtValue(rec));
   const halves = halfYearLabel(ctx.records, rec);
   const ocrBadge = isOcrSourced(rec, ctx.orgs)
-    ? `<div class="badge badge--ocr" title="${esc(OCR_BADGE_TITLE)}">확인필요</div>`
+    ? `<div class="badge badge--ocr" title="${esc(OCR_WARNING_TITLE)}">확인필요</div>`
     : '';
 
   return `

@@ -1,4 +1,4 @@
-import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced } from '../data.js';
+import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced, OCR_WARNING_TITLE } from '../data.js';
 
 // 펼침 상태는 화면 방문 동안 유지 (모듈 스코프 — 여러 회차 행이 동시에 펼쳐질 수 있음)
 const expandedIds = new Set();
@@ -8,8 +8,6 @@ const BADGE = {
   extracted: { cls: 'badge--extracted', label: '자동' },
   reviewed: { cls: 'badge--reviewed', label: '확인' },
 };
-
-const OCR_BADGE_TITLE = 'PDF 이미지를 OCR로 읽은 수치입니다 — 원문과 대조해 확인하세요.';
 
 const DELTA_SVG = {
   up: '<svg width="10" height="9" viewBox="0 0 10 9"><polygon points="5,0 10,9 0,9" fill="#c73e3a"></polygon></svg>',
@@ -88,7 +86,7 @@ function renderHeader(ctx, orgMeta, orgCode, latestRec, scheduleEntry) {
     </div>`;
 }
 
-function renderSummaryCard(ctx, orgCode, indicators, currentYear, records) {
+export function renderSummaryCard(ctx, orgCode, indicators, currentYear, records) {
   const items = [];
   for (const code of indicators) {
     const series = seriesFor(records, { org: orgCode, indicator: code, targetYear: currentYear });
@@ -113,9 +111,19 @@ function renderSummaryCard(ctx, orgCode, indicators, currentYear, records) {
     basisDate = yymm(max.published_at);
   }
 
+  // 이 화면은 기관 하나만 다루므로 카드마다 배지를 뿌리지 않고, 페이지를
+  // 대표하는 이 요약카드 한 곳에서만 OCR 출처를 밝힌다 — 개별 레코드가
+  // 아니라 기관 자체(method)를 보는 판정이라 org 코드만으로 충분하다.
+  const ocrBadge = isOcrSourced({ org: orgCode }, ctx.orgs)
+    ? `<div class="badge badge--ocr" title="${esc(OCR_WARNING_TITLE)}">확인필요</div>`
+    : '';
+
   return `
     <div class="card" style="margin:10px 16px 0 16px;padding:10px 14px;display:flex;flex-direction:column;gap:6px;">
-      <div class="num" style="font-size:11px;font-weight:600;color:#667085;">${esc(String(currentYear))}년 전망${basisDate ? ` (${esc(basisDate)} 기준)` : ''}</div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
+        <div class="num" style="font-size:11px;font-weight:600;color:#667085;">${esc(String(currentYear))}년 전망${basisDate ? ` (${esc(basisDate)} 기준)` : ''}</div>
+        ${ocrBadge}
+      </div>
       <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:6px;">
         ${items.join('')}
       </div>
@@ -212,7 +220,7 @@ function renderSourceLine(rec) {
   return `<div style="font-size:12px;color:#98a2b3;">원문 링크 확인 필요</div>`;
 }
 
-function renderRow(rec, isExpanded, orgsMeta, records) {
+export function renderRow(rec, isExpanded, orgsMeta, records) {
   const badgeInfo = BADGE[rec.confidence] || { cls: 'badge--extracted', label: rec.confidence || '' };
   const delta = fmtDelta(rec);
   // DELTA_SVG.flat already renders its own "—", so don't also append delta.text
@@ -222,15 +230,18 @@ function renderRow(rec, isExpanded, orgsMeta, records) {
     : `${DELTA_SVG[delta.dir] || ''}<span class="num">${esc(delta.text)}</span>`;
   const monthLabel = mmdd(rec.published_at);
   const rationale = rationaleText(rec, orgsMeta);
+  // 접힌 행은 연도에 회차가 둘 이상일 때 기본값이라, 펼치기 전까지는 이
+  // 배지가 KEIS 수치임을 알려줄 유일한 표시다 — 펼침·접힘 양쪽에서 같은
+  // 배지를 재사용한다.
+  const ocrBadge = isOcrSourced(rec, orgsMeta)
+    ? `<div class="badge badge--ocr" title="${esc(OCR_WARNING_TITLE)}">확인필요</div>`
+    : '';
 
   if (isExpanded) {
     const tags = (rec.rationale_tags || []).map(t => `<div style="font-size:11px;color:#23508f;background:#e7edf6;padding:2px 8px;border-radius:999px;">${esc(t)}</div>`).join('');
     const landingUrl = safeUrl(rec.landing_url);
     const landing = landingUrl
       ? `<a href="${esc(landingUrl)}" target="_blank" rel="noopener" style="font-size:11px;color:#667085;">기관 자료실</a>`
-      : '';
-    const ocrBadge = isOcrSourced(rec, orgsMeta)
-      ? `<div class="badge badge--ocr" title="${esc(OCR_BADGE_TITLE)}">확인필요</div>`
       : '';
     const confidenceBadges = `<div style="display:flex;align-items:center;gap:6px;">
           <div class="badge ${badgeInfo.cls}">${esc(badgeInfo.label)}</div>
@@ -260,6 +271,7 @@ function renderRow(rec, isExpanded, orgsMeta, records) {
     <button type="button" class="card" data-toggle="${esc(rec.id)}" style="display:flex;align-items:center;gap:10px;padding:10px 14px;width:100%;text-align:left;cursor:pointer;">
       <div class="num" style="font-size:13px;font-weight:600;color:#667085;width:42px;">${esc(monthLabel)}</div>
       <div class="num" style="font-size:15px;font-weight:700;">${esc(fmtValue(rec))}</div>
+      ${ocrBadge ? `<div style="flex-shrink:0;">${ocrBadge}</div>` : ''}
       <div class="delta" style="${delta.dir === 'up' ? 'color:#c73e3a;' : delta.dir === 'down' ? 'color:#2f6bd0;' : ''}">${deltaMarkup}</div>
       <div style="font-size:12px;color:#98a2b3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(rationale)}</div>
     </button>`;

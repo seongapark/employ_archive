@@ -1,4 +1,4 @@
-import { timelineGroups, fmtValue, fmtDelta, isNew, esc, SHORT_LABELS, isOcrSourced } from '../data.js';
+import { timelineGroups, fmtValue, fmtDelta, isNew, esc, SHORT_LABELS, isOcrSourced, OCR_WARNING_TITLE } from '../data.js';
 
 const CONF_LABEL = {
   verified: 'API 검증',
@@ -7,7 +7,6 @@ const CONF_LABEL = {
 };
 
 const OCR_WARNING_LABEL = '확인필요';
-const OCR_WARNING_TITLE = 'PDF 이미지를 OCR로 읽은 수치입니다 — 원문과 대조해 확인하세요.';
 
 // 요약 줄 전용 소형 삼각형 (org.js/home.js의 10x9 배지형보다 작은 8x7 인라인 아이콘)
 const DELTA_SVG_SMALL = {

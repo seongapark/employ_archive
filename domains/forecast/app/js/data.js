@@ -238,6 +238,10 @@ export function isOcrSourced(rec, orgsMeta) {
   return orgMeta ? orgMeta.method === 'ocr' : false;
 }
 
+// badge--ocr 배지·확인필요 텍스트 라벨이 다는 title 문구. 화면마다 리터럴로
+// 복사해두면 문구가 슬금슬금 어긋나므로 한 곳에서만 관리한다.
+export const OCR_WARNING_TITLE = 'PDF 이미지를 OCR로 읽은 수치입니다 — 원문과 대조해 확인하세요.';
+
 export function isNew(rec, today) {
   const daysSince = dayDiff(today, rec.published_at);
   return daysSince <= 7;
