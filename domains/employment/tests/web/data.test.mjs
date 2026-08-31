@@ -59,7 +59,13 @@ test('overviewCards marks a source unpublished and carries its latest month', ()
     { period: est.fallback.period, value: est.fallback.value, yoy: est.fallback.yoy },
     { period: '2026-06', value: 20714.2, yoy: 248.0 },
   );
+  // 카드는 조회한 달(period)과 그 출처의 최신 달(fallback.period)을 모두 들고 있어야
+  // 한다. 이 둘이 다른 것 자체가 "미발표" 카드가 존재하는 이유다 — period가 없으면
+  // 화면이 fallback.period를 잘못 "선택월"로 표시하는 사고가 난다.
+  assert.equal(est.period, '2026-07');
+  assert.equal(est.fallback.period, '2026-06');
   assert.equal(cards[0].state, 'value');
+  assert.equal(cards[0].period, '2026-07');
   assert.equal(cards[0].fallback, null);
 });
 

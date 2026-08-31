@@ -35,7 +35,7 @@ function cardHtml(card) {
   const body = card.state === 'value'
     ? `<div class="card__value num">${esc(fmtLevel(card.value))}</div>
        <div class="card__delta num ${card.yoy >= 0 ? 'is-up' : 'is-down'}">${esc(fmtDelta(card.yoy))} <span class="card__deltaNote">전년동월대비</span></div>`
-    : `<div class="card__value card__value--empty">${esc(monthLabel(card.fallback ? card.fallback.period : ''))} 기준 미발표</div>` +
+    : `<div class="card__value card__value--empty">${esc(monthLabel(card.period))} 기준 미발표</div>` +
       (card.fallback
         ? `<div class="card__fallback num">최신 ${esc(monthLabel(card.fallback.period))} · ${esc(fmtLevel(card.fallback.value))} (${esc(fmtDelta(card.fallback.yoy))})</div>`
         : '');

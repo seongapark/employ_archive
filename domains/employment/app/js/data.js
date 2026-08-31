@@ -98,13 +98,13 @@ export function overviewCards(series, sources, period) {
     };
     if (here) {
       return {
-        ...base, state: 'value', value: here.value, yoy: here.yoy, status: here.status,
+        ...base, period, state: 'value', value: here.value, yoy: here.yoy, status: here.status,
         releasedAt: here.released_at, releaseUrl: here.release_url,
         attachments: here.attachments || [], fallback: null,
       };
     }
     return {
-      ...base, state: 'unpublished', value: null, yoy: null, status: null,
+      ...base, period, state: 'unpublished', value: null, yoy: null, status: null,
       releasedAt: null, releaseUrl: meta.board_url, attachments: [],
       fallback: newest && {
         period: newest.period, value: newest.value, yoy: newest.yoy,
