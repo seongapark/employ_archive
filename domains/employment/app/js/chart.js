@@ -2,7 +2,10 @@
 import { SOURCE_ORDER, SOURCE_COLORS, fmtLevel, fmtDelta, monthLabel, emptyLabel, esc } from './data.js';
 
 const ROW_H = 34;
-export const LABEL_W = 96;
+// 출처 약칭(경활·사업체·행정통계)이 들어갈 폭. 정식명을 쓰던 때는 96 이었는데
+// 약칭으로 바뀌면서 그만큼 막대가 길어진다. 값 라벨 여백(VALUE_GUTTER)과 함께
+// chart.test.mjs 의 좌표 불변식이 이 두 값을 지킨다.
+export const LABEL_W = 60;
 // 값 라벨이 들어갈 자리. `+27.7만명` 같은 한국어 라벨은 11px 기준 55~60px 다.
 // 이 여백이 좁으면 최대 막대의 라벨이 출처명 열을 침범하거나 오른쪽에서 잘린다 —
 // 값 직접 라벨은 #1baf7a 대비 미달에 대한 의무 완화 조치라 잘리면 안 된다(스펙 7.6).
