@@ -1,6 +1,6 @@
 import { switcherHtml, bindSwitcher } from '../switcher.js';
 import {
-  segmentsOf, breakdownMatrix, fmtLevel, categoryTimeline, fmtDelta, deltaTone, monthLabel,
+  segmentsOf, breakdownMatrix, fmtLevel, fmtDelta, deltaTone, monthLabel,
   EMPTY_LABEL, emptyLabel, esc, shortOf, totalRow, SOURCE_ORDER, SOURCE_COLORS,
 } from '../data.js';
 
@@ -63,7 +63,7 @@ export function render(el, ctx) {
       <th scope="row" title="${esc(row.name_ko)}">${esc(shortOf(row))}</th>
       ${SOURCE_ORDER.map(s => cell(row.cells[s])).join('')}
     </tr>
-    ${ctx.state.category === row.code ? expanded(ctx, current, row) : ''}`).join('');
+    ${ctx.state.category === row.code ? expanded(ctx, row) : ''}`).join('');
 
   el.innerHTML = switcherHtml(ctx) + tabs(segments, current) + note + `
     <div class="sortbar">
@@ -90,31 +90,29 @@ export function render(el, ctx) {
   }));
 }
 
-function expanded(ctx, breakdown, row) {
-  const timeline = categoryTimeline(ctx.series, { breakdown, category: row.code, months: 24 });
+function expanded(ctx, row) {
+  // 펼침은 **선택한 달**을 말한다. 예전에는 24개월 시계열의 마지막 점을 읽어서
+  // 스위처로 2025년 3월을 골라도 최신월 숫자가 나왔다 — 매트릭스는 선택월을
+  // 보여주는데 그 아래 펼침만 다른 달을 말하는 상태였다. 이제 매트릭스 칸이
+  // 이미 들고 있는 값(row.cells)만 쓴다. 시계열은 시트가 보여준다.
   const lines = SOURCE_ORDER.map(s => {
     const name = shortOf(ctx.sources.find(m => m.code === s)) || s;
     const dot = `<span class="dot" style="background:${esc(SOURCE_COLORS[s])}"></span>`;
-    const points = timeline[s];
-    // 점이 없다고 행을 지우지 않는다. 사업체노동력조사가 농림어업을 잡지 않는다는
-    // 사실 자체가 정보다(상위 스펙 7.6) — 시트의 막대는 이미 이걸 지키는데
-    // 이 화면만 어겼다. 왜 비었는지는 매트릭스 칸이 이미 들고 있는 cellState
-    // 판정을 그대로 쓴다. 여기서 세 번째 판정을 만들지 않는다.
-    // 펼침은 그 달의 수준과 증감을 함께 보여준다. 매트릭스는 증감만 싣고,
-    // "그래서 규모가 얼마인데?" 는 여기서 답한다.
     const here = row.cells[s];
+
+    // 값이 없다고 행을 지우지 않는다. 사업체노동력조사가 농림어업을 잡지
+    // 않는다는 사실 자체가 정보다(상위 스펙 7.6). 왜 비었는지는 매트릭스가
+    // 이미 판정해 뒀으므로 여기서 세 번째 판정을 만들지 않는다.
     const level = here.value === null || here.value === undefined
       ? '' : ` <span class="expand__level num">${esc(fmtLevel(here.value))}</span>`;
-    if (!points.length) {
-      return `<li>${dot}${esc(name)} · ${esc(emptyLabel(here.state))}${level}</li>`;
-    }
-    const last = points[points.length - 1];
-    const label = here.state === 'noDelta' ? emptyLabel('noDelta') : fmtDelta(here.yoy);
+    const label = here.state === 'value' ? fmtDelta(here.yoy) : emptyLabel(here.state);
     return `<li>${dot}${esc(name)} · ${esc(label)}${level}</li>`;
   }).join('');
+
   // 약칭만으로는 뜻이 흐린 분류가 있다(가구내고용·국제외국·수도·하수·폐기업).
-  // 펼쳤을 때 정식명을 한 줄 얹어 표의 좁은 머리와 원문 이름을 잇는다.
-  const full = row.short_ko && row.short_ko !== row.name_ko
-    ? `<p class="expand__full">${esc(row.name_ko)}</p>` : '';
-  return `<tr class="expand"><td colspan="4">${full}<ul class="expand__list">${lines}</ul></td></tr>`;
+  // 정식명과 기준월을 함께 얹어 이 숫자가 어느 달의 무엇인지 못 박는다.
+  const title = row.short_ko && row.short_ko !== row.name_ko ? row.name_ko : row.short_ko;
+  const head = `<p class="expand__full">${esc(title)} · ${esc(monthLabel(ctx.state.period))}</p>`;
+  return `<tr class="expand"><td colspan="4">${head}<ul class="expand__list">${lines}</ul></td></tr>`;
 }
+
