@@ -40,17 +40,29 @@ def parse_list(page_html: str) -> list[ListedIssue]:
 
     목록 맨 위 대표 게시물 블록은 1번 행과 같은 회차를 한 번 더 싣는다.
     <tr> 만 읽어 중복을 피한다.
+
+    subject 앵커(goDetail(...))가 없는 행은 헤더·레이아웃용 행이라 조용히
+    건너뛴다. 하지만 subject 앵커가 있는데 게시일이나 PDF 링크가 없다면
+    그 행은 분명 게시물인데 못 읽은 것이다 — 서식이 바뀐 신호이므로
+    조용히 넘기지 않고 실패시킨다. 그래야 매일 도는 수집기가 1번 행을
+    건너뛰고 이미 있는 회차를 다시 모아 added: 0 으로 조용히 끝나는
+    사고를 막는다.
     """
     listed = []
     for row in _ROW.findall(page_html):
         subject = _SUBJECT.search(row)
+        if not subject:
+            continue
+        title = html_lib.unescape(subject.group("title")).strip()
         published = _DATE.search(row)
         pdf = _PDF.search(row)
-        if not (subject and published and pdf):
-            continue
+        if not published:
+            raise ValueError(f"{title}: 게시일을 찾지 못했다 — 서식이 바뀌었다")
+        if not pdf:
+            raise ValueError(f"{title}: PDF 다운로드 링크를 찾지 못했다 — 서식이 바뀌었다")
         listed.append(ListedIssue(
             issue=Issue(
-                title=html_lib.unescape(subject.group("title")).strip(),
+                title=title,
                 published_at=datetime.strptime(
                     "".join(published.groups()), "%Y%m%d").date(),
                 url=DETAIL_URL.format(category=subject.group("category"),
