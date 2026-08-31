@@ -32,10 +32,19 @@ function deltaRow(card) {
 }
 
 function cardHtml(card) {
-  // 잠정/확정 배지는 스펙 5장·상위 7.5 가 카드에 요구한다. 지금 적재분은 전부 `잠정` 이다.
-  const badge = card.status
-    ? ` <span class="badge badge--status">${esc(card.status)}</span>` : '';
-  const head = `<div class="card__head"><span class="card__name">${esc(card.name_ko)}${badge}</span>
+  // 잠정/확정 배지를 그리지 않는다(스펙 5장·상위 7.5 는 이걸 요구했다).
+  //
+  // 세 수집기 어디에도 status 를 넘기는 곳이 없어 2,082개 레코드가 전부 기본값
+  // `잠정` 이었다. 그 배지는 "이 값이 잠정이다" 가 아니라 "우리가 확인한 적 없다"
+  // 를 표시하고 있었고, 모든 카드에 똑같이 붙으니 아무것도 구분하지 못했다.
+  //
+  // 대신 이 앱은 숫자를 두 갈래로 대조한다 — 달마다 그 달의 보도자료로 링크를
+  // 걸고(releases.json), KOSIS 표의 값이 보도자료와 어긋나면 수집이 실패한다
+  // (check_kosis). 근거 없는 배지보다 이쪽이 실제 보증이다.
+  //
+  // 되살리려면 배지를 다시 그리기 전에 수집기가 원문에서 잠정/확정을 읽어
+  // status 로 넘겨야 한다. 레코드의 status 필드는 그때를 위해 남겨 둔다.
+  const head = `<div class="card__head"><span class="card__name">${esc(card.name_ko)}</span>
     <span class="card__meta num">${esc(releaseLabel(card))}</span></div>`;
 
   const body = card.state === 'unpublished'
