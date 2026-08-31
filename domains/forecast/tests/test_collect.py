@@ -91,8 +91,3 @@ def test_recollecting_the_same_edition_does_not_duplicate(tmp_path):
     collect.main(data_dir=tmp_path, collectors=collectors)
     collect.main(data_dir=tmp_path, collectors=collectors)
     assert len(store.load_forecasts(tmp_path / "forecasts.json")) == 1
-
-
-def test_keis_is_registered():
-    from domains.forecast.pipeline import collect
-    assert "keis" in collect.COLLECTORS

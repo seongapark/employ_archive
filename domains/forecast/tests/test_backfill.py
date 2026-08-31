@@ -123,14 +123,10 @@ def test_oecd_interim_rounds_come_from_the_edition_table():
 
 
 def test_keis_is_a_backfill_source():
-    from domains.forecast.pipeline import backfill
     assert "keis" in backfill.SOURCES
 
 
 def test_keis_rounds_carry_the_issue_date_and_title(monkeypatch):
-    from datetime import date
-
-    from domains.forecast.pipeline import backfill
     from domains.forecast.pipeline.collectors import keis
 
     listed = [

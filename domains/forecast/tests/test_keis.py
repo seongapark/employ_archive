@@ -144,6 +144,22 @@ def test_parse_table_picks_the_change_row_under_employed():
     assert got[("emp_change", 2025, "annual")] == 20.5   # 205천명, 경활 (192) 아님
 
 
+def test_parse_table_keeps_the_section_across_a_label_only_then_numbers_only_split():
+    # tesseract psm 6 이 라벨 줄과 숫자 줄을 둘로 쪼갤 때가 있다. 숫자만
+    # 있는 줄(label == "")이 대분류를 지우면, 그 다음 줄의 진짜 '(증감)'
+    # 라벨이 '취업자' 대분류를 잃어 emp_change 를 못 찾는다.
+    table = "\n".join([
+        "2023년 2024년 2025년 2026년",
+        "취업자",
+        "28,416 28,576 28,781 28,943",
+        "(증감) (327) (159) (205) (162)",
+        "실업률 2.7 2.8 2.7 2.7",
+        "고용률 62.6 62.7 62.9 63.0",
+    ])
+    got = keis.parse_table(table)
+    assert got[("emp_change", 2026, "annual")] == 16.2
+
+
 def test_parse_table_resets_section_after_a_block_ends():
     # 취업자의 '(증감)' 뒤에 실업자처럼 새 대분류 아닌 행이 오고, 거기에도
     # '(증감)' 하위행이 있다면 — 대분류를 안 지우면 이 값이 emp_change 로
@@ -213,6 +229,25 @@ def test_parse_table_raises_not_forecast_table_when_no_indicator_matches():
         keis.parse_table(other_table)
 
 
+def test_parse_table_raises_a_plain_error_when_a_real_table_has_the_wrong_column_count():
+    # OCR 이 헤더의 반기 하위줄('상반기 하반기')을 통째로 놓쳐 열이 4개인데
+    # 데이터 줄은 여전히 6개짜리다. 지표 라벨은 다 걸리므로(취업자 밑
+    # (증감), 실업률, 고용률) 이건 '다른 표'가 아니라 전망표를 못 읽은
+    # 것이다 — NotForecastTable 이 아닌 일반 ValueError 여야
+    # find_forecast_page 가 조용히 건너뛰지 않고 그대로 흘려보낸다.
+    garbled_header = "\n".join([
+        "2023년 2024년 2025년 2026년",
+        "잡음",  # 상반기·하반기 하위줄이 사라진 자리
+        "취업자 28,416 28,576 28,781 28,943 28,738 29,093",
+        "(증감) (327) (159) (205) (162) (108) (185)",
+        "실업률 2.7 2.8 2.7 2.7 3.2 2.6",
+        "고용률 62.6 62.7 62.9 63.0 62.5 63.3",
+    ])
+    with pytest.raises(ValueError, match="열 개수") as exc_info:
+        keis.parse_table(garbled_header)
+    assert not isinstance(exc_info.value, keis.NotForecastTable)
+
+
 def test_number_parses_wrapped_and_bare_values():
     assert keis._number("(146)") == 146.0
     assert keis._number("(-0.8)") == -0.8
@@ -279,18 +314,21 @@ LISTED_2026_08 = keis.ListedIssue(ISSUE_2026_08, "https://x/keis-2026-5.pdf")
 
 
 def test_find_forecast_page_returns_the_table_page_with_its_number():
-    got = keis.find_forecast_page([PAGE_NO_FORECAST, PAGE_2025_12], [9, 10])
+    got = keis.find_forecast_page(
+        [PAGE_NO_FORECAST, PAGE_2025_12], [9, 10], ISSUE_2025_12.published_at)
     assert got == (10, PAGE_2025_12)
 
 
 def test_find_forecast_page_skips_the_prose_page_that_quotes_the_numbers():
     # 도입부 쪽은 같은 수치를 문장으로 싣는다. 표 형태로 지표가 다 나오는
     # 쪽만 고르므로 자연히 걸러진다.
-    assert keis.find_forecast_page([PAGE_NO_FORECAST], [9]) is None
+    assert keis.find_forecast_page(
+        [PAGE_NO_FORECAST], [9], ISSUE_2026_08.published_at) is None
 
 
 def test_find_forecast_page_returns_none_when_the_issue_has_no_forecast():
-    assert keis.find_forecast_page([PAGE_NO_FORECAST, PAGE_NO_FORECAST], [3, 4]) is None
+    assert keis.find_forecast_page(
+        [PAGE_NO_FORECAST, PAGE_NO_FORECAST], [3, 4], ISSUE_2026_08.published_at) is None
 
 
 def test_find_forecast_page_reraises_errors_other_than_a_missing_header():
@@ -302,7 +340,7 @@ def test_find_forecast_page_reraises_errors_other_than_a_missing_header():
         "(증감) (327) (159) (205) (162)",
     ])
     with pytest.raises(ValueError, match="지표"):
-        keis.find_forecast_page([broken], [3])
+        keis.find_forecast_page([broken], [3], ISSUE_2026_08.published_at)
 
 
 def test_find_forecast_page_skips_a_different_table_and_finds_the_real_one_later():
@@ -314,7 +352,25 @@ def test_find_forecast_page_skips_a_different_table_and_finds_the_real_one_later
         "제조업 4,500 4,520 4,480 4,510",
         "서비스업 18,200 18,350 18,500 18,620",
     ])
-    got = keis.find_forecast_page([other_table, PAGE_2025_12], [2, 10])
+    got = keis.find_forecast_page(
+        [other_table, PAGE_2025_12], [2, 10], ISSUE_2025_12.published_at)
+    assert got == (10, PAGE_2025_12)
+
+
+def test_find_forecast_page_skips_a_past_years_only_summary_table():
+    # 도입부의 요약표는 취업자·(증감)·실업률·고용률을 과거 연도만으로 채워
+    # 우리 지표 3개가 다 걸린다 — parse_table 은 그대로 통과시킨다. 하지만
+    # 발표연도 이상 열이 하나도 없으니 진짜 전망표가 아니다. 이 표가 뒤쪽의
+    # 진짜 전망표보다 먼저 나와도 건너뛰고 계속 찾아야 한다.
+    past_years_only = "\n".join([
+        "2021년 2022년 2023년 2024년",
+        "취업자 27,583 27,896 28,166 28,416",
+        "(증감) (306) (313) (270) (250)",
+        "실업률 3.0 2.9 2.9 2.8",
+        "고용률 61.5 61.9 62.2 62.6",
+    ])
+    got = keis.find_forecast_page(
+        [past_years_only, PAGE_2025_12], [3, 10], ISSUE_2025_12.published_at)
     assert got == (10, PAGE_2025_12)
 
 
@@ -360,5 +416,21 @@ def test_collect_issue_raises_when_a_real_table_is_unreadable():
         return [broken] if pages is None else [broken]
 
     with pytest.raises(ValueError, match="지표"):
+        keis.collect_issue(LISTED_2026_08, fetch=lambda url: b"%PDF-",
+                           read_pages=fake_read_pages)
+
+
+def test_collect_issue_raises_when_an_accepted_page_yields_no_records(monkeypatch):
+    # find_forecast_page 가 이미 발표연도 이상 열이 있는 쪽만 통과시켰으니,
+    # 그 쪽에서 parse 가 빈 리스트를 낸다면 그건 "전망 없음"이 아니라
+    # 모순이다 — 빈 리스트로 조용히 넘기지 않고 실패시킨다.
+    monkeypatch.setattr(
+        keis, "find_forecast_page", lambda texts, pages, published_at: (4, "dummy"))
+    monkeypatch.setattr(keis, "parse", lambda text, issue, url, page: [])
+
+    def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
+        return ["전망"] if pages is None else ["dummy"]
+
+    with pytest.raises(ValueError, match="레코드"):
         keis.collect_issue(LISTED_2026_08, fetch=lambda url: b"%PDF-",
                            read_pages=fake_read_pages)
