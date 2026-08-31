@@ -50,8 +50,8 @@ def test_main_records_collector_failure_and_continues(tmp_path):
     assert len(summary["errors"]) == 1
 
 
-def test_collectors_registry_covers_the_pdf_track_orgs():
-    assert set(collect.COLLECTORS) == {"oecd", "imf", "bok", "kdi", "kli", "kiet"}
+def test_collectors_registry_covers_all_registered_orgs():
+    assert set(collect.COLLECTORS) == {"oecd", "imf", "bok", "kdi", "kli", "kiet", "keis"}
 
 
 def test_main_records_a_compact_error_without_local_paths(tmp_path):
@@ -91,3 +91,8 @@ def test_recollecting_the_same_edition_does_not_duplicate(tmp_path):
     collect.main(data_dir=tmp_path, collectors=collectors)
     collect.main(data_dir=tmp_path, collectors=collectors)
     assert len(store.load_forecasts(tmp_path / "forecasts.json")) == 1
+
+
+def test_keis_is_registered():
+    from domains.forecast.pipeline import collect
+    assert "keis" in collect.COLLECTORS

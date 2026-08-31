@@ -7,5 +7,5 @@
   {"org": "OECD", "name_ko": "OECD", "homepage": "https://www.oecd.org", "report": "Economic Outlook / Interim", "track": "A", "method": "api"},
   {"org": "ADB", "name_ko": "ADB", "homepage": "https://www.adb.org", "report": "Asian Development Outlook", "track": "A", "method": "pdf"},
   {"org": "KIET", "name_ko": "산업연구원", "homepage": "https://www.kiet.re.kr", "report": "경제·산업전망", "track": "A", "method": "pdf"},
-  {"org": "KEIS", "name_ko": "한국고용정보원", "homepage": "https://www.keis.or.kr", "report": "고용리뷰 / 고용브리프", "track": "B", "method": "llm"}
+  {"org": "KEIS", "name_ko": "한국고용정보원", "homepage": "https://www.keis.or.kr", "report": "고용동향브리프", "track": "B", "method": "ocr"}
 ]

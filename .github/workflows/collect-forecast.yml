@@ -20,6 +20,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
+      - run: sudo apt-get update && sudo apt-get install -y tesseract-ocr tesseract-ocr-kor
       - run: pip install -r requirements.txt
       - run: python -m pytest -q domains/forecast
       - run: python -m domains.forecast.pipeline.collect
