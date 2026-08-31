@@ -69,19 +69,20 @@ test('sheetTable is a real table with every source as a row', () => {
   const html = sheetTable(
     [{ source: 'eaps', state: 'value', value: 29136.1, yoy: 107.6 },
       { source: 'est', state: 'notProvided', value: null, yoy: null }],
-    { eaps: [{ period: '2026-07', yoy: 107.6 }], est: [] },
     { sourceNames: NAMES },
   );
   assert.match(html, /<table/);
   assert.match(html, /경제활동인구조사/);
   assert.match(html, /사업체노동력조사/);
   assert.match(html, /미제공/);
+  // 시계열 개월 수 열은 뺐다 — 표에서 알고 싶은 것은 수준과 증감이다
+  assert.doesNotMatch(html, /개월/);
+  assert.doesNotMatch(html, /시계열/);
 });
 
 test('the table carries the level too — the alternative view must not be thinner than the chart', () => {
   const html = sheetTable(
     [{ source: 'eaps', state: 'value', value: 29136.1, yoy: 107.6 }],
-    { eaps: [{ period: '2026-07', yoy: 107.6 }] },
     { sourceNames: NAMES },
   );
   assert.match(html, /<th scope="col">수준<\/th>/);
@@ -93,7 +94,6 @@ test('an empty-state row keeps its wording in both the level and the delta colum
   const html = sheetTable(
     [{ source: 'est', state: 'notProvided', value: null, yoy: null },
       { source: 'ei', state: 'unpublished', value: null, yoy: null }],
-    { est: [], ei: [] },
     { sourceNames: NAMES },
   );
   assert.equal((html.match(/― 미제공/g) || []).length, 2);
@@ -103,7 +103,6 @@ test('an empty-state row keeps its wording in both the level and the delta colum
 test('a noDelta row shows its level but never a fabricated delta', () => {
   const html = sheetTable(
     [{ source: 'est', state: 'noDelta', value: 20419.1, yoy: null }],
-    { est: [{ period: '2024-08', yoy: null }] },
     { sourceNames: NAMES },
   );
   assert.match(html, /2,041\.9만명/);
