@@ -112,7 +112,40 @@ def test_bok_rounds_come_from_the_issue_list(monkeypatch):
 
 
 def test_registered_sources_cover_the_backfillable_orgs():
-    assert set(backfill.SOURCES) == {"oecd", "oecd_interim", "bok", "kli", "kiet", "imf", "keis"}
+    assert set(backfill.SOURCES) == {
+        "oecd", "oecd_interim", "bok", "kli", "kdi", "kiet", "imf", "keis",
+    }
+
+
+def test_kdi_rounds_come_from_the_issue_list(monkeypatch):
+    from domains.forecast.pipeline.collectors import kdi
+
+    listed = [
+        kdi.Issue("KDI 경제전망 | 수정, 2026년 8월", date(2026, 8, 19), "u1"),
+        kdi.Issue("KDI 경제전망, 2026 상반기", date(2026, 5, 13), "u2"),
+    ]
+    seen_since_year = []
+
+    def fake_list_issues(since_year=None):
+        seen_since_year.append(since_year)
+        return listed
+
+    monkeypatch.setattr(kdi, "list_issues", fake_list_issues)
+    # item 을 그대로 돌려줘야 늦은 바인딩 사고를 잡아낸다 — 항상 같은 값을
+    # 주는 가짜라면 모든 Round 가 마지막 issue 를 가리켜도 결과가 우연히
+    # 같아 보여 버그를 놓친다.
+    monkeypatch.setattr(kdi, "collect_issue", lambda issue: [issue.title])
+
+    rounds = backfill.kdi_rounds()
+    assert [(r.label, r.published_at) for r in rounds] == [
+        ("KDI 경제전망 | 수정, 2026년 8월", date(2026, 8, 19)),
+        ("KDI 경제전망, 2026 상반기", date(2026, 5, 13)),
+    ]
+    # 늦은 바인딩 때문에 모든 Round 가 마지막 회차를 가리키는 실수를 막는다
+    assert rounds[0].fetch() == ["KDI 경제전망 | 수정, 2026년 8월"]
+    # 드롭다운은 1982년까지 이어진다 — SINCE 의 연도를 그대로 넘겨 옛 회차
+    # 페이지를 열어보지도 않고 미리 거르게 해야 한다
+    assert seen_since_year == [backfill.SINCE.year]
 
 
 def test_oecd_interim_rounds_come_from_the_edition_table():

@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Callable, NamedTuple
 
 from . import store
-from .collectors import bok, imf, keis, kiet, kli, oecd, oecd_interim
+from .collectors import bok, imf, kdi, keis, kiet, kli, oecd, oecd_interim
 from .models import ForecastRecord
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -86,6 +86,16 @@ def kli_rounds() -> list[Round]:
     ]
 
 
+def kdi_rounds() -> list[Round]:
+    # 드롭다운은 1982년까지 이어진다. 백필 커트라인(SINCE)의 연도를 그대로
+    # 넘겨, 그보다 뚜렷하게 이전인 회차는 kdi.list_issues() 가 페이지를
+    # 열어보지도 않고 미리 거르게 한다.
+    return [
+        Round(issue.title, issue.published_at, lambda issue=issue: kdi.collect_issue(issue))
+        for issue in kdi.list_issues(since_year=SINCE.year)
+    ]
+
+
 def keis_rounds() -> list[Round]:
     """고용동향브리프는 전망을 싣지 않는 호가 대부분이다.
 
@@ -104,6 +114,7 @@ SOURCES: dict[str, Callable[[], list[Round]]] = {
     "oecd_interim": oecd_interim_rounds,
     "bok": bok_rounds,
     "kli": kli_rounds,
+    "kdi": kdi_rounds,
     "kiet": kiet_rounds,
     "imf": imf_rounds,
     "keis": keis_rounds,
