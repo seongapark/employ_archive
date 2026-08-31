@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-08-30T21:47:36.688143+09:00",
+  "run_at": "2026-08-31T23:45:42.350525+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -17,8 +17,8 @@
       "added": 0
     },
     "kdi": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 16,
       "added": 0
     },
     "kli": {
@@ -30,10 +30,13 @@
       "ok": true,
       "fetched": 3,
       "added": 0
+    },
+    "keis": {
+      "ok": true,
+      "fetched": 9,
+      "added": 0
     }
   },
   "conflicts": [],
-  "errors": [
-    "kdi: HTTPError: HTTP Error 502: Bad Gateway"
-  ]
+  "errors": []
 }
