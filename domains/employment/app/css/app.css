@@ -151,3 +151,141 @@
 }
 
 .sheet[hidden] { display: none; }
+
+/* Breakdown (단면별: 산업·성·연령 매트릭스) */
+
+.btabs {
+  display: flex;
+  gap: 6px;
+  padding: 12px 16px 4px 16px;
+}
+
+.btab {
+  flex: 1;
+  text-align: center;
+  padding: 8px 4px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.btab--active {
+  color: #fff;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.note {
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--accent-light);
+  border-radius: 8px;
+  margin: 8px 16px 0 16px;
+  padding: 8px 10px;
+  line-height: 1.4;
+}
+
+.sortbar {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px 4px 16px;
+}
+
+.sortbtn {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 4px 10px;
+}
+
+.sortbtn.is-on {
+  color: var(--accent);
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+
+.matrix {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.matrix th,
+.matrix td {
+  padding: 10px 8px;
+  text-align: right;
+  border-bottom: 1px solid var(--border);
+}
+
+.matrix thead th {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  white-space: nowrap;
+}
+
+.matrix thead th:first-child,
+.matrix tbody th {
+  text-align: left;
+}
+
+.matrix tbody th {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  padding-left: 16px;
+}
+
+.matrix tbody td:last-child,
+.matrix thead th:last-child {
+  padding-right: 16px;
+}
+
+.matrix .row {
+  cursor: pointer;
+}
+
+.matrix .is-up { color: var(--up); }
+.matrix .is-down { color: var(--down); }
+
+.matrix .cell--empty {
+  color: var(--text-muted);
+}
+
+.matrix .expand td {
+  background: var(--bg);
+  padding: 8px 16px;
+}
+
+.expand__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.expand__list .dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+
+.legend {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 8px 16px 16px 16px;
+  line-height: 1.4;
+}
