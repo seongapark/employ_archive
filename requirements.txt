@@ -3,7 +3,11 @@ requests>=2.32
 curl_cffi>=0.7
 pdfplumber>=0.11
 pytest>=8
-pypdfium2>=5.10
-pytesseract>=0.3.13
-pillow>=10.4
-numpy>=1.26
+# 이 렌더링·OCR 스택 버전을 고정한다 — 출력이 그대로 고용전망 아카이브에
+# 실리는데, 버전이 바뀌어 숫자 하나가 다르게 읽히면 실제로 없었던 KEIS
+# 전망 수정치가 사실처럼 저장된다(store.merge 는 값이 달라진 id를 새 회차로
+# 받아들인다).
+pypdfium2~=5.10.1
+pillow~=12.2
+numpy~=2.4
+pytesseract~=0.3.13

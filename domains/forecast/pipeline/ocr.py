@@ -90,12 +90,15 @@ def page_texts(data: bytes, pages: list[int] | None = None, *,
     import pypdfium2 as pdfium  # 무거운 의존성이라 실제로 읽을 때만 불러온다
     import pytesseract
 
-    doc = pdfium.PdfDocument(io.BytesIO(data))
-    wanted = range(1, len(doc) + 1) if pages is None else pages
-    out = []
-    for page_no in wanted:
-        img = doc[page_no - 1].render(scale=dpi / 72).to_pil()
-        if preprocess:
-            img = flatten(img)
-        out.append(pytesseract.image_to_string(img, lang="kor+eng", config="--psm 6"))
-    return out
+    # pdf.page_texts 의 pdfplumber.open 처럼 with 로 닫는다. 안 닫으면
+    # pypdfium2 가 "still open" 경고를 찍는 데서 그치지 않는다 — 15개 호
+    # 백필 한 번에 수십 개(호당 ~7MB)가 GC 전까지 물려 있는다.
+    with pdfium.PdfDocument(io.BytesIO(data)) as doc:
+        wanted = range(1, len(doc) + 1) if pages is None else pages
+        out = []
+        for page_no in wanted:
+            img = doc[page_no - 1].render(scale=dpi / 72).to_pil()
+            if preprocess:
+                img = flatten(img)
+            out.append(pytesseract.image_to_string(img, lang="kor+eng", config="--psm 6"))
+        return out

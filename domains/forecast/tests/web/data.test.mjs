@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
   latestRecords, summarize, seriesFor, orgIndicators, compareSet,
   timelineGroups, fmtValue, fmtDelta, dateLabel, isNew, esc, SHORT_LABELS,
-  halfYears, halfYearLabel, fmtNumber,
+  halfYears, halfYearLabel, fmtNumber, isOcrSourced,
 } from '../../app/js/data.js';
 
 const INDICATOR_CODES = ['emp_change', 'emp_rate', 'unemp_rate', 'gdp_growth', 'cpi', 'emp_rate_youth', 'labor_force'];
@@ -11,6 +11,7 @@ const INDICATOR_CODES = ['emp_change', 'emp_rate', 'unemp_rate', 'gdp_growth', '
 const ORGS = [
   { org: 'OECD', name_ko: 'OECD', method: 'api', track: 'A' },
   { org: 'BOK', name_ko: '한국은행', method: 'pdf', track: 'A' },
+  { org: 'KEIS', name_ko: '한국고용정보원', method: 'ocr', track: 'B' },
 ];
 
 function rec(over = {}) {
@@ -129,6 +130,20 @@ test('SHORT_LABELS covers all 7 indicator codes', () => {
     assert.equal(typeof SHORT_LABELS[code], 'string');
     assert.ok(SHORT_LABELS[code].length > 0, `missing short label for ${code}`);
   }
+});
+
+test('isOcrSourced flags an org whose method is ocr', () => {
+  assert.equal(isOcrSourced(rec({ org: 'KEIS' }), ORGS), true);
+});
+
+test('isOcrSourced does not flag a non-OCR org', () => {
+  assert.equal(isOcrSourced(rec({ org: 'BOK' }), ORGS), false);
+  assert.equal(isOcrSourced(rec({ org: 'OECD' }), ORGS), false);
+});
+
+test('isOcrSourced does not throw for an unknown org', () => {
+  assert.equal(isOcrSourced(rec({ org: 'UNKNOWN' }), ORGS), false);
+  assert.equal(isOcrSourced(rec({ org: 'UNKNOWN' }), []), false);
 });
 
 test('fmtDelta: revision 0 is flat, not down', () => {
