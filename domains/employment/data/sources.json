@@ -2,6 +2,7 @@
   {
     "code": "eaps",
     "name_ko": "경제활동인구조사",
+    "short_ko": "경활",
     "agency": "국가데이터처",
     "type": "가구조사",
     "headline_ko": "취업자수",
@@ -13,6 +14,7 @@
   {
     "code": "est",
     "name_ko": "사업체노동력조사",
+    "short_ko": "사업체",
     "agency": "고용노동부",
     "type": "사업체조사",
     "headline_ko": "종사자수",
@@ -24,6 +26,7 @@
   {
     "code": "ei",
     "name_ko": "고용행정 통계로 본 노동시장 동향",
+    "short_ko": "행정통계",
     "agency": "고용노동부",
     "type": "행정자료",
     "headline_ko": "상시가입자수",
