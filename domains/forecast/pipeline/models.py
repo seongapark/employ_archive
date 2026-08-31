@@ -88,8 +88,10 @@ class ForecastRecord(BaseModel):
         # 레코드가 만들어질 때마다(수집기 호출은 물론 store.load_forecasts 의
         # model_validate 에서도) 걸린다 — 새 수집기가 실수로 API 주소를 넣거나
         # forecasts.json 을 손으로 고치다 기계용 주소가 섞여도 조용히 지나가지
-        # 않는다. "원문 보기"가 사람이 읽을 수 없는 곳을 가리키면 예외 없이
-        # 막는다(설계 3.0, 전역 제약).
+        # 않는다. 다만 이 프로젝트가 실제로 쓰는 SDMX·OECD REST·DataMapper
+        # 모양만 잡아낸다(_is_machine_endpoint 의 패턴 참고) — 여기 없는 새
+        # 모양(예: /apiv2/, stats.oecd.org/sdmx-json/...)의 엔드포인트가
+        # 생기면 패턴을 추가해야 한다(설계 3.0, 전역 제약).
         for field in ("source_url", "landing_url"):
             url = getattr(self, field)
             if _is_machine_endpoint(url):
