@@ -3,6 +3,15 @@
   --src-eaps: #2a78d6;
   --src-est: #eb6834;
   --src-ei: #1baf7a;
+
+  /* 하단 핸들이 뷰포트에 고정되므로 그 높이만큼 앱 아래에 자리를 비워 둔다.
+     44px 은 터치 타깃 하한이기도 하다. 핸들의 min-height 와 반드시 같이 움직인다. */
+  --sheet-handle-h: calc(44px + env(safe-area-inset-bottom, 0px));
+}
+
+/* 고정된 핸들 뒤로 마지막 행이 숨지 않게 앱 바닥을 그만큼 비운다. */
+.app {
+  padding-bottom: var(--sheet-handle-h);
 }
 
 /* Segments (상단 탭 3개) */
@@ -125,14 +134,40 @@
   font-weight: 500;
 }
 
-/* Sheet (하단 시트) */
+/* Sheet (하단 시트)
+   ─────────────────────────────────────────────────────────────────────
+   상위 스펙 7.6: "화면 하단에 얇은 핸들이 상시 노출된다 … 탭하면 올라오고,
+   다시 탭 · 배경 탭으로 내려간다." 그러려면 셋 다 뷰포트 고정이어야 한다.
+   문서 흐름에 두면 (1) 산업별 21행에서 핸들이 접힌 화면 아래로 내려가
+   "상시 노출"이 깨지고, (2) 시트에 위치도 배경도 없어 "배경"이 페이지
+   전체가 되어 세그먼트·연월 셀렉트·정렬 버튼 탭까지 시트를 닫는다.
+   스크림이 "배경"을 실제로 경계 지어진 것으로 만든다.
+   z 순서: 스크림(20) < 시트(25) < 핸들(30) — 시트가 열려 있어도 핸들은
+   스크림 위에 남아 "다시 탭"으로 닫을 수 있다. */
+
+.sheet__scrim {
+  position: fixed;
+  inset: 0;
+  z-index: 20;
+  background: rgba(25, 29, 36, 0.32);
+}
+
+.sheet__scrim[hidden] { display: none; }
 
 .sheet__handle {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   width: 100%;
+  max-width: 480px;
+  /* --sheet-handle-h 와 같이 움직인다. 이 값이 곧 .app 의 아래 여백이다. */
+  min-height: var(--sheet-handle-h);
   background: var(--card);
   border: none;
   border-top: 1px solid var(--border);
@@ -143,10 +178,19 @@
 }
 
 .sheet {
+  position: fixed;
+  bottom: var(--sheet-handle-h);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 25;
+  width: 100%;
+  max-width: 480px;
   background: var(--card);
   border-top: 1px solid var(--border);
-  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)) 16px;
-  max-height: 60dvh;
+  padding: 12px 16px;
+  /* 뷰포트를 넘지 않는다. 핸들 높이와 위쪽 여유 44px 을 뺀 나머지가 상한이고,
+     내용이 넘치면 시트 안에서 스크롤한다. */
+  max-height: calc(100dvh - var(--sheet-handle-h) - 44px);
   overflow-y: auto;
 }
 

@@ -60,11 +60,11 @@ async function boot() {
 
   const sheet = mountSheet(document.getElementById('sheet'),
     document.getElementById('sheetHandle'),
-    document.getElementById('sheetHandleLabel'), ctx);
+    document.getElementById('sheetHandleLabel'),
+    document.getElementById('sheetScrim'), ctx);
 
   function route() {
     const parsed = parseRoute(location.hash);
-    ctx.params = parsed.params;
     ctx.state.breakdown = parsed.name === 'breakdown' ? parsed.params.breakdown : null;
     ctx.state.category = parsed.name === 'breakdown' ? parsed.params.category : null;
     segmentsEl.querySelectorAll('.segment').forEach(el => {
