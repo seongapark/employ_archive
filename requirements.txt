@@ -3,3 +3,7 @@ requests>=2.32
 curl_cffi>=0.7
 pdfplumber>=0.11
 pytest>=8
+pypdfium2>=5.10
+pytesseract>=0.3.13
+pillow>=10.4
+numpy>=1.26
