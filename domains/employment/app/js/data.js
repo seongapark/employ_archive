@@ -113,3 +113,46 @@ export function overviewCards(series, sources, period) {
     };
   });
 }
+
+export function segmentsOf(industries, segments) {
+  return [
+    { breakdown: 'industry', name_ko: '산업별', categories: industries },
+    ...segments,
+  ];
+}
+
+// 없는 이유가 다른 것도 정보다. 미제공이면 발표 여부를 따질 이유가 없으므로
+// 이 판정 순서를 지킨다. 이 함수 밖에서 상태를 다시 판정하지 않는다.
+function cellState(record, provided) {
+  if (provided === false) return { state: 'notProvided', yoy: null };
+  if (!record) return { state: 'unpublished', yoy: null };
+  if (record.yoy === null || record.yoy === undefined) return { state: 'noDelta', yoy: null };
+  return { state: 'value', yoy: record.yoy };
+}
+
+export function breakdownMatrix(series, categories, period, { sort = 'delta' } = {}) {
+  const byKey = new Map();
+  for (const r of series) {
+    if (r.period !== period) continue;
+    byKey.set(`${r.source}|${r.breakdown}|${r.category}`, r);
+  }
+  const rows = categories.map(category => {
+    const cells = {};
+    for (const source of SOURCE_ORDER) {
+      const record = Array.from(byKey.values()).find(
+        r => r.source === source && r.category === category.code);
+      cells[source] = cellState(record, category.provided ? category.provided[source] : true);
+    }
+    return { code: category.code, name_ko: category.name_ko, cells };
+  });
+
+  if (sort === 'code') return rows;
+
+  const magnitude = row => {
+    const values = SOURCE_ORDER
+      .map(s => row.cells[s].yoy)
+      .filter(v => v !== null);
+    return values.length ? Math.max(...values.map(Math.abs)) : -1;
+  };
+  return rows.slice().sort((a, b) => magnitude(b) - magnitude(a));
+}

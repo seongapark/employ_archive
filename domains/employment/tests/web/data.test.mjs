@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { monthOptions, overviewCards, fmtLevel, fmtDelta, monthLabel, esc } from '../../app/js/data.js';
+import { monthOptions, overviewCards, fmtLevel, fmtDelta, monthLabel, esc, segmentsOf, breakdownMatrix } from '../../app/js/data.js';
 
 function rec(over = {}) {
   return {
@@ -70,4 +70,59 @@ test('formatters convert 천명 to 만명', () => {
   assert.equal(fmtDelta(0), '0.0만명');
   assert.equal(monthLabel('2026-07'), '2026.07');
   assert.equal(esc('<b>&'), '&lt;b&gt;&amp;');
+});
+
+const INDUSTRIES = [
+  { code: 'A', name_ko: '농업, 임업 및 어업', provided: { eaps: true, est: false, ei: true } },
+  { code: 'C', name_ko: '제조업', provided: { eaps: true, est: true, ei: true } },
+];
+const SEGMENTS = [
+  { breakdown: 'sex', name_ko: '성별', categories: [
+    { code: 'M', name_ko: '남자', provided: { eaps: true, est: false, ei: true } },
+    { code: 'F', name_ko: '여자', provided: { eaps: true, est: false, ei: true } },
+  ] },
+];
+
+test('segmentsOf puts industry first and keeps the rest', () => {
+  const segments = segmentsOf(INDUSTRIES, SEGMENTS);
+  assert.deepEqual(segments.map(s => s.breakdown), ['industry', 'sex']);
+  assert.equal(segments[0].name_ko, '산업별');
+  assert.deepEqual(segments[0].categories.map(c => c.code), ['A', 'C']);
+});
+
+test('breakdownMatrix tells the four empty states apart', () => {
+  const series = [
+    // A: est 는 미제공, eaps 는 값, ei 는 그 달 미발표
+    rec({ source: 'eaps', breakdown: 'industry', category: 'A', period: '2026-07', yoy: 11.5 }),
+    rec({ source: 'ei', breakdown: 'industry', category: 'A', period: '2026-06', yoy: 3.0 }),
+    // C: est 는 값이 있지만 증감을 낼 수 없다
+    rec({ source: 'eaps', breakdown: 'industry', category: 'C', period: '2026-07', yoy: -20.1 }),
+    rec({ source: 'est', breakdown: 'industry', category: 'C', period: '2026-07', yoy: null }),
+    rec({ source: 'ei', breakdown: 'industry', category: 'C', period: '2026-07', yoy: 5.5 }),
+  ];
+  const rows = breakdownMatrix(series, INDUSTRIES, '2026-07', { sort: 'code' });
+  assert.deepEqual(rows.map(r => r.code), ['A', 'C']);
+  assert.deepEqual(rows[0].cells.est, { state: 'notProvided', yoy: null });
+  assert.deepEqual(rows[0].cells.ei, { state: 'unpublished', yoy: null });
+  assert.deepEqual(rows[0].cells.eaps, { state: 'value', yoy: 11.5 });
+  assert.deepEqual(rows[1].cells.est, { state: 'noDelta', yoy: null });
+});
+
+test('breakdownMatrix sorts by delta magnitude, empty rows last', () => {
+  const series = [
+    rec({ source: 'eaps', breakdown: 'industry', category: 'A', period: '2026-07', yoy: 11.5 }),
+    rec({ source: 'eaps', breakdown: 'industry', category: 'C', period: '2026-07', yoy: -200.3 }),
+  ];
+  const rows = breakdownMatrix(series, INDUSTRIES, '2026-07', { sort: 'delta' });
+  assert.deepEqual(rows.map(r => r.code), ['C', 'A']);
+});
+
+test('breakdownMatrix works unchanged for sex', () => {
+  const series = [
+    rec({ source: 'eaps', breakdown: 'sex', category: 'M', period: '2026-07', yoy: 47.9 }),
+    rec({ source: 'ei', breakdown: 'sex', category: 'M', period: '2026-07', yoy: 90.0 }),
+  ];
+  const rows = breakdownMatrix(series, SEGMENTS[0].categories, '2026-07', { sort: 'code' });
+  assert.equal(rows[0].cells.est.state, 'notProvided');
+  assert.equal(rows[0].cells.eaps.yoy, 47.9);
 });
