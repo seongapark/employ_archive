@@ -90,21 +90,55 @@ _SERIAL_LINK = re.compile(
 def volume_issue(edition: int) -> tuple[int, int]:
     """회차 번호를 (권 연도, 호) 로 바꾼다.
 
-    OECD 본편은 연 2회이고 회차 번호가 한 호마다 1씩 오른다. 번호에서 권·호를
-    구할 수 있으므로 대응표를 따로 두지 않는다.
+    OECD 본편은 연 2회이고 회차 번호가 한 호마다 1씩 오른다는 가정으로 산술만
+    으로 구한다. 이 가정이 깨지면(번호를 건너뛰거나 Interim 이 끼어들거나
+    재번호를 매기면) 계산값이 이웃 회차의 (권, 호) 를 가리키게 되는데, 그
+    이웃 회차도 실제로 존재해 report_url() 의 목록 조회가 그 주소를 순순히
+    돌려준다 — 링크는 열리지만 다른 회차 문서다. 그래서 EDITIONS 의 발표일로
+    (권, 호)를 독립적으로 유도해 산술 결과와 맞춰 본다: 12월 발표는 그 해
+    2호, 6월 발표는 그 해 1호다.
+
+    EDITIONS 에 없는 회차는 대조할 발표일이 없어 산술값을 그대로 믿는다 —
+    다만 parse() 는 EDITIONS 에 없는 회차를 이 함수까지 오기 전에 이미
+    거부하므로(EDITIONS.get 이 None), 실제로 이 경로를 타는 것은 report_url
+    을 직접 부르는 호출뿐이고 그 결과는 report_url() 의 목록 소속 확인이
+    마지막 방어선이 된다.
     """
     step = edition - _FIRST_EDITION
     year, issue = _FIRST_VOLUME
     total = (year * 2 + (issue - 1)) + step
-    return total // 2, total % 2 + 1
+    computed = total // 2, total % 2 + 1
+
+    published_at = EDITIONS.get(edition)
+    if published_at is not None:
+        expected = (published_at.year, 2 if published_at.month == 12 else 1)
+        if computed != expected:
+            raise ValueError(
+                f"EO {edition} 의 권·호 산술값 {computed} 이 EDITIONS 발표일"
+                f"({published_at})로 유도한 {expected} 와 어긋난다 — 회차 번호가"
+                " 밀렸거나 Interim 이 끼어들었을 수 있다"
+            )
+    return computed
 
 
 def parse_serials(page_html: str) -> dict[tuple[int, int], str]:
-    """연재 목록에서 (권, 호) -> 보고서 주소 를 만든다."""
-    found = {
-        (int(m.group("year")), int(m.group("issue"))): BASE + m.group(1)
-        for m in _SERIAL_LINK.finditer(page_html)
-    }
+    """연재 목록에서 (권, 호) -> 보고서 주소 를 만든다.
+
+    같은 (권, 호)에 주소가 둘이면(재발행판이 미리보기 옆에 남아 있는 경우 등)
+    나중 것으로 조용히 덮어쓰지 않는다 — edition_with_label() 이 지평이
+    겹치는 회차를 거부하는 것과 같은 이유로, 어느 쪽이 진짜 보고서인지 여기서
+    고를 근거가 없기 때문이다.
+    """
+    found: dict[tuple[int, int], str] = {}
+    for m in _SERIAL_LINK.finditer(page_html):
+        key = (int(m.group("year")), int(m.group("issue")))
+        url = BASE + m.group(1)
+        if key in found and found[key] != url:
+            raise ValueError(
+                f"연재 목록에 권 {key[0]} {key[1]}호 주소가 둘이다: "
+                f"{found[key]!r} 와 {url!r}"
+            )
+        found[key] = url
     if not found:
         raise ValueError("연재 목록에서 회차 링크를 찾지 못했다 — 서식이 바뀌었다")
     return found

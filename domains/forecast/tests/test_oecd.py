@@ -128,6 +128,15 @@ def test_volume_issue_maps_the_edition_number():
     assert oecd.volume_issue(120) == (2026, 2)
 
 
+def test_volume_issue_raises_when_arithmetic_disagrees_with_editions(monkeypatch):
+    # EDITIONS 의 발표일로 유도한 (권, 호)가 산술값과 다르면 — 번호가 밀렸거나
+    # Interim 이 끼어든 신호다 — 조용히 산술값을 믿지 않는다. EO 119 의 발표일을
+    # 12월로 바꿔치기해 어긋나게 만든다(원래는 6월 → 1호, 산술값도 1호였다).
+    monkeypatch.setitem(oecd.EDITIONS, 119, date(2026, 12, 3))
+    with pytest.raises(ValueError, match="119"):
+        oecd.volume_issue(119)
+
+
 def test_parse_serials_reads_every_volume_issue():
     got = oecd.parse_serials(SERIALS_HTML)
     assert got[(2026, 1)] == (
@@ -143,15 +152,23 @@ def test_parse_serials_raises_when_the_listing_has_none():
         oecd.parse_serials("<html><body>준비중</body></html>")
 
 
-def test_no_record_points_at_a_machine_endpoint(monkeypatch):
-    # 설계 3.0
-    monkeypatch.setattr(oecd, "report_url",
-                        lambda edition: "https://www.oecd.org/en/publications/x_1234abcd-en.html")
-    records = oecd.parse(FIXTURE)
-    assert records
-    for r in records:
-        for url in (r.source_url, r.landing_url):
-            assert "sdmx" not in url and "/rest/data/" not in url
+def test_parse_serials_raises_when_one_volume_issue_has_two_addresses():
+    # 재발행판이 미리보기 옆에 남는 등으로 같은 (권, 호)에 링크가 둘이면
+    # 어느 쪽이 진짜인지 여기서 고를 근거가 없다 — 나중 것으로 조용히
+    # 덮어쓰지 않고 둘 다 드러내며 멈춘다.
+    duplicated = SERIALS_HTML.replace(
+        '<li><a href="/en/publications/oecd-economic-outlook-volume-2024-issue-2_d8814e8b-en.html">'
+        'OECD Economic Outlook, Volume 2024 Issue 2</a></li>',
+        '<li><a href="/en/publications/oecd-economic-outlook-volume-2024-issue-2_d8814e8b-en.html">'
+        'OECD Economic Outlook, Volume 2024 Issue 2</a></li>\n'
+        '  <li><a href="/en/publications/oecd-economic-outlook-volume-2024-issue-2_ffffffff-en.html">'
+        'OECD Economic Outlook, Volume 2024 Issue 2 (reissue)</a></li>',
+    )
+    with pytest.raises(ValueError) as exc_info:
+        oecd.parse_serials(duplicated)
+    message = str(exc_info.value)
+    assert "2024" in message and "2" in message
+    assert "d8814e8b" in message and "ffffffff" in message
 
 
 def _stub_serials_listing(monkeypatch):
@@ -161,6 +178,22 @@ def _stub_serials_listing(monkeypatch):
     # 갈아치우는 stub_report_url 픽스처로는 이 몸통을 한 번도 통과시키지
     # 못한다.
     monkeypatch.setattr(oecd.http, "get", lambda url, **kw: SimpleNamespace(text=SERIALS_HTML))
+
+
+def test_no_record_points_at_a_machine_endpoint(monkeypatch):
+    # 설계 3.0. report_url() 을 깨끗한 문자열로 통째로 바꿔치기하면(과거 버전)
+    # 그 결과가 그대로 레코드에 들어가는지만 확인하게 되어, _record() 가
+    # landing_url 에 report_url() 대신 LANDING_URL(기관 안내 페이지)을 써도
+    # 잡아내지 못한다. 그래서 report_url() 의 진짜 몸통(목록 조회)이 실행되게
+    # 하고, 그 반환값과 레코드가 실제로 같은지 직접 대조한다.
+    _stub_serials_listing(monkeypatch)
+    records = oecd.parse(FIXTURE)
+    assert records
+    expected = oecd.report_url(119)
+    for r in records:
+        assert r.source_url == r.landing_url == expected
+        for url in (r.source_url, r.landing_url):
+            assert "sdmx" not in url and "/rest/data/" not in url
 
 
 def test_report_url_resolves_an_edition_present_in_the_listing(monkeypatch):
