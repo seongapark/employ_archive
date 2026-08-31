@@ -78,3 +78,29 @@ def list_issues() -> list[ListedIssue]:
     if not listed:
         raise ValueError("목록에서 고용동향브리프 회차를 찾지 못했다")
     return listed
+
+
+# 연도 칸은 '2026년', 잠정치는 '2026년p'. OCR 이 그 p 를 6·0 으로도 읽는다.
+_YEAR_CELL = re.compile(r"(20\d{2})년[a-zA-Z0-9]?")
+_HALF_WORDS = {"상반기": "h1", "하반기": "h2"}
+# 헤더 줄로 인정할 최소 연도 개수. 본문 문장에도 연도가 한둘 나온다.
+_MIN_YEARS = 3
+
+
+def header_columns(lines: list[str]) -> list[tuple[int, str]]:
+    """헤더에서 열 순서대로 (연도, 기간) 을 만든다.
+
+    이 표에는 '연간' 토큰이 없다 — 연도 칸 자체가 연간이고, 반기가 있을 때만
+    마지막 연도의 하위 열로 오른쪽에 붙는다. 기존 pdf._columns 가 기간 토큰을
+    연도 블록으로 묶는 것과 구조가 달라 여기서 따로 만든다.
+    """
+    for index, line in enumerate(lines):
+        years = [int(y) for y in _YEAR_CELL.findall(line)]
+        if len(years) < _MIN_YEARS:
+            continue
+        columns = [(year, "annual") for year in years]
+        following = lines[index + 1] if index + 1 < len(lines) else ""
+        halves = [_HALF_WORDS[word] for word in ("상반기", "하반기")
+                  if word in following]
+        return columns + [(years[-1], half) for half in halves]
+    raise ValueError("표에서 연도 줄을 찾지 못했다")

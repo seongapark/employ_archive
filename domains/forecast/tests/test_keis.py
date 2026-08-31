@@ -7,6 +7,12 @@ from domains.forecast.pipeline.collectors import keis
 
 FIXTURES = Path(__file__).parent / "fixtures"
 LIST_HTML = (FIXTURES / "keis_list.html").read_text(encoding="utf-8")
+PAGE_2026_08 = (FIXTURES / "keis_2026-08_forecast.txt").read_text(encoding="utf-8")
+PAGE_2025_12 = (FIXTURES / "keis_2025-12_forecast.txt").read_text(encoding="utf-8")
+
+
+def _lines(text):
+    return [line for line in text.split("\n") if line.strip()]
 
 
 def test_parse_list_reads_title_date_and_pdf_link():
@@ -85,3 +91,34 @@ def test_parse_list_skips_a_row_without_a_subject_anchor():
     </tr>
     """
     assert keis.parse_list(header_row) == []
+
+
+def test_header_columns_reads_four_annual_columns():
+    got = keis.header_columns(_lines(PAGE_2025_12))
+    assert got == [(2023, "annual"), (2024, "annual"),
+                   (2025, "annual"), (2026, "annual")]
+
+
+def test_header_columns_attaches_half_years_to_the_last_year():
+    # 반기 두 열은 마지막 연도의 하위 열이고 표 오른쪽에 붙는다
+    got = keis.header_columns(_lines(PAGE_2026_08))
+    assert got == [(2023, "annual"), (2024, "annual"), (2025, "annual"),
+                   (2026, "annual"), (2026, "h1"), (2026, "h2")]
+
+
+def test_header_columns_ignores_the_caption_year_without_a_suffix():
+    # 캡션의 '표1 20264 고용 전망' 은 연도 줄이 아니다 — '년' 이 없다
+    got = keis.header_columns(_lines(PAGE_2026_08))
+    assert len(got) == 6
+
+
+def test_header_columns_ignores_ocr_noise_on_the_year_line():
+    # 헤더 줄 끝에 'Sandan' 같은 쓰레기 토큰이 붙는다
+    got = keis.header_columns(["2023년 2024년 2025년 2026년6 Sandan", "상반기 하반기"])
+    assert got == [(2023, "annual"), (2024, "annual"), (2025, "annual"),
+                   (2026, "annual"), (2026, "h1"), (2026, "h2")]
+
+
+def test_header_columns_raises_when_there_is_no_year_row():
+    with pytest.raises(ValueError, match="연도 줄"):
+        keis.header_columns(["취업자 28,416 28,576", "실업률 2.7 2.8"])
