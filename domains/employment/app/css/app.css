@@ -124,16 +124,6 @@
 /* 0 과 `증감없음` 은 증가도 감소도 아니다 — 부호색을 입히지 않는다. */
 .card__delta.is-flat { color: var(--text-secondary); }
 
-/* 잠정/확정 배지 (core/base.css 의 .badge 를 그대로 쓴다) */
-.badge--status {
-  margin-left: 4px;
-  color: var(--text-secondary);
-  background: var(--bg);
-  border: 1px solid var(--border);
-  white-space: nowrap;
-  vertical-align: 1px;
-}
-
 .card__deltaNote {
   font-weight: 400;
   color: var(--text-muted);
