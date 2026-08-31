@@ -15,7 +15,7 @@ import re
 from datetime import date, datetime
 from typing import NamedTuple
 
-from .. import http, report
+from .. import http, ocr, report
 from ..models import ForecastRecord
 from ..report import Issue
 
@@ -191,3 +191,53 @@ def parse(text: str, issue: Issue, source_url: str,
         parse_table(text), org="KEIS", org_name_ko="한국고용정보원", issue=issue,
         source_url=source_url, source_page=source_page,
     )
+
+
+# 1차 스크리닝 해상도. 라벨을 못 읽어도 상관없다 — '전망' 두 글자만 찾는다.
+SCREEN_DPI = 150
+SCREEN_KEYWORD = "전망"
+
+
+def find_forecast_page(page_texts: list[str],
+                       page_numbers: list[int]) -> tuple[int, str] | None:
+    """전망표가 실린 (쪽번호, 원문) 을 준다. 없으면 None.
+
+    캡션으로 찾지 않는다 — OCR 이 '표1' 을 'WED' 로도 읽는다. 실제로 파싱해
+    보고 지표가 다 나오는 쪽을 고른다. 표 앞 도입부 쪽이 같은 수치를 문장으로
+    싣는데, 그 쪽은 헤더가 없어 자연히 걸러진다.
+    """
+    for page_no, text in zip(page_numbers, page_texts):
+        try:
+            parse_table(text)
+        except ValueError as exc:
+            # 헤더가 있는데 지표가 모자라면 서식이 바뀐 것이다 — 알려야 한다
+            if "지표" in str(exc):
+                raise
+            continue
+        return page_no, text
+    return None
+
+
+def collect_issue(listed: ListedIssue, *, fetch=None,
+                  read_pages=None) -> list[ForecastRecord]:
+    """회차 하나를 읽는다. 전망표가 없으면 빈 리스트 — 실패가 아니다."""
+    fetch = fetch or (lambda url: http.get(url).content)
+    read_pages = read_pages or ocr.page_texts
+
+    data = fetch(listed.pdf_url)
+    screened = read_pages(data, None, dpi=SCREEN_DPI, preprocess=False)
+    candidates = [page_no for page_no, text in enumerate(screened, start=1)
+                  if SCREEN_KEYWORD in text]
+    if not candidates:
+        return []
+
+    texts = read_pages(data, candidates, dpi=400, preprocess=True)
+    found = find_forecast_page(texts, candidates)
+    if found is None:
+        return []
+    page_no, text = found
+    return parse(text, listed.issue, listed.pdf_url, page_no)
+
+
+def collect(today: date) -> list[ForecastRecord]:
+    return collect_issue(list_issues()[0])

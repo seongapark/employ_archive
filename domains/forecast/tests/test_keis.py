@@ -247,3 +247,68 @@ def test_parse_uses_the_right_units():
     got = by_key(keis.parse(PAGE_2026_08, ISSUE_2026_08, "https://x/y.pdf", 19))
     assert got[("emp_change", 2026, "annual")].unit == "만명"
     assert got[("emp_rate", 2026, "annual")].unit == "%"
+
+
+PAGE_NO_FORECAST = (FIXTURES / "keis_no_forecast.txt").read_text(encoding="utf-8")
+LISTED_2026_08 = keis.ListedIssue(ISSUE_2026_08, "https://x/keis-2026-5.pdf")
+
+
+def test_find_forecast_page_returns_the_table_page_with_its_number():
+    got = keis.find_forecast_page([PAGE_NO_FORECAST, PAGE_2025_12], [9, 10])
+    assert got == (10, PAGE_2025_12)
+
+
+def test_find_forecast_page_skips_the_prose_page_that_quotes_the_numbers():
+    # 도입부 쪽은 같은 수치를 문장으로 싣는다. 표 형태로 지표가 다 나오는
+    # 쪽만 고르므로 자연히 걸러진다.
+    assert keis.find_forecast_page([PAGE_NO_FORECAST], [9]) is None
+
+
+def test_find_forecast_page_returns_none_when_the_issue_has_no_forecast():
+    assert keis.find_forecast_page([PAGE_NO_FORECAST, PAGE_NO_FORECAST], [3, 4]) is None
+
+
+def test_collect_issue_reads_the_table_with_two_ocr_passes():
+    calls = []
+
+    by_page = {3: PAGE_NO_FORECAST, 4: PAGE_2025_12}
+
+    def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
+        calls.append({"pages": pages, "dpi": dpi, "preprocess": preprocess})
+        if pages is None:                      # 1차 스크리닝
+            return ["표지", "목차", PAGE_NO_FORECAST, PAGE_2025_12]
+        return [by_page[p] for p in pages]
+
+    records = keis.collect_issue(
+        LISTED_2026_08, fetch=lambda url: b"%PDF-", read_pages=fake_read_pages)
+
+    assert calls[0] == {"pages": None, "dpi": 150, "preprocess": False}
+    assert calls[1] == {"pages": [3, 4], "dpi": 400, "preprocess": True}
+    assert by_key(records)[("emp_change", 2026, "annual")].value == 16.2
+    assert records[0].source_page == 4
+
+
+def test_collect_issue_returns_nothing_when_the_issue_has_no_forecast_table():
+    # 대부분의 호가 그렇다. 실패가 아니다.
+    def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
+        return ["표지", "본문"] if pages is None else [PAGE_NO_FORECAST]
+
+    assert keis.collect_issue(
+        LISTED_2026_08, fetch=lambda url: b"%PDF-", read_pages=fake_read_pages) == []
+
+
+def test_collect_issue_raises_when_a_real_table_is_unreadable():
+    # 헤더는 있는데 지표가 일부만 읽히면 서식이 바뀐 것이다 — 조용히 넘기지 않는다
+    broken = "\n".join([
+        "2023년 2024년 2025년 2026년",
+        "취업자 28,416 28,576 28,781 28,943",
+        "(증감) (327) (159) (205) (162)",
+        "전망",
+    ])
+
+    def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
+        return [broken] if pages is None else [broken]
+
+    with pytest.raises(ValueError, match="지표"):
+        keis.collect_issue(LISTED_2026_08, fetch=lambda url: b"%PDF-",
+                           read_pages=fake_read_pages)
