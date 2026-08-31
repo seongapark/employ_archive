@@ -1,6 +1,10 @@
 import { compareSet, summarize, fmtValue, fmtNumber, dateLabel, esc, isOcrSourced } from '../data.js';
 
 const OCR_BADGE_TITLE = 'PDF 이미지를 OCR로 읽은 수치입니다 — 원문과 대조해 확인하세요.';
+// 복사용 표는 배지를 못 그리니 각주 방식(별표 + 하단 설명)으로 같은 경고를 낸다.
+// 탭으로 구분되는 표 형식을 깨지 않도록 기관명 칸에 별표 하나만 덧붙인다.
+const OCR_EXPORT_MARK = '*';
+const OCR_EXPORT_NOTE = '* PDF 이미지를 OCR로 읽은 수치입니다. 원문과 대조해 확인하세요.';
 
 const FILTERS = [
   { code: 'all', label: '전체' },
@@ -128,10 +132,20 @@ function renderCopyButton() {
     </div>`;
 }
 
-function buildTableText(set, orgs) {
+// 화면 배지가 사라지는 지점 — 이 표를 복사해 문서에 붙여넣는 순간에도 OCR
+// 출처 경고가 남아 있어야 한다. 탭 구분 표 형식은 그대로 두고, OCR 출처
+// 행에만 기관명 옆에 별표를 붙이고 표 끝에 각주 한 줄을 더한다.
+export function buildTableText(set, orgs) {
   const header = '기관\t값\t발표일';
-  const rows = set.map(({ rec }) => `${rec.org_name_ko}\t${fmtValue(rec)}\t${dateLabel(rec, orgs)}`);
-  return [header, ...rows].join('\n');
+  const rows = set.map(({ rec }) => {
+    const mark = isOcrSourced(rec, orgs) ? OCR_EXPORT_MARK : '';
+    return `${rec.org_name_ko}${mark}\t${fmtValue(rec)}\t${dateLabel(rec, orgs)}`;
+  });
+  const lines = [header, ...rows];
+  if (set.some(({ rec }) => isOcrSourced(rec, orgs))) {
+    lines.push('', OCR_EXPORT_NOTE);
+  }
+  return lines.join('\n');
 }
 
 export function render(el, ctx) {
