@@ -155,3 +155,40 @@ export function breakdownMatrix(series, categories, period, { sort = 'delta', br
   };
   return rows.slice().sort((a, b) => magnitude(b) - magnitude(a));
 }
+
+export function categoryTimeline(series, { breakdown, category, months = 24 } = {}) {
+  const out = {};
+  for (const source of SOURCE_ORDER) {
+    const points = series
+      .filter(r => r.source === source
+        && r.breakdown === (breakdown || 'total')
+        && (r.category ?? null) === (category ?? null))
+      .sort((a, b) => a.period.localeCompare(b.period))
+      .map(r => ({ period: r.period, value: r.value, yoy: r.yoy }));
+    out[source] = points.slice(-months);
+  }
+  return out;
+}
+
+// 시계열은 선택월과 무관하게 항상 최신월까지 그린다. 선택월 수치와 그 이후
+// 흐름이 한 화면에 같이 와야 하기 때문이다(스펙 7.6).
+export function sheetData(series, {
+  period, breakdown = null, category = null, categories = null, months = 24,
+} = {}) {
+  const meta = categories && categories.find(c => c.code === category);
+  const snapshot = SOURCE_ORDER.map(source => {
+    const record = series.find(r => r.source === source && r.period === period
+      && r.breakdown === (breakdown || 'total')
+      && (r.category ?? null) === (category ?? null));
+    const provided = meta && meta.provided ? meta.provided[source] : true;
+    const cell = provided === false
+      ? { state: 'notProvided', yoy: null }
+      : !record ? { state: 'unpublished', yoy: null }
+      : record.yoy === null || record.yoy === undefined ? { state: 'noDelta', yoy: null }
+      : { state: 'value', yoy: record.yoy };
+    return { source, ...cell };
+  });
+  const timeline = categoryTimeline(series, { breakdown, category, months });
+  const all = Object.values(timeline).flat().map(p => p.period).sort();
+  return { snapshot, timeline, latest: all.length ? all[all.length - 1] : period };
+}

@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { monthOptions, overviewCards, fmtLevel, fmtDelta, monthLabel, esc, segmentsOf, breakdownMatrix } from '../../app/js/data.js';
+import { monthOptions, overviewCards, fmtLevel, fmtDelta, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData } from '../../app/js/data.js';
 
 function rec(over = {}) {
   return {
@@ -141,4 +141,49 @@ test('a sex row never picks up the industry record with the same code', () => {
   const rows = breakdownMatrix(series, sexCats, '2026-07', { sort: 'code', breakdown: 'sex' });
   assert.equal(rows[1].cells.eaps.yoy, 59.7);   // 여자, not 건설업
   assert.equal(rows[0].cells.ei.yoy, 90);       // 남자, not 전문·과학·기술
+});
+
+test('categoryTimeline keeps the last N months per source, ascending', () => {
+  const series = [];
+  for (const m of [5, 6, 7]) {
+    series.push(rec({ source: 'eaps', breakdown: 'industry', category: 'C', period: `2026-0${m}`, yoy: m }));
+  }
+  series.push(rec({ source: 'est', breakdown: 'industry', category: 'C', period: '2026-06', yoy: 1 }));
+  const t = categoryTimeline(series, { breakdown: 'industry', category: 'C', months: 2 });
+  assert.deepEqual(t.eaps.map(p => p.period), ['2026-06', '2026-07']);
+  assert.deepEqual(t.est.map(p => p.period), ['2026-06']);
+  assert.deepEqual(t.ei, []);
+});
+
+test('sheetData snapshot keeps every source in fixed order, notProvided included', () => {
+  const series = [
+    rec({ source: 'eaps', breakdown: 'sex', category: 'F', period: '2026-07', yoy: 59.7 }),
+    rec({ source: 'ei', breakdown: 'sex', category: 'F', period: '2026-07', yoy: 188.0 }),
+  ];
+  const segments = [{ code: 'F', name_ko: '여자', provided: { eaps: true, est: false, ei: true } }];
+  const d = sheetData(series, { period: '2026-07', breakdown: 'sex', category: 'F', categories: segments });
+  assert.deepEqual(d.snapshot.map(s => s.source), ['eaps', 'est', 'ei']);
+  assert.equal(d.snapshot[1].state, 'notProvided');
+  assert.equal(d.snapshot[2].yoy, 188.0);
+});
+
+test('sheetData falls back to the total cut when no category is given', () => {
+  const series = [
+    rec({ source: 'eaps', breakdown: 'total', category: null, period: '2026-07', yoy: 107.6 }),
+    rec({ source: 'ei', breakdown: 'total', category: null, period: '2026-07', yoy: 277.0 }),
+    rec({ source: 'est', breakdown: 'total', category: null, period: '2026-06', yoy: 248.0 }),
+  ];
+  const d = sheetData(series, { period: '2026-07', breakdown: null, category: null });
+  assert.equal(d.snapshot[0].yoy, 107.6);
+  assert.equal(d.snapshot[1].state, 'unpublished');
+  assert.equal(d.latest, '2026-07');
+});
+
+test('timeline always runs to the newest month even when an older month is selected', () => {
+  const series = [
+    rec({ source: 'eaps', breakdown: 'total', category: null, period: '2026-05', yoy: 1 }),
+    rec({ source: 'eaps', breakdown: 'total', category: null, period: '2026-07', yoy: 3 }),
+  ];
+  const d = sheetData(series, { period: '2026-05', breakdown: null, category: null });
+  assert.deepEqual(d.timeline.eaps.map(p => p.period), ['2026-05', '2026-07']);
 });
