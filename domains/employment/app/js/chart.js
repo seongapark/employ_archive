@@ -115,16 +115,15 @@ export function timelineSvg(timeline, { width = 320, height = 160, selected = nu
 
 // 대체 뷰는 그래프가 말하는 것을 다 말해야 한다 — 수준과 증감 둘 다.
 // 빈 상태 행은 그래프와 같은 문구로 자리를 지킨다.
-export function sheetTable(snapshot, timeline, { sourceNames = {} } = {}) {
+export function sheetTable(snapshot, { sourceNames = {} } = {}) {
   const rows = snapshot.map(s => {
     const empty = esc(emptyLabel(s.state));
     const level = s.value === null || s.value === undefined ? empty : esc(fmtLevel(s.value));
     const delta = s.state === 'value' ? esc(fmtDelta(s.yoy)) : empty;
-    const points = (timeline[s.source] || []).length;
     return `<tr><th scope="row">${esc(sourceNames[s.source] || s.source)}</th>` +
-      `<td class="num">${level}</td><td class="num">${delta}</td><td class="num">${points}개월</td></tr>`;
+      `<td class="num">${level}</td><td class="num">${delta}</td></tr>`;
   }).join('');
   return `<table class="sheet__table"><caption class="sr-only">출처별 수준과 전년동월대비 증감</caption>` +
-    `<thead><tr><th scope="col">출처</th><th scope="col">수준</th><th scope="col">증감</th><th scope="col">시계열</th></tr></thead>` +
+    `<thead><tr><th scope="col">출처</th><th scope="col">수준</th><th scope="col">증감</th></tr></thead>` +
     `<tbody>${rows}</tbody></table>`;
 }

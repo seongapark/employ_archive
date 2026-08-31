@@ -60,7 +60,7 @@ export function mountSheet(sheetEl, handleEl, labelEl, scrimEl, ctx) {
     const body = sheetEl.querySelector('.sheet__body');
     if (body) {
       body.innerHTML = asTable
-        ? sheetTable(data.snapshot, data.timeline, { sourceNames: names })
+        ? sheetTable(data.snapshot, { sourceNames: names })
         : barsSvg(data.snapshot, { width: 320, sourceNames: names });
     }
     const line = sheetEl.querySelector('.sheet__line');
@@ -92,6 +92,10 @@ export function mountSheet(sheetEl, handleEl, labelEl, scrimEl, ctx) {
       <ul class="sheet__legend">${
         ctx.sources.map(s => `<li><span class="dot" data-source="${esc(s.code)}"></span>${esc(shortOf(s))}</li>`).join('')
       }</ul>`;
+
+    // 범례는 색이 무엇을 뜻하는지 알려주는 것이다. 표에는 색이 없으므로 숨긴다.
+    const legend = sheetEl.querySelector('.sheet__legend');
+    if (legend) legend.hidden = asTable;
 
     const periods = paint();
 
