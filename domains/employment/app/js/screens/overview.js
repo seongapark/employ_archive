@@ -3,11 +3,15 @@ import { overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, EMPTY_LABEL, 
 
 // 사업체노동력조사의 released_at 은 보도자료 발표일이 아니라 KOSIS 표 갱신일이다.
 // 다른 둘과 뜻이 다르므로 라벨을 달리 쓴다.
+// 날짜의 뜻이 레코드마다 다르다. KOSIS 표에서 받은 값이면 표가 갱신된 날이고,
+// 보도자료에서 읽은 값이면 발표일이다. 사업체노동력조사는 과거 달을 KOSIS 에서,
+// 최신월을 보도자료에서 받으므로 한 출처 안에서도 갈린다 — 출처 이름으로
+// 판단하면 보도자료에서 온 값에 `KOSIS 갱신` 이라 적히게 된다.
 function releaseLabel(card) {
   const at = card.releasedAt;
   if (!at) return '';
   const when = `${at.slice(5, 7)}.${at.slice(8, 10)}`;
-  return card.code === 'est' ? `KOSIS 갱신 ${when}` : `발표 ${when}`;
+  return card.origin === 'kosis' ? `KOSIS 갱신 ${when}` : `발표 ${when}`;
 }
 
 // 첨부는 눌러서 바로 받는다. download 속성은 다른 도메인 파일에는 브라우저가

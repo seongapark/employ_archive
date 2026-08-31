@@ -121,7 +121,7 @@ export function overviewCards(series, sources, period, releases = {}) {
       const { state, yoy } = cellState(here, true);
       return {
         ...base, period, state, value: here.value, yoy, status: here.status,
-        releasedAt: here.released_at, ...post, fallback: null,
+        releasedAt: here.released_at, origin: originOf(here), ...post, fallback: null,
       };
     }
     return {
@@ -136,6 +136,15 @@ export function overviewCards(series, sources, period, releases = {}) {
       },
     };
   });
+}
+
+// 그 숫자가 어디서 왔는가. released_at 의 뜻이 여기 달려 있다 — KOSIS 표에서
+// 받은 값의 날짜는 '표가 갱신된 날' 이고, 보도자료에서 읽은 값의 날짜는
+// '발표일' 이다. 출처(code)로 판단하면 안 된다: 사업체노동력조사는 과거 달을
+// KOSIS 에서, 아직 표에 없는 최신월을 보도자료에서 받아 한 출처 안에 둘이 섞인다.
+export function originOf(record) {
+  const url = (record && record.release_url) || '';
+  return url.includes('kosis.kr') ? 'kosis' : 'press';
 }
 
 export function segmentsOf(industries, segments) {
