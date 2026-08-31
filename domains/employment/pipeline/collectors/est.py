@@ -117,7 +117,11 @@ def check_coverage(records: list[SeriesRecord]) -> None:
         raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
 
 
-MAX_MONTHS_BEHIND = 3      # 전전월 기준이다 (sources.json 의 release_rule)
+# 보도자료는 매월 말 전월 기준으로 나온다(임금만 전전월). 그런데 우리는 숫자를
+# 보도자료가 아니라 KOSIS 표에서 받는데 그쪽 반영이 한 달 늦다 — 8월 말에 7월
+# 고용 보도자료가 나와도 KOSIS 에는 아직 6월까지만 있다. 그래서 3 이다.
+# 발표 주기가 전전월이라서가 아니다(sources.json 의 release_rule 은 보도자료 기준).
+MAX_MONTHS_BEHIND = 3
 
 
 def check_freshness(records: list[SeriesRecord], today: date) -> None:

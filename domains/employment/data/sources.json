@@ -20,7 +20,7 @@
     "type": "사업체조사",
     "headline_ko": "종사자수",
     "coverage": "1인 이상 사업체 · 농림어업 등 제외",
-    "release_rule": "매월 말, 전전월 기준",
+    "release_rule": "매월 말, 전월 기준(임금은 전전월 기준)",
     "caveat": "사업체 조사이므로 자영업자·무급가족종사자는 포함되지 않는다",
     "board_url": "https://www.moel.go.kr/news/enews/report/enewsList.do?pageIndex=1&bbs_id=12&searchField=1&searchText=%EC%82%AC%EC%97%85%EC%B2%B4%EB%85%B8%EB%8F%99%EB%A0%A5%EC%A1%B0%EC%82%AC&pageUnit=10",
     "kosis_url": "https://kosis.kr/statHtml/statHtml.do?orgId=118&tblId=DT_118N_MON066"
