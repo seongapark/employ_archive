@@ -41,6 +41,30 @@ def fetch_raw(imf_code: str) -> dict:
     return resp.json()
 
 
+WEO_ISSUE_BASE = "https://www.imf.org/en/publications/weo/issues"
+_MONTHS = ("january", "february", "march", "april", "may", "june",
+           "july", "august", "september", "october", "november", "december")
+
+
+def report_url(label: str, published_at: date) -> str:
+    """회차의 WEO 보고서 주소를 발표일에서 조립한다.
+
+    IMF 는 회차 주소가 규칙적이라 목록을 긁을 필요가 없다. 라벨에 'Update' 가
+    있으면 슬러그에 -update- 가 들어간다.
+
+    주소가 실제로 열리는지 여기서 확인하지 않는다 — 매 수집마다 요청이 한 번 더
+    붙고, 틀린 주소는 사람이 눌러 보면 즉시 드러난다. 회차를 추가할 때 그 주소를
+    한 번 열어 보는 것으로 갈음한다.
+    """
+    lowered = label.lower()
+    month = next((m for m in _MONTHS if m in lowered), None)
+    if month is None:
+        raise ValueError(f"회차 라벨에서 월을 읽지 못했다: {label!r}")
+    kind = "world-economic-outlook-update" if "update" in lowered else "world-economic-outlook"
+    return (f"{WEO_ISSUE_BASE}/{published_at:%Y/%m/%d}/"
+            f"{kind}-{month}-{published_at:%Y}")
+
+
 def edition_for_horizon(last_year: int) -> tuple[str, date, int]:
     for edition in EDITIONS.values():
         if edition[2] == last_year:
@@ -56,7 +80,10 @@ def parse(imf_code: str, payload: dict, today: date) -> list[ForecastRecord]:
     series = payload.get("values", {}).get(imf_code, {}).get("KOR", {})
     if not series:
         return []
-    title, published_at, _ = edition_for_horizon(max(int(y) for y in series))
+    edition = edition_for_horizon(max(int(y) for y in series))
+    title, published_at, _ = edition
+    label = next(l for l, e in EDITIONS.items() if e == edition)
+    url = report_url(label, published_at)
     records: list[ForecastRecord] = []
     for year in (published_at.year, published_at.year + 1):
         val = series.get(str(year))
@@ -72,8 +99,8 @@ def parse(imf_code: str, payload: dict, today: date) -> list[ForecastRecord]:
             indicator=indicator,
             value=round(float(val), meta["decimals"]),
             unit=meta["unit"],
-            source_url=f"{API_BASE}/{imf_code}/KOR",
-            landing_url=LANDING_URL,
+            source_url=url,
+            landing_url=url,
             confidence="verified",
             collected_at=datetime.now(KST),
         ))
@@ -108,12 +135,13 @@ def fetch_vintage(flow: str, imf_code: str) -> str:
     return resp.text
 
 
-def parse_vintage(xml: str, imf_code: str, title: str,
+def parse_vintage(xml: str, imf_code: str, label: str, title: str,
                   published_at: date) -> list[ForecastRecord]:
     series = {int(year): float(value) for value, year in _OBS.findall(xml)}
     if not series:
         return []
     payload = {"values": {imf_code: {"KOR": {str(y): v for y, v in series.items()}}}}
+    url = report_url(label, published_at)
     records = []
     for year in (published_at.year, published_at.year + 1):
         val = payload["values"][imf_code]["KOR"].get(str(year))
@@ -126,8 +154,7 @@ def parse_vintage(xml: str, imf_code: str, title: str,
             org="IMF", org_name_ko="IMF", report_title=title,
             published_at=published_at, target_year=year, indicator=indicator,
             value=round(float(val), meta["decimals"]), unit=meta["unit"],
-            source_url=SDMX_BASE,  # collect_vintage 가 회차별 주소로 채운다
-            landing_url=LANDING_URL, confidence="verified",
+            source_url=url, landing_url=url, confidence="verified",
             collected_at=datetime.now(KST),
         ))
     return records
@@ -137,7 +164,5 @@ def collect_vintage(label: str) -> list[ForecastRecord]:
     flow, title, published_at = VINTAGES[label]
     records: list[ForecastRecord] = []
     for code in IMF_CODE_TO_INDICATOR:
-        for rec in parse_vintage(fetch_vintage(flow, code), code, title, published_at):
-            records.append(rec.model_copy(
-                update={"source_url": f"{SDMX_BASE}/{flow}/KOR.{code}.A"}))
+        records.extend(parse_vintage(fetch_vintage(flow, code), code, label, title, published_at))
     return records
