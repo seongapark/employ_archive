@@ -100,6 +100,13 @@ def test_report_url_rejects_a_label_it_cannot_read():
         imf.report_url("Spring 2026", date(2026, 4, 14))
 
 
+def test_report_url_rejects_a_label_whose_month_disagrees_with_published_at():
+    # 라벨의 월(4월)과 발표일의 월(10월)이 서로 다른 EDITIONS 행에서 온
+    # 값처럼 어긋난다 — 조용히 4월 주소를 만들지 않고 멈춰야 한다
+    with pytest.raises(ValueError, match="어긋난다"):
+        imf.report_url("April 2026", date(2026, 10, 14))
+
+
 def test_no_record_points_at_a_machine_endpoint():
     # 설계 3.0 — 원문 보기가 JSON 을 띄우면 안 된다
     records = imf.parse("NGDP_RPCH", PAYLOAD, TODAY)

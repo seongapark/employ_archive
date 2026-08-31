@@ -26,6 +26,12 @@ LANDING_URL = "https://www.imf.org/external/datamapper/profile/KOR"
 # 지평을 늘리지 않는 회차가 늘어나면 두 회차가 같은 지평을 가질 수 있는데, 그때
 # 고르는 기준이 없다. edition_with_label() 이 이를 검사해 조용히 하나를 고르는
 # 대신 실패한다.
+#
+# Update 회차를 추가할 때는 키(라벨)에 반드시 "Update" 를 넣을 것 — report_url()
+# 은 라벨에 "update" 가 있는지만 보고 슬러그에 -update- 를 넣을지 정한다.
+# 예: 다음에 나올 2026년 7월판은 "April 2026" 과 같은 모양으로 "July 2026" 이라
+# 적으면 world-economic-outlook-july-2026(오답, 실제로는 존재하지 않는 주소)이
+# 만들어진다. 반드시 "Update July 2026" 으로 적어야 한다.
 #   April 2026  https://www.imf.org/en/publications/weo/issues/2026/04/14/world-economic-outlook-april-2026
 EDITIONS: dict[str, tuple[str, date, int]] = {
     "April 2026": ("IMF World Economic Outlook, April 2026", date(2026, 4, 14), 2031),
@@ -67,6 +73,14 @@ def report_url(label: str, published_at: date) -> str:
     month = next((m for m in _MONTHS if m in lowered), None)
     if month is None:
         raise ValueError(f"회차 라벨에서 월을 읽지 못했다: {label!r}")
+    # 라벨의 월과 published_at 의 월이 다른 곳에서 온 값이다(하나는 EDITIONS
+    # 키, 하나는 그 옆 튜플) — EDITIONS 행을 고치다 한쪽만 바꾸면 둘이 어긋난
+    # 채로 그럴듯한 주소가 만들어진다. 서로 맞는지 확인하고 아니면 멈춘다.
+    if _MONTHS.index(month) + 1 != published_at.month:
+        raise ValueError(
+            f"회차 라벨의 월과 발표일의 월이 어긋난다: {label!r} vs {published_at} "
+            "— EDITIONS 항목을 확인할 것"
+        )
     kind = "world-economic-outlook-update" if "update" in lowered else "world-economic-outlook"
     return (f"{WEO_ISSUE_BASE}/{published_at:%Y/%m/%d}/"
             f"{kind}-{month}-{published_at:%Y}")
