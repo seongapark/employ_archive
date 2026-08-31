@@ -1,0 +1,95 @@
+// 증감 비교 시트의 그림. SVG 문자열만 만든다 — DOM 을 만지지 않아 테스트가 된다.
+import { SOURCE_ORDER, SOURCE_COLORS, fmtDelta, monthLabel, esc } from './data.js';
+
+const EMPTY_LABEL = {
+  notProvided: '― 미제공',
+  unpublished: '― 미발표',
+  noDelta: '― 증감없음',
+};
+
+const ROW_H = 34;
+const LABEL_W = 96;
+
+export function barsSvg(snapshot, { width = 320, sourceNames = {} } = {}) {
+  const rows = snapshot.filter(s => SOURCE_ORDER.includes(s.source));
+  const height = rows.length * ROW_H + 8;
+  const plotW = width - LABEL_W - 8;
+  const max = Math.max(1, ...rows.map(r => Math.abs(r.yoy ?? 0)));
+  const zero = LABEL_W + plotW / 2;
+
+  const parts = [
+    `<line class="chart__zero" x1="${zero}" y1="0" x2="${zero}" y2="${height}" stroke="#e2e5ea" stroke-width="1"></line>`,
+  ];
+
+  rows.forEach((row, i) => {
+    const y = i * ROW_H + 6;
+    const name = sourceNames[row.source] || row.source;
+    parts.push(`<text x="0" y="${y + 15}" font-size="11" fill="#667085">${esc(name)}</text>`);
+
+    if (row.state !== 'value') {
+      parts.push(`<text x="${zero + 6}" y="${y + 15}" font-size="11" fill="#98a2b3">${esc(EMPTY_LABEL[row.state] || '―')}</text>`);
+      return;
+    }
+    const w = (Math.abs(row.yoy) / max) * (plotW / 2 - 44);
+    const x = row.yoy >= 0 ? zero : zero - w;
+    parts.push(
+      `<rect x="${x.toFixed(1)}" y="${y}" width="${Math.max(w, 1).toFixed(1)}" height="20" rx="4" fill="${SOURCE_COLORS[row.source]}"></rect>`,
+      // 값은 막대 끝에 직접 붙인다. #1baf7a 의 대비 미달에 대한 완화 조치이므로
+      // 지울 수 없다(스펙 7.6). 글자에는 계열 색을 입히지 않는다.
+      `<text x="${(row.yoy >= 0 ? x + w + 5 : x - 5).toFixed(1)}" y="${y + 15}" font-size="11" fill="#191d24" text-anchor="${row.yoy >= 0 ? 'start' : 'end'}">${esc(fmtDelta(row.yoy))}</text>`,
+    );
+  });
+
+  return `<svg class="chart chart--bars" viewBox="0 0 ${width} ${height}" width="100%" height="${height}" role="img">${parts.join('')}</svg>`;
+}
+
+export function timelineSvg(timeline, { width = 320, height = 160, selected = null } = {}) {
+  const periods = Array.from(new Set(
+    SOURCE_ORDER.flatMap(s => (timeline[s] || []).map(p => p.period)))).sort();
+  if (!periods.length) return '';
+
+  const pad = { l: 8, r: 8, t: 10, b: 18 };
+  const plotW = width - pad.l - pad.r;
+  const plotH = height - pad.t - pad.b;
+  const values = SOURCE_ORDER.flatMap(s => (timeline[s] || []).map(p => p.yoy)).filter(v => v !== null);
+  const max = Math.max(1, ...values.map(Math.abs));
+  const x = period => pad.l + (periods.indexOf(period) / Math.max(1, periods.length - 1)) * plotW;
+  const y = value => pad.t + plotH / 2 - (value / max) * (plotH / 2);
+
+  const parts = [
+    `<line x1="${pad.l}" y1="${y(0)}" x2="${width - pad.r}" y2="${y(0)}" stroke="#e2e5ea" stroke-width="1"></line>`,
+  ];
+
+  if (selected && periods.includes(selected)) {
+    parts.push(`<line class="chart__marker" x1="${x(selected)}" y1="${pad.t}" x2="${x(selected)}" y2="${pad.t + plotH}" stroke="#98a2b3" stroke-width="1" stroke-dasharray="3 3"></line>`);
+  }
+
+  for (const source of SOURCE_ORDER) {
+    const points = (timeline[source] || []).filter(p => p.yoy !== null);
+    if (!points.length) continue;   // 출처가 빠져도 남은 색은 바뀌지 않는다
+    const d = points.map(p => `${x(p.period).toFixed(1)},${y(p.yoy).toFixed(1)}`).join(' ');
+    parts.push(`<polyline points="${d}" fill="none" stroke="${SOURCE_COLORS[source]}" stroke-width="2" stroke-linejoin="round"></polyline>`);
+    const hit = selected && points.find(p => p.period === selected);
+    if (hit) {
+      parts.push(`<circle cx="${x(hit.period).toFixed(1)}" cy="${y(hit.yoy).toFixed(1)}" r="4.5" fill="${SOURCE_COLORS[source]}"></circle>`);
+    }
+  }
+
+  parts.push(
+    `<text x="${pad.l}" y="${height - 4}" font-size="10" fill="#98a2b3">${esc(monthLabel(periods[0]))}</text>`,
+    `<text x="${width - pad.r}" y="${height - 4}" font-size="10" fill="#98a2b3" text-anchor="end">${esc(monthLabel(periods[periods.length - 1]))}</text>`,
+  );
+
+  return `<svg class="chart chart--line" viewBox="0 0 ${width} ${height}" width="100%" height="${height}" role="img">${parts.join('')}</svg>`;
+}
+
+export function sheetTable(snapshot, timeline, { sourceNames = {} } = {}) {
+  const rows = snapshot.map(s => {
+    const label = s.state === 'value' ? esc(fmtDelta(s.yoy)) : esc(EMPTY_LABEL[s.state] || '―');
+    const points = (timeline[s.source] || []).length;
+    return `<tr><th scope="row">${esc(sourceNames[s.source] || s.source)}</th><td class="num">${label}</td><td class="num">${points}개월</td></tr>`;
+  }).join('');
+  return `<table class="sheet__table"><caption class="sr-only">출처별 전년동월대비 증감</caption>` +
+    `<thead><tr><th scope="col">출처</th><th scope="col">증감</th><th scope="col">시계열</th></tr></thead>` +
+    `<tbody>${rows}</tbody></table>`;
+}
