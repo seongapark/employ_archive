@@ -10,6 +10,9 @@ from ..models import ForecastRecord, INDICATOR_META, make_id
 KST = timezone(timedelta(hours=9))
 
 API_BASE = "https://www.imf.org/external/datamapper/api/v1"
+# report_url() 로 대체된 뒤로 쓰는 곳이 없다 — source_url·landing_url 의
+# 폴백으로 되살리지 말 것(기계용 주소를 절대 남기지 않는다는 이 파일의 원칙에
+# 어긋난다). 정리는 imf.py 전체를 다시 볼 다른 작업에서 한다.
 LANDING_URL = "https://www.imf.org/external/datamapper/profile/KOR"
 
 # IMF DataMapper 코드 → 내부 지표코드
@@ -19,6 +22,10 @@ LANDING_URL = "https://www.imf.org/external/datamapper/profile/KOR"
 # 4월판마다 전망 지평을 한 해 늘린다(2025년 10월판은 2030년까지, 현행은 2031년까지).
 # 그래서 마지막 연도로 회차를 특정하고, 모르는 지평이 오면 실패시킨다 —
 # 조용히 틀린 발표일을 붙이느니 멈추는 편이 낫다.
+# 이 특정 방식이 성립하려면 항목마다 마지막 연도가 서로 달라야 한다 — 10월판처럼
+# 지평을 늘리지 않는 회차가 늘어나면 두 회차가 같은 지평을 가질 수 있는데, 그때
+# 고르는 기준이 없다. edition_with_label() 이 이를 검사해 조용히 하나를 고르는
+# 대신 실패한다.
 #   April 2026  https://www.imf.org/en/publications/weo/issues/2026/04/14/world-economic-outlook-april-2026
 EDITIONS: dict[str, tuple[str, date, int]] = {
     "April 2026": ("IMF World Economic Outlook, April 2026", date(2026, 4, 14), 2031),
@@ -65,13 +72,32 @@ def report_url(label: str, published_at: date) -> str:
             f"{kind}-{month}-{published_at:%Y}")
 
 
+def edition_with_label(last_year: int) -> tuple[str, tuple[str, date, int]]:
+    """전망 지평(마지막 연도)으로 회차를 찾아 라벨과 함께 돌려준다.
+
+    라벨과 회차 정보를 한 번의 조회로 같이 얻는다 — 따로 찾으면 두 조회가
+    서로 다른 답을 줄 수 있다(EDITIONS 를 두 번 훑는 사이에 바뀌지는 않더라도,
+    "값으로 역매칭" 같은 코드가 원래 찾은 것과 다른 항목에 우연히 매치될 수
+    있다). 지평이 EDITIONS 항목 여럿과 맞으면 — 위 EDITIONS 주석대로 설계가
+    깨진 상황이라 — 조용히 하나를 고르지 않고 실패시킨다.
+    """
+    matches = [(label, edition) for label, edition in EDITIONS.items()
+               if edition[2] == last_year]
+    if not matches:
+        raise ValueError(
+            f"전망 지평이 {last_year}년인 WEO 회차를 모른다 — imf.EDITIONS 에 추가할 것"
+        )
+    if len(matches) > 1:
+        labels = [label for label, _ in matches]
+        raise ValueError(
+            f"전망 지평이 {last_year}년인 WEO 회차가 {labels} 로 여럿이다 — "
+            "EDITIONS 항목은 last_year 가 서로 달라야 회차를 특정할 수 있다"
+        )
+    return matches[0]
+
+
 def edition_for_horizon(last_year: int) -> tuple[str, date, int]:
-    for edition in EDITIONS.values():
-        if edition[2] == last_year:
-            return edition
-    raise ValueError(
-        f"전망 지평이 {last_year}년인 WEO 회차를 모른다 — imf.EDITIONS 에 추가할 것"
-    )
+    return edition_with_label(last_year)[1]
 
 
 def parse(imf_code: str, payload: dict, today: date) -> list[ForecastRecord]:
@@ -80,9 +106,7 @@ def parse(imf_code: str, payload: dict, today: date) -> list[ForecastRecord]:
     series = payload.get("values", {}).get(imf_code, {}).get("KOR", {})
     if not series:
         return []
-    edition = edition_for_horizon(max(int(y) for y in series))
-    title, published_at, _ = edition
-    label = next(l for l, e in EDITIONS.items() if e == edition)
+    label, (title, published_at, _) = edition_with_label(max(int(y) for y in series))
     url = report_url(label, published_at)
     records: list[ForecastRecord] = []
     for year in (published_at.year, published_at.year + 1):

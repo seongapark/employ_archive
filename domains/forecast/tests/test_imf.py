@@ -108,3 +108,36 @@ def test_no_record_points_at_a_machine_endpoint():
         for url in (r.source_url, r.landing_url):
             assert "api." not in url and "/api/" not in url and "sdmx" not in url
             assert url.startswith("https://www.imf.org/en/publications/weo/issues/")
+
+
+def test_edition_with_label_returns_the_label_next_to_its_edition():
+    assert imf.edition_with_label(2031) == ("April 2026", imf.EDITIONS["April 2026"])
+
+
+def test_edition_with_label_refuses_to_pick_between_two_matches(monkeypatch):
+    # 두 회차가 같은 전망 지평을 가지면(예: 지평을 늘리지 않는 10월판이 늘어나면)
+    # 어느 쪽인지 고를 근거가 없다 — 조용히 하나를 고르지 않고 실패해야 한다.
+    monkeypatch.setitem(
+        imf.EDITIONS, "October 2026",
+        ("IMF World Economic Outlook, October 2026", date(2026, 10, 13), 2031),
+    )
+    with pytest.raises(ValueError, match="여럿"):
+        imf.edition_with_label(2031)
+
+
+def test_parse_vintage_does_not_confuse_the_label_with_the_title():
+    # collect_vintage 는 label 과 title 을 나란히 parse_vintage 에 넘긴다 — 둘 다
+    # 평범한 문자열이라 자리가 바뀌어도 타입 오류 없이 조용히 통과할 수 있다.
+    # source_url 은 label 로, report_title 은 title 로 지어야 함을 값으로 못박는다.
+    flow, title, published_at = imf.VINTAGES["October 2025"]
+    xml = '<Obs OBS_VALUE="1.8" TIME_PERIOD="2025"/><Obs OBS_VALUE="2.1" TIME_PERIOD="2026"/>'
+    records = imf.parse_vintage(xml, "NGDP_RPCH", "October 2025", title, published_at)
+    assert records
+    expected_url = imf.report_url("October 2025", published_at)
+    for r in records:
+        assert r.source_url == expected_url
+        assert r.landing_url == expected_url
+        assert r.report_title == title
+        for url in (r.source_url, r.landing_url):
+            assert "api." not in url and "/api/" not in url and "sdmx" not in url
+            assert url.startswith("https://www.imf.org/en/publications/weo/issues/")
