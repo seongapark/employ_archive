@@ -289,3 +289,101 @@
   padding: 8px 16px 16px 16px;
   line-height: 1.4;
 }
+
+/* Sources Comparison (출처비교) */
+
+.scards {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 16px 0 16px;
+}
+
+.scard {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px;
+}
+
+.scard__head {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.swatch {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+.scard__name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.scard__agency {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.scard__defs {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+  margin-bottom: 10px;
+}
+
+.scard__defs dt {
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.scard__defs dt:first-child {
+  margin-top: 0;
+}
+
+.scard__defs dd {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.4;
+}
+
+.scard__link {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  text-decoration: none;
+  display: inline-block;
+}
+
+.scard__link:hover {
+  text-decoration: underline;
+}
+
+.note h3 {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.note p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.note + .note {
+  margin-top: 8px;
+}
