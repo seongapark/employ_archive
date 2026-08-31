@@ -65,9 +65,9 @@ function cardHtml(card) {
   // 보도자료는 그 출처의 게시판 검색 결과로 보낸다. 지금 레코드가 들고 있는
   // release_url 은 수집한 회차(=최신월) 게시글 하나뿐이라, 과거 달에서 누르면
   // 다른 달의 글이 열린다. 달마다 게시글을 찾아 넣기 전까지는 목록이 정확하다.
-  const parts = [`<a href="${esc(card.boardUrl)}" rel="noopener">보도자료</a>`];
+  const parts = [`<a class="card__go" href="${esc(card.releaseUrl)}" rel="noopener">보도자료</a>`];
   if (card.kosisUrl) {
-    parts.push(`<a href="${esc(card.kosisUrl)}" rel="noopener">KOSIS</a>`);
+    parts.push(`<a class="card__go" href="${esc(card.kosisUrl)}" rel="noopener">KOSIS</a>`);
   }
   const files = attachmentLinks(card);
   const links = `<div class="card__links">${parts.join('')}${files}</div>`;
