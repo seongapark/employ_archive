@@ -4,15 +4,18 @@
 우상향 꺾은선을 그려 icon-512.png / icon-192.png 로 저장한다.
 
 의존성: Pillow (요구사항 파일에는 추가하지 않음 — 임시로 `pip install pillow`).
-실행: python tools/make_icons.py
+실행: python tools/make_icons.py [domain] [bg_color]
+  인자 없이 실행하면 forecast / #23508f (기존 동작 그대로).
 """
 
+import sys
 from pathlib import Path
 
 from PIL import Image, ImageDraw
 
-OUT_DIR = Path(__file__).resolve().parent.parent / "domains" / "forecast" / "app" / "icons"
-BG_COLOR = "#23508f"
+OUT_DIR = Path(__file__).resolve().parent.parent / "domains" / (
+    sys.argv[1] if len(sys.argv) > 1 else "forecast") / "app" / "icons"
+BG_COLOR = sys.argv[2] if len(sys.argv) > 2 else "#23508f"
 FG_COLOR = "#ffffff"
 SIZE = 512
 

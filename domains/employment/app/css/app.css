@@ -1,0 +1,153 @@
+/* 출처 색은 출처 정체성만 나른다. 부호는 델타의 up/down 토큰이 말한다. */
+:root {
+  --src-eaps: #2a78d6;
+  --src-est: #eb6834;
+  --src-ei: #1baf7a;
+}
+
+/* Segments (상단 탭 3개) */
+
+.segments {
+  display: flex;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.segment {
+  flex: 1;
+  text-align: center;
+  padding: 10px 4px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  border-bottom: 2px solid transparent;
+}
+
+.segment--active {
+  color: var(--accent);
+  font-weight: 700;
+  border-bottom-color: var(--accent);
+}
+
+/* Switcher (연·월 선택) */
+
+.switcher {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px 4px 16px;
+}
+
+.switcher select {
+  flex: 1;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+}
+
+/* Cards */
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 8px 16px 16px 16px;
+}
+
+.card__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.card__name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.card__meta {
+  font-size: 11px;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.card__value {
+  font-size: 24px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.card__value--empty {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.card__delta {
+  font-size: 13px;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.card__delta.is-up { color: var(--up); }
+.card__delta.is-down { color: var(--down); }
+
+.card__deltaNote {
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.card__fallback {
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.card__coverage {
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin-top: 8px;
+  line-height: 1.4;
+}
+
+.card__links {
+  font-size: 12px;
+  margin-top: 6px;
+}
+
+.card__links a {
+  font-weight: 500;
+}
+
+/* Sheet (하단 시트) */
+
+.sheet__handle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  background: var(--card);
+  border: none;
+  border-top: 1px solid var(--border);
+  padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px)) 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.sheet {
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)) 16px;
+  max-height: 60dvh;
+  overflow-y: auto;
+}
+
+.sheet[hidden] { display: none; }
