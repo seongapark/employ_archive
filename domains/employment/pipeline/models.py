@@ -12,14 +12,14 @@ from typing import Literal, Optional
 from pydantic import BaseModel, Field, field_validator, model_validator
 
 Source = Literal["eaps", "est", "ei"]
-Breakdown = Literal["total", "industry"]
+Breakdown = Literal["total", "industry", "sex", "age"]
 Status = Literal["잠정", "확정"]
 
 PERIOD_RE = re.compile(r"^\d{4}-(0[1-9]|1[0-2])$")
 
 
 def make_id(source: str, period: str, breakdown: str, category: Optional[str]) -> str:
-    tail = f"-{category}" if breakdown == "industry" else ""
+    tail = "" if breakdown == "total" else f"-{category}"
     return f"{source}-{period}-headcount-{breakdown}{tail}"
 
 
@@ -60,8 +60,8 @@ class SeriesRecord(BaseModel):
 
     @model_validator(mode="after")
     def check_category(self):
-        if self.breakdown == "industry" and not self.category:
-            raise ValueError("breakdown=industry 는 category 가 필요하다")
         if self.breakdown == "total" and self.category:
             raise ValueError("breakdown=total 은 category 를 가질 수 없다")
+        if self.breakdown != "total" and not self.category:
+            raise ValueError(f"breakdown={self.breakdown} 는 category 가 필요하다")
         return self
