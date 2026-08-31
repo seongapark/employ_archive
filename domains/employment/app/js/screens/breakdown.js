@@ -1,11 +1,15 @@
 import {
   segmentsOf, breakdownMatrix, categoryTimeline, fmtDelta, deltaTone, monthLabel,
-  EMPTY_LABEL, emptyLabel, esc, shortOf, SOURCE_ORDER, SOURCE_COLORS,
+  EMPTY_LABEL, emptyLabel, esc, shortOf, totalRow, SOURCE_ORDER, SOURCE_COLORS,
 } from '../data.js';
 
 // 사업체노동력조사가 성·연령에서 통째로 비는 이유를 화면이 말한다.
 // 열을 지우면 "안 잡는다"는 사실 자체가 사라진다.
 const EST_NOTE = '사업체노동력조사는 성·연령별 종사자수를 공표하지 않습니다.';
+
+// 두 출처가 같은 구간을 다르게 부른다. 연령만 적는다 — 남자/남성은 누구도
+// 다르게 읽지 않지만, 15∼29세와 29세이하는 서로 다른 구간처럼 보인다.
+const AGE_NOTE = '경활은 15∼29세, 고용행정은 29세이하로 쓴다 · 이 앱은 29세 이하로 통일';
 
 function tabs(segments, current) {
   return `<div class="btabs">${segments.map(s =>
@@ -42,6 +46,15 @@ export function render(el, ctx) {
     }).join('')
   }</tr></thead>`;
 
+  // 전체 증감은 정렬과 무관하게 항상 첫 줄이다. 분류 행처럼 펼쳐지지 않는다 —
+  // 시계열은 이미 시트가 전체 기준으로 보여준다.
+  const total = totalRow(ctx.series, ctx.state.period);
+  const totalHtml = `
+    <tr class="matrix__total">
+      <th scope="row">${esc(total.short_ko)}</th>
+      ${SOURCE_ORDER.map(s => cell(total.cells[s].state, total.cells[s].yoy)).join('')}
+    </tr>`;
+
   const body = rows.map(row => `
     <tr class="row" data-code="${esc(row.code)}">
       <th scope="row" title="${esc(row.name_ko)}">${esc(shortOf(row))}</th>
@@ -54,8 +67,13 @@ export function render(el, ctx) {
       <button type="button" class="sortbtn${sort === 'delta' ? ' is-on' : ''}" data-sort="delta">증감순</button>
       <button type="button" class="sortbtn${sort === 'code' ? ' is-on' : ''}" data-sort="code">분류순</button>
     </div>
-    <table class="matrix">${head}<tbody>${body}</tbody></table>
-    <p class="legend">미제공 = 그 출처가 공표하지 않는 분류 · 미발표 = 아직 그 달을 내지 않음 · 증감없음 = 전년동월대비를 낼 수 없음</p>`;
+    <table class="matrix">${head}<tbody>${totalHtml}${body}</tbody></table>
+    <ul class="legend">
+      <li>미제공 = 그 출처가 공표하지 않는 분류</li>
+      <li>미발표 = 아직 그 달을 내지 않음</li>
+      <li>증감없음 = 전년동월대비를 낼 수 없음</li>
+      ${current === 'age' ? `<li>${esc(AGE_NOTE)}</li>` : ''}
+    </ul>`;
 
   el.querySelectorAll('.sortbtn').forEach(btn => btn.addEventListener('click', () => {
     ctx.state.sort = btn.dataset.sort;

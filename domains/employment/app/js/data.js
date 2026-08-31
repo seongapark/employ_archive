@@ -87,7 +87,10 @@ export function monthOptions(series) {
   };
 }
 
-export function overviewCards(series, sources, period) {
+// releases 는 releases.json — {출처: {기간: {url, title, attachments}}}.
+// 달마다 그 달의 보도자료 게시글과 첨부를 든다. 아직 못 채운 달은 없을 수 있으므로
+// 그때는 게시판 목록으로 보낸다(틀린 글을 여는 것보다 낫다).
+export function overviewCards(series, sources, period, releases = {}) {
   const byCode = new Map(sources.map(s => [s.code, s]));
   return SOURCE_ORDER.filter(code => byCode.has(code)).map(code => {
     const meta = byCode.get(code);
@@ -101,6 +104,14 @@ export function overviewCards(series, sources, period) {
       coverage: meta.coverage,
       caveat: meta.caveat,
       boardUrl: meta.board_url,
+      kosisUrl: meta.kosis_url || null,
+    };
+    // 그 달의 보도자료. 색인에 없으면 게시판 목록으로 떨어진다.
+    const found = (releases[code] || {})[period] || null;
+    const post = {
+      releaseUrl: found ? found.url : meta.board_url,
+      releaseTitle: found ? (found.title || null) : null,
+      attachments: found ? (found.attachments || []) : [],
     };
     if (here) {
       // 레코드가 있다고 곧 'value' 가 아니다. yoy 가 null 이면 noDelta 다 —
@@ -110,13 +121,12 @@ export function overviewCards(series, sources, period) {
       const { state, yoy } = cellState(here, true);
       return {
         ...base, period, state, value: here.value, yoy, status: here.status,
-        releasedAt: here.released_at, releaseUrl: here.release_url,
-        attachments: here.attachments || [], fallback: null,
+        releasedAt: here.released_at, ...post, fallback: null,
       };
     }
     return {
       ...base, period, state: 'unpublished', value: null, yoy: null, status: null,
-      releasedAt: null, releaseUrl: meta.board_url, attachments: [],
+      releasedAt: null, ...post,
       // 폴백 줄도 같은 판정을 탄다 — 최근 발표월의 yoy 가 null 인데 fmtDelta 로
       // 그리면 카드가 또 없는 숫자를 지어낸다.
       fallback: newest && {
@@ -196,6 +206,20 @@ export function breakdownMatrix(series, categories, period, { sort = 'delta', br
     return values.length ? Math.max(...values.map(Math.abs)) : -1;
   };
   return rows.slice().sort((a, b) => magnitude(b) - magnitude(a));
+}
+
+// 매트릭스 첫 줄에 고정되는 전체 증감. 분류별 숫자는 전체가 얼마나 움직였는지를
+// 알아야 크기를 가늠할 수 있다 — 제조업 -6.8만명 이 큰 수인지 작은 수인지는
+// 전체가 +10.8만명 이라는 걸 알아야 판단된다. 정렬은 이 줄을 건드리지 않는다:
+// 기준선이 순서에 따라 자리를 옮기면 기준선이 아니다.
+export function totalRow(series, period) {
+  const cells = {};
+  for (const source of SOURCE_ORDER) {
+    const record = series.find(r => r.source === source
+      && r.period === period && r.breakdown === 'total');
+    cells[source] = cellState(record, true);
+  }
+  return { code: null, name_ko: '전체', short_ko: '전체', cells };
 }
 
 export function categoryTimeline(series, { breakdown, category, months = 24 } = {}) {

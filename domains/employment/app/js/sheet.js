@@ -88,7 +88,7 @@ export function mountSheet(sheetEl, handleEl, labelEl, scrimEl, ctx) {
       </div>
       <div class="sheet__body"></div>
       <div class="sheet__line"></div>
-      <p class="sheet__hint">${asTable ? '' : '점선을 끌면 기준월이 바뀝니다 (위쪽 연·월 선택과는 별개)'}</p>
+      <p class="sheet__hint">${asTable ? '' : '점선을 끌면 기준월이 바뀝니다.'}</p>
       <ul class="sheet__legend">${
         ctx.sources.map(s => `<li><span class="dot" data-source="${esc(s.code)}"></span>${esc(shortOf(s))}</li>`).join('')
       }</ul>`;

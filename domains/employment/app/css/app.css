@@ -153,12 +153,26 @@
 }
 
 .card__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
   font-size: 12px;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .card__links a {
   font-weight: 500;
+}
+
+/* 첨부 받기는 링크가 아니라 버튼처럼 보여야 누를 것이 있다는 걸 안다.
+   그 달의 파일일 때만 나온다 — data.js 가 최신월이 아니면 첨부를 비운다. */
+.card__file {
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--text-secondary);
 }
 
 /* Sheet (하단 시트)
@@ -421,6 +435,21 @@
 .matrix .is-down { color: var(--down); }
 .matrix .is-flat { color: var(--text-secondary); }
 
+/* 전체 증감은 기준선이다 — 분류 행과 눈으로 구분되고 정렬과 무관하게 맨 위다. */
+.matrix__total th,
+.matrix__total td {
+  padding: 10px 8px;
+  text-align: right;
+  background: var(--accent-light);
+  border-bottom: 2px solid var(--border);
+  font-weight: 700;
+}
+
+.matrix__total th {
+  text-align: left;
+  color: var(--text);
+}
+
 .matrix .cell--empty {
   color: var(--text-muted);
 }
@@ -450,10 +479,17 @@
 }
 
 .legend {
+  list-style: none;
+  margin: 0;
   font-size: 11px;
   color: var(--text-muted);
   padding: 8px 16px 16px 16px;
-  line-height: 1.4;
+  line-height: 1.6;
+}
+
+/* 한 줄에 하나씩 — 가운뎃점으로 이어 붙이면 좁은 화면에서 세 설명이 뒤엉킨다 */
+.legend li + li {
+  margin-top: 2px;
 }
 
 /* Sources Comparison (출처비교) */
