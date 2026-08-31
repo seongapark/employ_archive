@@ -1,11 +1,5 @@
 // 증감 비교 시트의 그림. SVG 문자열만 만든다 — DOM 을 만지지 않아 테스트가 된다.
-import { SOURCE_ORDER, SOURCE_COLORS, fmtDelta, monthLabel, esc } from './data.js';
-
-const EMPTY_LABEL = {
-  notProvided: '― 미제공',
-  unpublished: '― 미발표',
-  noDelta: '― 증감없음',
-};
+import { SOURCE_ORDER, SOURCE_COLORS, fmtLevel, fmtDelta, monthLabel, emptyLabel, esc } from './data.js';
 
 const ROW_H = 34;
 export const LABEL_W = 96;
@@ -31,7 +25,7 @@ export function barsSvg(snapshot, { width = 320, sourceNames = {} } = {}) {
     parts.push(`<text x="0" y="${y + 15}" font-size="11" fill="#667085">${esc(name)}</text>`);
 
     if (row.state !== 'value') {
-      parts.push(`<text x="${zero + 6}" y="${y + 15}" font-size="11" fill="#98a2b3">${esc(EMPTY_LABEL[row.state] || '―')}</text>`);
+      parts.push(`<text x="${zero + 6}" y="${y + 15}" font-size="11" fill="#98a2b3">${esc(emptyLabel(row.state))}</text>`);
       return;
     }
     const w = (Math.abs(row.yoy) / max) * (plotW / 2 - VALUE_GUTTER);
@@ -87,13 +81,18 @@ export function timelineSvg(timeline, { width = 320, height = 160, selected = nu
   return `<svg class="chart chart--line" viewBox="0 0 ${width} ${height}" width="100%" height="${height}" role="img">${parts.join('')}</svg>`;
 }
 
+// 대체 뷰는 그래프가 말하는 것을 다 말해야 한다 — 수준과 증감 둘 다.
+// 빈 상태 행은 그래프와 같은 문구로 자리를 지킨다.
 export function sheetTable(snapshot, timeline, { sourceNames = {} } = {}) {
   const rows = snapshot.map(s => {
-    const label = s.state === 'value' ? esc(fmtDelta(s.yoy)) : esc(EMPTY_LABEL[s.state] || '―');
+    const empty = esc(emptyLabel(s.state));
+    const level = s.value === null || s.value === undefined ? empty : esc(fmtLevel(s.value));
+    const delta = s.state === 'value' ? esc(fmtDelta(s.yoy)) : empty;
     const points = (timeline[s.source] || []).length;
-    return `<tr><th scope="row">${esc(sourceNames[s.source] || s.source)}</th><td class="num">${label}</td><td class="num">${points}개월</td></tr>`;
+    return `<tr><th scope="row">${esc(sourceNames[s.source] || s.source)}</th>` +
+      `<td class="num">${level}</td><td class="num">${delta}</td><td class="num">${points}개월</td></tr>`;
   }).join('');
-  return `<table class="sheet__table"><caption class="sr-only">출처별 전년동월대비 증감</caption>` +
-    `<thead><tr><th scope="col">출처</th><th scope="col">증감</th><th scope="col">시계열</th></tr></thead>` +
+  return `<table class="sheet__table"><caption class="sr-only">출처별 수준과 전년동월대비 증감</caption>` +
+    `<thead><tr><th scope="col">출처</th><th scope="col">수준</th><th scope="col">증감</th><th scope="col">시계열</th></tr></thead>` +
     `<tbody>${rows}</tbody></table>`;
 }

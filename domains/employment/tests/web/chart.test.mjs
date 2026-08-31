@@ -67,7 +67,8 @@ test('the widest label at maximum magnitude neither overruns the name column nor
 
 test('sheetTable is a real table with every source as a row', () => {
   const html = sheetTable(
-    [{ source: 'eaps', state: 'value', yoy: 107.6 }, { source: 'est', state: 'notProvided', yoy: null }],
+    [{ source: 'eaps', state: 'value', value: 29136.1, yoy: 107.6 },
+      { source: 'est', state: 'notProvided', value: null, yoy: null }],
     { eaps: [{ period: '2026-07', yoy: 107.6 }], est: [] },
     { sourceNames: NAMES },
   );
@@ -75,4 +76,37 @@ test('sheetTable is a real table with every source as a row', () => {
   assert.match(html, /경제활동인구조사/);
   assert.match(html, /사업체노동력조사/);
   assert.match(html, /미제공/);
+});
+
+test('the table carries the level too — the alternative view must not be thinner than the chart', () => {
+  const html = sheetTable(
+    [{ source: 'eaps', state: 'value', value: 29136.1, yoy: 107.6 }],
+    { eaps: [{ period: '2026-07', yoy: 107.6 }] },
+    { sourceNames: NAMES },
+  );
+  assert.match(html, /<th scope="col">수준<\/th>/);
+  assert.match(html, /2,913\.6만명/);   // 수준
+  assert.match(html, /\+10\.8만명/);    // 증감
+});
+
+test('an empty-state row keeps its wording in both the level and the delta column', () => {
+  const html = sheetTable(
+    [{ source: 'est', state: 'notProvided', value: null, yoy: null },
+      { source: 'ei', state: 'unpublished', value: null, yoy: null }],
+    { est: [], ei: [] },
+    { sourceNames: NAMES },
+  );
+  assert.equal((html.match(/― 미제공/g) || []).length, 2);
+  assert.equal((html.match(/― 미발표/g) || []).length, 2);
+});
+
+test('a noDelta row shows its level but never a fabricated delta', () => {
+  const html = sheetTable(
+    [{ source: 'est', state: 'noDelta', value: 20419.1, yoy: null }],
+    { est: [{ period: '2024-08', yoy: null }] },
+    { sourceNames: NAMES },
+  );
+  assert.match(html, /2,041\.9만명/);
+  assert.match(html, /― 증감없음/);
+  assert.doesNotMatch(html, /0\.0만명/);
 });

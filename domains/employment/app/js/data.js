@@ -32,6 +32,12 @@ export function fmtDelta(cheon) {
   return `${sign}${Math.abs(man).toFixed(1)}만명`;
 }
 
+// 증감의 색 토큰. 0 은 증가도 감소도 아니므로 중립이다 —
+// `yoy >= 0` 로 묶으면 변동 없음이 증가색(빨강)으로 나간다.
+export function deltaTone(yoy) {
+  return yoy > 0 ? 'is-up' : yoy < 0 ? 'is-down' : 'is-flat';
+}
+
 function nextPeriod(period) {
   let year = Number(period.slice(0, 4));
   let month = Number(period.slice(5, 7)) + 1;
@@ -97,8 +103,13 @@ export function overviewCards(series, sources, period) {
       boardUrl: meta.board_url,
     };
     if (here) {
+      // 레코드가 있다고 곧 'value' 가 아니다. yoy 가 null 이면 noDelta 다 —
+      // 그 판정은 cellState 한 곳에서만 한다. 여기서 state:'value' 로 못박으면
+      // 화면이 fmtDelta(null) 을 `0.0만명` 증가로 그려 없는 숫자를 지어낸다
+      // (실제 사례: 사업체노동력조사 2024-01~12 의 total).
+      const { state, yoy } = cellState(here, true);
       return {
-        ...base, period, state: 'value', value: here.value, yoy: here.yoy, status: here.status,
+        ...base, period, state, value: here.value, yoy, status: here.status,
         releasedAt: here.released_at, releaseUrl: here.release_url,
         attachments: here.attachments || [], fallback: null,
       };
@@ -106,8 +117,11 @@ export function overviewCards(series, sources, period) {
     return {
       ...base, period, state: 'unpublished', value: null, yoy: null, status: null,
       releasedAt: null, releaseUrl: meta.board_url, attachments: [],
+      // 폴백 줄도 같은 판정을 탄다 — 최근 발표월의 yoy 가 null 인데 fmtDelta 로
+      // 그리면 카드가 또 없는 숫자를 지어낸다.
       fallback: newest && {
         period: newest.period, value: newest.value, yoy: newest.yoy,
+        state: cellState(newest, true).state,
         releasedAt: newest.released_at, releaseUrl: newest.release_url,
       },
     };
@@ -119,6 +133,21 @@ export function segmentsOf(industries, segments) {
     { breakdown: 'industry', name_ko: '산업별', categories: industries },
     ...segments,
   ];
+}
+
+// 네 상태의 표기. 판정(cellState)과 문구를 한곳에 둬야 화면마다 말이 갈라지지
+// 않는다 — 예전에는 chart.js 와 breakdown.js 가 각자 갖고 있다가 `미발표` 와
+// `― 미발표` 로 어긋났다. 매트릭스 칸은 좁으므로 문구만 쓰고, 막대·시트·펼침
+// 목록처럼 "자리를 지킨다"는 뜻이 필요한 곳은 emptyLabel() 로 `― ` 를 붙인다.
+export const EMPTY_LABEL = {
+  notProvided: '미제공',
+  unpublished: '미발표',
+  noDelta: '증감없음',
+};
+
+export function emptyLabel(state) {
+  const text = EMPTY_LABEL[state];
+  return text ? `― ${text}` : '―';
 }
 
 // 없는 이유가 다른 것도 정보다. 미제공이면 발표 여부를 따질 이유가 없으므로
@@ -181,7 +210,11 @@ export function sheetData(series, {
       && r.breakdown === (breakdown || 'total')
       && (r.category ?? null) === (category ?? null));
     const provided = meta && meta.provided ? meta.provided[source] : true;
-    return { source, ...cellState(record, provided) };
+    const cell = cellState(record, provided);
+    // 수준도 같이 나른다. `표로 보기` 는 #1baf7a 대비 미달에 대한 의무 완화
+    // 조치인데(스펙 7.6) 증감만 있으면 대체 뷰가 원본보다 빈약해진다.
+    const value = record && cell.state !== 'notProvided' ? record.value : null;
+    return { source, value, ...cell };
   });
   const timeline = categoryTimeline(series, { breakdown, category, months });
   const all = Object.values(timeline).flat().map(p => p.period).sort();

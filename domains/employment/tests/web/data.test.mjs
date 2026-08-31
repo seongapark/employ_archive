@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { monthOptions, overviewCards, fmtLevel, fmtDelta, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData } from '../../app/js/data.js';
+import { monthOptions, overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData, EMPTY_LABEL, emptyLabel } from '../../app/js/data.js';
 
 function rec(over = {}) {
   return {
@@ -67,6 +67,34 @@ test('overviewCards marks a source unpublished and carries its latest month', ()
   assert.equal(cards[0].state, 'value');
   assert.equal(cards[0].period, '2026-07');
   assert.equal(cards[0].fallback, null);
+});
+
+test('a card whose record has no yoy is noDelta, not a +0.0만명 increase', () => {
+  // 실제 사례: 사업체노동력조사 total 은 2024-01~12 의 yoy 가 null 인데
+  // 그 달들이 월 스위처에서 선택 가능하다. state 를 'value' 로 못박으면
+  // 화면이 fmtDelta(null) 을 `0.0만명 증가` 로 그려 없는 숫자를 지어낸다.
+  const series = [
+    rec({ source: 'eaps', period: '2024-08', value: 28800.8, yoy: 122.8 }),
+    rec({ source: 'est', period: '2024-08', value: 20419.1, yoy: null }),
+    rec({ source: 'ei', period: '2024-08', value: 15445.0, yoy: 220.0 }),
+  ];
+  const est = overviewCards(series, SOURCES, '2024-08')[1];
+  assert.equal(est.state, 'noDelta');
+  assert.equal(est.value, 20419.1);   // 수준은 그대로 있다 — 없는 것은 증감뿐이다
+  assert.equal(est.yoy, null);
+  assert.equal(est.fallback, null);
+  // 같은 사실을 시트는 이미 `― 증감없음` 으로 그린다. 두 화면이 한 사실에
+  // 다른 답을 주면 안 된다.
+  assert.equal(sheetData(series, { period: '2024-08' }).snapshot[1].state, 'noDelta');
+});
+
+test('an unpublished card carries the state of its fallback month too', () => {
+  const series = [
+    rec({ source: 'est', period: '2024-08', value: 20419.1, yoy: null }),
+  ];
+  const est = overviewCards(series, SOURCES, '2026-07')[1];
+  assert.equal(est.state, 'unpublished');
+  assert.equal(est.fallback.state, 'noDelta');
 });
 
 test('formatters convert 천명 to 만명', () => {
@@ -171,6 +199,22 @@ test('sheetData snapshot keeps every source in fixed order, notProvided included
   assert.deepEqual(d.snapshot.map(s => s.source), ['eaps', 'est', 'ei']);
   assert.equal(d.snapshot[1].state, 'notProvided');
   assert.equal(d.snapshot[2].yoy, 188.0);
+  // 수준도 같이 온다 — `표로 보기` 가 증감만 보여주면 대체 뷰가 원본보다 빈약해진다.
+  assert.equal(d.snapshot[0].value, 29136.1);
+  assert.equal(d.snapshot[1].value, null);
+});
+
+test('deltaTone gives zero a neutral token, not the increase colour', () => {
+  assert.equal(deltaTone(12), 'is-up');
+  assert.equal(deltaTone(-12), 'is-down');
+  assert.equal(deltaTone(0), 'is-flat');
+});
+
+test('EMPTY_LABEL has one home and emptyLabel adds the placeholder dash', () => {
+  assert.equal(EMPTY_LABEL.unpublished, '미발표');
+  assert.equal(emptyLabel('unpublished'), '― 미발표');
+  assert.equal(emptyLabel('notProvided'), '― 미제공');
+  assert.equal(emptyLabel('value'), '―');
 });
 
 test('sheetData falls back to the total cut when no category is given', () => {

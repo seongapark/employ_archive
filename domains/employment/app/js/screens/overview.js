@@ -1,4 +1,4 @@
-import { overviewCards, fmtLevel, fmtDelta, monthLabel, esc } from '../data.js';
+import { overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, EMPTY_LABEL, esc } from '../data.js';
 
 function switcher(ctx) {
   const { years, monthsByYear } = ctx.months;
@@ -28,17 +28,31 @@ function attachmentLinks(card) {
     .map(a => `<a href="${esc(a.url)}" rel="noopener">${esc(a.type)}</a>`).join(' · ');
 }
 
+// 증감 줄. state 는 data.js 의 cellState 가 이미 판정했다 — 여기서는 그릴 뿐이다.
+// noDelta 는 숫자가 아니라 `증감없음` 이다. fmtDelta(null) 을 그리면 시트가
+// `― 증감없음` 이라 말하는 같은 사실을 카드는 `0.0만명 증가` 로 말하게 된다.
+function deltaRow(card) {
+  if (card.state === 'noDelta') {
+    return `<div class="card__delta is-flat">${esc(EMPTY_LABEL.noDelta)} <span class="card__deltaNote">전년동월대비</span></div>`;
+  }
+  return `<div class="card__delta num ${deltaTone(card.yoy)}">${esc(fmtDelta(card.yoy))} <span class="card__deltaNote">전년동월대비</span></div>`;
+}
+
 function cardHtml(card) {
-  const head = `<div class="card__head"><span class="card__name">${esc(card.name_ko)}</span>
+  // 잠정/확정 배지는 스펙 5장·상위 7.5 가 카드에 요구한다. 지금 적재분은 전부 `잠정` 이다.
+  const badge = card.status
+    ? ` <span class="badge badge--status">${esc(card.status)}</span>` : '';
+  const head = `<div class="card__head"><span class="card__name">${esc(card.name_ko)}${badge}</span>
     <span class="card__meta num">${esc(releaseLabel(card))}</span></div>`;
 
-  const body = card.state === 'value'
-    ? `<div class="card__value num">${esc(fmtLevel(card.value))}</div>
-       <div class="card__delta num ${card.yoy >= 0 ? 'is-up' : 'is-down'}">${esc(fmtDelta(card.yoy))} <span class="card__deltaNote">전년동월대비</span></div>`
-    : `<div class="card__value card__value--empty">${esc(monthLabel(card.period))} 기준 미발표</div>` +
+  const body = card.state === 'unpublished'
+    ? `<div class="card__value card__value--empty">${esc(monthLabel(card.period))} 기준 미발표</div>` +
       (card.fallback
-        ? `<div class="card__fallback num">최신 ${esc(monthLabel(card.fallback.period))} · ${esc(fmtLevel(card.fallback.value))} (${esc(fmtDelta(card.fallback.yoy))})</div>`
-        : '');
+        ? `<div class="card__fallback num">최신 ${esc(monthLabel(card.fallback.period))} · ${esc(fmtLevel(card.fallback.value))} (${esc(
+            card.fallback.state === 'noDelta' ? EMPTY_LABEL.noDelta : fmtDelta(card.fallback.yoy))})</div>`
+        : '')
+    : `<div class="card__value num">${esc(fmtLevel(card.value))}</div>
+       ${deltaRow(card)}`;
 
   // coverage 는 접히지 않는다. 정의 차이의 인지가 이 앱의 핵심 가치다(스펙 7.5).
   const coverage = `<div class="card__coverage">${esc(card.coverage)}</div>`;
