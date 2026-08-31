@@ -144,6 +144,27 @@ def test_parse_table_picks_the_change_row_under_employed():
     assert got[("emp_change", 2025, "annual")] == 20.5   # 205천명, 경활 (192) 아님
 
 
+def test_parse_table_resets_section_after_a_block_ends():
+    # 취업자의 '(증감)' 뒤에 실업자처럼 새 대분류 아닌 행이 오고, 거기에도
+    # '(증감)' 하위행이 있다면 — 대분류를 안 지우면 이 값이 emp_change 로
+    # 잘못 덮어써진다. 실업자의 (999)들이 뚜렷이 다른 값이라 회귀가 나면
+    # 바로 드러난다.
+    table = "\n".join([
+        "2024년 2025년 2026년",
+        "취업자 28,576 28,781 28,943",
+        "(증감) (159) (205) (162)",
+        "실업자 823 810 812",
+        "(증감) (999) (999) (999)",
+        "실업률 2.8 2.7 2.7",
+        "고용률 62.7 62.9 63.0",
+    ])
+    got = keis.parse_table(table)
+    assert got[("emp_change", 2025, "annual")] == 20.5
+    assert got[("emp_change", 2026, "annual")] == 16.2
+    assert all(value != 99.9 for (indicator, *_), value in got.items()
+               if indicator == "emp_change")
+
+
 def test_parse_table_reads_rates_without_conversion():
     got = keis.parse_table(PAGE_2025_12)
     assert got[("emp_rate", 2026, "annual")] == 63.0
@@ -174,6 +195,25 @@ def test_parse_table_raises_when_the_table_is_incomplete():
     ])
     with pytest.raises(ValueError, match="지표"):
         keis.parse_table(partial)
+
+
+def test_number_parses_wrapped_and_bare_values():
+    assert keis._number("(146)") == 146.0
+    assert keis._number("(-0.8)") == -0.8
+    assert keis._number("(0.0)") == 0.0
+    assert keis._number("146") == 146.0
+    assert keis._number("29,203") == 29203.0
+    assert keis._number("−177") == -177.0
+
+
+def test_number_rejects_unbalanced_brackets_and_non_numbers():
+    # '1)' 같은 각주 표시가 숫자로 읽히면 그 줄의 값 개수가 하나 밀린다
+    assert keis._number("1)") is None
+    assert keis._number("(146") is None
+    assert keis._number("(증감)") is None
+    assert keis._number("(증가율)") is None
+    assert keis._number("30H") is None
+    assert keis._number("15~29세") is None
 
 
 def test_parse_drops_years_before_publication():

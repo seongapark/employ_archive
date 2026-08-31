@@ -119,7 +119,13 @@ LABEL_TO_INDICATOR = {
 SCALE = {"emp_change": 0.1}
 REQUIRED_INDICATORS = frozenset({"emp_change", "emp_rate", "unemp_rate"})
 
-_NUMBER = re.compile(r"^[(\[]?[-−]?[\d,]+(?:\.\d+)?[)\]]?$")
+# 괄호는 양쪽이 짝을 이뤄야 한다 — 한쪽만 있으면 숫자가 아니라 각주 표시
+# ('1)' 같은) 다. 짝을 안 보면 '1)' 이 값 1.0 으로 읽혀 열이 하나 밀리고,
+# 그 밀린 개수가 우연히 len(columns) 와 같으면 그 줄 전체가 엉뚱한
+# 기간에 조용히 들어간다.
+_NUMBER = re.compile(r"^\([-−]?[\d,]+(?:\.\d+)?\)$"
+                      r"|^\[[-−]?[\d,]+(?:\.\d+)?\]$"
+                      r"|^[-−]?[\d,]+(?:\.\d+)?$")
 _WRAPPING_PAREN = re.compile(r"^[(\[]|[)\]]$")
 
 
@@ -157,6 +163,11 @@ def parse_table(text: str) -> dict[tuple[str, int, str], float]:
         label, numbers = _split_row(line)
         if label in _SECTIONS:
             section = label
+        elif not label.startswith("("):
+            # 대분류가 끝나는 지점. 이걸 안 지우면, 훗날 다른 대분류 밑에도
+            # '(증감)' 하위행이 생겼을 때 그게 여전히 '취업자' 대분류로
+            # 남아 있는 section 과 짝지어져 emp_change 로 잘못 읽힌다.
+            section = None
         if len(numbers) != len(columns):
             continue
         indicator = (LABEL_TO_INDICATOR.get((section, label))
