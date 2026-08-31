@@ -96,19 +96,30 @@ def test_parse_handles_the_first_half_issue_layout():
     assert {r.target_year for r in got.values()} == {2026, 2027}  # 2024·2025는 실적
 
 
-# 실제 select 태그의 축약 발췌 — 여러 회차, 최신호에 selected 가 붙어 있다
+# 실제 select 태그의 축약 발췌 — 1982년까지 이어지는 실제 범위를 흉내 낸다.
+# "특별호"는 라벨에 연도가 없는 경우를 시험하기 위한 가상의 항목이다.
 ISSUE_SELECT_HTML = """
 <select id="yearSelectUpDown" name="date" onchange="dateChg(this.value);">
     <option value="19259" selected>2026년 8월</option>
     <option value="19180" >2026 상반기</option>
     <option value="18859" >2025년 8월</option>
     <option value="18476" >2024 하반기</option>
+    <option value="18120" >2023 하반기</option>
+    <option value="99999" >특별호</option>
+    <option value="2990" >1982年 4/4</option>
+    <option value="2989" >1982年 3/4</option>
+    <option value="2988" >1982年 2/4</option>
 </select>
 """
 
 
-def test_parse_issue_list_returns_pub_nos_newest_first():
-    assert kdi.parse_issue_list(ISSUE_SELECT_HTML) == ["19259", "19180", "18859", "18476"]
+def test_parse_issue_list_returns_pub_nos_and_labels_newest_first():
+    got = kdi.parse_issue_list(ISSUE_SELECT_HTML)
+    assert got[0] == ("19259", "2026년 8월")
+    assert got[-1] == ("2988", "1982年 2/4")
+    assert [no for no, _ in got] == [
+        "19259", "19180", "18859", "18476", "18120", "99999", "2990", "2989", "2988",
+    ]
 
 
 def test_parse_issue_list_raises_when_the_dropdown_is_missing():
@@ -163,15 +174,65 @@ def test_list_issues_reads_the_real_date_from_each_issue_page(monkeypatch):
     assert issues[0].url == kdi.ISSUE_URL.format(no="19259")
 
 
+def test_list_issues_skips_pages_older_than_the_cutoff_without_fetching_them(monkeypatch):
+    # 드롭다운은 1982년까지 이어진다. 라벨에서 커트라인보다 뚜렷하게 이전인
+    # 연도가 읽히면 그 회차의 본문은 아예 열지 않는다(네트워크 요청 자체가
+    # 없어야 한다). 라벨에 연도가 없는 항목은 걸러내지 않고 그냥 연다.
+    fetched = []
+
+    def fake_get(url, **kwargs):
+        if url == kdi.LIST_URL:
+            return _Resp(text=ISSUE_SELECT_HTML)
+        fetched.append(url)
+        return _Resp(text='<h2>더미 <p>2000.01.01</p></h2>')
+
+    monkeypatch.setattr(kdi.http, "get", fake_get)
+
+    kdi.list_issues(since_year=2024)
+
+    fetched_nos = {u.rsplit("=", 1)[-1] for u in fetched}
+    # 커트라인 이전(2023년, 1982년) 회차는 열어보지도 않는다
+    assert fetched_nos.isdisjoint({"18120", "2990", "2989", "2988"})
+    # 커트라인 그 해(2024)를 포함해 최신 회차는 연다
+    assert {"19259", "19180", "18859", "18476"} <= fetched_nos
+    # 라벨에 연도가 없으면 걸러내지 않고 그냥 연다
+    assert "99999" in fetched_nos
+
+
+def test_collect_fetches_the_listing_page_exactly_once(monkeypatch):
+    # collect() 는 list_issues() 를 타지 않는다 — /research/economy 자체가
+    # 최신 회차 본문이므로 그 페이지 하나만 보면 된다. 드롭다운 전체를
+    # 훑는 list_issues() 를 불렀다면 이 테스트가 실패한다. collect_issue() 에
+    # 이미 받아 둔 본문을 넘겨 같은 URL을 두 번 받지 않는지도 함께 본다.
+    def boom():
+        raise AssertionError("collect() 가 list_issues() 를 불렀다 — 드롭다운을 탈 필요가 없다")
+
+    monkeypatch.setattr(kdi, "list_issues", boom)
+
+    calls = []
+
+    def fake_get(url, **kwargs):
+        calls.append(url)
+        if url == kdi.LIST_URL:
+            return _Resp(text=PAGE)
+        return _Resp(content=b"%PDF")
+
+    monkeypatch.setattr(kdi.http, "get", fake_get)
+    monkeypatch.setattr(kdi.pdf, "page_texts", lambda data: [TABLE])
+
+    records = kdi.collect(date(2026, 8, 30))
+    assert records
+    assert calls.count(kdi.LIST_URL) == 1
+
+
 def test_collect_skips_a_chapter_whose_download_fails(monkeypatch):
     # 장은 본문 순서대로 시도한다. 앞 장 내려받기가 502로 죽으면 표가 실린
     # 뒷 장은 시도조차 못 하고 수집기 전체가 실패한다.
     chapters = kdi.parse_chapters(PAGE)
     failing = chapters[0][1]
-    monkeypatch.setattr(kdi, "list_issues", lambda: [ISSUE])
 
     def fake_get(url, **kwargs):
-        if url == ISSUE.url:
+        if url == kdi.LIST_URL:
             return _Resp(text=PAGE)
         if url == failing:
             raise ConnectionError("HTTP Error 502: Bad Gateway")
@@ -186,10 +247,8 @@ def test_collect_skips_a_chapter_whose_download_fails(monkeypatch):
 
 
 def test_collect_raises_when_every_chapter_fails(monkeypatch):
-    monkeypatch.setattr(kdi, "list_issues", lambda: [ISSUE])
-
     def fake_get(url, **kwargs):
-        if url == ISSUE.url:
+        if url == kdi.LIST_URL:
             return _Resp(text=PAGE)
         raise ConnectionError("HTTP Error 502: Bad Gateway")
 
