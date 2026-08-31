@@ -92,6 +92,17 @@ class NoHeaderRow(ValueError):
     """전망표의 연도 줄이 없다 — 이 쪽에는 전망표가 없다는 뜻이다."""
 
 
+class NotForecastTable(ValueError):
+    """연도 헤더는 있지만 우리가 찾는 지표가 하나도 없다 — 전망표가 아닌
+    다른 표다.
+
+    브리프 한 호에는 연도 헤더가 있는 표가 여럿 실린다(고용률 추이,
+    산업별 취업자 등). 그런 표를 만나면 지표가 하나도 안 걸리는 게
+    정상이라 "다른 표다"로 건너뛴다. 반면 지표가 일부만 걸리면 그건
+    전망표인데 서식이 바뀌어 못 읽은 것이니 조용히 넘기면 안 된다.
+    """
+
+
 def header_columns(lines: list[str]) -> list[tuple[int, str]]:
     """헤더에서 열 순서대로 (연도, 기간) 을 만든다.
 
@@ -189,6 +200,11 @@ def parse_table(text: str) -> dict[tuple[str, int, str], float]:
 
     found = {indicator for indicator, _, _ in values}
     missing = REQUIRED_INDICATORS - found
+    if missing == REQUIRED_INDICATORS:
+        # 하나도 못 찾았다 — 연도 헤더는 있지만 이 표엔 우리 지표가 아예
+        # 없다. 서식이 바뀐 게 아니라 애초에 다른 표라는 뜻이다.
+        raise NotForecastTable(
+            f"전망표가 아니다 — 지표를 하나도 찾지 못했다: {sorted(missing)}")
     if missing:
         raise ValueError(f"전망표에서 지표를 찾지 못했다: {sorted(missing)}")
     return values
@@ -215,16 +231,20 @@ def find_forecast_page(page_texts: list[str],
     보고 지표가 다 나오는 쪽을 고른다. 표 앞 도입부 쪽이 같은 수치를 문장으로
     싣는데, 그 쪽은 헤더가 없어 자연히 걸러진다.
 
-    건너뛰는 예외는 NoHeaderRow 하나로 한정한다(허용 목록). 메시지 문자열로
-    판별하면(예: '지표'가 없으면 건너뛴다) parse_table 이 앞으로 던질 수도
-    있는, 지금은 예상 못 한 다른 오류까지 전부 "표 없음"으로 조용히
-    삼켜버린다. 표는 있는데 못 읽은 경우를 놓치지 않으려면 알려진 "표 없음"
-    신호만 건너뛰고 나머지는 전부 위로 흘려보내야 한다.
+    건너뛰는 예외는 NoHeaderRow · NotForecastTable 둘로 한정한다(허용 목록).
+    메시지 문자열로 판별하면(예: '지표'가 없으면 건너뛴다) parse_table 이
+    앞으로 던질 수도 있는, 지금은 예상 못 한 다른 오류까지 전부 "표 없음"
+    으로 조용히 삼켜버린다. 표는 있는데 못 읽은 경우를 놓치지 않으려면
+    알려진 "표 없음" 신호만 건너뛰고 나머지는 전부 위로 흘려보내야 한다.
+
+    브리프 한 호에는 연도 헤더가 있는 표가 여러 개 실린다 — 전망표는 그중
+    하나일 뿐이다. NotForecastTable 은 그런 '다른 표'를 만났다는 뜻이라
+    건너뛰고 다음 후보 쪽을 계속 찾는다.
     """
     for page_no, text in zip(page_numbers, page_texts):
         try:
             parse_table(text)
-        except NoHeaderRow:
+        except (NoHeaderRow, NotForecastTable):
             continue
         return page_no, text
     return None

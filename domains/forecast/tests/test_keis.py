@@ -187,14 +187,30 @@ def test_parse_table_ignores_indicators_we_do_not_collect():
 
 
 def test_parse_table_raises_when_the_table_is_incomplete():
-    # 서식이 바뀌어 절반만 읽히면 조용히 넘기지 않는다
+    # 서식이 바뀌어 절반만 읽히면 조용히 넘기지 않는다. emp_change 는
+    # 찾았으니 이건 '다른 표'가 아니라 전망표가 망가진 것이다 —
+    # NotForecastTable 이 아닌 일반 ValueError 여야 find_forecast_page 가
+    # 이걸 건너뛰지 않고 그대로 흘려보낸다.
     partial = "\n".join([
         "2023년 2024년 2025년 2026년",
         "취업자 28,416 28,576 28,781 28,943",
         "(증감) (327) (159) (205) (162)",
     ])
-    with pytest.raises(ValueError, match="지표"):
+    with pytest.raises(ValueError, match="지표") as exc_info:
         keis.parse_table(partial)
+    assert not isinstance(exc_info.value, keis.NotForecastTable)
+
+
+def test_parse_table_raises_not_forecast_table_when_no_indicator_matches():
+    # 연도 헤더는 있는데 우리 지표가 하나도 안 걸린다 — 브리프에 흔한
+    # '다른 표'(예: 고용률 추이표)를 만난 정상적인 경우다.
+    other_table = "\n".join([
+        "2023년 2024년 2025년 2026년",
+        "제조업 4,500 4,520 4,480 4,510",
+        "서비스업 18,200 18,350 18,500 18,620",
+    ])
+    with pytest.raises(keis.NotForecastTable):
+        keis.parse_table(other_table)
 
 
 def test_number_parses_wrapped_and_bare_values():
@@ -287,6 +303,19 @@ def test_find_forecast_page_reraises_errors_other_than_a_missing_header():
     ])
     with pytest.raises(ValueError, match="지표"):
         keis.find_forecast_page([broken], [3])
+
+
+def test_find_forecast_page_skips_a_different_table_and_finds_the_real_one_later():
+    # 2025년 10호에서 실제로 벌어진 회귀 — 연도 헤더가 있는 다른 표(예:
+    # 산업별 취업자)를 먼저 만나도, 지표가 하나도 안 걸리면 "다른 표"로
+    # 건너뛰고 뒤쪽의 진짜 전망표를 찾아내야 한다.
+    other_table = "\n".join([
+        "2023년 2024년 2025년 2026년",
+        "제조업 4,500 4,520 4,480 4,510",
+        "서비스업 18,200 18,350 18,500 18,620",
+    ])
+    got = keis.find_forecast_page([other_table, PAGE_2025_12], [2, 10])
+    assert got == (10, PAGE_2025_12)
 
 
 def test_collect_issue_reads_the_table_with_two_ocr_passes():
