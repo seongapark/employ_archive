@@ -88,6 +88,10 @@ _HALF_WORDS = {"상반기": "h1", "하반기": "h2"}
 _MIN_YEARS = 3
 
 
+class NoHeaderRow(ValueError):
+    """전망표의 연도 줄이 없다 — 이 쪽에는 전망표가 없다는 뜻이다."""
+
+
 def header_columns(lines: list[str]) -> list[tuple[int, str]]:
     """헤더에서 열 순서대로 (연도, 기간) 을 만든다.
 
@@ -104,7 +108,7 @@ def header_columns(lines: list[str]) -> list[tuple[int, str]]:
         halves = [_HALF_WORDS[word] for word in ("상반기", "하반기")
                   if word in following]
         return columns + [(years[-1], half) for half in halves]
-    raise ValueError("표에서 연도 줄을 찾지 못했다")
+    raise NoHeaderRow("표에서 연도 줄을 찾지 못했다")
 
 
 # 표의 대분류. '(증감)' 이 여러 번 나오므로 직전 대분류를 기억해야 한다.
@@ -136,8 +140,13 @@ def _number(token: str) -> float | None:
     """
     if not _NUMBER.match(token):
         return None
-    cleaned = _WRAPPING_PAREN.sub("", token)
-    return float(cleaned.replace(",", "").replace("−", "-"))
+    cleaned = _WRAPPING_PAREN.sub("", token).replace(",", "").replace("−", "-")
+    if not cleaned or cleaned == "-":
+        # ',,,' 처럼 콤마·부호만 있는 토큰은 정규식은 통과하지만 숫자가 아니다.
+        # 여기서 걸러야 파서가 이 줄을 조용히 건너뛴다 — 안 그러면 float("")
+        # 가 예상 못 한 ValueError 를 던져, 표가 있는 쪽을 없는 쪽으로 오판한다.
+        return None
+    return float(cleaned)
 
 
 def _split_row(line: str) -> tuple[str, list[float]]:
@@ -205,14 +214,17 @@ def find_forecast_page(page_texts: list[str],
     캡션으로 찾지 않는다 — OCR 이 '표1' 을 'WED' 로도 읽는다. 실제로 파싱해
     보고 지표가 다 나오는 쪽을 고른다. 표 앞 도입부 쪽이 같은 수치를 문장으로
     싣는데, 그 쪽은 헤더가 없어 자연히 걸러진다.
+
+    건너뛰는 예외는 NoHeaderRow 하나로 한정한다(허용 목록). 메시지 문자열로
+    판별하면(예: '지표'가 없으면 건너뛴다) parse_table 이 앞으로 던질 수도
+    있는, 지금은 예상 못 한 다른 오류까지 전부 "표 없음"으로 조용히
+    삼켜버린다. 표는 있는데 못 읽은 경우를 놓치지 않으려면 알려진 "표 없음"
+    신호만 건너뛰고 나머지는 전부 위로 흘려보내야 한다.
     """
     for page_no, text in zip(page_numbers, page_texts):
         try:
             parse_table(text)
-        except ValueError as exc:
-            # 헤더가 있는데 지표가 모자라면 서식이 바뀐 것이다 — 알려야 한다
-            if "지표" in str(exc):
-                raise
+        except NoHeaderRow:
             continue
         return page_no, text
     return None

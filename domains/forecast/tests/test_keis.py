@@ -216,6 +216,15 @@ def test_number_rejects_unbalanced_brackets_and_non_numbers():
     assert keis._number("15~29세") is None
 
 
+def test_number_rejects_tokens_that_strip_to_nothing():
+    # ',,,' 는 정규식은 통과하지만 콤마를 지우면 빈 문자열이라 숫자가 아니다.
+    # float("") 로 새는 ValueError 를 여기서 막아야 find_forecast_page 가
+    # "표 없음"으로 오판하지 않는다.
+    assert keis._number(",,,") is None
+    assert keis._number("(,,,)") is None
+    assert keis._number(",") is None
+
+
 def test_parse_drops_years_before_publication():
     years = {r.target_year for r in keis.parse(PAGE_2026_08, ISSUE_2026_08, "https://x/y.pdf", 19)}
     assert years == {2026}
@@ -266,6 +275,18 @@ def test_find_forecast_page_skips_the_prose_page_that_quotes_the_numbers():
 
 def test_find_forecast_page_returns_none_when_the_issue_has_no_forecast():
     assert keis.find_forecast_page([PAGE_NO_FORECAST, PAGE_NO_FORECAST], [3, 4]) is None
+
+
+def test_find_forecast_page_reraises_errors_other_than_a_missing_header():
+    # 헤더는 있는데 지표가 일부만 읽히면 표는 있는데 못 읽은 것이다 — 이건
+    # "표 없음"이 아니므로 건너뛰지 않고 그대로 위로 흘려보내야 한다.
+    broken = "\n".join([
+        "2023년 2024년 2025년 2026년",
+        "취업자 28,416 28,576 28,781 28,943",
+        "(증감) (327) (159) (205) (162)",
+    ])
+    with pytest.raises(ValueError, match="지표"):
+        keis.find_forecast_page([broken], [3])
 
 
 def test_collect_issue_reads_the_table_with_two_ocr_passes():
