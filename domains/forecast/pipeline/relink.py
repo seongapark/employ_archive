@@ -22,18 +22,27 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 class RelinkResult:
     records: list[ForecastRecord]
     changed: int = 0
+    skipped: int = 0
     unresolved: list[tuple[str, str]] = field(default_factory=list)
 
 
 def relink(records: list[ForecastRecord],
-           resolvers: dict[str, Callable[[ForecastRecord], str]]) -> RelinkResult:
+           resolvers: dict[str, Callable[[ForecastRecord], str | None]]) -> RelinkResult:
     """기관별 해결자로 원문 주소를 구해 링크만 바꾼다.
 
-    수치·식별자·수정폭은 건드리지 않는다. 주소를 못 구한 레코드는 그대로 두고
-    몇 건인지 남긴다 — 조용히 빠뜨리면 무엇이 안 고쳐졌는지 알 수 없다.
+    수치·식별자·수정폭은 건드리지 않는다. 해결자는 세 가지 중 하나로 답한다.
+
+    - URL 문자열: 링크를 바꾼다(changed).
+    - None: 애초에 대상이 아니다(skipped) — 예를 들어 OECD Interim 은 이미
+      보고서를 가리키므로 손댈 필요가 없다. 이건 실패가 아니다.
+    - 예외: 정말로 주소를 못 구했다(unresolved). 원본은 그대로 두고 사유를 남긴다.
+
+    이 셋을 섞으면 안 된다. 대상이 아닌 레코드를 실패로 몰아넣으면, 매번 같은
+    건수가 "실패" 목록에 상주하게 되어 그 목록을 보는 사람이 곧 무시하는 법을
+    배운다 — 그러면 진짜 실패가 그 사이에 숨는다.
     """
     result = RelinkResult(records=[])
-    cache: dict[tuple[str, str], str] = {}
+    cache: dict[tuple[str, str], str | None] = {}
     for rec in records:
         resolve = resolvers.get(rec.org)
         if resolve is None:
@@ -47,6 +56,10 @@ def relink(records: list[ForecastRecord],
             result.records.append(rec)
             continue
         cache[key] = url
+        if url is None:
+            result.skipped += 1
+            result.records.append(rec)
+            continue
         result.records.append(rec.model_copy(update={"source_url": url, "landing_url": url}))
         result.changed += 1
     return result
@@ -70,16 +83,22 @@ def _imf_label(report_title: str) -> str:
     return f"{prefix}{m.group(1)} {m.group(2)}"
 
 
-def _oecd_resolver(rec: ForecastRecord) -> str:
-    """OECD Interim 은 이미 보고서 PDF 를 가리키므로 건드리지 않는다."""
+def _oecd_resolver(rec: ForecastRecord) -> str | None:
+    """OECD Interim 은 이미 보고서 PDF 를 가리키므로 대상에서 제외한다.
+
+    실패(예외)가 아니라 None 을 돌려준다 — 이 레코드를 못 고친 게 아니라
+    애초에 고칠 필요가 없는 것이다. 실패로 몰면 매 실행마다 같은 12건이
+    "못 찾음" 목록에 박혀 있게 되어, 그 목록으로 진짜 실패를 가리는 규칙이
+    무력해진다.
+    """
     if "Interim" in rec.report_title:
-        raise ValueError("OECD Interim 레코드는 대상이 아니다 — 이미 보고서를 가리킨다")
+        return None
     from .collectors import oecd
     return oecd.report_url(oecd.edition_number(rec.report_title))
 
 
 def main(data_dir: Path = DATA_DIR) -> int:
-    from .collectors import imf, oecd
+    from .collectors import imf
     from . import store
 
     path = Path(data_dir) / "forecasts.json"
@@ -97,9 +116,9 @@ def main(data_dir: Path = DATA_DIR) -> int:
         return 1
 
     store.save_forecasts(path, result.records)
-    print(f"링크 교체 {result.changed}건 / 못 찾음 {len(result.unresolved)}건")
+    print(f"교체 {result.changed}건 / 제외 {result.skipped}건 / 실패 {len(result.unresolved)}건")
     for rec_id, why in result.unresolved:
-        print(f"  못 찾음 {rec_id}: {why}")
+        print(f"  실패 {rec_id}: {why}")
     return 0
 
 
