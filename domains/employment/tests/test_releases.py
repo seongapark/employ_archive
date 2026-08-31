@@ -106,3 +106,69 @@ def test_missing_attachments_lists_only_the_months_still_to_fetch():
     }}
     assert releases.missing_attachments(index, "ei") == ["2026-05", "2026-06"]
     assert releases.missing_attachments(index, "eaps") == []
+
+
+# ── 네트워크 층 ───────────────────────────────────────────────────────────
+# 실제 게시판을 두드리지 않는다. get 을 주입해 픽스처를 돌려주고, 몇 번 어떤
+# 주소로 요청하는지까지 본다 — 무인으로 매일 도는 코드라 요청 횟수가 곧 예의다.
+
+def fake_board(calls, *, list_fails=False):
+    def get(url, params, **kw):
+        calls.append((url, dict(params)))
+        if list_fails:
+            return None
+        if "enewsList" in url:
+            if params.get("pageIndex") != "1":
+                return ""
+            return read("moel_list_est.html") if "사업체" in params.get("searchText", "")                 else read("moel_list_ei.html")
+        if "enewsView" in url:
+            return read("moel_view_est.html")
+        if "mods.go.kr" in url:
+            return read("mods_list.html") if params.get("nPage") == "1" else ""
+        return ""
+    return get
+
+
+def test_refresh_builds_the_index_for_all_three_sources():
+    calls = []
+    index, summary = releases.refresh({}, get=fake_board(calls), limit=3)
+    assert set(index) == {"eaps", "est", "ei"}
+    assert summary["ei"]["months"] >= 20
+    assert index["eaps"]["2026-07"]["url"].endswith("list_no=446465&act=view")
+
+
+def test_refresh_stops_paging_when_a_page_yields_nothing():
+    """게시판을 12페이지까지 무조건 두드리지 않는다."""
+    calls = []
+    releases.refresh({}, get=fake_board(calls), limit=0)
+    mods_pages = [p["nPage"] for u, p in calls if "mods.go.kr" in u]
+    assert mods_pages == ["1", "2"], mods_pages      # 2페이지가 비면 거기서 멈춘다
+
+
+def test_refresh_caps_how_many_detail_pages_it_opens():
+    """첫 실행에 상세를 60건 두드리면 게시판에 무리다. 나머지는 다음 실행으로."""
+    calls = []
+    index, summary = releases.refresh({}, get=fake_board(calls), limit=2)
+    views = [u for u, _ in calls if "enewsView" in u]
+    assert len(views) == 4                            # est 2 + ei 2
+    assert summary["est"]["attachments_filled"] == 2
+    assert summary["est"]["pending"] > 0
+
+
+def test_refresh_survives_a_dead_board():
+    """게시판이 죽어도 예외를 올리지 않는다 — 색인은 숫자 수집의 전제가 아니다."""
+    calls = []
+    index, summary = releases.refresh({"ei": {"2026-07": {"url": "u"}}},
+                                      get=fake_board(calls, list_fails=True), limit=3)
+    assert summary["eaps"]["months"] == 0
+    assert index["ei"]["2026-07"]["url"] == "u"       # 이미 있던 것은 지키고
+
+
+def test_refresh_does_not_refetch_details_it_already_has():
+    calls = []
+    first, _ = releases.refresh({}, get=fake_board(calls), limit=2)
+    calls.clear()
+    second, summary = releases.refresh(first, get=fake_board(calls), limit=2)
+    views = [u for u, _ in calls if "enewsView" in u]
+    assert len(views) == 4                            # 새로 채우는 2개월치씩만
+    assert summary["est"]["added"] == 0               # 목록에서 새로 들어온 달은 없다

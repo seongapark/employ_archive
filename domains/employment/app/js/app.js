@@ -26,12 +26,13 @@ async function boot() {
   const headerDateEl = document.getElementById('headerDate');
   const offlineBanner = document.getElementById('offlineBanner');
 
-  const [series, sourcesMeta, industries, segments, lastRun] = await Promise.all([
+  const [series, sourcesMeta, industries, segments, lastRun, releases] = await Promise.all([
     loadJson('./data/series.json'),
     loadJson('./data/sources.json'),
     loadJson('./data/industries.json'),
     loadJson('./data/segments.json'),
     loadJson('./data/last_run.json'),
+    loadJson('./data/releases.json'),
   ]);
 
   if (!navigator.onLine) offlineBanner.hidden = false;
@@ -53,6 +54,9 @@ async function boot() {
     sources: sourcesMeta || [],
     industries: industries || [],
     segments: segments || [],
+    // 월별 보도자료 색인. 없으면(수집 전이거나 게시판이 죽었으면) 빈 객체로
+    // 두고 카드가 게시판 목록으로 떨어진다.
+    releases: releases || {},
     months,
     state: { period: months.latest, breakdown: null, category: null },
     rerender: () => route(),

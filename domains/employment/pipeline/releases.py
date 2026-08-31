@@ -18,7 +18,10 @@
 from __future__ import annotations
 
 import re
-from typing import Iterable
+import time
+from typing import Callable
+
+import requests
 
 # 제목의 연·월. 경활은 `26년 7월 고용동향` 처럼 두 자리 연도를 쓰기도 한다.
 _TITLE_PERIOD = re.compile(r"(\d{2,4})\s*년\s*(\d{1,2})\s*월")
@@ -159,3 +162,104 @@ def merge(existing: dict, source: str, found: dict[str, dict]) -> dict:
 def missing_attachments(index: dict, source: str) -> list[str]:
     """첨부를 아직 못 받은 달. 상세 페이지는 이 목록만큼만 두드린다."""
     return sorted(p for p, v in index.get(source, {}).items() if "attachments" not in v)
+
+
+# ── 네트워크 층 ───────────────────────────────────────────────────────────
+# 위의 파서는 HTML 만 받는다. 여기부터가 게시판을 두드리는 부분이다.
+
+HEADERS = {"User-Agent": "Mozilla/5.0", "Accept-Language": "ko-KR,ko;q=0.9"}
+MOEL_LIST = "https://www.moel.go.kr/news/enews/report/enewsList.do"
+MODS_BOARD = "https://mods.go.kr/board.es"
+MODS_PARAMS = {"mid": "a10301030100", "bid": "a103010301",
+               "ref_bid": "210,211,11109,11113,11814"}
+
+# 게시판마다 페이지가 어떻게 도는지가 다르다. 고용노동부는 pageUnit 이 먹어서
+# 한 페이지에 30건을 받으면 2년치가 들어오고, 국가데이터처는 pageUnit 을 무시하고
+# 10건 고정이라 페이지를 넘겨야 한다(고용동향은 그중 3건쯤이다).
+BOARDS = {
+    "eaps": {"kind": "mods", "title_contains": "고용동향", "pages": 12},
+    "est": {"kind": "moel", "keyword": "사업체노동력조사",
+            "title_contains": "사업체노동력조사", "pages": 2},
+    "ei": {"kind": "moel", "keyword": "고용행정통계",
+           "title_contains": "고용행정", "pages": 2},
+}
+
+# 첫 실행에서 고용노동부 상세를 60건 두드리면 게시판에도 무리고 그날 수집도 길어진다.
+# 한 번에 이만큼만 채우고 나머지는 다음 실행으로 미룬다 — 색인은 숫자가 아니라
+# 출처라서 며칠에 걸쳐 채워져도 화면이 틀리지 않는다(그동안 그 달은 게시판 목록으로 간다).
+MAX_DETAILS_PER_RUN = 12
+
+
+def _get(url: str, params: dict, *, tries: int = 3, timeout: int = 60) -> str | None:
+    """실패해도 예외를 올리지 않는다. 색인은 있으면 좋은 것이지 수집의 전제가
+    아니다 — 게시판이 잠깐 죽었다고 그날 숫자 수집까지 같이 죽으면 안 된다."""
+    for attempt in range(tries):
+        try:
+            res = requests.get(url, params=params, headers=HEADERS, timeout=timeout)
+            if res.ok:
+                return res.text
+        except Exception:
+            pass
+        time.sleep(2 * (attempt + 1))
+    return None
+
+
+def fetch_list(source: str, *, get: Callable = _get) -> dict[str, dict]:
+    """게시판 목록을 넘겨가며 {기간: 게시글} 을 모은다."""
+    board = BOARDS[source]
+    found: dict[str, dict] = {}
+    for page in range(1, board["pages"] + 1):
+        if board["kind"] == "moel":
+            html = get(MOEL_LIST, {"pageIndex": str(page), "bbs_id": "12",
+                                   "searchField": "1", "searchText": board["keyword"],
+                                   "pageUnit": "30"})
+            page_found = moel_list(html, must_contain=board["title_contains"]) if html else {}
+        else:
+            html = get(MODS_BOARD, {**MODS_PARAMS, "nPage": str(page)})
+            page_found = mods_list(html, must_contain=board["title_contains"]) if html else {}
+        if not page_found and html is not None and page > 1:
+            break               # 더 넘겨도 안 나온다
+        for period, post in page_found.items():
+            found.setdefault(period, post)
+    return found
+
+
+def fill_attachments(index: dict, source: str, *,
+                     limit: int = MAX_DETAILS_PER_RUN,
+                     get: Callable = _get) -> tuple[dict, int]:
+    """첨부가 빈 달의 상세를 받아 채운다. 국가데이터처는 목록에서 이미 채워져
+    있으므로 여기 걸릴 달이 없다."""
+    if BOARDS[source]["kind"] != "moel":
+        return index, 0
+    out = {k: dict(v) for k, v in index.items()}
+    slot = dict(out.get(source, {}))
+    filled = 0
+    for period in missing_attachments(index, source)[::-1]:      # 최신월부터
+        if filled >= limit:
+            break
+        html = get(slot[period]["url"], {})
+        if html is None:
+            continue
+        slot[period] = {**slot[period], "attachments": moel_attachments(html)}
+        filled += 1
+    out[source] = slot
+    return out, filled
+
+
+def refresh(existing: dict, *, get: Callable = _get,
+            limit: int = MAX_DETAILS_PER_RUN) -> tuple[dict, dict]:
+    """색인 한 바퀴. (새 색인, 출처별 요약) 을 돌려준다."""
+    index = {k: dict(v) for k, v in (existing or {}).items()}
+    summary: dict[str, dict] = {}
+    for source in BOARDS:
+        before = len(index.get(source, {}))
+        found = fetch_list(source, get=get)
+        index = merge(index, source, found)
+        index, filled = fill_attachments(index, source, limit=limit, get=get)
+        summary[source] = {
+            "months": len(index.get(source, {})),
+            "added": len(index.get(source, {})) - before,
+            "attachments_filled": filled,
+            "pending": len(missing_attachments(index, source)),
+        }
+    return index, summary

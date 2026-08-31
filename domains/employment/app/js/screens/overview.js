@@ -76,7 +76,7 @@ function cardHtml(card) {
 }
 
 export function render(el, ctx) {
-  const cards = overviewCards(ctx.series, ctx.sources, ctx.state.period);
+  const cards = overviewCards(ctx.series, ctx.sources, ctx.state.period, ctx.releases);
   el.innerHTML = switcher(ctx) + `<div class="cards">${cards.map(cardHtml).join('')}</div>`;
 
   el.querySelector('#yearSelect').addEventListener('change', e => {
