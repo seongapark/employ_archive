@@ -60,6 +60,56 @@ _LABEL_YEAR = re.compile(r"(\d{4})")
 # list_issues() 를 단독으로 부를 때 쓰는 보수적인 기본값일 뿐이다.
 DEFAULT_SINCE_YEAR = 2024
 
+# 2월호(당해 연도 하나만 전망) 헤더가 수정폭 칸을 세로로 접어 내보내는
+# 문제를 다룬다. "연도 한 토큰뿐인 줄 → 연도 두 개 이상인 줄 → 수정폭
+# 표시뿐인 줄" 세 줄로 쪼개져 실제 표(기간 줄)보다 앞에 나온다.
+_FOLD_YEAR_TOKEN = re.compile(r"(?:19|20)\d{2}[pe]?\)?")
+_FOLD_REVISION_LINE = re.compile(r"수정폭\d*\)?")
+
+
+def _unfold_february_header(text: str) -> str:
+    """2월호가 세로로 접어 내보내는 수정폭 헤더를 8월호와 같은 한 줄 모양으로 편다.
+
+    2월호는 당해 연도 하나만 전망하므로 열은 [실적 연도][전망 연도][수정폭]
+    세 블록뿐이다. 그런데 pdfplumber가 표를 텍스트로 뽑을 때 수정폭 칸 위에
+    세로로 쌓인 "연도"와 "수정폭n)" 글자를 실제 표보다 앞줄에, 게다가 세
+    줄로 쪼개어 내놓는다: 연도 한 토큰뿐인 줄(전망 연도만 반복), 연도 두 개
+    이상인 줄(실적·전망 연도), 수정폭 표시뿐인 줄. 기간 줄(상반기·하반기·
+    연간…)은 그 뒤에 그대로 온전히 남아 있고, 다만 맨 끝 칸에 수정폭 몫으로
+    "연간"이 한 번 더 중복돼 있을 뿐이다.
+
+    실제 열 순서는 [연도 두 개 줄의 마지막 연도가 수정폭 몫] 이므로, 앞의
+    연도 한 토큰뿐인 줄은 버리고 연도 줄의 마지막 토큰을 한 번 더 이어 붙이며,
+    기간 줄의 마지막 "연간"을 수정폭 표시로 바꿔치기하면 pdf.parse_summary_table
+    이 8월호에서 이미 잘 읽는 모양 그대로가 된다.
+
+    이 네 줄 모양(연도 한 줄 → 연도 여러 개 줄 → 수정폭 줄 → 기간 줄)이
+    통째로 나타날 때만 손댄다. 조금이라도 다르면(수정폭 줄이 없거나 연도
+    줄이 비는 등, 표가 또 바뀐 것) 아무것도 바꾸지 않고 그대로 돌려준다 —
+    어설프게 짜맞추면 값이 조용히 틀린 열에 들어가므로, 모양이 안 맞을 땐
+    기존처럼 pdf.parse_summary_table 이 시끄럽게 실패하는 편이 훨씬 안전하다.
+    """
+    lines = text.split("\n")
+    for i in range(len(lines) - 3):
+        bare_year = lines[i].split()
+        year_block = lines[i + 1].split()
+        revision_mark = lines[i + 2].split()
+        period_row = lines[i + 3].split()
+        if len(bare_year) != 1 or not _FOLD_YEAR_TOKEN.fullmatch(bare_year[0]):
+            continue
+        if len(year_block) < 2 or not all(_FOLD_YEAR_TOKEN.fullmatch(t) for t in year_block):
+            continue
+        if len(revision_mark) != 1 or not _FOLD_REVISION_LINE.fullmatch(revision_mark[0]):
+            continue
+        if len(period_row) < 2 or not any(
+            re.search(r"연간|상반|하반", token) for token in period_row
+        ):
+            continue
+        new_year_line = " ".join([*year_block, year_block[-1]])
+        new_period_line = " ".join([*period_row[:-1], revision_mark[0]])
+        return "\n".join([*lines[:i], new_year_line, new_period_line, *lines[i + 4:]])
+    return text
+
 
 def _text(fragment: str) -> str:
     return re.sub(r"\s+", " ", html_lib.unescape(re.sub(r"<[^>]+>", " ", fragment))).strip()
@@ -106,7 +156,7 @@ def _label_year(label: str) -> int | None:
 
 def parse(text: str, issue: Issue, source_url: str, source_page: int) -> list[ForecastRecord]:
     return report.records_from_table(
-        text, LABEL_TO_INDICATOR,
+        _unfold_february_header(text), LABEL_TO_INDICATOR,
         org="KDI", org_name_ko="KDI",
         issue=issue, source_url=source_url, source_page=source_page,
     )
@@ -152,8 +202,12 @@ def collect_issue(issue: Issue, page_html: str | None = None) -> list[ForecastRe
         # 장은 본문 순서대로 나오지만 표가 어디 실릴지는 회차마다 다르다. 앞 장이
         # 502거나 표 없는 첨부여도 뒷 장을 마저 봐야 하므로 장 단위로 실패를 가둔다.
         try:
+            # find_summary_table 도 페이지마다 pdf.parse_summary_table 을 돌려 지표가
+            # 다 있는지 확인한다 — 2월호는 여기서부터 접힌 헤더를 펴 둬야 요약 페이지
+            # 자체를 찾는다. parse() 에서도 다시 펴지만 이미 편 텍스트는 그대로 지나간다.
             found = pdf.find_summary_table(
-                pdf.page_texts(http.get(url).content), LABEL_TO_INDICATOR, REQUIRED_INDICATORS
+                (_unfold_february_header(t) for t in pdf.page_texts(http.get(url).content)),
+                LABEL_TO_INDICATOR, REQUIRED_INDICATORS,
             )
         except Exception:
             continue

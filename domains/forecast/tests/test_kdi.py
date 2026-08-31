@@ -9,6 +9,8 @@ FIXTURES = Path(__file__).parent / "fixtures"
 PAGE = (FIXTURES / "kdi_economy.html").read_text(encoding="utf-8")
 TABLE = (FIXTURES / "kdi_2026-08_summary.txt").read_text(encoding="utf-8")
 FIRST_HALF_TABLE = (FIXTURES / "kdi_2026-05_summary.txt").read_text(encoding="utf-8")
+FEBRUARY_2025_TABLE = (FIXTURES / "kdi_2025-02_summary.txt").read_text(encoding="utf-8")
+FEBRUARY_2026_TABLE = (FIXTURES / "kdi_2026-02_summary.txt").read_text(encoding="utf-8")
 
 ISSUE = kdi.Issue(
     title="KDI 경제전망 | 수정, 2026년 8월",
@@ -94,6 +96,87 @@ def test_parse_handles_the_first_half_issue_layout():
     assert got[("gdp_growth", 2027)].value == 1.7
     assert got[("emp_change", 2026)].id == "kdi-2026-05-emp_change-2026"
     assert {r.target_year for r in got.values()} == {2026, 2027}  # 2024·2025는 실적
+
+
+def test_unfold_february_header_leaves_flat_headers_byte_identical():
+    # 8월호·5월호는 이미 8월호 모양(연도·기간이 한 줄씩)이라 접힌 부분이 없다 —
+    # _unfold_february_header 이 손대지 않고 그대로 돌려줘야 한다.
+    assert kdi._unfold_february_header(TABLE) == TABLE
+    assert kdi._unfold_february_header(FIRST_HALF_TABLE) == FIRST_HALF_TABLE
+
+
+def test_parse_handles_the_february_issue_layout_2025():
+    # kdi_2025-02_summary.txt (실제 pdfplumber 페이지 텍스트) 6번째 줄:
+    #   "국내총생산 2.8 1.3 2.0 0.9 2.2 1.6 -0.4"
+    # 열 순서는 [2024 상반기·하반기·연간][2025 상반기·하반기·연간][2025 수정폭].
+    # 발표일이 2025년이므로 2024(실적)는 report.records_from_values 가 걸러내고
+    # 2025 상반기=0.9, 하반기=2.2, 연간=1.6 만 남는다 — 숫자는 그 줄에서 그대로 옮겼다.
+    issue = kdi.Issue(
+        title="KDI 경제전망, 2025년 2월",
+        published_at=date(2025, 2, 12),
+        url="https://www.kdi.re.kr/research/economy?pub_no=1",
+    )
+    records = {(r.indicator, r.target_year, r.target_period): r
+               for r in kdi.parse(FEBRUARY_2025_TABLE, issue, PDF_URL, source_page=4)}
+    assert {r.target_year for r in records.values()} == {2025}  # 2024는 실적이라 빠진다
+    assert records[("gdp_growth", 2025, "h1")].value == 0.9
+    assert records[("gdp_growth", 2025, "h2")].value == 2.2
+    assert records[("gdp_growth", 2025, "annual")].value == 1.6
+    # 취업자 수(증감) 줄: "취업자 수(증감) 22 10 16 9 11 10 -4"
+    assert records[("emp_change", 2025, "annual")].value == 10.0
+    # 소비자물가 줄: "소비자물가 2.8 1.8 2.3 1.8 1.5 1.6 0.0"
+    assert records[("cpi", 2025, "annual")].value == 1.6
+    # 실업률 줄: "실업률 3.1 2.5 2.8 3.2 2.6 2.9 0.1"
+    assert records[("unemp_rate", 2025, "annual")].value == 2.9
+
+
+def test_parse_handles_the_february_issue_layout_2026():
+    # kdi_2026-02_summary.txt 7번째 줄:
+    #   "국내총생산 0.3 1.6 1.0 2.2 1.6 1.9 0.1"
+    # 열 순서는 위와 같되 연도가 [2025][2026][2026 수정폭] 이다. 발표일이
+    # 2026년이므로 2025(실적)는 걸러지고 2026 상반기=2.2, 하반기=1.6, 연간=1.9 만 남는다.
+    issue = kdi.Issue(
+        title="KDI 경제전망, 2026년 2월",
+        published_at=date(2026, 2, 12),
+        url="https://www.kdi.re.kr/research/economy?pub_no=2",
+    )
+    records = {(r.indicator, r.target_year, r.target_period): r
+               for r in kdi.parse(FEBRUARY_2026_TABLE, issue, PDF_URL, source_page=5)}
+    assert {r.target_year for r in records.values()} == {2026}  # 2025는 실적이라 빠진다
+    assert records[("gdp_growth", 2026, "h1")].value == 2.2
+    assert records[("gdp_growth", 2026, "h2")].value == 1.6
+    assert records[("gdp_growth", 2026, "annual")].value == 1.9
+    # 취업자 수(증감) 줄: "취업자 수(증감) 18 21 19 19 16 17 2"
+    assert records[("emp_change", 2026, "annual")].value == 17.0
+    # 소비자물가 줄: "소비자물가 2.1 2.2 2.1 2.1 2.1 2.1 0.1"
+    assert records[("cpi", 2026, "annual")].value == 2.1
+    # 실업률 줄: "실업률 3.1 2.6 2.8 3.1 2.5 2.8 0.0"
+    assert records[("unemp_rate", 2026, "annual")].value == 2.8
+
+
+def test_unfold_february_header_leaves_a_drifted_shape_alone_to_fail_loudly():
+    # 연도 두 개짜리 줄("2024p 2025")이 없으면 네 줄 모양이 아니므로 손대지
+    # 않는다. 그러면 헤더에 연도가 "2025" 하나뿐인 채로 원래 pdf.parse_summary_table
+    # 이 돌게 되는데, 이번엔 기간 블록이 4개([수정폭][상반기·하반기·연간]x2)로
+    # 잡혀 연도 1개와 어긋나 시끄럽게 실패한다 — 이 모양이 또 바뀌면 조용히
+    # 넘어가지 않고 바로 드러난다는 뜻이다.
+    #
+    # (수정폭 표시 줄만 지우는 변형도 시험해 봤지만, 그 경우엔 우연히 기간
+    # 블록 수가 연도 수와 맞아떨어져 조용히 잘못된 값을 만든다 — pdf.py 의
+    # 기존 동작이고 이 픽스는 그 경로를 손대지 않으므로 여기선 다루지 않는다.)
+    lines = FEBRUARY_2025_TABLE.split("\n")
+    year_block_index = lines.index("2024p 2025")
+    missing_year_line = "\n".join(lines[:year_block_index] + lines[year_block_index + 1:])
+
+    assert kdi._unfold_february_header(missing_year_line) == missing_year_line
+
+    issue = kdi.Issue(
+        title="KDI 경제전망, 2025년 2월",
+        published_at=date(2025, 2, 12),
+        url="https://www.kdi.re.kr/research/economy?pub_no=1",
+    )
+    with pytest.raises(ValueError):
+        kdi.parse(missing_year_line, issue, PDF_URL, source_page=4)
 
 
 # 실제 select 태그의 축약 발췌 — 1982년까지 이어지는 실제 범위를 흉내 낸다.
