@@ -141,3 +141,34 @@ def test_parse_vintage_does_not_confuse_the_label_with_the_title():
         for url in (r.source_url, r.landing_url):
             assert "api." not in url and "/api/" not in url and "sdmx" not in url
             assert url.startswith("https://www.imf.org/en/publications/weo/issues/")
+
+
+def test_collect_vintage_passes_label_and_title_to_the_right_slot(monkeypatch):
+    # 위 테스트는 parse_vintage 자체가 label/title 을 안 헷갈린다는 것만 본다 —
+    # 실제 위험은 imf.py 안 호출부(collect_vintage 가 label, title 을 나란히
+    # 넘기는 자리)다. 진짜 VINTAGES 항목은 label("October 2025")이 title 문자열
+    # 안에 그대로 들어 있어(위 테스트가 쓰는 값) 자리가 바뀌어도 report_url 이
+    # 우연히 같은 주소를 만들어낼 수 있다. 그래서 여기서는 label 에는 월 이름이
+    # 있고 title 에는 없는 값으로 VINTAGES 를 바꿔 스와핑이 반드시 드러나게 한다.
+    label = "October 2025"
+    title = "가상의 WEO 과거 회차 표제"  # 월 이름이 없어 label 자리에 들어가면 report_url 이 바로 실패한다
+    published_at = date(2025, 10, 14)
+    monkeypatch.setitem(imf.VINTAGES, label, ("TEST_FLOW/1.0.0", title, published_at))
+    monkeypatch.setattr(
+        imf, "fetch_vintage",
+        lambda flow, imf_code: (
+            '<Obs OBS_VALUE="1.8" TIME_PERIOD="2025"/><Obs OBS_VALUE="2.1" TIME_PERIOD="2026"/>'
+        ),
+    )
+
+    records = imf.collect_vintage(label)
+
+    assert records
+    expected_url = imf.report_url(label, published_at)
+    for r in records:
+        assert r.source_url == expected_url
+        assert r.landing_url == expected_url
+        assert r.report_title == title
+        for url in (r.source_url, r.landing_url):
+            assert "api." not in url and "/api/" not in url and "sdmx" not in url
+            assert url.startswith("https://www.imf.org/en/publications/weo/issues/")
