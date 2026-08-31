@@ -64,3 +64,29 @@ def test_industries_metadata_matches_what_the_collectors_produce():
     assert provided["eaps"] == set(eaps.INDUSTRY_COLUMNS.values())
     assert provided["est"] == est.EXPECTED_CODES
     assert provided["ei"] == ei.EXPECTED_CODES
+
+
+SERIES = Path(__file__).parent.parent / "data" / "series.json"
+
+
+def test_segments_cover_sex_and_age_with_every_source_flagged():
+    segments = json.loads((DATA / "segments.json").read_text(encoding="utf-8"))
+    by_breakdown = {s["breakdown"]: s for s in segments}
+    assert set(by_breakdown) == {"sex", "age"}
+    assert [c["code"] for c in by_breakdown["sex"]["categories"]] == ["M", "F"]
+    assert [c["code"] for c in by_breakdown["age"]["categories"]] == [
+        "15-29", "30-39", "40-49", "50-59", "60+"]
+    for segment in segments:
+        for category in segment["categories"]:
+            assert set(category["provided"]) == {"eaps", "est", "ei"}
+            assert category["provided"]["est"] is False, "사업체노동력조사는 공표하지 않는다"
+            assert category["provided"]["eaps"] and category["provided"]["ei"]
+
+
+def test_segment_codes_match_the_collected_records():
+    series = json.loads(SERIES.read_text(encoding="utf-8"))
+    segments = json.loads((DATA / "segments.json").read_text(encoding="utf-8"))
+    for segment in segments:
+        declared = {c["code"] for c in segment["categories"]}
+        collected = {r["category"] for r in series if r["breakdown"] == segment["breakdown"]}
+        assert collected <= declared, f"{segment['breakdown']}: 선언되지 않은 분류 {collected - declared}"
