@@ -7,15 +7,20 @@ from datetime import date, datetime, timedelta, timezone
 
 import requests
 
+from .. import http
 from ..models import ForecastRecord, INDICATOR_META, make_id
 
 KST = timezone(timedelta(hours=9))
 
+BASE = "https://www.oecd.org"
 DATA_URL = (
     "https://sdmx.oecd.org/public/rest/data/OECD.ECO.MAD,{dsd}@{flow},/"
     "KOR.GDPV_ANNPCT+UNR+CPI_YTYPCT+ET.A"
     "?startPeriod={start}&endPeriod={end}&format=csvfilewithlabels"
 )
+# report_url() 로 대체된 뒤로 쓰는 곳이 없다 — source_url·landing_url 의
+# 폴백으로 되살리지 말 것(기계용 주소를 절대 남기지 않는다는 이 파일의 원칙에
+# 어긋난다).
 LANDING_URL = "https://www.oecd.org/en/topics/economic-outlook.html"
 
 # 회차 번호 → 발표일. SDMX 는 발표일을 주지 않으므로 여기 적는다.
@@ -71,6 +76,87 @@ def fetch_raw(edition: int | None = None) -> str:
     return resp.text
 
 
+SERIALS_URL = f"{BASE}/en/publications/serials/oecd-economic-outlook_g1ghgh13.html"
+
+# 회차 116 이 2024년 2호다. 이후 한 호씩 번갈아 올라간다.
+_FIRST_EDITION = 116
+_FIRST_VOLUME = (2024, 2)
+
+_SERIAL_LINK = re.compile(
+    r'href="(/en/publications/oecd-economic-outlook-volume-'
+    r'(?P<year>\d{4})-issue-(?P<issue>\d)_[0-9a-f]+-en\.html)"')
+
+
+def volume_issue(edition: int) -> tuple[int, int]:
+    """회차 번호를 (권 연도, 호) 로 바꾼다.
+
+    OECD 본편은 연 2회이고 회차 번호가 한 호마다 1씩 오른다는 가정으로 산술만
+    으로 구한다. 이 가정이 깨지면(번호를 건너뛰거나 Interim 이 끼어들거나
+    재번호를 매기면) 계산값이 이웃 회차의 (권, 호) 를 가리키게 되는데, 그
+    이웃 회차도 실제로 존재해 report_url() 의 목록 조회가 그 주소를 순순히
+    돌려준다 — 링크는 열리지만 다른 회차 문서다. 그래서 EDITIONS 의 발표일로
+    (권, 호)를 독립적으로 유도해 산술 결과와 맞춰 본다: 12월 발표는 그 해
+    2호, 6월 발표는 그 해 1호다.
+
+    EDITIONS 에 없는 회차는 대조할 발표일이 없어 산술값을 그대로 믿는다 —
+    다만 parse() 는 EDITIONS 에 없는 회차를 이 함수까지 오기 전에 이미
+    거부하므로(EDITIONS.get 이 None), 실제로 이 경로를 타는 것은 report_url
+    을 직접 부르는 호출뿐이고 그 결과는 report_url() 의 목록 소속 확인이
+    마지막 방어선이 된다.
+    """
+    step = edition - _FIRST_EDITION
+    year, issue = _FIRST_VOLUME
+    total = (year * 2 + (issue - 1)) + step
+    computed = total // 2, total % 2 + 1
+
+    published_at = EDITIONS.get(edition)
+    if published_at is not None:
+        expected = (published_at.year, 2 if published_at.month == 12 else 1)
+        if computed != expected:
+            raise ValueError(
+                f"EO {edition} 의 권·호 산술값 {computed} 이 EDITIONS 발표일"
+                f"({published_at})로 유도한 {expected} 와 어긋난다 — 회차 번호가"
+                " 밀렸거나 Interim 이 끼어들었을 수 있다"
+            )
+    return computed
+
+
+def parse_serials(page_html: str) -> dict[tuple[int, int], str]:
+    """연재 목록에서 (권, 호) -> 보고서 주소 를 만든다.
+
+    같은 (권, 호)에 주소가 둘이면(재발행판이 미리보기 옆에 남아 있는 경우 등)
+    나중 것으로 조용히 덮어쓰지 않는다 — edition_with_label() 이 지평이
+    겹치는 회차를 거부하는 것과 같은 이유로, 어느 쪽이 진짜 보고서인지 여기서
+    고를 근거가 없기 때문이다.
+    """
+    found: dict[tuple[int, int], str] = {}
+    for m in _SERIAL_LINK.finditer(page_html):
+        key = (int(m.group("year")), int(m.group("issue")))
+        url = BASE + m.group(1)
+        if key in found and found[key] != url:
+            raise ValueError(
+                f"연재 목록에 권 {key[0]} {key[1]}호 주소가 둘이다: "
+                f"{found[key]!r} 와 {url!r}"
+            )
+        found[key] = url
+    if not found:
+        raise ValueError("연재 목록에서 회차 링크를 찾지 못했다 — 서식이 바뀌었다")
+    return found
+
+
+def report_url(edition: int) -> str:
+    """그 회차 보고서 주소를 준다. 목록에 없으면 실패시킨다.
+
+    옛 회차 주소를 재활용하거나 기관 안내 페이지로 떨어뜨리지 않는다 — 둘 다
+    독자를 다른 회차 문서로 데려간다(설계 4장).
+    """
+    key = volume_issue(edition)
+    listing = parse_serials(http.get(SERIALS_URL).text)
+    if key not in listing:
+        raise ValueError(f"연재 목록에 EO {edition}(권 {key[0]} {key[1]}호)이 없다")
+    return listing[key]
+
+
 def parse(raw_csv: str) -> list[ForecastRecord]:
     rows = list(csv.DictReader(io.StringIO(raw_csv)))
     report_title = rows[0]["STRUCTURE_NAME"] if rows else "OECD Economic Outlook"
@@ -90,20 +176,21 @@ def parse(raw_csv: str) -> list[ForecastRecord]:
         values[(row["MEASURE"], int(row["TIME_PERIOD"]))] = float(row["OBS_VALUE"])
 
     target_years = _forecast_years(values)
-    source_url = _data_url(edition)
+    # report_url() 은 네트워크를 타므로 레코드마다가 아니라 회차당 한 번만 부른다
+    url = report_url(edition)
     records: list[ForecastRecord] = []
     for (measure, year), val in values.items():
         indicator = MEASURE_TO_INDICATOR.get(measure)
         if indicator is None or year not in target_years:
             continue
-        records.append(_record(indicator, val, year, report_title, published_at, source_url))
+        records.append(_record(indicator, val, year, report_title, published_at, url))
     # 취업자 증감(만명) = ET(t) − ET(t−1)
     for year in target_years:
         cur = values.get(("ET", year))
         prev = values.get(("ET", year - 1))
         if cur is not None and prev is not None:
             records.append(_record(
-                "emp_change", (cur - prev) / 10000, year, report_title, published_at, source_url
+                "emp_change", (cur - prev) / 10000, year, report_title, published_at, url
             ))
     return records
 
@@ -119,7 +206,7 @@ def _forecast_years(values: dict[tuple[str, int], float]) -> list[int]:
 
 
 def _record(indicator: str, value: float, year: int, report_title: str,
-            published_at: date, source_url: str) -> ForecastRecord:
+            published_at: date, url: str) -> ForecastRecord:
     meta = INDICATOR_META[indicator]
     return ForecastRecord(
         id=make_id("OECD", published_at, indicator, year),
@@ -131,8 +218,8 @@ def _record(indicator: str, value: float, year: int, report_title: str,
         indicator=indicator,
         value=round(value, meta["decimals"]),
         unit=meta["unit"],
-        source_url=source_url,
-        landing_url=LANDING_URL,
+        source_url=url,
+        landing_url=url,
         confidence="verified",
         collected_at=datetime.now(KST),
     )
