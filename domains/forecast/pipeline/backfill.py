@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Callable, NamedTuple
 
 from . import store
-from .collectors import bok, imf, kiet, kli, oecd, oecd_interim
+from .collectors import bok, imf, keis, kiet, kli, oecd, oecd_interim
 from .models import ForecastRecord
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -86,6 +86,19 @@ def kli_rounds() -> list[Round]:
     ]
 
 
+def keis_rounds() -> list[Round]:
+    """고용동향브리프는 전망을 싣지 않는 호가 대부분이다.
+
+    그런 호는 `collect_issue` 가 빈 리스트를 주고 `run` 이 '건너뜀' 으로
+    적는다 — 실패가 아니다.
+    """
+    return [
+        Round(item.issue.title, item.issue.published_at,
+              lambda item=item: keis.collect_issue(item))
+        for item in keis.list_issues()
+    ]
+
+
 SOURCES: dict[str, Callable[[], list[Round]]] = {
     "oecd": oecd_rounds,
     "oecd_interim": oecd_interim_rounds,
@@ -93,6 +106,7 @@ SOURCES: dict[str, Callable[[], list[Round]]] = {
     "kli": kli_rounds,
     "kiet": kiet_rounds,
     "imf": imf_rounds,
+    "keis": keis_rounds,
 }
 
 

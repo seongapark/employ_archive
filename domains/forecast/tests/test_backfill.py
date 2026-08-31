@@ -112,7 +112,7 @@ def test_bok_rounds_come_from_the_issue_list(monkeypatch):
 
 
 def test_registered_sources_cover_the_backfillable_orgs():
-    assert set(backfill.SOURCES) == {"oecd", "oecd_interim", "bok", "kli", "kiet", "imf"}
+    assert set(backfill.SOURCES) == {"oecd", "oecd_interim", "bok", "kli", "kiet", "imf", "keis"}
 
 
 def test_oecd_interim_rounds_come_from_the_edition_table():
@@ -120,3 +120,32 @@ def test_oecd_interim_rounds_come_from_the_edition_table():
     assert ("March 2026", date(2026, 3, 26)) in labels
     assert ("September 2025", date(2025, 9, 23)) in labels
     assert ("March 2025", date(2025, 3, 17)) in labels
+
+
+def test_keis_is_a_backfill_source():
+    from domains.forecast.pipeline import backfill
+    assert "keis" in backfill.SOURCES
+
+
+def test_keis_rounds_carry_the_issue_date_and_title(monkeypatch):
+    from datetime import date
+
+    from domains.forecast.pipeline import backfill
+    from domains.forecast.pipeline.collectors import keis
+
+    listed = [
+        keis.ListedIssue(
+            keis.Issue("고용동향브리프 2026년 제5호", date(2026, 8, 3), "u1"), "p1"),
+        keis.ListedIssue(
+            keis.Issue("[본문] 2025년 고용동향브리프_10호_최종", date(2025, 12, 31), "u2"), "p2"),
+    ]
+    monkeypatch.setattr(keis, "list_issues", lambda: listed)
+    monkeypatch.setattr(keis, "collect_issue", lambda item: ["가짜레코드"])
+
+    rounds = backfill.keis_rounds()
+    assert [(r.label, r.published_at) for r in rounds] == [
+        ("고용동향브리프 2026년 제5호", date(2026, 8, 3)),
+        ("[본문] 2025년 고용동향브리프_10호_최종", date(2025, 12, 31)),
+    ]
+    # 늦은 바인딩 때문에 모든 Round 가 마지막 회차를 가리키는 실수를 막는다
+    assert rounds[0].fetch() == ["가짜레코드"]
