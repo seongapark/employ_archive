@@ -438,82 +438,114 @@
 
 /* Sources Comparison (출처비교) */
 
-.scards {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 12px 16px 0 16px;
-}
+/* 출처비교 표
+   ─────────────────────────────────────────────────────────────────────
+   항목을 행에, 출처를 열에 둔다 — 가로로 읽어야 세 출처가 같은 항목에서
+   어떻게 갈리는지 보이기 때문이다. 포괄범위·유의사항이 한 문장씩이라
+   세로 화면에서는 폭이 모자라므로 가로 스크롤을 허용하고, 대신 머리 행과
+   첫 열을 둘 다 고정해 어느 방향으로 밀어도 "무엇의 어느 항목"인지가 남게 한다.
+   가로 화면에서는 폭이 남으므로 스크롤 없이 들어간다. */
 
-.scard {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 12px;
-}
-
-.scard__head {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 12px;
-}
-
-.swatch {
-  flex-shrink: 0;
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
-}
-
-.scard__name {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.scard__agency {
+.rotate-hint {
+  margin: 10px 16px 0 16px;
+  padding: 8px 10px;
+  background: var(--accent-light);
+  border-radius: 6px;
   font-size: 12px;
-  color: var(--text-muted);
-  margin-left: auto;
+  color: var(--text-secondary);
 }
 
-.scard__defs {
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  font-size: 13px;
-  margin-bottom: 10px;
+.stable__wrap {
+  margin-top: 8px;
+  overflow-x: auto;
+  /* 고정 열이 스크롤 중에 배경 없이 겹쳐 보이지 않도록 */
+  background: var(--card);
 }
 
-.scard__defs dt {
+.stable {
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 12px;
+  /* 세로 화면에서는 정식명·포괄범위가 접히지 않게 열 폭을 확보하고 밀어서 본다 */
+  min-width: 560px;
+}
+
+.stable th,
+.stable td {
+  padding: 9px 10px;
+  vertical-align: top;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+  line-height: 1.45;
+}
+
+.stable thead th {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: var(--card);
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border);
+}
+
+.stable tbody th {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background: var(--card);
+  width: 84px;
+  min-width: 84px;
+  font-size: 11px;
   font-weight: 600;
   color: var(--text-secondary);
-  margin-top: 4px;
+  white-space: nowrap;
 }
 
-.scard__defs dt:first-child {
-  margin-top: 0;
+/* 머리 행과 첫 열이 만나는 칸. 둘 다 sticky 라 여기만 더 위에 있어야
+   가로로 밀 때 '항목' 글자가 출처명 아래로 파묻히지 않는다. */
+.stable thead th:first-child {
+  left: 0;
+  z-index: 3;
+  width: 84px;
+  min-width: 84px;
 }
 
-.scard__defs dd {
-  margin: 0;
+.stable td {
+  min-width: 150px;
   color: var(--text);
-  line-height: 1.4;
 }
 
-.scard__link {
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--accent);
-  text-decoration: none;
+.stable .cell--empty {
+  color: var(--text-muted);
+}
+
+.stable .swatch {
   display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  margin-right: 5px;
+  vertical-align: middle;
 }
 
-.scard__link:hover {
-  text-decoration: underline;
+@media (orientation: landscape) {
+  /* 가로로 돌리면 표의 최소 폭 제한을 푼다 — 세 열이 가로 스크롤 없이 들어오고
+     세로로만 밀면 된다. .app 이 480px 로 묶여 있어(core/base.css) 뷰포트가 넓어져도
+     이 열은 넓어지지 않는다. 표만 그 제한을 벗어나게 해봤더니(100vw + 음수 마진)
+     sticky 첫 열과 overflow-x 가 서로 부딪혀 표가 왼쪽으로 밀려 나갔다.
+     플랫폼의 폭 규칙과 싸우지 않는다 — 문장이 몇 줄 접히는 편이 낫다. */
+  .rotate-hint { display: none; }
+  .stable { min-width: 0; width: 100%; }
+  .stable td { min-width: 0; }
+}
+}
+
+.expand__full {
+  margin: 0 0 6px 0;
+  font-size: 12px;
+  color: var(--text-secondary);
 }
 
 .note h3 {
