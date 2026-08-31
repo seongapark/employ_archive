@@ -37,6 +37,24 @@ INDUSTRY_COLUMNS: dict[str, str] = {
 }
 TOTAL_COLUMN = "전체취업자"
 
+# 성별은 시트가 갈려 있고 취업자 열 하나만 쓴다.
+SEX_SHEETS: dict[str, tuple[str, str]] = {
+    "M": ("1.남자", "1.남자증감"),
+    "F": ("1.여자", "1.여자증감"),
+}
+SEX_COLUMN = "취업자"
+
+AGE_LEVEL_SHEET = "2.연령계층"
+AGE_DELTA_SHEET = "2.연령계층증감"
+# 라벨 부분일치용 토큰 → 분류 코드. 수준 시트와 증감 시트의 라벨 형태가
+# 다르지만(`취업자$15-29세$계` vs `증감{…}$계$15-29세`) 둘 다 이 토큰을 품는다.
+# 15∼19·20∼29·65/70/75세이상은 각각 15∼29·60세이상의 부분집합이라 뺀다 —
+# 넣으면 합 불변식이 깨지고 화면에서 이중 계상된다.
+AGE_TOKENS: dict[str, str] = {
+    "15-29세": "15-29", "30-39세": "30-39", "40-49세": "40-49",
+    "50-59세": "50-59", "60세이상": "60+",
+}
+
 
 def _header_labels(rows: list[list[str]]) -> dict[int, str]:
     """헤더가 4~7행에 걸쳐 있으므로(rows[3:7]) 열마다 위아래 조각을 이어붙인다."""
@@ -79,6 +97,28 @@ def _collect_sheets(data: bytes, names) -> dict[str, dict[str, float]]:
     return merged
 
 
+def _by_token(data: bytes, sheet: str) -> dict[str, dict[str, float]]:
+    """{기간: {분류코드: 값}} — 라벨에 AGE_TOKENS 가 들어간 열만."""
+    rows = xlsx.read_sheet(data, sheet)
+    labels = _header_labels(rows)
+    picked = {col: code for col, label in labels.items()
+              for token, code in AGE_TOKENS.items() if token in label}
+    out: dict[str, dict[str, float]] = {}
+    for period, row in month_rows(rows):
+        bucket = out.setdefault(period, {})
+        for col, code in picked.items():
+            if col >= len(row):
+                continue
+            raw = (row[col] or "").replace(",", "").strip()
+            if not raw:
+                continue
+            try:
+                bucket[code] = round(float(raw), 1)
+            except ValueError:
+                continue
+    return out
+
+
 def parse(data: bytes, *, released_at: date, release_url: str,
           attachments: list[Attachment], collected_at: datetime) -> list[SeriesRecord]:
     levels = _collect_sheets(data, LEVEL_SHEETS)
@@ -107,6 +147,32 @@ def parse(data: bytes, *, released_at: date, release_url: str,
                 released_at=released_at, release_url=release_url,
                 attachments=attachments, collected_at=collected_at,
             ))
+
+    def emit(breakdown: str, code: str, period: str,
+             value: float, yoy: float | None) -> None:
+        records.append(SeriesRecord(
+            id=make_id("eaps", period, breakdown, code), source="eaps",
+            breakdown=breakdown, category=code, period=period,
+            value=value, yoy=yoy,
+            released_at=released_at, release_url=release_url,
+            attachments=attachments, collected_at=collected_at,
+        ))
+
+    for code, (level_sheet, delta_sheet) in SEX_SHEETS.items():
+        levels_s = _collect_sheets(data, (level_sheet,))
+        deltas_s = _collect_sheets(data, (delta_sheet,))
+        for period, values in levels_s.items():
+            if SEX_COLUMN not in values:
+                continue
+            emit("sex", code, period, values[SEX_COLUMN],
+                 deltas_s.get(period, {}).get(SEX_COLUMN))
+
+    age_levels = _by_token(data, AGE_LEVEL_SHEET)
+    age_deltas = _by_token(data, AGE_DELTA_SHEET)
+    for period, values in age_levels.items():
+        for code, value in values.items():
+            emit("age", code, period, value, age_deltas.get(period, {}).get(code))
+
     return records
 
 
@@ -128,6 +194,15 @@ def check_coverage(records: list[SeriesRecord]) -> None:
     missing = set(INDUSTRY_COLUMNS.values()) - got
     if missing:
         raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
+
+    for breakdown, expected in (("sex", set(SEX_SHEETS)),
+                                ("age", set(AGE_TOKENS.values()))):
+        got = {r.category for r in records
+               if r.period == latest and r.breakdown == breakdown}
+        missing = expected - got
+        if missing:
+            name = "성별" if breakdown == "sex" else "연령"
+            raise ValueError(f"{latest} 에 빠진 {name} 분류: {sorted(missing)}")
 
 
 MAX_MONTHS_BEHIND = 2      # 전월 기준으로 매월 공표된다 (sources.json 의 release_rule)

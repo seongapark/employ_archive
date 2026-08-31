@@ -168,13 +168,18 @@ def test_collects_sex_and_age_for_the_latest_month(records):
 
 
 def test_sex_and_age_sum_to_the_total(records):
-    """부분집합 열(15∼19·20∼29·65/70/75세이상)을 넣으면 합이 깨진다."""
+    """부분집합 열(15∼19·20∼29·65/70/75세이상)을 넣으면 합이 깨진다.
+
+    원자료가 반올림된 값이라 합이 총계와 정확히 같지는 않다(실측 편차 최대 0.1천명).
+    허용오차 0.2 는 가장 작은 부분집합 열(15∼19, 151.6천명)이 섞이기만 해도 즉시
+    깨지므로 판별력을 잃지 않는다.
+    """
     for period in ("2026-07", "2025-12"):
         total = next(r for r in records if r.period == period and r.breakdown == "total")
         for breakdown in ("sex", "age"):
             parts = [r for r in records if r.period == period and r.breakdown == breakdown]
             assert parts, f"{period} {breakdown} 레코드가 없다"
-            assert round(sum(p.value for p in parts), 1) == round(total.value, 1)
+            assert abs(sum(p.value for p in parts) - total.value) <= 0.2
 
 
 def test_coverage_guard_fails_when_an_age_band_is_missing(records):
@@ -326,8 +331,11 @@ def test_demo_total_matches_the_industry_total(records):
     for breakdown in ("sex", "age"):
         parts = [r for r in records if r.period == latest and r.breakdown == breakdown]
         assert parts, f"{latest} {breakdown} 레코드가 없다"
-        assert round(sum(p.value for p in parts), 1) == round(total.value, 1)
-        assert round(sum(p.yoy for p in parts), 1) == round(total.yoy, 1)
+        # 천명 단위로 반올림된 값이라 합이 총계와 정확히 같지 않다
+        # (실측: 2026-07 증감 합 278 vs 전산업 277). 부분집합 열이 섞이면
+        # 편차가 백 단위로 벌어지므로 1.5 로도 충분히 갈린다.
+        assert abs(sum(p.value for p in parts) - total.value) <= 1.5
+        assert abs(sum(p.yoy for p in parts) - total.yoy) <= 1.5
 
 
 def test_collects_five_age_bands_and_two_sexes(records):
@@ -370,8 +378,11 @@ def find_demo_tables(tables) -> tuple[list, list]:
     """성·연령 통계표의 수준·증감 표. 증감률 표가 같은 헤더로 뒤따른다.
 
     셋 다 헤더가 같아 순서로만 구분된다. 크기로 뒤바뀜을 잡는다 —
-    수준은 만 단위, 증감은 백 단위, 증감률은 한 자릿수다. 증감률을 증감으로
-    집으면 값이 100배 작아지는데 조용히 그럴듯해 보인다.
+    수준은 만 단위, 증감·증감률은 그보다 훨씬 작다. 증감률을 증감으로 집으면 값이
+    100배 작아지는데 조용히 그럴듯해 보인다 — 그 사고는 parse() 의 대조(성·연령 합 =
+    산업표 전산업)가 150배 차이로 확실히 잡으므로 여기서는 하한을 두지 않는다.
+    총량 증감이 어쩌다 10천명 아래로 내려가는 것은 정상이고, 하한을 두면 그때
+    멀쩡한 수집이 실패한다.
     """
     cand = [i for i, g in enumerate(tables)
             if g and len(g[0]) > 5 and all(k in _flat(g[0]) for k in DEMO_HEADER_KEYS)]
@@ -381,8 +392,8 @@ def find_demo_tables(tables) -> tuple[list, list]:
     lv, dv = _num(level[-1][DEMO_TOTAL_COLUMN]), _num(delta[-1][DEMO_TOTAL_COLUMN])
     if lv is None or lv < 10000:
         raise ValueError(f"성·연령 수준 표의 전체가 이상하다: {lv}")
-    if dv is None or abs(dv) >= 1000 or abs(dv) < 10:
-        raise ValueError(f"성·연령 증감 표의 전체가 이상하다(증감률을 집었을 수 있다): {dv}")
+    if dv is None or abs(dv) >= 1000:
+        raise ValueError(f"성·연령 증감 표의 전체가 이상하다: {dv}")
     return level, delta
 
 
@@ -406,10 +417,19 @@ def _demo_by_period(table) -> dict[str, dict[tuple[str, str], float]]:
     demo_deltas = _demo_by_period(demo_delta)
 
     # 문서가 스스로 갖는 대조점: 성·연령의 전체는 산업 표의 전산업과 같아야 한다.
+    # 수준만 대조하면 증감률 표를 증감으로 집은 사고를 못 잡는다. 둘 다 본다.
+    # 허용오차 2.0 은 반올림 편차(실측 최대 1.0)를 덮되, 증감률(1.8 vs 277)은
+    # 150배 차이라 그대로 걸린다.
     demo_total = sum(v for (bd, _), v in demo_levels.get(latest, {}).items() if bd == "sex")
-    if abs(demo_total - levels[latest][TOTAL_KEY]) > 1.0:
+    if abs(demo_total - levels[latest][TOTAL_KEY]) > 2.0:
         raise ValueError(
             f"성별 합이 전산업과 다르다: {demo_total} vs {levels[latest][TOTAL_KEY]}")
+    demo_delta_total = sum(v for (bd, _), v in demo_deltas.get(latest, {}).items() if bd == "sex")
+    industry_delta_total = deltas.get(latest, {}).get(TOTAL_KEY)
+    if industry_delta_total is None or abs(demo_delta_total - industry_delta_total) > 2.0:
+        raise ValueError(
+            f"성별 증감 합이 전산업 증감과 다르다(증감률 표를 집었을 수 있다): "
+            f"{demo_delta_total} vs {industry_delta_total}")
 
     for period, values in demo_levels.items():
         delta = demo_deltas.get(period, {})
@@ -1317,6 +1337,7 @@ git commit -m "feat(employment): 증감 비교 차트 SVG 생성기"
 
 **Files:**
 - Create: `domains/employment/app/index.html`, `css/app.css`, `manifest.webmanifest`, `sw.js`, `js/app.js`, `js/screens/overview.js`
+- Create (스텁, 뒤 태스크가 덮어씀): `js/screens/breakdown.js`, `js/screens/sources.js`, `js/sheet.js`
 - Create: `domains/employment/app/icons/icon-192.png`, `icon-512.png`
 - Modify: `tools/make_icons.py` (출력 경로와 색을 인자로)
 
@@ -1563,6 +1584,29 @@ export function render(el, ctx) {
     ctx.state.period = `${ctx.state.period.slice(0, 4)}-${String(e.target.value).padStart(2, '0')}`;
     ctx.rerender();
   });
+}
+```
+
+**스텁 세 개를 함께 만든다.** `app.js` 는 `./screens/breakdown.js`·`./screens/sources.js`·
+`./sheet.js` 를 import 하는데 그 셋은 Task 11·12·13 에서 채워진다. 스텁이 없으면 이 태스크
+상태에서 모듈 그래프가 끊겨 앱이 통째로 뜨지 않고, 아래 Step 3·4 의 확인이 불가능하다.
+Task 11·12·13 이 각각 이 파일을 덮어쓴다.
+
+```javascript
+// js/screens/breakdown.js — Task 11 에서 채운다
+export function render(el) { el.textContent = '준비중'; }
+```
+
+```javascript
+// js/screens/sources.js — Task 12 에서 채운다
+export function render(el) { el.textContent = '준비중'; }
+```
+
+```javascript
+// js/sheet.js — Task 13 에서 채운다
+export function mountSheet(sheetEl, handleEl, labelEl) {
+  handleEl.hidden = true;
+  return { refresh() {} };
 }
 ```
 
@@ -1923,9 +1967,10 @@ Expected: `index.html`·`js/`·`css/`·`data/`·`core/` 가 있다.
 - [ ] **Step 3: 허브 활성화를 다시 확인한다**
 
 ```bash
-git diff --stat HEAD~13 -- hub tools/build.py
+git diff --stat $(git merge-base main HEAD) -- hub tools/build.py
 ```
 Expected: **빈 출력**. 허브 코드와 `build.py` 를 고치지 않고 버튼이 켜졌다는 증거다.
+(커밋 수를 세지 않는다 — 수정 라운드가 붙으면 `HEAD~N` 이 어긋난다.)
 
 - [ ] **Step 4: 실기기 확인**
 

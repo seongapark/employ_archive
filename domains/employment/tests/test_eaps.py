@@ -125,3 +125,34 @@ def test_freshness_check_passes_on_a_current_series(records):
     latest = max(r.period for r in records)
     year, month = (int(x) for x in latest.split("-"))
     eaps.check_freshness(records, _date(year, month, 28))
+
+
+def test_collects_sex_and_age_for_the_latest_month(records):
+    latest = max(r.period for r in records)
+    sex = {r.category: r for r in records if r.period == latest and r.breakdown == "sex"}
+    age = {r.category: r for r in records if r.period == latest and r.breakdown == "age"}
+    assert set(sex) == {"M", "F"}
+    assert set(age) == {"15-29", "30-39", "40-49", "50-59", "60+"}
+    assert sex["M"].value == 16079.5      # 2026-07 남자 취업자(천명)
+    assert sex["M"].yoy == 47.9
+
+
+def test_sex_and_age_sum_to_the_total(records):
+    """부분집합 열(15∼19·20∼29·65/70/75세이상)을 넣으면 합이 깨진다.
+
+    원자료가 반올림된 값이라 합이 총계와 정확히 같지는 않다(실측 편차 최대 0.1천명).
+    허용오차 0.2 는 가장 작은 부분집합 열(15∼19, 151.6천명)이 섞이기만 해도 즉시
+    깨지므로 판별력을 잃지 않는다.
+    """
+    for period in ("2026-07", "2025-12"):
+        total = next(r for r in records if r.period == period and r.breakdown == "total")
+        for breakdown in ("sex", "age"):
+            parts = [r for r in records if r.period == period and r.breakdown == breakdown]
+            assert parts, f"{period} {breakdown} 레코드가 없다"
+            assert abs(sum(p.value for p in parts) - total.value) <= 0.2
+
+
+def test_coverage_guard_fails_when_an_age_band_is_missing(records):
+    kept = [r for r in records if not (r.breakdown == "age" and r.category == "60+")]
+    with pytest.raises(ValueError, match="연령"):
+        eaps.check_coverage(kept)

@@ -51,3 +51,27 @@ def test_attachments_carry_type_and_url():
 def test_make_id_includes_category_only_for_industry():
     assert make_id("eaps", "2026-07", "total", None) == "eaps-2026-07-headcount-total"
     assert make_id("eaps", "2026-07", "industry", "C") == "eaps-2026-07-headcount-industry-C"
+
+
+def test_make_id_carries_category_for_every_breakdown_but_total():
+    assert make_id("eaps", "2026-07", "total", None) == "eaps-2026-07-headcount-total"
+    assert make_id("eaps", "2026-07", "industry", "A") == "eaps-2026-07-headcount-industry-A"
+    assert make_id("eaps", "2026-07", "sex", "M") == "eaps-2026-07-headcount-sex-M"
+    assert make_id("ei", "2026-07", "age", "60+") == "ei-2026-07-headcount-age-60+"
+
+
+def test_sex_and_age_records_need_a_category():
+    def build(**over):
+        base = dict(
+            id="x", source="eaps", breakdown="sex", category="M", period="2026-07",
+            value=16079.5, released_at=date(2026, 8, 12),
+            release_url="https://mods.go.kr/x", collected_at=datetime(2026, 8, 30, 9, 0),
+        )
+        return SeriesRecord(**{**base, **over})
+
+    build()                       # 정상
+    build(breakdown="age", category="15-29")
+    with pytest.raises(ValidationError):
+        build(category=None)
+    with pytest.raises(ValidationError):
+        build(breakdown="age", category=None)

@@ -1,0 +1,21 @@
+[
+  {
+    "breakdown": "sex",
+    "name_ko": "성별",
+    "categories": [
+      {"code": "M", "name_ko": "남자", "provided": {"eaps": true, "est": false, "ei": true}},
+      {"code": "F", "name_ko": "여자", "provided": {"eaps": true, "est": false, "ei": true}}
+    ]
+  },
+  {
+    "breakdown": "age",
+    "name_ko": "연령별",
+    "categories": [
+      {"code": "15-29", "name_ko": "29세 이하", "provided": {"eaps": true, "est": false, "ei": true}},
+      {"code": "30-39", "name_ko": "30대", "provided": {"eaps": true, "est": false, "ei": true}},
+      {"code": "40-49", "name_ko": "40대", "provided": {"eaps": true, "est": false, "ei": true}},
+      {"code": "50-59", "name_ko": "50대", "provided": {"eaps": true, "est": false, "ei": true}},
+      {"code": "60+", "name_ko": "60세 이상", "provided": {"eaps": true, "est": false, "ei": true}}
+    ]
+  }
+]

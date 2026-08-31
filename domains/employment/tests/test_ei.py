@@ -169,6 +169,68 @@ def test_parse_fails_when_the_summary_cannot_be_read(data, monkeypatch):
                  collected_at=datetime(2026, 8, 30, 9, 0))
 
 
+def test_demo_tables_are_level_and_delta_not_rate(data):
+    level, delta = ei.find_demo_tables(hwpx.tables(data))
+    assert level[-1][1] == "15,877"
+    assert delta[-1][1] == "277"
+
+
+def test_demo_total_matches_the_industry_total(records):
+    latest = max(r.period for r in records)
+    total = next(r for r in records if r.period == latest and r.breakdown == "total")
+    for breakdown in ("sex", "age"):
+        parts = [r for r in records if r.period == latest and r.breakdown == breakdown]
+        assert parts, f"{latest} {breakdown} 레코드가 없다"
+        # 천명 단위로 반올림된 값이라 합이 총계와 정확히 같지 않다
+        # (실측: 2026-07 증감 합 278 vs 전산업 277). 부분집합 열이 섞이면
+        # 편차가 백 단위로 벌어지므로 1.5 로도 충분히 갈린다.
+        assert abs(sum(p.value for p in parts) - total.value) <= 1.5
+        assert abs(sum(p.yoy for p in parts) - total.yoy) <= 1.5
+
+
+def test_parse_fails_when_the_age_columns_are_shifted(data, monkeypatch):
+    # DEMO_COLUMNS 는 열 위치로 읽는다. 헤더 가드는 8개 라벨 중 5개만 요구하므로
+    # 연령 블록 안에 열이 하나 끼어들어 30대→40대가 통째로 밀려도 통과한다.
+    # 성별 두 열은 그대로라 성별 대조도 통과한다 — 연령 대조만이 이걸 잡는다.
+    shifted = {2: ("sex", "M"), 3: ("sex", "F")}
+    for col, key in ei.DEMO_COLUMNS.items():
+        if key[0] == "age":
+            shifted[col + 1] = key
+    monkeypatch.setattr(ei, "DEMO_COLUMNS", shifted)
+    with pytest.raises(ValueError, match="연령"):
+        ei.parse(data, released_at=date(2026, 8, 11),
+                 release_url="https://x/view", attachments=[],
+                 collected_at=datetime(2026, 8, 30, 9, 0))
+
+
+def test_parse_fails_when_the_sex_columns_are_shifted(data, monkeypatch):
+    # 형제 가드. 성별이 밀리면 연령은 멀쩡하므로 성별 대조만이 잡는다.
+    shifted = dict(ei.DEMO_COLUMNS)
+    shifted[2] = ("sex", "M")
+    shifted[3] = ("age", "15-29")   # 여자 열 자리에 연령이 밀려 들어온 모양
+    monkeypatch.setattr(ei, "DEMO_COLUMNS", shifted)
+    with pytest.raises(ValueError, match="성별"):
+        ei.parse(data, released_at=date(2026, 8, 11),
+                 release_url="https://x/view", attachments=[],
+                 collected_at=datetime(2026, 8, 30, 9, 0))
+
+
+def test_collects_five_age_bands_and_two_sexes(records):
+    latest = max(r.period for r in records)
+    sex = {r.category: r for r in records if r.period == latest and r.breakdown == "sex"}
+    age = {r.category: r for r in records if r.period == latest and r.breakdown == "age"}
+    assert set(sex) == {"M", "F"}
+    assert set(age) == {"15-29", "30-39", "40-49", "50-59", "60+"}
+    assert sex["F"].value == 7205.0
+    assert age["60+"].yoy == 209.0
+
+
+def test_demo_series_covers_every_month_not_just_the_latest(records):
+    periods = {r.period for r in records if r.breakdown == "age"}
+    assert "2024-07" in periods and "2026-07" in periods
+    assert len(periods) >= 24
+
+
 def test_headline_delta_tolerates_spacing_and_particles():
     # 문구가 조금 달라진 것만으로 수집이 멈추면 안 된다.
     make = lambda s: [[[s]]]

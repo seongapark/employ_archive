@@ -50,12 +50,35 @@ PDF 는 요약표 한 페이지만 읽는다(`pipeline/pdf.py`). 표의 열 구�
 수집기가 깨진 날을 놓친다. 기한이 지나거나 그 수집기가 되살아나면 다시 빨개지므로,
 유예를 지우거나 미루기 전에는 초록으로 돌아가지 않는다(`pipeline/check_run.py`).
 
+## 고용동향 수집기
+
+| 출처 | 경로 | 분류 | 비고 |
+|---|---|---|---|
+| 경제활동인구조사 | 국가데이터처 보도자료 게시판 → 첨부 xlsx | 산업별·성별·연령별 | KOSIS API 미사용(원계열 월별 산업별 취업자가 2024-12 에서 끊긴다) |
+| 사업체노동력조사 | KOSIS OpenAPI (`DT_118N_MON066`) | 산업별만 | 성·연령별 종사자수를 발표하지 않는다 |
+| 고용행정통계 | 고용노동부 보도자료 게시판 → 첨부 hwpx | 산업별·성별·연령별 | 표는 인덱스가 아니라 헤더로 찾는다(회차마다 표 개수가 다르다) |
+
+세 출처 모두 산업별을 낸다. 성별·연령별은 경제활동인구조사와 고용행정통계만
+낸다 — 사업체노동력조사 열은 화면에서 `―`(미제공)로 표시되고, 표 자체가 발표되지
+않는 것과 그 달치 발표가 아직 나오지 않은 것(미발표)은 다른 상태로 구분한다.
+
+## 고용동향 화면
+
+`domains/employment/app/` — 총괄·단면별·출처비교 세 화면과, 표 상단에서 여는
+증감 비교 시트로 구성된다. 총괄은 최신 달 카드(미발표 출처는 직전달 값을 회색으로
+붙인다), 단면별은 산업·성·연령 토글과 정렬·펼침, 출처비교는 같은 지표를 세 출처가
+어떻게 다르게 내는지 나란히 본다. 연·월 스위처의 하한은 세 출처가 모두 값을 가진
+첫 달로 정해진다.
+
+수집 실패는 `data/last_run.json` 에 한 줄로 남고 `collect-employment.yml` 이 그날
+실행을 빨갛게 만든다. `KNOWN_DOWN` 형식은 전망 수집기와 같다.
+
 ## 실행
 
 ```bash
 pip install -r requirements.txt
 python -m pytest                              # 파이썬 테스트 (네트워크 불필요)
-node --test "core/tests/*.mjs" "hub/tests/*.mjs" "domains/forecast/tests/web/*.mjs"   # 웹 테스트
+node --test "core/tests/*.mjs" "hub/tests/*.mjs" "domains/forecast/tests/web/*.mjs" "domains/employment/tests/web/*.mjs"   # 웹 테스트
 python -m tools.serve                         # 로컬 서버 (http://127.0.0.1:8642/)
 python -m domains.forecast.pipeline.collect   # 전망 수집 1회
 python -m domains.employment.pipeline.collect   # 고용동향 수집 1회 (KOSIS_API_KEY 필요)
