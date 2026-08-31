@@ -3,7 +3,7 @@
 // 허브는 도메인 목록만 알고 내용은 모른다. 도메인이 사라지면 last_run.json이
 // 404가 되어 자동으로 '준비중'이 되고, 붙으면 자동으로 살아난다.
 export const DOMAINS = [
-  { slug: 'forecast', name: '전망', desc: '기관별 고용·거시 전망치와 수정 이력' },
+  { slug: 'forecast', name: '전망', desc: '기관별 고용 전망치' },
   { slug: 'employment', name: '고용동향', desc: '경활·사업체·고용행정통계 3출처 비교' },
   { slug: 'supply', name: '인력수급', desc: '중장기 인력수급전망' },
   { slug: 'economy', name: '경제동향', desc: '거시 지표 동향' },
