@@ -179,19 +179,29 @@ def parse_table(text: str) -> dict[tuple[str, int, str], float]:
 
     values: dict[tuple[str, int, str], float] = {}
     section = None
+    # 지표 라벨이 한 번이라도 걸렸는지 따로 기록한다. 숫자 개수가 열 개수와
+    # 안 맞아 값을 못 채운 줄이라도, 라벨만은 우리 지표였을 수 있다 —
+    # 그 경우와 '지표가 원래 하나도 없는 표'를 구분해야 한다(아래 참고).
+    label_matched_indicator = False
     for line in lines:
         label, numbers = _split_row(line)
         if label in _SECTIONS:
             section = label
-        elif not label.startswith("("):
+        elif label and not label.startswith("("):
             # 대분류가 끝나는 지점. 이걸 안 지우면, 훗날 다른 대분류 밑에도
             # '(증감)' 하위행이 생겼을 때 그게 여전히 '취업자' 대분류로
             # 남아 있는 section 과 짝지어져 emp_change 로 잘못 읽힌다.
+            # label 이 빈 줄(숫자만 있는 줄)은 여기서 걸러야 한다 — tesseract
+            # psm 6 이 라벨 줄과 숫자 줄을 둘로 쪼갤 때가 있는데, 그 숫자만
+            # 있는 줄 때문에 section 이 지워지면 바로 다음 줄의 진짜 라벨이
+            # 대분류를 잃는다.
             section = None
-        if len(numbers) != len(columns):
-            continue
         indicator = (LABEL_TO_INDICATOR.get((section, label))
                      or LABEL_TO_INDICATOR.get((None, label)))
+        if indicator is not None:
+            label_matched_indicator = True
+        if len(numbers) != len(columns):
+            continue
         if indicator is None:
             continue
         scale = SCALE.get(indicator, 1.0)
@@ -201,10 +211,19 @@ def parse_table(text: str) -> dict[tuple[str, int, str], float]:
     found = {indicator for indicator, _, _ in values}
     missing = REQUIRED_INDICATORS - found
     if missing == REQUIRED_INDICATORS:
-        # 하나도 못 찾았다 — 연도 헤더는 있지만 이 표엔 우리 지표가 아예
-        # 없다. 서식이 바뀐 게 아니라 애초에 다른 표라는 뜻이다.
-        raise NotForecastTable(
-            f"전망표가 아니다 — 지표를 하나도 찾지 못했다: {sorted(missing)}")
+        if not label_matched_indicator:
+            # 라벨조차 하나도 안 걸렸다 — 연도 헤더는 있지만 이 표엔 우리
+            # 지표가 아예 없다. 서식이 바뀐 게 아니라 애초에 다른 표라는 뜻이다.
+            raise NotForecastTable(
+                f"전망표가 아니다 — 지표를 하나도 찾지 못했다: {sorted(missing)}")
+        # 라벨은 걸렸는데 숫자 개수가 매번 열 개수와 어긋났다 — 예를 들어
+        # OCR 이 반기 하위줄을 통째로 놓쳐 열이 4개인데 데이터 줄은 여전히
+        # 6개짜리다. 이건 '다른 표'가 아니라 전망표를 못 읽은 것이니
+        # NotForecastTable 로 조용히 건너뛰면 안 된다 — find_forecast_page 가
+        # 진짜 전망표를 그대로 지나쳐 "전망표 없음"으로 보고해 버린다.
+        raise ValueError(
+            "전망표를 찾았지만 열 개수가 맞지 않는다 — 헤더의 반기 줄을 "
+            "잘못 읽었을 가능성이 크다")
     if missing:
         raise ValueError(f"전망표에서 지표를 찾지 못했다: {sorted(missing)}")
     return values
@@ -223,8 +242,8 @@ SCREEN_DPI = 150
 SCREEN_KEYWORD = "전망"
 
 
-def find_forecast_page(page_texts: list[str],
-                       page_numbers: list[int]) -> tuple[int, str] | None:
+def find_forecast_page(page_texts: list[str], page_numbers: list[int],
+                       published_at: date) -> tuple[int, str] | None:
     """전망표가 실린 (쪽번호, 원문) 을 준다. 없으면 None.
 
     캡션으로 찾지 않는다 — OCR 이 '표1' 을 'WED' 로도 읽는다. 실제로 파싱해
@@ -241,6 +260,13 @@ def find_forecast_page(page_texts: list[str],
     하나일 뿐이다. NotForecastTable 은 그런 '다른 표'를 만났다는 뜻이라
     건너뛰고 다음 후보 쪽을 계속 찾는다.
 
+    이 브리프는 도입부에 취업자·(증감)·실업률·고용률을 과거 연도만으로 채운
+    요약표를 싣는데, 그 표는 우리 지표 3개가 전부 걸려 parse_table 을 그대로
+    통과한다. 그래서 지표가 다 나온다고 바로 받아들이지 않고, 열에 발표연도
+    이상인 연도가 하나라도 있는지까지 확인한다. 없으면 과거 실적표일 뿐이니
+    건너뛰고 다음 후보를 본다 — 그렇지 않으면 parse() 가 발표연도 이전 열을
+    전부 버려 빈 리스트를 내놓고, collect_issue 는 "전망 없음"으로 오판한다.
+
     이건 대가가 있는 선택이다. 지표 3개가 하나도 안 걸리면 '다른 표'로
     보고 넘어가야 흔한 경우(호마다 있는 다른 연도표들)를 통과시킬 수 있다.
     하지만 그 대가로, 진짜 전망표인데 OCR 이 심하게 망가져 지표 3개를
@@ -248,11 +274,22 @@ def find_forecast_page(page_texts: list[str],
     없음"으로 보고되고 만다. 그래서 "이 회차엔 분명 전망표가 있는데
     빈손으로 나온다"는 문제를 조사할 땐, 표가 없다고 단정하지 말고 그
     표 쪽의 OCR 품질부터 의심해야 한다.
+
+    다만 그 의심은 이 함수에 넘어온 후보 쪽에만 유효하다. 후보 자체는
+    150dpi 스크리닝에서 '전망' 두 글자가 걸린 쪽만 추려 만든다(전처리 없이).
+    그 해상도·전처리 없음 조건에서 '전망'이 심하게 뭉개지면 표가 실린 쪽이
+    애초에 후보에 오르지 못해 이 함수는 호출조차 안 된다 — 그러면 400dpi
+    전처리 출력을 아무리 들여다봐도 그 쪽은 없다. "표가 없다고 보고된 회차"를
+    조사할 땐 이 두 지점(150dpi 스크리닝 탈락 vs 여기서의 건너뛰기)을 모두
+    의심해야 한다.
     """
     for page_no, text in zip(page_numbers, page_texts):
         try:
-            parse_table(text)
+            values = parse_table(text)
         except (NoHeaderRow, NotForecastTable):
+            continue
+        years = {year for _, year, _ in values}
+        if not any(year >= published_at.year for year in years):
             continue
         return page_no, text
     return None
@@ -272,11 +309,24 @@ def collect_issue(listed: ListedIssue, *, fetch=None,
         return []
 
     texts = read_pages(data, candidates, dpi=400, preprocess=True)
-    found = find_forecast_page(texts, candidates)
+    found = find_forecast_page(texts, candidates, listed.issue.published_at)
     if found is None:
+        # 후보는 있었는데 전망표로 확정된 쪽이 없었다는 뜻이다. "후보 자체가
+        # 없었다"(위의 return [])와 로그에서 구분돼야, 원인을 150dpi 스크리닝
+        # 탈락과 여기 판정 실패 중 어디서부터 찾을지 바로 알 수 있다.
+        print(f"{listed.issue.title}: 후보 {len(candidates)}쪽 중 전망표로 "
+              f"확정된 쪽이 없다")
         return []
     page_no, text = found
-    return parse(text, listed.issue, listed.pdf_url, page_no)
+    records = parse(text, listed.issue, listed.pdf_url, page_no)
+    if not records:
+        # find_forecast_page 가 이미 발표연도 이상 열이 있는 쪽만 통과시켰으니,
+        # 그 쪽에서 parse 가 빈 리스트를 낸다면 그건 "전망 없음"이 아니라
+        # 모순이다 — 조용히 넘기면 안 된다.
+        raise ValueError(
+            f"{listed.issue.title}: {page_no}쪽에서 전망표를 찾았지만 "
+            "레코드를 만들지 못했다")
+    return records
 
 
 def collect(today: date) -> list[ForecastRecord]:
