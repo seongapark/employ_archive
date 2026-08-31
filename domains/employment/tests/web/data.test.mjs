@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { monthOptions, overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData, EMPTY_LABEL, emptyLabel } from '../../app/js/data.js';
+import { originOf, monthOptions, overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData, EMPTY_LABEL, emptyLabel } from '../../app/js/data.js';
 
 function rec(over = {}) {
   return {
@@ -249,4 +249,24 @@ test('matrix cells carry the level so the screen can show it under the delta', (
   assert.equal(c.cells.eaps.yoy, -68.4);
   // 미제공은 수준도 없다 — 그 출처가 그 분류를 아예 안 잡는다
   assert.equal(c.cells.est.value, null);
+});
+
+test('a card knows whether its number came from KOSIS or a press release', () => {
+  // 날짜의 뜻이 달라진다 — KOSIS 는 표 갱신일, 보도자료는 발표일이다.
+  // 사업체노동력조사는 과거 달을 KOSIS 에서, 최신월을 보도자료에서 받으므로
+  // 한 출처 안에서도 갈린다. 출처 이름으로 판단하면 틀린다.
+  const series = [
+    rec({ source: 'est', period: '2026-06', value: 20714.2, yoy: 248,
+          released_at: '2026-08-31',
+          release_url: 'https://kosis.kr/statHtml/statHtml.do?orgId=118&tblId=DT_118N_MON066' }),
+    rec({ source: 'est', period: '2026-07', value: 20718, yoy: 226,
+          released_at: '2026-08-27',
+          release_url: 'https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19832' }),
+  ];
+  const june = overviewCards(series, SOURCES, '2026-06').find(c => c.code === 'est');
+  const july = overviewCards(series, SOURCES, '2026-07').find(c => c.code === 'est');
+  assert.equal(june.origin, 'kosis');
+  assert.equal(july.origin, 'press');
+  assert.equal(originOf({ release_url: 'https://kosis.kr/x' }), 'kosis');
+  assert.equal(originOf({}), 'press');
 });
