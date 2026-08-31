@@ -44,6 +44,18 @@ export function render(el, ctx) {
     }</tr>`;
 
   el.innerHTML = `
-    <p class="rotate-hint">가로로 돌리면 세 출처가 한눈에 들어옵니다.</p>
-    <div class="stable__wrap"><table class="stable">${head}<tbody>${body}</tbody></table></div>`;
+    <p class="rotate-hint">옆으로 밀면 세 출처를 나란히 볼 수 있습니다 · 가로로 돌리면 한눈에 들어옵니다</p>
+    <div class="stable__frame">
+      <div class="stable__wrap"><table class="stable">${head}<tbody>${body}</tbody></table></div>
+    </div>`;
+
+  // 오른쪽 끝까지 밀면 페이드를 끈다. 계속 띄워두면 "더 있다" 고 거짓말하게 된다.
+  const wrap = el.querySelector('.stable__wrap');
+  const frame = el.querySelector('.stable__frame');
+  const sync = () => {
+    const more = wrap.scrollWidth - wrap.clientWidth - wrap.scrollLeft > 4;
+    frame.classList.toggle('stable__frame--more', more);
+  };
+  wrap.addEventListener('scroll', sync, { passive: true });
+  sync();
 }
