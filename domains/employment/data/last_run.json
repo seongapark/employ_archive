@@ -1,28 +1,49 @@
 {
-  "run_at": "2026-08-31T09:55:12.214178+09:00",
+  "run_at": "2026-08-31T20:14:56.030953+09:00",
   "collectors": {
     "eaps": {
       "ok": true,
       "fetched": 784,
-      "added": 196,
+      "added": 0,
       "updated": 0,
       "rejected": 0
     },
     "est": {
       "ok": true,
-      "fetched": 570,
-      "added": 0,
+      "fetched": 589,
+      "added": 19,
       "updated": 0,
       "rejected": 0
     },
     "ei": {
       "ok": true,
       "fetched": 728,
-      "added": 196,
+      "added": 0,
       "updated": 0,
       "rejected": 0
     }
   },
   "conflicts": [],
-  "errors": []
+  "errors": [],
+  "releases": {
+    "eaps": {
+      "months": 39,
+      "added": 0,
+      "attachments_filled": 0,
+      "pending": 0
+    },
+    "est": {
+      "months": 51,
+      "added": 0,
+      "attachments_filled": 12,
+      "pending": 15
+    },
+    "ei": {
+      "months": 55,
+      "added": 0,
+      "attachments_filled": 12,
+      "pending": 19
+    }
+  },
+  "kosis_check": "2026-07 29136.1 일치"
 }

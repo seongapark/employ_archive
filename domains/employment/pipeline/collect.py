@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable
@@ -37,6 +38,19 @@ def load_manual(data_dir: Path) -> list[SeriesRecord]:
     return records
 
 
+def _extras(name: str, index: dict, data_dir: Path) -> dict:
+    """사업체노동력조사만 색인을 받는다. KOSIS 반영이 한 달 늦어서 아직 없는
+    달을 보도자료에서 보충하는데, 그러려면 그 달 게시글과 첨부를 알아야 한다."""
+    if name != "est" or not index:
+        return {}
+    try:
+        rows = json.loads((data_dir / "industries.json").read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+    names = {re.sub(r"\s+", "", r["name_ko"]): r["code"] for r in rows}
+    return {"releases_index": index, "industries": names}
+
+
 def main(data_dir: Path = DATA_DIR,
          collectors: dict[str, Callable[[date], list[SeriesRecord]]] | None = None,
          *,
@@ -61,6 +75,7 @@ def main(data_dir: Path = DATA_DIR,
     today = datetime.now(KST).date()
 
     merged = store.load_series(series_path)
+    index: dict = {}
     releases_path = data_dir / "releases.json"
     summary = {
         "run_at": datetime.now(KST).isoformat(),
@@ -69,9 +84,22 @@ def main(data_dir: Path = DATA_DIR,
         "errors": [],
     }
 
+    # 월별 보도자료 색인. 숫자가 아니라 출처를 담으므로 여기서 실패해도 그날 수집을
+    # 망치지 않는다 — 한 줄 남기고 넘어가고, 화면은 아직 못 채운 달을 게시판 목록으로
+    # 보낸다. 첫 실행은 상세를 MAX_DETAILS_PER_RUN 만큼만 채우고 며칠에 걸쳐 완성된다.
+    try:
+        existing_index = json.loads(releases_path.read_text(encoding="utf-8"))             if releases_path.exists() else {}
+        index, index_summary = refresh_releases(existing_index)
+        releases_path.write_text(
+            json.dumps(index, ensure_ascii=False, indent=2, sort_keys=True) + chr(10),
+            encoding="utf-8")
+        summary["releases"] = index_summary
+    except Exception as exc:
+        summary["errors"].append(f"releases: {type(exc).__name__}: {exc}")
+
     for name, collect_fn in collectors.items():
         try:
-            candidates = collect_fn(today)
+            candidates = collect_fn(today, **_extras(name, index, data_dir))
             result = store.upsert(merged, candidates)
             merged = result.records
             summary["collectors"][name] = {
@@ -95,19 +123,6 @@ def main(data_dir: Path = DATA_DIR,
             summary["kosis_check"] = note
     except Exception as exc:
         summary["errors"].append(f"kosis_check: {type(exc).__name__}: {exc}")
-
-    # 월별 보도자료 색인. 숫자가 아니라 출처를 담으므로 여기서 실패해도 그날 수집을
-    # 망치지 않는다 — 한 줄 남기고 넘어가고, 화면은 아직 못 채운 달을 게시판 목록으로
-    # 보낸다. 첫 실행은 상세를 MAX_DETAILS_PER_RUN 만큼만 채우고 며칠에 걸쳐 완성된다.
-    try:
-        existing_index = json.loads(releases_path.read_text(encoding="utf-8"))             if releases_path.exists() else {}
-        index, index_summary = refresh_releases(existing_index)
-        releases_path.write_text(
-            json.dumps(index, ensure_ascii=False, indent=2, sort_keys=True) + chr(10),
-            encoding="utf-8")
-        summary["releases"] = index_summary
-    except Exception as exc:
-        summary["errors"].append(f"releases: {type(exc).__name__}: {exc}")
 
     # 수기 입력은 마지막에 얹어 수집 결과를 이긴다.
     # 손으로 급히 채운 파일이 깨져 있어도 이미 수집한 세 결과를 버리지 않는다 —

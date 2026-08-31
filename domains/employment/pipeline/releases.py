@@ -27,6 +27,7 @@ import requests
 _TITLE_PERIOD = re.compile(r"(\d{2,4})\s*년\s*(\d{1,2})\s*월")
 _COMMENT = re.compile(r"<!--.*?-->", re.S)
 _TAG = re.compile(r"<[^>]+>")
+_POSTED = re.compile(r"(20\d{2})[.\-/](\d{2})[.\-/](\d{2})")
 
 
 def _strip(html: str) -> str:
@@ -55,17 +56,24 @@ def moel_list(html: str, *, must_contain: str) -> dict[str, dict]:
     """
     out: dict[str, dict] = {}
     body = _COMMENT.sub("", html)
-    for m in re.finditer(r'enewsView\.do\?news_seq=(\d+)[^>]*>(.*?)</a>', body, re.S):
-        seq, title = m.group(1), _strip(m.group(2))
+    for m in re.finditer(r'enewsView\.do\?news_seq=(\d+)[^>]*>(.*?)</a>(.{0,900}?)(?=enewsView\.do\?|$)',
+                         body, re.S):
+        seq, title, rest = m.group(1), _strip(m.group(2)), m.group(3)
         if must_contain not in title.replace(" ", ""):
             continue
         period = period_of(title)
         if period is None:
             continue
-        out.setdefault(period, {
+        post = {
             "url": f"https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq={seq}",
             "title": title,
-        })
+        }
+        # 발표일. 목록 행이 들고 있으므로 지어낼 필요가 없다 — 보도자료에서 읽은
+        # 숫자의 released_at 이 여기서 온다.
+        posted = _POSTED.search(_strip(rest))
+        if posted:
+            post["posted_at"] = f"{posted.group(1)}-{posted.group(2)}-{posted.group(3)}"
+        out.setdefault(period, post)
     return out
 
 
@@ -147,14 +155,22 @@ def moel_attachments(html: str) -> list[dict]:
 
 
 def merge(existing: dict, source: str, found: dict[str, dict]) -> dict:
-    """찾은 회차를 색인에 얹는다. 이미 있는 달은 건드리지 않는다 —
-    첨부까지 채워둔 항목을 목록만 보고 덮어쓰면 첨부가 날아간다."""
+    """찾은 회차를 색인에 얹는다.
+
+    이미 있는 달의 값은 덮어쓰지 않는다 — 상세에서 받아둔 첨부를 목록만 보고
+    지우면 안 된다. 다만 **없던 항목은 채운다**: 색인이 담는 것이 늘어날 때
+    (발표일 posted_at 을 뒤늦게 읽기 시작한 것처럼) 옛 항목이 영영 비어 있으면
+    안 되기 때문이다. 실제로 그 일이 있었다 — posted_at 이 없어 사업체노동력조사
+    보충이 조용히 건너뛰어졌다.
+    """
     index = {k: dict(v) for k, v in existing.items()}
-    slot = dict(index.get(source, {}))
+    slot = {k: dict(v) for k, v in index.get(source, {}).items()}
     for period, post in found.items():
-        if period in slot:
+        if period not in slot:
+            slot[period] = dict(post)
             continue
-        slot[period] = dict(post)
+        for key, value in post.items():
+            slot[period].setdefault(key, value)
     index[source] = slot
     return index
 

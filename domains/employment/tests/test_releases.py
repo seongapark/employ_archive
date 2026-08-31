@@ -93,9 +93,23 @@ def test_merge_does_not_overwrite_a_month_that_already_has_attachments():
     found = {"2026-07": {"url": "u2", "title": "t2"}, "2026-06": {"url": "u3", "title": "t3"}}
     merged = releases.merge(existing, "ei", found)
     assert merged["ei"]["2026-07"]["attachments"] == [{"type": "hwpx", "url": "f"}]
-    assert merged["ei"]["2026-07"]["url"] == "u"          # 기존 항목은 그대로
+    assert merged["ei"]["2026-07"]["url"] == "u"          # 기존 값은 덮이지 않고
     assert merged["ei"]["2026-06"]["url"] == "u3"         # 새 달만 들어온다
     assert existing["ei"]["2026-07"]["url"] == "u"        # 입력을 건드리지 않는다
+
+
+def test_merge_fills_fields_that_the_index_did_not_used_to_carry():
+    """색인이 담는 것이 늘어나면 옛 항목도 채워져야 한다.
+
+    발표일(posted_at)을 뒤늦게 읽기 시작했을 때 기존 달이 영영 비어 있어서
+    사업체노동력조사의 보도자료 보충이 조용히 건너뛰어졌다.
+    """
+    existing = {"est": {"2026-07": {"url": "u", "attachments": [{"type": "hwpx", "url": "f"}]}}}
+    found = {"2026-07": {"url": "u2", "title": "t", "posted_at": "2026-08-27"}}
+    merged = releases.merge(existing, "est", found)
+    assert merged["est"]["2026-07"]["posted_at"] == "2026-08-27"   # 없던 것은 채우고
+    assert merged["est"]["2026-07"]["url"] == "u"                  # 있던 것은 그대로
+    assert merged["est"]["2026-07"]["attachments"] == [{"type": "hwpx", "url": "f"}]
 
 
 def test_missing_attachments_lists_only_the_months_still_to_fetch():

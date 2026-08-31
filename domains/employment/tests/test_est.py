@@ -138,3 +138,74 @@ def test_industry_sum_matches_the_total(records):
     parts = sum(r.value for r in records
                 if r.breakdown == "industry" and r.period == latest)
     assert 0.999 < parts / total < 1.001
+
+
+# ── 보도자료로 최신월 보충 ────────────────────────────────────────────────
+# KOSIS 반영이 보도자료보다 한 달 늦어, 8월 말에 7월 고용이 발표돼도 표에는
+# 6월까지만 있었다. 그 달만 보도자료에서 읽어 얹는다.
+
+import io as _io
+from pathlib import Path as _Path
+
+from domains.employment.pipeline.periods import squash as _squash
+
+_FIX = _Path(__file__).parent / "fixtures"
+
+
+def _release_bytes():
+    return _io.open(_FIX / "est_2026-07.hwpx", "rb").read()
+
+
+def _industries():
+    rows = json.loads((_Path(__file__).parent.parent / "data" / "industries.json")
+                      .read_text(encoding="utf-8"))
+    return {_squash(r["name_ko"]): r["code"] for r in rows}
+
+
+def _index():
+    return {"est": {"2026-07": {
+        "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19832",
+        "posted_at": "2026-08-27",
+        "attachments": [{"type": "hwpx", "url": "https://x/f.hwpx"}],
+    }}}
+
+
+def test_release_gives_the_month_kosis_does_not_have_yet():
+    recs = est._from_release("2026-06", _index(), _industries(), lambda url: _release_bytes())
+    assert {r.period for r in recs} == {"2026-07"}
+    total = next(r for r in recs if r.breakdown == "total")
+    assert total.value == 20718.0 and total.yoy == 226.0
+    assert str(total.released_at) == "2026-08-27"        # 발표일을 지어내지 않는다
+    # 사업체노동력조사가 잡는 18개 대분류가 다 온다
+    codes = {r.category for r in recs if r.breakdown == "industry"}
+    assert codes == set("BCDEFGHIJKLMNOPQRS")
+
+
+def test_release_is_skipped_once_kosis_covers_that_month():
+    assert est._from_release("2026-07", _index(), _industries(), lambda url: _release_bytes()) == []
+
+
+def test_release_is_skipped_without_a_publication_date():
+    """released_at 을 지어내면 나중에 KOSIS 가 그 달을 실어도 갱신이 거부될 수 있다."""
+    index = _index()
+    del index["est"]["2026-07"]["posted_at"]
+    assert est._from_release("2026-06", index, _industries(), lambda url: _release_bytes()) == []
+
+
+def test_release_table_is_found_by_content_and_checked_against_the_month():
+    data = _release_bytes()
+    with pytest.raises(ValueError, match="기준월"):
+        est.parse_release(data, released_at=date(2026, 8, 27), release_url="https://www.moel.go.kr/x",
+                          attachments=[], collected_at=datetime(2026, 8, 27, 9, 0),
+                          industries=_industries(), expect_period="2026-06")
+
+
+def test_release_industry_sum_guards_against_grabbing_the_wrong_column():
+    """맨 오른쪽 세 칸이 최신월이다. 열을 잘못 집으면 합이 전체와 벌어진다."""
+    recs = est.parse_release(_release_bytes(), released_at=date(2026, 8, 27),
+                             release_url="https://www.moel.go.kr/x", attachments=[],
+                             collected_at=datetime(2026, 8, 27, 9, 0),
+                             industries=_industries())
+    total = next(r for r in recs if r.breakdown == "total").value
+    parts = sum(r.value for r in recs if r.breakdown == "industry")
+    assert abs(parts - total) <= 5      # 18개를 정수로 반올림한 만큼만 어긋난다
