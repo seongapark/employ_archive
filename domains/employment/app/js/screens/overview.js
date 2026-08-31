@@ -1,18 +1,5 @@
+import { switcherHtml, bindSwitcher } from '../switcher.js';
 import { overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, EMPTY_LABEL, esc } from '../data.js';
-
-function switcher(ctx) {
-  const { years, monthsByYear } = ctx.months;
-  const year = Number(ctx.state.period.slice(0, 4));
-  const month = Number(ctx.state.period.slice(5, 7));
-  const yearOpts = years.map(y =>
-    `<option value="${y}"${y === year ? ' selected' : ''}>${y}년</option>`).join('');
-  const monthOpts = (monthsByYear[year] || []).map(m =>
-    `<option value="${m}"${m === month ? ' selected' : ''}>${m}월</option>`).join('');
-  return `<div class="switcher">
-    <select id="yearSelect" aria-label="기준 연도">${yearOpts}</select>
-    <select id="monthSelect" aria-label="기준 월">${monthOpts}</select>
-  </div>`;
-}
 
 // 사업체노동력조사의 released_at 은 보도자료 발표일이 아니라 KOSIS 표 갱신일이다.
 // 다른 둘과 뜻이 다르므로 라벨을 달리 쓴다.
@@ -77,17 +64,7 @@ function cardHtml(card) {
 
 export function render(el, ctx) {
   const cards = overviewCards(ctx.series, ctx.sources, ctx.state.period, ctx.releases);
-  el.innerHTML = switcher(ctx) + `<div class="cards">${cards.map(cardHtml).join('')}</div>`;
+  el.innerHTML = switcherHtml(ctx) + `<div class="cards">${cards.map(cardHtml).join('')}</div>`;
 
-  el.querySelector('#yearSelect').addEventListener('change', e => {
-    const year = Number(e.target.value);
-    const months = ctx.months.monthsByYear[year] || [];
-    const month = months[months.length - 1];
-    ctx.state.period = `${year}-${String(month).padStart(2, '0')}`;
-    ctx.rerender();
-  });
-  el.querySelector('#monthSelect').addEventListener('change', e => {
-    ctx.state.period = `${ctx.state.period.slice(0, 4)}-${String(e.target.value).padStart(2, '0')}`;
-    ctx.rerender();
-  });
+  bindSwitcher(el, ctx);
 }

@@ -1,5 +1,6 @@
+import { switcherHtml, bindSwitcher } from '../switcher.js';
 import {
-  segmentsOf, breakdownMatrix, categoryTimeline, fmtDelta, deltaTone, monthLabel,
+  segmentsOf, breakdownMatrix, fmtLevel, categoryTimeline, fmtDelta, deltaTone, monthLabel,
   EMPTY_LABEL, emptyLabel, esc, shortOf, totalRow, SOURCE_ORDER, SOURCE_COLORS,
 } from '../data.js';
 
@@ -17,7 +18,9 @@ function tabs(segments, current) {
   ).join('')}</div>`;
 }
 
-function cell(state, yoy) {
+// 칸은 증감만 쓴다. 좁은 화면에서 한 칸에 두 숫자를 넣으면 21행이 다시 길어진다 —
+// 수준은 행을 탭했을 때 펼침에서 보여준다.
+function cell({ state, yoy }) {
   if (state === 'value') {
     return `<td class="num ${deltaTone(yoy)}">${esc(fmtDelta(yoy))}</td>`;
   }
@@ -52,17 +55,17 @@ export function render(el, ctx) {
   const totalHtml = `
     <tr class="matrix__total">
       <th scope="row">${esc(total.short_ko)}</th>
-      ${SOURCE_ORDER.map(s => cell(total.cells[s].state, total.cells[s].yoy)).join('')}
+      ${SOURCE_ORDER.map(s => cell(total.cells[s])).join('')}
     </tr>`;
 
   const body = rows.map(row => `
     <tr class="row" data-code="${esc(row.code)}">
       <th scope="row" title="${esc(row.name_ko)}">${esc(shortOf(row))}</th>
-      ${SOURCE_ORDER.map(s => cell(row.cells[s].state, row.cells[s].yoy)).join('')}
+      ${SOURCE_ORDER.map(s => cell(row.cells[s])).join('')}
     </tr>
     ${ctx.state.category === row.code ? expanded(ctx, current, row) : ''}`).join('');
 
-  el.innerHTML = tabs(segments, current) + note + `
+  el.innerHTML = switcherHtml(ctx) + tabs(segments, current) + note + `
     <div class="sortbar">
       <button type="button" class="sortbtn${sort === 'delta' ? ' is-on' : ''}" data-sort="delta">증감순</button>
       <button type="button" class="sortbtn${sort === 'code' ? ' is-on' : ''}" data-sort="code">분류순</button>
@@ -74,6 +77,8 @@ export function render(el, ctx) {
       <li>증감없음 = 전년동월대비를 낼 수 없음</li>
       ${current === 'age' ? `<li>${esc(AGE_NOTE)}</li>` : ''}
     </ul>`;
+
+  bindSwitcher(el, ctx);
 
   el.querySelectorAll('.sortbtn').forEach(btn => btn.addEventListener('click', () => {
     ctx.state.sort = btn.dataset.sort;
@@ -95,13 +100,17 @@ function expanded(ctx, breakdown, row) {
     // 사실 자체가 정보다(상위 스펙 7.6) — 시트의 막대는 이미 이걸 지키는데
     // 이 화면만 어겼다. 왜 비었는지는 매트릭스 칸이 이미 들고 있는 cellState
     // 판정을 그대로 쓴다. 여기서 세 번째 판정을 만들지 않는다.
+    // 펼침은 그 달의 수준과 증감을 함께 보여준다. 매트릭스는 증감만 싣고,
+    // "그래서 규모가 얼마인데?" 는 여기서 답한다.
+    const here = row.cells[s];
+    const level = here.value === null || here.value === undefined
+      ? '' : ` <span class="expand__level num">${esc(fmtLevel(here.value))}</span>`;
     if (!points.length) {
-      return `<li>${dot}${esc(name)} · ${esc(emptyLabel(row.cells[s].state))}</li>`;
+      return `<li>${dot}${esc(name)} · ${esc(emptyLabel(here.state))}${level}</li>`;
     }
     const last = points[points.length - 1];
-    const label = last.yoy === null ? emptyLabel('noDelta') : fmtDelta(last.yoy);
-    return `<li>${dot}
-      ${esc(name)} · ${esc(monthLabel(last.period))} ${esc(label)}</li>`;
+    const label = here.state === 'noDelta' ? emptyLabel('noDelta') : fmtDelta(here.yoy);
+    return `<li>${dot}${esc(name)} · ${esc(label)}${level}</li>`;
   }).join('');
   // 약칭만으로는 뜻이 흐린 분류가 있다(가구내고용·국제외국·수도·하수·폐기업).
   // 펼쳤을 때 정식명을 한 줄 얹어 표의 좁은 머리와 원문 이름을 잇는다.

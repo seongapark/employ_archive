@@ -136,10 +136,11 @@ test('breakdownMatrix tells the four empty states apart', () => {
   ];
   const rows = breakdownMatrix(series, INDUSTRIES, '2026-07', { sort: 'code', breakdown: 'industry' });
   assert.deepEqual(rows.map(r => r.code), ['A', 'C']);
-  assert.deepEqual(rows[0].cells.est, { state: 'notProvided', yoy: null });
-  assert.deepEqual(rows[0].cells.ei, { state: 'unpublished', yoy: null });
-  assert.deepEqual(rows[0].cells.eaps, { state: 'value', yoy: 11.5 });
-  assert.deepEqual(rows[1].cells.est, { state: 'noDelta', yoy: null });
+  assert.deepEqual(rows[0].cells.est, { state: 'notProvided', yoy: null, value: null });
+  assert.deepEqual(rows[0].cells.ei, { state: 'unpublished', yoy: null, value: null });
+  assert.deepEqual(rows[0].cells.eaps, { state: 'value', yoy: 11.5, value: 29136.1 });
+  // 값이 있는데 증감만 못 내는 칸은 수준을 지킨다 — 화면이 그 밑에 작게 적는다
+  assert.deepEqual(rows[1].cells.est, { state: 'noDelta', yoy: null, value: 29136.1 });
 });
 
 test('breakdownMatrix sorts by delta magnitude, empty rows last', () => {
@@ -236,4 +237,16 @@ test('timeline always runs to the newest month even when an older month is selec
   ];
   const d = sheetData(series, { period: '2026-05', breakdown: null, category: null });
   assert.deepEqual(d.timeline.eaps.map(p => p.period), ['2026-05', '2026-07']);
+});
+
+test('matrix cells carry the level so the screen can show it under the delta', () => {
+  const series = [
+    rec({ source: 'eaps', breakdown: 'industry', category: 'C', period: '2026-07', value: 4327.4, yoy: -68.4 }),
+  ];
+  const rows = breakdownMatrix(series, INDUSTRIES, '2026-07', { sort: 'code', breakdown: 'industry' });
+  const c = rows.find(r => r.code === 'C');
+  assert.equal(c.cells.eaps.value, 4327.4);
+  assert.equal(c.cells.eaps.yoy, -68.4);
+  // 미제공은 수준도 없다 — 그 출처가 그 분류를 아예 안 잡는다
+  assert.equal(c.cells.est.value, null);
 });

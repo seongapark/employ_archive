@@ -479,6 +479,13 @@
   color: var(--text-secondary);
 }
 
+/* 펼침에서 수준은 증감 옆에 한 단 작게. 주인공은 증감이다. */
+.expand__level {
+  margin-left: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
 .expand__list .dot {
   display: inline-block;
   width: 8px;
