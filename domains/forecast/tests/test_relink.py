@@ -20,7 +20,7 @@ def _rec(org, url, **kw):
 
 
 def test_relink_replaces_only_the_urls():
-    rec = _rec("IMF", "https://www.imf.org/external/datamapper/api/v1/NGDP_RPCH/KOR")
+    rec = _rec("IMF", "https://www.imf.org/old-wrong-source")
     result = relink.relink([rec], {"IMF": lambda r: "https://www.imf.org/en/publications/weo/issues/x"})
     got = result.records[0]
     assert got.source_url == "https://www.imf.org/en/publications/weo/issues/x"
@@ -40,7 +40,7 @@ def test_relink_leaves_other_orgs_alone():
 def test_relink_marks_out_of_scope_as_skipped_not_unresolved():
     # 대상이 아닌 레코드는 실패가 아니다 — None 을 돌려주는 해결자는 링크를
     # 건드리지 않고 skipped 로만 센다. unresolved 에 섞이면 안 된다.
-    rec = _rec("IMF", "https://www.imf.org/external/datamapper/api/v1/NGDP_RPCH/KOR")
+    rec = _rec("IMF", "https://www.imf.org/old-wrong-source")
     result = relink.relink([rec], {"IMF": lambda r: None})
     assert result.records[0].source_url == rec.source_url
     assert result.records[0].landing_url == rec.landing_url
@@ -68,7 +68,7 @@ def test_relink_oecd_resolver_treats_interim_as_out_of_scope():
 
 
 def test_relink_reports_records_it_could_not_resolve():
-    rec = _rec("IMF", "https://www.imf.org/external/datamapper/api/v1/NGDP_RPCH/KOR")
+    rec = _rec("IMF", "https://www.imf.org/old-wrong-source")
 
     def failing(_):
         raise ValueError("회차를 찾지 못했다")
@@ -87,7 +87,7 @@ def test_relink_keeps_skipped_and_unresolved_counts_separate():
     skip_rec = _rec("OECD", "https://oecd.example/skip.pdf", id="oecd-skip",
                      org_name_ko="OECD",
                      report_title="OECD Economic Outlook, Interim Report March 2026")
-    fail_rec = _rec("IMF", "https://www.imf.org/external/datamapper/api/v1/NGDP_RPCH/KOR",
+    fail_rec = _rec("IMF", "https://www.imf.org/old-wrong-source",
                      id="imf-fail")
 
     def skip_resolver(_):
