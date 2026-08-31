@@ -15,7 +15,8 @@ import re
 from datetime import date, datetime
 from typing import NamedTuple
 
-from .. import http
+from .. import http, report
+from ..models import ForecastRecord
 from ..report import Issue
 
 BASE = "https://www.keis.or.kr"
@@ -104,3 +105,78 @@ def header_columns(lines: list[str]) -> list[tuple[int, str]]:
                   if word in following]
         return columns + [(years[-1], half) for half in halves]
     raise ValueError("표에서 연도 줄을 찾지 못했다")
+
+
+# 표의 대분류. '(증감)' 이 여러 번 나오므로 직전 대분류를 기억해야 한다.
+_SECTIONS = ("생산가능인구", "경제활동인구", "취업자", "비경제활동인구")
+# (대분류, 행 이름) -> 지표코드. 대분류가 필요 없는 행은 왼쪽을 None 으로 둔다.
+LABEL_TO_INDICATOR = {
+    ("취업자", "(증감)"): "emp_change",
+    (None, "실업률"): "unemp_rate",
+    (None, "고용률"): "emp_rate",
+}
+# 표는 천명 단위, 아카이브는 만명 단위다
+SCALE = {"emp_change": 0.1}
+REQUIRED_INDICATORS = frozenset({"emp_change", "emp_rate", "unemp_rate"})
+
+_NUMBER = re.compile(r"^[(\[]?[-−]?[\d,]+(?:\.\d+)?[)\]]?$")
+_WRAPPING_PAREN = re.compile(r"^[(\[]|[)\]]$")
+
+
+def _number(token: str) -> float | None:
+    """'(146)' · '-0.8' · '29,203' 을 숫자로. 아니면 None.
+
+    이 표는 증감·증가율을 괄호로 감싸므로 기존 pdf._NUMBER 로는 못 읽는다.
+    """
+    if not _NUMBER.match(token):
+        return None
+    cleaned = _WRAPPING_PAREN.sub("", token)
+    return float(cleaned.replace(",", "").replace("−", "-"))
+
+
+def _split_row(line: str) -> tuple[str, list[float]]:
+    """줄을 (행 이름, 숫자들) 로 가른다. 첫 숫자 앞까지가 이름이다."""
+    words, numbers = [], []
+    for token in line.split():
+        value = _number(token)
+        if value is None and not numbers:
+            words.append(token)
+        elif value is not None:
+            numbers.append(value)
+    return "".join(words), numbers
+
+
+def parse_table(text: str) -> dict[tuple[str, int, str], float]:
+    """전망표 원문에서 {(지표, 연도, 기간): 값} 을 뽑는다."""
+    lines = [line for line in text.split("\n") if line.strip()]
+    columns = header_columns(lines)
+
+    values: dict[tuple[str, int, str], float] = {}
+    section = None
+    for line in lines:
+        label, numbers = _split_row(line)
+        if label in _SECTIONS:
+            section = label
+        if len(numbers) != len(columns):
+            continue
+        indicator = (LABEL_TO_INDICATOR.get((section, label))
+                     or LABEL_TO_INDICATOR.get((None, label)))
+        if indicator is None:
+            continue
+        scale = SCALE.get(indicator, 1.0)
+        for (year, period), value in zip(columns, numbers):
+            values[(indicator, year, period)] = round(value * scale, 2)
+
+    found = {indicator for indicator, _, _ in values}
+    missing = REQUIRED_INDICATORS - found
+    if missing:
+        raise ValueError(f"전망표에서 지표를 찾지 못했다: {sorted(missing)}")
+    return values
+
+
+def parse(text: str, issue: Issue, source_url: str,
+          source_page: int) -> list[ForecastRecord]:
+    return report.records_from_values(
+        parse_table(text), org="KEIS", org_name_ko="한국고용정보원", issue=issue,
+        source_url=source_url, source_page=source_page,
+    )

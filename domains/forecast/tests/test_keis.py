@@ -122,3 +122,88 @@ def test_header_columns_ignores_ocr_noise_on_the_year_line():
 def test_header_columns_raises_when_there_is_no_year_row():
     with pytest.raises(ValueError, match="연도 줄"):
         keis.header_columns(["취업자 28,416 28,576", "실업률 2.7 2.8"])
+
+
+ISSUE_2026_08 = keis.Issue(
+    "고용동향브리프 2026년 제5호", date(2026, 8, 3),
+    "https://www.keis.or.kr/keis/ko/proj/118/pblc/detail.do?categoryIdx=126&pubIdx=11349")
+ISSUE_2025_12 = keis.Issue(
+    "[본문] 2025년 고용동향브리프_10호_최종", date(2025, 12, 31),
+    "https://www.keis.or.kr/keis/ko/proj/118/pblc/detail.do?categoryIdx=126&pubIdx=11264")
+
+
+def by_key(records):
+    return {(r.indicator, r.target_year, r.target_period): r for r in records}
+
+
+def test_parse_table_picks_the_change_row_under_employed():
+    # '(증감)' 은 생산가능인구·경제활동인구·취업자 밑에 세 번 나온다.
+    # 취업자 아래 것만 emp_change 다.
+    got = keis.parse_table(PAGE_2025_12)
+    assert got[("emp_change", 2026, "annual")] == 16.2   # 162천명 -> 16.2만명
+    assert got[("emp_change", 2025, "annual")] == 20.5   # 205천명, 경활 (192) 아님
+
+
+def test_parse_table_reads_rates_without_conversion():
+    got = keis.parse_table(PAGE_2025_12)
+    assert got[("emp_rate", 2026, "annual")] == 63.0
+    assert got[("unemp_rate", 2026, "annual")] == 2.7
+
+
+def test_parse_table_reads_the_half_year_columns():
+    got = keis.parse_table(PAGE_2026_08)
+    assert got[("emp_change", 2026, "annual")] == 14.6
+    assert got[("emp_change", 2026, "h1")] == 10.8
+    assert got[("emp_change", 2026, "h2")] == 18.5
+    assert got[("emp_rate", 2026, "h2")] == 63.3
+    assert got[("unemp_rate", 2026, "h2")] == 2.6
+
+
+def test_parse_table_ignores_indicators_we_do_not_collect():
+    # 경제활동참가율은 표에 있지만 어느 수집기도 채우지 않는 지표라 뺀다
+    got = keis.parse_table(PAGE_2026_08)
+    assert not any(indicator == "labor_force" for indicator, _, _ in got)
+
+
+def test_parse_table_raises_when_the_table_is_incomplete():
+    # 서식이 바뀌어 절반만 읽히면 조용히 넘기지 않는다
+    partial = "\n".join([
+        "2023년 2024년 2025년 2026년",
+        "취업자 28,416 28,576 28,781 28,943",
+        "(증감) (327) (159) (205) (162)",
+    ])
+    with pytest.raises(ValueError, match="지표"):
+        keis.parse_table(partial)
+
+
+def test_parse_drops_years_before_publication():
+    years = {r.target_year for r in keis.parse(PAGE_2026_08, ISSUE_2026_08, "https://x/y.pdf", 19)}
+    assert years == {2026}
+
+
+def test_parse_keeps_the_publication_year_column():
+    # 공표일 기준 전망치는 모두 넣는다 — 지난 상반기 열도 버리지 않는다
+    got = by_key(keis.parse(PAGE_2025_12, ISSUE_2025_12, "https://x/y.pdf", 10))
+    assert got[("emp_change", 2025, "annual")].value == 20.5
+    assert got[("emp_change", 2026, "annual")].value == 16.2
+
+
+def test_parse_keeps_the_elapsed_first_half():
+    got = by_key(keis.parse(PAGE_2026_08, ISSUE_2026_08, "https://x/y.pdf", 19))
+    assert ("emp_change", 2026, "h1") in got
+
+
+def test_parse_marks_records_as_extracted_with_the_source_page():
+    record = keis.parse(PAGE_2026_08, ISSUE_2026_08, "https://x/y.pdf", 19)[0]
+    assert record.org == "KEIS"
+    assert record.org_name_ko == "한국고용정보원"
+    assert record.confidence == "extracted"
+    assert record.source_page == 19
+    assert record.source_url == "https://x/y.pdf"
+    assert record.landing_url == ISSUE_2026_08.url
+
+
+def test_parse_uses_the_right_units():
+    got = by_key(keis.parse(PAGE_2026_08, ISSUE_2026_08, "https://x/y.pdf", 19))
+    assert got[("emp_change", 2026, "annual")].unit == "만명"
+    assert got[("emp_rate", 2026, "annual")].unit == "%"
