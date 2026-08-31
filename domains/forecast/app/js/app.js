@@ -15,13 +15,16 @@ function computeDefaultYear(records, today) {
   return nextYear;
 }
 
-function computeHeaderDate(records) {
-  const withDate = records.filter(r => r.collected_at);
-  if (!withDate.length) return '';
-  const max = withDate.reduce((a, b) => (b.collected_at > a.collected_at ? b : a));
-  const month = max.collected_at.slice(5, 7);
-  const day = max.collected_at.slice(8, 10);
-  return `${month}.${day} 갱신`;
+// 헤더 날짜는 '수집기가 마지막으로 돈 날'(last_run.json 의 run_at)이다.
+// 레코드의 collected_at 최댓값이 아니다 — 그것은 '데이터가 마지막으로 바뀐 날'
+// 이라, 수집기가 죽어 있어도 마지막 변경일이 그대로 떠서 고장을 가려버린다.
+// run_at 은 매일 갱신되므로 날짜가 멈추면 그 자체가 고장 신호가 된다.
+// 허브(hub/js/state.js)와 고용동향 앱도 같은 근거를 쓴다 — 세 곳이 어긋나면
+// 사용자가 어느 날짜를 믿어야 할지 알 수 없다.
+function computeHeaderDate(lastRun) {
+  const at = lastRun && lastRun.run_at;
+  if (!at) return '';
+  return `${at.slice(5, 7)}.${at.slice(8, 10)} 갱신`;
 }
 
 function parseRoute(hash) {
@@ -62,11 +65,12 @@ async function boot() {
   const headerDateEl = document.getElementById('headerDate');
   const headerTitleEl = document.getElementById('headerTitle');
 
-  const [records, orgs, indicators, schedule] = await Promise.all([
+  const [records, orgs, indicators, schedule, lastRun] = await Promise.all([
     loadJson('./data/forecasts.json'),
     loadJson('./data/orgs.json'),
     loadJson('./data/indicators.json'),
     loadJson('./data/schedule.json'),
+    loadJson('./data/last_run.json'),
   ]);
 
   const anyMissing = records === null || orgs === null || indicators === null || schedule === null;
@@ -96,7 +100,7 @@ async function boot() {
   const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
   const defaultYear = computeDefaultYear(records, today);
 
-  headerDateEl.textContent = computeHeaderDate(records);
+  headerDateEl.textContent = computeHeaderDate(lastRun);
 
   const state = {
     indicator: 'emp_change',
