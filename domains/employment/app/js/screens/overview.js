@@ -1,18 +1,5 @@
+import { switcherHtml, bindSwitcher } from '../switcher.js';
 import { overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, EMPTY_LABEL, esc } from '../data.js';
-
-function switcher(ctx) {
-  const { years, monthsByYear } = ctx.months;
-  const year = Number(ctx.state.period.slice(0, 4));
-  const month = Number(ctx.state.period.slice(5, 7));
-  const yearOpts = years.map(y =>
-    `<option value="${y}"${y === year ? ' selected' : ''}>${y}년</option>`).join('');
-  const monthOpts = (monthsByYear[year] || []).map(m =>
-    `<option value="${m}"${m === month ? ' selected' : ''}>${m}월</option>`).join('');
-  return `<div class="switcher">
-    <select id="yearSelect" aria-label="기준 연도">${yearOpts}</select>
-    <select id="monthSelect" aria-label="기준 월">${monthOpts}</select>
-  </div>`;
-}
 
 // 사업체노동력조사의 released_at 은 보도자료 발표일이 아니라 KOSIS 표 갱신일이다.
 // 다른 둘과 뜻이 다르므로 라벨을 달리 쓴다.
@@ -65,9 +52,9 @@ function cardHtml(card) {
   // 보도자료는 그 출처의 게시판 검색 결과로 보낸다. 지금 레코드가 들고 있는
   // release_url 은 수집한 회차(=최신월) 게시글 하나뿐이라, 과거 달에서 누르면
   // 다른 달의 글이 열린다. 달마다 게시글을 찾아 넣기 전까지는 목록이 정확하다.
-  const parts = [`<a href="${esc(card.boardUrl)}" rel="noopener">보도자료</a>`];
+  const parts = [`<a class="card__go" href="${esc(card.releaseUrl)}" rel="noopener">보도자료</a>`];
   if (card.kosisUrl) {
-    parts.push(`<a href="${esc(card.kosisUrl)}" rel="noopener">KOSIS</a>`);
+    parts.push(`<a class="card__go" href="${esc(card.kosisUrl)}" rel="noopener">KOSIS</a>`);
   }
   const files = attachmentLinks(card);
   const links = `<div class="card__links">${parts.join('')}${files}</div>`;
@@ -77,17 +64,7 @@ function cardHtml(card) {
 
 export function render(el, ctx) {
   const cards = overviewCards(ctx.series, ctx.sources, ctx.state.period, ctx.releases);
-  el.innerHTML = switcher(ctx) + `<div class="cards">${cards.map(cardHtml).join('')}</div>`;
+  el.innerHTML = switcherHtml(ctx) + `<div class="cards">${cards.map(cardHtml).join('')}</div>`;
 
-  el.querySelector('#yearSelect').addEventListener('change', e => {
-    const year = Number(e.target.value);
-    const months = ctx.months.monthsByYear[year] || [];
-    const month = months[months.length - 1];
-    ctx.state.period = `${year}-${String(month).padStart(2, '0')}`;
-    ctx.rerender();
-  });
-  el.querySelector('#monthSelect').addEventListener('change', e => {
-    ctx.state.period = `${ctx.state.period.slice(0, 4)}-${String(e.target.value).padStart(2, '0')}`;
-    ctx.rerender();
-  });
+  bindSwitcher(el, ctx);
 }

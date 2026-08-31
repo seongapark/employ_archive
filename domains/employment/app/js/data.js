@@ -173,10 +173,14 @@ export function emptyLabel(state) {
 // 없는 이유가 다른 것도 정보다. 미제공이면 발표 여부를 따질 이유가 없으므로
 // 이 판정 순서를 지킨다. 이 함수 밖에서 상태를 다시 판정하지 않는다.
 function cellState(record, provided) {
-  if (provided === false) return { state: 'notProvided', yoy: null };
-  if (!record) return { state: 'unpublished', yoy: null };
-  if (record.yoy === null || record.yoy === undefined) return { state: 'noDelta', yoy: null };
-  return { state: 'value', yoy: record.yoy };
+  // 수준(value)도 같이 나른다. 증감이 주인공이지만 규모를 모르면 크기를 못 읽는다
+  // — 매트릭스 칸과 시트 표가 같은 판정에서 같은 수준을 받아야 말이 갈리지 않는다.
+  if (provided === false) return { state: 'notProvided', yoy: null, value: null };
+  if (!record) return { state: 'unpublished', yoy: null, value: null };
+  if (record.yoy === null || record.yoy === undefined) {
+    return { state: 'noDelta', yoy: null, value: record.value };
+  }
+  return { state: 'value', yoy: record.yoy, value: record.value };
 }
 
 export function breakdownMatrix(series, categories, period, { sort = 'delta', breakdown } = {}) {
@@ -247,11 +251,9 @@ export function sheetData(series, {
       && r.breakdown === (breakdown || 'total')
       && (r.category ?? null) === (category ?? null));
     const provided = meta && meta.provided ? meta.provided[source] : true;
-    const cell = cellState(record, provided);
-    // 수준도 같이 나른다. `표로 보기` 는 #1baf7a 대비 미달에 대한 의무 완화
-    // 조치인데(스펙 7.6) 증감만 있으면 대체 뷰가 원본보다 빈약해진다.
-    const value = record && cell.state !== 'notProvided' ? record.value : null;
-    return { source, value, ...cell };
+    // 수준은 cellState 가 판정과 함께 준다. `표로 보기` 는 #1baf7a 대비 미달에
+    // 대한 의무 완화 조치인데(스펙 7.6) 증감만 있으면 대체 뷰가 원본보다 빈약해진다.
+    return { source, ...cellState(record, provided) };
   });
   const timeline = categoryTimeline(series, { breakdown, category, months });
   const all = Object.values(timeline).flat().map(p => p.period).sort();

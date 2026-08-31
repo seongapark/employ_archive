@@ -165,14 +165,23 @@
   font-weight: 500;
 }
 
-/* 첨부 받기는 링크가 아니라 버튼처럼 보여야 누를 것이 있다는 걸 안다.
-   그 달의 파일일 때만 나온다 — data.js 가 최신월이 아니면 첨부를 비운다. */
-.card__file {
-  padding: 3px 8px;
-  border: 1px solid var(--border);
+/* 원문으로 가는 길(보도자료·KOSIS)이 이 카드에서 가장 중요한 행동이다 —
+   테두리를 두른 쪽이 더 눌리는 것으로 읽히므로 그 자리를 이쪽에 준다.
+   첨부 받기는 부가 동작이라 글자 링크로 물러선다. */
+.card__go {
+  padding: 4px 10px;
+  border: 1px solid var(--accent);
   border-radius: 999px;
-  background: var(--card);
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.card__file {
+  padding: 3px 2px;
   color: var(--text-secondary);
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 /* Sheet (하단 시트)
@@ -468,6 +477,13 @@
   gap: 4px;
   font-size: 12px;
   color: var(--text-secondary);
+}
+
+/* 펼침에서 수준은 증감 옆에 한 단 작게. 주인공은 증감이다. */
+.expand__level {
+  margin-left: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
 }
 
 .expand__list .dot {
