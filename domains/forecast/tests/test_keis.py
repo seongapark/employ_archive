@@ -374,6 +374,42 @@ def test_find_forecast_page_skips_a_past_years_only_summary_table():
     assert got == (10, PAGE_2025_12)
 
 
+def test_find_forecast_page_skips_a_past_years_table_with_inline_change_counts():
+    # 2025년 10호에서 실제로 벌어진 회귀. 「경제활동 현황」 같은 도입부
+    # 요약표는 증감을 값 옆에 괄호로 바로 붙여('61.5 (0.3)') 열마다 숫자가
+    # 두 개씩 나온다 — 지표 라벨(취업자·고용률·실업률)은 다 걸리는데 숫자
+    # 개수가 헤더 열 개수와 안 맞는다. 발표연도 게이트가 parse_table 보다
+    # 먼저 걸러야, 이 표가 "못 읽은 진짜 전망표"로 오인돼 시끄러운
+    # ValueError 를 던지지 않고 조용히 넘어가 뒤쪽의 진짜 전망표를 찾는다.
+    past_years_with_inline_change = "\n".join([
+        "2021년 2022년 2023년 2024년",
+        "취업자 27,583 (1.1) 27,896 (1.1) 28,166 (1.0) 28,416 (0.9)",
+        "고용률 61.5 (0.3) 61.9 (0.4) 62.2 (0.3) 62.6 (0.4)",
+        "실업률 3.0 (-0.1) 2.9 (-0.1) 2.9 (0.0) 2.8 (-0.1)",
+    ])
+    got = keis.find_forecast_page(
+        [past_years_with_inline_change, PAGE_2025_12], [2, 10],
+        ISSUE_2025_12.published_at)
+    assert got == (10, PAGE_2025_12)
+
+
+def test_find_forecast_page_reraises_a_column_mismatch_past_the_year_gate():
+    # 발표연도 이상 열이 있어 게이트는 통과하지만 그 안에서 열 개수가 안
+    # 맞는 경우 — '다른 표'가 아니라 진짜 전망표가 망가진 것이니 그대로
+    # 흘려보내야 한다.
+    garbled_header = "\n".join([
+        "2023년 2024년 2025년 2026년",
+        "잡음",  # 상반기·하반기 하위줄이 사라진 자리
+        "취업자 28,416 28,576 28,781 28,943 28,738 29,093",
+        "(증감) (327) (159) (205) (162) (108) (185)",
+        "실업률 2.7 2.8 2.7 2.7 3.2 2.6",
+        "고용률 62.6 62.7 62.9 63.0 62.5 63.3",
+    ])
+    with pytest.raises(ValueError, match="열 개수") as exc_info:
+        keis.find_forecast_page([garbled_header], [7], ISSUE_2025_12.published_at)
+    assert not isinstance(exc_info.value, keis.NotForecastTable)
+
+
 def test_collect_issue_reads_the_table_with_two_ocr_passes():
     calls = []
 

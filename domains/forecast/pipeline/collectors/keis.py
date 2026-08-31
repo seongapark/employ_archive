@@ -261,11 +261,24 @@ def find_forecast_page(page_texts: list[str], page_numbers: list[int],
     건너뛰고 다음 후보 쪽을 계속 찾는다.
 
     이 브리프는 도입부에 취업자·(증감)·실업률·고용률을 과거 연도만으로 채운
-    요약표를 싣는데, 그 표는 우리 지표 3개가 전부 걸려 parse_table 을 그대로
-    통과한다. 그래서 지표가 다 나온다고 바로 받아들이지 않고, 열에 발표연도
-    이상인 연도가 하나라도 있는지까지 확인한다. 없으면 과거 실적표일 뿐이니
-    건너뛰고 다음 후보를 본다 — 그렇지 않으면 parse() 가 발표연도 이전 열을
-    전부 버려 빈 리스트를 내놓고, collect_issue 는 "전망 없음"으로 오판한다.
+    요약표를 싣는데, 그 표는 우리 지표 3개가 전부 걸린다. 그래서 지표가
+    다 나온다고 바로 받아들이지 않고, 헤더 열에 발표연도 이상인 연도가
+    하나라도 있는지부터 확인한다 — 없으면 과거 실적표일 뿐이니 parse_table
+    조차 부르지 않고 건너뛰고 다음 후보를 본다. 순서가 중요하다: 이 게이트를
+    parse_table 뒤로 미루면, 이 요약표가 증감을 값 옆에 괄호로 바로 붙여
+    적어(예: '61.5 (0.3)') 열마다 숫자가 두 개씩 나오는 판본을 만났을 때
+    사달이 난다 — 지표 라벨(취업자·고용률·실업률)은 다 걸리는데 숫자 개수가
+    열 개수와 안 맞으니, parse_table 은 이걸 "전망표를 찾았지만 못 읽었다"는
+    시끄러운 ValueError 로 본다. 하지만 이 표는 애초에 전망표가 아니라 과거
+    실적표이므로, 행 내용이 어떻든 조용히 건너뛰어야 맞다. 헤더의 연도만
+    보고 먼저 걸러내면 parse_table 은 그 표를 아예 보지 않으니 이 오판이
+    생기지 않는다.
+
+    반대로 게이트를 통과한 뒤에는 parse_table 이 하는 판정을 그대로 믿는다.
+    NotForecastTable 은 여전히 건너뛰고, 지표는 걸렸는데 열 개수가 안 맞는
+    경우의 일반 ValueError 는 여전히 그대로 위로 흘려보낸다 — 게이트를
+    통과했다는 건 이 표에 발표연도 이상 열이 있다는 뜻이라, 이제는 "다른
+    표"가 아니라 "전망표인데 못 읽었다"고 봐야 하기 때문이다.
 
     이건 대가가 있는 선택이다. 지표 3개가 하나도 안 걸리면 '다른 표'로
     보고 넘어가야 흔한 경우(호마다 있는 다른 연도표들)를 통과시킬 수 있다.
@@ -284,12 +297,19 @@ def find_forecast_page(page_texts: list[str], page_numbers: list[int],
     의심해야 한다.
     """
     for page_no, text in zip(page_numbers, page_texts):
+        lines = [line for line in text.split("\n") if line.strip()]
         try:
-            values = parse_table(text)
-        except (NoHeaderRow, NotForecastTable):
+            columns = header_columns(lines)
+        except NoHeaderRow:
             continue
-        years = {year for _, year, _ in values}
-        if not any(year >= published_at.year for year in years):
+        # 발표연도 게이트를 parse_table 보다 먼저 적용한다 — 위 문서화 참고.
+        # 과거 실적표는 행 내용(지표 라벨, 열 개수)이 어떻든 여기서 이미
+        # 걸러지므로, parse_table 은 발표연도 이상 열이 있는 쪽만 본다.
+        if not any(year >= published_at.year for year, _ in columns):
+            continue
+        try:
+            parse_table(text)
+        except NotForecastTable:
             continue
         return page_no, text
     return None
