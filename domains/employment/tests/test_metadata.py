@@ -66,11 +66,8 @@ def test_industries_metadata_matches_what_the_collectors_produce():
     assert provided["ei"] == ei.EXPECTED_CODES
 
 
-SERIES = Path(__file__).parent.parent / "data" / "series.json"
-
-
 def test_segments_cover_sex_and_age_with_every_source_flagged():
-    segments = json.loads((DATA / "segments.json").read_text(encoding="utf-8"))
+    segments = load("segments.json")
     by_breakdown = {s["breakdown"]: s for s in segments}
     assert set(by_breakdown) == {"sex", "age"}
     assert [c["code"] for c in by_breakdown["sex"]["categories"]] == ["M", "F"]
@@ -84,8 +81,8 @@ def test_segments_cover_sex_and_age_with_every_source_flagged():
 
 
 def test_segment_codes_match_the_collected_records():
-    series = json.loads(SERIES.read_text(encoding="utf-8"))
-    segments = json.loads((DATA / "segments.json").read_text(encoding="utf-8"))
+    series = load("series.json")
+    segments = load("segments.json")
     for segment in segments:
         declared = {c["code"] for c in segment["categories"]}
         collected = {r["category"] for r in series if r["breakdown"] == segment["breakdown"]}
