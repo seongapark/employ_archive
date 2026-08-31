@@ -23,9 +23,15 @@ function releaseLabel(card) {
   return card.code === 'est' ? `KOSIS 갱신 ${when}` : `발표 ${when}`;
 }
 
+// 첨부는 눌러서 바로 받는다. download 속성은 다른 도메인 파일에는 브라우저가
+// 무시하지만(게시판이 Content-Disposition 을 주므로 실제로는 내려받아진다),
+// 링크가 무엇인지 이름으로 밝히는 편이 낫다.
+const ATTACH_LABEL = { hwpx: '한글', hwp: '한글', pdf: 'PDF', xlsx: '엑셀' };
+
 function attachmentLinks(card) {
-  return (card.attachments || [])
-    .map(a => `<a href="${esc(a.url)}" rel="noopener">${esc(a.type)}</a>`).join(' · ');
+  return (card.attachments || []).map(a =>
+    `<a class="card__file" href="${esc(a.url)}" rel="noopener" download>${
+      esc(ATTACH_LABEL[a.type] || a.type)} 받기</a>`).join('');
 }
 
 // 증감 줄. state 는 data.js 의 cellState 가 이미 판정했다 — 여기서는 그릴 뿐이다.
@@ -56,8 +62,15 @@ function cardHtml(card) {
 
   // coverage 는 접히지 않는다. 정의 차이의 인지가 이 앱의 핵심 가치다(스펙 7.5).
   const coverage = `<div class="card__coverage">${esc(card.coverage)}</div>`;
-  const links = `<div class="card__links"><a href="${esc(card.releaseUrl)}" rel="noopener">원문보기</a>${
-    attachmentLinks(card) ? ' · ' + attachmentLinks(card) : ''}</div>`;
+  // 보도자료는 그 출처의 게시판 검색 결과로 보낸다. 지금 레코드가 들고 있는
+  // release_url 은 수집한 회차(=최신월) 게시글 하나뿐이라, 과거 달에서 누르면
+  // 다른 달의 글이 열린다. 달마다 게시글을 찾아 넣기 전까지는 목록이 정확하다.
+  const parts = [`<a href="${esc(card.boardUrl)}" rel="noopener">보도자료</a>`];
+  if (card.kosisUrl) {
+    parts.push(`<a href="${esc(card.kosisUrl)}" rel="noopener">KOSIS</a>`);
+  }
+  const files = attachmentLinks(card);
+  const links = `<div class="card__links">${parts.join('')}${files}</div>`;
 
   return `<article class="card" data-source="${esc(card.code)}">${head}${body}${coverage}${links}</article>`;
 }

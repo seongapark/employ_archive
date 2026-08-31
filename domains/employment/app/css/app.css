@@ -153,12 +153,26 @@
 }
 
 .card__links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
   font-size: 12px;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
 .card__links a {
   font-weight: 500;
+}
+
+/* 첨부 받기는 링크가 아니라 버튼처럼 보여야 누를 것이 있다는 걸 안다.
+   그 달의 파일일 때만 나온다 — data.js 가 최신월이 아니면 첨부를 비운다. */
+.card__file {
+  padding: 3px 8px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+  color: var(--text-secondary);
 }
 
 /* Sheet (하단 시트)

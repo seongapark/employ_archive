@@ -16,7 +16,7 @@ def test_sources_has_the_three_sources_with_every_field():
     assert {r["code"] for r in rows} == SOURCES
     for r in rows:
         assert set(r) == {"code", "name_ko", "short_ko", "agency", "type", "headline_ko",
-                          "coverage", "release_rule", "caveat", "board_url"}
+                          "coverage", "release_rule", "caveat", "board_url", "kosis_url"}
         assert r["board_url"].startswith("https://")
         assert r["coverage"].strip()
 
@@ -123,3 +123,26 @@ def test_industry_short_names_match_the_source_document():
     assert by_code["Q"] == "보건복지업"
     assert by_code["E"] == "수도·하수·폐기업"
     assert by_code["U"] == "국제외국"
+
+
+def test_board_url_points_at_a_press_release_board_not_a_statistics_table():
+    """보도자료 링크가 KOSIS 표를 가리키면 '원문' 이 아니다.
+
+    사업체노동력조사는 예전에 board_url 이 KOSIS 표였다. 화면이 그걸 `보도자료` 로
+    부르면서 누르면 통계표가 열렸다. 게시판과 표는 다른 것이므로 칸을 나눈다.
+    """
+    for r in load("sources.json"):
+        assert "kosis.kr" not in r["board_url"], f'{r["code"]}: board_url 이 KOSIS 다'
+        assert r["board_url"].startswith("https://")
+
+
+def test_kosis_url_is_only_set_where_a_matching_table_exists():
+    rows = {r["code"]: r for r in load("sources.json")}
+    # 2026-08-31 확인: DT_1DA7002S 의 취업자(15세 이상 전체) 가 경활 보도자료와
+    # 최근 4개월 모두 일치했다(2026-07 29,136.1 등). 산업·직종 개편으로 표 id 가
+    # 바뀌면 이 링크는 조용히 다른 표를 가리키게 되므로 값 대조가 따로 필요하다.
+    assert rows["eaps"]["kosis_url"].endswith("tblId=DT_1DA7002S")
+    assert rows["est"]["kosis_url"].endswith("tblId=DT_118N_MON066")
+    assert rows["ei"]["kosis_url"] is None      # 고용행정통계는 KOSIS 표를 쓰지 않는다
+    for code in ("eaps", "est"):
+        assert rows[code]["kosis_url"].startswith("https://kosis.kr/")

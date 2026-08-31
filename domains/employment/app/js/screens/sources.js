@@ -38,7 +38,9 @@ export function render(el, ctx) {
       metas.map(m => `<td>${esc(pick(m) || '')}</td>`).join('')
     }</tr>`).join('') + sexAgeRow(ctx) +
     `<tr><th scope="row">원문</th>${
-      metas.map(m => `<td><a href="${esc(m.board_url)}" rel="noopener">게시판</a></td>`).join('')
+      metas.map(m => `<td><a href="${esc(m.board_url)}" rel="noopener">보도자료</a>${
+        m.kosis_url ? ` · <a href="${esc(m.kosis_url)}" rel="noopener">KOSIS</a>` : ''
+      }</td>`).join('')
     }</tr>`;
 
   el.innerHTML = `

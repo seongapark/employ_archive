@@ -9,7 +9,8 @@
     "coverage": "15세 이상 인구 · 조사대상주간 1시간 이상 취업",
     "release_rule": "매월 중순, 전월 기준",
     "caveat": "자영업자·무급가족종사자를 포함한다",
-    "board_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&ref_bid=210,211,11109,11113,11814"
+    "board_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&ref_bid=210,211,11109,11113,11814",
+    "kosis_url": "https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_1DA7002S"
   },
   {
     "code": "est",
@@ -21,7 +22,8 @@
     "coverage": "1인 이상 사업체 · 농림어업 등 제외",
     "release_rule": "매월 말, 전전월 기준",
     "caveat": "사업체 조사이므로 자영업자·무급가족종사자는 포함되지 않는다",
-    "board_url": "https://kosis.kr/statHtml/statHtml.do?orgId=118&tblId=DT_118N_MON066"
+    "board_url": "https://www.moel.go.kr/news/enews/report/enewsList.do?pageIndex=1&bbs_id=12&searchField=1&searchText=%EC%82%AC%EC%97%85%EC%B2%B4%EB%85%B8%EB%8F%99%EB%A0%A5%EC%A1%B0%EC%82%AC&pageUnit=10",
+    "kosis_url": "https://kosis.kr/statHtml/statHtml.do?orgId=118&tblId=DT_118N_MON066"
   },
   {
     "code": "ei",
@@ -33,6 +35,7 @@
     "coverage": "고용보험 가입 상시가입자",
     "release_rule": "매월 초, 전월 기준",
     "caveat": "고용보험 미가입 자영업자·특수형태근로 등은 포함되지 않는다",
-    "board_url": "https://www.moel.go.kr/news/enews/report/enewsList.do"
+    "board_url": "https://www.moel.go.kr/news/enews/report/enewsList.do?pageIndex=1&bbs_id=12&searchField=1&searchText=%EA%B3%A0%EC%9A%A9%ED%96%89%EC%A0%95%ED%86%B5%EA%B3%84&pageUnit=10",
+    "kosis_url": null
   }
 ]

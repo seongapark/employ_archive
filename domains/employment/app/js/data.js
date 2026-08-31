@@ -101,6 +101,7 @@ export function overviewCards(series, sources, period) {
       coverage: meta.coverage,
       caveat: meta.caveat,
       boardUrl: meta.board_url,
+      kosisUrl: meta.kosis_url || null,
     };
     if (here) {
       // 레코드가 있다고 곧 'value' 가 아니다. yoy 가 null 이면 noDelta 다 —
@@ -108,10 +109,14 @@ export function overviewCards(series, sources, period) {
       // 화면이 fmtDelta(null) 을 `0.0만명` 증가로 그려 없는 숫자를 지어낸다
       // (실제 사례: 사업체노동력조사 2024-01~12 의 total).
       const { state, yoy } = cellState(here, true);
+      // 첨부는 수집한 회차(=최신월)의 파일이다. 과거 달을 보면서 그 버튼을 누르면
+      // 엉뚱한 달의 문서가 내려온다 — 그 달의 것일 때만 내보낸다. 월별 첨부는
+      // 게시판 목록에서 달마다 게시글을 찾아와야 생긴다(아직 없다).
+      const isLatest = !!newest && newest.period === here.period;
       return {
         ...base, period, state, value: here.value, yoy, status: here.status,
         releasedAt: here.released_at, releaseUrl: here.release_url,
-        attachments: here.attachments || [], fallback: null,
+        attachments: isLatest ? (here.attachments || []) : [], fallback: null,
       };
     }
     return {
