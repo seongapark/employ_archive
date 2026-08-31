@@ -8,7 +8,19 @@ from domains.forecast.pipeline.collectors import oecd
 FIXTURES = Path(__file__).parent / "fixtures"
 FIXTURE = (FIXTURES / "oecd_eo119_kor.csv").read_text(encoding="utf-8")
 EO118 = (FIXTURES / "oecd_eo118_kor.csv").read_text(encoding="utf-8")
+SERIALS_HTML = (FIXTURES / "oecd_serials.html").read_text(encoding="utf-8")
 TODAY = date(2026, 8, 29)
+
+
+@pytest.fixture(autouse=True)
+def _fake_report_url(monkeypatch):
+    # report_url() 은 네트워크를 탄다 — parse() 를 부르는 테스트마다 실제
+    # 연재 목록을 긁으면 매 실행이 느려지고 오프라인에서 깨진다. URL 조립
+    # 자체를 검증하는 테스트(volume_issue·parse_serials·report_url 관련)는
+    # 이 모듈이 아니라 실제 함수를 직접 부른다.
+    monkeypatch.setattr(
+        oecd, "report_url",
+        lambda edition: f"https://www.oecd.org/en/publications/eo{edition}-en.html")
 
 
 def by_key(records):
@@ -96,3 +108,38 @@ def test_latest_edition_uses_the_undated_dataflow():
     assert "DF_EO," in oecd._data_url(latest)
     assert f"DF_EO_{latest}" not in oecd._data_url(latest)
     assert f"DF_EO_{latest - 1}" in oecd._data_url(latest - 1)
+
+
+def test_volume_issue_maps_the_edition_number():
+    # 실제 대조로 확인한 대응이다(설계 3.3)
+    assert oecd.volume_issue(116) == (2024, 2)
+    assert oecd.volume_issue(117) == (2025, 1)
+    assert oecd.volume_issue(118) == (2025, 2)
+    assert oecd.volume_issue(119) == (2026, 1)
+    assert oecd.volume_issue(120) == (2026, 2)
+
+
+def test_parse_serials_reads_every_volume_issue():
+    got = oecd.parse_serials(SERIALS_HTML)
+    assert got[(2026, 1)] == (
+        "https://www.oecd.org/en/publications/"
+        "oecd-economic-outlook-volume-2026-issue-1_2d1956f0-en.html"
+    )
+    assert got[(2024, 2)].endswith("volume-2024-issue-2_d8814e8b-en.html")
+    assert len(got) == 4
+
+
+def test_parse_serials_raises_when_the_listing_has_none():
+    with pytest.raises(ValueError, match="연재 목록"):
+        oecd.parse_serials("<html><body>준비중</body></html>")
+
+
+def test_no_record_points_at_a_machine_endpoint(monkeypatch):
+    # 설계 3.0
+    monkeypatch.setattr(oecd, "report_url",
+                        lambda edition: "https://www.oecd.org/en/publications/x_1234abcd-en.html")
+    records = oecd.parse(FIXTURE)
+    assert records
+    for r in records:
+        for url in (r.source_url, r.landing_url):
+            assert "sdmx" not in url and "/rest/data/" not in url
