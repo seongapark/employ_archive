@@ -245,6 +245,26 @@
   padding: 4px 10px;
 }
 
+/* 시계열을 끄는 칸. touch-action:none 이 없으면 손가락을 옆으로 밀 때
+   브라우저가 그 동작을 스크롤로 가로채 달이 한 칸도 안 움직인다. */
+.sheet__line {
+  touch-action: none;
+  cursor: ew-resize;
+  -webkit-user-select: none;
+  user-select: none;
+}
+
+.sheet__month {
+  font-variant-numeric: tabular-nums;
+}
+
+.sheet__hint {
+  margin: 2px 0 0 0;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
 .sheet__legend {
   list-style: none;
   margin: 8px 0 0 0;

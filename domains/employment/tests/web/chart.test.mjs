@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { barsSvg, timelineSvg, sheetTable, LABEL_W } from '../../app/js/chart.js';
+import { barsSvg, timelineSvg, sheetTable, LABEL_W, timelinePeriods, periodAtRatio } from '../../app/js/chart.js';
 
 // 한국어 값 라벨(`+27.7만명` 류)이 11px 기준으로 실제 차지하는 폭의 하한.
 // chart.js 의 VALUE_GUTTER 를 그대로 들여오면 여백이 좁아져도 이 테스트가
@@ -109,4 +109,53 @@ test('a noDelta row shows its level but never a fabricated delta', () => {
   assert.match(html, /2,041\.9만명/);
   assert.match(html, /― 증감없음/);
   assert.doesNotMatch(html, /0\.0만명/);
+});
+
+// 드래그는 이 두 함수 위에 얹힌다. 좌표 계산이 틀리면 끌었을 때 엉뚱한 달로
+// 튀는데, 브라우저 없이 잡을 수 있는 곳은 여기뿐이다.
+const TL = {
+  eaps: [
+    { period: '2024-07', yoy: 1 }, { period: '2024-08', yoy: 2 },
+    { period: '2024-09', yoy: 3 }, { period: '2024-10', yoy: 4 },
+  ],
+  est: [{ period: '2024-09', yoy: 9 }],
+  ei: [],
+};
+
+test('timelinePeriods unions the sources and sorts ascending', () => {
+  assert.deepEqual(timelinePeriods(TL), ['2024-07', '2024-08', '2024-09', '2024-10']);
+});
+
+test('periodAtRatio maps the two ends to the first and last month', () => {
+  const periods = timelinePeriods(TL);
+  assert.equal(periodAtRatio(periods, 0), '2024-07');
+  assert.equal(periodAtRatio(periods, 1), '2024-10');
+});
+
+test('periodAtRatio snaps to the nearest month and never runs off the ends', () => {
+  const periods = timelinePeriods(TL);
+  // 왼쪽 여백(8/320)과 오른쪽 여백을 뺀 구간을 3등분한 지점들
+  assert.equal(periodAtRatio(periods, 8 / 320), '2024-07');
+  assert.equal(periodAtRatio(periods, (8 + 304 / 3) / 320), '2024-08');
+  assert.equal(periodAtRatio(periods, (8 + 304 * 2 / 3) / 320), '2024-09');
+  // 그래프 밖으로 끌어도 양 끝에서 멈춘다
+  assert.equal(periodAtRatio(periods, -5), '2024-07');
+  assert.equal(periodAtRatio(periods, 5), '2024-10');
+  assert.equal(periodAtRatio([], 0.5), null);
+});
+
+test('bars show the level next to the delta', () => {
+  const svg = barsSvg([
+    { source: 'eaps', state: 'value', value: 29136.1, yoy: 107.6 },
+    { source: 'est', state: 'notProvided', value: null, yoy: null },
+  ], { width: 320, sourceNames: NAMES });
+  assert.match(svg, /2,913\.6만명/);   // 수준
+  assert.match(svg, /\+10\.8만명/);    // 증감
+  assert.match(svg, /― 미제공/);
+});
+
+test('the marker carries a grip so it reads as draggable', () => {
+  const svg = timelineSvg(TL, { width: 320, height: 160, selected: '2024-09' });
+  assert.match(svg, /class="chart__marker"/);
+  assert.match(svg, /class="chart__grip"/);
 });
