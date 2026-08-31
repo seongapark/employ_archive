@@ -1,6 +1,11 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { barsSvg, timelineSvg, sheetTable } from '../../app/js/chart.js';
+import { barsSvg, timelineSvg, sheetTable, LABEL_W } from '../../app/js/chart.js';
+
+// 한국어 값 라벨(`+27.7만명` 류)이 11px 기준으로 실제 차지하는 폭의 하한.
+// chart.js 의 VALUE_GUTTER 를 그대로 들여오면 여백이 좁아져도 이 테스트가
+// 항상 자기 자신과 비교해 통과해 버린다 — 그래서 숫자를 여기 다시 박아 둔다.
+const MIN_VALUE_GUTTER = 55;
 
 const NAMES = { eaps: '경제활동인구조사', est: '사업체노동력조사', ei: '고용행정통계' };
 
@@ -42,6 +47,22 @@ test('the selected month gets a marker line', () => {
     { width: 320, height: 160, selected: '2026-05' },
   );
   assert.match(svg, /class="chart__marker"/);
+});
+
+test('the widest label at maximum magnitude neither overruns the name column nor gets clipped', () => {
+  const width = 320;
+  const svg = barsSvg([
+    { source: 'eaps', state: 'value', yoy: -1000 },
+    { source: 'ei', state: 'value', yoy: 1000 },
+  ], { width, sourceNames: NAMES });
+  const rects = [...svg.matchAll(/<rect[^>]*x="([\d.]+)"[^>]*width="([\d.]+)"/g)]
+    .map(m => ({ x: Number(m[1]), w: Number(m[2]) }));
+  assert.equal(rects.length, 2);
+  const [neg, pos] = rects;
+  assert.ok(neg.x >= LABEL_W + MIN_VALUE_GUTTER,
+    `음수 막대 x(${neg.x})는 LABEL_W+MIN_VALUE_GUTTER(${LABEL_W + MIN_VALUE_GUTTER}) 이상이어야 라벨이 출처명 열을 침범하지 않는다`);
+  assert.ok(pos.x + pos.w <= width - MIN_VALUE_GUTTER,
+    `양수 막대 오른쪽 끝(${pos.x + pos.w})은 width-MIN_VALUE_GUTTER(${width - MIN_VALUE_GUTTER}) 이하여야 라벨이 잘리지 않는다`);
 });
 
 test('sheetTable is a real table with every source as a row', () => {

@@ -8,7 +8,11 @@ const EMPTY_LABEL = {
 };
 
 const ROW_H = 34;
-const LABEL_W = 96;
+export const LABEL_W = 96;
+// 값 라벨이 들어갈 자리. `+27.7만명` 같은 한국어 라벨은 11px 기준 55~60px 다.
+// 이 여백이 좁으면 최대 막대의 라벨이 출처명 열을 침범하거나 오른쪽에서 잘린다 —
+// 값 직접 라벨은 #1baf7a 대비 미달에 대한 의무 완화 조치라 잘리면 안 된다(스펙 7.6).
+export const VALUE_GUTTER = 64;
 
 export function barsSvg(snapshot, { width = 320, sourceNames = {} } = {}) {
   const rows = snapshot.filter(s => SOURCE_ORDER.includes(s.source));
@@ -30,7 +34,7 @@ export function barsSvg(snapshot, { width = 320, sourceNames = {} } = {}) {
       parts.push(`<text x="${zero + 6}" y="${y + 15}" font-size="11" fill="#98a2b3">${esc(EMPTY_LABEL[row.state] || '―')}</text>`);
       return;
     }
-    const w = (Math.abs(row.yoy) / max) * (plotW / 2 - 44);
+    const w = (Math.abs(row.yoy) / max) * (plotW / 2 - VALUE_GUTTER);
     const x = row.yoy >= 0 ? zero : zero - w;
     parts.push(
       `<rect x="${x.toFixed(1)}" y="${y}" width="${Math.max(w, 1).toFixed(1)}" height="20" rx="4" fill="${SOURCE_COLORS[row.source]}"></rect>`,
