@@ -1,4 +1,6 @@
-import { compareSet, summarize, fmtValue, fmtNumber, dateLabel, esc } from '../data.js';
+import { compareSet, summarize, fmtValue, fmtNumber, dateLabel, esc, isOcrSourced } from '../data.js';
+
+const OCR_BADGE_TITLE = 'PDF 이미지를 OCR로 읽은 수치입니다 — 원문과 대조해 확인하세요.';
 
 const FILTERS = [
   { code: 'all', label: '전체' },
@@ -45,7 +47,7 @@ function renderSelectors(ctx, compareState, availableYears) {
     </div>`;
 }
 
-function renderBars(set) {
+function renderBars(set, orgsMeta) {
   if (!set.length) {
     return `
       <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:32px 16px;text-align:center;">
@@ -60,6 +62,9 @@ function renderBars(set) {
     const widthPct = maxValue <= 0 ? 50 : Math.max(4, Math.min(100, (rec.value / maxValue) * 100));
     const barColor = stale ? '#7f9dc4' : '#23508f';
     const [valueText] = splitValueUnit(fmtValue(rec));
+    const ocrBadge = isOcrSourced(rec, orgsMeta)
+      ? `<div class="badge badge--ocr" style="flex-shrink:0;" title="${esc(OCR_BADGE_TITLE)}">확인필요</div>`
+      : '';
 
     return `
       <button type="button" class="num" data-org="${esc(rec.org)}" style="display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;padding:2px 0;text-align:left;cursor:pointer;min-height:44px;${stale ? 'opacity:.45;' : ''}">
@@ -67,6 +72,7 @@ function renderBars(set) {
         <div style="flex:1;height:18px;background:var(--bg);border-radius:4px;overflow:hidden;">
           <div style="width:${widthPct.toFixed(1)}%;height:18px;background:${barColor};border-radius:4px;"></div>
         </div>
+        ${ocrBadge}
         <div style="min-width:30px;font-size:14px;font-weight:700;text-align:right;color:var(--text);">${esc(valueText)}</div>
         <div style="min-width:38px;font-size:11px;color:var(--text-muted);text-align:right;">${esc(monthLabel)}</div>
       </button>`;
@@ -153,7 +159,7 @@ export function render(el, ctx) {
       <div style="font-size:18px;font-weight:700;" class="num">${esc(title)}</div>
       ${renderSelectors(ctx, compareState, availableYears)}
     </div>
-    ${renderBars(set)}
+    ${renderBars(set, orgs)}
     ${renderBand(set, curMeta)}
     ${renderWarning()}
     ${renderCopyButton()}

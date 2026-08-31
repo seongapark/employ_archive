@@ -6,6 +6,10 @@
   --badge-extracted-bg: #faf0dc;
   --badge-reviewed-fg: #2458a6;
   --badge-reviewed-bg: #e5edfa;
+  /* OCR 출처 경고 — badge-extracted(자동)의 옅은 황색과 겹치면 눈에 안 띄니
+     더 짙은 주황으로 구분해 '주의' 신호를 낸다. */
+  --badge-ocr-fg: #b3400c;
+  --badge-ocr-bg: #fbe6d7;
 }
 
 /* Tab bar */
@@ -54,6 +58,11 @@
 .badge--reviewed {
   color: var(--badge-reviewed-fg);
   background: var(--badge-reviewed-bg);
+}
+
+.badge--ocr {
+  color: var(--badge-ocr-fg);
+  background: var(--badge-ocr-bg);
 }
 
 /* Pill (filter / indicator selector) */

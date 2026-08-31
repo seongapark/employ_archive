@@ -1,4 +1,4 @@
-import { latestRecords, summarize, fmtValue, fmtNumber, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS } from '../data.js';
+import { latestRecords, summarize, fmtValue, fmtNumber, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced } from '../data.js';
 
 // 홈의 첫 필만 목업대로 '취업자 증감'을 온전히 유지하고, 나머지는 공유 축약 라벨을 쓴다.
 const PILLS = [
@@ -13,6 +13,8 @@ const BADGE = {
   extracted: { cls: 'badge--extracted', label: '자동' },
   reviewed: { cls: 'badge--reviewed', label: '확인' },
 };
+
+const OCR_BADGE_TITLE = 'PDF 이미지를 OCR로 읽은 수치입니다 — 원문과 대조해 확인하세요.';
 
 const DELTA_SVG = {
   up: '<svg width="10" height="9" viewBox="0 0 10 9"><polygon points="5,0 10,9 0,9" fill="#c73e3a"></polygon></svg>',
@@ -80,12 +82,18 @@ function renderCard(rec, ctx) {
 
   const [value, unitSuffix] = splitValueUnit(fmtValue(rec));
   const halves = halfYearLabel(ctx.records, rec);
+  const ocrBadge = isOcrSourced(rec, ctx.orgs)
+    ? `<div class="badge badge--ocr" title="${esc(OCR_BADGE_TITLE)}">확인필요</div>`
+    : '';
 
   return `
     <button type="button" class="card" data-org="${esc(rec.org)}" style="display:flex;flex-direction:column;gap:4px;text-align:left;width:100%;cursor:pointer;">
       <div style="display:flex;align-items:center;justify-content:space-between;">
         <div style="font-size:13px;font-weight:600;">${esc(rec.org_name_ko)}</div>
-        <div class="badge ${badgeInfo.cls}">${esc(badgeInfo.label)}</div>
+        <div style="display:flex;align-items:center;gap:6px;">
+          <div class="badge ${badgeInfo.cls}">${esc(badgeInfo.label)}</div>
+          ${ocrBadge}
+        </div>
       </div>
       <div style="display:flex;align-items:baseline;gap:10px;">
         <div class="num" style="font-size:28px;font-weight:700;">${esc(value)}<span style="font-size:15px;font-weight:600;">${esc(unitSuffix)}</span></div>

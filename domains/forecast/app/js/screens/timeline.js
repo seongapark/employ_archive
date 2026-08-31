@@ -1,10 +1,13 @@
-import { timelineGroups, fmtValue, fmtDelta, isNew, esc, SHORT_LABELS } from '../data.js';
+import { timelineGroups, fmtValue, fmtDelta, isNew, esc, SHORT_LABELS, isOcrSourced } from '../data.js';
 
 const CONF_LABEL = {
   verified: 'API 검증',
   extracted: '자동추출',
   reviewed: '확인완료',
 };
+
+const OCR_WARNING_LABEL = '확인필요';
+const OCR_WARNING_TITLE = 'PDF 이미지를 OCR로 읽은 수치입니다 — 원문과 대조해 확인하세요.';
 
 // 요약 줄 전용 소형 삼각형 (org.js/home.js의 10x9 배지형보다 작은 8x7 인라인 아이콘)
 const DELTA_SVG_SMALL = {
@@ -61,7 +64,7 @@ function renderSummaryLine(items) {
   return parts.join(' · ');
 }
 
-function renderEventCard(event, today) {
+function renderEventCard(event, today, orgsMeta) {
   const firstRec = event.items[0];
   const newBadge = isNew(firstRec, today);
   const title = event.report_title.startsWith(event.org_name_ko)
@@ -69,7 +72,12 @@ function renderEventCard(event, today) {
     : `${event.org_name_ko} ${event.report_title}`;
   const confLabel = CONF_LABEL[firstRec.confidence] || firstRec.confidence || '';
   const indicatorCount = dedupeByIndicatorLatestYear(event.items).length;
-  const subLine = `${mmdd(event.published_at)} · ${indicatorCount}개 지표 갱신 · ${confLabel}`;
+  // 이 파일은 배지 대신 텍스트 라벨 관례를 쓰므로(CONF_LABEL 참고), OCR 경고도
+  // 그 관례를 따라 요약줄 끝에 텍스트로 붙인다 — title 속성만 span 으로 살린다.
+  const ocrWarning = isOcrSourced(firstRec, orgsMeta)
+    ? ` · <span title="${esc(OCR_WARNING_TITLE)}">${esc(OCR_WARNING_LABEL)}</span>`
+    : '';
+  const subLine = `${esc(mmdd(event.published_at))} · ${esc(String(indicatorCount))}개 지표 갱신 · ${esc(confLabel)}${ocrWarning}`;
   const summaryHtml = renderSummaryLine(event.items);
 
   return `
@@ -78,19 +86,19 @@ function renderEventCard(event, today) {
         <div style="font-size:14px;font-weight:700;">${esc(title)}</div>
         ${newBadge ? '<div style="font-size:10px;font-weight:700;color:#ffffff;background:#c73e3a;padding:1px 7px;border-radius:999px;">NEW</div>' : ''}
       </div>
-      <div class="num" style="font-size:12px;color:var(--text-secondary);">${esc(subLine)}</div>
+      <div class="num" style="font-size:12px;color:var(--text-secondary);">${subLine}</div>
       <div class="num" style="display:flex;align-items:center;flex-wrap:wrap;gap:4px;font-size:13px;color:#344054;">${summaryHtml}</div>
     </button>`;
 }
 
-function renderMonthGroup(group, today, isFirst) {
+function renderMonthGroup(group, today, isFirst, orgsMeta) {
   const label = `<div class="num" style="font-size:12px;font-weight:700;color:var(--text-secondary);${isFirst ? '' : 'margin-top:4px;'}">${esc(group.month)}</div>`;
-  const cards = group.events.map(event => renderEventCard(event, today)).join('');
+  const cards = group.events.map(event => renderEventCard(event, today, orgsMeta)).join('');
   return label + cards;
 }
 
 export function render(el, ctx) {
-  const { records, schedule, today } = ctx;
+  const { records, schedule, today, orgs } = ctx;
   const groups = timelineGroups(records);
   const nextEntry = findNextSchedule(schedule, today);
 
@@ -101,7 +109,7 @@ export function render(el, ctx) {
         <div style="font-size:14px;font-weight:600;color:var(--text-secondary);">아직 수집된 전망이 없습니다</div>
       </div>`;
   } else {
-    const rows = groups.map((g, i) => renderMonthGroup(g, today, i === 0)).join('');
+    const rows = groups.map((g, i) => renderMonthGroup(g, today, i === 0, orgs)).join('');
     body = `<div style="flex:1;display:flex;flex-direction:column;gap:8px;padding:12px 16px;">${rows}</div>`;
   }
 

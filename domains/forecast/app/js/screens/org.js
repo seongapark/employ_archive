@@ -1,4 +1,4 @@
-import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS } from '../data.js';
+import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced } from '../data.js';
 
 // 펼침 상태는 화면 방문 동안 유지 (모듈 스코프 — 여러 회차 행이 동시에 펼쳐질 수 있음)
 const expandedIds = new Set();
@@ -8,6 +8,8 @@ const BADGE = {
   extracted: { cls: 'badge--extracted', label: '자동' },
   reviewed: { cls: 'badge--reviewed', label: '확인' },
 };
+
+const OCR_BADGE_TITLE = 'PDF 이미지를 OCR로 읽은 수치입니다 — 원문과 대조해 확인하세요.';
 
 const DELTA_SVG = {
   up: '<svg width="10" height="9" viewBox="0 0 10 9"><polygon points="5,0 10,9 0,9" fill="#c73e3a"></polygon></svg>',
@@ -227,6 +229,13 @@ function renderRow(rec, isExpanded, orgsMeta, records) {
     const landing = landingUrl
       ? `<a href="${esc(landingUrl)}" target="_blank" rel="noopener" style="font-size:11px;color:#667085;">기관 자료실</a>`
       : '';
+    const ocrBadge = isOcrSourced(rec, orgsMeta)
+      ? `<div class="badge badge--ocr" title="${esc(OCR_BADGE_TITLE)}">확인필요</div>`
+      : '';
+    const confidenceBadges = `<div style="display:flex;align-items:center;gap:6px;">
+          <div class="badge ${badgeInfo.cls}">${esc(badgeInfo.label)}</div>
+          ${ocrBadge}
+        </div>`;
     return `
       <div class="card" style="border-color:#b9c9e2;display:flex;flex-direction:column;padding:0;">
         <button type="button" data-toggle="${esc(rec.id)}" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:none;border:none;width:100%;text-align:left;cursor:pointer;min-height:44px;">
@@ -240,7 +249,7 @@ function renderRow(rec, isExpanded, orgsMeta, records) {
         <div style="border-top:1px solid #eef0f3;padding:10px 14px;display:flex;flex-direction:column;gap:8px;">
           <div style="font-size:13px;line-height:1.5;color:#344054;">${esc(rationale)}</div>
           <div class="num" style="font-size:12px;color:#667085;">${esc(halfYearLabel(records, rec, { unit: true }))}</div>
-          ${tags || landing ? `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">${tags}<div class="badge ${badgeInfo.cls}" style="margin-left:auto;">${esc(badgeInfo.label)}</div></div>` : `<div class="badge ${badgeInfo.cls}" style="align-self:flex-end;">${esc(badgeInfo.label)}</div>`}
+          ${tags || landing ? `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">${tags}<div style="margin-left:auto;">${confidenceBadges}</div></div>` : `<div style="align-self:flex-end;">${confidenceBadges}</div>`}
           ${renderSourceLine(rec)}
           ${landing}
         </div>

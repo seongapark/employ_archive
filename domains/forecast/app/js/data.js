@@ -229,6 +229,15 @@ export function dateLabel(rec, orgsMeta) {
   }
 }
 
+// method가 'ocr'인 기관(현재 KEIS)의 수치는 PDF 이미지를 OCR로 읽은 것이라
+// 원문과 어긋날 여지가 있다. 화면들이 이 값을 보고 '확인필요' 배지를 붙인다.
+// orgs.json 에 없는(혹은 아직 안 실린) org 코드가 들어와도 조용히 false —
+// 판정을 못 한다고 화면이 죽으면 안 된다.
+export function isOcrSourced(rec, orgsMeta) {
+  const orgMeta = (orgsMeta || []).find(o => o.org === rec.org);
+  return orgMeta ? orgMeta.method === 'ocr' : false;
+}
+
 export function isNew(rec, today) {
   const daysSince = dayDiff(today, rec.published_at);
   return daysSince <= 7;
