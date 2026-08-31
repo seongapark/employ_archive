@@ -198,6 +198,20 @@ export function breakdownMatrix(series, categories, period, { sort = 'delta', br
   return rows.slice().sort((a, b) => magnitude(b) - magnitude(a));
 }
 
+// 매트릭스 첫 줄에 고정되는 전체 증감. 분류별 숫자는 전체가 얼마나 움직였는지를
+// 알아야 크기를 가늠할 수 있다 — 제조업 -6.8만명 이 큰 수인지 작은 수인지는
+// 전체가 +10.8만명 이라는 걸 알아야 판단된다. 정렬은 이 줄을 건드리지 않는다:
+// 기준선이 순서에 따라 자리를 옮기면 기준선이 아니다.
+export function totalRow(series, period) {
+  const cells = {};
+  for (const source of SOURCE_ORDER) {
+    const record = series.find(r => r.source === source
+      && r.period === period && r.breakdown === 'total');
+    cells[source] = cellState(record, true);
+  }
+  return { code: null, name_ko: '전체', short_ko: '전체', cells };
+}
+
 export function categoryTimeline(series, { breakdown, category, months = 24 } = {}) {
   const out = {};
   for (const source of SOURCE_ORDER) {
