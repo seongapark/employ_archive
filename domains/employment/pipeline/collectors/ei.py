@@ -41,6 +41,51 @@ TOTAL_COLUMN = 1
 
 # 6(서비스업)과 11(기타*)은 일부러 뺐다. 집계 열이라 넣으면 이중 계상된다.
 
+DEMO_HEADER_KEYS = ("전체", "남성", "여성", "29세이하", "60세이상")
+# 열 위치 → (단면, 분류코드). 1번 열(전체)은 산업 표에서 이미 total 로 나오므로 뺀다.
+DEMO_COLUMNS: dict[int, tuple[str, str]] = {
+    2: ("sex", "M"), 3: ("sex", "F"),
+    4: ("age", "15-29"), 5: ("age", "30-39"), 6: ("age", "40-49"),
+    7: ("age", "50-59"), 8: ("age", "60+"),
+}
+DEMO_TOTAL_COLUMN = 1
+
+
+def find_demo_tables(tables) -> tuple[list, list]:
+    """성·연령 통계표의 수준·증감 표. 증감률 표가 같은 헤더로 뒤따른다.
+
+    셋 다 헤더가 같아 순서로만 구분된다. 크기로 뒤바뀜을 잡는다 —
+    수준은 만 단위, 증감·증감률은 그보다 훨씬 작다. 증감률을 증감으로 집으면 값이
+    100배 작아지는데 조용히 그럴듯해 보인다 — 그 사고는 parse() 의 대조(성·연령 합 =
+    산업표 전산업)가 150배 차이로 확실히 잡으므로 여기서는 하한을 두지 않는다.
+    총량 증감이 어쩌다 10천명 아래로 내려가는 것은 정상이고, 하한을 두면 그때
+    멀쩡한 수집이 실패한다.
+    """
+    cand = [i for i, g in enumerate(tables)
+            if g and len(g[0]) > 5 and all(k in _flat(g[0]) for k in DEMO_HEADER_KEYS)]
+    if len(cand) < 2:
+        raise ValueError(f"성·연령 수준·증감 표를 찾지 못했다 (후보 {cand})")
+    level, delta = tables[cand[0]], tables[cand[1]]
+    lv, dv = _num(level[-1][DEMO_TOTAL_COLUMN]), _num(delta[-1][DEMO_TOTAL_COLUMN])
+    if lv is None or lv < 10000:
+        raise ValueError(f"성·연령 수준 표의 전체가 이상하다: {lv}")
+    if dv is None or abs(dv) >= 1000:
+        raise ValueError(f"성·연령 증감 표의 전체가 이상하다: {dv}")
+    return level, delta
+
+
+def _demo_by_period(table) -> dict[str, dict[tuple[str, str], float]]:
+    out: dict[str, dict[tuple[str, str], float]] = {}
+    for period, row in month_rows(table):
+        bucket = out.setdefault(period, {})
+        for col, key in DEMO_COLUMNS.items():
+            if col < len(row):
+                value = _num(row[col])
+                if value is not None:
+                    bucket[key] = value
+    return out
+
+
 _LEAD_HEADER = {1: "전산업", 2: "농림어업", 3: "제조업", 6: "서비스업"}
 _CONT_HEADER = {1: "정보통신업", 8: "보건복지", 11: "기타*"}
 
@@ -208,6 +253,36 @@ def parse(data: bytes, *, released_at: date, release_url: str,
                 released_at=released_at, release_url=release_url,
                 attachments=attachments, collected_at=collected_at,
             ))
+
+    demo_level, demo_delta = find_demo_tables(tables)
+    demo_levels = _demo_by_period(demo_level)
+    demo_deltas = _demo_by_period(demo_delta)
+
+    # 문서가 스스로 갖는 대조점: 성·연령의 전체는 산업 표의 전산업과 같아야 한다.
+    # 수준만 대조하면 증감률 표를 증감으로 집은 사고를 못 잡는다. 둘 다 본다.
+    # 허용오차 2.0 은 반올림 편차(실측 최대 1.0)를 덮되, 증감률(1.8 vs 277)은
+    # 150배 차이라 그대로 걸린다.
+    demo_total = sum(v for (bd, _), v in demo_levels.get(latest, {}).items() if bd == "sex")
+    if abs(demo_total - levels[latest][TOTAL_KEY]) > 2.0:
+        raise ValueError(
+            f"성별 합이 전산업과 다르다: {demo_total} vs {levels[latest][TOTAL_KEY]}")
+    demo_delta_total = sum(v for (bd, _), v in demo_deltas.get(latest, {}).items() if bd == "sex")
+    industry_delta_total = deltas.get(latest, {}).get(TOTAL_KEY)
+    if industry_delta_total is None or abs(demo_delta_total - industry_delta_total) > 2.0:
+        raise ValueError(
+            f"성별 증감 합이 전산업 증감과 다르다(증감률 표를 집었을 수 있다): "
+            f"{demo_delta_total} vs {industry_delta_total}")
+
+    for period, values in demo_levels.items():
+        delta = demo_deltas.get(period, {})
+        for (breakdown, code), value in values.items():
+            records.append(SeriesRecord(
+                id=make_id("ei", period, breakdown, code), source="ei",
+                breakdown=breakdown, category=code, period=period,
+                value=value, yoy=delta.get((breakdown, code)),
+                released_at=released_at, release_url=release_url,
+                attachments=attachments, collected_at=collected_at,
+            ))
     return records
 
 
@@ -230,6 +305,15 @@ def check_coverage(records: list[SeriesRecord]) -> None:
     missing = EXPECTED_CODES - got
     if missing:
         raise ValueError(f"{latest} 에 빠진 산업 대분류: {sorted(missing)}")
+
+    for breakdown, expected in (("sex", {"M", "F"}),
+                                ("age", {"15-29", "30-39", "40-49", "50-59", "60+"})):
+        got = {r.category for r in records
+               if r.period == latest and r.breakdown == breakdown}
+        missing = expected - got
+        if missing:
+            name = "성별" if breakdown == "sex" else "연령"
+            raise ValueError(f"{latest} 에 빠진 {name} 분류: {sorted(missing)}")
 
 
 MAX_MONTHS_BEHIND = 2      # 전월 기준으로 매월 공표된다 (sources.json 의 release_rule)
