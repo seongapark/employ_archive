@@ -100,7 +100,7 @@ test('breakdownMatrix tells the four empty states apart', () => {
     rec({ source: 'est', breakdown: 'industry', category: 'C', period: '2026-07', yoy: null }),
     rec({ source: 'ei', breakdown: 'industry', category: 'C', period: '2026-07', yoy: 5.5 }),
   ];
-  const rows = breakdownMatrix(series, INDUSTRIES, '2026-07', { sort: 'code' });
+  const rows = breakdownMatrix(series, INDUSTRIES, '2026-07', { sort: 'code', breakdown: 'industry' });
   assert.deepEqual(rows.map(r => r.code), ['A', 'C']);
   assert.deepEqual(rows[0].cells.est, { state: 'notProvided', yoy: null });
   assert.deepEqual(rows[0].cells.ei, { state: 'unpublished', yoy: null });
@@ -113,7 +113,7 @@ test('breakdownMatrix sorts by delta magnitude, empty rows last', () => {
     rec({ source: 'eaps', breakdown: 'industry', category: 'A', period: '2026-07', yoy: 11.5 }),
     rec({ source: 'eaps', breakdown: 'industry', category: 'C', period: '2026-07', yoy: -200.3 }),
   ];
-  const rows = breakdownMatrix(series, INDUSTRIES, '2026-07', { sort: 'delta' });
+  const rows = breakdownMatrix(series, INDUSTRIES, '2026-07', { sort: 'delta', breakdown: 'industry' });
   assert.deepEqual(rows.map(r => r.code), ['C', 'A']);
 });
 
@@ -122,7 +122,23 @@ test('breakdownMatrix works unchanged for sex', () => {
     rec({ source: 'eaps', breakdown: 'sex', category: 'M', period: '2026-07', yoy: 47.9 }),
     rec({ source: 'ei', breakdown: 'sex', category: 'M', period: '2026-07', yoy: 90.0 }),
   ];
-  const rows = breakdownMatrix(series, SEGMENTS[0].categories, '2026-07', { sort: 'code' });
+  const rows = breakdownMatrix(series, SEGMENTS[0].categories, '2026-07', { sort: 'code', breakdown: 'sex' });
   assert.equal(rows[0].cells.est.state, 'notProvided');
   assert.equal(rows[0].cells.eaps.yoy, 47.9);
+});
+
+test('a sex row never picks up the industry record with the same code', () => {
+  const series = [
+    rec({ source: 'eaps', breakdown: 'industry', category: 'F', period: '2026-07', yoy: -57.1 }),
+    rec({ source: 'eaps', breakdown: 'sex', category: 'F', period: '2026-07', yoy: 59.7 }),
+    rec({ source: 'ei', breakdown: 'industry', category: 'M', period: '2026-07', yoy: 23 }),
+    rec({ source: 'ei', breakdown: 'sex', category: 'M', period: '2026-07', yoy: 90 }),
+  ];
+  const sexCats = [
+    { code: 'M', name_ko: '남자', provided: { eaps: true, est: false, ei: true } },
+    { code: 'F', name_ko: '여자', provided: { eaps: true, est: false, ei: true } },
+  ];
+  const rows = breakdownMatrix(series, sexCats, '2026-07', { sort: 'code', breakdown: 'sex' });
+  assert.equal(rows[1].cells.eaps.yoy, 59.7);   // 여자, not 건설업
+  assert.equal(rows[0].cells.ei.yoy, 90);       // 남자, not 전문·과학·기술
 });

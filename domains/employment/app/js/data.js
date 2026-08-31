@@ -130,7 +130,7 @@ function cellState(record, provided) {
   return { state: 'value', yoy: record.yoy };
 }
 
-export function breakdownMatrix(series, categories, period, { sort = 'delta' } = {}) {
+export function breakdownMatrix(series, categories, period, { sort = 'delta', breakdown } = {}) {
   const byKey = new Map();
   for (const r of series) {
     if (r.period !== period) continue;
@@ -139,8 +139,7 @@ export function breakdownMatrix(series, categories, period, { sort = 'delta' } =
   const rows = categories.map(category => {
     const cells = {};
     for (const source of SOURCE_ORDER) {
-      const record = Array.from(byKey.values()).find(
-        r => r.source === source && r.category === category.code);
+      const record = byKey.get(`${source}|${breakdown}|${category.code}`);
       cells[source] = cellState(record, category.provided ? category.provided[source] : true);
     }
     return { code: category.code, name_ko: category.name_ko, cells };
