@@ -181,12 +181,7 @@ export function sheetData(series, {
       && r.breakdown === (breakdown || 'total')
       && (r.category ?? null) === (category ?? null));
     const provided = meta && meta.provided ? meta.provided[source] : true;
-    const cell = provided === false
-      ? { state: 'notProvided', yoy: null }
-      : !record ? { state: 'unpublished', yoy: null }
-      : record.yoy === null || record.yoy === undefined ? { state: 'noDelta', yoy: null }
-      : { state: 'value', yoy: record.yoy };
-    return { source, ...cell };
+    return { source, ...cellState(record, provided) };
   });
   const timeline = categoryTimeline(series, { breakdown, category, months });
   const all = Object.values(timeline).flat().map(p => p.period).sort();
