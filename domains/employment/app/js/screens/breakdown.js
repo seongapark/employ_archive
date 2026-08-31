@@ -1,6 +1,6 @@
 import {
   segmentsOf, breakdownMatrix, categoryTimeline, fmtDelta, deltaTone, monthLabel,
-  EMPTY_LABEL, emptyLabel, esc, SOURCE_ORDER, SOURCE_COLORS,
+  EMPTY_LABEL, emptyLabel, esc, shortOf, SOURCE_ORDER, SOURCE_COLORS,
 } from '../data.js';
 
 // 사업체노동력조사가 성·연령에서 통째로 비는 이유를 화면이 말한다.
@@ -31,15 +31,20 @@ export function render(el, ctx) {
   const rows = breakdownMatrix(ctx.series, segment.categories, ctx.state.period, { sort, breakdown: current });
 
   const note = current === 'industry' ? '' : `<p class="note note--est">${esc(EST_NOTE)}</p>`;
+  // 열 머리는 출처 약칭(경활·사업체·행정통계)이다. 정식명을 쓰면 세 번째 열이
+  // 휴대폰 화면 밖으로 잘려 나간다. 정식명은 title 로 남겨 길게 눌렀을 때 뜨고,
+  // 출처비교 화면이 전체를 나열한다.
   const head = `<thead><tr><th scope="col">${esc(segment.name_ko)}</th>${
-    SOURCE_ORDER.map(s => `<th scope="col"><a href="${esc(
-      (ctx.sources.find(m => m.code === s) || {}).board_url || '#')}" rel="noopener">${esc(
-      (ctx.sources.find(m => m.code === s) || {}).name_ko || s)}</a></th>`).join('')
+    SOURCE_ORDER.map(s => {
+      const meta = ctx.sources.find(m => m.code === s) || {};
+      return `<th scope="col"><a href="${esc(meta.board_url || '#')}" rel="noopener"
+        title="${esc(meta.name_ko || s)}">${esc(shortOf(meta) || s)}</a></th>`;
+    }).join('')
   }</tr></thead>`;
 
   const body = rows.map(row => `
     <tr class="row" data-code="${esc(row.code)}">
-      <th scope="row">${esc(row.name_ko)}</th>
+      <th scope="row" title="${esc(row.name_ko)}">${esc(shortOf(row))}</th>
       ${SOURCE_ORDER.map(s => cell(row.cells[s].state, row.cells[s].yoy)).join('')}
     </tr>
     ${ctx.state.category === row.code ? expanded(ctx, current, row) : ''}`).join('');
@@ -65,7 +70,7 @@ export function render(el, ctx) {
 function expanded(ctx, breakdown, row) {
   const timeline = categoryTimeline(ctx.series, { breakdown, category: row.code, months: 24 });
   const lines = SOURCE_ORDER.map(s => {
-    const name = (ctx.sources.find(m => m.code === s) || {}).name_ko || s;
+    const name = shortOf(ctx.sources.find(m => m.code === s)) || s;
     const dot = `<span class="dot" style="background:${esc(SOURCE_COLORS[s])}"></span>`;
     const points = timeline[s];
     // 점이 없다고 행을 지우지 않는다. 사업체노동력조사가 농림어업을 잡지 않는다는
@@ -80,5 +85,9 @@ function expanded(ctx, breakdown, row) {
     return `<li>${dot}
       ${esc(name)} · ${esc(monthLabel(last.period))} ${esc(label)}</li>`;
   }).join('');
-  return `<tr class="expand"><td colspan="4"><ul class="expand__list">${lines}</ul></td></tr>`;
+  // 약칭만으로는 뜻이 흐린 분류가 있다(가구내고용·국제외국·수도·하수·폐기업).
+  // 펼쳤을 때 정식명을 한 줄 얹어 표의 좁은 머리와 원문 이름을 잇는다.
+  const full = row.short_ko && row.short_ko !== row.name_ko
+    ? `<p class="expand__full">${esc(row.name_ko)}</p>` : '';
+  return `<tr class="expand"><td colspan="4">${full}<ul class="expand__list">${lines}</ul></td></tr>`;
 }

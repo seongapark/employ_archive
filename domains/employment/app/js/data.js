@@ -135,6 +135,16 @@ export function segmentsOf(industries, segments) {
   ];
 }
 
+// 좁은 표 머리에 들어갈 이름. 산업 대분류의 정식명은 "보건업 및 사회복지 서비스업"
+// 처럼 길어서 휴대폰 매트릭스에서 한 글자씩 세로로 접힌다 — 행 하나가 화면을 다
+// 먹는다. 약칭은 데이터가 갖고(industries.json·sources.json 의 short_ko), 없을 때
+// 정식명으로 떨어지는 규칙만 여기 한 곳에 둔다. 성·연령 분류는 애초에 짧아서
+// short_ko 가 없고 이 폴백을 탄다.
+export function shortOf(meta) {
+  if (!meta) return '';
+  return meta.short_ko || meta.name_ko || '';
+}
+
 // 네 상태의 표기. 판정(cellState)과 문구를 한곳에 둬야 화면마다 말이 갈라지지
 // 않는다 — 예전에는 chart.js 와 breakdown.js 가 각자 갖고 있다가 `미발표` 와
 // `― 미발표` 로 어긋났다. 매트릭스 칸은 좁으므로 문구만 쓰고, 막대·시트·펼침
@@ -171,7 +181,10 @@ export function breakdownMatrix(series, categories, period, { sort = 'delta', br
       const record = byKey.get(`${source}|${breakdown}|${category.code}`);
       cells[source] = cellState(record, category.provided ? category.provided[source] : true);
     }
-    return { code: category.code, name_ko: category.name_ko, cells };
+    return {
+      code: category.code, name_ko: category.name_ko,
+      short_ko: category.short_ko, cells,
+    };
   });
 
   if (sort === 'code') return rows;

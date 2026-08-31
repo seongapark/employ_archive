@@ -1,4 +1,4 @@
-import { sheetData, segmentsOf, monthLabel, esc } from './data.js';
+import { sheetData, segmentsOf, monthLabel, esc, shortOf } from './data.js';
 import { barsSvg, timelineSvg, sheetTable } from './chart.js';
 
 const KEY = 'employment.sheet';
@@ -27,14 +27,16 @@ export function mountSheet(sheetEl, handleEl, labelEl, scrimEl, ctx) {
     if (category && !found) {
       return { breakdown: null, category: null, categories: null, label: '전체' };
     }
-    const label = found ? (found.name_ko || category) : '전체';
+    const label = found ? (shortOf(found) || category) : '전체';
     return { breakdown, category, categories: segment ? segment.categories : null, label };
   }
 
   function refresh() {
     const { breakdown, category, categories, label } = cut();
     const data = sheetData(ctx.series, { period: ctx.state.period, breakdown, category, categories });
-    const names = Object.fromEntries(ctx.sources.map(s => [s.code, s.name_ko]));
+    // 시트는 폭이 320 이라 출처 약칭을 쓴다 — 정식명이면 막대 라벨 열이
+    // 그림을 반으로 줄인다.
+    const names = Object.fromEntries(ctx.sources.map(s => [s.code, shortOf(s)]));
 
     labelEl.textContent = `증감 비교 · ${monthLabel(ctx.state.period)} · ${label}`;
     handleEl.setAttribute('aria-expanded', String(open));
