@@ -339,3 +339,95 @@ def test_collect_raises_when_every_chapter_fails(monkeypatch):
 
     with pytest.raises(ValueError):
         kdi.collect(date(2026, 8, 30))
+
+
+CHAPTERS = kdi.parse_chapters(PAGE)
+
+
+def _wire_chapters(monkeypatch, chapter_pages):
+    """chapter_pages: {장 이름: 그 장 PDF 의 쪽 목록}.
+
+    각 장 URL 을 표시용 바이트(URL 자체)로 구분해, page_texts 가 그 장에
+    맞는 쪽 목록을 돌려주게 한다. 이름을 안 준 장은 표가 없는 빈 문서로
+    취급된다.
+    """
+    by_url = {url: chapter_pages.get(label, []) for label, url in CHAPTERS}
+
+    def fake_get(url, **kwargs):
+        if url == ISSUE.url:
+            return _Resp(text=PAGE)
+        return _Resp(content=url.encode())
+
+    monkeypatch.setattr(kdi.http, "get", fake_get)
+    monkeypatch.setattr(kdi.pdf, "page_texts", lambda data: by_url[data.decode()])
+
+
+def test_collect_issue_rationales_returns_empty_for_the_real_report(monkeypatch):
+    # "요약" 장의 표(실제: 5쪽)와 그 앞쪽(4쪽, 실측)에는 근거가 없다. 표가
+    # 그 장의 마지막 쪽이라 뒤쪽은 없다.
+    _wire_chapters(monkeypatch, {"요약": ["표지", "본문", "본문", "본문", TABLE]})
+    assert kdi.collect_issue_rationales(ISSUE) == []
+
+
+def test_collect_issue_rationales_reads_the_page_before_the_table(monkeypatch):
+    # 자리 표시자 문장이다 — 실제 보고서의 진짜 근거는 표에서 더 멀리
+    # 떨어져 있어(아래 headline_summary 테스트 참고) 이 창엔 안 들어온다.
+    # 이 테스트는 창이 정말 앞쪽 한 쪽을 읽는지만 확인한다.
+    prose = "취업자수는 건설업 부진의 영향으로 지난 전망 대비 하향조정될 것으로 예상된다."
+    _wire_chapters(monkeypatch, {"요약": [prose, TABLE]})
+
+    got = kdi.collect_issue_rationales(ISSUE)
+    by_ind = {r.indicator: r for r in got}
+    assert "emp_change" in by_ind
+    assert by_ind["emp_change"].source_page == 1   # 표 쪽(2)이 아니라 앞쪽(1)
+    assert by_ind["emp_change"].org == "KDI"
+    assert by_ind["emp_change"].source_url == CHAPTERS[0][1]
+
+
+def test_collect_issue_rationales_reads_the_page_after_the_table(monkeypatch):
+    prose = "소비자물가는 국제유가 상승의 영향으로 당초 전망보다 높아질 것으로 예상된다."
+    _wire_chapters(monkeypatch, {"요약": [TABLE, prose]})
+
+    got = kdi.collect_issue_rationales(ISSUE)
+    by_ind = {r.indicator: r for r in got}
+    assert "cpi" in by_ind
+    assert by_ind["cpi"].source_page == 2   # 표 쪽(1)이 아니라 뒤쪽(2)
+
+
+def test_collect_issue_rationales_moves_to_the_next_chapter_when_the_first_has_no_table(monkeypatch):
+    # 첫 장에 표가 없으면(REQUIRED_INDICATORS 를 못 채우면) 다음 장을 본다 —
+    # collect_issue 와 같은 순서다.
+    prose = "취업자수는 건설업 부진의 영향으로 지난 전망 대비 하향조정될 것으로 예상된다."
+    _wire_chapters(monkeypatch, {
+        "요약": ["표지만 있고 표는 없다"],
+        "현 경제상황에 대한 인식": ["본문"],
+        "2026~27년 국내경제 전망": [prose, TABLE],
+    })
+
+    got = kdi.collect_issue_rationales(ISSUE)
+    by_ind = {r.indicator: r for r in got}
+    assert "emp_change" in by_ind
+    assert by_ind["emp_change"].source_page == 1
+    assert by_ind["emp_change"].source_url == CHAPTERS[2][1]
+
+
+def test_collect_issue_rationales_returns_empty_when_no_chapter_has_a_table(monkeypatch):
+    _wire_chapters(monkeypatch, {
+        "요약": ["본문"],
+        "현 경제상황에 대한 인식": ["본문"],
+        "2026~27년 국내경제 전망": ["본문"],
+    })
+    assert kdi.collect_issue_rationales(ISSUE) == []
+
+
+def test_pick_would_blend_indicators_on_the_real_headline_summary_page():
+    # 실측(2026년 8월호 "요약" 장 1쪽) — 성장률·물가·고용 세 줄이 마침표도
+    # 빈 줄도 없이 붙어 있어, rationale.sentences 가 셋을 한 "문장"으로
+    # 묶는다. collect_issue_rationales 가 표 쪽(그 장의 5쪽, 마지막 쪽)
+    # 앞뒤 한 쪽으로만 창을 좁히는 이유가 이것이다 — 이 쪽(1)은 그 창 밖이다.
+    from domains.forecast.pipeline import rationale
+    headline = (FIXTURES / "kdi_2026-08_p1_headline_summary.txt").read_text(encoding="utf-8")
+    got_growth = rationale.pick(headline, "gdp_growth")
+    got_emp = rationale.pick(headline, "emp_change")
+    assert got_growth is not None
+    assert got_growth == got_emp  # 서로 다른 지표인데 같은 "문장"이 뽑힌다
