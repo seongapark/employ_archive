@@ -257,8 +257,35 @@ def test_tags_catch_working_age_population_in_english():
     assert "인구구조" in rationale.tags_for(s)
 
 
-def test_tags_catch_aging_in_english():
-    s = "Rapid population aging is projected to constrain labor supply."
+def test_tags_catch_every_aging_population_phrase_variant():
+    # OECD 는 영국식 철자(ageing)를, IMF 는 미국식 철자(aging)를 쓰고,
+    # "aging population"·"population aging" 두 어순 모두 이 프로즈에
+    # 나온다 — 네 구 형태 모두 인구구조를 잡아야 한다.
+    for phrase in ("aging population", "ageing population",
+                   "population aging", "population ageing"):
+        s = f"A rapidly changing {phrase} weighs on potential growth."
+        assert "인구구조" in rationale.tags_for(s), phrase
+
+
+def test_tags_do_not_flag_demographics_from_ordinary_aging_suffixed_words():
+    # "aging" 을 낱말 하나로 두면 damaging·encouraging·averaging·managing·
+    # packaging 처럼 거시경제 서술에 흔한 낱말 안에도 부분열로 걸린다 —
+    # en_US 사전(로컬 Hunspell 사전) 전수 대조로 확인한 문제다. 구 형태로
+    # 바꾼 뒤에는 이런 문장에 인구구조가 붙으면 안 된다.
+    sentences = [
+        "Trade tensions are damaging the export outlook.",
+        "There are encouraging signs in private consumption.",
+        "Growth is averaging 2 percent over the period.",
+        "Managing inflation expectations remains the priority.",
+        "Packaging costs rose sharply.",
+    ]
+    for s in sentences:
+        assert "인구구조" not in rationale.tags_for(s), s
+
+
+def test_tags_still_catch_a_real_aging_population_sentence():
+    # 함정을 막는다고 진짜 인구구조 문장까지 놓치면 안 된다.
+    s = "A rapidly aging population weighs on labour supply."
     assert "인구구조" in rationale.tags_for(s)
 
 

@@ -144,14 +144,23 @@ def pick(text: str, indicator: str) -> str | None:
 # 인용할 때 이 이름을 그대로 쓴다). "manufacturing employment"·
 # "construction employment" 는 OECD Economic Surveys: Korea 가 부문별
 # 고용을 말할 때 쓰는 표현이다. "demographic"·"working-age population"·
-# "aging" 은 한국의 인구 감소를 다루는 IMF·OECD 문서에 흔히 나오는 낱말이다
-# ("adverse demographics", "the working-age population is projected to
-# decline", "rapid population aging"). "agricultural prices"·
-# "administered prices" 는 한국 물가 분해를 다룰 때 IMF 가 쓰는 표현이다.
-# "돌봄일자리"에는 영문을 붙이지 않는다 — 이건 정부가 보건복지 부문에
-# 재정으로 만드는 한국 특유의 일자리 정책 용어라, IMF·OECD 문서에서 이
-# 개념 하나를 가리키는 표준 표현을 찾지 못했다. 없는 것을 지어내 붙이면
+# "aging population"/"ageing population"/"population aging"/
+# "population ageing" 은 한국의 인구 감소를 다루는 IMF·OECD 문서에 흔히
+# 나오는 표현이다("adverse demographics", "the working-age population is
+# projected to decline", "a rapidly aging population"). "agricultural
+# prices"·"administered prices" 는 한국 물가 분해를 다룰 때 IMF 가 쓰는
+# 표현이다. "돌봄일자리"에는 영문을 붙이지 않는다 — 이건 정부가 보건복지
+# 부문에 재정으로 만드는 한국 특유의 일자리 정책 용어라, IMF·OECD 문서에서
+# 이 개념 하나를 가리키는 표준 표현을 찾지 못했다. 없는 것을 지어내 붙이면
 # 그 자체가 검증 안 되는 태그가 된다.
+#
+# "aging" 을 낱말 하나로는 쓰지 않는다 — en_US 사전(로컬에 있는 Hunspell
+# 사전, 62,002 낱말)을 전수 대조한 결과 damaging·discouraging·
+# disparaging·encouraging·engaging·packaging·portaging·raging·staging
+# 9개 낱말이 전부 "aging"을 부분열로 품고 있었고, 이 중 다수가 거시경제
+# 서술에 흔히 쓰이는 낱말이다("Trade tensions are damaging the export
+# outlook" 처럼). "population" 과 짝지은 구(句) 형태 4가지로만 적는다 —
+# 이 구를 통째로 담는 낱말은 없다.
 TAG_WORDS: dict[str, tuple[str, ...]] = {
     "수출": ("수출", "export"),
     "글로벌경기": ("글로벌", "세계경제", "global"),
@@ -163,7 +172,9 @@ TAG_WORDS: dict[str, tuple[str, ...]] = {
     "재정정책": ("재정", "추경", "fiscal"),
     "통화정책": ("통화정책", "금리", "monetary"),
     "인구구조": ("인구구조", "생산가능인구", "고령",
-              "demographic", "working-age population", "aging"),
+              "demographic", "working-age population",
+              "aging population", "ageing population",
+              "population aging", "population ageing"),
     "돌봄일자리": ("돌봄", "보건복지"),
     "제조업고용": ("제조업", "manufacturing employment"),
     "건설업고용": ("건설업", "construction employment"),
