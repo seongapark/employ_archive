@@ -183,6 +183,14 @@ def test_tags_ignore_tongsang_trapped_inside_tongsangjeok():
     assert "내수" in tags
 
 
+def test_tags_ignore_tongsang_trapped_inside_tongsangimgeum():
+    # "통상임금" 은 초과근로수당 산정 기준이 되는 노동법 용어(정기적으로
+    # 지급되는 통상의 급여)이지 무역 통상정책과 무관하다 — 이 아카이브는
+    # 고용·임금 전망을 다루므로 이 낱말이 실제로 나타날 개연성이 낮지 않다.
+    s = "통상임금 산정 기준 변경이 반영되어 인건비가 늘어날 것으로 전망된다."
+    assert "통상정책" not in rationale.tags_for(s)
+
+
 def test_tags_ignore_yuga_trapped_inside_yugajeunggwon():
     # "유가증권" 은 증권 용어이지 원유 가격과 무관하다.
     s = "유가증권 시장 회복을 반영해 설비투자가 확대될 것으로 전망된다."
