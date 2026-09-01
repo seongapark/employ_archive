@@ -17,6 +17,10 @@ FIXTURES = Path(__file__).parent / "fixtures"
 # 전망 어미("자리한 것으로 전망된다")를 "자요"로 망가뜨려 실제로는 못 건진다
 # — 아래 bullets 테스트는 그 실물 원문을 그대로 쓴다.
 KEIS_P20 = (FIXTURES / "keis_2026-08_p20.txt").read_text(encoding="utf-8")
+# 텍스트 레이어가 있는 PDF 를 pdfplumber 로 읽은 실물 원문이다 — 한 문장이
+# 여러 줄에 걸쳐 감겨 있고, 그 줄들은 마침표로 끝나지 않는다.
+KLI_2026 = (FIXTURES / "kli_2026_forecast.txt").read_text(encoding="utf-8")
+KIET_2026H2 = (FIXTURES / "kiet_2026h2_macro.txt").read_text(encoding="utf-8")
 
 
 def test_pick_takes_the_sentence_that_gives_a_reason():
@@ -399,9 +403,17 @@ def test_pick_rejects_the_garbled_lead_bullet_despite_cause_and_indicator():
 
 
 def test_pick_does_not_use_bullets_by_default_on_the_same_ocr_text():
-    # bullets 인자를 안 주면(기본 False) 여전히 마침표로만 자른다 — 이
-    # OCR 텍스트에는 항목 끝에 마침표가 없어 실제 문장을 하나도 못 찾는다.
-    assert rationale.pick(KEIS_P20, "emp_change") is None
+    # 두 경로는 여전히 다른 경로다 — bullets 기본값이 조용히 True 로 바뀌는
+    # 회귀를 잡는 게 이 테스트의 목적이다. 줄 감김을 펴게 된 뒤로 이 OCR
+    # 쪽에서 고르는 문장 자체는 같아졌지만(그건 아래에서 따로 단언한다),
+    # 문장을 무엇으로 보는지는 다르다: bullets=True 는 쪽 하단 장식과 첫
+    # 표지 앞 캡션을 버리고 7개만 남기는 반면, 기본 경로는 그것들을 버리지
+    # 않아 12개를 남긴다. 기본값이 True 로 새면 이 수가 같아진다.
+    assert len(rationale.sentences(KEIS_P20)) == 12
+    assert len(rationale.sentences(KEIS_P20, bullets=True)) == 7
+    assert any("통계포커스" in s for s in rationale.sentences(KEIS_P20))
+    assert not any("통계포커스" in s
+                   for s in rationale.sentences(KEIS_P20, bullets=True))
 
 
 def test_bullets_true_does_not_split_a_wrapped_negative_percentage_line():
@@ -430,15 +442,81 @@ def test_bullets_true_still_splits_a_dash_bullet_that_starts_with_content():
     ]
 
 
-def test_bullets_false_pins_the_current_line_dropping_defect_on_the_same_text():
-    # 주의: 이 테스트는 옳은 동작이 아니라 "지금의" 동작을 못박아 둔다.
-    # bullets=False 의 기본 분리(_SENTENCE)는 마침표 없이 끝나는 줄을
-    # 조용히 버린다 — 아래에서 1행("...물가는")이 통째로 사라지는 게
-    # 그 증거다. 이건 알려진 결함이고 Task 5 로 넘겨졌다: Task 5 가
-    # 그 결함을 고치면 이 테스트는 실패해야 정상이다 — 그때는 이 테스트를
-    # 지우거나 새 기대값으로 바꾸면 된다. bullets 플래그 자체를 건드는
-    # 회귀(기본값이 조용히 True 로 바뀌는 것)를 잡는 게 이 테스트의
-    # 진짜 목적이다.
+def test_bullets_false_also_keeps_a_wrapped_negative_percentage_with_its_sentence():
+    # 예전에는 기본 경로가 마침표 없이 끝나는 1행("...물가는")을 통째로
+    # 버려 "-0.3%p 하락한 것으로 전망된다." 만 남겼다 — 주어를 잃은 반
+    # 토막이 완결된 인용문처럼 저장되는 모양이다. 줄 감김을 펴게 된 지금은
+    # 두 줄이 한 문장으로 돌아온다.
+    #
+    # 여기서 함께 지키는 것이 하나 더 있다: 소수점 가리기는 줄 감김을 편
+    # **뒤에** 와야 한다. 먼저 가리면 "-0.3%p" 의 소수점 자리에 원문에 없는
+    # 문자가 들어가 _NEGATIVE_NUMBER 판정이 어긋나고, 이 2행이 새 항목으로
+    # 오인돼 부호가 앞 문장에서 떨어져 나간다.
     text = ("- 2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는\n"
             "-0.3%p 하락한 것으로 전망된다.")
-    assert rationale.sentences(text) == ["-0.3%p 하락한 것으로 전망된다."]
+    assert rationale.sentences(text) == [
+        "2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는 "
+        "-0.3%p 하락한 것으로 전망된다.",
+    ]
+
+
+def test_sentences_join_a_prose_sentence_wrapped_across_three_lines():
+    # KLI 2026년 전망(픽스처 2~4행)에서 그대로 딴 것이다. pdfplumber 는
+    # PDF 가 오른쪽 여백에서 접은 자리마다 줄바꿈을 내므로 앞 두 줄이
+    # 마침표 없이 끝난다 — 줄바꿈을 문장 경계로 보면 그 두 줄이 조용히
+    # 사라지고 마지막 줄("뒷받침된 결과이다.")만 남아, 주어도 전망 표지도
+    # 없는 조각이 문장 행세를 한다.
+    assert (
+        "2025년 하반기 고용 증가폭은 20만 명을 상회할 것으로 예상되는데, "
+        "이는 보건업 및 사회복지 서비스업, 정보통신업, 전문ㆍ과학 및 "
+        "기술서비스업 등 서비스업 전반의 견조한 고용 증가가 뒷받침된 결과이다."
+    ) in rationale.sentences(KLI_2026)
+
+
+def test_sentences_do_not_run_across_a_blank_line():
+    # 빈 줄은 문단(또는 쪽) 경계다. 여기서 끊지 않으면 줄 감김을 펴는 일이
+    # 글 전체로 번져, 서로 다른 문단이 한 인용문으로 붙는다 — 마침표를
+    # 쓰지 않는 국문 보고서 문체에서는 그 덩어리가 쪽 하나만큼 커진다.
+    text = ("내수 회복에 힘입어 취업자 증가세가 이어질 전망\n"
+            "\n"
+            "수출 호조를 반영해 성장률이 확대될 전망")
+    assert rationale.sentences(text) == [
+        "내수 회복에 힘입어 취업자 증가세가 이어질 전망",
+        "수출 호조를 반영해 성장률이 확대될 전망",
+    ]
+
+
+def test_sentences_start_a_new_unit_at_a_bullet_marker_in_the_default_path():
+    # 빈 줄만으로는 부족하다 — KIET·BOK·KDI 픽스처에는 빈 줄이 하나도 없다.
+    # 국문 보고서는 서술 항목 끝에 마침표를 쓰지 않는 문체라, 표지를 경계로
+    # 보지 않으면 서술과 그 아래 표가 한 덩어리가 된다.
+    text = ("○ 내수 회복에 힘입어 취업자 증가세가 이어질 전망\n"
+            "○ 수출 호조를 반영해 성장률이 확대될 전망")
+    assert rationale.sentences(text) == [
+        "내수 회복에 힘입어 취업자 증가세가 이어질 전망",
+        "수출 호조를 반영해 성장률이 확대될 전망",
+    ]
+
+
+def test_pick_does_not_hand_back_a_whole_table_page_as_a_rationale():
+    # KIET 2026년 하반기 거시 전망 쪽은 빈 줄도 본문 마침표도 없다. 표지를
+    # 경계로 보지 않으면 서술 네 항목과 표 전체가 1,039자 한 덩어리가 되고,
+    # 그 덩어리가 인과·전망 표지를 모두 갖춰 근거로 뽑힌다 — 숫자 한 쪽을
+    # 기관의 설명인 양 사용자에게 보여주는 셈이다.
+    got = rationale.pick(KIET_2026H2, "cpi")
+    assert got == (
+        "민간소비는 실질소득 증가와 정부의 확장적 재정 기조, 금융시장(증시 등) "
+        "호조세 등을 배경으로 점차 개선될 전망이나, 에너지 가격 상승과 고환율 "
+        "등이 물가 부담으로 작용하 고, 금리 인하 지연 등이 회복세를 제한하면서 "
+        "전년 대비 2.2% 증가할 것으로 예상"
+    )
+    assert "실질GDP" not in got
+
+
+def test_pick_finds_the_same_keis_sentence_with_or_without_bullets():
+    # 줄 감김을 펴게 된 뒤로 두 경로는 이 쪽에서 같은 문장을 고른다 —
+    # 기본 경로도 이제 표지를 경계로 보고 표지 글자를 떼기 때문이다.
+    # (경로가 같아진 건 아니다 — 그 차이는 위
+    # test_pick_does_not_use_bullets_by_default_on_the_same_ocr_text 참고.)
+    assert rationale.pick(KEIS_P20, "emp_change") == rationale.pick(
+        KEIS_P20, "emp_change", bullets=True)

@@ -54,7 +54,16 @@ _FORECAST = ("전망", "예상",
 # 보고서 문체에서 드물게 쓰인다("내다보인다").
 _FORECAST_SUFFIX = re.compile(r"것으로\s*(?:전망|예상|보인다|기대된다|점쳐진다|관측된다|예측된다)")
 
-_SENTENCE = re.compile(r"[^.。\n]+[.。]|[^.。\n]+$")
+# 이 정규식은 _unwrap 이 편 텍스트에만 쓴다. 거기 남은 줄바꿈은 줄 감김이
+# 아니라 진짜 경계(문단·항목)이므로, 문자군에서 '\n' 을 빼 두는 것이 곧
+# "경계를 넘어 이어 붙이지 않는다"는 뜻이 된다. 원문에 그대로 쓰면 마침표
+# 없이 끝나는 감긴 줄이 두 갈래 어디에도 안 걸려 조용히 사라진다.
+#
+# re.MULTILINE 이 있어야 '$' 가 글 전체의 끝뿐 아니라 줄마다의 끝에도
+# 걸린다. 없으면 마침표 없이 끝나는 경계(예: 마침표를 안 쓰는 국문 보고서
+# 문체의 '○' 항목)가 마지막 한 줄만 빼고 전부 조용히 사라진다 — 줄 감김을
+# 펴 놓고도 같은 결함을 한 단계 위에서 되풀이하는 셈이다.
+_SENTENCE = re.compile(r"[^.。\n]+[.。]|[^.。\n]+$", re.MULTILINE)
 
 # 마침표가 숫자 사이(소수점)에 오면 문장 끝이 아니다 — "0.3%p" 를 문장
 # 경계로 잘못 보면 인용문이 숫자 한가운데서 끊겨 주어를 잃는다. 분리 전에
@@ -66,6 +75,12 @@ _DECIMAL_PLACEHOLDER = ""
 def sentences(text: str, *, bullets: bool = False) -> list[str]:
     """본문을 문장 단위로 자른다. 빈 조각은 버린다.
 
+    줄바꿈은 **문장 경계가 아니라 줄 감김**이다. pdfplumber 는 PDF 가
+    오른쪽 여백에서 줄을 접은 자리마다 줄바꿈을 낸다 — 세 줄에 걸친 한
+    문장은 앞 두 줄이 마침표 없이 끝난다. 그래서 먼저 _unwrap 으로 감긴
+    줄을 공백으로 이어 붙여 편 뒤에(문단 경계와 항목 표지만 진짜 경계로
+    남긴다), 그 결과를 마침표로 자른다.
+
     bullets 는 기본 False 로 잠가 둔다 — 이 옵션은 텍스트 레이어 없는
     PDF 를 OCR 로 읽는 KEIS 수집기만 명시적으로 켜야 한다(자세한 이유는
     _bullet_sentences 참고). 나머지 여섯 기관은 텍스트 레이어가 있는
@@ -75,7 +90,13 @@ def sentences(text: str, *, bullets: bool = False) -> list[str]:
     """
     if bullets:
         return _bullet_sentences(text)
-    protected = _DECIMAL_POINT.sub(_DECIMAL_PLACEHOLDER, text)
+    # 순서가 중요하다: 소수점 가리기는 _unwrap **뒤에** 온다. _unwrap 안의
+    # 음수 판정(_NEGATIVE_NUMBER)이 "-0.3%p" 의 소수점을 그대로 봐야 하기
+    # 때문이다 — 먼저 가리면 그 자리에 원문에 없는 문자가 들어가 판정이
+    # 어긋나고, 줄 감김으로 잘린 음수가 새 항목으로 오인돼 부호가 앞
+    # 문장에서 떨어져 나간다. _unwrap 은 마침표를 보지 않으므로 순서를
+    # 바꿔도 잃는 것이 없다.
+    protected = _DECIMAL_POINT.sub(_DECIMAL_PLACEHOLDER, _unwrap(text))
     return [
         s.strip().replace(_DECIMAL_PLACEHOLDER, ".")
         for s in _SENTENCE.findall(protected)
@@ -105,19 +126,78 @@ def _is_page_furniture(line: str) -> bool:
 _NEGATIVE_NUMBER = re.compile(r"^-\s*\d[\d.,]*\s*(?:%p|%|퍼센트|만\s*명|억|조)")
 
 
-def _is_bullet_marker_line(line: str) -> bool:
+def _is_bullet_marker_line(line: str, *, markers: str = _BULLET_MARKERS) -> bool:
     """줄이 불릿 표지로 시작하는가.
 
     '-' 만 특별하다 — 이 표지는 이 보고서들의 불릿 기호이자 음수의 부호
     이기도 하다. 그 둘을 가르는 건 표지 뒤에 오는 것이다: 단위 붙은
     숫자가 곧바로 오면(_NEGATIVE_NUMBER) 새 항목이 아니라 줄 감김으로
     잘린 음수이므로 표지로 보지 않는다.
+
+    markers 를 따로 받는다 — 표지의 뜻(항목이 여기서 시작한다)은 두 경로가
+    같지만, 읽는 방식이 달라 실제로 나타나는 글자가 조금 다르다(아래
+    _WRAP_BOUNDARY_MARKERS 참고). 기본값은 OCR 경로가 쓰던 그대로다.
     """
-    if not line or line[0] not in _BULLET_MARKERS:
+    if not line or line[0] not in markers:
         return False
     if line[0] == "-" and _NEGATIVE_NUMBER.match(line):
         return False
     return True
+
+
+# 줄 감김을 펼 때 "여기서 새 항목이 시작한다"고 볼 표지. OCR 경로가 쓰는
+# _BULLET_MARKERS 에 '•' 하나를 더한 것이다 — 같은 보고서라도 텍스트
+# 레이어를 그대로 읽으면 원래 글자인 '•' 가 나오고, 400dpi OCR 로 읽으면
+# 그 점이 'ㅇ'·'○'·'-' 로 뭉개져 나온다. 뜻은 하나이므로 목록도 하나로
+# 두고 글자만 더한다. _BULLET_MARKERS 자체는 건드리지 않는다 — OCR
+# 경로의 동작은 그대로여야 한다.
+_WRAP_BOUNDARY_MARKERS = _BULLET_MARKERS + "•"
+
+
+def _unwrap(text: str) -> str:
+    """줄 감김을 편다 — 감긴 줄은 공백으로 잇고, 진짜 경계만 줄바꿈으로 남긴다.
+
+    경계는 **두 가지뿐**이고 둘 다 이름 붙은 것이다. "이 줄은 표처럼
+    보인다" 같은 짐작은 하지 않는다 — 그런 판정은 새 표 모양이 나올 때마다
+    하나씩 뚫린다.
+
+    - **빈 줄** — 문단 경계다. 이게 없으면 한 쪽 전체가 하나로 이어질 수
+      있다.
+    - **항목 표지로 시작하는 줄**(_WRAP_BOUNDARY_MARKERS) — 이 보고서들의
+      관행상 새 항목이 시작하는 자리다. 이 규칙이 없으면 마침표를 안 쓰는
+      국문 보고서 문체에서 서술 항목과 그 아래 표가 통째로 한 덩어리가
+      된다. 실측: KIET 2026년 하반기 거시 전망 쪽은 빈 줄이 하나도 없고
+      본문 마침표도 없어, 표지 규칙 없이 펴면 서술 네 항목과 표 전체가
+      1,039자 한 덩어리가 되고 그 덩어리가 인과·전망 표지를 모두 갖춰
+      gdp_growth·cpi 의 "근거"로 뽑힌다 — 숫자 한 쪽을 기관의 설명인 양
+      보여주는 셈이다. 표지를 경계로 두면 같은 쪽에서 실제 서술 문장
+      하나(145자)만 뽑힌다.
+
+    표지 글자 자체는 인용문에 넣지 않는다 — 편집 기호이지 기관이 쓴
+    말이 아니다. OCR 경로(_bullet_sentences)도 같은 이유로 떼어낸다.
+    """
+    lines: list[str] = []
+    current: list[str] = []
+
+    def flush() -> None:
+        if current:
+            joined = " ".join(part for part in current if part)
+            current.clear()
+            if joined.strip():
+                lines.append(joined)
+
+    for raw_line in text.split("\n"):
+        line = raw_line.strip()
+        if not line:
+            flush()
+            continue
+        if _is_bullet_marker_line(line, markers=_WRAP_BOUNDARY_MARKERS):
+            flush()
+            line = line[1:].strip()
+        if line:
+            current.append(line)
+    flush()
+    return "\n".join(lines)
 
 
 def _bullet_sentences(text: str) -> list[str]:
