@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Literal, Optional
 from urllib.parse import urlparse
 
-from pydantic import BaseModel, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 Indicator = Literal[
     "emp_change", "emp_rate", "unemp_rate", "gdp_growth",
@@ -54,6 +54,12 @@ def make_id(org: str, published_at: date, indicator: str, target_year: int,
 
 
 class ForecastRecord(BaseModel):
+    # forecasts.json 에는 예전 rationale·rationale_tags 키가 여전히 남아 있다
+    # (근거는 이제 rationales.json 이 정본이다). model_dump 로 다시 저장되기
+    # 전까지는 옛 키가 파일에 그대로 있으므로, 모르는 키를 만나도 실패하지
+    # 않게 명시한다.
+    model_config = ConfigDict(extra="ignore")
+
     id: str
     org: str
     org_name_ko: str
@@ -66,8 +72,6 @@ class ForecastRecord(BaseModel):
     unit: str
     prev_value: Optional[float] = None
     revision: Optional[float] = None
-    rationale: str = ""
-    rationale_tags: list[str] = Field(default_factory=list)
     source_url: str
     source_page: Optional[int] = None
     landing_url: str

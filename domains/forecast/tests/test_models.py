@@ -23,9 +23,13 @@ def test_valid_record_with_defaults():
     assert r.target_period == "annual"
     assert r.prev_value is None
     assert r.revision is None
-    assert r.rationale == ""
-    assert r.rationale_tags == []
     assert r.source_page is None
+
+
+def test_record_no_longer_carries_a_rationale_field():
+    # 근거는 rationales.json 이 정본이다. 두 곳에 두면 어느 쪽이 맞는지 모호해진다
+    assert "rationale" not in ForecastRecord.model_fields
+    assert "rationale_tags" not in ForecastRecord.model_fields
 
 
 def test_value_out_of_range_rejected():
