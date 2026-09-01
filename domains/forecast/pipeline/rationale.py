@@ -93,19 +93,35 @@ _HAS_WORD_CHAR = re.compile(r"[가-힣a-zA-Z]")
 
 
 def _is_page_furniture(line: str) -> bool:
-    """쪽 하단 장식 줄이다 — 워터마크 URL 이거나 장식 규칙(점선 등)이다.
-
-    이 검사는 줄이 불릿 표지로 시작하는지 확인한 *뒤에* 걸어야 한다.
-    예를 들어 '= =' 처럼 표지 문자(=) 하나뿐인 줄은 한글도 로마자도 없어
-    이 조건에 걸리지만, 그건 장식이 아니라 (내용이 비었을 뿐) 불릿 한
-    항목이다 — 불릿 판정이 이 판정보다 먼저 와야 그런 줄을 장식으로
-    잘못 삼키지 않는다.
-    """
+    """쪽 하단 장식 줄이다 — 워터마크 URL 이거나 장식 규칙(점선 등)이다."""
     return "www." in line or _HAS_WORD_CHAR.search(line) is None
 
 
+# '-' 표지 바로 뒤에 단위 붙은 숫자가 오면 불릿이 아니라 줄 감김으로 잘린
+# 음수다("-0.3%p 하락"처럼). 관찰된 단위(%p·%·퍼센트·만 명·억·조)로만
+# 좁힌다 — "이 숫자처럼 보이면 다 막는다"는 일반 규칙으로 넓히면 새 단위가
+# 나올 때마다 이유 없이 오탐이 늘어난다. '년'은 이 목록에 없으므로
+# "-2026년…"·"-또한…" 은 여전히 불릿으로 남는다.
+_NEGATIVE_NUMBER = re.compile(r"^-\s*\d[\d.,]*\s*(?:%p|%|퍼센트|만\s*명|억|조)")
+
+
+def _is_bullet_marker_line(line: str) -> bool:
+    """줄이 불릿 표지로 시작하는가.
+
+    '-' 만 특별하다 — 이 표지는 이 보고서들의 불릿 기호이자 음수의 부호
+    이기도 하다. 그 둘을 가르는 건 표지 뒤에 오는 것이다: 단위 붙은
+    숫자가 곧바로 오면(_NEGATIVE_NUMBER) 새 항목이 아니라 줄 감김으로
+    잘린 음수이므로 표지로 보지 않는다.
+    """
+    if not line or line[0] not in _BULLET_MARKERS:
+        return False
+    if line[0] == "-" and _NEGATIVE_NUMBER.match(line):
+        return False
+    return True
+
+
 def _bullet_sentences(text: str) -> list[str]:
-    """줄바꿈이 아니라 불릿 표지에서 문장을 가른다.
+    """줄바꿈이 아니라 불릿 표지에서 문장을 가른다. 빈 조각은 버린다.
 
     텍스트 레이어 없는 PDF 를 OCR 로 읽으면 한 문장이 여러 줄에 걸쳐
     줄바꿈으로 감기고, 그 줄은 마침표로 끝나지 않는다. 줄바꿈 자체를
@@ -114,33 +130,49 @@ def _bullet_sentences(text: str) -> list[str]:
     다음 줄 "자리한 것으로 전망된다"(서술어)가 같은 문장인데 줄바꿈만
     보면 남남이 된다.
 
-    대신 이 보고서들이 실제로 쓰는 불릿 표지(_BULLET_MARKERS)를 문장의
-    시작으로 삼는다. 표지로 시작하지 않는 줄은 줄 감김으로 보고 공백을
-    끼워 앞 문장에 이어 붙인다. 첫 표지가 나오기 전 줄(캡션·머리말)은
-    아직 열린 문장이 없으므로 버린다.
+    줄 하나를 넷 중 하나로 본다:
+    - **빈 줄** — 문단·쪽 경계다. 지금까지 모은 문장을 닫는다(flush).
+    - **불릿 표지로 시작하는 줄**(_is_bullet_marker_line) — 새 문장의
+      시작이다. 먼저 지금까지 모은 문장을 닫고, 표지를 뗀 나머지로
+      새로 연다.
+    - **쪽 하단 장식 줄**(_is_page_furniture) — 그 줄 자체만 버리고
+      지나간다. *닫지 않는다.* 장식은 문단 경계가 아니라 문장 한가운데
+      우연히 끼어든 쓰레기다 — "...부진 완화와" 다음 줄에 워터마크가
+      끼고 그 다음 줄에 "내수 회복이..."로 문장이 이어지는 경우가
+      실례다. 여기서 닫아 버리면, 장식 다음에 오는 진짜 이어지는 줄이
+      이미 비어 버린 current 에 도착해 아래 넷째 갈래에도 안 걸려
+      조용히 사라진다 — 문장이 반 토막 나고, 그 반 토막이 완결된
+      문장처럼 보인다("...부진 완화와"만 남아 마침표 없이도 뜻이 통하는
+      것처럼 읽힌다). 설계 문서 9장이 막으려는 실패 모양이 정확히 이것이다.
+    - **그 밖의 줄** — 줄 감김이다. 이미 열린 문장이 있으면(current 가
+      비어 있지 않으면) 공백을 끼워 이어 붙이고, 아직 표지가 안 나온
+      상태(캡션·머리말)면 조용히 버린다.
 
-    쪽 하단 장식 줄(_is_page_furniture)을 만나면 지금까지 모은 문장을
-    닫고 그 장식 줄 자체는 버린다 — 안 그러면 마지막 문장이 "20 ⋯
-    www.keis.or.kr" 같은 각주까지 통째로 삼켜, 사용자에게 보일 인용문에
-    장식 문자가 섞여 나간다.
+    여러 쪽 원문을 이어 붙여 이 함수에 한 번에 넘기면, 쪽 경계에 빈 줄이
+    없는 한 앞 쪽 마지막 불릿과 뒤 쪽 첫 줄이 하나로 이어질 수 있다.
+    keis.collect_issue_rationales 는 쪽마다 이 함수를(정확히는 pick 을
+    통해) 따로 호출해 애초에 그 위험을 없앤다 — 한 호출은 한 쪽의 텍스트만
+    본다.
     """
     units: list[str] = []
     current: list[str] = []
 
     def flush() -> None:
         if current:
-            units.append(" ".join(current))
+            joined = " ".join(part for part in current if part)
             current.clear()
+            if joined:
+                units.append(joined)
 
     for raw_line in text.split("\n"):
         line = raw_line.strip()
         if not line:
-            continue
-        if line[0] in _BULLET_MARKERS:
+            flush()
+        elif _is_bullet_marker_line(line):
             flush()
             current.append(line[1:].strip())
         elif _is_page_furniture(line):
-            flush()
+            continue
         elif current:
             current.append(line)
         # current 가 비어 있고(첫 표지 전) 표지도 아니고 장식도 아닌 줄은

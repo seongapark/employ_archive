@@ -497,8 +497,10 @@ def test_collect_issue_rationales_merges_the_table_page_with_the_page_before_it(
     prose = ("- 2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 전망된다.\n"
              "- 실업률은 내수 회복을 반영해 하락할 것으로 예상된다.")
     by_page = {3: prose, 4: PAGE_2025_12}
+    calls = []
 
     def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
+        calls.append({"pages": pages, "dpi": dpi, "preprocess": preprocess})
         if pages is None:
             return ["표지", "목차", prose, PAGE_2025_12]
         return [by_page[p] for p in pages]
@@ -506,9 +508,22 @@ def test_collect_issue_rationales_merges_the_table_page_with_the_page_before_it(
     got = keis.collect_issue_rationales(
         LISTED_2025_12, fetch=lambda url: b"%PDF-", read_pages=fake_read_pages)
 
+    # 앞쪽(3)은 이미 400dpi 후보 판독([3, 4])에 들어 있다 — 그런데도 다시
+    # 개별 조회하면 400dpi 전처리 OCR 을 쪽당 ~4.5초씩 낭비한다. "missing"
+    # 계산을 아예 빼고 이웃을 전부 다시 읽게 부러뜨려도, 이 테스트의
+    # fake_read_pages 는 어떤 pages 인자에도 답할 수 있어 by_ind 단언은 다
+    # 통과해 버린다 — 그래서 여기서 호출 자체를 직접 검사한다: 이미 후보로
+    # 읽은 쪽 번호(3, 4)를 요청하는 개별 호출이 없어야 한다.
+    assert not any(call["pages"] == [3] for call in calls[2:])
+    assert not any(call["pages"] == [4] for call in calls[2:])
+
     by_ind = {r.indicator: r for r in got}
-    assert by_ind["emp_change"].source_page == 4   # 근거는 표 쪽 번호로 기록한다
+    # 근거는 그 문장이 실제로 실린 쪽(3, 앞쪽)으로 인용한다 — 표 쪽 번호(4)
+    # 로 뭉뚱그리면 사람이 나중에 원문과 대조하려 할 때 엉뚱한 쪽을 편다.
+    assert by_ind["emp_change"].source_page == 3
     assert by_ind["emp_change"].text.startswith("2026년 하반기 취업자 수 증가 배경")
+    assert by_ind["emp_change"].org == "KEIS"
+    assert by_ind["emp_change"].source_url == LISTED_2025_12.pdf_url
     assert "unemp_rate" in by_ind
 
 
@@ -575,7 +590,11 @@ def test_collect_issue_rationales_merges_the_table_page_with_the_page_after_it()
         LISTED_2025_12, fetch=lambda url: b"%PDF-", read_pages=fake_read_pages)
 
     by_ind = {r.indicator: r for r in got}
-    assert by_ind["emp_change"].source_page == 2   # 근거는 표 쪽 번호로 기록한다
+    # 근거는 그 문장이 실제로 실린 쪽(3, 뒤쪽)으로 인용한다 — 2026년
+    # 제5호에서 실제로 벌어진 모양이 정확히 이것이다(표는 19쪽, 근거는
+    # 20쪽). 표 쪽 번호(2)로 인용하면 사람이 원문과 대조할 때 숫자만
+    # 있는 표 쪽을 펴게 된다.
+    assert by_ind["emp_change"].source_page == 3
     assert by_ind["emp_change"].text.startswith("2026년 하반기 취업자 수 증가 배경")
     assert "unemp_rate" in by_ind
 
@@ -625,8 +644,10 @@ def test_collect_issue_rationales_does_not_look_past_the_last_page():
         LISTED_2025_12, fetch=lambda url: b"%PDF-", read_pages=fake_read_pages)
 
     by_ind = {r.indicator: r for r in got}
-    assert "emp_change" in by_ind          # 앞쪽 근거는 여전히 반영된다
-    assert by_ind["emp_change"].source_page == 2
+    assert "emp_change" in by_ind
+    # 근거는 그 문장이 실제로 실린 쪽(1, 앞쪽)으로 인용한다 — 표 쪽(2)이
+    # 아니다.
+    assert by_ind["emp_change"].source_page == 1
 
 
 def test_collect_issue_rationales_reads_both_missing_neighbors_in_one_call():

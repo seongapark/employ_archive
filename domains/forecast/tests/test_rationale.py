@@ -339,11 +339,32 @@ def test_sentences_bullets_true_cuts_real_keis_ocr_text_into_seven_units():
 
 
 def test_sentences_bullets_true_drops_the_page_furniture():
-    # 쪽 하단 장식 줄을 만나면 지금까지 모은 문장을 닫고 그 장식 줄 자체는
-    # 버린다 — 안 그러면 마지막 문장이 각주까지 통째로 삼킨다.
+    # 쪽 하단 장식 줄 자체는 버린다 — 안 그러면 마지막 문장이 각주까지
+    # 통째로 삼킨다.
     units = rationale.sentences(KEIS_P20, bullets=True)
     assert not any("www." in u for u in units)
     assert not any("_" in u for u in units)
+
+
+def test_sentences_bullets_true_does_not_flush_across_furniture_mid_bullet():
+    # 장식 줄은 문단 경계가 아니다 — 문장 한가운데 우연히 끼어든 쓰레기일
+    # 뿐이다. 예전 구현은 장식을 만나면 지금까지 모은 문장을 닫아버렸는데,
+    # 그러면 이어지는 진짜 continuation 이 이미 빈 current 에 도착해
+    # 조용히 사라지고, 앞 반쪽만 완결된 문장처럼 남는다 — KEIS 를 근거로
+    # 인용하는 이 아카이브가 정확히 피해야 할 실패 모양이다.
+    text = ("- 하반기에는 건설경기 부진 완화와\n"
+            "www.keis.or.kr\n"
+            "내수 회복이 반영될 것으로 예상")
+    assert rationale.sentences(text, bullets=True) == [
+        "하반기에는 건설경기 부진 완화와 내수 회복이 반영될 것으로 예상",
+    ]
+
+
+def test_sentences_bullets_true_drops_empty_fragments():
+    # "빈 조각은 버린다"는 기본 분리와 같은 약속이다. 표지만 있고 내용이
+    # 없는 줄(예: '- ' 한 줄로 끝나는 불릿)이 바로 다음 표지로 닫히면
+    # 빈 문자열이 그대로 유닛이 될 수 있다 — 그 조각을 걸러야 한다.
+    assert rationale.sentences("- \n- 내용", bullets=True) == ["내용"]
 
 
 def test_sentences_bullets_true_recovers_the_causal_bullet_whole():
@@ -383,22 +404,41 @@ def test_pick_does_not_use_bullets_by_default_on_the_same_ocr_text():
     assert rationale.pick(KEIS_P20, "emp_change") is None
 
 
-def test_bullets_true_fragments_a_wrapped_negative_percentage_line():
+def test_bullets_true_does_not_split_a_wrapped_negative_percentage_line():
     # KEIS 실물 OCR 은 값이 음수면 그 값이 줄 맨 앞으로 감기는 일이 흔하다
-    # ('-0.3%p 하락'). bullets=True 는 이런 줄도 새 불릿으로 오인해 앞
-    # 문장의 나머지를 잃는다 — 이 옵션을 기본 False 로 잠가 두고 KEIS 만
-    # 켜야 하는 이유다.
+    # ('-0.3%p 하락'). '-' 뒤에 단위 붙은 숫자가 곧바로 오면 새 불릿이
+    # 아니라 줄 감김으로 본다 — 그렇지 않으면 앞 문장의 나머지를 잃고,
+    # 부호까지 함께 잘려 나가 수치의 뜻이 뒤집힌 인용문이 저장된다.
     text = ("- 2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는\n"
             "-0.3%p 하락한 것으로 전망된다.")
     assert rationale.sentences(text, bullets=True) == [
-        "2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는",
-        "0.3%p 하락한 것으로 전망된다.",
+        "2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는 "
+        "-0.3%p 하락한 것으로 전망된다.",
     ]
 
 
-def test_bullets_false_does_not_split_the_same_wrapped_negative_percentage_line():
-    # 같은 텍스트를 기본값(bullets=False)으로 보면 그 줄을 새 문장의
-    # 시작으로 보지 않는다 — 위 테스트가 보여준 반 토막이 나지 않는다.
+def test_bullets_true_still_splits_a_dash_bullet_that_starts_with_content():
+    # 반대 방향도 지켜야 한다 — '-' 뒤에 단위 붙은 숫자가 아니라 보통
+    # 낱말이 오면(연도·"또한" 등, 실제 KEIS 20쪽 원문의 "-또한 최근 AI
+    # 수요..."가 실례다) 여전히 새 불릿으로 본다. 음수 판정을 숫자+단위로
+    # 좁혀 두지 않으면 이런 흔한 불릿까지 줄 감김으로 오인해 잃는다.
+    text = ("- 2026년 하반기 취업자 수는 증가했다\n"
+            "-또한 반도체 수출 확대가 국내 경제를 견인할 것으로 전망된다.")
+    assert rationale.sentences(text, bullets=True) == [
+        "2026년 하반기 취업자 수는 증가했다",
+        "또한 반도체 수출 확대가 국내 경제를 견인할 것으로 전망된다.",
+    ]
+
+
+def test_bullets_false_pins_the_current_line_dropping_defect_on_the_same_text():
+    # 주의: 이 테스트는 옳은 동작이 아니라 "지금의" 동작을 못박아 둔다.
+    # bullets=False 의 기본 분리(_SENTENCE)는 마침표 없이 끝나는 줄을
+    # 조용히 버린다 — 아래에서 1행("...물가는")이 통째로 사라지는 게
+    # 그 증거다. 이건 알려진 결함이고 Task 5 로 넘겨졌다: Task 5 가
+    # 그 결함을 고치면 이 테스트는 실패해야 정상이다 — 그때는 이 테스트를
+    # 지우거나 새 기대값으로 바꾸면 된다. bullets 플래그 자체를 건드는
+    # 회귀(기본값이 조용히 True 로 바뀌는 것)를 잡는 게 이 테스트의
+    # 진짜 목적이다.
     text = ("- 2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는\n"
             "-0.3%p 하락한 것으로 전망된다.")
     assert rationale.sentences(text) == ["-0.3%p 하락한 것으로 전망된다."]

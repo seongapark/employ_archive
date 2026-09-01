@@ -15,7 +15,7 @@ import re
 from datetime import date, datetime
 from typing import NamedTuple
 
-from .. import http, ocr, report
+from .. import http, ocr, rationale_store, report
 from ..models import ForecastRecord
 from ..report import Issue
 
@@ -414,11 +414,23 @@ def collect_issue_rationales(listed: ListedIssue, *, fetch=None,
     OCR 이 낸 줄바꿈은 문장 경계가 아니라 대개 줄 감김이다(rationale.
     sentences 의 bullets 옵션 설명 참고). report.rationales_from_text 에
     bullets=True 를 넘겨 rationale.pick 이 마침표가 아니라 불릿 표지로
-    문장을 가르게 한다 — 합친 원문을 우리가 먼저 문장 단위로 잘라 마침표로
-    다시 이어 붙이는 우회는 하지 않는다. 그 우회는 pick 이 이미 갖고 있던
-    경계를 마침표라는 손실 있는 형식으로 왕복시켜 되찾는 셈이었고, 저장되는
-    인용문도 그 왕복을 한 번 거친 텍스트가 됐을 것이다 — 사람이 나중에 읽고
-    고칠 문장이니 원본 그대로가 맞다.
+    문장을 가르게 한다.
+
+    쪽마다 따로 report.rationales_from_text 를 부르고 rationale_store.merge
+    로 합친다 — 세 쪽을 한 텍스트로 이어 붙여 한 번만 부르지 않는다. 두
+    가지 이유가 있다. 첫째, 인용문이 실제로 나온 쪽 번호를 기록해야
+    한다 — 표 쪽 번호 하나로 고정하면(예전 방식) 2026년 제5호처럼 근거가
+    20쪽에 있는데 19쪽(표)으로 인용돼, 사람이 나중에 rationales.json 을
+    열어 원문과 대조하려 할 때(설계 문서 4.3) 엉뚱한 쪽을 펴게 된다. 둘째,
+    쪽을 이어 붙이면 앞 쪽 마지막 불릿과 뒤 쪽 첫 줄이 (그 사이에 빈 줄이
+    없는 한) 하나로 이어질 위험이 있다 — 쪽마다 따로 부르면 한 호출이 한
+    쪽만 보므로 그 위험이 구조적으로 없다.
+
+    합치는 순서는 앞쪽 → 표 쪽 → 뒤쪽, 즉 오름차순 쪽번호다. merge 는
+    이미 있는 키(지표)를 덮어쓰지 않고 새 키만 더하므로, 이 순서를 지키면
+    "먼저 나온 쪽의 문장을 취한다"는 기존 우선순위가 그대로 유지된다 —
+    이번에 바뀌는 건 그 문장이 어느 쪽에서 왔는지를 정확히 기록하는
+    것뿐이고, 어떤 문장이 뽑히는지는 바뀌지 않는다.
     """
     fetch = fetch or (lambda url: http.get(url).content)
     read_pages = read_pages or ocr.page_texts
@@ -436,18 +448,20 @@ def collect_issue_rationales(listed: ListedIssue, *, fetch=None,
              if missing else {})
     neighbor_texts = {**located.candidate_texts, **fresh}
 
-    parts = []
+    pages: list[tuple[int, str]] = []
     if preceding_page in neighbors and neighbor_texts.get(preceding_page):
-        parts.append(neighbor_texts[preceding_page])
-    parts.append(located.text)
+        pages.append((preceding_page, neighbor_texts[preceding_page]))
+    pages.append((located.page_no, located.text))
     if following_page in neighbors and neighbor_texts.get(following_page):
-        parts.append(neighbor_texts[following_page])
+        pages.append((following_page, neighbor_texts[following_page]))
 
-    text = "\n".join(parts)
-    return report.rationales_from_text(
-        text, org="KEIS", issue=listed.issue,
-        indicators=sorted(REQUIRED_INDICATORS), source_url=listed.pdf_url,
-        source_page=located.page_no, bullets=True)
+    found: list["Rationale"] = []
+    for page_no, page_text in pages:
+        found = rationale_store.merge(found, report.rationales_from_text(
+            page_text, org="KEIS", issue=listed.issue,
+            indicators=sorted(REQUIRED_INDICATORS), source_url=listed.pdf_url,
+            source_page=page_no, bullets=True))
+    return found
 
 
 def collect(today: date) -> list[ForecastRecord]:
