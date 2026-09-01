@@ -130,17 +130,29 @@ def test_refresh_does_not_delete_when_the_target_is_not_regenerated(tmp_path):
     kdi_saved = [r for r in saved if r.org == "KDI"]
     assert len(kdi_saved) == 1
     assert kdi_saved[0].text == "사람이 고친 문장"
-    assert any("KDI" in line and "그대로 둔다" in line for line in rep.lines)
+    assert any("KDI:2026-08-19:emp_change" in line and "그대로 둔다" in line
+               for line in rep.lines)
+    # 이 키는 존재하고(사람이 고친 항목이 있다) 이번 실행이 다시 만들지
+    # 못했을 뿐이다 — 오타가 아니므로 unmatched_refresh 에는 안 들어간다
+    # (exit code 판정에 영향을 주면 안 된다, coordinator 의 판단).
+    assert rep.unmatched_refresh == []
 
 
 def test_refresh_target_with_no_matching_record_is_reported(tmp_path):
     # 기관·발표일·지표 표기가 하나라도 틀리면 이 키는 existing 의 어떤
     # 항목과도 안 맞는다 — 조용히 무시하지 않고 그 사실을 알린다.
+    bad_key = ("KDI", date(1999, 1, 1), "emp_change")
     rep = rationales.run(
         tmp_path, sources={"kdi": lambda: [_listed()]},
         select=lambda *a, **k: _pick(),
-        refresh={("KDI", date(1999, 1, 1), "emp_change")})
+        refresh={bad_key})
     assert any("일치하는 기존 항목이 없다" in line for line in rep.lines)
+    # 사람이 대조할 수 있게 파이썬 튜플이 아니라 입력한 형식 그대로 찍는다.
+    assert any("KDI:1999-01-01:emp_change" in line for line in rep.lines)
+    assert not any("datetime.date" in line for line in rep.lines)
+    # main() 이 문자열을 뒤지지 않고 종료 코드를 정할 수 있도록 구조화된
+    # 필드에도 남긴다.
+    assert rep.unmatched_refresh == [bad_key]
 
 
 def test_load_error_stops_before_any_write(tmp_path):
@@ -222,7 +234,7 @@ def test_parse_refresh_rejects_bad_date():
 def test_main_rejects_unknown_only_org(capsys):
     rc = rationales.main(["--only", "not-a-real-org"])
     assert rc == 1
-    assert "모르는 기관" in capsys.readouterr().out
+    assert "모르는 소스키" in capsys.readouterr().out
 
 
 def test_main_rejects_malformed_refresh(capsys):
@@ -243,3 +255,112 @@ def test_main_runs_end_to_end_with_patched_sources(tmp_path, monkeypatch):
     assert rc == 0
     saved = rs.load(tmp_path / "rationales.json")
     assert len(saved) == 1
+
+
+# ---------------------------------------------------------------------------
+# 2차 리뷰: main() 이 --only·--refresh 를 실제로 run() 에 넘기는지, 종료
+# 코드가 rep.failures/rep.unmatched_refresh 를 실제로 보는지는 이전까지
+# `main([])`(인자 없음, 실패 없음) 하나로만 확인했다 — 두 플래그도, 실패
+# 경로도 전혀 자극하지 못했다. run() 을 흉내낸 스텁으로 main() 의 배선만
+# 따로 확인한다.
+# ---------------------------------------------------------------------------
+
+
+def test_main_forwards_only_and_refresh_to_run(monkeypatch):
+    captured = {}
+
+    def fake_run(data_dir, *, sources=None, select=None, only=None, refresh=()):
+        captured["only"] = only
+        captured["refresh"] = refresh
+        return rationales.Report()
+
+    monkeypatch.setattr(rationales, "run", fake_run)
+
+    rc = rationales.main(["--only", "kdi", "--refresh", "KDI:2026-08-19:emp_change"])
+
+    assert rc == 0
+    # --only 가 run() 까지 안 이어지면 SOURCES 에 있는 소스를 전부(=네트워크
+    # 전부) 부르게 된다 — captured["only"] 가 None 이면 그 사고를 놓친다.
+    assert captured["only"] == ["kdi"]
+    # --refresh 가 안 이어지면 명령이 조용한 완전 무동작이 된다.
+    assert captured["refresh"] == {("KDI", date(2026, 8, 19), "emp_change")}
+
+
+def test_main_returns_1_when_run_reports_failures(monkeypatch):
+    monkeypatch.setattr(
+        rationales, "run",
+        lambda *a, **k: rationales.Report(failures=["뭔가 실패했다"]))
+
+    rc = rationales.main([])
+
+    assert rc == 1
+
+
+def test_main_returns_0_when_only_rejections_are_present(monkeypatch):
+    # coordinator 의 판단: 거절만 있는 실행은 실패가 아니다 — 검증이
+    # 설계대로 작동했을 뿐 아무것도 잃지 않았다.
+    monkeypatch.setattr(
+        rationales, "run",
+        lambda *a, **k: rationales.Report(rejected=["원문에 없다고 거절됐다"]))
+
+    rc = rationales.main([])
+
+    assert rc == 0
+
+
+def test_main_returns_1_when_a_refresh_target_matches_nothing(monkeypatch):
+    # coordinator 의 판단: existing 의 어떤 키와도 안 맞는 refresh 대상은
+    # 오타이므로 exit code 로 드러나야 한다 — 실행 로그 맨 아래 한 줄에
+    # 묻히면 안 된다.
+    monkeypatch.setattr(
+        rationales, "run",
+        lambda *a, **k: rationales.Report(
+            unmatched_refresh=[("KDI", date(1999, 1, 1), "emp_change")]))
+
+    rc = rationales.main([])
+
+    assert rc == 1
+
+
+def test_main_returns_0_when_refresh_target_exists_but_is_not_replaced(monkeypatch):
+    # coordinator 의 판단: 대상은 실재하는데 이번 실행이 다시 못 만든 것은
+    # 실패가 아니다 — 잃은 것이 없고 다시 돌리면 되는 정상적인 다음 수순이다.
+    monkeypatch.setattr(
+        rationales, "run",
+        lambda *a, **k: rationales.Report(
+            lines=["refresh KDI:2026-08-19:emp_change: 이번 실행에서 대체물을 "
+                   "못 만들어 기존 항목을 그대로 둔다"]))
+
+    rc = rationales.main([])
+
+    assert rc == 0
+
+
+def test_saved_count_reflects_a_refresh_replacement(tmp_path):
+    """rep.saved 는 refresh 로 뺀 뒤의 집합(kept) 을 기준으로 세야 한다.
+
+    existing 을 기준으로 세면(1차 리뷰의 critical 을 감춘 바로 그 계산)
+    실제 교체가 일어났는데도 saved 가 0으로 나온다 — 이 계산 하나가
+    critical 을 산술적으로 안 보이게 만든 원흉이라 별도로 못박는다.
+    """
+    published_at = date(2026, 8, 19)
+    rs.save(tmp_path / "rationales.json", [rs.Rationale(
+        org="KDI", published_at=published_at, indicator="emp_change",
+        text="옛 문장", tags=[], source_url="https://x/y.pdf", source_page=2)])
+
+    rep = rationales.run(
+        tmp_path, sources={"kdi": lambda: [_listed()]},
+        select=lambda *a, **k: _pick(),
+        refresh={("KDI", published_at, "emp_change")})
+
+    assert rep.saved == 1
+    saved = rs.load(tmp_path / "rationales.json")
+    assert len(saved) == 1
+    assert saved[0].text == "취업자는 내수 회복이 반영되어 늘어날 것으로 전망된다."
+
+
+def test_per_issue_line_reports_picked_stored_and_rejected_counts(tmp_path):
+    rep = rationales.run(tmp_path, sources={"kdi": lambda: [_listed()]},
+                         select=lambda *a, **k: _pick())
+    assert any("후보 1건" in line and "저장 1건" in line and "거절 0건" in line
+               for line in rep.lines)

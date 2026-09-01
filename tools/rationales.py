@@ -42,6 +42,14 @@ class Report:
     skipped: int = 0
     rejected: list[str] = field(default_factory=list)
     failures: list[str] = field(default_factory=list)
+    # refresh 대상인데 existing 의 어떤 키와도 안 맞는 것들 — 기관 철자·
+    # 발표일·지표 표기 오타가 이 자리에 걸린다. lines 안의 한국어 문장으로만
+    # 남기면 main() 이 그 사실을 알려면 문자열을 뒤져야 한다 — 구조화된
+    # 필드를 따로 둬서 종료 코드 판정이 문자열 매칭에 기대지 않게 한다.
+    # "대상은 있는데 이번 실행이 대체물을 못 만든" 경우는 여기 들어가지
+    # 않는다 — 그건 오타가 아니라 정상적인 재시도 대상이라 exit 0 을
+    # 유지한다(모듈 main() 문서 참고).
+    unmatched_refresh: list[tuple[str, date, str]] = field(default_factory=list)
     lines: list[str] = field(default_factory=list)
 
 
@@ -148,13 +156,19 @@ def run(data_dir, *, sources=None, select=None, only=None, refresh=()) -> Report
         kept = [r for r in existing if not (r.key in refresh and r.key in replaced)]
         for key in sorted(k for k in refresh if k not in replaced):
             if key in existing_keys:
+                # 대상은 실재한다 — 이번 실행이 다시 만들지 못했을 뿐이다.
+                # 잃은 것이 없고 다시 돌리면 되므로 오류로 세지 않는다.
                 rep.lines.append(
-                    f"refresh {key}: 이번 실행에서 대체물을 못 만들어 "
-                    "기존 항목을 그대로 둔다")
+                    f"refresh {_format_refresh_key(key)}: 이번 실행에서 대체물을 "
+                    "못 만들어 기존 항목을 그대로 둔다")
             else:
+                # existing 의 어떤 키와도 안 맞는다 — 기관 철자·발표일·지표
+                # 표기 중 하나가 틀렸다는 뜻이라 오타로 본다. main() 이 이
+                # 목록을 보고 종료 코드를 정한다.
+                rep.unmatched_refresh.append(key)
                 rep.lines.append(
-                    f"refresh {key}: 일치하는 기존 항목이 없다 — 기관·발표일·"
-                    "지표 표기를 확인한다")
+                    f"refresh {_format_refresh_key(key)}: 일치하는 기존 항목이 "
+                    "없다 — 기관·발표일·지표 표기를 확인한다")
 
     merged = rs.merge(kept, fresh)
     rep.saved = len(merged) - len(kept)
@@ -162,6 +176,18 @@ def run(data_dir, *, sources=None, select=None, only=None, refresh=()) -> Report
     if merged != existing:
         rs.save(path, merged)
     return rep
+
+
+def _format_refresh_key(key: tuple[str, date, str]) -> str:
+    """(org, published_at, indicator) 를 --refresh 가 받는 그 표기로 되돌린다.
+
+    보고서 메시지 전체의 목적이 "무엇을 잘못 적었는지 확인하라"는 것인데,
+    파이썬 튜플을 그대로 찍으면(`('KDI', datetime.date(2026, 8, 19),
+    'emp_change')`) 사람이 입력한 문자열과 안 닮아 대조하기 더 어렵다 —
+    입력 형식 그대로("KDI:2026-08-19:emp_change") 돌려준다.
+    """
+    org, published_at, indicator = key
+    return f"{org}:{published_at.isoformat()}:{indicator}"
 
 
 def _parse_refresh(item: str) -> tuple[str, date, str]:
@@ -187,23 +213,24 @@ def _parse_refresh(item: str) -> tuple[str, date, str]:
 
 def main(argv: list[str] | None = None) -> int:
     argv = sys.argv[1:] if argv is None else argv
-    parser = argparse.ArgumentParser(description=__doc__)
+    parser = argparse.ArgumentParser(
+        description="전망 근거를 LLM 으로 골라 rationales.json 에 병합한다.")
     parser.add_argument(
-        "--only", action="append", default=None, metavar="기관",
-        help="이 기관만 수집한다(반복 가능, documents.SOURCES 의 키 — "
+        "--only", action="append", default=None, metavar="소스키",
+        help="이 소스만 수집한다(반복 가능, documents.SOURCES 의 키 — "
              "예: bok, kdi, oecd_interim)")
     parser.add_argument(
         "--refresh", action="append", default=[], metavar="기관:발표일:지표",
         help="이미 있는 근거를 다시 만들어 본다(반복 가능하고, 명시한 대상만 "
              "대상이 된다 — 이번 실행이 대체물을 못 만들면 기존 항목은 "
              "그대로 남는다). <기관>은 Rationale.org 표기(BOK·KDI·KEIS·"
-             "KLI·KIET·OECD)로 적는다 — --only 의 소스 키와는 다른 이름 "
+             "KLI·KIET·OECD)로 적는다 — --only 의 소스키와는 다른 이름 "
              "공간이다. 예: --refresh KDI:2026-08-19:emp_change")
     args = parser.parse_args(argv)
 
     unknown = [name for name in (args.only or []) if name not in SOURCES]
     if unknown:
-        print(f"모르는 기관: {unknown} — 쓸 수 있는 것: {sorted(SOURCES)}")
+        print(f"모르는 소스키: {unknown} — 쓸 수 있는 것: {sorted(SOURCES)}")
         return 1
 
     try:
@@ -222,7 +249,14 @@ def main(argv: list[str] | None = None) -> int:
         print(f"  거절 — {line}")
     for line in rep.failures:
         print(f"  실패 — {line}")
-    return 1 if rep.failures else 0
+    # 거절만 있는 실행과, refresh 대상이 있는데 이번엔 대체물을 못 만든
+    # 실행은 exit 0 을 유지한다 — 둘 다 아무것도 잃지 않았고(거절은 검증이
+    # 설계대로 작동한 것이고, 재시도가 그 대상의 정상적인 다음 수순이다)
+    # 실패를 여기서 세면 사람이 종료 코드를 무시하는 법을 배운다. 반면
+    # unmatched_refresh(존재하지 않는 키를 --refresh 로 지정한 경우)는
+    # 오타이므로 실패로 센다 — 그래야 ~180줄짜리 실행 로그 맨 아래
+    # 한 줄에 묻히지 않고 exit code 로도 드러난다.
+    return 1 if rep.failures or rep.unmatched_refresh else 0
 
 
 if __name__ == "__main__":
