@@ -247,6 +247,16 @@ export function isNew(rec, today) {
   return daysSince <= 7;
 }
 
+// 근거 문장은 레코드가 아니라 (기관, 발표일, 지표) 조합에 딸려 있다
+// (rationales.json). target_year/target_period는 일부러 보지 않는다 — 같은
+// 회차의 연간·상반·하반 레코드가 모두 같은 문장을 가리켜야 하기 때문이다.
+export function rationaleFor(rec, items) {
+  const found = (items || []).find(
+    it => it.org === rec.org && it.published_at === rec.published_at && it.indicator === rec.indicator
+  );
+  return found || null;
+}
+
 export function esc(s) {
   return s
     .replace(/&/g, '&amp;')

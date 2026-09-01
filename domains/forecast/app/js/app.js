@@ -65,12 +65,16 @@ async function boot() {
   const headerDateEl = document.getElementById('headerDate');
   const headerTitleEl = document.getElementById('headerTitle');
 
-  const [records, orgs, indicators, schedule, lastRun] = await Promise.all([
+  const [records, orgs, indicators, schedule, lastRun, rationales] = await Promise.all([
     loadJson('./data/forecasts.json'),
     loadJson('./data/orgs.json'),
     loadJson('./data/indicators.json'),
     loadJson('./data/schedule.json'),
     loadJson('./data/last_run.json'),
+    // 근거 백필은 별도 배치라 아직 파일이 없을 수 있다 — loadJson이 404/네트워크
+    // 실패를 null로 흡수하므로, 없어도 배너를 띄우지 않고 빈 배열로 내려간다
+    // (anyMissing 판정에도 넣지 않는다: 근거 없음은 오프라인이 아니라 정상 상태다).
+    loadJson('./data/rationales.json'),
   ]);
 
   const anyMissing = records === null || orgs === null || indicators === null || schedule === null;
@@ -96,6 +100,7 @@ async function boot() {
   const safeOrgs = orgs || [];
   const safeIndicators = indicators || [];
   const safeSchedule = schedule || [];
+  const safeRationales = rationales || [];
 
   const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
   const defaultYear = computeDefaultYear(records, today);
@@ -118,6 +123,7 @@ async function boot() {
     indicators: safeIndicators,
     indicatorMeta: Object.fromEntries(safeIndicators.map(i => [i.code, i])),
     schedule: safeSchedule,
+    rationales: safeRationales,
     today,
     state,
     params: {},

@@ -1,4 +1,4 @@
-import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced, OCR_WARNING_TITLE } from '../data.js';
+import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced, OCR_WARNING_TITLE, rationaleFor } from '../data.js';
 
 // 펼침 상태는 화면 방문 동안 유지 (모듈 스코프 — 여러 회차 행이 동시에 펼쳐질 수 있음)
 const expandedIds = new Set();
@@ -25,8 +25,8 @@ function yymm(dateStr) {
   return `${y.slice(2)}.${m}`;
 }
 
-function rationaleText(rec, orgsMeta) {
-  if (rec.rationale && rec.rationale.trim()) return rec.rationale;
+function rationaleText(rec, orgsMeta, found) {
+  if (found && found.text) return found.text;
   const orgMeta = (orgsMeta || []).find(o => o.org === rec.org);
   const isApi = orgMeta && orgMeta.method === 'api';
   return isApi ? `${rec.report_title} · API 수집` : rec.report_title;
@@ -220,7 +220,7 @@ function renderSourceLine(rec) {
   return `<div style="font-size:12px;color:#98a2b3;">원문 링크 확인 필요</div>`;
 }
 
-export function renderRow(rec, isExpanded, orgsMeta, records) {
+export function renderRow(rec, isExpanded, orgsMeta, records, rationaleItems = []) {
   const badgeInfo = BADGE[rec.confidence] || { cls: 'badge--extracted', label: rec.confidence || '' };
   const delta = fmtDelta(rec);
   // DELTA_SVG.flat already renders its own "—", so don't also append delta.text
@@ -229,7 +229,8 @@ export function renderRow(rec, isExpanded, orgsMeta, records) {
     ? DELTA_SVG.flat
     : `${DELTA_SVG[delta.dir] || ''}<span class="num">${esc(delta.text)}</span>`;
   const monthLabel = mmdd(rec.published_at);
-  const rationale = rationaleText(rec, orgsMeta);
+  const foundRationale = rationaleFor(rec, rationaleItems);
+  const rationale = rationaleText(rec, orgsMeta, foundRationale);
   // 접힌 행은 연도에 회차가 둘 이상일 때 기본값이라, 펼치기 전까지는 이
   // 배지가 KEIS 수치임을 알려줄 유일한 표시다 — 펼침·접힘 양쪽에서 같은
   // 배지를 재사용한다.
@@ -238,7 +239,7 @@ export function renderRow(rec, isExpanded, orgsMeta, records) {
     : '';
 
   if (isExpanded) {
-    const tags = (rec.rationale_tags || []).map(t => `<div style="font-size:11px;color:#23508f;background:#e7edf6;padding:2px 8px;border-radius:999px;">${esc(t)}</div>`).join('');
+    const tags = (foundRationale?.tags || []).map(t => `<div style="font-size:11px;color:#23508f;background:#e7edf6;padding:2px 8px;border-radius:999px;">${esc(t)}</div>`).join('');
     const landingUrl = safeUrl(rec.landing_url);
     const landing = landingUrl
       ? `<a href="${esc(landingUrl)}" target="_blank" rel="noopener" style="font-size:11px;color:#667085;">기관 자료실</a>`
@@ -277,7 +278,7 @@ export function renderRow(rec, isExpanded, orgsMeta, records) {
     </button>`;
 }
 
-function renderHistory(series, orgsMeta, records) {
+function renderHistory(series, orgsMeta, records, rationaleItems) {
   if (!series.length) {
     return `<div style="padding:16px;text-align:center;font-size:13px;color:#98a2b3;">이 연도에는 데이터가 없습니다</div>`;
   }
@@ -285,7 +286,7 @@ function renderHistory(series, orgsMeta, records) {
   const rows = series
     .slice()
     .reverse() // 최신 위
-    .map(rec => renderRow(rec, singleEdition || expandedIds.has(rec.id), orgsMeta, records))
+    .map(rec => renderRow(rec, singleEdition || expandedIds.has(rec.id), orgsMeta, records, rationaleItems))
     .join('');
   return `<div style="display:flex;flex-direction:column;gap:6px;padding:8px 16px;">${rows}</div>`;
 }
@@ -331,7 +332,7 @@ export function render(el, ctx) {
     ${renderSummaryCard(ctx, orgCode, indicators, currentYear, records)}
     ${indicators.length ? renderYearAndPills(currentYear, indicatorYears, indicators, currentIndicator, ctx) : ''}
     ${renderChart(seriesCurrent)}
-    ${indicators.length ? renderHistory(seriesCurrent, ctx.orgs, ctx.records) : ''}
+    ${indicators.length ? renderHistory(seriesCurrent, ctx.orgs, ctx.records, ctx.rationales) : ''}
   `;
 
   wireBack(el, ctx);

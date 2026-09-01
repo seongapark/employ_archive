@@ -1,4 +1,4 @@
-import { latestRecords, summarize, fmtValue, fmtNumber, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced, OCR_WARNING_TITLE } from '../data.js';
+import { latestRecords, summarize, fmtValue, fmtNumber, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced, OCR_WARNING_TITLE, rationaleFor } from '../data.js';
 
 // 홈의 첫 필만 목업대로 '취업자 증감'을 온전히 유지하고, 나머지는 공유 축약 라벨을 쓴다.
 const PILLS = [
@@ -74,8 +74,9 @@ function renderCard(rec, ctx) {
   const date = dateLabel(rec, ctx.orgs);
   const orgMeta = ctx.orgs.find(o => o.org === rec.org);
   const isApi = orgMeta && orgMeta.method === 'api';
-  const rationale = rec.rationale && rec.rationale.trim()
-    ? rec.rationale
+  const found = rationaleFor(rec, ctx.rationales);
+  const rationale = found
+    ? found.text
     : (isApi ? `${rec.report_title} · API 수집` : rec.report_title);
 
   const [value, unitSuffix] = splitValueUnit(fmtValue(rec));
