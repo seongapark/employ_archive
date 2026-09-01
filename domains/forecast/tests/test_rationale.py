@@ -153,3 +153,22 @@ def test_pick_accepts_gwanchugdoenda_and_yechukdoenda_as_forecast_markers():
     predicted = "설비투자 회복과 수출 개선에 힘입어 성장률이 확대될 것으로 예측된다."
     assert rationale.pick(observed, "gdp_growth") == observed
     assert rationale.pick(predicted, "gdp_growth") == predicted
+
+
+def test_tags_come_only_from_words_in_the_sentence():
+    s = "반도체 수출 호조와 설비투자 확대가 성장세를 뒷받침할 것으로 전망된다."
+    assert rationale.tags_for(s) == ["수출", "설비투자"]
+
+
+def test_tags_are_empty_when_nothing_matches():
+    assert rationale.tags_for("경기 흐름이 이어질 것으로 전망된다.") == []
+
+
+def test_tags_do_not_guess_beyond_the_sentence():
+    # '반도체' 는 수출을 함의하지만 태그 낱말이 아니다 — 지어내지 않는다
+    assert rationale.tags_for("반도체 경기가 회복될 것으로 예상된다.") == []
+
+
+def test_tags_keep_the_declared_order():
+    s = "유가 하락과 내수 회복이 물가를 낮출 것으로 전망된다."
+    assert rationale.tags_for(s) == ["내수", "유가"]

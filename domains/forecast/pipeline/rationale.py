@@ -133,3 +133,36 @@ def pick(text: str, indicator: str) -> str | None:
             continue
         return sentence
     return None
+
+
+# 기획서 3.3 의 태그 체계. 순서를 표와 같게 두어 화면에서 늘 같은 차례로 보인다.
+TAG_WORDS: dict[str, tuple[str, ...]] = {
+    "수출": ("수출", "export"),
+    "글로벌경기": ("글로벌", "세계경제", "global"),
+    "환율": ("환율", "exchange rate"),
+    "통상정책": ("통상", "관세", "tariff"),
+    "내수": ("내수", "민간소비", "domestic demand"),
+    "건설투자": ("건설투자", "건설경기"),
+    "설비투자": ("설비투자",),
+    "재정정책": ("재정", "추경", "fiscal"),
+    "통화정책": ("통화정책", "금리", "monetary"),
+    "인구구조": ("인구구조", "생산가능인구", "고령"),
+    "돌봄일자리": ("돌봄", "보건복지"),
+    "제조업고용": ("제조업",),
+    "건설업고용": ("건설업",),
+    "유가": ("유가", "oil price"),
+    "농산물": ("농산물",),
+    "공공요금": ("공공요금",),
+}
+
+
+def tags_for(sentence: str) -> list[str]:
+    """인용한 문장 안의 낱말에서만 태그를 뽑는다.
+
+    태그는 그 문장에 붙이는 이름표이지 추론이 아니다. '반도체' 가 수출을
+    함의하더라도 문장에 '수출' 이 없으면 붙이지 않는다 — 지어낸 태그로 거른
+    결과는 사용자가 검증할 방법이 없다.
+    """
+    lowered = sentence.lower()
+    return [tag for tag, words in TAG_WORDS.items()
+            if any(_word_present(lowered, w.lower()) for w in words)]
