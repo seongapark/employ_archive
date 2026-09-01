@@ -212,3 +212,82 @@ def test_tags_still_catch_yuga_when_genuinely_present():
     s = "유가 하락과 내수 회복이 물가를 낮출 것으로 전망된다."
     tags = rationale.tags_for(s)
     assert "유가" in tags
+
+
+def test_tags_match_english_plurals_as_substrings():
+    # IMF·OECD 원문은 복수형으로 쓰는 경우가 흔하다("exports"·"tariffs"·
+    # "oil prices"·"exchange rates") — 낱말 경계를 두면 "s" 하나 때문에
+    # 이런 흔한 영문 표현을 다 놓친다. 태그 낱말은 지표 낱말과 달리 서로
+    # 경쟁하지 않으므로 경계 없이 부분열로 찾는다.
+    assert "수출" in rationale.tags_for(
+        "Exports are projected to rise, supported by strong global demand.")
+    assert "통상정책" in rationale.tags_for(
+        "Tariffs are expected to increase in the near term.")
+    assert "유가" in rationale.tags_for(
+        "Oil prices are expected to decline through the forecast horizon.")
+    assert "환율" in rationale.tags_for(
+        "Exchange rates are projected to remain broadly stable.")
+
+
+def test_tags_do_not_guess_beyond_the_sentence_in_english():
+    # 한국어 문장에서와 같은 원칙이 영문 문장에도 그대로 적용된다.
+    assert rationale.tags_for("Semiconductor conditions are expected to improve.") == []
+
+
+def test_tags_catch_construction_investment_in_english():
+    # "construction investment" 는 한국은행·통계청이 건설투자를 영문으로
+    # 낼 때 쓰는 공식 명칭이다.
+    s = "Construction investment is projected to weaken further amid high borrowing costs."
+    assert "건설투자" in rationale.tags_for(s)
+
+
+def test_tags_catch_facility_investment_in_english():
+    # "facility investment" 는 설비투자의 공식 영문 명칭이다.
+    s = "Facility investment is expected to recover gradually as external demand improves."
+    assert "설비투자" in rationale.tags_for(s)
+
+
+def test_tags_catch_demographic_in_english():
+    s = "Demographic headwinds are expected to weigh on potential growth."
+    assert "인구구조" in rationale.tags_for(s)
+
+
+def test_tags_catch_working_age_population_in_english():
+    s = "The working-age population is projected to decline through the decade."
+    assert "인구구조" in rationale.tags_for(s)
+
+
+def test_tags_catch_aging_in_english():
+    s = "Rapid population aging is projected to constrain labor supply."
+    assert "인구구조" in rationale.tags_for(s)
+
+
+def test_tags_catch_manufacturing_employment_in_english():
+    # OECD Economic Surveys: Korea 가 부문별 고용을 말할 때 쓰는 표현이다.
+    s = "Manufacturing employment is expected to contract further."
+    assert "제조업고용" in rationale.tags_for(s)
+
+
+def test_tags_catch_construction_employment_in_english():
+    s = "Construction employment is expected to remain weak."
+    assert "건설업고용" in rationale.tags_for(s)
+
+
+def test_tags_catch_agricultural_prices_in_english():
+    # IMF 가 한국 물가를 요인별로 분해할 때 쓰는 표현이다.
+    s = "Agricultural prices are projected to ease in the second half."
+    assert "농산물" in rationale.tags_for(s)
+
+
+def test_tags_catch_administered_prices_in_english():
+    s = "Administered prices are expected to rise following utility rate hikes."
+    assert "공공요금" in rationale.tags_for(s)
+
+
+def test_tags_leave_care_jobs_without_an_english_word():
+    # 돌봄일자리는 정부가 재정으로 보건복지 부문에 만드는 한국 특유의 일자리
+    # 정책 용어라 IMF·OECD 문서에서 이 개념 하나를 가리키는 표준 영문
+    # 표현을 찾지 못했다 — 없는 것을 지어내 붙이지 않았으므로 영문
+    # 문장에서는 이 태그가 걸리지 않는다.
+    s = "Public health and welfare spending is expected to expand."
+    assert "돌봄일자리" not in rationale.tags_for(s)

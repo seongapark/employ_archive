@@ -136,23 +136,40 @@ def pick(text: str, indicator: str) -> str | None:
 
 
 # 기획서 3.3 의 태그 체계. 순서를 표와 같게 두어 화면에서 늘 같은 차례로 보인다.
+#
+# 영문 낱말은 "IMF·OECD 가 한국을 두고 실제로 쓰는 표현"만 적는다 — 태그가
+# 없다고 아무 말이나 채우면 그 낱말이 나중에 거짓 태그를 만든다.
+# "건설투자"·"facility investment" 는 한국은행·통계청이 GDP 지출 항목을
+# 영문으로 낼 때 쓰는 공식 명칭 그대로다(IMF Article IV 도 한국 자료를
+# 인용할 때 이 이름을 그대로 쓴다). "manufacturing employment"·
+# "construction employment" 는 OECD Economic Surveys: Korea 가 부문별
+# 고용을 말할 때 쓰는 표현이다. "demographic"·"working-age population"·
+# "aging" 은 한국의 인구 감소를 다루는 IMF·OECD 문서에 흔히 나오는 낱말이다
+# ("adverse demographics", "the working-age population is projected to
+# decline", "rapid population aging"). "agricultural prices"·
+# "administered prices" 는 한국 물가 분해를 다룰 때 IMF 가 쓰는 표현이다.
+# "돌봄일자리"에는 영문을 붙이지 않는다 — 이건 정부가 보건복지 부문에
+# 재정으로 만드는 한국 특유의 일자리 정책 용어라, IMF·OECD 문서에서 이
+# 개념 하나를 가리키는 표준 표현을 찾지 못했다. 없는 것을 지어내 붙이면
+# 그 자체가 검증 안 되는 태그가 된다.
 TAG_WORDS: dict[str, tuple[str, ...]] = {
     "수출": ("수출", "export"),
     "글로벌경기": ("글로벌", "세계경제", "global"),
     "환율": ("환율", "exchange rate"),
     "통상정책": ("통상", "관세", "tariff"),
     "내수": ("내수", "민간소비", "domestic demand"),
-    "건설투자": ("건설투자", "건설경기"),
-    "설비투자": ("설비투자",),
+    "건설투자": ("건설투자", "건설경기", "construction investment"),
+    "설비투자": ("설비투자", "facility investment"),
     "재정정책": ("재정", "추경", "fiscal"),
     "통화정책": ("통화정책", "금리", "monetary"),
-    "인구구조": ("인구구조", "생산가능인구", "고령"),
+    "인구구조": ("인구구조", "생산가능인구", "고령",
+              "demographic", "working-age population", "aging"),
     "돌봄일자리": ("돌봄", "보건복지"),
-    "제조업고용": ("제조업",),
-    "건설업고용": ("건설업",),
+    "제조업고용": ("제조업", "manufacturing employment"),
+    "건설업고용": ("건설업", "construction employment"),
     "유가": ("유가", "oil price"),
-    "농산물": ("농산물",),
-    "공공요금": ("공공요금",),
+    "농산물": ("농산물", "agricultural prices"),
+    "공공요금": ("공공요금", "administered prices"),
 }
 
 
@@ -175,13 +192,17 @@ _FALSE_CONTAINMENT: dict[str, tuple[str, ...]] = {
 def _word_present_as_tag(lowered: str, word: str) -> bool:
     """word 가 태그 낱말로 실제 나타났는지 본다.
 
-    _FALSE_CONTAINMENT 에 등록된, 뜻이 다른 더 긴 낱말 안에서만 나타난
-    경우는 세지 않는다 — 그 부분을 지우고도 word 가 남아 있어야 진짜로
-    나타난 것이다.
+    지표 낱말(INDICATOR_WORDS)과 달리 태그 낱말은 서로 경쟁하지 않는다 —
+    표 안의 모든 낱말 쌍을 대조해도 겹치는 자리가 없다(태그 부여 조사 시
+    확인). 그래서 영문도 낱말 경계를 두지 않고 한국어와 똑같이 부분열로
+    찾는다: 경계를 두면 IMF·OECD 원문이 흔히 쓰는 복수형("exports"·
+    "tariffs"·"oil prices"·"exchange rates")이 "s" 하나 때문에 걸리지
+    않는다. 부분열로 찾을 때 생기는 거짓 겹침은 이 함수가 일반화해서
+    처리하지 않고, _FALSE_CONTAINMENT 에 이름 붙은 것만 걸러낸다.
     """
     for unrelated in _FALSE_CONTAINMENT.get(word, ()):
         lowered = lowered.replace(unrelated, "")
-    return _word_present(lowered, word)
+    return word in lowered
 
 
 def tags_for(sentence: str) -> list[str]:
