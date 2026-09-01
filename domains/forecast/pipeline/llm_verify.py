@@ -16,9 +16,29 @@ from __future__ import annotations
 
 import re
 
-from .rationale import (_DUPLICATED_HANGUL, _MAX_RATIONALE_LENGTH)
+from .rationale import (_BULLET_MARKERS, _DUPLICATED_HANGUL,
+                         _MAX_RATIONALE_LENGTH, _WRAP_BOUNDARY_MARKERS)
 
 _WHITESPACE = re.compile(r"\s+")
+
+# 마침표 대조만으로는 "문장 중간에서 시작하는 조각"을 못 잡는다 — 부분열
+# 검사는 위치를 가리지 않기 때문이다. 그래서 매치 시작 자리가 실제
+# 문장·항목의 머리인지 원문 좌표로 되짚어 확인한다(_starts_at_a_boundary).
+#
+# 표지 집합은 rationale.py 가 이미 실측으로 확정해 둔 두 개
+# (_BULLET_MARKERS · _WRAP_BOUNDARY_MARKERS)의 합집합을 그대로 쓴다 — 이
+# 모듈은 후보가 어느 수집 경로(OCR 인 KEIS 대 텍스트 레이어가 있는 나머지
+# 여섯 기관)에서 왔는지 모르므로 두 집합을 가리지 않고 합쳐 받는다. 여기에
+# ')' 를 더한다 — "1) 문장"처럼 번호 뒤에 괄호가 오는 항목은 이 코퍼스에도
+# 나타나지만 두 표지 집합 어디에도 없다. 절 번호("1. 문장")는 이미 마침표로
+# 끝나므로 새로 더할 것 없이 마침표 판정만으로 잡힌다.
+_START_BOUNDARY_MARKERS = frozenset(_BULLET_MARKERS) | frozenset(_WRAP_BOUNDARY_MARKERS) | {")"}
+
+# 문장 종결부호 — 이 뒤에서 새 문장이 시작한다. 국문 보고서 불릿은 종종
+# 마침표 없이 끝나므로(예: "…지속될 것으로 예상") 끝은 검사하지 않는다 —
+# 시작만 검사한다. 잘린 머리(주어 없는 인용)가 이 프로젝트가 실제로 본
+# 실패 모양이다.
+_SENTENCE_TERMINATORS = frozenset(".。")
 
 
 class Rejected(Exception):
@@ -29,9 +49,43 @@ class Rejected(Exception):
         self.reason = reason
 
 
+def _normalize_with_index(s: str) -> tuple[str, list[int]]:
+    """공백을 지우면서, 남은 문자 각각이 원문에서 몇 번째 자리였는지 기록한다.
+
+    normalize() 는 이 함수의 결과 문자열만 쓴다 — 두 구현을 따로 두면
+    "공백을 지운다"는 규칙이 갈라질 수 있어, 하나로 합쳐 둔다. index_map 은
+    verify() 가 부분열이 발견된 정규화 좌표를 원문 좌표로 되짚어 시작 경계를
+    검사할 때만 쓴다.
+    """
+    chars: list[str] = []
+    index_map: list[int] = []
+    for i, ch in enumerate(s):
+        if not ch.isspace():
+            chars.append(ch)
+            index_map.append(i)
+    return "".join(chars), index_map
+
+
 def normalize(s: str) -> str:
     """공백을 전부 지운다. 줄바꿈도 공백이라 함께 사라진다."""
-    return _WHITESPACE.sub("", s)
+    return _normalize_with_index(s)[0]
+
+
+def _starts_at_a_boundary(source: str, pos: int) -> bool:
+    """source[pos] 가 문장·항목이 시작하는 자리인가.
+
+    pos 바로 앞(공백은 건너뛴다)이 원문의 시작이거나, 문장 종결부호거나,
+    항목 표지면 그 자리에서 새 단위가 시작한다고 본다. 이 목록 밖의
+    "문장처럼 보인다"는 어떤 짐작도 하지 않는다 — 표지 집합을 실측 없이
+    넓히면 다음에 그 짐작이 하나씩 틀린다(_BULLET_MARKERS 옆 주석과 같은
+    이유).
+    """
+    i = pos - 1
+    while i >= 0 and source[i].isspace():
+        i -= 1
+    if i < 0:
+        return True
+    return source[i] in _SENTENCE_TERMINATORS or source[i] in _START_BOUNDARY_MARKERS
 
 
 def verify(candidate: str, source_page_text: str) -> str:
@@ -42,6 +96,11 @@ def verify(candidate: str, source_page_text: str) -> str:
         raise Rejected(f"{_MAX_RATIONALE_LENGTH}자보다 길다({len(candidate)}자)")
     if _DUPLICATED_HANGUL.search(candidate):
         raise Rejected("굵은 글씨 반복 렌더링 흔적이 들어 있다")
-    if normalize(candidate) not in normalize(source_page_text):
+    norm_candidate = normalize(candidate)
+    norm_source, index_map = _normalize_with_index(source_page_text)
+    pos = norm_source.find(norm_candidate)
+    if pos == -1:
         raise Rejected("원문에 없다")
+    if not _starts_at_a_boundary(source_page_text, index_map[pos]):
+        raise Rejected("문장·항목이 시작하는 자리가 아닌 곳에서 시작한다")
     return candidate

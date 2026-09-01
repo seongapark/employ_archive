@@ -20,9 +20,14 @@ def test_accepts_across_a_line_wrap():
 
 
 def test_accepts_closing_a_wrap_artifact_space():
-    # pdfplumber 가 낱말 중간에 넣은 공백을 LLM 이 붙여 써도 통과한다
+    # pdfplumber 가 낱말 중간에 넣은 공백을 LLM 이 붙여 써도 통과한다.
+    # 문장 머리("에너지 가격 상승이")부터 준다 — 시작 경계 검사(Fix 1)가
+    # 들어온 뒤로 그 앞을 자른 조각은 머리 없는 조각으로 따로 걸리므로,
+    # 이 테스트가 원래 확인하려던 것(낱말 중간 공백을 붙여도 통과한다)만
+    # 남기려면 문장 전체를 후보로 줘야 한다.
     page = "에너지 가격 상승이 물가 부담으로 작용하 고, 회복세를 제한한다"
-    assert v.verify("물가 부담으로 작용하고, 회복세를 제한한다", page)
+    candidate = "에너지 가격 상승이 물가 부담으로 작용하고, 회복세를 제한한다"
+    assert v.verify(candidate, page) == candidate
 
 
 def test_rejects_a_word_that_is_not_in_the_page():
@@ -54,3 +59,32 @@ def test_rejects_bold_overprint_debris():
     with pytest.raises(v.Rejected) as e:
         v.verify("낙낙낙관관관시시시나나나리리리오오오 중국과 진행 중인 협상이", page)
     assert "렌더링" in e.value.reason
+
+
+def test_rejects_a_fragment_that_starts_mid_clause():
+    # "완화와"는 PAGE 에서 "부진 " 뒤, 즉 절 한가운데서 시작한다.
+    # 주어("하반기에는 건설경기 부진")가 잘려 나간 머리 없는 조각이다.
+    with pytest.raises(v.Rejected) as e:
+        v.verify("완화와 내수 회복이 점진적으로 반영되고, 상반기 고용", PAGE)
+    assert "시작" in e.value.reason
+
+
+def test_rejects_a_splice_across_a_sentence_boundary():
+    # "전망이다."로 앞 문장을 끝내고 "정부는"으로 다음 문장 머리를 잇는다 —
+    # 화면에는 한 기관이 실제로는 하지 않은 하나의 주장처럼 보인다.
+    page = "성장률 3% 전망이다. 정부는 확장적 재정을 유지한다."
+    with pytest.raises(v.Rejected) as e:
+        v.verify("전망이다. 정부는", page)
+    assert "시작" in e.value.reason
+
+
+def test_rejects_an_empty_candidate():
+    with pytest.raises(v.Rejected) as e:
+        v.verify("", PAGE)
+    assert "빈 문장" in e.value.reason
+
+
+def test_rejects_a_whitespace_only_candidate():
+    with pytest.raises(v.Rejected) as e:
+        v.verify("   ", PAGE)
+    assert "빈 문장" in e.value.reason
