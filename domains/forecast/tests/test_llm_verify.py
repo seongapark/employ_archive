@@ -129,3 +129,25 @@ def test_accepts_a_sentence_after_a_numbered_dot_item():
     page = "3. 전망의 위험요인은 다음과 같다"
     candidate = "전망의 위험요인은 다음과 같다"
     assert v.verify(candidate, page) == candidate
+
+
+def test_rejects_a_fragment_starting_inside_a_decimal_number():
+    # "." 는 문장 종결부호이자 소수점이다(rationale._DECIMAL_POINT 참고).
+    # 숫자 사이에 오면 문장이 끝난 게 아니라 소수점이므로, 그 뒤에서
+    # 시작하는 조각은 "성장률은" 이라는 주어를 자른 것이다.
+    with pytest.raises(v.Rejected) as e:
+        v.verify("5% 상승할 것으로 전망된다", "성장률은 3.5% 상승할 것으로 전망된다")
+    assert "시작" in e.value.reason
+
+
+def test_rejects_a_fragment_starting_inside_a_decimal_percentage_point():
+    with pytest.raises(v.Rejected) as e:
+        v.verify("3%p 낮아질 것으로 예상된다", "물가는 0.3%p 낮아질 것으로 예상된다")
+    assert "시작" in e.value.reason
+
+
+def test_accepts_a_sentence_after_a_terminator_then_space():
+    # 개행이 아니라 그냥 띄어쓰기로 이어지는 경우도 종결부호 판정이 걸린다.
+    page = "앞 문장이다. 취업자는 증가했다"
+    candidate = "취업자는 증가했다"
+    assert v.verify(candidate, page) == candidate

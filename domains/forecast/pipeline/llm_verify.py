@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import re
 
-from .rationale import (_BULLET_MARKERS, _DUPLICATED_HANGUL,
+from .rationale import (_BULLET_MARKERS, _DECIMAL_POINT, _DUPLICATED_HANGUL,
                          _MAX_RATIONALE_LENGTH, _WRAP_BOUNDARY_MARKERS)
 
 _WHITESPACE = re.compile(r"\s+")
@@ -41,6 +41,12 @@ _START_BOUNDARY_MARKERS = frozenset(_BULLET_MARKERS) | frozenset(_WRAP_BOUNDARY_
 # 시작만 검사한다. 잘린 머리(주어 없는 인용)가 이 프로젝트가 실제로 본
 # 실패 모양이다. 종결부호는 줄 첫머리가 아니라 어디에 있어도 문장을 끝낸다
 # — 그래서 아래 표지·번호 판정과 달리 줄 시작 제약을 받지 않는다.
+#
+# 다만 '.' 는 문장 종결부호이자 소수점이다 — rationale._DECIMAL_POINT 가
+# 이미 "숫자 사이의 마침표는 문장 끝이 아니다"를 실측으로 확정해 뒀다(옆
+# 주석: 소수점을 문장 경계로 보면 인용문이 숫자 한가운데서 끊겨 주어를
+# 잃는다). 그 규정을 그대로 재사용한다 — 정규식을 하나 더 만들면 두 규칙이
+# 갈라질 수 있다. '。' 는 숫자 사이에 올 일이 없어 이 예외가 필요 없다.
 _SENTENCE_TERMINATORS = frozenset(".。")
 
 # rationale._is_bullet_marker_line 은 표지를 line[0] 일 때만 인정한다 — 표지
@@ -49,12 +55,16 @@ _SENTENCE_TERMINATORS = frozenset(".。")
 # "-" 뒤부터, "가격(예: 100원) 상승이 예상된다" 에서 ")" 뒤부터 시작하는
 # 조각이 그대로 통과해 버렸다 — 둘 다 주어 잘린 조각이다). 그래서 표지는
 # "그 줄의 첫 내용"일 때만 인정한다: 줄 시작(직전 개행 또는 원문 시작)부터
-# 매치 자리까지가 공백과 항목 표지 하나(또는 번호 붙은 표지 하나)뿐이어야
-# 한다. 표지 문자 하나, 또는 숫자 뒤에 ')'나 '.'가 붙은 번호 표지("1)"·
-# "3.") 둘 중 하나만 허용한다 — 그 이상은 "표지처럼 보이는 자리"일 뿐 항목
-# 시작이 아니다.
+# 매치 자리까지가 공백과 항목 표지 하나(또는 번호 붙은 괄호 표지)뿐이어야
+# 한다.
+#
+# 번호 표지는 ')' 붙은 것만 여기서 잡는다("1)"). '.' 붙은 번호("3.")는
+# 넣지 않는다 — 그 마침표는 위 _SENTENCE_TERMINATORS 가 이미
+# _DECIMAL_POINT 로 소수점과 가려 가며 다룬다. 여기 또 넣으면 "3.5" 같은
+# 소수점을 문장 종결부호 쪽에서는 막아 놓고 항목 표지 쪽에서 도로
+# 통과시키는 두 규칙 불일치가 생긴다.
 _marker_class = "".join(re.escape(ch) for ch in sorted(_START_BOUNDARY_MARKERS))
-_ITEM_PREFIX = re.compile(rf"\s*(?:[{_marker_class}]|\d+[).])\s*")
+_ITEM_PREFIX = re.compile(rf"\s*(?:[{_marker_class}]|\d+\))\s*")
 
 
 class Rejected(Exception):
@@ -94,7 +104,8 @@ def _starts_at_a_boundary(source: str, pos: int) -> bool:
 
     - **문장 종결부호**는 pos 바로 앞(공백은 건너뛴다)에 있으면 줄 어디서든
       인정한다 — 마침표는 그 자리에 있는 것만으로 문장이 끝났다는 뜻이라
-      줄 시작일 필요가 없다.
+      줄 시작일 필요가 없다. 단, 그 마침표가 숫자 사이(소수점)면 인정하지
+      않는다 — rationale._DECIMAL_POINT 로 가린다.
     - **항목 표지·번호**는 그 줄의 첫 내용일 때만 인정한다. 줄 안 아무
       데서나 인정하면 "-" 는 음수 부호와, ")" 는 여는 괄호를 닫는 자리와
       구별이 안 된다(_ITEM_PREFIX 옆 주석의 실측 참고).
@@ -108,7 +119,7 @@ def _starts_at_a_boundary(source: str, pos: int) -> bool:
         i -= 1
     if i < 0:
         return True
-    if source[i] in _SENTENCE_TERMINATORS:
+    if source[i] in _SENTENCE_TERMINATORS and _DECIMAL_POINT.match(source, i) is None:
         return True
     line_start = source.rfind("\n", 0, pos) + 1
     return _ITEM_PREFIX.fullmatch(source[line_start:pos]) is not None
