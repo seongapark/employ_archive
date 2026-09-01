@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-08-31T20:14:56.030953+09:00",
+  "run_at": "2026-09-01T21:32:58.189950+09:00",
   "collectors": {
     "eaps": {
       "ok": true,
@@ -11,7 +11,7 @@
     "est": {
       "ok": true,
       "fetched": 589,
-      "added": 19,
+      "added": 0,
       "updated": 0,
       "rejected": 0
     },
@@ -36,13 +36,13 @@
       "months": 51,
       "added": 0,
       "attachments_filled": 12,
-      "pending": 15
+      "pending": 3
     },
     "ei": {
       "months": 55,
       "added": 0,
       "attachments_filled": 12,
-      "pending": 19
+      "pending": 7
     }
   },
   "kosis_check": "2026-07 29136.1 일치"
