@@ -30,6 +30,11 @@ KLI_INHAE_SENTENCE = (
     "인구 증가폭이 일시적으로 확대되면서 인구효과로 인해 올해 나타난 "
     "취업자 감소(-2만 명)가 내년에는 사라질 전망(±0명)이다."
 )
+# 한국은행 2026년 8월 경제전망 요약표 원문이다 — 국문 표제어 항목마다
+# '•' 로 시작한다(예: "•미국"·"•유로지역"). '•' 를 _WRAP_BOUNDARY_MARKERS
+# 에서 빼면 이 항목들이 다시 한 덩어리로 뭉친다 — 이 픽스처로 그 표지가
+# 실제로 일하고 있음을 못박는다.
+BOK_2026_08 = (FIXTURES / "bok_2026-08_summary.txt").read_text(encoding="utf-8")
 
 
 def test_pick_takes_the_sentence_that_gives_a_reason():
@@ -413,12 +418,18 @@ def test_pick_rejects_the_garbled_lead_bullet_despite_cause_and_indicator():
 
 def test_pick_does_not_use_bullets_by_default_on_the_same_ocr_text():
     # 두 경로는 여전히 다른 경로다 — bullets 기본값이 조용히 True 로 바뀌는
-    # 회귀를 잡는 게 이 테스트의 목적이다. 줄 감김을 펴게 된 뒤로 이 OCR
-    # 쪽에서 고르는 문장 자체는 같아졌지만(그건 아래에서 따로 단언한다),
-    # 문장을 무엇으로 보는지는 다르다: bullets=True 는 쪽 하단 장식과 첫
-    # 표지 앞 캡션을 버리고 7개만 남기는 반면, 기본 경로는 그것들을 버리지
-    # 않아 12개를 남긴다. 기본값이 True 로 새면 이 수가 같아진다.
-    assert len(rationale.sentences(KEIS_P20)) == 12
+    # 회귀를 잡는 게 이 테스트의 목적이다. '-' 를 기본 경로의 표지 집합에서
+    # 뺀 뒤(_WRAP_BOUNDARY_MARKERS, "Fix 2")로 두 경로의 유닛 수가 우연히
+    # 다시 7개로 같아졌다 — 예전엔 기본 경로가 12개를 남겨 수만으로도
+    # 구분이 됐지만, 지금은 숫자가 같으니 수를 규제 신호로 못 쓴다. 구조는
+    # 여전히 다르다: 기본 경로는 '-' 를 표지로 안 보므로 그때 '-' 로
+    # 갈라지던 문장들이 지금은 한 덩어리로 뭉치고(그 결과로 emp_change 를
+    # 못 찾는다 — 아래
+    # test_pick_needs_bullets_true_for_keis_after_fix_2 참고), 캡션
+    # ("통계포커스") 도 여전히 기본 경로에만 남는다. 이 캡션 검사가 이
+    # 테스트의 진짜 회귀 감지기다 — bullets 가 조용히 True 로 새면 기본
+    # 경로 호출도 캡션을 버려 이 단언이 깨진다.
+    assert len(rationale.sentences(KEIS_P20)) == 7
     assert len(rationale.sentences(KEIS_P20, bullets=True)) == 7
     assert any("통계포커스" in s for s in rationale.sentences(KEIS_P20))
     assert not any("통계포커스" in s
@@ -451,17 +462,20 @@ def test_bullets_true_still_splits_a_dash_bullet_that_starts_with_content():
     ]
 
 
-def test_bullets_false_also_keeps_a_wrapped_negative_percentage_with_its_sentence():
+def test_default_path_keeps_a_wrapped_negative_percentage_whole():
     # 예전에는 기본 경로가 마침표 없이 끝나는 1행("...물가는")을 통째로
     # 버려 "-0.3%p 하락한 것으로 전망된다." 만 남겼다 — 주어를 잃은 반
     # 토막이 완결된 인용문처럼 저장되는 모양이다. 줄 감김을 펴게 된 지금은
     # 두 줄이 한 문장으로 돌아온다.
     #
-    # 여기서 함께 지키는 것이 하나 더 있다: 소수점 가리기는 줄 감김을 편
-    # **뒤에** 와야 한다. 먼저 가리면 "-0.3%p" 의 소수점 자리에 원문에 없는
-    # 문자가 들어가 _NEGATIVE_NUMBER 판정이 어긋나고, 이 2행이 새 항목으로
-    # 오인돼 부호가 앞 문장에서 떨어져 나간다.
-    text = ("- 2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는\n"
+    # (이 테스트는 예전에 "- 2026년..." 처럼 문장 맨 앞에 '-' 불릿을 얹어,
+    # 소수점 가리기와 줄 감김의 순서까지 함께 지켰다. '-' 를 기본 경로의
+    # 표지 집합에서 뺀 뒤(_WRAP_BOUNDARY_MARKERS, "Fix 2")로는 그 순서가
+    # 더는 결과를 바꾸지 않는다 — '-' 로 시작하는 줄은 표지 판정 자체를
+    # 거치지 않으므로 _NEGATIVE_NUMBER 도 안 거친다. 그래서 이 테스트는
+    # '-' 불릿 없이, KDI·OECD 실제 표에 실제로 나오는 모양 그대로 줄 앞으로
+    # 감긴 음수만 확인한다.)
+    text = ("2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는\n"
             "-0.3%p 하락한 것으로 전망된다.")
     assert rationale.sentences(text) == [
         "2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는 "
@@ -512,6 +526,14 @@ def test_pick_does_not_hand_back_a_whole_table_page_as_a_rationale():
     # 경계로 보지 않으면 서술 네 항목과 표 전체가 1,039자 한 덩어리가 되고,
     # 그 덩어리가 인과·전망 표지를 모두 갖춰 근거로 뽑힌다 — 숫자 한 쪽을
     # 기관의 설명인 양 사용자에게 보여주는 셈이다.
+    #
+    # 이 인용문의 "작용하 고," 는 오탈자가 아니다 — _unwrap 이 줄 감김을
+    # 공백으로 이어 붙이면서 생긴 것이다. pdfplumber 는 줄 끝 공백을 지워
+    # 넘기므로, 이 공백이 원래 낱말 중간의 줄 감김("작용하"|"고,")이었는지
+    # 진짜 낱말 경계("사회복지"|"서비스업,")였는지 원문 자체에 아무 표시도
+    # 남지 않는다 — 어느 쪽으로 처리해도 반대쪽 경우에서는 틀린다. 그래서
+    # sentences() 는 이 흔적을 지우려 하지 않고 그대로 남긴다(sentences()
+    # 문서주석 참고). 이 단언은 그 인공물을 의도적으로 못박는다.
     got = rationale.pick(KIET_2026H2, "cpi")
     assert got == (
         "민간소비는 실질소득 증가와 정부의 확장적 재정 기조, 금융시장(증시 등) "
@@ -522,13 +544,17 @@ def test_pick_does_not_hand_back_a_whole_table_page_as_a_rationale():
     assert "실질GDP" not in got
 
 
-def test_pick_finds_the_same_keis_sentence_with_or_without_bullets():
-    # 줄 감김을 펴게 된 뒤로 두 경로는 이 쪽에서 같은 문장을 고른다 —
-    # 기본 경로도 이제 표지를 경계로 보고 표지 글자를 떼기 때문이다.
-    # (경로가 같아진 건 아니다 — 그 차이는 위
-    # test_pick_does_not_use_bullets_by_default_on_the_same_ocr_text 참고.)
-    assert rationale.pick(KEIS_P20, "emp_change") == rationale.pick(
-        KEIS_P20, "emp_change", bullets=True)
+def test_pick_needs_bullets_true_for_keis_after_fix_2():
+    # 예전엔 두 경로가 이 쪽에서 우연히 같은 문장을 골랐다 — 기본 경로도
+    # 그때는 '-' 를 표지로 보고 KEIS 항목들을 갈랐기 때문이다. '-' 를 기본
+    # 경로의 표지 집합에서 뺀 뒤(_WRAP_BOUNDARY_MARKERS, "Fix 2")로는 그
+    # 갈림이 사라져, '-' 로 갈리던 항목들이 다시 한 덩어리로 뭉치고
+    # emp_change 의 세 조건을 못 채운다. 이래도 된다 — KEIS 수집기는
+    # production 에서 언제나 bullets=True 를 넘긴다(설계 문서 3.3). 이
+    # 테스트는 그 전제, 즉 "두 경로가 우연히 같아지는 일에 기대면 안 된다"
+    # 는 것 자체를 못박는다.
+    assert rationale.pick(KEIS_P20, "emp_change", bullets=True) is not None
+    assert rationale.pick(KEIS_P20, "emp_change", bullets=False) is None
 
 
 # ---------------------------------------------------------------------------
@@ -560,9 +586,20 @@ def test_pick_finds_the_kli_emp_change_reason_via_gyeolgwaida():
 def test_pick_recognizes_inhae_as_a_cause_marker():
     # KLI_2026 27~28행에서 그대로 딴 문장이다(위 KLI_INHAE_SENTENCE) — 이
     # 문장 하나만으로는 pick(KLI_2026, ...) 전체 호출에서 앞서 매칭되는 다른
-    # 문장에 가려 드러나지 않으므로, 문장을 따로 떼어 "인해" 자체를
+    # 문장에 가려 드러나지 않으므로, 문장을 따로 떼어 "로 인해" 자체를
     # 검증한다.
     assert rationale.pick(KLI_INHAE_SENTENCE, "emp_change") == KLI_INHAE_SENTENCE
+
+
+def test_cause_uses_ro_inhae_not_bare_inhae():
+    # 맨 "인해"는 "확인해"·"승인해"·"부인해" 안에도 부분열로 들어 있다 —
+    # "확인·승인·부인" 동사 어간에 우연히 "인해"가 걸릴 뿐, "그것 때문에"
+    # 라는 뜻이 아니다. "확인해 보면"은 "만약 확인하면"이라는 조건절이지
+    # 인과 서술이 아니다. "결과"를 "결과이다"·"결과다"로만 두는 것과 정확히
+    # 같은 부류의 함정이다. 이 코퍼스 23개 픽스처에는 이런 문장이 없어
+    # 합성 문장으로 검증한다.
+    s = "통계청 자료를 확인해 보면 취업자 수는 늘어날 것으로 전망된다."
+    assert rationale.pick(s, "emp_change") is None
 
 
 def test_pick_recognizes_gyeolgwada_without_the_ida_ending():
@@ -599,15 +636,22 @@ def test_pick_never_returns_a_table_page_longer_than_the_declared_maximum(monkey
     # 낱말이 우연히 인과 표지 목록에 걸리든, 상한이 없으면 그 순간 표
     # 전체가 "근거"로 뽑힌다는 사실은 똑같다.
     monkeypatch.setattr(rationale, "_CAUSE", rationale._CAUSE + ("difference from",))
+    # 전제 확인: 이 몽키패치가 실제로 723자 이상이면서 인과 표지("difference
+    # from")를 담은 유닛을 만드는지 먼저 본다 — 안 그러면 아래 단언은 빈
+    # 픽스처에 대해서도 통과해 아무것도 안 지킨다.
+    assert any(
+        len(u) > rationale._MAX_RATIONALE_LENGTH and "difference from" in u.lower()
+        for u in rationale.sentences(OECD_P10)
+    )
     assert rationale.pick(OECD_P10, "cpi") is None
 
 
 def test_pick_keeps_a_real_sentence_well_under_the_maximum():
     # 실측한 가장 긴 실제 문장(kiet cpi, 143자)은 상한(300)의 절반에도 못
-    # 미친다 — 상한이 진짜 문장을 자르지 않는다는 것을 다시 못박는다.
-    got = rationale.pick(KIET_2026H2, "cpi")
-    assert got is not None
-    assert len(got) < 300
+    # 미친다 — 상한이 진짜 문장을 자르지 않는다는 것을 다시 못박는다. (길이
+    # 자체를 다시 재는 건 상한 로직을 그대로 되풀이하는 동어반복이라 뺐다 —
+    # 여기서 지킬 것은 "None 이 아니다"뿐이다.)
+    assert rationale.pick(KIET_2026H2, "cpi") is not None
 
 
 def test_pick_rejects_a_unit_one_character_over_the_maximum():
@@ -628,3 +672,30 @@ def test_pick_accepts_a_unit_exactly_at_the_maximum():
     s = f"내수 회복({filler}) 에 힘입어 취업자 증가세가 이어질 것으로 전망된다."
     assert len(s) == 300
     assert rationale.pick(s, "emp_change") == s
+
+
+def test_pick_skips_an_over_length_unit_instead_of_giving_up_on_the_whole_text():
+    # 상한을 넘는 유닛은 "건너뛸 뿐 순회를 멈추지 않는다" — pick() 문서주석의
+    # 그 약속을 직접 확인한다. continue 를 return None 으로 바꿔도 기존
+    # 테스트는 하나도 안 깨진다(어떤 픽스처도 상한을 넘는 유닛보다 앞에
+    # 짧고 진짜인 문장을 두고 있지 않다) — 그래서 합성 텍스트로 검증한다:
+    # 300자를 넘는 무관한 유닛(310자 채움) 바로 뒤에 emp_change 의 세
+    # 조건을 모두 만족하는 진짜 짧은 문장을 둔다. continue 라면 앞 유닛을
+    # 넘기고 뒤 문장을 찾아 돌려주지만, return None 으로 바뀌면 앞 유닛의
+    # 길이만 보고 즉시 포기해 뒤의 진짜 문장을 놓친다 — 다음 디스패치가
+    # 표 쪽을 먼저 넘기기 시작하면 실제로 벌어질 순서다.
+    filler = "가" * 310 + "."
+    real = "내수 회복에 힘입어 취업자 증가세가 이어질 것으로 전망된다."
+    text = f"{filler} {real}"
+    assert rationale.pick(text, "emp_change") == real
+
+
+def test_pick_never_drops_below_two_units_when_the_wrap_boundary_bullet_is_removed():
+    # BOK_2026_08 은 '•' 로 시작하는 항목이 16유닛으로 갈리는 실물 원문이다
+    # — '•' 를 _WRAP_BOUNDARY_MARKERS 에서 빼면 이 항목들이 다시 한
+    # 덩어리로 뭉친다(실측: 16유닛 → 2유닛). 이 테스트가 없으면 '•' 를
+    # 빼도 test_rationale.py 전체가 그대로 통과한다 — BOK 픽스처를 쓰는
+    # 테스트가 이것 말고 없었기 때문이다. 다음 디스패치의 일곱 수집기 중
+    # 하나가 BOK 이므로, 이 표지가 실제로 일하고 있다는 것을 이 픽스처로
+    # 못박아 둔다.
+    assert len(rationale.sentences(BOK_2026_08)) == 16
