@@ -12,13 +12,14 @@ from __future__ import annotations
 import re
 
 # 지표 표제어. 한국어와 영어를 함께 둔다 — IMF·OECD 는 영문 보고서다.
-# "고용"·맨 "growth" 처럼 흔한 낱말은 담지 않는다 — "고용"은 "고용률"·
-# "고용시장" 안에도 들어 있고, "growth"는 "employment growth"·"export
-# growth"·"wage growth" 어디에나 붙어 다른 지표의 문장을 가로챈다. 아래
-# _claimed_by_a_more_specific_word 가 남은 겹침(예: "employment" 대
-# "employment rate")을 한 번 더 막아준다.
+# 맨 "growth" 만은 담지 않는다 — "employment growth"·"export growth"·
+# "wage growth" 어디에나 붙어 다른 지표의 문장을 가로채고, 이를 막을
+# 구체성 관계도 없다(성장 서술이면 뭐든 걸리는 것이지, 특정 낱말을 감싸는
+# 게 아니다). "고용"은 그대로 둔다 — "고용률"과 겹치는 문제는 아래
+# _MORE_SPECIFIC_FORM 이 명시적으로 처리하므로, 낱말 자체를 빼서 "고용
+# 증가세가 이어질 것으로 전망된다" 같은 흔한 문장까지 놓칠 필요가 없다.
 INDICATOR_WORDS: dict[str, tuple[str, ...]] = {
-    "emp_change": ("취업자", "employment"),
+    "emp_change": ("취업자", "고용", "employment"),
     "emp_rate": ("고용률", "employment rate"),
     "unemp_rate": ("실업률", "unemployment"),
     "gdp_growth": ("성장률", "국내총생산", "GDP", "economic growth"),
@@ -27,9 +28,13 @@ INDICATOR_WORDS: dict[str, tuple[str, ...]] = {
 }
 
 # 인과 표지 — 이 문장이 '왜' 를 말한다는 신호.
-# "따라" 는 빼고 "따라서"만 둔다 — "정부 지침에 따라"는 "…에 의하면"이지
-# "…때문에"가 아니다. "따라서"만 온전히 인과다.
-_CAUSE = ("배경", "때문", "기인", "반영", "영향", "힘입어", "따라서",
+# "따라"·"따라서" 는 둘 다 뺀다. "~에 따라"는 "…에 의하면"이지 "…때문에"가
+# 아니고, "~에 따라서"는 그 강조형이라 같은 문제를 그대로 되풀이한다.
+# 문장 맨 앞의 "따라서"는 그나마 접속부사답게 쓰이지만, 그때 가리키는 원인은
+# 이 문장이 아니라 앞 문장에 있다 — 인용문 한 문장만 떼어 저장하는 이 모듈의
+# 전제(2.1)와 맞지 않는다. 배경·때문·기인·반영·영향·힘입어는 모두 원인이
+# 그 문장 안에 있어 혼자 떼어내도 뜻이 선다.
+_CAUSE = ("배경", "때문", "기인", "반영", "영향", "힘입어",
           "due to", "driven by", "reflecting", "supported by",
           "owing to", "on the back of")
 
@@ -38,9 +43,12 @@ _FORECAST = ("전망", "예상",
              "is projected", "are projected", "is expected", "are expected",
              "is forecast", "will")
 
-# "것으로" 는 대개 앞을 보는 말이지만 "것으로 나타났다/밝혀졌다/조사됐다"는
-# 이미 드러난 사실을 말한다 — 그 뒤에 이런 완결형이 오면 전망 표지로 치지 않는다.
-_FORECAST_SUFFIX = re.compile(r"것으로(?!\s*(?:나타났|밝혀졌|조사됐|조사되었))")
+# "것으로" 는 뒤에 앞을 보는 낱말이 올 때만 전망 표지다. 뒤에 오지 말아야
+# 할 회고형(나타났다·밝혀졌다·확인됐다·드러났다·알려졌다·집계됐다 …)을
+# 나열하는 금지 목록은 새 회고 동사가 나올 때마다 하나씩 뚫린다 — IMF
+# 수집기의 오류 분기, KEIS 표 판정이 배웠던 것과 같은 이유로 허용 목록으로
+# 돈다. 목록에 없는 낯선 동사는 실패로 닫힌다.
+_FORECAST_SUFFIX = re.compile(r"것으로\s*(?:전망|예상|보인다|기대된다|점쳐진다)")
 
 _SENTENCE = re.compile(r"[^.。\n]+[.。]|[^.。\n]+$")
 
@@ -61,27 +69,44 @@ def sentences(text: str) -> list[str]:
     ]
 
 
-def _claimed_by_a_more_specific_word(lowered: str, word: str, indicator: str) -> bool:
-    """다른 지표의 낱말이 이 낱말을 통째로 품고, 그 낱말도 문장에 있으면 참이다.
+# 낱말 하나가 다른 낱말 안에 통째로 들어 있다고 해서 그쪽이 더 구체적인 건
+# 아니다 — "employment" 는 "unemployment" 안에도 부분열로 들어 있지만
+# "un-" 부정 접두사일 뿐이라 실업이 고용의 더 구체적인 형태가 되는 게
+# 아니다. 그런 포함 관계를 일반적으로 추론하면 이런 우연한 겹침까지
+# 넘겨짚어 실업률 문장이 취업자 증감 자리로(혹은 그 반대로) 넘어간다.
+# 그래서 추론하지 않고, 아래처럼 "이 낱말은 저 낱말의 더 구체적인 표현이다"
+# 라고 이름 붙일 수 있는 쌍만 적어 둔다 — 새 겹침이 생기면 이유를 댈 수
+# 있을 때만 여기 한 줄을 더한다.
+_MORE_SPECIFIC_FORM = {
+    "고용": "고용률",              # 고용 증감(emp_change) < 고용률(emp_rate)
+    "employment": "employment rate",
+}
 
-    "고용"은 "고용률" 안에 들어 있다. 고용률을 말하는 문장에서 emp_change 의
-    "고용"이 먼저 걸리면 실업률 자리에 성장률 설명이 붙는 것과 같은 사고가
-    난다 — 더 구체적인(감싸는) 낱말이 문장에 있으면 그쪽에 양보한다.
-    """
-    for other_indicator, other_words in INDICATOR_WORDS.items():
-        if other_indicator == indicator:
-            continue
-        for other_word in other_words:
-            ow = other_word.lower()
-            if word != ow and word in ow and ow in lowered:
-                return True
-    return False
+
+def _claimed_by_a_more_specific_word(lowered: str, word: str) -> bool:
+    """word 보다 더 구체적인 표현이 문장에도 있으면 참이다."""
+    specific = _MORE_SPECIFIC_FORM.get(word)
+    return specific is not None and specific in lowered
+
+
+# 영문 표제어는 낱말 경계로 찾는다 — 안 그러면 "employment" 가 "un-" 부정
+# 접두사가 붙은 "unemployment" 안에서도 우연히 걸려, 고용을 한마디도 안 한
+# 순수 실업률 문장까지 emp_change 의 근거 후보가 된다. 한글 표제어는 그대로
+# 부분열로 찾는다 — 조사가 명사에 바로 붙어("국내총생산은"처럼) 공백이
+# 낱말 경계와 일치하지 않기 때문이다.
+_ASCII_WORD = re.compile(r"^[a-z0-9][a-z0-9 ]*$")
+
+
+def _word_present(lowered: str, word: str) -> bool:
+    if _ASCII_WORD.match(word):
+        return re.search(rf"\b{re.escape(word)}\b", lowered) is not None
+    return word in lowered
 
 
 def _mentions_indicator(lowered: str, indicator: str) -> bool:
     for word in INDICATOR_WORDS.get(indicator, ()):
         w = word.lower()
-        if w in lowered and not _claimed_by_a_more_specific_word(lowered, w, indicator):
+        if _word_present(lowered, w) and not _claimed_by_a_more_specific_word(lowered, w):
             return True
     return False
 

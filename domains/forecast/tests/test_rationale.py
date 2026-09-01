@@ -95,3 +95,55 @@ def test_pick_rejects_a_procedural_e_ttara():
     # "~에 따라" 는 "…에 의하면" 이지 "…때문에" 가 아니다
     s = "정부 지침에 따라 취업자 수 집계 방식이 하반기부터 변경될 것으로 예상된다."
     assert rationale.pick(s, "emp_change") is None
+
+
+def test_pick_no_longer_suppresses_employment_when_unemployment_is_also_present():
+    # "employment" 는 "unemployment" 안에도 부분열로 들어 있지만 "un-" 부정
+    # 접두사일 뿐이다 — 실업이 고용의 더 구체적인 형태가 아니므로 emp_change 의
+    # "employment" 는 더 이상 억눌리지 않는다. 다만 이 문장은 "unemployment"도
+    # 진짜 독립된 낱말로 담고 있고 인과·전망 표지를 공유하므로, unemp_rate 역시
+    # 제 몫으로 같은 문장을 정당하게 얻는다 — 두 지표를 함께 말하는 문장이라
+    # 실제로 둘 다에 근거가 되는 것이지, 어느 한쪽이 훔친 게 아니다.
+    s = ("Employment growth remains solid even as unemployment stays low, "
+         "driven by strong hiring, and is projected to continue.")
+    assert rationale.pick(s, "emp_change") == s
+    assert rationale.pick(s, "unemp_rate") == s
+
+
+def test_pick_does_not_let_a_pure_unemployment_sentence_trigger_emp_change():
+    # 앞의 문장과 달리 "employment" 가 독립된 낱말로 한 번도 안 나오면(오직
+    # "unemployment" 안의 부분열로만 우연히 걸릴 뿐이면) emp_change 는 걸리지
+    # 않아야 한다 — 실업만 말하는 문장이 고용 증감의 근거가 되면 안 된다.
+    s = "Unemployment is projected to rise, driven by weak demand."
+    assert rationale.pick(s, "emp_change") is None
+    assert rationale.pick(s, "unemp_rate") == s
+
+
+def test_pick_recovers_a_plain_employment_sentence_without_chwieopja():
+    # "고용" 을 빼지 않고 그대로 두었으므로 "취업자" 가 없어도 "고용"만으로
+    # 흔한 문장을 잡아야 한다.
+    s1 = "내수 회복과 서비스업 개선에 힘입어 고용 증가세가 이어질 것으로 전망된다."
+    s2 = "수출 호조에 힘입어 하반기 고용 확대가 지속될 것으로 예상된다."
+    assert rationale.pick(s1, "emp_change") == s1
+    assert rationale.pick(s2, "emp_change") == s2
+
+
+def test_pick_rejects_retrospective_verbs_not_on_any_deny_list():
+    # 금지 목록은 새 회고 동사가 나올 때마다 하나씩 뚫린다 — 허용 목록으로
+    # 돌았으니 목록에 없는 낯선 회고 동사도 실패로 닫혀야 한다.
+    for verb in ("확인됐다", "드러났다", "알려졌다", "집계됐다"):
+        s = f"상반기 취업자 증가는 건설경기 부진 완화에 기인한 것으로 {verb}"
+        assert rationale.pick(s, "emp_change") is None, verb
+
+
+def test_pick_rejects_the_emphatic_procedural_e_ttaraseo():
+    # "~에 따라서" 는 "~에 따라" 의 강조형일 뿐 여전히 "…에 의하면" 이다
+    s = "정부 지침에 따라서 취업자 수 집계 방식이 하반기부터 변경될 것으로 예상된다."
+    assert rationale.pick(s, "emp_change") is None
+
+
+def test_pick_does_not_borrow_a_cause_from_the_previous_sentence():
+    # 문장 맨 앞의 "따라서" 가 가리키는 원인은 이 문장이 아니라 앞 문장에
+    # 있다 — 저장되는 인용문은 그 원인을 설명하지 못한다.
+    s = "수출 회복세가 이어지고 있다. 따라서 취업자 수는 증가할 것으로 전망된다."
+    assert rationale.pick(s, "emp_change") is None
