@@ -1,6 +1,7 @@
 import json
 
 import pytest
+import requests
 
 from domains.forecast.pipeline import llm_select as s
 
@@ -95,6 +96,23 @@ def test_parse_rejects_a_negative_source_page():
         s.parse_response(body)
 
 
+def test_parse_raises_a_named_error_on_an_infinite_source_page():
+    # json.dumps/json.loads 는 기본값으로 Infinity 를 그대로 주고받는다.
+    # int(float("inf")) 는 OverflowError 를 던지므로 이것도 잡아야 한다.
+    body = json.dumps([{"indicator": "cpi", "text": "가나다", "source_page": float("inf")}],
+                      ensure_ascii=False)
+    with pytest.raises(ValueError):
+        s.parse_response(body)
+
+
+def test_parse_raises_a_named_error_when_indicator_is_null():
+    # str(None) 이 "None" 으로 둔갑해 지표 이름처럼 보이면 안 된다.
+    body = json.dumps([{"indicator": None, "text": "가나다", "source_page": 1}],
+                      ensure_ascii=False)
+    with pytest.raises(ValueError):
+        s.parse_response(body)
+
+
 class _FakeResponse:
     """requests.Response 를 흉내낸다 — 네트워크는 전혀 열지 않는다."""
 
@@ -107,6 +125,13 @@ class _FakeResponse:
         if self._json_body is None:
             raise json.JSONDecodeError("no body", "", 0)
         return self._json_body
+
+    def raise_for_status(self):
+        # 진짜 requests.Response 처럼 400 미만은 그냥 넘어가고, 그 이상은
+        # HTTPError 를 던진다 — 이 흉내가 부실하면 뮤테이션 테스트가
+        # "가짜가 부실해서" 실패하는 거짓 신호를 준다.
+        if self.status_code >= 400:
+            raise requests.HTTPError(f"{self.status_code} error", response=self)
 
 
 def test_call_api_posts_the_expected_shape_to_the_messages_endpoint(monkeypatch):
@@ -125,10 +150,12 @@ def test_call_api_posts_the_expected_shape_to_the_messages_endpoint(monkeypatch)
     got = s._call_api("프롬프트-내용")
 
     assert got == "가나다"
-    assert captured["url"] == s.API_URL
+    # 모듈 상수가 아니라 리터럴과 대조한다 — 상수 자체가 오타나면
+    # s.API_URL/s.MODEL 과 비교해서는 절대 잡지 못한다.
+    assert captured["url"] == "https://api.anthropic.com/v1/messages"
     assert set(captured["headers"]) == {"x-api-key", "anthropic-version", "content-type"}
     assert captured["headers"]["x-api-key"] == "sk-test-key"
-    assert captured["json"]["model"] == s.MODEL
+    assert captured["json"]["model"] == "claude-sonnet-5"
     assert captured["json"]["messages"][0]["content"] == "프롬프트-내용"
 
 

@@ -84,9 +84,16 @@ def parse_response(body: str) -> list[Picked]:
         if not text_:
             continue  # 근거 없음은 정상이다
         try:
-            indicator = str(row["indicator"])
+            raw_indicator = row["indicator"]
+            if raw_indicator is None:
+                # str(None) 은 "None" 이 되어 지표 이름처럼 보인다 —
+                # null 은 지표가 아니라 잘못된 입력이므로 여기서 막는다.
+                raise ValueError("indicator 가 null 이다")
+            indicator = str(raw_indicator)
             source_page = int(row["source_page"])
-        except (KeyError, TypeError, ValueError) as exc:
+        except (KeyError, TypeError, ValueError, ArithmeticError) as exc:
+            # ArithmeticError 는 OverflowError 를 포함한다 — json.loads 는
+            # Infinity 를 기본으로 받아들이는데 int(inf) 는 이 예외를 던진다.
             raise ValueError(f"항목을 읽지 못했다(indicator/source_page 누락 "
                              f"또는 형식 오류): {row!r}") from exc
         if source_page < 1:
