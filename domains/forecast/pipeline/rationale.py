@@ -156,6 +156,32 @@ TAG_WORDS: dict[str, tuple[str, ...]] = {
 }
 
 
+# 짧은 태그 낱말이 부분열로 걸리는 흔한 낱말 중, 뜻이 그 태그와 무관한 것.
+# "통상적(으로)"는 "평소·으레"라는 뜻이지 통상정책과 무관하고, "유가증권"은
+# 증권 용어이지 원유 가격과 무관하다. 둘 다 "employment" 가 "unemployment"
+# 안에 우연히 들어 있는 것과 같은 모양의 사고다 — 짧은 낱말이 더 긴 낱말
+# 안에 들어 있다고 해서 그 긴 낱말이 짧은 낱말의 한 예가 되는 게 아니다.
+# 이런 겹침을 일반적으로 추론하지 않고, "이 긴 낱말 안에서는 이 짧은 낱말을
+# 세지 않는다"라고 이름 붙일 수 있는 쌍만 여기 적어 둔다 — 새 겹침이 생기면
+# 이유를 댈 수 있을 때만 한 줄을 더한다.
+_FALSE_CONTAINMENT: dict[str, tuple[str, ...]] = {
+    "통상": ("통상적",),
+    "유가": ("유가증권",),
+}
+
+
+def _word_present_as_tag(lowered: str, word: str) -> bool:
+    """word 가 태그 낱말로 실제 나타났는지 본다.
+
+    _FALSE_CONTAINMENT 에 등록된, 뜻이 다른 더 긴 낱말 안에서만 나타난
+    경우는 세지 않는다 — 그 부분을 지우고도 word 가 남아 있어야 진짜로
+    나타난 것이다.
+    """
+    for unrelated in _FALSE_CONTAINMENT.get(word, ()):
+        lowered = lowered.replace(unrelated, "")
+    return _word_present(lowered, word)
+
+
 def tags_for(sentence: str) -> list[str]:
     """인용한 문장 안의 낱말에서만 태그를 뽑는다.
 
@@ -165,4 +191,4 @@ def tags_for(sentence: str) -> list[str]:
     """
     lowered = sentence.lower()
     return [tag for tag, words in TAG_WORDS.items()
-            if any(_word_present(lowered, w.lower()) for w in words)]
+            if any(_word_present_as_tag(lowered, w.lower()) for w in words)]

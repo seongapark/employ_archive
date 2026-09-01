@@ -172,3 +172,35 @@ def test_tags_do_not_guess_beyond_the_sentence():
 def test_tags_keep_the_declared_order():
     s = "유가 하락과 내수 회복이 물가를 낮출 것으로 전망된다."
     assert rationale.tags_for(s) == ["내수", "유가"]
+
+
+def test_tags_ignore_tongsang_trapped_inside_tongsangjeok():
+    # "통상적으로" 는 "평소·으레" 라는 뜻이지 통상정책과 무관하다 — "통상" 이
+    # 그 안에 부분열로 들어 있다고 해서 통상정책 태그가 붙으면 안 된다.
+    s = "통상적으로 하반기에는 내수 회복이 반영되어 취업자가 늘어날 것으로 전망된다."
+    tags = rationale.tags_for(s)
+    assert "통상정책" not in tags
+    assert "내수" in tags
+
+
+def test_tags_ignore_yuga_trapped_inside_yugajeunggwon():
+    # "유가증권" 은 증권 용어이지 원유 가격과 무관하다.
+    s = "유가증권 시장 회복을 반영해 설비투자가 확대될 것으로 전망된다."
+    tags = rationale.tags_for(s)
+    assert "유가" not in tags
+    assert "설비투자" in tags
+
+
+def test_tags_still_catch_tongsangjeongchaek_when_genuinely_present():
+    # 함정을 막는다고 진짜 통상정책 문장까지 놓치면 안 된다.
+    s = "통상정책 불확실성이 수출에 영향을 미칠 것으로 전망된다."
+    tags = rationale.tags_for(s)
+    assert "통상정책" in tags
+
+
+def test_tags_still_catch_yuga_when_genuinely_present():
+    # 함정을 막는다고 진짜 유가 문장까지 놓치면 안 된다 — 순서 테스트와
+    # 같은 문장이지만 이 파일이 이 목적으로도 계속 통과해야 함을 못박아 둔다.
+    s = "유가 하락과 내수 회복이 물가를 낮출 것으로 전망된다."
+    tags = rationale.tags_for(s)
+    assert "유가" in tags
