@@ -58,7 +58,14 @@ JSON 배열로만 답하라. 다른 말을 덧붙이지 마라:
 
 
 def parse_response(body: str) -> list[Picked]:
-    """JSON 배열을 읽는다. 못 읽으면 ValueError — 조용히 넘기지 않는다."""
+    """JSON 배열을 읽는다. 못 읽으면 ValueError — 조용히 넘기지 않는다.
+
+    indicator 값 자체는 여기서 걸러내지 않는다 — 목록에 없는 지표가 와도
+    그대로 돌려준다. 걸러내면 select 가 깨끗한 목록을 내놓아, 모델이
+    엉뚱한 지표에 문장을 붙였다는 사실을 아무도 못 보게 된다. 그 대조는
+    호출자(지표 목록을 아는 쪽)가 하고, 걸러낸 사실을 보고서에 남긴다.
+    여기서는 형식만 본다.
+    """
     text = body.strip()
     fenced = _FENCE.search(text)
     if fenced:
@@ -71,10 +78,22 @@ def parse_response(body: str) -> list[Picked]:
         raise ValueError(f"배열이 아니다: {body[:200]}")
     out = []
     for row in rows:
+        if not isinstance(row, dict):
+            raise ValueError(f"항목이 객체가 아니다: {row!r}")
         text_ = str(row.get("text", "")).strip()
         if not text_:
             continue  # 근거 없음은 정상이다
-        out.append(Picked(str(row["indicator"]), text_, int(row["source_page"])))
+        try:
+            indicator = str(row["indicator"])
+            source_page = int(row["source_page"])
+        except (KeyError, TypeError, ValueError) as exc:
+            raise ValueError(f"항목을 읽지 못했다(indicator/source_page 누락 "
+                             f"또는 형식 오류): {row!r}") from exc
+        if source_page < 1:
+            # pages[source_page - 1] 로 색인하므로 0 이하는 잘못된(때로는
+            # 마지막) 쪽으로 둔갑한다 — 조용히 넘기지 않고 여기서 막는다.
+            raise ValueError(f"source_page 가 1보다 작다: {source_page} ({row!r})")
+        out.append(Picked(indicator, text_, source_page))
     return out
 
 
@@ -90,8 +109,14 @@ def _call_api(prompt: str) -> str:
               "messages": [{"role": "user", "content": prompt}]},
         timeout=TIMEOUT,
     )
-    resp.raise_for_status()
-    return "".join(b.get("text", "") for b in resp.json()["content"])
+    if resp.status_code != 200:
+        # raise_for_status() 는 본문을 버린다 — 401 이나 429 가 왜 그랬는지는
+        # 본문 안에 있다. 그대로 실어 보낸다.
+        raise ValueError(f"API 가 {resp.status_code} 를 돌려줬다: {resp.text[:200]}")
+    try:
+        return "".join(b.get("text", "") for b in resp.json()["content"])
+    except (ValueError, KeyError, TypeError, AttributeError) as exc:
+        raise ValueError(f"200 응답인데 형식이 예상과 다르다: {resp.text[:200]}") from exc
 
 
 def select(org: str, title: str, indicators: Sequence[str], pages: Sequence[str],
