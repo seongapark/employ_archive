@@ -44,14 +44,19 @@ _START_BOUNDARY_MARKERS = frozenset(_BULLET_MARKERS) | frozenset(_WRAP_BOUNDARY_
 #
 # 다만 '.' 는 문장 종결부호이자 소수점이다. rationale._DECIMAL_POINT
 # (r"(?<=\d)\.(?=\d)")는 숫자가 마침표에 딱 붙어 있을 때만 소수점으로
-# 본다 — rationale.py 는 _unwrap 이 줄 감김을 이미 이어 붙인 뒤에만 이
-# 정규식을 돌리므로 그걸로 충분하다. 하지만 이 모듈은 _unwrap 을 거치지
-# 않은 원문 그대로("성장률은 3.\n5%…")를 보므로, pdfplumber 의 줄 감김이
-# 소수점 한가운데를 지나가는 경우가 실제로 있다 — 이 모듈이 애초에
-# 공백을 무시하는 이유(엉뚱한 공백)와 같은 현상이다. 그래서 앞뒤가 붙어
-# 있을 때만 소수점으로 보는 rationale._DECIMAL_POINT 대신, 뒤쪽은 공백을
-# 건너뛰고 보는 별도 판정(_looks_like_a_decimal_point)을 이 모듈에 둔다.
-# rationale.py 의 정규식은 그 용도에 맞게 그대로 두고 바꾸지 않는다.
+# 본다. 그런데 그 인접 전제는 rationale.py 안에서도 실제로는 보장되지
+# 않는다 — _unwrap 이 줄 감김을 리터럴 공백(" ")으로 이어 붙이므로,
+# "성장률은 3.\n5%…" 는 그 뒤에도 "3. 5%…"(마침표와 숫자 사이에 공백)로
+# 남고 인접해지지 않는다. 이 모듈은 그 경로(rationale.sentences → pick)
+# 를 쓰지 않으므로 이 사실 자체는 여기 동작에 영향을 주지 않지만, "인접
+# 전제가 성립하니 그대로 재사용하면 된다"는 근거는 틀렸다는 뜻이라 여기
+# 남겨 둔다 — rationale.py 는 고치지 않는다(그 경로는 이후 계획에서
+# 통째로 삭제된다). 이 모듈은 pdfplumber 가 남긴 원문 그대로("성장률은
+# 3.\n5%…" 처럼 소수점 한가운데로 줄이 감기거나, "성장률은 3\n.5%…"
+# 처럼 반대쪽으로 감기는 경우 모두)를 보므로, 앞뒤 모두 공백(개행 포함)을
+# 건너뛰고 숫자인지 보는 별도 판정(_looks_like_a_decimal_point)을 이
+# 모듈에 따로 둔다 — 이 모듈이 애초에 공백을 무시하는 이유(엉뚱한 공백)와
+# 같은 현상이다.
 _SENTENCE_TERMINATORS = frozenset(".。")
 
 # rationale._is_bullet_marker_line 은 표지를 line[0] 일 때만 인정한다 — 표지
@@ -103,25 +108,34 @@ def normalize(s: str) -> str:
 
 
 def _looks_like_a_decimal_point(source: str, i: int) -> bool:
-    """source[i] (마침표) 가 소수점인가 — 줄 감김으로 뒤가 떨어져 있어도 본다.
+    """source[i] (마침표) 가 소수점인가 — 줄 감김으로 앞뒤 어느 쪽이 떨어져
+    있어도 본다.
 
-    앞은 딱 붙어 있어야 한다: "…이다. 5%" 처럼 문장이 실제로 끝난 뒤에
-    오는 숫자까지 소수점으로 오인하면 진짜 문장 경계를 놓친다. 뒤는
-    공백(개행 포함)을 건너뛰고 처음 나오는 문자만 본다: "3.\n5%" 처럼
-    pdfplumber 의 줄 감김이 소수점 한가운데를 지나갈 수 있기 때문이다.
+    앞뒤 모두 공백(개행 포함)을 건너뛰고 처음 나오는 문자가 숫자인지만
+    본다. pdfplumber 는 페이지 여백 위치를 기준으로 줄을 감으므로, 숫자
+    뒤에서 마침표가 다음 줄로 넘어가는 경우("3.\n5%")와 마침표 뒤에서
+    숫자가 다음 줄로 넘어가는 경우("3\n.5%") 둘 다 물리적으로 똑같이
+    있을 법하다 — 한쪽만 공백을 건너뛰고 볼 이유가 없다.
 
-    이 비대칭 때문에 "3. 5% 성장률의 배경"처럼 번호 항목의 내용이 우연히
-    숫자로 시작하면 앞뒤가 모두 숫자라 소수점으로 오인해 항목 경계를
+    앞쪽에 공백을 건너뛰는 것이 "…이다. 5%" 처럼 실제로 끝난 문장 뒤에
+    오는 숫자를 소수점으로 오인하게 만들지는 않는다 — 그 마침표 앞은
+    공백을 건너뛰어도 "다"(숫자 아님)이므로 여전히 걸리지 않는다.
+
+    앞뒤가 모두 숫자면 문장 경계 취급을 안 하므로, "3. 5% 성장률의
+    배경"처럼 번호 항목의 내용이 우연히 숫자로 시작하면 항목 경계를
     놓친다 — 일부러 받아들이는 손해다. 근거를 하나 놓쳐 빈 칸으로 남는
     것이, 두 자리를 이어 붙여 기관이 하지 않은 문장을 내보내는 것보다
     낫다.
     """
-    if source[i] != "." or i == 0 or not source[i - 1].isdigit():
+    if source[i] != ".":
         return False
+    k = i - 1
+    while k >= 0 and source[k].isspace():
+        k -= 1
     j = i + 1
     while j < len(source) and source[j].isspace():
         j += 1
-    return j < len(source) and source[j].isdigit()
+    return k >= 0 and source[k].isdigit() and j < len(source) and source[j].isdigit()
 
 
 def _starts_at_a_boundary(source: str, pos: int) -> bool:

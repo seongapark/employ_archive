@@ -181,3 +181,18 @@ def test_rejects_a_numbered_heading_starting_with_a_digit_as_an_accepted_trade()
     candidate = "5% 성장률의 배경"
     with pytest.raises(v.Rejected):
         v.verify(candidate, page)
+
+
+def test_rejects_a_fragment_starting_after_a_decimal_point_split_by_a_space():
+    # pdfplumber 는 페이지 여백 위치로 줄을 감으므로, 숫자 뒤에서 마침표가
+    # 다음 줄로 넘어가는 것("3.\n5%")과 마침표 뒤에서 숫자가 넘어가는 것
+    # ("3 .5%") 둘 다 물리적으로 똑같이 있을 법하다 — 거울상이다.
+    with pytest.raises(v.Rejected) as e:
+        v.verify("5% 상승할 것으로 전망된다", "성장률은 3 .5% 상승할 것으로 전망된다")
+    assert "시작" in e.value.reason
+
+
+def test_rejects_a_fragment_starting_after_a_decimal_point_split_by_a_line_wrap():
+    with pytest.raises(v.Rejected) as e:
+        v.verify("5% 상승할 것으로 전망된다", "성장률은 3\n. 5% 상승할 것으로 전망된다")
+    assert "시작" in e.value.reason
