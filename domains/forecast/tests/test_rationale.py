@@ -36,6 +36,27 @@ KLI_INHAE_SENTENCE = (
 # 실제로 일하고 있음을 못박는다.
 BOK_2026_08 = (FIXTURES / "bok_2026-08_summary.txt").read_text(encoding="utf-8")
 
+# 아래 세 픽스처는 task-9a(백필 결함 수정)에서 실네트워크·실 Tesseract 로
+# 새로 박제한 것이다 — 백필이 실제로 뽑은 다섯 개의 못 쓸 근거 중 셋이
+# 나온 바로 그 쪽이다(rationales.json 실측). "가공 없음" 원칙은 기존
+# 픽스처와 같다.
+#
+# 한국은행 2025-08-28호 10쪽(source_page=10) — 관세 시나리오 해설 쪽이다.
+# 볼드 인쇄를 pdfplumber 가 글자마다 3번씩 겹쳐 읽어("낙낙낙관관관시시시
+# 나나나리리리오오오") cpi·gdp_growth 근거 둘 다 이 결함을 그대로 담고
+# 있었다. 각주 기호 '*'·'§' 도 이 쪽에서 실제로 항목을 가르는 표지로
+# 쓰인다.
+BOK_2025_08_P10 = (FIXTURES / "bok_2025-08_p10.txt").read_text(encoding="utf-8")
+# KDI 2025-08-12호 4쪽(source_page=4) — 표지 글자가 단 하나도 없는 서술
+# 문단 넷이 실려 있다. 사람 눈에는 문단 간격이 갈라 보이지만 그 간격은
+# pdf.page_texts 가 텍스트만 뽑는 순간 사라진다 — 아래 "여전히 안 고쳐진
+# 사례" 절 참고.
+KDI_2025_08_P4 = (FIXTURES / "kdi_2025-08_p4.txt").read_text(encoding="utf-8")
+# KEIS 2025-12-31호(2025년 10호) 10쪽(source_page=10) — 400dpi·전처리로
+# 실제 OCR 한 원문이다. 'ㆍ'(한글 가운뎃점)가 서로 다른 두 항목(고용 증가
+# 배경 / GDP 성장률 전망)을 가르는 표지로 실제로 쓰인다.
+KEIS_2025_12_P10 = (FIXTURES / "keis_2025-12_p10.txt").read_text(encoding="utf-8")
+
 
 def test_pick_takes_the_sentence_that_gives_a_reason():
     assert rationale.pick(REASON, "emp_change") == REASON.strip()
@@ -654,10 +675,18 @@ def test_pick_keeps_a_real_sentence_well_under_the_maximum():
     assert rationale.pick(KIET_2026H2, "cpi") is not None
 
 
+def _filler(n: int) -> str:
+    # "가"를 n번 반복하면 _DUPLICATED_HANGUL(3연속 동일 음절)에 걸려 상한
+    # 검사가 아니라 중복 검사에서 걸러진다 — 이 두 테스트가 재는 것은
+    # 길이 상한이지 중복 결함이 아니므로, 같은 음절이 3번 이어지지 않도록
+    # 두 글자를 번갈아 채운다.
+    return ("가나" * (n // 2 + 1))[:n]
+
+
 def test_pick_rejects_a_unit_one_character_over_the_maximum():
     # 정확히 경계에서 상한이 동작하는지를 합성 문장으로 확인한다 — 300자를
     # 한 글자 넘기면(301자) 더는 문장으로 보지 않는다.
-    filler = "가" * (301 - len(
+    filler = _filler(301 - len(
         "내수 회복() 에 힘입어 취업자 증가세가 이어질 것으로 전망된다."))
     s = f"내수 회복({filler}) 에 힘입어 취업자 증가세가 이어질 것으로 전망된다."
     assert len(s) == 301
@@ -667,7 +696,7 @@ def test_pick_rejects_a_unit_one_character_over_the_maximum():
 def test_pick_accepts_a_unit_exactly_at_the_maximum():
     # 300자는 여전히 문장으로 본다 — 상한은 "300자보다 길면" 이지 "300자
     # 이상이면" 이 아니다.
-    filler = "가" * (300 - len(
+    filler = _filler(300 - len(
         "내수 회복() 에 힘입어 취업자 증가세가 이어질 것으로 전망된다."))
     s = f"내수 회복({filler}) 에 힘입어 취업자 증가세가 이어질 것으로 전망된다."
     assert len(s) == 300
@@ -699,3 +728,109 @@ def test_pick_never_drops_below_two_units_when_the_wrap_boundary_bullet_is_remov
     # 하나가 BOK 이므로, 이 표지가 실제로 일하고 있다는 것을 이 픽스처로
     # 못박아 둔다.
     assert len(rationale.sentences(BOK_2026_08)) == 16
+
+
+# ---------------------------------------------------------------------------
+# Task 9a Defect 1 — 3연속 동일 한글 음절은 렌더링 결함이지 산문이 아니다.
+# ---------------------------------------------------------------------------
+
+def test_the_bok_scenario_page_actually_contains_the_duplication_artifact():
+    # 전제 확인부터 한다 — 안 그러면 아래 pick() 단언이 빈 픽스처에도
+    # 통과해 아무것도 지키지 못한다. bok_2025-08_p10.txt 5·9행의
+    # "낙낙낙관관관시시시나나나리리리오오오"·"비비비관관관시시시나나나
+    # 리리리오오오"가 실제로 _DUPLICATED_HANGUL 에 걸리는지 먼저 본다.
+    units = rationale.sentences(BOK_2025_08_P10)
+    assert any(rationale._DUPLICATED_HANGUL.search(u) for u in units)
+
+
+def test_pick_rejects_the_bok_scenario_units_for_both_cpi_and_gdp_growth():
+    # 실제 백필(2025-08-28호)이 cpi·gdp_growth 근거로 냈던 문장은 둘 다
+    # 이 볼드 중복 결함을 그대로 인용문에 담고 있었다(rationales.json
+    # 실측: "alternative * 시나리오별 관세경로가 … § 낙낙낙관관관시시시
+    # 나나나리리리오오오 …"). 두 지표 모두 None 이어야 고쳐진 것이다.
+    assert rationale.pick(BOK_2025_08_P10, "cpi") is None
+    assert rationale.pick(BOK_2025_08_P10, "gdp_growth") is None
+
+
+def test_duplicated_hangul_guard_ignores_runs_of_repeated_digits():
+    # 한글 음절에만 건다 — "1000"은 "0"이 세 번 이어지는 정당한 수치
+    # 표기이고, "222000222666" 처럼 숫자만 삼중 반복돼도 그 자체는 결함이
+    # 아니다(둘레 텍스트가 결함이라 결함처럼 '보일' 뿐이다). 이 정규식
+    # 하나만 떼어 확인한다 — pick() 수준에서는 아래
+    # test_duplicated_hangul_guard_does_not_reject_legitimate_forecast_text
+    # 가 이어서 확인한다.
+    assert rationale._DUPLICATED_HANGUL.search("222000222666") is None
+    assert rationale._DUPLICATED_HANGUL.search("1000") is None
+
+
+def test_duplicated_hangul_guard_does_not_reject_legitimate_forecast_text():
+    # 정당한 수치 표기("1000억 원")가 섞인 평범한 전망 문장은 이 결함
+    # 판정 때문에 근거를 잃으면 안 된다.
+    s = ("국내총생산은 1000억 원 규모의 투자 확대를 반영해 성장률이 "
+         "확대될 것으로 전망된다.")
+    assert rationale.pick(s, "gdp_growth") == s
+
+
+# ---------------------------------------------------------------------------
+# Task 9a Defect 2 — 불릿 표지가 빠져 서로 다른 항목이 한 문장으로 붙는다.
+# ---------------------------------------------------------------------------
+
+def test_wrap_boundary_markers_split_the_real_bok_scenario_items():
+    # '*'·'§' 를 _WRAP_BOUNDARY_MARKERS 에 더하기 전에는 도입 문단·
+    # "alternative"·낙관 시나리오·비관 시나리오·표 전체가 4유닛으로
+    # 뭉친다(실측). 더한 뒤에는 6유닛으로 갈라져 시나리오 해설마다 독립된
+    # 유닛이 된다 — 아래 세 번째 단언이 "* "·"§ " 표지 글자 자체가
+    # 인용문에 남지 않는다는 것도 함께 확인한다.
+    units = rationale.sentences(BOK_2025_08_P10)
+    assert len(units) == 6
+    assert units[2].startswith("시나리오별 관세경로가")
+    assert units[3].startswith("낙낙낙관관관시시시나나나리리리오오오")
+    assert not any(u.startswith(("*", "§")) for u in units)
+
+
+def test_bullet_marker_splits_the_real_keis_gaundejeom_bullet():
+    # 'ㆍ'(U+318D, 한글 가운뎃점)를 _BULLET_MARKERS 에 더하기 전에는 이
+    # 두 항목이 한 유닛으로 붙어 2025-12-31 emp_change 근거로 실제
+    # 저장됐다("20264 취업자 수 증가 배경에는 … 존재 ㆍ한국은행과 …
+    # 예측", rationales.json 실측). 더한 뒤에는 두 항목으로 갈라진다.
+    units = rationale.sentences(KEIS_2025_12_P10, bullets=True)
+    assert "20264 취업자 수 증가 배경에는 국내 경제의 완만한 성장 흐름이 존재" in units
+    assert (
+        "한국은행과 한국개발연구원은 2026년 국내 GDP 성장률 전망치를 1.8% "
+        "수준으로 전망하며 경기 회복세를 예측"
+    ) in units
+    assert not any("존재 ㆍ한국은행" in u or "존재 한국은행" in u for u in units)
+
+
+def test_pick_no_longer_returns_the_fused_keis_run_on_after_the_marker_fix():
+    # 갈라진 뒤에는 두 조각 다 pick 의 조건을 못 채운다 — 앞 조각("존재")은
+    # 전망 표지가 없고("존재"는 지난 일도 앞일도 아닌 사실 서술이다), 뒤
+    # 조각("예측")은 인과 표지가 없다(_CAUSE 목록에 없는 낱말이다). 서로
+    # 다른 항목의 인과·전망 표지를 빌려와 하나로 합쳐 뽑히던 예전 동작이
+    # 이제는 사라졌다는 뜻이다 — 근거가 없다면 빈 칸이 옳다.
+    assert rationale.pick(KEIS_2025_12_P10, "emp_change", bullets=True) is None
+    assert rationale.pick(KEIS_2025_12_P10, "gdp_growth", bullets=True) is None
+
+
+def test_pick_still_fuses_the_kdi_run_on_because_the_page_has_no_marker_at_all():
+    # 알려진 결함을 고정해 둔 것이다 — 이번 수정으로 못 고쳤다. 아직 이렇다.
+    #
+    # kdi_2025-08_p4.txt(2025-08-12호 4쪽)를 글자 좌표까지 실측했다
+    # (pdfplumber page.chars, x0<105 전수 조사) — 이 쪽의 서술 항목 넷 사이
+    # 에는 마침표도, '-'·'ㆍ'·'*'·'§' 같은 표지 글자도 단 하나도 없다.
+    # 사람 눈에는 문단 간격(줄 간격 ≈17pt 대비 문단 경계 ≈28pt)이 항목을
+    # 가르지만, 그 간격 정보는 pdf.page_texts 가 pdfplumber 로 텍스트만
+    # 뽑는 순간 사라진다 — 남는 건 평문 개행뿐이라 rationale.py 에는
+    # 애초에 표지를 넓혀 잡을 대상 자체가 없다.
+    #
+    # 그래서 이 태스크의 처방("표지 집합을 실측해 넓혀라")이 이 문서에는
+    # 적용되지 않는다 — 좌표 기반 문단 인식은 pdf.py 를 고쳐야 하는 별도
+    # 작업이고, 이 태스크 범위(rationale.py·테스트·픽스처)를 벗어난다.
+    # cpi·emp_change 근거가 여전히 같은 덩어리를 나눠 갖고, 서로 다른
+    # 지표의 문장이 그대로 섞여 있다 — task-9a-report.md 에 그대로 보고한다.
+    got_cpi = rationale.pick(KDI_2025_08_P4, "cpi")
+    got_emp = rationale.pick(KDI_2025_08_P4, "emp_change")
+    assert got_cpi == got_emp
+    assert got_cpi is not None
+    assert "인구구조 변화와 낮은 경제성장세로 인해 취업자 수" in got_cpi
+    assert "국제유가 전제와 민간소비 전망이 상향 조정" in got_emp
