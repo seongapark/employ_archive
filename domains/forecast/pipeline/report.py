@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 from datetime import date, datetime, timedelta, timezone
-from typing import Mapping, NamedTuple
+from typing import Iterable, Mapping, NamedTuple
 
 from . import pdf
 from .models import ForecastRecord, INDICATOR_META, make_id
@@ -74,3 +74,23 @@ def records_from_values(
             collected_at=collected_at,
         ))
     return records
+
+
+def rationales_from_text(text: str, *, org: str, issue: Issue,
+                         indicators: Iterable[str], source_url: str,
+                         source_page: int | None) -> list["Rationale"]:
+    """본문에서 지표별 근거 문장을 뽑는다. 없는 지표는 건너뛴다."""
+    from . import rationale
+    from .rationale_store import Rationale
+
+    out = []
+    for indicator in indicators:
+        sentence = rationale.pick(text, indicator)
+        if sentence is None:
+            continue
+        out.append(Rationale(
+            org=org, published_at=issue.published_at, indicator=indicator,
+            text=sentence, tags=rationale.tags_for(sentence),
+            source_url=source_url, source_page=source_page,
+        ))
+    return out

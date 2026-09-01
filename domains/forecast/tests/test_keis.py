@@ -456,6 +456,112 @@ def test_collect_issue_raises_when_a_real_table_is_unreadable():
                            read_pages=fake_read_pages)
 
 
+def test_rationales_from_text_finds_one_per_indicator():
+    from domains.forecast.pipeline import report
+
+    text = ("2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 전망된다. "
+            "실업률은 내수 회복을 반영해 하락할 것으로 예상된다.")
+    got = report.rationales_from_text(
+        text, org="KEIS", issue=ISSUE_2026_08,
+        indicators=("emp_change", "emp_rate", "unemp_rate"),
+        source_url="https://x/y.pdf", source_page=20)
+
+    by_ind = {r.indicator: r for r in got}
+    assert set(by_ind) == {"emp_change", "unemp_rate"}   # emp_rate 는 근거가 없다
+    assert by_ind["emp_change"].text.startswith("2026년 하반기 취업자 수 증가 배경")
+    assert by_ind["emp_change"].published_at == ISSUE_2026_08.published_at
+    assert by_ind["emp_change"].source_page == 20
+    # tags_for 를 실제로 불렀는지 확인한다 — 고정된 빈 리스트를 넣어도 위
+    # 단언들은 모두 통과하므로, 이 문장에 실제로 태그가 붙는지 따로 본다.
+    assert by_ind["unemp_rate"].tags == ["내수"]
+
+
+def test_rationales_from_text_returns_empty_when_nothing_qualifies():
+    from domains.forecast.pipeline import report
+
+    got = report.rationales_from_text(
+        "표는 다음과 같다.", org="KEIS", issue=ISSUE_2026_08,
+        indicators=("emp_change",), source_url="https://x/y.pdf", source_page=1)
+    assert got == []
+
+
+LISTED_2025_12 = keis.ListedIssue(ISSUE_2025_12, "https://x/keis-2025-12.pdf")
+
+
+def test_collect_issue_rationales_merges_the_table_page_with_the_page_before_it():
+    # 표 앞쪽(도입부 서술)과 표 쪽을 합쳐 넘긴다. 이 예에서는 두 쪽 모두
+    # '전망'을 담고 있어 1차 스크리닝에서 둘 다 후보가 되고, 400dpi 정밀
+    # 판독도 두 쪽 모두에 대해 한 번에 이뤄진다(재조회 없음).
+    prose = ("2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 전망된다. "
+             "실업률은 내수 회복을 반영해 하락할 것으로 예상된다.")
+    by_page = {3: prose, 4: PAGE_2025_12}
+
+    def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
+        if pages is None:
+            return ["표지", "목차", prose, PAGE_2025_12]
+        return [by_page[p] for p in pages]
+
+    got = keis.collect_issue_rationales(
+        LISTED_2025_12, fetch=lambda url: b"%PDF-", read_pages=fake_read_pages)
+
+    by_ind = {r.indicator: r for r in got}
+    assert by_ind["emp_change"].source_page == 4   # 근거는 표 쪽 번호로 기록한다
+    assert by_ind["emp_change"].text.startswith("2026년 하반기 취업자 수 증가 배경")
+    assert "unemp_rate" in by_ind
+
+
+def test_collect_issue_rationales_re_reads_the_preceding_page_when_it_is_not_a_screening_candidate():
+    # 표 앞쪽(도입부)은 대개 '전망'이라는 낱말이 없어 150dpi 스크리닝에서
+    # 후보로 걸리지 않는다 — 그래서 400dpi 정밀 판독 목록에도 없다. 그런
+    # 경우 이 쪽을 명시적으로 다시 읽어야 한다. 후보에 없었다는 걸 보장하려
+    # 여기서는 '전망' 대신 '예상'으로 미래 표지를 준다.
+    prose_without_screen_keyword = (
+        "2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 예상된다.")
+    calls = []
+
+    def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
+        calls.append({"pages": pages, "dpi": dpi, "preprocess": preprocess})
+        if pages is None:
+            return ["표지", "목차", prose_without_screen_keyword, PAGE_2025_12]
+        if pages == [4]:
+            return [PAGE_2025_12]
+        if pages == [3]:
+            return [prose_without_screen_keyword]
+        raise AssertionError(f"예상 못 한 pages 인자: {pages}")
+
+    got = keis.collect_issue_rationales(
+        LISTED_2025_12, fetch=lambda url: b"%PDF-", read_pages=fake_read_pages)
+
+    # 표 쪽([4])과는 별개로 앞쪽([3])을 400dpi 로 명시적으로 다시 읽었다
+    assert {"pages": [3], "dpi": 400, "preprocess": True} in calls
+    by_ind = {r.indicator: r for r in got}
+    assert "emp_change" in by_ind
+    assert by_ind["emp_change"].text.startswith("2026년 하반기 취업자 수 증가 배경")
+
+
+def test_collect_issue_rationales_does_not_look_before_page_one():
+    # 전망표가 1쪽이면 그 앞쪽은 없다 — 없는 쪽을 읽으려다 오류를 내지 않고
+    # 그냥 표 쪽만으로 판단한다(이 표엔 서술이 없으니 결과는 빈 리스트).
+    def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
+        if pages is None:
+            return [PAGE_2025_12]
+        assert pages == [1], f"0쪽 이하를 읽으려 했다: {pages}"
+        return [PAGE_2025_12]
+
+    got = keis.collect_issue_rationales(
+        LISTED_2025_12, fetch=lambda url: b"%PDF-", read_pages=fake_read_pages)
+    assert got == []
+
+
+def test_collect_issue_rationales_returns_empty_when_the_issue_has_no_forecast_table():
+    # 대부분의 호가 그렇다. 실패가 아니다.
+    def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
+        return ["표지", "본문"] if pages is None else [PAGE_NO_FORECAST]
+
+    assert keis.collect_issue_rationales(
+        LISTED_2026_08, fetch=lambda url: b"%PDF-", read_pages=fake_read_pages) == []
+
+
 def test_collect_issue_raises_when_an_accepted_page_yields_no_records(monkeypatch):
     # find_forecast_page 가 이미 발표연도 이상 열이 있는 쪽만 통과시켰으니,
     # 그 쪽에서 parse 가 빈 리스트를 낸다면 그건 "전망 없음"이 아니라

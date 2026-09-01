@@ -315,38 +315,114 @@ def find_forecast_page(page_texts: list[str], page_numbers: list[int],
     return None
 
 
+class _LocatedForecastPage(NamedTuple):
+    """전망표 쪽을 찾은 결과.
+
+    표 쪽 번호·원문뿐 아니라, 그 앞쪽을 추가로 읽을 때 필요한 것들(원본
+    PDF 바이트, read_pages 함수, 이미 400dpi 로 읽어 둔 후보 쪽들)도 함께
+    담는다 — collect_issue_rationales 가 fetch 를 다시 하거나 이미 읽은
+    후보 쪽을 다시 OCR 하지 않게 하기 위해서다.
+    """
+    page_no: int
+    text: str
+    data: bytes
+    read_pages: object
+    candidate_texts: dict[int, str]
+
+
+def _locate_forecast_page(listed: ListedIssue, *, fetch,
+                          read_pages) -> _LocatedForecastPage | None:
+    """PDF 를 받아 전망표가 실린 쪽을 찾는다.
+
+    collect_issue 와 collect_issue_rationales 가 똑같이 거치는
+    fetch → 150dpi 스크리닝 → 후보만 400dpi 정밀 판독 → 표 확정 앞부분을
+    여기 하나로 모은다. 각자 따로 베끼면 한쪽만 고쳐질 때 둘이 어긋난다.
+
+    전망표가 없으면(후보가 아예 없거나, 후보는 있어도 확정되지 않으면)
+    None 을 준다.
+    """
+    data = fetch(listed.pdf_url)
+    screened = read_pages(data, None, dpi=SCREEN_DPI, preprocess=False)
+    candidates = [page_no for page_no, text in enumerate(screened, start=1)
+                  if SCREEN_KEYWORD in text]
+    if not candidates:
+        return None
+
+    texts = read_pages(data, candidates, dpi=400, preprocess=True)
+    found = find_forecast_page(texts, candidates, listed.issue.published_at)
+    if found is None:
+        # 후보는 있었는데 전망표로 확정된 쪽이 없었다는 뜻이다. "후보 자체가
+        # 없었다"(위의 return None)와 로그에서 구분돼야, 원인을 150dpi
+        # 스크리닝 탈락과 여기 판정 실패 중 어디서부터 찾을지 바로 알 수 있다.
+        print(f"{listed.issue.title}: 후보 {len(candidates)}쪽 중 전망표로 "
+              f"확정된 쪽이 없다")
+        return None
+    page_no, text = found
+    return _LocatedForecastPage(
+        page_no=page_no, text=text, data=data, read_pages=read_pages,
+        candidate_texts=dict(zip(candidates, texts)),
+    )
+
+
 def collect_issue(listed: ListedIssue, *, fetch=None,
                   read_pages=None) -> list[ForecastRecord]:
     """회차 하나를 읽는다. 전망표가 없으면 빈 리스트 — 실패가 아니다."""
     fetch = fetch or (lambda url: http.get(url).content)
     read_pages = read_pages or ocr.page_texts
 
-    data = fetch(listed.pdf_url)
-    screened = read_pages(data, None, dpi=SCREEN_DPI, preprocess=False)
-    candidates = [page_no for page_no, text in enumerate(screened, start=1)
-                  if SCREEN_KEYWORD in text]
-    if not candidates:
+    located = _locate_forecast_page(listed, fetch=fetch, read_pages=read_pages)
+    if located is None:
         return []
-
-    texts = read_pages(data, candidates, dpi=400, preprocess=True)
-    found = find_forecast_page(texts, candidates, listed.issue.published_at)
-    if found is None:
-        # 후보는 있었는데 전망표로 확정된 쪽이 없었다는 뜻이다. "후보 자체가
-        # 없었다"(위의 return [])와 로그에서 구분돼야, 원인을 150dpi 스크리닝
-        # 탈락과 여기 판정 실패 중 어디서부터 찾을지 바로 알 수 있다.
-        print(f"{listed.issue.title}: 후보 {len(candidates)}쪽 중 전망표로 "
-              f"확정된 쪽이 없다")
-        return []
-    page_no, text = found
-    records = parse(text, listed.issue, listed.pdf_url, page_no)
+    records = parse(located.text, listed.issue, listed.pdf_url, located.page_no)
     if not records:
         # find_forecast_page 가 이미 발표연도 이상 열이 있는 쪽만 통과시켰으니,
         # 그 쪽에서 parse 가 빈 리스트를 낸다면 그건 "전망 없음"이 아니라
         # 모순이다 — 조용히 넘기면 안 된다.
         raise ValueError(
-            f"{listed.issue.title}: {page_no}쪽에서 전망표를 찾았지만 "
+            f"{listed.issue.title}: {located.page_no}쪽에서 전망표를 찾았지만 "
             "레코드를 만들지 못했다")
     return records
+
+
+def collect_issue_rationales(listed: ListedIssue, *, fetch=None,
+                             read_pages=None) -> list["Rationale"]:
+    """그 회차의 근거 문장을 준다. 전망표가 없으면 빈 리스트.
+
+    표 쪽 원문만으로는 부족하다 — 이 브리프는 표 앞쪽에 '왜'를 말하는
+    도입부 서술을 싣고, 표 자체는 숫자뿐이라 서술이 없다. 그래서 표 쪽과
+    그 바로 앞쪽을 합쳐 rationale.pick 에 넘긴다.
+
+    앞쪽 쪽은 150dpi 스크리닝에서 SCREEN_KEYWORD('전망')가 안 걸려 대개
+    candidate_texts 에 없다 — 도입부는 "…것으로 예상된다"처럼 '전망' 없이
+    미래를 말하는 문장이 흔하기 때문이다. 그럴 땐 그 한 쪽만 400dpi 로
+    새로 읽는다. 이미 후보에 들어 400dpi 로 읽어 둔 경우(우연히 '전망'을
+    담고 있던 경우)라면 다시 읽지 않고 재사용한다 — 400dpi 전처리 OCR
+    한 쪽에 ~4.5초가 들어, 지표마다 부르면 안 되고 여기서 한 번만 부른다.
+
+    표가 1쪽이면 그 앞쪽은 없다 — 없는 쪽을 읽으려다 오류를 내는 대신
+    표 쪽 원문만으로 판단한다.
+    """
+    fetch = fetch or (lambda url: http.get(url).content)
+    read_pages = read_pages or ocr.page_texts
+
+    located = _locate_forecast_page(listed, fetch=fetch, read_pages=read_pages)
+    if located is None:
+        return []
+
+    preceding_page = located.page_no - 1
+    if preceding_page < 1:
+        preceding_text = ""
+    elif preceding_page in located.candidate_texts:
+        preceding_text = located.candidate_texts[preceding_page]
+    else:
+        [preceding_text] = located.read_pages(
+            located.data, [preceding_page], dpi=400, preprocess=True)
+
+    text = f"{preceding_text}\n{located.text}" if preceding_text else located.text
+    return report.rationales_from_text(
+        text, org="KEIS", issue=listed.issue,
+        indicators=sorted(REQUIRED_INDICATORS), source_url=listed.pdf_url,
+        source_page=located.page_no)
 
 
 def collect(today: date) -> list[ForecastRecord]:
