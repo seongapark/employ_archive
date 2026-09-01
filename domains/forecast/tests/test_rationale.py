@@ -21,6 +21,15 @@ KEIS_P20 = (FIXTURES / "keis_2026-08_p20.txt").read_text(encoding="utf-8")
 # 여러 줄에 걸쳐 감겨 있고, 그 줄들은 마침표로 끝나지 않는다.
 KLI_2026 = (FIXTURES / "kli_2026_forecast.txt").read_text(encoding="utf-8")
 KIET_2026H2 = (FIXTURES / "kiet_2026h2_macro.txt").read_text(encoding="utf-8")
+# OECD Interim Economic Outlook 2026-03 10쪽 원문이다 — 표 전체가 빈 줄도
+# 항목 표지도 없이 한 유닛(723자)으로 남는다. 물가 지표("inflation")와 전망
+# 표지("is projected")는 이미 갖췄고 인과 표지 하나만 없다.
+OECD_P10 = (FIXTURES / "oecd_interim_2026-03_p10.txt").read_text(encoding="utf-8")
+# KLI_2026 27~28행에서 그대로 딴 문장이다 — "인해" 가 인과 표지로 쓰인 실례다.
+KLI_INHAE_SENTENCE = (
+    "인구 증가폭이 일시적으로 확대되면서 인구효과로 인해 올해 나타난 "
+    "취업자 감소(-2만 명)가 내년에는 사라질 전망(±0명)이다."
+)
 
 
 def test_pick_takes_the_sentence_that_gives_a_reason():
@@ -520,3 +529,102 @@ def test_pick_finds_the_same_keis_sentence_with_or_without_bullets():
     # test_pick_does_not_use_bullets_by_default_on_the_same_ocr_text 참고.)
     assert rationale.pick(KEIS_P20, "emp_change") == rationale.pick(
         KEIS_P20, "emp_change", bullets=True)
+
+
+# ---------------------------------------------------------------------------
+# Change 1 — _CAUSE 에 "원인"·"인해"·"결과이다"·"결과다" 를 더한다.
+# ---------------------------------------------------------------------------
+
+def test_pick_finds_the_kli_gdp_growth_reason_via_wonin():
+    # KLI_2026 11~13행(줄 감김을 편 뒤 한 문장)에서 그대로 나오는 문장이다.
+    # "원인" 이 _CAUSE 에 없으면 지표(성장률)·전망(전망)은 있어도 인과 표지가
+    # 없어 떨어진다 — 이 테스트가 그 실측(98자)을 못박는다.
+    assert rationale.pick(KLI_2026, "gdp_growth") == (
+        "이러한 긍정적 전망의 주요 원인으로는 올해보다 나은 내년 경제 "
+        "성장률 전망과 함께 인구효과의 변화, 정부 직접일자리사업 참여자 "
+        "증가, 산업별 고용의 메가트 렌드 지속이 꼽힌다."
+    )
+
+
+def test_pick_finds_the_kli_emp_change_reason_via_gyeolgwaida():
+    # KLI_2026 3~5행(줄 감김을 편 뒤 한 문장)에서 그대로 나오는 문장이다.
+    # "결과이다" 가 _CAUSE 에 없으면 지표(고용)·전망(예상)은 있어도 인과
+    # 표지가 없어 떨어진다 — 이 테스트가 그 실측(114자)을 못박는다.
+    assert rationale.pick(KLI_2026, "emp_change") == (
+        "2025년 하반기 고용 증가폭은 20만 명을 상회할 것으로 예상되는데, "
+        "이는 보건업 및 사회복지 서비스업, 정보통신업, 전문ㆍ과학 및 "
+        "기술서비스업 등 서비스업 전반의 견조한 고용 증가가 뒷받침된 결과이다."
+    )
+
+
+def test_pick_recognizes_inhae_as_a_cause_marker():
+    # KLI_2026 27~28행에서 그대로 딴 문장이다(위 KLI_INHAE_SENTENCE) — 이
+    # 문장 하나만으로는 pick(KLI_2026, ...) 전체 호출에서 앞서 매칭되는 다른
+    # 문장에 가려 드러나지 않으므로, 문장을 따로 떼어 "인해" 자체를
+    # 검증한다.
+    assert rationale.pick(KLI_INHAE_SENTENCE, "emp_change") == KLI_INHAE_SENTENCE
+
+
+def test_pick_recognizes_gyeolgwada_without_the_ida_ending():
+    # "결과다" 는 "결과이다" 의 해요체가 아닌 축약형이다 — 이 코퍼스
+    # 픽스처에는 이 어미로 끝나는 문장이 없어 합성 문장으로 확인한다.
+    s = "취업자 증가세가 이어질 것으로 전망되는 것은 서비스업 고용 확대의 결과다."
+    assert rationale.pick(s, "emp_change") == s
+
+
+def test_cause_uses_gyeolgwaida_not_bare_gyeolgwa():
+    # "결과" 를 그대로 쓰면 "조사 결과"·"설문 결과"·"그 결과" 처럼 원인이
+    # 아니라 "조사해 보니" 라는 뜻의 문장까지 인과로 오인한다 — "것으로
+    # 나타났다" 를 빼야 했던 것과 같은 부류의 실패다. 이 코퍼스 23개
+    # 픽스처에는 이런 문장이 없어(측정으로 확인했다) 합성 문장으로
+    # 검증한다: 실업률 통계는 언급하지만 그 조사 결과를 전할 뿐 원인을
+    # 말하지 않는다.
+    s = "실업률 조사 결과, 하반기에는 고용 지표가 개선될 것으로 전망된다."
+    assert rationale.pick(s, "emp_change") is None
+    assert rationale.pick(s, "unemp_rate") is None
+
+
+# ---------------------------------------------------------------------------
+# Change 2 — 근거 문장에 상한 길이를 둔다.
+# ---------------------------------------------------------------------------
+
+def test_pick_never_returns_a_table_page_longer_than_the_declared_maximum(monkeypatch):
+    # OECD_P10 은 물가 지표("inflation")와 전망 표지("is projected")를 이미
+    # 갖춘 723자짜리 표 한 덩어리다 — 인과 표지 하나만 없어서 지금은 안
+    # 뽑힌다. 이게 바로 상한을 두는 이유인 "한 낱말 차이" 위험이다. 그
+    # 위험을 실제로 확인하려면 인과 표지가 하나 있어야 하는데, 이 표
+    # 원문에는(측정으로 확인한 대로) 아직 없다. 그래서 이 테스트만 표
+    # 원문에 이미 있는 낱말("difference from")을 임시로 _CAUSE 에 얹는다 —
+    # 표 본문 자체는 실제 픽스처 그대로이고 한 글자도 손대지 않는다. 어떤
+    # 낱말이 우연히 인과 표지 목록에 걸리든, 상한이 없으면 그 순간 표
+    # 전체가 "근거"로 뽑힌다는 사실은 똑같다.
+    monkeypatch.setattr(rationale, "_CAUSE", rationale._CAUSE + ("difference from",))
+    assert rationale.pick(OECD_P10, "cpi") is None
+
+
+def test_pick_keeps_a_real_sentence_well_under_the_maximum():
+    # 실측한 가장 긴 실제 문장(kiet cpi, 143자)은 상한(300)의 절반에도 못
+    # 미친다 — 상한이 진짜 문장을 자르지 않는다는 것을 다시 못박는다.
+    got = rationale.pick(KIET_2026H2, "cpi")
+    assert got is not None
+    assert len(got) < 300
+
+
+def test_pick_rejects_a_unit_one_character_over_the_maximum():
+    # 정확히 경계에서 상한이 동작하는지를 합성 문장으로 확인한다 — 300자를
+    # 한 글자 넘기면(301자) 더는 문장으로 보지 않는다.
+    filler = "가" * (301 - len(
+        "내수 회복() 에 힘입어 취업자 증가세가 이어질 것으로 전망된다."))
+    s = f"내수 회복({filler}) 에 힘입어 취업자 증가세가 이어질 것으로 전망된다."
+    assert len(s) == 301
+    assert rationale.pick(s, "emp_change") is None
+
+
+def test_pick_accepts_a_unit_exactly_at_the_maximum():
+    # 300자는 여전히 문장으로 본다 — 상한은 "300자보다 길면" 이지 "300자
+    # 이상이면" 이 아니다.
+    filler = "가" * (300 - len(
+        "내수 회복() 에 힘입어 취업자 증가세가 이어질 것으로 전망된다."))
+    s = f"내수 회복({filler}) 에 힘입어 취업자 증가세가 이어질 것으로 전망된다."
+    assert len(s) == 300
+    assert rationale.pick(s, "emp_change") == s
