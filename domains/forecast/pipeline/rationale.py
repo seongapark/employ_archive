@@ -63,14 +63,90 @@ _DECIMAL_POINT = re.compile(r"(?<=\d)\.(?=\d)")
 _DECIMAL_PLACEHOLDER = ""
 
 
-def sentences(text: str) -> list[str]:
-    """본문을 문장 단위로 자른다. 빈 조각은 버린다."""
+def sentences(text: str, *, bullets: bool = False) -> list[str]:
+    """본문을 문장 단위로 자른다. 빈 조각은 버린다.
+
+    bullets 는 기본 False 로 잠가 둔다 — 이 옵션은 텍스트 레이어 없는
+    PDF 를 OCR 로 읽는 KEIS 수집기만 명시적으로 켜야 한다(자세한 이유는
+    _bullet_sentences 참고). 나머지 여섯 기관은 텍스트 레이어가 있는
+    PDF 를 읽어 문장이 실제 마침표로 끝나므로 이 옵션을 켤 이유가 없고,
+    잘못 켜졌을 때의 부작용(줄 감김으로 생긴 "-0.3%p" 같은 줄을 새 문장의
+    시작으로 오인)을 감수할 이유도 없다.
+    """
+    if bullets:
+        return _bullet_sentences(text)
     protected = _DECIMAL_POINT.sub(_DECIMAL_PLACEHOLDER, text)
     return [
         s.strip().replace(_DECIMAL_PLACEHOLDER, ".")
         for s in _SENTENCE.findall(protected)
         if s.strip()
     ]
+
+
+# 불릿 표지 — 이 보고서들의 관행상 문장(또는 항목)이 시작하는 자리다.
+# 뒤 세 개(ㅇ·□·○·▶)는 이 픽스처엔 없지만 국문 보고서 관행이라 미리 넣는다.
+_BULLET_MARKERS = "-=>ㅇ□○▶"
+
+# 한글도 로마자도 없는 줄 — 점선 같은 장식 규칙이다. 워터마크 URL('www.')은
+# 이 조건 없이도 흔히 로마자를 포함하므로 따로 검사한다.
+_HAS_WORD_CHAR = re.compile(r"[가-힣a-zA-Z]")
+
+
+def _is_page_furniture(line: str) -> bool:
+    """쪽 하단 장식 줄이다 — 워터마크 URL 이거나 장식 규칙(점선 등)이다.
+
+    이 검사는 줄이 불릿 표지로 시작하는지 확인한 *뒤에* 걸어야 한다.
+    예를 들어 '= =' 처럼 표지 문자(=) 하나뿐인 줄은 한글도 로마자도 없어
+    이 조건에 걸리지만, 그건 장식이 아니라 (내용이 비었을 뿐) 불릿 한
+    항목이다 — 불릿 판정이 이 판정보다 먼저 와야 그런 줄을 장식으로
+    잘못 삼키지 않는다.
+    """
+    return "www." in line or _HAS_WORD_CHAR.search(line) is None
+
+
+def _bullet_sentences(text: str) -> list[str]:
+    """줄바꿈이 아니라 불릿 표지에서 문장을 가른다.
+
+    텍스트 레이어 없는 PDF 를 OCR 로 읽으면 한 문장이 여러 줄에 걸쳐
+    줄바꿈으로 감기고, 그 줄은 마침표로 끝나지 않는다. 줄바꿈 자체를
+    경계로 쓰면 감긴 줄이 그대로 쪼개져 문장이 반 토막 난다 — KEIS
+    2026년 제5호 20쪽 원문이 실례다: "…경기 개선 기대가"(주어)와 그
+    다음 줄 "자리한 것으로 전망된다"(서술어)가 같은 문장인데 줄바꿈만
+    보면 남남이 된다.
+
+    대신 이 보고서들이 실제로 쓰는 불릿 표지(_BULLET_MARKERS)를 문장의
+    시작으로 삼는다. 표지로 시작하지 않는 줄은 줄 감김으로 보고 공백을
+    끼워 앞 문장에 이어 붙인다. 첫 표지가 나오기 전 줄(캡션·머리말)은
+    아직 열린 문장이 없으므로 버린다.
+
+    쪽 하단 장식 줄(_is_page_furniture)을 만나면 지금까지 모은 문장을
+    닫고 그 장식 줄 자체는 버린다 — 안 그러면 마지막 문장이 "20 ⋯
+    www.keis.or.kr" 같은 각주까지 통째로 삼켜, 사용자에게 보일 인용문에
+    장식 문자가 섞여 나간다.
+    """
+    units: list[str] = []
+    current: list[str] = []
+
+    def flush() -> None:
+        if current:
+            units.append(" ".join(current))
+            current.clear()
+
+    for raw_line in text.split("\n"):
+        line = raw_line.strip()
+        if not line:
+            continue
+        if line[0] in _BULLET_MARKERS:
+            flush()
+            current.append(line[1:].strip())
+        elif _is_page_furniture(line):
+            flush()
+        elif current:
+            current.append(line)
+        # current 가 비어 있고(첫 표지 전) 표지도 아니고 장식도 아닌 줄은
+        # 캡션·머리말로 보고 조용히 지나간다.
+    flush()
+    return units
 
 
 # 낱말 하나가 다른 낱말 안에 통째로 들어 있다고 해서 그쪽이 더 구체적인 건
@@ -115,14 +191,18 @@ def _mentions_indicator(lowered: str, indicator: str) -> bool:
     return False
 
 
-def pick(text: str, indicator: str) -> str | None:
+def pick(text: str, indicator: str, *, bullets: bool = False) -> str | None:
     """그 지표의 근거 문장을 준다. 없으면 None.
 
     세 조건을 모두 만족해야 한다 — 지표 언급, 인과 표지, 전망 표지. 하나라도
     없으면 근거로 보지 않는다. 느슨하게 잡으면 엉뚱한 문장이 기관의 근거로
     남고, 그 잘못은 그럴듯해서 아무도 의심하지 않는다. 빡빡한 쪽으로 틀린다.
+
+    bullets 는 그대로 sentences() 에 넘길 뿐이다 — 문장을 무엇으로 볼지는
+    sentences() 하나가 정하고, 여기 세 조건(지표·인과·전망)은 그 문장이
+    무엇이든 똑같이 적용된다.
     """
-    for sentence in sentences(text):
+    for sentence in sentences(text, bullets=bullets):
         lowered = sentence.lower()
         if not _mentions_indicator(lowered, indicator):
             continue

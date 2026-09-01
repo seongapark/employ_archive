@@ -491,9 +491,11 @@ LISTED_2025_12 = keis.ListedIssue(ISSUE_2025_12, "https://x/keis-2025-12.pdf")
 def test_collect_issue_rationales_merges_the_table_page_with_the_page_before_it():
     # 표 앞쪽(도입부 서술)과 표 쪽을 합쳐 넘긴다. 이 예에서는 두 쪽 모두
     # '전망'을 담고 있어 1차 스크리닝에서 둘 다 후보가 되고, 400dpi 정밀
-    # 판독도 두 쪽 모두에 대해 한 번에 이뤄진다(재조회 없음).
-    prose = ("2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 전망된다. "
-             "실업률은 내수 회복을 반영해 하락할 것으로 예상된다.")
+    # 판독도 두 쪽 모두에 대해 한 번에 이뤄진다(재조회 없음). 실제 OCR 처럼
+    # 항목마다 줄을 나누고 불릿 표지(-)로 시작한다 — bullets=True 는 줄바꿈이
+    # 아니라 이 표지로 문장을 가른다.
+    prose = ("- 2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 전망된다.\n"
+             "- 실업률은 내수 회복을 반영해 하락할 것으로 예상된다.")
     by_page = {3: prose, 4: PAGE_2025_12}
 
     def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
@@ -516,7 +518,7 @@ def test_collect_issue_rationales_re_reads_the_preceding_page_when_it_is_not_a_s
     # 경우 이 쪽을 명시적으로 다시 읽어야 한다. 후보에 없었다는 걸 보장하려
     # 여기서는 '전망' 대신 '예상'으로 미래 표지를 준다.
     prose_without_screen_keyword = (
-        "2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 예상된다.")
+        "- 2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 예상된다.")
     calls = []
 
     def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
@@ -558,9 +560,10 @@ def test_collect_issue_rationales_merges_the_table_page_with_the_page_after_it()
     # 인과 서술이 표 앞이 아니라 뒤에 오는 경우 — 2026년 제5호에서 실제로
     # 벌어진 모양이다. 표(2쪽)와 뒤쪽(3쪽) 모두 '전망'을 담고 있어 둘 다
     # 1차 스크리닝 후보가 된다. 앞쪽(1쪽, '표지')은 후보가 아니라서 따로
-    # 다시 읽지만 내용이 없어 결과에 아무 영향도 주지 않는다.
-    prose = ("2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 전망된다. "
-             "실업률은 내수 회복을 반영해 하락할 것으로 예상된다.")
+    # 다시 읽지만 내용이 없어 결과에 아무 영향도 주지 않는다. 실제 OCR 처럼
+    # 항목마다 줄을 나누고 불릿 표지(-)로 시작한다.
+    prose = ("- 2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 전망된다.\n"
+             "- 실업률은 내수 회복을 반영해 하락할 것으로 예상된다.")
     by_page = {1: "표지", 2: PAGE_2025_12, 3: prose}
 
     def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
@@ -582,7 +585,7 @@ def test_collect_issue_rationales_re_reads_the_following_page_when_it_is_not_a_s
     # 1차 스크리닝 후보에 못 들어 400dpi 정밀 판독 목록에도 없으므로, 그
     # 쪽만 명시적으로 다시 읽어야 한다. 표가 1쪽이라 앞쪽은 아예 없다.
     prose_without_screen_keyword = (
-        "2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 예상된다.")
+        "- 2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 예상된다.")
     calls = []
 
     def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
@@ -609,7 +612,7 @@ def test_collect_issue_rationales_does_not_look_past_the_last_page():
     # 전망표가 PDF 마지막 쪽이면 그 뒤는 없다 — 총 쪽수를 넘는 쪽을 읽으려
     # 들지 않고, 앞쪽까지만 반영해 판단한다. 이 회차는 2쪽짜리이고 앞쪽(1쪽)
     # 은 이미 후보라 재조회 없이 그대로 쓰인다.
-    prose = "2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 전망된다."
+    prose = "- 2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 전망된다."
     by_page = {1: prose, 2: PAGE_2025_12}
 
     def fake_read_pages(data, pages=None, *, dpi=400, preprocess=True):
@@ -629,8 +632,8 @@ def test_collect_issue_rationales_does_not_look_past_the_last_page():
 def test_collect_issue_rationales_reads_both_missing_neighbors_in_one_call():
     # 앞뒤 이웃이 한꺼번에 후보가 아니면 따로따로 부르지 않고 한 번에 모아
     # 읽는다 — 400dpi 전처리 OCR 이 쪽당 ~4.5초라 호출 수를 늘리면 안 된다.
-    before = "2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 예상된다."
-    after = "실업률은 내수 회복을 반영해 하락할 것으로 예상된다."
+    before = "- 2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 예상된다."
+    after = "- 실업률은 내수 회복을 반영해 하락할 것으로 예상된다."
     by_page = {1: before, 2: PAGE_2025_12, 3: after}
     calls = []
 

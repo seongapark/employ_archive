@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import pytest
 
 from domains.forecast.pipeline import rationale
@@ -8,6 +10,13 @@ REASON = ("2026년 하반기 취업자 수 증가 배경에는 상반기 고용�
 RESTATEMENT = "하반기 취업자 수는 전년 동기 대비 약 18만 5천 명 증가할 것으로 예상되며"
 OTHER_INDICATOR = ("생산가능인구는 하반기에도 전년 동기 대비 0.4% 증가세를 "
                    "이어갈 것으로 예상되나, 대부분은 60세 이상 고령층이다.")
+
+FIXTURES = Path(__file__).parent / "fixtures"
+# 2026년 제5호 20쪽을 400dpi·전처리로 실제 OCR 한 원문 그대로다(가공 없음).
+# 위 REASON 은 이 쪽의 첫 항목을 손으로 옮겨 적은 것이지만, OCR 은 그 항목의
+# 전망 어미("자리한 것으로 전망된다")를 "자요"로 망가뜨려 실제로는 못 건진다
+# — 아래 bullets 테스트는 그 실물 원문을 그대로 쓴다.
+KEIS_P20 = (FIXTURES / "keis_2026-08_p20.txt").read_text(encoding="utf-8")
 
 
 def test_pick_takes_the_sentence_that_gives_a_reason():
@@ -318,3 +327,78 @@ def test_tags_leave_care_jobs_without_an_english_word():
     # 문장에서는 이 태그가 걸리지 않는다.
     s = "Public health and welfare spending is expected to expand."
     assert "돌봄일자리" not in rationale.tags_for(s)
+
+
+def test_sentences_bullets_true_cuts_real_keis_ocr_text_into_seven_units():
+    # 텍스트 레이어 없는 PDF 를 OCR 로 읽은 실물 원문이다 — 줄바꿈만으로는
+    # 이 표지들이 있는 자리조차 알 수 없어, 합성 문장이 아니라 이 픽스처로
+    # 검증한다. 캡션("| 통계포커스 |")과 쪽 하단 장식(점선·워터마크 URL)은
+    # 표지가 아니므로 단위로 세지 않는다.
+    units = rationale.sentences(KEIS_P20, bullets=True)
+    assert len(units) == 7
+
+
+def test_sentences_bullets_true_drops_the_page_furniture():
+    # 쪽 하단 장식 줄을 만나면 지금까지 모은 문장을 닫고 그 장식 줄 자체는
+    # 버린다 — 안 그러면 마지막 문장이 각주까지 통째로 삼킨다.
+    units = rationale.sentences(KEIS_P20, bullets=True)
+    assert not any("www." in u for u in units)
+    assert not any("_" in u for u in units)
+
+
+def test_sentences_bullets_true_recovers_the_causal_bullet_whole():
+    # 이 문장은 두 줄에 걸쳐 줄바꿈으로 감겨 있다("...주도한" / "보건복지업
+    # ...예상") — 불릿 표지가 아니라 줄바꿈을 경계로 쓰면 반 토막 난다.
+    units = rationale.sentences(KEIS_P20, bullets=True)
+    assert (
+        "하반기에는 건설경기 부진 완화와 내수 회복이 점진적으로 반영되고, "
+        "상반기 고용 증가를 주도한 보건복지업 및 대면 서비스업의 노동 수요 "
+        "역시 지속될 것으로 예상"
+    ) in units
+
+
+def test_pick_finds_the_emp_change_rationale_in_real_keis_ocr_text():
+    # bullets=True 를 pick 에 그대로 넘기면, 표 다음 쪽 실물 원문에서 지표·
+    # 인과·전망 세 조건을 모두 만족하는 문장 하나를 그대로(가공 없이) 찾는다.
+    got = rationale.pick(KEIS_P20, "emp_change", bullets=True)
+    assert got == (
+        "하반기에는 건설경기 부진 완화와 내수 회복이 점진적으로 반영되고, "
+        "상반기 고용 증가를 주도한 보건복지업 및 대면 서비스업의 노동 수요 "
+        "역시 지속될 것으로 예상"
+    )
+
+
+def test_pick_rejects_the_garbled_lead_bullet_despite_cause_and_indicator():
+    # 이 쪽의 첫 항목은 배경·취업자를 다 담고 있지만, OCR 이 전망 어미를
+    # "자요"로 망가뜨려 전망 표지가 없다 — 규칙을 늦추지 않고 그대로 걸러야
+    # 한다. 값은 위 test_pick_finds_the_emp_change_rationale_in_real_keis_ocr_text
+    # 에서 이미 확인한 문장이므로, 여기서는 첫 항목이 아니라는 것만 본다.
+    got = rationale.pick(KEIS_P20, "emp_change", bullets=True)
+    assert not got.startswith("2026년 하반기 취업자 수 증가 배경")
+
+
+def test_pick_does_not_use_bullets_by_default_on_the_same_ocr_text():
+    # bullets 인자를 안 주면(기본 False) 여전히 마침표로만 자른다 — 이
+    # OCR 텍스트에는 항목 끝에 마침표가 없어 실제 문장을 하나도 못 찾는다.
+    assert rationale.pick(KEIS_P20, "emp_change") is None
+
+
+def test_bullets_true_fragments_a_wrapped_negative_percentage_line():
+    # KEIS 실물 OCR 은 값이 음수면 그 값이 줄 맨 앞으로 감기는 일이 흔하다
+    # ('-0.3%p 하락'). bullets=True 는 이런 줄도 새 불릿으로 오인해 앞
+    # 문장의 나머지를 잃는다 — 이 옵션을 기본 False 로 잠가 두고 KEIS 만
+    # 켜야 하는 이유다.
+    text = ("- 2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는\n"
+            "-0.3%p 하락한 것으로 전망된다.")
+    assert rationale.sentences(text, bullets=True) == [
+        "2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는",
+        "0.3%p 하락한 것으로 전망된다.",
+    ]
+
+
+def test_bullets_false_does_not_split_the_same_wrapped_negative_percentage_line():
+    # 같은 텍스트를 기본값(bullets=False)으로 보면 그 줄을 새 문장의
+    # 시작으로 보지 않는다 — 위 테스트가 보여준 반 토막이 나지 않는다.
+    text = ("- 2026년 하반기 성장률은 상반기 대비 개선되었으나 물가는\n"
+            "-0.3%p 하락한 것으로 전망된다.")
+    assert rationale.sentences(text) == ["-0.3%p 하락한 것으로 전망된다."]

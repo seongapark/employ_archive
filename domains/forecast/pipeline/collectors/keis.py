@@ -410,6 +410,15 @@ def collect_issue_rationales(listed: ListedIssue, *, fetch=None,
     있던 경우)라면 다시 읽지 않고 재사용한다. 두 이웃이 한꺼번에 없는
     경우도 read_pages 한 번으로 같이 읽는다 — 400dpi 전처리 OCR 한 쪽에
     ~4.5초가 들어, 쪽마다 따로 부르지 않고 부족한 쪽만 모아 한 번에 부른다.
+
+    OCR 이 낸 줄바꿈은 문장 경계가 아니라 대개 줄 감김이다(rationale.
+    sentences 의 bullets 옵션 설명 참고). report.rationales_from_text 에
+    bullets=True 를 넘겨 rationale.pick 이 마침표가 아니라 불릿 표지로
+    문장을 가르게 한다 — 합친 원문을 우리가 먼저 문장 단위로 잘라 마침표로
+    다시 이어 붙이는 우회는 하지 않는다. 그 우회는 pick 이 이미 갖고 있던
+    경계를 마침표라는 손실 있는 형식으로 왕복시켜 되찾는 셈이었고, 저장되는
+    인용문도 그 왕복을 한 번 거친 텍스트가 됐을 것이다 — 사람이 나중에 읽고
+    고칠 문장이니 원본 그대로가 맞다.
     """
     fetch = fetch or (lambda url: http.get(url).content)
     read_pages = read_pages or ocr.page_texts
@@ -438,7 +447,7 @@ def collect_issue_rationales(listed: ListedIssue, *, fetch=None,
     return report.rationales_from_text(
         text, org="KEIS", issue=listed.issue,
         indicators=sorted(REQUIRED_INDICATORS), source_url=listed.pdf_url,
-        source_page=located.page_no)
+        source_page=located.page_no, bullets=True)
 
 
 def collect(today: date) -> list[ForecastRecord]:
