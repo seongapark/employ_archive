@@ -88,3 +88,44 @@ def test_rejects_a_whitespace_only_candidate():
     with pytest.raises(v.Rejected) as e:
         v.verify("   ", PAGE)
     assert "빈 문장" in e.value.reason
+
+
+def test_rejects_a_fragment_starting_inside_a_negative_number():
+    # "-" 는 불릿이자 음수 부호다(rationale._is_bullet_marker_line 참고).
+    # 줄 첫머리가 아니라 "성장률은 " 뒤에 온 "-" 는 표지가 아니라 부호이므로
+    # 그 뒤에서 시작하는 조각은 "성장률은" 이라는 주어를 자른 것이다.
+    with pytest.raises(v.Rejected) as e:
+        v.verify("0.3%p 감소했다고 밝혔다", "성장률은 -0.3%p 감소했다고 밝혔다")
+    assert "시작" in e.value.reason
+
+
+def test_rejects_a_fragment_starting_after_a_parenthesis():
+    # ")" 는 번호 붙은 항목("1)")의 일부일 때만 표지다. 문장 중간의 여는
+    # 괄호를 닫는 ")" 뒤에서 시작하면 주어를 자른 조각이 된다.
+    with pytest.raises(v.Rejected) as e:
+        v.verify("상승이 예상된다", "가격(예: 100원) 상승이 예상된다")
+    assert "시작" in e.value.reason
+
+
+def test_accepts_a_sentence_after_a_terminator_then_newline():
+    page = "앞 문장이 있다.\n뒤 문장이 이어진다"
+    candidate = "뒤 문장이 이어진다"
+    assert v.verify(candidate, page) == candidate
+
+
+def test_accepts_a_sentence_after_an_indented_bullet():
+    page = "개요\n  - 항목 내용입니다 계속된다"
+    candidate = "항목 내용입니다 계속된다"
+    assert v.verify(candidate, page) == candidate
+
+
+def test_accepts_a_sentence_after_a_numbered_paren_item():
+    page = "1) 취업자는 증가했다"
+    candidate = "취업자는 증가했다"
+    assert v.verify(candidate, page) == candidate
+
+
+def test_accepts_a_sentence_after_a_numbered_dot_item():
+    page = "3. 전망의 위험요인은 다음과 같다"
+    candidate = "전망의 위험요인은 다음과 같다"
+    assert v.verify(candidate, page) == candidate
