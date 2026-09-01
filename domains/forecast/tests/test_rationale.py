@@ -54,8 +54,17 @@ BOK_2025_08_P10 = (FIXTURES / "bok_2025-08_p10.txt").read_text(encoding="utf-8")
 KDI_2025_08_P4 = (FIXTURES / "kdi_2025-08_p4.txt").read_text(encoding="utf-8")
 # KEIS 2025-12-31호(2025년 10호) 10쪽(source_page=10) — 400dpi·전처리로
 # 실제 OCR 한 원문이다. 'ㆍ'(한글 가운뎃점)가 서로 다른 두 항목(고용 증가
-# 배경 / GDP 성장률 전망)을 가르는 표지로 실제로 쓰인다.
+# 배경 / GDP 성장률 전망)을 가르는 표지로 실제로 쓰인다. 마지막 항목
+# ("한국은행은 2024~2025년…분석") 뒤에는 각주 "1) 한국은행, 「경제전망…"
+# 이 표지 없이 곧바로 붙어 있다 — 각주 표지 수정(아래) 전에는 이 문장에
+# 통째로 용접됐다.
 KEIS_2025_12_P10 = (FIXTURES / "keis_2025-12_p10.txt").read_text(encoding="utf-8")
+# KEIS 2025-12-31호 11쪽(source_page=11) — 표 쪽(10쪽) 바로 다음 쪽이다.
+# 400dpi·전처리 OCR 원문. 마지막 항목("만성적인 인력 공급제약…예상됨")
+# 뒤에 각주 두 개("2) 3) 한국개발연구원,…"·"4) 한국금융연구원,…")가
+# 표지 없이 곧바로 붙어 있다 — 각주 표지 수정 전에는 emp_change 근거가
+# 이 각주까지 통째로 삼켜 rationales.json 에 그대로 저장됐다.
+KEIS_2025_12_P11 = (FIXTURES / "keis_2025-12_p11.txt").read_text(encoding="utf-8")
 
 
 def test_pick_takes_the_sentence_that_gives_a_reason():
@@ -720,14 +729,21 @@ def test_pick_skips_an_over_length_unit_instead_of_giving_up_on_the_whole_text()
 
 
 def test_pick_never_drops_below_two_units_when_the_wrap_boundary_bullet_is_removed():
-    # BOK_2026_08 은 '•' 로 시작하는 항목이 16유닛으로 갈리는 실물 원문이다
-    # — '•' 를 _WRAP_BOUNDARY_MARKERS 에서 빼면 이 항목들이 다시 한
-    # 덩어리로 뭉친다(실측: 16유닛 → 2유닛). 이 테스트가 없으면 '•' 를
-    # 빼도 test_rationale.py 전체가 그대로 통과한다 — BOK 픽스처를 쓰는
-    # 테스트가 이것 말고 없었기 때문이다. 다음 디스패치의 일곱 수집기 중
-    # 하나가 BOK 이므로, 이 표지가 실제로 일하고 있다는 것을 이 픽스처로
-    # 못박아 둔다.
-    assert len(rationale.sentences(BOK_2026_08)) == 16
+    # BOK_2026_08 은 '•' 로 시작하는 항목이 갈리는 실물 원문이다 — '•' 를
+    # _WRAP_BOUNDARY_MARKERS 에서 빼면 이 항목들이 다시 한 덩어리로
+    # 뭉친다(실측: 17유닛 → 3유닛). 이 테스트가 없으면 '•' 를 빼도
+    # test_rationale.py 전체가 그대로 통과한다 — BOK 픽스처를 쓰는 테스트가
+    # 이것 말고 없었기 때문이다. 다음 디스패치의 일곱 수집기 중 하나가
+    # BOK 이므로, 이 표지가 실제로 일하고 있다는 것을 이 픽스처로 못박아
+    # 둔다.
+    #
+    # 원래 16유닛이었다가 각주 표지(_is_footnote_marker_line, Task 9a
+    # 후속)를 더한 뒤 17유닛이 됐다 — "주: 1) 세계경제,… 3) 전년동기대비
+    # 기준"과 "자료: 한국은행,…" 사이의 각주 줄("4) 근월물 기간 평균
+    # 기준…")이 이제 경계로 인식·폐기되면서, 예전엔 한 덩어리였던 두
+    # 줄이 두 유닛으로 갈렸다. 뜻 있는 근거로 바뀐 건 아니다 — 이 표
+    # 픽스처는 애초에 지표·인과·전망 조건을 만족하는 문장이 없다.
+    assert len(rationale.sentences(BOK_2026_08)) == 17
 
 
 # ---------------------------------------------------------------------------
@@ -834,3 +850,89 @@ def test_pick_still_fuses_the_kdi_run_on_because_the_page_has_no_marker_at_all()
     assert got_cpi is not None
     assert "인구구조 변화와 낮은 경제성장세로 인해 취업자 수" in got_cpi
     assert "국제유가 전제와 민간소비 전망이 상향 조정" in got_emp
+
+
+# ---------------------------------------------------------------------------
+# Task 9a 후속 — 각주 표지가 없어 각주가 산문에 그대로 용접된다.
+# ---------------------------------------------------------------------------
+
+def test_footnote_marker_regex_matches_only_a_leading_digit_paren():
+    # 이 정규식 하나만 떼어 확인한다 — 숫자로 시작해 ')' 로 닫는 줄만
+    # 걸리고, 문장 한가운데 있는 각주 번호("한국금융연구원3)")나 숫자로
+    # 시작하지 않는 줄은 걸리지 않는다.
+    assert rationale._is_footnote_marker_line("1) 한국은행, 「경제전망」")
+    assert rationale._is_footnote_marker_line("2) 3) 한국개발연구원, KDI 경제전망")
+    assert not rationale._is_footnote_marker_line("한국금융연구원3)")
+    assert not rationale._is_footnote_marker_line("취업자 수는 증가할 전망")
+
+
+def test_wrap_boundary_drops_the_footnote_welded_onto_the_real_keis_p10_sentence():
+    # 각주 표지를 더하기 전에는 "…뒷받침할 것으로 분석"(완결된 산문) 뒤에
+    # "1) 한국은행, 「경제전망…" 각주가 표지 없이 곧바로 붙어 한 유닛이
+    # 됐다. 더한 뒤에는 산문이 독립된 유닛으로 갈라지고, 각주 자체는 어떤
+    # 유닛으로도 남지 않는다(내용을 새 유닛으로 남기지 않고 버린다 —
+    # 위 _FOOTNOTE_MARKER 주석의 "닫되 버린다" 설계 그대로).
+    units = rationale.sentences(KEIS_2025_12_P10, bullets=True)
+    assert (
+        "한국은행은 2024~2025년 고용 시장의 주요 제약 요인이었던 건설경기 "
+        "부진이 2026년에는 완화되며 취업자 수 증가를 뒷받침할 것으로 분석"
+    ) in units
+    assert not any("한국은행, 「경제전망" in u for u in units)
+    assert not any(u.startswith(("1)", "2)", "3)", "4)")) for u in units)
+
+
+def test_pick_no_longer_welds_the_footnote_onto_the_keis_p10_sentence():
+    # 각주가 떨어져 나간 문장 자체는 여전히 인과 표지가 없다("제약 요인"은
+    # _CAUSE 의 "원인"과 다른 낱말이다) — 그래서 emp_change 근거로
+    # 뽑히지는 않는다. 이 테스트가 지키는 건 "뽑힌다"가 아니라 "더는 각주가
+    # 안 섞인다"이다: 혹시라도 뭔가 뽑힌다면 그 인용문에 각주 텍스트
+    # ("한국은행, 「경제전망")가 들어 있으면 안 된다.
+    got = rationale.pick(KEIS_2025_12_P10, "emp_change", bullets=True)
+    if got is not None:
+        assert "한국은행, 「경제전망" not in got
+
+
+def test_wrap_boundary_drops_the_footnotes_welded_onto_the_real_keis_p11_sentence():
+    # 11쪽은 각주 두 개("2) 3) 한국개발연구원,…"·"4) 한국금융연구원,…")가
+    # 연달아 표지 없이 붙는다 — 표지를 더한 뒤에는 앞의 좋은 문장이
+    # 독립된 유닛이 되고, 각주 두 개 다 어떤 유닛으로도 남지 않는다.
+    #
+    # "한국금융연구원"으로만 검사하지 않는다 — 이 쪽의 다른(무관한) 불릿
+    # 하나가 문장 한가운데 이미 "한국금융연구원3)"이라는 인라인 각주
+    # 번호를 갖고 있다("…제약할 것으로 전망 (KD), 한국금융연구원3)",
+    # 표지 없는 줄 위의 것이 아니라 이 불릿 자체가 실물 OCR 에서 그렇게
+    # 감겨 있다) — 이건 이 태스크가 다루는 결함(줄 첫머리 각주 블록)과
+    # 다른, 손대지 않는 기존 인공물이다. 그래서 "이 문장이 각주 두 개를
+    # 삼켰는가"만 좁혀서 본다: 어떤 유닛도 각주 표지로 시작하지 않고,
+    # "만성적인…" 문장에 각주 인용문("한국개발연구원, KDI 경제전망")이
+    # 붙어 있지 않으면 된다.
+    units = rationale.sentences(KEIS_2025_12_P11, bullets=True)
+    assert (
+        "만성적인 인력 공급제약(인력 부족)은 이 업종의 취업자 수 감소에 "
+        "추가적 영향을 미칠 것으로 예상됨"
+    ) in units
+    assert not any(u.startswith(("2)", "3)", "4)")) for u in units)
+    assert not any("한국개발연구원, KDI 경제전망" in u for u in units)
+
+
+def test_wrap_boundary_drops_the_footnote_line_in_the_real_bok_summary_table():
+    # 각주 표지는 OCR 경로만이 아니라 텍스트 레이어 경로에도 나온다 —
+    # bok_2026-08_summary.txt 는 표 아래 각주 여러 개가 "4) 근월물 기간
+    # 평균 기준 5) 식료품·에너지 제외 기준 6) 15세 이상 기준" 한 줄로
+    # 이어져 있다. 이 줄이 통째로 버려지는지 직접 확인한다(단위 개수
+    # 변화는 위 test_pick_never_drops_below_two_units_… 가 이미 못박아
+    # 뒀다).
+    units = rationale.sentences(BOK_2026_08)
+    assert not any("근월물 기간 평균 기준" in u for u in units)
+
+
+def test_pick_recovers_the_keis_p11_sentence_whole_for_emp_change():
+    # 각주 표지를 더하기 전에는 이 문장 뒤에 각주 두 개가 그대로 용접돼
+    # 2025-12-31 emp_change 근거로 실제 저장됐다(rationales.json 실측,
+    # 컨트롤러 보고). 더한 뒤에는 각주 없이 문장 그대로가 뽑힌다 — 이
+    # 문장은 "영향"(인과)과 "예상"(전망, "예상됨"의 부분열)과 "취업자"
+    # (지표)를 모두 갖춰 pick 의 세 조건을 채운다.
+    assert rationale.pick(KEIS_2025_12_P11, "emp_change", bullets=True) == (
+        "만성적인 인력 공급제약(인력 부족)은 이 업종의 취업자 수 감소에 "
+        "추가적 영향을 미칠 것으로 예상됨"
+    )
