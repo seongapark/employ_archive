@@ -1,3 +1,4 @@
+import json
 from datetime import date, datetime
 from domains.forecast.pipeline.models import ForecastRecord, make_id
 from domains.forecast.pipeline import store
@@ -70,6 +71,25 @@ def test_save_and_load_roundtrip(tmp_path):
 
 def test_load_missing_file_returns_empty(tmp_path):
     assert store.load_forecasts(tmp_path / "nope.json") == []
+
+
+def test_load_forecasts_tolerates_legacy_rationale_keys(tmp_path):
+    # forecasts.json 에는 모델에서 뺀 rationale·rationale_tags 키가 아직 남아
+    # 있다(다음 저장 전까지). ForecastRecord.model_config 의 extra="ignore" 가
+    # 없으면 이 로드는 pydantic 검증 오류로 깨진다.
+    path = tmp_path / "forecasts.json"
+    path.write_text(json.dumps([{
+        "id": "oecd-2026-06-gdp_growth-2027", "org": "OECD", "org_name_ko": "OECD",
+        "report_title": "test", "published_at": "2026-06-15", "target_year": 2027,
+        "target_period": "annual", "indicator": "gdp_growth", "value": 2.0, "unit": "%",
+        "prev_value": None, "revision": None,
+        "rationale": "", "rationale_tags": [],
+        "source_url": "https://example.com/a", "source_page": None,
+        "landing_url": "https://example.com", "confidence": "verified",
+        "collected_at": "2026-06-15T16:00:00",
+    }]), encoding="utf-8")
+    loaded = store.load_forecasts(path)
+    assert [r.id for r in loaded] == ["oecd-2026-06-gdp_growth-2027"]
 
 
 def test_backfill_out_of_order_links_to_immediate_predecessor():

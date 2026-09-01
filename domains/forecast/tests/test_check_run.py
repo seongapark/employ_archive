@@ -123,3 +123,67 @@ def test_entry_point_prints_on_a_console_that_is_not_utf8(tmp_path):
                      ["kdi: HTTPError: HTTP Error 502: Bad Gateway"])
     proc = run_entry_point(path, PYTHONIOENCODING="ascii")
     assert proc.returncode == 0, proc.stdout + proc.stderr
+
+
+# ---------------------------------------------------------------------------
+# 최종 검토 Fix 6 — 근거 실패는 경고다. 수치 실패만 판정을 바꾼다.
+# ---------------------------------------------------------------------------
+
+def write_run_with_rationale_errors(tmp_path, collectors, errors, rationale_errors):
+    path = tmp_path / "last_run.json"
+    path.write_text(json.dumps({
+        "run_at": "2026-08-30T16:00:00+09:00",
+        "collectors": collectors,
+        "conflicts": [],
+        "errors": errors,
+        "rationale_errors": rationale_errors,
+    }, ensure_ascii=False), encoding="utf-8")
+    return path
+
+
+def test_a_rationale_failure_alone_keeps_the_run_green(tmp_path, capsys):
+    # 이게 이 수정의 요점이다. 예전엔 이 오류가 errors 에 섞여 있어
+    # "keis" 의 수치 장애로 읽혔고, KNOWN_DOWN 으로 유예를 주면 이번엔
+    # collectors["keis"]["ok"] 가 True 라 두 번째 루프에 걸렸다 — 두 갈래
+    # 어디로 가도 빨갛고 안내문은 다시 첫 갈래로 보냈다.
+    path = write_run_with_rationale_errors(
+        tmp_path, {"keis": {"ok": True}}, [],
+        ["keis: 근거 ValueError: 본문을 못 받았다"])
+    assert judge(path, known_down={}) == 0
+    out = capsys.readouterr().out
+    assert "::warning::" in out
+    assert "keis" in out
+    assert "::error::" not in out
+
+
+def test_a_rationale_failure_does_not_need_a_known_down_reprieve(tmp_path, capsys):
+    # 유예를 주는 순간 예전 구현이 걸리던 그 두 번째 루프를 직접 자극한다 —
+    # 수치는 성공(ok=True)인데 이름이 KNOWN_DOWN 에 있는 상태다. 근거
+    # 실패에는 애초에 유예가 필요 없어야 한다.
+    path = write_run_with_rationale_errors(
+        tmp_path, {"keis": {"ok": True}}, [],
+        ["keis: 근거 ValueError: 본문을 못 받았다"])
+    assert judge(path, known_down={"keis": date(2026, 12, 31)}) == 1
+    # 이때 빨간 이유는 근거가 아니라 "되살아난 수집기가 목록에 남아 있다"
+    # 여야 한다 — 근거 쪽은 여전히 경고로만 찍힌다.
+    out = capsys.readouterr().out
+    assert "KNOWN_DOWN" in out
+    assert "::warning::" in out
+
+
+def test_a_numbers_failure_still_fails_even_beside_a_rationale_warning(tmp_path, capsys):
+    # 근거 칸을 새로 만들었다고 수치 판정이 무뎌지면 안 된다.
+    path = write_run_with_rationale_errors(
+        tmp_path, {"bok": {"ok": False}, "keis": {"ok": True}},
+        ["bok: ValueError: 요약표 페이지를 찾지 못했다"],
+        ["keis: 근거 ValueError: 본문을 못 받았다"])
+    assert judge(path, known_down={}) == 1
+    out = capsys.readouterr().out
+    assert "::error::bok" in out
+    assert "::warning::" in out
+
+
+def test_an_old_last_run_without_the_new_key_is_still_judged(tmp_path):
+    # 이 브랜치 이전에 쓰인 last_run.json 에는 rationale_errors 키가 없다 —
+    # KeyError 로 터지면 옛 실행을 다시 판정할 수 없게 된다.
+    assert judge(write_run(tmp_path, {"bok": {"ok": True}}, []), known_down={}) == 0

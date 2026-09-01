@@ -143,3 +143,88 @@ def test_collect_uses_the_newest_round(monkeypatch):
 
     bok.collect(date(2026, 8, 30))
     assert [i.url for i in seen] == ["u-new"]
+
+
+def _fake_get_for(issue):
+    def fake_get(url, **kw):
+        if url == issue.url:
+            return _Resp(text='<a href="/fileSrc/x.pdf">첨부</a>')
+        assert url == "https://www.bok.or.kr/fileSrc/x.pdf"
+        return _Resp(content=b"%PDF")
+    return fake_get
+
+
+def test_collect_issue_rationales_returns_empty_for_the_real_report(monkeypatch):
+    # TABLE(16쪽 실제 원문)과 그 앞뒤(15·17쪽, 실측)에는 근거가 없다 —
+    # 표 쪽만으로는(그리고 실제 이웃 쪽으로도) 근거가 안 나오는 게 이
+    # 보고서의 실제 모습이다.
+    issue = bok.Issue("경제전망보고서(2026년 8월)", date(2026, 8, 27), "https://x/view")
+    monkeypatch.setattr(bok.http, "get", _fake_get_for(issue))
+    monkeypatch.setattr(bok.pdf, "page_texts", lambda data: ["표지", TABLE, "다음 쪽"])
+
+    assert bok.collect_issue_rationales(issue) == []
+
+
+def test_collect_issue_rationales_returns_empty_when_no_summary_table_found(monkeypatch):
+    issue = bok.Issue("경제전망보고서(2026년 8월)", date(2026, 8, 27), "https://x/view")
+    monkeypatch.setattr(bok.http, "get", _fake_get_for(issue))
+    monkeypatch.setattr(bok.pdf, "page_texts", lambda data: ["표지", "본문"])
+
+    assert bok.collect_issue_rationales(issue) == []
+
+
+def test_collect_issue_rationales_reads_the_page_before_the_table(monkeypatch):
+    # 인과 서술이 표 앞쪽에 실릴 수 있다 — 이 문장은 실제 문장이 아니라
+    # (아래 실제 보고서 문장은 표에서 멀리 떨어져 있어 이 창엔 안 들어온다)
+    # 창이 정말 앞쪽 한 쪽을 읽는지만 확인하는 자리 표시자다.
+    issue = bok.Issue("경제전망보고서(2026년 8월)", date(2026, 8, 27), "https://x/view")
+    prose = "취업자수는 건설업 부진의 영향으로 지난 전망 대비 하향조정될 것으로 예상된다."
+
+    monkeypatch.setattr(bok.http, "get", _fake_get_for(issue))
+    monkeypatch.setattr(bok.pdf, "page_texts", lambda data: [prose, TABLE])
+
+    got = bok.collect_issue_rationales(issue)
+    by_ind = {r.indicator: r for r in got}
+    assert "emp_change" in by_ind
+    # 근거는 그 문장이 실제로 실린 쪽(1, 앞쪽)으로 인용한다 — 표 쪽(2)이 아니다
+    assert by_ind["emp_change"].source_page == 1
+    assert by_ind["emp_change"].org == "BOK"
+    assert by_ind["emp_change"].source_url == "https://www.bok.or.kr/fileSrc/x.pdf"
+
+
+def test_collect_issue_rationales_reads_the_page_after_the_table(monkeypatch):
+    # 표가 마지막 쪽이 아니면 뒤쪽도 본다. 자리 표시자 문장이다.
+    issue = bok.Issue("경제전망보고서(2026년 8월)", date(2026, 8, 27), "https://x/view")
+    prose = "소비자물가는 국제유가 상승의 영향으로 당초 전망보다 높아질 것으로 예상된다."
+
+    monkeypatch.setattr(bok.http, "get", _fake_get_for(issue))
+    monkeypatch.setattr(bok.pdf, "page_texts", lambda data: ["표지", TABLE, prose])
+
+    got = bok.collect_issue_rationales(issue)
+    by_ind = {r.indicator: r for r in got}
+    assert "cpi" in by_ind
+    assert by_ind["cpi"].source_page == 3   # 표 쪽(2)이 아니라 뒤쪽(3)
+
+
+def test_collect_issue_rationales_does_not_look_before_page_one(monkeypatch):
+    issue = bok.Issue("경제전망보고서(2026년 8월)", date(2026, 8, 27), "https://x/view")
+    monkeypatch.setattr(bok.http, "get", _fake_get_for(issue))
+    monkeypatch.setattr(bok.pdf, "page_texts", lambda data: [TABLE])
+
+    assert bok.collect_issue_rationales(issue) == []
+
+
+def test_pick_would_blend_indicators_on_the_real_credits_page():
+    # 실측(2026년 8월호 3쪽, 부문별 담당자 목록) — "물가연구팀"·"고용동향팀"
+    # (지표 낱말)과 "…흐름과 배경"(사실은 BOX 제목의 일부일 뿐인 인과 표지)과
+    # "향후 전망"(전망 표지)이 한 "문장"에 우연히 다 모여, cpi 와 emp_change
+    # 근거가 서로 같은 문장이 돼 버린다. collect_issue_rationales 가 표
+    # 쪽(16) 앞뒤 한 쪽으로만 창을 좁히는 이유가 이것이다 — 이 쪽(3)은
+    # 그 창 밖이다.
+    from domains.forecast.pipeline import rationale
+    credits = (Path(__file__).parent / "fixtures" / "bok_2026-08_p3_credits.txt"
+               ).read_text(encoding="utf-8")
+    got_cpi = rationale.pick(credits, "cpi")
+    got_emp = rationale.pick(credits, "emp_change")
+    assert got_cpi is not None
+    assert got_cpi == got_emp  # 서로 다른 지표인데 같은 "문장"이 뽑힌다

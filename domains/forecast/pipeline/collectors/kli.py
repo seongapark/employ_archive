@@ -29,6 +29,9 @@ LABEL_TO_INDICATOR = {
 }
 # 표는 천명 단위, 아카이브는 만명 단위다
 SCALE = {"emp_change": 0.1}
+# 이 보고서가 실제로 다루는 지표 — LABEL_TO_INDICATOR 의 값 집합이다. 성장률·
+# 물가는 이 보고서가 다루지 않는다(머리말 참고).
+INDICATORS = frozenset(LABEL_TO_INDICATOR.values())
 
 _ITEM = re.compile(
     r'href="(?P<href>[^"]*list_no=(?P<no>\d+)[^"]*)"[^>]*>(?P<title>[^<]*전망[^<]*)</a>')
@@ -116,6 +119,36 @@ def collect_issue(issue: Issue) -> list[ForecastRecord]:
             # 표 차례에도 같은 캡션이 나온다 — 표가 아닌 쪽은 건너뛴다
             continue
     raise ValueError(f"{issue.title}: 고용 전망 표를 실은 쪽을 찾지 못했다")
+
+
+def collect_issue_rationales(issue: Issue) -> list["Rationale"]:
+    """그 회차의 근거 문장을 준다. 고용 전망 표를 못 찾으면 빈 리스트.
+
+    이 보고서는 표 앞뒤 서술이 표와 같은 쪽에 실린다(실측: 2025년 12월호
+    — kli_2026_forecast 픽스처가 그 쪽 원문 그대로다) — KEIS 처럼 앞뒤
+    쪽을 따로 읽을 필요가 없다. parse() 는 forecast_table() 로 표 구간만
+    잘라 쓰지만, 여기서는 서술까지 담긴 쪽 원문 전체를 report.
+    rationales_from_text 에 넘긴다.
+
+    indicators 를 INDICATORS(이 보고서가 실제로 다루는 지표)로 한정한다.
+    같은 쪽에는 "이러한 긍정적 전망의 주요 원인으로는 …" 처럼 성장률을
+    말하는 서술도 있지만(실측), 이 기관은 성장률을 전망하지 않으므로
+    gdp_growth 근거로 저장하면 안 된다.
+    """
+    url = DOWNLOAD_URL.format(no=_list_no(issue.url))
+    pages = pdf.page_texts(http.get(url).content)
+    for page_no, text in enumerate(pages, start=1):
+        if not _TABLE_CAPTION.search(text):
+            continue
+        try:
+            parse(text, issue, url, page_no)
+        except ValueError:
+            # 표 차례에도 같은 캡션이 나온다 — 표가 아닌 쪽은 건너뛴다
+            continue
+        return report.rationales_from_text(
+            text, org="KLI", issue=issue,
+            indicators=sorted(INDICATORS), source_url=url, source_page=page_no)
+    return []
 
 
 def collect(today: date) -> list[ForecastRecord]:

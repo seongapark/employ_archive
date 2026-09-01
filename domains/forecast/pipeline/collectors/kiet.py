@@ -107,5 +107,30 @@ def collect_issue(issue: Issue) -> list[ForecastRecord]:
     raise ValueError(f"{issue.title}: 거시경제지표 전망 표를 실은 쪽을 찾지 못했다")
 
 
+def collect_issue_rationales(issue: Issue) -> list["Rationale"]:
+    """그 회차의 근거 문장을 준다. 거시경제지표 전망 표를 못 찾으면 빈 리스트.
+
+    이 표에는 성장률만 있다(머리말 참고) — indicators 를 LABEL_TO_INDICATOR
+    의 값({"gdp_growth"})으로 한정한다. 같은 쪽에는 민간소비(물가) 서술도
+    있지만(실측: kiet_2026h2_macro 픽스처 cpi 143자 문장), 이 표는 물가를
+    다루지 않으므로 cpi 근거로 저장하면 안 된다.
+    """
+    url = parse_pdf_link(http.get(issue.url).text)
+    pages = pdf.page_texts(http.get(url).content)
+    for page_no, text in enumerate(pages, start=1):
+        if not _TABLE_CAPTION.search(text):
+            continue
+        try:
+            parse(text, issue, url, page_no)
+        except ValueError:
+            # 표 차례에도 같은 캡션이 나온다 — 표가 아닌 쪽은 건너뛴다
+            continue
+        return report.rationales_from_text(
+            text, org="KIET", issue=issue,
+            indicators=sorted(LABEL_TO_INDICATOR.values()), source_url=url,
+            source_page=page_no)
+    return []
+
+
 def collect(today: date) -> list[ForecastRecord]:
     return collect_issue(list_issues()[0])

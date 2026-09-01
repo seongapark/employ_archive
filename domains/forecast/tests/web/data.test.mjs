@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
   latestRecords, summarize, seriesFor, orgIndicators, compareSet,
   timelineGroups, fmtValue, fmtDelta, dateLabel, isNew, esc, SHORT_LABELS,
-  halfYears, halfYearLabel, fmtNumber, isOcrSourced,
+  halfYears, halfYearLabel, fmtNumber, isOcrSourced, rationaleFor,
 } from '../../app/js/data.js';
 
 const INDICATOR_CODES = ['emp_change', 'emp_rate', 'unemp_rate', 'gdp_growth', 'cpi', 'emp_rate_youth', 'labor_force'];
@@ -281,4 +281,47 @@ test('fmtDelta pins a whole-number percent revision to one decimal', () => {
   // 카드가 63.0% 인데 옆의 수정폭이 +1%p 면 정밀도가 달라 보인다
   assert.deepEqual(fmtDelta(rec({ revision: 1, unit: '%' })), { dir: 'up', text: '+1.0%p' });
   assert.deepEqual(fmtDelta(rec({ revision: -2, unit: '%' })), { dir: 'down', text: '-2.0%p' });
+});
+
+test('근거는 기관·발표일·지표로 찾는다', () => {
+  // 같은 기관·같은 발표일에 지표가 다른 근거를 먼저 두어야, 지표를 보지 않고
+  // 앞의 것을 그냥 반환하는 실수를 이 테스트가 잡아낸다.
+  const items = [
+    { org: 'KDI', published_at: '2026-08-19', indicator: 'cpi',
+      text: '유가 상승', tags: ['유가'] },
+    { org: 'KDI', published_at: '2026-08-19', indicator: 'gdp_growth',
+      text: '수출 호조', tags: ['수출'] },
+  ];
+  const rec = { org: 'KDI', published_at: '2026-08-19', indicator: 'gdp_growth' };
+  assert.equal(rationaleFor(rec, items).text, '수출 호조');
+});
+
+test('같은 지표의 반기 레코드도 같은 근거를 가리킨다', () => {
+  const items = [{ org: 'KDI', published_at: '2026-08-19', indicator: 'gdp_growth',
+                   text: '수출 호조', tags: [] }];
+  const h2 = { org: 'KDI', published_at: '2026-08-19', indicator: 'gdp_growth',
+               target_period: 'h2' };
+  assert.equal(rationaleFor(h2, items).text, '수출 호조');
+});
+
+test('없으면 null 을 준다', () => {
+  assert.equal(rationaleFor({ org: 'BOK', published_at: '2026-01-01',
+                              indicator: 'cpi' }, []), null);
+});
+
+test('rationales.json이 아직 없어 items가 null이어도 죽지 않는다', () => {
+  // loadJson은 404/네트워크 실패를 null로 돌려준다(core/shell.js). 근거 백필 전에는
+  // rationales.json 자체가 없을 수 있으므로, 그 null이 그대로 여기 들어와도
+  // 예외 없이 폴백(null)으로 떨어져야 화면이 살아있다.
+  assert.equal(rationaleFor({ org: 'KDI', published_at: '2026-08-19',
+                              indicator: 'gdp_growth' }, null), null);
+});
+
+test('같은 기관·지표라도 발표일이 다르면 옛 회차의 근거를 빌리지 않는다', () => {
+  // 발표일을 보지 않으면, 최신 회차 레코드가 더 오래된 회차의 문장을 그대로
+  // 물려받는다 — 그 회차엔 아직 아무 근거도 없어야 정상이다.
+  const items = [{ org: 'KDI', published_at: '2026-05-19', indicator: 'gdp_growth',
+                   text: '5월호 근거', tags: [] }];
+  const rec = { org: 'KDI', published_at: '2026-08-19', indicator: 'gdp_growth' };
+  assert.equal(rationaleFor(rec, items), null);
 });
