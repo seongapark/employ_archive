@@ -195,10 +195,16 @@ def run(sources: dict[str, Callable[[], list[Round]]] = None,
     rationale_sources = {} if rationale_sources is None else rationale_sources
     path = Path(data_dir) / "forecasts.json"
     rationales_path = Path(data_dir) / "rationales.json"
+    # forecasts.json 은 기계만 쓰는 파일이라 못 읽으면 그건 진짜 사고다 —
+    # 여기서 감싸지 않는다(rationale_store.load_or_empty 문서주석 참고).
     records = store.load_forecasts(path)
-    rationales = rs.load(rationales_path)
+    rationales, rationale_load_error = rs.load_or_empty(rationales_path)
     existing_rationales = list(rationales)  # 내용 비교용 스냅샷
     report = Report()
+    if rationale_load_error is not None:
+        report.rationale_errors.append(
+            f"rationales.json 을 읽지 못해 이번 실행은 근거를 비운 채로 "
+            f"진행한다(저장도 건너뛴다) — {rationale_load_error}")
 
     for name, list_rounds in sources.items():
         if only is not None and name not in only:
@@ -263,7 +269,9 @@ def run(sources: dict[str, Callable[[], list[Round]]] = None,
     # 개수가 아니라 내용으로 비교한다 — merge 가 잘못 짜여 있는 값을 덮어써도
     # 개수는 그대로일 수 있는데(같은 키, 다른 문장), 개수만 보면 그 사고를
     # 놓치고 저장하지 않아 파일이 우연히 이전 그대로인 것처럼 보인다.
-    if rationales != existing_rationales:
+    # 못 읽은 파일에는 쓰지 않는다 — 사람이 고치던 편집물을 우리가 지우게
+    # 된다(rationale_store.load_or_empty 문서주석).
+    if rationale_load_error is None and rationales != existing_rationales:
         rs.save(rationales_path, rationales)
     return report
 

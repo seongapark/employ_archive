@@ -65,6 +65,16 @@ KEIS_2025_12_P10 = (FIXTURES / "keis_2025-12_p10.txt").read_text(encoding="utf-8
 # 표지 없이 곧바로 붙어 있다 — 각주 표지 수정 전에는 emp_change 근거가
 # 이 각주까지 통째로 삼켜 rationales.json 에 그대로 저장됐다.
 KEIS_2025_12_P11 = (FIXTURES / "keis_2025-12_p11.txt").read_text(encoding="utf-8")
+# 한국은행 2026년 8월호 3쪽(집필진 명단·목차) — 절 제목("1. 주요 여건 점검",
+# "2. 거시경제 전망", "3. 전망의 리스크 평가")이 명단 줄 사이에 끼어 있어,
+# 절 제목 규칙이 없으면 유닛이 "…황수빈 이나영 2." 로 끝난다.
+BOK_2026_08_P3_CREDITS = (
+    FIXTURES / "bok_2026-08_p3_credits.txt").read_text(encoding="utf-8")
+# OECD Interim 2026년 3월호 20쪽 — 한국이 아니라 G20 전체를 말하는 본문이고
+# 문단마다 번호가 붙는 문체다("20. Economic growth in the G20 …"). 수집
+# 창(표 쪽 ±1) 밖이라 production 은 읽지 않는다.
+OECD_P20_GLOBAL = (
+    FIXTURES / "oecd_interim_2026-03_p20_global.txt").read_text(encoding="utf-8")
 
 
 def test_pick_takes_the_sentence_that_gives_a_reason():
@@ -459,7 +469,14 @@ def test_pick_does_not_use_bullets_by_default_on_the_same_ocr_text():
     # ("통계포커스") 도 여전히 기본 경로에만 남는다. 이 캡션 검사가 이
     # 테스트의 진짜 회귀 감지기다 — bullets 가 조용히 True 로 새면 기본
     # 경로 호출도 캡션을 버려 이 단언이 깨진다.
-    assert len(rationale.sentences(KEIS_P20)) == 7
+    #
+    # 기본 경로 수가 7 -> 3 으로 줄었다. _is_page_furniture 를 _unwrap 에도
+    # 걸면서(Fix 4) 이 쪽의 장식 세 줄("= =", 쪽번호+점선 줄,
+    # "www.keis.or.kr")이 더는 유닛이 되지 않기 때문이다 — 예전엔 그 셋이
+    # 각각 유닛으로 남아 수를 부풀리고 있었다. OCR 경로는 원래부터 장식을
+    # 버렸으므로 7 그대로다. 두 수가 다시 달라진 것 자체는 이 테스트가
+    # 재는 것이 아니다(아래 캡션 검사가 재는 것이다).
+    assert len(rationale.sentences(KEIS_P20)) == 3
     assert len(rationale.sentences(KEIS_P20, bullets=True)) == 7
     assert any("통계포커스" in s for s in rationale.sentences(KEIS_P20))
     assert not any("통계포커스" in s
@@ -936,3 +953,248 @@ def test_pick_recovers_the_keis_p11_sentence_whole_for_emp_change():
         "만성적인 인력 공급제약(인력 부족)은 이 업종의 취업자 수 감소에 "
         "추가적 영향을 미칠 것으로 예상됨"
     )
+
+
+# ---------------------------------------------------------------------------
+# 최종 검토 Fix 1 — _FALSE_CONTAINMENT 에 "이유"·"건설업체" 를 더한다.
+# ---------------------------------------------------------------------------
+
+def test_tags_ignore_yuga_trapped_inside_iyu():
+    # 배포된 데이터에서 실제로 잡은 오탐이다 — rationales.json 의 KLI
+    # 2025-08-29 emp_change 근거가 ["인구구조", "유가"] 로 저장돼 화면에
+    # "요인은 유가" 가 떴는데, 그 문장에 원유 가격 얘기는 한 글자도 없다.
+    # 걸린 건 "컸던 이유가" 의 "이유가" 안에 든 부분열이다.
+    s = ("그보다는 상반기에 취업자 수 증가가 예상보다 컸던 이유가 예상을 "
+         "넘어선 고령층 취업자 수 증가에 힘입었던 것처럼 하반 기에도 이러한 "
+         "경향이 지속된다면 그로 인해 20만 명을 상회하는 취업자 증가도 "
+         "실현될 수 있다.")
+    tags = rationale.tags_for(s)
+    assert "유가" not in tags
+    assert "인구구조" in tags   # "고령" 은 진짜다 — 함정만 막고 진짜는 남긴다
+
+
+def test_tags_still_catch_yuga_in_a_sentence_that_also_says_iyu():
+    # "이유" 를 지운다고 같은 문장의 진짜 "유가" 까지 잃으면 안 된다 —
+    # 인과를 말하는 문장에는 둘이 함께 나올 개연성이 높다.
+    s = "국제유가 상승이 물가가 오른 이유가 되어 상승률이 확대될 전망이다."
+    assert "유가" in rationale.tags_for(s)
+
+
+def test_tags_ignore_geonseoleop_trapped_inside_geonseoleopche():
+    # kdi_2025-08_p4.txt 의 "건설업체의 재무건전성 악화" 가 실례다 —
+    # 건설회사의 재무 상태를 말하는 문장이지 건설업 '고용' 얘기가 아니다.
+    s = "건설업체의 재무건전성 악화가 반영되어 공사 진행에 차질이 발생할 전망이다."
+    assert "건설업고용" not in rationale.tags_for(s)
+
+
+def test_tags_still_catch_geonseoleop_when_genuinely_present():
+    s = "건설업 고용 감소가 하반기에도 이어질 것으로 전망된다."
+    assert "건설업고용" in rationale.tags_for(s)
+
+
+def test_the_kdi_p4_fixture_really_contains_the_geonseoleopche_trap():
+    # 전제 확인 — 위 합성 문장이 아니라 실물 픽스처에도 이 겹침이 있다는
+    # 것을 먼저 못박는다(안 그러면 위 테스트는 코퍼스와 무관한 방어가 된다).
+    # 이 쪽에서 "건설업" 이 나오는 자리는 "건설업체" 뿐이다 — 그래서 맨
+    # "건설업" 을 세면 이 쪽의 태그가 통째로 틀린다.
+    assert "건설업체" in KDI_2025_08_P4
+    assert "건설업" not in KDI_2025_08_P4.replace("건설업체", "")
+
+
+# ---------------------------------------------------------------------------
+# 최종 검토 Fix 2 — "전망"·"예상" 은 낱말 첫머리에서만 전망 표지다.
+# ---------------------------------------------------------------------------
+
+# 배포된 rationales.json 의 BOK 2025-02-25 cpi 근거 문장 그대로다. 이 문장이
+# 전망 조건을 통과한 경로는 오직 "기본전망보다" 안의 맨 "전망" 하나였고,
+# 문장은 "…추정된다." 로 끝난다 — _FORECAST_SUFFIX 허용목록이 세 라운드에
+# 걸쳐 명시적으로 배제한 그 어미다.
+BOK_ALTERNATIVE_SCENARIO = (
+    "물가상승률은 금년중 영향은 제한적이지만, 내년 에는 기본전망보다 "
+    "+0.2%p 높아질 것으로 추정된다."
+)
+# 배포된 KDI 근거 문장에서 그대로 딴 조각이다 — "축소될 전망" 의 "전망" 은
+# 앞이 공백이라 낱말 첫머리다.
+KDI_KEPT_CLAUSE = (
+    "인구구조 변화와 낮은 경제성장세로 인해 취업자 수 증가폭은 작년 "
+    "16만명에서 금년 15만명, 내년 11만명 정도로 축소될 전망"
+)
+
+
+def test_pick_drops_the_bok_alternative_scenario_that_only_had_gibonjeonmang():
+    # 이 문장은 지표(물가)와 인과("영향")를 갖췄고, 전망 표지만이 쟁점이다.
+    # "기본전망" 은 기준 시나리오의 **이름**이지 이 문장이 하는 예측이
+    # 아니다 — 게다가 그 인과("영향")가 가리키는 원인은 인용문 밖에 있다.
+    assert rationale.pick(BOK_ALTERNATIVE_SCENARIO, "cpi") is None
+
+
+def test_the_bok_sentence_would_still_pass_if_the_bare_noun_were_a_marker(monkeypatch):
+    # 전제 확인 — 위 단언이 "전망 표지 때문에" 떨어진 것인지, 다른 조건이
+    # 없어서 떨어진 것인지 갈라 본다. 낱말 첫머리 제약만 풀면(맨 "전망" 을
+    # 다시 표지로 삼으면) 같은 문장이 그대로 통과한다.
+    monkeypatch.setattr(rationale, "_FORECAST", rationale._FORECAST + ("전망",))
+    assert rationale.pick(BOK_ALTERNATIVE_SCENARIO, "cpi") == BOK_ALTERNATIVE_SCENARIO
+
+
+def test_pick_keeps_the_kdi_clause_where_jeonmang_starts_a_word():
+    # 반대 방향 — 공백 뒤의 "전망" 은 그대로 표지다. 배포된 여섯 건이
+    # 그대로 남아야 한다는 것이 이 수정의 전제다.
+    assert rationale.pick(KDI_KEPT_CLAUSE, "emp_change") == KDI_KEPT_CLAUSE
+
+
+def test_pick_keeps_yesang_when_a_particle_follows_it():
+    # 뒤가 아니라 **앞**만 본다 — "예상보다"·"예상을" 처럼 조사가 붙는 것은
+    # 막지 않는다(배포된 KLI 2025-08-29 근거가 이 형태로만 통과한다).
+    s = "취업자 수 증가가 예상보다 컸던 것은 고령층 증가에 힘입은 결과다."
+    assert rationale.pick(s, "emp_change") == s
+
+
+def test_pick_rejects_the_forecast_noun_inside_other_compounds():
+    # "기본전망"·"수정전망"·"직전전망" 도 같은 부류다 — 문서나 숫자의
+    # 이름이지 이 문장이 하는 예측이 아니다. 셋 다 인과·지표는 갖추고
+    # 전망 표지만 없는 문장으로 확인한다.
+    for compound in ("기본전망", "수정전망", "직전전망"):
+        s = f"취업자 수는 {compound}보다 낮아진 영향으로 부진한 것으로 추정된다."
+        assert rationale.pick(s, "emp_change") is None, compound
+
+
+def test_pick_still_uses_the_forecast_suffix_allow_list_after_the_word_initial_rule():
+    # 허용목록이 살아 있는지 다시 확인한다 — "것으로 관측된다" 는 통과하고
+    # "것으로 추정된다" 는 떨어진다. 낱말 첫머리 제약이 이 목록을 우회하는
+    # 길을 막은 것이지, 목록 자체를 대신하는 것이 아니다.
+    ok = "취업자 증가세는 내수 회복에 힘입어 이어질 것으로 관측된다."
+    no = "취업자 증가세는 내수 회복에 힘입어 이어질 것으로 추정된다."
+    assert rationale.pick(ok, "emp_change") == ok
+    assert rationale.pick(no, "emp_change") is None
+
+
+def test_only_the_two_bok_rationales_of_the_shipped_eight_get_dropped():
+    # 배포된 8건 전부를 문장 그대로 다시 태워 6건이 남는지 본다 — 표로만
+    # 적어 둔 예측을 실제로 재는 자리다.
+    kept = [
+        (KDI_KEPT_CLAUSE, "emp_change"),
+        ("그보다는 상반기에 취업자 수 증가가 예상보다 컸던 이유가 예상을 "
+         "넘어선 고령층 취업자 수 증가에 힘입었던 것처럼 하반 기에도 이러한 "
+         "경향이 지속된다면 그로 인해 20만 명을 상회하는 취업자 증가도 "
+         "실현될 수 있다.", "emp_change"),
+        ("만성적인 인력 공급제약(인력 부족)은 이 업종의 취업자 수 감소에 "
+         "추가적 영향을 미칠 것으로 예상됨", "emp_change"),
+        ("2025년 하반기 고용 증가폭은 20만 명을 상회할 것으로 예상되는데, "
+         "이는 보건업 및 사회복지 서비스업, 정보통신업, 전문ㆍ과학 및 "
+         "기술서비스업 등 서비스업 전반의 견조한 고용 증가가 뒷받침된 결과이다.",
+         "emp_change"),
+        ("하반기에는 건설경기 부진 완화와 내수 회복이 점진적으로 반영되고, "
+         "상반기 고용 증가를 주도한 보건복지업 및 대면 서비스업의 노동 수요 "
+         "역시 지속될 것으로 예상", "emp_change"),
+    ]
+    for text, indicator in kept:
+        assert rationale.pick(text, indicator) is not None, text[:30]
+    dropped = [
+        (BOK_ALTERNATIVE_SCENARIO, "cpi"),
+        ("물가상승률은 금년중 영향이 제한적이지만, 내년에는 기본전망보다 "
+         "+0.1%p 높아질 것으로 추정된다.", "cpi"),
+    ]
+    for text, indicator in dropped:
+        assert rationale.pick(text, indicator) is None, text[:30]
+
+
+# ---------------------------------------------------------------------------
+# 최종 검토 Fix 3 — 절 제목 줄은 각주와 같은 갈래로 닫고 버린다.
+# ---------------------------------------------------------------------------
+
+def test_section_heading_regex_matches_only_a_leading_number_dot_space():
+    assert rationale._is_section_heading_line("3. 전망의 위험요인")
+    assert rationale._is_section_heading_line("  20. Economic growth in the G20")
+    # 숫자 뒤에 공백이 없으면 절 제목이 아니다 — 소수점("3.3% 성장")과
+    # 절 번호를 가르는 것이 이 공백이다.
+    assert not rationale._is_section_heading_line("3.3% 성장할 전망")
+    assert not rationale._is_section_heading_line("전망의 위험요인 3.")
+
+
+def test_the_kdi_rationale_no_longer_ends_with_the_section_number():
+    # 배포된 rationales.json 의 KDI 2025-08-12 두 건은 "…6만명 상향 조정 3."
+    # 으로 끝난다. 그 "3." 은 kdi_2025-08_p4.txt 10행의 절 제목
+    # "3. 전망의 위험요인" 이고, _DECIMAL_POINT 가 숫자 사이 마침표만
+    # 가리므로 _SENTENCE 가 그 마침표를 문장 끝으로 봤다.
+    got = rationale.pick(KDI_2025_08_P4, "emp_change")
+    assert got is not None
+    assert got.endswith("금년 취업자 수 증가폭을 6만명 상향 조정")
+    # 제목 문구 자체도 어느 유닛에도 남지 않는다(각주와 같은 처리 — 닫고 버린다)
+    assert not any("전망의 위험요인" in u
+                   for u in rationale.sentences(KDI_2025_08_P4))
+
+
+def test_the_bok_credits_page_no_longer_ends_a_unit_with_the_section_number():
+    # 같은 결함이 bok_2026-08_p3_credits.txt 에도 있다 — "…황수빈 이나영 2."
+    # (16행의 절 제목 "2. 거시경제 전망"). 같은 규칙 하나로 함께 사라진다.
+    units = rationale.sentences(BOK_2026_08_P3_CREDITS)
+    assert any(u.endswith("고용동향팀 황수빈 이나영") for u in units)
+    assert not any(u.rstrip().endswith(("1.", "2.", "3.")) for u in units)
+
+
+def test_section_heading_costs_the_head_line_of_a_numbered_oecd_paragraph():
+    # **이 규칙이 지는 비용을 그대로 못박는다.** OECD Interim 본문은 문단마다
+    # 번호를 붙이는 문체("20. Economic growth in the G20 …")라, 그 첫 줄이
+    # 절 제목과 글자 모양이 같다 — 규칙이 그 줄을 버리면 문단의 나머지가
+    # 머리 없는 조각으로 남는다. 픽스처 전수조사에서 이 모양의 줄 37개 중
+    # 8개가 이 부류였고(나머지 29개는 국문 절 제목 5개와 OECD 표 각주 24개),
+    # 실제로 결과가 달라지는 쪽은 수집 창 밖의 20쪽뿐이다
+    # (test_oecd_interim.py 의
+    # test_the_generic_global_page_no_longer_yields_a_rationale_at_all 참고).
+    #
+    # 조용히 두지 않고 여기 고정한다 — 다음 사람이 "왜 이 문장이 반쪽이지"
+    # 를 물을 때 답이 있어야 한다. 창 안의 쪽에서는 pick 결과가 하나도
+    # 바뀌지 않는다는 것을 아래 두 번째 단언이 함께 지킨다.
+    units = rationale.sentences(OECD_P20_GLOBAL)
+    assert "due to a step down in growth in China and India." in units
+    assert not any(u.startswith("20. Economic growth") for u in units)
+    # 수집 창 안의 쪽(2026-03 표 쪽 ±1 = 8·9·10쪽)에서는 손실이 없다.
+    assert rationale.pick(OECD_P10, "cpi") is None
+    assert rationale.pick(OECD_P10, "gdp_growth") is None
+
+
+# ---------------------------------------------------------------------------
+# 최종 검토 Fix 4 — 쪽 장식 판정을 기본 경로에도 건다.
+# ---------------------------------------------------------------------------
+
+def test_default_path_drops_page_furniture_welded_onto_the_last_unit():
+    # kdi_2025-08_p4.txt 의 마지막 줄은 쪽번호 "4" 하나다. 예전에는
+    # _is_page_furniture 를 _bullet_sentences 하나만 불러서, 텍스트 레이어
+    # 경로에서는 이 쪽번호가 앞 문장에 그대로 용접돼 유닛이
+    # "…가능성이 존재 4" 로 끝났다.
+    units = rationale.sentences(KDI_2025_08_P4)
+    assert any(u.endswith("가능성이 존재") for u in units)
+    assert not any(u.endswith("가능성이 존재 4") for u in units)
+
+
+def test_default_path_drops_the_watermark_url():
+    # 워터마크 URL 은 로마자를 담고 있어 "글자 없는 줄" 규칙만으로는 안
+    # 걸린다 — _is_page_furniture 가 'www.' 를 따로 보는 이유다. 예전에는
+    # 이 검사를 OCR 경로만 불러서 기본 경로 유닛에 URL 이 그대로 남았다.
+    units = rationale.sentences(KEIS_P20)
+    assert not any("www." in u for u in units)
+
+
+def test_default_path_does_not_flush_across_furniture_mid_sentence():
+    # OCR 경로와 **같은 semantics** 다 — 장식 줄은 버리되 닫지 않는다.
+    # 닫으면 장식 다음의 진짜 continuation 이 이미 비운 current 에 도착해
+    # 앞 반쪽만 완결된 문장처럼 남는다(설계 §3.3, Task 4 에서 한 번 겪고
+    # 되돌린 처리다). 이 테스트가 그 되돌림을 다시 못박는다.
+    text = ("내수 회복이 점진적으로 반영되고\n"
+            "www.keis.or.kr\n"
+            "취업자 증가세가 이어질 것으로 전망된다.")
+    assert rationale.sentences(text) == [
+        "내수 회복이 점진적으로 반영되고 취업자 증가세가 이어질 것으로 전망된다.",
+    ]
+
+
+def test_default_path_keeps_a_marker_only_line_from_being_eaten_as_furniture():
+    # 불릿 판정이 장식 판정보다 먼저 온다 — 표지만 있고 한글·로마자가 없는
+    # 줄("= =" 처럼, KEIS 20쪽 실물에 있다)을 장식으로 삼키면 항목 경계가
+    # 조용히 사라져 앞뒤 항목이 한 문장으로 붙는다.
+    text = ("취업자 수는 증가했다\n"
+            "= =\n"
+            "수출 호조를 반영해 성장률이 확대될 전망")
+    units = rationale.sentences(text)
+    assert "취업자 수는 증가했다" in units
+    assert not any("취업자 수는 증가했다 수출" in u for u in units)

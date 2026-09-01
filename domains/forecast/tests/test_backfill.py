@@ -257,3 +257,69 @@ def test_rationale_registry_covers_the_orgs_with_a_rationale_entry_point():
     assert set(backfill.RATIONALE_SOURCES) == {
         "oecd_interim", "bok", "kli", "kdi", "kiet", "keis",
     }
+
+
+# ---------------------------------------------------------------------------
+# 최종 검토 Fix 5 — 손으로 고치다 깨뜨린 rationales.json 이 백필을 죽이면 안 된다.
+# ---------------------------------------------------------------------------
+
+# 설계 4.3 이 상정하는 그 편집 사고 그대로다 — source_page 에 숫자가 아니라
+# 말이 들어갔고, 뒤에 끝 쉼표까지 붙었다.
+MALFORMED_RATIONALES = """[
+  {
+    "org": "BOK",
+    "published_at": "2026-08-27",
+    "indicator": "gdp_growth",
+    "text": "사람이 고치다 만 문장",
+    "tags": [],
+    "source_url": "https://x/y.pdf",
+    "source_page": "세 번째 쪽",
+  }
+]
+"""
+
+
+def test_a_malformed_rationales_file_does_not_stop_the_backfill(tmp_path):
+    # 예전에는 rs.load 가 try 밖에 있어 이 파일 하나로 백필 전체가 터졌다 —
+    # forecasts.json 이 한 줄도 안 쓰였다. 근거는 곁가지고 수치가 본체다.
+    (tmp_path / "rationales.json").write_text(MALFORMED_RATIONALES, encoding="utf-8")
+    src = {"bok": lambda: rounds(
+        ("2026년 8월", date(2026, 8, 27), [rec(date(2026, 8, 27), 3.3)]))}
+    rationale_src = {"bok": lambda: [
+        backfill.Round("2026년 8월", date(2026, 8, 27),
+                       lambda: [rationale(date(2026, 8, 27))])
+    ]}
+
+    report = backfill.run(src, rationale_src, data_dir=tmp_path, since=date(2024, 11, 1))
+
+    assert report.saved == 1
+    assert report.failed == 0
+    assert len(store.load_forecasts(tmp_path / "forecasts.json")) == 1
+    assert any("rationales.json" in e for e in report.rationale_errors)
+
+
+def test_a_malformed_rationales_file_is_not_overwritten_by_the_backfill(tmp_path):
+    # 못 읽은 파일에 새 근거를 덮어쓰면 사람이 고치던 편집물을 우리가
+    # 지우는 셈이다 — 한 글자도 안 바뀌어야 한다.
+    path = tmp_path / "rationales.json"
+    path.write_text(MALFORMED_RATIONALES, encoding="utf-8")
+    src = {"bok": lambda: rounds(
+        ("2026년 8월", date(2026, 8, 27), [rec(date(2026, 8, 27), 3.3)]))}
+    rationale_src = {"bok": lambda: [
+        backfill.Round("2026년 8월", date(2026, 8, 27),
+                       lambda: [rationale(date(2026, 8, 27))])
+    ]}
+
+    backfill.run(src, rationale_src, data_dir=tmp_path, since=date(2024, 11, 1))
+
+    assert path.read_text(encoding="utf-8") == MALFORMED_RATIONALES
+
+
+def test_a_malformed_forecasts_file_still_stops_the_backfill(tmp_path):
+    # 비대칭은 의도다 — forecasts.json 은 기계만 쓰는 파일이라 손으로 고칠
+    # 일이 없고, 못 읽는다면 그건 진짜 사고다.
+    (tmp_path / "forecasts.json").write_text("{ 이건 JSON 이 아니다", encoding="utf-8")
+    src = {"bok": lambda: rounds(
+        ("2026년 8월", date(2026, 8, 27), [rec(date(2026, 8, 27), 3.3)]))}
+    with pytest.raises(Exception):
+        backfill.run(src, data_dir=tmp_path, since=date(2024, 11, 1))

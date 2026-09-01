@@ -6,6 +6,27 @@
 
 요약하지 않고 원문 문장을 그대로 준다. 요약은 기관이 하지 않은 말을 기관의
 근거처럼 적을 위험이 있고, 그 오류는 수치와 달리 원문 대조로 드러나지 않는다.
+
+## 언젠가 이 파일을 쪼갤 때의 이음매 (지금은 쪼개지 않는다)
+
+이 파일은 서로 의존하지 않는 세 덩어리로 되어 있다. 셋 사이에 흐르는 것은
+`str` 하나뿐이고 공유 상태가 없다 — 그래서 실제로 갈라진다.
+
+1. **분절**(segmentation) — `sentences` · `_unwrap` · `_bullet_sentences` ·
+   `_SENTENCE` · `_DECIMAL_POINT` · 표지 상수들. 입력은 쪽 원문, 출력은
+   유닛 리스트다. "무엇이 한 문장인가"만 안다. 지표도 태그도 모른다.
+2. **선별**(selection) — `pick` · `INDICATOR_WORDS` · `_CAUSE` ·
+   `_FORECAST` · `_FORECAST_SUFFIX` · `_MAX_RATIONALE_LENGTH` ·
+   `_DUPLICATED_HANGUL` · `_MORE_SPECIFIC_FORM`. 입력은 유닛 리스트와
+   지표코드, 출력은 유닛 하나 또는 None. 유닛이 어디서 왔는지 모른다.
+3. **태깅**(tagging) — `tags_for` · `TAG_WORDS` · `_FALSE_CONTAINMENT` ·
+   `_word_present_as_tag`. 입력은 고른 문장 하나, 출력은 태그 리스트다.
+   `pick` 을 부르지도, `pick` 에게 불리지도 않는다(`report.py` 가 둘을
+   차례로 부른다).
+
+지금 쪼개지 않는 이유는 하나다 — 병합 직전이고, 순수 리팩터라 얻는 게
+읽기 편함뿐인데 잃는 건 이 브랜치가 26개 커밋에 걸쳐 쌓은 회귀망의
+행 번호다. 다음 사람이 열 때 이 지도를 먼저 읽으면 된다.
 """
 from __future__ import annotations
 
@@ -66,9 +87,35 @@ _CAUSE = ("배경", "때문", "기인", "반영", "영향", "힘입어",
           "owing to", "on the back of")
 
 # 전망 표지 — 지난 일이 아니라 앞을 말한다는 신호
-_FORECAST = ("전망", "예상",
-             "is projected", "are projected", "is expected", "are expected",
+_FORECAST = ("is projected", "are projected", "is expected", "are expected",
              "is forecast", "will")
+
+# 국문 전망 표지는 **낱말 첫머리**에서만 센다 — 앞에 한글 음절이 붙어 있으면
+# 세지 않는다.
+#
+# "전망"·"예상"은 이 보고서들에서 두 가지로 쓰인다: 이 문장이 하는 예측
+# ("축소될 전망", "것으로 예상")과, 문서·수치를 가리키는 합성명사의 뒷부분
+# ("기본전망", "전망치", "전망 보고서", "수정전망")이다. 뒤엣것은 앞을
+# 보는 말이 아니라 **이름**이다 — "기본전망보다 +0.2%p 높아질"은 기준
+# 시나리오라는 이름을 부르는 것이지 이 문장이 무엇을 예측한다는 뜻이 아니다.
+#
+# 이 구분이 없으면 아래 _FORECAST_SUFFIX 허용목록이 통째로 무력해진다.
+# 실측(2026-09-01, 배포된 근거 8건): BOK 2025-02-25·2025-05-29 cpi 두 건이
+# 전망 조건을 오직 "기본전망보다"의 맨 "전망"으로만 통과했고, 두 문장 다
+# "…추정된다."로 끝난다 — _FORECAST_SUFFIX 가 허용목록을 만들며 세 라운드에
+# 걸쳐 명시적으로 **배제한** 바로 그 어미다. 부분열 하나가 그 위에서 우회로를
+# 열어 둔 셈이다. 두 건은 이 규칙으로 떨어지고(의도한 결과 — 둘 다 기준
+# 전망 대비 대안 시나리오 서술이라 인과의 원인이 인용문 밖에 있다), 나머지
+# 여섯 건은 그대로 남는다:
+#   KDI ×2      "축소될 전망"        앞이 공백    -> 유지
+#   KLI 2025-08 "예상보다"·"예상을"  앞이 공백    -> 유지
+#   KLI 2026-01 "것으로 예상되는데"  앞이 공백    -> 유지
+#   KEIS ×2     "것으로 예상(됨)"    앞이 공백    -> 유지
+#
+# 한글 음절만 막는다([가-힣]) — 공백·따옴표·괄호·숫자·마침표 뒤에 오는
+# "전망"은 그대로 표지다. 조사가 뒤에 붙는 것("전망이다"·"예상보다")은
+# 막지 않는다: 뒤가 아니라 **앞**만 본다.
+_FORECAST_WORD_INITIAL = re.compile(r"(?<![가-힣])(?:전망|예상)")
 
 # "것으로" 는 뒤에 앞을 보는 낱말이 올 때만 전망 표지다. 뒤에 오지 말아야
 # 할 회고형(나타났다·밝혀졌다·확인됐다·드러났다·알려졌다·집계됐다 …)을
@@ -188,7 +235,8 @@ def sentences(text: str, *, bullets: bool = False) -> list[str]:
 
 
 # 불릿 표지 — 이 보고서들의 관행상 문장(또는 항목)이 시작하는 자리다.
-# 뒤 세 개(ㅇ·□·○·▶)는 이 픽스처엔 없지만 국문 보고서 관행이라 미리 넣는다.
+# 이 상수의 전체 목록은 '-'·'='·'>'·'ㅇ'·'□'·'○'·'▶'·'ㆍ' 여덟이다.
+# 그중 ㅇ·□·○·▶ 는 이 픽스처엔 없지만 국문 보고서 관행이라 미리 넣는다.
 #
 # 'ㆍ'(U+318D, 한글 가운뎃점)를 더한다 — KEIS 실물 OCR 원문 두 곳에서 실측:
 # keis_no_forecast.txt 4행 "ㆍ 취업자 수는 전년 대비 …"와 keis_2025-12_p10.txt
@@ -209,7 +257,15 @@ _HAS_WORD_CHAR = re.compile(r"[가-힣a-zA-Z]")
 
 
 def _is_page_furniture(line: str) -> bool:
-    """쪽 하단 장식 줄이다 — 워터마크 URL 이거나 장식 규칙(점선 등)이다."""
+    """쪽 하단 장식 줄이다 — 워터마크 URL 이거나 장식 규칙(점선 등)이다.
+
+    두 경로가 함께 쓴다(_unwrap · _bullet_sentences). 예전에는
+    _bullet_sentences 하나만 불렀고, 그래서 텍스트 레이어 경로에서는 쪽
+    번호·워터마크·점선이 유닛에 그대로 용접됐다 — kdi_2025-08_p4.txt 의
+    마지막 유닛이 쪽번호를 삼켜 "…가능성이 존재 4" 로 끝나는 것이 실례다.
+    설계 §3.3 이 두 경로의 차이를 표지마다 표로 선언해 두었는데 이 차이만
+    선언에 없었다 — 즉 의도가 아니라 누락이었다.
+    """
     return "www." in line or _HAS_WORD_CHAR.search(line) is None
 
 
@@ -256,6 +312,48 @@ _FOOTNOTE_MARKER = re.compile(r"^\d+\)")
 
 def _is_footnote_marker_line(line: str) -> bool:
     return _FOOTNOTE_MARKER.match(line) is not None
+
+
+# 장 제목 표지 — 숫자로 시작해 '.' 과 공백이 뒤따르는 줄은 절 제목이다
+# ("3. 전망의 위험요인"). 각주(_FOOTNOTE_MARKER)와 **같은 부류**로 다룬다:
+# 앞선 문장을 닫고(flush) 그 줄 자체는 버린다. 목차 항목이지 기관의 판단이
+# 아니라서 인용문에 남을 수 없고, 새 유닛으로 남기면 그 제목 문구가 지표·
+# 인과·전망 표지를 우연히 갖출 여지를 연다(각주와 같은 이유).
+#
+# 왜 필요한가(실측): _DECIMAL_POINT 는 마침표를 **숫자 사이**일 때만
+# 가린다. 절 번호의 마침표는 뒤가 공백이라 안 가려지고, _SENTENCE 가 그걸
+# 문장 끝으로 본다 — 그래서 kdi_2025-08_p4.txt 10행의 제목 "3. 전망의
+# 위험요인"이 바로 앞 줄에 이어 붙어 "…6만명 상향 조정 3." 으로 끝나는
+# 인용문이 실제로 배포됐다(rationales.json 의 KDI 2025-08-12 두 건).
+# bok_2026-08_p3_credits.txt 도 같은 모양으로 "…이나영 2." 를 냈다.
+#
+# 픽스처 전수조사(2026-09-01, 텍스트 픽스처 26개, 37줄이 이 모양이다):
+#   - 국문 절 제목 5줄(bok_2026-08_p3_credits ×3, kdi_2025-08_p4 ×1,
+#     kiet_2026h2_macro ×1) — 전부 진짜 제목이다.
+#   - OECD Interim 표 각주 24줄("1. The European Union is a full member
+#     of the G20…"·"2. Spain is a permanent invitee to the G20."·
+#     "3. Fiscal years, starting in April.") — `\d+)` 대신 `\d+.` 로
+#     찍힌 각주다. 버리는 것이 이미 맞는 처리다.
+#   - OECD Interim 번호 문단 8줄("1. The evolving conflict…"·"20. Economic
+#     growth in the G20 emerging-market economies…") — 이건 진짜 산문이고
+#     여러 줄에 걸쳐 감긴다. 이 줄을 버리면 그 문단의 첫 줄이 사라지고
+#     나머지가 머리 없는 유닛으로 남는다. **이 규칙이 지는 유일한 비용이다.**
+#     실측한 실제 손실은 oecd_interim_2026-03_p20_global 의 두 문장뿐인데,
+#     그 쪽은 수집 창(표 쪽 ±1) 밖이라 production 이 읽지 않고, 애초에
+#     "한국이 아니라 G20 전체를 말하는 문장을 이 기관의 한국 근거로 붙이면
+#     안 된다"는 이유로 창을 안 넓히기로 이미 판정한 텍스트다
+#     (oecd_interim.collect_edition_rationales 문서주석). 수집 창 안의
+#     쪽(4·6·7·8·9·10쪽)에서는 이 규칙으로 바뀌는 pick 결과가 하나도 없다.
+#   - **문장의 줄 감김이 이 모양으로 이어지는 사례는 37줄 중 0건이다** —
+#     있었다면 이 규칙을 넣지 않았을 것이다(각주 규칙 때와 같은 기준).
+#
+# 각주 정규식과 합치지 않는다 — 두 표지는 서로 다른 글자이고, 하나로
+# 뭉뚱그리면 나중에 한쪽만 좁히거나 넓힐 수 없게 된다.
+_SECTION_HEADING = re.compile(r"^\s*\d+\.\s")
+
+
+def _is_section_heading_line(line: str) -> bool:
+    return _SECTION_HEADING.match(line) is not None
 
 
 # '-' 표지 바로 뒤에 단위 붙은 숫자가 오면 불릿이 아니라 줄 감김으로 잘린
@@ -340,10 +438,11 @@ _WRAP_BOUNDARY_MARKERS = "=>ㅇ□○▶•*§"
 def _unwrap(text: str) -> str:
     """줄 감김을 편다 — 감긴 줄은 공백으로 잇고, 진짜 경계만 줄바꿈으로 남긴다.
 
-    경계는 **세 가지뿐**이고 셋 다 이름 붙은 것이다("이 줄은 표처럼
+    갈래는 **다섯 가지뿐**이고 다섯 다 이름 붙은 것이다("이 줄은 표처럼
     보인다" 같은 짐작은 하지 않는다 — 그런 판정은 새 표 모양이 나올 때마다
-    하나씩 뚫린다). 처음 두 가지는 "새 항목이 시작한다"는 뜻이고, 세
-    번째(각주)는 "이건 애초에 항목이 아니다"라는 뜻이라 성격이 다르다.
+    하나씩 뚫린다). 처음 두 가지는 "새 항목이 시작한다"는 뜻이고, 나머지
+    셋(각주·절 제목·쪽 장식)은 "이건 애초에 항목이 아니다"라는 뜻이라
+    성격이 다르다.
 
     - **빈 줄** — 문단 경계다. 이게 없으면 한 쪽 전체가 하나로 이어질 수
       있다.
@@ -360,6 +459,16 @@ def _unwrap(text: str) -> str:
       (flush), 그 줄 자체는 새 항목으로 남기지 않고 버린다. 위 두 경계와
       달리 이건 "새 경계"가 아니라 "내용이 아닌 경계"다 — 각주 옆 주석
       참고.
+    - **절 제목으로 시작하는 줄**(_is_section_heading_line) — 각주와 같이
+      다룬다(닫고 버린다). 이유도 같다: 목차 항목이지 기관의 판단이 아니다.
+    - **쪽 하단 장식 줄**(_is_page_furniture) — 그 줄 자체만 버리고
+      지나간다. **닫지 않는다.** 이 한 가지가 앞 셋과 다르다 — 장식은
+      문단 경계가 아니라 문장 한가운데 우연히 끼어든 쓰레기여서, 여기서
+      닫으면 장식 다음에 이어지는 진짜 continuation 이 이미 비운 current
+      에 도착해 앞 반쪽만 완결된 문장처럼 남는다(설계 §3.3 이 OCR 경로에
+      대해 적어 둔 그 실패 모양이고, Task 4 에서 한 번 겪고 되돌린 처리다
+      — 닫는 쪽으로 "정리"하지 말 것). 그래서 OCR 경로
+      (_bullet_sentences)와 **같은 semantics** 다.
 
     표지 글자 자체는 인용문에 넣지 않는다 — 편집 기호이지 기관이 쓴
     말이 아니다. OCR 경로(_bullet_sentences)도 같은 이유로 떼어낸다.
@@ -382,9 +491,17 @@ def _unwrap(text: str) -> str:
         if _is_footnote_marker_line(line):
             flush()
             continue
+        if _is_section_heading_line(line):
+            flush()
+            continue
         if _is_bullet_marker_line(line, markers=_WRAP_BOUNDARY_MARKERS):
+            # 불릿 판정을 장식 판정보다 먼저 둔다 — OCR 경로와 같은 순서다.
+            # 표지만 있고 한글·로마자가 없는 줄("= =" 같은)을 장식으로
+            # 삼켜 버리면 항목 경계가 조용히 사라진다.
             flush()
             line = line[1:].strip()
+        elif _is_page_furniture(line):
+            continue
         if line:
             current.append(line)
     flush()
@@ -406,11 +523,15 @@ def _bullet_sentences(text: str) -> list[str]:
     - **불릿 표지로 시작하는 줄**(_is_bullet_marker_line) — 새 문장의
       시작이다. 먼저 지금까지 모은 문장을 닫고, 표지를 뗀 나머지로
       새로 연다.
-    - **각주로 시작하는 줄**(_is_footnote_marker_line) — 지금까지 모은
-      문장을 닫되(flush), 이 줄 자체는 새 문장으로 남기지 않고 버린다.
-      각주는 늘 완결된 문장 뒤에만 오지("...뒷받침할 것으로 분석" 다음의
-      "1) 한국은행, 「경제전망…" 이 실례다) 문장 한가운데 끼어들지
-      않으므로 장식 줄과 달리 닫는다 — 위 각주 표지 옆 주석 참고.
+    - **각주 또는 절 제목으로 시작하는 줄**(_is_footnote_marker_line ·
+      _is_section_heading_line) — 지금까지 모은 문장을 닫되(flush), 이 줄
+      자체는 새 문장으로 남기지 않고 버린다. 각주는 늘 완결된 문장 뒤에만
+      오지("...뒷받침할 것으로 분석" 다음의 "1) 한국은행, 「경제전망…" 이
+      실례다) 문장 한가운데 끼어들지 않으므로 장식 줄과 달리 닫는다 — 위
+      각주 표지 옆 주석 참고. 절 제목("3. 전망의 위험요인")은 이 코퍼스의
+      OCR 픽스처에는 0건이지만 같은 갈래로 둔다 — 기본 경로에만 두면
+      설계 §3.3 의 표에 없는 새 비대칭이 하나 생기고, 여기서는 발동하지
+      않으므로 동작이 바뀌지 않는다(실측).
     - **쪽 하단 장식 줄**(_is_page_furniture) — 그 줄 자체만 버리고
       지나간다. *닫지 않는다.* 장식은 문단 경계가 아니라 문장 한가운데
       우연히 끼어든 쓰레기다 — "...부진 완화와" 다음 줄에 워터마크가
@@ -451,7 +572,7 @@ def _bullet_sentences(text: str) -> list[str]:
         elif _is_bullet_marker_line(line):
             flush()
             current.append(line[1:].strip())
-        elif _is_footnote_marker_line(line):
+        elif _is_footnote_marker_line(line) or _is_section_heading_line(line):
             flush()
         elif _is_page_furniture(line):
             continue
@@ -537,7 +658,8 @@ def pick(text: str, indicator: str, *, bullets: bool = False) -> str | None:
             continue
         if not any(c.lower() in lowered for c in _CAUSE):
             continue
-        if not (any(f.lower() in lowered for f in _FORECAST)
+        if not (_FORECAST_WORD_INITIAL.search(lowered)
+                or any(f.lower() in lowered for f in _FORECAST)
                 or _FORECAST_SUFFIX.search(lowered)):
             continue
         return sentence
@@ -603,9 +725,24 @@ TAG_WORDS: dict[str, tuple[str, ...]] = {
 # 겹침을 일반적으로 추론하지 않고, "이 긴 낱말 안에서는 이 짧은 낱말을
 # 세지 않는다"라고 이름 붙일 수 있는 쌍만 여기 적어 둔다 — 새 겹침이 생기면
 # 이유를 댈 수 있을 때만 한 줄을 더한다.
+#
+# "이유"는 실제로 배포된 데이터에서 잡았다 — rationales.json 의 KLI
+# 2025-08-29 emp_change 근거가 "…취업자 수 증가가 예상보다 컸던 **이유가**
+# 예상을 넘어선 고령층…"이라는 문장 하나 때문에 화면에 "요인은 유가"로
+# 떴다. 원유 가격은 그 문장에 한 글자도 없다. "유가증권"보다 훨씬 위험한
+# 겹침이다: "이유"는 한국어에서 흔한 낱말인 데다, 하필 **인과를 말하는
+# 문장에 특히 자주** 나온다 — 이 기능이 고르는 문장이 정확히 그런 문장이다.
+# "국제유가 상승이 이유가 되어…" 처럼 둘 다 든 문장에서는 "이유"만 지워도
+# 진짜 "유가"가 남아 태그가 그대로 붙는다(실측).
+#
+# "건설업체"는 코퍼스 안에서 찾은 같은 부류다 — kdi_2025-08_p4.txt 의
+# "**건설업체**의 재무건전성 악화"가 맨 "건설업"에 걸려, 건설회사의 재무
+# 상태를 말하는 문장에 "건설업고용"(건설업 **고용**) 태그가 붙는다. 회사의
+# 재무와 그 업종의 고용은 다른 얘기다.
 _FALSE_CONTAINMENT: dict[str, tuple[str, ...]] = {
     "통상": ("통상적", "통상임금"),
-    "유가": ("유가증권",),
+    "유가": ("유가증권", "이유"),
+    "건설업": ("건설업체",),
 }
 
 

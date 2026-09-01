@@ -8,6 +8,25 @@
  - 기한이 지나면 다시 실패시킨다. 장애가 안 끝났으면 기한만 미루면 된다.
  - 적어둔 수집기가 되살아나면 실패시킨다. 초록 실행에 붙은 경고는 아무도
    보지 않으므로, 목록에서 지울 때까지 빨갛게 둔다.
+
+근거(rationale)는 다르다. `errors` 는 **수치** 실패만 담고, 근거 실패는
+`rationale_errors` 라는 제 칸에 따로 담긴다 — 여기서는 경고로만 찍고 판정을
+바꾸지 않는다.
+
+두 칸을 나눈 이유는 취향이 아니라 막다른 길이었다. 예전엔 근거 실패도
+`errors` 에 섞였는데, 위 KNOWN_DOWN 판정은 오류 문자열을 첫 콜론에서 잘라
+수집기 이름을 얻는다 — 그래서 `"keis: 근거 ValueError: …"` 가 keis 의
+**수치** 장애로 읽혔다. 유예를 주면 이번엔 두 번째 루프가 걸린다:
+`collectors["keis"]["ok"]` 가 True 이기 때문이다(수치는 성공이고, 그게
+설계상 옳다). 근거만 죽은 날은 두 갈래 어디로 가도 빨갛고, 안내문은 다시
+첫 갈래로 돌려보낸다 — 초록으로 돌아갈 길이 없었다.
+
+그러면 "초록 실행에 붙은 경고는 아무도 안 본다"는 위 원칙과 어긋나지
+않나? 어긋나지 않는다. 그 원칙은 **수치가 조용히 빠지는 것**을 막으려는
+것이고(수치는 이 아카이브의 본체다), 근거는 없는 게 정상 상태인 곁가지다
+— 설계 §9 가 "근거 때문에 수치를 잃는 것이 더 나쁘다"고 정해 뒀다. 근거가
+오래 죽어 있으면 `rationales.json` 이 안 자라는 것으로 드러나지, 빨간 CI
+로 드러날 일이 아니다.
 """
 from __future__ import annotations
 
@@ -65,6 +84,12 @@ def main(last_run_path: Path = DATA_DIR / "last_run.json", *,
                   f"KNOWN_DOWN 의 기한을 미루고, 고칠 수 있으면 고친다. {error}")
         else:
             print(f"::notice::알고 있는 장애라 {deadline} 까지 넘어간다 — {error}")
+
+    # 근거 실패는 경고로만 찍고 failed 를 건드리지 않는다. 옛 파일에는 이
+    # 키가 없으므로 없으면 빈 리스트로 본다 — 예전 last_run.json 을 다시
+    # 판정할 때 KeyError 로 터지면 안 된다.
+    for warning in run.get("rationale_errors", []):
+        print(f"::warning::근거 수집 실패(수치는 무관) — {warning}")
 
     for name, deadline in sorted(known_down.items()):
         if run["collectors"].get(name, {}).get("ok"):
