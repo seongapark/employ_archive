@@ -314,11 +314,13 @@ def _is_footnote_marker_line(line: str) -> bool:
     return _FOOTNOTE_MARKER.match(line) is not None
 
 
-# 장 제목 표지 — 숫자로 시작해 '.' 과 공백이 뒤따르는 줄은 절 제목이다
-# ("3. 전망의 위험요인"). 각주(_FOOTNOTE_MARKER)와 **같은 부류**로 다룬다:
-# 앞선 문장을 닫고(flush) 그 줄 자체는 버린다. 목차 항목이지 기관의 판단이
-# 아니라서 인용문에 남을 수 없고, 새 유닛으로 남기면 그 제목 문구가 지표·
-# 인과·전망 표지를 우연히 갖출 여지를 연다(각주와 같은 이유).
+# 절 번호 표지 — 숫자로 시작해 '.' 과 공백이 뒤따르는 줄("3. 전망의
+# 위험요인", "20. Economic growth in the G20…").
+#
+# **각주가 아니라 불릿과 같은 부류로 다룬다** — 앞선 문장을 닫고(flush),
+# 번호만 떼고 **남은 내용은 새 유닛으로 남긴다.** 바로 위 _FOOTNOTE_MARKER
+# 와 나란히 있고 글자 모양도 비슷하지만, 처리는 일부러 다르다. 하나로
+# "정리"하면 아래 실측이 깨진다.
 #
 # 왜 필요한가(실측): _DECIMAL_POINT 는 마침표를 **숫자 사이**일 때만
 # 가린다. 절 번호의 마침표는 뒤가 공백이라 안 가려지고, _SENTENCE 가 그걸
@@ -329,26 +331,31 @@ def _is_footnote_marker_line(line: str) -> bool:
 #
 # 픽스처 전수조사(2026-09-01, 텍스트 픽스처 26개, 37줄이 이 모양이다):
 #   - 국문 절 제목 5줄(bok_2026-08_p3_credits ×3, kdi_2025-08_p4 ×1,
-#     kiet_2026h2_macro ×1) — 전부 진짜 제목이다.
+#     kiet_2026h2_macro ×1) — 진짜 제목이다.
 #   - OECD Interim 표 각주 24줄("1. The European Union is a full member
 #     of the G20…"·"2. Spain is a permanent invitee to the G20."·
 #     "3. Fiscal years, starting in April.") — `\d+)` 대신 `\d+.` 로
-#     찍힌 각주다. 버리는 것이 이미 맞는 처리다.
-#   - OECD Interim 번호 문단 8줄("1. The evolving conflict…"·"20. Economic
-#     growth in the G20 emerging-market economies…") — 이건 진짜 산문이고
-#     여러 줄에 걸쳐 감긴다. 이 줄을 버리면 그 문단의 첫 줄이 사라지고
-#     나머지가 머리 없는 유닛으로 남는다. **이 규칙이 지는 유일한 비용이다.**
-#     실측한 실제 손실은 oecd_interim_2026-03_p20_global 의 두 문장뿐인데,
-#     그 쪽은 수집 창(표 쪽 ±1) 밖이라 production 이 읽지 않고, 애초에
-#     "한국이 아니라 G20 전체를 말하는 문장을 이 기관의 한국 근거로 붙이면
-#     안 된다"는 이유로 창을 안 넓히기로 이미 판정한 텍스트다
-#     (oecd_interim.collect_edition_rationales 문서주석). 수집 창 안의
-#     쪽(4·6·7·8·9·10쪽)에서는 이 규칙으로 바뀌는 pick 결과가 하나도 없다.
-#   - **문장의 줄 감김이 이 모양으로 이어지는 사례는 37줄 중 0건이다** —
-#     있었다면 이 규칙을 넣지 않았을 것이다(각주 규칙 때와 같은 기준).
+#     찍힌 각주다.
+#   - **OECD Interim 번호 문단 8줄**("1. The evolving conflict…"·
+#     "20. Economic growth in the G20 emerging-market economies…") —
+#     이건 진짜 산문이고 여러 줄에 걸쳐 감긴다.
+#   - 문장의 줄 감김이 이 모양으로 이어지는 사례는 37줄 중 0건이다.
 #
-# 각주 정규식과 합치지 않는다 — 두 표지는 서로 다른 글자이고, 하나로
-# 뭉뚱그리면 나중에 한쪽만 좁히거나 넓힐 수 없게 된다.
+# 셋째 부류가 처리를 가른다. 각주처럼 **줄째 버리면** 그 문단의 첫 줄이
+# 사라지고 나머지가 머리 없는 유닛으로 남는다("due to a step down in
+# growth in China and India." 만 남는 식이다) — 주어 없는 조각을 인용문으로
+# 저장하는 것은 이 계획이 Task 1 에서 세 라운드에 걸쳐 없앤 결함이고, 그걸
+# 후보 풀에 다시 들이는 셈이다. 실측: 두 처리를 픽스처 26개 × 지표 6개로
+# 전부 돌려 비교했다.
+#   버린다  KDI·BOK 의 "3." 결함은 사라지지만, OECD 번호 문단이 머리를
+#           잃고 oecd_interim_2026-03_p20_global 의 두 문장이 통째로 사라진다.
+#   남긴다  "3." 결함은 **똑같이** 사라지고, 머리 없는 조각이 하나도 안
+#           생기며, 새 오탐 0(픽스처 26개 × 지표 6개 전수 대조).
+# 그래서 남긴다. 치르는 값은 제목 문구가 뒤 문단 첫머리에 붙는 것뿐이다
+# ("전망의 위험요인 미국과 주요국 간의 …") — 장황할 뿐 틀리지 않다.
+# KDI 융합 두 건에서 이미 받아들인 것과 같은 교환이다(설계 §3.5).
+#
+# 각주 정규식과 합치지 않는다 — 두 표지는 서로 다른 글자이고 처리도 다르다.
 _SECTION_HEADING = re.compile(r"^\s*\d+\.\s")
 
 
@@ -440,9 +447,9 @@ def _unwrap(text: str) -> str:
 
     갈래는 **다섯 가지뿐**이고 다섯 다 이름 붙은 것이다("이 줄은 표처럼
     보인다" 같은 짐작은 하지 않는다 — 그런 판정은 새 표 모양이 나올 때마다
-    하나씩 뚫린다). 처음 두 가지는 "새 항목이 시작한다"는 뜻이고, 나머지
-    셋(각주·절 제목·쪽 장식)은 "이건 애초에 항목이 아니다"라는 뜻이라
-    성격이 다르다.
+    하나씩 뚫린다). 처음 셋(빈 줄·항목 표지·절 번호)은 "새 항목이
+    시작한다"는 뜻이고, 나머지 둘(각주·쪽 장식)은 "이건 애초에 항목이
+    아니다"라는 뜻이라 성격이 다르다.
 
     - **빈 줄** — 문단 경계다. 이게 없으면 한 쪽 전체가 하나로 이어질 수
       있다.
@@ -455,12 +462,16 @@ def _unwrap(text: str) -> str:
       gdp_growth·cpi 의 "근거"로 뽑힌다 — 숫자 한 쪽을 기관의 설명인 양
       보여주는 셈이다. 표지를 경계로 두면 같은 쪽에서 실제 서술 문장
       하나(145자)만 뽑힌다.
+    - **절 번호로 시작하는 줄**(_is_section_heading_line) — 항목 표지와
+      **같이** 다룬다: 닫고, 번호만 떼고, 남은 내용으로 새 항목을 연다.
+      바로 아래 각주와 글자 모양이 비슷해 헷갈리기 쉬운데 처리는 다르다 —
+      OECD Interim 본문은 문단마다 번호를 붙이는 문체("20. Economic
+      growth in the G20…")라 이 줄이 곧 산문의 첫 줄인 경우가 실제로
+      있고, 버리면 그 문단이 머리를 잃는다(_SECTION_HEADING 옆 실측 참고).
     - **각주로 시작하는 줄**(_is_footnote_marker_line) — 앞선 문장을 닫되
-      (flush), 그 줄 자체는 새 항목으로 남기지 않고 버린다. 위 두 경계와
+      (flush), 그 줄 자체는 새 항목으로 남기지 않고 버린다. 위 세 경계와
       달리 이건 "새 경계"가 아니라 "내용이 아닌 경계"다 — 각주 옆 주석
       참고.
-    - **절 제목으로 시작하는 줄**(_is_section_heading_line) — 각주와 같이
-      다룬다(닫고 버린다). 이유도 같다: 목차 항목이지 기관의 판단이 아니다.
     - **쪽 하단 장식 줄**(_is_page_furniture) — 그 줄 자체만 버리고
       지나간다. **닫지 않는다.** 이 한 가지가 앞 셋과 다르다 — 장식은
       문단 경계가 아니라 문장 한가운데 우연히 끼어든 쓰레기여서, 여기서
@@ -492,9 +503,11 @@ def _unwrap(text: str) -> str:
             flush()
             continue
         if _is_section_heading_line(line):
+            # 각주가 아니라 불릿과 같은 처리다 — 번호만 떼고 내용은 남긴다
+            # (_SECTION_HEADING 옆 실측 참고).
             flush()
-            continue
-        if _is_bullet_marker_line(line, markers=_WRAP_BOUNDARY_MARKERS):
+            line = _SECTION_HEADING.sub("", line, count=1).strip()
+        elif _is_bullet_marker_line(line, markers=_WRAP_BOUNDARY_MARKERS):
             # 불릿 판정을 장식 판정보다 먼저 둔다 — OCR 경로와 같은 순서다.
             # 표지만 있고 한글·로마자가 없는 줄("= =" 같은)을 장식으로
             # 삼켜 버리면 항목 경계가 조용히 사라진다.
@@ -523,15 +536,16 @@ def _bullet_sentences(text: str) -> list[str]:
     - **불릿 표지로 시작하는 줄**(_is_bullet_marker_line) — 새 문장의
       시작이다. 먼저 지금까지 모은 문장을 닫고, 표지를 뗀 나머지로
       새로 연다.
-    - **각주 또는 절 제목으로 시작하는 줄**(_is_footnote_marker_line ·
-      _is_section_heading_line) — 지금까지 모은 문장을 닫되(flush), 이 줄
-      자체는 새 문장으로 남기지 않고 버린다. 각주는 늘 완결된 문장 뒤에만
-      오지("...뒷받침할 것으로 분석" 다음의 "1) 한국은행, 「경제전망…" 이
-      실례다) 문장 한가운데 끼어들지 않으므로 장식 줄과 달리 닫는다 — 위
-      각주 표지 옆 주석 참고. 절 제목("3. 전망의 위험요인")은 이 코퍼스의
-      OCR 픽스처에는 0건이지만 같은 갈래로 둔다 — 기본 경로에만 두면
-      설계 §3.3 의 표에 없는 새 비대칭이 하나 생기고, 여기서는 발동하지
-      않으므로 동작이 바뀌지 않는다(실측).
+    - **절 번호로 시작하는 줄**(_is_section_heading_line) — 불릿 표지와
+      같이 다룬다: 닫고, 번호를 뗀 나머지로 새 문장을 연다. 이 코퍼스의
+      OCR 픽스처에는 0건이지만 기본 경로와 같은 갈래로 둔다 — 한쪽에만
+      두면 설계 §3.3 의 표에 없는 새 비대칭이 하나 생기고, 여기서는
+      발동하지 않으므로 동작이 바뀌지 않는다(실측).
+    - **각주로 시작하는 줄**(_is_footnote_marker_line) — 지금까지 모은
+      문장을 닫되(flush), 이 줄 자체는 새 문장으로 남기지 않고 버린다.
+      각주는 늘 완결된 문장 뒤에만 오지("...뒷받침할 것으로 분석" 다음의
+      "1) 한국은행, 「경제전망…" 이 실례다) 문장 한가운데 끼어들지
+      않으므로 장식 줄과 달리 닫는다 — 위 각주 표지 옆 주석 참고.
     - **쪽 하단 장식 줄**(_is_page_furniture) — 그 줄 자체만 버리고
       지나간다. *닫지 않는다.* 장식은 문단 경계가 아니라 문장 한가운데
       우연히 끼어든 쓰레기다 — "...부진 완화와" 다음 줄에 워터마크가
@@ -572,7 +586,10 @@ def _bullet_sentences(text: str) -> list[str]:
         elif _is_bullet_marker_line(line):
             flush()
             current.append(line[1:].strip())
-        elif _is_footnote_marker_line(line) or _is_section_heading_line(line):
+        elif _is_section_heading_line(line):
+            flush()
+            current.append(_SECTION_HEADING.sub("", line, count=1).strip())
+        elif _is_footnote_marker_line(line):
             flush()
         elif _is_page_furniture(line):
             continue

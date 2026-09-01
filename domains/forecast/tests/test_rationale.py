@@ -1118,37 +1118,50 @@ def test_the_kdi_rationale_no_longer_ends_with_the_section_number():
     # 가리므로 _SENTENCE 가 그 마침표를 문장 끝으로 봤다.
     got = rationale.pick(KDI_2025_08_P4, "emp_change")
     assert got is not None
-    assert got.endswith("금년 취업자 수 증가폭을 6만명 상향 조정")
-    # 제목 문구 자체도 어느 유닛에도 남지 않는다(각주와 같은 처리 — 닫고 버린다)
-    assert not any("전망의 위험요인" in u
-                   for u in rationale.sentences(KDI_2025_08_P4))
+    assert got.endswith("금년 취업자 수 증가폭을 6만명 상향 조정"), got[-60:]
+    # 절 번호는 **불릿과 같은 갈래**라, 번호만 떼고 제목 문구는 남는다 —
+    # 각주처럼 줄째 버리지 않는다. 그래서 "전망의 위험요인" 은 앞 유닛에서
+    # 떨어져 나와 **뒤 문단의 첫머리**에 붙는다. 이것이 이 처리가 치르는
+    # 값이고(장황할 뿐 틀리지 않다), 각주 갈래로 바꿔 버리면 OECD 번호
+    # 문단이 머리를 잃는다 — 아래
+    # test_section_heading_keeps_the_head_line_of_a_numbered_oecd_paragraph
+    # 가 그 반대쪽을 지킨다.
+    units = rationale.sentences(KDI_2025_08_P4)
+    assert not any(u.rstrip().endswith("3.") for u in units), [u[-40:] for u in units]
+    assert any(u.startswith("전망의 위험요인 미국과 주요국") for u in units), [u[:40] for u in units]
 
 
 def test_the_bok_credits_page_no_longer_ends_a_unit_with_the_section_number():
     # 같은 결함이 bok_2026-08_p3_credits.txt 에도 있다 — "…황수빈 이나영 2."
     # (16행의 절 제목 "2. 거시경제 전망"). 같은 규칙 하나로 함께 사라진다.
     units = rationale.sentences(BOK_2026_08_P3_CREDITS)
-    assert any(u.endswith("고용동향팀 황수빈 이나영") for u in units)
-    assert not any(u.rstrip().endswith(("1.", "2.", "3.")) for u in units)
+    assert any(u.endswith("고용동향팀 황수빈 이나영") for u in units), [u[-40:] for u in units]
+    assert not any(u.rstrip().endswith(("1.", "2.", "3.")) for u in units), [u[-40:] for u in units]
 
 
-def test_section_heading_costs_the_head_line_of_a_numbered_oecd_paragraph():
-    # **이 규칙이 지는 비용을 그대로 못박는다.** OECD Interim 본문은 문단마다
-    # 번호를 붙이는 문체("20. Economic growth in the G20 …")라, 그 첫 줄이
-    # 절 제목과 글자 모양이 같다 — 규칙이 그 줄을 버리면 문단의 나머지가
-    # 머리 없는 조각으로 남는다. 픽스처 전수조사에서 이 모양의 줄 37개 중
-    # 8개가 이 부류였고(나머지 29개는 국문 절 제목 5개와 OECD 표 각주 24개),
-    # 실제로 결과가 달라지는 쪽은 수집 창 밖의 20쪽뿐이다
-    # (test_oecd_interim.py 의
-    # test_the_generic_global_page_no_longer_yields_a_rationale_at_all 참고).
+def test_section_heading_keeps_the_head_line_of_a_numbered_oecd_paragraph():
+    # 절 번호를 **각주 갈래**(닫고 버린다)로 두면 여기서 값을 치른다. OECD
+    # Interim 본문은 문단마다 번호를 붙이는 문체("20. Economic growth in the
+    # G20 …")라 그 첫 줄이 절 제목과 글자 모양이 같고, 버리면 문단이 머리를
+    # 잃어 "due to a step down in growth in China and India." 같은 **주어
+    # 없는 조각**이 후보로 남는다 — Task 1 이 세 라운드에 걸쳐 없앤 그
+    # 결함을 후보 풀에 다시 들이는 것이다.
     #
-    # 조용히 두지 않고 여기 고정한다 — 다음 사람이 "왜 이 문장이 반쪽이지"
-    # 를 물을 때 답이 있어야 한다. 창 안의 쪽에서는 pick 결과가 하나도
-    # 바뀌지 않는다는 것을 아래 두 번째 단언이 함께 지킨다.
+    # 픽스처 전수조사(텍스트 26개, 이 모양의 줄 37개): 국문 절 제목 5 ·
+    # OECD 표 각주 24 · **OECD 번호 문단 8** · 줄 감김의 연속 0. 셋째
+    # 부류가 처리를 가르고, 그래서 불릿 갈래(번호만 떼고 내용은 남긴다)로
+    # 둔다. 이 테스트가 그 선택을 못박는다 — 각주 갈래로 "정리" 하면 깨진다.
     units = rationale.sentences(OECD_P20_GLOBAL)
-    assert "due to a step down in growth in China and India." in units
+    assert (
+        "Economic growth in the G20 emerging-market economies is projected to "
+        "ease somewhat, largely due to a step down in growth in China and India."
+    ) in units
+    # 머리 없는 조각이 남지 않는다 — 각주 갈래였을 때 실제로 나오던 세 개다.
+    assert "due to a step down in growth in China and India." not in units
+    assert "the baseline projections." not in units
     assert not any(u.startswith("20. Economic growth") for u in units)
-    # 수집 창 안의 쪽(2026-03 표 쪽 ±1 = 8·9·10쪽)에서는 손실이 없다.
+    # 수집 창 안의 쪽(2026-03 표 쪽 ±1 = 8·9·10쪽)에는 근거가 없다 —
+    # 절 번호 처리를 어느 갈래로 두든 이 쪽의 pick 결과는 바뀌지 않는다.
     assert rationale.pick(OECD_P10, "cpi") is None
     assert rationale.pick(OECD_P10, "gdp_growth") is None
 

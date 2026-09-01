@@ -147,24 +147,21 @@ def test_collect_edition_rationales_returns_empty_when_no_table_found(monkeypatc
     assert oi.collect_edition_rationales("March 2026") == []
 
 
-def test_the_generic_global_page_no_longer_yields_a_rationale_at_all():
-    # 이 테스트는 예전에 반대 방향을 단언했다 — 20쪽에서 "Economic growth in
-    # the G20 emerging-market economies is projected to ease somewhat, largely
-    # due to a step down in growth in China and India." 가 gdp_growth 근거로
-    # **뽑힌다**는 것을 못박아, 창을 표 쪽 ±1 로 좁혀 둔 이유를 보였다.
+def test_pick_finds_a_generic_global_sentence_that_is_not_about_korea():
+    # 실측(2026년 3월호 20쪽) — G20·중국·인도 얘기이지 한국 얘기가 아니다.
+    # collect_edition_rationales 가 표 쪽(8·9) 앞뒤 한 쪽으로만 창을 좁히는
+    # 이유가 이것이다 — 이 쪽(20)은 표에서 한참 떨어져 있어 그 창 밖이다.
+    # 이 문장을 한국의 근거로 저장하면 표 쪽 번호를 잘못 인용하는 것보다
+    # 더 나쁘다 — 아예 다른 나라 얘기를 한국 근거로 둔갑시키는 것이다.
     #
-    # 절 제목 규칙(_SECTION_HEADING, `^\s*\d+\.\s`)을 넣은 뒤로 이 두 문장은
-    # 더는 뽑히지 않는다. 이 쪽의 OECD 본문은 문단마다 "20. "·"21. " 처럼
-    # 번호가 붙는 문체라, 그 규칙이 문단 첫 줄을 절 제목으로 보고 버린다.
-    # **이것이 그 규칙이 지는 비용이고, 여기 그대로 기록해 둔다** — 잃은 게
-    # 마침 이 아카이브가 저장하면 안 되는 문장(한국이 아니라 G20 전체 서술)
-    # 이었다는 건 다행이지 설계가 아니다. 자세한 실측은 rationale.py 의
-    # _SECTION_HEADING 옆 주석과 test_rationale.py 의 같은 이름 절 참고.
-    #
-    # 창을 좁혀 두는 이유 자체는 그대로다 — collect_edition_rationales 문서
-    # 주석이 24쪽 미국 정책금리 문장도 같은 부류로 실측해 두었고, 그 쪽은
-    # 픽스처로 박제돼 있지 않다.
+    # 이 쪽의 문단은 "20. " 처럼 번호로 시작한다. 절 번호를 각주 갈래로
+    # (줄째) 버리면 이 문장이 머리를 잃어 이 단언이 조용히 통과해 버린다 —
+    # 규칙이 나아져서가 아니라 문장이 반토막 나서 안 걸리는 것이므로,
+    # 그때는 이 테스트가 창의 좁음을 더는 못 지킨다. 절 번호를 불릿 갈래로
+    # 두는 이유 중 하나가 이것이다(test_rationale.py 의
+    # test_section_heading_keeps_the_head_line_of_a_numbered_oecd_paragraph).
     from domains.forecast.pipeline import rationale
     global_text = load("oecd_interim_2026-03_p20_global.txt")
-    assert rationale.pick(global_text, "gdp_growth") is None
-    assert rationale.pick(global_text, "cpi") is None
+    got = rationale.pick(global_text, "gdp_growth")
+    assert got is not None
+    assert "korea" not in got.lower()
