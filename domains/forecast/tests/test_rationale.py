@@ -100,14 +100,12 @@ def test_pick_rejects_a_procedural_e_ttara():
 def test_pick_no_longer_suppresses_employment_when_unemployment_is_also_present():
     # "employment" 는 "unemployment" 안에도 부분열로 들어 있지만 "un-" 부정
     # 접두사일 뿐이다 — 실업이 고용의 더 구체적인 형태가 아니므로 emp_change 의
-    # "employment" 는 더 이상 억눌리지 않는다. 다만 이 문장은 "unemployment"도
-    # 진짜 독립된 낱말로 담고 있고 인과·전망 표지를 공유하므로, unemp_rate 역시
-    # 제 몫으로 같은 문장을 정당하게 얻는다 — 두 지표를 함께 말하는 문장이라
-    # 실제로 둘 다에 근거가 되는 것이지, 어느 한쪽이 훔친 게 아니다.
+    # "employment" 는 더 이상 억눌리지 않는다. (이 문장은 "unemployment"도
+    # 진짜 독립된 낱말로 담고 있어 unemp_rate 역시 같은 문장을 정당하게 얻지만,
+    # 그 매칭은 여기서 고친 어떤 것에도 좌우되지 않으므로 따로 단언하지 않는다.)
     s = ("Employment growth remains solid even as unemployment stays low, "
          "driven by strong hiring, and is projected to continue.")
     assert rationale.pick(s, "emp_change") == s
-    assert rationale.pick(s, "unemp_rate") == s
 
 
 def test_pick_does_not_let_a_pure_unemployment_sentence_trigger_emp_change():
@@ -116,7 +114,6 @@ def test_pick_does_not_let_a_pure_unemployment_sentence_trigger_emp_change():
     # 않아야 한다 — 실업만 말하는 문장이 고용 증감의 근거가 되면 안 된다.
     s = "Unemployment is projected to rise, driven by weak demand."
     assert rationale.pick(s, "emp_change") is None
-    assert rationale.pick(s, "unemp_rate") == s
 
 
 def test_pick_recovers_a_plain_employment_sentence_without_chwieopja():
@@ -147,3 +144,12 @@ def test_pick_does_not_borrow_a_cause_from_the_previous_sentence():
     # 있다 — 저장되는 인용문은 그 원인을 설명하지 못한다.
     s = "수출 회복세가 이어지고 있다. 따라서 취업자 수는 증가할 것으로 전망된다."
     assert rationale.pick(s, "emp_change") is None
+
+
+def test_pick_accepts_gwanchugdoenda_and_yechukdoenda_as_forecast_markers():
+    # "관측된다"·"예측된다" 도 "보인다"·"기대된다" 와 같은 자리에 오는 전망
+    # 어미다. 허용 목록에서 빠지면 이런 흔한 서술까지 근거 없이 비게 된다.
+    observed = "설비투자 회복과 수출 개선에 힘입어 성장률이 확대될 것으로 관측된다."
+    predicted = "설비투자 회복과 수출 개선에 힘입어 성장률이 확대될 것으로 예측된다."
+    assert rationale.pick(observed, "gdp_growth") == observed
+    assert rationale.pick(predicted, "gdp_growth") == predicted
