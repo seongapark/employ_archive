@@ -318,16 +318,19 @@ def find_forecast_page(page_texts: list[str], page_numbers: list[int],
 class _LocatedForecastPage(NamedTuple):
     """전망표 쪽을 찾은 결과.
 
-    표 쪽 번호·원문뿐 아니라, 그 앞쪽을 추가로 읽을 때 필요한 것들(원본
-    PDF 바이트, read_pages 함수, 이미 400dpi 로 읽어 둔 후보 쪽들)도 함께
-    담는다 — collect_issue_rationales 가 fetch 를 다시 하거나 이미 읽은
-    후보 쪽을 다시 OCR 하지 않게 하기 위해서다.
+    표 쪽 번호·원문뿐 아니라, 그 앞뒤 쪽을 추가로 읽을 때 필요한 것들(원본
+    PDF 바이트, read_pages 함수, 이미 400dpi 로 읽어 둔 후보 쪽들, PDF 전체
+    쪽수)도 함께 담는다 — collect_issue_rationales 가 fetch 를 다시 하거나
+    이미 읽은 후보 쪽을 다시 OCR 하지 않게 하고, 마지막 쪽 뒤를 읽으려 들지
+    않게 하기 위해서다. 전체 쪽수는 150dpi 스크리닝이 이미 전 쪽을 훑으므로
+    거기서 공짜로 얻는다.
     """
     page_no: int
     text: str
     data: bytes
     read_pages: object
     candidate_texts: dict[int, str]
+    total_pages: int
 
 
 def _locate_forecast_page(listed: ListedIssue, *, fetch,
@@ -343,6 +346,7 @@ def _locate_forecast_page(listed: ListedIssue, *, fetch,
     """
     data = fetch(listed.pdf_url)
     screened = read_pages(data, None, dpi=SCREEN_DPI, preprocess=False)
+    total_pages = len(screened)
     candidates = [page_no for page_no, text in enumerate(screened, start=1)
                   if SCREEN_KEYWORD in text]
     if not candidates:
@@ -360,7 +364,7 @@ def _locate_forecast_page(listed: ListedIssue, *, fetch,
     page_no, text = found
     return _LocatedForecastPage(
         page_no=page_no, text=text, data=data, read_pages=read_pages,
-        candidate_texts=dict(zip(candidates, texts)),
+        candidate_texts=dict(zip(candidates, texts)), total_pages=total_pages,
     )
 
 
@@ -388,19 +392,24 @@ def collect_issue_rationales(listed: ListedIssue, *, fetch=None,
                              read_pages=None) -> list["Rationale"]:
     """그 회차의 근거 문장을 준다. 전망표가 없으면 빈 리스트.
 
-    표 쪽 원문만으로는 부족하다 — 이 브리프는 표 앞쪽에 '왜'를 말하는
-    도입부 서술을 싣고, 표 자체는 숫자뿐이라 서술이 없다. 그래서 표 쪽과
-    그 바로 앞쪽을 합쳐 rationale.pick 에 넘긴다.
+    표 쪽 원문만으로는 부족하다 — 이 브리프는 표 옆에 '왜'를 말하는 서술을
+    따로 싣고, 표 자체는 숫자뿐이라 서술이 없다. 처음엔 표 "앞쪽"만 합쳐
+    넘겼으나, 2026년 제5호를 열어 보니 정작 인과 서술은 표 "다음" 쪽에
+    있었다 — 이 서술이 표의 앞과 뒤 중 어느 쪽에 오는지는 회차마다 다를 수
+    있으므로, 앞뒤 한 쪽씩(page_no-1, page_no+1)을 표 쪽과 합쳐 넘긴다.
 
-    앞쪽 쪽은 150dpi 스크리닝에서 SCREEN_KEYWORD('전망')가 안 걸려 대개
-    candidate_texts 에 없다 — 도입부는 "…것으로 예상된다"처럼 '전망' 없이
-    미래를 말하는 문장이 흔하기 때문이다. 그럴 땐 그 한 쪽만 400dpi 로
-    새로 읽는다. 이미 후보에 들어 400dpi 로 읽어 둔 경우(우연히 '전망'을
-    담고 있던 경우)라면 다시 읽지 않고 재사용한다 — 400dpi 전처리 OCR
-    한 쪽에 ~4.5초가 들어, 지표마다 부르면 안 되고 여기서 한 번만 부른다.
+    두 이웃 다 없을 수 있다 — 표가 1쪽이면 앞이 없고, 표가 PDF 의 마지막
+    쪽이면 뒤가 없다. 이런 경우 그 쪽은 그냥 기여하지 않는다(오류를 내지
+    않는다). 전체 쪽수는 _locate_forecast_page 가 150dpi 스크리닝에서 이미
+    구해 뒀다.
 
-    표가 1쪽이면 그 앞쪽은 없다 — 없는 쪽을 읽으려다 오류를 내는 대신
-    표 쪽 원문만으로 판단한다.
+    이웃 쪽이 150dpi 스크리닝에서 SCREEN_KEYWORD('전망')가 안 걸려 대개
+    candidate_texts 에 없다 — 서술 쪽은 "…것으로 예상된다"처럼 '전망' 없이
+    미래를 말하는 문장이 흔하기 때문이다. 그럴 땐 그 쪽만 400dpi 로 새로
+    읽는다. 이미 후보에 들어 400dpi 로 읽어 둔 경우(우연히 '전망'을 담고
+    있던 경우)라면 다시 읽지 않고 재사용한다. 두 이웃이 한꺼번에 없는
+    경우도 read_pages 한 번으로 같이 읽는다 — 400dpi 전처리 OCR 한 쪽에
+    ~4.5초가 들어, 쪽마다 따로 부르지 않고 부족한 쪽만 모아 한 번에 부른다.
     """
     fetch = fetch or (lambda url: http.get(url).content)
     read_pages = read_pages or ocr.page_texts
@@ -409,16 +418,23 @@ def collect_issue_rationales(listed: ListedIssue, *, fetch=None,
     if located is None:
         return []
 
-    preceding_page = located.page_no - 1
-    if preceding_page < 1:
-        preceding_text = ""
-    elif preceding_page in located.candidate_texts:
-        preceding_text = located.candidate_texts[preceding_page]
-    else:
-        [preceding_text] = located.read_pages(
-            located.data, [preceding_page], dpi=400, preprocess=True)
+    preceding_page, following_page = located.page_no - 1, located.page_no + 1
+    neighbors = [p for p in (preceding_page, following_page)
+                 if 1 <= p <= located.total_pages]
+    missing = [p for p in neighbors if p not in located.candidate_texts]
+    fresh = (dict(zip(missing, located.read_pages(
+                 located.data, missing, dpi=400, preprocess=True)))
+             if missing else {})
+    neighbor_texts = {**located.candidate_texts, **fresh}
 
-    text = f"{preceding_text}\n{located.text}" if preceding_text else located.text
+    parts = []
+    if preceding_page in neighbors and neighbor_texts.get(preceding_page):
+        parts.append(neighbor_texts[preceding_page])
+    parts.append(located.text)
+    if following_page in neighbors and neighbor_texts.get(following_page):
+        parts.append(neighbor_texts[following_page])
+
+    text = "\n".join(parts)
     return report.rationales_from_text(
         text, org="KEIS", issue=listed.issue,
         indicators=sorted(REQUIRED_INDICATORS), source_url=listed.pdf_url,
