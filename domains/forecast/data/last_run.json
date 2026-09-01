@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-08-31T23:45:42.350525+09:00",
+  "run_at": "2026-09-01T21:17:56.152542+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -38,5 +38,6 @@
     }
   },
   "conflicts": [],
-  "errors": []
+  "errors": [],
+  "rationale_errors": []
 }
