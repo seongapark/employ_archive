@@ -151,3 +151,33 @@ def test_accepts_a_sentence_after_a_terminator_then_space():
     page = "앞 문장이다. 취업자는 증가했다"
     candidate = "취업자는 증가했다"
     assert v.verify(candidate, page) == candidate
+
+
+def test_rejects_a_fragment_starting_inside_a_decimal_split_by_a_line_wrap():
+    # pdfplumber 의 줄 감김이 소수점 한가운데를 지날 수 있다 — 이 모듈이
+    # 애초에 공백(개행 포함)을 무시하는 이유(엉뚱한 공백)와 같은 현상이다.
+    # 앞뒤가 줄로 떨어져 있어도 숫자 사이의 마침표는 소수점이지 문장
+    # 끝이 아니다.
+    with pytest.raises(v.Rejected) as e:
+        v.verify("5% 상승할 것으로 전망된다", "성장률은 3.\n5% 상승할 것으로 전망된다")
+    assert "시작" in e.value.reason
+
+
+def test_accepts_a_sentence_starting_with_a_digit_after_a_real_terminator():
+    # 마침표 앞이 숫자가 아니면(문장이 실제로 끝난 것이면) 뒤에 숫자로
+    # 시작하는 문장이 와도 소수점으로 오인하지 않고 경계로 인정해야 한다.
+    page = "앞 문장이 있다. 5% 성장이 예상된다"
+    candidate = "5% 성장이 예상된다"
+    assert v.verify(candidate, page) == candidate
+
+
+def test_rejects_a_numbered_heading_starting_with_a_digit_as_an_accepted_trade():
+    # "3. 5%…" 처럼 번호 붙은 항목의 내용이 우연히 숫자로 시작하면, 마침표
+    # 앞뒤가 모두 숫자라는 이유로 소수점으로 오인해 항목 경계를 놓친다.
+    # 이것은 버그가 아니라 일부러 받아들이는 손해다 — 근거를 하나 놓쳐
+    # 빈 칸으로 남는 편이, 두 자리를 이어 붙여 기관이 하지 않은 문장을
+    # 내보내는 것보다 낫다.
+    page = "3. 5% 성장률의 배경"
+    candidate = "5% 성장률의 배경"
+    with pytest.raises(v.Rejected):
+        v.verify(candidate, page)

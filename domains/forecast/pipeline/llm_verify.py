@@ -16,7 +16,7 @@ from __future__ import annotations
 
 import re
 
-from .rationale import (_BULLET_MARKERS, _DECIMAL_POINT, _DUPLICATED_HANGUL,
+from .rationale import (_BULLET_MARKERS, _DUPLICATED_HANGUL,
                          _MAX_RATIONALE_LENGTH, _WRAP_BOUNDARY_MARKERS)
 
 _WHITESPACE = re.compile(r"\s+")
@@ -42,11 +42,16 @@ _START_BOUNDARY_MARKERS = frozenset(_BULLET_MARKERS) | frozenset(_WRAP_BOUNDARY_
 # 실패 모양이다. 종결부호는 줄 첫머리가 아니라 어디에 있어도 문장을 끝낸다
 # — 그래서 아래 표지·번호 판정과 달리 줄 시작 제약을 받지 않는다.
 #
-# 다만 '.' 는 문장 종결부호이자 소수점이다 — rationale._DECIMAL_POINT 가
-# 이미 "숫자 사이의 마침표는 문장 끝이 아니다"를 실측으로 확정해 뒀다(옆
-# 주석: 소수점을 문장 경계로 보면 인용문이 숫자 한가운데서 끊겨 주어를
-# 잃는다). 그 규정을 그대로 재사용한다 — 정규식을 하나 더 만들면 두 규칙이
-# 갈라질 수 있다. '。' 는 숫자 사이에 올 일이 없어 이 예외가 필요 없다.
+# 다만 '.' 는 문장 종결부호이자 소수점이다. rationale._DECIMAL_POINT
+# (r"(?<=\d)\.(?=\d)")는 숫자가 마침표에 딱 붙어 있을 때만 소수점으로
+# 본다 — rationale.py 는 _unwrap 이 줄 감김을 이미 이어 붙인 뒤에만 이
+# 정규식을 돌리므로 그걸로 충분하다. 하지만 이 모듈은 _unwrap 을 거치지
+# 않은 원문 그대로("성장률은 3.\n5%…")를 보므로, pdfplumber 의 줄 감김이
+# 소수점 한가운데를 지나가는 경우가 실제로 있다 — 이 모듈이 애초에
+# 공백을 무시하는 이유(엉뚱한 공백)와 같은 현상이다. 그래서 앞뒤가 붙어
+# 있을 때만 소수점으로 보는 rationale._DECIMAL_POINT 대신, 뒤쪽은 공백을
+# 건너뛰고 보는 별도 판정(_looks_like_a_decimal_point)을 이 모듈에 둔다.
+# rationale.py 의 정규식은 그 용도에 맞게 그대로 두고 바꾸지 않는다.
 _SENTENCE_TERMINATORS = frozenset(".。")
 
 # rationale._is_bullet_marker_line 은 표지를 line[0] 일 때만 인정한다 — 표지
@@ -97,6 +102,28 @@ def normalize(s: str) -> str:
     return _normalize_with_index(s)[0]
 
 
+def _looks_like_a_decimal_point(source: str, i: int) -> bool:
+    """source[i] (마침표) 가 소수점인가 — 줄 감김으로 뒤가 떨어져 있어도 본다.
+
+    앞은 딱 붙어 있어야 한다: "…이다. 5%" 처럼 문장이 실제로 끝난 뒤에
+    오는 숫자까지 소수점으로 오인하면 진짜 문장 경계를 놓친다. 뒤는
+    공백(개행 포함)을 건너뛰고 처음 나오는 문자만 본다: "3.\n5%" 처럼
+    pdfplumber 의 줄 감김이 소수점 한가운데를 지나갈 수 있기 때문이다.
+
+    이 비대칭 때문에 "3. 5% 성장률의 배경"처럼 번호 항목의 내용이 우연히
+    숫자로 시작하면 앞뒤가 모두 숫자라 소수점으로 오인해 항목 경계를
+    놓친다 — 일부러 받아들이는 손해다. 근거를 하나 놓쳐 빈 칸으로 남는
+    것이, 두 자리를 이어 붙여 기관이 하지 않은 문장을 내보내는 것보다
+    낫다.
+    """
+    if source[i] != "." or i == 0 or not source[i - 1].isdigit():
+        return False
+    j = i + 1
+    while j < len(source) and source[j].isspace():
+        j += 1
+    return j < len(source) and source[j].isdigit()
+
+
 def _starts_at_a_boundary(source: str, pos: int) -> bool:
     """source[pos] 가 문장·항목이 시작하는 자리인가.
 
@@ -104,8 +131,8 @@ def _starts_at_a_boundary(source: str, pos: int) -> bool:
 
     - **문장 종결부호**는 pos 바로 앞(공백은 건너뛴다)에 있으면 줄 어디서든
       인정한다 — 마침표는 그 자리에 있는 것만으로 문장이 끝났다는 뜻이라
-      줄 시작일 필요가 없다. 단, 그 마침표가 숫자 사이(소수점)면 인정하지
-      않는다 — rationale._DECIMAL_POINT 로 가린다.
+      줄 시작일 필요가 없다. 단, 그 마침표가 소수점이면 인정하지 않는다
+      (_looks_like_a_decimal_point).
     - **항목 표지·번호**는 그 줄의 첫 내용일 때만 인정한다. 줄 안 아무
       데서나 인정하면 "-" 는 음수 부호와, ")" 는 여는 괄호를 닫는 자리와
       구별이 안 된다(_ITEM_PREFIX 옆 주석의 실측 참고).
@@ -119,7 +146,7 @@ def _starts_at_a_boundary(source: str, pos: int) -> bool:
         i -= 1
     if i < 0:
         return True
-    if source[i] in _SENTENCE_TERMINATORS and _DECIMAL_POINT.match(source, i) is None:
+    if source[i] in _SENTENCE_TERMINATORS and not _looks_like_a_decimal_point(source, i):
         return True
     line_start = source.rfind("\n", 0, pos) + 1
     return _ITEM_PREFIX.fullmatch(source[line_start:pos]) is not None
