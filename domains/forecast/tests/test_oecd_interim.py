@@ -84,73 +84,8 @@ def test_parse_fails_when_no_page_yields_a_table():
         oi.parse({5: "Table 1. Global growth 6\n"}, "March 2026", date(2026, 3, 26), "u")
 
 
-class _Resp:
-    def __init__(self, content=b""):
-        self.content = content
-
-
-def _wire(monkeypatch, pages_list):
-    monkeypatch.setattr(oi.http, "get", lambda url, **kw: _Resp(content=b"%PDF"))
-    monkeypatch.setattr(oi.pdf, "page_texts", lambda data: pages_list)
-
-
-def test_collect_edition_rationales_returns_empty_for_the_real_report(monkeypatch):
-    # 실제 원문(8·9쪽 성장률·물가 표)과 그 앞뒤(7·10쪽 상당)에는 근거가
-    # 없다 — 표만 있는 쪽이라 문장 자체가 없다.
-    pages = ["표지"] * 7 + [
-        load("oecd_interim_2026-03_p8.txt"),
-        load("oecd_interim_2026-03_p9.txt"),
-        load("oecd_interim_2026-03_p10.txt"),
-        "결론",
-    ]
-    _wire(monkeypatch, pages)
-    assert oi.collect_edition_rationales("March 2026") == []
-
-
-def test_collect_edition_rationales_reads_the_page_before_the_growth_table(monkeypatch):
-    # 자리 표시자 문장이다 — 실제 보고서에는 한국만 따로 짚는 서술이 없다
-    # (아래 global 테스트 참고). 이 테스트는 창이 정말 표 앞쪽 한 쪽을
-    # 읽는지만 확인한다.
-    prose = "한국 성장률은 반도체 수출 호조에 힘입어 상향조정될 것으로 전망된다."
-    pages = ["표지"] * 6 + [
-        prose,
-        load("oecd_interim_2026-03_p8.txt"),
-        load("oecd_interim_2026-03_p9.txt"),
-    ]
-    _wire(monkeypatch, pages)
-
-    got = oi.collect_edition_rationales("March 2026")
-    by_ind = {r.indicator: r for r in got}
-    assert "gdp_growth" in by_ind
-    assert by_ind["gdp_growth"].source_page == 7   # 표 쪽(8)이 아니라 앞쪽(7)
-    assert by_ind["gdp_growth"].org == "OECD"
-    assert by_ind["gdp_growth"].published_at == date(2026, 3, 26)
-
-
-def test_collect_edition_rationales_reads_the_page_after_the_cpi_table(monkeypatch):
-    prose = "물가는 국제유가 상승의 영향으로 당초 전망보다 높아질 것으로 예상된다."
-    pages = [
-        load("oecd_interim_2026-03_p8.txt"),
-        load("oecd_interim_2026-03_p9.txt"),
-        prose,
-    ]
-    _wire(monkeypatch, pages)
-
-    got = oi.collect_edition_rationales("March 2026")
-    by_ind = {r.indicator: r for r in got}
-    assert "cpi" in by_ind
-    assert by_ind["cpi"].source_page == 3   # 표 쪽(2)이 아니라 뒤쪽(3)
-
-
-def test_collect_edition_rationales_returns_empty_when_no_table_found(monkeypatch):
-    _wire(monkeypatch, ["표지", "본문"])
-    assert oi.collect_edition_rationales("March 2026") == []
-
-
 def test_pick_finds_a_generic_global_sentence_that_is_not_about_korea():
     # 실측(2026년 3월호 20쪽) — G20·중국·인도 얘기이지 한국 얘기가 아니다.
-    # collect_edition_rationales 가 표 쪽(8·9) 앞뒤 한 쪽으로만 창을 좁히는
-    # 이유가 이것이다 — 이 쪽(20)은 표에서 한참 떨어져 있어 그 창 밖이다.
     # 이 문장을 한국의 근거로 저장하면 표 쪽 번호를 잘못 인용하는 것보다
     # 더 나쁘다 — 아예 다른 나라 얘기를 한국 근거로 둔갑시키는 것이다.
     #

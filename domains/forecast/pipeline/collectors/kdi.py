@@ -16,7 +16,7 @@ import html as html_lib
 import re
 from datetime import date, datetime
 
-from .. import http, pdf, rationale_store, report
+from .. import http, pdf, report
 from ..models import ForecastRecord
 from ..report import Issue  # 두 수집기가 같은 회차 표현을 쓴다
 
@@ -216,49 +216,6 @@ def collect_issue(issue: Issue, page_html: str | None = None) -> list[ForecastRe
         page_no, text = found
         return parse(text, issue, url, page_no)
     raise ValueError(f"{issue.title}: 요약표를 실은 장을 찾지 못했다")
-
-
-def collect_issue_rationales(issue: Issue, page_html: str | None = None) -> list["Rationale"]:
-    """그 회차의 근거 문장을 준다. 요약표를 실은 장을 못 찾으면 빈 리스트.
-
-    collect_issue 와 같은 순서로 장을 시도해, 표가 처음 확정되는 장 하나만
-    쓴다 — 장마다 표가 있을 수 있는데, 뒷 장까지 다 뒤지면 같은 지표에
-    대해 서로 다른 장에서 두 문장이 나올 수 있다. 그 장 안에서 표 쪽 앞뒤
-    한 쪽씩을 함께 본다(keis.collect_issue_rationales·bok.
-    collect_issue_rationales 참고).
-
-    "요약" 장을 통째로 스캔하지 않는 이유는 실측(2026년 8월호)에 있다: 그
-    장 1쪽은 성장률·물가·고용 세 줄이 마침표도 빈 줄도 없이 붙어 있어,
-    rationale.sentences 가 셋을 하나의 "문장"으로 묶는다("우리 경제는
-    글로벌 반도체경기 호황에 힘입어 … 취업자 수는 2026년 11만명 증가한
-    후 …"). 그러면 성장률 문장의 인과 표지("힘입어")가 고용 근거에도
-    그대로 묻어와, 성장률 얘기를 고용 증감의 근거인 양 인용하게 된다.
-    표 쪽(그 장의 마지막 쪽) 바로 앞뒤 한 쪽으로 창을 좁히면 이 1쪽은
-    창 밖에 남아 이 위험을 피한다 — 그 대신 이 장에 실린 진짜 요약
-    문장도 함께 놓치지만, 지표를 뒤섞어 인용하는 것보다는 아무것도
-    인용하지 않는 편이 낫다.
-    """
-    collected: list["Rationale"] = []
-    if page_html is None:
-        page_html = http.get(issue.url).text
-    for _, url in parse_chapters(page_html):
-        try:
-            pages = [_unfold_february_header(t) for t in pdf.page_texts(http.get(url).content)]
-            found = pdf.find_summary_table(pages, LABEL_TO_INDICATOR, REQUIRED_INDICATORS)
-        except Exception:
-            continue
-        if found is None:
-            continue
-        page_no, _ = found
-        for neighbor in (page_no - 1, page_no, page_no + 1):
-            if not (1 <= neighbor <= len(pages)):
-                continue
-            collected = rationale_store.merge(collected, report.rationales_from_text(
-                pages[neighbor - 1], org="KDI", issue=issue,
-                indicators=sorted(REQUIRED_INDICATORS), source_url=url,
-                source_page=neighbor))
-        return collected
-    return collected
 
 
 def collect(today: date) -> list[ForecastRecord]:

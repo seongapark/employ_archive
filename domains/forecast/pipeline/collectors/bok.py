@@ -10,7 +10,7 @@ import re
 from datetime import date
 from email.utils import parsedate_to_datetime
 
-from .. import http, pdf, rationale_store, report
+from .. import http, pdf, report
 from ..models import ForecastRecord
 from ..report import Issue  # 두 수집기가 같은 회차 표현을 쓴다
 
@@ -91,45 +91,6 @@ def collect_issue(issue: Issue) -> list[ForecastRecord]:
         raise ValueError(f"{issue.title}: 요약표 페이지를 찾지 못했다")
     page_no, text = found
     return parse(text, issue, pdf_url, page_no)
-
-
-def collect_issue_rationales(issue: Issue) -> list["Rationale"]:
-    """그 회차의 근거 문장을 준다. 요약표를 찾지 못하면 빈 리스트.
-
-    표 앞뒤 한 쪽씩(page_no-1, page_no+1)을 표 쪽과 합쳐 넘긴다 —
-    keis.collect_issue_rationales 와 같은 이유다: 서술이 표 앞과 뒤 중
-    어디에 오는지 회차마다 다르다.
-
-    이 창을 표 쪽 근처로만 좁혀 둔 것은 실측 때문이다. 2026년 8월호(69쪽
-    짜리 PDF, 표는 16쪽)를 통째로 스캔해 보면 진짜 근거 문장은 8·10·11·
-    39·43쪽처럼 표에서 멀리 떨어진 곳에 흩어져 있다(예: 39쪽 "올해
-    취업자수 전망치는 … 지난 5월 전망 대비 4만명 하향조정하였다"). 반면
-    그 통째 스캔은 위험하다 — 같은 호 3쪽(부문별 담당자 목록)이 "물가
-    연구팀"·"고용동향팀"(지표 낱말)과 "…흐름과 배경"(인과 표지 — 사실은
-    BOX 제목의 일부일 뿐이다)과 "향후 전망"(전망 표지)을 우연히 모두
-    갖춰, rationale.pick 이 241자짜리 집필진 명단을 하나의 "근거 문장"
-    으로 뽑아 버린다. 표 앞뒤 한 쪽으로 창을 좁히면 이 먼 쪽들은 놓치지만
-    (실제 손실이다), 엉뚱한 문장을 이 기관의 근거인 양 인용하는 것보다는
-    아무것도 인용하지 않는 편이 낫다 — 근거를 지어내지 않는다는 원칙과
-    같은 이유다. 표 앞뒤 한 쪽(15·17쪽)은 실측으로 이 위험이 없음을
-    확인했다: 둘 다 근거도 오탐도 없다.
-    """
-    pdf_url = parse_pdf_link(http.get(issue.url).text)
-    pages = pdf.page_texts(http.get(pdf_url).content)
-    found = pdf.find_summary_table(pages, LABEL_TO_INDICATOR, REQUIRED_INDICATORS)
-    if found is None:
-        return []
-    page_no, _ = found
-
-    collected: list["Rationale"] = []
-    for neighbor in (page_no - 1, page_no, page_no + 1):
-        if not (1 <= neighbor <= len(pages)):
-            continue
-        collected = rationale_store.merge(collected, report.rationales_from_text(
-            pages[neighbor - 1], org="BOK", issue=issue,
-            indicators=sorted(REQUIRED_INDICATORS), source_url=pdf_url,
-            source_page=neighbor))
-    return collected
 
 
 def collect(today: date) -> list[ForecastRecord]:

@@ -16,7 +16,7 @@ import re
 from datetime import date
 from typing import Mapping
 
-from .. import http, pdf, rationale_store, report
+from .. import http, pdf, report
 from ..models import ForecastRecord
 
 BASE = "https://www.oecd.org"
@@ -151,78 +151,3 @@ def collect_edition(label: str) -> list[ForecastRecord]:
     wanted = {n: t for n, t in enumerate(pages, 1) if table_indicator(t) is not None}
     return parse(wanted, label, published_at, url)
 
-
-def _real_table_pages(pages: Mapping[int, str], published_at: date) -> dict[str, int]:
-    """지표별로 실제 전망표가 실린 쪽을 찾는다. parse() 의 page_of 계산과 같은
-    규칙을 쓰지만, page_of 는 parse() 안의 지역변수라 밖에서 못 쓰므로 여기서
-    따로 계산한다.
-
-    캡션만으로는 부족하다 — 목차와 본문 참조에도 같은 캡션이 나온다
-    (table_indicator 문서 참고). korea_values 가 실제로 성공하는 쪽만
-    "진짜 표"로 센다.
-    """
-    page_of: dict[str, int] = {}
-    for page_no, text in sorted(pages.items()):
-        indicator = table_indicator(text)
-        if indicator is None or indicator in page_of:
-            continue
-        try:
-            korea_values(text, published_at)
-        except ValueError:
-            # 목차와 본문 참조에도 같은 캡션이 나온다 — 표가 아닌 쪽은 건너뛴다
-            continue
-        page_of[indicator] = page_no
-    return page_of
-
-
-def collect_edition_rationales(label: str) -> list["Rationale"]:
-    """그 회차의 근거 문장을 준다. 전망표를 못 찾으면 빈 리스트.
-
-    성장률·물가 표가 각각 다른 쪽에 실릴 수 있으므로(_real_table_pages),
-    지표마다 표 쪽 앞뒤 한 쪽씩을 창으로 잡는다. 다만 그 창들을 **하나로
-    합쳐**(neighbors) 쪽 번호 오름차순으로 한 번씩만 읽고, 각 쪽에서 두
-    지표(gdp_growth·cpi)를 함께 찾는다 — 지표별로 따로 훑지 않는다. 두
-    표가 이웃한 쪽에 실리면 창이 겹치는데, 합치지 않으면 같은 쪽을 두 번
-    읽고 같은 문장을 두 번 후보로 올리게 된다.
-
-    지표를 쪽마다 함께 찾아도 결과가 섞이지 않는 것은 pick 이 지표별로
-    따로 판정하기 때문이고, 같은 (기관·발표일·지표) 키가 여러 쪽에서 나오면
-    rationale_store.merge 가 **먼저 온 쪽**(작은 쪽 번호)을 남긴다 —
-    그래서 정렬해 읽는 순서가 곧 "보고서 앞쪽 우선"이 된다.
-
-    이 창 밖으로 넓히지 않는다. Interim 보고서는 한국만 따로 짚어
-    설명하는 서술이 없다(머리말 참고) — 국가명은 표에만 나오고, 본문은
-    G20·미국처럼 큰 단위를 말한다. 실측(2026년 3월호, 28쪽짜리 PDF)으로
-    확인했다: 본문 전체를 스캔하면 20쪽 "Economic growth in the G20
-    emerging-market economies is projected to ease somewhat, largely due
-    to a step down in growth in China and India."나 24쪽의 미국 정책금리
-    문장처럼 한국과 무관한 문장이 gdp_growth·cpi 조건을 만족해 뽑힌다.
-    이걸 한국 전망의 근거인 양 저장하면 표 쪽 번호를 잘못 인용하는 것보다
-    더 나쁘다 — 아예 다른 나라 얘기를 이 기관의 한국 근거로 둔갑시키는
-    것이기 때문이다. 표 쪽 앞뒤 한 쪽(4·6·7·10쪽)은 실측으로 이 위험이
-    없음을 확인했다: 근거도 오탐도 없다.
-    """
-    published_at, url = EDITIONS[label]
-    page_texts = pdf.page_texts(http.get(url).content)
-    pages = {n: t for n, t in enumerate(page_texts, 1)}
-    page_of = _real_table_pages(pages, published_at)
-    if not page_of:
-        return []
-
-    issue = report.Issue(
-        title=f"OECD Economic Outlook, Interim Report {label}",
-        published_at=published_at,
-        url=LANDING_URL,
-    )
-    neighbors: set[int] = set()
-    for page_no in page_of.values():
-        for candidate in (page_no - 1, page_no, page_no + 1):
-            if 1 <= candidate <= len(page_texts):
-                neighbors.add(candidate)
-
-    collected: list["Rationale"] = []
-    for page_no in sorted(neighbors):
-        collected = rationale_store.merge(collected, report.rationales_from_text(
-            page_texts[page_no - 1], org="OECD", issue=issue,
-            indicators=("gdp_growth", "cpi"), source_url=url, source_page=page_no))
-    return collected

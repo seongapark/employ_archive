@@ -15,7 +15,7 @@ import re
 from datetime import date, datetime
 from typing import NamedTuple
 
-from .. import http, ocr, rationale_store, report
+from .. import http, ocr, report
 from ..models import ForecastRecord
 from ..report import Issue
 
@@ -320,10 +320,9 @@ class _LocatedForecastPage(NamedTuple):
 
     표 쪽 번호·원문뿐 아니라, 그 앞뒤 쪽을 추가로 읽을 때 필요한 것들(원본
     PDF 바이트, read_pages 함수, 이미 400dpi 로 읽어 둔 후보 쪽들, PDF 전체
-    쪽수)도 함께 담는다 — collect_issue_rationales 가 fetch 를 다시 하거나
-    이미 읽은 후보 쪽을 다시 OCR 하지 않게 하고, 마지막 쪽 뒤를 읽으려 들지
-    않게 하기 위해서다. 전체 쪽수는 150dpi 스크리닝이 이미 전 쪽을 훑으므로
-    거기서 공짜로 얻는다.
+    쪽수)도 함께 담는다 — fetch 를 다시 하거나 이미 읽은 후보 쪽을 다시
+    OCR 하지 않게 하고, 마지막 쪽 뒤를 읽으려 들지 않게 하기 위해서다.
+    전체 쪽수는 150dpi 스크리닝이 이미 전 쪽을 훑으므로 거기서 공짜로 얻는다.
     """
     page_no: int
     text: str
@@ -337,9 +336,8 @@ def _locate_forecast_page(listed: ListedIssue, *, fetch,
                           read_pages) -> _LocatedForecastPage | None:
     """PDF 를 받아 전망표가 실린 쪽을 찾는다.
 
-    collect_issue 와 collect_issue_rationales 가 똑같이 거치는
-    fetch → 150dpi 스크리닝 → 후보만 400dpi 정밀 판독 → 표 확정 앞부분을
-    여기 하나로 모은다. 각자 따로 베끼면 한쪽만 고쳐질 때 둘이 어긋난다.
+    collect_issue 가 거치는 fetch → 150dpi 스크리닝 → 후보만 400dpi 정밀
+    판독 → 표 확정 앞부분을 여기 하나로 모은다.
 
     전망표가 없으면(후보가 아예 없거나, 후보는 있어도 확정되지 않으면)
     None 을 준다.
@@ -386,82 +384,6 @@ def collect_issue(listed: ListedIssue, *, fetch=None,
             f"{listed.issue.title}: {located.page_no}쪽에서 전망표를 찾았지만 "
             "레코드를 만들지 못했다")
     return records
-
-
-def collect_issue_rationales(listed: ListedIssue, *, fetch=None,
-                             read_pages=None) -> list["Rationale"]:
-    """그 회차의 근거 문장을 준다. 전망표가 없으면 빈 리스트.
-
-    표 쪽 원문만으로는 부족하다 — 이 브리프는 표 옆에 '왜'를 말하는 서술을
-    따로 싣고, 표 자체는 숫자뿐이라 서술이 없다. 처음엔 표 "앞쪽"만 합쳐
-    넘겼으나, 2026년 제5호를 열어 보니 정작 인과 서술은 표 "다음" 쪽에
-    있었다 — 이 서술이 표의 앞과 뒤 중 어느 쪽에 오는지는 회차마다 다를 수
-    있으므로, 앞뒤 한 쪽씩(page_no-1, page_no+1)을 표 쪽과 합쳐 넘긴다.
-
-    두 이웃 다 없을 수 있다 — 표가 1쪽이면 앞이 없고, 표가 PDF 의 마지막
-    쪽이면 뒤가 없다. 이런 경우 그 쪽은 그냥 기여하지 않는다(오류를 내지
-    않는다). 전체 쪽수는 _locate_forecast_page 가 150dpi 스크리닝에서 이미
-    구해 뒀다.
-
-    이웃 쪽이 150dpi 스크리닝에서 SCREEN_KEYWORD('전망')가 안 걸려 대개
-    candidate_texts 에 없다 — 서술 쪽은 "…것으로 예상된다"처럼 '전망' 없이
-    미래를 말하는 문장이 흔하기 때문이다. 그럴 땐 그 쪽만 400dpi 로 새로
-    읽는다. 이미 후보에 들어 400dpi 로 읽어 둔 경우(우연히 '전망'을 담고
-    있던 경우)라면 다시 읽지 않고 재사용한다. 두 이웃이 한꺼번에 없는
-    경우도 read_pages 한 번으로 같이 읽는다 — 400dpi 전처리 OCR 한 쪽에
-    ~4.5초가 들어, 쪽마다 따로 부르지 않고 부족한 쪽만 모아 한 번에 부른다.
-
-    OCR 이 낸 줄바꿈은 문장 경계가 아니라 대개 줄 감김이다(rationale.
-    sentences 의 bullets 옵션 설명 참고). report.rationales_from_text 에
-    bullets=True 를 넘겨 rationale.pick 이 마침표가 아니라 불릿 표지로
-    문장을 가르게 한다.
-
-    쪽마다 따로 report.rationales_from_text 를 부르고 rationale_store.merge
-    로 합친다 — 세 쪽을 한 텍스트로 이어 붙여 한 번만 부르지 않는다. 두
-    가지 이유가 있다. 첫째, 인용문이 실제로 나온 쪽 번호를 기록해야
-    한다 — 표 쪽 번호 하나로 고정하면(예전 방식) 2026년 제5호처럼 근거가
-    20쪽에 있는데 19쪽(표)으로 인용돼, 사람이 나중에 rationales.json 을
-    열어 원문과 대조하려 할 때(설계 문서 4.3) 엉뚱한 쪽을 펴게 된다. 둘째,
-    쪽을 이어 붙이면 앞 쪽 마지막 불릿과 뒤 쪽 첫 줄이 (그 사이에 빈 줄이
-    없는 한) 하나로 이어질 위험이 있다 — 쪽마다 따로 부르면 한 호출이 한
-    쪽만 보므로 그 위험이 구조적으로 없다.
-
-    합치는 순서는 앞쪽 → 표 쪽 → 뒤쪽, 즉 오름차순 쪽번호다. merge 는
-    이미 있는 키(지표)를 덮어쓰지 않고 새 키만 더하므로, 이 순서를 지키면
-    "먼저 나온 쪽의 문장을 취한다"는 기존 우선순위가 그대로 유지된다 —
-    이번에 바뀌는 건 그 문장이 어느 쪽에서 왔는지를 정확히 기록하는
-    것뿐이고, 어떤 문장이 뽑히는지는 바뀌지 않는다.
-    """
-    fetch = fetch or (lambda url: http.get(url).content)
-    read_pages = read_pages or ocr.page_texts
-
-    located = _locate_forecast_page(listed, fetch=fetch, read_pages=read_pages)
-    if located is None:
-        return []
-
-    preceding_page, following_page = located.page_no - 1, located.page_no + 1
-    neighbors = [p for p in (preceding_page, following_page)
-                 if 1 <= p <= located.total_pages]
-    missing = [p for p in neighbors if p not in located.candidate_texts]
-    fresh = (dict(zip(missing, located.read_pages(
-                 located.data, missing, dpi=400, preprocess=True)))
-             if missing else {})
-    neighbor_texts = {**located.candidate_texts, **fresh}
-
-    pages: list[tuple[int, str]] = []
-    if preceding_page in neighbors and neighbor_texts.get(preceding_page):
-        pages.append((preceding_page, neighbor_texts[preceding_page]))
-    pages.append((located.page_no, located.text))
-    if following_page in neighbors and neighbor_texts.get(following_page):
-        pages.append((following_page, neighbor_texts[following_page]))
-
-    found: list["Rationale"] = []
-    for page_no, page_text in pages:
-        found = rationale_store.merge(found, report.rationales_from_text(
-            page_text, org="KEIS", issue=listed.issue,
-            indicators=sorted(REQUIRED_INDICATORS), source_url=listed.pdf_url,
-            source_page=page_no, bullets=True))
-    return found
 
 
 def collect(today: date) -> list[ForecastRecord]:
