@@ -145,15 +145,6 @@ def test_collect_uses_the_newest_round(monkeypatch):
     assert [i.url for i in seen] == ["u-new"]
 
 
-def _fake_get_for(issue):
-    def fake_get(url, **kw):
-        if url == issue.url:
-            return _Resp(text='<a href="/fileSrc/x.pdf">첨부</a>')
-        assert url == "https://www.bok.or.kr/fileSrc/x.pdf"
-        return _Resp(content=b"%PDF")
-    return fake_get
-
-
 def test_pick_would_blend_indicators_on_the_real_credits_page():
     # 실측(2026년 8월호 3쪽, 부문별 담당자 목록) — "물가연구팀"·"고용동향팀"
     # (지표 낱말)과 "…흐름과 배경"(사실은 BOX 제목의 일부일 뿐인 인과 표지)과

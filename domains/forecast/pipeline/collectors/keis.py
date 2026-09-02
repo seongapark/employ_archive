@@ -316,20 +316,9 @@ def find_forecast_page(page_texts: list[str], page_numbers: list[int],
 
 
 class _LocatedForecastPage(NamedTuple):
-    """전망표 쪽을 찾은 결과.
-
-    표 쪽 번호·원문뿐 아니라, 그 앞뒤 쪽을 추가로 읽을 때 필요한 것들(원본
-    PDF 바이트, read_pages 함수, 이미 400dpi 로 읽어 둔 후보 쪽들, PDF 전체
-    쪽수)도 함께 담는다 — fetch 를 다시 하거나 이미 읽은 후보 쪽을 다시
-    OCR 하지 않게 하고, 마지막 쪽 뒤를 읽으려 들지 않게 하기 위해서다.
-    전체 쪽수는 150dpi 스크리닝이 이미 전 쪽을 훑으므로 거기서 공짜로 얻는다.
-    """
+    """전망표가 실린 쪽 번호와 그 원문."""
     page_no: int
     text: str
-    data: bytes
-    read_pages: object
-    candidate_texts: dict[int, str]
-    total_pages: int
 
 
 def _locate_forecast_page(listed: ListedIssue, *, fetch,
@@ -344,7 +333,6 @@ def _locate_forecast_page(listed: ListedIssue, *, fetch,
     """
     data = fetch(listed.pdf_url)
     screened = read_pages(data, None, dpi=SCREEN_DPI, preprocess=False)
-    total_pages = len(screened)
     candidates = [page_no for page_no, text in enumerate(screened, start=1)
                   if SCREEN_KEYWORD in text]
     if not candidates:
@@ -360,10 +348,7 @@ def _locate_forecast_page(listed: ListedIssue, *, fetch,
               f"확정된 쪽이 없다")
         return None
     page_no, text = found
-    return _LocatedForecastPage(
-        page_no=page_no, text=text, data=data, read_pages=read_pages,
-        candidate_texts=dict(zip(candidates, texts)), total_pages=total_pages,
-    )
+    return _LocatedForecastPage(page_no=page_no, text=text)
 
 
 def collect_issue(listed: ListedIssue, *, fetch=None,
