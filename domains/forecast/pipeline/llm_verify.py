@@ -61,13 +61,24 @@ _SENTENCE_TERMINATORS = frozenset(".。")
 # 내용"일 때만 인정한다: 줄 시작(직전 개행 또는 원문 시작)부터 매치
 # 자리까지가 공백과 항목 표지 하나(또는 번호 붙은 괄호 표지)뿐이어야 한다.
 #
+# 줄 첫머리로 좁힌 것만으로는 부족하다 — pdfplumber 는 배치 위치로 줄을
+# 감으므로, 음수로 시작하는 줄("…늘어\n-0.3%p 낮아질…")도 마이너스 부호로
+# 시작하는 줄만큼 있을 법하다. 실측: "-0.3%p" 처럼 표지 문자 바로 뒤에
+# 숫자가 붙으면 통과해 버렸다(줄 첫머리라는 조건만 봤을 뿐 표지 자체가
+# 진짜 불릿인지는 안 봤다). '=' 도 _WRAP_BOUNDARY_MARKERS 를 통해 같은
+# 모양이다("=2026년…"). 그래서 "실제 불릿은 항상 뒤에 공백이 오고,
+# '-0.3' 은 절대 그렇지 않다"는 사실을 그대로 규칙으로 쓴다 — 표지 문자
+# 하나만 있는 갈래는 뒤에 공백이 하나 이상 와야 인정한다. 번호 붙은
+# 괄호 표지("1)")는 그대로 둔다 — 그쪽은 표지 자체가 숫자+')' 형태라
+# 애초에 음수·괄호 닫기와 헷갈릴 자리가 아니다.
+#
 # 번호 표지는 ')' 붙은 것만 여기서 잡는다("1)"). '.' 붙은 번호("3.")는
 # 넣지 않는다 — 그 마침표는 위 _SENTENCE_TERMINATORS 와
 # _looks_like_a_decimal_point 가 이미 소수점과 가려 가며 다룬다. 여기 또
 # 넣으면 "3.5" 같은 소수점을 문장 종결부호 쪽에서는 막아 놓고 항목 표지
 # 쪽에서 도로 통과시키는 두 규칙 불일치가 생긴다.
 _marker_class = "".join(re.escape(ch) for ch in sorted(_START_BOUNDARY_MARKERS))
-_ITEM_PREFIX = re.compile(rf"\s*(?:[{_marker_class}]|\d+\))\s*")
+_ITEM_PREFIX = re.compile(rf"\s*(?:[{_marker_class}]\s+|\d+\)\s*)")
 
 
 class Rejected(Exception):
@@ -134,15 +145,25 @@ def _looks_like_a_decimal_point(source: str, i: int) -> bool:
 def _starts_at_a_boundary(source: str, pos: int) -> bool:
     """source[pos] 가 문장·항목이 시작하는 자리인가.
 
-    두 판정은 성격이 다르다.
+    세 판정은 성격이 다르다.
 
     - **문장 종결부호**는 pos 바로 앞(공백은 건너뛴다)에 있으면 줄 어디서든
       인정한다 — 마침표는 그 자리에 있는 것만으로 문장이 끝났다는 뜻이라
       줄 시작일 필요가 없다. 단, 그 마침표가 소수점이면 인정하지 않는다
       (_looks_like_a_decimal_point).
-    - **항목 표지·번호**는 그 줄의 첫 내용일 때만 인정한다. 줄 안 아무
-      데서나 인정하면 "-" 는 음수 부호와, ")" 는 여는 괄호를 닫는 자리와
-      구별이 안 된다(_ITEM_PREFIX 옆 주석의 실측 참고).
+    - **항목 표지·번호가 pos 앞에 있는 경우**는 그 줄의 첫 내용일 때만
+      인정한다. 줄 안 아무 데서나 인정하면 "-" 는 음수 부호와, ")" 는
+      여는 괄호를 닫는 자리와 구별이 안 된다(_ITEM_PREFIX 옆 주석의 실측
+      참고).
+    - **항목 표지·번호가 pos 자체에서 시작하는 경우**도 인정한다 — LLM 이
+      표지까지 포함해 후보를 돌려줄 수 있다("ㅇ 소비가…"). 이때는 pos
+      바로 앞을 봐도 소용없다: 그 자리는 앞 줄의 마지막 글자인데, 국문
+      보고서 불릿은 마침표 없이 끝나는 게 보통이라(_SENTENCE_TERMINATORS
+      옆 주석 참고) 앞을 보는 판정으로는 표지 자체를 절대 못 찾는다.
+      그래서 pos 앞이 아니라 pos 부터 뒤로 _ITEM_PREFIX 가 매치하는지
+      보되, 그 줄에서 pos 앞쪽에 표지 말고 다른 내용이 없을 때만
+      허용한다(줄 중간에 우연히 표지 모양이 나온 자리를 항목 시작으로
+      오인하지 않기 위해서다).
 
     이 목록 밖의 "문장처럼 보인다"는 어떤 짐작도 하지 않는다 — 표지
     집합을 실측 없이 넓히면 다음에 그 짐작이 하나씩 틀린다(_BULLET_MARKERS
@@ -156,7 +177,10 @@ def _starts_at_a_boundary(source: str, pos: int) -> bool:
     if source[i] in _SENTENCE_TERMINATORS and not _looks_like_a_decimal_point(source, i):
         return True
     line_start = source.rfind("\n", 0, pos) + 1
-    return _ITEM_PREFIX.fullmatch(source[line_start:pos]) is not None
+    prefix = source[line_start:pos]
+    if _ITEM_PREFIX.fullmatch(prefix) is not None:
+        return True
+    return not prefix.strip() and _ITEM_PREFIX.match(source, pos) is not None
 
 
 def verify(candidate: str, source_page_text: str) -> str:

@@ -196,3 +196,36 @@ def test_rejects_a_fragment_starting_after_a_decimal_point_split_by_a_line_wrap(
     with pytest.raises(v.Rejected) as e:
         v.verify("5% 상승할 것으로 전망된다", "성장률은 3\n. 5% 상승할 것으로 전망된다")
     assert "시작" in e.value.reason
+
+
+def test_rejects_a_fragment_starting_after_a_line_leading_minus_sign():
+    # pdfplumber 는 배치 위치로 줄을 감으므로, 줄 첫머리가 음수로 시작하는
+    # 것("-0.3%p")도 마이너스 부호로 시작하는 줄만큼 있을 법하다 — 줄
+    # 첫머리라는 조건만으로는 표지와 음수 부호를 못 가른다.
+    page = "물가 상승률이 둔화되면서 실질소득이 늘어\n-0.3%p 낮아질 것으로 예상된다"
+    with pytest.raises(v.Rejected) as e:
+        v.verify("0.3%p 낮아질 것으로 예상된다", page)
+    assert "시작" in e.value.reason
+
+
+def test_rejects_a_fragment_starting_after_a_line_leading_equals_sign():
+    # '=' 도 _WRAP_BOUNDARY_MARKERS 를 통해 같은 모양의 구멍이다.
+    page = "고용 흐름 요약\n=2026년 취업자는 크게 늘어날 것으로 보인다"
+    with pytest.raises(v.Rejected) as e:
+        v.verify("2026년 취업자는 크게 늘어날 것으로 보인다", page)
+    assert "시작" in e.value.reason
+
+
+def test_accepts_a_sentence_that_includes_its_own_bullet_marker():
+    # LLM 이 표지까지 포함해 후보를 돌려줄 수 있다. 이 경우 표지 앞은 앞
+    # 줄의 마지막 글자라 뒤를 보는 판정으로는 절대 못 찾는다 — 국문 보고서
+    # 불릿은 마침표 없이 끝나는 게 보통이기 때문이다.
+    page = "고용 전망\nㅇ 소비가 회복되면서 취업자가 늘어날 것으로 예상된다\nㅇ 건설투자는 부진하다"
+    candidate = "ㅇ 소비가 회복되면서 취업자가 늘어날 것으로 예상된다"
+    assert v.verify(candidate, page) == candidate
+
+
+def test_accepts_a_sentence_that_includes_its_own_dash_marker():
+    page = "개요\n- 항목 내용입니다 계속된다"
+    candidate = "- 항목 내용입니다 계속된다"
+    assert v.verify(candidate, page) == candidate
