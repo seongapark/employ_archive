@@ -82,21 +82,3 @@ def test_a_page_that_only_mentions_a_table_is_skipped():
 def test_parse_fails_when_no_page_yields_a_table():
     with pytest.raises(ValueError, match="전망표"):
         oi.parse({5: "Table 1. Global growth 6\n"}, "March 2026", date(2026, 3, 26), "u")
-
-
-def test_pick_finds_a_generic_global_sentence_that_is_not_about_korea():
-    # 실측(2026년 3월호 20쪽) — G20·중국·인도 얘기이지 한국 얘기가 아니다.
-    # 이 문장을 한국의 근거로 저장하면 표 쪽 번호를 잘못 인용하는 것보다
-    # 더 나쁘다 — 아예 다른 나라 얘기를 한국 근거로 둔갑시키는 것이다.
-    #
-    # 이 쪽의 문단은 "20. " 처럼 번호로 시작한다. 절 번호를 각주 갈래로
-    # (줄째) 버리면 이 문장이 머리를 잃어 이 단언이 조용히 통과해 버린다 —
-    # 규칙이 나아져서가 아니라 문장이 반토막 나서 안 걸리는 것이므로,
-    # 그때는 이 테스트가 창의 좁음을 더는 못 지킨다. 절 번호를 불릿 갈래로
-    # 두는 이유 중 하나가 이것이다(test_rationale.py 의
-    # test_section_heading_keeps_the_head_line_of_a_numbered_oecd_paragraph).
-    from domains.forecast.pipeline import rationale
-    global_text = load("oecd_interim_2026-03_p20_global.txt")
-    got = rationale.pick(global_text, "gdp_growth")
-    assert got is not None
-    assert "korea" not in got.lower()

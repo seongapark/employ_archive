@@ -143,18 +143,3 @@ def test_collect_uses_the_newest_round(monkeypatch):
 
     bok.collect(date(2026, 8, 30))
     assert [i.url for i in seen] == ["u-new"]
-
-
-def test_pick_would_blend_indicators_on_the_real_credits_page():
-    # 실측(2026년 8월호 3쪽, 부문별 담당자 목록) — "물가연구팀"·"고용동향팀"
-    # (지표 낱말)과 "…흐름과 배경"(사실은 BOX 제목의 일부일 뿐인 인과 표지)과
-    # "향후 전망"(전망 표지)이 한 "문장"에 우연히 다 모여, cpi 와 emp_change
-    # 근거가 서로 같은 문장이 돼 버린다(예전엔 이게 표 쪽 근처로만 근거
-    # 수집 창을 좁히는 이유였다).
-    from domains.forecast.pipeline import rationale
-    credits = (Path(__file__).parent / "fixtures" / "bok_2026-08_p3_credits.txt"
-               ).read_text(encoding="utf-8")
-    got_cpi = rationale.pick(credits, "cpi")
-    got_emp = rationale.pick(credits, "emp_change")
-    assert got_cpi is not None
-    assert got_cpi == got_emp  # 서로 다른 지표인데 같은 "문장"이 뽑힌다

@@ -456,35 +456,6 @@ def test_collect_issue_raises_when_a_real_table_is_unreadable():
                            read_pages=fake_read_pages)
 
 
-def test_rationales_from_text_finds_one_per_indicator():
-    from domains.forecast.pipeline import report
-
-    text = ("2026년 하반기 취업자 수 증가 배경에는 경기 개선 기대가 자리한 것으로 전망된다. "
-            "실업률은 내수 회복을 반영해 하락할 것으로 예상된다.")
-    got = report.rationales_from_text(
-        text, org="KEIS", issue=ISSUE_2026_08,
-        indicators=("emp_change", "emp_rate", "unemp_rate"),
-        source_url="https://x/y.pdf", source_page=20)
-
-    by_ind = {r.indicator: r for r in got}
-    assert set(by_ind) == {"emp_change", "unemp_rate"}   # emp_rate 는 근거가 없다
-    assert by_ind["emp_change"].text.startswith("2026년 하반기 취업자 수 증가 배경")
-    assert by_ind["emp_change"].published_at == ISSUE_2026_08.published_at
-    assert by_ind["emp_change"].source_page == 20
-    # tags_for 를 실제로 불렀는지 확인한다 — 고정된 빈 리스트를 넣어도 위
-    # 단언들은 모두 통과하므로, 이 문장에 실제로 태그가 붙는지 따로 본다.
-    assert by_ind["unemp_rate"].tags == ["내수"]
-
-
-def test_rationales_from_text_returns_empty_when_nothing_qualifies():
-    from domains.forecast.pipeline import report
-
-    got = report.rationales_from_text(
-        "표는 다음과 같다.", org="KEIS", issue=ISSUE_2026_08,
-        indicators=("emp_change",), source_url="https://x/y.pdf", source_page=1)
-    assert got == []
-
-
 def test_collect_issue_raises_when_an_accepted_page_yields_no_records(monkeypatch):
     # find_forecast_page 가 이미 발표연도 이상 열이 있는 쪽만 통과시켰으니,
     # 그 쪽에서 parse 가 빈 리스트를 낸다면 그건 "전망 없음"이 아니라

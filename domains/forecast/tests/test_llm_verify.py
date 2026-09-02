@@ -132,7 +132,7 @@ def test_accepts_a_sentence_after_a_numbered_dot_item():
 
 
 def test_rejects_a_fragment_starting_inside_a_decimal_number():
-    # "." 는 문장 종결부호이자 소수점이다(rationale._DECIMAL_POINT 참고).
+    # "." 는 문장 종결부호이자 소수점이다(v._looks_like_a_decimal_point 참고).
     # 숫자 사이에 오면 문장이 끝난 게 아니라 소수점이므로, 그 뒤에서
     # 시작하는 조각은 "성장률은" 이라는 주어를 자른 것이다.
     with pytest.raises(v.Rejected) as e:

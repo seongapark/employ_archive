@@ -339,15 +339,3 @@ def test_collect_raises_when_every_chapter_fails(monkeypatch):
 
     with pytest.raises(ValueError):
         kdi.collect(date(2026, 8, 30))
-
-
-def test_pick_would_blend_indicators_on_the_real_headline_summary_page():
-    # 실측(2026년 8월호 "요약" 장 1쪽) — 성장률·물가·고용 세 줄이 마침표도
-    # 빈 줄도 없이 붙어 있어, rationale.sentences 가 셋을 한 "문장"으로
-    # 묶는다(예전엔 이게 표 쪽 근처로만 근거 수집 창을 좁히는 이유였다).
-    from domains.forecast.pipeline import rationale
-    headline = (FIXTURES / "kdi_2026-08_p1_headline_summary.txt").read_text(encoding="utf-8")
-    got_growth = rationale.pick(headline, "gdp_growth")
-    got_emp = rationale.pick(headline, "emp_change")
-    assert got_growth is not None
-    assert got_growth == got_emp  # 서로 다른 지표인데 같은 "문장"이 뽑힌다
