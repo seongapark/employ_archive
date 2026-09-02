@@ -705,36 +705,106 @@
   },
   "ei": {
     "2022-01": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220200836&bbs_seq=13255&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220200844&bbs_seq=13255&bbs_id=12&file_ext=pdf"
+        }
+      ],
       "posted_at": "2022-02-14",
       "title": "고용행정 통계로 본 2022년 1월 노동시장 동향",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=13255"
     },
     "2022-02": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220301033&bbs_seq=13325&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220301035&bbs_seq=13325&bbs_id=12&file_ext=pdf"
+        }
+      ],
       "posted_at": "2022-03-14",
       "title": "고용행정 통계로 본 2022년 2월 노동시장 동향",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=13325"
     },
     "2022-03": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220401288&bbs_seq=13414&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220401289&bbs_seq=13414&bbs_id=12&file_ext=pdf"
+        }
+      ],
       "posted_at": "2022-04-11",
       "title": "고용행정 통계로 본 2022년 3월 노동시장 동향",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=13414"
     },
     "2022-04": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220500575&bbs_seq=13504&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220500576&bbs_seq=13504&bbs_id=12&file_ext=pdf"
+        }
+      ],
       "posted_at": "2022-05-09",
       "title": "고용행정 통계로 본 2022년 4월 노동시장 동향",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=13504"
     },
     "2022-05": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220600935&bbs_seq=13616&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220600936&bbs_seq=13616&bbs_id=12&file_ext=pdf"
+        }
+      ],
       "posted_at": "2022-06-13",
       "title": "고용행정 통계로 본 2022년 5월 노동시장 동향",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=13616"
     },
     "2022-06": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220700788&bbs_seq=13732&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220700789&bbs_seq=13732&bbs_id=12&file_ext=pdf"
+        }
+      ],
       "posted_at": "2022-07-11",
       "title": "고용행정 통계로 본 2022년 6월 노동시장 동향",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=13732"
     },
     "2022-07": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220800711&bbs_seq=13825&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220800712&bbs_seq=13825&bbs_id=12&file_ext=pdf"
+        }
+      ],
       "posted_at": "2022-08-08",
       "title": "고용행정 통계로 본 2022년 7월 노동시장 동향",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=13825"
@@ -1461,16 +1531,46 @@
   },
   "est": {
     "2022-05": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220602318&bbs_seq=13689&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220602319&bbs_seq=13689&bbs_id=12&file_ext=pdf"
+        }
+      ],
       "posted_at": "2022-06-30",
       "title": "2022년 5월 사업체노동력조사 결과",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=13689"
     },
     "2022-06": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220702362&bbs_seq=13796&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220702363&bbs_seq=13796&bbs_id=12&file_ext=pdf"
+        }
+      ],
       "posted_at": "2022-07-28",
       "title": "2022년 6월 사업체노동력조사 결과",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=13796"
     },
     "2022-07": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220801870&bbs_seq=13895&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20220801872&bbs_seq=13895&bbs_id=12&file_ext=pdf"
+        }
+      ],
       "posted_at": "2022-08-30",
       "title": "2022년 7월 사업체노동력조사 및 2022년 4월 지역별사업체노동력조사 결과",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=13895"
