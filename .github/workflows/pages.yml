@@ -10,7 +10,10 @@ on:
       - "tools/build.py"
       - ".github/workflows/pages.yml"
   schedule:
-    - cron: "20 7 * * *" # 16:20 KST — 일일 수집(16:00) 20분 후 재배포
+    # 12:20 KST — 일일 수집(12:00) 20분 후. 수집 시각을 앞당긴 이유는
+    # collect-forecast.yml 의 schedule 주석에 있다. 이 예약은 보조일
+    # 뿐이다 — domains/** 가 바뀌면 push 로 이미 재배포된다.
+    - cron: "20 3 * * *"
   workflow_dispatch:
 
 permissions:

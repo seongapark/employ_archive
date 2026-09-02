@@ -2,7 +2,16 @@ name: collect-forecast
 
 on:
   schedule:
-    - cron: "0 7 * * *" # 07:00 UTC = 16:00 KST
+    # 12:00 KST = 03:00 UTC. 원래 16:00 KST 였는데 앞당겼다 — GitHub 의
+    # 예약 실행이 실제로는 5~8시간 늦게 시작하기 때문이다(2026-09-02 측정:
+    # 표본 8개, 최소 5.3h / 중앙 5.6h / 최대 7.9h, 세 워크플로가 같은 날
+    # 같은 폭으로 밀린다). 분을 옮겨서 해결되는 문제가 아니다 — 정각이
+    # 붐벼서가 아니라 이 저장소의 예약 큐 전체가 밀린다. push 로 도는
+    # 실행은 40초 안에 시작하므로 늦는 것은 schedule 이벤트뿐이다.
+    # 목적은 "퇴근(18:00) 전에 그날 수집 결과를 안다" 이므로 지연을 미리
+    # 빼서 적어 둔 것이고, 그래서 이 숫자는 발표 시각이 아니라 지연 관측값에
+    # 매여 있다. 지연이 줄면(또는 늘면) 이 값도 다시 재서 옮겨야 한다.
+    - cron: "0 3 * * *"
   workflow_dispatch:
 
 permissions:
@@ -30,6 +39,13 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add domains/forecast/data/
           git diff --cached --quiet || git commit -m "data: daily collect $(date -u +%F)"
+          # 체크아웃한 뒤 수집이 도는 몇 분 사이에 다른 워크플로나 사람이
+          # main 에 올렸을 수 있다. 그대로 push 하면 거절돼 그날 수집이
+          # 통째로 버려진다 — 2026-08-31 고용동향 실패가 실제로 이것이었다
+          # (failed to push some refs). 두 수집 워크플로는 서로 다른 도메인
+          # 폴더만 건드리므로 rebase 로 얹으면 섞이지 않는다. 그래도 충돌이
+          # 나면 여기서 멈춘다 — 조용히 덮는 것보다 빨간 X 가 낫다.
+          git pull --rebase origin main
           git push
       - name: Fail on collector errors
         env:
