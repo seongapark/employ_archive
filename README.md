@@ -59,6 +59,36 @@ API 에서 가져오지만 저장하는 원문 링크는 API 응답이 아니라
 수집기가 깨진 날을 놓친다. 기한이 지나거나 그 수집기가 되살아나면 다시 빨개지므로,
 유예를 지우거나 미루기 전에는 초록으로 돌아가지 않는다(`pipeline/check_run.py`).
 
+### 근거 선별(LLM, 사람이 돌리는 도구)
+
+전망이 왜 움직였는지 설명하는 문장은 규칙이 아니라 LLM 이 고른다. 원문 전문을 모델에
+주고 지표별로 근거 문장을 지목하게 한 뒤, 지목한 문자열이 실제로 원문에 있는지
+프로그램으로 대조해 통과한 것만 `domains/forecast/data/rationales.json` 에 넣는다.
+설계는 `docs/superpowers/specs/2026-09-01-전망근거-LLM선별-design.md`.
+
+```bash
+export ANTHROPIC_API_KEY=...          # 환경변수로만 넣는다 — GitHub Secret 이 아니다
+python -m tools.rationales             # 전체 소스 수집
+python -m tools.rationales --only bok --only kdi        # 특정 소스만
+python -m tools.rationales --refresh KDI:2026-08-19:emp_change   # 특정 근거만 다시 만든다
+```
+
+**CI 는 이 도구를 부르지 않는다.** `collect-forecast.yml` 은 이 도구를 한 줄도
+참조하지 않고 그대로 매일 돌아 수치를 수집하고 사이트를 배포한다 — LLM 호출이
+실패하거나 `ANTHROPIC_API_KEY` 가 없어도 수집·배포에는 지장이 없다.
+
+이미 있는 근거는 절대 덮어쓰지 않는다 — 사람이 손으로 문장을 고쳤을 수 있기
+때문이다. 일부러 다시 만들려면 `--refresh` 로 대상을 명시해야 한다. `--only` 와
+`--refresh` 는 서로 다른 이름공간을 쓴다: `--only` 는 `documents.SOURCES` 의 소스
+키(`bok`·`kdi`·`kli`·`kiet`·`keis`·`oecd_interim`)를 받고, `--refresh` 는 저장된
+근거의 키를 `기관:발표일:지표` 형식(예: `KDI:2026-08-19:emp_change`)으로 받는다 —
+여기서 기관명은 `rationales.json` 에 저장된 표기(`BOK`·`KDI`·`KLI`·`KIET`·`KEIS`,
+그리고 `oecd_interim` 소스가 만드는 근거는 `OECD`)를 그대로 쓴다.
+
+실행은 느리다. 한국고용정보원(KEIS)은 PDF 에 텍스트 레이어가 없어 전문을 400dpi
+OCR 로 읽어야 하고 회차당 1분 반쯤 걸린다 — 매일 도는 것이 아니라 사람이 새 회차가
+나왔을 때 어쩌다 한 번 돌리는 도구이므로 감수한다.
+
 ## 고용동향 수집기
 
 | 출처 | 경로 | 분류 | 비고 |
