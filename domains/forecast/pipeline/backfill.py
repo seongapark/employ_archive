@@ -15,7 +15,7 @@ from datetime import date
 from pathlib import Path
 from typing import Callable, NamedTuple
 
-from . import rationale_store as rs, store
+from . import store
 from .collectors import bok, imf, kdi, keis, kiet, kli, oecd, oecd_interim
 from .models import ForecastRecord
 
@@ -41,9 +41,6 @@ class Report:
     failed: int = 0
     lines: list[str] = field(default_factory=list)
     failures: list[tuple[str, str, str]] = field(default_factory=list)
-    # 근거 실패는 수치 백필의 성패(failed/failures)와 별도로 센다 — 근거는
-    # 곁가지고, 근거가 죽었다고 그 회차의 수치 백필까지 실패로 세면 안 된다.
-    rationale_errors: list[str] = field(default_factory=list)
 
 
 def oecd_rounds() -> list[Round]:
@@ -124,87 +121,15 @@ SOURCES: dict[str, Callable[[], list[Round]]] = {
 }
 
 
-def bok_rationale_rounds() -> list[Round]:
-    return [
-        Round(issue.title, issue.published_at,
-              lambda issue=issue: bok.collect_issue_rationales(issue))
-        for issue in bok.list_issues()
-    ]
-
-
-def oecd_interim_rationale_rounds() -> list[Round]:
-    return [
-        Round(label, pub, lambda label=label: oecd_interim.collect_edition_rationales(label))
-        for label, (pub, _) in sorted(oecd_interim.EDITIONS.items(), key=lambda kv: kv[1][0])
-    ]
-
-
-def kiet_rationale_rounds() -> list[Round]:
-    return [
-        Round(issue.title, issue.published_at,
-              lambda issue=issue: kiet.collect_issue_rationales(issue))
-        for issue in kiet.list_issues()
-    ]
-
-
-def kli_rationale_rounds() -> list[Round]:
-    return [
-        Round(issue.title, issue.published_at,
-              lambda issue=issue: kli.collect_issue_rationales(issue))
-        for issue in kli.list_issues()
-    ]
-
-
-def kdi_rationale_rounds() -> list[Round]:
-    return [
-        Round(issue.title, issue.published_at,
-              lambda issue=issue: kdi.collect_issue_rationales(issue))
-        for issue in kdi.list_issues(since_year=SINCE.year)
-    ]
-
-
-def keis_rationale_rounds() -> list[Round]:
-    return [
-        Round(item.issue.title, item.issue.published_at,
-              lambda item=item: keis.collect_issue_rationales(item))
-        for item in keis.list_issues()
-    ]
-
-
-# imf·oecd 는 없다 — API 로 숫자만 읽어 근거로 삼을 본문이 없다. run() 은
-# sources 에 있는 이름이라도 여기 없으면 그냥 건너뛴다(부재를 견딘다).
-RATIONALE_SOURCES: dict[str, Callable[[], list[Round]]] = {
-    "oecd_interim": oecd_interim_rationale_rounds,
-    "bok": bok_rationale_rounds,
-    "kli": kli_rationale_rounds,
-    "kdi": kdi_rationale_rounds,
-    "kiet": kiet_rationale_rounds,
-    "keis": keis_rationale_rounds,
-}
-
-
-def run(sources: dict[str, Callable[[], list[Round]]] = None,
-        rationale_sources: dict[str, Callable[[], list[Round]]] = None, *,
+def run(sources: dict[str, Callable[[], list[Round]]] = None, *,
         data_dir: Path = DATA_DIR, since: date = SINCE,
         only: list[str] | None = None) -> Report:
     sources = SOURCES if sources is None else sources
-    # 기본값을 빈 dict 로 둔다 — sources 처럼 실제 레지스트리를 기본값으로
-    # 하면, sources 만 바꿔 끼우는 기존 테스트들이 이름이 겹치는 순간(예:
-    # "bok"·"kdi") 모르게 네트워크를 타 버린다. 실제 운영은 main() 이
-    # RATIONALE_SOURCES 를 명시적으로 넘긴다.
-    rationale_sources = {} if rationale_sources is None else rationale_sources
     path = Path(data_dir) / "forecasts.json"
-    rationales_path = Path(data_dir) / "rationales.json"
     # forecasts.json 은 기계만 쓰는 파일이라 못 읽으면 그건 진짜 사고다 —
-    # 여기서 감싸지 않는다(rationale_store.load_or_empty 문서주석 참고).
+    # 여기서 감싸지 않는다.
     records = store.load_forecasts(path)
-    rationales, rationale_load_error = rs.load_or_empty(rationales_path)
-    existing_rationales = list(rationales)  # 내용 비교용 스냅샷
     report = Report()
-    if rationale_load_error is not None:
-        report.rationale_errors.append(
-            f"rationales.json 을 읽지 못해 이번 실행은 근거를 비운 채로 "
-            f"진행한다(저장도 건너뛴다) — {rationale_load_error}")
 
     for name, list_rounds in sources.items():
         if only is not None and name not in only:
@@ -219,20 +144,6 @@ def run(sources: dict[str, Callable[[], list[Round]]] = None,
 
         wanted = [r for r in rounds if r.published_at >= since]
         report.lines.append(f"{name}: {len(wanted)}회차 시도 (전체 {len(rounds)})")
-
-        # 근거 회차 목록도 (라벨, 발표일) 로 찾아 매칭한다 — 같은 list_issues()
-        # 에서 나온 값이라 forecast Round 와 키가 같다. 근거 쪽이 아예 없는
-        # 기관(imf·oecd)이나, 목록 자체가 실패한 경우는 빈 매칭으로 둔다 —
-        # 수치 백필은 그대로 진행돼야 한다.
-        rationale_by_key: dict[tuple[str, date], Round] = {}
-        list_rationale_rounds = rationale_sources.get(name)
-        if list_rationale_rounds is not None:
-            try:
-                rationale_by_key = {
-                    (r.label, r.published_at): r for r in list_rationale_rounds()
-                }
-            except Exception as exc:
-                report.rationale_errors.append(f"{name}: 근거 회차 목록 {_reason(exc)}")
 
         for rnd in sorted(wanted, key=lambda r: r.published_at):
             report.attempted += 1
@@ -252,27 +163,8 @@ def run(sources: dict[str, Callable[[], list[Round]]] = None,
                 report.skipped += 1
                 report.lines.append(f"  {rnd.published_at}  {rnd.label}  건너뜀 (이미 있음)")
 
-            rationale_round = rationale_by_key.get((rnd.label, rnd.published_at))
-            if rationale_round is None:
-                continue
-            try:
-                rationale_candidates = rationale_round.fetch()
-            except Exception as exc:
-                # 근거 실패는 이 회차의 수치 백필(위의 saved/skipped)을 건드리지
-                # 않는다 — 수치가 본체다.
-                report.rationale_errors.append(f"{name}: 근거({rnd.label}) {_reason(exc)}")
-                continue
-            rationales = rs.merge(rationales, rationale_candidates)
-
     # 과거 회차가 나중에 들어오므로, 먼저 저장돼 있던 회차의 수정폭이 비어 있다.
     store.save_forecasts(path, store.recompute_revisions(records))
-    # 개수가 아니라 내용으로 비교한다 — merge 가 잘못 짜여 있는 값을 덮어써도
-    # 개수는 그대로일 수 있는데(같은 키, 다른 문장), 개수만 보면 그 사고를
-    # 놓치고 저장하지 않아 파일이 우연히 이전 그대로인 것처럼 보인다.
-    # 못 읽은 파일에는 쓰지 않는다 — 사람이 고치던 편집물을 우리가 지우게
-    # 된다(rationale_store.load_or_empty 문서주석).
-    if rationale_load_error is None and rationales != existing_rationales:
-        rs.save(rationales_path, rationales)
     return report
 
 
@@ -286,15 +178,13 @@ def main(argv: list[str] | None = None) -> int:
     if unknown:
         print(f"모르는 기관: {unknown} — 쓸 수 있는 것: {sorted(SOURCES)}")
         return 1
-    report = run(rationale_sources=RATIONALE_SOURCES, only=argv or None)
+    report = run(only=argv or None)
     for line in report.lines:
         print(line)
     print(f"\n요약: 시도 {report.attempted} / 저장 {report.saved}건 / "
           f"건너뜀 {report.skipped} / 실패 {report.failed}")
     for name, label, reason in report.failures:
         print(f"  실패 — {name} {label}: {reason}")
-    for line in report.rationale_errors:
-        print(f"  근거 실패 — {line}")
     return 0
 
 

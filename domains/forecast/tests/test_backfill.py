@@ -1,10 +1,8 @@
-import json
 from datetime import date, datetime
 
 import pytest
 
 from domains.forecast.pipeline import backfill, store
-from domains.forecast.pipeline import rationale_store as rs
 from domains.forecast.pipeline.models import ForecastRecord, make_id
 
 
@@ -182,137 +180,6 @@ def test_keis_rounds_carry_the_issue_date_and_title(monkeypatch):
     ]
     # 늦은 바인딩 때문에 모든 Round 가 마지막 회차를 가리키는 실수를 막는다
     assert rounds[0].fetch() == ["고용동향브리프 2026년 제5호"]
-
-
-def rationale(pub: date, text="근거 문장", org="BOK", indicator="gdp_growth"):
-    return rs.Rationale(org=org, published_at=pub, indicator=indicator, text=text,
-                         tags=[], source_url="https://x/y.pdf", source_page=3)
-
-
-def test_run_saves_rationales_next_to_records(tmp_path):
-    src = {"bok": lambda: rounds(
-        ("2026년 8월", date(2026, 8, 27), [rec(date(2026, 8, 27), 3.3)]))}
-    rationale_src = {"bok": lambda: [
-        backfill.Round("2026년 8월", date(2026, 8, 27), lambda: [rationale(date(2026, 8, 27))])
-    ]}
-    backfill.run(src, rationale_src, data_dir=tmp_path, since=date(2024, 11, 1))
-    saved = rs.load(tmp_path / "rationales.json")
-    assert [r.indicator for r in saved] == ["gdp_growth"]
-
-
-def test_run_keeps_an_existing_rationale(tmp_path):
-    # 사람이 고친 문장을 재수집이 덮지 않는다
-    rs.save(tmp_path / "rationales.json", [rationale(date(2026, 8, 27), "사람이 고친 문장")])
-    src = {"bok": lambda: rounds(
-        ("2026년 8월", date(2026, 8, 27), [rec(date(2026, 8, 27), 3.3)]))}
-    rationale_src = {"bok": lambda: [
-        backfill.Round("2026년 8월", date(2026, 8, 27),
-                       lambda: [rationale(date(2026, 8, 27), "수집기가 새로 뽑은 문장")])
-    ]}
-    backfill.run(src, rationale_src, data_dir=tmp_path, since=date(2024, 11, 1))
-    assert rs.load(tmp_path / "rationales.json")[0].text == "사람이 고친 문장"
-
-
-def test_a_failing_rationale_round_does_not_fail_the_forecast_round(tmp_path):
-    # 수치가 본체다. 근거 때문에 수치를 잃지 않는다.
-    src = {"bok": lambda: rounds(
-        ("2026년 8월", date(2026, 8, 27), [rec(date(2026, 8, 27), 3.3)]))}
-
-    def boom():
-        raise ValueError("본문을 못 받았다")
-
-    rationale_src = {"bok": lambda: [backfill.Round("2026년 8월", date(2026, 8, 27), boom)]}
-    report = backfill.run(src, rationale_src, data_dir=tmp_path, since=date(2024, 11, 1))
-    assert len(store.load_forecasts(tmp_path / "forecasts.json")) == 1
-    assert report.failed == 0  # 수치 백필은 그대로 성공이다
-    assert any("bok" in e for e in report.rationale_errors)
-
-
-def test_a_source_without_a_rationale_entry_point_is_tolerated(tmp_path):
-    # imf·oecd 처럼 근거 진입점이 없는 기관은 rationale_sources 에 없어도
-    # run() 이 그냥 건너뛰어야 한다 — KeyError 로 죽으면 안 된다.
-    src = {"oecd": lambda: rounds(
-        ("EO 1", date(2026, 6, 3), [rec(date(2026, 6, 3), 1.9, org="OECD")]))}
-    report = backfill.run(src, {}, data_dir=tmp_path, since=date(2024, 11, 1))
-    assert report.failed == 0
-    assert report.rationale_errors == []
-    assert rs.load(tmp_path / "rationales.json") == []
-
-
-def test_a_failing_rationale_round_listing_does_not_stop_forecast_backfill(tmp_path):
-    src = {"bok": lambda: rounds(
-        ("2026년 8월", date(2026, 8, 27), [rec(date(2026, 8, 27), 3.3)]))}
-
-    def boom():
-        raise ConnectionError("HTTP Error 502: Bad Gateway")
-
-    report = backfill.run(src, {"bok": boom}, data_dir=tmp_path, since=date(2024, 11, 1))
-    assert len(store.load_forecasts(tmp_path / "forecasts.json")) == 1
-    assert report.failed == 0
-    assert any("bok" in e for e in report.rationale_errors)
-
-
-def test_rationale_registry_covers_the_orgs_with_a_rationale_entry_point():
-    # imf·oecd 는 API 로 숫자만 읽어 근거로 삼을 본문이 없다.
-    assert set(backfill.RATIONALE_SOURCES) == {
-        "oecd_interim", "bok", "kli", "kdi", "kiet", "keis",
-    }
-
-
-# ---------------------------------------------------------------------------
-# 최종 검토 Fix 5 — 손으로 고치다 깨뜨린 rationales.json 이 백필을 죽이면 안 된다.
-# ---------------------------------------------------------------------------
-
-# 설계 4.3 이 상정하는 그 편집 사고 그대로다 — source_page 에 숫자가 아니라
-# 말이 들어갔고, 뒤에 끝 쉼표까지 붙었다.
-MALFORMED_RATIONALES = """[
-  {
-    "org": "BOK",
-    "published_at": "2026-08-27",
-    "indicator": "gdp_growth",
-    "text": "사람이 고치다 만 문장",
-    "tags": [],
-    "source_url": "https://x/y.pdf",
-    "source_page": "세 번째 쪽",
-  }
-]
-"""
-
-
-def test_a_malformed_rationales_file_does_not_stop_the_backfill(tmp_path):
-    # 예전에는 rs.load 가 try 밖에 있어 이 파일 하나로 백필 전체가 터졌다 —
-    # forecasts.json 이 한 줄도 안 쓰였다. 근거는 곁가지고 수치가 본체다.
-    (tmp_path / "rationales.json").write_text(MALFORMED_RATIONALES, encoding="utf-8")
-    src = {"bok": lambda: rounds(
-        ("2026년 8월", date(2026, 8, 27), [rec(date(2026, 8, 27), 3.3)]))}
-    rationale_src = {"bok": lambda: [
-        backfill.Round("2026년 8월", date(2026, 8, 27),
-                       lambda: [rationale(date(2026, 8, 27))])
-    ]}
-
-    report = backfill.run(src, rationale_src, data_dir=tmp_path, since=date(2024, 11, 1))
-
-    assert report.saved == 1
-    assert report.failed == 0
-    assert len(store.load_forecasts(tmp_path / "forecasts.json")) == 1
-    assert any("rationales.json" in e for e in report.rationale_errors)
-
-
-def test_a_malformed_rationales_file_is_not_overwritten_by_the_backfill(tmp_path):
-    # 못 읽은 파일에 새 근거를 덮어쓰면 사람이 고치던 편집물을 우리가
-    # 지우는 셈이다 — 한 글자도 안 바뀌어야 한다.
-    path = tmp_path / "rationales.json"
-    path.write_text(MALFORMED_RATIONALES, encoding="utf-8")
-    src = {"bok": lambda: rounds(
-        ("2026년 8월", date(2026, 8, 27), [rec(date(2026, 8, 27), 3.3)]))}
-    rationale_src = {"bok": lambda: [
-        backfill.Round("2026년 8월", date(2026, 8, 27),
-                       lambda: [rationale(date(2026, 8, 27))])
-    ]}
-
-    backfill.run(src, rationale_src, data_dir=tmp_path, since=date(2024, 11, 1))
-
-    assert path.read_text(encoding="utf-8") == MALFORMED_RATIONALES
 
 
 def test_a_malformed_forecasts_file_still_stops_the_backfill(tmp_path):
