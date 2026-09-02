@@ -91,9 +91,9 @@ def test_rejects_a_whitespace_only_candidate():
 
 
 def test_rejects_a_fragment_starting_inside_a_negative_number():
-    # "-" 는 불릿이자 음수 부호다(rationale._is_bullet_marker_line 참고).
-    # 줄 첫머리가 아니라 "성장률은 " 뒤에 온 "-" 는 표지가 아니라 부호이므로
-    # 그 뒤에서 시작하는 조각은 "성장률은" 이라는 주어를 자른 것이다.
+    # "-" 는 불릿이자 음수 부호다 — 표지는 줄의 첫 내용일 때만 표지로
+    # 인정한다. 줄 첫머리가 아니라 "성장률은 " 뒤에 온 "-" 는 표지가 아니라
+    # 부호이므로 그 뒤에서 시작하는 조각은 "성장률은" 이라는 주어를 자른 것이다.
     with pytest.raises(v.Rejected) as e:
         v.verify("0.3%p 감소했다고 밝혔다", "성장률은 -0.3%p 감소했다고 밝혔다")
     assert "시작" in e.value.reason
