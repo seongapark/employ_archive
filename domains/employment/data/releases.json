@@ -1090,6 +1090,7 @@
           "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20240300956&bbs_seq=16287&bbs_id=12&file_ext=pdf"
         }
       ],
+      "posted_at": "2024-03-11",
       "title": "2024년 2월 고용행정 통계로 본 노동시장 동향",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=16287"
     },
@@ -1527,6 +1528,21 @@
       "posted_at": "2026-08-10",
       "title": "2026년 7월 고용행정 통계로 본 노동시장 동향",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19759"
+    },
+    "2026-08": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900431&bbs_seq=19896&bbs_id=12&file_ext=pdf"
+        }
+      ],
+      "posted_at": "2026-09-07",
+      "title": "2026년 8월 고용행정 통계로 본 노동시장 동향",
+      "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896"
     }
   },
   "est": {
