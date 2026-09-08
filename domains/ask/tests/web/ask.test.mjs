@@ -1,0 +1,159 @@
+// 골든 세트는 6건의 대표 질문을 통째로 돌린다. 여기서는 그 아래에 깔린 규칙들을
+// 하나씩 문다 — 골든이 초록인데 규칙이 깨져 있는 상태를 만들지 않기 위해서다.
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { ask, verify, 관측축, 축_BREAKDOWN, 전망지표 } from '../../worker/src/core/ask.mjs';
+import { makeFakeDb } from './fixtures/fakedb.mjs';
+
+const 관측 = (unit) => [
+  { source: 'eaps', breakdown: 'age', category: '30-39', period: '2026-06',
+    value: 5300.1, ...(unit ? { unit } : {}), yoy: null, rse: null, rse_flag: null },
+  { source: 'eaps', breakdown: 'age', category: '30-39', period: '2026-07',
+    value: 5280.4, ...(unit ? { unit } : {}), yoy: null, rse: null, rse_flag: null },
+];
+const 수치슬롯 = {
+  주제: '취업자수', 집단축: ['연령'], 지역입도: '전국', 시간입도: '월',
+  기간: { from: '2026-06', to: '2026-07' }, 출처: [],
+};
+
+// ── 규칙 1: 가짜 db 의 표 선택 ───────────────────────────────────────────────
+test('표 이름 13개 중 어느 것도 다른 표 이름에 단어경계로 걸리지 않는다', () => {
+  const 이름들 = Object.keys(makeFakeDb().표);
+  assert.equal(이름들.length, 13); // 표 12 + 판정 뷰 1
+  const 오매칭 = [];
+  for (const a of 이름들) {
+    for (const b of 이름들) {
+      if (a !== b && new RegExp(`\\b${a}\\b`).test(b)) 오매칭.push(`${a} ⊂ ${b}`);
+    }
+  }
+  assert.deepEqual(오매칭, []);
+});
+
+test('WHERE 절의 열 이름이 표 이름과 같아도 엉뚱한 표를 읽지 않는다', async () => {
+  const db = makeFakeDb({ forecast: [{ id: 'f1', org: 'KDI', indicator: 'emp_change' }] });
+  // `phenomenon_id` 는 phenomenon 이 아니라 hypothesis 를 읽어야 한다
+  const h = await db.all('SELECT * FROM hypothesis WHERE phenomenon_id = ?', ['청년사무직감소']);
+  assert.ok(h.length > 0);
+  assert.ok(h.every((x) => x.phenomenon_id === '청년사무직감소'));
+  assert.ok(h.every((x) => 'name_ko' in x && '대립가설' in x));
+  // `indicator` 는 열 이름이자 표 이름이다 — FROM 절이 forecast 라고 말한다
+  const f = await db.all('SELECT * FROM forecast WHERE indicator = ?', ['emp_change']);
+  assert.deepEqual(f.map((x) => x.id), ['f1']);
+  // hypothesis_verdict 를 물으면 hypothesis 가 오면 안 된다
+  const v = await db.all('SELECT * FROM hypothesis_verdict');
+  assert.ok(v.every((x) => 'verdict_capable' in x));
+});
+
+test('WHERE 절을 실제로 적용한다 — 안 하면 걸러야 할 소스가 다 실린다', async () => {
+  const db = makeFakeDb();
+  const 전체 = await db.all('SELECT * FROM source_catalog');
+  const 하나 = await db.all('SELECT * FROM source_catalog WHERE id IN (?)', ['est']);
+  const 보관 = await db.all('SELECT * FROM source_catalog WHERE archived = 1');
+  assert.ok(전체.length > 3);
+  assert.deepEqual(하나.map((s) => s.id), ['est']);
+  assert.deepEqual(보관.map((s) => s.id).sort(), ['eaps', 'ei', 'est']);
+  // compare() 가 쓰는 괄호 + OR 형태
+  const c = await db.all(
+    `SELECT * FROM source_conflict
+      WHERE (source_a = ? AND source_b = ?) OR (source_a = ? AND source_b = ?)`,
+    ['eaps', 'ei', 'ei', 'eaps']);
+  assert.deepEqual(c.map((x) => x.id).sort(), ['CONF-eaps-ei-개념', 'CONF-eaps-ei-모집단']);
+});
+
+// ── 규칙 2: 단위는 데이터가 준 것만 ─────────────────────────────────────────
+test('관측 행의 unit 을 그대로 파생 단위로 싣는다', async () => {
+  const db = makeFakeDb({ observation: 관측('천명') });
+  const r = await ask({ db, llm: null }, { 유형: '수치조회', 슬롯: 수치슬롯 });
+  assert.equal(r.근거.length, 1);
+  assert.equal(r.근거[0].파생.단위, '천명');
+});
+
+test('unit 이 없으면 단위 키를 만들지 않는다 — null 로도 채우지 않는다', async () => {
+  const db = makeFakeDb({ observation: 관측(null) });
+  const r = await ask({ db, llm: null }, { 유형: '수치조회', 슬롯: 수치슬롯 });
+  assert.equal(r.근거.length, 1);
+  assert.equal('단위' in r.근거[0].파생, false);
+});
+
+// ── 규칙 3: 전망 지표 코드 매핑 ─────────────────────────────────────────────
+test('주제를 전망 지표 코드로 옮겨 조회한다', async () => {
+  const db = makeFakeDb({
+    forecast: [{ id: 'f1', org: 'KDI', indicator: 'emp_change', target_year: 2027,
+                 value: 12, unit: '만명', published_at: '2026-05-01' }],
+  });
+  for (const 주제 of ['취업자', '취업자수']) {  // 짧은 정규형·카탈로그 원어 둘 다
+    const r = await ask({ db, llm: null }, { 유형: '전망', 슬롯: { 주제, 기간: { from: '2027', to: '2027' } } });
+    assert.equal(r.지표코드, 'emp_change');
+    assert.deepEqual(r.전망.map((x) => x.id), ['f1']);
+  }
+});
+
+test('매핑에 없는 주제는 빈 결과가 아니라 한계를 낸다', async () => {
+  const db = makeFakeDb();
+  const r = await ask({ db, llm: null }, { 유형: '전망', 슬롯: { 주제: '종사자수' } });
+  assert.equal(r.지표코드, null);
+  assert.deepEqual(r.전망, []);
+  assert.ok(r.한계.some((l) => l.includes('아직 다루지 않는다')),
+            `한계가 비었다: ${JSON.stringify(r.한계)}`);
+  // 매핑표는 실측 코드만 담는다 (domains/forecast/data/indicators.json)
+  assert.equal(전망지표.취업자수, 'emp_change');
+  assert.equal('종사자수' in 전망지표, false);
+  assert.equal('상시가입자수' in 전망지표, false);
+});
+
+// ── 규칙 4: 허용텍스트는 우리가 준 카드 텍스트만 ───────────────────────────
+test('허용텍스트에 현상 근거서술과 한계가 실리고, 카탈로그 산문은 안 실린다', async () => {
+  const db = makeFakeDb();
+  const r = await ask({ db, llm: null }, {
+    유형: '원인탐색',
+    슬롯: { 주제: '취업자', 집단축: ['연령', '직업'], 지역입도: '전국', 시간입도: '반기',
+            기간: { from: '2023S1', to: '2025S2' }, 출처: [] },
+  });
+  assert.ok(r.허용텍스트.includes(r.현상.근거서술));
+  for (const l of r.한계) assert.ok(r.허용텍스트.includes(l));
+  // 카드에 실리지 않는 산문(지표 정의·소스 설명)은 허용텍스트에 없어야 한다
+  assert.equal(r.허용텍스트.some((t) => t.includes('경제활동인구조사 기준 전체 취업자수')), false);
+});
+
+test('허용텍스트가 있으면 근거서술을 인용한 숫자가 환각으로 튕기지 않는다', async () => {
+  const db = makeFakeDb();
+  const r = await ask({ db, llm: null }, {
+    유형: '원인탐색',
+    슬롯: { 주제: '취업자', 지역입도: '전국', 시간입도: '반기',
+            기간: { from: '2023S1', to: '2025S2' }, 출처: [] },
+  });
+  const 답변객체 = { 답변: '4반기 연속 감소했다.', 근거: [] };
+  assert.equal(verify(답변객체, r.근거, r.허용텍스트).ok, true);
+  // 허용텍스트를 안 넘기면 같은 답변이 위반으로 잡힌다 — 이 인자가 왜 필요한지의 근거
+  assert.deepEqual(verify(답변객체, r.근거).위반, [4]);
+});
+
+// ── 규칙 5: 집단축 → breakdown 매핑 ─────────────────────────────────────────
+test('축 매핑은 실측 breakdown 만 담는다', () => {
+  assert.deepEqual(축_BREAKDOWN, { 연령: 'age', 성: 'sex', 산업: 'industry' });
+  assert.equal(관측축([]).breakdown, 'total');
+  assert.equal(관측축(['연령']).breakdown, 'age');
+  assert.equal(관측축(['성']).breakdown, 'sex');
+  assert.equal(관측축(['산업']).breakdown, 'industry');
+});
+
+test('매핑에 없는 축은 total 로 떨어지지 않고 한계가 된다', async () => {
+  const { breakdown, 한계 } = 관측축(['직업']);
+  assert.equal(breakdown, null);
+  assert.ok(한계.some((l) => l.includes('직업')));
+
+  const db = makeFakeDb({ observation: 관측('천명') });
+  const r = await ask({ db, llm: null }, {
+    유형: '수치조회',
+    슬롯: { ...수치슬롯, 주제: '취업자수', 집단축: ['직업'] },
+  });
+  // 전체값을 대신 내놓지 않는다
+  assert.deepEqual(r.근거, []);
+  assert.ok(r.한계.some((l) => l.includes('직업')));
+});
+
+test('축을 둘 물으면 하나만 조회한다고 밝힌다', () => {
+  const { breakdown, 한계 } = 관측축(['연령', '산업']);
+  assert.equal(breakdown, 'age');
+  assert.ok(한계.some((l) => l.includes('산업')));
+});
