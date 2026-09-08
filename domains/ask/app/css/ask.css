@@ -1,0 +1,255 @@
+/* 질의응답 도메인 전용 스타일. core/tokens.css 의 변수를 그대로 쓴다. */
+:root {
+  --badge-warn-fg: var(--warn-fg);
+  --badge-warn-bg: var(--warn-bg);
+  --badge-muted-fg: var(--text-secondary);
+  --badge-muted-bg: var(--border);
+  /* RSE(표본오차) 주석 전용 색 — 근거 표의 숫자(--text)와 눈에 띄게 다르다 */
+  --rse-fg: #7a5b12;
+}
+
+.screen { padding: 12px 14px 24px 14px; display: flex; flex-direction: column; gap: 14px; }
+
+/* 질문 입력 */
+
+.qform { display: flex; gap: 8px; }
+
+.qform__input {
+  flex: 1;
+  min-height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 0 12px;
+  font-size: 15px;
+  background: var(--card);
+  color: var(--text);
+}
+
+.qform__input:disabled { color: var(--text-muted); background: var(--bg); }
+
+.qform__go {
+  min-height: 44px;
+  padding: 0 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+
+.qform--busy .qform__go { opacity: 0.6; }
+
+.offline {
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  padding: 8px 12px;
+  color: var(--warn-fg);
+  background: var(--warn-bg);
+  border-radius: 8px;
+}
+
+/* 이해 카드 — 기본 접힘. 저확신일 때만 펼친다(js 가 open 속성을 정한다) */
+
+.understand {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.understand summary {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.understand__raw {
+  margin-top: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.understand__slots {
+  margin-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.understand__edit {
+  margin-top: 8px;
+  border: none;
+  background: none;
+  color: var(--link);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 0;
+  cursor: pointer;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+.chip--btn {
+  cursor: pointer;
+  color: var(--accent);
+  background: var(--accent-light);
+  border-color: transparent;
+}
+
+/* 배지 — 색만이 아니라 텍스트 라벨을 함께 낸다(공공 사이트) */
+
+.badges { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.badge--warn { color: var(--badge-warn-fg); background: var(--badge-warn-bg); }
+.badge--muted { color: var(--badge-muted-fg); background: var(--badge-muted-bg); }
+
+/* 답변 — 검증실패·한도초과·할당량확인불가면 이 블록만 사라진다(근거는 남는다) */
+
+.answer:empty { display: none; }
+
+.answer__text {
+  margin: 0;
+  padding: 12px 14px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+/* 근거 */
+
+.evidence { display: flex; flex-direction: column; gap: 10px; }
+
+.ev {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+}
+
+.ev--missing { border-style: dashed; color: var(--text-muted); }
+.ev--missing em { font-style: normal; color: var(--text-muted); }
+
+.ev__basis {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.ev__nums { margin-top: 6px; display: flex; flex-wrap: wrap; gap: 8px; }
+
+.num-chip {
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+  background: var(--bg);
+  border-radius: 6px;
+  padding: 2px 8px;
+}
+
+/* 규칙 3: RSE(표본오차)는 관측값이 아니다 — 근거 표의 숫자(.num-chip)와
+   같은 자리·서식으로 두지 않는다. 각주 형태로, 다른 색으로 분리한다. */
+.ev__sig {
+  margin: 8px 0 0 0;
+  padding-top: 6px;
+  border-top: 1px dashed var(--border);
+  font-size: 11px;
+  font-style: italic;
+  color: var(--text-muted);
+}
+
+.ev__sig--rse { color: var(--rse-fg); }
+
+/* 가설 카드 — 지지·반증을 좌우 병치한다(위아래로 쌓지 않는다) */
+
+.hyp {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 14px;
+}
+
+.hyp h3 { margin: 0 0 4px 0; font-size: 14px; }
+
+.hyp__verdict { margin: 0 0 8px 0; font-size: 12px; color: var(--text-secondary); }
+
+.hyp__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.col h4 {
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--text-muted);
+}
+
+.col__empty {
+  margin: 0;
+  padding: 10px;
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.hyp__missing, .hyp__detour {
+  margin: 8px 0 0 0;
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.fallback__note { font-size: 12px; color: var(--text-secondary); margin: 0 0 8px 0; }
+
+.rationale {
+  margin: 0;
+  padding: 10px 12px;
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  font-size: 13px;
+}
+
+.rationale a { margin-left: 8px; font-size: 12px; }
+
+.compare { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+.compare__basis { margin: 0 0 4px 0; }
+.compare__note { margin: 2px 0; font-size: 12px; color: var(--text-secondary); }
+
+.routing { background: var(--card); border: 1px dashed var(--border); border-radius: 10px; padding: 10px 12px; }
+.routing__group { margin: 4px 0; font-size: 13px; }
+
+/* 한계 · 소스 · 후속질문 */
+
+.block__title { font-size: 12px; font-weight: 700; color: var(--text-muted); margin: 0 0 6px 0; }
+
+.limits { margin: 0; padding-left: 18px; font-size: 13px; color: var(--text-secondary); }
+.limits:empty { display: none; }
+.limits li { margin: 2px 0; }
+
+.sources { display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.sources:empty::after { content: '없음'; color: var(--text-muted); font-size: 12px; }
+.sources small { color: var(--text-muted); margin-left: 6px; }
+
+.followups { display: flex; flex-wrap: wrap; gap: 6px; }
+.followups:empty { display: none; }
+
+.error { color: var(--warn-fg); font-size: 14px; }

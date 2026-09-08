@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#23508f">
+  <title>질의응답 — 고용데이터 아카이브</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="./core/tokens.css">
+  <link rel="stylesheet" href="./core/base.css">
+  <link rel="stylesheet" href="./css/ask.css">
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <a class="header__home" href="../" aria-label="홈으로">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5 12 3l9 7.5"></path><path d="M5 9.5V21h14V9.5"></path></svg>
+      </a>
+      <div class="header__title">질의응답</div>
+    </header>
+    <main class="screen">
+      <form id="qform" class="qform">
+        <input id="q" class="qform__input" type="text" autocomplete="off"
+               placeholder="예: 2026년 7월 30대 취업자는 몇 명인가">
+        <button class="qform__go" type="submit">묻기</button>
+      </form>
+
+      <div id="offline" class="offline" hidden>오프라인 — 질의응답은 네트워크가 필요하다</div>
+
+      <details id="understand" class="understand" hidden>
+        <summary></summary>
+        <div id="raw" class="understand__raw"></div>
+        <div id="slots" class="understand__slots"></div>
+        <button id="understand-edit" class="understand__edit" type="button">질문 다시 쓰기</button>
+      </details>
+
+      <div id="badges" class="badges"></div>
+
+      <section id="answer" class="answer" aria-live="polite"></section>
+
+      <section id="evidence" class="evidence"></section>
+
+      <section class="block">
+        <h2 class="block__title">한계 · 미확인</h2>
+        <ul id="limits" class="limits"></ul>
+      </section>
+
+      <section class="block">
+        <h2 class="block__title">소스</h2>
+        <div id="sources" class="sources"></div>
+      </section>
+
+      <div id="followups" class="followups"></div>
+    </main>
+    <div class="notice">본 서비스는 개인이 제작한 비공식 참고자료이며, 각 기관 원문이 정본이다.</div>
+  </div>
+  <script type="module" src="./js/ask.js"></script>
+</body>
+</html>
