@@ -13,7 +13,7 @@ const SHELL_ASSETS = [
   './js/graph.js',
   './js/screens/home.js',
   './js/screens/articles.js',
-  './js/screens/frames.js',
+  './js/screens/follow.js',
   './js/screens/rounds.js',
   './manifest.webmanifest',
   './icons/icon-192.png',

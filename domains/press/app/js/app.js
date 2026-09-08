@@ -1,11 +1,11 @@
 import { render as home } from './screens/home.js';
 import { render as articles } from './screens/articles.js';
-import { render as frames } from './screens/frames.js';
+import { render as follow } from './screens/follow.js';
 import { render as rounds } from './screens/rounds.js';
 import { roundSwitchHtml, bindRoundSwitch } from './ui.js';
 import { loadJson } from '../core/shell.js';
 
-const screens = { home, articles, frames, rounds };
+const screens = { home, articles, follow, rounds };
 
 // 헤더 날짜는 '수집기가 마지막으로 돈 날'(last_run.json 의 run_at)이다.
 // 회차의 배포일이 아니다 — 배포일을 쓰면 수집기가 죽어도 날짜가 그대로라
@@ -31,7 +31,7 @@ function parseRoute(hash) {
     }
     return { name: 'articles', params: { kw } };
   }
-  if (h === '/frames') return { name: 'frames', params: {} };
+  if (h === '/follow') return { name: 'follow', params: {} };
   if (h === '/rounds') return { name: 'rounds', params: {} };
   return { name: 'home', params: {} };
 }
@@ -43,8 +43,8 @@ function setActiveTab(tabbarEl, routeName) {
 }
 
 export function headerTitleFor(routeName) {
-  if (routeName === 'articles') return '기사';
-  if (routeName === 'frames') return '프레임';
+  if (routeName === 'articles') return '배포 당일 보도';
+  if (routeName === 'follow') return '후속';
   if (routeName === 'rounds') return '회차';
   return '행통 모니터링';
 }

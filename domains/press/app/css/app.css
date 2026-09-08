@@ -241,6 +241,62 @@
 .state--hold { color: var(--gap-fg); background: var(--gap-bg); }
 .state--gone { color: var(--text-muted); background: var(--bg); }
 
+/* 후속 타임라인
+
+   날짜를 얇은 구분선으로만 나누니 어느 기사가 어느 날 것인지 눈에 안 들어왔다.
+   왼쪽에 세로 레일을 두고 날짜마다 점을 찍어, 하루 덩어리가 한눈에 잡히게 한다. */
+
+.tl { position: relative; }
+
+.tl__day { position: relative; padding: 0 0 14px 16px; }
+
+/* 레일. 마지막 날 아래로는 선이 이어지지 않게 끊는다. */
+.tl__day::before {
+  content: '';
+  position: absolute;
+  left: 3.5px;
+  top: 6px;
+  bottom: 0;
+  width: 1px;
+  background: var(--border);
+}
+
+.tl__day:last-child::before { bottom: auto; height: 10px; }
+
+.tl__day::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.tl__mark {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 1px;
+}
+
+.tl__date { font-size: 12px; font-weight: 700; color: var(--text); }
+
+.tl__dplus {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 1px 6px;
+  border-radius: 999px;
+}
+
+.tl__count { font-size: 11px; color: var(--text-muted); margin-left: auto; }
+
+/* 하루 안의 기사끼리는 선을 긋지 않는다 — 날짜 경계가 유일한 경계여야 한다. */
+.tl__arts .art { border-bottom: none; padding: 5px 0 0 0; }
+
 /* 동시출현 네트워크 */
 
 .gnet { display: block; overflow: visible; }
