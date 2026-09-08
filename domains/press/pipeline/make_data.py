@@ -76,6 +76,9 @@ def main():
         articles[release] = arts
         prev_press = summary['all_press']
         f = summary['follow']
+        if summary['unjudged']:
+            print('  ⚠ %s — 판정 없는 기사 %d건. 인용 아님으로 세어진다.'
+                  ' llm_cite 를 다시 돌려라.' % (release, summary['unjudged']))
         print('%s  %s  정기 %d/%d 인용 · 후속 %s' % (
             release, summary['label'], summary['regular']['cited'],
             summary['regular']['kept'],

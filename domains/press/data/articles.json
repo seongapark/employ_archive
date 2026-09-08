@@ -7,6 +7,7 @@
     "press": "이데일리",
     "pub": "2026-07-13 05:01",
     "cites": false,
+    "judged": true,
     "why": "고용보험 소득기준 개편 사설",
     "hits": [
      "지표:고용보험"
@@ -28,6 +29,7 @@
     "press": "orklaw.co.kr",
     "pub": "2026-07-13 09:24",
     "cites": false,
+    "judged": true,
     "why": "보험료 부담 주체 법률 해설",
     "hits": [
      "지표:고용보험"
@@ -46,6 +48,7 @@
     "press": "kbiznews.co.kr",
     "pub": "2026-07-13 11:18",
     "cites": false,
+    "judged": true,
     "why": "이탈리아 협동조합 사례",
     "hits": [],
     "tone": [],
@@ -65,6 +68,7 @@
     "press": "뉴스1",
     "pub": "2026-07-13 12:00",
     "cites": true,
+    "judged": true,
     "why": "6개월 연속 20만명대 증가 등 전함",
     "hits": [
      "연령:청년",
@@ -81,6 +85,7 @@
     "press": "뉴시스",
     "pub": "2026-07-13 12:00",
     "cites": true,
+    "judged": true,
     "why": "제조 13개월·건설 감소 수치 전함",
     "hits": [
      "지표:고용보험"
@@ -94,6 +99,7 @@
     "press": "nocutnews.co.kr",
     "pub": "2026-07-13 12:01",
     "cites": true,
+    "judged": true,
     "why": "가입자 증가폭·과장 발언 인용",
     "hits": [
      "지표:가입자",
@@ -110,6 +116,7 @@
     "press": "조선일보",
     "pub": "2026-07-13 12:01",
     "cites": true,
+    "judged": true,
     "why": "연령별 증감 수치 전함",
     "hits": [
      "연령:29세이하",
@@ -125,6 +132,7 @@
     "press": "헤럴드경제",
     "pub": "2026-07-13 12:01",
     "cites": true,
+    "judged": true,
     "why": "29세 이하 46개월 감소 전함",
     "hits": [
      "연령:29세이하",
@@ -140,6 +148,7 @@
     "press": "아주경제",
     "pub": "2026-07-13 12:02",
     "cites": true,
+    "judged": true,
     "why": "청년 46개월 감소·과장 발언",
     "hits": [
      "연령:청년",
@@ -155,6 +164,7 @@
     "press": "이투데이",
     "pub": "2026-07-13 12:02",
     "cites": true,
+    "judged": true,
     "why": "구인배수·서비스업 27.9만명",
     "hits": [],
     "tone": [
@@ -172,6 +182,7 @@
     "press": "4th.kr",
     "pub": "2026-07-13 12:08",
     "cites": false,
+    "judged": true,
     "why": "기업 홍보성 경제소식 모음",
     "hits": [],
     "tone": [],
@@ -188,6 +199,7 @@
     "press": "청년일보",
     "pub": "2026-07-13 12:10",
     "cites": true,
+    "judged": true,
     "why": "26만4천명·27만9천명 수치",
     "hits": [
      "산업:제조업",
@@ -205,6 +217,7 @@
     "press": "뉴스1",
     "pub": "2026-07-13 12:42",
     "cites": true,
+    "judged": true,
     "why": "상시가입자 1585.5만명 1.7% 증가",
     "hits": [
      "지표:가입자",
@@ -219,6 +232,7 @@
     "press": "머니투데이",
     "pub": "2026-07-13 12:51",
     "cites": true,
+    "judged": true,
     "why": "6개월 연속 증가·과장 발언",
     "hits": [
      "지표:가입자",
@@ -235,6 +249,7 @@
     "press": "news.tf.co.kr",
     "pub": "2026-07-13 12:58",
     "cites": true,
+    "judged": true,
     "why": "26만4천명 증가 발표 전함",
     "hits": [
      "지표:고용보험"
@@ -250,6 +265,7 @@
     "press": "dailian.co.kr",
     "pub": "2026-07-13 13:16",
     "cites": true,
+    "judged": true,
     "why": "가입자 증가·청년 46개월 감소",
     "hits": [
      "연령:청년",
@@ -268,6 +284,7 @@
     "press": "omennews.co.kr",
     "pub": "2026-07-13 13:26",
     "cites": true,
+    "judged": true,
     "why": "6개월 연속 증가·건설 감소",
     "hits": [
      "산업:건설업",
@@ -283,6 +300,7 @@
     "press": "조선일보",
     "pub": "2026-07-13 13:27",
     "cites": true,
+    "judged": true,
     "why": "60세 이상 증가·20대 감소",
     "hits": [
      "연령:고령",
@@ -300,6 +318,7 @@
     "press": "theopiniontimes.news",
     "pub": "2026-07-13 13:39",
     "cites": true,
+    "judged": true,
     "why": "산업·연령별 양극화 지표 해설",
     "hits": [
      "지표:고용보험"
@@ -317,6 +336,7 @@
     "press": "metroseoul.co.kr",
     "pub": "2026-07-13 13:42",
     "cites": true,
+    "judged": true,
     "why": "26.4만명 1.7% 증가 전함",
     "hits": [
      "연령:청년",
@@ -333,6 +353,7 @@
     "press": "news.sbs.co.kr",
     "pub": "2026-07-13 13:49",
     "cites": true,
+    "judged": true,
     "why": "6개월 연속 20만명대 증가·제조업 13개월 감소 전함",
     "hits": [
      "산업:도소매업",
@@ -351,6 +372,7 @@
     "press": "ebn.co.kr",
     "pub": "2026-07-13 14:04",
     "cites": true,
+    "judged": true,
     "why": "상시가입자 1585만5천명 등 보도자료 수치 인용",
     "hits": [],
     "tone": [],
@@ -370,6 +392,7 @@
     "press": "mbnmoney.mbn.co.kr",
     "pub": "2026-07-13 14:10",
     "cites": true,
+    "judged": true,
     "why": "6월 가입자 26만4천명 증가 전함",
     "hits": [
      "산업:도소매업",
@@ -385,6 +408,7 @@
     "press": "뉴스핌",
     "pub": "2026-07-13 14:11",
     "cites": true,
+    "judged": true,
     "why": "6개월 연속 20만명대 증가·도소매 둔화 전함",
     "hits": [
      "산업:도소매업",
@@ -403,6 +427,7 @@
     "press": "뉴시스",
     "pub": "2026-07-13 14:13",
     "cites": true,
+    "judged": true,
     "why": "구직급여 신규신청 9만명, 4천명 증가 그래픽",
     "hits": [],
     "tone": [],
@@ -414,6 +439,7 @@
     "press": "sisajournal.com",
     "pub": "2026-07-13 14:14",
     "cites": true,
+    "judged": true,
     "why": "가입자 증가세·20대 46개월 감소 전함",
     "hits": [
      "산업:도소매업",
@@ -434,6 +460,7 @@
     "press": "gosiweek.com",
     "pub": "2026-07-13 14:20",
     "cites": true,
+    "judged": true,
     "why": "제조 13개월·건설 35개월 감소 전함",
     "hits": [
      "연령:청년",
@@ -449,6 +476,7 @@
     "press": "아시아경제",
     "pub": "2026-07-13 14:24",
     "cites": true,
+    "judged": true,
     "why": "청년 46개월 감소·전체 6개월 연속 증가 전함",
     "hits": [
      "연령:청년",
@@ -464,6 +492,7 @@
     "press": "biz.newdaily.co.kr",
     "pub": "2026-07-13 14:26",
     "cites": true,
+    "judged": true,
     "why": "가입자 증가와 청년·제조·건설 부진 전함",
     "hits": [
      "산업:건설업",
@@ -484,6 +513,7 @@
     "press": "전자신문",
     "pub": "2026-07-13 14:26",
     "cites": true,
+    "judged": true,
     "why": "제조업 13개월 연속 감소 등 보도자료 인용",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -499,6 +529,7 @@
     "press": "전기신문",
     "pub": "2026-07-13 14:26",
     "cites": true,
+    "judged": true,
     "why": "6개월 연속 20만명대 증가·제조건설 부진 전함",
     "hits": [
      "지표:가입자",
@@ -517,6 +548,7 @@
     "press": "imnews.imbc.com",
     "pub": "2026-07-13 14:51",
     "cites": true,
+    "judged": true,
     "why": "상시가입자 1585만명 등 보도자료 인용",
     "hits": [
      "산업:도소매업",
@@ -535,6 +567,7 @@
     "press": "연합뉴스",
     "pub": "2026-07-13 15:02",
     "cites": false,
+    "judged": true,
     "why": "지자체 고용위기 지원금 사업 기사",
     "hits": [
      "산업:금속가공",
@@ -556,6 +589,7 @@
     "press": "이투데이",
     "pub": "2026-07-13 15:20",
     "cites": true,
+    "judged": true,
     "why": "26만4천명 증가·29세 이하 46개월 감소 전함",
     "hits": [
      "연령:29세이하"
@@ -573,6 +607,7 @@
     "press": "thepowernews.co.kr",
     "pub": "2026-07-13 15:26",
     "cites": true,
+    "judged": true,
     "why": "26만명 증가·청년 6만명 감소 전함",
     "hits": [
      "연령:청년",
@@ -588,6 +623,7 @@
     "press": "startuptoday.co.kr",
     "pub": "2026-07-13 15:34",
     "cites": true,
+    "judged": true,
     "why": "6개월째 20만명대 증가·제조 청년 부진 전함",
     "hits": [
      "산업:제조업",
@@ -608,6 +644,7 @@
     "press": "pointe.co.kr",
     "pub": "2026-07-13 15:50",
     "cites": true,
+    "judged": true,
     "why": "제조 13개월 감소·구직급여 4개월만 증가 전함",
     "hits": [
      "산업:제조업",
@@ -626,6 +663,7 @@
     "press": "news.bbsi.co.kr",
     "pub": "2026-07-13 15:56",
     "cites": true,
+    "judged": true,
     "why": "26만4천명 증가·제조 13개월 감소 전함",
     "hits": [
      "산업:제조업",
@@ -641,6 +679,7 @@
     "press": "dealsite.co.kr",
     "pub": "2026-07-13 15:58",
     "cites": true,
+    "judged": true,
     "why": "26만명 증가·60세 이상 기여 등 인용",
     "hits": [
      "산업:제조업"
@@ -657,6 +696,7 @@
     "press": "이투데이",
     "pub": "2026-07-13 16:00",
     "cites": false,
+    "judged": true,
     "why": "정부 재정운용·부처 업무계획 기사",
     "hits": [],
     "tone": [],
@@ -677,6 +717,7 @@
     "press": "news.tvchosun.com",
     "pub": "2026-07-13 16:09",
     "cites": true,
+    "judged": true,
     "why": "6월 가입자 20만명대·제조 13개월 감소 전함",
     "hits": [
      "지표:고용보험"
@@ -690,6 +731,7 @@
     "press": "asiatime.co.kr",
     "pub": "2026-07-13 16:12",
     "cites": true,
+    "judged": true,
     "why": "6월 26만명↑, 서비스업 27.9만명 등 수치 전함",
     "hits": [
      "연령:청년",
@@ -707,6 +749,7 @@
     "press": "한겨레",
     "pub": "2026-07-13 16:40",
     "cites": true,
+    "judged": true,
     "why": "6월 26만명↑, 청년 46개월 감소 전함",
     "hits": [
      "연령:청년",
@@ -724,6 +767,7 @@
     "press": "m-economynews.com",
     "pub": "2026-07-13 17:12",
     "cites": true,
+    "judged": true,
     "why": "상시가입자 26만4천명 증가 인용",
     "hits": [],
     "tone": [],
@@ -739,6 +783,7 @@
     "press": "대한전문건설신문",
     "pub": "2026-07-13 17:12",
     "cites": true,
+    "judged": true,
     "why": "보도자료 명시, 건설업 35개월 감소",
     "hits": [
      "산업:건설업",
@@ -753,6 +798,7 @@
     "press": "뉴시스",
     "pub": "2026-07-13 17:26",
     "cites": false,
+    "judged": true,
     "why": "K-노동회의소 정책 발표 기사",
     "hits": [],
     "tone": [],
@@ -769,6 +815,7 @@
     "press": "ngetnews.com",
     "pub": "2026-07-13 17:30",
     "cites": true,
+    "judged": true,
     "why": "청년 46개월 감소·고령층 증가 수치 전함",
     "hits": [
      "연령:청년",
@@ -786,6 +833,7 @@
     "press": "viva100.com",
     "pub": "2026-07-13 17:36",
     "cites": true,
+    "judged": true,
     "why": "6월 26.4만명 증가, 보도자료 인용",
     "hits": [
      "지표:가입자",
@@ -803,6 +851,7 @@
     "press": "viva100.com",
     "pub": "2026-07-13 17:40",
     "cites": false,
+    "judged": true,
     "why": "장관 K-노동회의소 제안 기사",
     "hits": [],
     "tone": [],
@@ -822,6 +871,7 @@
     "press": "파이낸셜뉴스",
     "pub": "2026-07-13 17:41",
     "cites": true,
+    "judged": true,
     "why": "1585만5천명, 26만4천명 증가 인용",
     "hits": [
      "연령:청년"
@@ -838,6 +888,7 @@
     "press": "매일경제",
     "pub": "2026-07-13 17:54",
     "cites": true,
+    "judged": true,
     "why": "6개월 연속 20만명대·제조건설 감소",
     "hits": [
      "지표:가입자",
@@ -852,6 +903,7 @@
     "press": "남도일보",
     "pub": "2026-07-13 18:12",
     "cites": true,
+    "judged": true,
     "why": "6개월 연속 20만명 증가 전함",
     "hits": [
      "산업:건설업",
@@ -868,6 +920,7 @@
     "press": "hidomin.com",
     "pub": "2026-07-13 18:38",
     "cites": false,
+    "judged": true,
     "why": "고용보험 제도 확대·기금 재정 논평",
     "hits": [
      "지표:고용보험"
@@ -884,6 +937,7 @@
     "press": "rcast.co.kr",
     "pub": "2026-07-13 18:44",
     "cites": false,
+    "judged": true,
     "why": "증권사 연금상품 등 기업 소식",
     "hits": [],
     "tone": [],
@@ -902,6 +956,7 @@
     "press": "서울경제",
     "pub": "2026-07-13 19:08",
     "cites": false,
+    "judged": true,
     "why": "정부 청년일자리·제도 개편 대책",
     "hits": [
      "연령:청년"
@@ -923,6 +978,7 @@
     "press": "이투데이",
     "pub": "2026-07-13 23:36",
     "cites": true,
+    "judged": true,
     "why": "60세 이상 20만6천명 증가 인용",
     "hits": [
      "연령:60세이상",
@@ -942,6 +998,7 @@
     "press": "gjdream.com",
     "pub": "2026-07-14 00:08",
     "cites": true,
+    "judged": true,
     "why": "제조업 -9천명 13개월째 감소 전함",
     "hits": [
      "산업:제조업"
@@ -955,6 +1012,7 @@
     "press": "dnews.co.kr",
     "pub": "2026-07-14 06:22",
     "cites": true,
+    "judged": true,
     "why": "건설업 74만4천명, -8천명 전함",
     "hits": [
      "산업:건설업"
@@ -973,6 +1031,7 @@
     "press": "ohmynews.com",
     "pub": "2026-07-14 10:46",
     "cites": false,
+    "judged": true,
     "why": "당진 노사 성명, 지역 자체 수치",
     "hits": [
      "산업:철강(1차금속)"
@@ -992,6 +1051,7 @@
     "press": "finomy.com",
     "pub": "2026-07-14 11:38",
     "cites": false,
+    "judged": true,
     "why": "경기도 자동차기업 지원사업 안내",
     "hits": [
      "산업:자동차"
@@ -1013,6 +1073,7 @@
     "press": "idsn.co.kr",
     "pub": "2026-07-14 13:58",
     "cites": false,
+    "judged": true,
     "why": "산재 직업력 인정 변호사 칼럼",
     "hits": [],
     "tone": [],
@@ -1030,6 +1091,7 @@
     "press": "데이터솜",
     "pub": "2026-07-15 10:04",
     "cites": true,
+    "judged": true,
     "why": "6월 청년 가입자·구직급여 통계 전함",
     "hits": [
      "연령:청년",
@@ -1045,6 +1107,7 @@
     "press": "idjnews.kr",
     "pub": "2026-07-15 10:22",
     "cites": false,
+    "judged": true,
     "why": "당진 고용위기지역 지정 촉구 성명",
     "hits": [],
     "tone": [],
@@ -1062,6 +1125,7 @@
     "press": "polinews.co.kr",
     "pub": "2026-07-15 13:14",
     "cites": false,
+    "judged": true,
     "why": "고흥군 근속장려금 사업 안내",
     "hits": [
      "연령:청년"
@@ -1082,6 +1146,7 @@
     "press": "머니투데이",
     "pub": "2026-07-16 04:00",
     "cites": false,
+    "judged": true,
     "why": "AI 시대 칼럼, 업종별 증감률 인용 불명확",
     "hits": [],
     "tone": [],
@@ -1099,6 +1164,7 @@
     "press": "00news.co.kr",
     "pub": "2026-07-16 10:36",
     "cites": true,
+    "judged": true,
     "why": "보도자료 명시, 건설업 74만4천명",
     "hits": [
      "산업:제조업"
@@ -1116,6 +1182,7 @@
     "press": "서울신문",
     "pub": "2026-07-17 05:01",
     "cites": false,
+    "judged": true,
     "why": "KOSIS 5월 피보험자 기반 기획기사",
     "hits": [
      "연령:청년"
@@ -1134,6 +1201,7 @@
     "press": "대한전문건설신문",
     "pub": "2026-07-17 08:00",
     "cites": false,
+    "judged": true,
     "why": "기술교육원 교육과정 안내",
     "hits": [],
     "tone": [],
@@ -1150,6 +1218,7 @@
     "press": "newspost.kr",
     "pub": "2026-07-18 13:26",
     "cites": true,
+    "judged": true,
     "why": "전체 증가·29세 이하 감소 등 전함",
     "hits": [
      "연령:청년"
@@ -1171,6 +1240,7 @@
     "press": "getnews.co.kr",
     "pub": "2026-07-19 14:00",
     "cites": true,
+    "judged": true,
     "why": "제조업·건설업 감소, 전체 증가 전함",
     "hits": [
      "연령:30대"
@@ -1187,6 +1257,7 @@
     "press": "연합뉴스",
     "pub": "2026-07-20 06:00",
     "cites": false,
+    "judged": true,
     "why": "육아기 단축급여 제도 제보기사",
     "hits": [],
     "tone": [],
@@ -1206,6 +1277,7 @@
     "press": "news.sbs.co.kr",
     "pub": "2026-07-20 07:28",
     "cites": false,
+    "judged": true,
     "why": "육아기 단축급여 제도 제보기사",
     "hits": [],
     "tone": [],
@@ -1224,6 +1296,7 @@
     "press": "jnilbo.com",
     "pub": "2026-07-20 07:53",
     "cites": false,
+    "judged": true,
     "why": "육아기 단축급여 제도 제보기사",
     "hits": [],
     "tone": [],
@@ -1241,6 +1314,7 @@
     "press": "문화일보",
     "pub": "2026-07-20 12:15",
     "cites": true,
+    "judged": true,
     "why": "6월 제조업 -9천명 13개월 감소 인용",
     "hits": [],
     "tone": [],
@@ -1256,6 +1330,7 @@
     "press": "뉴스핌",
     "pub": "2026-07-22 09:05",
     "cites": false,
+    "judged": true,
     "why": "고용보험 적용범위 확대 연구",
     "hits": [
      "지표:고용보험"
@@ -1273,6 +1348,7 @@
     "press": "kyeonggi.com",
     "pub": "2026-07-22 10:31",
     "cites": false,
+    "judged": true,
     "why": "고용보험 적용 직종 확대 제도",
     "hits": [
      "지표:고용보험"
@@ -1292,6 +1368,7 @@
     "press": "insnews.co.kr",
     "pub": "2026-07-22 19:50",
     "cites": false,
+    "judged": true,
     "why": "고용보험 적용대상 확대 시행령 개정",
     "hits": [
      "지표:고용보험"
@@ -1308,6 +1385,7 @@
     "press": "labortoday.co.kr",
     "pub": "2026-07-23 06:34",
     "cites": false,
+    "judged": true,
     "why": "고용보험 시행령 개정 내용",
     "hits": [
      "지표:고용보험"
@@ -1326,6 +1404,7 @@
     "press": "헤럴드경제",
     "pub": "2026-07-23 18:01",
     "cites": false,
+    "judged": true,
     "why": "채용공고 임금 미공개 실태",
     "hits": [],
     "tone": [],
@@ -1344,6 +1423,7 @@
     "press": "ddaily.co.kr",
     "pub": "2026-07-26 17:00",
     "cites": false,
+    "judged": true,
     "why": "공공SW 반프리 계약 문제",
     "hits": [],
     "tone": [],
@@ -1361,6 +1441,7 @@
     "press": "nocutnews.co.kr",
     "pub": "2026-07-27 05:01",
     "cites": false,
+    "judged": true,
     "why": "5월 통계 인용, 정년연장 특위",
     "hits": [
      "연령:청년"
@@ -1380,6 +1461,7 @@
     "press": "biz.newdaily.co.kr",
     "pub": "2026-07-27 09:44",
     "cites": false,
+    "judged": true,
     "why": "청년 가입자 감소 분석, 6월 수치 아님",
     "hits": [
      "연령:청년"
@@ -1399,6 +1481,7 @@
     "press": "kwnews.co.kr",
     "pub": "2026-07-27 13:14",
     "cites": false,
+    "judged": true,
     "why": "개별 기업 수상 소개",
     "hits": [],
     "tone": [],
@@ -1420,6 +1503,7 @@
     "press": "뉴시스",
     "pub": "2026-08-10 06:01",
     "cites": false,
+    "judged": true,
     "why": "청년 자발적 실업급여 제도 개편 논쟁",
     "hits": [
      "연령:청년"
@@ -1438,6 +1522,7 @@
     "press": "국민일보",
     "pub": "2026-08-10 06:59",
     "cites": false,
+    "judged": true,
     "why": "청년 자발적 실업급여 추진 논란",
     "hits": [
      "연령:청년"
@@ -1456,6 +1541,7 @@
     "press": "문화일보",
     "pub": "2026-08-10 07:39",
     "cites": false,
+    "judged": true,
     "why": "실업급여 확대 정책 비판 기사",
     "hits": [],
     "tone": [],
@@ -1471,6 +1557,7 @@
     "press": "lcnews.co.kr",
     "pub": "2026-08-10 09:46",
     "cites": false,
+    "judged": true,
     "why": "구직급여 개정안 칼럼",
     "hits": [
      "연령:청년",
@@ -1489,6 +1576,7 @@
     "press": "세계일보",
     "pub": "2026-08-10 09:59",
     "cites": false,
+    "judged": true,
     "why": "청년 자진퇴사 실업급여 확대 논의",
     "hits": [
      "연령:청년"
@@ -1506,6 +1594,7 @@
     "press": "헤럴드경제",
     "pub": "2026-08-10 09:59",
     "cites": false,
+    "judged": true,
     "why": "실업급여 확대 정책 딜레마",
     "hits": [
      "연령:청년"
@@ -1522,6 +1611,7 @@
     "press": "m-economynews.com",
     "pub": "2026-08-10 11:06",
     "cites": false,
+    "judged": true,
     "why": "자진퇴사 실업급여 지원 논쟁",
     "hits": [
      "연령:청년"
@@ -1540,6 +1630,7 @@
     "press": "뉴스1",
     "pub": "2026-08-10 11:36",
     "cites": false,
+    "judged": true,
     "why": "정치 공방 기사",
     "hits": [],
     "tone": [],
@@ -1558,6 +1649,7 @@
     "press": "뉴스1",
     "pub": "2026-08-10 12:00",
     "cites": true,
+    "judged": true,
     "why": "가입자 27.7만·청년 5.7만 감소 전함",
     "hits": [
      "연령:청년",
@@ -1572,6 +1664,7 @@
     "press": "뉴시스",
     "pub": "2026-08-10 12:00",
     "cites": true,
+    "judged": true,
     "why": "가입자 27.7만명 증가, 40대 반등",
     "hits": [
      "연령:40대",
@@ -1589,6 +1682,7 @@
     "press": "뉴스핌",
     "pub": "2026-08-10 12:00",
     "cites": true,
+    "judged": true,
     "why": "가입자 27.7만·서비스업 28.5만",
     "hits": [
      "연령:청년",
@@ -1604,6 +1698,7 @@
     "press": "머니투데이",
     "pub": "2026-08-10 12:00",
     "cites": true,
+    "judged": true,
     "why": "7개월 연속 20만명대 증가 전함",
     "hits": [
      "산업:제조업",
@@ -1622,6 +1717,7 @@
     "press": "전자신문",
     "pub": "2026-08-10 12:01",
     "cites": true,
+    "judged": true,
     "why": "제조업 14개월 연속 감소 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -1643,6 +1739,7 @@
     "press": "nocutnews.co.kr",
     "pub": "2026-08-10 12:01",
     "cites": true,
+    "judged": true,
     "why": "40대 33개월만 증가, 청년 감소",
     "hits": [
      "연령:40대",
@@ -1659,6 +1756,7 @@
     "press": "dailian.co.kr",
     "pub": "2026-08-10 12:01",
     "cites": true,
+    "judged": true,
     "why": "27.7만 중 60세이상 비중 전함",
     "hits": [
      "연령:60세이상",
@@ -1679,6 +1777,7 @@
     "press": "이투데이",
     "pub": "2026-08-10 12:02",
     "cites": true,
+    "judged": true,
     "why": "가입자 증가폭·구인배수 전함",
     "hits": [
      "지표:가입자",
@@ -1695,6 +1794,7 @@
     "press": "아주경제",
     "pub": "2026-08-10 12:02",
     "cites": true,
+    "judged": true,
     "why": "제조업 가입자 14개월 감소 전함",
     "hits": [
      "산업:제조업",
@@ -1709,6 +1809,7 @@
     "press": "news.bbsi.co.kr",
     "pub": "2026-08-10 12:04",
     "cites": true,
+    "judged": true,
     "why": "27.7만 증가·청년 5.7만 감소",
     "hits": [
      "연령:청년",
@@ -1724,6 +1825,7 @@
     "press": "이데일리",
     "pub": "2026-08-10 12:04",
     "cites": true,
+    "judged": true,
     "why": "구인배수 0.44, 신규구인·구직",
     "hits": [
      "연령:청년"
@@ -1742,6 +1844,7 @@
     "press": "서울경제",
     "pub": "2026-08-10 12:06",
     "cites": true,
+    "judged": true,
     "why": "27만명 증가·청년 47개월 감소",
     "hits": [
      "연령:청년",
@@ -1763,6 +1866,7 @@
     "press": "헤럴드경제",
     "pub": "2026-08-10 12:52",
     "cites": true,
+    "judged": true,
     "why": "29세 이하 47개월 감소 등 7월 통계 전함",
     "hits": [
      "연령:29세이하",
@@ -1783,6 +1887,7 @@
     "press": "뉴스1",
     "pub": "2026-08-10 13:06",
     "cites": true,
+    "judged": true,
     "why": "가입자 1587.7만명·27.7만명 증가 전함",
     "hits": [],
     "tone": [],
@@ -1794,6 +1899,7 @@
     "press": "뉴스1",
     "pub": "2026-08-10 13:06",
     "cites": true,
+    "judged": true,
     "why": "7월 노동시장 동향 발표 내용 전함",
     "hits": [],
     "tone": [],
@@ -1807,6 +1913,7 @@
     "press": "mediapen.com",
     "pub": "2026-08-10 13:08",
     "cites": true,
+    "judged": true,
     "why": "27.7만명 증가·청년·제조업 수치 전함",
     "hits": [
      "산업:제조업",
@@ -1826,6 +1933,7 @@
     "press": "jibs.co.kr",
     "pub": "2026-08-10 13:35",
     "cites": false,
+    "judged": true,
     "why": "청년 자진퇴사 구직급여 확대 제도 논의",
     "hits": [
      "연령:청년"
@@ -1843,6 +1951,7 @@
     "press": "jeonmae.co.kr",
     "pub": "2026-08-10 13:48",
     "cites": true,
+    "judged": true,
     "why": "7월 동향의 청년 47개월 감소 전함",
     "hits": [
      "연령:청년",
@@ -1863,6 +1972,7 @@
     "press": "파이낸셜뉴스",
     "pub": "2026-08-10 13:50",
     "cites": true,
+    "judged": true,
     "why": "제조업 가입자 14개월 감소 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -1882,6 +1992,7 @@
     "press": "동아일보",
     "pub": "2026-08-10 13:51",
     "cites": false,
+    "judged": true,
     "why": "구직급여 지급요건 제도 개편 논의",
     "hits": [
      "연령:청년",
@@ -1900,6 +2011,7 @@
     "press": "뉴시스",
     "pub": "2026-08-10 14:00",
     "cites": true,
+    "judged": true,
     "why": "27.7만명 증가·40대 반등 그래픽",
     "hits": [
      "연령:40대",
@@ -1917,6 +2029,7 @@
     "press": "아시아경제",
     "pub": "2026-08-10 14:03",
     "cites": true,
+    "judged": true,
     "why": "7월 동향 인용, 청년 47개월 감소",
     "hits": [
      "연령:29세이하",
@@ -1936,6 +2049,7 @@
     "press": "thepowernews.co.kr",
     "pub": "2026-08-10 14:24",
     "cites": true,
+    "judged": true,
     "why": "29세 이하 5.7만명 감소·60세 이상 증가",
     "hits": [
      "연령:29세이하",
@@ -1953,6 +2067,7 @@
     "press": "slist.kr",
     "pub": "2026-08-10 14:28",
     "cites": true,
+    "judged": true,
     "why": "노동부 10일 발표 청년 감소 전함",
     "hits": [
      "연령:29세이하",
@@ -1973,6 +2088,7 @@
     "press": "mbnmoney.mbn.co.kr",
     "pub": "2026-08-10 14:28",
     "cites": true,
+    "judged": true,
     "why": "29세 이하 5.7만명 감소 원인 분석 전함",
     "hits": [
      "연령:29세이하",
@@ -1988,6 +2104,7 @@
     "press": "연합뉴스",
     "pub": "2026-08-10 14:30",
     "cites": false,
+    "judged": true,
     "why": "여러 기사 묶은 헤드라인 모음",
     "hits": [],
     "tone": [],
@@ -2003,6 +2120,7 @@
     "press": "천지일보",
     "pub": "2026-08-10 14:38",
     "cites": true,
+    "judged": true,
     "why": "청년 가입자 47개월 감소 전함",
     "hits": [
      "연령:청년"
@@ -2021,6 +2139,7 @@
     "press": "news.cpbc.co.kr",
     "pub": "2026-08-10 14:44",
     "cites": true,
+    "judged": true,
     "why": "7월 동향의 반도체·청년 고용 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -2041,6 +2160,7 @@
     "press": "데이터솜",
     "pub": "2026-08-10 14:46",
     "cites": true,
+    "judged": true,
     "why": "29세 이하 2.5% 감소·원인 분석 전함",
     "hits": [
      "연령:29세이하",
@@ -2055,6 +2175,7 @@
     "press": "lawtv.kr",
     "pub": "2026-08-10 14:50",
     "cites": true,
+    "judged": true,
     "why": "7월 동향 청년 감소 원인 전함",
     "hits": [
      "연령:청년"
@@ -2077,6 +2198,7 @@
     "press": "newsfc.co.kr",
     "pub": "2026-08-10 14:50",
     "cites": true,
+    "judged": true,
     "why": "20만명 후반 증가·청년 감소 전함",
     "hits": [
      "연령:29세이하",
@@ -2097,6 +2219,7 @@
     "press": "이투데이",
     "pub": "2026-08-10 14:58",
     "cites": true,
+    "judged": true,
     "why": "제조업 14개월 감소 등 7월 통계 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -2118,6 +2241,7 @@
     "press": "sisajournal.com",
     "pub": "2026-08-10 14:58",
     "cites": false,
+    "judged": true,
     "why": "청년 자진퇴사 실업급여 제도 개편 논의",
     "hits": [
      "연령:청년"
@@ -2135,6 +2259,7 @@
     "press": "metroseoul.co.kr",
     "pub": "2026-08-10 15:04",
     "cites": true,
+    "judged": true,
     "why": "7월 가입자·제조·건설 증감 전함",
     "hits": [
      "지표:가입자",
@@ -2149,6 +2274,7 @@
     "press": "한국경제",
     "pub": "2026-08-10 15:06",
     "cites": true,
+    "judged": true,
     "why": "7개월 연속 20만명대·청년 47개월 감소",
     "hits": [
      "연령:29세이하",
@@ -2170,6 +2296,7 @@
     "press": "gokorea.kr",
     "pub": "2026-08-10 15:06",
     "cites": true,
+    "judged": true,
     "why": "29세 이하 47개월 감소 전함",
     "hits": [
      "연령:29세이하",
@@ -2189,6 +2316,7 @@
     "press": "매일경제",
     "pub": "2026-08-10 15:09",
     "cites": true,
+    "judged": true,
     "why": "노동부 10일 발표 청년 감소 전함",
     "hits": [
      "연령:29세이하",
@@ -2207,6 +2335,7 @@
     "press": "shinailbo.co.kr",
     "pub": "2026-08-10 15:22",
     "cites": true,
+    "judged": true,
     "why": "7월 노동시장 동향 가입자 수치 인용",
     "hits": [
      "연령:청년",
@@ -2227,6 +2356,7 @@
     "press": "seouleconews.com",
     "pub": "2026-08-10 15:26",
     "cites": true,
+    "judged": true,
     "why": "7월 동향 청년 47개월 감소 인용",
     "hits": [
      "연령:29세이하",
@@ -2247,6 +2377,7 @@
     "press": "아시아투데이",
     "pub": "2026-08-10 15:34",
     "cites": true,
+    "judged": true,
     "why": "제조업 14개월·청년 감소 전함",
     "hits": [
      "연령:청년"
@@ -2265,6 +2396,7 @@
     "press": "kidd.co.kr",
     "pub": "2026-08-10 15:36",
     "cites": true,
+    "judged": true,
     "why": "가입자 27만7천명 증가 인용",
     "hits": [
      "산업:제조업",
@@ -2286,6 +2418,7 @@
     "press": "dnews.co.kr",
     "pub": "2026-08-10 15:42",
     "cites": true,
+    "judged": true,
     "why": "7월 동향 청년 47개월 감소 인용",
     "hits": [
      "연령:청년",
@@ -2305,6 +2438,7 @@
     "press": "viva100.com",
     "pub": "2026-08-10 15:50",
     "cites": true,
+    "judged": true,
     "why": "27만7천명 증가·청년 5만7천명 감소",
     "hits": [
      "지표:가입자",
@@ -2319,6 +2453,7 @@
     "press": "fntoday.co.kr",
     "pub": "2026-08-10 15:52",
     "cites": true,
+    "judged": true,
     "why": "7월 동향 가입자 증감 인용",
     "hits": [
      "연령:29세이하",
@@ -2337,6 +2472,7 @@
     "press": "news2day.co.kr",
     "pub": "2026-08-10 15:52",
     "cites": true,
+    "judged": true,
     "why": "청년 5만7천명 감소 등 수치 인용",
     "hits": [
      "연령:청년",
@@ -2355,6 +2491,7 @@
     "press": "한국경제",
     "pub": "2026-08-10 16:06",
     "cites": true,
+    "judged": true,
     "why": "7월 동향 청년 고용 수치 인용",
     "hits": [
      "연령:청년"
@@ -2372,6 +2509,7 @@
     "press": "KNN",
     "pub": "2026-08-10 16:08",
     "cites": true,
+    "judged": true,
     "why": "서비스업 28만5천명 증가 인용",
     "hits": [
      "연령:청년",
@@ -2388,6 +2526,7 @@
     "press": "뉴스프리존",
     "pub": "2026-08-10 16:20",
     "cites": true,
+    "judged": true,
     "why": "노동부 7월 청년 47개월 감소 인용",
     "hits": [
      "연령:청년",
@@ -2405,6 +2544,7 @@
     "press": "news2day.co.kr",
     "pub": "2026-08-10 16:22",
     "cites": false,
+    "judged": true,
     "why": "청년 실업급여 확대 정책 해설",
     "hits": [
      "연령:청년"
@@ -2425,6 +2565,7 @@
     "press": "한국일보",
     "pub": "2026-08-10 16:34",
     "cites": true,
+    "judged": true,
     "why": "건설업 36개월 감소 등 수치 인용",
     "hits": [
      "산업:건설업",
@@ -2444,6 +2585,7 @@
     "press": "kihoilbo.co.kr",
     "pub": "2026-08-10 16:36",
     "cites": true,
+    "judged": true,
     "why": "7월 27만7천명·서비스업 28만5천명",
     "hits": [
      "지표:가입자",
@@ -2460,6 +2602,7 @@
     "press": "한국경제",
     "pub": "2026-08-10 16:38",
     "cites": true,
+    "judged": true,
     "why": "7월 동향 청년 47개월 후퇴 인용",
     "hits": [
      "연령:29세이하",
@@ -2478,6 +2621,7 @@
     "press": "delighti.co.kr",
     "pub": "2026-08-10 16:40",
     "cites": true,
+    "judged": true,
     "why": "7월 가입자 28만명 증가·청년 감소 전함",
     "hits": [
      "연령:청년",
@@ -2495,6 +2639,7 @@
     "press": "news.tvchosun.com",
     "pub": "2026-08-10 16:46",
     "cites": true,
+    "judged": true,
     "why": "7월 노동시장 동향 인용, 청년 47개월 감소",
     "hits": [
      "산업:건설업",
@@ -2514,6 +2659,7 @@
     "press": "nspna.com",
     "pub": "2026-08-10 16:50",
     "cites": false,
+    "judged": true,
     "why": "증시 업종 등락 기사, 헤드라인만 병기",
     "hits": [
      "산업:보험업"
@@ -2534,6 +2680,7 @@
     "press": "kbsm.net",
     "pub": "2026-08-10 16:50",
     "cites": true,
+    "judged": true,
     "why": "29세 이하 47개월 감소 수치 전함",
     "hits": [
      "연령:29세이하",
@@ -2552,6 +2699,7 @@
     "press": "joongdo.co.kr",
     "pub": "2026-08-10 16:52",
     "cites": true,
+    "judged": true,
     "why": "사설이나 7월 가입자 증감 수치 인용",
     "hits": [
      "연령:청년"
@@ -2571,6 +2719,7 @@
     "press": "남도일보",
     "pub": "2026-08-10 17:02",
     "cites": true,
+    "judged": true,
     "why": "노동부 7월 통계 인용",
     "hits": [
      "연령:청년"
@@ -2588,6 +2737,7 @@
     "press": "서울경제",
     "pub": "2026-08-10 17:30",
     "cites": true,
+    "judged": true,
     "why": "칼럼이나 7월 27만명·47개월 수치 인용",
     "hits": [],
     "tone": [],
@@ -2605,6 +2755,7 @@
     "press": "ccdailynews.com",
     "pub": "2026-08-10 17:32",
     "cites": true,
+    "judged": true,
     "why": "가입자 1587만7천명·27만7천명 증가 전함",
     "hits": [
      "연령:29세이하",
@@ -2626,6 +2777,7 @@
     "press": "한국경제",
     "pub": "2026-08-10 17:42",
     "cites": true,
+    "judged": true,
     "why": "7월 가입자 증감 언급, 잡코리아 조사 병기",
     "hits": [
      "연령:청년"
@@ -2645,6 +2797,7 @@
     "press": "owtv.co.kr",
     "pub": "2026-08-10 17:45",
     "cites": true,
+    "judged": true,
     "why": "청년 5만7천명 감소·47개월 전함",
     "hits": [
      "연령:청년",
@@ -2661,6 +2814,7 @@
     "press": "imnews.imbc.com",
     "pub": "2026-08-10 18:32",
     "cites": true,
+    "judged": true,
     "why": "노동부 7월 동향 인용",
     "hits": [
      "연령:29세이하",
@@ -2677,6 +2831,7 @@
     "press": "ggilbo.com",
     "pub": "2026-08-10 18:38",
     "cites": true,
+    "judged": true,
     "why": "산업별 가입자 증감 수치 전함",
     "hits": [
      "연령:청년",
@@ -2696,6 +2851,7 @@
     "press": "충청매일",
     "pub": "2026-08-10 19:14",
     "cites": true,
+    "judged": true,
     "why": "가입자 증가 속 29세 이하 감소 전함",
     "hits": [
      "연령:29세이하",
@@ -2711,6 +2867,7 @@
     "press": "00news.co.kr",
     "pub": "2026-08-10 19:30",
     "cites": true,
+    "judged": true,
     "why": "청년 47개월 연속 감소 전함",
     "hits": [
      "연령:청년"
@@ -2731,6 +2888,7 @@
     "press": "ksilbo.co.kr",
     "pub": "2026-08-11 00:02",
     "cites": true,
+    "judged": true,
     "why": "7월 청년 가입자 224만2천명 감소 전함",
     "hits": [
      "연령:29세이하",
@@ -2750,6 +2908,7 @@
     "press": "gjdream.com",
     "pub": "2026-08-11 00:02",
     "cites": true,
+    "judged": true,
     "why": "7월 제조업 가입자 감소폭 축소 분석",
     "hits": [
      "산업:제조업"
@@ -2766,6 +2925,7 @@
     "press": "한국경제",
     "pub": "2026-08-11 00:39",
     "cites": true,
+    "judged": true,
     "why": "7월 청년 가입자 5만7천명 감소 인용",
     "hits": [
      "연령:청년"
@@ -2787,6 +2947,7 @@
     "press": "labortoday.co.kr",
     "pub": "2026-08-11 06:32",
     "cites": true,
+    "judged": true,
     "why": "7월 통계 47개월 연속 감소 보도",
     "hits": [
      "연령:청년",
@@ -2802,6 +2963,7 @@
     "press": "뉴스1",
     "pub": "2026-08-11 06:51",
     "cites": true,
+    "judged": true,
     "why": "7월 가입자 1587만·청년 감소 인용",
     "hits": [
      "연령:청년"
@@ -2824,6 +2986,7 @@
     "press": "ytn.co.kr",
     "pub": "2026-08-11 07:27",
     "cites": true,
+    "judged": true,
     "why": "47개월 연속 청년 감소 수치 언급",
     "hits": [],
     "tone": [],
@@ -2841,6 +3004,7 @@
     "press": "ferrotimes.com",
     "pub": "2026-08-11 07:28",
     "cites": false,
+    "judged": true,
     "why": "칼럼, 5월 통계 인용한 AI 전망론",
     "hits": [],
     "tone": [],
@@ -2860,6 +3024,7 @@
     "press": "ytn.co.kr",
     "pub": "2026-08-11 07:58",
     "cites": true,
+    "judged": true,
     "why": "47개월 연속 감소 수치 인용 녹취록",
     "hits": [],
     "tone": [],
@@ -2878,6 +3043,7 @@
     "press": "kor.theasian.asia",
     "pub": "2026-08-11 08:00",
     "cites": false,
+    "judged": true,
     "why": "[오늘의 신문] 헤드라인 모음",
     "hits": [],
     "tone": [],
@@ -2897,6 +3063,7 @@
     "press": "뉴스핌",
     "pub": "2026-08-11 08:12",
     "cites": false,
+    "judged": true,
     "why": "부산시 쿨링키트 지자체 사업",
     "hits": [
      "산업:조선업(기타운송장비)"
@@ -2917,6 +3084,7 @@
     "press": "cbci.co.kr",
     "pub": "2026-08-11 10:00",
     "cites": true,
+    "judged": true,
     "why": "7월 구직급여 1조·청년 5만7천 감소",
     "hits": [
      "연령:청년",
@@ -2934,6 +3102,7 @@
     "press": "biz.newdaily.co.kr",
     "pub": "2026-08-11 10:34",
     "cites": false,
+    "judged": true,
     "why": "자진퇴사 실업급여 제도·조기퇴사 분석",
     "hits": [
      "연령:청년"
@@ -2952,6 +3121,7 @@
     "press": "kbiznews.co.kr",
     "pub": "2026-08-11 11:06",
     "cites": false,
+    "judged": true,
     "why": "6월 통계 인용한 AI 채용 칼럼",
     "hits": [],
     "tone": [],
@@ -2968,6 +3138,7 @@
     "press": "mstoday.co.kr",
     "pub": "2026-08-11 11:22",
     "cites": true,
+    "judged": true,
     "why": "7월 가입자 27만7천·제조업 감소 인용",
     "hits": [],
     "tone": [],
@@ -2985,6 +3156,7 @@
     "press": "naeil.com",
     "pub": "2026-08-11 13:06",
     "cites": true,
+    "judged": true,
     "why": "7월 청년·건설업·40대 증감 전함",
     "hits": [
      "연령:청년",
@@ -2999,6 +3171,7 @@
     "press": "polinews.co.kr",
     "pub": "2026-08-11 16:10",
     "cites": true,
+    "judged": true,
     "why": "7월 보도자료 명시, 1587만7천명 인용",
     "hits": [
      "산업:제조업",
@@ -3018,6 +3191,7 @@
     "press": "gukjenews.com",
     "pub": "2026-08-11 17:00",
     "cites": false,
+    "judged": true,
     "why": "부산시 쿨링키트 지원 사업",
     "hits": [
      "산업:조선업(기타운송장비)"
@@ -3037,6 +3211,7 @@
     "press": "대한전문건설신문",
     "pub": "2026-08-11 17:38",
     "cites": true,
+    "judged": true,
     "why": "7월 가입자 27만7천·건설업 36개월 감소",
     "hits": [
      "산업:건설업",
@@ -3052,6 +3227,7 @@
     "press": "경향신문",
     "pub": "2026-08-11 20:05",
     "cites": false,
+    "judged": true,
     "why": "고용보험 확대 제안 칼럼",
     "hits": [],
     "tone": [],
@@ -3066,6 +3242,7 @@
     "press": "insight.co.kr",
     "pub": "2026-08-11 22:42",
     "cites": true,
+    "judged": true,
     "why": "7월 청년 5만7천 감소·전체 1587만 인용",
     "hits": [
      "연령:청년"
@@ -3086,6 +3263,7 @@
     "press": "cbci.co.kr",
     "pub": "2026-08-12 09:38",
     "cites": true,
+    "judged": true,
     "why": "27만7천명 증가·신규신청 10만9천명 전함",
     "hits": [
      "지표:가입자",
@@ -3101,6 +3279,7 @@
     "press": "dailypop.kr",
     "pub": "2026-08-12 14:36",
     "cites": true,
+    "judged": true,
     "why": "가입자 1587만7천명·27만7천명 증가 인용",
     "hits": [
      "연령:청년"
@@ -3120,6 +3299,7 @@
     "press": "국민일보",
     "pub": "2026-08-12 15:47",
     "cites": true,
+    "judged": true,
     "why": "지난달 자동차업 가입자 감소 등 고용행정통계 인용",
     "hits": [],
     "tone": [],
@@ -3136,6 +3316,7 @@
     "press": "국민일보",
     "pub": "2026-08-13 02:51",
     "cites": true,
+    "judged": true,
     "why": "동일 자동차업 가입자 감소 수치 인용",
     "hits": [],
     "tone": [],
@@ -3154,6 +3335,7 @@
     "press": "mhns.co.kr",
     "pub": "2026-08-13 03:28",
     "cites": false,
+    "judged": true,
     "why": "8월12일 발표·취업자 10만8천명 등 다른 수치 혼재",
     "hits": [
      "연령:청년"
@@ -3172,6 +3354,7 @@
     "press": "뉴스1",
     "pub": "2026-08-13 06:00",
     "cites": true,
+    "judged": true,
     "why": "29세 이하 -5만7천, 60세 이상 +20만9천 인용",
     "hits": [
      "연령:고령",
@@ -3189,6 +3372,7 @@
     "press": "천지일보",
     "pub": "2026-08-13 07:02",
     "cites": true,
+    "judged": true,
     "why": "7월 동향 청년 -5만7천·47개월 감소 인용",
     "hits": [
      "연령:청년"
@@ -3208,6 +3392,7 @@
     "press": "shinailbo.co.kr",
     "pub": "2026-08-13 09:10",
     "cites": false,
+    "judged": true,
     "why": "협회 재직자 무료교육 성과평가 기사",
     "hits": [],
     "tone": [],
@@ -3226,6 +3411,7 @@
     "press": "kukinews.com",
     "pub": "2026-08-13 12:32",
     "cites": false,
+    "judged": true,
     "why": "기재부 재정동향 나라살림 적자 기사",
     "hits": [],
     "tone": [],
@@ -3246,6 +3432,7 @@
     "press": "insightkorea.co.kr",
     "pub": "2026-08-13 16:42",
     "cites": false,
+    "judged": true,
     "why": "IT업계 노조 기사, 과거 시점 가입자 수치",
     "hits": [],
     "tone": [],
@@ -3265,6 +3452,7 @@
     "press": "한국경제",
     "pub": "2026-08-15 19:18",
     "cites": false,
+    "judged": true,
     "why": "KOSIS 5월 통계 인용한 취업 트렌드 기사",
     "hits": [],
     "tone": [],
@@ -3281,6 +3469,7 @@
     "press": "연합뉴스",
     "pub": "2026-08-17 06:11",
     "cites": false,
+    "judged": true,
     "why": "국민연금 출산크레딧 기사",
     "hits": [
      "성:남성",
@@ -3300,6 +3489,7 @@
     "press": "cbci.co.kr",
     "pub": "2026-08-17 15:36",
     "cites": true,
+    "judged": true,
     "why": "청년 -5만7천·구직급여 지급액 등 인용",
     "hits": [
      "연령:청년",
@@ -3318,6 +3508,7 @@
     "press": "jnilbo.com",
     "pub": "2026-08-17 16:30",
     "cites": false,
+    "judged": true,
     "why": "국민연금 출산크레딧 기사",
     "hits": [
      "성:남성",
@@ -3337,6 +3528,7 @@
     "press": "imnews.imbc.com",
     "pub": "2026-08-17 20:35",
     "cites": true,
+    "judged": true,
     "why": "지난달 청년 가입자 -5만7천·47개월 인용",
     "hits": [],
     "tone": [],
@@ -3356,6 +3548,7 @@
     "press": "imnews.imbc.com",
     "pub": "2026-08-18 07:32",
     "cites": true,
+    "judged": true,
     "why": "동일 청년 가입자 감소 수치 인용",
     "hits": [
      "연령:청년"
@@ -3374,6 +3567,7 @@
     "press": "thescoop.co.kr",
     "pub": "2026-08-18 10:09",
     "cites": false,
+    "judged": true,
     "why": "실업급여 제도 개편 논쟁 기사",
     "hits": [
      "연령:청년"
@@ -3391,6 +3585,7 @@
     "press": "getnews.co.kr",
     "pub": "2026-08-18 11:04",
     "cites": false,
+    "judged": true,
     "why": "울산 지역 기업·일자리 조사 기사",
     "hits": [],
     "tone": [],
@@ -3405,6 +3600,7 @@
     "press": "kbsm.net",
     "pub": "2026-08-18 12:54",
     "cites": false,
+    "judged": true,
     "why": "국민연금 출산크레딧 기사",
     "hits": [
      "성:남성",
@@ -3423,6 +3619,7 @@
     "press": "dailian.co.kr",
     "pub": "2026-08-18 17:59",
     "cites": true,
+    "judged": true,
     "why": "47개월 감소·60세 이상 20만9천명 인용",
     "hits": [
      "연령:청년"
@@ -3442,6 +3639,7 @@
     "press": "이데일리",
     "pub": "2026-08-19 05:02",
     "cites": false,
+    "judged": true,
     "why": "5월 통계 기반 AI·청년 SW 고용 사설",
     "hits": [
      "연령:청년"
@@ -3464,6 +3662,7 @@
     "press": "dnews.co.kr",
     "pub": "2026-08-19 12:02",
     "cites": false,
+    "judged": true,
     "why": "경북 지자체 일자리대상 브리핑 모음",
     "hits": [],
     "tone": [],
@@ -3481,6 +3680,7 @@
     "press": "아주경제",
     "pub": "2026-08-19 12:02",
     "cites": true,
+    "judged": true,
     "why": "7월 제조업 가입자 3000명 감소 인용",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -3501,6 +3701,7 @@
     "press": "tournews21.com",
     "pub": "2026-08-19 15:00",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3517,6 +3718,7 @@
     "press": "hidomin.com",
     "pub": "2026-08-19 15:34",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3534,6 +3736,7 @@
     "press": "kyongbuk.co.kr",
     "pub": "2026-08-19 16:26",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3550,6 +3753,7 @@
     "press": "kbsm.net",
     "pub": "2026-08-19 16:28",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3567,6 +3771,7 @@
     "press": "enewstoday.co.kr",
     "pub": "2026-08-19 16:55",
     "cites": false,
+    "judged": true,
     "why": "강릉시 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3585,6 +3790,7 @@
     "press": "sisafocus.co.kr",
     "pub": "2026-08-19 17:02",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3599,6 +3805,7 @@
     "press": "shinailbo.co.kr",
     "pub": "2026-08-19 17:08",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3616,6 +3823,7 @@
     "press": "news.mtn.co.kr",
     "pub": "2026-08-19 17:46",
     "cites": true,
+    "judged": true,
     "why": "제조업 14개월·건설업 감소 인용",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -3633,6 +3841,7 @@
     "press": "kbmaeil.com",
     "pub": "2026-08-19 18:06",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3649,6 +3858,7 @@
     "press": "breaknews.com",
     "pub": "2026-08-19 19:16",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3665,6 +3875,7 @@
     "press": "이데일리",
     "pub": "2026-08-19 20:56",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3681,6 +3892,7 @@
     "press": "gukjenews.com",
     "pub": "2026-08-20 01:04",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3696,6 +3908,7 @@
     "press": "아주경제",
     "pub": "2026-08-20 05:02",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3712,6 +3925,7 @@
     "press": "경향신문",
     "pub": "2026-08-20 06:00",
     "cites": false,
+    "judged": true,
     "why": "예술인 고용보험 제도 개편 논의",
     "hits": [],
     "tone": [],
@@ -3729,6 +3943,7 @@
     "press": "metroseoul.co.kr",
     "pub": "2026-08-20 11:50",
     "cites": false,
+    "judged": true,
     "why": "경북도 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3744,6 +3959,7 @@
     "press": "데이터솜",
     "pub": "2026-08-20 13:22",
     "cites": true,
+    "judged": true,
     "why": "10일 발표 7월 통계 제조업 수치 인용",
     "hits": [
      "산업:제조업"
@@ -3762,6 +3978,7 @@
     "press": "00news.co.kr",
     "pub": "2026-08-20 14:24",
     "cites": true,
+    "judged": true,
     "why": "7월 가입자 27만명 증가·청년 감소 인용",
     "hits": [
      "연령:청년"
@@ -3780,6 +3997,7 @@
     "press": "lawtalknews.co.kr",
     "pub": "2026-08-20 16:36",
     "cites": false,
+    "judged": true,
     "why": "실업급여 수급요건 법률 해설, 2024년 수치",
     "hits": [],
     "tone": [],
@@ -3798,6 +4016,7 @@
     "press": "bizwnews.com",
     "pub": "2026-08-20 17:40",
     "cites": false,
+    "judged": true,
     "why": "시흥시 일자리대상 수상 소식",
     "hits": [],
     "tone": [],
@@ -3814,6 +4033,7 @@
     "press": "대한전문건설신문",
     "pub": "2026-08-21 08:00",
     "cites": false,
+    "judged": true,
     "why": "기술교육원 출장 교육 안내",
     "hits": [],
     "tone": [],
@@ -3833,6 +4053,7 @@
     "press": "snmnews.com",
     "pub": "2026-08-21 09:26",
     "cites": false,
+    "judged": true,
     "why": "당진 고용위기 선제대응지역 지정, 2월 수치",
     "hits": [
      "산업:철강(1차금속)"
@@ -3854,6 +4075,7 @@
     "press": "polinews.co.kr",
     "pub": "2026-08-21 15:25",
     "cites": true,
+    "judged": true,
     "why": "7월 업종별 고용보험 가입자 증감 전함",
     "hits": [
      "산업:제조업"
@@ -3874,6 +4096,7 @@
     "press": "sisafocus.co.kr",
     "pub": "2026-08-22 09:18",
     "cites": true,
+    "judged": true,
     "why": "보도자료 명시 인용, 7월 가입자 통계",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -3893,6 +4116,7 @@
     "press": "nocutnews.co.kr",
     "pub": "2026-08-23 05:01",
     "cites": true,
+    "judged": true,
     "why": "7월 고용행정통계 업종별 가입자 인용",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -3911,6 +4135,7 @@
     "press": "파이낸셜뉴스",
     "pub": "2026-08-23 19:10",
     "cites": false,
+    "judged": true,
     "why": "고용 정책 논평 기자수첩, 구체 수치 없음",
     "hits": [],
     "tone": [],
@@ -3924,6 +4149,7 @@
     "press": "kbiznews.co.kr",
     "pub": "2026-08-24 13:22",
     "cites": false,
+    "judged": true,
     "why": "자영업 폐업 대책 칼럼, 추세만 언급",
     "hits": [],
     "tone": [],
@@ -3944,6 +4170,7 @@
     "press": "thescoop.co.kr",
     "pub": "2026-09-07 08:25",
     "cites": false,
+    "judged": true,
     "why": "AI 노출도 서베이 분석, 다른 조사",
     "hits": [],
     "tone": [],
@@ -3966,6 +4193,7 @@
     "press": "gokorea.kr",
     "pub": "2026-09-07 09:48",
     "cites": false,
+    "judged": true,
     "why": "육아휴직 급여 국회 심의",
     "hits": [],
     "tone": [],
@@ -3982,6 +4210,7 @@
     "press": "news.inochong.org",
     "pub": "2026-09-07 10:02",
     "cites": false,
+    "judged": true,
     "why": "복지국가·노동 담론 칼럼",
     "hits": [],
     "tone": [],
@@ -3996,6 +4225,7 @@
     "press": "아시아경제",
     "pub": "2026-09-07 11:04",
     "cites": false,
+    "judged": true,
     "why": "청년 자발적 이직급여 제도화 논의",
     "hits": [
      "연령:청년"
@@ -4015,6 +4245,7 @@
     "press": "연합뉴스",
     "pub": "2026-09-07 12:00",
     "cites": true,
+    "judged": true,
     "why": "제조업 15개월만 증가 등 8월 통계",
     "hits": [
      "산업:건설업",
@@ -4034,6 +4265,7 @@
     "press": "한국경제",
     "pub": "2026-09-07 12:00",
     "cites": true,
+    "judged": true,
     "why": "청년 48개월 감소 등 8월 통계",
     "hits": [
      "연령:청년",
@@ -4051,6 +4283,7 @@
     "press": "헤럴드경제",
     "pub": "2026-09-07 12:00",
     "cites": true,
+    "judged": true,
     "why": "제조업 가입자 15개월만 증가",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4067,6 +4300,7 @@
     "press": "뉴스1",
     "pub": "2026-09-07 12:00",
     "cites": true,
+    "judged": true,
     "why": "8월 가입자 27만8천명 증가",
     "hits": [
      "지표:가입자",
@@ -4081,6 +4315,7 @@
     "press": "뉴스핌",
     "pub": "2026-09-07 12:00",
     "cites": true,
+    "judged": true,
     "why": "29세 이하 감소·제조업 증가",
     "hits": [
      "산업:제조업",
@@ -4097,6 +4332,7 @@
     "press": "뉴시스",
     "pub": "2026-09-07 12:00",
     "cites": true,
+    "judged": true,
     "why": "27.8만명 증가, 제조업 반등",
     "hits": [
      "산업:제조업",
@@ -4114,6 +4350,7 @@
     "press": "뉴스1",
     "pub": "2026-09-07 12:00",
     "cites": true,
+    "judged": true,
     "why": "8월 가입자 27만8천명 증가",
     "hits": [
      "지표:가입자",
@@ -4128,6 +4365,7 @@
     "press": "뉴스1",
     "pub": "2026-09-07 12:00",
     "cites": true,
+    "judged": true,
     "why": "8개월 연속 20만명대 후반 증가",
     "hits": [
      "산업:제조업",
@@ -4144,6 +4382,7 @@
     "press": "nocutnews.co.kr",
     "pub": "2026-09-07 12:01",
     "cites": true,
+    "judged": true,
     "why": "보도자료 명시, 제조업 반등",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4162,6 +4401,7 @@
     "press": "전자신문",
     "pub": "2026-09-07 12:01",
     "cites": true,
+    "judged": true,
     "why": "제조업 반등·청년 한파 통계",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4183,6 +4423,7 @@
     "press": "이데일리",
     "pub": "2026-09-07 12:02",
     "cites": true,
+    "judged": true,
     "why": "제조업 2000명 증가, 청년 감소",
     "hits": [
      "연령:청년",
@@ -4202,6 +4443,7 @@
     "press": "아주경제",
     "pub": "2026-09-07 12:02",
     "cites": true,
+    "judged": true,
     "why": "서비스업 28만·건설 -7천명",
     "hits": [
      "산업:제조업",
@@ -4217,6 +4459,7 @@
     "press": "이투데이",
     "pub": "2026-09-07 12:02",
     "cites": true,
+    "judged": true,
     "why": "8월 노동시장 동향 인용",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4236,6 +4479,7 @@
     "press": "ohmynews.com",
     "pub": "2026-09-07 12:11",
     "cites": false,
+    "judged": true,
     "why": "실직 개인 수기",
     "hits": [
      "지표:구직급여"
@@ -4255,6 +4499,7 @@
     "press": "한겨레",
     "pub": "2026-09-07 12:12",
     "cites": true,
+    "judged": true,
     "why": "청년 5만6천명 감소 등 8월 통계",
     "hits": [
      "산업:제조업",
@@ -4271,6 +4516,7 @@
     "press": "dailian.co.kr",
     "pub": "2026-09-07 12:12",
     "cites": true,
+    "judged": true,
     "why": "27.8만명 증가, 제조업 반등",
     "hits": [
      "산업:제조업",
@@ -4288,6 +4534,7 @@
     "press": "머니투데이",
     "pub": "2026-09-07 13:26",
     "cites": true,
+    "judged": true,
     "why": "8월 가입자 27만8천명·제조업 증가 전환 전함",
     "hits": [
      "산업:제조업",
@@ -4303,6 +4550,7 @@
     "press": "news.tf.co.kr",
     "pub": "2026-09-07 13:27",
     "cites": true,
+    "judged": true,
     "why": "8월 노동시장 동향 발표 내용 보도",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4322,6 +4570,7 @@
     "press": "청년일보",
     "pub": "2026-09-07 13:36",
     "cites": true,
+    "judged": true,
     "why": "가입자 1590만5천명·건설업 37개월 감소 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4342,6 +4591,7 @@
     "press": "news.tvchosun.com",
     "pub": "2026-09-07 13:39",
     "cites": true,
+    "judged": true,
     "why": "8월 상시가입자 1590만5천명 수치 인용",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4359,6 +4609,7 @@
     "press": "디지털타임스",
     "pub": "2026-09-07 13:54",
     "cites": true,
+    "judged": true,
     "why": "27만8천명 증가·건설업 감소 전함",
     "hits": [
      "산업:건설업",
@@ -4377,6 +4628,7 @@
     "press": "thepowernews.co.kr",
     "pub": "2026-09-07 13:54",
     "cites": true,
+    "judged": true,
     "why": "8월 가입자 27.8만명 증가 전함",
     "hits": [
      "산업:제조업",
@@ -4392,6 +4644,7 @@
     "press": "biz.sbs.co.kr",
     "pub": "2026-09-07 14:06",
     "cites": true,
+    "judged": true,
     "why": "제조업 반등·청년 감소 수치 전함",
     "hits": [
      "산업:반도체(전자·통신)"
@@ -4409,6 +4662,7 @@
     "press": "중앙이코노미뉴스",
     "pub": "2026-09-07 14:06",
     "cites": true,
+    "judged": true,
     "why": "제조업 15개월 만 반등 통계 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4428,6 +4682,7 @@
     "press": "뉴시스",
     "pub": "2026-09-07 14:07",
     "cites": true,
+    "judged": true,
     "why": "본문에 27만8천명 증가 수치 인용(사진기사)",
     "hits": [],
     "tone": [],
@@ -4441,6 +4696,7 @@
     "press": "뉴시스",
     "pub": "2026-09-07 14:07",
     "cites": true,
+    "judged": true,
     "why": "본문에 8월 동향 수치 인용(사진기사)",
     "hits": [],
     "tone": [],
@@ -4454,6 +4710,7 @@
     "press": "뉴시스",
     "pub": "2026-09-07 14:07",
     "cites": true,
+    "judged": true,
     "why": "본문에 8월 동향 수치 인용(사진기사)",
     "hits": [],
     "tone": [],
@@ -4465,6 +4722,7 @@
     "press": "뉴시스",
     "pub": "2026-09-07 14:08",
     "cites": true,
+    "judged": true,
     "why": "잡페어 사진이나 본문에 8월 통계 인용",
     "hits": [],
     "tone": [],
@@ -4480,6 +4738,7 @@
     "press": "뉴시스",
     "pub": "2026-09-07 14:08",
     "cites": true,
+    "judged": true,
     "why": "청년 가입자 감소 등 8월 통계 인용",
     "hits": [
      "연령:29세이하",
@@ -4498,6 +4757,7 @@
     "press": "뉴시스",
     "pub": "2026-09-07 14:08",
     "cites": true,
+    "judged": true,
     "why": "본문에 8월 동향 수치 인용(사진기사)",
     "hits": [],
     "tone": [],
@@ -4509,6 +4769,7 @@
     "press": "조선일보",
     "pub": "2026-09-07 14:17",
     "cites": true,
+    "judged": true,
     "why": "8월 노동시장 동향 제조업·청년 수치 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4527,6 +4788,7 @@
     "press": "pointe.co.kr",
     "pub": "2026-09-07 14:24",
     "cites": true,
+    "judged": true,
     "why": "1590만5천명·27만8천명 증가 전함",
     "hits": [
      "산업:제조업",
@@ -4543,6 +4805,7 @@
     "press": "연합뉴스",
     "pub": "2026-09-07 14:29",
     "cites": true,
+    "judged": true,
     "why": "제조업 가입자 증감 추이 그래픽",
     "hits": [
      "산업:제조업",
@@ -4558,6 +4821,7 @@
     "press": "연합뉴스",
     "pub": "2026-09-07 14:30",
     "cites": false,
+    "judged": true,
     "why": "헤드라인 모음 기사",
     "hits": [],
     "tone": [],
@@ -4573,6 +4837,7 @@
     "press": "news.bbsi.co.kr",
     "pub": "2026-09-07 14:32",
     "cites": true,
+    "judged": true,
     "why": "8월 고용행정통계 제조업 반등 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4591,6 +4856,7 @@
     "press": "gosiweek.com",
     "pub": "2026-09-07 14:36",
     "cites": true,
+    "judged": true,
     "why": "27만8천명 증가·청년 5만6천명 감소 전함",
     "hits": [
      "산업:제조업",
@@ -4608,6 +4874,7 @@
     "press": "gokorea.kr",
     "pub": "2026-09-07 14:36",
     "cites": true,
+    "judged": true,
     "why": "가입자 27만8천명·서비스업 28만명 증가 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4625,6 +4892,7 @@
     "press": "seouleconews.com",
     "pub": "2026-09-07 14:44",
     "cites": true,
+    "judged": true,
     "why": "제조업 15개월만 반등·건설업 37개월 감소",
     "hits": [
      "산업:건설업",
@@ -4641,6 +4909,7 @@
     "press": "viva100.com",
     "pub": "2026-09-07 14:50",
     "cites": true,
+    "judged": true,
     "why": "8월 가입자 20만명대 후반·제조업 증가 전환",
     "hits": [
      "산업:제조업"
@@ -4654,6 +4923,7 @@
     "press": "asiatime.co.kr",
     "pub": "2026-09-07 14:52",
     "cites": true,
+    "judged": true,
     "why": "제조업 384만7천명, 2천명 증가 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4672,6 +4942,7 @@
     "press": "fntoday.co.kr",
     "pub": "2026-09-07 14:58",
     "cites": true,
+    "judged": true,
     "why": "8개월 연속 20만명대 증가·건설업 부진",
     "hits": [
      "산업:건설업",
@@ -4689,6 +4960,7 @@
     "press": "lawtalknews.co.kr",
     "pub": "2026-09-07 15:00",
     "cites": false,
+    "judged": true,
     "why": "실업급여 부정수급 환수 법률 해설 기사",
     "hits": [],
     "tone": [],
@@ -4704,6 +4976,7 @@
     "press": "dnews.co.kr",
     "pub": "2026-09-07 15:02",
     "cites": true,
+    "judged": true,
     "why": "27만8천명 증가·제조업 2천명 증가 전함",
     "hits": [
      "산업:제조업"
@@ -4721,6 +4994,7 @@
     "press": "뉴스1",
     "pub": "2026-09-07 15:08",
     "cites": true,
+    "judged": true,
     "why": "8월 가입자 27만8천명 증가 종합 보도",
     "hits": [
      "산업:제조업",
@@ -4737,6 +5011,7 @@
     "press": "mbnmoney.mbn.co.kr",
     "pub": "2026-09-07 15:08",
     "cites": true,
+    "judged": true,
     "why": "가입자 1590만5천명·제조업 증가 전환",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4753,6 +5028,7 @@
     "press": "천지일보",
     "pub": "2026-09-07 15:12",
     "cites": true,
+    "judged": true,
     "why": "제조업·서비스업 가입자 증감 분석 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4771,6 +5047,7 @@
     "press": "delighti.co.kr",
     "pub": "2026-09-07 15:22",
     "cites": true,
+    "judged": true,
     "why": "제조업 상시가입자 15개월만 증가 전함",
     "hits": [
      "산업:제조업",
@@ -4786,6 +5063,7 @@
     "press": "뉴스1",
     "pub": "2026-09-07 15:23",
     "cites": true,
+    "judged": true,
     "why": "29세 이하 5만6천명 감소 수치 인용",
     "hits": [],
     "tone": [],
@@ -4805,6 +5083,7 @@
     "press": "파이낸셜뉴스",
     "pub": "2026-09-07 15:32",
     "cites": true,
+    "judged": true,
     "why": "제조업 반등·건설업 37개월 감소 전함",
     "hits": [
      "산업:건설업",
@@ -4822,6 +5101,7 @@
     "press": "segyebiz.com",
     "pub": "2026-09-07 15:42",
     "cites": true,
+    "judged": true,
     "why": "8월 고용행정통계 발표 내용 보도",
     "hits": [
      "산업:건설업",
@@ -4839,6 +5119,7 @@
     "press": "theopiniontimes.news",
     "pub": "2026-09-07 15:42",
     "cites": true,
+    "judged": true,
     "why": "가입자·구직급여·구인배수 수치 전함",
     "hits": [
      "산업:제조업",
@@ -4856,6 +5137,7 @@
     "press": "kfenews.co.kr",
     "pub": "2026-09-07 15:46",
     "cites": true,
+    "judged": true,
     "why": "제조업 2천명 증가 전환 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4873,6 +5155,7 @@
     "press": "imaeil.com",
     "pub": "2026-09-07 15:53",
     "cites": true,
+    "judged": true,
     "why": "제조업 증가·건설업 37개월 감소 전함",
     "hits": [
      "산업:건설업",
@@ -4889,6 +5172,7 @@
     "press": "idsn.co.kr",
     "pub": "2026-09-07 16:20",
     "cites": true,
+    "judged": true,
     "why": "가입자 1590만5천명·청년 감소 전함",
     "hits": [
      "연령:29세이하",
@@ -4904,6 +5188,7 @@
     "press": "hitepaper.co.kr",
     "pub": "2026-09-07 16:26",
     "cites": true,
+    "judged": true,
     "why": "27만8천명 증가·제조업 전환 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4923,6 +5208,7 @@
     "press": "ngetnews.com",
     "pub": "2026-09-07 16:26",
     "cites": true,
+    "judged": true,
     "why": "27만8천명 증가·제조업 반등 전함",
     "hits": [
      "산업:제조업"
@@ -4939,6 +5225,7 @@
     "press": "이데일리",
     "pub": "2026-09-07 16:30",
     "cites": true,
+    "judged": true,
     "why": "29세 이하 가입자 감소 수치 인용",
     "hits": [],
     "tone": [],
@@ -4956,6 +5243,7 @@
     "press": "뉴시스",
     "pub": "2026-09-07 16:34",
     "cites": true,
+    "judged": true,
     "why": "가입자 27만8천명 증가·제조업 반등",
     "hits": [
      "산업:제조업",
@@ -4973,6 +5261,7 @@
     "press": "newsway.co.kr",
     "pub": "2026-09-07 16:36",
     "cites": true,
+    "judged": true,
     "why": "제조업 15개월 만 증가 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -4991,6 +5280,7 @@
     "press": "obsnews.co.kr",
     "pub": "2026-09-07 16:44",
     "cites": true,
+    "judged": true,
     "why": "보도자료 제목·제조업 반등 인용",
     "hits": [
      "산업:건설업",
@@ -5007,6 +5297,7 @@
     "press": "ggilbo.com",
     "pub": "2026-09-07 16:44",
     "cites": true,
+    "judged": true,
     "why": "서비스업 28만명 증가 등 세부수치",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -5024,6 +5315,7 @@
     "press": "newsfc.co.kr",
     "pub": "2026-09-07 16:50",
     "cites": true,
+    "judged": true,
     "why": "보도자료 인용해 제조업 반등",
     "hits": [
      "산업:건설업",
@@ -5040,6 +5332,7 @@
     "press": "mtnews.net",
     "pub": "2026-09-07 16:52",
     "cites": true,
+    "judged": true,
     "why": "제조업 2천명 증가 수치 인용",
     "hits": [],
     "tone": [],
@@ -5059,6 +5352,7 @@
     "press": "뉴스토마토",
     "pub": "2026-09-07 16:54",
     "cites": true,
+    "judged": true,
     "why": "청년 감소·구인배수 0.46 인용",
     "hits": [
      "산업:제조업",
@@ -5075,6 +5369,7 @@
     "press": "대한전문건설신문",
     "pub": "2026-09-07 17:02",
     "cites": true,
+    "judged": true,
     "why": "27만8천명 증가·건설업 37개월 감소",
     "hits": [
      "산업:건설업",
@@ -5090,6 +5385,7 @@
     "press": "vegannews.co.kr",
     "pub": "2026-09-07 17:10",
     "cites": true,
+    "judged": true,
     "why": "1590만5천명·27만8천명 증가",
     "hits": [
      "산업:제조업",
@@ -5104,6 +5400,7 @@
     "press": "남도일보",
     "pub": "2026-09-07 17:24",
     "cites": true,
+    "judged": true,
     "why": "제조업 고용 증가 전환 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -5123,6 +5420,7 @@
     "press": "kidd.co.kr",
     "pub": "2026-09-07 17:26",
     "cites": true,
+    "judged": true,
     "why": "27만8천명 증가·건설업 감소",
     "hits": [
      "산업:건설업",
@@ -5144,6 +5442,7 @@
     "press": "korea.kr",
     "pub": "2026-09-07 17:32",
     "cites": true,
+    "judged": true,
     "why": "제조업 384만7천명 2천명 증가",
     "hits": [
      "지표:가입자",
@@ -5158,6 +5457,7 @@
     "press": "한국경제",
     "pub": "2026-09-07 17:41",
     "cites": true,
+    "judged": true,
     "why": "청년층 48개월 감소·업종별 수치",
     "hits": [
      "연령:청년",
@@ -5176,6 +5476,7 @@
     "press": "kbmaeil.com",
     "pub": "2026-09-07 17:44",
     "cites": true,
+    "judged": true,
     "why": "보도자료 지역·업종별 수치 분석",
     "hits": [
      "산업:자동차",
@@ -5194,6 +5495,7 @@
     "press": "news2day.co.kr",
     "pub": "2026-09-07 17:48",
     "cites": true,
+    "judged": true,
     "why": "보도자료 제목 명시·가입자 증가",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -5210,6 +5512,7 @@
     "press": "ccdailynews.com",
     "pub": "2026-09-07 17:52",
     "cites": true,
+    "judged": true,
     "why": "제조업 15개월 만 반등 전함",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -5227,6 +5530,7 @@
     "press": "ktv.go.kr",
     "pub": "2026-09-07 19:00",
     "cites": true,
+    "judged": true,
     "why": "가입자 1.8% 증가·제조업 반등",
     "hits": [
      "산업:제조업",
@@ -5242,6 +5546,7 @@
     "press": "ggilbo.com",
     "pub": "2026-09-07 20:00",
     "cites": false,
+    "judged": true,
     "why": "여러 기사 묶은 오늘의 신문 모음",
     "hits": [],
     "tone": [],
@@ -5255,6 +5560,7 @@
     "press": "cctimes.kr",
     "pub": "2026-09-07 20:08",
     "cites": true,
+    "judged": true,
     "why": "건설업 74만2천명·연령별 수치",
     "hits": [
      "산업:반도체(전자·통신)",
@@ -5273,6 +5579,7 @@
     "press": "ulsanpress.net",
     "pub": "2026-09-07 21:42",
     "cites": true,
+    "judged": true,
     "why": "제조업 고용보험 가입자 15개월만 증가 전함",
     "hits": [
      "산업:자동차",

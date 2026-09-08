@@ -37,8 +37,15 @@ def _norm_title(t):
 
 
 def enrich(arts, verdicts, D, body):
-    """기사마다 판정·매칭항목·논조·밖키워드를 붙인다. 중복 제목은 하나로."""
-    v = {x['n']: x for x in verdicts}
+    """기사마다 판정·매칭항목·논조·밖키워드를 붙인다. 중복 제목은 하나로.
+
+    판정을 **제목으로** 잇는다. 번호로 이으면 재수집 때 조용히 어긋난다 —
+    네이버 검색 결과는 시간이 지나면 순서와 개수가 달라지므로, 같은 회차를
+    다시 긁는 순간 3번 기사의 판정이 5번 기사에 붙는다. 아무 에러도 안 난다.
+    번호는 제목이 없는 옛 판정 파일을 위한 폴백으로만 남긴다.
+    """
+    by_title = {_norm_title(x['title']): x for x in verdicts if x.get('title')}
+    by_n = {x['n']: x for x in verdicts}
     seen, out = set(), []
     for i, a in enumerate(arts, start=1):
         k = _norm_title(a['title'])
@@ -46,13 +53,15 @@ def enrich(arts, verdicts, D, body):
             continue
         seen.add(k)
         hits, tone, kw = analyze_title(a['title'], D, body)
-        got = v.get(i, {})
+        got = by_title.get(k) or (by_n.get(i, {}) if not by_title else {})
+        judged = bool(got)
         out.append({
             'title': a['title'],
             'url': a.get('originallink') or a.get('link') or '',
             'press': a['press'],
             'pub': a['pub'][:16],
             'cites': bool(got.get('cites')),
+            'judged': judged,
             'why': got.get('why', ''),
             'hits': ['%s:%s' % (axis, name) for axis, name in hits],
             'tone': tone,
@@ -313,5 +322,6 @@ def build_round(release, month, hwpx, reg, reg_v, fol=None, fol_v=None, prev_pre
         'new_press': sorted(press_now - set(prev_press or [])) if prev_press else [],
         'all_press': sorted(press_now),
         'truncated': reg.get('truncated_queries', []),
+        'unjudged': sum(1 for a in r_all + f_all if not a['judged']),
     }
     return summary, {'regular': r_all, 'follow': f_all}

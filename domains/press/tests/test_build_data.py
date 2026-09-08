@@ -123,3 +123,28 @@ def test_a_lone_reason_is_not_an_agenda():
 
 def test_rivals_are_empty_when_everything_cited():
     assert b.rivals([]) == []
+
+
+def test_verdicts_are_matched_by_title_not_by_position():
+    # 재수집하면 검색 결과의 순서와 개수가 달라진다. 번호로 이으면 3번 기사의
+    # 판정이 5번 기사에 붙고 아무 에러도 안 난다 — 조용한 오염이다.
+    arts = [{'title': '나중에 들어온 기사', 'press': 'A', 'pub': '2026-09-07 09:00',
+             'link': 'u0', 'desc': ''},
+            {'title': '고용보험 가입자 증가', 'press': 'B', 'pub': '2026-09-07 12:00',
+             'link': 'u1', 'desc': ''}]
+    verdicts = [{'n': 1, 'cites': True, 'why': '27만8천명', 'title': '고용보험 가입자 증가'}]
+    out = b.enrich(arts, verdicts, {}, '본문')
+    assert out[0]['cites'] is False and out[0]['judged'] is False
+    assert out[1]['cites'] is True and out[1]['why'] == '27만8천명'
+
+
+def test_old_verdict_files_without_titles_still_line_up_by_number():
+    arts = [{'title': 't1', 'press': 'A', 'pub': '', 'link': '', 'desc': ''},
+            {'title': 't2', 'press': 'B', 'pub': '', 'link': '', 'desc': ''}]
+    out = b.enrich(arts, [{'n': 2, 'cites': True}], {}, '본문')
+    assert out[1]['cites'] is True and out[0]['cites'] is False
+
+
+def test_an_article_with_no_verdict_is_marked_unjudged():
+    arts = [{'title': 't', 'press': 'A', 'pub': '', 'link': '', 'desc': ''}]
+    assert b.enrich(arts, [], {}, '본문')[0]['judged'] is False
