@@ -21,6 +21,10 @@ from .rationale import (_BULLET_MARKERS, _DUPLICATED_HANGUL,
 
 _WHITESPACE = re.compile(r"\s+")
 
+# 빈 줄 — 개행 두 개 사이에 공백만 있는 자리. pdf.text_with_paragraph_breaks
+# 가 문단 나눔에 넣는 표지이고, 감김(개행 하나)과 구별된다.
+_BLANK_LINE = re.compile(r"\n[^\S\n]*\n")
+
 # 마침표 대조만으로는 "문장 중간에서 시작하는 조각"을 못 잡는다 — 부분열
 # 검사는 위치를 가리지 않기 때문이다. 그래서 매치 시작 자리가 실제
 # 문장·항목의 머리인지 원문 좌표로 되짚어 확인한다(_starts_at_a_boundary).
@@ -208,4 +212,11 @@ def verify(candidate: str, source_page_text: str) -> str:
         raise Rejected("원문에 없다")
     if not _starts_at_a_boundary(source_page_text, index_map[pos]):
         raise Rejected("문장·항목이 시작하는 자리가 아닌 곳에서 시작한다")
+    span = source_page_text[index_map[pos]:index_map[pos + len(norm_candidate) - 1] + 1]
+    if _BLANK_LINE.search(span):
+        # 지어낸 문장은 아니지만 기관이 한 문장으로 말한 것도 아니다.
+        # 공백을 지우고 대조하므로 빈 줄을 건너뛴 후보도 부분열로 통과한다 —
+        # 시작 자리만 보고 끝을 안 보기 때문이다. 실측: KDI 2025-08 4쪽에서
+        # 물가 항목과 고용 항목이 한 근거로 붙어 저장됐다.
+        raise Rejected("여러 항목을 이어 붙였다(중간에 문단 나눔이 있다)")
     return candidate

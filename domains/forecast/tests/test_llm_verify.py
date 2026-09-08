@@ -248,3 +248,20 @@ def test_accepts_an_item_that_starts_after_a_blank_line():
 def test_still_rejects_a_fragment_starting_at_a_wrapped_line_without_a_blank_line():
     with pytest.raises(v.Rejected):
         v.verify("20만명으로 확대될 전망", FUSED)
+
+
+def test_rejects_a_candidate_that_welds_two_items_across_a_blank_line():
+    """지어낸 문장은 아니지만 기관이 한 문장으로 말한 것도 아니다. 실측:
+    KDI 2025-08 4쪽에서 물가 항목과 고용 항목이 한 근거로 붙어 저장됐다.
+    공백을 지우고 대조하므로 빈 줄을 건너뛴 후보도 부분열로 통과한다 —
+    시작 자리만 보고 끝을 안 보기 때문이다."""
+    welded = ("우리 경제는 반도체경기 호황에 힘입어 2027년에도 2.2% 성장할 전망 "
+              "취업자 수는 내수 개선세가 파급되면서 20만명으로 확대될 전망")
+    with pytest.raises(v.Rejected):
+        v.verify(welded, FUSED)
+
+
+def test_still_accepts_a_candidate_that_spans_an_ordinary_line_wrap():
+    """빈 줄이 아닌 줄바꿈 하나는 감김이다 — 막으면 안 된다."""
+    candidate = "우리 경제는 반도체경기 호황에 힘입어 2027년에도 2.2% 성장할 전망"
+    assert v.verify(candidate, FUSED) == candidate
