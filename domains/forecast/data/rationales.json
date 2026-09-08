@@ -1,29 +1,339 @@
 [
   {
+    "org": "KLI",
+    "published_at": "2023-05-19",
+    "indicator": "emp_change",
+    "text": "다만, 최근 고용증가폭이 서서히 둔화되고 있다는 점과 금리 및 물가 인상, 대외 경제 불확실성\n증가 등 경제적 불확실성이 시차를 두고 노동시장에 반영될 수 있어 내년의 고용성과는 예년\n수준보다 오히려 감소할 것으로 전망된다.",
+    "tags": [
+      "통화정책"
+    ],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=142698&seq=1",
+    "source_page": 1
+  },
+  {
+    "org": "KLI",
+    "published_at": "2023-05-19",
+    "indicator": "emp_rate",
+    "text": "글로벌 공급망 교란이 장기화되고, 미국의 기준금리 인상여파에 따른 내수 악화의 가능성\n이 적다고 볼 수는 없지만, 고용사정에 있어서는 여전히 침체되어 있는 대면서비스업 고용의\n반등 가능성이 존재하는 가운데, 비대면 고용의 증가세 지속, 재정지원의 효과 등이 반영되면서\n양호한 수준의 고용회복세를 이어갈 것으로 전망된다.",
+    "tags": [
+      "글로벌경기",
+      "내수",
+      "재정정책",
+      "통화정책"
+    ],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=142697&seq=1",
+    "source_page": 23
+  },
+  {
+    "org": "KLI",
+    "published_at": "2023-05-19",
+    "indicator": "unemp_rate",
+    "text": "실업률은 사실상 장기적으로도 가장 낮은 수\n준에 도달해 있어 향후 추가적으로 감소할 여력은 크지 않다.",
+    "tags": [],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=142698&seq=1",
+    "source_page": 3
+  },
+  {
+    "org": "KLI",
+    "published_at": "2023-08-14",
+    "indicator": "emp_change",
+    "text": "노동공급 측면에서는 고령층과 여성, 여성 중에서 30대 여성 취업자 수가 구조적인 요인으로서의 고용증가세를 보였고, 청년과 20~40대 남성이 경기와 함께 고용둔화 모습을 보였다.",
+    "tags": [
+      "인구구조"
+    ],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=143042&seq=1",
+    "source_page": 51
+  },
+  {
+    "org": "KLI",
+    "published_at": "2023-12-13",
+    "indicator": "emp_change",
+    "text": "그러나 올해 1~3분기, 그리고 10월까지의 강건한 노동시장 상황에 기반하여 고용이 조정되는 정도가 기존에 논의되었던 것보다 더 천천히 진행될 수 있을 수 있는 가능성을 이전보다 높게 고려하게 되었다.",
+    "tags": [],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=143542&seq=1",
+    "source_page": 41
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-02-14",
+    "indicator": "cpi",
+    "text": "소비자물가 상승률은 내수 증가세 둔화를 반영하여 기존 전망(2.6%)보다 소폭 낮은\n2.5%로 전망",
+    "tags": [
+      "내수"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=SI7ePpSkjvN7i9kNOU%2BYyQ%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-02-14",
+    "indicator": "emp_change",
+    "text": "내수 증가세 둔화에도 불구하고 30대 여성과 고령층의 노동공급 확대를 반영하여 취\n업자 수 증가폭은 기존 전망(21만명)과 유사한 22만명으로 예상됨.",
+    "tags": [
+      "내수",
+      "인구구조"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=SI7ePpSkjvN7i9kNOU%2BYyQ%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-02-14",
+    "indicator": "gdp_growth",
+    "text": "2024년 우리 경제는 소비와 투자의 증가세가 둔화되는 반면 수출 증가세는 확대되면서 기존 전망과 동일하게 2.2% 성장할 것으로 전망됨.",
+    "tags": [
+      "수출"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=SI7ePpSkjvN7i9kNOU%2BYyQ%3D%3D",
+    "source_page": 2
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-05-16",
+    "indicator": "cpi",
+    "text": "소비자물가 상승률은 2024년에는 내수 부진으로 2023년(3.6%)보다 낮은 2.6%를\n기록한 후, 2025년에는 물가안정목표 수준과 유사한 2.1%를 기록할 것으로 예상됨.",
+    "tags": [
+      "내수"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=ECRFSi6ZjSoJZkI%2Feu6tEA%3D%3D",
+    "source_page": 4
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-05-16",
+    "indicator": "emp_change",
+    "text": "생산가능인구가 지속적으로 감소하는 가운데 내수 부진이 반영되며 취업자 수 증가폭은\n2023년 33만명에서 2024년 24만명, 2025년 17만명으로 점차 축소될 전망",
+    "tags": [
+      "내수",
+      "인구구조"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=ECRFSi6ZjSoJZkI%2Feu6tEA%3D%3D",
+    "source_page": 4
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-05-16",
+    "indicator": "gdp_growth",
+    "text": "우리 경제는 2024년에 수출이 급증하면서 2.6% 성장한 후, 2025년에는 내수 부진은\n완화되겠으나 수출 증가세가 조정되면서 2.1% 성장할 전망",
+    "tags": [
+      "수출",
+      "내수"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=ECRFSi6ZjSoJZkI%2Feu6tEA%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-08-08",
+    "indicator": "cpi",
+    "text": "소비자물가 상승률은 내수 부진과 국제유가 하향 조정을 반영하여 기존 전망(2.6%) 보다 낮은 2.4%로 전망",
+    "tags": [
+      "내수",
+      "유가"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=iwRP2r0lNuG62oBxu%2FkhKg%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-08-08",
+    "indicator": "emp_change",
+    "text": "내수 부진을 반영하여 취업자 수 증가폭을 24만명에서 20만명으로 하향 조정",
+    "tags": [
+      "내수"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=iwRP2r0lNuG62oBxu%2FkhKg%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-08-08",
+    "indicator": "gdp_growth",
+    "text": "기존 전망에 비해 수출 증가세는 확대되는 반면, 민간소비와 설비투자의 회복은 지연 되면서 2024년 경제성장률은 기존 전망(2.6%)보다 낮은 2.5%로 전망됨.",
+    "tags": [
+      "수출",
+      "내수",
+      "설비투자"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=iwRP2r0lNuG62oBxu%2FkhKg%3D%3D",
+    "source_page": 2
+  },
+  {
+    "org": "KLI",
+    "published_at": "2024-10-04",
+    "indicator": "emp_change",
+    "text": "2분기 중에 급감한 취업자 증가폭은 건설업과 보건사회복지서비스업의 부진에서 기인한 바가 크며, 하반기에도 반등하기 어려울 것으로 보인다.",
+    "tags": [
+      "건설업고용"
+    ],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=144795&seq=1",
+    "source_page": 31
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-11-12",
+    "indicator": "cpi",
+    "text": "소비자물가 상승률은 수요 압력이 낮은 가운데, 국제유가도 하락하며 2024년(2.3%)보다 낮은 1.6% 상승하면서 물가안정목표를 하회할 전망",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=XyooFSHZitPoP94uAMRBkw%3D%3D",
+    "source_page": 4
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-11-12",
+    "indicator": "emp_change",
+    "text": "내수 회복세가 완만한 가운데, 생산가능인구 감소의 영향이 파급되며 취업자 수는 2024년(18만명)보다 축소된 14만명 증가할 것으로 예상됨.",
+    "tags": [
+      "내수",
+      "인구구조"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=XyooFSHZitPoP94uAMRBkw%3D%3D",
+    "source_page": 4
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-11-12",
+    "indicator": "gdp_growth",
+    "text": "2025년 우리 경제는 내수 부진이 점차 완화되겠으나, 수출 증가세가 둔화되면서 2024년(2.2%)보다 낮은 2.0% 성장할 전망",
+    "tags": [
+      "수출",
+      "내수"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=XyooFSHZitPoP94uAMRBkw%3D%3D",
+    "source_page": 1
+  },
+  {
+    "org": "KLI",
+    "published_at": "2024-12-30",
+    "indicator": "emp_change",
+    "text": "이러한 증가폭 둔화의 주요 원인으로는 경기둔화의 영향과 함께 인구효과와 정부 직접일자리사업 증가세의 둔화가 꼽힌다.",
+    "tags": [],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=145319&seq=1",
+    "source_page": 22
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-02-11",
+    "indicator": "cpi",
+    "text": "소비자물가는 낮은 수요 압력이 지속되면서 전년(2.3%)보다 낮은 1.6%의 상승률을 나타낼 전망",
+    "tags": [],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=J1VygJv4GPyl6Gn6c5xHlg%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-02-11",
+    "indicator": "emp_change",
+    "text": "생산가능인구가 감소하는 가운데 내수 회복도 완만한 수준에 그침에 따라 취업자 수는 전년(16만명)보다 낮은 10만명 내외의 증가에 그칠 것으로 예상됨.",
+    "tags": [
+      "내수",
+      "인구구조"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=J1VygJv4GPyl6Gn6c5xHlg%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-02-11",
+    "indicator": "gdp_growth",
+    "text": "2025년 우리 경제는 내수 부진이 완화되겠으나 수출 증가세가 둔화되면서 2024년(2.0%)보다 낮은 1.6% 증가할 전망",
+    "tags": [
+      "수출",
+      "내수"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=J1VygJv4GPyl6Gn6c5xHlg%3D%3D",
+    "source_page": 2
+  },
+  {
+    "org": "OECD",
+    "published_at": "2025-03-17",
+    "indicator": "cpi",
+    "text": "Projected inflation paths are generally higher than previously expected, with the impact of slower growth offset by the incorporation of new data and the gradual inflationary impact of tariff increases (Figure 7, Panel B).",
+    "tags": [
+      "통상정책"
+    ],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/03/oecd-economic-outlook-interim-report-march-2025_47a36021/89af4857-en.pdf",
+    "source_page": 18
+  },
+  {
+    "org": "OECD",
+    "published_at": "2025-03-17",
+    "indicator": "gdp_growth",
+    "text": "The imposition of new bilateral tariff rates and the associated increase in policy and geopolitical uncertainty will act as a drag, particularly on business investment and trade.",
+    "tags": [
+      "통상정책"
+    ],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/03/oecd-economic-outlook-interim-report-march-2025_47a36021/89af4857-en.pdf",
+    "source_page": 15
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-05-14",
+    "indicator": "cpi",
+    "text": "소비자물가는 경기 둔화 및 유가 하락으로 낮은 상승률을 지속할 것으로 전망",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=%2FxwjQYioi8mBMiV99xGqUQ%3D%3D",
+    "source_page": 4
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-05-14",
+    "indicator": "emp_change",
+    "text": "인구구조 변화가 지속적인 하방 압력으로 작용하는 가운데, 불확실성 증대에 따른 고용\n여건 악화로 취업자 수 증가폭은 작년 16만명에서 금년 9만명, 내년 7만명 수준으로\n축소될 전망",
+    "tags": [
+      "인구구조"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=%2FxwjQYioi8mBMiV99xGqUQ%3D%3D",
+    "source_page": 4
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-05-14",
+    "indicator": "gdp_growth",
+    "text": "이와 같은 대내외 여건을 고려할 때, 우리 경제는 통상 여건 악화에 따른 수출 부진으로\n성장세가 둔화될 전망",
+    "tags": [
+      "수출",
+      "통상정책"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=%2FxwjQYioi8mBMiV99xGqUQ%3D%3D",
+    "source_page": 2
+  },
+  {
     "org": "KDI",
     "published_at": "2025-08-12",
     "indicator": "cpi",
-    "text": "기존 전망에 비해 국제유가 전제와 민간소비 전망이 상향 조정됨에 따라 금년 소비자 물가와 근원물가 상승률을 각각 0.3%p, 0.1%p 상향 조정 인구구조 변화와 낮은 경제성장세로 인해 취업자 수 증가폭은 작년 16만명에서 금년 15만명, 내년 11만명 정도로 축소될 전망 기존 전망에 비해 정부 일자리 규모 및 고용과 밀접한 민간소비 전망이 상향 조정됨에 따라 금년 취업자 수 증가폭을 6만명 상향 조정",
-    "tags": [
-      "내수",
-      "인구구조",
-      "유가"
-    ],
+    "text": "소비자물가는 낮은 경제성장세에 따라 작년 2.3%에서 금년과 내년에 각각\n2.0%, 1.8% 정도로 상승세가 둔화될 전망",
+    "tags": [],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=lbNOcbJ6YPSL2%2FimIvIRog%3D%3D",
-    "source_page": 4
+    "source_page": 1
   },
   {
     "org": "KDI",
     "published_at": "2025-08-12",
     "indicator": "emp_change",
-    "text": "기존 전망에 비해 국제유가 전제와 민간소비 전망이 상향 조정됨에 따라 금년 소비자 물가와 근원물가 상승률을 각각 0.3%p, 0.1%p 상향 조정 인구구조 변화와 낮은 경제성장세로 인해 취업자 수 증가폭은 작년 16만명에서 금년 15만명, 내년 11만명 정도로 축소될 전망 기존 전망에 비해 정부 일자리 규모 및 고용과 밀접한 민간소비 전망이 상향 조정됨에 따라 금년 취업자 수 증가폭을 6만명 상향 조정",
+    "text": "인구구조 변화와 낮은 경제성장세로 인해 취업자 수 증가폭은 작년 16만명에서\n금년 15만명, 내년 11만명 정도로 축소될 전망",
     "tags": [
-      "내수",
-      "인구구조",
-      "유가"
+      "인구구조"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=lbNOcbJ6YPSL2%2FimIvIRog%3D%3D",
-    "source_page": 4
+    "source_page": 1
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-08-12",
+    "indicator": "gdp_growth",
+    "text": "우리 경제는 2025년에 건설투자 부진에 주로 기인하여 0.8% 성장하는 데 그친 후, 2026년에는 수출 부진에도 불구하고 내수가 완만하게 회복되면서 1.6% 성장할 전망",
+    "tags": [
+      "수출",
+      "내수",
+      "건설투자"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=lbNOcbJ6YPSL2%2FimIvIRog%3D%3D",
+    "source_page": 1
   },
   {
     "org": "KLI",
@@ -35,6 +345,71 @@
     ],
     "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=146724&seq=1",
     "source_page": 24
+  },
+  {
+    "org": "OECD",
+    "published_at": "2025-09-23",
+    "indicator": "cpi",
+    "text": "Aggregate consumer price inflation for the G20 countries is expected to decline as economic growth and labour markets ease (Figure 8, Panel B).",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/09/oecd-economic-outlook-interim-report-september-2025_ae3d418b/67b10c01-en.pdf",
+    "source_page": 17
+  },
+  {
+    "org": "OECD",
+    "published_at": "2025-09-23",
+    "indicator": "gdp_growth",
+    "text": "Growth is expected to soften noticeably in the second half of this year, as front-loading activity unwinds and higher effective tariff rates on imports to the United States and China dampen investment and trade growth.",
+    "tags": [
+      "통상정책"
+    ],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/09/oecd-economic-outlook-interim-report-september-2025_ae3d418b/67b10c01-en.pdf",
+    "source_page": 16
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-11-11",
+    "indicator": "cpi",
+    "text": "소비자물가는 내수가 회복되겠으나, 국제유가는 하락함에 따라 금년(2.1%)과 유사한 2.0% 정도 상승할 전망",
+    "tags": [
+      "내수",
+      "유가"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=mU4SZU%2F0gWSawfrzWKLCpA%3D%3D",
+    "source_page": 4
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-11-11",
+    "indicator": "emp_change",
+    "text": "내수 회복세에 따라 고용 여건도 완만하게 개선될 것으로 예상되나, 인구구조 변화의 영향으로 취업자 수는 금년(17만명)보다 축소된 15만명 정도 증가할 전망",
+    "tags": [
+      "내수",
+      "인구구조"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=mU4SZU%2F0gWSawfrzWKLCpA%3D%3D",
+    "source_page": 4
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-11-11",
+    "indicator": "gdp_growth",
+    "text": "2026년 우리 경제는 수출이 둔화되겠으나, 내수가 회복세를 나타내며 1.8% 정도 성장할 전망",
+    "tags": [
+      "수출",
+      "내수"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=mU4SZU%2F0gWSawfrzWKLCpA%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-11-11",
+    "indicator": "unemp_rate",
+    "text": "실업률은 구조적 요인에 주로 기인하여 2.8%의 낮은 수준을 유지할 전망",
+    "tags": [],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=mU4SZU%2F0gWSawfrzWKLCpA%3D%3D",
+    "source_page": 4
   },
   {
     "org": "KEIS",
@@ -55,6 +430,98 @@
     "source_page": 24
   },
   {
+    "org": "KDI",
+    "published_at": "2026-02-11",
+    "indicator": "cpi",
+    "text": "소비자물가는 국제유가 하락에도 불구하고 소비 회복세에 따라 전년에 이어 2.1% 정도\n상승할 전망",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=360DkHhQV2Udsh1Tgu%2BHeQ%3D%3D",
+    "source_page": 4
+  },
+  {
+    "org": "KDI",
+    "published_at": "2026-02-11",
+    "indicator": "emp_change",
+    "text": "경기 회복세에도 불구하고 생산가능인구가 지속적으로 감소하면서 취업자 수는 전년\n(19만명)보다 축소된 17만명 정도 증가할 전망",
+    "tags": [
+      "인구구조"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=360DkHhQV2Udsh1Tgu%2BHeQ%3D%3D",
+    "source_page": 4
+  },
+  {
+    "org": "KDI",
+    "published_at": "2026-02-11",
+    "indicator": "gdp_growth",
+    "text": "이러한 대내외 여건을 고려할 때, 향후 우리 경제는 미국 관세 인상과 건설투자 회복\n지연에도 불구하고 반도체수출 호조세와 소비 회복세로 성장세가 다소 확대될 전망",
+    "tags": [
+      "수출",
+      "통상정책",
+      "건설투자"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=360DkHhQV2Udsh1Tgu%2BHeQ%3D%3D",
+    "source_page": 2
+  },
+  {
+    "org": "OECD",
+    "published_at": "2026-03-26",
+    "indicator": "cpi",
+    "text": "Aggregate consumer price inflation for the G20 countries will be markedly higher than previously expected in 2026, mostly owing to the increase in global energy prices.",
+    "tags": [
+      "글로벌경기"
+    ],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/03/oecd-economic-outlook-interim-report-march-2026_254a8d56/d4623013-en.pdf",
+    "source_page": 20
+  },
+  {
+    "org": "OECD",
+    "published_at": "2026-03-26",
+    "indicator": "gdp_growth",
+    "text": "The energy price surge and the unpredictable nature of the evolving conflict in the Middle East will raise costs and lower demand, offsetting the tailwinds from strong technology-related investment and production, lower effective tariff rates and the momentum carried over from 2025.",
+    "tags": [
+      "통상정책"
+    ],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/03/oecd-economic-outlook-interim-report-march-2026_254a8d56/d4623013-en.pdf",
+    "source_page": 6
+  },
+  {
+    "org": "KDI",
+    "published_at": "2026-05-13",
+    "indicator": "cpi",
+    "text": "소비자물가는 국제유가 상승에 경기 회복세가 더해지면서 금년에 2.7% 정도 상승한 후,\n내년에는 국제유가 하락에 따라 2.2% 정도로 상승폭이 일부 축소될 전망",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=2PGfm9R3%2Bsq%2Fbzo5hJt4%2Fw%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2026-05-13",
+    "indicator": "emp_change",
+    "text": "인구구조 변화에도 불구하고 내수 회복세로 취업자 수는 금년과 내년에 각각 17만명\n증가하며 완만한 고용 개선세를 유지할 전망",
+    "tags": [
+      "내수",
+      "인구구조"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=2PGfm9R3%2Bsq%2Fbzo5hJt4%2Fw%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2026-05-13",
+    "indicator": "gdp_growth",
+    "text": "우리 경제는 2026년에 반도체수출 호조세와 내수 개선세로 2.5% 정도 성장한 후,\n2027년에도 1.7% 수준의 성장을 나타낼 전망",
+    "tags": [
+      "수출",
+      "내수"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=2PGfm9R3%2Bsq%2Fbzo5hJt4%2Fw%3D%3D",
+    "source_page": 3
+  },
+  {
     "org": "KEIS",
     "published_at": "2026-08-03",
     "indicator": "emp_change",
@@ -66,5 +533,38 @@
     ],
     "source_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20260803024446542.pdf&path=pblc&fn=%EA%B3%A0%EC%9A%A9%EB%8F%99%ED%96%A5%EB%B8%8C%EB%A6%AC%ED%94%84+2026%EB%85%84+%EC%A0%9C5%ED%98%B8.pdf&sn=11349&fsn=22677&ty=P",
     "source_page": 20
+  },
+  {
+    "org": "KDI",
+    "published_at": "2026-08-19",
+    "indicator": "cpi",
+    "text": "소비자물가는 국제유가 상승과 경기 개선으로 금년 2.7% 상승한 후, 내년에는 국제유가 안정으로 2.2% 상승할 전망",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=t0ttotGKwxjCSAgCQUEjRA%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2026-08-19",
+    "indicator": "emp_change",
+    "text": "취업자 수는 금년 11만명 증가한 후, 내년에는 내수 개선세가 파급되면서 증가폭이 기저효과를 동반하여 20만명으로 확대될 전망",
+    "tags": [
+      "내수"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=t0ttotGKwxjCSAgCQUEjRA%3D%3D",
+    "source_page": 3
+  },
+  {
+    "org": "KDI",
+    "published_at": "2026-08-19",
+    "indicator": "gdp_growth",
+    "text": "우리 경제는 글로벌 반도체경기 호황에 힘입어 2026년 3.2%의 높은 성장률을 기록한 뒤, 2027년에도 2.2% 성장할 전망",
+    "tags": [
+      "글로벌경기"
+    ],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=t0ttotGKwxjCSAgCQUEjRA%3D%3D",
+    "source_page": 1
   }
 ]
