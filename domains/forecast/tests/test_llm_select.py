@@ -256,3 +256,38 @@ def test_call_api_raises_a_named_error_when_the_content_is_null(monkeypatch):
     with pytest.raises(ValueError) as e:
         s._call_api("x")
     assert "length" in str(e.value)   # 본문을 실어 보내 원인을 알 수 있어야 한다
+
+
+def test_parse_reads_an_array_behind_a_bare_json_prefix():
+    """실측: 백틱 없이 "json" 한 줄만 앞에 붙어 온 회차가 있었다(BOK 2026년
+    5월). 형식이 실행마다 흔들리는데 그때마다 그 회차가 통째로 죽었다."""
+    body = 'json\n[{"indicator": "cpi", "text": "가", "source_page": 2}]'
+    assert s.parse_response(body) == [s.Picked("cpi", "가", 2)]
+
+
+def test_parse_reads_an_array_behind_a_sentence():
+    body = '다음과 같습니다:\n\n[{"indicator": "cpi", "text": "가", "source_page": 2}]'
+    assert s.parse_response(body) == [s.Picked("cpi", "가", 2)]
+
+
+def test_parse_still_raises_when_there_is_no_array_at_all():
+    with pytest.raises(ValueError):
+        s.parse_response("죄송합니다, 근거를 찾지 못했습니다.")
+
+
+def test_call_api_pins_the_temperature_so_reruns_reproduce(monkeypatch):
+    """정하지 않으면 기본 샘플링이라 같은 입력에 매번 다른 답이 온다 —
+    쪽번호가 24와 23 사이를 오갔고, 응답 형식조차 실행마다 달랐다(백틱 없는
+    "json" 접두어로 한 회차가 죽었다). 실측: temperature 0 이면 같은 입력에
+    글자까지 같은 답이 온다(2회 확인, 추론을 켠 채로도 받아들여진다)."""
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test-key")
+    captured = {}
+
+    def fake_post(url, headers=None, json=None, timeout=None):
+        captured.update(json)
+        return _FakeResponse(200, {"content": [{"text": "가"}]})
+
+    monkeypatch.setattr(s.requests, "post", fake_post)
+    s._call_api("x")
+
+    assert captured["temperature"] == 0

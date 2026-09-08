@@ -522,6 +522,18 @@
     "source_page": 3
   },
   {
+    "org": "BOK",
+    "published_at": "2026-05-28",
+    "indicator": "emp_change",
+    "text": "취업자수는 중동전쟁의 부정적 영향에도 추경 효과 등이 이를 완충하는 데다 돌봄 관련 일자리도 당초 예상보다 늘어남에 따라 지난 전망을 소폭 상회하겠다.",
+    "tags": [
+      "재정정책",
+      "돌봄일자리"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/411de844aef442e7ad07896b7bbe2eef/1/4e0f66601a6a4f95ac4164f9286de537.pdf",
+    "source_page": 11
+  },
+  {
     "org": "KEIS",
     "published_at": "2026-08-03",
     "indicator": "emp_change",
@@ -566,5 +578,14 @@
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=t0ttotGKwxjCSAgCQUEjRA%3D%3D",
     "source_page": 1
+  },
+  {
+    "org": "BOK",
+    "published_at": "2026-08-27",
+    "indicator": "cpi",
+    "text": "금년중 소비자물가는 비용충격의 전이가 지속되고 수요압력도 점차 확대됨에 따라 2.7% 상승할 것으로 예상된다.",
+    "tags": [],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/dfe965a8e38a4e4b9fd1a6989a7ee18e/1/d8feb2de24a34fe38ef9db25182c8b05.pdf",
+    "source_page": 11
   }
 ]

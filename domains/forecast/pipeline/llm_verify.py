@@ -15,9 +15,10 @@
 from __future__ import annotations
 
 import re
+import unicodedata
+from typing import Sequence
 
-from .rationale import (_BULLET_MARKERS, _DUPLICATED_HANGUL,
-                         _MAX_RATIONALE_LENGTH, _WRAP_BOUNDARY_MARKERS)
+from .rationale import _DUPLICATED_HANGUL, _MAX_RATIONALE_LENGTH
 
 _WHITESPACE = re.compile(r"\s+")
 
@@ -29,60 +30,33 @@ _BLANK_LINE = re.compile(r"\n[^\S\n]*\n")
 # 검사는 위치를 가리지 않기 때문이다. 그래서 매치 시작 자리가 실제
 # 문장·항목의 머리인지 원문 좌표로 되짚어 확인한다(_starts_at_a_boundary).
 #
-# 표지 집합은 rationale.py 가 이미 실측으로 확정해 둔 두 개
-# (_BULLET_MARKERS · _WRAP_BOUNDARY_MARKERS)의 합집합을 그대로 쓴다 — 이
-# 모듈은 후보가 어느 수집 경로(OCR 인 KEIS 대 텍스트 레이어가 있는 나머지
-# 여섯 기관)에서 왔는지 모르므로 두 집합을 가리지 않고 합쳐 받는다.
-#
-# ')' 는 여기 넣지 않는다 — rationale.py 어디에도 ')' 단독을 항목 표지로
-# 쓴 적이 없고, 이 코퍼스에서 ')' 는 "1)"처럼 번호 뒤에 올 때만 항목의
-# 일부다(괄호 안 예시 "가격(예: 100원)"처럼 그냥 닫는 괄호로 훨씬 자주
-# 쓰인다). 번호 붙은 항목은 아래 _ITEM_PREFIX 로 따로 잡는다.
-_START_BOUNDARY_MARKERS = frozenset(_BULLET_MARKERS) | frozenset(_WRAP_BOUNDARY_MARKERS)
+# 표지를 목록으로 두지 않는다. 목록은 유한한데 기관마다 새 기호가 나와
+# 그때마다 그 항목의 근거가 통째로 거절됐다(실측: BOK 의 ▢ U+25A2·▪ U+25AA,
+# 그리고 글꼴이 매핑 못 한 사설영역 글자들). 대신 "줄머리에서 글자가
+# 시작하기 전까지의 기호 무리" 로 본다 — 무엇이 오든 걸린다.
 
 # 문장 종결부호 — 이 뒤에서 새 문장이 시작한다. 국문 보고서 불릿은 종종
 # 마침표 없이 끝나므로(예: "…지속될 것으로 예상") 끝은 검사하지 않는다 —
 # 시작만 검사한다. 잘린 머리(주어 없는 인용)가 이 프로젝트가 실제로 본
-# 실패 모양이다. 종결부호는 줄 첫머리가 아니라 어디에 있어도 문장을 끝낸다
-# — 그래서 아래 표지·번호 판정과 달리 줄 시작 제약을 받지 않는다.
+# 실패 모양이다. 종결부호는 줄 첫머리가 아니라 어디에 있어도 문장을 끝낸다.
 #
 # 다만 '.' 는 문장 종결부호이자 소수점이다. 숫자가 마침표에 딱 붙어
 # 있을 때만 소수점으로 보는 좁은 판정으로는 부족하다 — pdfplumber 가
-# 남긴 원문은 소수점 한가운데로 줄이 감겨("성장률은 3.\n5%…") 마침표와
-# 숫자 사이에 개행이 낄 수도, 반대쪽으로 감겨("성장률은 3\n.5%…") 숫자
-# 쪽에 개행이 낄 수도 있다. 이 모듈은 원문을 고치지 않고 pdfplumber 가
-# 남긴 그대로를 보므로, 앞뒤 모두 공백(개행 포함)을 건너뛰고 그다음
-# 문자가 숫자인지 보는 별도 판정(_looks_like_a_decimal_point)을 따로
-# 둔다 — 이 모듈이 애초에 공백을 무시하는 이유(엉뚱한 공백)와 같은
-# 현상이다.
+# 남긴 원문은 소수점 한가운데로 줄이 감길 수 있다.
+# 그래서 앞뒤 모두 공백을 건너뛰고 판정한다(_looks_like_a_decimal_point).
 _SENTENCE_TERMINATORS = frozenset(".。")
 
-# 표지 문자는 줄의 첫 내용일 때만 인정한다 — 표지 문자가 줄 어디에 있어도
-# 인정하면 "-" 는 음수 부호와, ")" 는 여는 괄호를 닫는 자리와 구별이 안
-# 된다(실측: "성장률은 -0.3%p 감소했다고 밝혔다" 에서 "-" 뒤부터, "가격
-# (예: 100원) 상승이 예상된다" 에서 ")" 뒤부터 시작하는 조각이 그대로
-# 통과해 버렸다 — 둘 다 주어 잘린 조각이다). 그래서 표지는 "그 줄의 첫
-# 내용"일 때만 인정한다: 줄 시작(직전 개행 또는 원문 시작)부터 매치
-# 자리까지가 공백과 항목 표지 하나(또는 번호 붙은 괄호 표지)뿐이어야 한다.
-#
-# 줄 첫머리로 좁힌 것만으로는 부족하다 — pdfplumber 는 배치 위치로 줄을
-# 감으므로, 음수로 시작하는 줄("…늘어\n-0.3%p 낮아질…")도 마이너스 부호로
-# 시작하는 줄만큼 있을 법하다. 실측: "-0.3%p" 처럼 표지 문자 바로 뒤에
-# 숫자가 붙으면 통과해 버렸다(줄 첫머리라는 조건만 봤을 뿐 표지 자체가
-# 진짜 불릿인지는 안 봤다). '=' 도 _WRAP_BOUNDARY_MARKERS 를 통해 같은
-# 모양이다("=2026년…"). 그래서 "실제 불릿은 항상 뒤에 공백이 오고,
-# '-0.3' 은 절대 그렇지 않다"는 사실을 그대로 규칙으로 쓴다 — 표지 문자
-# 하나만 있는 갈래는 뒤에 공백이 하나 이상 와야 인정한다. 번호 붙은
-# 괄호 표지("1)")는 그대로 둔다 — 그쪽은 표지 자체가 숫자+')' 형태라
-# 애초에 음수·괄호 닫기와 헷갈릴 자리가 아니다.
-#
-# 번호 표지는 ')' 붙은 것만 여기서 잡는다("1)"). '.' 붙은 번호("3.")는
-# 넣지 않는다 — 그 마침표는 위 _SENTENCE_TERMINATORS 와
-# _looks_like_a_decimal_point 가 이미 소수점과 가려 가며 다룬다. 여기 또
-# 넣으면 "3.5" 같은 소수점을 문장 종결부호 쪽에서는 막아 놓고 항목 표지
-# 쪽에서 도로 통과시키는 두 규칙 불일치가 생긴다.
-_marker_class = "".join(re.escape(ch) for ch in sorted(_START_BOUNDARY_MARKERS))
-_ITEM_PREFIX = re.compile(rf"\s*(?:[{_marker_class}]\s+|\d+\)\s*)")
+# 글자 — 한글·영숫자. 이것이 나오기 전까지는 아직 항목 내용이 아니다.
+_WORDLIKE = re.compile(r"[0-9A-Za-z가-힣]")
+
+# 번호 붙은 항목("1)"). 숫자를 쓰므로 위 기호 무리 규칙에 안 걸려 따로 둔다.
+# '.' 붙은 번호("3.")는 넣지 않는다 — 그 마침표는 _SENTENCE_TERMINATORS 와
+# _looks_like_a_decimal_point 가 이미 소수점과 가려 가며 다룬다.
+_NUMBERED_ITEM = re.compile(r"\s*\d+\)\s*")
+
+# 후보가 표지를 스스로 물고 오는 경우("ㅇ 소비가…")를 위해, pos 자리에서
+# 시작하는 기호 무리를 본다.
+_LEADING_MARKERS = re.compile(r"[^\s0-9A-Za-z가-힣]+\s*")
 
 
 class Rejected(Exception):
@@ -91,6 +65,16 @@ class Rejected(Exception):
     def __init__(self, reason: str) -> None:
         super().__init__(reason)
         self.reason = reason
+
+
+def _is_private_use(ch: str) -> bool:
+    """사설영역(U+E000–U+F8FF) 글자인가.
+
+    글꼴이 유니코드로 안 매핑해 남은 자국이라 뜻이 없다. 실측(BOK 2026년
+    8월호): U+E0F8 이 30줄, U+F000 이 25줄. 모델은 이런 글자를 옮겨 적지
+    않으므로 원문에만 남아 대조를 깨뜨린다 — 양쪽에서 지우고 본다.
+    """
+    return "\ue000" <= ch <= "\uf8ff"
 
 
 def _normalize_with_index(s: str) -> tuple[str, list[int]]:
@@ -104,8 +88,15 @@ def _normalize_with_index(s: str) -> tuple[str, list[int]]:
     chars: list[str] = []
     index_map: list[int] = []
     for i, ch in enumerate(s):
-        if not ch.isspace():
-            chars.append(ch)
+        if ch.isspace() or _is_private_use(ch):
+            continue
+        # 글자 단위로 NFKC 를 건다 — 문자열 통째로 걸면 글자 수가 바뀌어
+        # index_map 이 원문 좌표를 잃는다. 이걸로 전각·호환 문자는 잡히지만
+        # 자모가 풀린 한글(ㄱ+ㅏ)까지 모으지는 못한다. 이 코퍼스에서는 늘
+        # 모아진 채로 나와 문제가 안 됐다 — 그렇지 않은 문서를 만나면
+        # 여기가 아니라 추출 단계에서 다뤄야 한다.
+        for out in unicodedata.normalize("NFKC", ch):
+            chars.append(out)
             index_map.append(i)
     return "".join(chars), index_map
 
@@ -146,32 +137,52 @@ def _looks_like_a_decimal_point(source: str, i: int) -> bool:
     return k >= 0 and source[k].isdigit() and j < len(source) and source[j].isdigit()
 
 
+def _is_marker_run(prefix: str) -> bool:
+    """줄머리부터 여기까지가 '글자 없는 기호 무리' 인가.
+
+    비어 있으면 아니다 — 줄머리라는 것만으로는 항목 시작이 아니고, 감긴
+    줄도 줄머리이기 때문이다.
+
+    마침표류는 기호로 세지 않는다. pdfplumber 가 소수점 한가운데로 줄을
+    감으면 줄머리가 "." 로 시작한다 — 소수점이 다음 줄로 넘어간 자리다.
+    그것을 표지로 보면 "5% 상승할 전망" 이라는 머리 잘린 조각이 통과한다.
+    그것을 표지로 보면 "5% 상승할 전망" 이라는 머리 잘린 조각이 통과한다.
+    마침표는 위 종결부호 판정이 이미 소수점과 가려 가며 다루므로, 여기까지
+    내려왔다는 것은 그 마침표가 소수점이었다는 뜻이다.
+    """
+    symbols = [ch for ch in prefix
+               if not ch.isspace() and ch not in _SENTENCE_TERMINATORS]
+    return bool(symbols) and not _WORDLIKE.search(prefix)
+
+
+def _marker_allows(prefix: str, following: str) -> bool:
+    """기호 무리 뒤가 항목 내용인가, 아니면 그 기호가 숫자의 일부인가.
+
+    실측으로 막아야 했던 것은 둘뿐이다: 줄머리 음수("-0.3%p 낮아질")와
+    줄머리 등호("=2026년"). 둘 다 기호가 숫자에 **딱 붙어** 있다. 진짜
+    글머리표는 뒤에 공백이 오거나("▢ 2026년 성장률은"), 공백 없이 붙더라도
+    그 뒤가 글자다("▪견조한"). 그래서 "공백 없이 붙은 채 숫자가 뒤따르면
+    표지가 아니다" 하나로 가른다 — 기호 목록을 들지 않고도 갈린다.
+    """
+    if prefix and prefix[-1].isspace():
+        return True
+    return not following[:1].isdigit()
+
+
 def _starts_at_a_boundary(source: str, pos: int) -> bool:
     """source[pos] 가 문장·항목이 시작하는 자리인가.
 
-    세 판정은 성격이 다르다.
-
-    - **문장 종결부호**는 pos 바로 앞(공백은 건너뛴다)에 있으면 줄 어디서든
-      인정한다 — 마침표는 그 자리에 있는 것만으로 문장이 끝났다는 뜻이라
-      줄 시작일 필요가 없다. 단, 그 마침표가 소수점이면 인정하지 않는다
-      (_looks_like_a_decimal_point).
-    - **항목 표지·번호가 pos 앞에 있는 경우**는 그 줄의 첫 내용일 때만
-      인정한다. 줄 안 아무 데서나 인정하면 "-" 는 음수 부호와, ")" 는
-      여는 괄호를 닫는 자리와 구별이 안 된다(_ITEM_PREFIX 옆 주석의 실측
-      참고).
-    - **항목 표지·번호가 pos 자체에서 시작하는 경우**도 인정한다 — LLM 이
-      표지까지 포함해 후보를 돌려줄 수 있다("ㅇ 소비가…"). 이때는 pos
-      바로 앞을 봐도 소용없다: 그 자리는 앞 줄의 마지막 글자인데, 국문
-      보고서 불릿은 마침표 없이 끝나는 게 보통이라(_SENTENCE_TERMINATORS
-      옆 주석 참고) 앞을 보는 판정으로는 표지 자체를 절대 못 찾는다.
-      그래서 pos 앞이 아니라 pos 부터 뒤로 _ITEM_PREFIX 가 매치하는지
-      보되, 그 줄에서 pos 앞쪽에 표지 말고 다른 내용이 없을 때만
-      허용한다(줄 중간에 우연히 표지 모양이 나온 자리를 항목 시작으로
-      오인하지 않기 위해서다).
-
-    이 목록 밖의 "문장처럼 보인다"는 어떤 짐작도 하지 않는다 — 표지
-    집합을 실측 없이 넓히면 다음에 그 짐작이 하나씩 틀린다(_BULLET_MARKERS
-    옆 주석과 같은 이유).
+    - **빈 줄**이 앞에 있으면 문단 나눔이다(pdf.text_with_paragraph_breaks 가
+      세로 간격을 보고 넣는다). 표지도 마침표도 없이 간격으로만 갈리는
+      항목이 있어서(KDI 요약 쪽) 이것이 없으면 그 근거가 통째로 빈 칸이 된다.
+    - **문장 종결부호**가 앞에 있으면(공백은 건너뛴다) 줄 어디서든 인정한다.
+      단 그 마침표가 소수점이면 아니다.
+    - **기호 무리**가 그 줄의 첫 내용이면 글머리표로 본다. 줄 안 아무 데서나
+      인정하면 "가격(예: 100원) 상승이" 의 ')' 뒤부터 시작하는 조각이
+      통과한다 — 그래서 줄머리로 좁힌다.
+    - **후보가 표지를 스스로 포함하는 경우**도 인정한다("ㅇ 소비가…").
+      이때 pos 앞은 앞 줄의 마지막 글자인데, 국문 불릿은 마침표 없이
+      끝나는 게 보통이라 앞을 보는 판정으로는 표지를 못 찾는다.
     """
     i = pos - 1
     newlines = 0
@@ -182,19 +193,57 @@ def _starts_at_a_boundary(source: str, pos: int) -> bool:
     if i < 0:
         return True
     if newlines >= 2:
-        # 빈 줄은 문단 나눔이다 — pdf.text_with_paragraph_breaks 가 세로
-        # 간격을 보고 넣는다. 표지도 마침표도 없이 간격으로만 갈리는 항목이
-        # 있어서(KDI 요약 쪽), 그 자리를 여기서 인정하지 않으면 그 기관의
-        # 가장 깨끗한 근거 한 줄이 통째로 빈 칸으로 남는다. 빈 줄이 없는
-        # 줄바꿈 하나는 여전히 경계가 아니다 — 감긴 줄과 구별되지 않는다.
         return True
     if source[i] in _SENTENCE_TERMINATORS and not _looks_like_a_decimal_point(source, i):
         return True
+
     line_start = source.rfind("\n", 0, pos) + 1
     prefix = source[line_start:pos]
-    if _ITEM_PREFIX.fullmatch(prefix) is not None:
+    if _NUMBERED_ITEM.fullmatch(prefix):
         return True
-    return not prefix.strip() and _ITEM_PREFIX.match(source, pos) is not None
+    if _is_marker_run(prefix) and _marker_allows(prefix, source[pos:]):
+        return True
+    if not prefix.strip():
+        own = _LEADING_MARKERS.match(source, pos)
+        if own and _marker_allows(own.group(), source[own.end():]):
+            return True
+    return False
+
+
+def verify_in_pages(candidate: str, pages: Sequence[str],
+                    hinted_page: int | None = None) -> tuple[str, int]:
+    """후보가 실제로 실린 쪽을 찾아 (문장, 1부터 세는 쪽번호) 를 준다.
+
+    모델이 댄 쪽번호를 믿지 않는다 — 맞는 문장을 찾고도 쪽을 틀리게 대고,
+    같은 회차를 다시 돌리면 다른 번호가 나온다(실측: BOK 2026년 8월호에서
+    cpi 를 8쪽이라 했으나 11쪽, emp_change 를 23쪽이라 했으나 39쪽. KLI
+    2026-01-02 은 24와 23 사이를 오갔다). 그 흔들림 때문에 원문에 실재하는
+    문장이 "원문에 없다"로 버려졌다.
+
+    보증은 약해지지 않는다. 여전히 문장이 원문에 실재해야 하고 항목 시작
+    자리여야 한다 — 바뀐 것은 **어느 쪽인지를 모델에게 묻지 않는다**는 것
+    뿐이고, 그 결과 저장되는 인용 쪽번호는 오히려 정확해진다.
+
+    쪽 차례는 힌트부터 본다. 같은 문장이 여러 쪽에 실렸을 때(BOK 은 개관과
+    상세장이 같은 문장을 쓴다) 모델이 본 쪽을 그대로 두는 편이 인용으로
+    자연스럽고, 실행마다 쪽번호가 달라지지도 않는다.
+    """
+    order = []
+    if hinted_page is not None and 0 < hinted_page <= len(pages):
+        order.append(hinted_page)
+    order += [n for n in range(1, len(pages) + 1) if n not in order]
+
+    other: Rejected | None = None
+    for page_no in order:
+        try:
+            return verify(candidate, pages[page_no - 1]), page_no
+        except Rejected as exc:
+            # "원문에 없다" 는 이 쪽에 없다는 뜻일 뿐이다 — 모든 쪽을 다 본
+            # 뒤에야 결론이 된다. 다른 사유는 그 쪽에 문장이 실재한다는
+            # 뜻이므로 그대로 전한다(사람이 원인을 헷갈리지 않게).
+            if exc.reason != "원문에 없다" and other is None:
+                other = exc
+    raise other or Rejected("원문에 없다")
 
 
 def verify(candidate: str, source_page_text: str) -> str:

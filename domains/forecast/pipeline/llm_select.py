@@ -27,6 +27,13 @@ MODEL_OPENROUTER = "anthropic/claude-sonnet-5"
 # 중간에 잘리거나 content 가 통째로 비어 온다. 상한일 뿐이라 넉넉히 잡아도
 # 실제로 쓴 만큼만 청구된다.
 MAX_TOKENS = 8000
+
+# 정하지 않으면 기본 샘플링이라 같은 입력에 매번 다른 답이 온다 — 쪽번호가
+# 24와 23 사이를 오갔고, 응답 형식조차 흔들려 한 회차가 통째로 죽었다
+# (백틱 없는 "json" 접두어). 재실행이 "다시 굴리기" 가 아니라 "재현" 이어야
+# 사람이 결과를 믿고 읽을 수 있다. 실측: 0 이면 같은 입력에 글자까지 같은
+# 답이 오고(2회), 추론(thinking)을 켠 채로도 받아들여진다.
+TEMPERATURE = 0
 TIMEOUT = 120
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)\s*```", re.S)
@@ -80,7 +87,17 @@ def parse_response(body: str) -> list[Picked]:
     try:
         rows = json.loads(text)
     except json.JSONDecodeError as exc:
-        raise ValueError(f"응답을 JSON 으로 읽지 못했다: {body[:200]}") from exc
+        # 형식이 실행마다 흔들린다. 실측: 백틱 없이 "json" 한 줄만 앞에 붙어
+        # 온 회차가 있었다(BOK 2026년 5월) — 그때 그 회차가 통째로 죽었다.
+        # 배열의 바깥 괄호를 찾아 한 번 더 본다. 배열이 아예 없으면 그대로
+        # 세운다 — 무엇이든 읽어내려 하면 지어낸 근거를 통과시키게 된다.
+        start, end = text.find("["), text.rfind("]")
+        if start == -1 or end < start:
+            raise ValueError(f"응답을 JSON 으로 읽지 못했다: {body[:200]}") from exc
+        try:
+            rows = json.loads(text[start:end + 1])
+        except json.JSONDecodeError:
+            raise ValueError(f"응답을 JSON 으로 읽지 못했다: {body[:200]}") from exc
     if not isinstance(rows, list):
         raise ValueError(f"배열이 아니다: {body[:200]}")
     out = []
@@ -140,6 +157,7 @@ def _call_api(prompt: str) -> str:
         url,
         headers=headers,
         json={"model": model, "max_tokens": MAX_TOKENS,
+              "temperature": TEMPERATURE,
               "messages": [{"role": "user", "content": prompt}]},
         timeout=TIMEOUT,
     )

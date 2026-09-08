@@ -21,6 +21,10 @@ class Rationale(BaseModel):
     tags: list[str] = Field(default_factory=list)
     source_url: str
     source_page: int | None = None
+    # 저장은 하되 사람이 알아야 할 것 — 지금은 "모델이 댄 쪽번호가 실제와
+    # 달라 고쳤다" 하나다. 근거의 옳고 그름을 담는 자리가 아니다: 틀린
+    # 근거는 경고를 달아 내보내지 않고 거절한다(화면은 경고를 안 읽는다).
+    warnings: list[str] = Field(default_factory=list)
 
     @property
     def key(self) -> tuple[str, date, str]:

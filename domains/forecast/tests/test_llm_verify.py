@@ -265,3 +265,113 @@ def test_still_accepts_a_candidate_that_spans_an_ordinary_line_wrap():
     """빈 줄이 아닌 줄바꿈 하나는 감김이다 — 막으면 안 된다."""
     candidate = "우리 경제는 반도체경기 호황에 힘입어 2027년에도 2.2% 성장할 전망"
     assert v.verify(candidate, FUSED) == candidate
+
+
+# BOK 정기 보고서가 쓰는 표지 — 실측(2026년 8월호): ▢ 15줄, ▪ 25줄.
+# 둘 다 지금 표지 집합에 없어 그 항목의 근거가 통째로 거절됐다.
+BOK_PAGE = ("▢ [반도체 경기] 글로벌 AI 인프라 투자가 지속적으로 확대됨에 따라 반도체\n"
+            "수출이 높은 증가세를 이어갈 전망\n"
+            "▪견조한 반도체 수요가 지속되는 가운데 생산능력은 점진적으로 증대")
+
+
+def test_accepts_an_item_after_a_bok_square_marker():
+    candidate = ("[반도체 경기] 글로벌 AI 인프라 투자가 지속적으로 확대됨에 따라 "
+                 "반도체 수출이 높은 증가세를 이어갈 전망")
+    assert v.verify(candidate, BOK_PAGE) == candidate
+
+
+def test_accepts_an_item_after_a_bok_marker_with_no_space_behind_it():
+    """▪ 는 뒤에 공백 없이 붙는다("▪견조한"). 표지 한 글자짜리에 공백을
+    요구하는 규칙은 '-0.3%p' 를 불릿으로 오인하지 않으려던 것인데, ▪·▢ 는
+    숫자나 낱말의 일부가 될 수 없어 그 조건이 필요 없다."""
+    candidate = "견조한 반도체 수요가 지속되는 가운데 생산능력은 점진적으로 증대"
+    assert v.verify(candidate, BOK_PAGE) == candidate
+
+
+# 모델은 맞는 문장을 찾고도 쪽번호를 틀리게 댄다 — 실측(BOK 2026년 8월):
+# cpi 를 8쪽이라 했는데 실제로는 11쪽, emp_change 를 23쪽이라 했는데 39쪽.
+# 같은 회차를 다시 돌리면 다른 쪽번호가 나온다(KLI 는 24↔23 으로 흔들렸다).
+PAGES = ["첫 쪽에는 아무것도 없다.",
+         "둘째 쪽이다. 취업자 수는 내수 개선세가 파급되면서 늘어날 전망",
+         "셋째 쪽이다."]
+
+
+def test_finds_the_page_the_sentence_is_actually_on():
+    got, page = v.verify_in_pages("취업자 수는 내수 개선세가 파급되면서 늘어날 전망",
+                                  PAGES, hinted_page=1)
+    assert page == 2
+    assert got == "취업자 수는 내수 개선세가 파급되면서 늘어날 전망"
+
+
+def test_keeps_the_hinted_page_when_the_sentence_is_really_there():
+    _, page = v.verify_in_pages("취업자 수는 내수 개선세가 파급되면서 늘어날 전망",
+                                PAGES, hinted_page=2)
+    assert page == 2
+
+
+def test_searches_even_when_the_hinted_page_is_out_of_range():
+    _, page = v.verify_in_pages("취업자 수는 내수 개선세가 파급되면서 늘어날 전망",
+                                PAGES, hinted_page=99)
+    assert page == 2
+
+
+def test_rejects_when_the_sentence_is_on_no_page():
+    with pytest.raises(v.Rejected) as e:
+        v.verify_in_pages("이 문장은 어느 쪽에도 없다", PAGES, hinted_page=1)
+    assert "원문에 없다" in e.value.reason
+
+
+def test_reports_the_real_reason_when_the_sentence_exists_but_fails_a_check():
+    """어느 쪽에도 안 걸릴 때만 '원문에 없다' 다. 있는데 다른 검사에 걸린
+    것이면 그 사유를 그대로 줘야 사람이 엉뚱한 가설로 새지 않는다."""
+    with pytest.raises(v.Rejected) as e:
+        v.verify_in_pages("내수 개선세가 파급되면서 늘어날 전망", PAGES, hinted_page=1)
+    assert "시작하는 자리" in e.value.reason
+
+
+def test_matching_ignores_private_use_glyphs():
+    """실측: BOK 본문에 사설영역 글자가 섞여 나온다(2026년 8월호에서 U+E0F8
+    30줄, U+F000 25줄). 글꼴이 유니코드로 안 매핑해 남은 자국이라 뜻이 없고,
+    모델은 그것을 옮겨 적지 않는다 — 원문에만 남아 대조를 깨뜨린다."""
+    pua = chr(0xE0F8)
+    page = f"취업자 수는{pua} 내수 개선세가 파급되면서 늘어날 전망"
+    candidate = "취업자 수는 내수 개선세가 파급되면서 늘어날 전망"
+    assert v.verify(candidate, page) == candidate
+
+
+def test_matching_normalizes_compatibility_forms():
+    """전각 숫자·괄호 같은 호환 문자를 모델이 보통 형태로 옮겨 적어도 통과한다."""
+    page = "취업자 수는 ２０만명으로 확대될 전망"
+    candidate = "취업자 수는 20만명으로 확대될 전망"
+    assert v.verify(candidate, page) == candidate
+
+
+def test_accepts_an_item_after_a_marker_that_is_on_no_whitelist():
+    """표지 목록을 유한하게 두면 회차마다 새 기호가 나와 깨진다(실측: BOK 의
+    ▢·▪). 목록 대신 '줄머리에서 글자가 시작하기 전까지의 기호 무리' 로 본다 —
+    ◈ 는 이 저장소가 한 번도 본 적 없는 기호다."""
+    page = "◈ 금년 국내경제는 반도체 경기 호황으로 높은 성장세를 나타낼 전망"
+    candidate = "금년 국내경제는 반도체 경기 호황으로 높은 성장세를 나타낼 전망"
+    assert v.verify(candidate, page) == candidate
+
+
+def test_accepts_an_item_after_a_private_use_marker():
+    """사설영역 글머리표도 같은 규칙으로 처리된다 — 따로 등록할 것이 없다."""
+    page = f"{chr(0xF000)} 금년 취업자수는 건설업 부진으로 증가폭이 축소될 전망"
+    candidate = "금년 취업자수는 건설업 부진으로 증가폭이 축소될 전망"
+    assert v.verify(candidate, page) == candidate
+
+
+def test_still_rejects_a_fragment_after_a_line_leading_minus_even_without_a_whitelist():
+    """목록을 지워도 이 사례는 막혀야 한다 — 줄머리 기호 뒤가 숫자면
+    글머리표가 아니라 음수 부호다."""
+    page = "취업자 수는 예상보다 늘어\n-0.3%p 낮아질 것으로 보인다"
+    with pytest.raises(v.Rejected):
+        v.verify("0.3%p 낮아질 것으로 보인다", page)
+
+
+def test_still_rejects_a_wrapped_continuation_line_that_has_no_marker():
+    """줄머리라는 것만으로는 항목 시작이 아니다 — 감긴 줄도 줄머리다."""
+    page = "우리 경제는 반도체경기 호황에 힘입어\n기록한 뒤 2.2% 성장할 전망"
+    with pytest.raises(v.Rejected):
+        v.verify("기록한 뒤 2.2% 성장할 전망", page)

@@ -280,3 +280,36 @@ def test_nul_characters_become_spaces_not_deletions():
     ))
     assert got.startswith(" 최근 우리 경제는 높은 수출 증가세에")
     assert nul not in got
+
+
+def _lines_at(*rows):
+    """(글, top, bottom) 을 그대로 준다 — 줄이 겹치는 쪽을 만들 수 있다."""
+    return [{"text": t, "top": top, "bottom": bottom} for t, top, bottom in rows]
+
+
+# BOK 2026년 8월호 28쪽에서 그대로 읽은 줄 간격이다. 겹친 줄이 음수로
+# 나오고(-7.1 등), 그것이 사분위를 끌어내려 임계가 감김(5.4~6.0)보다 낮아졌다.
+# 그 결과 감긴 줄마다 문단 나눔이 들어가 문장 한가운데가 끊겼고
+# ("…반도체 경기 호황과 그에 ‖ 따른 파급효과의…") 멀쩡한 한 문장이
+# "여러 항목을 이어 붙였다" 로 거절됐다.
+BOK_PAGE28_GAPS = [27.16, 18.94, 5.99, -7.1, 5.41, 5.98, -7.09, 5.41,
+                   5.98, 5.99, 5.98, -7.1, 5.41, -7.1, 3.6, 5.99]
+
+
+def _lines_from_gaps(gaps, height=11.0, top=100.0):
+    lines = [{"text": "L0", "top": top, "bottom": top + height}]
+    for i, gap in enumerate(gaps, start=1):
+        top = lines[-1]["bottom"] + gap
+        lines.append({"text": f"L{i}", "top": top, "bottom": top + height})
+    return lines
+
+
+def test_overlapping_lines_do_not_drag_the_wrap_gap_below_the_real_line_spacing():
+    """음수 간격은 줄 간격이 아니다 — 겹쳐 나온 줄이다. 감김 간격을 고를 때
+    빼야, 진짜 감김(5.4~6.0)이 문단 나눔으로 넘어가지 않는다."""
+    got = pdf.text_with_paragraph_breaks(_lines_from_gaps(BOK_PAGE28_GAPS))
+
+    # 큰 간격 두 곳(27.16, 18.94)에서만 갈린다
+    assert got.count("\n\n") == 2
+    assert got.startswith("L0\n\nL1\n\nL2\nL3\nL4")
+    assert got.endswith("L15\nL16")

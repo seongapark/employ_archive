@@ -200,10 +200,9 @@ def test_only_skips_sources_not_listed(tmp_path):
     assert rep.saved == 1
 
 
-def test_out_of_range_source_page_gets_its_own_message(tmp_path):
-    """쪽번호가 범위를 벗어나면 "원문에 없다"(지어낸 문장 취급)가 아니라
-    쪽번호 문제라고 밝혀야 한다 — 원인이 다르면 사람이 쫓는 가설도 달라진다.
-    """
+def test_an_out_of_range_source_page_is_searched_for_instead_of_rejected(tmp_path):
+    """모델이 댄 쪽번호를 믿지 않는다. 범위 밖이면 문서 전체에서 찾는다 —
+    실측으로 모델은 맞는 문장을 찾고도 쪽을 자주 틀리게 댔다."""
     from domains.forecast.pipeline.llm_select import Picked
 
     rep = rationales.run(
@@ -211,9 +210,74 @@ def test_out_of_range_source_page_gets_its_own_message(tmp_path):
         select=lambda *a, **k: [Picked(
             "emp_change", "취업자는 내수 회복이 반영되어 늘어날 것으로 전망된다.", 99)])
 
+    assert rep.saved == 1
+    assert rs.load(tmp_path / "rationales.json")[0].source_page == 2
+
+
+def test_a_corrected_page_number_is_recorded_as_a_warning(tmp_path):
+    """고쳤다는 사실은 남긴다 — 사람이 인용을 확인할 때 알아야 한다."""
+    from domains.forecast.pipeline.llm_select import Picked
+
+    rationales.run(
+        tmp_path, sources={"kdi": lambda: [_listed()]},
+        select=lambda *a, **k: [Picked(
+            "emp_change", "취업자는 내수 회복이 반영되어 늘어날 것으로 전망된다.", 1)])
+
+    saved = rs.load(tmp_path / "rationales.json")[0]
+    assert saved.source_page == 2
+    assert any("1" in w and "2" in w for w in saved.warnings)
+
+
+def test_a_right_page_number_leaves_no_warning(tmp_path):
+    rationales.run(tmp_path, sources={"kdi": lambda: [_listed()]},
+                   select=lambda *a, **k: _pick())
+    assert rs.load(tmp_path / "rationales.json")[0].warnings == []
+
+
+def test_does_not_call_the_model_for_an_issue_that_is_already_covered(tmp_path):
+    """이미 그 회차의 지표가 다 차 있으면 묻지 않는다. 지금까지는 51회차면
+    51번 다 묻고 merge 단계에서 버렸다 — 그만큼이 헛돈 API 호출이었다."""
+    rs.save(tmp_path / "rationales.json", [rs.Rationale(
+        org="KDI", published_at=date(2026, 8, 19), indicator="emp_change",
+        text="사람이 이미 넣어 둔 문장", source_url="https://x/y.pdf")])
+
+    def _boom(*a, **k):
+        raise AssertionError("이미 채워진 회차인데 모델을 불렀다")
+
+    rep = rationales.run(tmp_path, sources={"kdi": lambda: [_listed()]},
+                         select=_boom)
+
     assert rep.saved == 0
-    assert any("범위를 벗어난다" in line for line in rep.rejected)
-    assert not any("원문에 없다" in line for line in rep.rejected)
+    assert rep.failures == []
+
+
+def test_still_asks_when_the_issue_is_only_partly_covered(tmp_path):
+    """지표 하나가 비어 있으면 다시 묻는다 — 재시도가 정상적인 다음 수순이다."""
+    rs.save(tmp_path / "rationales.json", [rs.Rationale(
+        org="KDI", published_at=date(2026, 8, 19), indicator="cpi",
+        text="물가 근거", source_url="https://x/y.pdf")])
+
+    rep = rationales.run(
+        tmp_path, sources={"kdi": lambda: [_listed(indicators=("emp_change", "cpi"))]},
+        select=lambda *a, **k: _pick())
+
+    assert rep.saved == 1
+
+
+def test_refresh_targets_are_asked_again_even_when_covered(tmp_path):
+    """--refresh 는 '다시 만들어도 좋다'는 허락이다 — 건너뛰기가 그걸 막으면
+    안 된다."""
+    rs.save(tmp_path / "rationales.json", [rs.Rationale(
+        org="KDI", published_at=date(2026, 8, 19), indicator="emp_change",
+        text="옛 문장", source_url="https://x/y.pdf")])
+
+    rep = rationales.run(
+        tmp_path, sources={"kdi": lambda: [_listed()]},
+        select=lambda *a, **k: _pick(),
+        refresh={("KDI", date(2026, 8, 19), "emp_change")})
+
+    assert rep.saved == 1
+    assert rs.load(tmp_path / "rationales.json")[0].text.startswith("취업자는")
 
 
 def test_parse_refresh_reads_org_date_indicator():

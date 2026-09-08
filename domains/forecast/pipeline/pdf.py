@@ -66,7 +66,15 @@ def _wrap_gap(gaps: list[float]) -> float:
     거꾸로 임계가 높아져 아무것도 안 넣는 쪽으로 기운다. 어느 쪽으로
     틀리든 손해가 '근거를 못 찾는다' 쪽이어야 한다.
     """
-    return sorted(gaps)[len(gaps) // 4]
+    # 음수·0 은 줄 간격이 아니다 — 줄이 겹쳐 나온 것이다(BOK 은 한 쪽에
+    # 네 개씩 나온다). 그대로 두면 사분위를 끌어내려 임계가 진짜 감김보다
+    # 낮아지고, 감긴 줄마다 문단 나눔이 들어가 문장 한가운데가 끊긴다
+    # (실측: 2026년 8월호 28쪽에서 한 문장이 둘로 갈렸다).
+    spacing = [gap for gap in gaps if gap > 0]
+    if not spacing:
+        # 이 쪽의 줄 배치를 못 믿는다 — 아무것도 넣지 않는 쪽으로 기운다.
+        return float("inf")
+    return sorted(spacing)[len(spacing) // 4]
 
 
 def _despace(text: str) -> str:
