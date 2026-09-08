@@ -81,8 +81,21 @@ _SENTENCE_TERMINATORS = frozenset(".。")
 # _looks_like_a_decimal_point 가 이미 소수점과 가려 가며 다룬다. 여기 또
 # 넣으면 "3.5" 같은 소수점을 문장 종결부호 쪽에서는 막아 놓고 항목 표지
 # 쪽에서 도로 통과시키는 두 규칙 불일치가 생긴다.
+# 숫자나 낱말의 일부가 될 수 없는 표지 — 뒤에 공백이 없어도 항목 표지다.
+# 위 집합에 공백을 요구한 것은 "-0.3%p"·"=2026년" 을 불릿으로 오인하지
+# 않으려던 것인데, 이 두 글자는 그렇게 쓰일 자리가 없다. 실측(BOK 2026년
+# 8월호 전문): ▢ 15줄, ▪ 25줄 — 그중 ▪ 는 항상 뒤에 공백 없이 붙는다
+# ("▪견조한 반도체 수요가…"). 여기 없으면 그 항목의 근거가 통째로 거절된다.
+#
+# BOK 본문에는 사설영역 글자도 있지만(U+F000 목차·집필진 줄, U+E0F8 그래프
+# 글리프) 표지로 올리지 않는다 — 근거가 실릴 자리가 아니고, 글꼴마다 뜻이
+# 달라 이 코퍼스 밖에서는 무엇을 인정하는지 알 수 없게 된다.
+_UNSPACED_MARKERS = frozenset("▢▪")
+
 _marker_class = "".join(re.escape(ch) for ch in sorted(_START_BOUNDARY_MARKERS))
-_ITEM_PREFIX = re.compile(rf"\s*(?:[{_marker_class}]\s+|\d+\)\s*)")
+_unspaced_class = "".join(re.escape(ch) for ch in sorted(_UNSPACED_MARKERS))
+_ITEM_PREFIX = re.compile(
+    rf"\s*(?:[{_marker_class}]\s+|[{_unspaced_class}]\s*|\d+\)\s*)")
 
 
 class Rejected(Exception):

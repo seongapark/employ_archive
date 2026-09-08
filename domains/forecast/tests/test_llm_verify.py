@@ -265,3 +265,24 @@ def test_still_accepts_a_candidate_that_spans_an_ordinary_line_wrap():
     """빈 줄이 아닌 줄바꿈 하나는 감김이다 — 막으면 안 된다."""
     candidate = "우리 경제는 반도체경기 호황에 힘입어 2027년에도 2.2% 성장할 전망"
     assert v.verify(candidate, FUSED) == candidate
+
+
+# BOK 정기 보고서가 쓰는 표지 — 실측(2026년 8월호): ▢ 15줄, ▪ 25줄.
+# 둘 다 지금 표지 집합에 없어 그 항목의 근거가 통째로 거절됐다.
+BOK_PAGE = ("▢ [반도체 경기] 글로벌 AI 인프라 투자가 지속적으로 확대됨에 따라 반도체\n"
+            "수출이 높은 증가세를 이어갈 전망\n"
+            "▪견조한 반도체 수요가 지속되는 가운데 생산능력은 점진적으로 증대")
+
+
+def test_accepts_an_item_after_a_bok_square_marker():
+    candidate = ("[반도체 경기] 글로벌 AI 인프라 투자가 지속적으로 확대됨에 따라 "
+                 "반도체 수출이 높은 증가세를 이어갈 전망")
+    assert v.verify(candidate, BOK_PAGE) == candidate
+
+
+def test_accepts_an_item_after_a_bok_marker_with_no_space_behind_it():
+    """▪ 는 뒤에 공백 없이 붙는다("▪견조한"). 표지 한 글자짜리에 공백을
+    요구하는 규칙은 '-0.3%p' 를 불릿으로 오인하지 않으려던 것인데, ▪·▢ 는
+    숫자나 낱말의 일부가 될 수 없어 그 조건이 필요 없다."""
+    candidate = "견조한 반도체 수요가 지속되는 가운데 생산능력은 점진적으로 증대"
+    assert v.verify(candidate, BOK_PAGE) == candidate
