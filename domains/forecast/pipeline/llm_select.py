@@ -21,7 +21,12 @@ ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 MODEL_ANTHROPIC = "claude-sonnet-5"
 MODEL_OPENROUTER = "anthropic/claude-sonnet-5"
-MAX_TOKENS = 2000
+# 추론(thinking)을 켜는 경로에서는 추론 토큰이 이 예산을 함께 먹는다 —
+# 실측(OpenRouter, claude-sonnet-5): 한 회차가 completion 1,491 토큰 중
+# 1,191 이 추론이었다. 2000 이면 긴 회차에서 답을 쓸 자리가 안 남아 JSON 이
+# 중간에 잘리거나 content 가 통째로 비어 온다. 상한일 뿐이라 넉넉히 잡아도
+# 실제로 쓴 만큼만 청구된다.
+MAX_TOKENS = 8000
 TIMEOUT = 120
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)\s*```", re.S)
@@ -145,10 +150,18 @@ def _call_api(prompt: str) -> str:
     data = resp.json()
     try:
         if "content" in data:                              # Anthropic Messages
-            return "".join(b.get("text", "") for b in data["content"])
-        return data["choices"][0]["message"]["content"]    # OpenAI 호환(OpenRouter)
+            text = "".join(b.get("text", "") for b in data["content"])
+        else:
+            text = data["choices"][0]["message"]["content"]  # OpenAI 호환
     except (ValueError, KeyError, TypeError, IndexError, AttributeError) as exc:
         raise ValueError(f"200 응답인데 형식이 예상과 다르다: {resp.text[:200]}") from exc
+    if not isinstance(text, str):
+        # OpenRouter 는 추론 토큰이 max_tokens 를 다 먹으면 content 를 null 로
+        # 돌려준다. 그대로 넘기면 parse_response 에서 NoneType 오류가 나
+        # 실행 로그만 보고는 원인을 알 수 없다 — finish_reason 이 들어 있는
+        # 본문을 그대로 실어 보낸다.
+        raise ValueError(f"200 응답인데 본문이 비어 있다: {resp.text[:300]}")
+    return text
 
 
 def select(org: str, title: str, indicators: Sequence[str], pages: Sequence[str],

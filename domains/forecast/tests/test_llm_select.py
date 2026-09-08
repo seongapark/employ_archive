@@ -235,3 +235,24 @@ def test_select_uses_the_injected_call_and_does_not_touch_the_network():
     got = s.select("KDI", "t", ["emp_change"], PAGES, call=fake)
     assert got == [s.Picked("emp_change", "가", 2)]
     assert "KDI" in seen["prompt"]
+
+
+def test_call_api_raises_a_named_error_when_the_content_is_null(monkeypatch):
+    """추론 토큰이 max_tokens 를 다 먹으면 OpenRouter 는 content 를 null 로
+    돌려준다. 그대로 넘기면 parse_response 에서 'NoneType has no attribute
+    strip' 이 나서, 실행 로그만 보고는 무엇이 잘못됐는지 알 수 없다."""
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-or-test")
+
+    body = {"choices": [{"finish_reason": "length", "message": {"content": None}}]}
+
+    def fake_post(*a, **kw):
+        # 진짜 Response 는 .text 가 본문 그대로다 — 가짜도 그래야 오류
+        # 메시지가 본문을 싣는지 정직하게 확인할 수 있다.
+        return _FakeResponse(200, body, text=json.dumps(body))
+
+    monkeypatch.setattr(s.requests, "post", fake_post)
+
+    with pytest.raises(ValueError) as e:
+        s._call_api("x")
+    assert "length" in str(e.value)   # 본문을 실어 보내 원인을 알 수 있어야 한다
