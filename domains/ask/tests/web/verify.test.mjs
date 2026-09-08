@@ -16,6 +16,31 @@ test('연도와 기간 표기는 숫자로 세지 않는다', () => {
   assert.deepEqual(extractNumbers('2025S1 대비 2025S2 는 727.4천명'), [727.4]);
 });
 
+test('집단 라벨은 숫자로 세지 않는다 — 값이 아니라 이름이다', () => {
+  // 카테고리를 정확히 집어도 답변이 "30대 취업자" 라고 쓰면 30 이 잡히던 자리
+  assert.deepEqual(extractNumbers('30대 취업자는 600천명이다'), [600]);
+  assert.deepEqual(extractNumbers('30~39세 취업자는 600천명'), [600]);
+  assert.deepEqual(extractNumbers('30-39세 취업자는 600천명'), [600]);
+  assert.deepEqual(extractNumbers('15세 이상 인구 중 600천명'), [600]);
+  assert.deepEqual(extractNumbers('65세 미만 600천명'), [600]);
+  const 근거600 = [buildEvidence({ 지표: 'X', compare_basis: '수준' },
+    [{ 기간: '2026-07', 값: 600 }])];
+  assert.equal(verify({ 답변: '30대 취업자는 600천명이다', 근거: [] }, 근거600).ok, true);
+  assert.equal(verify({ 답변: '15세 이상 30~39세는 600천명', 근거: [] }, 근거600).ok, true);
+});
+
+test('집단 라벨을 가려도 측정값은 그대로 잡힌다 — 단위가 붙은 숫자는 안 가린다', () => {
+  // 마스킹을 넓히면서 환각 방어에 구멍을 내지 않았음을 증명하는 회귀 테스트다
+  const 근거600 = [buildEvidence({ 지표: 'X', compare_basis: '수준' },
+    [{ 기간: '2026-07', 값: 600 }])];
+  const r = verify({ 답변: '30대 취업자는 700천명이다', 근거: [] }, 근거600);
+  assert.equal(r.ok, false);
+  assert.deepEqual(r.위반, [700]);
+  // 건·% 도 그대로 잡힌다
+  assert.deepEqual(extractNumbers('30대 구인 1200건, 전년비 -2.3%'), [1200, -2.3]);
+  assert.deepEqual(verify({ 답변: '30대는 -2.3% 줄었다', 근거: [] }, 근거600).위반, [-2.3]);
+});
+
 test('파생값을 쓴 답변은 통과한다', () => {
   const r = verify({ 답변: '744.3천명에서 727.4천명으로 -16.9천명(-2.3%) 줄었다', 근거: [] }, 근거);
   assert.equal(r.ok, true);

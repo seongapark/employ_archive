@@ -6,10 +6,20 @@ import { numbersIn } from './query.mjs';
 
 // 연·기간 토큰(2025S1, 2026-07, 2026년)은 숫자로 세지 않는다.
 const PERIOD = /\b(19|20)\d{2}(년|[-–]\d{1,2}|S[12]|H[12]|Q[1-4])?\b/g;
+
+// 집단 라벨(30대, 30~39세, 15세 이상)도 숫자로 세지 않는다. **값이 아니라 이름이다** —
+// 기간이 값이 아니라 좌표인 것과 같다. 카테고리를 정확히 집어도 답변이 "30대 취업자"
+// 라고 쓰는 순간 30 이 위반으로 잡히던 것을 막는다.
+//
+// **여기서 멈춘다.** `600천명`·`200건`·`-2.3%` 는 우리가 재서 낸 값이라 절대 안 가린다 —
+// 가리면 환각 방어에 구멍이 뚫린다. 이 정규식에 단위(천명·건·%)가 한 글자도 없는 것이
+// 그 경계다. 범위형을 먼저 두어 `30~39세` 가 `39세` 로 쪼개지지 않게 한다.
+const COHORT = /\d+\s*[~\-–]\s*\d+세|\d+세\s*(?:이상|미만|이하|초과)?|\d+대/g;
+
 const NUM = /[-−+]?\d+(?:\.\d+)?/g;
 
 export function extractNumbers(text) {
-  const masked = String(text ?? '').replace(PERIOD, ' ');
+  const masked = String(text ?? '').replace(PERIOD, ' ').replace(COHORT, ' ');
   return (masked.match(NUM) ?? [])
     .map((s) => Number(s.replace('−', '-')))
     .filter((n) => Number.isFinite(n));
