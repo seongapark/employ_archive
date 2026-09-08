@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  badgeLabel, understandLine, evidenceColumns, isSampleErrorText,
+  badgeLabel, understandLine, evidenceColumns, isSampleErrorText, safeHref,
 } from '../../app/js/badge.js';
 
 const 배지코드8종 = [
@@ -85,4 +85,23 @@ test('RSE 로 시작하지 않는 문구는 표본오차 문구로 식별하지 
   assert.equal(isSampleErrorText(''), false);
   assert.equal(isSampleErrorText(null), false);
   assert.equal(isSampleErrorText(undefined), false);
+});
+
+// Minor(리뷰 라운드 1): href 스킴 화이트리스트 — 카탈로그가 오염돼도 클릭이
+// 코드를 실행하면 안 된다.
+test('http/https 링크는 그대로 통과한다', () => {
+  assert.equal(safeHref('https://mods.go.kr/board'), 'https://mods.go.kr/board');
+  assert.equal(safeHref('http://example.com'), 'http://example.com');
+});
+
+test('javascript: 스킴은 링크로 통과시키지 않는다', () => {
+  assert.equal(safeHref('javascript:alert(1)'), null);
+  assert.equal(safeHref('JavaScript:alert(1)'), null);
+  assert.equal(safeHref('data:text/html,<script>alert(1)</script>'), null);
+});
+
+test('빈 값·비문자열 href 도 통과시키지 않는다', () => {
+  assert.equal(safeHref(''), null);
+  assert.equal(safeHref(null), null);
+  assert.equal(safeHref(undefined), null);
 });

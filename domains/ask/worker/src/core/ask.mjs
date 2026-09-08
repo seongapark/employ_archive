@@ -40,6 +40,39 @@ export const 전망지표 = {
 //    classify 와 **같은 표**로 한 번 더 접는다 — 표를 두 벌 두지 않는다.
 const 주제원어 = (주제) => 주제_SYN[주제] ?? 주제 ?? '';
 
+// ── Task 13 리뷰 대응(Important 1·5): 소스는 유형을 안 가린다 ──────────────
+// `메타한계`·`범위밖` 은 이미 meta() 로 소스를 채우지만, 수치조회·출처비교·
+// 원인탐색은 여태 안 채워서 화면이 "소스 없음"으로 그렸다(근거는 있는데 출처가
+// 없다고 말하는 셈). 실제로 쓰인 소스 id(근거[].출처 ∪ 지표[].출처 ∪ 라우팅.가능)를
+// 모아 한 번만 source_catalog 를 조회한다.
+function 사용된소스id(r) {
+  const ids = new Set();
+  for (const e of r.근거 ?? []) if (e.출처) ids.add(e.출처);
+  for (const i of r.지표 ?? []) if (i.출처) ids.add(i.출처);
+  for (const s of r.라우팅?.가능 ?? []) ids.add(s);
+  return [...ids];
+}
+
+// breakdown(관측 축) → 한글 축 이름. 축_BREAKDOWN 의 반대 방향이다 — 표를 두 벌
+// 두지 않으려고 여기서 뒤집는다.
+const 축한글 = Object.fromEntries(Object.entries(축_BREAKDOWN).map(([k, v]) => [v, k]));
+
+// 수치조회·출처비교의 근거는 `지표` 가 "eaps:age:30-39" 같은 내부 합성키다(원인탐색
+// 쪽 근거는 loadIndicator 가 이미 name_ko 를 붙여 온다 — 그래서 여기선 손대지 않는다).
+// segments.json(카테고리 코드 → "30대" 같은 한글명)은 D1 에 없어 Worker 가 못 읽는다
+// — 그래서 **없는 이름을 지어내지 않고**, 가진 것(소스 name_ko + 한글 축 + 코드)만으로
+// 조립한다. 소스 이름조차 없으면(카탈로그에 없는 id) 합성키를 그대로 둔다 — 화면이
+// `·` 로 끊어 읽기 쉽게 그린다.
+function 지표이름조립(e, 소스이름표) {
+  if (e.name_ko) return; // 이미 사람이 읽을 이름이 있으면 덮지 않는다
+  const [src, breakdown, ...rest] = String(e.지표 ?? '').split(':');
+  const 소스이름 = 소스이름표[src];
+  if (!소스이름) return; // 조립 불가 — 합성키를 그대로 둔다
+  const category = rest.join(':') || null;
+  const 축 = breakdown === 'total' ? null : (축한글[breakdown] ?? breakdown);
+  e.name_ko = 축 ? `${소스이름} · ${축}${category ? ` ${category}` : ''}` : 소스이름;
+}
+
 const 배지 = (r) => {
   const b = [];
   if (r.저확신) b.push('저확신');
@@ -239,8 +272,21 @@ export async function ask(deps, { 유형, 슬롯: 입력슬롯 = {}, 저확신 =
       r = { ...base, 전망: [], 근거서술: [], 지표코드: null,
             한계: [`'${슬롯.주제}' 의 전망은 아직 다루지 않는다 — 전망 지표 카탈로그(${Object.values(전망지표).join('·')})에 대응 코드가 없다`] };
     } else {
-      const rows = await deps.db.all(
-        'SELECT * FROM forecast WHERE indicator = ? ORDER BY published_at', [ind]);
+      // Task 13 리뷰 대응(Important 4): 연도 필터가 없으면 여러 연도의 전망이
+      // 섞여 나올 수 있다 — 슬롯이 연도를 지목했으면(수치조회처럼 강제는 아니지만)
+      // 그 범위로 좁힌다. 못 지목하면(연/기간이 비거나 연도가 아니면) 전부 낸다 —
+      // 못 좁혔다는 사실 자체를 화면이 안 숨기면 된다(연도별로 묶어 그린다).
+      const 연도from = Number(슬롯.기간?.from) || null;
+      const 연도to = Number(슬롯.기간?.to) || null;
+      const rows = (연도from && 연도to)
+        ? await deps.db.all(
+            `SELECT * FROM forecast WHERE indicator = ?
+               AND target_year >= ? AND target_year <= ?
+              ORDER BY target_year, published_at`,
+            [ind, 연도from, 연도to])
+        : await deps.db.all(
+            'SELECT * FROM forecast WHERE indicator = ? ORDER BY target_year, published_at',
+            [ind]);
       // 근거 블록이 rationale 인용을 요구한다(스펙 §6) — 원문 페이지까지 함께 낸다
       const 근거서술 = await deps.db.all(
         'SELECT * FROM forecast_rationale WHERE indicator = ? ORDER BY published_at', [ind]);
@@ -278,6 +324,28 @@ export async function ask(deps, { 유형, 슬롯: 입력슬롯 = {}, 저확신 =
       r.답할수있는질문 = ['2026년 7월 30대 취업자는 몇 명인가',
                          '경활과 고용행정통계는 왜 숫자가 다른가',
                          '내년 취업자 전망은 어떤가'];
+    }
+  }
+
+  // Task 13 리뷰 대응(Important 1·5): 메타한계·범위밖은 위에서 이미 `소스` 를
+  // 채웠다(r.소스 가 배열로 존재 — 비어 있어도 존재한다는 사실 자체가 다르다).
+  // 나머지 유형(수치조회·출처비교·원인탐색)은 여기서 한 번만 채운다.
+  //
+  // **미확인 소스는 여기서 `카드.미확인`에 합치지 않는다.** meta()·메타한계·범위밖은
+  // 이미 미확인 소스를 별도로 갈라 `근거 미확인` 배지를 붙이는 확립된 경로다(Task 9·
+  // meta.test.mjs). 그 경로를 그대로 나머지 유형까지 넓히면, 원인탐색 골든(청년사무직)
+  // 처럼 지지 지표 하나가 우연히 미확인 소스(kosis_service_production)를 쓰는 카드에
+  // 배지가 하나 더 붙어 이미 검증된 골든 기대(`배지: [...]` 정확 일치)를 깨뜨린다.
+  // 그건 이번 리뷰가 요구한 범위 밖이라 확인된 소스만 `소스`에 싣는다 — 이름 조립은
+  // 확인 여부와 무관하게(카탈로그에 있으면) 해 준다.
+  if (!r.소스) {
+    const ids = 사용된소스id(r);
+    if (ids.length) {
+      const m = await meta(deps, { 출처: ids });
+      r.소스 = m.소스;
+      const 소스이름표 = Object.fromEntries(
+        [...m.소스, ...m.미확인].map((s) => [s.id, s.name_ko]));
+      for (const e of r.근거 ?? []) 지표이름조립(e, 소스이름표);
     }
   }
 

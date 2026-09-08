@@ -1,10 +1,19 @@
 // DOM 렌더러. badge.js 의 순수 함수만 쓰고, 여기 자체는 테스트 대상이 아니다
 // (node --test 는 DOM 이 없다 — 그래서 render.test.mjs 는 badge.js 만 담는다).
 
-import { isSampleErrorText } from './badge.js';
+import { isSampleErrorText, safeHref } from './badge.js';
 
 function fmtVal(v) {
   return typeof v === 'number' ? v.toLocaleString('ko-KR') : String(v);
+}
+
+// Minor(리뷰 라운드 1): href 는 안전한 스킴일 때만 링크로 그리고, 아니면 평문으로
+// 그린다 — 카탈로그가 오염돼도 클릭이 코드를 실행하면 안 된다.
+function 링크또는텍스트(esc, url, label) {
+  const safe = safeHref(url);
+  return safe
+    ? `<a href="${esc(safe)}" target="_blank" rel="noopener">${esc(label)}</a>`
+    : `<span class="ev__nolink">${esc(label)}</span>`;
 }
 
 // 파생 수치를 표 형태로 그린다. **유의성사유(RSE)는 여기 안 넣는다** — 규칙 3:
@@ -71,15 +80,34 @@ function 지표폴백(esc, 카드) {
   </p>` + (카드.지표 ?? []).map((i) => 근거행(esc, i)).join('');
 }
 
-function 전망블록(esc, 카드) {
-  const rows = (카드.전망 ?? []).map((r) => `<div class="ev">
+// Important 4(리뷰 라운드 1): 몇 년도 전망인지·단위가 뭔지 없으면 숫자가 뜻을
+// 잃는다. target_year·target_period·unit 을 함께 그리고, 연도로 묶어 보여준다
+// (ask.mjs 도 슬롯이 연도를 지목하면 그 범위로 조회를 좁히도록 같이 고쳤다).
+function 전망행(esc, r) {
+  const 시점 = [r.target_year != null ? `${r.target_year}년` : null, r.target_period]
+    .filter((x) => x != null && x !== '').join(' ');
+  return `<div class="ev">
     <b>${esc(r.org ?? r.기관 ?? '')}</b>
-    <span class="ev__basis">${esc(r.published_at ?? '')}</span>
-    <div class="ev__nums"><span class="num-chip">${esc(fmtVal(r.value ?? r.값 ?? ''))}</span></div>
-  </div>`).join('');
+    <span class="ev__basis">${esc(시점)}${r.published_at ? ` · 발표 ${esc(r.published_at)}` : ''}</span>
+    <div class="ev__nums"><span class="num-chip">${esc(fmtVal(r.value ?? r.값 ?? ''))}${r.unit ? ` ${esc(r.unit)}` : ''}</span></div>
+  </div>`;
+}
+
+function 전망블록(esc, 카드) {
+  const 연도별 = new Map();
+  for (const r of 카드.전망 ?? []) {
+    const key = r.target_year != null ? String(r.target_year) : '연도 미상';
+    if (!연도별.has(key)) 연도별.set(key, []);
+    연도별.get(key).push(r);
+  }
+  const rows = [...연도별.entries()].map(([year, items]) => `
+    <div class="forecast-year">
+      <h4>${esc(year === '연도 미상' ? year : `${year}년 전망`)}</h4>
+      ${items.map((r) => 전망행(esc, r)).join('')}
+    </div>`).join('');
   const 근거서술 = (카드.근거서술 ?? []).map((r) => `<blockquote class="rationale">
     ${esc(r.text ?? r.내용 ?? '')}
-    ${r.url ? `<a href="${esc(r.url)}" target="_blank" rel="noopener">원문</a>` : ''}
+    ${r.url ? 링크또는텍스트(esc, r.url, '원문') : ''}
   </blockquote>`).join('');
   return rows + 근거서술;
 }
@@ -90,6 +118,21 @@ function 비교블록(esc, 비교) {
     <p class="compare__basis"><b>비교 가능</b> ${esc(비교.비교가능)}</p>
     ${(비교.차이유형 ?? []).length ? `<p>차이 유형: ${esc(비교.차이유형.join(' · '))}</p>` : ''}
     ${(비교.설명 ?? []).map((s) => `<p class="compare__note">${esc(s)}</p>`).join('')}
+    ${(비교.근거 ?? []).length ? `<ul class="compare__refs">${(비교.근거 ?? []).map((g) =>
+      `<li>${esc(g.id)} — ${esc(g.evidence ?? '')}${g.verified_at ? ` (확인 ${esc(g.verified_at)})` : ''}</li>`).join('')}</ul>` : ''}
+  </div>`;
+}
+
+// Important 3(리뷰 라운드 1): 답변 문장이 검증실패·한도초과·할당량확인불가로
+// 사라지면, 원인탐색에서 "무슨 현상을 판정하려던 건지" 조차 모른 채 가설 카드만
+// 보이던 문제. 현상(name_ko·정의·근거서술)을 가설 열 위에 항상 그린다 — 근거서술은
+// 관측만 담긴 문장이니 그대로 보여준다.
+function 현상블록(esc, 현상) {
+  if (!현상) return '';
+  return `<div class="phenomenon">
+    <h3>${esc(현상.name_ko ?? '')}</h3>
+    ${현상.정의 ? `<p class="phenomenon__def">${esc(현상.정의)}</p>` : ''}
+    ${현상.근거서술 ? `<p class="phenomenon__evidence">${esc(현상.근거서술)}</p>` : ''}
   </div>`;
 }
 
@@ -107,16 +150,35 @@ function 라우팅블록(esc, 라우팅) {
   </div>`;
 }
 
+// Minor(리뷰 라운드 1): `가설없음`·`판정없음`을 배열 길이로 간접 추론하지 않고
+// 카드가 실어 준 그 필드를 그대로 읽는다 — 둘은 서로 다른 신호이고, 필드가 있는데
+// 배열 길이로 재추론하면 필드가 바뀔 때 조용히 어긋난다.
 function evidenceHtml(esc, 카드, columns) {
-  if (카드.가설) {
-    return 카드.가설.map((h) => 가설카드(esc, h, columns)).join('')
-      || '<p class="col__empty">비었음 — 등록된 가설이 없다</p>';
+  if (카드.가설 || 카드.가설없음) {
+    const 현상 = 현상블록(esc, 카드.현상);
+    if (카드.가설없음) {
+      return `${현상}<p class="col__empty">비었음 — 이 현상에 등록된 가설이 없다</p>`;
+    }
+    const 전부판정불가 = 카드.판정없음
+      ? '<p class="hyp__all-blocked">이 현상에 등록된 가설은 아직 전부 판정할 수 없다</p>' : '';
+    return 현상 + 전부판정불가 + (카드.가설 ?? []).map((h) => 가설카드(esc, h, columns)).join('');
   }
   if (카드.지표) return 지표폴백(esc, 카드);
   if (카드.전망 || 카드.근거서술) return 전망블록(esc, 카드);
   if (카드.비교) return 비교블록(esc, 카드.비교) + (카드.근거 ?? []).map((e) => 근거행(esc, e)).join('');
   if ((카드.근거 ?? []).length) return (카드.근거 ?? []).map((e) => 근거행(esc, e)).join('');
   return 라우팅블록(esc, 카드.라우팅);
+}
+
+// Important 2(리뷰 라운드 1): meta() 가 만들고 ask.mjs 가 싣는 `충돌`(출처 간 상충
+// 기록)을 화면이 한 번도 안 읽었다 — 여러 출처가 걸릴 때 "왜 서로 다른지" 를 보여줄
+// 자리가 통째로 빠져 있었다.
+function 충돌블록(esc, 충돌) {
+  return (충돌 ?? []).map((c) => `<div class="conflict">
+    <b>${esc(c.source_a)} ↔ ${esc(c.source_b)}</b>
+    <span class="conflict__basis">${esc(c.비교가능 ?? '')}</span>
+    <p>${esc(c.차이유형 ?? '')} — ${esc(c.설명 ?? '')}</p>
+  </div>`).join('');
 }
 
 export function renderAll(카드, { esc, badgeLabel, understandLine, evidenceColumns, go }) {
@@ -163,10 +225,14 @@ export function renderAll(카드, { esc, badgeLabel, understandLine, evidenceCol
     ...(카드.미확인 ?? []).map((m) => `근거 미확인: ${typeof m === 'string' ? m : (m.name_ko ?? JSON.stringify(m))}`),
   ].map((l) => `<li>${esc(l)}</li>`).join('');
 
-  // ── 소스 ──────────────────────────────────────────────────────────
+  // ── 소스 ── 스펙 §6: 원문 링크 + 확인일 + evidence_status. 링크는 http/https
+  // 화이트리스트일 때만 그린다(Minor: href 스킴 검증) ──────────────────────
   $('sources').innerHTML = (카드.소스 ?? []).map((s) =>
-    `<a href="${esc(s.endpoint ?? '#')}" target="_blank" rel="noopener">${esc(s.name_ko ?? s.id)}</a>
-     <small>${esc(s.verified_at ?? '')} ${esc(s.evidence_status ?? '')}</small>`).join('');
+    `<div class="source">${링크또는텍스트(esc, s.endpoint, s.name_ko ?? s.id)}
+     <small>${esc(s.verified_at ?? '')} ${esc(s.evidence_status ?? '')}</small></div>`).join('');
+
+  // ── 충돌: 소스가 둘 이상 걸릴 때 "왜 서로 다른지" ───────────────────
+  $('conflicts').innerHTML = 충돌블록(esc, 카드.충돌);
 
   // ── 범위밖: "이건 못 하지만 이건 됩니다" ────────────────────────────
   $('followups').innerHTML = '';

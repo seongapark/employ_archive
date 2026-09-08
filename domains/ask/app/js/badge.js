@@ -55,3 +55,11 @@ export function evidenceColumns(가설) {
 export function isSampleErrorText(s) {
   return typeof s === 'string' && /^RSE\b/.test(s.trim());
 }
+
+// Minor(리뷰 라운드 1): esc() 는 속성값을 이스케이프하지만 `javascript:` 스킴 자체를
+// 막지는 못한다. 카탈로그(source_catalog.endpoint 등)가 오염돼도 클릭이 코드를
+// 실행하지 않도록 http/https 화이트리스트만 링크로 그린다 — 그 외는 안전한
+// 텍스트로만 보여준다.
+export function safeHref(url) {
+  return typeof url === 'string' && /^https?:\/\//i.test(url) ? url : null;
+}
