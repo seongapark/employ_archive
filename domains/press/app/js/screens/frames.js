@@ -1,11 +1,28 @@
 import { esc, roundOf, dayLabel, daysSince } from '../data.js';
 import { articleRow, card, section } from '../ui.js';
+import { graphSvg, legendHtml } from '../graph.js';
 
 // 프레임 화면은 '배포 당일에 생긴 말이 며칠째 살아있나'만 본다.
 // 후속 수집이 없는 회차는 표가 아니라 '아직 못 잰다'고 말한다 — 빈 표는
 // '프레임이 없다'로 읽히는데 그건 사실이 아니다.
 
 const STATE_CLS = { 확산: 'state--spread', 유지: 'state--hold', 소멸: 'state--gone' };
+
+function netCard(round) {
+  const g = round.graph;
+  if (!g || !g.nodes.length) return '';
+  const trimmed = g.trimmed
+    ? ` · 적게 나온 ${g.trimmed}개는 뺐습니다` : '';
+  return card(`
+    <div style="font-size:13px;font-weight:700;">이 달 보도가 묶인 모양</div>
+    <div style="font-size:11px;color:var(--text-secondary);margin:2px 0 6px;">
+      한 기사에 같이 나온 말끼리 이었습니다 · 점 크기는 기사 수, 선 굵기는 같이 나온 횟수</div>
+    ${graphSvg(g)}
+    <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">
+      ${legendHtml(g)}</div>
+    <div style="font-size:10px;color:var(--text-muted);margin-top:4px;">
+      점을 누르면 그 말이 든 기사가 열립니다${trimmed}</div>`);
+}
 
 function frameTable(round) {
   const rows = round.frames.map((f) => `
@@ -55,12 +72,12 @@ export function render(root, ctx) {
     return;
   }
 
-  const body = round.follow && round.frames.length
+  const spread = round.follow && round.frames.length
     ? `${frameTable(round)}${timeline(round, ctx)}`
     : `<div class="empty">
         ${round.follow ? '이 회차는 배포 당일에 반복된 밖 표현이 없었습니다.'
                        : `후속 수집을 아직 안 돌렸습니다.<br>후속 구간은 배포 다음날부터 15일까지라, ${esc(round.label)} 회차는 그 구간이 끝난 뒤에 채워집니다.`}
       </div>`;
 
-  root.innerHTML = `${section(body)}`;
+  root.innerHTML = `${section(`${netCard(round)}${spread}`)}`;
 }

@@ -10,6 +10,7 @@ const SHELL_ASSETS = [
   './js/app.js',
   './js/data.js',
   './js/ui.js',
+  './js/graph.js',
   './js/screens/home.js',
   './js/screens/articles.js',
   './js/screens/frames.js',

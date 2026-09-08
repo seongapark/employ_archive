@@ -241,6 +241,25 @@
 .state--hold { color: var(--gap-fg); background: var(--gap-bg); }
 .state--gone { color: var(--text-muted); background: var(--bg); }
 
+/* 동시출현 네트워크 */
+
+.gnet { display: block; overflow: visible; }
+
+/* 라벨이 선·점 위에 겹쳐도 읽히게 흰 테두리를 두른다. paint-order 를 안 주면
+   테두리가 글자를 덮어 오히려 안 보인다. */
+.gnode__label {
+  font-family: inherit;
+  font-size: 9.5px;
+  font-weight: 600;
+  fill: var(--text);
+  stroke: var(--card);
+  stroke-width: 2.6px;
+  paint-order: stroke fill;
+}
+
+.gnet a { cursor: pointer; }
+.gnet a:hover circle { fill-opacity: 1; }
+
 /* 섹션 제목 */
 
 .sec-title {

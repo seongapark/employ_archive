@@ -208,6 +208,58 @@ def rivals(not_cited, min_count=2):
     return rows
 
 
+def graph(cited, min_node=2, min_edge=2, max_nodes=28):
+    """한 기사 안에 같이 나온 말들을 이어 그 달의 보도 구조를 만든다.
+
+    프레임은 낱말 하나가 아니라 **같이 다니는 낱말 뭉치**다 — '26.8월분의
+    「제조업·반도체·반등·호황」이 한 덩어리인 것처럼. 표로는 그 뭉침이 안 보인다.
+
+    노드가 40개를 넘으면 480px 화면에서 글자가 겹쳐 읽을 수 없게 되므로
+    등장 횟수 상위만 남긴다. 잘라낸 사실은 화면이 말한다(`trimmed`).
+    """
+    axis_of, count = {}, collections.Counter()
+    for a in cited:
+        for h in a['hits']:
+            ax, nm = h.split(':', 1)
+            axis_of.setdefault(nm, ax)
+        for w in a['kw']:
+            axis_of.setdefault(w, '밖')
+        for w in a['tone']:
+            axis_of.setdefault(w, '논조')
+        for t in _terms(a):
+            count[t] += 1
+
+    keep = [w for w, n in count.most_common() if n >= min_node][:max_nodes]
+    kept = set(keep)
+
+    pairs = collections.Counter()
+    for a in cited:
+        ts = sorted(t for t in _terms(a) if t in kept)
+        for i in range(len(ts)):
+            for j in range(i + 1, len(ts)):
+                pairs[(ts[i], ts[j])] += 1
+
+    idx = {w: i for i, w in enumerate(keep)}
+    edges = [[idx[x], idx[y], n] for (x, y), n in pairs.items() if n >= min_edge]
+    edges.sort(key=lambda e: -e[2])
+    # 어디에도 안 붙는 노드는 그래프에서 점 하나로 떠돈다 — 뺀다.
+    linked = {i for e in edges for i in e[:2]}
+    nodes, remap = [], {}
+    for i, w in enumerate(keep):
+        if i in linked:
+            remap[i] = len(nodes)
+            nodes.append({'id': w, 'axis': axis_of.get(w, '밖'), 'n': count[w]})
+    edges = [[remap[a], remap[b], n] for a, b, n in edges]
+    return {'nodes': nodes, 'edges': edges,
+            'trimmed': max(0, len([1 for _, n in count.items() if n >= min_node]) - len(nodes))}
+
+
+def _terms(a):
+    """기사 하나가 들고 있는 말들. 축이 달라도 같은 평면에 놓는다 —
+    「제조업(산업)」과 「반등(밖)」이 붙어 다니는 것이 곧 프레임이다."""
+    return ({h.split(':', 1)[1] for h in a['hits']} | set(a['kw']) | set(a['tone']))
+
+
 def gaps(cov, cited, body):
     """보도자료 ↔ 기사의 어긋남. 숫자를 문장으로 부풀리지 않고 사실만 적는다."""
     out = []
@@ -256,6 +308,7 @@ def build_round(release, month, hwpx, reg, reg_v, fol=None, fol_v=None, prev_pre
         'tone': tone,
         'issues': issues(r_cited),
         'rivals': rivals([a for a in r_all if not a['cites']]),
+        'graph': graph(r_cited),
         'frames': frames(r_cited, f_cited) if fol else [],
         'new_press': sorted(press_now - set(prev_press or [])) if prev_press else [],
         'all_press': sorted(press_now),
