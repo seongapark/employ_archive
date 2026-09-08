@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-09-07T16:47:08.840796+09:00",
+  "run_at": "2026-09-08T16:41:36.597768+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -17,8 +17,8 @@
       "added": 0
     },
     "kdi": {
-      "ok": true,
-      "fetched": 16,
+      "ok": false,
+      "fetched": 0,
       "added": 0
     },
     "kli": {
@@ -38,5 +38,7 @@
     }
   },
   "conflicts": [],
-  "errors": []
+  "errors": [
+    "kdi: Timeout: Failed to perform, curl: (28) Connection timed out after 120002 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
+  ]
 }
