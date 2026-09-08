@@ -93,6 +93,16 @@ def run(data_dir, *, sources=None, select=None, only=None, refresh=()) -> Report
             rep.failures.append(f"{name} 목록: {type(exc).__name__}: {exc}")
             continue
         for listed in listed_all:
+            # 이미 그 회차의 지표가 다 차 있으면 모델을 부르지 않는다.
+            # 지금까지는 회차 수만큼 다 묻고 merge 단계에서 버렸다 — 51회차
+            # 짜리 BOK 이면 그만큼이 통째로 헛돈 API 호출이었다. refresh
+            # 대상은 예외다("다시 만들어도 좋다"는 허락이 건너뛰기에 막히면
+            # 안 된다). 일부만 찬 회차도 다시 묻는다 — 빈 지표를 채우는
+            # 재시도가 정상적인 다음 수순이다.
+            wanted = {(listed.org, listed.published_at, ind)
+                      for ind in listed.indicators}
+            if wanted and wanted <= existing_keys and not (wanted & refresh):
+                continue
             # fetch_pages·select 뿐 아니라 후보를 거르는 아래 루프까지
             # 통째로 이 try 안에 둔다 — 이 회차가 무엇 때문에 죽든(본문
             # 획득 실패든, 모델 응답이든, 예상 못 한 다른 무엇이든) 이미
@@ -114,31 +124,26 @@ def run(data_dir, *, sources=None, select=None, only=None, refresh=()) -> Report
                             "이 기관이 전망하지 않는 지표다")
                         rejected_here += 1
                         continue
-                    if not (0 < p.source_page <= len(pages)):
-                        # verify() 에 넘기지 않는다 — page_text 를 ""로 두고
-                        # 넘기면 verify 가 "원문에 없다"로 거절해, 모델이
-                        # 잘못된 쪽번호를 댔을 뿐인데 문장을 지어낸 것처럼
-                        # 보고서에 남는다. 원인이 다르면 메시지도 달라야
-                        # 사람이 엉뚱한 가설(프롬프트가 새어나갔다)로
-                        # 새지 않는다.
-                        rep.rejected.append(
-                            f"{listed.org} {listed.title} {p.indicator}: "
-                            f"source_page {p.source_page} 이(가) 본문 쪽수"
-                            f"(1~{len(pages)}) 범위를 벗어난다")
-                        rejected_here += 1
-                        continue
-                    page_text = pages[p.source_page - 1]
                     try:
-                        text = llm_verify.verify(p.text, page_text)
+                        text, page_no = llm_verify.verify_in_pages(
+                            p.text, pages, p.source_page)
                     except llm_verify.Rejected as exc:
                         rep.rejected.append(
                             f"{listed.org} {listed.title} {p.indicator}: {exc.reason}")
                         rejected_here += 1
                         continue
+                    warnings = []
+                    if page_no != p.source_page:
+                        # 고쳤다는 사실은 남긴다 — 사람이 인용을 확인할 때
+                        # 알아야 하고, 이 흔들림이 얼마나 잦은지도 보인다.
+                        warnings.append(
+                            f"모델이 댄 쪽번호 {p.source_page} 이(가) 실제 "
+                            f"{page_no} 쪽과 달라 고쳤다")
                     fresh.append(rs.Rationale(
                         org=listed.org, published_at=listed.published_at,
                         indicator=p.indicator, text=text, tags=rationale.tags_for(text),
-                        source_url=source_url, source_page=p.source_page))
+                        source_url=source_url, source_page=page_no,
+                        warnings=warnings))
                     stored += 1
                 rep.lines.append(
                     f"{listed.org} {listed.title}: 후보 {len(picked)}건 / "
