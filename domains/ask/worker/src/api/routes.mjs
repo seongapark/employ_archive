@@ -16,10 +16,35 @@ export const quotaKey = (ip, today) => `q:${ip}:${today}`;
 
 export async function checkQuota(kv, ip, today, limit) {
   const k = quotaKey(ip, today);
-  const used = Number((await kv.get(k)) ?? 0);
+  let used;
+  try {
+    used = Number((await kv.get(k)) ?? 0);
+  } catch {
+    // KV 가 죽으면 이용량을 셀 수 없다. 관대한 기본값(허용: true)으로 열어 두면 장애가
+    // 길어지는 동안 LLM 비용이 무한정 샌다 — 남용 방어가 존재하는 이유가 사라진다.
+    // "초과하면 LLM 만 건너뛰고 카드는 그대로 낸다" 는 이 설계의 원칙을 그대로 적용해
+    // 확인 실패도 LLM 은 건너뛰되, 사용자가 한도를 다 쓴 것(내일 다시)과 우리 저장소가
+    // 죽은 것(잠시 뒤 다시)은 서로 다른 사실이라 별도 신호(`확인불가`)로 가른다.
+    return { 허용: false, 남음: 0, 확인불가: true };
+  }
   if (used >= limit) return { 허용: false, 남음: 0 };
-  await kv.put(k, used + 1, { expirationTtl: 60 * 60 * 48 });
+  try {
+    await kv.put(k, used + 1, { expirationTtl: 60 * 60 * 48 });
+  } catch {
+    // put 실패는 이번 카운트가 안 늘 뿐이다 — get 으로 이미 한도 안임을 확인했으므로
+    // 이번 요청은 통과시킨다. 쓰기 지연 하나로 정상 이용자를 막는 것이 더 나쁘다.
+  }
   return { 허용: true, 남음: limit - used - 1 };
+}
+
+// 한도초과(사용자가 오늘 몫을 다 씀)와 확인불가(우리 KV 가 죽어 셀 수 없음)는 서로 다른
+// 사실이라 뭉개지 않는다 — 필드도 배지도 다르게 낸다. 카드(라우팅·한계 등)는 두 경우 다
+// 그대로 나가고, LLM(compose)만 건너뛴다.
+function 확인불가표시(카드) {
+  카드.할당량확인불가 = true;
+  카드.한계 = [...(카드.한계 ?? []), '이용량 확인에 실패해 문장 생성을 건너뛴다'];
+  카드.배지 = [...new Set([...(카드.배지 ?? []), '할당량확인불가'])];
+  return 카드;
 }
 
 // 어휘는 카탈로그(capability)에서만 뽑는다 — 하드코딩하면 카탈로그가 늘 때 조용히 낡는다.
@@ -41,10 +66,12 @@ export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
   if (!유형 || !슬롯) {
     // 1패스. 사용자가 슬롯을 고쳐 보내면 이 호출을 건너뛴다 → 결정적
     if (!q.허용) {
-      // 1패스조차 LLM 이라 할당량을 태운다 — 넘겼으면 분해 없이 메타한계로 떨어뜨린다.
-      // 원문슬롯은 LLM 을 부르지 않았으니 아직 없다.
-      const 카드 = await ask(deps, { 유형: '메타한계', 슬롯: {}, 한도초과: true });
+      // 1패스조차 LLM 이라 할당량을 태운다 — 넘겼거나 확인 못 했으면 분해 없이
+      // 메타한계로 떨어뜨린다. `한도초과` 는 확인불가일 때 false 로 넘긴다 — 진짜
+      // 초과가 아니라서다. 원문슬롯은 LLM 을 부르지 않았으니 아직 없다.
+      const 카드 = await ask(deps, { 유형: '메타한계', 슬롯: {}, 한도초과: !q.확인불가 });
       카드.원문슬롯 = null;
+      if (q.확인불가) 확인불가표시(카드);
       return 카드;
     }
     let raw = null;
@@ -54,8 +81,9 @@ export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
     원문슬롯 = n.원문슬롯;
   }
 
-  const 카드 = await ask(deps, { 유형, 슬롯, 저확신, 한도초과: !q.허용 });
+  const 카드 = await ask(deps, { 유형, 슬롯, 저확신, 한도초과: !q.허용 && !q.확인불가 });
   카드.원문슬롯 = 원문슬롯;
+  if (q.확인불가) 확인불가표시(카드);
   if (!q.허용) return 카드;                       // LLM 만 건너뛴다. 카드는 그대로
 
   let 문장 = null;

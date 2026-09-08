@@ -9,6 +9,13 @@ function memKv(seed = {}) {
   return { get: async (k) => m.get(k) ?? null,
            put: async (k, v) => void m.set(k, String(v)) };
 }
+// KV 장애를 흉내낸다 — get·put 을 독립적으로 던지게 할 수 있다.
+function 죽은Kv({ get: 죽은get = false, put: 죽은put = false } = {}) {
+  return {
+    get: async () => { if (죽은get) throw new Error('KV get 타임아웃'); return null; },
+    put: async () => { if (죽은put) throw new Error('KV put 타임아웃'); },
+  };
+}
 const 슬롯 = { 주제: '취업자', 집단축: ['연령'], 지역입도: '전국', 시간입도: '월',
               기간: { from: '2026-07', to: '2026-07' }, 출처: [] };
 
@@ -27,6 +34,21 @@ test('한도를 넘으면 막는다', async () => {
   const kv = memKv({ 'q:1.2.3.4:2026-09-08': '30' });
   const r = await checkQuota(kv, '1.2.3.4', '2026-09-08', 30);
   assert.equal(r.허용, false);
+});
+
+// ── KV 장애 — 관대한 기본값(허용: true)으로 열지 않는다 ───────────────────
+test('kv.get 이 던지면 막되, 한도초과와 다른 신호(확인불가)를 낸다', async () => {
+  const r = await checkQuota(죽은Kv({ get: true }), '1.2.3.4', '2026-09-08', 30);
+  assert.equal(r.허용, false);
+  assert.equal(r.남음, 0);
+  assert.equal(r.확인불가, true);
+});
+
+test('kv.put 이 던져도 이번 요청은 통과시킨다 — get 으로 이미 한도 안임을 확인했다', async () => {
+  const r = await checkQuota(죽은Kv({ put: true }), '1.2.3.4', '2026-09-08', 30);
+  assert.equal(r.허용, true);
+  assert.equal(r.남음, 29);
+  assert.equal(r.확인불가, undefined);
 });
 
 // ── 자가확인 1: 슬롯을 직접 주면 1패스를 건너뛴다 ──────────────────────────
@@ -50,6 +72,58 @@ test('한도 초과여도 카드는 나온다 — 기능이 죽지 않는다', a
   assert.ok(r.배지.includes('한도초과'));
   assert.ok(r.라우팅);           // 카드(라우팅·한계)는 그대로 나온다
   assert.ok(Array.isArray(r.한계));
+});
+
+// ── KV 장애 — checkQuota 가 던지지 않아도 handleAsk 가 그 신호를 카드에 반영해야 한다 ─
+test('kv.get 이 던져도 카드는 나온다 — 할당량확인불가, 한도초과와는 다른 배지, 근거·라우팅은 그대로', async () => {
+  const db = makeFakeDb({ observation: [
+    { source: 'eaps', breakdown: 'age', category: '30-39', period: '2026-07',
+      value: 600, unit: '천명', yoy: null, rse: null, rse_flag: null },
+  ] });
+  const llm = { compose: async () => { throw new Error('불려선 안 된다 — LLM 은 건너뛴다'); } };
+  const r = await handleAsk(
+    { db, kv: 죽은Kv({ get: true }), llm, quota: 30 },
+    { 유형: '수치조회', 슬롯, ip: '1.2.3.9', today: '2026-09-08' });
+  assert.equal(r.답변, null);
+  assert.equal(r.할당량확인불가, true);
+  assert.equal(r.한도초과, false);          // 진짜 초과가 아니다 — 뭉개지 않는다
+  assert.ok(r.한계.includes('이용량 확인에 실패해 문장 생성을 건너뛴다'));
+  assert.ok(r.배지.includes('할당량확인불가'));
+  assert.ok(!r.배지.includes('한도초과'));  // 다른 배지로 난다
+  assert.ok(r.라우팅);                      // 카드는 그대로 — 라우팅
+  assert.equal(r.근거.length, 1);           // 카드는 그대로 — 근거
+  assert.equal(r.근거[0].파생.합계, 600);
+});
+
+test('kv.put 이 던져도 정상 요청처럼 통과한다(설계상 판단) — 확인불가로 잘못 표시하지 않는다', async () => {
+  const llm = { compose: async () => ({ 답변: '', 근거: [] }) };
+  const r = await handleAsk(
+    { db: makeFakeDb(), kv: 죽은Kv({ put: true }), llm, quota: 30 },
+    { 유형: '수치조회', 슬롯, ip: '1.2.3.10', today: '2026-09-08' });
+  assert.equal(r.할당량확인불가, undefined);
+  assert.equal(r.한도초과, false);
+  // compose 가 정상 실행됐다는 것 자체가 "LLM 을 건너뛰지 않았다" 는 증거다
+  assert.equal(r.답변, '');
+});
+
+test('한도초과와 할당량확인불가는 서로 다른 필드·다른 배지다 — 뭉개지지 않는다', async () => {
+  const 초과kv = memKv({ 'q:1.2.3.4:2026-09-08': '30' });
+  const 죽은kv = 죽은Kv({ get: true });
+  const llm = { compose: async () => { throw new Error('불려선 안 된다'); } };
+  const 초과카드 = await handleAsk({ db: makeFakeDb(), kv: 초과kv, llm, quota: 30 },
+    { 유형: '수치조회', 슬롯, ip: '1.2.3.4', today: '2026-09-08' });
+  const 확인불가카드 = await handleAsk({ db: makeFakeDb(), kv: 죽은kv, llm, quota: 30 },
+    { 유형: '수치조회', 슬롯, ip: '1.2.3.11', today: '2026-09-08' });
+
+  assert.equal(초과카드.한도초과, true);
+  assert.equal(초과카드.할당량확인불가, undefined);
+  assert.ok(초과카드.배지.includes('한도초과'));
+  assert.ok(!초과카드.배지.includes('할당량확인불가'));
+
+  assert.equal(확인불가카드.한도초과, false);
+  assert.equal(확인불가카드.할당량확인불가, true);
+  assert.ok(확인불가카드.배지.includes('할당량확인불가'));
+  assert.ok(!확인불가카드.배지.includes('한도초과'));
 });
 
 // ── 자가확인 3: 근거에 없는 숫자를 쓰면 답변만 버리고 근거는 남긴다 ────────
