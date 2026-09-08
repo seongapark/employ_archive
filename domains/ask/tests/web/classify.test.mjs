@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { normalize, TYPES } from '../../worker/src/core/classify.mjs';
+import { normalize, TYPES, 카테고리_SYN, 축_SYN } from '../../worker/src/core/classify.mjs';
 
 // 어휘.주제 는 capability.주제 원문이다(2026-09-08 실측, domains/ask/data/capabilities.json:
 // eaps=["취업자수"], est=["종사자수"], ei=["상시가입자수"]) — 짧은 정규형이 아니다.
@@ -96,6 +96,20 @@ test('집단축의 카테고리 값을 축과 함께 건져 낸다', () => {
   assert.deepEqual(r.슬롯.집단축, ['연령']);
   assert.deepEqual(r.슬롯.category, { 연령: '30-39' });
   assert.equal(r.저확신, false);
+});
+
+test('카테고리_SYN 의 키는 전부 축_SYN 에도 있어 실제로 도달한다', () => {
+  // 한쪽에만 있으면 축 매핑이 실패해 저확신 → 메타한계로 떨어지고, 건진 카테고리가
+  // 영영 안 쓰인다. '여성 취업자 몇 명' 이 답변 불가로 떨어지던 자리다.
+  for (const [키, { 축, code }] of Object.entries(카테고리_SYN)) {
+    assert.equal(축_SYN[키], 축, `축_SYN 에 '${키}' 가 없거나 축이 다르다`);
+    const r = normalize({ 유형: '수치조회', 확신도: 0.9,
+                          슬롯: { 주제: '취업자', 집단축: [키] } }, { 어휘 });
+    assert.equal(r.저확신, false, `'${키}' 가 저확신으로 떨어진다`);
+    assert.equal(r.유형, '수치조회', `'${키}' 가 메타한계로 떨어진다`);
+    assert.deepEqual(r.슬롯.집단축, [축], `'${키}' 의 집단축`);
+    assert.deepEqual(r.슬롯.category, { [축]: code }, `'${키}' 의 category`);
+  }
 });
 
 test('카테고리를 못 집으면 빈 객체다 — 지어내지 않는다', () => {
