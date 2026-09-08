@@ -3,8 +3,11 @@ import assert from 'node:assert/strict';
 import { domainState, updatedLabel, DOMAINS } from '../js/state.js';
 
 test('DOMAINS는 네 영역을 고정 순서로 갖는다', () => {
+  // economy(경제동향) 자리는 press(행통 모니터링)로 바뀌었다 — 거시 지표 동향은
+  // 이 아카이브가 다루는 축이 아니었고, 고용행정통계 보도 모니터링이
+  // 앞의 세 도메인과 같은 원자료(고용노동부 보도자료)를 쓴다.
   assert.deepEqual(DOMAINS.map(d => d.slug),
-    ['forecast', 'employment', 'supply', 'economy']);
+    ['forecast', 'employment', 'supply', 'press']);
 });
 
 test('last_run이 없으면 준비중이다', () => {
