@@ -107,7 +107,7 @@
       "role": "지지", "timing": "선후검정", "expected_sign": "-", "lead_lag": "선행 1~3개월",
       "falsifies": null, "time_grain": "월" },
     { "hypothesis_id": "H2_경기순환", "indicator_id": "IND_사무직취업자",
-      "role": "falsifies", "timing": "수준확인", "expected_sign": null, "lead_lag": null,
+      "role": "falsifies", "timing": "선후검정", "expected_sign": null, "lead_lag": null,
       "falsifies": "사무직 취업자가 전체 취업자보다 유독 크게 감소하면 H2 단독 설명 부족(H1·H3 병행 검토)",
       "time_grain": "월" },
     { "hypothesis_id": "H3_산업구조", "indicator_id": "IND_KGJ피보험자",
