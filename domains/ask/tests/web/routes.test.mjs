@@ -4,10 +4,26 @@ import { handleAsk, quotaKey, checkQuota } from '../../worker/src/api/routes.mjs
 import { verify } from '../../worker/src/core/verify.mjs';
 import { makeFakeDb } from './fixtures/fakedb.mjs';
 
+// 가짜가 실물보다 관대하면 테스트가 거짓 안심을 준다 — 이번 사고의 교훈이다.
+// 예전 이 가짜는 `m.set(k, String(v))` 로 **실물 바인딩이 하지 않는 문자열 변환**을
+// 대신 해 줬고, 그래서 `kv.put(k, used + 1)`(숫자)이 프로덕션에서만 TypeError 를
+// 던져 IP 할당량이 통째로 무효가 된 것을 아무 테스트도 잡지 못했다.
+// 지금은 실물 Workers KV 와 같은 계약을 지킨다 — 값은
+// string | ArrayBuffer | ArrayBufferView | ReadableStream 만 받고, 그 밖이면 던진다.
 function memKv(seed = {}) {
   const m = new Map(Object.entries(seed));
-  return { get: async (k) => m.get(k) ?? null,
-           put: async (k, v) => void m.set(k, String(v)) };
+  return {
+    get: async (k) => m.get(k) ?? null,
+    put: async (k, v) => {
+      if (typeof v !== 'string' && !(v instanceof ArrayBuffer) && !ArrayBuffer.isView(v)) {
+        throw new TypeError(
+          `KV put() 에 넘길 수 있는 값은 string|ArrayBuffer|ArrayBufferView|ReadableStream 뿐이다: ${typeof v}`);
+      }
+      m.set(k, v);
+    },
+    // 테스트가 저장된 원값을 직접 들여다볼 수 있게 한다(카운트가 실제로 느는지 확인용)
+    _raw: m,
+  };
 }
 // KV 장애를 흉내낸다 — get·put 을 독립적으로 던지게 할 수 있다.
 function 죽은Kv({ get: 죽은get = false, put: 죽은put = false } = {}) {
@@ -34,6 +50,28 @@ test('한도를 넘으면 막는다', async () => {
   const kv = memKv({ 'q:1.2.3.4:2026-09-08': '30' });
   const r = await checkQuota(kv, '1.2.3.4', '2026-09-08', 30);
   assert.equal(r.허용, false);
+});
+
+// ── Critical 1(최종 리뷰): 카운트가 **실제로** 는다 ───────────────────────
+// 예전엔 put 에 숫자를 넘겼고 실물 KV 가 TypeError 를 던졌지만 checkQuota 의
+// catch 가 그것을 삼켜 "이번 요청은 통과" 로 처리했다 — 모든 요청에서 카운트가
+// 안 늘어 확정사항 #5(IP 별 하루 할당량)가 통째로 작동하지 않았다.
+test('같은 IP 로 거듭 물으면 카운트가 실제로 는다 — 할당량이 진짜로 센다', async () => {
+  const kv = memKv();
+  const a = await checkQuota(kv, '1.2.3.4', '2026-09-08', 3);
+  const b = await checkQuota(kv, '1.2.3.4', '2026-09-08', 3);
+  const c = await checkQuota(kv, '1.2.3.4', '2026-09-08', 3);
+  const d = await checkQuota(kv, '1.2.3.4', '2026-09-08', 3);
+  assert.deepEqual([a.허용, b.허용, c.허용, d.허용], [true, true, true, false]);
+  assert.deepEqual([a.남음, b.남음, c.남음, d.남음], [2, 1, 0, 0]);
+  // 저장된 값은 문자열이다 — 실물 KV 가 받는 형태 그대로
+  assert.equal(kv._raw.get('q:1.2.3.4:2026-09-08'), '3');
+});
+
+test('가짜 KV 는 실물처럼 숫자를 거부한다 — 가짜가 더 관대하면 테스트가 거짓 안심을 준다', async () => {
+  const kv = memKv();
+  await assert.rejects(() => kv.put('q:x:2026-09-08', 1), TypeError);
+  await assert.doesNotReject(() => kv.put('q:x:2026-09-08', '1'));
 });
 
 // ── KV 장애 — 관대한 기본값(허용: true)으로 열지 않는다 ───────────────────

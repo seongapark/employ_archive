@@ -23,6 +23,9 @@ function renderError(message) {
   document.getElementById('evidence').innerHTML = `<p class="error">${esc(message)}</p>`;
   document.getElementById('limits').innerHTML = '';
   document.getElementById('sources').innerHTML = '';
+  // Minor(최종 리뷰): 여기서 #conflicts 를 안 지우면, 성공 → 오류 순으로 물었을 때
+  // 이전 질문의 "출처 간 상충" 이 오류 화면에 그대로 남는다.
+  document.getElementById('conflicts').innerHTML = '';
   document.getElementById('followups').innerHTML = '';
 }
 

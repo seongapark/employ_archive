@@ -245,6 +245,21 @@
 .routing { background: var(--card); border: 1px dashed var(--border); border-radius: 10px; padding: 10px 12px; }
 .routing__group { margin: 4px 0; font-size: 13px; }
 
+/* 우회경로 — "못 준다" 로 끝내지 않으려고 만든 장치다. 답변이 사라지는 순간
+   (검증실패·한도초과·할당량확인불가)에도 이 블록은 남는다 */
+
+.detour {
+  margin-top: 8px;
+  background: var(--accent-light);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.detour h4 { margin: 0 0 4px 0; font-size: 12px; color: var(--accent); }
+.detour__row { margin: 2px 0; font-size: 13px; }
+.detour__approval { color: var(--text-muted); font-size: 12px; font-style: normal; }
+
 /* 현상 — 원인탐색에서 답변이 사라져도 "무슨 현상을 판정하려던 건지" 는 남는다 */
 
 .phenomenon {

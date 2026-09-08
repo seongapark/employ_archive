@@ -29,7 +29,13 @@ export async function checkQuota(kv, ip, today, limit) {
   }
   if (used >= limit) return { 허용: false, 남음: 0 };
   try {
-    await kv.put(k, used + 1, { expirationTtl: 60 * 60 * 48 });
+    // **문자열로 넘긴다.** Workers KV 의 put() 이 받는 값은
+    // string | ArrayBuffer | ArrayBufferView | ReadableStream 뿐이라, 숫자를 넘기면
+    // 실물 바인딩이 TypeError 를 던진다. 그 예외를 아래 catch 가 삼키므로 프로덕션에서
+    // **모든 요청의 카운트가 안 늘고 IP 할당량이 통째로 무효**가 됐다(최종 리뷰 Critical 1).
+    // 테스트가 못 잡은 이유는 가짜 KV 가 String() 을 대신 해 줬기 때문이다 —
+    // 그쪽도 실물과 같게 고쳤다(routes.test.mjs 의 memKv).
+    await kv.put(k, String(used + 1), { expirationTtl: 60 * 60 * 48 });
   } catch {
     // put 실패는 이번 카운트가 안 늘 뿐이다 — get 으로 이미 한도 안임을 확인했으므로
     // 이번 요청은 통과시킨다. 쓰기 지연 하나로 정상 이용자를 막는 것이 더 나쁘다.

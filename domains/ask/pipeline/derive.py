@@ -10,6 +10,27 @@ TODAY = "2026-09-08"
 EV = "저장소 domains/employment/data (수집기가 실제로 채우는 축)"
 
 
+def 은는(word: str) -> str:
+    """받침에 따라 `은`/`는` 을 고른다.
+
+    f-string 에 `는` 을 고정으로 붙이면 받침 있는 이름 뒤에서 어색해진다
+    ("…고용행정 통계로 본 노동시장 동향는…"). 이 문자열은 `compare().설명` →
+    `카드.한계` 를 타고 **화면과 LLM 프롬프트 양쪽에** 그대로 나가므로 고쳤다.
+
+    판정은 한글 음절의 종성으로 한다 — 한글 음절 코드는 0xAC00 부터
+    (초성 × 21 + 중성) × 28 + 종성 이라, 28 로 나눈 나머지가 0 이 아니면 받침이 있다.
+    마지막 글자가 한글 음절이 아니면(영문·숫자·기호) 판정할 근거가 없으므로
+    `는` 으로 둔다 — 지금 카탈로그의 이름은 전부 한글로 끝난다.
+    """
+    s = str(word or "")
+    if not s:
+        return "는"
+    last = s[-1]
+    if not ("가" <= last <= "힣"):
+        return "는"
+    return "은" if (ord(last) - 0xAC00) % 28 else "는"
+
+
 def derive_capabilities(segments, industries, sources):
     codes = [s["code"] for s in sources]
     axes = {c: [] for c in codes}
@@ -72,8 +93,9 @@ def derive_conflicts(sources):
         rows.append({
             "id": f"CONF-{a}-{b}-개념", "source_a": a, "source_b": b,
             "차이유형": "개념",
-            "설명": f"{by[a]['name_ko']}는 {by[a]['headline_ko']}, "
-                    f"{by[b]['name_ko']}는 {by[b]['headline_ko']}로 개념이 다르다",
+            "설명": f"{by[a]['name_ko']}{은는(by[a]['name_ko'])} {by[a]['headline_ko']}, "
+                    f"{by[b]['name_ko']}{은는(by[b]['name_ko'])} {by[b]['headline_ko']}로 "
+                    f"개념이 다르다",
             "비교가능": "증감률만",
             "evidence": EV, "verified_at": TODAY, "evidence_status": "확인"})
         rows.append({

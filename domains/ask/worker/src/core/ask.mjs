@@ -349,6 +349,12 @@ export async function ask(deps, { 유형, 슬롯: 입력슬롯 = {}, 저확신 =
       const m = await meta(deps, { 출처: ids });
       r.소스 = m.소스;
       if (m.미확인.length) r.미확인 = [...(r.미확인 ?? []), ...m.미확인];
+      // Minor(최종 리뷰): `충돌` 도 같은 meta() 호출에서 나온다. 여기서 안 옮기면
+      // 출처비교 화면이 위(비교 블록)에서는 "개념이 다르다" 고 하고 아래
+      // "출처 간 상충" 에는 `.conflicts:empty::after` 때문에 "없음" 이라 쓴다 —
+      // 같은 화면이 스스로 모순된다. 카드.충돌 이 메타한계·범위밖에서만 채워졌기
+      // 때문이었다. 소스를 옮기는 자리에서 충돌도 같이 옮긴다.
+      r.충돌 = m.충돌;
       const 소스이름표 = Object.fromEntries(
         [...m.소스, ...m.미확인].map((s) => [s.id, s.name_ko]));
       for (const e of r.근거 ?? []) 지표이름조립(e, 소스이름표);

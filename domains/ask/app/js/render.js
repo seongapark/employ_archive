@@ -118,10 +118,18 @@ function 전망블록(esc, 카드) {
       <h4>${esc(year === '연도 미상' ? year : `${year}년 전망`)}</h4>
       ${items.map((r) => 전망행(esc, r)).join('')}
     </div>`).join('');
-  const 근거서술 = (카드.근거서술 ?? []).map((r) => `<blockquote class="rationale">
+  // Important 3(최종 리뷰): 컬럼 이름은 `url` 이 아니라 **`source_url`·`source_page`**
+  // 다(0001_init.sql 의 forecast_rationale). `r.url` 은 항상 falsy 라 원문 링크가
+  // 영구히 안 나왔다. 페이지 번호가 있으면 같이 보여 준다 — 100쪽짜리 PDF 에서
+  // "그 문장이 어디 있는지" 가 인용의 절반이다.
+  const 근거서술 = (카드.근거서술 ?? []).map((r) => {
+    const 라벨 = r.source_page != null && r.source_page !== ''
+      ? `원문 p.${r.source_page}` : '원문';
+    return `<blockquote class="rationale">
     ${esc(r.text ?? r.내용 ?? '')}
-    ${r.url ? 링크또는텍스트(esc, r.url, '원문') : ''}
-  </blockquote>`).join('');
+    ${r.source_url ? 링크또는텍스트(esc, r.source_url, 라벨) : ''}
+  </blockquote>`;
+  }).join('');
   return rows + 근거서술;
 }
 
@@ -146,6 +154,31 @@ function 현상블록(esc, 현상) {
     <h3>${esc(현상.name_ko ?? '')}</h3>
     ${현상.정의 ? `<p class="phenomenon__def">${esc(현상.정의)}</p>` : ''}
     ${현상.근거서술 ? `<p class="phenomenon__evidence">${esc(현상.근거서술)}</p>` : ''}
+  </div>`;
+}
+
+// Important 2(최종 리뷰): `카드.우회경로`(라우팅이 만든 우회)를 화면이 한 번도 안
+// 읽었다. 스펙 §6 은 이걸 `메타한계`·`범위밖` 근거 블록의 **필수 구성요소**로 명시하고
+// 골든 `메타한계-연령별.json` 도 기대에 넣어 뒀다.
+//
+// 하필 답변이 사라지는 바로 그 순간(검증실패·한도초과·할당량확인불가)에 우회경로도
+// 같이 사라졌다 — "못 준다" 로 끝내지 않으려고 만든 장치가 정확히 필요한 순간에
+// 안 보였다. 그래서 유형을 가리지 않고, 답변이 있든 없든 항상 그린다.
+//
+// route() 는 `{경로, 제약, 승인}` 객체를 내지만 문자열로 들어와도 그린다.
+function 우회블록(esc, 우회경로) {
+  const rows = (우회경로 ?? []).filter(Boolean);
+  if (!rows.length) return '';
+  const 행 = (u) => {
+    const { 경로, 제약, 승인 } = typeof u === 'string' ? { 경로: u } : u;
+    return `<p class="detour__row">
+      <b>${esc(경로 ?? '')}</b>${제약 ? ` — ${esc(제약)}` : ''}${
+      승인 && 승인 !== '불요' ? ` <em class="detour__approval">승인 ${esc(승인)}</em>` : ''}
+    </p>`;
+  };
+  return `<div class="detour">
+    <h4>우회 경로</h4>
+    ${rows.map(행).join('')}
   </div>`;
 }
 
@@ -229,8 +262,10 @@ export function renderAll(카드, { esc, badgeLabel, understandLine, evidenceCol
   // ── 답변: 검증실패·한도초과·할당량확인불가면 이 블록만 사라진다. 근거는 남는다 ──
   $('answer').innerHTML = 카드.답변 ? `<p class="answer__text">${esc(카드.답변)}</p>` : '';
 
-  // ── 근거: 유형별로 모양이 다르다 ──────────────────────────────────────
-  $('evidence').innerHTML = evidenceHtml(esc, 카드, evidenceColumns);
+  // ── 근거: 유형별로 모양이 다르다. 우회경로는 유형을 안 가리고 뒤에 붙는다 ──
+  // (답변이 사라지는 순간에도 남아야 하므로 답변 블록이 아니라 여기에 붙인다)
+  $('evidence').innerHTML =
+    evidenceHtml(esc, 카드, evidenceColumns) + 우회블록(esc, 카드.우회경로);
 
   // ── 한계·미확인 ──────────────────────────────────────────────────────
   $('limits').innerHTML = [
