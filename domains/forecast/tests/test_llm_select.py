@@ -159,10 +159,44 @@ def test_call_api_posts_the_expected_shape_to_the_messages_endpoint(monkeypatch)
     assert captured["json"]["messages"][0]["content"] == "프롬프트-내용"
 
 
-def test_call_api_raises_when_the_key_is_missing(monkeypatch):
+def test_call_api_raises_when_both_keys_are_missing(monkeypatch):
     monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.delenv("OPENROUTER_API_KEY", raising=False)
     with pytest.raises(RuntimeError):
         s._call_api("x")
+
+
+def test_call_api_falls_back_to_openrouter_when_only_that_key_is_set(monkeypatch):
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-or-test")
+    captured = {}
+
+    def fake_post(url, headers=None, json=None, timeout=None):
+        captured["url"] = url
+        captured["headers"] = headers
+        captured["json"] = json
+        # OpenAI 호환 응답 — Anthropic 의 content 배열이 아니다.
+        return _FakeResponse(200, {"choices": [{"message": {"content": "가나다"}}]})
+
+    monkeypatch.setattr(s.requests, "post", fake_post)
+
+    assert s._call_api("프롬프트-내용") == "가나다"
+    # 모듈 상수가 아니라 리터럴과 대조한다(위 테스트와 같은 이유).
+    assert captured["url"] == "https://openrouter.ai/api/v1/chat/completions"
+    assert captured["headers"]["Authorization"] == "Bearer sk-or-test"
+    assert "x-api-key" not in captured["headers"]
+    assert captured["json"]["model"] == "anthropic/claude-sonnet-5"
+    assert captured["json"]["messages"][0]["content"] == "프롬프트-내용"
+
+
+def test_anthropic_wins_when_both_keys_are_set(monkeypatch):
+    """공급자 차례를 고정한다 — press 의 llm_cite 와 같아야 한다."""
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "sk-test-key")
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-or-test")
+    url, model, headers = s.provider()
+    assert url == "https://api.anthropic.com/v1/messages"
+    assert model == "claude-sonnet-5"
+    assert headers["x-api-key"] == "sk-test-key"
 
 
 def test_call_api_raises_on_a_non_200_and_keeps_the_body_text(monkeypatch):
@@ -201,3 +235,24 @@ def test_select_uses_the_injected_call_and_does_not_touch_the_network():
     got = s.select("KDI", "t", ["emp_change"], PAGES, call=fake)
     assert got == [s.Picked("emp_change", "가", 2)]
     assert "KDI" in seen["prompt"]
+
+
+def test_call_api_raises_a_named_error_when_the_content_is_null(monkeypatch):
+    """추론 토큰이 max_tokens 를 다 먹으면 OpenRouter 는 content 를 null 로
+    돌려준다. 그대로 넘기면 parse_response 에서 'NoneType has no attribute
+    strip' 이 나서, 실행 로그만 보고는 무엇이 잘못됐는지 알 수 없다."""
+    monkeypatch.delenv("ANTHROPIC_API_KEY", raising=False)
+    monkeypatch.setenv("OPENROUTER_API_KEY", "sk-or-test")
+
+    body = {"choices": [{"finish_reason": "length", "message": {"content": None}}]}
+
+    def fake_post(*a, **kw):
+        # 진짜 Response 는 .text 가 본문 그대로다 — 가짜도 그래야 오류
+        # 메시지가 본문을 싣는지 정직하게 확인할 수 있다.
+        return _FakeResponse(200, body, text=json.dumps(body))
+
+    monkeypatch.setattr(s.requests, "post", fake_post)
+
+    with pytest.raises(ValueError) as e:
+        s._call_api("x")
+    assert "length" in str(e.value)   # 본문을 실어 보내 원인을 알 수 있어야 한다

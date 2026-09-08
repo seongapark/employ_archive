@@ -34,13 +34,13 @@ def _via_detail(detail_url: str, find_pdf) -> Callable[[], tuple[str, list[str]]
     """주소를 상세 페이지에서 읽는 출처(BOK·KIET)용."""
     def fetch() -> tuple[str, list[str]]:
         url = find_pdf(http.get(detail_url).text)
-        return url, pdf.page_texts(http.get(url).content)
+        return url, pdf.page_texts_with_breaks(http.get(url).content)
     return fetch
 
 
 def _direct(url: str) -> Callable[[], tuple[str, list[str]]]:
     """주소를 계산으로 아는 출처(KLI·OECD Interim)용."""
-    return lambda: (url, pdf.page_texts(http.get(url).content))
+    return lambda: (url, pdf.page_texts_with_breaks(http.get(url).content))
 
 
 def _via_ocr(pdf_url: str) -> Callable[[], tuple[str, list[str]]]:
@@ -60,16 +60,23 @@ def _via_kdi_chapters(issue) -> Callable[[], tuple[str, list[str]]]:
     def fetch() -> tuple[str, list[str]]:
         page_html = http.get(issue.url).text
         for _, url in kdi.parse_chapters(page_html):
+            content = http.get(url).content
             try:
-                pages = [kdi._unfold_february_header(t)
-                         for t in pdf.page_texts(http.get(url).content)]
+                # 장을 고르는 일은 빈 줄이 없는 원문으로 한다 —
+                # _unfold_february_header 는 접힌 네 줄이 잇달아 있을 때만
+                # 손대므로, 문단 나눔이 그 사이에 빈 줄을 넣으면 2월호가
+                # 조용히 안 펴져 요약표를 실은 장을 못 찾는다.
+                plain = [kdi._unfold_february_header(t)
+                         for t in pdf.page_texts(content)]
                 found = pdf.find_summary_table(
-                    pages, kdi.LABEL_TO_INDICATOR, kdi.REQUIRED_INDICATORS)
+                    plain, kdi.LABEL_TO_INDICATOR, kdi.REQUIRED_INDICATORS)
             except Exception:
                 continue
             if found is None:
                 continue
-            return url, pages
+            # LLM 에게는 문단 나눔이 든 원문을 준다. 같은 바이트를 두 번
+            # 읽지만, 이 도구는 사람이 돌리는 것이라 정확도가 먼저다.
+            return url, pdf.page_texts_with_breaks(content)
         raise ValueError(f"{issue.title}: 요약표를 실은 장을 찾지 못했다")
     return fetch
 
