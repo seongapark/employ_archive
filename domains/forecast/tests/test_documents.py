@@ -47,7 +47,7 @@ def test_fetch_pages_returns_the_source_url_with_the_pages(monkeypatch):
     monkeypatch.setattr(kli, "list_issues",
                         lambda: [Issue("t", date(2026, 1, 2), "https://x/list_no=7")])
     monkeypatch.setattr(http, "get", lambda url, **k: _Resp(b"pdf"))
-    monkeypatch.setattr(pdf, "page_texts", lambda data: ["1쪽", "2쪽"])
+    monkeypatch.setattr(pdf, "page_texts_with_breaks", lambda data: ["1쪽", "2쪽"])
     url, pages = d.SOURCES["kli"]()[0].fetch_pages()
     assert url.startswith("http")
     assert pages == ["1쪽", "2쪽"]
@@ -69,7 +69,7 @@ def test_bok_fetch_pages_resolves_the_pdf_link_from_the_detail_page(monkeypatch)
         return _Resp(b"pdf-bytes")
 
     monkeypatch.setattr(http, "get", fake_get)
-    monkeypatch.setattr(pdf, "page_texts", lambda data: ["1쪽"])
+    monkeypatch.setattr(pdf, "page_texts_with_breaks", lambda data: ["1쪽"])
 
     url, pages = d.SOURCES["bok"]()[0].fetch_pages()
     assert url == pdf_url
@@ -83,7 +83,7 @@ def test_oecd_interim_fetch_pages_uses_the_editions_url(monkeypatch):
     monkeypatch.setattr(oecd_interim, "EDITIONS",
                         {"March 2026": (date(2026, 3, 26), "https://x/oecd.pdf")})
     monkeypatch.setattr(http, "get", lambda url, **k: _Resp(b"pdf"))
-    monkeypatch.setattr(pdf, "page_texts", lambda data: ["1쪽"])
+    monkeypatch.setattr(pdf, "page_texts_with_breaks", lambda data: ["1쪽"])
 
     listed = d.SOURCES["oecd_interim"]()
     assert listed[0].published_at == date(2026, 3, 26)
@@ -123,44 +123,6 @@ def test_keis_fetch_pages_ocrs_the_full_document_at_400dpi(monkeypatch):
     assert captured["preprocess"] is True
 
 
-def test_kdi_fetch_pages_unfolds_the_february_header(monkeypatch):
-    """KDI 2월호는 수정폭 헤더가 세로로 접혀 나온다. _unfold_february_header 를
-    빠뜨리면 그 회차 본문이 어긋난다 — 호출 여부가 아니라 실제로 펴진 결과가
-    돌아오는지를 확인한다(호출만 확인하면 인자 순서가 바뀌어도 통과해 버린다).
-    """
-    from domains.forecast.pipeline import http, pdf
-    from domains.forecast.pipeline.collectors import kdi
-    from domains.forecast.pipeline.report import Issue
-
-    issue = Issue("경제전망(2026년 2월)", date(2026, 2, 1), "https://x/issue")
-    chapter_url = "https://x/chapter.pdf"
-    # 연도 한 줄 → 연도 두 개 줄 → 수정폭 줄 → 기간 줄, 접힌 모양 그대로.
-    folded = "\n".join(["2026", "2025 2026", "수정폭1)", "상반기 하반기 연간 연간"])
-    unfolded = "\n".join(["2025 2026 2026", "상반기 하반기 연간 수정폭1)"])
-    assert kdi._unfold_february_header(folded) == unfolded  # 전제 확인
-
-    monkeypatch.setattr(kdi, "list_issues", lambda: [issue])
-    monkeypatch.setattr(kdi, "parse_chapters",
-                        lambda html: [("요약", chapter_url)])
-
-    def fake_get(url, **k):
-        if url == issue.url:
-            return _TextResp("<html>본문</html>")
-        assert url == chapter_url, f"예상 밖 주소: {url}"
-        return _Resp(b"pdf-bytes")
-
-    monkeypatch.setattr(http, "get", fake_get)
-    monkeypatch.setattr(pdf, "page_texts", lambda data: [folded])
-    # find_summary_table 자체의 판정 로직은 kdi 자신의 테스트가 이미 지킨다.
-    # 여기서는 documents.py 가 unfold 된 페이지를 넘기고 그대로 돌려주는지만 본다.
-    monkeypatch.setattr(pdf, "find_summary_table",
-                        lambda pages, labels, required: (1, pages[0]))
-
-    url, pages = d.SOURCES["kdi"]()[0].fetch_pages()
-    assert url == chapter_url
-    assert pages == [unfolded]
-
-
 class _Resp:
     def __init__(self, content):
         self.content = content
@@ -173,3 +135,68 @@ class _TextResp:
 
 def _boom(*a, **k):
     raise AssertionError("목록 단계에서 네트워크를 탔다")
+
+
+def test_pdf_paths_read_the_text_with_paragraph_breaks(monkeypatch):
+    """근거 경로는 문단 나눔이 들어간 원문을 쓴다 — llm_verify 가 표지도
+    마침표도 없는 항목의 시작을 그 빈 줄로 알아본다. 매일 도는 수집기가
+    쓰는 pdf.page_texts 는 그대로 둔다."""
+    from domains.forecast.pipeline import http, pdf
+    from domains.forecast.pipeline.collectors import kli
+    from domains.forecast.pipeline.report import Issue
+
+    monkeypatch.setattr(kli, "list_issues",
+                        lambda: [Issue("t", date(2026, 1, 2), "https://x/list_no=7")])
+    monkeypatch.setattr(http, "get", lambda url, **k: _Resp(b"pdf"))
+    monkeypatch.setattr(pdf, "page_texts", _boom)
+    monkeypatch.setattr(pdf, "page_texts_with_breaks",
+                        lambda data: ["항목 하나\n\n항목 둘"])
+
+    _, pages = d.SOURCES["kli"]()[0].fetch_pages()
+
+    assert pages == ["항목 하나\n\n항목 둘"]
+
+
+def test_kdi_chapter_search_uses_the_unbroken_text_so_the_february_header_unfolds(monkeypatch):
+    """_unfold_february_header 는 네 줄이 잇달아 있을 때만 손댄다. 문단 나눔이
+    그 사이에 빈 줄을 넣으면 모양이 안 맞아 조용히 안 펴지고, 그 회차는
+    요약표를 실은 장을 못 찾는다. 그래서 장 선택은 빈 줄이 없는 원문으로
+    하고, 빈 줄이 든 원문은 LLM 에게만 넘긴다.
+
+    호출 여부가 아니라 find_summary_table 이 실제로 받은 원문을 본다 —
+    호출만 확인하면 인자 순서가 바뀌어도 통과해 버린다."""
+    from domains.forecast.pipeline import http, pdf
+    from domains.forecast.pipeline.collectors import kdi
+    from domains.forecast.pipeline.report import Issue
+
+    issue = Issue("경제전망(2026년 2월)", date(2026, 2, 1), "https://x/issue")
+    chapter_url = "https://x/chapter.pdf"
+    folded = "\n".join(["2026", "2025 2026", "수정폭1)", "상반기 하반기 연간 연간"])
+    unfolded = "\n".join(["2025 2026 2026", "상반기 하반기 연간 수정폭1)"])
+    broken = "\n".join(["2026", "", "2025 2026", "수정폭1)", "상반기 하반기 연간 연간"])
+    assert kdi._unfold_february_header(broken) == broken  # 전제: 빈 줄이 끼면 안 펴진다
+
+    monkeypatch.setattr(kdi, "list_issues", lambda: [issue])
+    monkeypatch.setattr(kdi, "parse_chapters", lambda html: [("요약", chapter_url)])
+
+    def fake_get(url, **k):
+        if url == issue.url:
+            return _TextResp("<html>본문</html>")
+        return _Resp(b"pdf-bytes")
+
+    monkeypatch.setattr(http, "get", fake_get)
+    monkeypatch.setattr(pdf, "page_texts", lambda data: [folded])
+    monkeypatch.setattr(pdf, "page_texts_with_breaks", lambda data: [broken])
+
+    seen = {}
+
+    def fake_find(pages, labels, required):
+        seen["pages"] = pages
+        return (1, pages[0])
+
+    monkeypatch.setattr(pdf, "find_summary_table", fake_find)
+
+    url, pages = d.SOURCES["kdi"]()[0].fetch_pages()
+
+    assert seen["pages"] == [unfolded]   # 장 선택은 펴진 원문으로
+    assert pages == [broken]             # LLM 에는 문단 나눔이 든 원문으로

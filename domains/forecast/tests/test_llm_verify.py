@@ -229,3 +229,22 @@ def test_accepts_a_sentence_that_includes_its_own_dash_marker():
     page = "개요\n- 항목 내용입니다 계속된다"
     candidate = "- 항목 내용입니다 계속된다"
     assert v.verify(candidate, page) == candidate
+
+
+# 표지도 마침표도 없이 세로 간격으로만 갈리는 항목(KDI 요약 쪽) — pdf 가
+# 그 자리에 빈 줄을 넣어 주므로, 빈 줄을 항목 시작으로 인정한다.
+FUSED = ("우리 경제는 반도체경기 호황에 힘입어\n"
+         "2027년에도 2.2% 성장할 전망\n"
+         "\n"
+         "취업자 수는 내수 개선세가 파급되면서\n"
+         "20만명으로 확대될 전망")
+
+
+def test_accepts_an_item_that_starts_after_a_blank_line():
+    candidate = "취업자 수는 내수 개선세가 파급되면서 20만명으로 확대될 전망"
+    assert v.verify(candidate, FUSED) == candidate
+
+
+def test_still_rejects_a_fragment_starting_at_a_wrapped_line_without_a_blank_line():
+    with pytest.raises(v.Rejected):
+        v.verify("20만명으로 확대될 전망", FUSED)

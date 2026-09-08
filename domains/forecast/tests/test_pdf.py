@@ -177,3 +177,89 @@ def test_bold_undo_keeps_repeated_digits_of_a_thousands_separator():
 
 def test_bold_undo_leaves_an_ordinary_line_alone():
     assert pdf.unbold_line("경상수지(억달러) 1,000 2,000") == "경상수지(억달러) 1,000 2,000"
+
+
+def _lines(*rows):
+    """(글, top) 들로 pdfplumber extract_text_lines 모양을 만든다(줄 높이 11)."""
+    return [{"text": text, "top": top, "bottom": top + 11} for text, top in rows]
+
+
+def test_paragraph_break_lands_between_items_not_inside_a_wrapped_one():
+    # KDI 요약 쪽의 실측 모양 — 감김 6.5, 항목 사이 17. 표지도 마침표도 없다.
+    got = pdf.text_with_paragraph_breaks(_lines(
+        ("우리 경제는 반도체경기 호황에 힘입어", 100),
+        ("2027년에도 2.2% 성장할 전망", 117.5),      # 감김(6.5)
+        ("소비자물가는 국제유가 상승으로", 145),      # 새 항목(17)
+        ("2.2%로 상승폭이 축소될 전망", 162.5),      # 감김(6.5)
+    ))
+    assert got == ("우리 경제는 반도체경기 호황에 힘입어\n"
+                   "2027년에도 2.2% 성장할 전망\n"
+                   "\n"
+                   "소비자물가는 국제유가 상승으로\n"
+                   "2.2%로 상승폭이 축소될 전망")
+
+
+def test_no_break_when_the_page_has_no_clean_valley_between_the_two_gaps():
+    # 간격이 7·9·11 로 이어져 감김과 문단 나눔이 안 갈린다. 이럴 때 빈 줄을
+    # 넣으면 문장 한가운데를 항목 시작으로 만들 수 있다 — 아무것도 안 넣는다.
+    got = pdf.text_with_paragraph_breaks(_lines(
+        ("첫 줄", 100), ("둘째 줄", 118), ("셋째 줄", 138), ("넷째 줄", 160)))
+    assert got == "첫 줄\n둘째 줄\n셋째 줄\n넷째 줄"
+
+
+def test_one_unusually_tight_pair_does_not_define_the_wrap_gap():
+    # 위첨자·겹친 줄처럼 유난히 붙은 자리가 하나 있으면, 그것을 감김 간격으로
+    # 삼는 순간 임계가 바닥으로 내려가 감긴 줄마다 빈 줄이 들어간다.
+    got = pdf.text_with_paragraph_breaks(_lines(
+        ("본문 첫 줄", 100),
+        ("유난히 붙은 줄", 112),      # 1.0 — 이상치
+        ("감긴 줄 하나", 129.5),      # 6.5
+        ("감긴 줄 둘", 147),          # 6.5
+        ("새 항목이 시작한다", 175),   # 17
+        ("그 항목의 감긴 줄", 192.5),  # 6.5
+    ))
+    assert got == ("본문 첫 줄\n유난히 붙은 줄\n감긴 줄 하나\n감긴 줄 둘\n"
+                   "\n"
+                   "새 항목이 시작한다\n그 항목의 감긴 줄")
+
+
+def _tiny_pdf_placed(pages):
+    """페이지마다 (글, y) 를 그 자리에 찍은 최소 PDF — 줄 간격을 시험한다."""
+    objects = ["<</Type/Catalog/Pages 2 0 R>>", None]
+    kids = []
+    for i, placements in enumerate(pages):
+        page_no = 3 + i * 2
+        content = " ".join(
+            f"BT /F1 12 Tf 20 {y} Td ({text}) Tj ET" for text, y in placements
+        ).encode()
+        objects.append(
+            f"<</Type/Page/Parent 2 0 R/MediaBox[0 0 300 200]/Contents {page_no + 1} 0 R"
+            f"/Resources<</Font<</F1 {3 + len(pages) * 2} 0 R>>>>>>"
+        )
+        objects.append(f"<</Length {len(content)}>>stream\n".encode() + content + b"\nendstream")
+        kids.append(f"{page_no} 0 R")
+    objects[1] = f"<</Type/Pages/Kids[{' '.join(kids)}]/Count {len(pages)}>>"
+    objects.append("<</Type/Font/Subtype/Type1/BaseFont/Helvetica>>")
+
+    out = bytearray(b"%PDF-1.4\n")
+    offsets = []
+    for number, obj in enumerate(objects, start=1):
+        offsets.append(len(out))
+        body = obj if isinstance(obj, bytes) else obj.encode()
+        out += f"{number} 0 obj\n".encode() + body + b"\nendobj\n"
+    xref_at = len(out)
+    out += f"xref\n0 {len(objects) + 1}\n0000000000 65535 f \n".encode()
+    for offset in offsets:
+        out += f"{offset:010d} 00000 n \n".encode()
+    out += (f"trailer<</Size {len(objects) + 1}/Root 1 0 R>>\n"
+            f"startxref\n{xref_at}\n%%EOF\n").encode()
+    return bytes(out)
+
+
+def test_page_texts_with_breaks_takes_the_gaps_from_the_pdf_itself():
+    # 12pt 글자라 줄 높이가 12 다 — y 를 15 씩 띄우면 간격 3(감김),
+    # 35 씩 띄우면 간격 23(문단 나눔) 이 된다.
+    data = _tiny_pdf_placed([[("Item one head", 180), ("wrapped tail", 165),
+                              ("Item two head", 130), ("its wrapped tail", 115)]])
+    assert pdf.page_texts_with_breaks(data) == [
+        "Item one head\nwrapped tail\n\nItem two head\nits wrapped tail"]

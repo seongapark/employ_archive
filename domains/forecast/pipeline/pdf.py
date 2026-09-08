@@ -50,11 +50,74 @@ def unbold_line(line: str) -> str:
     return " ".join(token[::3] for token in line.split())
 
 
+# 문단 나눔 판정 — 임계는 감김 간격의 _BREAK_FACTOR 배, 그 임계가 실제로
+# 골 한가운데에 있는지는 _VALLEY_FACTOR 로 확인한다(둘 다 실측으로 정했다).
+_BREAK_FACTOR = 1.5
+_VALLEY_FACTOR = 1.5
+
+
+def _wrap_gap(gaps: list[float]) -> float:
+    """이 쪽에서 '한 문장이 다음 줄로 넘어간' 간격을 고른다.
+
+    최소값을 쓰면 위첨자나 겹친 줄 하나가 임계를 바닥으로 끌어내려, 감긴
+    줄마다 빈 줄이 들어간다. 그래서 아래쪽 사분위를 쓴다 — 이상치 몇 개는
+    그 아래에 묻히고, 감김이 드문 쪽(대부분이 한 줄짜리 항목인 쪽)에서는
+    거꾸로 임계가 높아져 아무것도 안 넣는 쪽으로 기운다. 어느 쪽으로
+    틀리든 손해가 '근거를 못 찾는다' 쪽이어야 한다.
+    """
+    return sorted(gaps)[len(gaps) // 4]
+
+
+def text_with_paragraph_breaks(lines) -> str:
+    """줄과 좌표를 받아, 문단이 갈리는 자리에 빈 줄을 넣은 원문을 만든다.
+
+    감김(한 문장이 다음 줄로 넘어간 것)과 새 항목은 세로 간격이 다르다.
+    간격이 갈리는 쪽에서만 빈 줄을 넣고, 안 갈리는 쪽은 그대로 둔다 —
+    문단 나눔이 아닌 자리에 빈 줄을 넣으면 llm_verify 가 그 자리를 항목
+    시작으로 인정해, 주어가 잘린 조각이 근거로 저장된다. 못 넣어서
+    근거가 빈 칸으로 남는 것보다 그쪽이 나쁘다.
+    """
+    if len(lines) < 2:
+        return "\n".join(line["text"] for line in lines)
+    gaps = [b["top"] - a["bottom"] for a, b in zip(lines, lines[1:])]
+    threshold = _wrap_gap(gaps) * _BREAK_FACTOR
+    below = [gap for gap in gaps if gap <= threshold]
+    above = [gap for gap in gaps if gap > threshold]
+    if not below or not above or min(above) < max(below) * _VALLEY_FACTOR:
+        return "\n".join(line["text"] for line in lines)
+    out = [lines[0]["text"]]
+    for gap, line in zip(gaps, lines[1:]):
+        if gap > threshold:
+            out.append("")
+        out.append(line["text"])
+    return "\n".join(out)
+
+
 def page_texts(data: bytes) -> list[str]:
     import pdfplumber  # 무거운 의존성이라 실제로 PDF를 읽을 때만 불러온다
 
     with pdfplumber.open(io.BytesIO(data)) as doc:
         return [page.extract_text() or "" for page in doc.pages]
+
+
+def page_texts_with_breaks(data: bytes) -> list[str]:
+    """page_texts 와 같되, 문단이 갈리는 자리에 빈 줄을 넣는다.
+
+    근거 선별(llm_select)만 쓴다 — 매일 도는 수집기 여섯 개는 page_texts 를
+    그대로 쓴다. 빈 줄은 llm_verify 가 "여기서 항목이 시작한다"고 인정하는
+    표지이므로, 이 함수를 쓰는 쪽만 그 판정을 받게 둔다.
+
+    빈 줄을 안 넣는 쪽도 extract_text() 가 아니라 extract_text_lines() 를
+    이어 붙인다 — 한 쪽 안에서 두 가지 추출을 섞으면 넣고 안 넣고에 따라
+    원문이 달라질 수 있다. 실측으로 둘은 같았다(KDI·KLI·OECD Interim
+    59쪽 전부 바이트까지 일치). 같으니까 하나로 고른 것이지, 달라도
+    괜찮아서가 아니다.
+    """
+    import pdfplumber
+
+    with pdfplumber.open(io.BytesIO(data)) as doc:
+        return [text_with_paragraph_breaks(page.extract_text_lines())
+                for page in doc.pages]
 
 
 def find_summary_table(

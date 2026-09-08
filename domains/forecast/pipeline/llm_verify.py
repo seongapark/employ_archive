@@ -170,9 +170,19 @@ def _starts_at_a_boundary(source: str, pos: int) -> bool:
     옆 주석과 같은 이유).
     """
     i = pos - 1
+    newlines = 0
     while i >= 0 and source[i].isspace():
+        if source[i] == "\n":
+            newlines += 1
         i -= 1
     if i < 0:
+        return True
+    if newlines >= 2:
+        # 빈 줄은 문단 나눔이다 — pdf.text_with_paragraph_breaks 가 세로
+        # 간격을 보고 넣는다. 표지도 마침표도 없이 간격으로만 갈리는 항목이
+        # 있어서(KDI 요약 쪽), 그 자리를 여기서 인정하지 않으면 그 기관의
+        # 가장 깨끗한 근거 한 줄이 통째로 빈 칸으로 남는다. 빈 줄이 없는
+        # 줄바꿈 하나는 여전히 경계가 아니다 — 감긴 줄과 구별되지 않는다.
         return True
     if source[i] in _SENTENCE_TERMINATORS and not _looks_like_a_decimal_point(source, i):
         return True
