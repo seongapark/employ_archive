@@ -31,14 +31,15 @@ const T = {
     { source: 'ei', breakdown: 'industry', category: 'K', period: '2026-07', value: 98, unit: '천명', rse: null, rse_flag: null },
   ],
 };
-const db = {
-  // 단어 경계로 맞춘다 — 순진한 substring 비교는 'hypothesis' 가 'hypothesis_verdict' 의
-  // 접두어라서, 또 'phenomenon' 이 WHERE 절의 'phenomenon_id' 안에 들어 있어서 오매칭된다.
+// 단어 경계로 맞춘다 — 순진한 substring 비교는 'hypothesis' 가 'hypothesis_verdict' 의
+// 접두어라서, 또 'phenomenon' 이 WHERE 절의 'phenomenon_id' 안에 들어 있어서 오매칭된다.
+const makeDb = (T) => ({
   all: async (sql) => {
     for (const t of Object.keys(T)) if (new RegExp(`\\b${t}\\b`).test(sql)) return T[t];
     return [];
   },
-};
+});
+const db = makeDb(T);
 
 test('지지와 반증을 갈라 담는다', async () => {
   const r = await evidence({ db }, { phenomenon_id: '청년사무직감소' });
@@ -83,4 +84,19 @@ test('관측의 unit 을 파생에 단위로 싣는다 — 하드코딩하지 �
   const r = await evidence({ db }, { phenomenon_id: '청년사무직감소' });
   const 지지 = r.가설[0].지지[0];
   assert.equal(지지.파생.단위, '천명');
+});
+
+test('unit 이 없는 관측은 단위 키 자체를 만들지 않는다', async () => {
+  const T2 = { ...T, observation: T.observation.map(({ unit, ...rest }) => rest) };
+  const r = await evidence({ db: makeDb(T2) }, { phenomenon_id: '청년사무직감소' });
+  const 지지 = r.가설[0].지지[0];
+  assert.equal('단위' in 지지.파생, false);
+});
+
+test('가설이 0건이면 가설없음과 판정없음을 가른다', async () => {
+  const T3 = { ...T, phenomenon: [{ ...T.phenomenon[0], id: '가설미등록현상' }], hypothesis: [] };
+  const r = await evidence({ db: makeDb(T3) }, { phenomenon_id: '가설미등록현상' });
+  assert.equal(r.가설.length, 0);
+  assert.equal(r.가설없음, true);
+  assert.equal(r.판정없음, false);
 });

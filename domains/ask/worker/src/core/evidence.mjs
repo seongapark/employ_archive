@@ -23,7 +23,7 @@ async function loadIndicator(deps, hi, ind, 기간) {
   const last = rows[rows.length - 1] ?? {};
   return { ...base,
     ...buildEvidence({ 지표: i.id, compare_basis: i.compare_basis,
-                       단위: last.unit ?? null,
+                       ...(last.unit ? { 단위: last.unit } : {}),
                        rse: last.rse ?? null, rse_flag: last.rse_flag ?? null,
                        출처: i.source_id }, 관측) };
 }
@@ -71,7 +71,14 @@ export async function evidence(deps, { phenomenon_id, 기간 } = {}) {
       한계,
     });
   }
-  return { 현상: ph, 가설, 판정없음: 가설.every((h) => !h.판정.verdict_capable) };
+  return {
+    현상: ph, 가설,
+    // 가설없음(카탈로그가 비어 우리 쪽이 미비)과 판정없음(가설은 있으나 전부 판정 불가,
+    // 지표를 수집하면 풀린다)은 서로 다른 신호다 — verdict_blocked_by 가 반증미설계 와
+    // 데이터미보유 를 가른 것과 같은 구분을, 위 층에서 every() 로 뭉개면 안 된다.
+    가설없음: 가설.length === 0,
+    판정없음: 가설.length > 0 && 가설.every((h) => !h.판정.verdict_capable),
+  };
 }
 
 export async function indicatorFallback(deps, 슬롯) {
