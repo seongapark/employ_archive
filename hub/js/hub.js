@@ -1,5 +1,5 @@
 import { loadJson } from '../core/shell.js';
-import { DOMAINS, domainState, updatedLabel } from './state.js';
+import { DOMAINS, domainState, updatedLabel, askHref } from './state.js';
 
 function esc(s) {
   return String(s).replace(/[&<>"']/g, (c) => (
@@ -27,3 +27,9 @@ async function render() {
 }
 
 render();
+
+document.getElementById('askform')?.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const href = askHref(document.getElementById('askq').value);
+  if (href) location.href = href;
+});

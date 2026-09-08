@@ -1,0 +1,27 @@
+name: sync-catalog
+
+on:
+  push:
+    branches: [main]
+    paths: ['domains/ask/data/**']
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q domains/ask/tests    # 카탈로그가 깨졌으면 밀지 않는다
+      - name: D1 동기화
+        env:
+          PYTHONIOENCODING: utf-8
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          python -m tools.d1_sync catalog > /tmp/catalog.sql
+          npx --yes wrangler@4 d1 execute employ-archive-ask --remote \
+            --config domains/ask/worker/wrangler.jsonc --file=/tmp/catalog.sql

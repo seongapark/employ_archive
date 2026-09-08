@@ -37,7 +37,7 @@ jobs:
         with:
           python-version: "3.12"
       - run: pip install -r requirements.txt
-      - run: python -m pytest -q tools
+      - run: python -m pytest -q tools domains/ask
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
@@ -45,6 +45,7 @@ jobs:
         run: >-
           node --test "core/tests/*.mjs" "hub/tests/*.mjs"
           "domains/forecast/tests/web/*.mjs" "domains/employment/tests/web/*.mjs"
+          "domains/ask/tests/web/*.test.mjs"
       - name: Build site
         run: python -m tools.build
       - uses: actions/upload-pages-artifact@v3

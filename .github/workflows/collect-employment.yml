@@ -48,6 +48,16 @@ jobs:
           # 나면 여기서 멈춘다 — 조용히 덮는 것보다 빨간 X 가 낫다.
           git pull --rebase origin main
           git push
+      - name: D1 동기화
+        continue-on-error: true          # D1 이 죽어도 Pages 와 수집은 멀쩡히 돈다
+        env:
+          PYTHONIOENCODING: utf-8
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          python -m tools.d1_sync employment > /tmp/employment.sql
+          npx --yes wrangler@4 d1 execute employ-archive-ask --remote \
+            --config domains/ask/worker/wrangler.jsonc --file=/tmp/employment.sql
       - name: Fail on collector errors
         env:
           # 원인을 이미 아는 외부 장애. 이 수집기의 실패는 로그로만 남기고 통과시켜,

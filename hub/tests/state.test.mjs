@@ -1,13 +1,22 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { domainState, updatedLabel, DOMAINS } from '../js/state.js';
+import { domainState, updatedLabel, DOMAINS, askHref } from '../js/state.js';
 
-test('DOMAINS는 네 영역을 고정 순서로 갖는다', () => {
+test('DOMAINS는 다섯 영역을 고정 순서로 갖는다', () => {
+  // ask(질의응답)를 맨 앞에 둔다 — 다른 도메인으로 가는 입구 역할을 겸한다.
   // economy(경제동향) 자리는 press(행통 모니터링)로 바뀌었다 — 거시 지표 동향은
   // 이 아카이브가 다루는 축이 아니었고, 고용행정통계 보도 모니터링이
   // 앞의 세 도메인과 같은 원자료(고용노동부 보도자료)를 쓴다.
   assert.deepEqual(DOMAINS.map(d => d.slug),
-    ['forecast', 'employment', 'supply', 'press']);
+    ['ask', 'forecast', 'employment', 'supply', 'press']);
+});
+
+test('허브는 질문 문자열만 넘긴다 — 내용을 해석하지 않는다', () => {
+  assert.equal(askHref('청년 사무직'), './ask/#/q=%EC%B2%AD%EB%85%84%20%EC%82%AC%EB%AC%B4%EC%A7%81');
+});
+
+test('빈 질문은 넘기지 않는다', () => {
+  assert.equal(askHref('   '), null);
 });
 
 test('last_run이 없으면 준비중이다', () => {
