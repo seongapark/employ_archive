@@ -263,3 +263,20 @@ def test_page_texts_with_breaks_takes_the_gaps_from_the_pdf_itself():
                               ("Item two head", 130), ("its wrapped tail", 115)]])
     assert pdf.page_texts_with_breaks(data) == [
         "Item one head\nwrapped tail\n\nItem two head\nits wrapped tail"]
+
+
+def test_nul_characters_become_spaces_not_deletions():
+    """실측: KDI 2024 상반기 PDF 는 공백 자리에 U+0000 을 내놓는다(그 회차에
+    67개, 다른 문서엔 0개). 파이썬에서 NUL 은 공백이 아니라서 llm_verify 가
+    경계를 뒤로 훑다 거기서 멈추고, 모델이 그 자리를 보통 공백으로 옮겨
+    적으면 대조도 어긋난다. 지우면 낱말이 붙으므로 공백으로 바꾼다.
+    """
+    nul = chr(0)  # 테스트 파일 자체에는 진짜 NUL 을 넣지 않는다
+    got = pdf.text_with_paragraph_breaks(_lines(
+        (f"{nul}최근 우리 경제는{nul}높은 수출 증가세에", 100),
+        ("힘입어 경기 부진이 완화되는 모습", 117.5),
+        ("1/4분기 국내총생산은 수출 회복세가", 145),
+        ("지속된 가운데 3.4% 증가", 162.5),
+    ))
+    assert got.startswith(" 최근 우리 경제는 높은 수출 증가세에")
+    assert nul not in got

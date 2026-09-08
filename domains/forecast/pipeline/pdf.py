@@ -52,6 +52,7 @@ def unbold_line(line: str) -> str:
 
 # 문단 나눔 판정 — 임계는 감김 간격의 _BREAK_FACTOR 배, 그 임계가 실제로
 # 골 한가운데에 있는지는 _VALLEY_FACTOR 로 확인한다(둘 다 실측으로 정했다).
+NUL = chr(0)
 _BREAK_FACTOR = 1.5
 _VALLEY_FACTOR = 1.5
 
@@ -68,6 +69,23 @@ def _wrap_gap(gaps: list[float]) -> float:
     return sorted(gaps)[len(gaps) // 4]
 
 
+def _despace(text: str) -> str:
+    """U+0000 을 공백으로 바꾼다.
+
+    실측: KDI 2024 상반기 PDF 는 공백 자리에 U+0000 을 내놓는다(그 회차 본문에
+    67개, 같이 확인한 다른 문서 세 개에는 0개) — 그 폰트의 공백 글리프가
+    유니코드로 안 매핑된 것이다. 지우면 "경제는높은" 처럼 낱말이 붙어 없는
+    낱말이 만들어지므로 공백으로 바꾼다.
+
+    그냥 두면 두 군데가 함께 어긋난다. llm_verify 가 경계를 뒤로 훑을 때
+    NUL 은 파이썬에서 공백이 아니라 거기서 멈춰 문단 나눔에 닿지 못하고,
+    모델이 그 자리를 보통 공백으로 옮겨 적으면 대조에서 "원문에 없다"가 된다.
+    NUL 만 다룬다 — 실측에서 나온 제어문자가 이것뿐이라, 더 넓히면 안 본
+    문자에 대한 짐작이 된다.
+    """
+    return text.replace(NUL, " ")
+
+
 def text_with_paragraph_breaks(lines) -> str:
     """줄과 좌표를 받아, 문단이 갈리는 자리에 빈 줄을 넣은 원문을 만든다.
 
@@ -77,19 +95,20 @@ def text_with_paragraph_breaks(lines) -> str:
     시작으로 인정해, 주어가 잘린 조각이 근거로 저장된다. 못 넣어서
     근거가 빈 칸으로 남는 것보다 그쪽이 나쁘다.
     """
+    texts = [_despace(line["text"]) for line in lines]
     if len(lines) < 2:
-        return "\n".join(line["text"] for line in lines)
+        return "\n".join(texts)
     gaps = [b["top"] - a["bottom"] for a, b in zip(lines, lines[1:])]
     threshold = _wrap_gap(gaps) * _BREAK_FACTOR
     below = [gap for gap in gaps if gap <= threshold]
     above = [gap for gap in gaps if gap > threshold]
     if not below or not above or min(above) < max(below) * _VALLEY_FACTOR:
-        return "\n".join(line["text"] for line in lines)
-    out = [lines[0]["text"]]
-    for gap, line in zip(gaps, lines[1:]):
+        return "\n".join(texts)
+    out = [texts[0]]
+    for gap, text in zip(gaps, texts[1:]):
         if gap > threshold:
             out.append("")
-        out.append(line["text"])
+        out.append(text)
     return "\n".join(out)
 
 
