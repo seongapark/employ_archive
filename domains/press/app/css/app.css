@@ -1,0 +1,278 @@
+/* 인용 판정과 프레임 경보는 이 도메인 전용 개념이므로 토큰도 이 앱이 갖는다. */
+:root {
+  --badge-cited-fg: #17714a;
+  --badge-cited-bg: #e5f3ec;
+  --badge-other-fg: #667085;
+  --badge-other-bg: #eef0f3;
+  /* 보도자료 밖 표현 — 경고가 아니라 '눈에 띄어야 할 것'이다. 옅은 주황으로
+     둔다. 붉은색은 감소(--up)가 이미 쓰고 있어 뜻이 겹친다. */
+  --frame-fg: #b3400c;
+  --frame-bg: #fbe6d7;
+  --gap-fg: #9a6b15;
+  --gap-bg: #faf0dc;
+}
+
+/* Tab bar — 다른 도메인 앱과 같은 규격 */
+
+.tabbar {
+  display: flex;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  padding: 8px 8px 14px 8px;
+}
+
+.tab {
+  flex: 1;
+  min-height: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  color: var(--text-muted);
+}
+
+.tab span {
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.tab--active { color: var(--accent); }
+.tab--active span { font-weight: 700; }
+
+/* Pill (회차·필터 선택) */
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--card);
+  border: 1px solid var(--border);
+  padding: 6px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+.pill--active {
+  color: #ffffff;
+  font-weight: 600;
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+/* 프레임 칩은 pill 과 같은 골격에 색만 다르다 — 누르면 기사가 걸러진다 */
+.pill--frame {
+  color: var(--frame-fg);
+  background: var(--frame-bg);
+  border-color: var(--frame-bg);
+}
+
+.pill--frame.pill--active {
+  color: #ffffff;
+  background: var(--frame-fg);
+  border-color: var(--frame-fg);
+}
+
+/* Switcher (회차 선택)
+
+   화면 안이 아니라 셸(헤더 바로 아래)에 둔다. 네 화면이 같은 회차를 보므로
+   화면마다 그리면 한쪽만 고쳐지는 날이 오고, 스크롤에 딸려 올라가 버린다.
+   여기 두면 스크롤과 무관하게 늘 붙어 있다 — sticky 를 쓸 필요도 없다.
+   세그먼트가 아니라 select 인 이유는 회차가 매달 하나씩 늘기 때문이다. */
+
+.switcher {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+
+.switcher select {
+  flex: 1;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
+  min-height: 44px;
+}
+
+/* Summary band */
+
+.band {
+  margin: 6px 16px 0 16px;
+  padding: 10px 14px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.band__title { font-size: 13px; font-weight: 600; color: var(--accent); }
+.band__meta { font-size: 12px; color: var(--text-secondary); }
+
+/* 경보 밴드 — 보도자료 밖 표현이 몇 개 매체에서 공통으로 쓰였나 */
+.band--frame { background: var(--frame-bg); }
+.band--frame .band__title { color: var(--frame-fg); }
+
+/* 격차 상자 — 보도자료가 말했는데 기사가 안 다룬 것 */
+.gapbox {
+  background: var(--gap-bg);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 12px;
+  color: var(--gap-fg);
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+/* Badge */
+
+.badge--cited { color: var(--badge-cited-fg); background: var(--badge-cited-bg); }
+.badge--other { color: var(--badge-other-fg); background: var(--badge-other-bg); }
+.badge--frame { color: var(--frame-fg); background: var(--frame-bg); }
+
+/* 커버리지 막대 — 축마다 눈금이 달라 축 안에서만 비교한다 */
+
+.bars { display: flex; flex-direction: column; gap: 5px; }
+
+.bar-row {
+  display: grid;
+  grid-template-columns: 84px 1fr 28px;
+  align-items: center;
+  gap: 8px;
+}
+
+.bar-row__name {
+  font-size: 11px;
+  color: var(--text-secondary);
+  text-align: right;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.bar-row__track {
+  height: 10px;
+  background: var(--bg);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.bar-row__fill { height: 100%; background: var(--accent); border-radius: 3px; }
+
+/* 0건은 빈 칸이 아니라 '안 다뤄졌다'는 사실이다 — 빗금으로 남긴다 */
+.bar-row__track--zero {
+  background: repeating-linear-gradient(45deg,
+    var(--bg), var(--bg) 3px, #e2e5ea 3px, #e2e5ea 6px);
+}
+
+.bar-row__n { font-size: 11px; color: var(--text-secondary); text-align: right; }
+
+/* 기사 줄 — 많이 보이는 것이 목적이라 조밀하게 둔다 */
+
+.art {
+  display: block;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.art:last-child { border-bottom: none; }
+
+.art__title {
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--text);
+  font-weight: 500;
+}
+
+.art--other .art__title { color: var(--text-secondary); font-weight: 400; }
+
+.art__meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 3px;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.art__tag {
+  margin-left: 5px;
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: var(--frame-fg);
+  background: var(--frame-bg);
+}
+
+/* 표 — 프레임 추이 */
+
+.tbl { width: 100%; border-collapse: collapse; font-size: 12px; }
+.tbl th {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: left;
+  padding: 0 6px 6px 0;
+}
+.tbl td { padding: 7px 6px 7px 0; border-top: 1px solid var(--border); }
+.tbl td:last-child, .tbl th:last-child { padding-right: 0; }
+
+.state {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 1px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+.state--spread { color: var(--frame-fg); background: var(--frame-bg); }
+.state--hold { color: var(--gap-fg); background: var(--gap-bg); }
+.state--gone { color: var(--text-muted); background: var(--bg); }
+
+/* 동시출현 네트워크 */
+
+.gnet { display: block; overflow: visible; }
+
+/* 라벨이 선·점 위에 겹쳐도 읽히게 흰 테두리를 두른다. paint-order 를 안 주면
+   테두리가 글자를 덮어 오히려 안 보인다. */
+.gnode__label {
+  font-family: inherit;
+  font-size: 9.5px;
+  font-weight: 600;
+  fill: var(--text);
+  stroke: var(--card);
+  stroke-width: 2.6px;
+  paint-order: stroke fill;
+}
+
+.gnet a { cursor: pointer; }
+.gnet a:hover circle { fill-opacity: 1; }
+
+/* 섹션 제목 */
+
+.sec-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  padding: 0 2px 6px 2px;
+}
+
+.empty {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 24px 16px;
+  line-height: 1.6;
+}

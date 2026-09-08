@@ -1,0 +1,841 @@
+{
+ "round_release": "2026-08-10",
+ "mode": "regular",
+ "auth": "HUB",
+ "window": [
+  "2026-08-10",
+  "2026-08-11"
+ ],
+ "collected_at": "2026-09-08 14:11",
+ "volume": {
+  "collected": 79,
+  "articles": 74,
+  "press": 62,
+  "queries": 3
+ },
+ "truncated_queries": [],
+ "note": "",
+ "queries": [
+  {
+   "query": "고용보험 가입자",
+   "api_total": 29231,
+   "fetched": 300,
+   "truncated": false,
+   "in_window": 68,
+   "relevant": 67,
+   "new": 63
+  },
+  {
+   "query": "구직급여",
+   "api_total": 94275,
+   "fetched": 700,
+   "truncated": false,
+   "in_window": 55,
+   "relevant": 49,
+   "new": 15
+  },
+  {
+   "query": "구인배수",
+   "api_total": 2635,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 28,
+   "relevant": 26,
+   "new": 1
+  }
+ ],
+ "articles": [
+  {
+   "title": "1년도 안 돼 짐싸는 청년들…자발적 실업급여 역효과 우려",
+   "desc": "고홍주 임승규 기자 = 정부가 35세 미만 청년의 자발적 퇴사에도 구직급여(실업급여)를 지급하는 방안을 추진하는 가운데, 해당 연령층 자진퇴사자 3명 중 2명은 입사 1년을 채우지 못하고 직장을 떠나는 것으로...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014116719?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20260809_0003741882",
+   "press": "뉴시스",
+   "pub": "2026-08-10 06:01",
+   "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "“수당처럼 인식할라”… 청년 자발적 실업급여 추진 시끌",
+   "desc": "정부가 35세 미만 청년의 자발적 퇴사에도 구직급여(실업급여)를 지급하는 방안을 추진해 논란이 일고 있다. 청년의 재도전을 지원하기 위한 취지지만, 해당 연령층 자진퇴사자 3명 중 2명은 입사 1년을 채우지...",
+   "link": "https://n.news.naver.com/mnews/article/005/0001865873?sid=102",
+   "originallink": "https://www.kmib.co.kr/article/view.asp?arcid=0030228338&code=61121111&cp=nv",
+   "press": "국민일보",
+   "pub": "2026-08-10 06:59",
+   "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "“못 타먹으면 바보”20대 초반 80%가 1년 미만 퇴사…실업급여 확대의...",
+   "desc": "정부가 35세 미만 청년의 자발적 퇴사에도 구직급여(실업급여)를 지급하는 방안을 추진하는 가운데, 이 연령층 자진퇴사자 3명 중 2명은 입사 1년을 채우지 못하고 직장을 떠나는 것으로 나타났다. 청년의 재도전을...",
+   "link": "https://n.news.naver.com/mnews/article/021/0002810200?sid=102",
+   "originallink": "https://www.munhwa.com/article/11608292?ref=naver",
+   "press": "문화일보",
+   "pub": "2026-08-10 07:39",
+   "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "[전인미답] '쉬었음 청년' 양산하는 구직급여 개정안",
+   "desc": "라이센스뉴스 = 박한울 칼럼니스트 | 노동 정책 가운데 본래 취지가 왜곡된 제도를 하나만 꼽으라면 구직급여를 들 수 있다. 비자발적 실업 상태에서 구직 기간 동안의 생계를 지원하기 위해 도입된 제도지만, 현재는...",
+   "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=206246",
+   "originallink": "https://www.lcnews.co.kr/news/articleView.html?idxno=206246",
+   "press": "lcnews.co.kr",
+   "pub": "2026-08-10 09:46",
+   "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "‘실업급여 준다는데…’ 청년 자진퇴사 3명 중 2명, 1년도 못 채웠다",
+   "desc": "1%가 1년 안 돼 퇴사 “재도전 기회” vs “퇴사 유인”…청년 실업급여 확대 놓고 엇갈린 시선 청년 재도전 취지지만 ‘퇴사 후 수당’ 인식 우려도 정부가 35세 미만 청년의 자발적 퇴사에도 구직급여를 주는 방안을...",
+   "link": "https://n.news.naver.com/mnews/article/022/0004149703?sid=101",
+   "originallink": "https://www.segye.com/newsView/20260810506050?OutUrl=naver",
+   "press": "세계일보",
+   "pub": "2026-08-10 09:59",
+   "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "“1년도 못 채우고 퇴사” 청년 3명 중 2명...정부 ‘실업급여 확대’ 딜...",
+   "desc": "정부가 35세 미만 청년의 자발적 퇴사에도 구직급여(실업급여)를 지급하는 방안을 추진하는 가운데, 이 연령대 자진퇴사자 3명 중 2명은 첫 직장에서 1년을 채우지 못하고 떠나는 것으로 나타났다. 특히 20대 초반...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002681526?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10835598?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-08-10 09:59",
+   "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "자진퇴사 청년도 실업급여?...입사 1년 못 채우는 청년 66% 지원 논쟁 확...",
+   "desc": "35세 미만 자진퇴사자 10명 중 9명, 근속 3년 미만...정부 “재도전 지원” 전문가들 “조기퇴사 유인·재정 부담 고려해 공백 메우는 정교한 설계 필요” 정부가 35세 미만 청년의 자발적 퇴사에도 구직급여(실업급여)를...",
+   "link": "https://www.m-economynews.com/news/article.html?no=69576",
+   "originallink": "https://www.m-economynews.com/news/article.html?no=69576",
+   "press": "m-economynews.com",
+   "pub": "2026-08-10 11:06",
+   "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "野, 황희 '폐버스 하우스' 맹공…\"민주당사부터 폐버스로 옮겨라\"",
+   "desc": "앞서 정부는 35세 미만 청년의 자발적 퇴사에도 구직급여(실업급여)를 지급하는 방안을 추진한다고 밝힌 바 있다. 박 대변인은 \"청년들이 바라는 것은 한시적인 푼돈이나 길거리 폐버스와 같은 기괴한 눈속임 대안이 아니다...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009105655?sid=100",
+   "originallink": "https://www.news1.kr/politics/assembly/6254132",
+   "press": "뉴스1",
+   "pub": "2026-08-10 11:36",
+   "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "고용보험 7개월째 20만명대 증가…청년은 5.7만명 줄었다",
+   "desc": "고용보험 가입자 증가세가 7개월째 20만 명 후반을 유지했다. 서비스업과 60세 이상 가입자가 증가세를 이끌었다. 반면 청년층 가입자는 5만 7000명 줄어 세대별 고용 온도 차는 더 뚜렷해졌다. 서비스업이 끌고...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009105729?sid=101",
+   "originallink": "https://www.news1.kr/economy/employment-labor/6253903",
+   "press": "뉴스1",
+   "pub": "2026-08-10 12:00",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입자 27.7만명↑…40대 33개월 만에 반등",
+   "desc": "고용보험 가입자 수가 7개월 연속 20만명 후반대 증가세를 이어가고 있다. 특히 지난 2023년 11월부터 감소를 거듭하던 '경제 허리' 40대도 33개월 만에 증가 전환했다. 고용노동부가 10일 발표한 '2026년 7월...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014117622?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20260810_0003742698",
+   "press": "뉴시스",
+   "pub": "2026-08-10 12:00",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입자 증가폭 7개월째 20만명대…청년 가입자만 감소",
+   "desc": "고용보험 가입자는 지난해 7월보다 27만7000명(1.8%) 증가한 수준으로, 고용보험 가입자 증가 폭이 20만명 후반대를 기록한 것은 7개월째다. 업종별로 보면 서비스업 가입자가 28만5000명(2.6%) 늘어난 1113만9000명으로...",
+   "link": "https://www.newspim.com/news/view/20260810000598",
+   "originallink": "https://www.newspim.com/news/view/20260810000598",
+   "press": "뉴스핌",
+   "pub": "2026-08-10 12:00",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "고용보험 상시가입자 7개월 연속 20만명대 증가…청년·제조업 취업자는...",
+   "desc": "점점 어려워지는 상황\"이라며 \"올해 상반기에는 중동전쟁으로 인한 유가와 물가 상승 등으로 부담이 있지만 그에 비해서는 고용보험 가입자 증가세가 지속되고 있어 선방하고 있는 것으로 보고 있다\"고 말했다.",
+   "link": "https://n.news.naver.com/mnews/article/008/0005397743?sid=101",
+   "originallink": "https://www.mt.co.kr/economy/2026/08/10/2026081010555834440",
+   "press": "머니투데이",
+   "pub": "2026-08-10 12:00",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "반도체·조선 살아나도 청년고용 '한파'…제조업 고용 '양극화'",
+   "desc": "제조업 고용보험 가입자는 14개월 연속 감소한 가운데 반도체·조선은 증가하고 자동차·화학 등은 뒷걸음질하며 업종별 격차가 뚜렷해졌다. 정부는 기업의 경력직 선호와 인공지능(AI)·로봇 등 자동화 확산까지...",
+   "link": "https://n.news.naver.com/mnews/article/030/0003455797?sid=100",
+   "originallink": "https://www.etnews.com/20260810000197",
+   "press": "전자신문",
+   "pub": "2026-08-10 12:01",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입자, 40대 33개월 만에 증가 전환…청년층은 감소 지속",
+   "desc": "40대 고용보험 가입자가 33개월 만에 증가로 돌아섰다. 반면 29세 이하 청년층은 47개월 연속 감소를 이어갔다. 고용노동부가 10일 발표한 '2026년 7월 고용행정 통계로 본 노동시장 동향'에 따르면, 지난달 말 기준 40대...",
+   "link": "https://n.news.naver.com/mnews/article/079/0004177089?sid=102",
+   "originallink": "https://www.nocutnews.co.kr/news/6560518?utm_source=naver&utm_medium=article&utm_campaign=20260810120040",
+   "press": "nocutnews.co.kr",
+   "pub": "2026-08-10 12:01",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입자 증가분 75%가 60세 이상…세대별 고용 격차 ‘뚜렷’",
+   "desc": "지난달 고용보험 가입자가 27만7000명 늘었지만 증가분의 약 75%는 60세 이상이 차지했다. 29세 이하 가입자는 5만7000명 줄면서 세대별 고용 격차가 이어졌다. 고용노동부가 10일 발표한 ‘2026년 7월 고용행정...",
+   "link": "https://n.news.naver.com/mnews/article/119/0003120174?sid=102",
+   "originallink": "https://www.dailian.co.kr/news/view/1676646/?sc=Naver",
+   "press": "dailian.co.kr",
+   "pub": "2026-08-10 12:01",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입자 증가 폭 29개월 만에 최대",
+   "desc": "이투데이=세종=김지영 인구정책전문 기자 | 노동부, '7월 고용행정 통계로 본 노동시장 동향' 발표 고용보험 가입자가 29개월 만에 가장 큰 폭으로 늘었다. 구직자 대비 일자리 수도 회복세를 이어갔다....",
+   "link": "https://www.etoday.co.kr/news/view/2612703",
+   "originallink": "https://www.etoday.co.kr/news/view/2612703",
+   "press": "이투데이",
+   "pub": "2026-08-10 12:02",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "제조업 고용보험 14개월째 감소…외국인 빼면 1만5000명 줄었다",
+   "desc": "노동부, 2026년 7월 고용행정 통계로 본 노동시장 동향 발표 아주경제=최예지 기자 ruizhi@ajunews.com 2026년 7월 고용행정 통계로 본 노동시장 동향 [자료=고용노동부] 국내 제조업 고용보험 가입자가 14개월 연속...",
+   "link": "https://www.ajunews.com/view/20260810101049682",
+   "originallink": "https://www.ajunews.com/view/20260810101049682",
+   "press": "아주경제",
+   "pub": "2026-08-10 12:02",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "청년 고용보험 가입자 '뚝' 5만 7천 명 감소... 47개월 연속 감소",
+   "desc": "지난달 고용보험 가입자가 27만 7천 명 늘면서, 7개월 연속 20만 명대 증가세를 이어갔습니다. 전체적인 고용 흐름은 개선되고 있지만, 청년층 고용은 계속 감소하면서 여전히 부진한 것으로 나타났습니다. 김민수...",
+   "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4099881",
+   "originallink": "https://news.bbsi.co.kr/news/articleView.html?idxno=4099881",
+   "press": "news.bbsi.co.kr",
+   "pub": "2026-08-10 12:04",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "새 일자리 구하는 청년 다시 '감소'…고용 한파 계속",
+   "desc": "신규구직은 감소한 반면 신규구인은 증가하면서 지난달 구인배수는 0.44로 상승했다. 구인배수는 신규 구인인원을 신규 구직인원으로 나눈 값으로, 구직자 1명당 일자리 수를 뜻한다. 지난해 7월 0.40보다 개선됐다....",
+   "link": "https://n.news.naver.com/mnews/article/018/0006348747?sid=102",
+   "originallink": "https://www.edaily.co.kr/news/newspath.asp?newsid=03119286645546008",
+   "press": "이데일리",
+   "pub": "2026-08-10 12:04",
+   "q": "구인배수",
+   "rel": true
+  },
+  {
+   "title": "청년 고용보험 가입자 47개월째 감소…“AI·경력직 채용에 개선 쉽지 않...",
+   "desc": "지난달 고용보험 가입자가 1년 전보다 27만 명 넘게 늘며 전체 고용은 증가세를 이어갔지만 청년층의 고용 부진은 장기화하고 있다. 29세 이하 고용보험 가입자는 47개월 연속 감소한 가운데 고용노동부는 경기...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004650183?sid=102",
+   "originallink": "https://www.sedaily.com/article/20077573?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-08-10 12:06",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "29세 이하 고용보험 47개월째 감소… AI·경력직 선호에 막힌 청년 문턱",
+   "desc": "29세 이하 청년층 고용보험 가입자가 47개월 연속 감소했다. 인구 감소 영향이 크지만 경기 부진과 일자리 미스매치, 기업의 경력직 선호에 인공지능(AI)·로봇 도입까지 겹치면서 청년층이 노동시장에...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002681740?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10836001?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-08-10 12:52",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "노동시장 7개월 연속 안정적 증가",
+   "desc": "7월 말 기준 고용보험 상시가입자 수는 1,587만 7,000명으로 전년동월대비 27만 7,000명으로 1.8% 증가하여 7개월 연속 20만 명 후반대 안정적 증가를 보이고 있다고 밝혔다. 2026.8.10/뉴스1",
+   "link": "https://n.news.naver.com/mnews/article/421/0009105780?sid=102",
+   "originallink": "https://www.news1.kr/photos/8048646",
+   "press": "뉴스1",
+   "pub": "2026-08-10 13:06",
+   "q": "고용보험 가입자, 고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "고용노동부, 7월 노동시장 동향 발표",
+   "desc": "7월 말 기준 고용보험 상시가입자 수는 1,587만 7,000명으로 전년동월대비 27만 7,000명으로 1.8% 증가하여 7개월 연속 20만 명 후반대 안정적 증가를 보이고 있다고 밝혔다. 2026.8.10/뉴스1",
+   "link": "https://n.news.naver.com/mnews/article/421/0009105781?sid=102",
+   "originallink": "https://www.news1.kr/photos/8048647",
+   "press": "뉴스1",
+   "pub": "2026-08-10 13:06",
+   "q": "고용보험 가입자, 고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "7월 고용보험 27.7만명 늘었지만…청년·제조업 양극화 '뚜렷'",
+   "desc": "조 과장은 \"상반기 유가·물가·금리 상승 등 부담 요인이 컸던 점을 감안하면 고용보험 가입자 증가세가 지속되는 것은 노동시장이 일정 부분 버텨주고 있는 것으로 볼 수 있다\"고 평가했다.",
+   "link": "https://www.mediapen.com/news/view/1115340",
+   "originallink": "https://www.mediapen.com/news/view/1115340",
+   "press": "mediapen.com",
+   "pub": "2026-08-10 13:08",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "“1년도 못 채웠다” 청년 자진퇴사 66.5%… 실업급여 확대 ‘딜레마’",
+   "desc": "정부가 35세 미만 청년의 자발적 퇴사에도 구직급여를 지급하는 방안을 추진하면서, 청년층의 짧은 근속기간이 제도 설계의 주요 변수로 떠오르고 있습니다. 올해 6월 직장을 스스로 그만둔 35세 미만 청년 가운데 66.5...",
+   "link": "https://n.news.naver.com/mnews/article/661/0000081351?sid=101",
+   "originallink": "https://www.jibs.co.kr/news/articles/articlesDetail/64361?feed=na",
+   "press": "jibs.co.kr",
+   "pub": "2026-08-10 13:35",
+   "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "청년 고용보험 가입자 47개월째 감소…\"AI·경력직 선호에 취업 더 어렵...",
+   "desc": "[연합뉴스] 경기 불황과 기업의 경력직 선호, 인공지능(AI)·로봇 도입 등의 영향으로 청년 취업난이 심화하면서 29세 이하 고용보험 가입자가 47개월 연속 감소한 것으로 나타났다. 고용노동부가 10일 발표한 '7월...",
+   "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1282587",
+   "originallink": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1282587",
+   "press": "jeonmae.co.kr",
+   "pub": "2026-08-10 13:48",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "제조업 고용 14개월 연속 감소…'반도체 의존 고용 양극화' 징조",
+   "desc": "제조업 고용보험 가입자 수가 올해 7월 기준 14개월 연속 전년 동월 대비 감소했다. 최근 경제성장 전망과 비슷하게 '반도체 의존 고용 방어', '제조업종별 고용 양극화' 징조도 나타나고 있다. 고용노동부가 10일...",
+   "link": "https://n.news.naver.com/mnews/article/014/0005559376?sid=101",
+   "originallink": "http://www.fnnews.com/news/202608101307420339",
+   "press": "파이낸셜뉴스",
+   "pub": "2026-08-10 13:50",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "자진퇴사 청년 66%가 근속 1년 미만…“구직급여 확대 신중해야” 지적",
+   "desc": "현재 고용보험 구직급여는 원칙적으로 비자발적 이직자에게 지급된다. 자진퇴사자도 임금체불이나 근로조건 저하 등 정당한 사유가 인정되면 받을 수 있지만 단순 개인사정으로 회사를 떠나면 구직급여를 받을...",
+   "link": "https://n.news.naver.com/mnews/article/020/0003739720?sid=102",
+   "originallink": "https://www.donga.com/news/Society/article/all/20260810/134449194/1",
+   "press": "동아일보",
+   "pub": "2026-08-10 13:51",
+   "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "[그래픽] 고용보험 가입자 27.7만명↑…40대 33개월 만에 반등",
+   "desc": "10일 고용노동부에 따르면 지난달 말 고용보험 상시가입자 수는 1587만7000명으로 전년 동월보다 27만7000명(1.8%) 증가하며 7개월 연속 20만명대 후반의 증가세를 이어갔다. 특히 2023년 11월부터 감소를 거듭하던...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014117911?sid=102",
+   "originallink": "https://www.newsis.com/view/NISI20260810_0002208408",
+   "press": "뉴시스",
+   "pub": "2026-08-10 14:00",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "\"경력직 뽑고 AI 늘리니\"…29세 이하 고용보험 가입자 47개월 연속 감소",
+   "desc": "이에 따라 29세 이하 고용보험 상시가입자 수가 47개월 연속 줄어든 것으로 나타났다. 10일 고용노동부가 발표한 '7월 고용행정 통계로 본 노동시장 동향'에 따르면, 지난달 기준 고용보험 상시가입자는 총...",
+   "link": "https://n.news.naver.com/mnews/article/277/0005800991?sid=101",
+   "originallink": "https://view.asiae.co.kr/article/2026081014035284119",
+   "press": "아시아경제",
+   "pub": "2026-08-10 14:03",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "29세 이하 고용보험 5.7만명 감소…청년 고용 한파는 계속",
+   "desc": "전체 고용보험 가입자가 1년 전보다 27만7000명 늘었지만 청년층 일자리는 반대 방향으로 움직였다. 60세 이상 가입자가 20만명 넘게 증가한 사이 29세 이하에서는 5만7000명이 빠졌다. 서비스업이 고용 증가를...",
+   "link": "https://www.thepowernews.co.kr/view.php?ud=202608101422492245de3f0aa1be_7",
+   "originallink": "https://www.thepowernews.co.kr/view.php?ud=202608101422492245de3f0aa1be_7",
+   "press": "thepowernews.co.kr",
+   "pub": "2026-08-10 14:24",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "청년 고용한파 계속...29세이하 고용보험 가입자 47개월째 감소",
+   "desc": "경기 불황과 기업의 경력직 선호, 인공지능(AI) 도입 등 영향으로 청년 취업난이 심화하면서 29세 이하 고용보험 상시가입자 수가 전년보다 47개월 연속 뒷걸음친 것으로 나타났다. 고용노동부는 10일 이런 내용을...",
+   "link": "https://www.slist.kr/news/articleView.html?idxno=757873",
+   "originallink": "https://www.slist.kr/news/articleView.html?idxno=757873",
+   "press": "slist.kr",
+   "pub": "2026-08-10 14:28",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "29세 이하 고용보험 가입자 47개월째 감소",
+   "desc": "오늘(10일) 고용노동부에 따르면 지난달 29세 이하 고용보험 가입자는 1년 전보다 5만7천명 줄어 47개월 연속 감소했습니다. 노동부는 감소 원인의 60%는 인구 감소, 40%는 고용 감소 영향으로 분석했습니다. 제조업...",
+   "link": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005897805",
+   "originallink": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005897805",
+   "press": "mbnmoney.mbn.co.kr",
+   "pub": "2026-08-10 14:28",
+   "q": "고용보험 가입자, 고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[연합뉴스 이 시각 헤드라인] - 14:30",
+   "desc": "전문보기: https://www.yna.co.kr/view/AKR20260810064800009 ■ 29세 이하 고용보험 가입자 47개월째 감소…청년 고용한파 지속 경기 불황과 기업의 경력직 선호, 인공지능(AI) 도입 등 영향으로 청년 취업난이 심화하면서...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016242647?sid=102",
+   "originallink": "https://www.yna.co.kr/view/AKR20260810088900011?input=1195m",
+   "press": "연합뉴스",
+   "pub": "2026-08-10 14:30",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "AI·경력직 선호에 청년 고용 47개월째 뒷걸음질",
+   "desc": "29세 이하 청년층의 고용보험 가입자가 47개월 연속 감소한 것으로 나타났다. 경기 부진과 기업의 경력직 선호가 이어지는 가운데 인공지능(AI)과 로봇 도입까지 확대되면서 청년 고용 회복이 쉽지 않은 모습이다....",
+   "link": "https://www.newscj.com/news/articleView.html?idxno=3423854",
+   "originallink": "https://www.newscj.com/news/articleView.html?idxno=3423854",
+   "press": "천지일보",
+   "pub": "2026-08-10 14:38",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "반도체 고용 훈풍이지만…청년 고용 여전히 '한파'",
+   "desc": "뉴시스 20대 청년층의 고용보험 가입자 감소세가 이어지는 가운데, 제조업에서는 반도체 분야의 고용 증가세가 두드러졌다. 고용노동부는 10일 이 같은 내용을 담은 '2026년 7월 고용행정 통계로 본 노동시장 동향'을...",
+   "link": "https://news.cpbc.co.kr/article/1174867?division=NAVER",
+   "originallink": "https://news.cpbc.co.kr/article/1174867?division=NAVER",
+   "press": "news.cpbc.co.kr",
+   "pub": "2026-08-10 14:44",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "지난달 29세 이하 고용보험 2.5% 감소…47개월 연속",
+   "desc": "지난달 29세 이하 고용보험 가입자가 1년 전보다 2.5% 줄어 47개월 연속 감소한 것으로 나타났다. 청년 인구 자체가 감소하고 있는 영향이 크지만 고용노동부는 가입자 감소 원인의 약 40%는 인구가 아닌 고용...",
+   "link": "https://www.datasom.co.kr/news/articleView.html?idxno=209436",
+   "originallink": "https://www.datasom.co.kr/news/articleView.html?idxno=209436",
+   "press": "데이터솜",
+   "pub": "2026-08-10 14:46",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "청년 고용한파 \"경력 위주 채용과 AI·로봇이 한 원인\"",
+   "desc": "청년층 고용보험 가입자 감소세가 4년 가까이 이어지는 가운데, 그 원인 중 하나로 경력 위주 채용과 인공지능(AI)·로봇 도입이 꼽혔다. 고용노동부는 10일 '2026년 7월 고용행정 통계로 본 노동시장 동향'을...",
+   "link": "https://www.lawtv.kr/news/articleView.html?idxno=60635",
+   "originallink": "https://www.lawtv.kr/news/articleView.html?idxno=60635",
+   "press": "lawtv.kr",
+   "pub": "2026-08-10 14:50",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "청년 고용한파 지속...29세이하 고용보험 가입자 47개월째 감소",
+   "desc": "KB국민은행 제공  고용보험 가입자 증가세가 7개월째 20만 명 후반을 유지했으나, 29세 이하 고용보험 상시가입자 수는 전년보다 47개월 연속 감소, 청년 취업난이 심화한 것으로 조사됐다. 고용노동부가 10일...",
+   "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=80426",
+   "originallink": "http://www.newsfc.co.kr/news/articleView.html?idxno=80426",
+   "press": "newsfc.co.kr",
+   "pub": "2026-08-10 14:50",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "반도체 호황에도 제조업 고용 '마이너스'⋯기존 주력산업 부진에 발복",
+   "desc": "이투데이=세종=김지영 인구정책전문 기자 | 반도체 제조업 고용보험 가입자, 전체 제조업 2.9% 불과 반도체 호황에도 제조업 고용보험 가입자는 14개월 연속 감소했다. 고용노동부가 10일 발표한 ‘7월 고용행정 통계로...",
+   "link": "https://www.etoday.co.kr/news/view/2612742",
+   "originallink": "https://www.etoday.co.kr/news/view/2612742",
+   "press": "이투데이",
+   "pub": "2026-08-10 14:58",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "청년 3명 중 2명 1년 내 퇴사…'자진퇴사 실업급여' 확대 괜찮나",
+   "desc": "정부, 생애 1회 구직급여 추진…\"조기 퇴사 부추길 수도\" 35세 미만 자진퇴사자의 66.5%가 근속 1년 미만인 것으로 나타났다. 이런 가운데 정부가 청년의 자발적 퇴사에도 생애 한 차례 구직급여를 지급하는 방안을...",
+   "link": "https://n.news.naver.com/mnews/article/586/0000135613?sid=101",
+   "originallink": "https://www.sisajournal.com/news/articleView.html?idxno=382981",
+   "press": "sisajournal.com",
+   "pub": "2026-08-10 14:58",
+   "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입자 7개월째 증가...제조는 14개월, 건설은 36개월 연속 내...",
+   "desc": "/뉴시스 고용보험 가입자 수가 전년동월 대비로 7개월째 증가세를 나타냈다. 그러나 제조업과 건설업 가입자는 감소세를 지속했다. 고용노동부가 10일 발표한 '2026년 7월 고용행정 통계로 본 노동시장 동향...",
+   "link": "http://www.metroseoul.co.kr/article/20260810500414",
+   "originallink": "http://www.metroseoul.co.kr/article/20260810500414",
+   "press": "metroseoul.co.kr",
+   "pub": "2026-08-10 15:04",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "29세 이하 고용보험 가입자 또 줄었다…\"AI 도입·경력직 선호 여파\"",
+   "desc": "지난달 고용보험 상시가입자 증가 폭이 7개월 연속 20만명 후반대를 유지했지만, 29세 이하 청년층 가입자는 47개월 연속 줄어든 것으로 나타났다. 10일 고용노동부가 발표한 '7월 고용행정 통계로 본 노동시장...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005319134?sid=102",
+   "originallink": "https://www.hankyung.com/article/2026081045127",
+   "press": "한국경제",
+   "pub": "2026-08-10 15:06",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "청년 고용 위기…29세 이하 고용보험 가입자 47개월째 감소하는 이유",
+   "desc": "청년 고용의 어려움이 계속되며 29세 이하 고용보험 가입자 수가 지난 해와 비교해 47개월 연속 감소한 것으로 나타났다. 경기 불황과 더불어 기업들이 경력직을 선호하며 인공지능 및 자동화 기술을 도입하는 등의...",
+   "link": "https://www.gokorea.kr/news/articleView.html?idxno=874584",
+   "originallink": "https://www.gokorea.kr/news/articleView.html?idxno=874584",
+   "press": "gokorea.kr",
+   "pub": "2026-08-10 15:06",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "29세 이하 고용보험 47개월째 감소…청년 취업난 심화",
+   "desc": "경기 불황과 기업의 경력직 선호, 인공지능(AI) 도입 등 영향으로 청년 취업난이 심화하면서 29세 이하 고용보험 상시가입자 수가 전년보다 47개월 연속 뒷걸음친 것으로 나타났습니다. 고용노동부는 오늘(10일)...",
+   "link": "https://n.news.naver.com/mnews/article/057/0001962915?sid=102",
+   "originallink": "http://mbn.mk.co.kr/pages/news/newsView.php?category=mbn00009&news_seq_no=5211413",
+   "press": "매일경제",
+   "pub": "2026-08-10 15:09",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "청년층 고용보험 가입자 47개월째 감소…경력직 선호·AI 도입 등 영향",
+   "desc": "전체 고용보험 가입자는 증가세를 이어갔지만 청년층 가입자는 47개월 연속 감소한 것으로 나타났다. 고용노동부가 10일 발표한 '2026년 7월 고용행정 통계로 본 노동시장 동향'에 따르면 지난달 고용보험...",
+   "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5049870",
+   "originallink": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5049870",
+   "press": "shinailbo.co.kr",
+   "pub": "2026-08-10 15:22",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "29세이하 고용보험 가입자 47개월째 감소…청년 고용한파 지속",
+   "desc": "경기 불황과 기업의 경력직 선호, 인공지능(AI) 도입 등 영향으로 청년 취업난이 심화하면서 29세 이하 고용보험 상시가입자 수가 전년보다 47개월 연속 뒷걸음쳤다. 고용노동부는 10일 이런 내용을 담은 '7월...",
+   "link": "http://www.seouleconews.com/news/articleView.html?idxno=92983",
+   "originallink": "http://www.seouleconews.com/news/articleView.html?idxno=92983",
+   "press": "seouleconews.com",
+   "pub": "2026-08-10 15:26",
+   "q": "고용보험 가입자, 고용보험 가입자, 구직급여, 구직급여, 구인배수, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "AI 도입·경력직 선호에…청년 일자리 47개월 연속 감소",
+   "desc": "아시아투데이 김보영 기자 = 경기 불황과 기업의 경력직 선호, 인공지능·로봇 도입 등 영향으로 청년 취업난이 심화하면서 국내 제조업 고용보험 가입자가 14개월 연속 감소한 것으로 나타났다. 정부는 청년층...",
+   "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260810010003140",
+   "originallink": "https://www.asiatoday.co.kr/kn/view.php?key=20260810010003140",
+   "press": "아시아투데이",
+   "pub": "2026-08-10 15:34",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "K-푸드·조선업이 버틴 고용시장… 제조업 ‘양극화’·청년층 ‘한파’...",
+   "desc": "7월 고용보험 가입자 27만 7천 명 증가… 40대 가입자 33개월 만에 반등 지난 7월 고용보험 상시가입자 수가 7개월 연속 20만 명 후반대의 증가세를 이어갔다. 서비스업이 고용 성장을 이끄는 가운데, 40대 가입자는 33개월...",
+   "link": "https://kidd.co.kr/news/246970",
+   "originallink": "https://kidd.co.kr/news/246970",
+   "press": "kidd.co.kr",
+   "pub": "2026-08-10 15:36",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "AI 도입ㆍ경력직 선호에…청년 고용보험 가입 47개월째 감소",
+   "desc": "29세 이하 고용보험 가입자 수가 47개월 연속 줄어든 것으로 나타났다. 경기 불황과 기업의 경력직 선호, 인공지능(AI) 도입 등의 영향으로 청년층 취업난이 심화한 결과다. 10일 고용노동부가 발표한 ‘7월...",
+   "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202608101525163290463",
+   "originallink": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202608101525163290463",
+   "press": "dnews.co.kr",
+   "pub": "2026-08-10 15:42",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입자 7개월 연속 20만명대↑",
+   "desc": "지난달 고용보험 가입자가 전년보다 27만7000명 늘며 7개월 연속 20만명 후반대 증가세를 이어갔다. 다만 제조업은 14개월 연속 감소했고 29세 이하 청년 가입자도 5만7000명 줄어 산업·연령별 고용 격차는...",
+   "link": "https://www.viva100.com/article/20260810500706",
+   "originallink": "https://www.viva100.com/article/20260810500706",
+   "press": "viva100.com",
+   "pub": "2026-08-10 15:50",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "청년 취업문 더 좁아졌다… 29세 이하 고용보험 가입자 '47개월 연속' 감...",
+   "desc": "반면 서비스업 호조와 60세 이상 고령층 및 40대 여성의 경제활동 참여 증가로 전체 고용보험 가입자 수는 20만 명대 후반의 증가 폭을 유지했다. 고용노동부가 10일 발표한 '7월 고용행정 통계로 본 노동시장...",
+   "link": "https://www.fntoday.co.kr/news/articleView.html?idxno=390122",
+   "originallink": "https://www.fntoday.co.kr/news/articleView.html?idxno=390122",
+   "press": "fntoday.co.kr",
+   "pub": "2026-08-10 15:52",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입자 27만명 늘었지만…청년만 나홀로 뒷걸음",
+   "desc": "10일 고용노동부가 발표한 '7월 고용행정 통계로 본 노동시장 동향'에 따르면 지난달 29세 이하 고용보험 상시가입자는 1년 전보다 5만7000명 줄어들며 47개월 연속 감소 흐름을 이어갔다. 2022년 9월부터 시작된 이...",
+   "link": "https://www.news2day.co.kr/article/20260810500127",
+   "originallink": "https://www.news2day.co.kr/article/20260810500127",
+   "press": "news2day.co.kr",
+   "pub": "2026-08-10 15:52",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "“우린 어디로” 청년들의 비명",
+   "desc": "지난달 전체 고용보험 상시가입자 수가 20만 명대 증가세를 유지했으나 29세 이하 청년층의 고용 한파는 여전히 심각한 것으로 나타났다. 10일 고용노동부가 발표한 ‘7월 고용행정 통계로 본 노동시장 동향’에...",
+   "link": "https://n.news.naver.com/mnews/article/050/0000109509?sid=101",
+   "originallink": "https://magazine.hankyung.com/business/article/202608104735b",
+   "press": "한국경제",
+   "pub": "2026-08-10 16:06",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "청년 고용 문턱 더 높아졌다…고용보험 47개월 연속 감소",
+   "desc": "업종별로는 서비스업 가입자가 28만5천명 증가하며 전체 고용보험 가입자 증가세를 이끌었습니다. 특히 보건복지업에서 11만2천명이 늘었고, 숙박·음식점업과 사업서비스업, 전문·과학기술서비스업 등에서도...",
+   "link": "https://news.knn.co.kr/news/article_sns/1585",
+   "originallink": "https://news.knn.co.kr/news/article_sns/1585",
+   "press": "KNN",
+   "pub": "2026-08-10 16:08",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "청년 고용보험 가입자 47개월째 감소···가입자 증가 속 청년 한파",
+   "desc": "기업의 경력직 채용 선호와 인공지능(AI) 도입, 기간제 해고 등 일자리 미스매치에 더해 인구 감소 영향으로 29세 이하 고용보험 상시가입자가 2022년 9월 이후 47개월 연속 감소세를 이어갔다. 고용노동부가...",
+   "link": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=703282",
+   "originallink": "https://www.newsfreezone.co.kr/news/articleView.html?idxno=703282",
+   "press": "뉴스프리존",
+   "pub": "2026-08-10 16:20",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "[JOB리포트] 취준생보다 일단 취업 후 퇴사가 유리?…청년 실업급여 확...",
+   "desc": "보험료율 인상이나 다른 사업의 지출 조정 없이 보장 대상만 확대하면 고용보험 가입자와 사업주의 보험료 부담으로 이어질 수 있다는 우려가 나오는 이유다. 결국 청년 자발적 퇴사 실업급여의 성패는 지급...",
+   "link": "https://www.news2day.co.kr/article/20260810500117",
+   "originallink": "https://www.news2day.co.kr/article/20260810500117",
+   "press": "news2day.co.kr",
+   "pub": "2026-08-10 16:22",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "일하는 고령층 또 늘고…건설업 고용보험 가입자 36개월 연속 감소",
+   "desc": "지난달 고용보험 가입자 증가세가 이어졌지만 고령층과 서비스업에 증가분이 집중된 것으로 나타났다. 청년 취업난에 29세 이하 고용보험 가입자 수는 전년 대비 6만 명 가까이 줄었고, 장기 불황에 신음하는...",
+   "link": "https://n.news.naver.com/mnews/article/469/0000947213?sid=102",
+   "originallink": "https://www.hankookilbo.com/news/article/A2026081014410004352?did=NA",
+   "press": "한국일보",
+   "pub": "2026-08-10 16:34",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입자 7개월 연속 증가…서비스업이 견인",
+   "desc": "고용보험 가입자는 지난 3월 27만 명, 4월 27만1천 명, 5월 27만 명, 6월 26만6천 명 늘어난 데 이어 7월에도 27만7천 명 증가했다. 업종별로는 서비스업 가입자가 1천113만9천 명으로 전년 동월보다 28만5천 명(2.6...",
+   "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3031281",
+   "originallink": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3031281",
+   "press": "kihoilbo.co.kr",
+   "pub": "2026-08-10 16:36",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "\"취업, 점점 더 어려워진다\"···29세 이하 고용보험 47개월째 후퇴",
+   "desc": "경기 불황과 인공지능(AI) 도입 등 영향으로 청년 취업난이 심화하면서 29세 이하 고용보험 상시가입자 수가 전년보다 47개월 연속 후퇴했다. 고용노동부는 10일 이 같은 내용을 담은 '7월 고용행정 통계로 본...",
+   "link": "https://magazine.hankyung.com/job-joy/article/202608104816d",
+   "originallink": "https://magazine.hankyung.com/job-joy/article/202608104816d",
+   "press": "한국경제",
+   "pub": "2026-08-10 16:38",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입자 28만명 늘었는데… 청년층은 6만명 감소",
+   "desc": "서울 마포구 서울서부고용복지플러스센터 일자리 정보지(사진=연합뉴스) 지난달 고용보험 상시가입자가 28만명 늘었지만, 29세 이하 가입자는 감소한 것으로 나타났다. 또, 전 연령층에서  청년층만...",
+   "link": "https://www.delighti.co.kr/news/articleView.html?idxno=120030",
+   "originallink": "https://www.delighti.co.kr/news/articleView.html?idxno=120030",
+   "press": "delighti.co.kr",
+   "pub": "2026-08-10 16:40",
+   "q": "고용보험 가입자, 고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "청년 고용 47개월 연속 '찬바람'…제조업·건설업 '부진'",
+   "desc": "경기 불황과 경력직 선호 현상, 인공지능(AI) 도입 등의 여파로 29세 이하 고용보험 상시가입자 수가 47개월 연속 감소한 것으로 나타났다. 고용노동부가 10일 발표한 '7월 고용행정 통계로 본 노동시장 동향'에 따르면...",
+   "link": "https://n.news.naver.com/mnews/article/448/0000632631?sid=102",
+   "originallink": "https://news.tvchosun.com/site/data/html_dir/2026/08/10/2026081090197.html",
+   "press": "news.tvchosun.com",
+   "pub": "2026-08-10 16:46",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[업앤다운]보험 업종 희비 엇갈려…현대해상↑·삼성화재↓",
+   "desc": "고용보험 가입자 29개월 만에 최대 증가…청년만 뒷걸음 8월 10일 코스피(+0.65%)와 코스닥(+6.97%)이 모두 상승한 가운데 보험 업종은 희비가 갈렸다. 이날 상승 마감한 대표 종목은 현대해상이다. 현대해상은...",
+   "link": "https://www.nspna.com/news/?mode=view&newsid=823702",
+   "originallink": "https://www.nspna.com/news/?mode=view&newsid=823702",
+   "press": "nspna.com",
+   "pub": "2026-08-10 16:50",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "청년 고용 ‘찬바람’…29세 이하 고용보험 가입자 47개월째 감소",
+   "desc": "경기 불황과 기업들의 경력직 선호, 인공지능(AI)·로봇 도입 등의 영향으로 청년 취업난이 갈수록 심화하고 있다.특히 29세 이하 청년의 고용보험 상시가입자 수가 47개월 연속 감소하면서 청년층 고용시장의...",
+   "link": "https://www.kbsm.net/news/view.php?idx=529823",
+   "originallink": "https://www.kbsm.net/news/view.php?idx=529823",
+   "press": "kbsm.net",
+   "pub": "2026-08-10 16:50",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[사설] 청년고용 한파 언제까지 지속되나",
+   "desc": "전체 고용보험 가입자 수가 7개월 연속 20만 명대 후반의 증가세인데도 29세 이하는 전년 동월 대비 5만7200명 감소했다. 청년고용 한파의 심각성이 완화되지 않았다는 지표다. 여기에는 경기 부진과 일자리 미스매치...",
+   "link": "https://www.joongdo.co.kr/web/view.php?key=20260810010003082",
+   "originallink": "https://www.joongdo.co.kr/web/view.php?key=20260810010003082",
+   "press": "joongdo.co.kr",
+   "pub": "2026-08-10 16:52",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "경력직 선호에 AI까지…20대 청년 고용 4년째 감소",
+   "desc": "경기 부진에 기업들의 경력직 선호가 강해진 데다 인공지능(AI)·로봇 도입까지 확산하면서 29세 이하 고용보험 가입자가 4년 가까이 감소세를 이어갔다. 10일 고용노동부가 발표한 '7월 고용행정 통계로 본...",
+   "link": "https://www.namdonews.com/news/articleView.html?idxno=919565",
+   "originallink": "https://www.namdonews.com/news/articleView.html?idxno=919565",
+   "press": "남도일보",
+   "pub": "2026-08-10 17:02",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "[왈가왈부] 황희 “버스하우스, 깊이 사과”…부동산 문제, 더 신중해야...",
+   "desc": "▲청년 취업난이 날로 심화하면서 29세 이하 고용보험 상시가입자 수가 47개월 연속 줄었습니다. 10일 고용노동부에 따르면 지난달 전체 고용보험 상시가입자는 1년 전보다 27만여 명(1.8%) 늘어난 반면 29세 이하 가입자는...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004650277?sid=110",
+   "originallink": "https://www.sedaily.com/article/20077735?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-08-10 17:30",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "29세 이하 고용보험 가입자 47개월째 감소…청년 고용한파 장기화",
+   "desc": "29세 이하 고용보험 가입자는 47개월 연속 감소했다. 고용노동부가 10일 발표한 '7월 고용행정 통계로 본 노동시장 동향'에 따르면 지난달 고용보험 상시가입자는 1587만7000명으로 전년 동월보다 27만7000명(1.8...",
+   "link": "https://www.ccdailynews.com/news/articleView.html?idxno=2433389",
+   "originallink": "https://www.ccdailynews.com/news/articleView.html?idxno=2433389",
+   "press": "ccdailynews.com",
+   "pub": "2026-08-10 17:32",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "공채는 바늘구멍, 경력직은 '찔끔'…고용절벽 내몰린 청년",
+   "desc": "지난 7월 전체 고용보험 가입자가 20만 명 넘게 늘었지만 29세 이하 청년층만 유일하게 뒷걸음쳤다. 10일 인재정보 기업 잡코리아가 기업 인사담당자 569명을 대상으로 한 ‘2026 하반기 채용 동향’ 조사에 따르면...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005319243?sid=102",
+   "originallink": "https://www.hankyung.com/article/2026081050601",
+   "press": "한국경제",
+   "pub": "2026-08-10 17:42",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "47개월째 고용보험 감소...'쉬었음'으로 가는 청년들",
+   "desc": "전체 고용보험 가입자는 늘었지만, 29세 이하 청년층에서만 유일하게 가입자가 줄었는데요. 29세 이하 고용보험 가입자는 지난해보다 5만 7천명 줄며 지난 2022년 9월 이후 47개월 연속 감소세를 이어갔습니다. 구직활동도...",
+   "link": "https://n.news.naver.com/mnews/article/215/0001261841?sid=101",
+   "originallink": "https://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202608100295&t=NNv",
+   "press": "owtv.co.kr",
+   "pub": "2026-08-10 17:45",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "29세 이하 청년 고용보험 가입자 47개월째 줄어",
+   "desc": "경기 불황과 경력직 선호, AI 도입 영향으로 청년 취업난이 심화하면서 29세 이하 고용보험 상시가입자 수가 전년보다 47개월 연속 줄었습니다. 고용노동부는 '7월 고용행정 통계로 본 노동시장 동향'을...",
+   "link": "https://n.news.naver.com/mnews/article/214/0001516995?sid=102",
+   "originallink": "https://imnews.imbc.com/news/2026/society/article/6843712_36918.html",
+   "press": "imnews.imbc.com",
+   "pub": "2026-08-10 18:32",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입 7개월째 증가세… 청년 고용한파 여전",
+   "desc": "보건복지(11만 2000명)에서 가장 큰 증가 폭이 나타났고 숙박음식(5만 7000명), 사업서비스(2만 6000명), 전문과학기술(2만 3000명) 등 대부분 산업에서 고용보험 가입자가 증가했다. 그러나 제조업과 건설업에선...",
+   "link": "https://www.ggilbo.com/news/articleView.html?idxno=1174559",
+   "originallink": "https://www.ggilbo.com/news/articleView.html?idxno=1174559",
+   "press": "ggilbo.com",
+   "pub": "2026-08-10 18:38",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "고용보험 상시가입자 29세 이하만 감소",
+   "desc": "국내 고용상황을 보여주는 고용보험 상시가입자 증가세에도 29세 이하 청년층의 고용한파는 지속되고 있는 것으로 나타났다. 경기 불황과 기업의 경력직 선호, 인공지능(AI) 도입 등 영향으로 청년 취업난이...",
+   "link": "https://www.ccdn.co.kr/news/articleView.html?idxno=1093168",
+   "originallink": "https://www.ccdn.co.kr/news/articleView.html?idxno=1093168",
+   "press": "충청매일",
+   "pub": "2026-08-10 19:14",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "47개월째 내리막...청년 취업 한파 언제까지",
+   "desc": "공공뉴스=김수연 기자 전체 고용보험 가입자가 증가세를 이어가고 있는 가운데 청년층 가입자는 47개월 연속 감소한 것으로 나타났다. 기업들의 경력직 선호와 인공지능(AI) 도입 등이 맞물리며 청년 취업문이...",
+   "link": "http://www.00news.co.kr/news/articleView.html?idxno=105763",
+   "originallink": "http://www.00news.co.kr/news/articleView.html?idxno=105763",
+   "press": "00news.co.kr",
+   "pub": "2026-08-10 19:30",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  }
+ ],
+ "excluded": [
+  {
+   "title": "\"일자리 잡아도 비자 장벽 커졌다\"… 中 진출 외국인 청년 구직자 잔혹...",
+   "desc": "Z 비자는 고숙련 전문가를 위한 B 카테고리가 주를 이루는데, 신청자의 학력, 경력, 예상 급여, 중국어 능력... 현지에서 구직 활동 및 임시 근무를 할 수 있는 자격을 부여한다. 반면 중국은 유사한 이행 비자 제도가 없어...",
+   "link": "https://www.g-enews.com/view.php?ud=2026080916214574600c8c1c064d_1",
+   "originallink": "https://www.g-enews.com/view.php?ud=2026080916214574600c8c1c064d_1",
+   "press": "g-enews.com",
+   "pub": "2026-08-10 05:50",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[월요기획] 오너 제친 180억 전무 등장… 패션기업 연봉 격차 5배로",
+   "desc": "정 전무는 기본 급여와 상여를 합친 금액이 13억원 정도인데, 여기에 스톡옵션(주식매수선택권) 행사... ☞ 인사·구인·구직 관련 사이트 ‘FS컨설팅’ 둘러보기(클릭) ☞ 헤드헌팅 의뢰 프로세스 알아보기(클릭)...",
+   "link": "https://www.fashionbiz.co.kr/article/228230",
+   "originallink": "https://www.fashionbiz.co.kr/article/228230",
+   "press": "fashionbiz.co.kr",
+   "pub": "2026-08-10 09:26",
+   "q": "구직급여, 구인배수",
+   "rel": false
+  },
+  {
+   "title": "[기고] 외국인근로자 고용허가제(E-9)와 노동법상 보호 (2026년 8월 현재...",
+   "desc": "③ 국민건강보험은 건강보험 적용사업장에 고용된 E-9 근로자가 직장가입자로 당연 적용된다. ④ 국민연금은 외국인등록을 한 E-9 근로자가 원칙적으로 사업장가입자가 되지만, 해당 외국인의 본국 법이 대한민국...",
+   "link": "https://www.kmaeil.com/news/articleView.html?idxno=647945",
+   "originallink": "https://www.kmaeil.com/news/articleView.html?idxno=647945",
+   "press": "kmaeil.com",
+   "pub": "2026-08-10 10:30",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": false
+  },
+  {
+   "title": "양극화 심화 속 취약가구 공적이전은 줄여",
+   "desc": "공적이전은 국가나 공공기관이 국민에게 지급하는 연금·수당·급여 등을 의미한다. 취약계층인 1분위는... 국가데이터처의 '6월 고용동향'에 따르면 지난 6월 구직단념자는 35만6000명으로 전년동월대비 1만6000명...",
+   "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260807010002500",
+   "originallink": "https://www.asiatoday.co.kr/kn/view.php?key=20260807010002500",
+   "press": "아시아투데이",
+   "pub": "2026-08-10 17:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[기자수첩] \"열일한 사람은 바보인가요?\" '자발적 퇴사' 실업급여에 씁...",
+   "desc": "일본은 개인 사정 퇴직자에 대해 7일의 대기 기간 뒤 1개월(5년 내 3회 이상일 경우 3개월) 동안 급여를 주지 않는 '급부 제한' 기간을 두며, 실업 인정은 원칙 4주마다 출석하여 구직 활동 실적을 보고하도록 한다. 이들 국가가...",
+   "link": "http://www.hellodd.com/news/articleView.html?idxno=112755",
+   "originallink": "http://www.hellodd.com/news/articleView.html?idxno=112755",
+   "press": "hellodd.com",
+   "pub": "2026-08-10 18:56",
+   "q": "구직급여",
+   "rel": false
+  }
+ ]
+}

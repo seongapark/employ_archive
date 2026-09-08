@@ -6,7 +6,7 @@ export const DOMAINS = [
   { slug: 'forecast', name: '고용전망', desc: '기관별 고용 전망치' },
   { slug: 'employment', name: '고용동향', desc: '경활·사업체·고용행정통계 비교' },
   { slug: 'supply', name: '인력수급', desc: '중장기 인력수급전망' },
-  { slug: 'economy', name: '경제동향', desc: '거시 지표 동향' },
+  { slug: 'press', name: '행통 모니터링', desc: '고용행정통계 기사 모니터링' },
 ];
 
 export function domainState(lastRun) {

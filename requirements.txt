@@ -2,6 +2,8 @@ pydantic>=2.7
 requests>=2.32
 curl_cffi>=0.7
 pdfplumber>=0.11
+# 보도자료 hwpx 파싱(domains/press) — 표 구조를 XPath 로 읽는다
+lxml>=5.2
 pytest>=8
 # 이 렌더링·OCR 스택 버전을 고정한다 — 출력이 그대로 고용전망 아카이브에
 # 실리는데, 버전이 바뀌어 숫자 하나가 다르게 읽히면 실제로 없었던 KEIS
