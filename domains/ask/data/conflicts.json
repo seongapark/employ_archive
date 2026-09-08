@@ -1,1 +1,68 @@
-[]
+[
+  {
+    "id": "CONF-eaps-est-개념",
+    "source_a": "eaps",
+    "source_b": "est",
+    "차이유형": "개념",
+    "설명": "경제활동인구조사는 취업자수, 사업체노동력조사는 종사자수로 개념이 다르다",
+    "비교가능": "증감률만",
+    "evidence": "저장소 domains/employment/data (수집기가 실제로 채우는 축)",
+    "verified_at": "2026-09-08",
+    "evidence_status": "확인"
+  },
+  {
+    "id": "CONF-eaps-est-모집단",
+    "source_a": "eaps",
+    "source_b": "est",
+    "차이유형": "모집단",
+    "설명": "15세 이상 인구 · 조사대상주간 1시간 이상 취업 vs 1인 이상 사업체 · 농림어업 등 제외",
+    "비교가능": "증감률만",
+    "evidence": "저장소 domains/employment/data (수집기가 실제로 채우는 축)",
+    "verified_at": "2026-09-08",
+    "evidence_status": "확인"
+  },
+  {
+    "id": "CONF-eaps-ei-개념",
+    "source_a": "eaps",
+    "source_b": "ei",
+    "차이유형": "개념",
+    "설명": "경제활동인구조사는 취업자수, 고용행정 통계로 본 노동시장 동향는 상시가입자수로 개념이 다르다",
+    "비교가능": "증감률만",
+    "evidence": "저장소 domains/employment/data (수집기가 실제로 채우는 축)",
+    "verified_at": "2026-09-08",
+    "evidence_status": "확인"
+  },
+  {
+    "id": "CONF-eaps-ei-모집단",
+    "source_a": "eaps",
+    "source_b": "ei",
+    "차이유형": "모집단",
+    "설명": "15세 이상 인구 · 조사대상주간 1시간 이상 취업 vs 고용보험 가입 상시가입자",
+    "비교가능": "증감률만",
+    "evidence": "저장소 domains/employment/data (수집기가 실제로 채우는 축)",
+    "verified_at": "2026-09-08",
+    "evidence_status": "확인"
+  },
+  {
+    "id": "CONF-est-ei-개념",
+    "source_a": "est",
+    "source_b": "ei",
+    "차이유형": "개념",
+    "설명": "사업체노동력조사는 종사자수, 고용행정 통계로 본 노동시장 동향는 상시가입자수로 개념이 다르다",
+    "비교가능": "증감률만",
+    "evidence": "저장소 domains/employment/data (수집기가 실제로 채우는 축)",
+    "verified_at": "2026-09-08",
+    "evidence_status": "확인"
+  },
+  {
+    "id": "CONF-est-ei-모집단",
+    "source_a": "est",
+    "source_b": "ei",
+    "차이유형": "모집단",
+    "설명": "1인 이상 사업체 · 농림어업 등 제외 vs 고용보험 가입 상시가입자",
+    "비교가능": "증감률만",
+    "evidence": "저장소 domains/employment/data (수집기가 실제로 채우는 축)",
+    "verified_at": "2026-09-08",
+    "evidence_status": "확인"
+  }
+]
