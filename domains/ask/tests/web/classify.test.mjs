@@ -80,9 +80,30 @@ test('확신도가 범위 밖이면 잘라낸다', () => {
 
 test('슬롯 필드가 빠지면 채워 넣는다', () => {
   const r = normalize({ 유형: '전망', 확신도: 0.8, 슬롯: { 주제: '취업자' } }, { 어휘 });
+  // category 는 LLM 슬롯이 아니라 코드가 집단축에서 뽑아 붙이는 파생 필드다 —
+  // 그래서 SLOT_KEYS 는 6개 그대로이고, 슬롯 객체에는 7번째 키로 나온다.
   assert.deepEqual(Object.keys(r.슬롯).sort(),
-    ['기간', '지역입도', '집단축', '출처', '시간입도', '주제'].sort());
+    ['기간', '지역입도', '집단축', '출처', '시간입도', '주제', 'category'].sort());
   assert.deepEqual(r.슬롯.집단축, []);
+  assert.deepEqual(r.슬롯.category, {});
+});
+
+test('집단축의 카테고리 값을 축과 함께 건져 낸다', () => {
+  // '30대' 를 축으로만 접으면 그 값이 사라져 조회가 연령 전 구간을 돌려주고,
+  // 파생이 20대와 40대 사이의 "차이" 를 만든다. 코드값은 segments.json 이 정본이다.
+  const r = normalize({ 유형: '수치조회', 확신도: 0.9,
+                        슬롯: { 주제: '취업자', 집단축: ['30대'] } }, { 어휘 });
+  assert.deepEqual(r.슬롯.집단축, ['연령']);
+  assert.deepEqual(r.슬롯.category, { 연령: '30-39' });
+  assert.equal(r.저확신, false);
+});
+
+test('카테고리를 못 집으면 빈 객체다 — 지어내지 않는다', () => {
+  // '10대' 는 축으로는 연령이지만 segments.json 에 대응 구간이 없다
+  const r = normalize({ 유형: '수치조회', 확신도: 0.9,
+                        슬롯: { 주제: '취업자', 집단축: ['10대'] } }, { 어휘 });
+  assert.deepEqual(r.슬롯.집단축, ['연령']);
+  assert.deepEqual(r.슬롯.category, {});
 });
 
 test('LLM 이 아예 빈 응답을 줘도 떨어지지 않는다', () => {

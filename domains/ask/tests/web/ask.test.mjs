@@ -185,6 +185,109 @@ test('매핑에 없는 축은 total 로 떨어지지 않고 한계가 된다', a
   assert.ok(r.한계.some((l) => l.includes('직업')));
 });
 
+// ── C1: 카테고리 소실과 날조된 파생 ─────────────────────────────────────────
+const 연령횡단면 = ['15-29', '30-39', '40-49'].map((c, i) => ({
+  source: 'eaps', breakdown: 'age', category: c, period: '2026-07',
+  value: 400 + i * 200, unit: '천명', rse: null, rse_flag: null,
+}));
+
+test('연령대를 못 집으면 전 구간이 나오지만 차이·증감률을 날조하지 않는다', async () => {
+  const db = makeFakeDb({ observation: 연령횡단면 });
+  const r = await ask({ db, llm: null }, {
+    유형: '수치조회',
+    슬롯: { ...수치슬롯, 기간: { from: '2026-07', to: '2026-07' } },  // category 없음
+  });
+  const 파생 = r.근거[0].파생;
+  // 20대와 40대 사이의 "차이 400 / 증감률 100%" 는 아무 뜻이 없다 — 만들지 않는다
+  assert.equal('차이' in 파생, false);
+  assert.equal('증감률' in 파생, false);
+  assert.equal(파생.합계, 1800);
+  // 그리고 조용히 넘어가지 않는다
+  assert.ok(r.한계.includes('연령대를 지목하지 못해 전 구간을 함께 보여준다'),
+            `한계: ${JSON.stringify(r.한계)}`);
+});
+
+test('연령대를 집으면 그 구간만 조회하고 지목 한계도 사라진다', async () => {
+  const db = makeFakeDb({
+    observation: [
+      ...연령횡단면,
+      { source: 'eaps', breakdown: 'age', category: '30-39', period: '2026-08',
+        value: 620, unit: '천명', rse: null, rse_flag: null },
+    ],
+  });
+  const r = await ask({ db, llm: null }, {
+    유형: '수치조회',
+    슬롯: { ...수치슬롯, 기간: { from: '2026-07', to: '2026-08' },
+            category: { 연령: '30-39' } },
+  });
+  // 카드가 어느 연령대인지 말한다 — 골든이 적어 둔 근거지표 형식과 같다
+  assert.equal(r.근거[0].지표, 'eaps:age:30-39');
+  assert.deepEqual(r.근거[0].관측, [{ 기간: '2026-07', 값: 600 }, { 기간: '2026-08', 값: 620 }]);
+  assert.equal(r.근거[0].파생.차이, 20);   // 이제는 진짜 시계열이다
+  assert.equal(r.한계.some((l) => l.includes('지목하지 못해')), false);
+});
+
+// ── I1·I2: 모르면 보수적으로, 쌍 판정을 근거에 물린다 ───────────────────────
+test('비교기준이 카탈로그에 없으면 수준이 아니라 증감률만으로 떨어진다', async () => {
+  // est 는 ontology.indicators 에 행이 없다 — conflicts.json 이 증감률만으로 못박은 소스다
+  const db = makeFakeDb({
+    observation: [
+      { source: 'est', breakdown: 'industry', category: 'C', period: '2026-06', value: 100, unit: '천명' },
+      { source: 'est', breakdown: 'industry', category: 'C', period: '2026-07', value: 110, unit: '천명' },
+    ],
+  });
+  const r = await ask({ db, llm: null }, {
+    유형: '수치조회',
+    슬롯: { 주제: '종사자수', 집단축: ['산업'], 지역입도: '전국', 시간입도: '월',
+            기간: { from: '2026-06', to: '2026-07' }, 출처: [] },
+  });
+  assert.deepEqual(r.라우팅.가능, ['est']);
+  assert.equal(r.근거[0].compare_basis, '증감률만');
+  assert.equal(r.근거[0].관측, undefined);          // 수준값이 안 실린다
+  assert.ok(r.한계.some((l) => l.includes('증감률만으로 인용한다')));
+});
+
+test('출처비교의 쌍 판정이 근거에 그대로 물린다', async () => {
+  const db = makeFakeDb({
+    observation: [
+      { source: 'eaps', breakdown: 'total', category: null, period: '2026-07', value: 28000, unit: '천명' },
+      { source: 'ei', breakdown: 'total', category: null, period: '2026-07', value: 15000, unit: '천명' },
+    ],
+  });
+  const r = await ask({ db, llm: null }, {
+    유형: '출처비교',
+    슬롯: { 주제: '취업자', 집단축: [], 지역입도: '전국', 시간입도: '월',
+            기간: { from: '2026-07', to: '2026-07' }, 출처: ['eaps', 'ei'] },
+  });
+  assert.equal(r.비교.비교가능, '증감률만');
+  // eaps 는 카탈로그상 '수준'(IND_전직종취업자)이지만, 쌍 판정이 더 보수적이라 그쪽을 따른다
+  assert.equal(r.근거.length, 2);
+  for (const e of r.근거) {
+    assert.equal(e.compare_basis, '증감률만');
+    assert.equal(e.관측, undefined);
+  }
+});
+
+// ── I3: 라우팅이 통째로 비면 밝힌다 ─────────────────────────────────────────
+test('짧은 정규형 주제도 route 앞에서 카탈로그 원어로 접힌다', async () => {
+  const db = makeFakeDb();
+  const r = await ask({ db, llm: null }, {
+    유형: '수치조회', 슬롯: { ...수치슬롯, 주제: '취업자' },
+  });
+  assert.deepEqual(r.라우팅.가능, ['eaps']);
+});
+
+test('라우팅이 통째로 비면 빈 카드가 아니라 한계를 낸다', async () => {
+  const db = makeFakeDb();
+  const r = await ask({ db, llm: null }, {
+    유형: '수치조회',
+    슬롯: { 주제: '매출', 집단축: [], 지역입도: '전국', 시간입도: '월',
+            기간: { from: '', to: '' }, 출처: [] },
+  });
+  assert.deepEqual([r.라우팅.가능, r.라우팅.부분, r.라우팅.불가], [[], [], []]);
+  assert.ok(r.한계.includes('이 주제·축 조합을 내는 출처가 카탈로그에 없다'));
+});
+
 test('축을 둘 물으면 하나만 조회한다고 밝힌다', () => {
   const { breakdown, 한계 } = 관측축(['연령', '산업']);
   assert.equal(breakdown, 'age');

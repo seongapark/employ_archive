@@ -47,7 +47,9 @@ for (const f of readdirSync(DIR).filter((n) => n.endsWith('.json'))) {
       assert.ok(r.한계.some((l) => l.includes(문구)),
                 `한계에 "${문구}" 가 없다: ${JSON.stringify(r.한계)}`);
     }
-    for (const b of c.기대.배지 ?? []) assert.ok(r.배지.includes(b), `배지 ${b} 없음`);
+    // 배지는 **집합 일치**로 단언한다. 포함 검사면 `배지: []` 가 아무것도 검사하지 않아
+    // "붙으면 안 되는 배지가 붙었다" 를 통째로 놓친다.
+    if (c.기대.배지) assert.deepEqual([...r.배지].sort(), [...c.기대.배지].sort());
 
     if (c.기대.현상) assert.equal(r.현상?.id, c.기대.현상);
     for (const id of c.기대.가설 ?? []) {

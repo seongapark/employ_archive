@@ -94,8 +94,15 @@ function 허용텍스트(r) {
 
 // 집단축을 관측 축으로 접는다. observation 은 breakdown 열이 하나뿐이라 축 하나만
 // 조회할 수 있다 — 나머지는 못 한다고 말한다.
+// 축을 지목하지 못했을 때 무엇을 함께 보여주게 되는지 축마다 밝힌다(조사 때문에 표로 둔다)
+const 축_지목없음 = {
+  연령: '연령대를 지목하지 못해 전 구간을 함께 보여준다',
+  성: '성별을 지목하지 못해 남녀를 함께 보여준다',
+  산업: '산업을 지목하지 못해 전 산업을 함께 보여준다',
+};
+
 export function 관측축(집단축 = []) {
-  if (!집단축.length) return { breakdown: 'total', 한계: [] };
+  if (!집단축.length) return { breakdown: 'total', 축: null, 한계: [] };
   const 됨 = 집단축.filter((a) => a in 축_BREAKDOWN);
   const 안됨 = 집단축.filter((a) => !(a in 축_BREAKDOWN));
   const 한계 = [];
@@ -103,8 +110,11 @@ export function 관측축(집단축 = []) {
     한계.push(`${안됨.join('·')}별 관측은 적재돼 있지 않다 — 전체값으로 대신 답하지 않는다`);
   }
   if (됨.length > 1) 한계.push(`${됨[0]} 축만 조회한다 — ${됨.slice(1).join('·')} 과의 교차는 못 낸다`);
-  return { breakdown: 됨.length ? 축_BREAKDOWN[됨[0]] : null, 한계 };
+  return { breakdown: 됨.length ? 축_BREAKDOWN[됨[0]] : null, 축: 됨[0] ?? null, 한계 };
 }
+
+// 둘 중 더 보수적인 쪽. 하나라도 수준이 아니면 수준으로 인용하지 않는다.
+const 보수적 = (...xs) => (xs.some((x) => x && x !== '수준') ? '증감률만' : '수준');
 
 // 비교기준은 소스가 아니라 **지표 카탈로그**가 정한다. `src === 'eaps' ? '수준' : '증감률만'`
 // 처럼 소스 id 를 코드에 박으면 소스가 늘 때마다 조용히 틀린다.
@@ -114,40 +124,55 @@ function 비교기준(지표들, src, breakdown) {
   const 같은소스 = 지표들.filter((i) => i.source_id === src);
   if (같은소스.length) {
     // 같은 소스 안에서 가장 보수적인 쪽을 고른다 — 하나라도 증감률만이면 수준으로 안 낸다
-    const 보수 = 같은소스.some((i) => i.compare_basis === '증감률만') ? '증감률만' : '수준';
+    const 보수 = 보수적(...같은소스.map((i) => i.compare_basis));
     return { compare_basis: 보수, 근거: 같은소스.map((i) => i.id).join('·') };
   }
-  return { compare_basis: '수준', 근거: null };
+  // 모르면 관대한 쪽이 아니라 보수적인 쪽으로 떨어진다 — compare.mjs 의 "모르면 비교를
+  // 허용하지 않는다" 와 같은 규율이다. est 처럼 지표 행이 없는 소스가 실제로 여기 온다.
+  return { compare_basis: '증감률만', 근거: null };
 }
 
-async function 수치조회(deps, 슬롯, { 출처 } = {}) {
+async function 수치조회(deps, 슬롯, { 출처, 비교하한 } = {}) {
   const 라우팅 = await route(deps, 슬롯);
   // 출처비교는 사용자가 출처를 직접 지목한다 — 그때는 라우팅 대신 지목된 출처를 읽는다.
   const 대상 = 출처?.length ? 출처 : 라우팅.가능;
   const 지표들 = await deps.db.all('SELECT * FROM indicator');
-  const { breakdown, 한계: 축한계 } = 관측축(슬롯.집단축);
+  const { breakdown, 축, 한계: 축한계 } = 관측축(슬롯.집단축);
+  const category = 축 ? (슬롯.category?.[축] ?? null) : null;
 
   const 근거 = [];
   const 한계 = [...축한계];
   if (대상.length > 1) 한계.push('모집단이 달라 수준 비교 불가 — 증감 방향만');
+  // 축은 집었는데 그 축의 어느 값인지를 못 집으면 전 구간이 함께 나온다. 밝힌다.
+  if (축 && !category) 한계.push(축_지목없음[축] ?? `${축} 값을 지목하지 못해 전 구간을 함께 보여준다`);
+  // 라우팅이 통째로 비면 카드가 아무 말도 안 하게 된다 — 그 자체가 답이다
+  if (!라우팅.가능.length && !라우팅.부분.length && !라우팅.불가.length) {
+    한계.push('이 주제·축 조합을 내는 출처가 카탈로그에 없다');
+  }
 
   if (breakdown) {
     for (const src of 대상) {
       const rows = await queryObservations(deps, {
-        source: src, breakdown, category: 슬롯.category ?? null,
+        source: src, breakdown, category,
         from: 슬롯.기간?.from, to: 슬롯.기간?.to,
       });
       if (!rows.length) {
         // 빈손을 조용히 넘기지 않는다
-        한계.push(`${src}: 이 조건(${breakdown}${슬롯.기간?.from ? ` ${슬롯.기간.from}~${슬롯.기간.to}` : ''})의 관측이 아직 적재돼 있지 않다`);
+        한계.push(`${src}: 이 조건(${breakdown}${category ? `=${category}` : ''}${슬롯.기간?.from ? ` ${슬롯.기간.from}~${슬롯.기간.to}` : ''})의 관측이 아직 적재돼 있지 않다`);
         continue;
       }
       const 끝 = rows[rows.length - 1];
-      const { compare_basis, 근거: 기준근거 } = 비교기준(지표들, src, breakdown);
-      if (!기준근거) 한계.push(`${src}: 비교기준이 지표 카탈로그에 없어 수준으로 인용한다`);
+      const { compare_basis: 카탈로그기준, 근거: 기준근거 } = 비교기준(지표들, src, breakdown);
+      if (!기준근거) 한계.push(`${src}: 비교기준이 지표 카탈로그에 없어 증감률만으로 인용한다`);
+      // 쌍 판정(출처비교의 compare 결과)이 더 보수적이면 그쪽을 따른다 — 소스별 카탈로그
+      // 기준과 쌍 단위 판정이 따로 놀면, 증감률만으로 못박은 쌍에 수준값이 실려 나간다.
+      const compare_basis = 보수적(카탈로그기준, 비교하한);
       근거.push(buildEvidence(
         {
-          지표: `${src}:${breakdown}`,
+          // 카테고리까지 키에 넣는다 — 안 넣으면 카드가 "eaps:age" 라고만 말해
+          // 이 숫자가 어느 연령대인지 LLM 도 화면도 알 수 없다.
+          // 골든이 문서용으로 적어 둔 근거지표 형식(`eaps:age:30-39:2026-07`)과도 같다.
+          지표: [src, breakdown, category].filter(Boolean).join(':'),
           compare_basis,
           // 단위는 **데이터가 준 것만** 싣는다. 지표에 %·건·지수가 섞여 있어
           // '천명' 을 박으면 틀린 단위가 답변에 나간다(Task 6).
@@ -182,7 +207,11 @@ async function 현상찾기(deps, 슬롯) {
   }) ?? null;
 }
 
-export async function ask(deps, { 유형, 슬롯 = {}, 저확신 = false, 한도초과 = false } = {}) {
+export async function ask(deps, { 유형, 슬롯: 입력슬롯 = {}, 저확신 = false, 한도초과 = false } = {}) {
+  // 주제를 **한 번만, 맨 앞에서** 카탈로그 원어로 접는다. 전망·원인탐색에서만 접고
+  // route() 앞에서는 안 접으면, 짧은 정규형으로 들어온 질문이 후보 없음으로 떨어져
+  // 라우팅이 통째로 비고 카드가 아무 말도 못 하게 된다.
+  const 슬롯 = { ...입력슬롯, 주제: 주제원어(입력슬롯.주제) };
   const base = {
     유형, 슬롯, 저확신, 한도초과, 답변: null, 근거: [], 한계: [],
     미확인: [], 가설없음: false, 판정없음: false, 후속질문: [],
@@ -197,12 +226,15 @@ export async function ask(deps, { 유형, 슬롯 = {}, 저확신 = false, 한도
       r = { ...base, 한계: ['비교하려면 출처가 둘 필요하다 — 하나만 지목됐다'] };
     } else {
       const c = await compare(deps, { source_a: a, source_b: b });
-      const q = await 수치조회(deps, { ...슬롯, 집단축: [] }, { 출처: [a, b] });
+      // 쌍 판정을 근거 생성에 그대로 물린다. 출처비교는 이 규율이 가장 중요한 유형이다 —
+      // 증감률만·불가로 못박은 쌍인데 소스별 카탈로그 기준만 보고 수준값을 실으면
+      // compare() 가 낸 판정이 장식이 된다.
+      const q = await 수치조회(deps, { ...슬롯, 집단축: [] },
+                               { 출처: [a, b], 비교하한: c.비교가능 });
       r = { ...base, ...q, 비교: c, 한계: [...c.설명, ...q.한계] };
     }
   } else if (유형 === '전망') {
-    const 주제 = 주제원어(슬롯.주제);
-    const ind = 전망지표[주제] ?? null;
+    const ind = 전망지표[슬롯.주제] ?? null;   // 주제는 ask() 맨 앞에서 이미 접혔다
     if (!ind) {
       r = { ...base, 전망: [], 근거서술: [], 지표코드: null,
             한계: [`'${슬롯.주제}' 의 전망은 아직 다루지 않는다 — 전망 지표 카탈로그(${Object.values(전망지표).join('·')})에 대응 코드가 없다`] };
