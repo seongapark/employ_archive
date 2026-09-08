@@ -110,9 +110,42 @@ test('허용텍스트에 현상 근거서술과 한계가 실리고, 카탈로�
             기간: { from: '2023S1', to: '2025S2' }, 출처: [] },
   });
   assert.ok(r.허용텍스트.includes(r.현상.근거서술));
+  assert.ok(r.허용텍스트.includes(r.현상.정의));   // "15~29세 …" 에도 숫자가 있다
   for (const l of r.한계) assert.ok(r.허용텍스트.includes(l));
-  // 카드에 실리지 않는 산문(지표 정의·소스 설명)은 허용텍스트에 없어야 한다
+  for (const h of r.가설) for (const m of h.missing_for_verdict) assert.ok(r.허용텍스트.includes(m));
+  // 카드에 실리지 않는 산문(지표 카탈로그의 정의)은 허용텍스트에 없어야 한다
   assert.equal(r.허용텍스트.some((t) => t.includes('경제활동인구조사 기준 전체 취업자수')), false);
+  // 식별자·열거값도 문장이 아니라 담지 않는다
+  for (const 금지 of ['H1_AI대체', '청년사무직감소', '반기', '증감률만']) {
+    assert.equal(r.허용텍스트.includes(금지), false, `허용텍스트에 ${금지} 가 있다`);
+  }
+});
+
+test('범위밖의 예시 질문도 우리가 준 문장이라 허용텍스트에 담는다', async () => {
+  const db = makeFakeDb();
+  const r = await ask({ db, llm: null }, {
+    유형: '범위밖',
+    슬롯: { 주제: '매출', 집단축: [], 지역입도: '시군구', 시간입도: '월',
+            기간: { from: '', to: '' }, 출처: [] },
+  });
+  assert.equal(r.답할수있는질문.length, 3);
+  for (const q of r.답할수있는질문) assert.ok(r.허용텍스트.includes(q));
+  // 예시 질문을 그대로 인용한 답변이 튕기지 않는다 (2026년은 기간 토큰, 7·30 은 숫자)
+  const 답변객체 = { 답변: '대신 "2026년 7월 30대 취업자는 몇 명인가" 는 답할 수 있다.', 근거: [] };
+  assert.deepEqual(verify(답변객체, r.근거).위반, [7, 30]);
+  assert.equal(verify(답변객체, r.근거, r.허용텍스트).ok, true);
+});
+
+test('메타한계 카드의 라우팅 불가 사유도 허용텍스트에 담는다', async () => {
+  const db = makeFakeDb();
+  const r = await ask({ db, llm: null }, {
+    유형: '메타한계',
+    슬롯: { 주제: '종사자수', 집단축: ['연령'], 지역입도: '전국', 시간입도: '월',
+            기간: { from: '', to: '' }, 출처: ['est'] },
+  });
+  // 이 경로에서는 라우팅 사유가 한계로 접히지 않고 라우팅 안에 실려 나간다
+  assert.ok(r.라우팅.불가.length > 0);
+  for (const x of r.라우팅.불가) assert.ok(r.허용텍스트.includes(x.사유));
 });
 
 test('허용텍스트가 있으면 근거서술을 인용한 숫자가 환각으로 튕기지 않는다', async () => {

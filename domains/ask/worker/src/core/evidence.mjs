@@ -51,8 +51,14 @@ export async function evidence(deps, { phenomenon_id, 기간 } = {}) {
     const 한계 = [];
     if (rows.some((r) => r.time_grain !== '월' && r.role === 'falsifies'))
       한계.push('선후관계는 검정하지 않음 — 반기 지표로는 선후를 볼 수 없다');
-    if (rows.some((r) => r.유의성 === '불명'))
-      한계.push('RSE 미공표 — 변화가 표본오차 안인지 알 수 없다');
+    // 사유를 고정 문자열로 박지 않는다. buildEvidence 가 rse_flag 유무로 이미
+    // `RSE 미공표(${rse_flag})` 와 `RSE 미보유` 를 갈라 놨다 — 그것을 그대로 인용한다.
+    // 그래서 오늘은 "RSE 미보유 — …" 이고, 수집기가 붙어 rse_flag 가 들어오는 날
+    // 저절로 "RSE 미공표(*) — …" 가 된다. data_status 하나로 판정이 켜지는 것과 같은 계열이다.
+    for (const 사유 of new Set(
+      rows.filter((r) => r.유의성 === '불명').map((r) => r.유의성사유))) {
+      한계.push(`${사유} — 표본오차 안인지 알 수 없다`);
+    }
     if (rows.some((r) => r.compare_basis === '증감률만'))
       한계.push('모집단이 달라 수준 비교 불가 — 증감 방향만');
     if (h.검정력_주석) 한계.push(h.검정력_주석);
