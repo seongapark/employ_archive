@@ -7,6 +7,19 @@ function fmtVal(v) {
   return typeof v === 'number' ? v.toLocaleString('ko-KR') : String(v);
 }
 
+// 리뷰 라운드 2 판정 2: 전망 기관은 source_catalog 에 등재돼 있지 않다(출처가
+// 없는 게 아니라 카탈로그가 없는 것 — forecast 행 자체가 org·source_url·
+// landing_url 을 들고 있다. 그게 원문이다). 그래서 전망의 출처 블록은
+// source_catalog 조회(카드.소스) 가 아니라 forecast 행에서 직접 그린다.
+function 전망출처목록(전망행들) {
+  const seen = new Map();
+  for (const r of 전망행들 ?? []) {
+    if (!r.org || seen.has(r.org)) continue;
+    seen.set(r.org, { name_ko: r.org, endpoint: r.landing_url ?? r.source_url ?? null });
+  }
+  return [...seen.values()];
+}
+
 // Minor(리뷰 라운드 1): href 는 안전한 스킴일 때만 링크로 그리고, 아니면 평문으로
 // 그린다 — 카탈로그가 오염돼도 클릭이 코드를 실행하면 안 된다.
 function 링크또는텍스트(esc, url, label) {
@@ -226,8 +239,10 @@ export function renderAll(카드, { esc, badgeLabel, understandLine, evidenceCol
   ].map((l) => `<li>${esc(l)}</li>`).join('');
 
   // ── 소스 ── 스펙 §6: 원문 링크 + 확인일 + evidence_status. 링크는 http/https
-  // 화이트리스트일 때만 그린다(Minor: href 스킴 검증) ──────────────────────
-  $('sources').innerHTML = (카드.소스 ?? []).map((s) =>
+  // 화이트리스트일 때만 그린다(Minor: href 스킴 검증). 전망은 source_catalog 가
+  // 아니라 forecast 행(org·landing_url·source_url)에서 직접 그린다(판정 2) ──────
+  const 소스행 = (카드.전망 || 카드.근거서술) ? 전망출처목록(카드.전망) : (카드.소스 ?? []);
+  $('sources').innerHTML = 소스행.map((s) =>
     `<div class="source">${링크또는텍스트(esc, s.endpoint, s.name_ko ?? s.id)}
      <small>${esc(s.verified_at ?? '')} ${esc(s.evidence_status ?? '')}</small></div>`).join('');
 
