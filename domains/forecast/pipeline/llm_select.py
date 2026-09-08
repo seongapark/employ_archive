@@ -17,8 +17,10 @@ from typing import Callable, NamedTuple, Sequence
 
 import requests
 
-MODEL = "claude-sonnet-5"
-API_URL = "https://api.anthropic.com/v1/messages"
+ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
+OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+MODEL_ANTHROPIC = "claude-sonnet-5"
+MODEL_OPENROUTER = "anthropic/claude-sonnet-5"
 MAX_TOKENS = 2000
 TIMEOUT = 120
 
@@ -104,15 +106,35 @@ def parse_response(body: str) -> list[Picked]:
     return out
 
 
-def _call_api(prompt: str) -> str:
+def provider() -> tuple[str, str, dict] | None:
+    """(url, model, headers) — 있는 키를 쓴다. 둘 다 없으면 None.
+
+    press 의 llm_cite.provider() 와 같은 차례다(Anthropic 직결이 먼저,
+    OpenRouter 가 대타). 순서를 바꾸지 않는다 — 둘 다 있는 환경에서
+    도메인마다 다른 공급자를 쓰면, 같은 프롬프트가 왜 다른 답을 냈는지
+    설명할 수 없게 된다.
+    """
     key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-    if not key:
-        raise RuntimeError("ANTHROPIC_API_KEY 가 없다")
+    if key:
+        return (ANTHROPIC_URL, MODEL_ANTHROPIC,
+                {"x-api-key": key, "anthropic-version": "2023-06-01",
+                 "content-type": "application/json"})
+    key = os.environ.get("OPENROUTER_API_KEY", "").strip()
+    if key:
+        return (OPENROUTER_URL, MODEL_OPENROUTER,
+                {"Authorization": f"Bearer {key}", "content-type": "application/json"})
+    return None
+
+
+def _call_api(prompt: str) -> str:
+    got = provider()
+    if got is None:
+        raise RuntimeError("ANTHROPIC_API_KEY 도 OPENROUTER_API_KEY 도 없다")
+    url, model, headers = got
     resp = requests.post(
-        API_URL,
-        headers={"x-api-key": key, "anthropic-version": "2023-06-01",
-                 "content-type": "application/json"},
-        json={"model": MODEL, "max_tokens": MAX_TOKENS,
+        url,
+        headers=headers,
+        json={"model": model, "max_tokens": MAX_TOKENS,
               "messages": [{"role": "user", "content": prompt}]},
         timeout=TIMEOUT,
     )
@@ -120,9 +142,12 @@ def _call_api(prompt: str) -> str:
         # raise_for_status() 는 본문을 버린다 — 401 이나 429 가 왜 그랬는지는
         # 본문 안에 있다. 그대로 실어 보낸다.
         raise ValueError(f"API 가 {resp.status_code} 를 돌려줬다: {resp.text[:200]}")
+    data = resp.json()
     try:
-        return "".join(b.get("text", "") for b in resp.json()["content"])
-    except (ValueError, KeyError, TypeError, AttributeError) as exc:
+        if "content" in data:                              # Anthropic Messages
+            return "".join(b.get("text", "") for b in data["content"])
+        return data["choices"][0]["message"]["content"]    # OpenAI 호환(OpenRouter)
+    except (ValueError, KeyError, TypeError, IndexError, AttributeError) as exc:
         raise ValueError(f"200 응답인데 형식이 예상과 다르다: {resp.text[:200]}") from exc
 
 
