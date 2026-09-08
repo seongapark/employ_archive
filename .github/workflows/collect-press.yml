@@ -1,0 +1,105 @@
+name: collect-press
+
+on:
+  schedule:
+    # 목표: **실제로** 10:00~20:00 KST 사이에 한 시간 간격으로 돈다.
+    #
+    # 여기 적힌 시각은 그 목표에서 지연을 미리 뺀 값이다. 이 저장소의 예약
+    # 실행은 5~8시간 늦게 시작한다(2026-09-02 측정: 표본 8개, 최소 5.3h /
+    # 중앙 5.6h / 최대 7.9h). 중앙값 6시간을 빼서 19:00~05:00 UTC 로 적었고,
+    # 그래서 실제 실행이 10시~20시 KST 근처에 떨어진다. 이 숫자는 발표
+    # 시각이 아니라 **지연 관측값**에 매여 있다 — 지연이 달라지면 다시 재서
+    # 옮겨야 한다. push·workflow_dispatch 는 40초 안에 시작하므로 늦는 것은
+    # schedule 이벤트뿐이다.
+    #
+    # 매시간 도는 것은 **배포 당일뿐**이다. 그날은 기사가 12시 엠바고부터 밤까지
+    # 계속 올라오고, 이 도메인은 늦게 아는 것이 가장 나쁘다. 이튿날·후속일은
+    # 하루 한 번이면 되고, 그 판단은 크론이 아니라 `plan.should_run` 이 한다 —
+    # 늦게 깬 실행이 엉뚱한 날로 넘어가도 회차를 안 놓치게 하려면 시각이 아니라
+    # 상태로 판단해야 한다.
+    - cron: "0 19-23 * * *"
+    - cron: "0 0-5 * * *"
+  workflow_dispatch:
+    inputs:
+      release:
+        description: "배포일 YYYY-MM-DD (비우면 오늘 할 일을 스스로 정한다)"
+        required: false
+      kind:
+        description: "regular | follow"
+        required: false
+
+permissions:
+  contents: write
+
+concurrency:
+  # 겹치면 두 실행이 같은 파일을 쓰고 서로의 push 를 거절한다.
+  group: collect-press
+  cancel-in-progress: false
+
+jobs:
+  plan:
+    # 대부분의 날은 여기서 끝난다. 수집 잡을 통째로 건너뛰게 해서
+    # 아무 날도 아닌 실행이 30초 안에 초록으로 끝나게 한다.
+    runs-on: ubuntu-latest
+    outputs:
+      kind: ${{ steps.decide.outputs.kind }}
+      release: ${{ steps.decide.outputs.release }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install requests lxml
+      - id: decide
+        run: |
+          if [ -n "${{ inputs.release }}" ] && [ -n "${{ inputs.kind }}" ]; then
+            echo "kind=${{ inputs.kind }}" >> "$GITHUB_OUTPUT"
+            echo "release=${{ inputs.release }}" >> "$GITHUB_OUTPUT"
+            echo "직접 지정: ${{ inputs.release }} ${{ inputs.kind }}"
+            exit 0
+          fi
+          python -m domains.press.pipeline.run_round --dry-run | tee plan.txt
+          grep '^PLAN_KIND=' plan.txt | sed 's/PLAN_//' | tr 'A-Z' 'a-z' >> "$GITHUB_OUTPUT"
+          grep '^PLAN_RELEASE=' plan.txt | sed 's/PLAN_//' | tr 'A-Z' 'a-z' >> "$GITHUB_OUTPUT"
+
+  collect:
+    needs: plan
+    if: needs.plan.outputs.kind != ''
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python -m pytest -q domains/press
+      - name: Collect and judge
+        env:
+          NAVER_ID: ${{ secrets.NAVER_ID }}
+          NAVER_SECRET: ${{ secrets.NAVER_SECRET }}
+          # 둘 중 있는 쪽을 쓴다. 둘 다 없으면 판정 없이 수집만 하고,
+          # 화면에는 그 기사들이 '인용 아님'으로 세어진다(로그에 경고가 남는다).
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+        run: |
+          python -m domains.press.pipeline.run_round \
+            --release "${{ needs.plan.outputs.release }}" \
+            --kind "${{ needs.plan.outputs.kind }}"
+      - name: Commit data
+        run: |
+          git config user.name "press-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # sources/releases 는 .gitignore 다(hwpx 는 게시판에서 다시 받는다).
+          # raw 와 verdicts 는 **다시 만들 수 없어서** 반드시 담는다 — 네이버
+          # 검색은 약 50일이면 그 회차에 못 닿는다.
+          git add domains/press/data/ domains/press/sources/
+          if git diff --cached --quiet; then
+            echo "바뀐 것이 없다 — 커밋하지 않는다"
+            exit 0
+          fi
+          git commit -m "data: press collect ${{ needs.plan.outputs.release }} ${{ needs.plan.outputs.kind }} ($(date -u +%F))"
+          # 체크아웃한 뒤 수집이 도는 사이에 다른 워크플로가 main 에 올렸을 수
+          # 있다. 그대로 push 하면 거절돼 그 회차 수집이 통째로 버려진다.
+          # 도메인 폴더가 서로 달라 rebase 로 얹으면 섞이지 않는다.
+          git pull --rebase origin main
+          git push

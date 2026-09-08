@@ -14,6 +14,8 @@ import os
 from datetime import datetime, timedelta, timezone
 
 from .build_data import build_round
+from .plan import schedule_to_releases
+from .press_parser import parse_release
 
 KST = timezone(timedelta(hours=9))
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -83,6 +85,18 @@ def main():
             release, summary['label'], summary['regular']['cited'],
             summary['regular']['kept'],
             ('%d/%d 인용' % (f['cited'], f['kept'])) if f else '없음'))
+
+    # 배포일정표를 데이터로 남긴다. 매시간 도는 게이트가 이걸 보고 판단하면
+    # 고용노동부 게시판을 두드리지 않아도 된다 — 표에는 다음 달 배포일까지 있다.
+    if summaries:
+        newest = summaries[-1] if summaries[0]['release'] < summaries[-1]['release']             else summaries[0]
+        hwpx = os.path.join(RELEASES, 'ei_%s.hwpx' % newest['month'])
+        if os.path.exists(hwpx):
+            year = int(newest['month'][:4])
+            sched = schedule_to_releases(parse_release(hwpx)['schedule'], year)
+            json.dump(sched, io.open(os.path.join(DATA, 'schedule.json'), 'w',
+                                     encoding='utf-8'), ensure_ascii=False, indent=1)
+            print('→ schedule.json (%d개 회차 배포일)' % len(sched))
 
     summaries.sort(key=lambda r: r['release'], reverse=True)
     json.dump(summaries, io.open(os.path.join(DATA, 'rounds.json'), 'w', encoding='utf-8'),
