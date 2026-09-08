@@ -19,10 +19,16 @@ a:hover { color: var(--link-hover); }
 
 /* App shell */
 
+/* height 다. min-height 로 두면 내용이 길 때 .app 이 같이 늘어나 **문서 전체가**
+   스크롤하고, .screen 의 overflow-y 는 한 번도 쓰이지 않는다. 그러면 헤더와
+   탭바가 위아래로 밀려 나간다 — 스크롤을 내린 사람이 탭을 못 찾는다.
+   뷰포트에 딱 맞춰 두면 스크롤 주체가 .screen 이 되고, 셸은 제자리에 남는다.
+   dvh 인 이유는 모바일 주소창이 접힐 때 vh 가 따라오지 않기 때문이다.
+   min-height 로 되돌리지 말 것. */
 .app {
   max-width: 480px;
   margin: 0 auto;
-  min-height: 100dvh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--bg);
@@ -76,6 +82,8 @@ a:hover { color: var(--link-hover); }
 .screen {
   flex: 1;
   overflow-y: auto;
+  /* 목록 끝에서 더 당겨도 문서 전체가 딸려 움직이지 않게 한다. */
+  overscroll-behavior: contain;
 }
 
 .notice {

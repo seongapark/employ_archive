@@ -42,10 +42,10 @@ function setActiveTab(tabbarEl, routeName) {
   });
 }
 
-export function headerTitleFor(routeName) {
-  if (routeName === 'articles') return '배포 당일 보도';
-  if (routeName === 'follow') return '후속';
-  if (routeName === 'rounds') return '회차';
+// 헤더는 '지금 어느 앱에 있나'를 말한다. 탭 이름은 탭바가 이미 말하고 있으므로
+// 헤더까지 따라 바뀌면 도메인 이름이 화면에서 사라진다 — 홈으로 나가는 길을
+// 잃는다. 다른 도메인 앱도 이 규칙을 따른다.
+export function headerTitleFor() {
   return '행통 모니터링';
 }
 
@@ -94,7 +94,7 @@ async function boot() {
     const parsed = parseRoute(location.hash);
     ctx.params = parsed.params;
     setActiveTab(tabbarEl, parsed.name);
-    headerTitleEl.textContent = headerTitleFor(parsed.name);
+    headerTitleEl.textContent = headerTitleFor();
 
     // 회차 스위치는 셸에 있어 화면이 바뀌어도 살아남는다. 다만 회차 화면에서
     // 카드를 눌러 회차를 바꾸는 길이 있으므로, 고른 값은 매번 다시 맞춰 준다.
