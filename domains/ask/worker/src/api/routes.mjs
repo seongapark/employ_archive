@@ -1,9 +1,12 @@
 // core 를 감싸기만 한다. 로직을 여기 두면 /mcp 를 얹을 때 두 번 짜게 된다.
 //
-// LLM 호출 횟수 규율(설계 §5-1, task-12 규칙 2):
-//   메타한계 · 범위밖  → 1회 (1패스 분해만. 카드 자체가 이미 답이라 2패스 서술이 없다)
-//   나머지 넷          → 2회 (1패스 분해 + 2패스 서술)
-//   사용자가 슬롯을 고쳐 보내면(유형·슬롯이 이미 주어지면) 1패스를 건너뛰어 그만큼 준다.
+// LLM 호출 횟수 규율(설계 §5-1 정정판 — "core 왕복" 열과 "LLM" 을 혼동하지 않는다):
+//   여섯 유형 모두 LLM 호출 횟수는 같다 — 1패스(슬롯 분해) + 2패스(서술).
+//   사용자가 슬롯을 고쳐 보내면(유형·슬롯이 이미 주어지면) 1패스를 건너뛴다 → 1회.
+//   확정사항 #4 "LLM 이 답변 전체를 쓴다" 는 유형을 가리지 않는다 — 메타한계·범위밖이야말로
+//   "왜 못 주는지" 를 문장으로 설명해야 하는 자리라, 여기서 서술을 생략하면 이 도구의
+//   핵심 산출물이 그 두 유형에서만 빠진다. (이전에 있던 NO_COMPOSE 게이트는 철회했다 —
+//   자세한 경위는 task-12-report.md 의 "수정 라운드 1" 참조.)
 
 import { ask } from '../core/ask.mjs';
 import { verify } from '../core/verify.mjs';
@@ -26,11 +29,6 @@ async function 어휘(deps) {
   return { 주제: [...new Set(caps.flatMap((c) => j(c.주제)))],
            집단축: [...new Set(caps.flatMap((c) => j(c.집단축)))] };
 }
-
-// 이 두 유형의 카드는 소스·한계·라우팅·답할수있는질문처럼 이미 완결된 산문으로 채워진다
-// (ask.mjs 참조) — LLM 이 다시 "서술" 할 근거 묶음(관측·파생)이 애초에 없다.
-// 2패스를 태우면 호출만 늘 뿐 검증할 새 숫자도 없어 낭비다.
-const NO_COMPOSE = new Set(['메타한계', '범위밖']);
 
 export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
   const q = await checkQuota(deps.kv, ip, today, deps.quota);
@@ -59,8 +57,6 @@ export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
   const 카드 = await ask(deps, { 유형, 슬롯, 저확신, 한도초과: !q.허용 });
   카드.원문슬롯 = 원문슬롯;
   if (!q.허용) return 카드;                       // LLM 만 건너뛴다. 카드는 그대로
-
-  if (NO_COMPOSE.has(유형)) return 카드;          // 규칙 2: 이 둘은 여기서 끝난다 (1회)
 
   let 문장 = null;
   try { 문장 = await deps.llm.compose(유형, 카드); } catch { 문장 = null; }

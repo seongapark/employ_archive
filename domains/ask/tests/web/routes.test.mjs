@@ -83,7 +83,8 @@ test('LLM 이 compose 에서 던져도 카드는 나온다(수치조회)', async
 test('LLM 이 classify 에서 던져도 메타한계로 결정적으로 떨어진다', async () => {
   const llm = {
     classify: async () => { throw new Error('timeout'); },
-    compose: async () => { throw new Error('메타한계는 compose 를 안 부른다 — 불렸다면 버그'); },
+    // classify 가 실패해도 compose(2패스)는 그대로 시도된다 — 이것도 던지면 카드만 남는다.
+    compose: async () => { throw new Error('502'); },
   };
   const r = await handleAsk({ db: makeFakeDb(), kv: memKv(), llm, quota: 30 },
     { 질문: '아무 질문', ip: '5.5.5.5', today: '2026-09-08' });
@@ -92,24 +93,44 @@ test('LLM 이 classify 에서 던져도 메타한계로 결정적으로 떨어�
   assert.equal(r.답변, null);
 });
 
-// ── 규칙 2: 메타한계·범위밖은 1회, 나머지 넷은 2회 ─────────────────────────
-test('메타한계·범위밖은 compose 를 부르지 않는다 — 던져도 확인할 필요조차 없다', async () => {
-  const llm = { compose: async () => { throw new Error('502'); } };
+// ── 규칙 2 (수정 라운드 1) — LLM 호출 횟수는 유형과 무관하다 ───────────────
+// 설계 §5-1 의 "LLM" 열은 core 조회 왕복 횟수였지, "문장을 만들지 않는다" 가 아니었다.
+// 메타한계·범위밖이야말로 "왜 못 주는지" 를 문장으로 설명해야 하는 자리라 compose 를
+// 생략하면 안 된다(확정사항 #4 "LLM 이 답변 전체를 쓴다" 는 유형을 가리지 않는다).
+test('메타한계·범위밖도 compose 를 부른다 — 서술이 이 도구의 핵심 산출물이다', async () => {
+  const llm = { compose: async () => ({ 답변: '이런 이유로 이 통계는 못 준다', 근거: [] }) };
   const r1 = await handleAsk(
     { db: makeFakeDb(), kv: memKv(), llm, quota: 30 },
     { 유형: '메타한계', 슬롯: { ...슬롯, 출처: ['est'] }, ip: '8.8.8.8', today: '2026-09-08' });
-  assert.equal(r1.답변, null);
+  assert.equal(r1.답변, '이런 이유로 이 통계는 못 준다');
   assert.ok(Array.isArray(r1.한계));
 
   const r2 = await handleAsk(
     { db: makeFakeDb(), kv: memKv(), llm, quota: 30 },
     { 유형: '범위밖', 슬롯: {}, ip: '8.8.8.9', today: '2026-09-08' });
+  assert.equal(r2.답변, '이런 이유로 이 통계는 못 준다');
+  assert.ok(Array.isArray(r2.한계));
+});
+
+test('메타한계·범위밖도 compose 가 던지면 카드만 남긴다 — 서술이 없어도 죽지 않는다', async () => {
+  const llm = { compose: async () => { throw new Error('502'); } };
+  const r1 = await handleAsk(
+    { db: makeFakeDb(), kv: memKv(), llm, quota: 30 },
+    { 유형: '메타한계', 슬롯: { ...슬롯, 출처: ['est'] }, ip: '8.8.8.10', today: '2026-09-08' });
+  assert.equal(r1.답변, null);
+  assert.ok(Array.isArray(r1.한계));
+
+  const r2 = await handleAsk(
+    { db: makeFakeDb(), kv: memKv(), llm, quota: 30 },
+    { 유형: '범위밖', 슬롯: {}, ip: '8.8.8.11', today: '2026-09-08' });
   assert.equal(r2.답변, null);
   assert.ok(Array.isArray(r2.한계));
 });
 
-test('원본 질문에서 시작하면 수치조회·출처비교·전망·원인탐색은 2회, 메타한계·범위밖은 1회 부른다', async () => {
-  async function 세보기(응답유형, ip) {
+test('호출 횟수는 유형과 무관하다 — 슬롯 미제공 2회(6종 전부), 슬롯 직접 제공 1회(6종 전부)', async () => {
+  const 유형들 = ['수치조회', '출처비교', '메타한계', '전망', '원인탐색', '범위밖'];
+
+  async function 세보기(응답유형, { 슬롯주기, ip }) {
     let classify호출 = 0;
     let compose호출 = 0;
     const llm = {
@@ -124,24 +145,24 @@ test('원본 질문에서 시작하면 수치조회·출처비교·전망·원�
       },
       compose: async () => { compose호출 += 1; return { 답변: '', 근거: [] }; },
     };
-    await handleAsk({ db: makeFakeDb(), kv: memKv(), llm, quota: 30 },
-      { 질문: '아무 질문', ip, today: '2026-09-08' });
+    const 입력 = 슬롯주기
+      ? { 유형: 응답유형, 슬롯: { ...슬롯, 출처: [] }, ip, today: '2026-09-08' }
+      : { 질문: '아무 질문', ip, today: '2026-09-08' };
+    await handleAsk({ db: makeFakeDb(), kv: memKv(), llm, quota: 30 }, 입력);
     return { classify호출, compose호출, 합계: classify호출 + compose호출 };
   }
-  const 수치조회결과 = await 세보기('수치조회', 'c1');
-  assert.equal(수치조회결과.합계, 2);
-  const 출처비교결과 = await 세보기('출처비교', 'c2');
-  assert.equal(출처비교결과.합계, 2);
-  const 전망결과 = await 세보기('전망', 'c3');
-  assert.equal(전망결과.합계, 2);
-  const 원인탐색결과 = await 세보기('원인탐색', 'c4');
-  assert.equal(원인탐색결과.합계, 2);
-  const 메타한계결과 = await 세보기('메타한계', 'c5');
-  assert.equal(메타한계결과.합계, 1);
-  assert.equal(메타한계결과.compose호출, 0);
-  const 범위밖결과 = await 세보기('범위밖', 'c6');
-  assert.equal(범위밖결과.합계, 1);
-  assert.equal(범위밖결과.compose호출, 0);
+
+  const 표 = [];
+  for (const 유형 of 유형들) {
+    const 미제공 = await 세보기(유형, { 슬롯주기: false, ip: `nogive-${유형}` });
+    const 제공 = await 세보기(유형, { 슬롯주기: true, ip: `give-${유형}` });
+    표.push({ 유형, 미제공, 제공 });
+    // 슬롯 미제공: classify 1 + compose 1 = 2, 유형과 무관
+    assert.deepEqual(미제공, { classify호출: 1, compose호출: 1, 합계: 2 });
+    // 슬롯 직접 제공: classify 0 + compose 1 = 1, 유형과 무관
+    assert.deepEqual(제공, { classify호출: 0, compose호출: 1, 합계: 1 });
+  }
+  console.log('호출 횟수 표(유형 × 슬롯제공여부):', JSON.stringify(표, null, 1));
 });
 
 // ── 규칙 3: 원문슬롯을 응답에 싣는다 ───────────────────────────────────────
