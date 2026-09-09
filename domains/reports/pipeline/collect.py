@@ -9,6 +9,13 @@
 """
 from __future__ import annotations
 
+import sys
+
+# Windows 콘솔 기본 코드페이지(cp949)는 em-dash 같은 문자를 못 찍는다. 로그 한 줄
+# 때문에 수집이 통째로 중단되면 안 된다.
+if hasattr(sys.stdout, 'reconfigure'):
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+
 import argparse
 import json
 import os

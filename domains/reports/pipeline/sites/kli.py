@@ -16,8 +16,10 @@ from . import common
 
 BASE = 'https://www.kli.re.kr'
 
+# 게시판마다 표 헤더 이름이 다르다 — 연구보고서는 '제목', 패널브리프는 '서명'.
+# 하나만 받으면 그 게시판만 조용히 0건이 된다.
 _TITLE = re.compile(
-    r'aria-label="제목"[^>]*>\s*<a href="([^"]*)"[^>]*>(.*?)</a>', re.S)
+    r'aria-label="(?:제목|서명)"[^>]*>\s*<a href="([^"]*)"[^>]*>(.*?)</a>', re.S)
 _AUTHORS = re.compile(r'aria-label="저자"[^>]*>(.*?)</td>', re.S)
 _PUBLISHED = re.compile(r'aria-label="출판일"[^>]*>(.*?)</td>', re.S)
 _FILE = re.compile(r'href="(/kliFileDownload\?[^"]*)"')

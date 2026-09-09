@@ -1,0 +1,907 @@
+[
+  {
+    "id": "kli-10075",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2024년 제1호(통권 제87호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2024-05-15",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10075&mid=a10104020000&nPage=2&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=7B4493ABAA1D9D1649258B24002C2342_1.pdf&fileNameOrg=임금정보브리프 통권 제87호.pdf&filePath1=jsphome/DATA/pblctList/issue/7B4493ABAA1D9D1649258B24002C2342",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 2023년 업종별 시장임금 실태조사 결과 : 조선업",
+      "- 콜센터 운영 쟁점과 과제 : 콜센터는 없어질 것인가, 개선해야 할 것인가"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10080",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2024년 제2호(통권 제88호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2024-06-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10080&mid=a10104020000&nPage=2&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=C6F2D138A0F8E9D949258B41000A7EB0_1.pdf&fileNameOrg=임금정보브리프 통권 제88호.pdf&filePath1=jsphome/DATA/pblctList/issue/C6F2D138A0F8E9D949258B41000A7EB0",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 업종별 시장임금 정보 : 자동차부품산업",
+      "- 조직역량 강화에 중점을 둔 임금제도 개편 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10086",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2024년 제3호(통권 제89호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2024-07-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10086&mid=a10104020000&nPage=2&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=3937939963A5967A49258B5B0002F374_1.pdf&fileNameOrg=임금정보브리프 통권 제89호.pdf&filePath1=jsphome/DATA/pblctList/issue/3937939963A5967A49258B5B0002F374",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 업종별 시장임금 정보 : 식품제조업",
+      "- 핵심인재 확보 및 유지를 위한 보상제도 운영 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10090",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2024년 제4호(통권 제90호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2024-08-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10090&mid=a10104020000&nPage=2&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=09564447C5E6171249258B7F00187DFF_1.pdf&fileNameOrg=임금정보브리프 통권 제90호.pdf&filePath1=jsphome/DATA/pblctList/issue/09564447C5E6171249258B7F00187DFF",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 2023년도 임금체계 및 인력운용 실태조사 : 임금체계 현황을 중심으로",
+      "- 국내 기업의 ‘한국형’ 직무급 도입 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10098",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2024년 제5호(통권 제91호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2024-09-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10098&mid=a10104020000&nPage=2&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=21F2597B40B11E0449258B9E002B5177_1.pdf&fileNameOrg=임금정보브리프 통권 제91호.pdf&filePath1=jsphome/DATA/pblctList/issue/21F2597B40B11E0449258B9E002B5177",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 임금연공성, 새롭게 바라보기",
+      "- 직급단계 축소에 따른 보상체계 혁신 사례",
+      "- 공무원 임금을 둘러싼 최근 쟁점 : 2024년 공무원보수위원회 활동 및 평가를 중심으로"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10105",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2024년 제6호(통권 제92호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2024-10-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10105&mid=a10104020000&nPage=2&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=789D62C5A5460CDB49258BBF002B718E_1.pdf&fileNameOrg=임금정보브리프 통권 제92호.pdf&filePath1=jsphome/DATA/pblctList/issue/789D62C5A5460CDB49258BBF002B718E",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 성별임금공시제 : 프랑스, 독일, 호주 사례를 통해 본 시사점",
+      "- 국내기업의 주식형 보상 활용 현황과 사례",
+      "- 일본의 고령자 고용과 임금"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10114",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2024년 제7호(통권 제93호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2024-11-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10114&mid=a10104020000&nPage=2&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=36DAB6B7A7ABED5F49258BF50019DD69_1.pdf&fileNameOrg=임금정보브리프 통권 제93호.pdf&filePath1=jsphome/DATA/pblctList/issue/36DAB6B7A7ABED5F49258BF50019DD69",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 임금피크제와 고령자고용",
+      "- 불확실성 시대에서 직무 및 성과 중심으로의 인사제도 개편 사례",
+      "- 스타트업 IT개발인력 노동시장의 이중구조"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10126",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2024년 제8호(통권 제94호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2024-12-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10126&mid=a10104020000&nPage=2&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=90F037285680A49849258C18002E1BB6_1.pdf&fileNameOrg=임금정보브리프 통권 제94호.pdf&filePath1=jsphome/DATA/pblctList/issue/90F037285680A49849258C18002E1BB6",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 외국의 협약임금인상률 정보 수집체계와 시사점 : 프랑스, 독일, 일본 사례를 중심으로",
+      "- 고령화에 대응한 중소 제조기업의 직급 개편 및 임금체계 개선 사례",
+      "- 임금체불 해결을 위한 징벌적 손해배상의 내용과 근로기준법 개정 사안"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10188",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2025년 제1호(통권 제95호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2025-05-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10188&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=90FBDAF6A19FD49449258C900006043C_1.pdf&fileNameOrg=임금정보브리프  2025년 제1호(통권 제95호).pdf&filePath1=jsphome/DATA/pblctList/issue/90FBDAF6A19FD49449258C900006043C",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 2024년 업종별 시장임금 실태조사 결과 : 전기전자부품업",
+      "- 다국적 기업 한국 법인의 직무급 도입",
+      "- 통상임금 전원합의체 판결의 변천과 시사점"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10196",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2025년 제2호(통권 제96호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2025-06-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10196&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=3CFBDB3D4718610E49258CAF0024CE62_1.pdf&fileNameOrg=임금정보브리프 2025년 제2호(통권 제96호).pdf&filePath1=jsphome/DATA/pblctList/issue/3CFBDB3D4718610E49258CAF0024CE62",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다.",
+      "- 2024년 업종별 시장임금 실태조사 결과 : 플라스틱 · 고무 제조업",
+      "- 글로벌 사업 확장을 위한 직무 기반 보상체계의 전략적 설계와 적용",
+      "- 주4일제 시대를 준비하는 한국 사회 : 글로벌 실험 성과와 정책과제"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10204",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2025년 제3호(통권 제97호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2025-07-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10204&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=399D76B4604FF18849258CE30019A345_1.pdf&fileNameOrg=임금정보브리프  2025년 제3호(통권 제97호).pdf&filePath1=jsphome/DATA/pblctList/issue/399D76B4604FF18849258CE30019A345",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다.",
+      "- 2024년 업종별 시장임금 실태조사 결과 : 호텔업",
+      "- 합리적 직무관리와 동기부여형 인사전략",
+      "- 통상임금, 제도의 취지와 본질에 집중한 전략을 구축해야 할 때"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10213",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2025년 제4호(통권 제98호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2025-09-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10213&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=50C2124978C3C2A449258D2900054237_1.pdf&fileNameOrg=임금정보브리프  2025년 제4호(통권 제98호).pdf&filePath1=jsphome/DATA/pblctList/issue/50C2124978C3C2A449258D2900054237",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다.",
+      "- 2024년 계속고용 실태조사 : 정년 후 재고용 제도를 중심으로",
+      "- 일본계 글로벌 기업의 직무급 운영 현지화 사례와 시사점 : 직무등급의 안정적 도입과 보상정책의 지역 적합성 확보 방안을 중심으로",
+      "- 비전문 외국인 근로자 인사관리 관련 정책 방안"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10216",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2025년 제5호(통권 제99호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2025-10-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10216&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=DF385E1494D91E7449258D45002E3B3A_1.pdf&fileNameOrg=임금정보브리프  2025년 제5호(통권 제99호).pdf&filePath1=jsphome/DATA/pblctList/issue/DF385E1494D91E7449258D45002E3B3A",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다.",
+      "- 성별 임금수준 : 오스트리아·캐나다 사례",
+      "- 비상장 기업의 스톡옵션, ‘약속·평가·정산’을 한 문서로 묶어라 : 분쟁을 줄이는 설계·운영 표준안",
+      "- 산재노동자 ‘괜찮은 복귀’를 위한 기업 HR 차원의 전략"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10231",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2025년 제6호(통권 제100호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2025-12-10",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10231&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=0C08390D32CD541D49258D9D00206A88_0.pdf&fileNameOrg=임금정보브리프  2025년 제6호(통권 제100호).pdf&filePath1=jsphome/DATA/pblctList/issue/0C08390D32CD541D49258D9D00206A88",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다.",
+      "- 대졸 초임 정보 생산실태 : 韓·日·英을 중심으로",
+      "- 총인건비 관리 방식의 전환 : 전략적 재원 배분",
+      "- 최저임금과 임금 불평등",
+      "- 외국인근로자 임금체불"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10232",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2025년 제7호(통권 제101호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2025-12-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10232&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=6DFAC8C38CEAC48649258DAB000C14FC_1.pdf&fileNameOrg=임금정보브리프  2025년 제7호(통권 제101호).pdf&filePath1=jsphome/DATA/pblctList/issue/6DFAC8C38CEAC48649258DAB000C14FC",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다.",
+      "- 성과급 제도 개선 사례 : 제도는 구성원에게 어떤 메시지를 전달하는가",
+      "- 임금상승률 및 임금격차에 대한 보조 지표 : 라스파이레스 지수"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10286",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2026년 제1호(통권 제102호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2026-05-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10286&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=EFC00997485CCF1649258E170018E7FB_0.pdf&fileNameOrg=임금정보브리프  2026년 제1호(통권 제102호).pdf&filePath1=jsphome/DATA/pblctList/issue/EFC00997485CCF1649258E170018E7FB",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다.",
+      "- 2025년 고령인력 인사관리 실태1)",
+      "- 미국 자동차 산업 생산직 임금체계의 특징과 시사점 : GM, Tesla, Daimler Truck 사례를 중심으로",
+      "- 포괄임금제의 오남용 방지를 위한 정책적 과제"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10295",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2026년 제2호(통권 제103호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2026-07-10",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10295&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=9F79221C5B35459349258E430020474E_1.pdf&fileNameOrg=임금정보브리프  2026년 제2호(통권 제103호).pdf&filePath1=jsphome/DATA/pblctList/issue/9F79221C5B35459349258E430020474E",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다.",
+      "- 요양보호사 임금체계의 구조적 문제와 개선 방향 : 설문조사와 면접조사 분석을 중심으로",
+      "- 산업전환 시대에서의 생산직 인사체계 개편",
+      "- 성과급 교섭에 관한 새로운 사회계약의 필요성과 임금불평등 해소 방안"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-10300",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2026년 제3호(통권 제104호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2026-07-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10300&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=D34CEB764815FBD349258E64001EC143_1.pdf&fileNameOrg=임금정보브리프  2026년 제3호(통권 제104호).pdf&filePath1=jsphome/DATA/pblctList/issue/D34CEB764815FBD349258E64001EC143",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다.",
+      "- 자동차 제조업 수당체계",
+      "- 독일 완성차업체의 기본급체계 : 메르세데스-벤츠와 폭스바겐의 생산직과 엔지니어를 중심으로"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9628",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2021년 제8호(통권 제65호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2021-09-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9628&mid=a10104020000&nPage=4&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=A050E10AEDAB4F1749258795002D101F_3.pdf&fileNameOrg=임금정보브리프 2021년 제8호_통권 제65호.pdf&filePath1=jsphome/DATA/pblctList/issue/A050E10AEDAB4F1749258795002D101F",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2021년 7~8월 임금 동향",
+      "- 임금체계 개편 사례",
+      "- 직무중심 인사관리(연재)* 8편: 제조업(사무관리직용, 생산직용) 범용 직무평가 도구 활용방안"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9635",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2021년 제9호(통권 제66호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2021-10-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9635&mid=a10104020000&nPage=4&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=7286D0F90CC5F610492587C10025908C_2.pdf&fileNameOrg=임금정보브리프 2021년 제9호_통권 제66호.pdf&filePath1=jsphome/DATA/pblctList/issue/7286D0F90CC5F610492587C10025908C",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2021년 8~9월 임금 동향",
+      "- 임금체계 개편 사례",
+      "- 직무중심 인사관리(연재)* 9편 : 직무평가 결과 활용 및 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9639",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2021년 제10호(통권 제67호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2021-11-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9639&mid=a10104020000&nPage=4&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=913882772B17611A492587DF000AE14E_3.pdf&fileNameOrg=임금정보브리프 2021년 제10호_통권 제67호.pdf&filePath1=jsphome/DATA/pblctList/issue/913882772B17611A492587DF000AE14E",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2021년 9~10월 임금 동향",
+      "- 임금체계 개편 사례",
+      "- 직무중심 인사관리(연재)* 9편 : 직무평가 결과 활용 및 사례**"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9640",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2021년 제11호(통권 제68호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2021-12-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9640&mid=a10104020000&nPage=4&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=A1E17688BB7E1566492587DF000B2C56_3.pdf&fileNameOrg=임금정보브리프 2021년 제11호_통권 제68호.pdf&filePath1=jsphome/DATA/pblctList/issue/A1E17688BB7E1566492587DF000B2C56",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2021년 10~11월 임금 동향",
+      "- 임금체계 개편 사례",
+      "- 직무중심 인사관리(연재)* 10편 : 직무평가 결과 활용 및 사례**"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9669",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2022년 제1호(통권 제69호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2022-02-28",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9669&mid=a10104020000&nPage=4&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=C1C184BAA8951E7849258814001A4DBF_0.pdf&fileNameOrg=임금정보브리프 통권 제69호.pdf&filePath1=jsphome/DATA/pblctList/issue/C1C184BAA8951E7849258814001A4DBF",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2021년 12월~2022년 1월 임금 동향",
+      "- 임금체계 개편 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9680",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2022년 제2호(통권 제70호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2022-03-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9680&mid=a10104020000&nPage=4&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=A157216BEC2B933B4925882B0020285D_2.pdf&fileNameOrg=임금정보브리프 통권 제70호.pdf&filePath1=jsphome/DATA/pblctList/issue/A157216BEC2B933B4925882B0020285D",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2022년 1월~2월 임금 동향",
+      "- 임금체계 개편 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9689",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2022년 제3호(통권 제71호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2022-04-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9689&mid=a10104020000&nPage=4&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=906DD74366ADEB614925883200203997_1.pdf&fileNameOrg=임금정보브리프 통권 제71호.pdf&filePath1=jsphome/DATA/pblctList/issue/906DD74366ADEB614925883200203997",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2022년 2월~3월 임금 동향",
+      "- 임금체계 개편 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9734",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2022년 제4호(통권 제72호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2022-05-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9734&mid=a10104020000&nPage=4&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=7A15675485CA2670492588530028B692_1.pdf&fileNameOrg=임금정보브리프 통권 제72호.pdf&filePath1=jsphome/DATA/pblctList/issue/7A15675485CA2670492588530028B692",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2022년 3월~4월 임금 동향",
+      "- 임금체계 개편 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9744",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2022년 제5호(통권 제73호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2022-06-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9744&mid=a10104020000&nPage=4&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=E81D75D1B3BD6D1F49258875000BA6EC_1.pdf&fileNameOrg=임금정보브리프 통권 제73호.pdf&filePath1=jsphome/DATA/pblctList/issue/E81D75D1B3BD6D1F49258875000BA6EC",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2022년 4월~5월 임금 동향",
+      "- 임금체계 개편 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9752",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2022년 제6호(통권 제74호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2022-07-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9752&mid=a10104020000&nPage=4&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=D6E1A61D9633DF64492588A0002FFECC_1.pdf&fileNameOrg=임금정보브리프 통권 제74호.pdf&filePath1=jsphome/DATA/pblctList/issue/D6E1A61D9633DF64492588A0002FFECC",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2022년 5월~6월 임금 동향",
+      "- 임금체계 개편 사례",
+      "- 국내 IT업종 임금인상 현상과 임금체계 변화 방향"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9775",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2022년 제7호(통권 제75호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2022-08-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9775&mid=a10104020000&nPage=3&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=D6C0E894BA3EDB76492588D4000C819C_0.pdf&fileNameOrg=임금정보브리프 통권 제75호.pdf&filePath1=jsphome/DATA/pblctList/issue/D6C0E894BA3EDB76492588D4000C819C",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2022년 6월~7월 임금 동향",
+      "- 공공기관의 직무중심 임금체계 도입 현황과 과제"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9779",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2022년 제8호(통권 제76호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2022-09-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9779&mid=a10104020000&nPage=3&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=BCEB451614D9BA1F492588E50001B3DB_2.pdf&fileNameOrg=임금정보브리프 통권 제76호.pdf&filePath1=jsphome/DATA/pblctList/issue/BCEB451614D9BA1F492588E50001B3DB",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2022년 7월~8월 임금 동향",
+      "- 임금체계 개편 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9785",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2022년 제9호(통권 제77호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2022-10-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9785&mid=a10104020000&nPage=3&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=424E00390B20A2E849258905000C1ED8_0.pdf&fileNameOrg=임금정보브리프 통권 제77호.pdf&filePath1=jsphome/DATA/pblctList/issue/424E00390B20A2E849258905000C1ED8",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2022년 8월~9월 임금 동향",
+      "- 임금체계 개편 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9788",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2022년 제10호(통권 제78호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2022-11-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9788&mid=a10104020000&nPage=3&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=A4B1EB3D5EB10638492589090008543B_0.pdf&fileNameOrg=임금정보브리프 통권 제78호.pdf&filePath1=jsphome/DATA/pblctList/issue/A4B1EB3D5EB10638492589090008543B",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2022년 9월~10월 임금 동향",
+      "- 임금체계 개편 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9798",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2022년 제11호(통권 제79호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2022-12-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9798&mid=a10104020000&nPage=3&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=4C1BC756E60A76134925892B002CA6DE_0.pdf&fileNameOrg=임금정보브리프 통권 제79호.pdf&filePath1=jsphome/DATA/pblctList/issue/4C1BC756E60A76134925892B002CA6DE",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2022년 10월~11월 임금 동향",
+      "- 임금체계 개편 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9907",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2023년 제2호(통권 제81호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2023-05-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9907&mid=a10104020000&nPage=3&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=E0263155BC61A5FF492589DC001E2D4F_0.pdf&fileNameOrg=임금정보브리프 통권 제81호.pdf&filePath1=jsphome/DATA/pblctList/issue/E0263155BC61A5FF492589DC001E2D4F",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2023년 3~4월 임금 동향",
+      "- 임금체계 개편 해외사례 : IT기업의 직무와 능력중심 임금체계 개편",
+      "- 임금체계 개편 해외사례 : NSPCC*"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9920",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2023년 제1호(통권 제80호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2023-04-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9920&mid=a10104020000&nPage=3&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=C447645E665F230349258A0E0019F571_0.pdf&fileNameOrg=임금정보브리프 통권 제80호.pdf&filePath1=jsphome/DATA/pblctList/issue/C447645E665F230349258A0E0019F571",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "-「2022년 임금체계 및 인력운용 실태조사」주요 조사결과",
+      "- 임금체계 개편 해외사례 : Network Rail",
+      "- 임금체계 개편 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9921",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2023년 제3호(통권 제82호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2023-06-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9921&mid=a10104020000&nPage=3&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=8A71B83D99B394A449258A1400200436_1.pdf&fileNameOrg=임금정보브리프 통권 제82호.pdf&filePath1=jsphome/DATA/pblctList/issue/8A71B83D99B394A449258A1400200436",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "워크넷 구인구직DB를 이용한 2023년 4~5월 임금 동향",
+      "중소기업 인사관행의 공식성과 비공식성의 역동적 관계 : 스타트업 임금관리를 중심으로",
+      "출판업 강소 중소기업의 고성과자 중심의 임금체계 구축 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9945",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2023년 제4호(통권 제83호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2023-07-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9945&mid=a10104020000&nPage=3&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=B1DFEEE54F7AF8C649258A3F002F8A98_0.pdf&fileNameOrg=임금정보브리프 통권 제83호.pdf&filePath1=jsphome/DATA/pblctList/issue/B1DFEEE54F7AF8C649258A3F002F8A98",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "워크넷 구인구직DB를 이용한 2023년 5~6월 임금 동향",
+      "강소 IT기업(T사)의 성과중심 임금체계 개편 사례",
+      "중견 제조기업 임금관리 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9952",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2023년 제5호(통권 제84호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2023-08-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9952&mid=a10104020000&nPage=3&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=651211B11F06468549258A53002B91B2_0.pdf&fileNameOrg=임금정보브리프 통권 제84호.pdf&filePath1=jsphome/DATA/pblctList/issue/651211B11F06468549258A53002B91B2",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "소프트웨어기술자 임금실태조사",
+      "지속가능한 경영 및 구성원 동기부여를 위한 직무중심 임금체계 개편 사례",
+      "임금체계 개편 해외사례 : University of Portsmouth"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9959",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2023년 제6호(통권 제85호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2023-09-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9959&mid=a10104020000&nPage=2&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=C9E1495AEF9BBF3449258A6F00192291_0.pdf&fileNameOrg=임금정보브리프 통권 제85호.pdf&filePath1=jsphome/DATA/pblctList/issue/C9E1495AEF9BBF3449258A6F00192291",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "건설업임금실태조사 및 최근 통계 동향",
+      "포괄임금제 개선과 성과급제 도입을 통한 임금체계 개편사례",
+      "강소 제조기업의 직무 및 임금관리 사례"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  },
+  {
+    "id": "kli-9967",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2023년 제7호(통권 제86호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2023-10-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9967&mid=a10104020000&nPage=2&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=2EDEB5C7E196D4F949258A8D0017890A_0.pdf&fileNameOrg=임금정보브리프 통권 제86호.pdf&filePath1=jsphome/DATA/pblctList/issue/2EDEB5C7E196D4F949258A8D0017890A",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 측량업체 임금실태조사",
+      "- 제조업 중견기업의 성과연동형 임금체계 구축 사례",
+      "- 영국의 국가생활임금(National Living Wage) 도입과 기업들의 대응 : 임금관리방식을 중심으로"
+    ],
+    "collected_at": "2026-09-10T02:08:40+09:00"
+  }
+]

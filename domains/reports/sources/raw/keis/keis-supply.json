@@ -1,0 +1,686 @@
+[
+  {
+    "id": "keis-s1",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2008~2018 중장기 인력수급전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202105304484.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s10",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2016~2030 기술혁신을 반영한 인력수요 전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202085854731.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s11",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2017~2027 중장기 인력수급 수정전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202090056703.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s12",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2016~2026 광역지역별 인력수급전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202090200749.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s13",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2019 하반기 주요 업종별 일자리 전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202090248130.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s14",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2018~2028 중장기 인력수급 전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202090416807.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s15",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2020 상반기 주요 업종별 일자리 전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205090451329.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s16",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "기술혁신을 반영한 장기 인력수요전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205090619454.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s17",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2020 하반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205090852960.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s18",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2021 상반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205091025560.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s19",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2019~2029 중장기 인력수급 수정전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205091211895.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s2",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2011~2020 중장기 인력수급전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202105548414.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s20",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2021 하반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205091340408.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s21",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2022 상반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205091448806.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s22",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2020~2030 중장기 인력수급전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205091634017.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s23",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2022 하반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205091916691.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s24",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2020~2035 디지털 혁신을 반영한 장기인력수요전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205092028072.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s25",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2019~2029 광역지역별 인력수급전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205092235229.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s26",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2023 상반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205092712528.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s27",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2021~2031 중장기 인력수급 수정 전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205092826267.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s28",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2023 하반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205092959957.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s29",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2024 상반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205093144650.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s3",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2013~2023 중장기 인력수급전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202084451759.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s30",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2022~2032 산업별 중장기 인력수요전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205093339723.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s31",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2022~2032 중장기 인력공급전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205093524484.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s32",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2022~2032 직업별 중장기 인력수요전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-05",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241205093730161.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s33",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2024 하반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2025-01-07",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20250107110821943.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s34",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2022-2032 중장기 인력수급 전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2025-01-09",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20250113023556243.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s35",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2025 상반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2025-04-28",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20250428012917236.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s36",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2023-2033 중장기 인력수급 전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2025-06-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20250630112601172.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s37",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2025 하반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2025-09-09",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20250909031726789.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s38",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2026 상반기 주요 업종별 일자리전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2026-02-25",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20260225090253001.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s4",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2013~2023 광역지역별 인력수급전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202084916680.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s5",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2014~2024 중장기 인력수급 수정전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202085029636.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s6",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2014~2024 대학전공별 인력수급전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202085146447.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s7",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2015~2025 중장기 인력수급 수정전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202085234500.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s8",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2015~2025 대학전공별 인력수급전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202085328586.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  },
+  {
+    "id": "keis-s9",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "2016~2026 중장기 인력수급 전망",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2024-12-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/bbs/preview.do?dn=20241202085752436.pdf&path=/bbs/1106",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:12:11+09:00"
+  }
+]

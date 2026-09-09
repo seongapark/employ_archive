@@ -8,7 +8,10 @@ from urllib.parse import quote, urljoin
 from ..boards import Board
 
 _TAG = re.compile(r'<[^>]+>')
+# 문단을 나누는 태그. 전부 공백으로 뭉개면 긴 초록이 한 덩어리가 되어 안 읽힌다.
+_BLOCK = re.compile(r'</(?:p|div|li|tr|h[1-6])\s*>|<br\s*/?>', re.I)
 _WS = re.compile(r'[ \t\r\f\v ]+')
+_BLANKS = re.compile(r' *\n[ \n]*')
 _DATE = re.compile(r'(20\d{2})[-.\s]{1,3}(\d{1,2})(?:[-.\s]{1,3}(\d{1,2}))?')
 
 
@@ -31,10 +34,12 @@ def page_url(board: Board, page: int) -> str:
 
 
 def text(fragment: str) -> str:
-    """태그를 걷어내고 엔티티를 푼 뒤 공백을 다듬는다."""
-    s = _TAG.sub(' ', fragment or '')
+    """태그를 걷어내고 엔티티를 푼 뒤 공백을 다듬는다. 문단은 살린다."""
+    s = _BLOCK.sub('\n', fragment or '')
+    s = _TAG.sub(' ', s)
     s = html_mod.unescape(s)
     s = _WS.sub(' ', s)
+    s = _BLANKS.sub('\n', s)
     return s.strip()
 
 

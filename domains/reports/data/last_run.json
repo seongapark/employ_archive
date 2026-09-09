@@ -1,0 +1,137 @@
+{
+  "at": "2026-09-10T02:14:19+09:00",
+  "boards": {
+    "keis-research": {
+      "ok": true,
+      "parsed": 50,
+      "added": 40,
+      "details": 40,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 40
+    },
+    "keis-supply": {
+      "ok": true,
+      "parsed": 38,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 38
+    },
+    "keis-issue": {
+      "ok": true,
+      "parsed": 50,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": true,
+      "error": null,
+      "total": 21
+    },
+    "keis-trend": {
+      "ok": true,
+      "parsed": 50,
+      "added": 40,
+      "details": 40,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 40
+    },
+    "keis-region": {
+      "ok": true,
+      "parsed": 20,
+      "added": 20,
+      "details": 20,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 20
+    },
+    "keis-transition": {
+      "ok": true,
+      "parsed": 5,
+      "added": 5,
+      "details": 5,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 5
+    }
+  },
+  "unregistered": [],
+  "reports": 420,
+  "abstract_missing": {
+    "kli": {
+      "연구보고서": {
+        "total": 60,
+        "missing": 60,
+        "rate": 1.0
+      },
+      "국제노동브리프": {
+        "total": 40,
+        "missing": 40,
+        "rate": 1.0
+      },
+      "노동리뷰": {
+        "total": 40,
+        "missing": 40,
+        "rate": 1.0
+      },
+      "고용노동브리프": {
+        "total": 11,
+        "missing": 11,
+        "rate": 1.0
+      },
+      "고용영향평가브리프": {
+        "total": 33,
+        "missing": 33,
+        "rate": 1.0
+      },
+      "임금정보브리프": {
+        "total": 40,
+        "missing": 40,
+        "rate": 1.0
+      },
+      "노동정책연구": {
+        "total": 22,
+        "missing": 22,
+        "rate": 1.0
+      },
+      "패널브리프": {
+        "total": 10,
+        "missing": 10,
+        "rate": 1.0
+      }
+    },
+    "keis": {
+      "고용이슈": {
+        "total": 21,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구사업보고서": {
+        "total": 40,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "고용동향브리프": {
+        "total": 40,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "지역산업과 고용": {
+        "total": 20,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "산업일자리 전환 지도": {
+        "total": 5,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "인력수급전망": {
+        "total": 38,
+        "missing": 38,
+        "rate": 1.0
+      }
+    }
+  }
+}
