@@ -149,6 +149,11 @@ const API = 'https://employ-archive-ask.<subdomain>.workers.dev/api/ask';  // �
 `vars.ASK_API_BASE`(공급자 주소) · `vars.ASK_MODEL`(품질이 모자라면 이 값만 바꾼다) ·
 `vars.ASK_DAILY_QUOTA`(IP 별 하루 한도).
 
+**`ASK_DAILY_QUOTA` 는 지금 `500` 이다 — 링크를 남에게 공유하기 전까지의 값이다.**
+질문 한 건이 LLM 호출 두 번(슬롯 분해·문장 작성)을 쓰고 그 비용이 `ASK_API_KEY` 주인에게
+간다. 공개 링크를 돌리는 시점에 **다시 조인다**(직접 개발·시연 기준으로 `30` 이 원래 값).
+바꾸는 방법은 이 줄 하나 고치고 `wrangler deploy` 다.
+
 **공급자를 갈아끼울 때는 코드가 아니라 `ASK_API_BASE`·`ASK_MODEL` 두 줄과 `ASK_API_KEY`
 시크릿만 바꾼다.** 요청·응답 형식이 OpenAI 호환이면 그대로 붙는다 — 실제로 한 번
 갈아끼웠다(OpenRouter → OpenAI). 다만 **공급자를 바꾸면 모델 선정 근거가 같이 옮겨가지

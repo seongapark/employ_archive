@@ -361,3 +361,30 @@ test('허용텍스트를 넘겼을 때와 안 넘겼을 때 verify 결과가 실
   assert.equal(없이.ok, false);
   assert.equal(함께.ok, true);
 });
+
+// ── LLM 장애 — 질문이 모호한 것(저확신)과 뭉개지 않는다 ────────────────────
+// 실측(2026-09-09): 워커에서 classify 가 두 번 다 실패했는데 catch 가 소리 없이
+// 삼켜, 화면은 "저확신 · 주제가 비었다" 를 냈다. 멀쩡한 질문을 한 사람이 자기
+// 질문을 의심하게 되는 자리다.
+test('classify 가 던지면 분류실패로 난다 — 저확신과 다른 배지다', async () => {
+  const llm = { classify: async () => { throw new Error('llm 500'); },
+                compose: async () => ({ 답변: '', 근거: [] }) };
+  const r = await handleAsk({ db: makeFakeDb(), kv: memKv(), llm, quota: 30 },
+    { 질문: '2026년 8월 취업자 몇 명이야?', ip: '1.2.3.21', today: '2026-09-08' });
+  assert.equal(r.분류실패, true);
+  assert.ok(r.배지.includes('분류실패'));
+  assert.ok(r.한계.some((l) => l.includes('서버 문제')));
+  assert.equal(r.한도초과, false);            // 할당량 문제가 아니다
+  assert.equal(r.할당량확인불가, undefined);  // KV 문제도 아니다
+});
+
+test('질문이 모호해 저확신인 것은 분류실패가 아니다 — 사용자가 할 일이 다르다', async () => {
+  // classify 는 정상 응답했다. 어휘로 매핑이 안 됐을 뿐이다.
+  const llm = { classify: async () => ({ 유형: '수치조회', 슬롯: { 주제: '' }, 확신도: 0.9 }),
+                compose: async () => ({ 답변: '', 근거: [] }) };
+  const r = await handleAsk({ db: makeFakeDb(), kv: memKv(), llm, quota: 30 },
+    { 질문: '그거 어때?', ip: '1.2.3.22', today: '2026-09-08' });
+  assert.equal(r.분류실패, undefined);
+  assert.ok(!r.배지.includes('분류실패'));
+  assert.ok(r.배지.includes('저확신'));
+});

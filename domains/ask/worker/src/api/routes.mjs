@@ -53,6 +53,16 @@ function 확인불가표시(카드) {
   return 카드;
 }
 
+// 질문을 못 알아들은 것(저확신)과 우리 LLM 이 죽은 것은 다른 사실이다. 앞은 사용자가
+// 질문을 고쳐야 하고, 뒤는 사용자가 할 게 없다(잠시 뒤 다시). 뭉개면 정상 질문을 한
+// 사람이 자기 질문을 의심하게 된다 — 이 설계가 도처에서 가르는 구분과 같은 이유다.
+function 분류실패표시(카드) {
+  카드.분류실패 = true;
+  카드.한계 = [...(카드.한계 ?? []), '질문 분해에 실패했다 — 질문 문제가 아니라 서버 문제다'];
+  카드.배지 = [...new Set([...(카드.배지 ?? []), '분류실패'])];
+  return 카드;
+}
+
 // 어휘는 카탈로그(capability)에서만 뽑는다 — 하드코딩하면 카탈로그가 늘 때 조용히 낡는다.
 async function 어휘(deps) {
   const caps = await deps.db.all('SELECT 주제, 집단축 FROM capability');
@@ -72,6 +82,8 @@ export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
   // 규칙 3: '이해 카드' 가 "이렇게 이해했습니다" 를 보여주고 고칠 수 있으려면
   // 매핑된 슬롯(카드.슬롯)과 LLM 원문(원문슬롯)이 둘 다 응답에 실려야 한다.
   let 원문슬롯 = 슬롯 ?? null;
+  // 우리 쪽 LLM 장애. 질문이 모호한 것(저확신)과 뭉개면 안 된다 — 할 수 있는 일이 다르다.
+  let 분류실패 = false;
 
   if (!유형 || !슬롯) {
     // 1패스. 사용자가 슬롯을 고쳐 보내면 이 호출을 건너뛴다 → 결정적
@@ -85,7 +97,17 @@ export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
       return 카드;
     }
     let raw = null;
-    try { raw = await deps.llm.classify(질문); } catch { raw = null; }
+    try { raw = await deps.llm.classify(질문); }
+    catch (e) {
+      // **소리 없이 삼키지 않는다.** 여기서 그냥 null 로 떨어뜨리면 화면은
+      // "저확신 · 주제가 비었다" 를 낸다 — 사용자 질문이 모호했다는 뜻이다.
+      // 실제로는 우리 LLM 이 죽은 것이고, 사용자가 할 수 있는 일이 정반대다
+      // (질문을 고칠 게 아니라 잠시 뒤 다시 온다). 실측: 2026-09-09, 워커에서
+      // 두 번 다 실패했는데 로그가 없어 원인을 좁히는 데 배포를 한 번 더 썼다.
+      console.error('classify 실패', e?.name, e?.message);
+      raw = null;
+      분류실패 = true;
+    }
     const n = normalize(raw, { 어휘: await 어휘(deps) });
     ({ 유형, 슬롯, 저확신 } = n);
     원문슬롯 = n.원문슬롯;
@@ -97,6 +119,7 @@ export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
   카드.원문슬롯 = 원문슬롯;
   카드.확신도 = 확신도;
   카드.저확신사유 = 저확신사유;
+  if (분류실패) 분류실패표시(카드);
   if (q.확인불가) 확인불가표시(카드);
   if (!q.허용) return 카드;                       // LLM 만 건너뛴다. 카드는 그대로
 
