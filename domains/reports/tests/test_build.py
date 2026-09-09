@@ -1,0 +1,95 @@
+from domains.reports.pipeline import build
+from domains.reports.pipeline.boards import Board
+from domains.reports.pipeline.models import RawReport
+
+KW = {'청년고용': ['청년고용'], '임금': ['임금']}
+
+KLI_BOARD = Board(id='kli-research', org='kli', name='연구보고서',
+                  series='연구보고서', list_url='https://x/1',
+                  item_re=r'(\d+)', filter=False)
+KDI_BOARD = Board(id='kdi-report', org='kdi', name='연구보고서',
+                  series='연구보고서', list_url='https://x/2',
+                  item_re=r'(\d+)', filter=True)
+
+
+def raw(rid, board, title='제목', abstract=None):
+    return RawReport(
+        id=rid, org=board.org, board=board.id, series=board.series,
+        title=title, authors=[], published='2025-05-01', date_precision='day',
+        landing_url=f'https://example.org/{rid}', abstract=abstract,
+    )
+
+
+def test_unfiltered_board_is_kept_even_without_a_keyword():
+    # KLI·KEIS 는 기관 전체가 고용·노동이다.
+    reports, _, _ = build.build([raw('kli-1', KLI_BOARD, '노사협의회 운영실태')],
+                                [KLI_BOARD], KW)
+    assert [r.id for r in reports] == ['kli-1']
+    assert reports[0].employment is True
+
+
+def test_matched_is_recorded_even_on_unfiltered_boards():
+    # 주제 화면이 네 기관을 덮으려면 KLI 에도 matched 가 있어야 한다.
+    reports, _, _ = build.build([raw('kli-2', KLI_BOARD, '청년고용 실태')],
+                                [KLI_BOARD], KW)
+    assert reports[0].matched == ['청년고용']
+
+
+def test_filtered_board_drops_a_report_with_no_keyword():
+    reports, _, _ = build.build([raw('kdi-1', KDI_BOARD, '반도체 수출 전망')],
+                                [KDI_BOARD], KW)
+    assert reports == []
+
+
+def test_filtered_board_keeps_a_report_that_matches():
+    reports, _, _ = build.build([raw('kdi-2', KDI_BOARD, '청년고용 대책 평가')],
+                                [KDI_BOARD], KW)
+    assert [r.id for r in reports] == ['kdi-2']
+    assert reports[0].matched == ['청년고용']
+
+
+def test_the_abstract_counts_toward_the_match():
+    reports, _, _ = build.build(
+        [raw('kdi-3', KDI_BOARD, '산업구조 변화 연구', abstract='임금 격차를 다룬다')],
+        [KDI_BOARD], KW)
+    assert [r.id for r in reports] == ['kdi-3']
+
+
+def test_changing_keywords_flips_the_verdict_without_recollecting():
+    # 이 과제의 존재 이유. raw 는 그대로고 keywords 만 바뀐다.
+    rows = [raw('kdi-4', KDI_BOARD, '플랫폼 종사자 실태')]
+    assert build.build(rows, [KDI_BOARD], KW)[0] == []
+    wider = dict(KW, 고용형태=['플랫폼 종사자'])
+    kept, _, _ = build.build(rows, [KDI_BOARD], wider)
+    assert [r.id for r in kept] == ['kdi-4']
+
+
+def test_abstracts_are_split_out_by_id():
+    kept, abstracts, _ = build.build(
+        [raw('kli-3', KLI_BOARD, '제목', abstract='초록 본문')], [KLI_BOARD], KW)
+    assert abstracts['kli-3']['abstract'] == '초록 본문'
+    # 경량 레코드에는 초록이 없다 — 첫 화면이 그것까지 받으면 안 된다.
+    assert 'abstract' not in build._light(kept[0])
+
+
+def test_missing_abstract_rate_is_measured_per_org_and_series():
+    rows = [raw('kli-4', KLI_BOARD, 'ㄱ', abstract='있다'),
+            raw('kli-5', KLI_BOARD, 'ㄴ'),
+            raw('kli-6', KLI_BOARD, 'ㄷ')]
+    _, _, missing = build.build(rows, [KLI_BOARD], KW)
+    cell = missing['kli']['연구보고서']
+    assert cell['total'] == 3 and cell['missing'] == 2
+    assert round(cell['rate'], 2) == 0.67
+
+
+def test_a_raw_record_from_a_disabled_board_is_skipped():
+    off = KLI_BOARD.model_copy(update={'enabled': False})
+    assert build.build([raw('kli-7', off)], [off], KW)[0] == []
+
+
+def test_newest_first():
+    a = raw('kli-8', KLI_BOARD)
+    b = raw('kli-9', KLI_BOARD)
+    b.published = '2026-01-01'
+    kept, _, _ = build.build([a, b], [KLI_BOARD], KW)
+    assert [r.id for r in kept] == ['kli-9', 'kli-8']
