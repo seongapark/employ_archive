@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { homeRows } from '../../app/js/screens/home.js';
+import { homeRows, headHtml, bodyHtml } from '../../app/js/screens/home.js';
 import { topicChips, reportsForTopic } from '../../app/js/screens/topics.js';
 import { shelf } from '../../app/js/screens/orgs.js';
 import { detailModel } from '../../app/js/screens/report.js';
@@ -50,6 +50,38 @@ test('기관 칩이 검색 결과에도 똑같이 걸린다', () => {
 test('연도 칩도 양쪽에 걸린다', () => {
   assert.equal(homeRows({ q: '', orgs: [], years: [2025] }, CTX)
     .groups.flatMap((g) => g.rows).length, 1);
+});
+
+// ── 홈: 한글 입력이 깨지지 않게 하는 경계 ─────────────────────────────
+
+test('머리는 검색어가 바뀌어도 그대로다', () => {
+  // 이 불변식이 곧 '입력창 DOM 이 살아남는다' 이다. 머리가 검색어를 읽기
+  // 시작하면 타이핑마다 머리를 다시 그려야 하고, 그러면 한글 조합이 끊겨
+  // '사무직' 이 'ㅅㅏㅁㅜㅈㅣㄱ' 으로 들어간다.
+  const a = headHtml({ q: '', orgs: [], years: [] }, CTX);
+  const b = headHtml({ q: '청년', orgs: [], years: [] }, CTX);
+  assert.equal(a, b);
+});
+
+test('머리에 검색어 값을 박아 넣지 않는다', () => {
+  // value="..." 로 박으면 머리를 다시 그려야만 글자가 보인다.
+  const html = headHtml({ q: '청년', orgs: [], years: [] }, CTX);
+  assert.ok(!html.includes('청년'));
+  assert.ok(html.includes('id="q"'));
+});
+
+test('본문은 검색어를 따라 바뀐다', () => {
+  const timeline = bodyHtml({ q: '', orgs: [], years: [] }, CTX);
+  const search = bodyHtml({ q: '청년고용', orgs: [], years: [] }, CTX);
+  assert.notEqual(timeline, search);
+  assert.ok(search.includes('관련도순'));
+});
+
+test('머리는 기관·연도 칩 상태는 반영한다', () => {
+  // 칩은 눌린 표시를 클래스로 바꾸므로 머리를 다시 그리지 않는다. 다만 첫
+  // 그림에서는 상태가 맞아야 한다.
+  const on = headHtml({ q: '', orgs: ['kli'], years: [] }, CTX);
+  assert.ok(on.includes('chip--active'));
 });
 
 // ── 주제 ──────────────────────────────────────────────────────────────

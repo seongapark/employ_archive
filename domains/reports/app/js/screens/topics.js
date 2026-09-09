@@ -21,7 +21,7 @@ export function reportsForTopic(reports, topic) {
 }
 
 export function render(el, ctx) {
-  const topic = ctx.route.param;
+  const topic = ctx.route.params[0];
   if (!topic) {
     const chips = topicChips(ctx.reports);
     el.innerHTML = chips.length ? `
