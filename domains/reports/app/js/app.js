@@ -1,22 +1,12 @@
 // 앱 셸. 해시 라우팅과 데이터 로드만 한다 — 무엇을 그리는지는 screens/ 가 안다.
 import { loadJson } from '../core/shell.js';
+import { parseRoute } from './route.js';
 import * as home from './screens/home.js';
 import * as topics from './screens/topics.js';
 import * as orgs from './screens/orgs.js';
 import * as report from './screens/report.js';
 
 const screens = { home, topics, orgs, report };
-
-function parseRoute(hash) {
-  const h = (hash || '').replace(/^#/, '') || '/';
-  if (h === '/' || h === '') return { name: 'home', param: null, tab: 'home' };
-  const [, head, ...rest] = h.split('/');
-  const param = rest.length ? rest.join('/') : null;
-  if (head === 'topics') return { name: 'topics', param, tab: 'topics' };
-  if (head === 'orgs') return { name: 'orgs', param, tab: 'orgs' };
-  if (head === 'r') return { name: 'report', param: param && decodeURIComponent(param), tab: null };
-  return { name: 'home', param: null, tab: 'home' };
-}
 
 function setActiveTab(tabbarEl, tab) {
   tabbarEl.querySelectorAll('.tab').forEach((el) => {
@@ -52,7 +42,7 @@ async function start() {
     abstracts: null,
     state: { q: '', orgs: [], years: [], sort: 'score', expanded: new Set() },
     route: parseRoute(location.hash),
-    rerender: () => route({ keepFocus: false }),
+    refreshBody: null,
     prefetchAbstracts,
   };
 
@@ -63,39 +53,30 @@ async function start() {
     if (abstractsPromise) return abstractsPromise;
     abstractsPromise = loadJson('./data/abstracts.json').then((data) => {
       ctx.abstracts = data || {};
-      if (ctx.route.name === 'home' && ctx.state.q) route({ keepFocus: true });
+      // 검색 중이었다면 본문만 다시 그린다. 화면을 갈면 조합이 끊긴다.
+      if (ctx.refreshBody) ctx.refreshBody();
       return ctx.abstracts;
     });
     return abstractsPromise;
   }
 
-  function route(opts = {}) {
+  // route 는 **화면을 바꿀 때만** 부른다. 같은 화면 안의 갱신(타이핑·칩·접기)은
+  // 각 화면이 자기 본문만 다시 그린다 — 여기서 통째로 갈면 입력창이 교체돼
+  // 한글 조합이 끊긴다.
+  function route() {
     ctx.route = parseRoute(location.hash);
+    ctx.refreshBody = null;
     setActiveTab(tabbarEl, ctx.route.tab);
     const fn = (screens[ctx.route.name] || screens.home).render;
-    const active = document.activeElement;
-    const caret = active && active.id === 'q' ? active.selectionStart : null;
-    // 접힌 묶음을 펼치는 것은 화면을 바꾸는 게 아니라 보고 있던 자리를 여는
-    // 것이다. 맨 위로 튕기면 572줄 목록에서 접기가 쓸모없어진다.
-    const keptScroll = screenEl.scrollTop;
-    if (!opts.keepFocus && !opts.keepScroll) screenEl.scrollTop = 0;
+    screenEl.scrollTop = 0;
     screenEl.innerHTML = '';
     fn(screenEl, ctx);
-    if (opts.keepScroll) screenEl.scrollTop = keptScroll;
-    if (opts.keepFocus) {
-      const input = screenEl.querySelector('#q');
-      if (input) {
-        input.focus();
-        if (caret != null) input.setSelectionRange(caret, caret);
-      }
-    }
     // 상세로 들어왔는데 초록이 아직 없으면 그때 받는다.
     if (ctx.route.name === 'report' && !ctx.abstracts) {
-      prefetchAbstracts().then(() => route({ keepFocus: false }));
+      prefetchAbstracts().then(() => route());
     }
   }
 
-  ctx.rerender = route;
   window.addEventListener('hashchange', () => route());
   window.addEventListener('online', () => { offlineEl.hidden = true; });
   window.addEventListener('offline', () => { offlineEl.hidden = false; });

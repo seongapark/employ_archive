@@ -20,7 +20,7 @@ export function detailModel(id, ctx) {
 }
 
 export function render(el, ctx) {
-  const model = detailModel(ctx.route.param, ctx);
+  const model = detailModel(ctx.route.params[0], ctx);
   if (!model) {
     el.innerHTML = empty('그 보고서를 찾을 수 없습니다.<br><a class="back" href="#/">검색으로</a>');
     return;

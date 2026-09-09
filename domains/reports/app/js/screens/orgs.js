@@ -19,8 +19,8 @@ export function shelf(reports, orgs) {
 }
 
 export function render(el, ctx) {
-  const param = ctx.route.param;
-  if (!param) {
+  const [code, series] = ctx.route.params;
+  if (!code) {
     const shelves = shelf(ctx.reports, ctx.orgs);
     el.innerHTML = `
       <div class="section-title">기관별 서가</div>
@@ -40,7 +40,6 @@ export function render(el, ctx) {
     return;
   }
 
-  const [code, series] = param.split('/').map(decodeURIComponent);
   const org = (ctx.orgs || []).find((o) => o.code === code);
   const rows = (ctx.reports || []).filter(
     (r) => r.org === code && (!series || r.series === series)
