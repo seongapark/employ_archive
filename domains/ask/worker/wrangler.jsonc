@@ -4,10 +4,10 @@
   "main": "./src/index.mjs",
   "compatibility_date": "2026-09-08",
   "d1_databases": [
-    { "binding": "DB", "database_name": "employ-archive-ask", "database_id": "<wrangler d1 create 후 채운다>" }
+    { "binding": "DB", "database_name": "employ-archive-ask", "database_id": "cd910da8-cf8d-410d-9f10-f42d316d9d55" }
   ],
   "kv_namespaces": [
-    { "binding": "QUOTA", "id": "<wrangler kv namespace create QUOTA 후 채운다>" }
+    { "binding": "QUOTA", "id": "36a8c6cdef34411295826d7ee64ac386" }
   ],
   "vars": {
     // secret 이 아니다. Task 0 스파이크가 통과시킨 슬러그를 넣고, 품질이 모자라면 이 값만 바꾼다

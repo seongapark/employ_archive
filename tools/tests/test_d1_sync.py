@@ -147,3 +147,12 @@ def test_keys_are_real_primary_keys():
     for table, key in KEYS.items():
         for k in key:
             assert k in schema[table], (table, k)
+
+
+def test_no_transaction_statements():
+    """D1 원격 실행이 BEGIN/COMMIT 을 거부한다 — 로컬 sqlite3 는 받아 줘서 배포에서야 드러났다."""
+    sql = build_sql({"source_catalog": [{"id": "eaps", "name_ko": "경활", "grade": "B"}]})
+    upper = sql.upper()
+    assert "BEGIN TRANSACTION" not in upper
+    assert "COMMIT" not in upper
+    assert "PRAGMA" not in upper

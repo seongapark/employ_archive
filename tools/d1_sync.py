@@ -64,7 +64,11 @@ def sql_literal(v):
 
 
 def build_sql(tables: dict[str, list[dict]]) -> str:
-    out = ["PRAGMA foreign_keys=OFF;", "BEGIN TRANSACTION;"]
+    # D1 원격 실행은 BEGIN TRANSACTION·COMMIT 을 거부한다("please use the
+    # state.storage.transaction() APIs instead"). 로컬 sqlite3 는 받아 주므로
+    # 이 결함은 실제 배포에서만 드러났다. --file 실행 자체가 배치로 처리되고,
+    # 모든 문장이 upsert 라 중간에 끊겨도 재실행이 안전하다.
+    out = []
     for table, rows in tables.items():
         if not rows:
             continue
@@ -76,7 +80,6 @@ def build_sql(tables: dict[str, list[dict]]) -> str:
             out.append(
                 f"INSERT INTO {table} ({', '.join(cols)}) VALUES ({vals}) "
                 f"ON CONFLICT({', '.join(key)}) DO UPDATE SET {upd};")
-    out += ["COMMIT;", "PRAGMA foreign_keys=ON;"]
     return "\n".join(out) + "\n"
 
 
