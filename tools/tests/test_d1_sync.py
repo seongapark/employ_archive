@@ -1,7 +1,8 @@
+import json
 import re
 from pathlib import Path
 
-from tools.d1_sync import COLUMNS, KEYS, build_sql, collect, flatten_releases, sql_literal
+from tools.d1_sync import REPO, COLUMNS, KEYS, build_sql, collect, flatten_releases, sql_literal
 
 MIGRATION = (Path(__file__).resolve().parents[2]
              / "domains/ask/worker/migrations/0001_init.sql")
@@ -62,10 +63,24 @@ def test_flatten_releases_unnests_source_month_dict():
     assert row2["posted_at"] == "2022-02-14"
 
 
-def test_flatten_releases_real_data_has_146_rows():
-    # eaps 39 + ei 56 + est 51 = 146. 원본이 바뀌면 이 숫자가 알려준다.
-    tables = collect("employment")
-    assert len(tables["release"]) == 146
+def test_flatten_releases_loses_no_rows():
+    """중첩 dict 를 펼치면서 행이 새거나 겹치지 않는지 본다.
+
+    처음에는 146 이라는 숫자를 박아 뒀는데, 매일 도는 수집이 회차를 하나 늘리자
+    바로 빨개졌다. 지키려던 것은 그 숫자가 아니라 **펼치면서 아무것도 잃지 않는다**
+    는 불변이므로, 원본에서 직접 세어 대조한다. 회차가 늘어도 안 깨지고,
+    행이 사라지거나 겹치면 깨진다.
+    """
+    src = json.loads((REPO / "domains/employment/data/releases.json")
+                     .read_text(encoding="utf-8"))
+    기대 = sum(len(months) for months in src.values())
+    rows = collect("employment")["release"]
+    assert len(rows) == 기대
+    # id 가 유일해야 upsert 가 회차를 덮어쓰지 않는다
+    assert len({r["id"] for r in rows}) == 기대
+    # 출처별로도 어긋나지 않는다
+    for source, months in src.items():
+        assert sum(1 for r in rows if r["source"] == source) == len(months), source
 
 
 def test_catalog_hyp_indicator_drops_time_grain():
