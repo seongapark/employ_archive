@@ -49,7 +49,11 @@ export function numbersInText(strings) {
   return s;
 }
 
-export function verify(답변객체, 근거묶음, 허용텍스트 = []) {
+// `허용숫자` 는 근거 구조 바깥에 사는 값을 위한 자리다 — 지금은 전망 수치다.
+// 전망 유형은 `근거` 가 비어 있고 값이 `전망` 에 있어서, 이 인자가 없으면
+// **전망 답변의 모든 숫자가 근거 밖으로 판정돼 문장이 늘 버려진다**(실측).
+// 넓힘은 언제나 명시적이다 — 안 주면 안 넓어진다.
+export function verify(답변객체, 근거묶음, 허용텍스트 = [], 허용숫자 = []) {
   // 우리가 LLM 에게 준 문장(근거서술·한계·검정력_주석·우회경로·compare 설명 등)의 숫자는
   // 인용이지 환각이 아니다 — 근거 집합에 없다는 이유만으로 위반 처리하면 그 문장을
   // 그대로 인용한 정상 답변까지 튕겨 나간다. 호출부는 "우리가 실제로 넘긴 문장"만
@@ -57,6 +61,7 @@ export function verify(답변객체, 근거묶음, 허용텍스트 = []) {
   const allowed = new Set([
     ...numbersIn(근거묶음),
     ...numbersInText(허용텍스트),
+    ...허용숫자,
   ]);
   const found = [
     ...extractNumbers(답변객체?.답변),
@@ -64,5 +69,27 @@ export function verify(답변객체, 근거묶음, 허용텍스트 = []) {
       typeof g?.값 === 'number' ? [g.값] : extractNumbers(g?.값)),
   ];
   const 위반 = [...new Set(found.filter((n) => !allowed.has(n)))];
-  return { ok: 위반.length === 0, 위반 };
+  return { ok: 위반.length === 0, 위반, 진단: 진단하기(위반, allowed) };
+}
+
+// 검증이 걸렸을 때 **어느 쪽인지** 가른다. 위반 숫자만으로는 2패스가 없는 값을
+// 지어낸 것인지, 우리 대조가 표기 차이를 못 맞춘 것인지 알 수 없어 진단에 배포를
+// 한 번 더 쓰게 된다(실측: 전망 위반 [17, 12.3] 의 17 은 근거값 그 자체였다).
+//
+// `표기차이` = 허용 집합에 **자릿수만 다른 같은 수**가 있다(18 ↔ 180000, 2.5 ↔ 250).
+//   답변이 "18만명" 을 "180000명" 으로 풀어 쓴 경우가 여기다 — 우리 쪽을 고칠 신호다.
+// `근거밖` = 흔적이 없다. 2패스가 지어낸 값이므로 문장을 버리는 게 맞다.
+function 진단하기(위반, allowed) {
+  const 자릿수무시 = (n) => {
+    let x = Math.abs(n);
+    if (x === 0) return '0';
+    while (x < 1) x *= 10;
+    while (x >= 10) x /= 10;
+    return x.toPrecision(6);          // 부동소수 흔들림을 자른다
+  };
+  const 척도 = new Set([...allowed].map(자릿수무시));
+  return 위반.map((n) => ({
+    숫자: n,
+    판정: 척도.has(자릿수무시(n)) ? '표기차이' : '근거밖',
+  }));
 }

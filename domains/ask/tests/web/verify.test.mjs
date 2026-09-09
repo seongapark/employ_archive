@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { verify, extractNumbers, numbersInText } from '../../worker/src/core/verify.mjs';
+import { 숫자모음 } from '../../worker/src/core/query.mjs';
 import { buildEvidence } from '../../worker/src/core/query.mjs';
 
 const 근거 = [buildEvidence({ 지표: 'IND_청년사무직취업자', compare_basis: '수준' },
@@ -162,4 +163,41 @@ test('진짜 연령대는 여전히 라벨로 가린다', () => {
 
 test('쉼표 수의 소수점도 살아 있다', () => {
   assert.deepEqual(extractNumbers('29,151.5천명'), [29151.5]);
+});
+
+// ── 전망 수치 (실배포 화면 검증) ───────────────────────────────────────────
+// 전망 유형은 근거가 비어 있고 수치가 `카드.전망` 에 있는데, verify 는 근거만
+// 봤다. **전망 답변의 모든 숫자가 근거 밖으로 판정돼 문장이 늘 버려졌다.**
+// 실측(2026-09-09): 위반 [17, 12.3] — 17 은 BOK 2024 연간 전망값 그 자체였다.
+
+const 전망행 = [
+  { org: 'KDI', published_at: '2024-11-12', target_period: 'annual',
+    value: 18, unit: '만명', prev_value: null, revision: null },
+  { org: 'BOK', published_at: '2024-11-28', target_period: 'annual',
+    value: 17, unit: '만명', prev_value: 20, revision: -3 },
+];
+
+test('전망값을 인용한 답변은 통과한다', () => {
+  const r = verify({ 답변: 'KDI는 18만명, BOK는 17만명을 전망한다', 근거: [] },
+    [], [], 숫자모음(전망행));
+  assert.equal(r.ok, true);
+});
+
+test('전망의 이전값·조정폭도 인용할 수 있다', () => {
+  const r = verify({ 답변: '20만명에서 17만명으로 3만명 하향 조정됐다', 근거: [] },
+    [], [], 숫자모음(전망행));
+  assert.equal(r.ok, true);
+});
+
+test('전망에 없는 숫자는 여전히 위반이다', () => {
+  const r = verify({ 답변: 'KDI는 18만명, BOK는 99만명을 전망한다', 근거: [] },
+    [], [], 숫자모음(전망행));
+  assert.equal(r.ok, false);
+  assert.deepEqual(r.위반, [99]);
+});
+
+test('허용숫자를 안 주면 전망값도 위반이다 — 넓힘은 명시적이다', () => {
+  const r = verify({ 답변: 'KDI는 18만명을 전망한다', 근거: [] }, []);
+  assert.equal(r.ok, false);
+  assert.deepEqual(r.위반, [18]);
 });

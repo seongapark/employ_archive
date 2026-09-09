@@ -11,6 +11,7 @@
 import { ask } from '../core/ask.mjs';
 import { verify } from '../core/verify.mjs';
 import { normalize } from '../core/classify.mjs';
+import { 숫자모음 } from '../core/query.mjs';
 
 export const quotaKey = (ip, today) => `q:${ip}:${today}`;
 
@@ -129,10 +130,14 @@ export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
 
   // 규칙 1: verify 세 번째 인자에 카드.허용텍스트 를 그대로 넘긴다 — 우리가 실제로
   // LLM 에게 넘긴 문장(현상 근거서술·한계·우회경로 등)의 숫자는 인용이지 환각이 아니다.
-  const v = verify(문장, 카드.근거 ?? [], 카드.허용텍스트 ?? []);
+  // 규칙 2: 전망 수치는 `근거` 가 아니라 `전망` 에 산다 — 안 넘기면 전망 답변의
+  // 모든 숫자가 근거 밖으로 판정돼 **문장이 늘 버려진다**(2026-09-09 실측).
+  const v = verify(문장, 카드.근거 ?? [], 카드.허용텍스트 ?? [], 숫자모음(카드.전망));
   if (!v.ok) {
     카드.검증실패 = true;
     카드.검증위반 = v.위반;
+    // 위반 숫자만으로는 환각인지 우리 대조의 표기 문제인지 못 가른다 — 같이 싣는다.
+    카드.검증진단 = v.진단;
     카드.배지 = [...new Set([...(카드.배지 ?? []), '검증실패'])];
     return 카드;                                  // 답변만 버린다. 근거는 남는다
   }

@@ -388,3 +388,39 @@ test('질문이 모호해 저확신인 것은 분류실패가 아니다 — 사�
   assert.ok(!r.배지.includes('분류실패'));
   assert.ok(r.배지.includes('저확신'));
 });
+
+// ── 전망 답변 검증 (실배포 화면 검증) ──────────────────────────────────────
+test('전망 수치를 인용한 답변은 검증을 통과한다', async () => {
+  const db = makeFakeDb({ forecast: [
+    { id: 'kdi-1', org: 'KDI', report_title: 'KDI 경제전망', published_at: '2024-11-12',
+      target_year: 2027, target_period: 'annual', indicator: 'emp_change',
+      value: 18, unit: '만명', prev_value: null, revision: null,
+      source_url: 'https://x', landing_url: 'https://y' },
+  ] });
+  const llm = { compose: async () => ({ 답변: 'KDI는 18만명을 전망한다',
+                                        근거: [], 한계: [], 미확인: [], 후속질문: [] }) };
+  const r = await handleAsk({ db, kv: memKv(), llm, quota: 30 },
+    { 유형: '전망', 슬롯: { 주제: '취업자수', 기간: { from: '2027-01', to: '2027-12' } },
+      ip: '1.2.3.31', today: '2026-09-09' });
+  assert.equal(r.검증실패, undefined, `위반: ${JSON.stringify(r.검증위반)}`);
+  assert.equal(r.답변, 'KDI는 18만명을 전망한다');
+});
+
+test('검증이 걸리면 환각인지 표기 차이인지 가를 정보를 싣는다', async () => {
+  const db = makeFakeDb({ forecast: [
+    { id: 'kdi-1', org: 'KDI', report_title: 'KDI 경제전망', published_at: '2024-11-12',
+      target_year: 2027, target_period: 'annual', indicator: 'emp_change',
+      value: 18, unit: '만명', prev_value: null, revision: null,
+      source_url: 'https://x', landing_url: 'https://y' },
+  ] });
+  const llm = { compose: async () => ({ 답변: 'KDI는 180000명과 99만명을 전망한다',
+                                        근거: [], 한계: [], 미확인: [], 후속질문: [] }) };
+  const r = await handleAsk({ db, kv: memKv(), llm, quota: 30 },
+    { 유형: '전망', 슬롯: { 주제: '취업자수', 기간: { from: '2027-01', to: '2027-12' } },
+      ip: '1.2.3.32', today: '2026-09-09' });
+  assert.equal(r.검증실패, true);
+  // 180000 은 18 의 자릿수 차이(표기), 99 는 근거에 아무 흔적이 없다(환각)
+  const 진단 = Object.fromEntries((r.검증진단 ?? []).map((d) => [d.숫자, d.판정]));
+  assert.equal(진단[180000], '표기차이');
+  assert.equal(진단[99], '근거밖');
+});
