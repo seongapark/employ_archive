@@ -1,10 +1,10 @@
 import { badgeLabel, understandLine, evidenceColumns } from './badge.js';
 import { renderAll } from './render.js';
 
-// Worker 배포 주소. 배포되기 전에는 알 수 없다 — 실제 주소를 지어내지 않는다.
-// TODO(배포 후): domains/ask/worker 를 `wrangler deploy` 한 뒤 나오는 실제
-// *.workers.dev(또는 커스텀 도메인) 주소로 이 상수를 바꾼다.
-const API = 'https://REPLACE-AFTER-DEPLOY.workers.dev/api/ask';
+// Worker 배포 주소. 워커를 다시 배포해 주소가 바뀌면 이 한 줄을 고친다.
+// 워커 쪽 CORS 는 wrangler.jsonc 의 ASK_ALLOWED_ORIGIN 이 정한다 — 둘이 어긋나면
+// 브라우저가 응답을 못 읽는다(서버는 200 을 내는데 화면만 빈다).
+const API = 'https://employ-archive-ask.seongapark92.workers.dev/api/ask';
 
 function esc(s) {
   return String(s).replace(/[&<>"']/g, (c) => (

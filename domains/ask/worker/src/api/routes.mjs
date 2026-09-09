@@ -65,6 +65,10 @@ export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
   const q = await checkQuota(deps.kv, ip, today, deps.quota);
 
   let 저확신 = false;
+  // 스펙 §5-5: 모든 응답에 {유형, 슬롯, 확신도, 저확신} 을 싣는다.
+  // 화면의 이해 카드가 "이렇게 이해했습니다" 를 보여주고 사용자가 고치려면 이 둘이 필요하다.
+  let 확신도 = null;
+  let 저확신사유 = [];
   // 규칙 3: '이해 카드' 가 "이렇게 이해했습니다" 를 보여주고 고칠 수 있으려면
   // 매핑된 슬롯(카드.슬롯)과 LLM 원문(원문슬롯)이 둘 다 응답에 실려야 한다.
   let 원문슬롯 = 슬롯 ?? null;
@@ -85,10 +89,14 @@ export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
     const n = normalize(raw, { 어휘: await 어휘(deps) });
     ({ 유형, 슬롯, 저확신 } = n);
     원문슬롯 = n.원문슬롯;
+    확신도 = n.확신도;
+    저확신사유 = n.저확신사유;
   }
 
   const 카드 = await ask(deps, { 유형, 슬롯, 저확신, 한도초과: !q.허용 && !q.확인불가 });
   카드.원문슬롯 = 원문슬롯;
+  카드.확신도 = 확신도;
+  카드.저확신사유 = 저확신사유;
   if (q.확인불가) 확인불가표시(카드);
   if (!q.허용) return 카드;                       // LLM 만 건너뛴다. 카드는 그대로
 

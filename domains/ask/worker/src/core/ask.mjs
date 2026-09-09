@@ -228,16 +228,24 @@ async function 현상찾기(deps, 슬롯) {
   const 주제 = 주제원어(슬롯.주제);
   const [pf, pt] = String(슬롯.기간?.from ?? '') && String(슬롯.기간?.to ?? '')
     ? [슬롯.기간.from, 슬롯.기간.to] : [null, null];
-  return phs.find((p) => {
-    if (슬롯.시간입도 && p.time_grain && p.time_grain !== 슬롯.시간입도) return false;
+  // **시간입도·기간으로 거르지 않는다.** 현상의 관측 주기(반기)는 데이터의 성질이지
+  // 질문의 성질이 아니다 — "왜 줄었어?" 라고 묻는 사람이 그걸 알 리 없다. 실제로
+  // 그 조건 때문에 간판 질문("청년 사무직은 왜 줄었어")이 현상을 못 찾고 지표
+  // 폴백으로 떨어졌다(2026-09-09 배포 후 실측). 어긋나는 주기는 거부 사유가 아니라
+  // 답변에 **알려줄 사실**이라, 호출부가 한계로 낸다.
+  // 기간 비교도 뺐다 — 현상은 "2023S1~2025S2", 슬롯은 "2023" 처럼 형식이 달라
+  // 문자열 비교가 거짓 거부를 한다.
+  const 후보 = phs.filter((p) => {
     if (슬롯.지역입도 && p.지역 && p.지역 !== 슬롯.지역입도) return false;
-    if (주제 && !`${p.name_ko} ${p.정의 ?? ''}`.includes(주제)) return false;
-    if (pf && p.기간) {
-      const [f, t] = String(p.기간).split('~');
-      if (f && t && !(f <= pt && pf <= t)) return false;
-    }
     return true;
-  }) ?? null;
+  });
+  // 주제는 매핑된 값과 원문 둘 다로 맞춰 본다 — 카탈로그 문구가 어느 쪽을 담을지 모른다.
+  const 열쇠 = [주제, 슬롯.주제, ...(슬롯.집단축 ?? [])].filter(Boolean);
+  const 맞는것 = 후보.find((p) => {
+    const 말뭉치 = `${p.name_ko} ${p.정의 ?? ''}`;
+    return 열쇠.length ? 열쇠.some((k) => 말뭉치.includes(k)) : true;
+  });
+  return 맞는것 ?? null;
 }
 
 export async function ask(deps, { 유형, 슬롯: 입력슬롯 = {}, 저확신 = false, 한도초과 = false } = {}) {
@@ -311,6 +319,10 @@ export async function ask(deps, { 유형, 슬롯: 입력슬롯 = {}, 저확신 =
         한계: [...new Set(ev.가설.flatMap((h) => h.한계))],
       };
       if (ev.가설없음) r.한계.push('이 현상에 등록된 가설이 없다 — 판정 이전의 문제다');
+      // 질문의 시간입도와 현상의 관측 주기가 다르면 거부하지 말고 밝힌다.
+      if (슬롯.시간입도 && ph.time_grain && ph.time_grain !== 슬롯.시간입도) {
+        r.한계.push(`이 현상은 ${ph.time_grain} 단위로 관측된다 — 물으신 ${슬롯.시간입도} 단위로는 볼 수 없다`);
+      }
     } else {
       const fb = await indicatorFallback(deps, 슬롯);
       r = { ...base, ...fb, 한계: ['현상이 등록돼 있지 않아 판정하지 않는다'] };
