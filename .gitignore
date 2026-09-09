@@ -12,3 +12,6 @@ _site/
 # sources/verdicts 의 판정은 **다시 만들 수 없으므로** 반드시 담는다 —
 # 네이버 검색 API 는 검색어당 1,000건까지만 거슬러 가서 약 50일이면 못 닿는다.
 domains/press/sources/releases/
+
+# wrangler 로컬 캐시·상태. 배포 산출물이 아니다.
+.wrangler/
