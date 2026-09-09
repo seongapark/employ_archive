@@ -1134,6 +1134,594 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
+    "id": "eaps-2021-08-headcount-age-15-29",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "15-29",
+    "period": "2021-08",
+    "value": 3953.6,
+    "unit": "천명",
+    "yoy": 142.7,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-age-30-39",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "30-39",
+    "period": "2021-08",
+    "value": 5200.0,
+    "unit": "천명",
+    "yoy": -88.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-age-40-49",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "40-49",
+    "period": "2021-08",
+    "value": 6332.5,
+    "unit": "천명",
+    "yoy": 11.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-age-50-59",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "50-59",
+    "period": "2021-08",
+    "value": 6454.9,
+    "unit": "천명",
+    "yoy": 75.8,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-age-60+",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "60+",
+    "period": "2021-08",
+    "value": 5661.7,
+    "unit": "천명",
+    "yoy": 376.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-A",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "A",
+    "period": "2021-08",
+    "value": 1572.6,
+    "unit": "천명",
+    "yoy": 36.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-C",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "C",
+    "period": "2021-08",
+    "value": 4289.4,
+    "unit": "천명",
+    "yoy": -75.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-D",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "D",
+    "period": "2021-08",
+    "value": 70.6,
+    "unit": "천명",
+    "yoy": -2.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-E",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "E",
+    "period": "2021-08",
+    "value": 172.5,
+    "unit": "천명",
+    "yoy": 18.1,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-F",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "F",
+    "period": "2021-08",
+    "value": 2148.5,
+    "unit": "천명",
+    "yoy": 123.3,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-G",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "G",
+    "period": "2021-08",
+    "value": 3342.4,
+    "unit": "천명",
+    "yoy": -113.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-H",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "H",
+    "period": "2021-08",
+    "value": 1580.0,
+    "unit": "천명",
+    "yoy": 107.1,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-I",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "I",
+    "period": "2021-08",
+    "value": 2125.0,
+    "unit": "천명",
+    "yoy": -38.2,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-J",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "J",
+    "period": "2021-08",
+    "value": 917.1,
+    "unit": "천명",
+    "yoy": 74.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-K",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "K",
+    "period": "2021-08",
+    "value": 749.4,
+    "unit": "천명",
+    "yoy": 11.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-L",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "L",
+    "period": "2021-08",
+    "value": 544.7,
+    "unit": "천명",
+    "yoy": 35.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-M",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "M",
+    "period": "2021-08",
+    "value": 1215.7,
+    "unit": "천명",
+    "yoy": 55.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-N",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "N",
+    "period": "2021-08",
+    "value": 1409.6,
+    "unit": "천명",
+    "yoy": 47.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-O",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "O",
+    "period": "2021-08",
+    "value": 1223.8,
+    "unit": "천명",
+    "yoy": 56.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-P",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "P",
+    "period": "2021-08",
+    "value": 1844.6,
+    "unit": "천명",
+    "yoy": 51.3,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-Q",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "Q",
+    "period": "2021-08",
+    "value": 2662.9,
+    "unit": "천명",
+    "yoy": 243.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-R",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "R",
+    "period": "2021-08",
+    "value": 472.2,
+    "unit": "천명",
+    "yoy": -42.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-S",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "S",
+    "period": "2021-08",
+    "value": 1152.9,
+    "unit": "천명",
+    "yoy": -41.1,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-T",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "T",
+    "period": "2021-08",
+    "value": 83.8,
+    "unit": "천명",
+    "yoy": -24.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-industry-U",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "U",
+    "period": "2021-08",
+    "value": 13.0,
+    "unit": "천명",
+    "yoy": -6.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-sex-F",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "F",
+    "period": "2021-08",
+    "value": 11920.3,
+    "unit": "천명",
+    "yoy": 304.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-sex-M",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "M",
+    "period": "2021-08",
+    "value": 15682.4,
+    "unit": "천명",
+    "yoy": 213.1,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2021-08-headcount-total",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2021-08",
+    "value": 27602.7,
+    "unit": "천명",
+    "yoy": 518.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
     "id": "ei-2021-08-headcount-age-15-29",
     "source": "ei",
     "series": "headcount",
@@ -2814,6 +3402,594 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
+    "id": "eaps-2022-08-headcount-age-15-29",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "15-29",
+    "period": "2022-08",
+    "value": 4034.6,
+    "unit": "천명",
+    "yoy": 81.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-age-30-39",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "30-39",
+    "period": "2022-08",
+    "value": 5297.7,
+    "unit": "천명",
+    "yoy": 97.7,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-age-40-49",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "40-49",
+    "period": "2022-08",
+    "value": 6325.0,
+    "unit": "천명",
+    "yoy": -7.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-age-50-59",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "50-59",
+    "period": "2022-08",
+    "value": 6637.3,
+    "unit": "천명",
+    "yoy": 182.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-age-60+",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "60+",
+    "period": "2022-08",
+    "value": 6115.4,
+    "unit": "천명",
+    "yoy": 453.7,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-A",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "A",
+    "period": "2022-08",
+    "value": 1662.5,
+    "unit": "천명",
+    "yoy": 89.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-C",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "C",
+    "period": "2022-08",
+    "value": 4528.9,
+    "unit": "천명",
+    "yoy": 239.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-D",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "D",
+    "period": "2022-08",
+    "value": 82.2,
+    "unit": "천명",
+    "yoy": 11.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-E",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "E",
+    "period": "2022-08",
+    "value": 146.1,
+    "unit": "천명",
+    "yoy": -26.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-F",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "F",
+    "period": "2022-08",
+    "value": 2126.1,
+    "unit": "천명",
+    "yoy": -22.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-G",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "G",
+    "period": "2022-08",
+    "value": 3328.9,
+    "unit": "천명",
+    "yoy": -13.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-H",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "H",
+    "period": "2022-08",
+    "value": 1654.9,
+    "unit": "천명",
+    "yoy": 74.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-I",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "I",
+    "period": "2022-08",
+    "value": 2192.1,
+    "unit": "천명",
+    "yoy": 67.1,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-J",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "J",
+    "period": "2022-08",
+    "value": 989.5,
+    "unit": "천명",
+    "yoy": 72.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-K",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "K",
+    "period": "2022-08",
+    "value": 736.6,
+    "unit": "천명",
+    "yoy": -12.8,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-L",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "L",
+    "period": "2022-08",
+    "value": 549.0,
+    "unit": "천명",
+    "yoy": 4.3,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-M",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "M",
+    "period": "2022-08",
+    "value": 1295.2,
+    "unit": "천명",
+    "yoy": 79.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-N",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "N",
+    "period": "2022-08",
+    "value": 1415.9,
+    "unit": "천명",
+    "yoy": 6.3,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-O",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "O",
+    "period": "2022-08",
+    "value": 1295.4,
+    "unit": "천명",
+    "yoy": 71.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-P",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "P",
+    "period": "2022-08",
+    "value": 1906.6,
+    "unit": "천명",
+    "yoy": 62.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-Q",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "Q",
+    "period": "2022-08",
+    "value": 2785.9,
+    "unit": "천명",
+    "yoy": 123.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-R",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "R",
+    "period": "2022-08",
+    "value": 495.2,
+    "unit": "천명",
+    "yoy": 23.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-S",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "S",
+    "period": "2022-08",
+    "value": 1114.3,
+    "unit": "천명",
+    "yoy": -38.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-T",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "T",
+    "period": "2022-08",
+    "value": 80.2,
+    "unit": "천명",
+    "yoy": -3.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-industry-U",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "U",
+    "period": "2022-08",
+    "value": 18.2,
+    "unit": "천명",
+    "yoy": 5.2,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-sex-F",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "F",
+    "period": "2022-08",
+    "value": 12324.7,
+    "unit": "천명",
+    "yoy": 404.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-sex-M",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "M",
+    "period": "2022-08",
+    "value": 16085.3,
+    "unit": "천명",
+    "yoy": 402.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2022-08-headcount-total",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2022-08",
+    "value": 28410.0,
+    "unit": "천명",
+    "yoy": 807.3,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
     "id": "ei-2022-08-headcount-age-15-29",
     "source": "ei",
     "series": "headcount",
@@ -4492,6 +5668,594 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-age-15-29",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "15-29",
+    "period": "2023-08",
+    "value": 3931.4,
+    "unit": "천명",
+    "yoy": -103.2,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-age-30-39",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "30-39",
+    "period": "2023-08",
+    "value": 5362.0,
+    "unit": "천명",
+    "yoy": 64.3,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-age-40-49",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "40-49",
+    "period": "2023-08",
+    "value": 6255.6,
+    "unit": "천명",
+    "yoy": -69.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-age-50-59",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "50-59",
+    "period": "2023-08",
+    "value": 6710.0,
+    "unit": "천명",
+    "yoy": 72.7,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-age-60+",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "60+",
+    "period": "2023-08",
+    "value": 6419.0,
+    "unit": "천명",
+    "yoy": 303.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-A",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "A",
+    "period": "2023-08",
+    "value": 1644.0,
+    "unit": "천명",
+    "yoy": -18.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-C",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "C",
+    "period": "2023-08",
+    "value": 4459.7,
+    "unit": "천명",
+    "yoy": -69.2,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-D",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "D",
+    "period": "2023-08",
+    "value": 92.1,
+    "unit": "천명",
+    "yoy": 9.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-E",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "E",
+    "period": "2023-08",
+    "value": 148.8,
+    "unit": "천명",
+    "yoy": 2.7,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-F",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "F",
+    "period": "2023-08",
+    "value": 2125.1,
+    "unit": "천명",
+    "yoy": -1.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-G",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "G",
+    "period": "2023-08",
+    "value": 3259.6,
+    "unit": "천명",
+    "yoy": -69.3,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-H",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "H",
+    "period": "2023-08",
+    "value": 1638.9,
+    "unit": "천명",
+    "yoy": -16.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-I",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "I",
+    "period": "2023-08",
+    "value": 2313.3,
+    "unit": "천명",
+    "yoy": 121.2,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-J",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "J",
+    "period": "2023-08",
+    "value": 1034.2,
+    "unit": "천명",
+    "yoy": 44.7,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-K",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "K",
+    "period": "2023-08",
+    "value": 751.1,
+    "unit": "천명",
+    "yoy": 14.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-L",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "L",
+    "period": "2023-08",
+    "value": 532.8,
+    "unit": "천명",
+    "yoy": -16.2,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-M",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "M",
+    "period": "2023-08",
+    "value": 1352.0,
+    "unit": "천명",
+    "yoy": 56.8,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-N",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "N",
+    "period": "2023-08",
+    "value": 1446.9,
+    "unit": "천명",
+    "yoy": 31.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-O",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "O",
+    "period": "2023-08",
+    "value": 1296.9,
+    "unit": "천명",
+    "yoy": 1.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-P",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "P",
+    "period": "2023-08",
+    "value": 1900.9,
+    "unit": "천명",
+    "yoy": -5.7,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-Q",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "Q",
+    "period": "2023-08",
+    "value": 2923.5,
+    "unit": "천명",
+    "yoy": 137.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-R",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "R",
+    "period": "2023-08",
+    "value": 516.6,
+    "unit": "천명",
+    "yoy": 21.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-S",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "S",
+    "period": "2023-08",
+    "value": 1146.3,
+    "unit": "천명",
+    "yoy": 32.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-T",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "T",
+    "period": "2023-08",
+    "value": 70.7,
+    "unit": "천명",
+    "yoy": -9.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-industry-U",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "U",
+    "period": "2023-08",
+    "value": 16.6,
+    "unit": "천명",
+    "yoy": -1.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-sex-F",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "F",
+    "period": "2023-08",
+    "value": 12605.3,
+    "unit": "천명",
+    "yoy": 280.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-sex-M",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "M",
+    "period": "2023-08",
+    "value": 16072.7,
+    "unit": "천명",
+    "yoy": -12.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2023-08-headcount-total",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2023-08",
+    "value": 28678.0,
+    "unit": "천명",
+    "yoy": 268.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
   },
   {
     "id": "ei-2023-08-headcount-age-15-29",
@@ -42812,6 +44576,594 @@
     "release_url": "https://kosis.kr/statHtml/statHtml.do?orgId=118&tblId=DT_118N_MON066",
     "attachments": [],
     "collected_at": "2026-09-08T17:04:05.654219+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-age-15-29",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "15-29",
+    "period": "2026-08",
+    "value": 3428.0,
+    "unit": "천명",
+    "yoy": -142.7,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-age-30-39",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "30-39",
+    "period": "2026-08",
+    "value": 5648.3,
+    "unit": "천명",
+    "yoy": 91.2,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-age-40-49",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "40-49",
+    "period": "2026-08",
+    "value": 6096.8,
+    "unit": "천명",
+    "yoy": -17.1,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-age-50-59",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "50-59",
+    "period": "2026-08",
+    "value": 6736.4,
+    "unit": "천명",
+    "yoy": 61.8,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-age-60+",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "60+",
+    "period": "2026-08",
+    "value": 7241.6,
+    "unit": "천명",
+    "yoy": 190.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-A",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "A",
+    "period": "2026-08",
+    "value": 1357.5,
+    "unit": "천명",
+    "yoy": -108.7,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-C",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "C",
+    "period": "2026-08",
+    "value": 4325.4,
+    "unit": "천명",
+    "yoy": -38.3,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-D",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "D",
+    "period": "2026-08",
+    "value": 116.3,
+    "unit": "천명",
+    "yoy": 16.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-E",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "E",
+    "period": "2026-08",
+    "value": 164.7,
+    "unit": "천명",
+    "yoy": 17.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-F",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "F",
+    "period": "2026-08",
+    "value": 1878.0,
+    "unit": "천명",
+    "yoy": -31.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-G",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "G",
+    "period": "2026-08",
+    "value": 3226.0,
+    "unit": "천명",
+    "yoy": 21.1,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-H",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "H",
+    "period": "2026-08",
+    "value": 1757.7,
+    "unit": "천명",
+    "yoy": 20.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-I",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "I",
+    "period": "2026-08",
+    "value": 2258.6,
+    "unit": "천명",
+    "yoy": -61.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-J",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "J",
+    "period": "2026-08",
+    "value": 1147.0,
+    "unit": "천명",
+    "yoy": 28.3,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-K",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "K",
+    "period": "2026-08",
+    "value": 833.2,
+    "unit": "천명",
+    "yoy": 23.3,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-L",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "L",
+    "period": "2026-08",
+    "value": 544.6,
+    "unit": "천명",
+    "yoy": 8.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-M",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "M",
+    "period": "2026-08",
+    "value": 1472.4,
+    "unit": "천명",
+    "yoy": -4.9,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-N",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "N",
+    "period": "2026-08",
+    "value": 1448.2,
+    "unit": "천명",
+    "yoy": 44.7,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-O",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "O",
+    "period": "2026-08",
+    "value": 1361.0,
+    "unit": "천명",
+    "yoy": 32.1,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-P",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "P",
+    "period": "2026-08",
+    "value": 1933.8,
+    "unit": "천명",
+    "yoy": -24.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-Q",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "Q",
+    "period": "2026-08",
+    "value": 3475.6,
+    "unit": "천명",
+    "yoy": 185.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-R",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "R",
+    "period": "2026-08",
+    "value": 625.5,
+    "unit": "천명",
+    "yoy": 73.2,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-S",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "S",
+    "period": "2026-08",
+    "value": 1133.9,
+    "unit": "천명",
+    "yoy": -12.7,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-T",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "T",
+    "period": "2026-08",
+    "value": 67.9,
+    "unit": "천명",
+    "yoy": -9.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-industry-U",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "U",
+    "period": "2026-08",
+    "value": 13.8,
+    "unit": "천명",
+    "yoy": 1.5,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-sex-F",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "F",
+    "period": "2026-08",
+    "value": 13021.1,
+    "unit": "천명",
+    "yoy": 77.4,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-sex-M",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "M",
+    "period": "2026-08",
+    "value": 16129.9,
+    "unit": "천명",
+    "yoy": 106.6,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
+  },
+  {
+    "id": "eaps-2026-08-headcount-total",
+    "source": "eaps",
+    "series": "headcount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2026-08",
+    "value": 29151.0,
+    "unit": "천명",
+    "yoy": 184.0,
+    "status": "잠정",
+    "released_at": "2026-09-09",
+    "release_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view",
+    "attachments": [
+      {
+        "type": "xlsx",
+        "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+      }
+    ],
+    "collected_at": "2026-09-09T17:07:26.009679+09:00"
   },
   {
     "id": "ei-2026-08-headcount-age-15-29",

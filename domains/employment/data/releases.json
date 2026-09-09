@@ -701,6 +701,24 @@
       ],
       "title": "26년 7월 고용동향",
       "url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446465&act=view"
+    },
+    "2026-08": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=2"
+        },
+        {
+          "type": "pdf",
+          "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=1"
+        },
+        {
+          "type": "xlsx",
+          "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=446913&seq=4"
+        }
+      ],
+      "title": "새글 26년 8월 고용동향",
+      "url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446913&act=view"
     }
   },
   "ei": {

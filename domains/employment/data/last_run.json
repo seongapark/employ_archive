@@ -1,10 +1,10 @@
 {
-  "run_at": "2026-09-08T17:01:25.154254+09:00",
+  "run_at": "2026-09-09T17:05:47.963872+09:00",
   "collectors": {
     "eaps": {
       "ok": true,
       "fetched": 784,
-      "added": 0,
+      "added": 112,
       "updated": 0,
       "rejected": 0
     },
@@ -12,7 +12,7 @@
       "ok": true,
       "fetched": 589,
       "added": 0,
-      "updated": 19,
+      "updated": 0,
       "rejected": 0
     },
     "ei": {
@@ -27,8 +27,8 @@
   "errors": [],
   "releases": {
     "eaps": {
-      "months": 39,
-      "added": 0,
+      "months": 40,
+      "added": 1,
       "attachments_filled": 0,
       "pending": 0
     },
@@ -45,5 +45,5 @@
       "pending": 0
     }
   },
-  "kosis_check": "2026-07 29136.1 일치"
+  "kosis_check": "2026-08 29151.0 일치"
 }
