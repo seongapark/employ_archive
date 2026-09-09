@@ -69,12 +69,36 @@ export function numbersIn(근거묶음) {
   return s;
 }
 
-export async function queryObservations(deps, { source, breakdown, category, from, to }) {
+// **`최신만` 은 호출부가 켠다 — 여기서 몰래 켜지 않는다.**
+// 수치조회는 기간을 안 주면 "지금" 을 묻는 것이라 최신 한 시점이 맞다(안 그러면
+// "취업자 몇 명이야" 에 5년치가 쏟아진다). 하지만 원인탐색의 근거는 **추세**라
+// 같은 기본값을 먹이면 한 점으로 접혀 차이·증감률이 통째로 사라진다. 두 부름의
+// 뜻이 다르므로 기본값도 다르다 — 그 선택을 부르는 쪽이 하게 둔다.
+//
+// **최신은 나머지 조건 안에서 구한다.** 전역 MAX(period) 를 쓰면 가장 늦게 발표하는
+// 출처가 전체 기준이 되어, 그보다 이른 출처는 조용히 빈손이 된다 — 실제로 est 는
+// eaps 보다 한 달 늦다. 그래서 source·breakdown·category 를 그대로 물고 MAX 를 뽑는다.
+async function 최신시점(deps, where, p) {
+  const rows = await deps.db.all(
+    `SELECT MAX(period) AS 최신 FROM observation WHERE ${where.join(' AND ')}`, p);
+  return rows?.[0]?.최신 ?? null;
+}
+
+export async function queryObservations(deps,
+  { source, breakdown, category, from, to, 최신만 = false }) {
   const where = ['source = ?', 'breakdown = ?'];
   const p = [source, breakdown];
   if (category) { where.push('category = ?'); p.push(category); }
-  if (from) { where.push('period >= ?'); p.push(from); }
-  if (to) { where.push('period <= ?'); p.push(to); }
+
+  if (최신만 && !from && !to) {
+    const 최신 = await 최신시점(deps, where, p);
+    if (!최신) return [];          // 관측이 아예 없다 — 지어내지 않는다
+    where.push('period = ?'); p.push(최신);
+  } else {
+    if (from) { where.push('period >= ?'); p.push(from); }
+    if (to) { where.push('period <= ?'); p.push(to); }
+  }
+
   return deps.db.all(
     `SELECT source, breakdown, category, period, value, unit, yoy, rse, rse_flag,
             released_at, release_url

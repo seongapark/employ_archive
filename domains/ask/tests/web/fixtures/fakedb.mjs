@@ -174,7 +174,19 @@ export function makeFakeDb(덮어쓰기 = {}) {
       // 모르는 표를 빈 배열로 돌려주면 "데이터가 없다" 와 구분되지 않는다 — 던진다.
       if (!name) throw new Error(`가짜 db 가 표를 못 찾았다: ${sql}`);
       const pred = 조건식(sql, params);
-      return 정렬(sql, pred ? T[name].filter(pred) : T[name]);
+      const rows = pred ? T[name].filter(pred) : T[name];
+
+      // SELECT MAX(col) AS alias — 집계는 **SQLite 처럼** 항상 한 행을 낸다.
+      // 맞는 행이 없으면 빈 배열이 아니라 값이 null 인 한 행이다. 대역이 여기서
+      // 빈 배열을 내면 "없다" 를 다르게 처리하는 구현도 통과해 버린다.
+      const agg = /^\s*SELECT\s+MAX\((\w+)\)\s+AS\s+(\S+)\s+FROM/i.exec(sql);
+      if (agg) {
+        const [, col, alias] = agg;
+        const vals = rows.map((r) => r[col]).filter((v) => v != null);
+        return [{ [alias]: vals.length ? vals.reduce((a, b) => (a > b ? a : b)) : null }];
+      }
+
+      return 정렬(sql, rows);
     },
   };
 }

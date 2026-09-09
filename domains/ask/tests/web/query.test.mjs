@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { derive, buildEvidence, numbersIn } from '../../worker/src/core/query.mjs';
+import { derive, buildEvidence, numbersIn, queryObservations } from '../../worker/src/core/query.mjs';
 
 const 관측 = [{ 기간: '2025S1', 값: 744.3 }, { 기간: '2025S2', 값: 727.4 }]; // 시계열
 const 횡단면관측 = [{ 기간: '2026-07', 값: 100 }, { 기간: '2026-07', 값: 300 }]; // 같은 기간, 여러 계열
@@ -115,4 +115,54 @@ test('numbersIn 은 시계열 관측에서 합계를 근거 집합에 넣지 않
   const e = buildEvidence({ 지표: 'X', compare_basis: '수준' }, 관측);
   const s = numbersIn([e]);
   assert.equal(s.has(1471.7), false);
+});
+
+// ── 기간을 안 주면 최신 시점 (실배포 화면 검증) ────────────────────────────
+// from/to 가 비면 필터가 아예 안 붙어 **전 기간이 통째로** 나왔다. "취업자 몇
+// 명이야" 에 5년치가 쏟아진다. 사람이 기간을 안 말하면 "지금" 을 묻는 것이다.
+
+const 넉줄 = [
+  { source: 'eaps', breakdown: 'total', category: null, period: '2026-06', value: 1, unit: '천명' },
+  { source: 'eaps', breakdown: 'total', category: null, period: '2026-07', value: 2, unit: '천명' },
+  { source: 'eaps', breakdown: 'total', category: null, period: '2026-08', value: 3, unit: '천명' },
+  { source: 'ei', breakdown: 'total', category: null, period: '2026-09', value: 9, unit: '천명' },
+];
+const db넉줄 = {
+  all: async (sql, p = []) => {
+    if (/FROM observation/.test(sql) && /MAX\(period\)/.test(sql)) {
+      const 대상 = 넉줄.filter((r) => r.source === p[0] && r.breakdown === p[1]);
+      return 대상.length ? [{ 최신: 대상.map((r) => r.period).sort().at(-1) }] : [];
+    }
+    let rows = 넉줄.filter((r) => r.source === p[0] && r.breakdown === p[1]);
+    const eq = sql.match(/period = \?/); const ge = sql.match(/period >= \?/);
+    if (eq) rows = rows.filter((r) => r.period === p[p.length - 1]);
+    else if (ge) rows = rows.filter((r) => r.period >= p[2] && r.period <= p[3]);
+    return rows.sort((a, b) => a.period.localeCompare(b.period));
+  },
+};
+
+test('기간을 안 주면 최신 한 건만 낸다', async () => {
+  const rows = await queryObservations({ db: db넉줄 },
+    { source: 'eaps', breakdown: 'total', category: null, from: '', to: '', 최신만: true });
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].period, '2026-08');
+});
+
+test('최신은 출처별로 따로 구한다 — 남의 최신을 빌려오지 않는다', async () => {
+  // ei 는 2026-09 까지 있고 eaps 는 2026-08 까지다. 전역 MAX 를 쓰면 eaps 가 빈손이 된다.
+  const rows = await queryObservations({ db: db넉줄 },
+    { source: 'ei', breakdown: 'total', category: null, from: '', to: '', 최신만: true });
+  assert.equal(rows[0].period, '2026-09');
+});
+
+test('기간을 주면 그대로 쓴다 — 기본값이 지정을 덮지 않는다', async () => {
+  const rows = await queryObservations({ db: db넉줄 },
+    { source: 'eaps', breakdown: 'total', category: null, from: '2026-06', to: '2026-07', 최신만: true });
+  assert.deepEqual(rows.map((r) => r.period), ['2026-06', '2026-07']);
+});
+
+test('관측이 아예 없으면 빈 배열이다 — 지어내지 않는다', async () => {
+  const rows = await queryObservations({ db: db넉줄 },
+    { source: 'est', breakdown: 'total', category: null, from: '', to: '', 최신만: true });
+  assert.deepEqual(rows, []);
 });

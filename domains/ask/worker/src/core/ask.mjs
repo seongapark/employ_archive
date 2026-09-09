@@ -185,14 +185,20 @@ async function 수치조회(deps, 슬롯, { 출처, 비교하한 } = {}) {
 
   if (breakdown) {
     for (const src of 대상) {
+      // 기간을 안 물었으면 **최신 한 시점**이다. 전 기간을 쏟으면 "몇 명이야" 에
+      // 대한 답이 아니다. 대신 무엇을 기준으로 답했는지 아래에서 한계로 밝힌다 —
+      // 조용히 고르는 것이 이 도구에서 가장 나쁜 실패다.
       const rows = await queryObservations(deps, {
         source: src, breakdown, category,
-        from: 슬롯.기간?.from, to: 슬롯.기간?.to,
+        from: 슬롯.기간?.from, to: 슬롯.기간?.to, 최신만: true,
       });
       if (!rows.length) {
         // 빈손을 조용히 넘기지 않는다
         한계.push(`${src}: 이 조건(${breakdown}${category ? `=${category}` : ''}${슬롯.기간?.from ? ` ${슬롯.기간.from}~${슬롯.기간.to}` : ''})의 관측이 아직 적재돼 있지 않다`);
         continue;
+      }
+      if (!슬롯.기간?.from && !슬롯.기간?.to) {
+        한계.push(`${src}: 기간을 지정하지 않아 최신 시점(${rows[rows.length - 1].period}) 기준으로 답했다`);
       }
       const 끝 = rows[rows.length - 1];
       const { compare_basis: 카탈로그기준, 근거: 기준근거 } = 비교기준(지표들, src, breakdown);

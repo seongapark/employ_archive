@@ -371,3 +371,41 @@ test('현상이 선언한 축의 일부만 물어도 고른다 — "청년 취�
   });
   assert.equal(r.현상?.id, '청년사무직감소');
 });
+
+// ── 기간 미지정 시 최신 시점 (실배포 화면 검증) ────────────────────────────
+test('수치조회에서 기간을 안 주면 최신 시점만 내고 그 사실을 밝힌다', async () => {
+  const db = makeFakeDb({ observation: [
+    { source: 'eaps', breakdown: 'age', category: '30-39', period: '2026-06',
+      value: 5300, unit: '천명', yoy: null, rse: null, rse_flag: null },
+    { source: 'eaps', breakdown: 'age', category: '30-39', period: '2026-07',
+      value: 5280, unit: '천명', yoy: null, rse: null, rse_flag: null },
+    { source: 'eaps', breakdown: 'age', category: '30-39', period: '2026-08',
+      value: 5310, unit: '천명', yoy: null, rse: null, rse_flag: null },
+  ] });
+  const r = await ask({ db }, { 유형: '수치조회',
+    슬롯: { 주제: '취업자수', 집단축: ['연령'], category: { 연령: '30-39' },
+            지역입도: '전국', 시간입도: '월', 기간: { from: '', to: '' }, 출처: ['eaps'] } });
+
+  const e = r.근거.find((x) => x.출처 === 'eaps');
+  assert.deepEqual(e.관측.map((o) => o.기간), ['2026-08']);
+  // 조용히 고르지 않는다 — 무엇을 기준으로 답했는지 말한다
+  assert.ok(r.한계.some((l) => l.includes('2026-08') && l.includes('최신')), r.한계.join(' | '));
+});
+
+test('기간을 주면 그 구간을 그대로 낸다', async () => {
+  const db = makeFakeDb({ observation: [
+    { source: 'eaps', breakdown: 'age', category: '30-39', period: '2026-06',
+      value: 5300, unit: '천명', yoy: null, rse: null, rse_flag: null },
+    { source: 'eaps', breakdown: 'age', category: '30-39', period: '2026-07',
+      value: 5280, unit: '천명', yoy: null, rse: null, rse_flag: null },
+    { source: 'eaps', breakdown: 'age', category: '30-39', period: '2026-08',
+      value: 5310, unit: '천명', yoy: null, rse: null, rse_flag: null },
+  ] });
+  const r = await ask({ db }, { 유형: '수치조회',
+    슬롯: { 주제: '취업자수', 집단축: ['연령'], category: { 연령: '30-39' },
+            지역입도: '전국', 시간입도: '월',
+            기간: { from: '2026-06', to: '2026-07' }, 출처: ['eaps'] } });
+  const e = r.근거.find((x) => x.출처 === 'eaps');
+  assert.deepEqual(e.관측.map((o) => o.기간), ['2026-06', '2026-07']);
+  assert.ok(!r.한계.some((l) => l.includes('최신')));
+});
