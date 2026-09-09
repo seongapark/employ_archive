@@ -117,10 +117,12 @@ OCR 로 읽어야 하고 회차당 1분 반쯤 걸린다 — 매일 도는 것�
 ```bash
 pip install -r requirements.txt
 python -m pytest                              # 파이썬 테스트 (네트워크 불필요)
-node --test "core/tests/*.mjs" "hub/tests/*.mjs" "domains/forecast/tests/web/*.mjs" "domains/employment/tests/web/*.mjs"   # 웹 테스트
+node --test "core/tests/*.mjs" "hub/tests/*.mjs" "domains/forecast/tests/web/*.mjs" "domains/employment/tests/web/*.mjs" "domains/reports/tests/web/*.mjs"   # 웹 테스트
 python -m tools.serve                         # 로컬 서버 (http://127.0.0.1:8642/)
 python -m domains.forecast.pipeline.collect   # 전망 수집 1회
 python -m domains.employment.pipeline.collect   # 고용동향 수집 1회 (KOSIS_API_KEY 필요)
+python -m domains.reports.pipeline.collect     # 연구보고서 수집 1회 (회차당 게시판별 40건 상한)
+python -m domains.reports.pipeline.build      # 키워드만 고치고 재판정 (재수집 없이 수십 초)
 ```
 
 웹앱은 `python -m tools.serve` 로 조립된 사이트를 그대로 띄운다. 앱 폴더의 `index.html`을

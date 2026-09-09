@@ -1,0 +1,151 @@
+{
+  "at": "2026-09-10T02:25:51+09:00",
+  "boards": {
+    "kdi-trends": {
+      "ok": true,
+      "parsed": 45,
+      "added": 40,
+      "details": 40,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 40
+    }
+  },
+  "unregistered": [],
+  "reports": 572,
+  "abstract_missing": {
+    "kdi": {
+      "경제동향": {
+        "total": 40,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "기타보고서": {
+        "total": 1,
+        "missing": 1,
+        "rate": 1.0
+      },
+      "연구보고서": {
+        "total": 16,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "KDI FOCUS": {
+        "total": 6,
+        "missing": 6,
+        "rate": 1.0
+      },
+      "현안분석": {
+        "total": 7,
+        "missing": 1,
+        "rate": 0.143
+      }
+    },
+    "kli": {
+      "연구보고서": {
+        "total": 60,
+        "missing": 60,
+        "rate": 1.0
+      },
+      "국제노동브리프": {
+        "total": 40,
+        "missing": 40,
+        "rate": 1.0
+      },
+      "노동리뷰": {
+        "total": 40,
+        "missing": 40,
+        "rate": 1.0
+      },
+      "고용노동브리프": {
+        "total": 11,
+        "missing": 11,
+        "rate": 1.0
+      },
+      "고용영향평가브리프": {
+        "total": 33,
+        "missing": 33,
+        "rate": 1.0
+      },
+      "임금정보브리프": {
+        "total": 40,
+        "missing": 40,
+        "rate": 1.0
+      },
+      "노동정책연구": {
+        "total": 22,
+        "missing": 22,
+        "rate": 1.0
+      },
+      "패널브리프": {
+        "total": 10,
+        "missing": 10,
+        "rate": 1.0
+      }
+    },
+    "keis": {
+      "고용이슈": {
+        "total": 21,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구사업보고서": {
+        "total": 40,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "고용동향브리프": {
+        "total": 40,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "지역산업과 고용": {
+        "total": 20,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "산업일자리 전환 지도": {
+        "total": 5,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "인력수급전망": {
+        "total": 38,
+        "missing": 38,
+        "rate": 1.0
+      }
+    },
+    "kiet": {
+      "i-KIET": {
+        "total": 12,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "월간 산업경제": {
+        "total": 9,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구자료": {
+        "total": 13,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구보고서": {
+        "total": 22,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "이슈페이퍼": {
+        "total": 13,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "정책자료": {
+        "total": 13,
+        "missing": 0,
+        "rate": 0.0
+      }
+    }
+  }
+}

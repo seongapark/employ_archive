@@ -1,0 +1,673 @@
+[
+  {
+    "id": "kdi-17839",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "우리나라 중산층의 현주소와 정책과제",
+    "authors": [
+      "이영욱"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=17839",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=fFMXP7go%2FgwSEcb2WOgLPg%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-17948",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "플랫폼 기업결합 심사 개선방향",
+    "authors": [
+      "조성익"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=17948",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=fRAG4c5s73gvbIsE87WuVA%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18001",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "길어지는 연금 공백기에 대한 대응방안",
+    "authors": [
+      "김도헌"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18001",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=V1Mhe2sBeo6jnZZ3MBb%2F9w%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18010",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "수요자 중심의 대학 구조개혁",
+    "authors": [
+      "고영선"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18010",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=Hj%2B81lBP0QZbvFGSJT7%2BGw%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18034",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "배출권거래제의 시장기능 개선 방안",
+    "authors": [
+      "윤여창"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 10,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18034",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=AGVr2htwqnZMS4FWaAc5Vw%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18063",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "플랫폼 종사자에 대한 사회적 보호 설계",
+    "authors": [
+      "한요셉"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18063",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=8pCC6vABUoFTIsUTylbPpw%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18092",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "전세보증금 반환보증제도 개선방안",
+    "authors": [
+      "문윤상"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 10,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18092",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=BcWefj5hhY6bL4NOr%2FKG7A%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18100",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "소득과 자산으로 진단한 노인빈곤과 정책방향",
+    "authors": [
+      "이승희"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18100",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=MVl5nJ903op%2Fqtv%2BWTeeRg%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18141",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "리쇼어링 기업의 특징과 투자의 결정요인",
+    "authors": [
+      "정성훈"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18141",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=lnRQ%2Fk%2FuIQaJn7RxU9ObeQ%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18149",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "OECD 연간근로시간 비교분석과 시사점",
+    "authors": [
+      "김민섭"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 10,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18149",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=nO1vk3hIAiPiBvbqtbRCGg%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18231",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "국민연금 구조개혁 방안",
+    "authors": [
+      "이강구",
+      "신승룡"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18231",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=uCwE%2Fc%2FB0qvUmTfcZAbBnw%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18232",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "더 많은 대기업 일자리가 필요하다",
+    "authors": [
+      "고영선"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 10,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18232",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=zEq7Sqkw2o9OGUApUjYmtg%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18297",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "중장년층 고용 불안정성 극복을 위한 노동시장 기능 회복 방안",
+    "authors": [
+      "한요셉"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18297",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=nC%2F%2B7ikMqUPY3BtWOn9usQ%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18306",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "여성의 경력단절 우려와 출산율 감소",
+    "authors": [
+      "조덕상",
+      "한정민"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18306",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=RQM44AGuRstK97yS88fVag%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18356",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "직무 분석을 통해 살펴본 중장년 노동시장의 현황과 개선 방안",
+    "authors": [
+      "김지연"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18356",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=bs0hyUUdxsq5qCus%2Bob81w%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18371",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "갈라파고스적 부동산PF, 근본적 구조개선 필요",
+    "authors": [
+      "황순주"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 16,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18371",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=NbAQC5FihZ6cU3zy9BAlXg%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18382",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "친환경차 보급정책 개선 방향",
+    "authors": [
+      "김현석"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18382",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=F2%2FjwNnvbqvv2LfJYiKAxg%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18410",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "온라인 플랫폼의 자사우대에 대한 경쟁정책 방향",
+    "authors": [
+      "김민정"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18410",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=vdoMC0z9C80Fvs9sakm%2FiQ%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18450",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "신종 금융상품의 고객자금 보호방안",
+    "authors": [
+      "황순주"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18450",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=jLjgXaxA7bPftstb4VLhbA%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18548",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "챔피언으로 가는 길: 중소·중견 기업 지원정책의 전환방안",
+    "authors": [
+      "김민호"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18548",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=%2F7RMZuMvQ86W26YF8MwoSg%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18631",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "기초연금 선정방식 개편 방향",
+    "authors": [
+      "김도헌",
+      "이승희"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18631",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=VXOzaTqOesS5NgkXtio%2Ftw%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18658",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "K-콘텐츠의 비상(飛上): 산업 특성과 성장 요인 분석",
+    "authors": [
+      "이진국"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18658",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=BYGlsXoMNU9pA%2BGA3ZPA4w%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18679",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "건강보험 지출 증가 요인과 시사점",
+    "authors": [
+      "권정현"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18679",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=L45hHz79hrbvanUS%2BC7Mzg%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18830",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "2010년대 이후 무역구조 변화와 경제안보에 대한 함의",
+    "authors": [
+      "정성훈"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18830",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=7Rl5BxZssn1TG9MckU%2B7nA%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18853",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "인구구조 변화가 가계부채에 미치는 영향",
+    "authors": [
+      "김미루"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18853",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=78AUhY2d9YwEFCsPHislEg%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18869",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "재생에너지 확대에 대응한 전력도매시장 구조 개선 방향",
+    "authors": [
+      "윤여창"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18869",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=esIp%2FEKnue2q9BLpMAsORQ%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18876",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "부동산 PF 자본확충의 효과와 제도개선 방안",
+    "authors": [
+      "황순주"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18876",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=QbQtpOwfiBehRC6qAS8Teg%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18911",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "온라인 플랫폼 거래상지위 남용행위 규제 개선 방향",
+    "authors": [
+      "조성익"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18911",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=orERR6pDsXiSyZAzP%2Bh8jw%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18976",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "증권사 건전성 규제 개선 방향",
+    "authors": [
+      "홍종수"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18976",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=3XUYX0242wg6jTkbSZKcUQ%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-18994",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "초단시간 노동의 증가 요인과 정책 제언",
+    "authors": [
+      "정수환"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 10,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18994",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=VJm0R1Si1mi87tsiZtTmXQ%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-19038",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "근로자 인지역량의 감소 요인과 개선방안",
+    "authors": [
+      "김민섭",
+      "박윤수"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=19038",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=kJhPmAueLu50Q1UNfnR%2Fjg%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-19046",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "수도권 집중은 왜 계속되는가: 인구분포 결정요인과 공간정책 함의",
+    "authors": [
+      "김선함"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=19046",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=oEB285g1obC432r9XKvs4g%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-19131",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "기업의 성공적 스케일업을 위한 정책 지원체계 재구축 방안",
+    "authors": [
+      "김민호"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=19131",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=nkiOWerKD41pIB%2BTjIDmjA%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-19161",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "노인돌봄서비스 인력의 전망과 정책방향",
+    "authors": [
+      "권정현"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=19161",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=ymwJ0BmhzYzLSBelZG44uA%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-19187",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "의무휴업일 평일 전환이 시사하는 유통정책의 전환 방향",
+    "authors": [
+      "이진국"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 12,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=19187",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=uK0esZSh9wy1TQhlvDGgEw%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-19221",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "온라인 유통의 성장과 유통시장 정책 개선 방향",
+    "authors": [
+      "이공"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": 11,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=19221",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=v%2FFewoXDv9jQIC8dTFJ8Aw%3D%3D",
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  },
+  {
+    "id": "kdi-19239",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "인기 검색어",
+    "authors": [
+      "임희현",
+      "정성훈"
+    ],
+    "published": "2026-05-13",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=19239",
+    "file_url": null,
+    "abstract": null,
+    "toc": [],
+    "collected_at": "2026-09-10T02:20:03+09:00"
+  }
+]
