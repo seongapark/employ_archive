@@ -100,7 +100,7 @@
    "list_url": "https://www.kdi.re.kr/research/monTrends",
    "page_url": "https://www.kdi.re.kr/research/monTrends?year={page}",
    "page_values": ["2026", "2025", "2024", "2023", "2022", "2021"],
-   "item_re": "monTrends\\?pub_no=(\\d+)", "filter": true, "collapse": true},
+   "list_style": "buttons", "item_re": "monTrends\\?pub_no=(\\d+)", "filter": true, "collapse": true},
   {"id": "kdi-etc", "org": "kdi", "name": "기타보고서", "series": "기타보고서",
    "list_url": "https://www.kdi.re.kr/research/etcReportList",
    "page_url": "https://www.kdi.re.kr/research/etcReportList?pg={page}",

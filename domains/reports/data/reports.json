@@ -1,5 +1,22 @@
 [
  {
+  "id": "kdi-19271",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2026년 9월",
+  "authors": [],
+  "published": "2026-09-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=19271",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-10299",
   "org": "kli",
   "board": "kli-research",
@@ -34,6 +51,23 @@
    "직업훈련",
    "고용보험",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-19252",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2026년 8월",
+  "authors": [],
+  "published": "2026-08-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=19252",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -466,6 +500,23 @@
   "matched": [
    "고용보험",
    "산업별고용"
+  ]
+ },
+ {
+  "id": "kdi-19236",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2026년 7월",
+  "authors": [],
+  "published": "2026-07-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=19236",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -1272,6 +1323,24 @@
   ]
  },
  {
+  "id": "kdi-19202",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2026년 6월",
+  "authors": [],
+  "published": "2026-06-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=19202",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "노사관계"
+  ]
+ },
+ {
   "id": "keis-11312",
   "org": "keis",
   "board": "keis-research",
@@ -1734,6 +1803,23 @@
   ]
  },
  {
+  "id": "kdi-19181",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2026년 5월",
+  "authors": [],
+  "published": "2026-05-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=19181",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "keis-11279",
   "org": "keis",
   "board": "keis-issue",
@@ -1788,6 +1874,26 @@
   "employment": true,
   "matched": [
    "임금"
+  ]
+ },
+ {
+  "id": "kdi-e18798",
+  "org": "kdi",
+  "board": "kdi-etc",
+  "series": "기타보고서",
+  "title": "플랫폼 기반 산업의 경쟁현황 분석 및 웹툰산업에서의 영향 연구",
+  "authors": [
+   "김정욱",
+   "이미연"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 65,
+  "landing_url": "https://www.kdi.re.kr/research/reportEtcView?pub_no=18798",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=Q2FLMBLaZPmYNaQ2warcdg%3D%3D",
+  "employment": true,
+  "matched": [
+   "고용형태"
   ]
  },
  {
@@ -2126,6 +2232,121 @@
   ]
  },
  {
+  "id": "kdi-18356",
+  "org": "kdi",
+  "board": "kdi-focus",
+  "series": "KDI FOCUS",
+  "title": "직무 분석을 통해 살펴본 중장년 노동시장의 현황과 개선 방안",
+  "authors": [
+   "김지연"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 11,
+  "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18356",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=bs0hyUUdxsq5qCus%2Bob81w%3D%3D",
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18306",
+  "org": "kdi",
+  "board": "kdi-focus",
+  "series": "KDI FOCUS",
+  "title": "여성의 경력단절 우려와 출산율 감소",
+  "authors": [
+   "조덕상",
+   "한정민"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 12,
+  "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18306",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=RQM44AGuRstK97yS88fVag%3D%3D",
+  "employment": true,
+  "matched": [
+   "여성고용"
+  ]
+ },
+ {
+  "id": "kdi-18297",
+  "org": "kdi",
+  "board": "kdi-focus",
+  "series": "KDI FOCUS",
+  "title": "중장년층 고용 불안정성 극복을 위한 노동시장 기능 회복 방안",
+  "authors": [
+   "한요셉"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 11,
+  "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18297",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=nC%2F%2B7ikMqUPY3BtWOn9usQ%3D%3D",
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18232",
+  "org": "kdi",
+  "board": "kdi-focus",
+  "series": "KDI FOCUS",
+  "title": "더 많은 대기업 일자리가 필요하다",
+  "authors": [
+   "고영선"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 10,
+  "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18232",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=zEq7Sqkw2o9OGUApUjYmtg%3D%3D",
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18149",
+  "org": "kdi",
+  "board": "kdi-focus",
+  "series": "KDI FOCUS",
+  "title": "OECD 연간근로시간 비교분석과 시사점",
+  "authors": [
+   "김민섭"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 10,
+  "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18149",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=nO1vk3hIAiPiBvbqtbRCGg%3D%3D",
+  "employment": true,
+  "matched": [
+   "근로시간"
+  ]
+ },
+ {
+  "id": "kdi-18063",
+  "org": "kdi",
+  "board": "kdi-focus",
+  "series": "KDI FOCUS",
+  "title": "플랫폼 종사자에 대한 사회적 보호 설계",
+  "authors": [
+   "한요셉"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 11,
+  "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=18063",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=8pCC6vABUoFTIsUTylbPpw%3D%3D",
+  "employment": true,
+  "matched": [
+   "고용형태"
+  ]
+ },
+ {
   "id": "kli-10284",
   "org": "kli",
   "board": "kli-review",
@@ -2181,6 +2402,23 @@
    "고용보험",
    "지역고용",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-19151",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2026년 4월",
+  "authors": [],
+  "published": "2026-04-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=19151",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -2283,6 +2521,23 @@
   "matched": [
    "임금",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-19115",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2026년 3월",
+  "authors": [],
+  "published": "2026-03-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=19115",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -2434,6 +2689,23 @@
   ]
  },
  {
+  "id": "kdi-19073",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2026년 2월",
+  "authors": [],
+  "published": "2026-02-28",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=19073",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "keis-s38",
   "org": "keis",
   "board": "keis-supply",
@@ -2549,6 +2821,24 @@
   "matched": [
    "고령자",
    "노사관계",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-19028",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2026년 1월",
+  "authors": [],
+  "published": "2026-01-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=19028",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
    "일자리정책"
   ]
  },
@@ -4176,6 +4466,23 @@
   ]
  },
  {
+  "id": "kdi-18959",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 12월",
+  "authors": [],
+  "published": "2025-12-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18959",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-10235",
   "org": "kli",
   "board": "kli-research",
@@ -4510,6 +4817,23 @@
   ]
  },
  {
+  "id": "kdi-18926",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 11월",
+  "authors": [],
+  "published": "2025-11-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18926",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-10218",
   "org": "kli",
   "board": "kli-research",
@@ -4615,6 +4939,25 @@
   ]
  },
  {
+  "id": "kdi-an3723",
+  "org": "kdi",
+  "board": "kdi-analysis",
+  "series": "현안분석",
+  "title": "최근 낮은 실업률의 원인과 시사점",
+  "authors": [
+   "김지연"
+  ],
+  "published": "2025-11-06",
+  "date_precision": "day",
+  "pages": 12,
+  "landing_url": "https://www.kdi.re.kr/research/analysisView?art_no=3723",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=UGyjXLMhJ9k0xW6ZlL2FPQ%3D%3D",
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kiet-rd157",
   "org": "kiet",
   "board": "kiet-redata",
@@ -4632,6 +4975,23 @@
   "employment": true,
   "matched": [
    "인력수급"
+  ]
+ },
+ {
+  "id": "kdi-18903",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 10월",
+  "authors": [],
+  "published": "2025-10-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18903",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -4798,6 +5158,23 @@
   ]
  },
  {
+  "id": "kdi-18874",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 9월",
+  "authors": [],
+  "published": "2025-09-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18874",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-10210",
   "org": "kli",
   "board": "kli-eia",
@@ -4922,6 +5299,23 @@
    "여성고용",
    "근로시간",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18849",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 8월",
+  "authors": [],
+  "published": "2025-08-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18849",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -5138,6 +5532,23 @@
   ]
  },
  {
+  "id": "kdi-18837",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 7월",
+  "authors": [],
+  "published": "2025-07-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18837",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-10202",
   "org": "kli",
   "board": "kli-research",
@@ -5335,6 +5746,23 @@
   ]
  },
  {
+  "id": "kdi-18813",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 6월",
+  "authors": [],
+  "published": "2025-06-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18813",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-10196",
   "org": "kli",
   "board": "kli-wage",
@@ -5410,6 +5838,23 @@
    "임금",
    "지역고용",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18785",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 5월",
+  "authors": [],
+  "published": "2025-05-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18785",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -5589,6 +6034,23 @@
    "임금",
    "일자리정책",
    "노동전환"
+  ]
+ },
+ {
+  "id": "kdi-18673",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 4월",
+  "authors": [],
+  "published": "2025-04-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18673",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -5773,6 +6235,24 @@
   ]
  },
  {
+  "id": "kdi-18640",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 3월",
+  "authors": [],
+  "published": "2025-03-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18640",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "산업별고용"
+  ]
+ },
+ {
   "id": "kli-10177",
   "org": "kli",
   "board": "kli-policy",
@@ -5877,6 +6357,23 @@
   ]
  },
  {
+  "id": "kdi-18616",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 2월",
+  "authors": [],
+  "published": "2025-02-28",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18616",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kiet-rd135",
   "org": "kiet",
   "board": "kiet-redata",
@@ -5956,6 +6453,23 @@
    "직업훈련",
    "고용보험",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18567",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2025년 1월",
+  "authors": [],
+  "published": "2025-01-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18567",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -6102,6 +6616,23 @@
   "matched": [
    "외국인력",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18531",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 12월",
+  "authors": [],
+  "published": "2024-12-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18531",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -6903,6 +7434,23 @@
   ]
  },
  {
+  "id": "kdi-18487",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 11월",
+  "authors": [],
+  "published": "2024-11-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18487",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-10113",
   "org": "kli",
   "board": "kli-eia",
@@ -7015,6 +7563,23 @@
    "임금",
    "고용보험",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18466",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 10월",
+  "authors": [],
+  "published": "2024-10-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18466",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -7158,6 +7723,23 @@
   ]
  },
  {
+  "id": "kdi-18445",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 9월",
+  "authors": [],
+  "published": "2024-09-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18445",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-10098",
   "org": "kli",
   "board": "kli-wage",
@@ -7233,6 +7815,23 @@
    "고용보험",
    "산업별고용",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18405",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 8월",
+  "authors": [],
+  "published": "2024-08-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18405",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -7421,6 +8020,23 @@
   ]
  },
  {
+  "id": "kdi-18388",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 7월",
+  "authors": [],
+  "published": "2024-07-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18388",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-10089",
   "org": "kli",
   "board": "kli-panel",
@@ -7532,6 +8148,23 @@
    "청년고용",
    "임금",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18358",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 6월",
+  "authors": [],
+  "published": "2024-06-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18358",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -7667,6 +8300,24 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=BE8C1F0CD6C81FBE49258B460001C55D_22.pdf&fileNameOrg=노동리뷰_2024년 6월호_web.pdf&filePath1=jsphome/DATA/pblctList/issue/BE8C1F0CD6C81FBE49258B460001C55D",
   "employment": true,
   "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18345",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 5월",
+  "authors": [],
+  "published": "2024-05-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18345",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
    "일자리정책"
   ]
  },
@@ -7835,6 +8486,23 @@
   ]
  },
  {
+  "id": "kdi-18316",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 4월",
+  "authors": [],
+  "published": "2024-04-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18316",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-10065",
   "org": "kli",
   "board": "kli-eia",
@@ -7893,6 +8561,23 @@
   "matched": [
    "노사관계",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18276",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 3월",
+  "authors": [],
+  "published": "2024-03-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18276",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -7974,6 +8659,23 @@
    "고령자",
    "고용형태",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18213",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 2월",
+  "authors": [],
+  "published": "2024-02-29",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18213",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -8060,6 +8762,23 @@
   "employment": true,
   "matched": [
    "근로시간"
+  ]
+ },
+ {
+  "id": "kdi-18167",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2024년 1월",
+  "authors": [],
+  "published": "2024-01-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18167",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -8356,6 +9075,25 @@
   ]
  },
  {
+  "id": "kdi-an3523",
+  "org": "kdi",
+  "board": "kdi-analysis",
+  "series": "현안분석",
+  "title": "중국 건설업 위축의 영향과 중장기 무역구조 변화의 시사점",
+  "authors": [
+   "정규철"
+  ],
+  "published": "2023-11-08",
+  "date_precision": "day",
+  "pages": 8,
+  "landing_url": "https://www.kdi.re.kr/research/analysisView?art_no=3523",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=2uf5Q0fAIG01mTkxDeHOKQ%3D%3D",
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-9967",
   "org": "kli",
   "board": "kli-wage",
@@ -8372,6 +9110,26 @@
   "employment": true,
   "matched": [
    "임금"
+  ]
+ },
+ {
+  "id": "kdi-an3519",
+  "org": "kdi",
+  "board": "kdi-analysis",
+  "series": "현안분석",
+  "title": "30대 여성 경제활동참가율 상승의 배경과 시사점",
+  "authors": [
+   "김지연"
+  ],
+  "published": "2023-10-30",
+  "date_precision": "day",
+  "pages": 9,
+  "landing_url": "https://www.kdi.re.kr/research/analysisView?art_no=3519",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=hXwKToh7E9uBiHQN%2FutH%2BQ%3D%3D",
+  "employment": true,
+  "matched": [
+   "근로시간",
+   "일자리정책"
   ]
  },
  {
@@ -8689,6 +9447,23 @@
   ]
  },
  {
+  "id": "kdi-18028",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2023년 7월",
+  "authors": [],
+  "published": "2023-07-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18028",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-9945",
   "org": "kli",
   "board": "kli-wage",
@@ -8864,6 +9639,24 @@
   ]
  },
  {
+  "id": "kdi-18006",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2023년 6월",
+  "authors": [],
+  "published": "2023-06-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=18006",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-9912",
   "org": "kli",
   "board": "kli-intl",
@@ -8941,6 +9734,23 @@
    "여성고용",
    "임금",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-17941",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2023년 5월",
+  "authors": [],
+  "published": "2023-05-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=17941",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -9079,6 +9889,23 @@
   ]
  },
  {
+  "id": "kdi-17916",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2023년 4월",
+  "authors": [],
+  "published": "2023-04-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=17916",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-9847",
   "org": "kli",
   "board": "kli-intl",
@@ -9117,6 +9944,23 @@
    "지역고용",
    "일자리정책",
    "노동전환"
+  ]
+ },
+ {
+  "id": "kdi-17882",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2023년 3월",
+  "authors": [],
+  "published": "2023-03-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=17882",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -9201,6 +10045,23 @@
   ]
  },
  {
+  "id": "kdi-17844",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2023년 2월",
+  "authors": [],
+  "published": "2023-02-28",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=17844",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "kli-9819",
   "org": "kli",
   "board": "kli-intl",
@@ -9217,6 +10078,23 @@
   "employment": true,
   "matched": [
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-17814",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2023년 1월",
+  "authors": [],
+  "published": "2023-01-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=17814",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -9435,6 +10313,29 @@
   ]
  },
  {
+  "id": "kdi-an3421",
+  "org": "kdi",
+  "board": "kdi-analysis",
+  "series": "현안분석",
+  "title": "장기경제성장률 전망과 시사점",
+  "authors": [
+   "김지연",
+   "정규철",
+   "허진욱"
+  ],
+  "published": "2022-11-08",
+  "date_precision": "day",
+  "pages": 8,
+  "landing_url": "https://www.kdi.re.kr/research/analysisView?art_no=3421",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=9B7A3f3P8VbKtqFwyD2Xlg%3D%3D",
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "임금",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kiet-pd351",
   "org": "kiet",
   "board": "kiet-podata",
@@ -9451,6 +10352,27 @@
   "employment": true,
   "matched": [
    "직업훈련",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kdi-an3420",
+  "org": "kdi",
+  "board": "kdi-analysis",
+  "series": "현안분석",
+  "title": "최근 취업자 수 증가세에 대한 평가 및 향후 전망",
+  "authors": [
+   "김지연"
+  ],
+  "published": "2022-11-03",
+  "date_precision": "day",
+  "pages": 8,
+  "landing_url": "https://www.kdi.re.kr/research/analysisView?art_no=3420",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=k8YAGZKlwvXMdqCyOI3WDA%3D%3D",
+  "employment": true,
+  "matched": [
+   "산업별고용",
+   "일자리정책",
    "인력수급"
   ]
  },
@@ -10444,6 +11366,28 @@
   ]
  },
  {
+  "id": "kdi-an3315",
+  "org": "kdi",
+  "board": "kdi-analysis",
+  "series": "현안분석",
+  "title": "코로나 위기가 초래한 고용구조 변화와 향후 전망",
+  "authors": [
+   "엄상민",
+   "정규철"
+  ],
+  "published": "2021-11-11",
+  "date_precision": "day",
+  "pages": 9,
+  "landing_url": "https://www.kdi.re.kr/research/analysisView?art_no=3315",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=DgNwO597D6wrIL6CFdtNSw%3D%3D",
+  "employment": true,
+  "matched": [
+   "근로시간",
+   "직업훈련",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-9626",
   "org": "kli",
   "board": "kli-eia",
@@ -10725,6 +11669,26 @@
   "employment": true,
   "matched": [
    "산업별고용",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-an3265",
+  "org": "kdi",
+  "board": "kdi-analysis",
+  "series": "현안분석",
+  "title": "코로나19 고용충격의 성별 격차와 시사점",
+  "authors": [
+   "김지연"
+  ],
+  "published": "2021-05-13",
+  "date_precision": "day",
+  "pages": 8,
+  "landing_url": "https://www.kdi.re.kr/research/analysisView?art_no=3265",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=N%2FAuB9CjQzm%2B64%2BfxkwLxQ%3D%3D",
+  "employment": true,
+  "matched": [
+   "여성고용",
    "일자리정책"
   ]
  },

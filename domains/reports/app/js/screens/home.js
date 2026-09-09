@@ -118,7 +118,7 @@ function wire(el, ctx) {
       state.expanded = state.expanded || new Set();
       if (state.expanded.has(id)) state.expanded.delete(id);
       else state.expanded.add(id);
-      ctx.rerender();
+      ctx.rerender({ keepScroll: true });
     });
   });
 }

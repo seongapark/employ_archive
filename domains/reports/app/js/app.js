@@ -75,9 +75,13 @@ async function start() {
     const fn = (screens[ctx.route.name] || screens.home).render;
     const active = document.activeElement;
     const caret = active && active.id === 'q' ? active.selectionStart : null;
-    if (!opts.keepFocus) screenEl.scrollTop = 0;
+    // 접힌 묶음을 펼치는 것은 화면을 바꾸는 게 아니라 보고 있던 자리를 여는
+    // 것이다. 맨 위로 튕기면 572줄 목록에서 접기가 쓸모없어진다.
+    const keptScroll = screenEl.scrollTop;
+    if (!opts.keepFocus && !opts.keepScroll) screenEl.scrollTop = 0;
     screenEl.innerHTML = '';
     fn(screenEl, ctx);
+    if (opts.keepScroll) screenEl.scrollTop = keptScroll;
     if (opts.keepFocus) {
       const input = screenEl.querySelector('#q');
       if (input) {

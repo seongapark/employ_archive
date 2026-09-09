@@ -37,6 +37,8 @@ class Board(BaseModel):
     # 게시판마다 번호 공간이 다르다(report_no / art_no / paper_no). 접두어가
     # 없으면 다른 게시판의 다른 보고서가 같은 id 를 갖는다.
     id_prefix: str = ''
+    # 항목이 앵커가 아니라 버튼인 게시판(KDI 경제동향)의 목록 모양.
+    list_style: str = 'list'
     filter: bool = False
     enabled: bool = True
     collapse: bool = False

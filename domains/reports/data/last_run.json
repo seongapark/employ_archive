@@ -1,9 +1,9 @@
 {
-  "at": "2026-09-10T02:20:01+09:00",
+  "at": "2026-09-10T02:25:51+09:00",
   "boards": {
-    "kiet-economy": {
+    "kdi-trends": {
       "ok": true,
-      "parsed": 60,
+      "parsed": 45,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
@@ -12,8 +12,35 @@
     }
   },
   "unregistered": [],
-  "reports": 518,
+  "reports": 572,
   "abstract_missing": {
+    "kdi": {
+      "경제동향": {
+        "total": 40,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "기타보고서": {
+        "total": 1,
+        "missing": 1,
+        "rate": 1.0
+      },
+      "연구보고서": {
+        "total": 16,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "KDI FOCUS": {
+        "total": 6,
+        "missing": 6,
+        "rate": 1.0
+      },
+      "현안분석": {
+        "total": 7,
+        "missing": 1,
+        "rate": 0.143
+      }
+    },
     "kli": {
       "연구보고서": {
         "total": 60,
@@ -116,13 +143,6 @@
       },
       "정책자료": {
         "total": 13,
-        "missing": 0,
-        "rate": 0.0
-      }
-    },
-    "kdi": {
-      "연구보고서": {
-        "total": 16,
         "missing": 0,
         "rate": 0.0
       }
