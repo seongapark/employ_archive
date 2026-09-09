@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-09-09T16:45:37.711526+09:00",
+  "run_at": "2026-09-09T22:17:29.263057+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -32,11 +32,13 @@
       "added": 0
     },
     "keis": {
-      "ok": true,
-      "fetched": 9,
+      "ok": false,
+      "fetched": 0,
       "added": 0
     }
   },
   "conflicts": [],
-  "errors": []
+  "errors": [
+    "keis: Timeout: Failed to perform, curl: (28) Connection timed out after 120001 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
+  ]
 }
