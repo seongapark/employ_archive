@@ -1,9 +1,9 @@
 {
-  "run_at": "2026-09-09T22:17:34.144160+09:00",
+  "run_at": "2026-09-09T23:34:00.522158+09:00",
   "collectors": {
     "eaps": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 784,
       "added": 0,
       "updated": 0,
       "rejected": 0
@@ -24,9 +24,7 @@
     }
   },
   "conflicts": [],
-  "errors": [
-    "eaps: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
-  ],
+  "errors": [],
   "releases": {
     "eaps": {
       "months": 40,
