@@ -122,7 +122,14 @@ export function makeFakeDb(덮어쓰기 = {}) {
     })),
     capability_limit: cap.limits,
     source_conflict: j('conflicts.json'),
-    phenomenon: ont.phenomena,
+    // 집단축은 D1 에서 **TEXT** 다 — 정본 JSON 은 객체로 들고 있으므로 여기서
+    // 문자열로 만든다. 안 하면 대역이 실물과 달라져, 객체를 그냥 읽는 구현도
+    // 통과해 버린다(같은 함정에 이미 두 번 당했다: 가짜 KV 의 String(), 손으로
+    // 적은 어휘).
+    phenomenon: ont.phenomena.map((p) => ({
+      ...p,
+      집단축: p.집단축 == null ? null : JSON.stringify(p.집단축),
+    })),
     hypothesis: ont.hypotheses.map((h) => ({
       ...h,
       대립가설: JSON.stringify(h.대립가설),

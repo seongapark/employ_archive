@@ -51,7 +51,27 @@ export const ANSWER_SCHEMA = {
 
 // Task 0 실측 — 이 정의 블록 하나가 유형 정확도를 1/5 → 6/6 으로 올렸다.
 // 같은 모델·같은 스키마에서 프롬프트만 바꾼 결과이므로 줄이지 말 것.
-const SYS_CLASSIFY = `한국 고용통계 질문을 분해만 한다. 답하지 않는다.
+// **오늘을 프롬프트에 심는다.** 없으면 LLM 은 학습 시점을 현재로 가정한다 — 실배포
+// 화면에서 "8월" 이 2023-08 로, "내년" 이 2024 로 풀려 2027년 전망 11건이 D1 에
+// 있는데도 못 꺼냈다. 하드코딩하지 않고 호출 때마다 계산한다(워커 isolate 는 오래
+// 산다 — 상수로 굳히면 배포일에 멈춘 달력을 쓰게 된다).
+//
+// **한국 시각으로 읽는다.** 워커는 UTC 로 도는데 질문하는 사람은 KST 로 산다.
+// UTC 로 읽으면 매달 마지막 날 밤 9시간 동안 "이번 달" 이 한 달 밀린다.
+const KST = (d) => new Date(d.getTime() + 9 * 60 * 60 * 1000);
+const YM = (d) => `${d.getUTCFullYear()}-${String(d.getUTCMonth() + 1).padStart(2, '0')}`;
+
+export function sysClassify(오늘 = new Date()) {
+  const k = KST(오늘);
+  const 연 = k.getUTCFullYear();
+  return `오늘: ${YM(k)} (한국 시각)
+시점 해석 — 이 날짜를 기준으로 푼다. 학습 시점을 현재로 쓰지 않는다.
+- 올해=${연}, 내년=${연 + 1}, 작년=${연 - 1}
+- 연도 없는 월은 오늘 기준 **가장 최근에 지난 그 달**이다.
+  오늘이 ${YM(k)} 이면 "8월"은 ${연}-08, 아직 오지 않은 달은 작년 것이다.
+- "전망"은 올해(${연}) 또는 내년(${연 + 1})이며, 명시가 없으면 **내년(${연 + 1})**이다.
+
+한국 고용통계 질문을 분해만 한다. 답하지 않는다.
 유형 정의:
 - 수치조회: 특정 시점·집단의 값을 묻는다 ("2026년 7월 30대 취업자 몇 명")
 - 출처비교: 두 통계의 숫자가 왜 다른지 묻는다 ("경활과 행정통계는 왜 다른가")
@@ -77,6 +97,7 @@ const SYS_CLASSIFY = `한국 고용통계 질문을 분해만 한다. 답하지 
   예) "경활이랑 고용행정통계는 왜 달라" → ["eaps","ei"]
   통계 이름이 안 나오면 **빈 배열**. 기관 이름을 지어내지 않는다.
 - 확신도: 0과 1 사이.`;
+}
 const SYS_COMPOSE =
   '주어진 근거 묶음 안의 값만 인용해 한국어로 답한다. ' +
   '근거에 없는 수치를 절대 만들지 않고, 계산도 하지 않는다(파생값은 이미 들어 있다). ' +
@@ -85,7 +106,7 @@ const SYS_COMPOSE =
 // baseUrl 을 주입으로 받는 이유: 공급자를 갈아끼울 때 코드가 아니라 설정만 바뀌게 한다.
 // 실제로 한 번 갈아끼웠다(OpenRouter → OpenAI). 요청·응답 형식이 같은 OpenAI 호환
 // 서비스면 wrangler.jsonc 의 ASK_API_BASE 한 줄로 옮겨갈 수 있다.
-export function makeLlm({ apiKey, model, baseUrl, fetch: f = fetch }) {
+export function makeLlm({ apiKey, model, baseUrl, fetch: f = fetch, now = () => new Date() }) {
   async function once(system, user, schema, name) {
     const res = await f(`${baseUrl}/chat/completions`, {
       method: 'POST',
@@ -110,7 +131,8 @@ export function makeLlm({ apiKey, model, baseUrl, fetch: f = fetch }) {
     catch { return await once(system, user, schema, name); }
   }
   return {
-    classify: (질문) => call(SYS_CLASSIFY, 질문, SLOT_SCHEMA, 'slots'),
+    // now() 를 **호출 때마다** 부른다 — isolate 하나가 며칠 살아도 달력이 안 굳는다.
+    classify: (질문) => call(sysClassify(now()), 질문, SLOT_SCHEMA, 'slots'),
     compose: (유형, 카드) =>
       call(SYS_COMPOSE,
            `유형: ${유형}\n근거 묶음(JSON):\n${JSON.stringify(카드, null, 1)}`,

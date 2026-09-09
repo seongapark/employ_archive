@@ -4,8 +4,11 @@ from pathlib import Path
 
 from tools.d1_sync import REPO, COLUMNS, KEYS, build_sql, collect, flatten_releases, sql_literal
 
-MIGRATION = (Path(__file__).resolve().parents[2]
-             / "domains/ask/worker/migrations/0001_init.sql")
+# **마이그레이션 전부**를 읽는다. 0001 하나만 읽으면, ALTER TABLE 로 늘린 컬럼이
+# COLUMNS 에 들어온 순간 이 불변식이 거짓 실패를 내고(0002 에서 실제로 그랬다),
+# 반대로 컬럼을 늘리고 COLUMNS 를 안 고치면 아무도 안 잡는다.
+MIGRATIONS_DIR = (Path(__file__).resolve().parents[2]
+                  / "domains/ask/worker/migrations")
 
 
 def test_string_literal_escapes_single_quote():
@@ -125,7 +128,10 @@ def schema_columns() -> dict[str, list[str]]:
     스킵됐었다). 주석 제거를 빼먹으면 이 테스트가 "통과"는 하되 아무것도 안 잡는
     가장 위험한 실패로 이어지므로, 아래 표 개수 단언으로 그 경우를 막는다.
     """
-    sql = re.sub(r"--[^\n]*", "", MIGRATION.read_text(encoding="utf-8"))
+    sql = "\n".join(
+        re.sub(r"--[^\n]*", "", f.read_text(encoding="utf-8"))
+        for f in sorted(MIGRATIONS_DIR.glob("*.sql"))
+    )
     out: dict[str, list[str]] = {}
     for m in re.finditer(r"CREATE TABLE (\w+)\s*\((.*?)\n\);", sql, re.S):
         table, body = m.group(1), m.group(2)
@@ -136,6 +142,10 @@ def schema_columns() -> dict[str, list[str]]:
                 continue
             cols.append(part.split()[0])
         out[table] = cols
+    # ALTER TABLE 로 늘어난 컬럼도 스키마의 일부다 — 마이그레이션 순서대로 뒤에 붙는다.
+    for t, c in re.findall(r"ALTER TABLE (\w+)\s+ADD COLUMN\s+(\w+)", sql):
+        if t in out and c not in out[t]:
+            out[t].append(c)
     return out
 
 
