@@ -1,0 +1,1726 @@
+
+
+
+
+
+
+
+
+
+
+
+<script>
+	sessionStorage.setItem("contextPath", "");
+</script>
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="_csrf_parameter" content="_csrf" /><meta name="_csrf_header" content="X-XSRF-TOKEN" /><meta name="_csrf" content="200ea231-c403-4815-a97c-905751e8f317" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,user-scalable=yes" />
+
+<meta name="title" content="전체 보고서 | 연구보고서 | 발간자료 : 한국노동연구원" />
+<meta name="description" content="한국노동연구원,전체 보고서 | 연구보고서 | 발간자료" />
+<meta name="keyword" content="kli" />
+<meta name="author" content="한국노동연구원" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="한국노동연구원" />
+<meta property="og:title" content="전체 보고서 | 연구보고서 | 발간자료 : 한국노동연구원" />
+<meta property="og:url" content="https://www.kli.re.kr//kli/rschRptpList.es?mid=a10102060000" />
+<meta property="og:description" content="한국노동연구원" />
+
+<title>전체 보고서 | 연구보고서 | 발간자료 : 한국노동연구원</title>
+
+<!-- 공통 CSS -->
+<link rel="stylesheet" href="/css/default.css" />
+<link rel="stylesheet" href="/jquery/css/swiper-bundle.min.css" />	
+<link rel="stylesheet" href="/kli/css/layout.css" />
+<link rel="stylesheet" href="/kli/css/layout_respond.css" />
+
+<!-- 서브 CSS -->
+    
+    <link rel="stylesheet" href="/kli/css/sub.css" />
+    <link rel="stylesheet" href="/kli/css/sub_respond.css" />
+    <link rel="stylesheet" href="/kli/css/sub_es.css" />
+    <link rel="stylesheet" href="/kli/css/sub01.css" />
+    
+
+
+<!-- 공통 JS -->
+<script src="/jquery/js/jquery-3.7.1.min.js"></script>
+<script src="/js/global.js"></script>
+<script src="/jquery/js/swiper-bundle.min.js"></script>
+
+<!-- 서브 JS -->    
+    <script src="/ease_src/sEditor/js/HuskyEZCreator.js" charset="UTF-8"></script>
+    
+    
+
+
+<!-- VODA -->
+<script type="text/javascript">
+    // 30분 동안 반응 없을 경우 로그아웃
+    $(document).ready(function () {
+        
+    });
+
+    function accessTimeOut(duration) {
+        var timer = duration * 3600;
+        var hours, minutes, seconds;
+
+        var interval = setInterval(function () {
+            hours = parseInt(timer / 3600, 10);
+            minutes = parseInt(timer / 60 % 60, 10);
+            seconds = parseInt(timer % 60, 10);
+
+            hours = hours < 10 ? "0" + hours : hours;
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            $('#divClock').text(minutes + ":" + seconds);
+
+            if (--timer < 0) {
+                timer = 0;
+                alert("안전을 위해 30분 동안 반응이 없어서 자동 로그아웃 됩니다.");
+                top.location.href = "/logout.es";
+                clearInterval(interval);
+            }
+        }, 1000);
+    }
+</script>
+</head>
+<body>
+
+<p id="skip_nav">
+	<a href="#contents">본문으로 바로가기</a>
+</p>
+
+<div id="hiddenLayer" style="display:none"></div>
+<div class="mw" id="mw_temp" style="display:none;"></div>
+
+<div id="wrap">
+	
+	
+
+	
+	<header id="header">
+		<div class="header_wrap">
+			
+
+
+
+<h1 id="logo"><a href="/kli/" ><span class="sr_only">한국노동연구원</span></a></h1>
+
+<div id="hnb">
+    <div class="hnb1">
+        <a href="javascript:;" class="label">사이트 바로가기</a>
+
+        <ul class="list">
+            <li class="active"><a href="/kli">한국노동연구원</a></li>
+            <li><a href="/eia">고용영향평가센터</a></li>
+            <li><a href="/klips">한국노동패널조사</a></li>
+            <li><a href="/wps">사업체패널조사</a></li>
+            <li><a href="/menu.es?mid=a10507010000">노사관계최고지도자과정</a></li>
+            <li><a href="https://dl.kli.re.kr/" target="_blank" title="새창 열림" rel="noopener noreferrer">전자도서관</a></li>
+        </ul>
+    </div>
+
+    <ul class="hnb2">
+        <li><a href="/menu.es?mid=a10702030000">웹진구독신청</a></li>
+        
+            
+            
+                <li><a href="/login_search.es?sid=a1">로그인</a></li>
+                <li><a href="/menu.es?mid=a10711000000">회원가입</a></li>
+            
+        
+        <li><a href="/kli/cartList.es?mid=a10803000000">장바구니</a></li>
+        <li><a href="/kli_eng">EN</a></li>
+    </ul>
+    
+</div>
+
+<div id="search">
+    <a href="javascript:;" class="control open">검색 레이어 열기</a>
+
+    <div class="group">
+        <div class="inner">
+            <h2 class="title_sch">Search</h2>
+            <p class="desc">한국노동연구원에 궁금한 점을 검색해보세요.</p>
+
+            <a href="javascript:;" class="control close">검색 레이어 닫기</a>
+            
+            <div class="form">
+                <form action="/aivorySearch">
+                    <input type="hidden" id="mid" name="mid" value="a10900000000">
+                    <input type="text" placeholder="검색어를 입력하세요." class="search_keyword" id="keyword" name="keyword" title="검색"/>
+                    <button type="submit" class="sch_btn"><img src="/kli/img/main/sch.png" alt="">검색</button>
+                </form>
+                <button class="sch_clear">검색어삭제</button>
+            </div>
+
+            
+        </div> 
+    </div>
+</div>
+			
+			<nav id="gnb1">
+				
+
+<ul id="head_menu" class="topmenu">
+	<li class="lnb1 mnfirst">
+		<a href="/menu.es?mid=a10101000000">발간자료</a>
+		<div class="submenu gnb_d2" style="display:none;">
+			
+
+<p class="desc">
+    <strong class="title">발간자료</strong>
+    <span class="txt">사람 중심의 사회로 이끄는<br>고용노동정책 연구허브 </span>
+</p>
+			<ul class="sub01">
+				<li class="sub01 subfirst"><a href="/menu.es?mid=a10101000000">전체 보고서</a></li>
+				<li class="sub02"><a href="/menu.es?mid=a10102060000">연구보고서</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102060000">전체 보고서</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102010000">노동시장 및 고용정책</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102020000">노사관계 및 인적자원관리</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102030000">노동법</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102040000">노동복지 및 노동보험</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102050000">기타</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub03"><a href="/menu.es?mid=a10103050000">정기간행물</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10103050000">전체 간행물</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10103010000">노동리뷰</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10103020000">노동정책연구</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10103030000">국제노동브리프</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub04"><a href="/menu.es?mid=a10104010000">이슈페이퍼</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10104010000">KLI 고용노동브리프</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10104020000">임금정보브리프</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10104030000">패널브리프</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10104040000">고용영향평가브리프</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10104060000">워킹페이퍼</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub05 sublast"><a href="/menu.es?mid=a10105000000">발간물 구매 안내</a></li>
+			</ul>
+			
+
+		</div>
+	</li>
+	<li class="lnb2">
+		<a href="/menu.es?mid=a10201000000">고용노동정보</a>
+		<div class="submenu gnb_d2" style="display:none;">
+			
+
+<p class="desc">
+    <strong class="title">고용노동정보</strong>
+    <span class="txt">사람 중심의 사회로 이끄는<br>고용노동정책 연구허브 </span>
+</p>
+			<ul class="sub02">
+				<li class="sub01 subfirst"><a href="/menu.es?mid=a10201010000">노동시장/노사관계전망</a></li>
+				<li class="sub02"><a href="/menu.es?mid=a10202000000">노동판례리뷰</a></li>
+				<li class="sub03"><a href="/menu.es?mid=a10203000000">국내노동동향</a></li>
+				<li class="sub04 sublast"><a href="/menu.es?mid=a10204000000">KLI 노동통계 Archive</a></li>
+			</ul>
+			
+
+		</div>
+	</li>
+	<li class="lnb3">
+		<a href="/menu.es?mid=a10301000000">알림광장</a>
+		<div class="submenu gnb_d2" style="display:none;">
+			
+
+<p class="desc">
+    <strong class="title">알림광장</strong>
+    <span class="txt">사람 중심의 사회로 이끄는<br>고용노동정책 연구허브 </span>
+</p>
+			<ul class="sub03">
+				<li class="sub01 subfirst"><a href="/menu.es?mid=a10301000000">토론회 및 세미나</a></li>
+				<li class="sub02"><a href="/menu.es?mid=a10302000000">공지사항</a></li>
+				<li class="sub03"><a href="/menu.es?mid=a10303010000">채용정보</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10303010000">채용공고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10303020000">채용안내</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10303030000">인재상</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10303040000">합격자발표</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub04"><a href="/menu.es?mid=a10304000000">입찰공고</a></li>
+				<li class="sub05"><a href="/menu.es?mid=a10305000000">보도자료</a></li>
+				<li class="sub06"><a href="/menu.es?mid=a10306000000">KLI 관련기사</a></li>
+				<li class="sub07"><a href="/menu.es?mid=a10307000000">영상자료</a></li>
+				<li class="sub08"><a href="/menu.es?mid=a10308000000">국외출장보고서</a></li>
+				<li class="sub09 sublast"><a href="/menu.es?mid=a10309000000">연구원동정</a></li>
+			</ul>
+			
+
+		</div>
+	</li>
+	<li class="lnb4">
+		<a href="/menu.es?mid=a10401000000">참여광장</a>
+		<div class="submenu gnb_d2" style="display:none;">
+			
+
+<p class="desc">
+    <strong class="title">참여광장</strong>
+    <span class="txt">사람 중심의 사회로 이끄는<br>고용노동정책 연구허브 </span>
+</p>
+			<ul class="sub04">
+				<li class="sub01 subfirst"><a href="/menu.es?mid=a10401010000">노동정책연구 원고모집</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10401010000">투고규정</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10401020000">논문투고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10401030000">연구윤리</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub02"><a href="/menu.es?mid=a10402000000">국제노동브리프 해외연구동향 원고모집</a></li>
+				<li class="sub03"><a href="/menu.es?mid=a10403000000">연구과제 수시제안</a></li>
+				<li class="sub04"><a href="/menu.es?mid=a10404000000">설문조사</a></li>
+				<li class="sub07"><a href="/menu.es?mid=a10407010000">익명신고센터</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10407010000">부패알리오</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub05"><a href="/menu.es?mid=a10405000000">온라인신고센터/클린센터</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10405040000">부정청탁 신고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10405050000">갑질피해 신고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10405060000">부패공익 신고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10405070000">인권침해 신고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10405080000">연구윤리 위반신고</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub06 sublast"><a href="/menu.es?mid=a10406000000">FAQ</a></li>
+			</ul>
+			
+
+		</div>
+	</li>
+	<li class="lnb5">
+		<a href="/menu.es?mid=a10509000000">연구원소개</a>
+		<div class="submenu gnb_d2" style="display:none;">
+			
+
+<p class="desc">
+    <strong class="title">연구원소개</strong>
+    <span class="txt">사람 중심의 사회로 이끄는<br>고용노동정책 연구허브 </span>
+</p>
+			<ul class="sub05">
+				<li class="sub09 subfirst"><a href="https://www.kli.re.kr/menu.es?mid=a10509040000">원장실</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10509010000">원장 인사말</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10509020000">원장 프로필</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10509030000">역대원장 소개</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub01"><a href="/menu.es?mid=a10501010000">KLI소개</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501010000">설립목적 및 근거</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501020000">연혁</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501030000">비전</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501040000">사명서</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501100100">윤리경영</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501050100">인권경영</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501060000">임직원 행동강령</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501071600">예산/결산</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501080000">경영공시</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub02"><a href="/menu.es?mid=a10502010000">조직안내</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10502010000">조직도</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10502020000">연구위원</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub03"><a href="/menu.es?mid=a10503010000">홍보관</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10503010000">CI소개</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10503050000">연차보고서</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10503020000">정기간행물 소개</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10503030000">토론회 및 세미나 소개</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10503040000">웹진 소개</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub04"><a href="/menu.es?mid=a10504010000">연구분야</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10504010000">노동시장 및 고용정책</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10504020000">노사관계/인적자원관리</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10504030000">노동법연구</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10504040000">노동복지 및 노동보험</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub05"><a href="/menu.es?mid=a10505010000">연구사업</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10505010000">연구계획</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10505020000">기본연구사업</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub06"><a href="/menu.es?mid=a10506000000">교류협력기관</a></li>
+				<li class="sub07"><a href="/menu.es?mid=a10507010000">노사관계최고지도자과정</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10507010000">소개</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10507020000">입학안내</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub08 sublast"><a href="/menu.es?mid=a10508000000">찾아오시는길</a></li>
+			</ul>
+			
+
+		</div>
+	</li>
+	<li class="lnb6 mnlast">
+		<a href="/menu.es?mid=a10602000000">정보공개</a>
+		<div class="submenu gnb_d2" style="display:none;">
+			
+
+<p class="desc">
+    <strong class="title">정보공개</strong>
+    <span class="txt">사람 중심의 사회로 이끄는<br>고용노동정책 연구허브 </span>
+</p>
+			<ul class="sub06">
+				<li class="sub02 subfirst"><a href="/menu.es?mid=a10602000000">정보공개</a></li>
+				<li class="sub01"><a href="/menu.es?mid=a10601010000">정보공개 제도안내</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601010000">정보공개제도란</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601020000">정보공개처리절차</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601030000">공개대상기관</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601040000">정보공개방법</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601050000">공공기관의무</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601060000">불복구제절차방법</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601070000">비공개정보세부기준</a></li>
+							<li class="lnb-detail-item"><a href="https://www.open.go.kr/infOthbc/infOthbc/infOthbcLaword.do" target="_blank" rel="noopener noreferrer" title="새창으로 이동" class="linkWindow">정보공개서식</a></li>
+							<li class="lnb-detail-item"><a href="https://www.open.go.kr/infOthbc/infOthbc/infOthbcLaword.do" target="_blank" rel="noopener noreferrer" title="새창으로 이동" class="linkWindow">정보공개관련법령</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub03"><a href="/menu.es?mid=a10603010000">사업실명제</a></li>
+				<li class="sub04"><a href="/menu.es?mid=a10604010000">공공데이터 개방</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10604010000">공공데이터 제도안내</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10604020000">공공데이터 목록</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub05"><a href="https://www.g2b.go.kr/link/FIUA006_01/single/?rowCnt=&instCd=B090012&demaInstNm=&hghrkInstCd=&prcmMthoSeCd=&frcpYn=N&laseYn=N&rsrvYn=N&chkInstCd=&urlSrchSeCd=instCd&demaInstCd=IN0100000048567">계약/입찰정보</a></li>
+				<li class="sub06 sublast"><a href="/menu.es?mid=a10606000000">친인척 채용현황</a></li>
+			</ul>
+			
+
+		</div>
+	</li>
+</ul>
+
+
+			</nav>
+			
+			<nav id="gnb2">
+				<a href="#" class="control open">
+                    <span class="sr_only">전체메뉴 열기</span>
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+                </a>
+                <a href="#" class="control close">
+                    <span class="sr_only">전체메뉴 닫기</span>
+                    <span class="bar1"></span>
+                    <span class="bar2"></span>
+                    <span class="bar3"></span>
+                </a>
+				
+
+<ul id="head_menu_all" class="topmenu_all">
+	<li class="lnb1 mnfirst">
+		<a href="/menu.es?mid=a10101000000">발간자료</a>
+		<div class="submenu gnb_d2">
+			<ul class="sub01">
+				<li class="sub01 subfirst"><a href="/menu.es?mid=a10101000000">전체 보고서</a></li>
+				<li class="sub02"><a href="/menu.es?mid=a10102060000">연구보고서</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102060000">전체 보고서</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102010000">노동시장 및 고용정책</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102020000">노사관계 및 인적자원관리</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102030000">노동법</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102040000">노동복지 및 노동보험</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10102050000">기타</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub03"><a href="/menu.es?mid=a10103050000">정기간행물</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10103050000">전체 간행물</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10103010000">노동리뷰</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10103020000">노동정책연구</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10103030000">국제노동브리프</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub04"><a href="/menu.es?mid=a10104010000">이슈페이퍼</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10104010000">KLI 고용노동브리프</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10104020000">임금정보브리프</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10104030000">패널브리프</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10104040000">고용영향평가브리프</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10104060000">워킹페이퍼</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub05 sublast"><a href="/menu.es?mid=a10105000000">발간물 구매 안내</a></li>
+			</ul>
+		</div>
+	</li>
+	<li class="lnb2">
+		<a href="/menu.es?mid=a10201000000">고용노동정보</a>
+		<div class="submenu gnb_d2">
+			<ul class="sub02">
+				<li class="sub01 subfirst"><a href="/menu.es?mid=a10201010000">노동시장/노사관계전망</a></li>
+				<li class="sub02"><a href="/menu.es?mid=a10202000000">노동판례리뷰</a></li>
+				<li class="sub03"><a href="/menu.es?mid=a10203000000">국내노동동향</a></li>
+				<li class="sub04 sublast"><a href="/menu.es?mid=a10204000000">KLI 노동통계 Archive</a></li>
+			</ul>
+		</div>
+	</li>
+	<li class="lnb3">
+		<a href="/menu.es?mid=a10301000000">알림광장</a>
+		<div class="submenu gnb_d2">
+			<ul class="sub03">
+				<li class="sub01 subfirst"><a href="/menu.es?mid=a10301000000">토론회 및 세미나</a></li>
+				<li class="sub02"><a href="/menu.es?mid=a10302000000">공지사항</a></li>
+				<li class="sub03"><a href="/menu.es?mid=a10303010000">채용정보</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10303010000">채용공고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10303020000">채용안내</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10303030000">인재상</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10303040000">합격자발표</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub04"><a href="/menu.es?mid=a10304000000">입찰공고</a></li>
+				<li class="sub05"><a href="/menu.es?mid=a10305000000">보도자료</a></li>
+				<li class="sub06"><a href="/menu.es?mid=a10306000000">KLI 관련기사</a></li>
+				<li class="sub07"><a href="/menu.es?mid=a10307000000">영상자료</a></li>
+				<li class="sub08"><a href="/menu.es?mid=a10308000000">국외출장보고서</a></li>
+				<li class="sub09 sublast"><a href="/menu.es?mid=a10309000000">연구원동정</a></li>
+			</ul>
+		</div>
+	</li>
+	<li class="lnb4">
+		<a href="/menu.es?mid=a10401000000">참여광장</a>
+		<div class="submenu gnb_d2">
+			<ul class="sub04">
+				<li class="sub01 subfirst"><a href="/menu.es?mid=a10401010000">노동정책연구 원고모집</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10401010000">투고규정</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10401020000">논문투고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10401030000">연구윤리</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub02"><a href="/menu.es?mid=a10402000000">국제노동브리프 해외연구동향 원고모집</a></li>
+				<li class="sub03"><a href="/menu.es?mid=a10403000000">연구과제 수시제안</a></li>
+				<li class="sub04"><a href="/menu.es?mid=a10404000000">설문조사</a></li>
+				<li class="sub07"><a href="/menu.es?mid=a10407010000">익명신고센터</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10407010000">부패알리오</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub05"><a href="/menu.es?mid=a10405000000">온라인신고센터/클린센터</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10405040000">부정청탁 신고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10405050000">갑질피해 신고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10405060000">부패공익 신고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10405070000">인권침해 신고</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10405080000">연구윤리 위반신고</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub06 sublast"><a href="/menu.es?mid=a10406000000">FAQ</a></li>
+			</ul>
+		</div>
+	</li>
+	<li class="lnb5">
+		<a href="/menu.es?mid=a10509000000">연구원소개</a>
+		<div class="submenu gnb_d2">
+			<ul class="sub05">
+				<li class="sub09 subfirst"><a href="https://www.kli.re.kr/menu.es?mid=a10509040000">원장실</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10509010000">원장 인사말</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10509020000">원장 프로필</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10509030000">역대원장 소개</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub01"><a href="/menu.es?mid=a10501010000">KLI소개</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501010000">설립목적 및 근거</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501020000">연혁</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501030000">비전</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501040000">사명서</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501100100">윤리경영</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501050100">인권경영</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501060000">임직원 행동강령</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501071600">예산/결산</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10501080000">경영공시</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub02"><a href="/menu.es?mid=a10502010000">조직안내</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10502010000">조직도</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10502020000">연구위원</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub03"><a href="/menu.es?mid=a10503010000">홍보관</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10503010000">CI소개</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10503050000">연차보고서</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10503020000">정기간행물 소개</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10503030000">토론회 및 세미나 소개</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10503040000">웹진 소개</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub04"><a href="/menu.es?mid=a10504010000">연구분야</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10504010000">노동시장 및 고용정책</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10504020000">노사관계/인적자원관리</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10504030000">노동법연구</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10504040000">노동복지 및 노동보험</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub05"><a href="/menu.es?mid=a10505010000">연구사업</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10505010000">연구계획</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10505020000">기본연구사업</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub06"><a href="/menu.es?mid=a10506000000">교류협력기관</a></li>
+				<li class="sub07"><a href="/menu.es?mid=a10507010000">노사관계최고지도자과정</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10507010000">소개</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10507020000">입학안내</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub08 sublast"><a href="/menu.es?mid=a10508000000">찾아오시는길</a></li>
+			</ul>
+		</div>
+	</li>
+	<li class="lnb6 mnlast">
+		<a href="/menu.es?mid=a10602000000">정보공개</a>
+		<div class="submenu gnb_d2">
+			<ul class="sub06">
+				<li class="sub02 subfirst"><a href="/menu.es?mid=a10602000000">정보공개</a></li>
+				<li class="sub01"><a href="/menu.es?mid=a10601010000">정보공개 제도안내</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601010000">정보공개제도란</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601020000">정보공개처리절차</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601030000">공개대상기관</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601040000">정보공개방법</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601050000">공공기관의무</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601060000">불복구제절차방법</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10601070000">비공개정보세부기준</a></li>
+							<li class="lnb-detail-item"><a href="https://www.open.go.kr/infOthbc/infOthbc/infOthbcLaword.do" target="_blank" rel="noopener noreferrer" title="새창으로 이동" class="linkWindow">정보공개서식</a></li>
+							<li class="lnb-detail-item"><a href="https://www.open.go.kr/infOthbc/infOthbc/infOthbcLaword.do" target="_blank" rel="noopener noreferrer" title="새창으로 이동" class="linkWindow">정보공개관련법령</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub03"><a href="/menu.es?mid=a10603010000">사업실명제</a></li>
+				<li class="sub04"><a href="/menu.es?mid=a10604010000">공공데이터 개방</a>
+					<div class="gnb_d3">
+						<ul class="lnb-detail">
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10604010000">공공데이터 제도안내</a></li>
+							<li class="lnb-detail-item"><a href="/menu.es?mid=a10604020000">공공데이터 목록</a></li>
+						</ul>
+					</div>
+				</li>
+				<li class="sub05"><a href="https://www.g2b.go.kr/link/FIUA006_01/single/?rowCnt=&instCd=B090012&demaInstNm=&hghrkInstCd=&prcmMthoSeCd=&frcpYn=N&laseYn=N&rsrvYn=N&chkInstCd=&urlSrchSeCd=instCd&demaInstCd=IN0100000048567">계약/입찰정보</a></li>
+				<li class="sub06 sublast"><a href="/menu.es?mid=a10606000000">친인척 채용현황</a></li>
+			</ul>
+		</div>
+	</li>
+</ul>
+
+
+				
+			</nav>
+		</div>
+	</header>
+	<main id="main">
+		<div class="main_wrap">
+
+
+
+
+
+
+
+
+<script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+<script>
+
+    function shareFacebook() {
+        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(document.URL) + '&t=' + encodeURIComponent(document.title), 'facebooksharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
+		console.log(document.URL);
+		console.log(document.title);
+    };
+
+    function shareTwitter() {
+        window.open('https://twitter.com/intent/tweet?text=[%EA%B3%B5%EC%9C%A0]%20' + encodeURIComponent(document.URL) + '%20-%20' + encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
+    };
+
+    function shareKakaostory() {
+        window.open('https://story.kakao.com/share?url=' + encodeURIComponent(document.URL) + '%20-%20' + encodeURIComponent(document.title), 'twittersharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
+    };
+
+    function shareNaver() {
+        window.open('http://share.naver.com/web/shareView.nhn?url=' + encodeURIComponent(document.URL) + '&title=' + encodeURIComponent(document.title), 'naversharedialog', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600')
+    };
+
+    function clip() {
+        var url = '';
+        var textarea = document.createElement("textarea");
+        document.body.appendChild(textarea);
+        url = window.document.location.href;
+        textarea.value = url;
+        textarea.select();
+        document.execCommand("copy");
+        document.body.removeChild(textarea);
+        alert('URL이 복사되었습니다.');
+    }
+</script>
+
+		
+
+
+<div id="visual" class="visual1">
+    <strong class="title">발간자료</strong>
+    <p class="desc">
+        
+	        
+	           한국노동연구원의 최신 발간물을 열람하시고 구독 신청하세요
+	        
+	        
+	        
+	        
+	        
+	        
+	        
+                    
+        
+    </p>
+
+    <span class="img"></span>
+</div>
+		
+		<section id="snb" class="sub01">
+			
+				
+				
+   			<h2 class="title">전체 보고서</h2>
+				
+			
+			<nav class="list">
+		
+			
+
+<ul id="left_menu_top" class="head_menu_depth">
+	<li id="li0101000000" class="first"><a href="/menu.es?mid=a10101000000" onclick="detailSubMenu('smenu1');">전체 보고서</a>
+	</li>
+	<li id="li0102000000"><a href="/menu.es?mid=a10102060000" onclick="detailSubMenu('smenu2');">연구보고서</a>
+		<ul id="smenu2" class="ul0102000000" style="display:none;">
+			<li id="li0102060000"><a href="/menu.es?mid=a10102060000">전체 보고서</a></li>
+			<li id="li0102010000"><a href="/menu.es?mid=a10102010000">노동시장 및 고용정책</a></li>
+			<li id="li0102020000"><a href="/menu.es?mid=a10102020000">노사관계 및 인적자원관리</a></li>
+			<li id="li0102030000"><a href="/menu.es?mid=a10102030000">노동법</a></li>
+			<li id="li0102040000"><a href="/menu.es?mid=a10102040000">노동복지 및 노동보험</a></li>
+			<li id="li0102050000" class="last"><a href="/menu.es?mid=a10102050000">기타</a></li>
+		</ul>
+	</li>
+	<li id="li0103000000"><a href="/menu.es?mid=a10103050000" onclick="detailSubMenu('smenu3');">정기간행물</a>
+		<ul id="smenu3" class="ul0103000000" style="display:none;">
+			<li id="li0103050000"><a href="/menu.es?mid=a10103050000">전체 간행물</a></li>
+			<li id="li0103010000"><a href="/menu.es?mid=a10103010000">노동리뷰</a></li>
+			<li id="li0103020000"><a href="/menu.es?mid=a10103020000">노동정책연구</a></li>
+			<li id="li0103030000" class="last"><a href="/menu.es?mid=a10103030000">국제노동브리프</a></li>
+		</ul>
+	</li>
+	<li id="li0104000000"><a href="/menu.es?mid=a10104010000" onclick="detailSubMenu('smenu4');">이슈페이퍼</a>
+		<ul id="smenu4" class="ul0104000000" style="display:none;">
+			<li id="li0104010000"><a href="/menu.es?mid=a10104010000">KLI 고용노동브리프</a></li>
+			<li id="li0104020000"><a href="/menu.es?mid=a10104020000">임금정보브리프</a></li>
+			<li id="li0104030000"><a href="/menu.es?mid=a10104030000">패널브리프</a></li>
+			<li id="li0104040000"><a href="/menu.es?mid=a10104040000">고용영향평가브리프</a></li>
+			<li id="li0104060000" class="last"><a href="/menu.es?mid=a10104060000">워킹페이퍼</a></li>
+		</ul>
+	</li>
+	<li id="li0105000000" class="last"><a href="/menu.es?mid=a10105000000" onclick="detailSubMenu('smenu5');">발간물 구매 안내</a>
+	</li>
+</ul>
+
+
+		
+			</nav>
+			
+		</section>
+		<section id="contents" tabindex="0">
+			<div class="contents_util">
+				
+				
+				
+					<h1 id="contents_title">전체 보고서</h1>
+				
+				
+				
+				<nav class="location">
+					<ul class="path">
+						<li class="icon"><a href="/index.es?sid=a1">홈</a></li>
+						
+							
+								
+                                    
+                                        <li><a href="/menu.es?mid=a10100000000">발간자료</a></li>
+                                    
+								
+                                    
+                                        <li><a href="/menu.es?mid=a10102000000">연구보고서</a></li>
+                                    
+								
+                                    
+                                        <li><a href="/menu.es?mid=a10102060000" class="active">전체 보고서</a></li>
+                                    
+								
+							
+						
+					</ul>
+
+					<ul class="list">					
+						<li>
+							<button class="label">발간자료</button>
+							
+
+<ul id="head_menu_depth1" class="sub depth1">
+	<li id="depth1_li0100000000"><a href="/menu.es?mid=a10101000000">발간자료</a></li>
+	<li id="depth1_li0200000000"><a href="/menu.es?mid=a10201000000">고용노동정보</a></li>
+	<li id="depth1_li0300000000"><a href="/menu.es?mid=a10301000000">알림광장</a></li>
+	<li id="depth1_li0400000000"><a href="/menu.es?mid=a10401000000">참여광장</a></li>
+	<li id="depth1_li0500000000"><a href="/menu.es?mid=a10509000000">연구원소개</a></li>
+	<li id="depth1_li0600000000"><a href="/menu.es?mid=a10602000000">정보공개</a></li>
+	<li id="depth1_li0700000000"><a href="/menu.es?mid=a10701000000">이용자가이드</a></li>
+	<li id="depth1_li0800000000"><a href="/menu.es?mid=a10801000000">마이페이지</a></li>
+	<li id="depth1_li0900000000"><a href="/menu.es?mid=a10900000000">통합검색</a></li>
+</ul>
+
+
+						</li>				
+						
+						<li>
+							<button class="label">연구보고서</button>
+							
+
+<ul id="head_menu_depth2" class="sub depth2">
+	<li id="depth2_li0101000000"><a href="/menu.es?mid=a10101000000">전체 보고서</a></li>
+	<li id="depth2_li0102000000"><a href="/menu.es?mid=a10102060000">연구보고서</a></li>
+	<li id="depth2_li0103000000"><a href="/menu.es?mid=a10103050000">정기간행물</a></li>
+	<li id="depth2_li0104000000"><a href="/menu.es?mid=a10104010000">이슈페이퍼</a></li>
+	<li id="depth2_li0105000000" class="last"><a href="/menu.es?mid=a10105000000">발간물 구매 안내</a></li>
+</ul>
+
+
+						</li>
+						
+						
+						<li>
+							<button class="label">전체 보고서</button>
+							
+
+<ul id="head_menu_depth3" class="sub depth3">
+	<li id="depth3_li0102060000"><a href="/menu.es?mid=a10102060000">전체 보고서</a></li>
+	<li id="depth3_li0102010000"><a href="/menu.es?mid=a10102010000">노동시장 및 고용정책</a></li>
+	<li id="depth3_li0102020000"><a href="/menu.es?mid=a10102020000">노사관계 및 인적자원관리</a></li>
+	<li id="depth3_li0102030000"><a href="/menu.es?mid=a10102030000">노동법</a></li>
+	<li id="depth3_li0102040000"><a href="/menu.es?mid=a10102040000">노동복지 및 노동보험</a></li>
+	<li id="depth3_li0102050000" class="last"><a href="/menu.es?mid=a10102050000">기타</a></li>
+</ul>
+
+
+						</li>				
+						
+						
+						
+					</ul>
+				</nav>
+				
+				
+				<div class="util">
+					<span class="zoom">
+						<a href="#contents_body" onclick="zoomInOut('plus'); return false;" class="btn up">글자 크게</a>
+						<a href="#contents_body" onclick="zoomInOut('minus'); return false;" class="btn down">글자 작게</a>
+					</span>
+					
+					<article class="share">
+						
+
+						<h2 class="title"><a href="#none" class="btn open">공유하기</a></h2>
+
+						<div class="item">
+							<ul id="share" class="list">
+								<li class="facebook"><a href="#share" onclick="shareFacebook(); return false;" target="_blank" rel="noopener noreferrer" title="페이스북 새창열림"><span class="sr_only">페이스북</span> <i class="xi-facebook"></i></a></li>
+                            	<li class="twitter"><a href="#share" onclick="shareTwitter(); return false;" target="_blank" rel="noopener noreferrer" title="트위터 새창열림"><span class="sr_only">트위터</span> <i class="xi-twitter"></i></a></li>
+							</ul>
+							<a href="#share" onclick="slideToggleView('#share'); return false;" class="close">닫기</a>
+						</div>
+					</article>
+					
+					<a class="btn print" href="#contents_detail" onclick="printAreaAction(); return false;">인쇄</a>
+				</div>
+				
+			</div>
+			
+			<div id="contents_body">
+				
+				
+
+
+
+<div class="eBook_view">
+    <!-- 최근글 1개 -->
+    
+        <div class="group1" >
+            <i class="thumb" >
+                <img src="/attachFiles/jsphome/DATA/pblctList/coverImage/6A1631CBC7F84C6D49258E640004A390_cover.jpg" style="cursor: pointer;" onclick="location.href='/kli/rschRptpView.es?pblct_sn=10299&mid=a10102060000&sch_rsch_fld_no='" alt="KLI Annual Report 2025">
+            </i>
+            <div class="txt_box">                            
+                <p class="title"><a href="/kli/rschRptpView.es?pblct_sn=10299&mid=a10102060000&sch_rsch_fld_no=">KLI Annual Report 2025</a></p>
+                
+                <ul class="info_wrap">
+                    <li>
+                        <em>저자</em> 
+                        <span>
+                            
+                            
+                                <a href="/kli/rschRptpAuthorList.es?mid=a10102060000&sch_type=aut_nm&sch_keyword=한국노동연구원&sch_rsch_fld_no=">한국노동연구원</a>
+                                
+                            
+                        </span>
+                    </li>
+                    <li><em>출판일</em> <span>2026.08.31</span></li>
+                    <li><em>분류</em> <span>기타자료</span></li>
+                    <li><em>ISBN</em> <span></span></li>
+                </ul>
+                <div class="btn_wrap type2">
+                    <div class="left">
+                        
+                            <a href="/kliFileDownload?fileName=6A1631CBC7F84C6D49258E640004A390_2.pdf&fileNameOrg=KLI Annual Report 2025_web.pdf&filePath1=jsphome/DATA/pblctList/issue/6A1631CBC7F84C6D49258E640004A390" class="btn4 ic">다운로드 <i class="xi-download"></i></a>
+                        
+                        
+                            <a href="/pdfPreviewDownload?fileName=6A1631CBC7F84C6D49258E640004A390_2.pdf&fileNameOrg=KLI Annual Report 2025_web.pdf&filePath1=jsphome/DATA/pblctList/issue/6A1631CBC7F84C6D49258E640004A390" target="_blank" class="btn4" title="새창으로 PDF 미리보기"><i class="xi-search"></i> 원문보기</a>   
+                        
+                    </div>
+                    <div class="right">                         
+                        <a href="/kli/rschRptpView.es?pblct_sn=10299&mid=a10102060000&sch_rsch_fld_no=" class="btn4 type3">자세히보기</a>
+                    </div>
+                </div>
+            </div>        
+        </div>
+    
+    <!-- 페이지별 최근글 1개 -->
+    
+</div>
+
+<div class="sch_box ">
+    <div class="group1">
+        <form name="schForm" id="schForm" method="get" action="/kli/rschRptpList.es">
+            <input type="hidden" name="mid" value="a10102060000"/>
+            
+		    <input type="hidden" id="nPage" name="nPage" value="1"/>
+		    <input type="hidden" id="sch_rsch_fld_no" name="sch_rsch_fld_no" value=""/>
+		    <input type="hidden" name="b_list" value="10"/>
+            <fieldset>
+                <legend class="blind">검색</legend>
+                <div class="flex_st">
+                    <div class="part part2">
+                        <select name="sch_yr" id="sch_yr" class="fo_select" title="검색연도를 선택하세요.">
+                            <option value="">연도검색</option>
+                            
+                                
+				                    
+				                    <option value="2026" >2026</option>
+                                
+				                    
+				                    <option value="2025" >2025</option>
+                                
+				                    
+				                    <option value="2024" >2024</option>
+                                
+				                    
+				                    <option value="2023" >2023</option>
+                                
+				                    
+				                    <option value="2022" >2022</option>
+                                
+				                    
+				                    <option value="2021" >2021</option>
+                                
+				                    
+				                    <option value="2020" >2020</option>
+                                
+				                    
+				                    <option value="2019" >2019</option>
+                                
+				                    
+				                    <option value="2018" >2018</option>
+                                
+				                    
+				                    <option value="2017" >2017</option>
+                                
+				                    
+				                    <option value="2016" >2016</option>
+                                
+				                    
+				                    <option value="2015" >2015</option>
+                                
+				                    
+				                    <option value="2014" >2014</option>
+                                
+				                    
+				                    <option value="2013" >2013</option>
+                                
+				                    
+				                    <option value="2012" >2012</option>
+                                
+				                    
+				                    <option value="2011" >2011</option>
+                                
+				                    
+				                    <option value="2010" >2010</option>
+                                
+				                    
+				                    <option value="2009" >2009</option>
+                                
+				                    
+				                    <option value="2008" >2008</option>
+                                
+				                    
+				                    <option value="2007" >2007</option>
+                                
+				                    
+				                    <option value="2006" >2006</option>
+                                
+				                    
+				                    <option value="2005" >2005</option>
+                                
+				                    
+				                    <option value="2004" >2004</option>
+                                
+				                    
+				                    <option value="2003" >2003</option>
+                                
+				                    
+				                    <option value="2002" >2002</option>
+                                
+				                    
+				                    <option value="2001" >2001</option>
+                                
+				                    
+				                    <option value="2000" >2000</option>
+                                
+				                    
+				                    <option value="1999" >1999</option>
+                                
+				                    
+				                    <option value="1998" >1998</option>
+                                
+				                    
+				                    <option value="1997" >1997</option>
+                                
+				                    
+				                    <option value="1996" >1996</option>
+                                
+				                    
+				                    <option value="1995" >1995</option>
+                                
+				                    
+				                    <option value="1994" >1994</option>
+                                
+				                    
+				                    <option value="1993" >1993</option>
+                                
+				                    
+				                    <option value="1992" >1992</option>
+                                
+				                    
+				                    <option value="1991" >1991</option>
+                                
+				                    
+				                    <option value="1990" >1990</option>
+                                
+				                    
+				                    <option value="1989" >1989</option>
+                                
+				                    
+				                    <option value="1988" >1988</option>
+                                
+                            
+                        </select>
+                        <select name="sch_type" id="sch_type" class="fo_select" title="검색어 분류를 선택하세요." >
+                            <option value="">전체</option>
+                            <option value="data_nm" >서명</option>
+                            <option value="cntnt" >목차</option>
+                            <option value="pblct_smry" >요약</option>
+                            <option value="aut_nm" >저자</option>
+                        </select>          
+                    </div>
+                    <div class="part part3">
+                        <input type="text" class="fo_input input1" name="sch_keyword" id="sch_keyword" value="" placeholder="검색어" title="검색어를 입력하세요"> 
+                        <button type="submit" class="btn_default">검색</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>                        
+</div> 
+
+<div class="board_info">
+    <p class="page">
+        
+        
+        
+        <span class="total">전체 <b>1,664건</b> </span> <span class="current">페이지 <strong>1</strong>/<b>167</b></span>                                    
+    </p>
+</div>
+
+<div class="board_list">
+    <table class="tstyle_list">
+        <caption>목록 - 번호, 
+                   구분,
+                 서명, 저자, 출판일, 첨부파일, 원문</caption>
+        <colgroup>
+            <col style="width:8%">
+            
+                <col style="width:10%">
+            
+            <col >
+            <col style="width:15%">
+            <col style="width:10%">
+            <col style="width:10%">
+            <col style="width:10%">
+        </colgroup>
+        <thead>
+            <tr>
+                <th scope="col">번호</th>
+                
+                    <th scope="col">구분</th>
+                
+                <th scope="col">서명</th>
+                <th scope="col">저자</th>
+                <th scope="col">출판일</th>
+                <th scope="col">첨부파일</th>
+                <th scope="col">원문</th>
+            </tr>
+        </thead>
+        <tbody>
+             
+                
+                    
+			            <tr>
+			                <td class="m_hidden" aria-label="번호">1664</td>
+                            
+                                <td class="m_hidden" aria-label="구분">
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        기타
+                                    
+                                </td>
+                            
+			                <td class="txt_left" aria-label="제목"><a href="/kli/rschRptpView.es?pblct_sn=10299&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=">KLI Annual Report 2025</a></td>
+			                <td aria-label="저자">한국노동연구원</td>
+			                <td aria-label="출판일">2026.08.31</td>
+			                <td aria-label="첨부파일">
+			                     
+			                         <a href="/kliFileDownload?fileName=6A1631CBC7F84C6D49258E640004A390_2.pdf&fileNameOrg=KLI Annual Report 2025_web.pdf&filePath1=jsphome/DATA/pblctList/issue/6A1631CBC7F84C6D49258E640004A390"><img src="/upload/skin/board/basic/pdf.png" alt="KLI Annual Report 2025_web.pdf"></a>
+			                     
+			                </td>
+			                <td aria-label="원문">
+                                
+                                    <a href="/pdfPreviewDownload?fileName=6A1631CBC7F84C6D49258E640004A390_2.pdf&fileNameOrg=KLI Annual Report 2025_web.pdf&filePath1=jsphome/DATA/pblctList/issue/6A1631CBC7F84C6D49258E640004A390" target="_blank" class="icon" data-label="원문보기" rel="noopener noreferrer" title="새창으로 PDF 미리보기">원문보기</a>
+                                
+			                </td>
+			            </tr>
+                    
+			            <tr>
+			                <td class="m_hidden" aria-label="번호">1663</td>
+                            
+                                <td class="m_hidden" aria-label="구분">
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        기타
+                                    
+                                </td>
+                            
+			                <td class="txt_left" aria-label="제목"><a href="/kli/rschRptpView.es?pblct_sn=10304&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=">2026 KLI 노동통계</a></td>
+			                <td aria-label="저자">손연정, 김종욱, 지상훈, 이기쁨, 임용빈, 신진호</td>
+			                <td aria-label="출판일">2026.08.28</td>
+			                <td aria-label="첨부파일">
+			                     
+			                         <a href="/kliFileDownload?fileName=F981032CB75A8C8749258E6C001283B1_4.pdf&fileNameOrg=2026 KLI 노동통계_web.pdf&filePath1=jsphome/DATA/pblctList/issue/F981032CB75A8C8749258E6C001283B1"><img src="/upload/skin/board/basic/pdf.png" alt="2026 KLI 노동통계_web.pdf"></a>
+			                     
+			                </td>
+			                <td aria-label="원문">
+                                
+                                    <a href="/pdfPreviewDownload?fileName=F981032CB75A8C8749258E6C001283B1_4.pdf&fileNameOrg=2026 KLI 노동통계_web.pdf&filePath1=jsphome/DATA/pblctList/issue/F981032CB75A8C8749258E6C001283B1" target="_blank" class="icon" data-label="원문보기" rel="noopener noreferrer" title="새창으로 PDF 미리보기">원문보기</a>
+                                
+			                </td>
+			            </tr>
+                    
+			            <tr>
+			                <td class="m_hidden" aria-label="번호">1662</td>
+                            
+                                <td class="m_hidden" aria-label="구분">
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        기타
+                                    
+                                </td>
+                            
+			                <td class="txt_left" aria-label="제목"><a href="/kli/rschRptpView.es?pblct_sn=10293&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=">2025 KLI 연차보고서</a></td>
+			                <td aria-label="저자">한국노동연구원</td>
+			                <td aria-label="출판일">2026.07.30</td>
+			                <td aria-label="첨부파일">
+			                     
+			                         <a href="/kliFileDownload?fileName=ABA6714A2FCA32BA49258E43001A182A_1.pdf&fileNameOrg=한국노동연구원 2025년 연차보고서_web.pdf&filePath1=jsphome/DATA/pblctList/issue/ABA6714A2FCA32BA49258E43001A182A"><img src="/upload/skin/board/basic/pdf.png" alt="한국노동연구원 2025년 연차보고서_web.pdf"></a>
+			                     
+			                </td>
+			                <td aria-label="원문">
+                                
+                                    <a href="/pdfPreviewDownload?fileName=ABA6714A2FCA32BA49258E43001A182A_1.pdf&fileNameOrg=한국노동연구원 2025년 연차보고서_web.pdf&filePath1=jsphome/DATA/pblctList/issue/ABA6714A2FCA32BA49258E43001A182A" target="_blank" class="icon" data-label="원문보기" rel="noopener noreferrer" title="새창으로 PDF 미리보기">원문보기</a>
+                                
+			                </td>
+			            </tr>
+                    
+			            <tr>
+			                <td class="m_hidden" aria-label="번호">1661</td>
+                            
+                                <td class="m_hidden" aria-label="구분">
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        노동법 연구
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                </td>
+                            
+			                <td class="txt_left" aria-label="제목"><a href="/kli/rschRptpView.es?pblct_sn=10291&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=">노동판례리뷰 2025</a></td>
+			                <td aria-label="저자">남궁준, 김근주, 양승엽, 이은주, 정슬기</td>
+			                <td aria-label="출판일">2026.06.30</td>
+			                <td aria-label="첨부파일">
+			                     
+			                         <a href="/kliFileDownload?fileName=CABA555DA5D97B8C49258E2D001CA7BD_1.pdf&fileNameOrg=2025 노동판례리뷰_web.pdf&filePath1=jsphome/DATA/pblctList/issue/CABA555DA5D97B8C49258E2D001CA7BD"><img src="/upload/skin/board/basic/pdf.png" alt="2025 노동판례리뷰_web.pdf"></a>
+			                     
+			                </td>
+			                <td aria-label="원문">
+                                
+                                    <a href="/pdfPreviewDownload?fileName=CABA555DA5D97B8C49258E2D001CA7BD_1.pdf&fileNameOrg=2025 노동판례리뷰_web.pdf&filePath1=jsphome/DATA/pblctList/issue/CABA555DA5D97B8C49258E2D001CA7BD" target="_blank" class="icon" data-label="원문보기" rel="noopener noreferrer" title="새창으로 PDF 미리보기">원문보기</a>
+                                
+			                </td>
+			            </tr>
+                    
+			            <tr>
+			                <td class="m_hidden" aria-label="번호">1660</td>
+                            
+                                <td class="m_hidden" aria-label="구분">
+                                    
+                                        노동시장 및 고용정책 연구
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                </td>
+                            
+			                <td class="txt_left" aria-label="제목"><a href="/kli/rschRptpView.es?pblct_sn=10303&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=">보육지원정책의 변화와 실증적 효과 분석</a></td>
+			                <td aria-label="저자">이창재</td>
+			                <td aria-label="출판일">2026.06.19</td>
+			                <td aria-label="첨부파일">
+			                     
+			                         <a href="/kliFileDownload?fileName=8CFB161381A0ACDE49258E66000A8310_2.pdf&fileNameOrg=보육지원정책의 변화와 실증적 효과 분석_web.pdf&filePath1=jsphome/DATA/pblctList/issue/8CFB161381A0ACDE49258E66000A8310"><img src="/upload/skin/board/basic/pdf.png" alt="보육지원정책의 변화와 실증적 효과 분석_web.pdf"></a>
+			                     
+			                </td>
+			                <td aria-label="원문">
+                                
+                                    <a href="/pdfPreviewDownload?fileName=8CFB161381A0ACDE49258E66000A8310_2.pdf&fileNameOrg=보육지원정책의 변화와 실증적 효과 분석_web.pdf&filePath1=jsphome/DATA/pblctList/issue/8CFB161381A0ACDE49258E66000A8310" target="_blank" class="icon" data-label="원문보기" rel="noopener noreferrer" title="새창으로 PDF 미리보기">원문보기</a>
+                                
+			                </td>
+			            </tr>
+                    
+			            <tr>
+			                <td class="m_hidden" aria-label="번호">1659</td>
+                            
+                                <td class="m_hidden" aria-label="구분">
+                                    
+                                        노동시장 및 고용정책 연구
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                </td>
+                            
+			                <td class="txt_left" aria-label="제목"><a href="/kli/rschRptpView.es?pblct_sn=10285&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=">직업 적성 불일치의 다면적 측정과 노동시장 성과</a></td>
+			                <td aria-label="저자">이철우</td>
+			                <td aria-label="출판일">2026.03.31</td>
+			                <td aria-label="첨부파일">
+			                     
+			                         <a href="/kliFileDownload?fileName=96F5C83D0EAA4ACE49258E13002A8C9B_3.pdf&fileNameOrg=직업 적성 불일치의 다면적 측정과 노동시장 성과_web.pdf&filePath1=jsphome/DATA/pblctList/issue/96F5C83D0EAA4ACE49258E13002A8C9B"><img src="/upload/skin/board/basic/pdf.png" alt="직업 적성 불일치의 다면적 측정과 노동시장 성과_web.pdf"></a>
+			                     
+			                </td>
+			                <td aria-label="원문">
+                                
+                                    <a href="/pdfPreviewDownload?fileName=96F5C83D0EAA4ACE49258E13002A8C9B_3.pdf&fileNameOrg=직업 적성 불일치의 다면적 측정과 노동시장 성과_web.pdf&filePath1=jsphome/DATA/pblctList/issue/96F5C83D0EAA4ACE49258E13002A8C9B" target="_blank" class="icon" data-label="원문보기" rel="noopener noreferrer" title="새창으로 PDF 미리보기">원문보기</a>
+                                
+			                </td>
+			            </tr>
+                    
+			            <tr>
+			                <td class="m_hidden" aria-label="번호">1658</td>
+                            
+                                <td class="m_hidden" aria-label="구분">
+                                    
+                                        
+                                    
+                                        노사관계 및 인적자원관리 연구
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                </td>
+                            
+			                <td class="txt_left" aria-label="제목"><a href="/kli/rschRptpView.es?pblct_sn=10282&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=">2025년 노사관계 현황과 과제</a></td>
+			                <td aria-label="저자">박수민, 김근주, 김수정, 남궁준, 박운, 송관철, 오계택, 윤혜정, 이상국, 이영면, 정흥준, 조성재, 채준호, 최영미, 홍창의 </td>
+			                <td aria-label="출판일">2026.02.23</td>
+			                <td aria-label="첨부파일">
+			                     
+			                         <a href="/kliFileDownload?fileName=D461EA2F247E4B4949258DFD00487058_2.pdf&fileNameOrg=2025년 노사관계 현황과 과제_web.pdf&filePath1=jsphome/DATA/pblctList/issue/D461EA2F247E4B4949258DFD00487058"><img src="/upload/skin/board/basic/pdf.png" alt="2025년 노사관계 현황과 과제_web.pdf"></a>
+			                     
+			                </td>
+			                <td aria-label="원문">
+                                
+                                    <a href="/pdfPreviewDownload?fileName=D461EA2F247E4B4949258DFD00487058_2.pdf&fileNameOrg=2025년 노사관계 현황과 과제_web.pdf&filePath1=jsphome/DATA/pblctList/issue/D461EA2F247E4B4949258DFD00487058" target="_blank" class="icon" data-label="원문보기" rel="noopener noreferrer" title="새창으로 PDF 미리보기">원문보기</a>
+                                
+			                </td>
+			            </tr>
+                    
+			            <tr>
+			                <td class="m_hidden" aria-label="번호">1657</td>
+                            
+                                <td class="m_hidden" aria-label="구분">
+                                    
+                                        노동시장 및 고용정책 연구
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                </td>
+                            
+			                <td class="txt_left" aria-label="제목"><a href="/kli/rschRptpView.es?pblct_sn=10279&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=">AI 기반 제조업 혁신과 고용</a></td>
+			                <td aria-label="저자">노세리, 장지연, 조성재</td>
+			                <td aria-label="출판일">2026.01.30</td>
+			                <td aria-label="첨부파일">
+			                     
+			                         <a href="/kliFileDownload?fileName=622B56762257A3E949258DE800261E94_4.pdf&fileNameOrg=AI기반 제조업 혁신과 고용_web.pdf&filePath1=jsphome/DATA/pblctList/issue/622B56762257A3E949258DE800261E94"><img src="/upload/skin/board/basic/pdf.png" alt="AI기반 제조업 혁신과 고용_web.pdf"></a>
+			                     
+			                </td>
+			                <td aria-label="원문">
+                                
+                                    <a href="/pdfPreviewDownload?fileName=622B56762257A3E949258DE800261E94_4.pdf&fileNameOrg=AI기반 제조업 혁신과 고용_web.pdf&filePath1=jsphome/DATA/pblctList/issue/622B56762257A3E949258DE800261E94" target="_blank" class="icon" data-label="원문보기" rel="noopener noreferrer" title="새창으로 PDF 미리보기">원문보기</a>
+                                
+			                </td>
+			            </tr>
+                    
+			            <tr>
+			                <td class="m_hidden" aria-label="번호">1656</td>
+                            
+                                <td class="m_hidden" aria-label="구분">
+                                    
+                                        
+                                    
+                                        노사관계 및 인적자원관리 연구
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                </td>
+                            
+			                <td class="txt_left" aria-label="제목"><a href="/kli/rschRptpView.es?pblct_sn=10281&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=">AI의 발달과 HR에 대한 적용</a></td>
+			                <td aria-label="저자">오계택, 김봄이, 정호석, 조아람 , 유건우</td>
+			                <td aria-label="출판일">2025.12.31</td>
+			                <td aria-label="첨부파일">
+			                     
+			                         <a href="/kliFileDownload?fileName=0CD1BD9F32970A3C49258DF5001CE031_2.pdf&fileNameOrg=AI의 발달과 HR에 대한 적용_web.pdf&filePath1=jsphome/DATA/pblctList/issue/0CD1BD9F32970A3C49258DF5001CE031"><img src="/upload/skin/board/basic/pdf.png" alt="AI의 발달과 HR에 대한 적용_web.pdf"></a>
+			                     
+			                </td>
+			                <td aria-label="원문">
+                                
+                                    <a href="/pdfPreviewDownload?fileName=0CD1BD9F32970A3C49258DF5001CE031_2.pdf&fileNameOrg=AI의 발달과 HR에 대한 적용_web.pdf&filePath1=jsphome/DATA/pblctList/issue/0CD1BD9F32970A3C49258DF5001CE031" target="_blank" class="icon" data-label="원문보기" rel="noopener noreferrer" title="새창으로 PDF 미리보기">원문보기</a>
+                                
+			                </td>
+			            </tr>
+                    
+			            <tr>
+			                <td class="m_hidden" aria-label="번호">1655</td>
+                            
+                                <td class="m_hidden" aria-label="구분">
+                                    
+                                        노동시장 및 고용정책 연구
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                        
+                                    
+                                </td>
+                            
+			                <td class="txt_left" aria-label="제목"><a href="/kli/rschRptpView.es?pblct_sn=10277&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=">석탄화력발전소 폐지의 지역경제 영향과 일자리 미스매치</a></td>
+			                <td aria-label="저자">강동우, 최충</td>
+			                <td aria-label="출판일">2025.12.31</td>
+			                <td aria-label="첨부파일">
+			                     
+			                         <a href="/kliFileDownload?fileName=5EBD2D4455159BE049258DE600177018_4.pdf&fileNameOrg=석탄화력발전소 폐지의 지역경제 영향과 일자리 미스매치_web.pdf&filePath1=jsphome/DATA/pblctList/issue/5EBD2D4455159BE049258DE600177018"><img src="/upload/skin/board/basic/pdf.png" alt="석탄화력발전소 폐지의 지역경제 영향과 일자리 미스매치_web.pdf"></a>
+			                     
+			                </td>
+			                <td aria-label="원문">
+                                
+                                    <a href="/pdfPreviewDownload?fileName=5EBD2D4455159BE049258DE600177018_4.pdf&fileNameOrg=석탄화력발전소 폐지의 지역경제 영향과 일자리 미스매치_web.pdf&filePath1=jsphome/DATA/pblctList/issue/5EBD2D4455159BE049258DE600177018" target="_blank" class="icon" data-label="원문보기" rel="noopener noreferrer" title="새창으로 PDF 미리보기">원문보기</a>
+                                
+			                </td>
+			            </tr>
+                    
+                
+            
+        </tbody>
+    </table>
+</div>
+
+<!-- 페이징 용 URL + 기본 파라미터 외에 추가할 파라미터 -->
+<div class="board_pager">
+    
+    
+
+        <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=1" class="arr first">처음</a>
+        <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=1" class="arr prev">이전</a>
+        
+        <span class="group">
+
+            <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=1" class="active" title="현재 페이지"><strong>1</strong></a>
+
+            <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=2">2</a>
+
+            <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=3">3</a>
+
+            <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=4">4</a>
+
+            <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=5">5</a>
+
+            <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=6">6</a>
+
+            <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=7">7</a>
+
+            <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=8">8</a>
+
+            <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=9">9</a>
+
+            <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=10">10</a>
+
+        </span>
+        
+        <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=2" class="arr next">다음</a>
+        <a href="/kli/rschRptpList.es?sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=&amp;mid=a10102060000&amp;nPage=167" class="arr last">마지막</a>
+
+</div>     
+
+
+	
+			</div>
+			<div class="contents_info">
+				
+				
+				<div class="group">
+				
+				
+				</div>
+			</div>
+		</section>
+	
+		
+
+
+		</div>
+	</main>
+	<footer id="footer">
+		<div class="footer_wrap">
+			
+
+<article class="article1">
+    <div class="swiper footbanner ">                        
+        <ul class="swiper-wrapper list">
+            <li class="swiper-slide">
+                <a href="https://www.eslc.go.kr" target="_blank" title="새창" rel="noopener noreferrer" tabindex="1">
+                    <img src="/kli/img/layout/f_b_1.png" alt="경제·인문사회연구회" />
+                </a>
+            </li>
+            <li class="swiper-slide">
+                <a href="http://www.moel.go.kr" target="_blank" title="새창" rel="noopener noreferrer">
+                    <img src="/kli/img/layout/f_b_2.png" alt="고용노동부" />
+                </a>
+            </li>
+            <li class="swiper-slide">
+                <a href="http://www.keis.or.kr" target="_blank" title="새창" rel="noopener noreferrer">
+                    <img src="/kli/img/layout/f_b_3.png" alt="내일을 희망으로 이어주는 한국고용정보원" />
+                </a>
+            </li>
+            <li class="swiper-slide">
+                <a href="https://www.nrc.re.kr/" target="_blank" title="새창" rel="noopener noreferrer">
+                    <img src="/kli/img/layout/f_b_4.png" alt="경제·인문사회연구회" />
+                </a>
+            </li>
+            <li class="swiper-slide">
+                <a href="http://www.oecd.org" target="_blank" title="새창" rel="noopener noreferrer">
+                    <img src="/kli/img/layout/f_b_5.png" alt="OECD" />
+                </a>
+            </li>  
+            <li class="swiper-slide">
+                <a href="http://www.ilo.org" target="_blank" title="새창" rel="noopener noreferrer">
+                    <img src="/kli/img/layout/f_b_6.png" alt="ILO International Labour Organization" />
+                </a>
+            </li>
+            <li class="swiper-slide">
+                <a href="http://www.nlrc.go.kr" target="_blank" title="새창" rel="noopener noreferrer">
+                    <img src="/kli/img/layout/f_b_7.png" alt="중앙노동위원회" />
+                </a>
+            </li>          
+        </ul>
+        <div class="swiper-controls">
+            <div class="inner">
+                <div class="swiper-button-prev"></div>
+                <div class="play_stop">
+                    <button class="play" data-action="start" type="button"><i class="xi-play"></i><span class="sr_only">재생</span></button>
+                    <button class="stop active" data-action="stop" type="button"><i class="xi-pause"></i><span class="sr_only">정지</span></button>     
+                </div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </div>
+</article>
+
+<article class="article2">
+    <a href="" class="logo"><img src="/kli/img/layout/logo_3.svg" alt="한국노동연구원"></a>
+
+    <div class="inner">
+        <div id="fnb">
+            <ul class="fnb1">
+                <li><a href="/menu.es?mid=a10704000000">저작권정책</a></li>
+                <li><a href="/menu.es?mid=a10705000000">개인정보처리방침</a></li>
+                <li><a href="/menu.es?mid=a10707000000">고객헌장</a></li>
+                <li><a href="/menu.es?mid=a10706000000">이메일무단수집거부</a></li>
+                <li><a href="/menu.es?mid=a10508000000">찾아오시는 길</a></li>
+                <li><a href="/menu.es?mid=a10501010000">연구원 소개</a></li>
+            </ul>
+        </div>
+
+        <div id="siteinfo">
+            <address>
+            	<p class="txt1">(우) 30147 세종특별자치시 시청대로 370 세종국책연구단지 경제정책동 5-7층</p> 
+            	<p class="txt2"><span>TEL : 044-287-6114</span> <span>E-mail : webmaster@kli.re.kr</span></p>
+            </address>    
+            <p class="copyright">COPYRIGHT KOREA LABOR INSTITUTE. ALL RIGHTS RESERVED BY KOREA LABOR INSTITUTE.</p>
+        </div>
+    </div>
+</article>
+
+
+
+
+
+
+<a href="#" class="btn-top">TOP</a>
+		</div>
+	</footer>
+</div>
+
+<!--[if lt IE 9]><script src="/js/html5.js"></script><![endif]-->
+<link rel="stylesheet" href="/css/printArea.css" media="print" />
+<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+<link rel="apple-touch-icon-precomposed" href="/favicon_m.png" />
+
+<!-- 공통 JS -->
+<script src="/kli/js/layout.js"></script>
+
+<!-- 서브 JS -->
+<script src="/kli/js/sub.js"></script>
+
+<script src="/jquery/js/jquery.bxslider.min.js"></script>
+<script src="/jquery/js/ui.datepicker.js"></script>
+<script src="/jquery/js/jquery-ui.min.js"></script>
+
+
+	
+
+	
+<script>
+	try { initNavigation('01'); } catch (e) { console.log(""); }	// 메인메뉴 활성화
+	//try { initNavigationMbl('01'); } catch (e) { console.log(""); }	// 모바일 메인메뉴 활성화
+	try { initLeftMenuLI('0102', '010206'); } catch (e) { console.log(""); }	// 서브메뉴 활성화
+	try { init3DepthMenu('010206'); } catch (e) { console.log(""); }
+	try { init4DepthMenu('01020600'); } catch (e) { console.log(""); }
+	try { init5DepthMenu('0102060000'); } catch (e) { console.log(""); }
+	try { init1DepthComboMenu('01'); } catch (e) { console.log(""); }
+	try { init2DepthComboMenu('0102'); } catch (e) { console.log(""); }
+	try { init3DepthComboMenu('010206'); } catch (e) { console.log(""); }
+	try { init4DepthComboMenu('01020600'); } catch (e) { console.log(""); }
+	try { init5DepthComboMenu('0102060000'); } catch (e) { console.log(""); }
+	$.ajax({ url:'/logInsert.es?mid=a10102060000' });		// 로그기록
+</script>
+	
+	
+
+</body>
+</html>

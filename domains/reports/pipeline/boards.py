@@ -26,9 +26,17 @@ class Board(BaseModel):
     series: str
     list_url: str
     item_re: str
-    page_param: Optional[str] = None
-    page_size_param: Optional[str] = None
-    page_size: Optional[int] = None
+    # 게시판마다 페이저 주소가 다르다(KLI 만 해도 rschRptpList / prdclList /
+    # issuePaperList 셋). 목록 주소로 페이지를 만들어 낼 수 없으므로 실측한
+    # 템플릿을 그대로 둔다. {page} 자리에 페이지 번호가 들어간다.
+    page_url: Optional[str] = None
+    # {page} 에 번호 대신 이 값들이 차례로 들어간다. KDI 경제동향은 페이지가
+    # 아니라 연도로 넘긴다(monTrends?year=2025).
+    page_values: Optional[list[str]] = None
+    single_page: bool = False
+    # 게시판마다 번호 공간이 다르다(report_no / art_no / paper_no). 접두어가
+    # 없으면 다른 게시판의 다른 보고서가 같은 id 를 갖는다.
+    id_prefix: str = ''
     filter: bool = False
     enabled: bool = True
     collapse: bool = False

@@ -24,18 +24,12 @@ def test_all_four_orgs_are_present():
     assert orgs == {'kli', 'keis', 'kdi', 'kiet'}
 
 
-def test_keis_reads_the_detail_from_the_list_page():
-    # KEIS 는 목록 항목이 초록·PDF 를 다 들고 있고 상세 페이지가 없다(실측).
-    # 이 플래그가 꺼지면 수집기가 870건을 헛되이 한 번씩 더 요청한다.
-    keis = [b for b in boards.load_boards() if b.org == 'keis']
-    assert keis
-    assert all(b.detail_in_list for b in keis)
-
-
-def test_other_orgs_have_a_separate_detail_page():
-    for b in boards.load_boards():
-        if b.org != 'keis':
-            assert not b.detail_in_list, f'{b.id}'
+def test_only_the_boards_without_a_detail_page_read_it_from_the_list():
+    # 실측(2026-09-10): KEIS proj 게시판은 detail.do 상세가 따로 있고, 인력수급전망
+    # (bbs/115)만 목록이 곧 상세다. 이 플래그가 잘못 켜지면 초록이 통째로 비고,
+    # 잘못 꺼지면 없는 상세를 건마다 한 번씩 더 요청한다.
+    flagged = {b.id for b in boards.load_boards() if b.detail_in_list}
+    assert flagged == {'keis-supply'}
 
 
 def test_unregistered_board_is_reported_not_added():
