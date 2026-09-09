@@ -36,15 +36,29 @@ wrangler kv namespace create QUOTA
 
 두 값을 `domains/ask/worker/wrangler.jsonc` 의 자리표시자에 넣는다(§3).
 
-### 3) **`0001_init.sql` 을 원격에 적용한다** ← 가장 잘 빠지는 단계
+### 3) **마이그레이션을 번호순으로 원격에 적용한다** ← 가장 잘 빠지는 단계
 
 `wrangler d1 create` 는 **빈 데이터베이스**를 만든다. 표는 하나도 없다.
+`migrations/` 의 파일을 **번호순으로 하나도 빠짐없이** 돌린다. 뒤 번호만 돌리면
+`no such column` 이, 앞 번호만 돌리면 새 컬럼을 쓰는 코드가 조용히 빈손이 된다.
 
 ```bash
-wrangler d1 execute employ-archive-ask --remote \
-  --config domains/ask/worker/wrangler.jsonc \
-  --file=domains/ask/worker/migrations/0001_init.sql
+for f in domains/ask/worker/migrations/*.sql; do
+  wrangler d1 execute employ-archive-ask --remote \
+    --config domains/ask/worker/wrangler.jsonc --file="$f"
+done
 ```
+
+지금까지의 마이그레이션:
+
+| 파일 | 무엇을 바꾸나 |
+|---|---|
+| `0001_init.sql` | 12표 + `hypothesis_verdict` 뷰 |
+| `0002_phenomenon_axes.sql` | `phenomenon.집단축`(JSON) — 현상이 자기 축을 선언한다 |
+| `0003_forecast_org_name.sql` | `forecast.org_name_ko` — 전망 카드의 한글 기관명 |
+
+**컬럼을 늘리면 `tools/d1_sync.py` 의 `COLUMNS` 도 같이 늘린다.**
+`tools/tests/test_d1_sync.py` 가 마이그레이션 전부와 대조해 어긋나면 잡는다.
 
 확인:
 
@@ -202,7 +216,8 @@ export const DOMAINS = [
 
 증상별 원인:
 
-- `no such table: …` → §1-3 이 안 됐다. 원격 D1 에 `0001_init.sql` 을 적용한다.
+- `no such table: …` → §1-3 이 안 됐다. 원격 D1 에 `migrations/` 를 번호순으로 적용한다.
+- `no such column: …` → 마이그레이션 일부만 돌았다. 빠뜨린 번호를 마저 적용한다.
 - `Authentication error` / `not found` → §2 의 시크릿 둘을 확인한다.
 - 화면은 "서버에 연결하지 못했다" 인데 워커는 살아 있다 → `ASK_ALLOWED_ORIGIN`(CORS) 또는
   `ask.js` 의 `API` 상수(§1-7).

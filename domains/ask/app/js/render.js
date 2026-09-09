@@ -11,11 +11,11 @@ function fmtVal(v) {
 // 없는 게 아니라 카탈로그가 없는 것 — forecast 행 자체가 org·source_url·
 // landing_url 을 들고 있다. 그게 원문이다). 그래서 전망의 출처 블록은
 // source_catalog 조회(카드.소스) 가 아니라 forecast 행에서 직접 그린다.
-function 전망출처목록(전망행들) {
+function 전망출처목록(전망묶음들) {
   const seen = new Map();
-  for (const r of 전망행들 ?? []) {
-    if (!r.org || seen.has(r.org)) continue;
-    seen.set(r.org, { name_ko: r.org, endpoint: r.landing_url ?? r.source_url ?? null });
+  for (const g of 전망묶음들 ?? []) {
+    if (!g.org || seen.has(g.org)) continue;
+    seen.set(g.org, { name_ko: g.org_name_ko ?? g.org, endpoint: g.landing_url ?? null });
   }
   return [...seen.values()];
 }
@@ -93,44 +93,54 @@ function 지표폴백(esc, 카드) {
   </p>` + (카드.지표 ?? []).map((i) => 근거행(esc, i)).join('');
 }
 
-// Important 4(리뷰 라운드 1): 몇 년도 전망인지·단위가 뭔지 없으면 숫자가 뜻을
-// 잃는다. target_year·target_period·unit 을 함께 그리고, 연도로 묶어 보여준다
-// (ask.mjs 도 슬롯이 연도를 지목하면 그 범위로 조회를 좁히도록 같이 고쳤다).
-function 전망행(esc, r) {
-  const 시점 = [r.target_year != null ? `${r.target_year}년` : null, r.target_period]
-    .filter((x) => x != null && x !== '').join(' ');
-  return `<div class="ev">
-    <b>${esc(r.org ?? r.기관 ?? '')}</b>
-    <span class="ev__basis">${esc(시점)}${r.published_at ? ` · 발표 ${esc(r.published_at)}` : ''}</span>
-    <div class="ev__nums"><span class="num-chip">${esc(fmtVal(r.value ?? r.값 ?? ''))}${r.unit ? ` ${esc(r.unit)}` : ''}</span></div>
-  </div>`;
+// **카드 1장 = 보고서 1건.** 전에는 같은 보고서의 annual·h1·h2 가 카드 3장으로
+// 흩어지고 근거 문장은 아래 따로 나열돼 **어느 전망의 근거인지 알 수 없었다**
+// (2026-09-09 화면 실측). 이제 한 카드 안에 수치와 근거가 같이 있다.
+//
+// 몇 년도 전망인지·단위가 뭔지 없으면 숫자가 뜻을 잃는다 — 시점과 단위를 늘 붙인다.
+const 시점라벨 = { annual: '연간', h1: '상반기', h2: '하반기' };
+
+function 수치칩(esc, v) {
+  const 시점 = 시점라벨[v.target_period] ?? v.target_period ?? '';
+  const 조정 = (v.prev_value != null && v.revision != null)
+    ? ` <span class="forecast-num__rev">(이전 ${esc(fmtVal(v.prev_value))} · ${esc(fmtVal(v.revision))})</span>`
+    : '';
+  return `<span class="num-chip forecast-num">
+    <b>${esc(시점)}</b> ${esc(fmtVal(v.value))}${v.unit ? ` ${esc(v.unit)}` : ''}${조정}
+  </span>`;
 }
 
-function 전망블록(esc, 카드) {
-  const 연도별 = new Map();
-  for (const r of 카드.전망 ?? []) {
-    const key = r.target_year != null ? String(r.target_year) : '연도 미상';
-    if (!연도별.has(key)) 연도별.set(key, []);
-    연도별.get(key).push(r);
-  }
-  const rows = [...연도별.entries()].map(([year, items]) => `
-    <div class="forecast-year">
-      <h4>${esc(year === '연도 미상' ? year : `${year}년 전망`)}</h4>
-      ${items.map((r) => 전망행(esc, r)).join('')}
-    </div>`).join('');
-  // Important 3(최종 리뷰): 컬럼 이름은 `url` 이 아니라 **`source_url`·`source_page`**
-  // 다(0001_init.sql 의 forecast_rationale). `r.url` 은 항상 falsy 라 원문 링크가
-  // 영구히 안 나왔다. 페이지 번호가 있으면 같이 보여 준다 — 100쪽짜리 PDF 에서
-  // "그 문장이 어디 있는지" 가 인용의 절반이다.
-  const 근거서술 = (카드.근거서술 ?? []).map((r) => {
-    const 라벨 = r.source_page != null && r.source_page !== ''
-      ? `원문 p.${r.source_page}` : '원문';
-    return `<blockquote class="rationale">
+// 컬럼 이름은 `url` 이 아니라 **`source_url`·`source_page`** 다(0001_init.sql 의
+// forecast_rationale). `r.url` 은 항상 falsy 라 원문 링크가 영구히 안 나왔었다.
+// 100쪽짜리 PDF 에서 "그 문장이 어디 있는지" 가 인용의 절반이다.
+function 근거인용(esc, r) {
+  const 라벨 = r.source_page != null && r.source_page !== ''
+    ? `원문 p.${r.source_page}` : '원문';
+  return `<blockquote class="rationale">
     ${esc(r.text ?? r.내용 ?? '')}
     ${r.source_url ? 링크또는텍스트(esc, r.source_url, 라벨) : ''}
   </blockquote>`;
+}
+
+export function 전망블록(esc, 카드) {
+  return (카드.전망 ?? []).map((g) => {
+    const 연도 = [...new Set((g.수치 ?? []).map((v) => v.target_year).filter((y) => y != null))];
+    const 제목 = 링크또는텍스트(esc, g.landing_url, g.report_title ?? g.org ?? '');
+    // **근거가 없으면 없다고 쓴다.** 조용히 비우면 "근거가 없다" 는 사실이 화면에서
+    // 사라진다 — 이 도구에서 가장 하면 안 되는 일이다.
+    const 근거 = (g.근거서술 ?? []).length
+      ? g.근거서술.map((r) => 근거인용(esc, r)).join('')
+      : '<p class="rationale rationale--none">이 보고서의 근거 문장은 적재돼 있지 않다</p>';
+    return `<div class="forecast-report">
+      <div class="forecast-report__head">
+        <b>${esc(g.org_name_ko ?? g.org ?? '')}</b> ${제목}
+        <span class="ev__basis">${연도.length ? `${esc(연도.join('·'))}년 전망` : ''}${
+          g.published_at ? ` · 발표 ${esc(g.published_at)}` : ''}</span>
+      </div>
+      <div class="ev__nums">${(g.수치 ?? []).map((v) => 수치칩(esc, v)).join('')}</div>
+      ${근거}
+    </div>`;
   }).join('');
-  return rows + 근거서술;
 }
 
 function 비교블록(esc, 비교) {
@@ -210,7 +220,7 @@ function evidenceHtml(esc, 카드, columns) {
     return 현상 + 전부판정불가 + (카드.가설 ?? []).map((h) => 가설카드(esc, h, columns)).join('');
   }
   if (카드.지표) return 지표폴백(esc, 카드);
-  if (카드.전망 || 카드.근거서술) return 전망블록(esc, 카드);
+  if (카드.전망) return 전망블록(esc, 카드);
   if (카드.비교) return 비교블록(esc, 카드.비교) + (카드.근거 ?? []).map((e) => 근거행(esc, e)).join('');
   if ((카드.근거 ?? []).length) return (카드.근거 ?? []).map((e) => 근거행(esc, e)).join('');
   return 라우팅블록(esc, 카드.라우팅);
@@ -276,7 +286,7 @@ export function renderAll(카드, { esc, badgeLabel, understandLine, evidenceCol
   // ── 소스 ── 스펙 §6: 원문 링크 + 확인일 + evidence_status. 링크는 http/https
   // 화이트리스트일 때만 그린다(Minor: href 스킴 검증). 전망은 source_catalog 가
   // 아니라 forecast 행(org·landing_url·source_url)에서 직접 그린다(판정 2) ──────
-  const 소스행 = (카드.전망 || 카드.근거서술) ? 전망출처목록(카드.전망) : (카드.소스 ?? []);
+  const 소스행 = 카드.전망 ? 전망출처목록(카드.전망) : (카드.소스 ?? []);
   $('sources').innerHTML = 소스행.map((s) =>
     `<div class="source">${링크또는텍스트(esc, s.endpoint, s.name_ko ?? s.id)}
      <small>${esc(s.verified_at ?? '')} ${esc(s.evidence_status ?? '')}</small></div>`).join('');

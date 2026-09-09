@@ -230,11 +230,29 @@
 
 .rationale a { margin-left: 8px; font-size: 12px; }
 
-.forecast-year + .forecast-year { margin-top: 10px; }
-.forecast-year h4 {
-  margin: 0 0 6px 0;
-  font-size: 12px;
+/* 카드 1장 = 보고서 1건. 수치와 그 근거가 같은 테두리 안에 있어야
+   "어느 전망의 근거인지" 가 보인다. */
+.forecast-report {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+.forecast-report + .forecast-report { margin-top: 10px; }
+.forecast-report__head { margin-bottom: 8px; }
+.forecast-report__head b { margin-right: 6px; }
+.forecast-report__head .ev__basis { display: block; margin-top: 2px; }
+.forecast-report .rationale { margin-top: 8px; }
+
+/* 조정 전 값·조정폭은 전망값보다 한 단계 낮게 — 같은 크기로 그리면
+   어느 쪽이 이번 전망인지 헷갈린다. */
+.forecast-num__rev { font-size: 11px; color: var(--text-muted); font-weight: 400; }
+
+.rationale--none {
+  background: none;
+  border-left: 3px solid var(--border);
   color: var(--text-muted);
+  font-style: normal;
 }
 
 .compare { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }

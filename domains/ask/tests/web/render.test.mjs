@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 import {
   badgeLabel, understandLine, evidenceColumns, isSampleErrorText, safeHref,
 } from '../../app/js/badge.js';
+import { 전망블록 } from '../../app/js/render.js';
 
 const 배지코드8종 = [
   '저확신', '검증실패', '한도초과', '할당량확인불가', '반증미설계',
@@ -104,4 +105,66 @@ test('빈 값·비문자열 href 도 통과시키지 않는다', () => {
   assert.equal(safeHref(''), null);
   assert.equal(safeHref(null), null);
   assert.equal(safeHref(undefined), null);
+});
+
+// ── 전망: 카드 1장 = 보고서 1건 (실배포 화면 검증) ─────────────────────────
+// 같은 보고서의 annual·h1·h2 가 카드 3장으로 흩어지고 근거는 아래 따로 나열돼
+// 어느 전망의 근거인지 알 수 없었다. 이제 한 카드 안에 수치와 근거가 같이 있다.
+const esc = (s) => String(s ?? '').replace(/[&<>"]/g, (c) =>
+  ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+const 묶음 = [
+  { org: 'KDI', org_name_ko: 'KDI', report_title: 'KDI 경제전망 2024 하반기',
+    published_at: '2024-11-12', landing_url: 'https://kdi/page', indicator: 'emp_change',
+    수치: [
+      { target_year: 2027, target_period: 'annual', value: 18, unit: '만명', prev_value: 20, revision: -2 },
+      { target_year: 2027, target_period: 'h1', value: 22, unit: '만명', prev_value: null, revision: null },
+      { target_year: 2027, target_period: 'h2', value: 13, unit: '만명', prev_value: null, revision: null },
+    ],
+    근거서술: [{ text: '고용 증가폭이 둔화된다', source_url: 'https://kdi/pdf', source_page: 12 }] },
+  { org: 'BOK', org_name_ko: '한국은행', report_title: '경제전망보고서(2025년 2월)',
+    published_at: '2025-02-25', landing_url: 'https://bok/page', indicator: 'emp_change',
+    수치: [{ target_year: 2027, target_period: 'annual', value: 17, unit: '만명', prev_value: null, revision: null }],
+    근거서술: [] },
+];
+
+test('보고서 하나가 카드 하나다', () => {
+  const html = 전망블록(esc, { 전망: 묶음 });
+  assert.equal((html.match(/class="forecast-report"/g) ?? []).length, 2);
+});
+
+test('머리에 기관명·보고서 제목·발표일이 있다', () => {
+  const html = 전망블록(esc, { 전망: 묶음 });
+  assert.ok(html.includes('한국은행'));
+  assert.ok(html.includes('KDI 경제전망 2024 하반기'));
+  assert.ok(html.includes('2024-11-12'));
+});
+
+test('수치가 한 카드 안에 나란히 있다', () => {
+  const html = 전망블록(esc, { 전망: 묶음 });
+  const kdi = html.split('class="forecast-report"')[1];
+  for (const t of ['연간', '상반기', '하반기', '18', '22', '13']) {
+    assert.ok(kdi.includes(t), `${t} 가 없다`);
+  }
+});
+
+test('근거 문장이 그 카드 안에 쪽수 링크와 함께 붙는다', () => {
+  const html = 전망블록(esc, { 전망: 묶음 });
+  const kdi = html.split('class="forecast-report"')[1].split('class="forecast-report"')[0];
+  assert.ok(kdi.includes('고용 증가폭이 둔화된다'));
+  assert.ok(kdi.includes('원문 p.12'));
+});
+
+test('근거가 없는 보고서는 없다고 말한다 — 조용히 비우지 않는다', () => {
+  const html = 전망블록(esc, { 전망: 묶음 });
+  assert.ok(html.includes('이 보고서의 근거 문장은 적재돼 있지 않다'));
+});
+
+test('조정 전 값과 조정폭이 있으면 보여 준다', () => {
+  const html = 전망블록(esc, { 전망: 묶음 });
+  assert.ok(html.includes('20'), '이전 전망값');
+});
+
+test('전망이 없어도 죽지 않는다', () => {
+  assert.equal(전망블록(esc, { 전망: [] }), '');
 });

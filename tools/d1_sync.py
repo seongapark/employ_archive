@@ -46,7 +46,8 @@ COLUMNS = {
     "observation": ["id", "source", "series", "breakdown", "category", "period", "value", "unit",
                      "yoy", "status", "rse", "rse_flag", "released_at", "release_url"],
     "forecast": ["id", "org", "report_title", "published_at", "target_year", "target_period",
-                 "indicator", "value", "unit", "prev_value", "revision", "source_url", "landing_url"],
+                 "indicator", "value", "unit", "prev_value", "revision", "source_url",
+                 "landing_url", "org_name_ko"],
     "forecast_rationale": ["org", "published_at", "indicator", "text", "tags", "source_url", "source_page"],
     "release": ["id", "source", "month", "title", "posted_at", "url", "attachments"],
 }

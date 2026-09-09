@@ -84,7 +84,9 @@ test('주제를 전망 지표 코드로 옮겨 조회한다', async () => {
   for (const 주제 of ['취업자', '취업자수']) {  // 짧은 정규형·카탈로그 원어 둘 다
     const r = await ask({ db, llm: null }, { 유형: '전망', 슬롯: { 주제, 기간: { from: '2027', to: '2027' } } });
     assert.equal(r.지표코드, 'emp_change');
-    assert.deepEqual(r.전망.map((x) => x.id), ['f1']);
+    // 응답은 보고서 묶음이다(평면 행 배열이 아니다)
+    assert.deepEqual(r.전망.map((g) => [g.org, g.수치.map((v) => v.value)]),
+                     [['KDI', [12]]]);
   }
 });
 
@@ -408,4 +410,113 @@ test('기간을 주면 그 구간을 그대로 낸다', async () => {
   const e = r.근거.find((x) => x.출처 === 'eaps');
   assert.deepEqual(e.관측.map((o) => o.기간), ['2026-06', '2026-07']);
   assert.ok(!r.한계.some((l) => l.includes('최신')));
+});
+
+// ── 전망을 보고서 단위로 묶는다 (실배포 화면 검증) ─────────────────────────
+// 같은 보고서(KDI 2024-11-12)의 annual·h1·h2 가 카드 3장으로 흩어지고, 근거
+// 문장은 아래 따로 나열돼 **어느 전망의 근거인지 알 수 없었다.** 근거 조회가
+// `WHERE indicator = ?` 뿐이라 질문한 연도와 무관한 보고서 문장까지 섞였다.
+//
+// forecast_rationale 의 PK 는 (org, published_at, indicator) 다 — 한 보고서·한
+// 지표에 근거는 **최대 1건**이다. 그래서 "같은 보고서의 근거 2건" 은 지표가
+// 달라야 성립하고, 그중 물은 지표만 붙어야 한다.
+const 전망픽스처 = {
+  forecast: [
+    { id: 'kdi-a', org: 'KDI', org_name_ko: 'KDI', report_title: 'KDI 경제전망 2024 하반기',
+      published_at: '2024-11-12', target_year: 2027, target_period: 'h2',
+      indicator: 'emp_change', value: 13, unit: '만명', prev_value: null, revision: null,
+      source_url: 'https://kdi/pdf', landing_url: 'https://kdi/page' },
+    { id: 'kdi-b', org: 'KDI', org_name_ko: 'KDI', report_title: 'KDI 경제전망 2024 하반기',
+      published_at: '2024-11-12', target_year: 2027, target_period: 'annual',
+      indicator: 'emp_change', value: 18, unit: '만명', prev_value: 20, revision: -2,
+      source_url: 'https://kdi/pdf', landing_url: 'https://kdi/page' },
+    { id: 'kdi-c', org: 'KDI', org_name_ko: 'KDI', report_title: 'KDI 경제전망 2024 하반기',
+      published_at: '2024-11-12', target_year: 2027, target_period: 'h1',
+      indicator: 'emp_change', value: 22, unit: '만명', prev_value: null, revision: null,
+      source_url: 'https://kdi/pdf', landing_url: 'https://kdi/page' },
+    { id: 'bok-a', org: 'BOK', org_name_ko: '한국은행', report_title: '경제전망보고서(2025년 2월)',
+      published_at: '2025-02-25', target_year: 2027, target_period: 'annual',
+      indicator: 'emp_change', value: 17, unit: '만명', prev_value: null, revision: null,
+      source_url: 'https://bok/pdf', landing_url: 'https://bok/page' },
+  ],
+  forecast_rationale: [
+    { org: 'KDI', published_at: '2024-11-12', indicator: 'emp_change',
+      text: '고용 증가폭이 둔화된다', tags: '[]', source_url: 'https://kdi/pdf', source_page: 12 },
+    // 같은 보고서지만 **다른 지표**의 근거 — 취업자 전망을 물었으면 안 붙는다
+    { org: 'KDI', published_at: '2024-11-12', indicator: 'cpi',
+      text: '물가는 안정된다', tags: '[]', source_url: 'https://kdi/pdf', source_page: 20 },
+    // **다른 보고서**의 근거 — 지표는 같지만 이 묶음의 것이 아니다
+    { org: 'KLI', published_at: '2023-05-19', indicator: 'emp_change',
+      text: '내년 고용성과는 예년 수준보다 감소한다', tags: '[]',
+      source_url: 'https://kli/pdf', source_page: 3 },
+  ],
+};
+const 전망슬롯 = { 주제: '취업자수', 집단축: [], 지역입도: '전국', 시간입도: '연',
+                   기간: { from: '2027', to: '2027' }, 출처: [] };
+
+test('같은 보고서의 전망은 한 묶음이다', async () => {
+  const r = await ask({ db: makeFakeDb(전망픽스처) }, { 유형: '전망', 슬롯: 전망슬롯 });
+  assert.equal(r.전망.length, 2);                       // KDI 한 묶음 + BOK 한 묶음
+  const kdi = r.전망.find((g) => g.org === 'KDI');
+  assert.equal(kdi.report_title, 'KDI 경제전망 2024 하반기');
+  assert.equal(kdi.org_name_ko, 'KDI');
+  assert.equal(kdi.landing_url, 'https://kdi/page');
+  assert.equal(kdi.수치.length, 3);
+});
+
+test('수치는 연간 → 상반기 → 하반기 순이다', async () => {
+  const r = await ask({ db: makeFakeDb(전망픽스처) }, { 유형: '전망', 슬롯: 전망슬롯 });
+  const kdi = r.전망.find((g) => g.org === 'KDI');
+  assert.deepEqual(kdi.수치.map((v) => v.target_period), ['annual', 'h1', 'h2']);
+  assert.deepEqual(kdi.수치.map((v) => v.value), [18, 22, 13]);
+  assert.equal(kdi.수치[0].prev_value, 20);
+  assert.equal(kdi.수치[0].revision, -2);
+});
+
+test('묶음은 발표일 내림차순이다 — 최신 보고서가 먼저다', async () => {
+  const r = await ask({ db: makeFakeDb(전망픽스처) }, { 유형: '전망', 슬롯: 전망슬롯 });
+  assert.deepEqual(r.전망.map((g) => g.published_at), ['2025-02-25', '2024-11-12']);
+});
+
+test('근거는 그 보고서·그 지표의 것만 붙는다', async () => {
+  const r = await ask({ db: makeFakeDb(전망픽스처) }, { 유형: '전망', 슬롯: 전망슬롯 });
+  const kdi = r.전망.find((g) => g.org === 'KDI');
+  assert.deepEqual(kdi.근거서술.map((x) => x.text), ['고용 증가폭이 둔화된다']);
+  assert.equal(kdi.근거서술[0].source_page, 12);
+  // 다른 지표(cpi)도, 다른 보고서(KLI)도 섞이지 않는다
+  const 전체 = r.전망.flatMap((g) => g.근거서술.map((x) => x.text));
+  assert.ok(!전체.includes('물가는 안정된다'));
+  assert.ok(!전체.includes('내년 고용성과는 예년 수준보다 감소한다'));
+});
+
+test('근거가 없는 보고서는 빈 배열이다 — 그 사실이 화면에 남는다', async () => {
+  const r = await ask({ db: makeFakeDb(전망픽스처) }, { 유형: '전망', 슬롯: 전망슬롯 });
+  const bok = r.전망.find((g) => g.org === 'BOK');
+  assert.deepEqual(bok.근거서술, []);
+});
+
+test('연-월 형식 기간에서도 연도를 집어낸다', async () => {
+  // 1패스가 시간입도=연인데 기간을 "2027-01"~"2027-12" 로 준다. Number() 로만
+  // 읽으면 NaN 이라 연도 필터가 통째로 풀려 전 연도가 쏟아진다(실측: 98건).
+  const 픽스처 = { ...전망픽스처, forecast: [
+    ...전망픽스처.forecast,
+    { id: 'kdi-2025', org: 'KDI', org_name_ko: 'KDI', report_title: 'KDI 경제전망 2024 하반기',
+      published_at: '2024-11-12', target_year: 2025, target_period: 'annual',
+      indicator: 'emp_change', value: 9, unit: '만명', prev_value: null, revision: null,
+      source_url: 'https://kdi/pdf', landing_url: 'https://kdi/page' },
+  ] };
+  const r = await ask({ db: makeFakeDb(픽스처) }, { 유형: '전망',
+    슬롯: { ...전망슬롯, 기간: { from: '2027-01', to: '2027-12' } } });
+  const 값 = r.전망.flatMap((g) => g.수치.map((v) => v.value));
+  assert.ok(!값.includes(9), '2025년 전망이 섞이면 안 된다');
+});
+
+test('전망 근거 문장은 허용텍스트에 들어간다 — 인용이 위반이 되지 않는다', async () => {
+  const 픽스처 = { ...전망픽스처, forecast_rationale: [
+    { org: 'KDI', published_at: '2024-11-12', indicator: 'emp_change',
+      text: '올해 1~3분기, 그리고 10월까지 노동시장은 강건했다',
+      tags: '[]', source_url: 'https://kdi/pdf', source_page: 7 },
+  ] };
+  const r = await ask({ db: makeFakeDb(픽스처) }, { 유형: '전망', 슬롯: 전망슬롯 });
+  assert.ok(r.허용텍스트.includes('올해 1~3분기, 그리고 10월까지 노동시장은 강건했다'));
 });

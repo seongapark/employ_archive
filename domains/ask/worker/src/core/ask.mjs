@@ -119,6 +119,10 @@ function 허용텍스트(r) {
     for (const x of [...(h.지지 ?? []), ...(h.반증 ?? [])]) { t.push(x.우회경로); t.push(x.사유); }
   }
   for (const x of r.지표 ?? []) if (x.우회경로) t.push(x.우회경로);
+  // 전망 보고서의 근거 문장도 **우리가 LLM 에게 넘긴 문장**이다. 빠져 있으면 그
+  // 문장을 그대로 인용한 답변이 위반으로 잡혀 버려진다("올해 1~3분기, 그리고
+  // 10월까지…" 처럼 원문에 숫자가 흔하다).
+  for (const g of r.전망 ?? []) for (const x of g.근거서술 ?? []) t.push(x.text);
   // 범위밖의 예시 질문은 우리가 만들어 카드에 실은 문장이다 — "2026년 7월 30대 취업자는
   // 몇 명인가" 를 그대로 인용하면 7·30 이 위반으로 잡힌다(2026년은 기간 토큰이라 마스킹된다)
   for (const q of r.답할수있는질문 ?? []) t.push(q);
@@ -229,6 +233,55 @@ async function 수치조회(deps, 슬롯, { 출처, 비교하한 } = {}) {
 // 현상은 고르는 것이지 박아 두는 것이 아니다 — id 를 코드에 박으면 어떤 원인탐색
 // 질문에도 같은 현상을 답하게 된다. 시간입도·지역·기간·주제로 대조해 고르고,
 // 걸리는 현상이 없으면 판정을 건너뛰고 지표 폴백으로 간다.
+// "2027" · "2027-01" · "2027S1" 어디서든 연도를 집어낸다. 못 집으면 null 이고,
+// 호출부는 필터를 안 건다(못 좁혔다는 사실을 화면이 안 숨기면 된다).
+function 연도뽑기(v) {
+  const m = /^(\d{4})/.exec(String(v ?? ''));
+  const y = m ? Number(m[1]) : NaN;
+  return Number.isFinite(y) ? y : null;
+}
+
+// 전망 행을 **보고서 단위**로 묶는다. 묶지 않으면 같은 보고서의 annual·h1·h2 가
+// 카드 3장으로 흩어지고, 근거 문장은 아래 따로 나열돼 어느 전망의 근거인지 알 수
+// 없다(2026-09-09 화면 실측).
+//
+// 근거는 (org, published_at, indicator) 로 **그 묶음에만** 붙인다. 지표만으로 전부
+// 긁으면 물은 연도와 무관한 보고서 문장까지 섞인다 — 실제로 그랬다.
+// forecast_rationale 의 PK 가 그 셋이라 한 묶음·한 지표에 근거는 최대 1건이다.
+//
+// 근거가 없는 보고서는 **빈 배열로 남긴다.** 묶음을 지우면 "근거가 없다" 는 사실이
+// 화면에서 사라진다 — 이 도구에서 가장 하면 안 되는 일이다.
+const 수치순서 = { annual: 0, h1: 1, h2: 2 };
+export function 보고서묶기(rows, 근거서술 = []) {
+  const 묶음 = new Map();
+  for (const r of rows ?? []) {
+        const key = JSON.stringify([r.org, r.published_at]);
+    if (!묶음.has(key)) {
+      묶음.set(key, {
+        org: r.org, org_name_ko: r.org_name_ko ?? r.org,
+        report_title: r.report_title ?? null, published_at: r.published_at ?? null,
+        landing_url: r.landing_url ?? r.source_url ?? null,
+        indicator: r.indicator, 수치: [], 근거서술: [],
+      });
+    }
+    묶음.get(key).수치.push({
+      target_year: r.target_year, target_period: r.target_period,
+      value: r.value, unit: r.unit,
+      prev_value: r.prev_value ?? null, revision: r.revision ?? null,
+    });
+  }
+  for (const g of 묶음.values()) {
+    g.수치.sort((a, b) =>
+      (a.target_year - b.target_year)
+      || ((수치순서[a.target_period] ?? 9) - (수치순서[b.target_period] ?? 9)));
+    g.근거서술 = (근거서술 ?? []).filter((x) =>
+      x.org === g.org && x.published_at === g.published_at && x.indicator === g.indicator);
+  }
+  // 발표일 내림차순 — 최신 보고서가 먼저다
+  return [...묶음.values()].sort((a, b) =>
+    String(b.published_at ?? '').localeCompare(String(a.published_at ?? '')));
+}
+
 async function 현상찾기(deps, 슬롯) {
   const phs = await deps.db.all('SELECT * FROM phenomenon');
   const 주제 = 주제원어(슬롯.주제);
@@ -305,15 +358,19 @@ export async function ask(deps, { 유형, 슬롯: 입력슬롯 = {}, 저확신 =
   } else if (유형 === '전망') {
     const ind = 전망지표[슬롯.주제] ?? null;   // 주제는 ask() 맨 앞에서 이미 접혔다
     if (!ind) {
-      r = { ...base, 전망: [], 근거서술: [], 지표코드: null,
+      r = { ...base, 전망: [], 지표코드: null,
             한계: [`'${슬롯.주제}' 의 전망은 아직 다루지 않는다 — 전망 지표 카탈로그(${Object.values(전망지표).join('·')})에 대응 코드가 없다`] };
     } else {
       // Task 13 리뷰 대응(Important 4): 연도 필터가 없으면 여러 연도의 전망이
       // 섞여 나올 수 있다 — 슬롯이 연도를 지목했으면(수치조회처럼 강제는 아니지만)
       // 그 범위로 좁힌다. 못 지목하면(연/기간이 비거나 연도가 아니면) 전부 낸다 —
       // 못 좁혔다는 사실 자체를 화면이 안 숨기면 된다(연도별로 묶어 그린다).
-      const 연도from = Number(슬롯.기간?.from) || null;
-      const 연도to = Number(슬롯.기간?.to) || null;
+      // **연도를 문자열 앞 네 자리에서 뽑는다.** Number() 로만 읽으면 1패스가
+      // 흔히 주는 "2027-01" 이 NaN 이라 연도 필터가 통째로 풀려 전 연도가
+      // 쏟아진다(2026-09-09 실측: 98건). 시간입도가 연인데 기간은 연-월로
+      // 오는 조합이 정상 경로다.
+      const 연도from = 연도뽑기(슬롯.기간?.from);
+      const 연도to = 연도뽑기(슬롯.기간?.to);
       const rows = (연도from && 연도to)
         ? await deps.db.all(
             `SELECT * FROM forecast WHERE indicator = ?
@@ -334,7 +391,7 @@ export async function ask(deps, { 유형, 슬롯: 입력슬롯 = {}, 저확신 =
         '전망 기관은 소스 카탈로그에 등재돼 있지 않아 등급·한계 정보가 없다',
       ];
       if (!rows.length) 한계.push(`${ind} 전망이 아직 적재돼 있지 않다`);
-      r = { ...base, 전망: rows, 근거서술, 지표코드: ind, 한계 };
+      r = { ...base, 전망: 보고서묶기(rows, 근거서술), 지표코드: ind, 한계 };
     }
   } else if (유형 === '원인탐색') {
     const ph = await 현상찾기(deps, 슬롯);
