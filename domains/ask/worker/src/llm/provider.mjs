@@ -1,6 +1,6 @@
 // 유일한 네트워크 의존. 주입 가능해야 테스트가 나가지 않는다.
 // OPENROUTER_API_KEY 는 wrangler secret 으로만 들어온다 — 이 파일에는 키 값이
-// 한 글자도 없다. apiKey 는 항상 호출부(index.mjs)가 env 에서 읽어 주입한다.
+// 한 글자도 없다. apiKey 와 baseUrl 은 항상 호출부(index.mjs)가 env 에서 읽어 주입한다.
 
 // ★ 슬롯 값 필드에 enum 을 걸지 말 것. Task 0 실측에서 strict json_schema 의 enum 배열이
 // provider 문법 컴파일을 느리게 만들어 45초를 넘겼다(웹에서 사용 불가). 어휘 강제는
@@ -62,9 +62,12 @@ const SYS_COMPOSE =
   '근거에 없는 수치를 절대 만들지 않고, 계산도 하지 않는다(파생값은 이미 들어 있다). ' +
   '인과를 단정하지 않고 상관·선후만 말한다. 한계와 미확인을 반드시 채운다.';
 
-export function makeLlm({ apiKey, model, fetch: f = fetch }) {
+// baseUrl 을 주입으로 받는 이유: 공급자를 갈아끼울 때 코드가 아니라 설정만 바뀌게 한다.
+// 실제로 한 번 갈아끼웠다(OpenRouter → OpenAI). 요청·응답 형식이 같은 OpenAI 호환
+// 서비스면 wrangler.jsonc 의 ASK_API_BASE 한 줄로 옮겨갈 수 있다.
+export function makeLlm({ apiKey, model, baseUrl, fetch: f = fetch }) {
   async function once(system, user, schema, name) {
-    const res = await f('https://openrouter.ai/api/v1/chat/completions', {
+    const res = await f(`${baseUrl}/chat/completions`, {
       method: 'POST',
       signal: AbortSignal.timeout(20000),
       headers: { authorization: `Bearer ${apiKey}`, 'content-type': 'application/json' },
@@ -76,7 +79,7 @@ export function makeLlm({ apiKey, model, fetch: f = fetch }) {
                            json_schema: { name, strict: true, schema } },
       }),
     });
-    if (!res.ok) throw new Error(`openrouter ${res.status}`);
+    if (!res.ok) throw new Error(`llm ${res.status}`);
     const body = await res.json();
     return JSON.parse(body.choices[0].message.content);
   }

@@ -65,11 +65,11 @@ wrangler d1 execute employ-archive-ask --remote \
 ### 4) 시크릿을 넣는다
 
 ```bash
-wrangler secret put OPENROUTER_API_KEY --config domains/ask/worker/wrangler.jsonc
+wrangler secret put ASK_API_KEY --config domains/ask/worker/wrangler.jsonc
 # 프롬프트에 키를 붙여 넣는다. 이 값은 저장소 어디에도 커밋하지 않는다.
 ```
 
-`ASK_MODEL` · `ASK_DAILY_QUOTA` · `ASK_ALLOWED_ORIGIN` 은 secret 이 **아니다** —
+`ASK_API_BASE` · `ASK_MODEL` · `ASK_DAILY_QUOTA` · `ASK_ALLOWED_ORIGIN` 은 secret 이 **아니다** —
 `wrangler.jsonc` 의 `vars` 에 평문으로 둔다(§3).
 
 ### 5) 워커를 배포한다
@@ -131,7 +131,7 @@ const API = 'https://employ-archive-ask.<subdomain>.workers.dev/api/ask';  // �
 | `CLOUDFLARE_API_TOKEN` | D1 편집 권한이 있는 API 토큰 (Cloudflare 대시보드 → My Profile → API Tokens. `D1:Edit` 권한이면 충분하다) | `sync-catalog` · `collect-employment` · `collect-forecast` 의 D1 스텝 |
 | `CLOUDFLARE_ACCOUNT_ID` | Cloudflare 계정 ID (대시보드 우측, 또는 `wrangler whoami`) | 같음 |
 
-`OPENROUTER_API_KEY` 는 **GitHub Secret 이 아니다** — 워커 런타임에서만 필요하므로
+`ASK_API_KEY` 는 **GitHub Secret 이 아니다** — 워커 런타임에서만 필요하므로
 `wrangler secret put` 으로만 들어간다(1-4). GitHub Actions 는 LLM 을 부르지 않는다.
 
 ---
@@ -146,7 +146,14 @@ const API = 'https://employ-archive-ask.<subdomain>.workers.dev/api/ask';  // �
 | `kv_namespaces[0].id` = `"<wrangler kv namespace create QUOTA 후 채운다>"` | 1-2 의 `wrangler kv namespace create QUOTA` 가 출력한 **id**(32자 hex) |
 
 같이 확인할 것: `vars.ASK_ALLOWED_ORIGIN` 이 실제 Pages 오리진과 같은지(1-8),
-`vars.ASK_MODEL`(품질이 모자라면 이 값만 바꾼다), `vars.ASK_DAILY_QUOTA`(IP 별 하루 한도).
+`vars.ASK_API_BASE`(공급자 주소) · `vars.ASK_MODEL`(품질이 모자라면 이 값만 바꾼다) ·
+`vars.ASK_DAILY_QUOTA`(IP 별 하루 한도).
+
+**공급자를 갈아끼울 때는 코드가 아니라 `ASK_API_BASE`·`ASK_MODEL` 두 줄과 `ASK_API_KEY`
+시크릿만 바꾼다.** 요청·응답 형식이 OpenAI 호환이면 그대로 붙는다 — 실제로 한 번
+갈아끼웠다(OpenRouter → OpenAI). 다만 **공급자를 바꾸면 모델 선정 근거가 같이 옮겨가지
+않는다**: 구조화 출력 지원 여부·유형 분류 정확도·응답 지연을 스파이크로 다시 재고
+`ASK_MODEL` 을 정해야 한다.
 
 ---
 

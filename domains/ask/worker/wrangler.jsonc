@@ -10,8 +10,10 @@
     { "binding": "QUOTA", "id": "36a8c6cdef34411295826d7ee64ac386" }
   ],
   "vars": {
-    // secret 이 아니다. Task 0 스파이크가 통과시킨 슬러그를 넣고, 품질이 모자라면 이 값만 바꾼다
-    "ASK_MODEL": "mistralai/mistral-nemo",
+    // 공급자를 갈아끼울 때 코드가 아니라 이 두 줄만 바꾼다. OpenAI 호환 형식이면 그대로 붙는다.
+    "ASK_API_BASE": "https://api.openai.com/v1",
+    // secret 이 아니다. 스파이크로 확인한 모델을 넣고, 품질이 모자라면 이 값만 바꾼다
+    "ASK_MODEL": "gpt-4o-mini",
     "ASK_DAILY_QUOTA": "30",
     "ASK_ALLOWED_ORIGIN": "https://seongapark.github.io"
   }

@@ -1,5 +1,5 @@
 import { d1 } from './core/db.mjs';
-import { makeLlm } from './llm/openrouter.mjs';
+import { makeLlm } from './llm/provider.mjs';
 import { handleAsk } from './api/routes.mjs';
 
 const cors = (env) => ({
@@ -25,9 +25,9 @@ export default {
         db: d1(env.DB),
         kv: env.QUOTA,
         quota: Number(env.ASK_DAILY_QUOTA ?? 30),
-        // OPENROUTER_API_KEY 는 wrangler secret 으로만 들어온다 — 여기서도 값 자체는
+        // ASK_API_KEY 는 wrangler secret 으로만 들어온다 — 여기서도 값 자체는
         // 절대 리터럴로 쓰지 않고 env 를 통해서만 읽는다.
-        llm: makeLlm({ apiKey: env.OPENROUTER_API_KEY, model: env.ASK_MODEL }),
+        llm: makeLlm({ apiKey: env.ASK_API_KEY, model: env.ASK_MODEL, baseUrl: env.ASK_API_BASE }),
       };
       const ip = request.headers.get('cf-connecting-ip') ?? '0.0.0.0';
       const today = new Date().toISOString().slice(0, 10);
