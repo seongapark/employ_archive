@@ -14,8 +14,11 @@ from . import common
 
 BASE = 'https://www.kiet.re.kr/research/'
 
+# 제목 앵커 앞에 분류 딱지가 끼는 게시판이 있다(월간 산업경제의 `특집`).
+# 앵커가 바로 뒤에 온다고 가정하면 그 게시판만 조용히 0건이 된다.
 _ITEM_TITLE = re.compile(
-    r'<div class="rpt_tit">\s*<a href="([^"]+)"[^>]*>\s*<strong>(.*?)</strong>', re.S)
+    r'<div class="rpt_tit">(?:(?!</div>).)*?<a href="([^"]+)"[^>]*>\s*<strong>(.*?)</strong>',
+    re.S)
 _ITEM_META = re.compile(r'<p>(.*?)</p>', re.S)
 _DATE_SPAN = re.compile(r'<span class="date">(.*?)</span>', re.S)
 _TAB_BOX = re.compile(r'<div class="tab_box([^"]*)"[^>]*>(.*?)</div>', re.S)

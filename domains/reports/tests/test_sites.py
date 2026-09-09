@@ -27,6 +27,7 @@ CASES = [
     (keis, 'keis-supply', 'keis_supply_list.html'),
     (kiet, 'kiet-report', 'kiet_report_list.html'),
     (kdi, 'kdi-report', 'kdi_report_list.html'),
+    (kiet, 'kiet-economy', 'kiet_economy_list.html'),
 ]
 
 
@@ -163,3 +164,19 @@ def test_kdi_trends_pages_by_year_not_by_number():
     assert 'year=2026' in kdi.list_url(b, 1)
     assert 'year=2021' in kdi.list_url(b, 6)
     assert kdi.list_url(b, 7) == '', '연도 목록을 넘어가면 빈 주소여야 멈춘다'
+
+
+def test_kiet_monthly_articles_are_individual_items_not_issues():
+    # 월간지가 호 단위였다면 한 페이지에 12건 이하로만 나온다.
+    items = kiet.parse_list(fixture('kiet_economy_list.html'), BOARDS['kiet-economy'])
+    assert len(items) >= 20
+    assert items[0]['detail_url'].startswith(
+        'https://www.kiet.re.kr/research/economyDetailView')
+
+
+def test_kiet_title_survives_a_classification_tag_before_the_anchor():
+    # rpt_tit 안에 <span class="clsf">특집</span> 이 끼어 있다. 앵커가 바로
+    # 뒤에 온다고 가정하면 이 게시판만 조용히 0건이 된다(실제로 그랬다).
+    html = fixture('kiet_economy_list.html')
+    assert 'clsf' in html, '픽스처에 분류 딱지가 없으면 이 테스트는 무의미하다'
+    assert kiet.parse_list(html, BOARDS['kiet-economy'])

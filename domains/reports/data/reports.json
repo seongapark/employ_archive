@@ -150,6 +150,26 @@
   ]
  },
  {
+  "id": "kiet-is864",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "공공기관 지방이전의 파급효과와 혁신도시 거점화 방향",
+  "authors": [
+   "백승민"
+  ],
+  "published": "2026-08-07",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=864&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "산업별고용",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-10297",
   "org": "kli",
   "board": "kli-brief",
@@ -249,6 +269,66 @@
   "pages": null,
   "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=11324",
   "file_url": "https://www.keis.or.kr/keis/ko/proj/0/snp/pblc/preview.do?dn=20260721032618098.pdf&path=pblc",
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-ec3244",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "미·중 경쟁 2.0, 중국의 AI·공급망 전략 변화와 우리의 대응: K-제조 대체불가성의 전략적 육성과 활용",
+  "authors": [
+   "조은교"
+  ],
+  "published": "2026-07-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3244&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kiet-ec3242",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "인구감소 시대의 지역 기반 비자 정책 분석과 시사점",
+  "authors": [
+   "최영미",
+   "김주영"
+  ],
+  "published": "2026-07-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3242&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "산업별고용",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-ec3237",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "서비스업 AI 전환 측정: 업무 위임 관점의 프레임워크 제안과 정책 활용 방안",
+  "authors": [
+   "이민주"
+  ],
+  "published": "2026-07-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3237&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
   "employment": true,
   "matched": [
    "일자리정책"
@@ -869,6 +949,127 @@
   ]
  },
  {
+  "id": "kiet-ec3228",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "이란 전쟁 여파에 따른 베트남 경제 충격과 시사점",
+  "authors": [
+   "안유나"
+  ],
+  "published": "2026-06-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3228&year=&month=&stype=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kiet-ec3220",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "지속적 인구 유입의 조건: 골든타임과 거점 투자",
+  "authors": [
+   "김준호"
+  ],
+  "published": "2026-06-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3220&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-ec3219",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "지방소멸 대응정책의 추진 현황과 정책과제",
+  "authors": [
+   "송우경",
+   "조성민"
+  ],
+  "published": "2026-06-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3219&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "청년고용",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-ec3216",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "균형발전에서 균형성장으로의 전환: 전략과 과제",
+  "authors": [
+   "허문구",
+   "이영선"
+  ],
+  "published": "2026-06-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3216&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-ec3215",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "균형성장 시대의 균형발전정책 전환 방향",
+  "authors": [
+   "조성민",
+   "유이선",
+   "김현우"
+  ],
+  "published": "2026-06-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3215&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
+  "id": "kiet-ec3214",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "5극3특 체제의 지역산업 전략에 대한 제언",
+  "authors": [
+   "김송년",
+   "이상호"
+  ],
+  "published": "2026-06-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3214&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "keis-11332",
   "org": "keis",
   "board": "keis-transition",
@@ -1149,6 +1350,28 @@
   ]
  },
  {
+  "id": "kiet-is861",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "노동시장 이중구조와 청년 취업 - 대기업과 중소기업 임금 격차를 중심으로",
+  "authors": [
+   "민순홍"
+  ],
+  "published": "2026-06-26",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=861&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "청년고용",
+   "임금",
+   "직업훈련",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "keis-11310",
   "org": "keis",
   "board": "keis-research",
@@ -1406,6 +1629,32 @@
   ]
  },
  {
+  "id": "kiet-rd164",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "외국인 유학생의 지역경제 영향과 지역인재로의 정착·활용 방안",
+  "authors": [
+   "서성민",
+   "김준호"
+  ],
+  "published": "2026-06-16",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=164&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "임금",
+   "근로시간",
+   "직업훈련",
+   "지역고용",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
   "id": "kli-10289",
   "org": "kli",
   "board": "kli-intl",
@@ -1441,6 +1690,28 @@
   "employment": true,
   "matched": [
    "외국인력"
+  ]
+ },
+ {
+  "id": "kiet-rd163",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "직무 거리 기반 직업 이동과 산업별 직무 연속성 분석",
+  "authors": [
+   "이주현"
+  ],
+  "published": "2026-06-04",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=163&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "직업훈련",
+   "일자리정책",
+   "인력수급"
   ]
  },
  {
@@ -1517,6 +1788,341 @@
   "employment": true,
   "matched": [
    "임금"
+  ]
+ },
+ {
+  "id": "kdi-19237",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "AI의 거시경제 영향 분석",
+  "authors": [
+   "남창우"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 220,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=19237",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=4Em1pMkxdfzWBiz%2FiTtaxA%3D%3D",
+  "employment": true,
+  "matched": [
+   "임금",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-19205",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "외국인 근로자 유입의 경제적 영향과 이주 결정요인 분석",
+  "authors": [
+   "정영욱"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 148,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=19205",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=8DTDhw5FJLZrKizE3PxPmg%3D%3D",
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "임금",
+   "고용형태",
+   "직업훈련",
+   "지역고용",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-19200",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "도시공간 개발 및 교통시설 공급 정책에 따른 통근통행의 효율성 분석",
+  "authors": [
+   "김강수"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 66,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=19200",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=PmwadxrhNTcNhz0IWa2SVw%3D%3D",
+  "employment": true,
+  "matched": [
+   "근로시간",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-19167",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "장기요양보험제도의 효과성 제고를 위한 연구",
+  "authors": [
+   "김도헌"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 132,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=19167",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=Nk1cRwD8%2B%2FGjBmF4SsU4pg%3D%3D",
+  "employment": true,
+  "matched": [
+   "산업별고용"
+  ]
+ },
+ {
+  "id": "kdi-19126",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "중대재해처벌법이 노동시장에 미친 영향",
+  "authors": [
+   "정수환"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 241,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=19126",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=wi3%2FzSGR1ljOcm%2BkHm9V7w%3D%3D",
+  "employment": true,
+  "matched": [
+   "임금",
+   "노사관계",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-19050",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "북러 밀착이 북한경제에 미친 영향과 시사점",
+  "authors": [
+   "김규철",
+   "남진욱"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 135,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=19050",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=Jsjq9SSHYrt8IAwI4hpM9w%3D%3D",
+  "employment": true,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kdi-19029",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "사교육 의존의 구조적 원인에 대한 고찰 및 함의",
+  "authors": [
+   "한성민"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 76,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=19029",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=n3EmT6tmy84uqVfC%2FHwy4Q%3D%3D",
+  "employment": true,
+  "matched": [
+   "임금",
+   "노사관계",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18954",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "소득보장체계 재구조화의 거시경제적 영향 및 사회후생변화 분석: 생애주기-중첩세대 일반균형모형 분석",
+  "authors": [
+   "권규호"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 80,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=18954",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=H2JkV2uc1TF0nyxxdlMbfg%3D%3D",
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18953",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "노동시장 충격에 대응한 소득지원 연구: 기초생활보장을 중심으로",
+  "authors": [
+   "이영욱"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 62,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=18953",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=Fae0RTiSaiG8fG7JKE6UXA%3D%3D",
+  "employment": true,
+  "matched": [
+   "임금",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18941",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "노인돌봄 인력의 전망과 정책 대응",
+  "authors": [
+   "권정현"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 134,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=18941",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=gZI02e1spY8Yg2onRdcsmw%3D%3D",
+  "employment": true,
+  "matched": [
+   "고령자",
+   "외국인력",
+   "임금",
+   "직업훈련",
+   "산업별고용",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kdi-18927",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "인구구조 변화가 생산성에 미치는 영향",
+  "authors": [
+   "김지연"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 82,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=18927",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=Aclc6XDplqfjMp%2Fok1WSoA%3D%3D",
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "임금",
+   "직업훈련",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kdi-18921",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "세계 통상 분절화가 우리나라 무역에 미치는 영향과 정책적 시사점: 미-중 무역 전쟁과 한국의 대미국·대중국 수출을 중심으로",
+  "authors": [
+   "임희현"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 84,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=18921",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=5gvUNkkxbj3Q27GuWcPJeA%3D%3D",
+  "employment": true,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kdi-18872",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "세대 간 이동성에 관한 연구: 교육이동성을 중심으로",
+  "authors": [
+   "이승희"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 98,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=18872",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=nri%2FoI3%2BKVS%2FORuhBkC1pA%3D%3D",
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
+  "id": "kdi-18865",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "단시간 노동의 증가요인과 정책 제언",
+  "authors": [
+   "정수환"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 278,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=18865",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=vU08yWCdxqpHuOIdPLIbQw%3D%3D",
+  "employment": true,
+  "matched": [
+   "고령자",
+   "임금",
+   "근로시간",
+   "고용형태",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-18854",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "북한의 시장가격체계 분석과 정책적 시사점",
+  "authors": [
+   "이석",
+   "남진욱",
+   "최지영"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 216,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=18854",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=zUEBUzWH%2B2ZP0DURQBzSrQ%3D%3D",
+  "employment": true,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
+  "id": "kdi-18832",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "혁신기업의 육성과 스케일업: 우리 경제의 새로운 성장동력 창출 전략",
+  "authors": [
+   "김민호",
+   "정성훈",
+   "이공",
+   "김기완"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 346,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=18832",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=XqnIq31S2x1NpcZ%2FaJNIAA%3D%3D",
+  "employment": true,
+  "matched": [
+   "인력수급"
   ]
  },
  {
@@ -1639,6 +2245,27 @@
   ]
  },
  {
+  "id": "kiet-is849",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "미국-이란 분쟁과 글로벌 물류경로 재편 가능성: 인도-중동-유럽 경제회랑(IMEC) 추진의 의미와 우리 산업의 중기 전환전략 모색",
+  "authors": [
+   "길은선",
+   "조은교"
+  ],
+  "published": "2026-04-08",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=849&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책",
+   "노동전환"
+  ]
+ },
+ {
   "id": "kli-10285",
   "org": "kli",
   "board": "kli-research",
@@ -1686,6 +2313,28 @@
   ]
  },
  {
+  "id": "kiet-rd162",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "고령화 시대 연령다양성(Age Diversity)과 생산성 간 관계 연구",
+  "authors": [
+   "이소라",
+   "천가현",
+   "박나연"
+  ],
+  "published": "2026-03-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=162&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "직업훈련",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "keis-11273",
   "org": "keis",
   "board": "keis-trend",
@@ -1702,6 +2351,47 @@
    "청년고용",
    "임금",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-1154",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "한국의 산업정책사",
+  "authors": [
+   "한국의 산업정책사 편찬위원회"
+  ],
+  "published": "2026-03-25",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1154&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "산업별고용"
+  ]
+ },
+ {
+  "id": "kiet-is845",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "미국-이란 전쟁의 리스크 확산과 한국에 미치는 영향",
+  "authors": [
+   "홍성욱",
+   "이원복",
+   "강성우",
+   "김정현"
+  ],
+  "published": "2026-03-16",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=845&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노사관계"
   ]
  },
  {
@@ -1881,6 +2571,25 @@
   "employment": true,
   "matched": [
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-is841",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "미국과 유럽의 핵심광물정책 및 우리의 대응방안",
+  "authors": [
+   "김동수"
+  ],
+  "published": "2026-01-28",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=841&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "인력수급"
   ]
  },
  {
@@ -2838,6 +3547,596 @@
   ]
  },
  {
+  "id": "kiet-pp830",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "제조 디지털전환이 고용에 미치는 영향 - 스마트제조 도입을 중심으로",
+  "authors": [
+   "김동근",
+   "장재기",
+   "길은선",
+   "오승환"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=830&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "산업별고용",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-pd382",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "인구구조 변화에 따른 섬유패션산업의 직무별 고용 변화 및 정책적 시사점",
+  "authors": [
+   "이임자",
+   "길은선"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=382&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "임금",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-pd379",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "인구구조 변화 및 디지털ㆍAI 전환에 따른 조선산업 인력 영향과 대응 방안",
+  "authors": [
+   "이은창",
+   "길은선"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=379&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "산업별고용",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-pd378",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "인구구조 변화의 영향을 고려한 금형산업 발전 방안 연구",
+  "authors": [
+   "김태영",
+   "박상수"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=378&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "직업훈련",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-1183",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "미래 산업경쟁력 제고를 위한 신성장동력 발굴 전략 연구",
+  "authors": [
+   "구진경",
+   "김여림",
+   "최은희",
+   "김성진",
+   "백민경",
+   "유슬기",
+   "박용훈",
+   "박지원",
+   "이유경",
+   "조재한",
+   "이슬기",
+   "정지은",
+   "양훈식"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1183&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노사관계",
+   "일자리정책",
+   "인력수급",
+   "노동전환"
+  ]
+ },
+ {
+  "id": "kiet-1181",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "아세안 중심성에 기반한 한-아세안 산업협력 연구",
+  "authors": [
+   "신윤성",
+   "이용호",
+   "박지혜"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1181&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kiet-1179",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "지역균형발전을 위한 공간거점화 전략 점검과 정책 방향",
+  "authors": [
+   "김송년",
+   "박민성",
+   "이상호",
+   "백승민",
+   "김준호",
+   "서성민"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1179&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-1178",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "청년의 지역 이동과 정착: 일-삶-락-연 기반의 청년친화지수와 정책방향",
+  "authors": [
+   "김지수",
+   "허문구",
+   "유이선"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1178&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-1175",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "노동시장 이중구조와 산업정책적 시사점",
+  "authors": [
+   "민순홍",
+   "최민철",
+   "신현모"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1175&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "청년고용",
+   "임금",
+   "고용형태",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-1174",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "한국형 고령친화일자리지수의 개발과 서비스산업 고용 창출 전략",
+  "authors": [
+   "이동희",
+   "고대영",
+   "강민성",
+   "이순학",
+   "신동한",
+   "장재기",
+   "박지혜",
+   "임은정",
+   "강바다",
+   "김숙경",
+   "김주영",
+   "최영미"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1174&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "고령자",
+   "직업훈련",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-1173",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "서비스 업종별 AI 기술 노출도 지수 개발",
+  "authors": [
+   "박문수",
+   "김승민",
+   "이경희"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1173&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-1172",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "첨단바이오 기술ㆍ경제 안보 환경 변화와 한국의 대응 전략 - 세포ㆍ유전자치료제를 중심으로",
+  "authors": [
+   "정지은",
+   "경희권",
+   "백민경",
+   "최은희",
+   "최윤희"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1172&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kiet-1169",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "AIㆍDX 기반 자율제조 생태계 고도화 전략 연구",
+  "authors": [
+   "이상현",
+   "김동근",
+   "김태영",
+   "심우중",
+   "오승환",
+   "임태민",
+   "이민주"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1169&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-1166",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "경제안보 시대 한일 산업협력 방안 연구: 반도체와 이차전지를 중심으로",
+  "authors": [
+   "최정환",
+   "경희권",
+   "김양팽"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1166&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-1165",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "지역균형발전의 전략적 가치와 핵심 정책의제",
+  "authors": [
+   "유이선",
+   "김지수",
+   "배진원",
+   "정진영",
+   "정윤선",
+   "서성민",
+   "조성민",
+   "서정현",
+   "김현우",
+   "이영선",
+   "이수진",
+   "이두희"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1165&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "지역고용"
+  ]
+ },
+ {
+  "id": "kiet-1162",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "인구감소 시대의 지역경쟁력 진단과 정책 대응 방안 연구",
+  "authors": [
+   "배진원",
+   "허문구",
+   "김준호",
+   "김현우",
+   "이영선"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1162&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-1161",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "한국의 경제성장 회복과 미래산업 선도국을 위한 산업정책",
+  "authors": [
+   "조재한",
+   "구진경",
+   "경희권",
+   "김경유",
+   "김승민",
+   "김종기",
+   "김태영",
+   "민순홍",
+   "민현기",
+   "박상수",
+   "박지원",
+   "백민경",
+   "송단비",
+   "심순형",
+   "유슬기",
+   "이상원",
+   "이슬기",
+   "이은창",
+   "이재윤",
+   "이채영",
+   "정지은",
+   "조용원",
+   "조은교",
+   "차민영",
+   "최민철",
+   "최은희",
+   "황경인"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1161&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "산업별고용",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-1160",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "국내 탄소중립 정책 변화의 산업 부문 영향 및 대응 과제",
+  "authors": [
+   "이재윤",
+   "이임자",
+   "조용원",
+   "남상욱",
+   "이상원",
+   "최동원",
+   "이고은",
+   "박유미",
+   "탁은명",
+   "문지원"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1160&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노동전환"
+  ]
+ },
+ {
+  "id": "kiet-1159",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "저성장의 구조적 진단과 전망을 통한 장기 성장전략 탐색 연구",
+  "authors": [
+   "박성근",
+   "홍성욱",
+   "김승민",
+   "이소라",
+   "박나연",
+   "이원복",
+   "민성환",
+   "주지환",
+   "천가현",
+   "최미정",
+   "김지현",
+   "이홍",
+   "김정현",
+   "강성우",
+   "원혜진",
+   "김재진",
+   "박문수"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1159&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책",
+   "노동전환"
+  ]
+ },
+ {
+  "id": "kiet-1156",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "인구구조 변화에 따른 산업별 세대교체 인력수요 분석",
+  "authors": [
+   "길은선",
+   "김지운"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1156&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "직업훈련",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-1155",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "공공기관 지방이전의 파급효과와 거점도시 정책 방향",
+  "authors": [
+   "백승민",
+   "박민성",
+   "정진영"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1155&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "지역고용"
+  ]
+ },
+ {
+  "id": "kiet-1151",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "이민자 유입에 따른 지역의 변화와 시사점 - 인구와 생활환경 변화를 중심으로",
+  "authors": [
+   "서성민",
+   "김준호",
+   "백승민"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1151&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "임금",
+   "지역고용",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-1150",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "글로벌 환경 변화에 따른 한국 산업정책의 방향 연구 - 산업정책 거버넌스를 중심으로",
+  "authors": [
+   "최현경",
+   "임은정"
+  ],
+  "published": "2025-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1150&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
   "id": "keis-11264",
   "org": "keis",
   "board": "keis-trend",
@@ -2945,6 +4244,28 @@
   ]
  },
  {
+  "id": "kiet-is839",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "주력산업의 경쟁력 제고를 위한 신산업정책의 필요성과 향후 과제",
+  "authors": [
+   "박성근",
+   "박나연",
+   "주지환"
+  ],
+  "published": "2025-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=839&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노사관계",
+   "지역고용"
+  ]
+ },
+ {
   "id": "keis-11266",
   "org": "keis",
   "board": "keis-transition",
@@ -2967,6 +4288,68 @@
   ]
  },
  {
+  "id": "kiet-is837",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "초고령사회 일본의 외국인력 도입 동향과 정책적 시사점",
+  "authors": [
+   "김주영"
+  ],
+  "published": "2025-12-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=837&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "직업훈련"
+  ]
+ },
+ {
+  "id": "kiet-pp832",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "이집트 방위산업 시장분석과 산업협력 전략",
+  "authors": [
+   "김미정",
+   "빙현지",
+   "박혜지"
+  ],
+  "published": "2025-12-26",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=832&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-is836",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "이민자 유입이 지역 물가에 미치는 영향",
+  "authors": [
+   "김준호"
+  ],
+  "published": "2025-12-26",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=836&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "직업훈련",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-10222",
   "org": "kli",
   "board": "kli-eia",
@@ -2982,6 +4365,48 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=3A11794979A209A049258D70001A44C6_1.pdf&fileNameOrg=KLI 고용영향평가브리프 2025년 제4호_통권 제50호.pdf&filePath1=jsphome/DATA/pblctList/issue/3A11794979A209A049258D70001A44C6",
   "employment": true,
   "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-rd160",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "국내 임차공장 현황과 입지 유형별 특성",
+  "authors": [
+   "정진영"
+  ],
+  "published": "2025-12-24",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=160&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "지역고용"
+  ]
+ },
+ {
+  "id": "kiet-is835",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "직주불일치 근로자의 지역 전입 활성화 방안",
+  "authors": [
+   "김영민",
+   "김현우"
+  ],
+  "published": "2025-12-23",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=835&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "직업훈련",
+   "지역고용",
    "일자리정책"
   ]
  },
@@ -3149,6 +4574,27 @@
   ]
  },
  {
+  "id": "kiet-rd156",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "한국 벤처생태계 담론 변화 및 정책 제언 - 텍스트 마이닝 분석을 중심으로",
+  "authors": [
+   "박문수",
+   "김승민",
+   "박나연"
+  ],
+  "published": "2025-11-18",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=156&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-10217",
   "org": "kli",
   "board": "kli-review",
@@ -3166,6 +4612,47 @@
   "matched": [
    "산업별고용",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-rd157",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "중장기 산업전망모형 개발을 위한 기초연구 - 소재산업의 수출 전망을 중심으로",
+  "authors": [
+   "최미정",
+   "박성근"
+  ],
+  "published": "2025-11-03",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=157&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-rd153",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "지역 간 인구이동과 임금 - 직주불일치를 중심으로",
+  "authors": [
+   "김영민",
+   "김현우"
+  ],
+  "published": "2025-10-22",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=153&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "인력수급"
   ]
  },
  {
@@ -3227,6 +4714,25 @@
   "matched": [
    "고령자",
    "지역고용",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-rd148",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "일자리 특성을 고려한 저출산 대응 방향 연구: 행정자료를 활용한 분석",
+  "authors": [
+   "신동한"
+  ],
+  "published": "2025-10-01",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=148&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
    "일자리정책"
   ]
  },
@@ -3376,6 +4882,30 @@
   ]
  },
  {
+  "id": "kiet-rd150",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "이민자 유입이 지역경제에 미치는 영향 - 지역 소비자물가지수 채널을 중심으로",
+  "authors": [
+   "김준호"
+  ],
+  "published": "2025-09-04",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=150&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "임금",
+   "근로시간",
+   "직업훈련",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
   "id": "keis-11240",
   "org": "keis",
   "board": "keis-trend",
@@ -3500,6 +5030,26 @@
   ]
  },
  {
+  "id": "kiet-is831",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "인공지능 시대, 고용 정책의 방향성 - 직업별 고용 효과를 중심으로",
+  "authors": [
+   "장재기",
+   "김동근"
+  ],
+  "published": "2025-08-12",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=831&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-10206",
   "org": "kli",
   "board": "kli-review",
@@ -3516,6 +5066,55 @@
   "employment": true,
   "matched": [
    "노사관계",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-is828",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "한국 산업의 도약을 위한 전략과 과제 : II.4대 분야 10대 정책과제",
+  "authors": [
+   "조재한",
+   "조은교",
+   "송단비",
+   "이상원",
+   "최민철",
+   "민순홍"
+  ],
+  "published": "2025-08-07",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=828&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "산업별고용",
+   "인력수급",
+   "노동전환"
+  ]
+ },
+ {
+  "id": "kiet-is827",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "한국 산업의 도약을 위한 전략과 과제 : I.한국 산업의 구조적 현황과 도전",
+  "authors": [
+   "조재한",
+   "송단비",
+   "이상원",
+   "최민철",
+   "민순홍"
+  ],
+  "published": "2025-08-07",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=827&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
    "일자리정책"
   ]
  },
@@ -3679,6 +5278,25 @@
   ]
  },
  {
+  "id": "kiet-pp823",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "RISE(지역혁신중심 대학지원체계)사업 추진에 따른 대학의 지역혁신허브 기능 강화 방안 연구",
+  "authors": [
+   "유이선"
+  ],
+  "published": "2025-06-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=823&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "keis-s36",
   "org": "keis",
   "board": "keis-supply",
@@ -3772,6 +5390,27 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=454100E5D60EBF9549258CAC0009A2EC_20.pdf&fileNameOrg=노동리뷰_2025년 6월호_web.pdf&filePath1=jsphome/DATA/pblctList/issue/454100E5D60EBF9549258CAC0009A2EC",
   "employment": true,
   "matched": []
+ },
+ {
+  "id": "kiet-rd141",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "산업환경 변화를 반영한 첨단지식기반산업 분류체계 개편과 지역산업별 특징 분석",
+  "authors": [
+   "김지수"
+  ],
+  "published": "2025-06-10",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=141&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "지역고용",
+   "일자리정책"
+  ]
  },
  {
   "id": "kli-10191",
@@ -3869,6 +5508,25 @@
   ]
  },
  {
+  "id": "kiet-pd375",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "중소형 웹툰 플랫폼의 육성 방안",
+  "authors": [
+   "박지혜"
+  ],
+  "published": "2025-05-16",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=375&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "인력수급"
+  ]
+ },
+ {
   "id": "kli-10189",
   "org": "kli",
   "board": "kli-review",
@@ -3954,6 +5612,47 @@
   ]
  },
  {
+  "id": "kiet-pp821",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "청년의 비수도권 노동시장 유인 방안 연구 - 지역인재에 대한 고찰",
+  "authors": [
+   "박민성"
+  ],
+  "published": "2025-04-24",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=821&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-pp819",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "지방대학의 현황과 과제 - 인력 양성을 중심으로",
+  "authors": [
+   "서성민",
+   "박민성"
+  ],
+  "published": "2025-04-17",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=819&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "지역고용",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
   "id": "kli-10184",
   "org": "kli",
   "board": "kli-intl",
@@ -4031,6 +5730,29 @@
   ]
  },
  {
+  "id": "kiet-1142",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "북ㆍ중ㆍ러 새로운 공급망 형성 가능성과 함의",
+  "authors": [
+   "김계환",
+   "김수정",
+   "이석기",
+   "박소희",
+   "백승욱"
+  ],
+  "published": "2025-03-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1142&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
   "id": "keis-11168",
   "org": "keis",
   "board": "keis-region",
@@ -4073,6 +5795,28 @@
   ]
  },
  {
+  "id": "kiet-pp817",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "인공지능의 고용 효과 분석 - 직종별 차별적 영향을 중심으로",
+  "authors": [
+   "장재기",
+   "김동근"
+  ],
+  "published": "2025-03-20",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=817&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "keis-11165",
   "org": "keis",
   "board": "keis-issue",
@@ -4111,6 +5855,64 @@
   "employment": true,
   "matched": [
    "근로시간"
+  ]
+ },
+ {
+  "id": "kiet-pd374",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "국내 섬유산업의 현안 과제와 대응 전략",
+  "authors": [
+   "박훈"
+  ],
+  "published": "2025-03-04",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=374&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-rd135",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "서비스산업의 디지털 혁신 과정과 정책 방안 - 생활밀착형 서비스를 중심으로",
+  "authors": [
+   "박문수"
+  ],
+  "published": "2025-02-17",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=135&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-pp820",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "글로벌 AI 경쟁에 대응하는 중국의 전략과 시사점",
+  "authors": [
+   "조은교",
+   "심우중"
+  ],
+  "published": "2025-02-17",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=820&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노사관계"
   ]
  },
  {
@@ -4230,6 +6032,40 @@
   "matched": [
    "일자리정책",
    "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-1125",
+  "org": "kiet",
+  "board": "kiet-report",
+  "series": "연구보고서",
+  "title": "초광역과 분권에 기반한 첨단전략산업의 혁신생태계 활성화 방안",
+  "authors": [
+   "송우경",
+   "허문구",
+   "김선배",
+   "이상호",
+   "유이선",
+   "김지수",
+   "배진원",
+   "김영민",
+   "백승민",
+   "이준영",
+   "서성민",
+   "최성웅",
+   "김현우",
+   "조성민",
+   "이동규",
+   "이영선"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/reportView?report_no=1125&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
   ]
  },
  {
@@ -4415,6 +6251,27 @@
    "임금",
    "노사관계",
    "지역고용",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-pp815",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "지방투자 활성화를 위한 인력수급 체계화 방안 연구",
+  "authors": [
+   "김영민",
+   "박민성"
+  ],
+  "published": "2024-12-12",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=815&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
    "일자리정책",
    "인력수급"
   ]
@@ -5320,6 +7177,27 @@
   ]
  },
  {
+  "id": "kiet-rd131",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "산업별ㆍ직종별 미스매치 현황과 결정요인 분석",
+  "authors": [
+   "민순홍"
+  ],
+  "published": "2024-09-11",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=131&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
   "id": "kli-10099",
   "org": "kli",
   "board": "kli-review",
@@ -5416,6 +7294,27 @@
   ]
  },
  {
+  "id": "kiet-pd365",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "주요국 XR산업 동향 및 국내 산업 활성화 방안",
+  "authors": [
+   "김성진",
+   "심우중",
+   "김종기"
+  ],
+  "published": "2024-08-23",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=365&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "인력수급"
+  ]
+ },
+ {
   "id": "kli-10090",
   "org": "kli",
   "board": "kli-wage",
@@ -5476,6 +7375,29 @@
    "근로시간",
    "고용형태",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-pd371",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "한국-인도네시아 산업혁신 공동연구의 성과와 과제",
+  "authors": [
+   "신윤성",
+   "이진면",
+   "이용호",
+   "강지현",
+   "빙현지"
+  ],
+  "published": "2024-07-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=371&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "임금"
   ]
  },
  {
@@ -5632,6 +7554,25 @@
   ]
  },
  {
+  "id": "kiet-pp812",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "사업재편과 혁신자금을 활용한 기업의 성장 연구 - 유통(쿠팡)ㆍ금융(토스) 분야 사례를 중심으로",
+  "authors": [
+   "하준"
+  ],
+  "published": "2024-06-27",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=812&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
   "id": "kli-10085",
   "org": "kli",
   "board": "kli-eia",
@@ -5667,6 +7608,27 @@
   "employment": true,
   "matched": [
    "임금"
+  ]
+ },
+ {
+  "id": "kiet-rd121",
+  "org": "kiet",
+  "board": "kiet-redata",
+  "series": "연구자료",
+  "title": "디지털 전환 시대 서비스업의 중장년 일자리 창출 구조 분석",
+  "authors": [
+   "신동한"
+  ],
+  "published": "2024-06-18",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/redataView?redata_no=121&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "근로시간",
+   "지역고용",
+   "일자리정책"
   ]
  },
  {
@@ -5726,6 +7688,28 @@
   ]
  },
  {
+  "id": "kiet-pp810",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "산업별 인공지능 도입의 노동시장 영향과 정책과제",
+  "authors": [
+   "송단비",
+   "민순홍",
+   "최민철",
+   "조재한"
+  ],
+  "published": "2024-05-23",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=810&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-10078",
   "org": "kli",
   "board": "kli-eia",
@@ -5742,6 +7726,28 @@
   "employment": true,
   "matched": [
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-pd359",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "초고령사회 일본의 외국인력 도입 - 최근의 변화와 시사점",
+  "authors": [
+   "김주영",
+   "임은정"
+  ],
+  "published": "2024-05-16",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=359&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "일자리정책",
+   "인력수급"
   ]
  },
  {
@@ -5971,6 +7977,51 @@
   ]
  },
  {
+  "id": "kiet-pp803",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "대중국·베트남 무역이 지역경제에 미치는 영향 분석 - 산업구조와 고용을 중심으로",
+  "authors": [
+   "장재기"
+  ],
+  "published": "2024-02-27",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=803&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "지역고용",
+   "산업별고용",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-pp801",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "대만 반도체산업 분석 및 정책적 시사점",
+  "authors": [
+   "김동수",
+   "박병열",
+   "최정환",
+   "김양팽",
+   "전정길"
+  ],
+  "published": "2024-02-26",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=801&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "산업별고용",
+   "인력수급"
+  ]
+ },
+ {
   "id": "kli-9988",
   "org": "kli",
   "board": "kli-intl",
@@ -6107,6 +8158,26 @@
   "employment": true,
   "matched": [
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-pp798",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "우리나라 고령소비자의 유형별 특징과 고령친화기업에 대한 시사점",
+  "authors": [
+   "조현승",
+   "김승민"
+  ],
+  "published": "2023-12-22",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=798&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "고령자"
   ]
  },
  {
@@ -6694,6 +8765,26 @@
   "employment": true,
   "matched": [
    "노사관계"
+  ]
+ },
+ {
+  "id": "kiet-pd355",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "공정 경쟁과 사업재편 활성화를 통한 역동적 산업정책 실현 방안 모색",
+  "authors": [
+   "하준"
+  ],
+  "published": "2023-07-09",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=355&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "고용형태",
+   "일자리정책"
   ]
  },
  {
@@ -7344,6 +9435,26 @@
   ]
  },
  {
+  "id": "kiet-pd351",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "국내 패션산업의 경쟁력 강화를 위한 디지털 전환 전략",
+  "authors": [
+   "박훈"
+  ],
+  "published": "2022-11-04",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=351&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "직업훈련",
+   "인력수급"
+  ]
+ },
+ {
   "id": "kli-9784",
   "org": "kli",
   "board": "kli-eia",
@@ -7534,6 +9645,28 @@
    "청년고용",
    "임금",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-pd346",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "생산연령인구 감소 시대의 외국인 전문숙련인력 유치 제도 개선에 관한 연구",
+  "authors": [
+   "김주영"
+  ],
+  "published": "2022-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=346&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "외국인력",
+   "직업훈련",
+   "일자리정책",
+   "인력수급"
   ]
  },
  {
@@ -7932,6 +10065,28 @@
   "employment": true,
   "matched": [
    "임금"
+  ]
+ },
+ {
+  "id": "kiet-pd330",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "서비스기업의 R&D 실태 및 정책과제",
+  "authors": [
+   "이동희",
+   "고대영",
+   "김승민",
+   "김천곤"
+  ],
+  "published": "2022-04-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=330&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "인력수급"
   ]
  },
  {
@@ -8410,6 +10565,26 @@
    "노사관계",
    "고용서비스",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-pd318",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "디자인산업 통계조사 현황과 개선 방안 연구",
+  "authors": [
+   "성열용",
+   "박지혜"
+  ],
+  "published": "2021-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=318&skey=&sval=&pg=2&pp=30",
+  "file_url": null,
+  "employment": true,
+  "matched": [
+   "고용형태"
   ]
  },
  {

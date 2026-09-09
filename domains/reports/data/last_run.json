@@ -1,63 +1,18 @@
 {
-  "at": "2026-09-10T02:14:19+09:00",
+  "at": "2026-09-10T02:20:01+09:00",
   "boards": {
-    "keis-research": {
+    "kiet-economy": {
       "ok": true,
-      "parsed": 50,
+      "parsed": 60,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
       "error": null,
       "total": 40
-    },
-    "keis-supply": {
-      "ok": true,
-      "parsed": 38,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 38
-    },
-    "keis-issue": {
-      "ok": true,
-      "parsed": 50,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 21
-    },
-    "keis-trend": {
-      "ok": true,
-      "parsed": 50,
-      "added": 40,
-      "details": 40,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 40
-    },
-    "keis-region": {
-      "ok": true,
-      "parsed": 20,
-      "added": 20,
-      "details": 20,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 20
-    },
-    "keis-transition": {
-      "ok": true,
-      "parsed": 5,
-      "added": 5,
-      "details": 5,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 5
     }
   },
   "unregistered": [],
-  "reports": 420,
+  "reports": 518,
   "abstract_missing": {
     "kli": {
       "연구보고서": {
@@ -131,6 +86,45 @@
         "total": 38,
         "missing": 38,
         "rate": 1.0
+      }
+    },
+    "kiet": {
+      "i-KIET": {
+        "total": 12,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "월간 산업경제": {
+        "total": 9,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구자료": {
+        "total": 13,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구보고서": {
+        "total": 22,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "이슈페이퍼": {
+        "total": 13,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "정책자료": {
+        "total": 13,
+        "missing": 0,
+        "rate": 0.0
+      }
+    },
+    "kdi": {
+      "연구보고서": {
+        "total": 16,
+        "missing": 0,
+        "rate": 0.0
       }
     }
   }
