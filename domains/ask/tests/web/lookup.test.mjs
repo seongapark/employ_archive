@@ -142,3 +142,13 @@ test('이용량을 셀 수 없으면 한도초과와 다른 배지를 단다', a
   assert.ok(r.배지.includes('할당량확인불가'), JSON.stringify(r.배지));
   assert.equal(r.배지.includes('한도초과'), false);
 });
+
+
+test('아직 색인에 없는 도메인도 이름을 남긴다', () => {
+  // 행통 모니터링은 이번 색인 범위 밖이다. 목록에서 통째로 빠지면 사용자는
+  // 그 도메인이 있는 줄도 모른다 — 조용히 빠지는 것이 가장 나쁜 실패다.
+  const p = 도메인적용('청년 고용률').find((x) => x.도메인 === 'press');
+  assert.ok(p, '행통 모니터링이 목록에 없다');
+  assert.equal(p.적용, false);
+  assert.match(p.사유, /색인/);
+});
