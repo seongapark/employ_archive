@@ -93,3 +93,25 @@ def test_newest_first():
     b.published = '2026-01-01'
     kept, _, _ = build.build([a, b], [KLI_BOARD], KW)
     assert [r.id for r in kept] == ['kli-9', 'kli-8']
+
+
+# ── 원문 PDF 에서 채운 초록 ─────────────────────────────────────────────
+
+def test_the_pdf_bookkeeping_fields_never_reach_the_app():
+    # abstract_tried·abstract_note 는 수집 살림살이다. 572건마다 실리면 목록만 커진다.
+    r = raw('kli-12', KLI_BOARD)
+    r.abstract_tried, r.abstract_note = True, '요약 섹션 없음'
+    kept, _, _ = build.build([r], [KLI_BOARD], KW)
+    light = build._light(kept[0])
+    assert 'abstract_tried' not in light and 'abstract_note' not in light
+
+
+def test_why_an_abstract_is_missing_is_counted():
+    # 결측률만 보면 스캔본(영영 못 채움)과 아직 안 받아 본 것이 한 칸에 섞인다.
+    a = raw('kli-14', KLI_BOARD); a.abstract_tried = True; a.abstract_note = '텍스트가 없는 스캔본'
+    b = raw('kli-15', KLI_BOARD)                       # 아직 안 받아 봤다
+    b.file_url = 'https://example.org/b.pdf'
+    c = raw('kli-16', KLI_BOARD, abstract='있다')
+    kept, _, _ = build.build([a, b, c], [KLI_BOARD], KW)
+    why = build.missing_reasons(kept)
+    assert why == {'텍스트가 없는 스캔본': 1, '아직 안 받음': 1}
