@@ -31,29 +31,6 @@ function yearsForOrgIndicator(records, org, indicator) {
   return Array.from(years).sort((a, b) => a - b);
 }
 
-function sparkline(values) {
-  const w = 40, h = 14, pad = 1;
-  let points;
-  if (values.length < 2) {
-    const y = h / 2;
-    points = `${pad},${y} ${w - pad},${y}`;
-  } else {
-    const min = Math.min(...values);
-    const max = Math.max(...values);
-    const range = max - min || 1;
-    const innerW = w - pad * 2;
-    const innerH = h - pad * 2;
-    points = values
-      .map((v, i) => {
-        const x = pad + (i / (values.length - 1)) * innerW;
-        const y = max === min ? h / 2 : pad + (1 - (v - min) / range) * innerH;
-        return `${x.toFixed(1)},${y.toFixed(1)}`;
-      })
-      .join(' ');
-  }
-  return `<svg width="40" height="14" viewBox="0 0 40 14" fill="none"><polyline points="${points}" stroke="#98a2b3" stroke-width="1.5"></polyline></svg>`;
-}
-
 function renderHeader(ctx, orgMeta, orgCode, latestRec, scheduleEntry) {
   const title = orgMeta ? orgMeta.name_ko : orgCode;
   const subParts = [];
@@ -83,13 +60,11 @@ export function renderSummaryCard(ctx, orgCode, indicators, currentYear, records
     const deltaSvg = DELTA_SVG[delta.dir] || '';
     // 지표명·수치는 절대 줄바꿈하지 않는다 — 좁은 폭에서 '취업 / 자',
     // '20만 / 명' 으로 쪼개지면 숫자가 세 줄이 되어 카드가 무너진다.
-    // 대신 칸이 모자라면 아래 그리드가 2열에서 1열로 떨어진다.
     items.push(`
-      <button type="button" class="num" data-indicator="${esc(code)}" style="display:flex;align-items:center;gap:6px;font-size:13px;background:none;border:none;padding:2px 0;text-align:left;cursor:pointer;min-height:44px;white-space:nowrap;">
+      <button type="button" class="num" data-indicator="${esc(code)}" style="display:flex;align-items:center;gap:5px;font-size:13px;background:none;border:none;padding:4px 0;text-align:left;cursor:pointer;min-height:32px;white-space:nowrap;">
         <span style="color:#667085;">${esc(SHORT_LABELS[code] || code)}</span>
         <span style="font-weight:700;">${esc(fmtValue(latest))}</span>
         ${deltaSvg}
-        ${sparkline(series.map(r => r.value))}
       </button>`);
   }
   if (!items.length) return '';
@@ -101,12 +76,17 @@ export function renderSummaryCard(ctx, orgCode, indicators, currentYear, records
     basisDate = yymm(max.published_at);
   }
 
-  // auto-fit — 한 칸에 160px 을 못 주면 2열이 1열로 떨어진다. 고정 2열이면
-  // 좁은 폰에서 칸이 145px 까지 줄어 지표명과 수치가 각각 줄바꿈된다.
+  // **고정 2열이다.** 예전엔 지표마다 스파크라인(40px)이 붙어 한 칸에 160px 이
+  // 필요했고, 그걸 못 주면 auto-fit 이 1열로 떨어져 카드가 200px 까지 자랐다 —
+  // 화면 위쪽을 이 상자가 다 먹었다. 스파크라인을 걷어내니 한 칸이 115px 이면
+  // 되므로(가장 긴 '청년고용률 63.0% ▲') 360px 폰에서도 2열이 선다.
+  //
+  // 지표별 추세는 아래 꺾은선 그래프가 이미 보여준다. 여기서 또 보여줄 이유가
+  // 없었다 — 이 상자의 일은 '이 기관이 무슨 지표를 내는가'를 한눈에 주는 것이다.
   return `
-    <div class="card" style="margin:10px 16px 0 16px;padding:10px 14px;display:flex;flex-direction:column;gap:6px;">
+    <div class="card" style="margin:10px 16px 0 16px;padding:8px 12px;display:flex;flex-direction:column;gap:4px;">
       <div class="num" style="font-size:11px;font-weight:600;color:#667085;">${esc(String(currentYear))}년 전망${basisDate ? ` (${esc(basisDate)} 기준)` : ''}</div>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:6px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:0 10px;">
         ${items.join('')}
       </div>
     </div>`;

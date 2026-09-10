@@ -37,13 +37,29 @@ test('요약카드는 OCR 기관이라도 확인필요를 달지 않는다', () 
   assert.equal(html.includes('badge'), false);
 });
 
-test('요약카드 격자는 좁아지면 1열로 떨어진다(고정 2열이 아니다)', () => {
+// 스파크라인이 있던 시절엔 한 칸에 160px 이 필요해 좁은 폰에서 1열로
+// 떨어졌고, 그래서 이 상자가 화면 위쪽을 200px 씩 먹었다. 그래프를 걷어낸
+// 지금은 한 칸이 115px 이면 되므로 폭과 무관하게 2열을 유지한다.
+test('요약카드 격자는 폭과 무관하게 2열이다', () => {
   const ctx = { orgs: ORGS };
   const records = [rec({ target_year: 2027 })];
   const html = renderSummaryCard(ctx, 'OECD', ['gdp_growth'], 2027, records);
-  assert.ok(html.includes('auto-fit'));
+  assert.ok(html.includes('grid-template-columns:1fr 1fr'));
+  assert.equal(html.includes('auto-fit'), false);
   // 지표명·수치가 중간에서 쪼개지지 않아야 한다
   assert.ok(html.includes('white-space:nowrap'));
+});
+
+test('요약카드에 추세 스파크라인은 없다', () => {
+  const ctx = { orgs: ORGS };
+  const records = [
+    rec({ target_year: 2027, published_at: '2026-05-01', value: 1.7, id: 'a' }),
+    rec({ target_year: 2027, published_at: '2026-08-29', value: 1.9, id: 'b', revision: 0.2 }),
+  ];
+  const html = renderSummaryCard(ctx, 'OECD', ['gdp_growth'], 2027, records);
+  // 증감 삼각형(polygon)은 남기고, 꺾은선(polyline)만 사라져야 한다
+  assert.equal(html.includes('polyline'), false);
+  assert.ok(html.includes('polygon'));
 });
 
 test('접힌 행에는 전망치와 증감만 있고 근거 문장은 없다', () => {

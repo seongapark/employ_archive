@@ -1,5 +1,17 @@
 * { box-sizing: border-box; }
 
+/* 문서 자체는 절대 스크롤하지 않는다. 스크롤 주체는 .screen 하나뿐이다.
+   이 두 줄이 없으면 무엇이든 문서를 뷰포트보다 크게 만드는 순간 문서가
+   스크롤하고, 그러면 헤더와 탭바가 화면 밖으로 함께 밀려 나간다.
+   overscroll-behavior 는 목록 끝에서 더 당겼을 때 문서가 딸려 움직이는
+   고무줄 스크롤(특히 iOS)을 막는다 — .screen 에도 걸려 있지만 그것만으로는
+   문서 쪽 고무줄이 남는다. */
+html, body {
+  height: 100%;
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
 body {
   margin: 0;
   font-family: 'IBM Plex Sans KR', 'Malgun Gothic', system-ui, sans-serif;
@@ -19,16 +31,29 @@ a:hover { color: var(--link-hover); }
 
 /* App shell */
 
-/* height 다. min-height 로 두면 내용이 길 때 .app 이 같이 늘어나 **문서 전체가**
-   스크롤하고, .screen 의 overflow-y 는 한 번도 쓰이지 않는다. 그러면 헤더와
-   탭바가 위아래로 밀려 나간다 — 스크롤을 내린 사람이 탭을 못 찾는다.
-   뷰포트에 딱 맞춰 두면 스크롤 주체가 .screen 이 되고, 셸은 제자리에 남는다.
-   dvh 인 이유는 모바일 주소창이 접힐 때 vh 가 따라오지 않기 때문이다.
-   min-height 로 되돌리지 말 것. */
+/* **뷰포트에 못박는다.** 셸은 흐름에서 빠져 있고 높이는 top/bottom 이 준다.
+   스크롤 주체는 .screen 하나뿐이고, 헤더와 탭바는 무슨 일이 있어도 제자리다.
+
+   예전에는 `height: 100dvh` 였다. 그것도 min-height 보다는 나았지만
+   (min-height 면 내용이 길 때 셸이 같이 늘어나 문서 전체가 스크롤한다),
+   **설치한 앱에서 탭바가 화면 밖으로 밀리는 것을 못 막았다** — 2026-09-10 에
+   safe-area 여백을 준 뒤에도 사용자 기기에서 그대로였다. 길이 단위는
+   브라우저 UI가 접히고 펴지는 순간이나 iOS 독립 실행(standalone) 모드에서
+   실제로 보이는 영역과 어긋날 수 있고, 그때 남는 높이만큼 문서가 스크롤한다.
+   position: fixed 는 그 계산을 브라우저의 실제 뷰포트에 맡기므로 어긋날
+   자리가 없다.
+
+   left/right 0 + max-width + margin auto 가 가운데 정렬을 한다
+   (절대 위치 요소에서 auto 마진은 남는 폭을 반씩 나눈다).
+   height 나 min-height 로 되돌리지 말 것 — 위 증상이 재발한다. */
 .app {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
   max-width: 480px;
   margin: 0 auto;
-  height: 100dvh;
   display: flex;
   flex-direction: column;
   background: var(--bg);
@@ -81,6 +106,10 @@ a:hover { color: var(--link-hover); }
 
 .screen {
   flex: 1;
+  /* flex 항목의 자동 최소 크기를 끈다. overflow-y:auto 가 대개 같은 일을
+     해주지만, 그 규칙에 기대면 셸이 조용히 내용만큼 늘어나는 경우가 남는다.
+     스크롤 주체가 여기라는 것을 값으로 못박는다. */
+  min-height: 0;
   overflow-y: auto;
   /* 목록 끝에서 더 당겨도 문서 전체가 딸려 움직이지 않게 한다. */
   overscroll-behavior: contain;
