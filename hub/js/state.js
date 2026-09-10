@@ -36,3 +36,25 @@ export function askHref(q) {
   const s = String(q ?? '').trim();
   return s ? `./ask/#/q=${encodeURIComponent(s)}` : null;
 }
+
+// 카드 한 장의 내용. **네트워크 없이도 다 정해진다** — 이름·설명은 DOMAINS 에 있고,
+// last_run 은 갱신 날짜와 '들어갈 수 있는가' 만 정한다. 그래서 뼈대를 먼저 그리고
+// 날짜만 나중에 채울 수 있다.
+export function cardModel(d, lastRun) {
+  const ready = domainState(lastRun) === 'ready';
+  return {
+    slug: d.slug, name: d.name, desc: d.desc,
+    meta: updatedLabel(lastRun),
+    ready,
+    href: ready ? `./${d.slug}/` : null,
+  };
+}
+
+// 네 도메인의 last_run 을 **동시에** 받는다.
+//
+// 예전에는 for 루프 안에서 하나씩 await 하고 받는 즉시 카드를 붙였다. 왕복이 직렬로
+// 네 번 일어나 카드가 뚝뚝 끊어지며 나타났다 — 왕복 200ms 면 마지막 카드가 0.8초
+// 뒤에 떴다. 폰처럼 지연이 큰 회선에서 특히 도드라진다.
+export function 갱신상태(load, domains = DOMAINS) {
+  return Promise.all(domains.map((d) => load(`./${d.slug}/data/last_run.json`)));
+}

@@ -1,5 +1,5 @@
 import { loadJson } from '../core/shell.js';
-import { DOMAINS, domainState, updatedLabel, askHref } from './state.js';
+import { DOMAINS, cardModel, 갱신상태, askHref } from './state.js';
 
 function esc(s) {
   return String(s).replace(/[&<>"']/g, (c) => (
@@ -7,23 +7,44 @@ function esc(s) {
   ));
 }
 
+// 카드를 **먼저 다 그리고**(이름·설명은 네트워크가 필요 없다) 갱신 날짜와 링크만
+// 나중에 채운다. 요청 넷은 동시에 나간다 — 예전에는 하나씩 기다렸다 붙여서 카드가
+// 뚝뚝 끊어지며 나타났다.
+function 카드그리기(m) {
+  const el = document.createElement('a');
+  el.className = 'domain domain--pending';
+  el.innerHTML = `
+    <div class="domain__name">${esc(m.name)}</div>
+    <div class="domain__desc">${esc(m.desc)}</div>
+    <div class="domain__meta num">${esc(m.meta)}</div>`;
+  return el;
+}
+
+function 카드채우기(el, m) {
+  el.className = m.ready ? 'domain' : 'domain domain--pending';
+  // 아직 안 받았거나 수집이 한 번도 안 돈 도메인은 링크를 걸지 않는다 —
+  // 빈 화면으로 보내는 것보다 못 들어가는 편이 정직하다.
+  if (m.href) el.href = m.href;
+  else el.removeAttribute('href');
+  el.querySelector('.domain__meta').textContent = m.meta;
+}
+
 async function render() {
   const list = document.getElementById('domains');
   if (!list) return;
 
-  for (const d of DOMAINS) {
-    const lastRun = await loadJson(`./${d.slug}/data/last_run.json`);
-    const ready = domainState(lastRun) === 'ready';
+  // 1) 뼈대를 한 번에 붙인다. 프래그먼트로 모아 붙여 리플로가 한 번만 일어난다.
+  const frag = document.createDocumentFragment();
+  const els = DOMAINS.map((d) => {
+    const el = 카드그리기(cardModel(d, null));
+    frag.appendChild(el);
+    return el;
+  });
+  list.appendChild(frag);
 
-    const el = document.createElement(ready ? 'a' : 'div');
-    el.className = ready ? 'domain' : 'domain domain--pending';
-    if (ready) el.href = `./${d.slug}/`;
-    el.innerHTML = `
-      <div class="domain__name">${esc(d.name)}</div>
-      <div class="domain__desc">${esc(d.desc)}</div>
-      <div class="domain__meta num">${esc(updatedLabel(lastRun))}</div>`;
-    list.appendChild(el);
-  }
+  // 2) 넷을 동시에 받아 채운다.
+  const 결과 = await 갱신상태(loadJson);
+  결과.forEach((lastRun, i) => 카드채우기(els[i], cardModel(DOMAINS[i], lastRun)));
 }
 
 // ── 앱 설치 버튼 ──────────────────────────────────────────────────────────

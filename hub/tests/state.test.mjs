@@ -56,3 +56,52 @@ test('시각이 없는 객체는 준비중이다', () => {
   // {} 를 ready 로 보면 수집이 한 번도 안 돈 도메인이 갱신된 것처럼 보인다.
   assert.equal(domainState({}), 'pending');
 });
+
+
+// ── 카드가 한꺼번에 뜨는가 ──────────────────────────────────────────────
+
+import { cardModel, 갱신상태 } from '../js/state.js';
+
+test('네 요청이 동시에 나간다', async () => {
+  // 예전에는 for 루프 안에서 하나씩 await 해서 왕복이 직렬로 네 번 일어났다 —
+  // 카드가 뚝뚝 끊어지며 나타난 이유다.
+  const 부른순서 = [];
+  const 풀기 = [];
+  const load = (path) => {
+    부른순서.push(path);
+    return new Promise((res) => 풀기.push(res));
+  };
+  const p = 갱신상태(load);
+  // 아직 아무것도 응답하지 않았는데 네 번 다 불렸어야 한다.
+  assert.equal(부른순서.length, 4, JSON.stringify(부른순서));
+  풀기.forEach((res) => res(null));
+  assert.equal((await p).length, 4);
+});
+
+test('요청 주소는 도메인마다 자기 last_run 이다', async () => {
+  const 본것 = [];
+  await 갱신상태((p) => { 본것.push(p); return Promise.resolve(null); });
+  assert.deepEqual(본것, [
+    './forecast/data/last_run.json',
+    './employment/data/last_run.json',
+    './press/data/last_run.json',
+    './reports/data/last_run.json',
+  ]);
+});
+
+test('아직 안 받은 카드는 링크가 없다', () => {
+  // 뼈대를 먼저 그리므로 last_run 이 null 인 순간이 반드시 있다. 그때 링크를 걸면
+  // 수집이 한 번도 안 돈 도메인의 빈 화면으로 사람을 보낸다.
+  const m = cardModel({ slug: 'reports', name: '연구보고서', desc: '설명' }, null);
+  assert.equal(m.href, null);
+  assert.equal(m.ready, false);
+  assert.equal(m.meta, '준비중');
+});
+
+test('받고 나면 링크와 날짜가 채워진다', () => {
+  const m = cardModel({ slug: 'reports', name: '연구보고서', desc: '설명' },
+                      { at: '2026-09-10T11:30:00+09:00' });
+  assert.equal(m.href, './reports/');
+  assert.equal(m.ready, true);
+  assert.equal(m.meta, '09.10 갱신');
+});
