@@ -128,6 +128,23 @@ def test_volume_issue_maps_the_edition_number():
     assert oecd.volume_issue(120) == (2026, 2)
 
 
+def test_volume_issue_accepts_a_november_second_issue():
+    # EO 114 는 2023-11-29 발표다. 2호를 '12월 발표'로만 보면 이 회차가 1호로
+    # 유도돼 멀쩡한 산술값(2023, 2)과 어긋나 거부된다. 실제 규칙은 상·하반기다.
+    assert oecd.EDITIONS[114].month == 11
+    assert oecd.volume_issue(114) == (2023, 2)
+    assert oecd.volume_issue(115) == (2024, 1)
+
+
+def test_old_editions_have_a_pinned_report_url():
+    # 연재 목록은 최근 네 권만 싣는다 — 그보다 옛 회차는 주소를 박아 둔다.
+    # 박아 둔 주소는 iLibrary 의 그 권호 페이지여야 하고, 중간전망이 아니어야
+    # 한다(OECD 는 중간보고서를 직전 권의 호 번호 아래 끼워 넣는다).
+    assert set(oecd.REPORT_URLS) == {114, 115}
+    assert "volume-2023/issue-2" in oecd.REPORT_URLS[114]
+    assert "volume-2024/issue-1" in oecd.REPORT_URLS[115]
+
+
 def test_volume_issue_raises_when_arithmetic_disagrees_with_editions(monkeypatch):
     # EDITIONS 의 발표일로 유도한 (권, 호)가 산술값과 다르면 — 번호가 밀렸거나
     # Interim 이 끼어든 신호다 — 조용히 산술값을 믿지 않는다. EO 119 의 발표일을

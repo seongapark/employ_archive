@@ -29,7 +29,16 @@ LANDING_URL = "https://www.oecd.org/en/topics/economic-outlook.html"
 #   116 https://www.oecd.org/en/about/news/media-advisories/2024/11/
 #       oecd-to-release-economic-outlook-on-wednesday-4-december-2024.html
 #   117 Volume 2025 Issue 1  118 Volume 2025 Issue 2  119 Volume 2026 Issue 1
+# 114·115 는 2026-09-10 에 소급으로 넣었다. 발표일은 **기획재정부 보도참고**로
+# 대조했다 — 기재부는 OECD 전망이 나오는 날 같은 날짜로 [보도참고]를 낸다.
+# 이 대조법이 맞다는 근거: 116·117·118·119 의 기재부 보도참고 날짜가
+# (2024-12-04·2025-06-03·2025-12-02·2026-06-03) 이미 들어 있던 값과 정확히 일치한다.
+#   114 기재부 2023-11-29 [보도참고] 경제협력개발기구, '24년 한국경제 성장률 2.3% 전망
+#   115 기재부 2024-05-02 [보도참고] 경제협력개발기구(OECD) 경제전망 발표
+# 113(2023년 6월)은 SDMX 에 없다(DF_EO_113 404) — 넣지 않는다.
 EDITIONS: dict[int, date] = {
+    114: date(2023, 11, 29),
+    115: date(2024, 5, 2),
     116: date(2024, 12, 4),
     117: date(2025, 6, 3),
     118: date(2025, 12, 2),
@@ -87,6 +96,22 @@ _SERIAL_LINK = re.compile(
     r'(?P<year>\d{4})-issue-(?P<issue>\d)_[0-9a-f]+-en\.html)"')
 
 
+# 연재 목록(SERIALS_URL)은 **최근 네 권만** 싣는다(실측: 2024-2호 ~ 2026-1호).
+# 그보다 옛 회차는 목록에서 못 찾으므로 주소를 여기 박는다. OECD iLibrary 는
+# 옛 권호를 계속 들고 있고 주소도 안 바뀐다.
+#
+# **같은 권호에 주소가 둘인 함정이 여기 있다.** OECD 는 중간보고서를 직전 권의
+# 호 번호 아래 끼워 넣는다 — `volume-2023/issue-2_0fd73462-en` 은 EO 114 가
+# 아니라 **2024년 2월 중간전망**이다. 제목을 열어 확인하고 골랐다.
+#   114 → OECD Economic Outlook, Volume 2023 Issue 2
+#   115 → OECD Economic Outlook, Volume 2024 Issue 1
+_ILIBRARY = "https://www.oecd-ilibrary.org/economics/oecd-economic-outlook"
+REPORT_URLS: dict[int, str] = {
+    114: f"{_ILIBRARY}/volume-2023/issue-2_7a5f73ce-en",
+    115: f"{_ILIBRARY}/volume-2024/issue-1_69a0c310-en",
+}
+
+
 def volume_issue(edition: int) -> tuple[int, int]:
     """회차 번호를 (권 연도, 호) 로 바꾼다.
 
@@ -95,8 +120,14 @@ def volume_issue(edition: int) -> tuple[int, int]:
     재번호를 매기면) 계산값이 이웃 회차의 (권, 호) 를 가리키게 되는데, 그
     이웃 회차도 실제로 존재해 report_url() 의 목록 조회가 그 주소를 순순히
     돌려준다 — 링크는 열리지만 다른 회차 문서다. 그래서 EDITIONS 의 발표일로
-    (권, 호)를 독립적으로 유도해 산술 결과와 맞춰 본다: 12월 발표는 그 해
-    2호, 6월 발표는 그 해 1호다.
+    (권, 호)를 독립적으로 유도해 산술 결과와 맞춰 본다: **하반기 발표가 그 해
+    2호, 상반기 발표가 1호**다.
+
+    달을 12월로 못박으면 안 된다 — EO 114 는 2023-11-29 발표다(11월).
+    12월만 2호로 보면 그 회차가 1호로 유도돼 멀쩡한 산술값과 어긋난다.
+    실제 규칙은 연 2회, 상반기/하반기다. 이미 들어 있던 네 회차
+    (116 2024-12-04 · 117 2025-06-03 · 118 2025-12-02 · 119 2026-06-03)의
+    판정은 이 규칙에서도 그대로다.
 
     EDITIONS 에 없는 회차는 대조할 발표일이 없어 산술값을 그대로 믿는다 —
     다만 parse() 는 EDITIONS 에 없는 회차를 이 함수까지 오기 전에 이미
@@ -111,7 +142,7 @@ def volume_issue(edition: int) -> tuple[int, int]:
 
     published_at = EDITIONS.get(edition)
     if published_at is not None:
-        expected = (published_at.year, 2 if published_at.month == 12 else 1)
+        expected = (published_at.year, 2 if published_at.month >= 7 else 1)
         if computed != expected:
             raise ValueError(
                 f"EO {edition} 의 권·호 산술값 {computed} 이 EDITIONS 발표일"
@@ -150,7 +181,11 @@ def report_url(edition: int) -> str:
     옛 회차 주소를 재활용하거나 기관 안내 페이지로 떨어뜨리지 않는다 — 둘 다
     독자를 다른 회차 문서로 데려간다(설계 4장).
     """
+    # 회차 번호와 발표일이 어긋나지 않는지는 주소를 박아 둔 회차에서도 검사한다.
     key = volume_issue(edition)
+    pinned = REPORT_URLS.get(edition)
+    if pinned is not None:
+        return pinned
     listing = parse_serials(http.get(SERIALS_URL).text)
     if key not in listing:
         raise ValueError(f"연재 목록에 EO {edition}(권 {key[0]} {key[1]}호)이 없다")
