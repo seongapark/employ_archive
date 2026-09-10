@@ -180,3 +180,14 @@ def test_kiet_title_survives_a_classification_tag_before_the_anchor():
     html = fixture('kiet_economy_list.html')
     assert 'clsf' in html, '픽스처에 분류 딱지가 없으면 이 테스트는 무의미하다'
     assert kiet.parse_list(html, BOARDS['kiet-economy'])
+
+
+def test_keis_file_url_points_at_the_file_not_the_viewer():
+    # preview.do 는 28KB 뷰어 HTML 이고 download.do 가 진짜 PDF 다(실측).
+    # 뷰어를 file_url 로 두면 '원문 PDF 열기' 가 파일을 안 주고, 초록 추출도 막힌다.
+    for board_id, fx in (('keis-research', 'keis_list.html'),
+                         ('keis-supply', 'keis_supply_list.html')):
+        items = keis.parse_list(fixture(fx), BOARDS[board_id])
+        urls = [i['file_url'] for i in items if i.get('file_url')]
+        assert urls, board_id
+        assert all('download.do' in u for u in urls), (board_id, urls[:1])

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import time
 from typing import Callable, Optional
+from urllib.parse import quote
 
 from curl_cffi import requests as cf_requests
 
@@ -68,3 +69,27 @@ class Throttle:
                 self._sleep(gap)
                 t += gap
         self._last = t
+
+
+def get_bytes(url: str, *, timeout: int = 180, tries: int = 3,
+              sleep: Callable[[float], None] = time.sleep,
+              fetch: Optional[Callable] = None) -> bytes:
+    """원문 파일을 받는다. 텍스트가 아니므로 인코딩을 건드리지 않는다.
+
+    질의에 한글이나 공백이 들어간 파일 주소가 있어(KLI 의 fileNameOrg,
+    KEIS 의 fn) 퍼센트 인코딩을 해 두지 않으면 요청 자체가 실패한다.
+    """
+    safe = quote(url, safe=":/?&=%#+,")
+    call = fetch or _default_fetch
+    last: Optional[Exception] = None
+    for attempt in range(1, tries + 1):
+        try:
+            resp = call(safe, timeout=timeout)
+            resp.raise_for_status()
+            return resp.content
+        except Exception as exc:       # noqa: BLE001
+            last = exc
+            if attempt == tries:
+                break
+            sleep(2.0 * attempt)
+    raise last                          # type: ignore[misc]

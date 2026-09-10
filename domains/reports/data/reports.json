@@ -1693,7 +1693,9 @@
   "employment": true,
   "matched": [
    "여성고용",
+   "임금",
    "근로시간",
+   "고용형태",
    "일자리정책"
   ]
  },
@@ -1893,7 +1895,9 @@
   "file_url": "https://www.kdi.re.kr/file/download?atch_no=Q2FLMBLaZPmYNaQ2warcdg%3D%3D",
   "employment": true,
   "matched": [
-   "고용형태"
+   "고용형태",
+   "노사관계",
+   "일자리정책"
   ]
  },
  {
@@ -2520,6 +2524,7 @@
   "employment": true,
   "matched": [
    "임금",
+   "고용서비스",
    "일자리정책"
   ]
  },
@@ -2860,7 +2865,15 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=622B56762257A3E949258DE800261E94_4.pdf&fileNameOrg=AI기반 제조업 혁신과 고용_web.pdf&filePath1=jsphome/DATA/pblctList/issue/622B56762257A3E949258DE800261E94",
   "employment": true,
   "matched": [
-   "일자리정책"
+   "청년고용",
+   "고령자",
+   "근로시간",
+   "직업훈련",
+   "고용서비스",
+   "고용보험",
+   "산업별고용",
+   "일자리정책",
+   "인력수급"
   ]
  },
  {
@@ -2920,7 +2933,11 @@
   "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=10281&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=0CD1BD9F32970A3C49258DF5001CE031_2.pdf&fileNameOrg=AI의 발달과 HR에 대한 적용_web.pdf&filePath1=jsphome/DATA/pblctList/issue/0CD1BD9F32970A3C49258DF5001CE031",
   "employment": true,
-  "matched": []
+  "matched": [
+   "임금",
+   "근로시간",
+   "일자리정책"
+  ]
  },
  {
   "id": "kli-10277",
@@ -2939,6 +2956,11 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=5EBD2D4455159BE049258DE600177018_4.pdf&fileNameOrg=석탄화력발전소 폐지의 지역경제 영향과 일자리 미스매치_web.pdf&filePath1=jsphome/DATA/pblctList/issue/5EBD2D4455159BE049258DE600177018",
   "employment": true,
   "matched": [
+   "임금",
+   "노사관계",
+   "직업훈련",
+   "고용서비스",
+   "지역고용",
    "일자리정책",
    "인력수급"
   ]
@@ -2962,7 +2984,11 @@
   "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=10276&mid=a10102060000&nPage=2&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=374E4D98994DD21C49258DE6000D26E8_4.pdf&fileNameOrg=AI 도입의 결정요인 및 성과 분석 - 사업체패널조사 자료를 이용하여_web.pdf&filePath1=jsphome/DATA/pblctList/issue/374E4D98994DD21C49258DE6000D26E8",
   "employment": true,
-  "matched": []
+  "matched": [
+   "직업훈련",
+   "일자리정책",
+   "노동전환"
+  ]
  },
  {
   "id": "kli-10274",
@@ -2983,7 +3009,8 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=5445EEB2F15EBA6A49258DDC0009DB0E_3.pdf&fileNameOrg=패널자료 품질개선 연구(XV)_web.pdf&filePath1=jsphome/DATA/pblctList/issue/5445EEB2F15EBA6A49258DDC0009DB0E",
   "employment": true,
   "matched": [
-   "노사관계"
+   "노사관계",
+   "일자리정책"
   ]
  },
  {
@@ -3004,8 +3031,14 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=180E80B6D02BC95649258DCC00096C5F_4.pdf&fileNameOrg=기술 도입에 따른 돌봄서비스의 변화_web.pdf&filePath1=jsphome/DATA/pblctList/issue/180E80B6D02BC95649258DCC00096C5F",
   "employment": true,
   "matched": [
+   "고령자",
    "여성고용",
-   "일자리정책"
+   "임금",
+   "고용형태",
+   "노사관계",
+   "산업별고용",
+   "일자리정책",
+   "인력수급"
   ]
  },
  {
@@ -3026,9 +3059,12 @@
   "employment": true,
   "matched": [
    "고령자",
+   "여성고용",
    "임금",
    "고용형태",
-   "노사관계"
+   "노사관계",
+   "직업훈련",
+   "일자리정책"
   ]
  },
  {
@@ -3048,6 +3084,7 @@
   "employment": true,
   "matched": [
    "임금",
+   "직업훈련",
    "일자리정책"
   ]
  },
@@ -3069,6 +3106,12 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=7924CE9AC85E9CE949258DCB002D05B2_4.pdf&fileNameOrg=자동차산업의 탈내연기관화와 고용체제의 구조변동_web.pdf&filePath1=jsphome/DATA/pblctList/issue/7924CE9AC85E9CE949258DCB002D05B2",
   "employment": true,
   "matched": [
+   "임금",
+   "근로시간",
+   "노사관계",
+   "직업훈련",
+   "일자리정책",
+   "인력수급",
    "노동전환"
   ]
  },
@@ -3091,7 +3134,13 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=F6EDCE04416A373949258DCB002C74CC_4.pdf&fileNameOrg=인공지능과 노사관계의 변화와 쟁점_web.pdf&filePath1=jsphome/DATA/pblctList/issue/F6EDCE04416A373949258DCB002C74CC",
   "employment": true,
   "matched": [
-   "노사관계"
+   "임금",
+   "근로시간",
+   "고용형태",
+   "노사관계",
+   "직업훈련",
+   "일자리정책",
+   "노동전환"
   ]
  },
  {
@@ -3117,6 +3166,7 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=CE696D350D91B1A649258DCB002C1D10_4.pdf&fileNameOrg=외국인_이민자 인력수급 추계 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/CE696D350D91B1A649258DCB002C1D10",
   "employment": true,
   "matched": [
+   "고령자",
    "외국인력",
    "직업훈련",
    "일자리정책",
@@ -3144,7 +3194,8 @@
   "employment": true,
   "matched": [
    "임금",
-   "노사관계"
+   "노사관계",
+   "인력수급"
   ]
  },
  {
@@ -3166,7 +3217,10 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=92E09DB39ED70C8949258DCB002B7165_4.pdf&fileNameOrg=글로벌 공급사슬 변화와 노사관계 이슈 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/92E09DB39ED70C8949258DCB002B7165",
   "employment": true,
   "matched": [
-   "노사관계"
+   "임금",
+   "노사관계",
+   "일자리정책",
+   "노동전환"
   ]
  },
  {
@@ -3186,6 +3240,8 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=90F28393C5AA48AB49258DCB002B24A1_4.pdf&fileNameOrg=취업형태 다변화와 21세기 산재보험법_web.pdf&filePath1=jsphome/DATA/pblctList/issue/90F28393C5AA48AB49258DCB002B24A1",
   "employment": true,
   "matched": [
+   "고용형태",
+   "노사관계",
    "고용보험",
    "일자리정책"
   ]
@@ -3212,10 +3268,14 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=D8576D311273202049258DCB002AED8F_4.pdf&fileNameOrg=AI와 노동의 공존 - 생산성 향상과 불평등 개선 가능성을 중심으로_web.pdf&filePath1=jsphome/DATA/pblctList/issue/D8576D311273202049258DCB002AED8F",
   "employment": true,
   "matched": [
+   "고령자",
    "임금",
+   "고용형태",
    "노사관계",
    "직업훈련",
-   "고용보험"
+   "고용보험",
+   "일자리정책",
+   "인력수급"
   ]
  },
  {
@@ -3235,7 +3295,12 @@
   "employment": true,
   "matched": [
    "청년고용",
-   "일자리정책"
+   "여성고용",
+   "임금",
+   "직업훈련",
+   "고용서비스",
+   "일자리정책",
+   "인력수급"
   ]
  },
  {
@@ -3259,7 +3324,9 @@
   "matched": [
    "외국인력",
    "직업훈련",
-   "일자리정책"
+   "지역고용",
+   "일자리정책",
+   "인력수급"
   ]
  },
  {
@@ -3282,6 +3349,11 @@
   "employment": true,
   "matched": [
    "외국인력",
+   "임금",
+   "근로시간",
+   "직업훈련",
+   "고용보험",
+   "산업별고용",
    "일자리정책"
   ]
  },
@@ -3304,7 +3376,12 @@
   "employment": true,
   "matched": [
    "고령자",
-   "일자리정책"
+   "임금",
+   "근로시간",
+   "고용형태",
+   "직업훈련",
+   "일자리정책",
+   "인력수급"
   ]
  },
  {
@@ -3323,6 +3400,8 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=FF67611FEB769E9949258DCB0026BEA9_4.pdf&fileNameOrg=자영업과 자영업정책_web.pdf&filePath1=jsphome/DATA/pblctList/issue/FF67611FEB769E9949258DCB0026BEA9",
   "employment": true,
   "matched": [
+   "고령자",
+   "임금",
    "고용보험",
    "일자리정책"
   ]
@@ -3345,7 +3424,11 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=4DA18D52D1BD6EB249258DCB0025C2D2_4.pdf&fileNameOrg=노동시장 지위와 소비 격차에 관한 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/4DA18D52D1BD6EB249258DCB0025C2D2",
   "employment": true,
   "matched": [
+   "임금",
+   "근로시간",
+   "고용형태",
    "고용서비스",
+   "고용보험",
    "일자리정책"
   ]
  },
@@ -3367,7 +3450,9 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=EB27ACBED42C21A549258DCA0025C7C4_4.pdf&fileNameOrg=사회적 소수자의 고용과 노동(Ⅱ)-북한이탈주민_web.pdf&filePath1=jsphome/DATA/pblctList/issue/EB27ACBED42C21A549258DCA0025C7C4",
   "employment": true,
   "matched": [
+   "여성고용",
    "임금",
+   "직업훈련",
    "고용서비스",
    "일자리정책"
   ]
@@ -3394,7 +3479,8 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=D4C1AB7B885DDEE949258DCA00254FF2_4.pdf&fileNameOrg=부당해고 구제제도의 개선방안_web.pdf&filePath1=jsphome/DATA/pblctList/issue/D4C1AB7B885DDEE949258DCA00254FF2",
   "employment": true,
   "matched": [
-   "노사관계"
+   "노사관계",
+   "일자리정책"
   ]
  },
  {
@@ -3484,6 +3570,7 @@
   "employment": true,
   "matched": [
    "여성고용",
+   "임금",
    "근로시간",
    "일자리정책"
   ]
@@ -3505,9 +3592,14 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=D1BC5DD9F0CF104749258DC3002546B0_4.pdf&fileNameOrg=지역노동시장권의 변화와 여성고용_web.pdf&filePath1=jsphome/DATA/pblctList/issue/D1BC5DD9F0CF104749258DC3002546B0",
   "employment": true,
   "matched": [
+   "고령자",
    "여성고용",
+   "고용형태",
+   "직업훈련",
+   "고용서비스",
    "지역고용",
-   "일자리정책"
+   "일자리정책",
+   "인력수급"
   ]
  },
  {
@@ -3552,6 +3644,8 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=982D2641F506411749258DBF007AE92D_4.pdf&fileNameOrg=청년 미스매치 실업 실태와 개선 방안 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/982D2641F506411749258DBF007AE92D",
   "employment": true,
   "matched": [
+   "청년고용",
+   "고용서비스",
    "일자리정책",
    "인력수급"
   ]
@@ -3573,6 +3667,7 @@
   "employment": true,
   "matched": [
    "임금",
+   "노사관계",
    "일자리정책"
   ]
  },
@@ -3594,10 +3689,13 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=0D95FB9BF03CF61749258DBD003FAEA9_4.pdf&fileNameOrg=고령자의 노동시장 이행 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/0D95FB9BF03CF61749258DBD003FAEA9",
   "employment": true,
   "matched": [
+   "청년고용",
    "고령자",
    "임금",
+   "근로시간",
    "직업훈련",
    "고용서비스",
+   "고용보험",
    "일자리정책"
   ]
  },
@@ -3619,6 +3717,12 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=225A83663A43793449258DBD003F6ECE_4.pdf&fileNameOrg=퇴직급여 사각지대와 정책과제_web.pdf&filePath1=jsphome/DATA/pblctList/issue/225A83663A43793449258DBD003F6ECE",
   "employment": true,
   "matched": [
+   "임금",
+   "근로시간",
+   "고용형태",
+   "노사관계",
+   "고용서비스",
+   "고용보험",
    "일자리정책"
   ]
  },
@@ -3657,7 +3761,10 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=5659F529903ECD4049258DBD00213836_4.pdf&fileNameOrg=소득수준과 생애주기별 건강_web.pdf&filePath1=jsphome/DATA/pblctList/issue/5659F529903ECD4049258DBD00213836",
   "employment": true,
   "matched": [
-   "임금"
+   "고령자",
+   "임금",
+   "고용형태",
+   "일자리정책"
   ]
  },
  {
@@ -3676,7 +3783,10 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=31CA20EF14940F3949258DBD001FCF1E_4.pdf&fileNameOrg=일생활균형을 위한 시간주권 보장연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/31CA20EF14940F3949258DBD001FCF1E",
   "employment": true,
   "matched": [
-   "근로시간"
+   "여성고용",
+   "근로시간",
+   "노사관계",
+   "일자리정책"
   ]
  },
  {
@@ -3696,7 +3806,9 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=080EC9C4756768C249258DBC00156ED5_4.pdf&fileNameOrg=연령대별 임금 격차 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/080EC9C4756768C249258DBC00156ED5",
   "employment": true,
   "matched": [
+   "고령자",
    "임금",
+   "고용형태",
    "일자리정책"
   ]
  },
@@ -3718,7 +3830,11 @@
   "employment": true,
   "matched": [
    "청년고용",
+   "여성고용",
    "임금",
+   "근로시간",
+   "직업훈련",
+   "고용서비스",
    "일자리정책"
   ]
  },
@@ -3811,6 +3927,8 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=8A3E5992E752C9C049258D6A0008013C_2.pdf&fileNameOrg=제27차(2024)년도 한국노동패널 기초분석보고서_web.pdf&filePath1=jsphome/DATA/pblctList/issue/8A3E5992E752C9C049258D6A0008013C",
   "employment": true,
   "matched": [
+   "청년고용",
+   "고령자",
    "임금",
    "근로시간",
    "고용형태",
@@ -5665,6 +5783,7 @@
   "employment": true,
   "matched": [
    "청년고용",
+   "임금",
    "일자리정책"
   ]
  },
@@ -6651,6 +6770,9 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=8FE8C105184DACD449258CC7002C9221_2.pdf&fileNameOrg=취업형태 다변화와 최적화된 규율분업의 모색_web.pdf&filePath1=jsphome/DATA/pblctList/issue/8FE8C105184DACD449258CC7002C9221",
   "employment": true,
   "matched": [
+   "임금",
+   "고용형태",
+   "노사관계",
    "일자리정책"
   ]
  },
@@ -6675,7 +6797,11 @@
   "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=10195&mid=a10102060000&nPage=6&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=14BFD31C0254FD1B49258CAD000B3A18_1.pdf&fileNameOrg=AI 도입과 노동과정의 재구조화_web.pdf&filePath1=jsphome/DATA/pblctList/issue/14BFD31C0254FD1B49258CAD000B3A18",
   "employment": true,
-  "matched": []
+  "matched": [
+   "노사관계",
+   "직업훈련",
+   "일자리정책"
+  ]
  },
  {
   "id": "kli-10185",
@@ -6699,8 +6825,13 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=B46666B1FCE6479049258C89002B4D56_3.pdf&fileNameOrg=인구변동과 노동이민정책_web.pdf&filePath1=jsphome/DATA/pblctList/issue/B46666B1FCE6479049258C89002B4D56",
   "employment": true,
   "matched": [
+   "청년고용",
    "외국인력",
-   "일자리정책"
+   "임금",
+   "직업훈련",
+   "고용서비스",
+   "일자리정책",
+   "인력수급"
   ]
  },
  {

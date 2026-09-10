@@ -48,6 +48,20 @@ def abstract_missing(reports: list[Report]) -> dict:
     return out
 
 
+def missing_reasons(reports: list[Report]) -> dict:
+    """초록이 빈 레코드가 왜 비었는지. 결측률만으로는 손쓸 수 있는 것과
+    없는 것이 안 갈린다 — 스캔본은 OCR 없이는 영영 못 채우고, '요약 섹션 없음'
+    은 기관이 애초에 안 쓴 것이며, 아직 안 받아 본 것은 다음 회차에 채워진다.
+    스펙 9-3(NKIS 보강 전환) 판단이 이 구분에 걸려 있다."""
+    out: dict[str, int] = {}
+    for r in reports:
+        if (r.abstract or '').strip():
+            continue
+        key = r.abstract_note or ('원문 없음' if not r.file_url else '아직 안 받음')
+        out[key] = out.get(key, 0) + 1
+    return dict(sorted(out.items(), key=lambda kv: -kv[1]))
+
+
 def build(raw_rows: list[RawReport], boards: list, kw: dict):
     by_id = {b.id: b for b in boards}
     kept: list[Report] = []
@@ -66,9 +80,9 @@ def build(raw_rows: list[RawReport], boards: list, kw: dict):
 def _light(r: Report) -> dict:
     """목록용 경량 레코드. 초록·목차는 abstracts.json 으로 간다."""
     d = r.model_dump(mode='json')
-    d.pop('abstract', None)
-    d.pop('toc', None)
-    d.pop('collected_at', None)
+    for k in ('abstract', 'toc', 'collected_at',
+              'abstract_tried', 'abstract_note'):
+        d.pop(k, None)
     return d
 
 
@@ -87,6 +101,7 @@ def main(argv=None) -> int:
     last = json.loads(last_path.read_text(encoding='utf-8')) if last_path.exists() else {}
     last['reports'] = len(kept)
     last['abstract_missing'] = missing
+    last['abstract_missing_why'] = missing_reasons(kept)
     last_path.write_text(json.dumps(last, ensure_ascii=False, indent=2) + '\n',
                          encoding='utf-8')
     print(f'built: {len(kept)} reports')

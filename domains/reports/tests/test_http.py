@@ -57,3 +57,38 @@ def test_throttle_waits_between_requests():
     t.wait()          # 0.2초밖에 안 지났으니 0.8초 기다린다 (그때가 1.0초)
     t.wait()          # 1.4초, 직전 요청이 1.0초였으니 0.6초 더 기다린다
     assert slept == [pytest.approx(0.8), pytest.approx(0.6)]
+
+
+def test_a_file_url_with_a_korean_name_is_percent_encoded():
+    # KLI 의 fileNameOrg, KEIS 의 fn 질의에 한글과 공백이 그대로 들어 있다.
+    # 인코딩하지 않으면 요청이 만들어지기 전에 깨진다(2026-09-10 실측).
+    seen = []
+
+    def spy(url, timeout):
+        seen.append(url)
+        return FakeResp(b'%PDF-1.7')
+
+    url = 'https://www.kli.re.kr/down?fileNameOrg=임금정보브리프 제90호.pdf&filePath1=a/b'
+    assert http.get_bytes(url, fetch=spy) == b'%PDF-1.7'
+    assert '%EC%9E%84' in seen[0] and ' ' not in seen[0]
+    assert seen[0].startswith('https://www.kli.re.kr/down?')
+    assert '&' in seen[0] and '=' in seen[0], '질의 구분자까지 인코딩하면 주소가 망가진다'
+
+
+def test_bytes_are_not_decoded():
+    # PDF 는 텍스트가 아니다. 인코딩을 건드리면 파일이 깨진다.
+    body = bytes(range(256))
+    assert http.get_bytes('https://x/f.pdf', fetch=lambda u, timeout: FakeResp(body)) == body
+
+
+def test_a_file_download_retries_too():
+    calls = []
+
+    def flaky(url, timeout):
+        calls.append(url)
+        if len(calls) < 2:
+            raise RuntimeError('502')
+        return FakeResp(b'%PDF-')
+
+    assert http.get_bytes('https://x/f.pdf', fetch=flaky, sleep=lambda _: None) == b'%PDF-'
+    assert len(calls) == 2

@@ -35,6 +35,15 @@ jobs:
         env:
           PYTHONIOENCODING: utf-8
         run: python -m domains.reports.pipeline.collect
+      - name: 초록 채우기
+        env:
+          PYTHONIOENCODING: utf-8
+        # 수집이 새로 들고 온 레코드의 원문 PDF 에서 요약 섹션을 뜯는다. 한 번
+        # 시도한 것은 다시 받지 않으므로(abstract_tried) 평소에는 몇 건뿐이다.
+        # 실패해도 그날 수집을 버리지 않는다 — 초록은 있으면 좋은 것이고,
+        # 서지는 이미 위에서 받아 뒀다.
+        continue-on-error: true
+        run: python -m domains.reports.pipeline.enrich
       - name: Commit data
         run: |
           git config user.name "reports-bot"
