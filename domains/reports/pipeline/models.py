@@ -63,6 +63,10 @@ class RawReport(BaseModel):
     file_url: Optional[str] = None
     abstract: Optional[str] = None
     toc: list[str] = Field(default_factory=list)
+    # 원문 PDF 에서 초록을 뜯어 보려 시도했는가. 없으면 요약 섹션이 없는 보고서를
+    # 회차마다 헛되이 다시 내려받는다. 사유는 abstract_note 에 남는다.
+    abstract_tried: bool = False
+    abstract_note: Optional[str] = None
     collected_at: Optional[str] = None
 
     @field_validator('published')

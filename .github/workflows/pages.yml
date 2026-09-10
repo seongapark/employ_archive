@@ -45,7 +45,7 @@ jobs:
         run: >-
           node --test "core/tests/*.mjs" "hub/tests/*.mjs"
           "domains/forecast/tests/web/*.mjs" "domains/employment/tests/web/*.mjs"
-          "domains/ask/tests/web/*.test.mjs"
+          "domains/ask/tests/web/*.test.mjs" "domains/reports/tests/web/*.test.mjs"
       - name: Build site
         run: python -m tools.build
       - uses: actions/upload-pages-artifact@v3

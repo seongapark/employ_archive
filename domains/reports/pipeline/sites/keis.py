@@ -22,6 +22,8 @@ _GO_DETAIL = re.compile(r"goDetail\('categoryIdx=(\d+)&(?:amp;)?pubIdx=(\d+)'\)"
 _SUBJECT = re.compile(r'class="cell-subject"[^>]*>(.*?)</td>', re.S)
 _CELL_DATE = re.compile(r'class="cell-date"[^>]*>(.*?)</td>', re.S)
 _ANCHOR_TEXT = re.compile(r'<a[^>]*>(.*?)</a>', re.S)
+# preview.do 는 28KB 짜리 뷰어 HTML 이고 download.do 가 진짜 PDF 다(실측).
+# file_url 은 '원문 PDF 열기' 가 가리키는 곳이므로 파일 쪽이어야 한다.
 _PREVIEW = re.compile(r'href="(/keis/[^"]*preview\.do\?[^"]*)"')
 _DOWNLOAD = re.compile(r'href="(/keis/[^"]*download\.do\?[^"]*)"')
 _FIELD = re.compile(r'<dt[^>]*>\s*{}\s*</dt>\s*<dd[^>]*>(.*?)</dd>', re.S)
@@ -58,7 +60,7 @@ def _parse_table(html: str, board: Board) -> list[dict]:
         raw_date = common.find_date(date_cell.group(1)) if date_cell else None
         if not (title and raw_date):
             continue
-        preview = _PREVIEW.search(row)
+        file_m = _DOWNLOAD.search(row) or _PREVIEW.search(row)
         seen.add(pub_idx)
         # 목록 주소의 디렉터리에 detail.do 가 있다.
         base_dir = board.list_url.rsplit('/', 1)[0] + '/'
@@ -68,7 +70,7 @@ def _parse_table(html: str, board: Board) -> list[dict]:
                            f'&pubIdx={pub_idx}'),
             'published_raw': raw_date,
             'title': title,
-            'file_url': common.absolute(BASE, preview.group(1)) if preview else None,
+            'file_url': common.absolute(BASE, file_m.group(1)) if file_m else None,
         })
     return items
 
@@ -94,7 +96,7 @@ def _parse_preview_boxes(html: str, board: Board) -> list[dict]:
         raw_date = common.find_date(date_m.group(1)) if date_m else None
         if not (title and raw_date):
             continue
-        preview = _PREVIEW.search(block)
+        file_m = dl or _PREVIEW.search(block)
         seen.add(nid.group(1))
         items.append({
             'native_id': nid.group(1),
@@ -102,7 +104,7 @@ def _parse_preview_boxes(html: str, board: Board) -> list[dict]:
             'published_raw': raw_date,
             'title': title,
             'authors': ['한국고용정보원'],
-            'file_url': common.absolute(BASE, preview.group(1)) if preview else None,
+            'file_url': common.absolute(BASE, file_m.group(1)) if file_m else None,
             'block': block,
         })
     return items
