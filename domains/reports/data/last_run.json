@@ -1,22 +1,238 @@
 {
-  "at": "2026-09-10T02:25:51+09:00",
+  "at": "2026-09-10T16:42:00+09:00",
   "boards": {
-    "kdi-trends": {
+    "kli-research": {
       "ok": true,
-      "parsed": 45,
+      "parsed": 110,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
       "error": null,
-      "total": 40
+      "total": 100
+    },
+    "kli-review": {
+      "ok": true,
+      "parsed": 70,
+      "added": 28,
+      "details": 28,
+      "reached_cutoff": true,
+      "error": null,
+      "total": 68
+    },
+    "kli-policy": {
+      "ok": true,
+      "parsed": 30,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": true,
+      "error": null,
+      "total": 22
+    },
+    "kli-intl": {
+      "ok": true,
+      "parsed": 60,
+      "added": 10,
+      "details": 10,
+      "reached_cutoff": true,
+      "error": null,
+      "total": 50
+    },
+    "kli-brief": {
+      "ok": true,
+      "parsed": 20,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": true,
+      "error": null,
+      "total": 11
+    },
+    "kli-wage": {
+      "ok": true,
+      "parsed": 50,
+      "added": 7,
+      "details": 7,
+      "reached_cutoff": true,
+      "error": null,
+      "total": 47
+    },
+    "kli-panel": {
+      "ok": true,
+      "parsed": 10,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 10
+    },
+    "kli-eia": {
+      "ok": true,
+      "parsed": 40,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": true,
+      "error": null,
+      "total": 33
+    },
+    "keis-research": {
+      "ok": true,
+      "parsed": 100,
+      "added": 40,
+      "details": 40,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 80
+    },
+    "keis-supply": {
+      "ok": true,
+      "parsed": 38,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 38
+    },
+    "keis-issue": {
+      "ok": true,
+      "parsed": 50,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": true,
+      "error": null,
+      "total": 21
+    },
+    "keis-trend": {
+      "ok": true,
+      "parsed": 100,
+      "added": 10,
+      "details": 10,
+      "reached_cutoff": true,
+      "error": null,
+      "total": 50
+    },
+    "keis-region": {
+      "ok": true,
+      "parsed": 20,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 20
+    },
+    "keis-transition": {
+      "ok": true,
+      "parsed": 5,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 5
+    },
+    "kiet-report": {
+      "ok": true,
+      "parsed": 90,
+      "added": 40,
+      "details": 40,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 80
+    },
+    "kiet-redata": {
+      "ok": true,
+      "parsed": 90,
+      "added": 40,
+      "details": 40,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 80
+    },
+    "kiet-podata": {
+      "ok": true,
+      "parsed": 60,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": true,
+      "error": null,
+      "total": 36
+    },
+    "kiet-paper": {
+      "ok": true,
+      "parsed": 90,
+      "added": 40,
+      "details": 40,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 80
+    },
+    "kiet-issue": {
+      "ok": true,
+      "parsed": 90,
+      "added": 40,
+      "details": 40,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 80
+    },
+    "kiet-economy": {
+      "ok": true,
+      "parsed": 90,
+      "added": 40,
+      "details": 40,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 80
+    },
+    "kdi-report": {
+      "ok": true,
+      "parsed": 90,
+      "added": 40,
+      "details": 40,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 80
+    },
+    "kdi-analysis": {
+      "ok": true,
+      "parsed": 40,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": true,
+      "error": null,
+      "total": 31
+    },
+    "kdi-focus": {
+      "ok": true,
+      "parsed": 87,
+      "added": 40,
+      "details": 40,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 77
+    },
+    "kdi-trends": {
+      "ok": true,
+      "parsed": 69,
+      "added": 29,
+      "details": 29,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 69
+    },
+    "kdi-etc": {
+      "ok": true,
+      "parsed": 1,
+      "added": 0,
+      "details": 0,
+      "reached_cutoff": false,
+      "error": null,
+      "total": 1
     }
   },
   "unregistered": [],
-  "reports": 572,
+  "reports": 812,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
-        "total": 40,
+        "total": 69,
         "missing": 0,
         "rate": 0.0
       },
@@ -26,14 +242,14 @@
         "rate": 0.0
       },
       "연구보고서": {
-        "total": 16,
+        "total": 34,
         "missing": 0,
         "rate": 0.0
       },
       "KDI FOCUS": {
-        "total": 6,
+        "total": 11,
         "missing": 6,
-        "rate": 1.0
+        "rate": 0.545
       },
       "현안분석": {
         "total": 7,
@@ -43,18 +259,18 @@
     },
     "kli": {
       "연구보고서": {
-        "total": 60,
-        "missing": 16,
-        "rate": 0.267
+        "total": 100,
+        "missing": 18,
+        "rate": 0.18
       },
       "국제노동브리프": {
-        "total": 40,
-        "missing": 40,
+        "total": 50,
+        "missing": 50,
         "rate": 1.0
       },
       "노동리뷰": {
-        "total": 40,
-        "missing": 40,
+        "total": 68,
+        "missing": 68,
         "rate": 1.0
       },
       "고용노동브리프": {
@@ -68,8 +284,8 @@
         "rate": 1.0
       },
       "임금정보브리프": {
-        "total": 40,
-        "missing": 40,
+        "total": 47,
+        "missing": 47,
         "rate": 1.0
       },
       "노동정책연구": {
@@ -90,12 +306,12 @@
         "rate": 0.0
       },
       "연구사업보고서": {
-        "total": 40,
+        "total": 80,
         "missing": 0,
         "rate": 0.0
       },
       "고용동향브리프": {
-        "total": 40,
+        "total": 50,
         "missing": 0,
         "rate": 0.0
       },
@@ -117,27 +333,27 @@
     },
     "kiet": {
       "i-KIET": {
-        "total": 12,
+        "total": 24,
         "missing": 0,
         "rate": 0.0
       },
       "월간 산업경제": {
-        "total": 9,
+        "total": 13,
         "missing": 0,
         "rate": 0.0
       },
       "연구자료": {
-        "total": 13,
+        "total": 26,
         "missing": 0,
         "rate": 0.0
       },
       "연구보고서": {
-        "total": 22,
+        "total": 39,
         "missing": 0,
         "rate": 0.0
       },
       "이슈페이퍼": {
-        "total": 13,
+        "total": 20,
         "missing": 0,
         "rate": 0.0
       },
@@ -149,7 +365,8 @@
     }
   },
   "abstract_missing_why": {
-    "요약 섹션 없음": 218,
+    "요약 섹션 없음": 220,
+    "아직 안 받음": 45,
     "텍스트가 없는 스캔본": 38,
     "파일이 너무 큼(67MB)": 1
   }

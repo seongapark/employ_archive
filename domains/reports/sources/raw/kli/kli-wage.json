@@ -445,6 +445,180 @@
     "collected_at": "2026-09-10T10:19:52+09:00"
   },
   {
+    "id": "kli-9531",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2021년 제1호(통권 제58호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2021-03-19",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9531&mid=a10104020000&nPage=5&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=2773128E1C862CAC492586A4000E627E_0.pdf&fileNameOrg=임금정보브리프 2021년 제1호_통권 제58호.pdf&filePath1=jsphome/DATA/pblctList/issue/2773128E1C862CAC492586A4000E627E",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2020년 12월~2021년 1월 임금 동향",
+      "- 임금체계 개편 사례",
+      "- 직무중심 인사관리(연재) 1편 : 직무란 무엇인가?"
+    ],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-10T16:31:03+09:00"
+  },
+  {
+    "id": "kli-9540",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2021년 제2호(통권 제59호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2021-03-31",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9540&mid=a10104020000&nPage=5&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=472DDB8130B31B02492586B2001CDE61_4.pdf&fileNameOrg=임금정보브리프 2021년 제2호_통권 제59호.pdf&filePath1=jsphome/DATA/pblctList/issue/472DDB8130B31B02492586B2001CDE61",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2021년 1~2월 임금 동향",
+      "- 임금체계 개편 사례",
+      "- 직무중심 인사관리(연재) 2편 : 직무관리체계란 무엇인가?"
+    ],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-10T16:31:03+09:00"
+  },
+  {
+    "id": "kli-9583",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2021년 제3호(통권 제60호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2021-04-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9583&mid=a10104020000&nPage=5&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=5CBFA30549CFAB94492586D4000D3ACC_0.pdf&fileNameOrg=임금정보브리프 2021년 제3호_통권 제60호.pdf&filePath1=jsphome/DATA/pblctList/issue/5CBFA30549CFAB94492586D4000D3ACC",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2021년 2~3월 임금 동향",
+      "- 임금체계 개편 사례",
+      "- 직무중심 인사관리(연재) 3편 : 직무분류 목적 및 방법"
+    ],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-10T16:31:03+09:00"
+  },
+  {
+    "id": "kli-9596",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2021년 제4호(통권 제61호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2021-05-31",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9596&mid=a10104020000&nPage=5&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=74DACDF95706C7BF492586EF00320B19_0.pdf&fileNameOrg=임금정보브리프 2021년 제4호_통권 제61호.pdf&filePath1=jsphome/DATA/pblctList/issue/74DACDF95706C7BF492586EF00320B19",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2021년 3~4월 임금 동향",
+      "- 임금체계 개편 사례",
+      "- 직무중심 인사관리(연재) 4편: 직무분석",
+      "- 직무 전문성 기반 보상체계로의 변화"
+    ],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-10T16:31:03+09:00"
+  },
+  {
+    "id": "kli-9604",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2021년 제5호(통권 제62호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2021-06-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9604&mid=a10104020000&nPage=5&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=9B0D28B8A1A0CBA14925871300015E98_0.pdf&fileNameOrg=임금정보브리프 2021년 제5호_통권 제62호.pdf&filePath1=jsphome/DATA/pblctList/issue/9B0D28B8A1A0CBA14925871300015E98",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2021년 4~5월 임금 동향",
+      "-직무중심 인사관리(연재) 5편: 직무분석"
+    ],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-10T16:31:03+09:00"
+  },
+  {
+    "id": "kli-9608",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2021년 제6호(통권 제63호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2021-07-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9608&mid=a10104020000&nPage=5&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=F46A0501F3ED69954925872E0005D907_2.pdf&fileNameOrg=임금정보브리프 2021년 제6호_통권 제63호.pdf&filePath1=jsphome/DATA/pblctList/issue/F46A0501F3ED69954925872E0005D907",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2021년 5~6월 임금 동향",
+      "- 직무중심 인사관리(연재) 6편: 직무평가란 무엇인가?"
+    ],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-10T16:31:03+09:00"
+  },
+  {
+    "id": "kli-9621",
+    "org": "kli",
+    "board": "kli-wage",
+    "series": "임금정보브리프",
+    "title": "임금정보브리프 2021년 제7호(통권 제64호)",
+    "authors": [
+      "임금직무혁신센터"
+    ],
+    "published": "2021-08-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=9621&mid=a10104020000&nPage=5&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=CA26231930A9EE9849258767002D05E5_0.pdf&fileNameOrg=임금정보브리프 2021년 제7호_통권 제64호.pdf&filePath1=jsphome/DATA/pblctList/issue/CA26231930A9EE9849258767002D05E5",
+    "abstract": null,
+    "toc": [
+      "본 자료는 임금 관련 각종 정보들을 제공하기 위해 한국노동연구원에서 발간한 것입니다",
+      "- 워크넷 구인구직DB를 이용한 2021년 6~7월 임금 동향",
+      "- 임금체계 개편 사례",
+      "- 직무중심 인사관리(연재)* 7편: 직무평가 과정"
+    ],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-10T16:31:03+09:00"
+  },
+  {
     "id": "kli-9628",
     "org": "kli",
     "board": "kli-wage",
