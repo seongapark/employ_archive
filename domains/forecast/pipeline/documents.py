@@ -145,9 +145,17 @@ def _moef() -> list[Listed]:
     열어 보지만, 근거는 문서 하나를 가리켜야 하므로 여기서는 **첫 후보**만
     쓴다(parse_attachments 가 보도자료·모두발언을 뒤로 미뤄 둔다).
     """
+    def first_pdf(html: str) -> str:
+        attachments = moef.parse_attachments(html)
+        if not attachments:
+            # 첨부가 없는 회차가 실제로 있다(참고자료만 올린 글 등).
+            # [0] 을 그냥 집으면 IndexError 가 나서 무엇이 문제인지 안 보인다.
+            raise ValueError("상세 페이지에 PDF 첨부가 없다")
+        return attachments[0][1]
+
     indicators = tuple(sorted(set(moef.LABEL_TO_INDICATOR.values())))
     return [Listed("MOEF", i.title, i.published_at, indicators,
-                   _via_detail(i.url, lambda html: moef.parse_attachments(html)[0][1]))
+                   _via_detail(i.url, first_pdf))
             for i in moef.list_issues()]
 
 

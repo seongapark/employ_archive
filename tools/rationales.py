@@ -29,6 +29,8 @@ from dataclasses import dataclass, field
 from datetime import date
 from pathlib import Path
 
+import json
+
 from domains.forecast.pipeline import llm_select, llm_verify, rationale
 from domains.forecast.pipeline import rationale_store as rs
 from domains.forecast.pipeline.documents import SOURCES
@@ -51,6 +53,24 @@ class Report:
     # 유지한다(모듈 main() 문서 참고).
     unmatched_refresh: list[tuple[str, date, str]] = field(default_factory=list)
     lines: list[str] = field(default_factory=list)
+
+
+def covered_rounds(data_dir) -> set[tuple[str, date]] | None:
+    """forecasts.json 이 실제로 수치를 든 (기관, 발표일) 들.
+
+    근거는 수치 레코드에 붙어야 화면에 뜬다(rationaleFor 가 기관·발표일·지표로
+    찾는다). 수치가 없는 회차의 근거는 만들어도 아무 데도 안 뜨는 죽은 항목이고,
+    그걸 만드느라 회차마다 API 를 한 번씩 태운다. 실제로 그렇게 됐다 —
+    MOEF 목록이 2013년까지 이어져 51건이 짝 없이 쌓였다.
+
+    읽지 못하면 None 을 준다: 거르지 않고 예전처럼 다 훑는다. 이 파일을
+    못 읽는 것이 근거 수집을 막을 이유는 아니다.
+    """
+    try:
+        rows = json.loads((Path(data_dir) / "forecasts.json").read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+    return {(r["org"], date.fromisoformat(r["published_at"])) for r in rows}
 
 
 def run(data_dir, *, sources=None, select=None, only=None, refresh=()) -> Report:
@@ -82,6 +102,7 @@ def run(data_dir, *, sources=None, select=None, only=None, refresh=()) -> Report
         return rep  # 사람이 고치던 파일을 기계 파일로 덮지 않는다
 
     existing_keys = {r.key for r in existing}
+    covered = covered_rounds(data_dir)
 
     fresh: list[rs.Rationale] = []
     for name, listing in sources.items():
@@ -102,6 +123,15 @@ def run(data_dir, *, sources=None, select=None, only=None, refresh=()) -> Report
             wanted = {(listed.org, listed.published_at, ind)
                       for ind in listed.indicators}
             if wanted and wanted <= existing_keys and not (wanted & refresh):
+                continue
+            # 수치가 없는 회차는 근거를 뽑아도 화면에 뜨지 않는다 — 묻지 않는다.
+            # refresh 대상은 예외로 둔다(사람이 명시적으로 지목한 것이다).
+            if (covered is not None
+                    and (listed.org, listed.published_at) not in covered
+                    and not (wanted & refresh)):
+                rep.skipped += 1
+                rep.lines.append(
+                    f"{listed.org} {listed.title}: 건너뜀 (이 회차의 수치가 없다)")
                 continue
             # fetch_pages·select 뿐 아니라 후보를 거르는 아래 루프까지
             # 통째로 이 try 안에 둔다 — 이 회차가 무엇 때문에 죽든(본문
