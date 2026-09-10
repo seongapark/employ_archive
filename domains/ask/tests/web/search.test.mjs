@@ -140,3 +140,51 @@ test('같은 글이 두 경로로 걸려도 한 번만 낸다', async () => {
   const 보고서 = r.묶음.find((g) => g.도메인 === 'reports');
   assert.equal(보고서.결과.length, 1, JSON.stringify(보고서.결과));
 });
+
+
+test('여러 낱말이 걸린 글이 위로 온다', async () => {
+  // '정년 연장이 고용에 미치는 영향' 은 낱말이 전부 두 글자라 LIKE 로만 찾는데,
+  // '고용' 은 거의 모든 글에 있다. 걸린 낱말 수로 정렬하지 않으면 '고용' 하나만
+  // 걸린 글이 '정년+연장+고용' 이 다 걸린 글보다 위로 온다.
+  let sql = '';
+  const deps = { db: { all: async (s, p) => { if (/LIKE/.test(s)) sql = s; return []; } } };
+  await lookup(deps, '정년 연장이 고용에 미치는 영향');
+  assert.match(sql, /ORDER BY/);
+  // 걸린 낱말 수를 더해 내림차순으로 세운다
+  assert.match(sql, /LIKE \?\)\s*\+/);
+});
+
+
+test('낱말이 여럿이면 하나만 걸린 글은 버린다', async () => {
+  // '고용' 은 이 저장소의 거의 모든 글에 있다. 그것 하나만 걸린 글을 "정년 연장"
+  // 질문의 답으로 내밀면 묻지 않은 것을 답한 셈이다.
+  let p = null;
+  const deps = { db: { all: async (s, q) => { if (/LIKE/.test(s)) p = { s, q }; return []; } } };
+  await lookup(deps, '정년 연장이 고용에 미치는 영향');
+  assert.match(p.s, />=\s*\?/);
+  assert.ok(p.q.includes(2), JSON.stringify(p.q));
+});
+
+test('낱말이 하나뿐이면 그 하나로 찾는다', async () => {
+  let p = null;
+  const deps = { db: { all: async (s, q) => { if (/LIKE/.test(s)) p = { s, q }; return []; } } };
+  await lookup(deps, '임금');
+  assert.ok(p.q.includes(1), JSON.stringify(p.q));
+});
+
+
+test('같은 문서의 다른 조각을 두 번 내지 않는다', async () => {
+  // 초록 한 건이 여러 청크로 쪼개져 있다. 조각 단위로 추리면 다섯 자리가 같은
+  // 보고서로 다 차서, 다른 보고서를 볼 기회가 사라진다(실측: "고령 노동과 소득 크레바스").
+  const 조각 = (i) => ({ doc_id: `reports:kli-1:초록:${i}`, 종류: '초록',
+                        제목: '같은 보고서', 본문: `${i}번째 조각이다`, 링크: '' });
+  const 다른 = { doc_id: 'reports:kli-2:초록:0', 종류: '초록',
+                제목: '다른 보고서', 본문: '다른 글이다', 링크: '' };
+  // 같은 보고서가 게시판 둘에 올라가 **id 는 다른데 제목이 같은** 경우가 실제로 있다.
+  const 쌍둥이 = { doc_id: 'reports:kli-3:초록:0', 종류: '초록',
+                  제목: '같은 보고서', 본문: '또 같은 글이다', 링크: '' };
+  const deps = { db: { all: async (s) => (/doc_fts/.test(s) ? [조각(0), 조각(1), 쌍둥이, 다른] : []) } };
+  const r = await lookup(deps, '청년 고용률');
+  const 보고서 = r.묶음.find((g) => g.도메인 === 'reports');
+  assert.deepEqual(보고서.결과.map((x) => x.제목), ['같은 보고서', '다른 보고서']);
+});

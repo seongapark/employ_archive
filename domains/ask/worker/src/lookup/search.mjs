@@ -90,27 +90,45 @@ async function 글조회(deps, 도메인, 용어들, limit) {
   if (식) {
     // bm25 는 색인 열에만 걸린다 — 제목색인(7번째)에 무게를 더 준다.
     rows.push(...await deps.db.all(
-      `SELECT 종류, 제목, 본문, 링크 FROM doc_fts
+      `SELECT doc_id, 종류, 제목, 본문, 링크 FROM doc_fts
         WHERE doc_fts MATCH ? AND 도메인 = ?
         ORDER BY bm25(doc_fts, 0,0,0,0,0,0, 10, 1) LIMIT ?`,
       [식, 도메인, limit]));
   }
 
   if (짧은것.length) {
-    const cond = 짧은것.map(() => '본문색인 LIKE ?').join(' OR ');
+    const like = 짧은것.map(() => '본문색인 LIKE ?');
+    // **걸린 낱말 수로 세운다.** 두 글자 낱말 중에는 '고용' 처럼 거의 모든 글에
+    // 있는 말이 섞여 있어, 정렬하지 않으면 그 하나만 걸린 글이 여러 낱말이 다
+    // 걸린 글보다 위로 온다(실측: "정년 연장이 고용에 미치는 영향").
+    const 점수 = like.map((c) => `(${c})`).join(' + ');
+    const 값 = 짧은것.map((x) => `%${squash(x)}%`);
+    // 낱말이 셋 이상이면 **둘 이상 걸려야** 낸다. '고용' 처럼 거의 모든 글에 있는
+    // 말 하나만 걸린 글을 "정년 연장" 질문의 답으로 내밀면 묻지 않은 것을 답한
+    // 셈이다(실측). 낱말이 한둘뿐이면 그대로 하나만 걸려도 낸다.
+    const 최소 = 짧은것.length >= 3 ? 2 : 1;
     rows.push(...await deps.db.all(
-      `SELECT 종류, 제목, 본문, 링크 FROM doc_fts
-        WHERE 도메인 = ? AND (${cond}) LIMIT ?`,
-      [도메인, ...짧은것.map((x) => `%${squash(x)}%`), limit]));
+      `SELECT doc_id, 종류, 제목, 본문, 링크 FROM doc_fts
+        WHERE 도메인 = ? AND (${like.join(' OR ')}) AND (${점수}) >= ?
+        ORDER BY ${점수} DESC LIMIT ?`,
+      [도메인, ...값, ...값, 최소, ...값, limit]));
   }
 
-  // 두 길로 같은 글이 걸릴 수 있다. 색인 쪽이 순위를 갖고 있으므로 먼저 온 것을 남긴다.
+  // **문서 단위로 추린다.** 초록 한 건이 여러 청크로 쪼개져 있어, 조각 단위로
+  // 추리면 다섯 자리가 같은 보고서로 다 차서 다른 보고서를 볼 기회가 사라진다
+  // (실측). 두 길로 같은 글이 걸리는 것도 여기서 함께 걸러진다 — 색인 쪽이 순위를
+  // 갖고 있으므로 먼저 온 것을 남긴다.
   const 본것 = new Set();
   const out = [];
   for (const r of rows) {
-    const key = `${r.종류}|${r.제목}|${r.본문}`;
-    if (본것.has(key)) continue;
+    // doc_id 는 `reports:kli-10303:초록:0` 꼴이다. 앞 두 마디가 문서를 가리킨다.
+    const key = String(r.doc_id ?? `${r.종류}|${r.제목}`).split(':').slice(0, 2).join(':');
+    // **제목으로도 추린다.** 같은 보고서가 게시판 둘에 올라가 id 는 다른데 제목이
+    // 같은 경우가 있다(실측: "고령 노동과 소득 크레바스" 가 두 번 나왔다).
+    const 이름 = `${r.도메인 ?? ''}|${r.제목 ?? ''}`;
+    if (본것.has(key) || 본것.has(이름)) continue;
     본것.add(key);
+    본것.add(이름);
     out.push(r);
     if (out.length >= limit) break;
   }
