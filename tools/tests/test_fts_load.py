@@ -63,7 +63,7 @@ def test_every_row_id_is_unique():
 
 def test_every_row_carries_its_domain_and_an_index_copy():
     for r in fts_load.rows():
-        assert r['도메인'] in {'reports', 'forecast', 'catalog'}, r['doc_id']
+        assert r['도메인'] in {'reports', 'forecast', 'press', 'catalog'}, r['doc_id']
         assert r['본문'], r['doc_id']
         assert r['본문색인'] == fts_load.squash(r['본문']), r['doc_id']
         assert r['제목색인'] == fts_load.squash(r['제목']), r['doc_id']
@@ -112,3 +112,26 @@ def test_no_statement_exceeds_the_d1_limit():
 def test_a_quote_in_the_text_does_not_break_the_sql():
     sql = fts_load.build_sql([dict(ONE, 제목="따옴표'가 든 제목")])
     assert "따옴표''가" in sql
+
+
+# ── 행통 모니터링: 기사 제목과 회차 분석 ──────────────────────────────────
+
+def test_press_headlines_are_indexed_with_their_outlet_and_link():
+    rows = [r for r in fts_load.rows() if r['도메인'] == 'press' and r['종류'] == '기사']
+    assert rows, '기사가 한 건도 안 담겼다'
+    assert all(r['링크'] for r in rows[:20]), '기사는 링크가 생명이다 — 가서 읽어야 한다'
+    # 제목이 본문이다. 기사 본문을 저장하지 않으므로 제목이 검색할 수 있는 전부다.
+    assert all(r['본문'] for r in rows[:20])
+
+
+def test_press_round_findings_are_indexed():
+    # 회차 분석(누락·논조·쟁점)은 "우리 발표가 어떻게 받아졌나" 를 묻는 질문의 답이다.
+    종류 = {r['종류'] for r in fts_load.rows() if r['도메인'] == 'press'}
+    assert '회차분석' in 종류, sorted(종류)
+
+
+def test_press_rows_carry_the_round_month():
+    # 어느 달 보도자료에 대한 것인지 없으면 3회차가 뒤섞여 읽을 수 없다.
+    rows = [r for r in fts_load.rows() if r['도메인'] == 'press']
+    assert all(any(ch.isdigit() for ch in r['제목']) for r in rows[:20]), \
+        [r['제목'] for r in rows[:3]]

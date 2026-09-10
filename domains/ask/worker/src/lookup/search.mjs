@@ -27,7 +27,7 @@ const 조사 = ['으로써', '에서는', '으로는', '에게서', '이라는',
               '은', '는', '이', '가', '을', '를', '의', '에', '도', '만', '와', '과', '로'];
 
 // 글로 찾는 세 도메인. 순서가 곧 화면 순서다.
-const 글도메인 = ['reports', 'forecast', 'catalog'];
+const 글도메인 = ['reports', 'forecast', 'press', 'catalog'];
 
 export function 용어뽑기(질문) {
   const out = [];

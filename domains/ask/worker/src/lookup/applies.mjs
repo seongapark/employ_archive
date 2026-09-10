@@ -59,7 +59,7 @@ function 기간뽑기(질문) {
 
 // 글로 찾는 도메인들. 질문 원문을 색인에 그대로 던지므로 주제 어휘를 몰라도 된다 —
 // '정년'·'최저임금' 처럼 주제 표에 없는 정책 낱말이 오히려 여기서 걸린다.
-const 글도메인 = ['reports', 'forecast', 'catalog'];
+const 글도메인 = ['reports', 'forecast', 'press', 'catalog'];
 
 export function 도메인적용(질문) {
   const 있음 = squash(질문).length > 0;
@@ -69,9 +69,6 @@ export function 도메인적용(질문) {
     적용: 있음,
     ...(있음 ? {} : { 사유: '질문이 비어 있다' }),
   }));
-  // 아직 색인에 담지 않은 도메인도 이름을 남긴다. 목록에서 통째로 빠지면
-  // 사용자는 그 도메인이 있는 줄도 모른다 — 담기면 이 줄을 지우고 글도메인에 넣는다.
-  out.push({ 도메인: 'press', 적용: false, 사유: '아직 색인에 담기지 않았다' });
   out.unshift({
     도메인: 'employment',
     적용: 있음 && Boolean(슬롯.주제),

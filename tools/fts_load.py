@@ -10,6 +10,7 @@
 
   reports  초록·목차     domains/reports/data/abstracts.json + reports.json
   forecast 전망근거      domains/forecast/data/rationales.json
+  press    기사·회차분석  domains/press/data/articles.json · rounds.json
   catalog  충돌·한계     domains/ask/data/conflicts.json · capabilities.json
 
 원문 PDF 본문은 담지 않는다(450건·약 39,000쪽 → 색인 포함 0.5~1GB 로 무료 플랜
@@ -146,8 +147,47 @@ def _catalog() -> list[dict]:
     return out
 
 
+def _press() -> list[dict]:
+    """기사 제목과 회차 분석.
+
+    **기사 본문은 없다** — press 도메인이 저장하지 않는다(제목·언론사·인용여부·
+    논조 낱말뿐). 그래서 제목이 곧 본문이고, 링크가 생명이다. 기사가 뭐라고
+    했는지는 가서 읽어야 한다.
+    """
+    arts = _load('domains/press/data/articles.json')
+    out = []
+    for release, 묶음 in arts.items():
+        for 구분 in ('regular', 'follow'):
+            for i, a in enumerate(묶음.get(구분) or []):
+                제목 = f"{release} {a.get('press', '')} {'정규' if 구분 == 'regular' else '후속'}"
+                본문 = a.get('title') or ''
+                if not 본문:
+                    continue
+                out.append(_row(f'press:{release}:{구분}:{i}', 'press', '기사',
+                                a.get('url') or '', 제목, 본문))
+
+    # 회차 분석은 "우리 발표가 어떻게 받아졌나" 를 묻는 질문의 답이다. 누락·논조·
+    # 쟁점을 한 행에 모은다 — 따로 두면 "왜" 를 물었을 때 조각만 걸린다.
+    for r in _load('domains/press/data/rounds.json'):
+        제목 = f"{r.get('label', '')} {r.get('title', '')}".strip() or str(r.get('release'))
+        조각 = []
+        for g in r.get('gaps') or []:
+            조각.append(str(g))
+        논조 = ' · '.join(f"{x.get('w')} {x.get('n')}건" for x in (r.get('tone') or []))
+        if 논조:
+            조각.append(f'자주 쓰인 낱말: {논조}')
+        for x in r.get('issues') or []:
+            heads = ' / '.join(h.get('title', '') for h in (x.get('heads') or [])[:3])
+            조각.append(f"쟁점 {x.get('key')} {x.get('n')}건 — {heads}")
+        본문 = ' '.join(조각)
+        for i, c in enumerate(chunks(본문)):
+            out.append(_row(f"press:{r.get('release')}:회차:{i}", 'press', '회차분석',
+                            '', 제목, c))
+    return out
+
+
 def rows() -> list[dict]:
-    return [*_reports(), *_forecast(), *_catalog()]
+    return [*_reports(), *_forecast(), *_press(), *_catalog()]
 
 
 def build_sql(rs: list[dict], batch: int = BATCH, budget: int = BUDGET) -> str:
