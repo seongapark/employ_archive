@@ -112,7 +112,7 @@ def test_bok_rounds_come_from_the_issue_list(monkeypatch):
 
 def test_registered_sources_cover_the_backfillable_orgs():
     assert set(backfill.SOURCES) == {
-        "oecd", "oecd_interim", "bok", "kli", "kdi", "kiet", "imf", "keis",
+        "oecd", "oecd_interim", "bok", "kli", "kdi", "kiet", "imf", "keis", "moef",
     }
 
 

@@ -16,7 +16,7 @@ from pathlib import Path
 from typing import Callable, NamedTuple
 
 from . import store
-from .collectors import bok, imf, kdi, keis, kiet, kli, oecd, oecd_interim
+from .collectors import bok, imf, kdi, keis, kiet, kli, moef, oecd, oecd_interim
 from .models import ForecastRecord
 
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
@@ -86,6 +86,13 @@ def kli_rounds() -> list[Round]:
     ]
 
 
+def moef_rounds() -> list[Round]:
+    return [
+        Round(issue.title, issue.published_at, lambda issue=issue: moef.collect_issue(issue))
+        for issue in moef.list_issues()
+    ]
+
+
 def kdi_rounds() -> list[Round]:
     # 드롭다운은 1982년까지 이어진다. 백필 커트라인(SINCE)의 연도를 그대로
     # 넘겨, 그보다 뚜렷하게 이전인 회차는 kdi.list_issues() 가 페이지를
@@ -118,6 +125,7 @@ SOURCES: dict[str, Callable[[], list[Round]]] = {
     "kiet": kiet_rounds,
     "imf": imf_rounds,
     "keis": keis_rounds,
+    "moef": moef_rounds,
 }
 
 

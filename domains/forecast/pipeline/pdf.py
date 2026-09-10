@@ -127,6 +127,21 @@ def page_texts(data: bytes) -> list[str]:
         return [page.extract_text() or "" for page in doc.pages]
 
 
+def page_words(data: bytes, page_no: int) -> list[dict]:
+    """한 쪽의 낱말을 좌표와 함께 준다(1부터 세는 쪽번호).
+
+    기재부 요약표는 연도 머리(`'26년`)가 하위 열 두 개(`1/4`·`연간e`) 위에
+    걸쳐 있는데, extract_text() 는 그 걸침을 버려서 어느 숫자가 어느 해인지
+    알 수 없게 된다. 열 복원에는 좌표가 있어야 한다.
+
+    쪽 하나만 연다 — 57쪽짜리 보고서에서 낱말을 전부 들고 있을 이유가 없다.
+    """
+    import pdfplumber
+
+    with pdfplumber.open(io.BytesIO(data)) as doc:
+        return doc.pages[page_no - 1].extract_words()
+
+
 def page_texts_with_breaks(data: bytes) -> list[str]:
     """page_texts 와 같되, 문단이 갈리는 자리에 빈 줄을 넣는다.
 
