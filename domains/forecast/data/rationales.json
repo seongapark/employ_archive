@@ -618,6 +618,46 @@
     "warnings": []
   },
   {
+    "org": "OECD",
+    "published_at": "2023-11-29",
+    "indicator": "cpi",
+    "text": "Energy and food prices have pushed up consumer prices, but inflation will gradually moderate and reach the target in 2025.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/11/oecd-economic-outlook-volume-2023-issue-2_6c587ffd/7a5f73ce-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2023-11-29",
+    "indicator": "emp_change",
+    "text": "Unemployment is set to increase from the current historically low level as weak demand reduces hiring.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/11/oecd-economic-outlook-volume-2023-issue-2_6c587ffd/7a5f73ce-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2023-11-29",
+    "indicator": "gdp_growth",
+    "text": "Elevated interest rates and energy prices are weighing on private consumption and investment in the near term.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/11/oecd-economic-outlook-volume-2023-issue-2_6c587ffd/7a5f73ce-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2023-11-29",
+    "indicator": "unemp_rate",
+    "text": "Unemployment is set to increase from the current historically low level as weak demand reduces hiring.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2023/11/oecd-economic-outlook-volume-2023-issue-2_6c587ffd/7a5f73ce-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
     "org": "KLI",
     "published_at": "2023-12-13",
     "indicator": "emp_change",
@@ -698,6 +738,48 @@
     "tags": [],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=SI7ePpSkjvN7i9kNOU%2BYyQ%3D%3D",
     "source_page": 3,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2024-05-02",
+    "indicator": "cpi",
+    "text": "Headline consumer price inflation decreased to 2.8% in January before edging up to 3.1% in March on account of increasing agricultural product prices.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/05/oecd-economic-outlook-volume-2024-issue-1_1046e564/69a0c310-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2024-05-02",
+    "indicator": "emp_change",
+    "text": "Employment is set to continue expanding, while unemployment will stabilise at a low level.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/05/oecd-economic-outlook-volume-2024-issue-1_1046e564/69a0c310-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2024-05-02",
+    "indicator": "gdp_growth",
+    "text": "Stronger global demand for computer chips remains a major driver of Korea’s growth.",
+    "tags": [
+      "글로벌경기"
+    ],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/05/oecd-economic-outlook-volume-2024-issue-1_1046e564/69a0c310-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2024-05-02",
+    "indicator": "unemp_rate",
+    "text": "Employment is set to continue expanding, while unemployment will stabilise at a low level.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/05/oecd-economic-outlook-volume-2024-issue-1_1046e564/69a0c310-en.pdf",
+    "source_page": 1,
     "warnings": []
   },
   {
@@ -965,6 +1047,49 @@
     "warnings": []
   },
   {
+    "org": "OECD",
+    "published_at": "2024-12-04",
+    "indicator": "cpi",
+    "text": "Inflation is projected to remain below the 2% target in the short term, largely due to lower international energy and commodity prices.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/12/oecd-economic-outlook-volume-2024-issue-2_67bb8fac/d8814e8b-en.pdf",
+    "source_page": 2,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2024-12-04",
+    "indicator": "emp_change",
+    "text": "Increased female and elderly labour market participation will further boost employment, while unemployment will remain low.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/12/oecd-economic-outlook-volume-2024-issue-2_67bb8fac/d8814e8b-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2024-12-04",
+    "indicator": "gdp_growth",
+    "text": "Strong global demand will continue to support exports.",
+    "tags": [
+      "수출",
+      "글로벌경기"
+    ],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/12/oecd-economic-outlook-volume-2024-issue-2_67bb8fac/d8814e8b-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2024-12-04",
+    "indicator": "unemp_rate",
+    "text": "Vacancies have been falling and nominal wage growth remains moderate, while labour shortages remain in sectors such as shipbuilding, health and welfare.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/12/oecd-economic-outlook-volume-2024-issue-2_67bb8fac/d8814e8b-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
     "org": "KLI",
     "published_at": "2024-12-30",
     "indicator": "emp_change",
@@ -1113,30 +1238,6 @@
     "warnings": []
   },
   {
-    "org": "OECD",
-    "published_at": "2025-03-17",
-    "indicator": "cpi",
-    "text": "Projected inflation paths are generally higher than previously expected, with the impact of slower growth offset by the incorporation of new data and the gradual inflationary impact of tariff increases (Figure 7, Panel B).",
-    "tags": [
-      "통상정책"
-    ],
-    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/03/oecd-economic-outlook-interim-report-march-2025_47a36021/89af4857-en.pdf",
-    "source_page": 18,
-    "warnings": []
-  },
-  {
-    "org": "OECD",
-    "published_at": "2025-03-17",
-    "indicator": "gdp_growth",
-    "text": "The imposition of new bilateral tariff rates and the associated increase in policy and geopolitical uncertainty will act as a drag, particularly on business investment and trade.",
-    "tags": [
-      "통상정책"
-    ],
-    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/03/oecd-economic-outlook-interim-report-march-2025_47a36021/89af4857-en.pdf",
-    "source_page": 15,
-    "warnings": []
-  },
-  {
     "org": "KDI",
     "published_at": "2025-05-14",
     "indicator": "cpi",
@@ -1208,6 +1309,49 @@
     ],
     "source_url": "https://www.bok.or.kr/fileSrc/portal/f4e84470826d43dbb68975127f1eb8ac/1/e3fb83fa6a7643c2afa49945d3c7d6ed.pdf",
     "source_page": 10,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2025-06-03",
+    "indicator": "cpi",
+    "text": "Recent inflation readings are largely in line with the 2% target, with headline inflation at 2.1% and core inflation at 2.4% in April.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/06/oecd-economic-outlook-volume-2025-issue-1_1fd979a8/83363382-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2025-06-03",
+    "indicator": "emp_change",
+    "text": "Increased female and elderly labour market participation will raise employment, and unemployment is set to edge down in 2026.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/06/oecd-economic-outlook-volume-2025-issue-1_1fd979a8/83363382-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2025-06-03",
+    "indicator": "gdp_growth",
+    "text": "Increased tariffs and uncertainty are set to hold back export growth and weaken business investment.",
+    "tags": [
+      "수출",
+      "통상정책"
+    ],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/06/oecd-economic-outlook-volume-2025-issue-1_1fd979a8/83363382-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2025-06-03",
+    "indicator": "unemp_rate",
+    "text": "Employment bottomed out in late 2024, and unemployment is falling back from a recent peak.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/06/oecd-economic-outlook-volume-2025-issue-1_1fd979a8/83363382-en.pdf",
+    "source_page": 1,
     "warnings": []
   },
   {
@@ -1369,28 +1513,6 @@
     "warnings": []
   },
   {
-    "org": "OECD",
-    "published_at": "2025-09-23",
-    "indicator": "cpi",
-    "text": "Aggregate consumer price inflation for the G20 countries is expected to decline as economic growth and labour markets ease (Figure 8, Panel B).",
-    "tags": [],
-    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/09/oecd-economic-outlook-interim-report-september-2025_ae3d418b/67b10c01-en.pdf",
-    "source_page": 17,
-    "warnings": []
-  },
-  {
-    "org": "OECD",
-    "published_at": "2025-09-23",
-    "indicator": "gdp_growth",
-    "text": "Growth is expected to soften noticeably in the second half of this year, as front-loading activity unwinds and higher effective tariff rates on imports to the United States and China dampen investment and trade growth.",
-    "tags": [
-      "통상정책"
-    ],
-    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/09/oecd-economic-outlook-interim-report-september-2025_ae3d418b/67b10c01-en.pdf",
-    "source_page": 16,
-    "warnings": []
-  },
-  {
     "org": "KDI",
     "published_at": "2025-11-11",
     "indicator": "cpi",
@@ -1452,6 +1574,39 @@
     ],
     "source_url": "https://www.kiet.re.kr/common/file/userDownload?atch_no=xsxLwLye4mxKdbjMveiBXQ%3D%3D",
     "source_page": 38,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2025-12-02",
+    "indicator": "cpi",
+    "text": "Headline consumer price inflation will remain in line with the 2% target.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/12/oecd-economic-outlook-volume-2025-issue-2_413f7d0a/9f653ca1-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2025-12-02",
+    "indicator": "emp_change",
+    "text": "Employment will continue to expand, largely due to increased labour market participation of women and older workers.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/12/oecd-economic-outlook-volume-2025-issue-2_413f7d0a/9f653ca1-en.pdf",
+    "source_page": 2,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2025-12-02",
+    "indicator": "gdp_growth",
+    "text": "Private consumption is supported by fiscal and monetary easing and rising real wages.",
+    "tags": [
+      "재정정책",
+      "통화정책"
+    ],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/12/oecd-economic-outlook-volume-2025-issue-2_413f7d0a/9f653ca1-en.pdf",
+    "source_page": 1,
     "warnings": []
   },
   {
@@ -1619,30 +1774,6 @@
     "warnings": []
   },
   {
-    "org": "OECD",
-    "published_at": "2026-03-26",
-    "indicator": "cpi",
-    "text": "Aggregate consumer price inflation for the G20 countries will be markedly higher than previously expected in 2026, mostly owing to the increase in global energy prices.",
-    "tags": [
-      "글로벌경기"
-    ],
-    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/03/oecd-economic-outlook-interim-report-march-2026_254a8d56/d4623013-en.pdf",
-    "source_page": 20,
-    "warnings": []
-  },
-  {
-    "org": "OECD",
-    "published_at": "2026-03-26",
-    "indicator": "gdp_growth",
-    "text": "The energy price surge and the unpredictable nature of the evolving conflict in the Middle East will raise costs and lower demand, offsetting the tailwinds from strong technology-related investment and production, lower effective tariff rates and the momentum carried over from 2025.",
-    "tags": [
-      "통상정책"
-    ],
-    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/03/oecd-economic-outlook-interim-report-march-2026_254a8d56/d4623013-en.pdf",
-    "source_page": 6,
-    "warnings": []
-  },
-  {
     "org": "KEIS",
     "published_at": "2026-03-30",
     "indicator": "unemp_rate",
@@ -1736,6 +1867,48 @@
     ],
     "source_url": "https://www.bok.or.kr/fileSrc/portal/411de844aef442e7ad07896b7bbe2eef/1/4e0f66601a6a4f95ac4164f9286de537.pdf",
     "source_page": 11,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2026-06-03",
+    "indicator": "cpi",
+    "text": "Policy measures, including fuel price regulations and tax cuts, will slow the inflationary impulse of the energy supply shock, but also increase its persistence.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/06/oecd-economic-outlook-volume-2026-issue-1_8be0dba6/2d1956f0-en.pdf",
+    "source_page": 3,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2026-06-03",
+    "indicator": "emp_change",
+    "text": "The unemployment rate edged up to 2.8% in April, while employment declined slightly after expanding by 0.4% in the first quarter.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/06/oecd-economic-outlook-volume-2026-issue-1_8be0dba6/2d1956f0-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2026-06-03",
+    "indicator": "gdp_growth",
+    "text": "Semiconductor exports continue to drive growth and private investment.",
+    "tags": [
+      "수출"
+    ],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/06/oecd-economic-outlook-volume-2026-issue-1_8be0dba6/2d1956f0-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "OECD",
+    "published_at": "2026-06-03",
+    "indicator": "unemp_rate",
+    "text": "The unemployment rate edged up to 2.8% in April, while employment declined slightly after expanding by 0.4% in the first quarter.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/06/oecd-economic-outlook-volume-2026-issue-1_8be0dba6/2d1956f0-en.pdf",
+    "source_page": 1,
     "warnings": []
   },
   {

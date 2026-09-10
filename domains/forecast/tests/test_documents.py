@@ -6,8 +6,7 @@ from domains.forecast.pipeline import documents as d
 
 def test_sources_covers_the_text_bearing_orgs():
     # MOEF 는 2026-09-10 에 붙였다 — 수집기가 생기면서 근거 대상이 됐다.
-    assert set(d.SOURCES) == {"bok", "kdi", "kli", "kiet", "keis", "oecd_interim",
-                              "moef", "oecd"}
+    assert set(d.SOURCES) == {"bok", "kdi", "kli", "kiet", "keis", "moef", "oecd"}
 
 
 def test_imf_는_원문에_한국_서술이_없어_빠져_있다():
@@ -80,22 +79,6 @@ def test_bok_fetch_pages_resolves_the_pdf_link_from_the_detail_page(monkeypatch)
 
     url, pages = d.SOURCES["bok"]()[0].fetch_pages()
     assert url == pdf_url
-    assert pages == ["1쪽"]
-
-
-def test_oecd_interim_fetch_pages_uses_the_editions_url(monkeypatch):
-    from domains.forecast.pipeline import http, pdf
-    from domains.forecast.pipeline.collectors import oecd_interim
-
-    monkeypatch.setattr(oecd_interim, "EDITIONS",
-                        {"March 2026": (date(2026, 3, 26), "https://x/oecd.pdf")})
-    monkeypatch.setattr(http, "get", lambda url, **k: _Resp(b"pdf"))
-    monkeypatch.setattr(pdf, "page_texts_with_breaks", lambda data: ["1쪽"])
-
-    listed = d.SOURCES["oecd_interim"]()
-    assert listed[0].published_at == date(2026, 3, 26)
-    url, pages = listed[0].fetch_pages()
-    assert url == "https://x/oecd.pdf"
     assert pages == ["1쪽"]
 
 
@@ -277,3 +260,9 @@ def test_oecd_본편이_근거_출처에_들어있다():
     # imf 는 없다 — WEO 원문에 한국 서술이 한 줄도 없기 때문이다.
     assert "oecd" in d.SOURCES
     assert "imf" not in d.SOURCES
+
+
+def test_중간전망은_근거_출처가_아니다():
+    # 본편과 달리 한국 국가노트가 없다(실측 28쪽: 표 행·출처 표기·환율 한 줄).
+    # 전문을 주면 G20·세계 서술이 한국 근거로 저장된다 — 실제로 6건이 그랬다.
+    assert "oecd_interim" not in d.SOURCES

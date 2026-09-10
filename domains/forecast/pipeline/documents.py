@@ -32,7 +32,7 @@ import html as html_lib
 import re
 
 from . import http, ocr, pdf
-from .collectors import bok, kdi, keis, kiet, kli, moef, oecd, oecd_interim
+from .collectors import bok, kdi, keis, kiet, kli, moef, oecd
 
 
 class Listed(NamedTuple):
@@ -230,14 +230,20 @@ def _oecd() -> list[Listed]:
             for edition, published_at in sorted(oecd.EDITIONS.items())]
 
 
-_OECD_INTERIM_INDICATORS = {"gdp_growth", "cpi"}
-
-
-def _oecd_interim() -> list[Listed]:
-    indicators = tuple(sorted(_OECD_INTERIM_INDICATORS))
-    return [Listed("OECD", f"OECD Economic Outlook, Interim Report {label}",
-                   published_at, indicators, _direct(url))
-            for label, (published_at, url) in oecd_interim.EDITIONS.items()]
+# **중간전망(Interim)은 근거 출처가 아니다 — 본편과 달리 한국 국가노트가 없다.**
+# 실측(2026년 3월호, 28쪽): Korea 가 나오는 자리는 표 행 하나(10쪽), 출처
+# 표기(`Statistics Korea`), 환율 서술 한 줄(16쪽)뿐이다. 한국의 전망을 설명하는
+# 문장이 없다.
+#
+# 그런데도 예전에는 전문을 줘서 근거를 뽑았고, 그렇게 저장된 6건이 전부 한국이
+# 아니라 **G20·세계** 얘기였다:
+#   "Aggregate consumer price inflation for the G20 countries will be markedly
+#    higher than previously expected"
+# 화면에서는 이것이 "OECD 가 한국 물가를 그렇게 본 이유" 로 읽힌다. 틀린 근거는
+# 빈 칸보다 나쁘다는 이 파일의 원칙에 어긋나므로 출처에서 뺐다(수치 수집은 그대로
+# 돈다 — oecd_interim.py 는 건드리지 않았다).
+#
+# 되살리려면 한국 서술이 실린 구간을 먼저 찾아야 한다. 지금은 그런 구간이 없다.
 
 
 SOURCES: dict[str, Callable[[], list[Listed]]] = {
@@ -246,7 +252,6 @@ SOURCES: dict[str, Callable[[], list[Listed]]] = {
     "kli": _kli,
     "kiet": _kiet,
     "keis": _keis,
-    "oecd_interim": _oecd_interim,
     "moef": _moef,
     "oecd": _oecd,
 }
