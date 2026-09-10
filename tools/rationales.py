@@ -157,6 +157,13 @@ def run(data_dir, *, sources=None, select=None, only=None, refresh=()) -> Report
                     try:
                         text, page_no = llm_verify.verify_in_pages(
                             p.text, pages, p.source_page)
+                        # OCR 출처만 — 검사기는 후보가 원문에 있는가만 보므로
+                        # OCR 원문 자체가 깨져 있으면 깨진 채로 통과한다.
+                        noise = (llm_verify.ocr_noise(text)
+                                 if getattr(listed, "ocr", False) else None)
+                        if noise is not None:
+                            raise llm_verify.Rejected(
+                                f"OCR 잡음이 섞였다({noise!r})")
                     except llm_verify.Rejected as exc:
                         rep.rejected.append(
                             f"{listed.org} {listed.title} {p.indicator}: {exc.reason}")

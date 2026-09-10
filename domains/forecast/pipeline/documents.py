@@ -28,6 +28,9 @@ class Listed(NamedTuple):
     published_at: date
     indicators: tuple[str, ...]
     fetch_pages: Callable[[], tuple[str, list[str]]]
+    # 본문이 OCR 로 읽힌 출처인가. 참이면 도구가 OCR 잡음 검사를 더 건다 —
+    # 검사기의 원문 대조는 깨진 원문을 그대로 통과시키기 때문이다.
+    ocr: bool = False
 
 
 def _via_detail(detail_url: str, find_pdf, *, max_pages: int | None = None
@@ -134,7 +137,7 @@ def _kiet() -> list[Listed]:
 def _keis() -> list[Listed]:
     indicators = tuple(sorted(keis.REQUIRED_INDICATORS))
     return [Listed("KEIS", li.issue.title, li.issue.published_at, indicators,
-                   _via_ocr(li.pdf_url))
+                   _via_ocr(li.pdf_url), ocr=True)
             for li in keis.list_issues()]
 
 

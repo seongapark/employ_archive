@@ -210,6 +210,34 @@ def _starts_at_a_boundary(source: str, pos: int) -> bool:
     return False
 
 
+# OCR 원문에서만 쓰는 검사 — 이 도메인 글에 정말로 나오는 약어들.
+# 여기 없는 대문자 토막은 OCR 이 한글을 잘못 읽은 자국으로 본다.
+# 실측한 자국들: 'AWS' 인구 / SOTA 노동공급 / HS CH 4> / APE 대다수 / SHS 증가.
+_KNOWN_ACRONYMS = frozenset({
+    "GDP", "OECD", "IMF", "ADB", "KDI", "KLI", "KEIS", "KIET", "MOEF", "BOK",
+    "AI", "IT", "ICT", "CPI", "WEO", "EO", "FTA", "R&D", "OPEC", "PPP", "TF",
+    "EU", "US", "UK", "USD", "GNI", "ILO", "OLS", "VAT", "COVID", "NEET",
+})
+_ACRONYM = re.compile(r"[A-Z][A-Z&]{1,}")
+
+
+def ocr_noise(text: str) -> str | None:
+    """OCR 이 한글을 라틴 대문자로 잘못 읽은 자국을 찾는다. 없으면 None.
+
+    검사기(verify)는 후보가 **원문에 있는가**만 본다. OCR 원문 자체가
+    깨져 있으면 깨진 그대로가 '원문에 있는' 문장이므로 통과한다 — 실제로
+    KEIS 근거 넷 중 둘이 그렇게 들어왔다. 원문 대조로는 못 잡는 결함이라
+    여기서 따로 본다.
+
+    지어낸 문장을 막는 것이 아니라 **읽을 수 없는 문장을 막는 것**이다.
+    빈 칸이 뜻 모를 글자보다 낫다.
+    """
+    for match in _ACRONYM.finditer(text):
+        if match.group(0) not in _KNOWN_ACRONYMS:
+            return match.group(0)
+    return None
+
+
 def verify_in_pages(candidate: str, pages: Sequence[str],
                     hinted_page: int | None = None) -> tuple[str, int]:
     """후보가 실제로 실린 쪽을 찾아 (문장, 1부터 세는 쪽번호) 를 준다.
