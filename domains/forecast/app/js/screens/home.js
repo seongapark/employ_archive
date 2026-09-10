@@ -150,6 +150,16 @@ function renderOrgBars(latest, orgs) {
 
 // 카드에 싣는 것은 넷뿐이다: 연전망 · 상하반기 전망 · 발표시점 · 보고서명.
 // 근거 문장과 수집 상태(자동/검증/확인)는 일부러 뺐다 — 사용자 결정이다.
+//
+// **두 줄이다.** 넷을 넉 줄로 쌓으면 카드 하나가 104px 이라 한 화면에 두세
+// 기관밖에 안 들어온다 — 이 화면의 일은 기관들을 나란히 놓고 보는 것이다.
+//   1줄: 기관명 · 연간 전망치 · 증감 · 상하반기
+//   2줄: 발표시기 · 보고서명
+//
+// 첫 줄은 좁은 폭에서 넘칠 수 있다(가장 긴 조합이 '한국고용정보원' + 14.6만명
+// + ▼-1.6만명 + 상하반기다). 그래서 wrap 을 허용해 상하반기만 아래로
+// 떨어지게 둔다 — nowrap 으로 눌러 두면 기관명이 잘리거나 가로 스크롤이 난다.
+// 기관명·수치·증감은 각자 nowrap 이라 낱말 중간에서 쪼개지지는 않는다.
 function renderCard(rec, ctx) {
   const delta = fmtDelta(rec);
   const deltaCls = delta.dir === 'up' ? 'delta-up' : delta.dir === 'down' ? 'delta-down' : 'delta-flat';
@@ -157,14 +167,14 @@ function renderCard(rec, ctx) {
   const [value, unitSuffix] = splitValueUnit(fmtValue(rec));
 
   return `
-    <button type="button" class="card" data-org="${esc(rec.org)}" style="display:flex;flex-direction:column;gap:4px;text-align:left;width:100%;cursor:pointer;">
-      <div style="font-size:13px;font-weight:600;">${esc(rec.org_name_ko)}</div>
-      <div style="display:flex;align-items:baseline;gap:10px;">
-        <div class="num" style="font-size:28px;font-weight:700;white-space:nowrap;">${esc(value)}<span style="font-size:15px;font-weight:600;">${esc(unitSuffix)}</span></div>
-        <div class="delta ${deltaCls}">${deltaSvg}<span class="num">${esc(delta.text)}</span></div>
+    <button type="button" class="card" data-org="${esc(rec.org)}" style="display:flex;flex-direction:column;gap:2px;text-align:left;width:100%;cursor:pointer;padding:9px 12px;">
+      <div style="display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 6px;width:100%;">
+        <div style="font-size:13px;font-weight:600;white-space:nowrap;">${esc(rec.org_name_ko)}</div>
+        <div class="num" style="font-size:20px;font-weight:700;white-space:nowrap;">${esc(value)}<span style="font-size:12px;font-weight:600;">${esc(unitSuffix)}</span></div>
+        <div class="delta ${deltaCls}" style="font-size:12px;white-space:nowrap;">${deltaSvg}<span class="num">${esc(delta.text)}</span></div>
+        <div class="num" style="margin-left:auto;font-size:11px;color:#667085;white-space:nowrap;">${esc(halfYearLabel(ctx.records, rec, { compact: true }))}</div>
       </div>
-      <div class="num" style="font-size:12px;color:#667085;">${esc(halfYearLabel(ctx.records, rec))}</div>
-      <div style="display:flex;gap:8px;font-size:12px;color:#667085;width:100%;">
+      <div style="display:flex;gap:6px;font-size:11px;color:#98a2b3;width:100%;">
         <span class="num" style="flex:none;">${esc(dateLabel(rec, ctx.orgs))}</span>
         <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(rec.report_title)}</span>
       </div>

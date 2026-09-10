@@ -230,6 +230,20 @@ test('halfYearLabel writes a dash for a half the org does not publish', () => {
   assert.equal(halfYearLabel(rs, rs[0]), '상반 11 · 하반 18');
 });
 
+test('halfYearLabel compact 는 홈 카드 한 줄에 들어가도록 상반/하반을 상/하로 줄인다', () => {
+  const r = rec({ target_period: 'annual', value: 14.6, unit: '만명', indicator: 'emp_change' });
+  const hs = [
+    rec({ target_period: 'h1', value: 10.8, unit: '만명', indicator: 'emp_change', id: 'h1' }),
+    rec({ target_period: 'h2', value: 18.5, unit: '만명', indicator: 'emp_change', id: 'h2' }),
+  ];
+  const full = halfYearLabel([r, ...hs], r);
+  const compact = halfYearLabel([r, ...hs], r, { compact: true });
+  assert.equal(full, '상반 10.8 · 하반 18.5');
+  assert.equal(compact, '상 10.8 · 하 18.5');
+  // 줄인 것은 말머리뿐 — 수치는 그대로여야 한다
+  assert.ok(compact.includes('10.8') && compact.includes('18.5'));
+});
+
 test('halfYearLabel can carry the unit for the detail view', () => {
   const rs = halfSet();
   assert.equal(halfYearLabel(rs, rs[0], { unit: true }), '상반 11만명 · 하반 18만명');
