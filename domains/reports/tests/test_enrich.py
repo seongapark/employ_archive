@@ -84,3 +84,28 @@ def test_a_huge_file_is_skipped_before_parsing():
 def test_read_pdf_refuses_what_is_not_a_pdf():
     # 로그인 페이지 HTML 이 오는 경우가 있다. pdfplumber 에 넘기면 예외가 난다.
     assert enrich.read_pdf('<html>로그인이 필요합니다</html>'.encode('utf-8')) == []
+
+
+def test_each_board_is_counted_on_its_own(capsys, monkeypatch, tmp_path):
+    # 누적으로 세면 로그가 '게시판마다 40건씩 초록이 나왔다' 처럼 읽힌다.
+    # 2026-09-10 백필 로그가 실제로 그렇게 읽혔다.
+    from domains.reports.pipeline import boards as boards_mod, build as build_mod, store
+
+    class Board:
+        enabled = True
+        def __init__(self, id, org):
+            self.id, self.org = id, org
+
+    boards = [Board('a', 'kli'), Board('b', 'kli')]
+    made = {b.id: [rec(id=f'{b.id}-1', board=b.id)] for b in boards}
+    monkeypatch.setattr(boards_mod, 'load_boards', lambda: boards)
+    monkeypatch.setattr(store, 'raw_path', lambda bid, org: bid)
+    monkeypatch.setattr(store, 'load_raw', lambda path: made[path])
+    monkeypatch.setattr(store, 'save_raw', lambda path, rows: None)
+    monkeypatch.setattr(build_mod, 'main', lambda: 0)
+    monkeypatch.setattr(enrich.http, 'Throttle', lambda delay: type('T', (), {'wait': lambda s: None})())
+
+    enrich.main(['--cap', '5'], fetch=lambda url: b'%PDF-fake', read=lambda data: SUMMARY)
+    lines = [l for l in capsys.readouterr().out.split('\n') if '건 시도 (' in l]
+    assert len(lines) == 2
+    assert all('초록 1 ' in l for l in lines), lines

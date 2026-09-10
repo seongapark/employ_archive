@@ -86,7 +86,9 @@ def enrich_record(rec: RawReport, *, fetch: Callable[[str], bytes],
     return True
 
 
-def main(argv=None, *, fetch: Optional[Callable[[str], bytes]] = None) -> int:
+def main(argv=None, *, fetch: Optional[Callable[[str], bytes]] = None,
+         read: Optional[Callable[[bytes], list[str]]] = None) -> int:
+    """`fetch`·`read` 를 주입하면 네트워크에도 PDF 라이브러리에도 안 나간다."""
     ap = argparse.ArgumentParser()
     ap.add_argument('--cap', type=int, default=CAP)
     ap.add_argument('--board')
@@ -96,7 +98,6 @@ def main(argv=None, *, fetch: Optional[Callable[[str], bytes]] = None) -> int:
     getter = fetch or (lambda url: http.get_bytes(url))
     throttle = http.Throttle(delay=DELAY)
     done = 0
-    filled = {'abstract': 0, 'none': 0}
 
     for board in boards_mod.load_boards():
         if done >= args.cap:
@@ -109,6 +110,7 @@ def main(argv=None, *, fetch: Optional[Callable[[str], bytes]] = None) -> int:
         if not targets:
             continue
         changed = 0
+        filled = {'abstract': 0, 'none': 0}     # 게시판마다 새로 센다
         for rec in targets:
             if done >= args.cap:
                 break
@@ -116,7 +118,7 @@ def main(argv=None, *, fetch: Optional[Callable[[str], bytes]] = None) -> int:
                 done += 1
                 continue
             throttle.wait()
-            enrich_record(rec, fetch=getter)
+            enrich_record(rec, fetch=getter, read=read or read_pdf)
             rec.collected_at = datetime.now(KST).isoformat(timespec='seconds')
             done += 1
             changed += 1
