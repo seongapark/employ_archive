@@ -10,16 +10,29 @@ fetch_pages 를 지연 호출로 두는 이유는 목록만 보려 할 때 회�
 텍스트 레이어가 없어 전문 OCR 에 회차당 1분 반이 걸리는데, 목록 단계에서
 그것을 치르면 도구를 쓸 수 없다.
 
-imf·oecd(본편)는 여기에 없다 — SDMX·CSV API 로 수치만 받아 원문 텍스트가
-없다.
+oecd(본편)는 수치를 CSV API 로 받지만 **근거는 보고서 PDF 에서 읽는다** —
+API 에는 "왜 그렇게 전망했는가" 가 없기 때문이다. 수치 경로는 그대로 둔다:
+API 값은 verified 이고 정확한데 같은 값을 PDF 에서 다시 읽으면 정확도만 떨어진다.
+
+**imf 는 여기에 없다. 경로를 안 만든 것이 아니라 원문에 내용이 없다.**
+WEO 전문 180쪽에서 Korea 가 나오는 자리를 전부 확인했다(2026년 4월판):
+표 행 하나, 나라 나열 여럿, `Korean War`(6·25), 그리고
+`Democratic People's Republic of Korea`(북한). **한국을 설명하는 문장이 한 줄도
+없다** — WEO 는 세계·권역 서술에 국가별 수치는 표로만 싣는 보고서다. 억지로
+붙이면 모델이 6·25 문장이나 다른 나라 서술을 한국 근거로 뽑을 위험만 생긴다.
+IMF 가 한국을 서술하는 문서는 Article IV 협의 보고서인데, WEO 와 발표일도
+전망치도 다른 별개 문서라 이 회차의 근거로 붙이면 뜻이 달라진다.
 """
 from __future__ import annotations
 
 from datetime import date
 from typing import Callable, NamedTuple
 
+import html as html_lib
+import re
+
 from . import http, ocr, pdf
-from .collectors import bok, kdi, keis, kiet, kli, moef, oecd_interim
+from .collectors import bok, kdi, keis, kiet, kli, moef, oecd, oecd_interim
 
 
 class Listed(NamedTuple):
@@ -162,6 +175,61 @@ def _moef() -> list[Listed]:
             for i in moef.list_issues()]
 
 
+# ── OECD 본편: 한국 국가노트만 잘라 준다 ─────────────────────────────
+#
+# **반드시 좁혀야 한다. BOK 을 앞 40쪽으로 자른 것과는 성격이 다르다.**
+# 이 보고서는 300쪽이고 **대부분이 다른 나라 얘기**다. 전문을 주면 토큰 한도를
+# 크게 넘길 뿐 아니라, 모델이 칠레나 일본 문장을 한국 근거로 뽑을 수 있다.
+# 잘못된 나라의 문장이 근거로 저장되는 것은 빈 칸보다 훨씬 나쁘다.
+#
+# 다행히 이 보고서에는 나라마다 국가노트가 따로 있다. 실측(EO 119): 214쪽이
+# `Korea` 한 줄로 시작하는 서술, 215쪽이 `Korea: Demand, output and prices` 표,
+# 216쪽이 서술 이어짐. 세 쪽 모두 본문에 Korea 가 나온다.
+#
+# 목차의 쪽번호(`Korea 212`)를 믿지 않는다 — 그건 **인쇄 쪽번호**라 PDF 인덱스와
+# 어긋난다(실측 +2). 대신 쪽 머리에 `Korea` 가 홀로 선 쪽을 찾는다.
+_OECD_INDICATORS = ("cpi", "emp_change", "gdp_growth", "unemp_rate")
+_OECD_COUNTRY = "Korea"
+_OECD_NOTE_MAX_PAGES = 4
+_PDF_LINK = re.compile(r'href="([^"]*\.pdf[^"]*)"')
+
+
+def korea_note(pages: list[str]) -> list[str]:
+    """국가노트 쪽들만 준다. 못 찾으면 실패시킨다.
+
+    조용히 전문을 돌려주면 안 된다 — 다른 나라 문장이 한국 근거가 된다.
+    """
+    for index, text in enumerate(pages):
+        # 쪽 머리 세 줄 안에 `Korea` 가 홀로 선 줄이 있으면 그 쪽이 시작이다.
+        # 목차 줄은 `Korea 212` 라 홀로 서지 않아 걸리지 않는다.
+        if _OECD_COUNTRY in [line.strip() for line in text.split("\n")[:3]]:
+            note = [t for t in pages[index:index + _OECD_NOTE_MAX_PAGES]
+                    if _OECD_COUNTRY in t]
+            if note:
+                return note
+    raise ValueError(
+        f"보고서에서 {_OECD_COUNTRY} 국가노트를 찾지 못했다 — 서식이 바뀌었다")
+
+
+def _oecd_report(edition: int) -> Callable[[], tuple[str, list[str]]]:
+    def fetch() -> tuple[str, list[str]]:
+        page_html = http.get(oecd.report_url(edition)).text
+        match = _PDF_LINK.search(page_html)
+        if not match:
+            raise ValueError(f"EO {edition} 회차 페이지에서 PDF 링크를 찾지 못했다")
+        url = html_lib.unescape(match.group(1))
+        if url.startswith("/"):
+            url = "https://www.oecd.org" + url
+        return url, korea_note(pdf.page_texts_with_breaks(http.get(url).content))
+    return fetch
+
+
+def _oecd() -> list[Listed]:
+    return [Listed("OECD", f"OECD Economic Outlook {edition}", published_at,
+                   _OECD_INDICATORS, _oecd_report(edition))
+            for edition, published_at in sorted(oecd.EDITIONS.items())]
+
+
 _OECD_INTERIM_INDICATORS = {"gdp_growth", "cpi"}
 
 
@@ -180,4 +248,5 @@ SOURCES: dict[str, Callable[[], list[Listed]]] = {
     "keis": _keis,
     "oecd_interim": _oecd_interim,
     "moef": _moef,
+    "oecd": _oecd,
 }

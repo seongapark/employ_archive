@@ -1,3 +1,4 @@
+import pytest
 from datetime import date
 
 from domains.forecast.pipeline import documents as d
@@ -6,12 +7,16 @@ from domains.forecast.pipeline import documents as d
 def test_sources_covers_the_text_bearing_orgs():
     # MOEF 는 2026-09-10 에 붙였다 — 수집기가 생기면서 근거 대상이 됐다.
     assert set(d.SOURCES) == {"bok", "kdi", "kli", "kiet", "keis", "oecd_interim",
-                              "moef"}
+                              "moef", "oecd"}
 
 
-def test_imf_and_oecd_are_absent_because_they_have_no_document_text():
+def test_imf_는_원문에_한국_서술이_없어_빠져_있다():
+    # 경로를 안 만든 것이 아니다. WEO 전문 180쪽에서 Korea 가 나오는 자리는
+    # 표 행·나라 나열·`Korean War`(6·25)·북한뿐이고 한국을 설명하는 문장이
+    # 한 줄도 없다. 붙이면 6·25 문장이 한국 근거가 될 수 있다.
     assert "imf" not in d.SOURCES
-    assert "oecd" not in d.SOURCES
+    # oecd 본편은 수치만 API 로 받고 **근거는 보고서 PDF 에서 읽는다**.
+    assert "oecd" in d.SOURCES
 
 
 def test_listed_carries_only_the_indicators_that_org_forecasts(monkeypatch):
@@ -219,3 +224,56 @@ def test_쪽_제한이_없으면_전문을_그대로_준다(monkeypatch):
     assert len(full[1]) == 60
     assert len(capped[1]) == 40
     assert capped[1][-1] == "39쪽"
+
+
+# ── OECD 본편: 한국 국가노트 잘라내기 ────────────────────────────────
+# 이 좁힘은 토큰 절약이 아니라 **정확성** 때문이다. 보고서 300쪽 대부분이
+# 다른 나라 얘기라, 전문을 주면 칠레·일본 문장이 한국 근거로 저장될 수 있다.
+
+def _page(*lines):
+    return NEWLINE.join(lines)
+
+
+NEWLINE = chr(10)
+
+KOREA_NOTE = [
+    _page("212 ", "Korea",
+          "GDP growth is projected to strengthen to 2.6% in 2026 before moderating to 1.9%."),
+    _page(" 213", "Korea: Demand, output and prices", "GDP at market prices 2 323.8 1.6"),
+    _page("214 ", "Exports and resilient consumption will boost growth",
+          "GDP is projected to strengthen to 2.6% in 2026. Korea's exports outstrip imports."),
+    _page(" 215", "Latvia", "GDP growth is projected to ease."),
+]
+
+
+def test_국가노트_쪽만_잘라낸다():
+    got = d.korea_note(KOREA_NOTE)
+    assert len(got) == 3, "라트비아 쪽까지 딸려 오면 안 된다"
+    assert all("Korea" in page for page in got)
+
+
+def test_목차_줄에는_걸리지_않는다():
+    # 목차는 `Korea 212` 라 홀로 서지 않는다. 여기 걸리면 국가노트 대신
+    # 목차부터 세 쪽을 근거 원문으로 준다.
+    toc = _page("6 ", "Japan 205", "Korea 212", "Latvia 218")
+    with pytest.raises(ValueError, match="국가노트를 찾지 못했다"):
+        d.korea_note([toc])
+
+
+def test_못_찾으면_조용히_전문을_주지_않는다():
+    # 조용히 전문을 돌려주면 다른 나라 문장이 한국 근거가 된다.
+    with pytest.raises(ValueError, match="국가노트를 찾지 못했다"):
+        d.korea_note([_page("1", "Japan", "GDP growth is projected to ease.")])
+
+
+def test_인쇄쪽번호를_믿지_않는다():
+    # 목차의 'Korea 212' 는 인쇄 쪽번호라 PDF 인덱스와 어긋난다(실측 +2).
+    # 쪽 머리에서 찾으므로 앞에 쪽이 몇 장 더 있어도 맞게 잡는다.
+    padded = [_page("cover"), _page("toc", "Korea 212")] + KOREA_NOTE
+    assert len(d.korea_note(padded)) == 3
+
+
+def test_oecd_본편이_근거_출처에_들어있다():
+    # imf 는 없다 — WEO 원문에 한국 서술이 한 줄도 없기 때문이다.
+    assert "oecd" in d.SOURCES
+    assert "imf" not in d.SOURCES
