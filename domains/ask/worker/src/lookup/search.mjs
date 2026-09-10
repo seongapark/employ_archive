@@ -135,21 +135,36 @@ async function 글조회(deps, 도메인, 용어들, limit) {
   return out;
 }
 
+// observation 의 breakdown 열은 이 셋뿐이다(실측). 직업 축은 값이 한 건도 없다.
+const 축_BREAKDOWN = { 연령: 'age', 성: 'sex', 산업: 'industry' };
+
 // 고용동향: 색인이 아니라 관측 조회. 같은 모양으로 접는다.
+//
+// **관측이 가진 축을 고른다.** 첫 축만 보면 "청년 사무직" 처럼 축이 둘인 질문에서
+// 관측에 없는 직업 축을 집어 고용동향이 통째로 0건이 된다 — 연령으로는 낼 수
+// 있는데도. 못 내는 축은 버리지 않고 말한다(못 준다와 못 알아들었다는 다르다).
 async function 관측조회(deps, 슬롯, limit) {
-  const 축 = 슬롯.집단축[0] ?? null;
-  const breakdown = { 연령: 'age', 성: 'sex', 산업: 'industry' }[축] ?? 'total';
+  const 됨 = (슬롯.집단축 ?? []).filter((a) => a in 축_BREAKDOWN);
+  const 안됨 = (슬롯.집단축 ?? []).filter((a) => !(a in 축_BREAKDOWN));
+  const 축 = 됨[0] ?? null;
+  const 한계 = [];
+  if (안됨.length) 한계.push(`${안됨.join('·')}별 관측은 적재돼 있지 않다`);
+  if (됨.length > 1) 한계.push(`${됨[0]} 축만 본다 — ${됨.slice(1).join('·')} 과의 교차는 못 낸다`);
+
   const rows = await queryObservations(deps, {
-    source: 'eaps', breakdown,
+    source: 'eaps', breakdown: 축 ? 축_BREAKDOWN[축] : 'total',
     category: 축 ? (슬롯.category[축] ?? null) : null,
     from: 슬롯.기간.from, to: 슬롯.기간.to, 최신만: true,
   });
-  return rows.slice(0, limit).map((o) => ({
-    제목: `${o.period} ${축 ? `${축} ${o.category}` : '전체'}`,
-    스니펫: `${o.value}${o.unit ?? ''}${o.yoy != null ? ` (전년대비 ${o.yoy})` : ''}`,
-    링크: o.release_url ?? '',
-    근거유형: '관측',
-  }));
+  return {
+    결과: rows.slice(0, limit).map((o) => ({
+      제목: `${o.period} ${축 ? `${축} ${o.category}` : '전체'}`,
+      스니펫: `${o.value}${o.unit ?? ''}${o.yoy != null ? ` (전년대비 ${o.yoy})` : ''}`,
+      링크: o.release_url ?? '',
+      근거유형: '관측',
+    })),
+    한계,
+  };
 }
 
 export async function lookup(deps, 질문, { limit = LIMIT } = {}) {
@@ -175,10 +190,11 @@ export async function lookup(deps, 질문, { limit = LIMIT } = {}) {
   }
 
   if (켜진.has('employment')) {
-    const 결과 = await 관측조회(deps, 슬롯, limit);
+    const { 결과, 한계 } = await 관측조회(deps, 슬롯, limit);
+    const 사유 = [...한계, ...(결과.length ? [] : ['이 조건의 관측이 적재돼 있지 않다'])];
     묶음.unshift({
       도메인: 'employment', 결과,
-      ...(결과.length ? {} : { 사유: '이 조건의 관측이 적재돼 있지 않다' }),
+      ...(사유.length ? { 사유: 사유.join(' · ') } : {}),
     });
   }
 

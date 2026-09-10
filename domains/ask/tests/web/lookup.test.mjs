@@ -4,6 +4,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
 import { slotsFromText, 도메인적용 } from '../../worker/src/lookup/applies.mjs';
+import { 주제_SYN } from '../../worker/src/core/classify.mjs';
 
 // ── 주제 ────────────────────────────────────────────────────────────────
 
@@ -151,4 +152,54 @@ test('아직 색인에 없는 도메인도 이름을 남긴다', () => {
   assert.ok(p, '행통 모니터링이 목록에 없다');
   assert.equal(p.적용, false);
   assert.match(p.사유, /색인/);
+});
+
+
+// ── 골든: LLM 없이 뽑은 슬롯이 예전 1패스 결과와 같은가 ────────────────────
+
+import { readFileSync, readdirSync } from 'node:fs';
+
+const 골든 = readdirSync(new URL('../golden/', import.meta.url))
+  .filter((f) => f.endsWith('.json'))
+  .map((f) => JSON.parse(readFileSync(new URL(`../golden/${f}`, import.meta.url), 'utf-8')));
+
+test('골든 여섯 질문이 전부 질문과 기대 도메인을 든다', () => {
+  assert.equal(골든.length, 6);
+  for (const g of 골든) {
+    assert.ok(g.질문, g.이름);
+    assert.ok(Array.isArray(g.기대도메인), g.이름);
+  }
+});
+
+// 골든의 주제는 짧은 정규형(`취업자`)으로 적힌 것도 있다 — 예전에는 normalize()
+// 가 접었다. 여기서도 **같은 표로** 접어서 비교한다(표를 두 벌 두지 않는다).
+// 접어도 카탈로그 어휘가 아니면 코드는 빈손을 내는 것이 옳다 — LLM 1패스는
+// '매출' 같은 말을 지어냈고, 그러면 route() 가 후보 없음으로 떨어져 결국 같은
+// 결론에 이르렀다. 코드는 그 단계를 건너뛴다.
+const 카탈로그주제 = new Set(['취업자수', '종사자수', '상시가입자수']);
+const 접기 = (s) => 주제_SYN[s] ?? s ?? '';
+
+test('코드로 뽑은 주제가 골든 슬롯과 같다', () => {
+  // 이 슬롯들은 예전에 LLM 1패스가 내던 값이다. 낱말 표만으로 같은 값이 나오는지가
+  // "LLM 없이 간다" 는 결정의 근거다.
+  for (const g of 골든) {
+    const 접힌 = 접기(g.슬롯.주제);
+    const 기대 = 카탈로그주제.has(접힌) ? 접힌 : '';
+    assert.equal(slotsFromText(g.질문).주제, 기대, `${g.이름}: 주제`);
+  }
+});
+
+test('코드로 뽑은 카테고리가 골든 슬롯과 같다', () => {
+  for (const g of 골든) {
+    for (const [축, 값] of Object.entries(g.슬롯.category ?? {})) {
+      assert.equal(slotsFromText(g.질문).category[축], 값, `${g.이름}: ${축}`);
+    }
+  }
+});
+
+test('기대한 도메인이 전부 적용된다', () => {
+  for (const g of 골든) {
+    const 적용 = new Set(도메인적용(g.질문).filter((x) => x.적용).map((x) => x.도메인));
+    for (const d of g.기대도메인) assert.ok(적용.has(d), `${g.이름}: ${d}`);
+  }
 });

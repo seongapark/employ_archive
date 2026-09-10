@@ -188,3 +188,22 @@ test('같은 문서의 다른 조각을 두 번 내지 않는다', async () => {
   const 보고서 = r.묶음.find((g) => g.도메인 === 'reports');
   assert.deepEqual(보고서.결과.map((x) => x.제목), ['같은 보고서', '다른 보고서']);
 });
+
+
+test('관측이 가진 축을 고르고, 못 내는 축은 말한다', async () => {
+  // "청년 사무직" 은 축이 둘(연령·직업)이다. 직업은 관측이 한 건도 없어서,
+  // 첫 축만 보면 고용동향이 통째로 0건이 된다 — 연령으로는 낼 수 있는데도.
+  const 본 = [];
+  const deps = { db: { all: async (sql, p) => {
+    본.push({ sql, p });
+    if (!/observation/.test(sql)) return [];
+    // queryObservations 는 최신만일 때 MAX(period) 를 먼저 묻고, 그 값으로 다시 묻는다.
+    if (/MAX\(period\)/.test(sql)) return [{ 최신: '2026-08' }];
+    return [{ source: 'eaps', breakdown: 'age', category: '15-29', period: '2026-08',
+              value: 3428, unit: '천명', yoy: -142.7, release_url: '' }];
+  } } };
+  const r = await lookup(deps, '청년 사무직 취업자가 왜 줄었나');
+  const 고용 = r.묶음.find((g) => g.도메인 === 'employment');
+  assert.equal(고용.결과.length, 1, JSON.stringify(고용));
+  assert.match(고용.사유 ?? '', /직업/);
+});
