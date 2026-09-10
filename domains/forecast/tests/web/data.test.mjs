@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {
   latestRecords, summarize, seriesFor, orgIndicators, compareSet,
   timelineGroups, fmtValue, fmtDelta, dateLabel, isNew, esc, SHORT_LABELS,
-  halfYears, halfYearLabel, fmtNumber, isOcrSourced, rationaleFor,
+  halfYears, halfYearLabel, fmtNumber, defaultYear, rationaleFor,
 } from '../../app/js/data.js';
 
 const INDICATOR_CODES = ['emp_change', 'emp_rate', 'unemp_rate', 'gdp_growth', 'cpi', 'emp_rate_youth', 'labor_force'];
@@ -56,18 +56,16 @@ test('orgIndicators returns ordered present indicators', () => {
   assert.deepEqual(orgIndicators(rs, 'OECD'), ['emp_change', 'gdp_growth']);
 });
 
-test('compareSet sorts desc, flags stale >90d, filters intl', () => {
+test('compareSet sorts desc, flags stale >90d', () => {
   const rs = [
     rec({ org: 'BOK', published_at: '2026-08-28', value: 2.1 }),
     rec({ published_at: '2026-04-01', value: 2.4 }),
   ];
-  const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-08-29', orgsMeta: ORGS, filter: 'all' });
+  const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-08-29' });
   assert.deepEqual(set.map((e) => e.rec.value), [2.4, 2.1]);
   assert.equal(set[0].stale, true);
   assert.equal(set[1].stale, false);
   assert.equal(set[0].monthLabel, '04.01');
-  const intl = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-08-29', orgsMeta: ORGS, filter: 'intl' });
-  assert.deepEqual(intl.map((e) => e.rec.org), ['OECD']);
 });
 
 test('timelineGroups groups by month then org+date', () => {
@@ -109,7 +107,7 @@ test('compareSet cross-month stale boundary', () => {
     rec({ published_at: '2026-01-01', value: 2.4 }),
     rec({ org: 'BOK', published_at: '2026-06-01', value: 2.1 }),
   ];
-  const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-04-02', orgsMeta: ORGS, filter: 'all' });
+  const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-04-02' });
   assert.equal(set[0].rec.published_at, '2026-01-01');
   assert.equal(set[0].stale, true);
   assert.equal(set[1].rec.published_at, '2026-06-01');
@@ -132,18 +130,18 @@ test('SHORT_LABELS covers all 7 indicator codes', () => {
   }
 });
 
-test('isOcrSourced flags an org whose method is ocr', () => {
-  assert.equal(isOcrSourced(rec({ org: 'KEIS' }), ORGS), true);
+test('defaultYear 는 내년이 아니라 올해를 고른다', () => {
+  const rs = [rec({ target_year: 2026 }), rec({ target_year: 2027, id: 'b' })];
+  assert.equal(defaultYear(rs, '2026-09-10'), 2026);
 });
 
-test('isOcrSourced does not flag a non-OCR org', () => {
-  assert.equal(isOcrSourced(rec({ org: 'BOK' }), ORGS), false);
-  assert.equal(isOcrSourced(rec({ org: 'OECD' }), ORGS), false);
+test('defaultYear: 올해치가 아직 없으면 가진 것 중 가장 나중 연도로 떨어진다', () => {
+  const rs = [rec({ target_year: 2027 }), rec({ target_year: 2028, id: 'b' })];
+  assert.equal(defaultYear(rs, '2026-01-05'), 2028);
 });
 
-test('isOcrSourced does not throw for an unknown org', () => {
-  assert.equal(isOcrSourced(rec({ org: 'UNKNOWN' }), ORGS), false);
-  assert.equal(isOcrSourced(rec({ org: 'UNKNOWN' }), []), false);
+test('defaultYear: 레코드가 하나도 없으면 올해', () => {
+  assert.equal(defaultYear([], '2026-09-10'), 2026);
 });
 
 test('fmtDelta: revision 0 is flat, not down', () => {
@@ -155,7 +153,7 @@ test('compareSet reduces to latest edition per org (F1)', () => {
     rec({ org: 'BOK', published_at: '2026-05-01', value: 1.8, id: 'old' }),
     rec({ org: 'BOK', published_at: '2026-08-01', value: 2.2, id: 'new' }),
   ];
-  const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-08-29', orgsMeta: ORGS, filter: 'all' });
+  const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-08-29' });
   assert.equal(set.length, 1);
   assert.equal(set[0].rec.id, 'new');
   assert.equal(set[0].rec.value, 2.2);
@@ -178,7 +176,7 @@ test('compareSet stale boundary at exactly 90/91 days', () => {
     rec({ org: 'OECD', published_at: '2026-05-31', value: 2.0, id: 'boundary90' }),
     rec({ org: 'BOK', published_at: '2026-05-30', value: 2.1, id: 'boundary91' }),
   ];
-  const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-08-29', orgsMeta: ORGS, filter: 'all' });
+  const set = compareSet(rs, { indicator: 'gdp_growth', targetYear: 2027, today: '2026-08-29' });
   const byId = Object.fromEntries(set.map((e) => [e.rec.id, e]));
   assert.equal(byId.boundary90.stale, false);
   assert.equal(byId.boundary91.stale, true);

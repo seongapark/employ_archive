@@ -1,4 +1,4 @@
-import { latestRecords, summarize, fmtValue, fmtNumber, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced, OCR_WARNING_TITLE, rationaleFor } from '../data.js';
+import { latestRecords, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS } from '../data.js';
 
 // 홈의 첫 필만 목업대로 '취업자 증감'을 온전히 유지하고, 나머지는 공유 축약 라벨을 쓴다.
 const PILLS = [
@@ -7,12 +7,6 @@ const PILLS = [
   { code: 'gdp_growth', label: SHORT_LABELS.gdp_growth },
   { code: 'cpi', label: SHORT_LABELS.cpi },
 ];
-
-const BADGE = {
-  verified: { cls: 'badge--verified', label: '검증' },
-  extracted: { cls: 'badge--extracted', label: '자동' },
-  reviewed: { cls: 'badge--reviewed', label: '확인' },
-};
 
 const DELTA_SVG = {
   up: '<svg width="10" height="9" viewBox="0 0 10 9"><polygon points="5,0 10,9 0,9" fill="#c73e3a"></polygon></svg>',
@@ -39,68 +33,140 @@ function renderYearSwitch(year) {
       <button type="button" id="yearPrev" aria-label="이전 연도" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:none;border:none;color:#98a2b3;cursor:pointer;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#98a2b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
       </button>
-      <div class="num" style="font-size:15px;font-weight:700;">${esc(String(year))}년 전망</div>
+      <div class="num" style="font-size:15px;font-weight:700;white-space:nowrap;">${esc(String(year))}년 전망</div>
       <button type="button" id="yearNext" aria-label="다음 연도" style="display:flex;align-items:center;justify-content:center;width:44px;height:44px;background:none;border:none;color:#98a2b3;cursor:pointer;">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#98a2b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
       </button>
     </div>`;
 }
 
-function renderBand(latest, indicatorMeta) {
-  const summary = summarize(latest);
-  if (!summary) return '';
-  const unit = indicatorMeta ? indicatorMeta.unit : '';
+// ── 기관별 전망치 세로 막대 ────────────────────────────────────────────────
+//
+// 축 규칙이 지표마다 다르다. 하나로 통일하면 둘 중 하나가 반드시 망가진다.
+//
+// **취업자 증감(만명)은 0 이 뜻을 갖는다** — 0 아래면 고용이 줄어든다는 말이다.
+// 그래서 0 을 기준선으로 살리고 막대를 그 위아래로 뻗는다. 이 축에서는 막대
+// 길이를 값의 크기로 읽어도 된다.
+//
+// **비율 지표(실업률·성장률·물가)는 기관 간 폭이 아주 좁다.** 2026년 실업률은
+// 여섯 기관이 2.8~2.9 안에 다 들어간다 — 0 을 바닥으로 잡으면 막대가 96.6%
+// 대 100% 가 되어 눈으로는 똑같다. 그래서 최저~최고에 축을 맞춘다.
+// **대신 이 축에서 막대 길이는 값의 절대 크기가 아니라 기관 간 상대 위치다.**
+// 그 사실을 화면에도 한 줄로 적는다(orgbars__note) — 안 적으면 0.1%p 차이를
+// 세 배 차이로 읽는다.
+//
+// 최저 기관을 바닥에 딱 붙이면 막대가 사라져 '자료 없음'처럼 보이므로,
+// 최저 아래로 범위의 RANGE_PAD 만큼 여백을 둔다.
+const ZERO_BASED = new Set(['emp_change']);
+const RANGE_PAD = 0.35;
 
-  const titleText = summary.count === 1
-    ? '1개 기관 수집'
-    : `${summary.count}개 기관 평균 ${fmtNumber(summary.avg, unit)}${esc(unit)} <span style="font-weight:400;color:#667085;">· 발표시점 상이</span>`;
+const VB_W = 330;
+const TOP_PAD = 13;   // 막대 위 값 라벨 자리
+const PLOT_H = 46;    // 막대가 쓰는 세로 — 납작하게 두되 높이 차이는 분별되는 선
+const LABEL_H = 15;   // 막대 아래 기관명 자리
+const VB_H = TOP_PAD + PLOT_H + LABEL_H;
 
-  const metaText = summary.count === 1
-    ? ''
-    : `<div class="band__meta num">최고 ${fmtNumber(summary.max.value, unit)} (${esc(summary.max.org_name_ko)}) · 최저 ${fmtNumber(summary.min.value, unit)} (${esc(summary.min.org_name_ko)})</div>`;
+// fractions 는 그림 안에서 막대가 차지할 비율이다.
+// signed 축에서는 부호가 있다(0 기준 위/아래). 아닌 축에서는 늘 0~1.
+export function barGeometry(indicator, values) {
+  const max = Math.max(...values);
+  const min = Math.min(...values);
 
-  return `
-    <div class="band">
-      <div class="band__title num">${titleText}</div>
-      ${metaText}
-    </div>`;
+  if (ZERO_BASED.has(indicator)) {
+    const top = Math.max(max, 0);
+    const bottom = Math.min(min, 0);
+    const span = top - bottom || 1;
+    return {
+      signed: true,
+      zeroAt: (0 - bottom) / span,
+      fractions: values.map(v => v / span),
+    };
+  }
+
+  const range = max - min;
+  if (range === 0) {
+    // 전 기관이 같은 값 — 없는 차이를 그리지 않는다. 나란히 반 높이로 둔다.
+    return { signed: false, zeroAt: 0, fractions: values.map(() => 0.5) };
+  }
+
+  const bottom = min - range * RANGE_PAD;
+  return {
+    signed: false,
+    zeroAt: 0,
+    fractions: values.map(v => (v - bottom) / (max - bottom)),
+  };
 }
 
-function renderCard(rec, ctx) {
-  const badgeInfo = BADGE[rec.confidence] || { cls: 'badge--extracted', label: rec.confidence || '' };
-  const delta = fmtDelta(rec);
-  const deltaCls = delta.dir === 'up' ? 'delta-up' : delta.dir === 'down' ? 'delta-down' : 'delta-flat';
-  const deltaSvg = DELTA_SVG[delta.dir] || '';
-  const date = dateLabel(rec, ctx.orgs);
-  const orgMeta = ctx.orgs.find(o => o.org === rec.org);
-  const isApi = orgMeta && orgMeta.method === 'api';
-  const found = rationaleFor(rec, ctx.rationales);
-  const rationale = found
-    ? found.text
-    : (isApi ? `${rec.report_title} · API 수집` : rec.report_title);
+// 약칭은 화면이 지어내지 않고 orgs.json 이 갖는다(short_ko). 막대 아래 칸은
+// 여섯 기관이면 55px 뿐이라 '한국고용정보원'이 그대로는 안 들어간다.
+// 데이터에 약칭이 없으면 본 이름으로 떨어진다 — 짓느니 넘치는 편이 낫다.
+function shortName(rec, orgs) {
+  const meta = (orgs || []).find(o => o.org === rec.org);
+  return (meta && meta.short_ko) || rec.org_name_ko;
+}
 
-  const [value, unitSuffix] = splitValueUnit(fmtValue(rec));
-  const halves = halfYearLabel(ctx.records, rec);
-  const ocrBadge = isOcrSourced(rec, ctx.orgs)
-    ? `<div class="badge badge--ocr" title="${esc(OCR_WARNING_TITLE)}">확인필요</div>`
+function renderOrgBars(latest, orgs) {
+  if (!latest.length) return '';
+
+  // 카드 목록은 발표일 순이지만 그래프는 값 순이어야 높낮이가 한눈에 읽힌다.
+  const rows = latest.slice().sort((a, b) => b.value - a.value);
+  const geo = barGeometry(rows[0].indicator, rows.map(r => r.value));
+
+  const plotBottom = TOP_PAD + PLOT_H;
+  const zeroY = plotBottom - geo.zeroAt * PLOT_H;
+  const slotW = VB_W / rows.length;
+  const barW = Math.min(30, slotW * 0.46);
+
+  const bars = rows.map((rec, i) => {
+    const cx = slotW * (i + 0.5);
+    const raw = geo.fractions[i] * PLOT_H;
+    const negative = raw < 0;
+    const h = Math.max(2, Math.abs(raw));
+    const y = geo.signed ? (negative ? zeroY : zeroY - h) : plotBottom - h;
+    const valueY = negative ? y + h + 10 : y - 4;
+    const [valueText] = splitValueUnit(fmtValue(rec));
+
+    return `
+      <rect x="${(cx - barW / 2).toFixed(1)}" y="${y.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" rx="2" fill="${negative ? '#7f9dc4' : '#23508f'}"></rect>
+      <text x="${cx.toFixed(1)}" y="${valueY.toFixed(1)}" font-size="10" font-weight="700" fill="#23508f" text-anchor="middle">${esc(valueText)}</text>
+      <text x="${cx.toFixed(1)}" y="${VB_H - 3}" font-size="10" fill="#667085" text-anchor="middle">${esc(shortName(rec, orgs))}</text>`;
+  }).join('');
+
+  const zeroLine = geo.signed
+    ? `<line x1="0" y1="${zeroY.toFixed(1)}" x2="${VB_W}" y2="${zeroY.toFixed(1)}" stroke="#c3cede" stroke-width="1"></line>`
     : '';
 
   return `
+    <div class="orgbars">
+      <svg width="100%" height="${VB_H}" viewBox="0 0 ${VB_W} ${VB_H}" fill="none" role="img" aria-label="기관별 전망치 막대그래프">
+        ${zeroLine}
+        ${bars}
+      </svg>
+      ${geo.signed ? '' : '<div class="orgbars__note">막대 높이는 기관 간 상대 위치</div>'}
+    </div>`;
+}
+
+// ───────────────────────────────────────────────────────────────────────────
+
+// 카드에 싣는 것은 넷뿐이다: 연전망 · 상하반기 전망 · 발표시점 · 보고서명.
+// 근거 문장과 수집 상태(자동/검증/확인)는 일부러 뺐다 — 사용자 결정이다.
+function renderCard(rec, ctx) {
+  const delta = fmtDelta(rec);
+  const deltaCls = delta.dir === 'up' ? 'delta-up' : delta.dir === 'down' ? 'delta-down' : 'delta-flat';
+  const deltaSvg = DELTA_SVG[delta.dir] || '';
+  const [value, unitSuffix] = splitValueUnit(fmtValue(rec));
+
+  return `
     <button type="button" class="card" data-org="${esc(rec.org)}" style="display:flex;flex-direction:column;gap:4px;text-align:left;width:100%;cursor:pointer;">
-      <div style="display:flex;align-items:center;justify-content:space-between;">
-        <div style="font-size:13px;font-weight:600;">${esc(rec.org_name_ko)}</div>
-        <div style="display:flex;align-items:center;gap:6px;">
-          <div class="badge ${badgeInfo.cls}">${esc(badgeInfo.label)}</div>
-          ${ocrBadge}
-        </div>
-      </div>
+      <div style="font-size:13px;font-weight:600;">${esc(rec.org_name_ko)}</div>
       <div style="display:flex;align-items:baseline;gap:10px;">
-        <div class="num" style="font-size:28px;font-weight:700;">${esc(value)}<span style="font-size:15px;font-weight:600;">${esc(unitSuffix)}</span></div>
+        <div class="num" style="font-size:28px;font-weight:700;white-space:nowrap;">${esc(value)}<span style="font-size:15px;font-weight:600;">${esc(unitSuffix)}</span></div>
         <div class="delta ${deltaCls}">${deltaSvg}<span class="num">${esc(delta.text)}</span></div>
       </div>
-      <div class="num" style="font-size:12px;color:#667085;">${esc(halves)}</div>
-      <div style="display:flex;gap:8px;font-size:12px;color:#667085;">
-        <span class="num">${esc(date)}</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(rationale)}</span>
+      <div class="num" style="font-size:12px;color:#667085;">${esc(halfYearLabel(ctx.records, rec))}</div>
+      <div style="display:flex;gap:8px;font-size:12px;color:#667085;width:100%;">
+        <span class="num" style="flex:none;">${esc(dateLabel(rec, ctx.orgs))}</span>
+        <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(rec.report_title)}</span>
       </div>
     </button>`;
 }
@@ -111,16 +177,6 @@ function splitValueUnit(formatted) {
   return [match[1], match[2]];
 }
 
-function renderMissingRow(missingOrgs) {
-  if (!missingOrgs.length) return '';
-  const names = missingOrgs.map(o => o.name_ko).join(' · ');
-  return `
-    <div class="missing-row">
-      <div class="missing-row__names">${esc(names)}</div>
-      <div class="missing-row__label">이 지표 미제공</div>
-    </div>`;
-}
-
 function lastCollectedLabel(records) {
   const withDate = records.filter(r => r.collected_at);
   if (!withDate.length) return '';
@@ -129,7 +185,7 @@ function lastCollectedLabel(records) {
 }
 
 export function render(el, ctx) {
-  const { records, orgs, state } = ctx;
+  const { records, state } = ctx;
 
   if (!PILLS.some(p => p.code === state.indicator)) {
     state.indicator = 'emp_change';
@@ -141,10 +197,6 @@ export function render(el, ctx) {
   }
 
   const latest = latestRecords(records, { indicator: state.indicator, targetYear: state.year });
-  const indicatorMeta = ctx.indicatorMeta ? ctx.indicatorMeta[state.indicator] : null;
-
-  const presentOrgs = new Set(latest.map(r => r.org));
-  const missingOrgs = orgs.filter(o => !presentOrgs.has(o.org));
 
   let body;
   if (latest.length === 0) {
@@ -158,14 +210,13 @@ export function render(el, ctx) {
     body = `
       <div style="flex:1;display:flex;flex-direction:column;gap:8px;padding:10px 16px 8px 16px;">
         ${latest.map(rec => renderCard(rec, ctx)).join('')}
-        ${renderMissingRow(missingOrgs)}
       </div>`;
   }
 
   el.innerHTML = `
     ${renderPills(ctx)}
     ${renderYearSwitch(state.year)}
-    ${renderBand(latest, indicatorMeta)}
+    ${renderOrgBars(latest, ctx.orgs)}
     ${body}
   `;
 

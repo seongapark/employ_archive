@@ -1,5 +1,4 @@
 const INDICATOR_ORDER = ['emp_change', 'unemp_rate', 'gdp_growth', 'cpi', 'emp_rate', 'emp_rate_youth', 'labor_force'];
-const INTL_ORGS = new Set(['IMF', 'OECD', 'ADB']);
 
 // 화면 전반(홈 필/기관 요약카드·필/타임라인 요약줄)에서 공유하는 지표 축약 라벨.
 // 각 화면이 자체적으로 라벨 테이블을 두면 표기가 어긋나므로 여기 한 곳에서만 관리한다.
@@ -82,22 +81,14 @@ export function orgIndicators(records, org) {
   return INDICATOR_ORDER.filter(ind => indicators.has(ind));
 }
 
-export function compareSet(records, { indicator, targetYear, today, orgsMeta, filter }) {
+export function compareSet(records, { indicator, targetYear, today }) {
   const filtered = records.filter(r => r.indicator === indicator && r.target_year === targetYear && isAnnual(r));
 
   // 기관당 최신 회차 1건으로 축약 (같은 org에 개정판이 여러 건 쌓여도 중복 표시/집계되지 않도록)
   const latestPerOrg = Array.from(reduceLatestPerOrg(filtered).values());
 
-  // Apply org filter
-  let filtered2 = latestPerOrg;
-  if (filter === 'domestic') {
-    filtered2 = latestPerOrg.filter(r => !INTL_ORGS.has(r.org));
-  } else if (filter === 'intl') {
-    filtered2 = latestPerOrg.filter(r => INTL_ORGS.has(r.org));
-  }
-
   // Map to result format and sort by value desc
-  const result = filtered2.map(rec => {
+  const result = latestPerOrg.map(rec => {
     const daysSince = dayDiff(today, rec.published_at);
     const stale = daysSince > 90;
     const [year, month, day] = rec.published_at.split('-');
@@ -229,18 +220,17 @@ export function dateLabel(rec, orgsMeta) {
   }
 }
 
-// method가 'ocr'인 기관(현재 KEIS)의 수치는 PDF 이미지를 OCR로 읽은 것이라
-// 원문과 어긋날 여지가 있다. 화면들이 이 값을 보고 '확인필요' 배지를 붙인다.
-// orgs.json 에 없는(혹은 아직 안 실린) org 코드가 들어와도 조용히 false —
-// 판정을 못 한다고 화면이 죽으면 안 된다.
-export function isOcrSourced(rec, orgsMeta) {
-  const orgMeta = (orgsMeta || []).find(o => o.org === rec.org);
-  return orgMeta ? orgMeta.method === 'ocr' : false;
+// 앱을 열었을 때 기본으로 보여줄 전망 연도 = **올해**. 사람이 이 앱을 여는
+// 이유는 대개 '지금 이 해가 어떻게 될까'이지 내년이 아니다.
+// 올해치가 아직 한 건도 없으면(연초에 기관들이 아직 안 냈을 때) 가진 것 중
+// 가장 나중 연도로 떨어진다 — 빈 화면을 기본으로 내밀지 않기 위해서다.
+export function defaultYear(records, today) {
+  const todayYear = parseInt(today.slice(0, 4), 10);
+  const years = records.map(r => r.target_year);
+  if (years.includes(todayYear)) return todayYear;
+  if (years.length) return Math.max(...years);
+  return todayYear;
 }
-
-// badge--ocr 배지·확인필요 텍스트 라벨이 다는 title 문구. 화면마다 리터럴로
-// 복사해두면 문구가 슬금슬금 어긋나므로 한 곳에서만 관리한다.
-export const OCR_WARNING_TITLE = 'PDF 이미지를 OCR로 읽은 수치입니다 — 원문과 대조해 확인하세요.';
 
 export function isNew(rec, today) {
   const daysSince = dayDiff(today, rec.published_at);

@@ -1,13 +1,7 @@
-import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, isOcrSourced, OCR_WARNING_TITLE, rationaleFor } from '../data.js';
+import { seriesFor, orgIndicators, fmtValue, fmtDelta, dateLabel, halfYearLabel, esc, SHORT_LABELS, rationaleFor } from '../data.js';
 
 // 펼침 상태는 화면 방문 동안 유지 (모듈 스코프 — 여러 회차 행이 동시에 펼쳐질 수 있음)
 const expandedIds = new Set();
-
-const BADGE = {
-  verified: { cls: 'badge--verified', label: '검증' },
-  extracted: { cls: 'badge--extracted', label: '자동' },
-  reviewed: { cls: 'badge--reviewed', label: '확인' },
-};
 
 const DELTA_SVG = {
   up: '<svg width="10" height="9" viewBox="0 0 10 9"><polygon points="5,0 10,9 0,9" fill="#c73e3a"></polygon></svg>',
@@ -23,13 +17,6 @@ function mmdd(dateStr) {
 function yymm(dateStr) {
   const [y, m] = dateStr.split('-');
   return `${y.slice(2)}.${m}`;
-}
-
-function rationaleText(rec, orgsMeta, found) {
-  if (found && found.text) return found.text;
-  const orgMeta = (orgsMeta || []).find(o => o.org === rec.org);
-  const isApi = orgMeta && orgMeta.method === 'api';
-  return isApi ? `${rec.report_title} · API 수집` : rec.report_title;
 }
 
 function yearsForOrg(records, org) {
@@ -94,8 +81,11 @@ export function renderSummaryCard(ctx, orgCode, indicators, currentYear, records
     const latest = series[series.length - 1];
     const delta = fmtDelta(latest);
     const deltaSvg = DELTA_SVG[delta.dir] || '';
+    // 지표명·수치는 절대 줄바꿈하지 않는다 — 좁은 폭에서 '취업 / 자',
+    // '20만 / 명' 으로 쪼개지면 숫자가 세 줄이 되어 카드가 무너진다.
+    // 대신 칸이 모자라면 아래 그리드가 2열에서 1열로 떨어진다.
     items.push(`
-      <button type="button" class="num" data-indicator="${esc(code)}" style="display:flex;align-items:center;gap:6px;font-size:13px;background:none;border:none;padding:2px 0;text-align:left;cursor:pointer;min-height:44px;">
+      <button type="button" class="num" data-indicator="${esc(code)}" style="display:flex;align-items:center;gap:6px;font-size:13px;background:none;border:none;padding:2px 0;text-align:left;cursor:pointer;min-height:44px;white-space:nowrap;">
         <span style="color:#667085;">${esc(SHORT_LABELS[code] || code)}</span>
         <span style="font-weight:700;">${esc(fmtValue(latest))}</span>
         ${deltaSvg}
@@ -111,49 +101,50 @@ export function renderSummaryCard(ctx, orgCode, indicators, currentYear, records
     basisDate = yymm(max.published_at);
   }
 
-  // 이 화면은 기관 하나만 다루므로 카드마다 배지를 뿌리지 않고, 페이지를
-  // 대표하는 이 요약카드 한 곳에서만 OCR 출처를 밝힌다 — 개별 레코드가
-  // 아니라 기관 자체(method)를 보는 판정이라 org 코드만으로 충분하다.
-  const ocrBadge = isOcrSourced({ org: orgCode }, ctx.orgs)
-    ? `<div class="badge badge--ocr" title="${esc(OCR_WARNING_TITLE)}">확인필요</div>`
-    : '';
-
+  // auto-fit — 한 칸에 160px 을 못 주면 2열이 1열로 떨어진다. 고정 2열이면
+  // 좁은 폰에서 칸이 145px 까지 줄어 지표명과 수치가 각각 줄바꿈된다.
   return `
     <div class="card" style="margin:10px 16px 0 16px;padding:10px 14px;display:flex;flex-direction:column;gap:6px;">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;">
-        <div class="num" style="font-size:11px;font-weight:600;color:#667085;">${esc(String(currentYear))}년 전망${basisDate ? ` (${esc(basisDate)} 기준)` : ''}</div>
-        ${ocrBadge}
-      </div>
-      <div style="display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:6px;">
+      <div class="num" style="font-size:11px;font-weight:600;color:#667085;">${esc(String(currentYear))}년 전망${basisDate ? ` (${esc(basisDate)} 기준)` : ''}</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(160px, 1fr));gap:6px;">
         ${items.join('')}
       </div>
     </div>`;
 }
 
-function renderYearAndPills(currentYear, years, indicators, currentIndicator, ctx) {
+// 지표는 필 나열이 아니라 드롭다운이다. 기관에 따라 지표가 다섯까지 가는데
+// 필을 한 줄에 늘어놓으면 좁은 폰에서 가로 스크롤이 생기고 마지막 지표가
+// 잘린다(실측: 360px 에서 '물가'가 잘렸다).
+//
+// 연도 묶음에는 flex:none 과 nowrap 을 함께 준다. flex 기본값(shrink 1)이면
+// 옆 칸에 밀려 '2027' 과 '년' 이 두 줄로 쪼개진다 — 실제로 그랬다.
+// 둘 중 하나만 걸면 안 된다: nowrap 만 주면 글자가 칸 밖으로 넘치고,
+// flex:none 만 주면 폭이 더 좁아질 때 다시 깨진다.
+function renderYearAndIndicator(currentYear, years, indicators, currentIndicator, ctx) {
   const hasYears = years.length > 0;
-  const pills = indicators.map(code => {
-    const active = code === currentIndicator;
-    return `<button type="button" class="pill${active ? ' pill--active' : ''}" data-indicator="${esc(code)}" style="min-height:44px;">${esc(SHORT_LABELS[code] || code)}</button>`;
+  const meta = ctx.indicatorMeta || {};
+  const options = indicators.map(code => {
+    const label = (meta[code] && meta[code].name_ko) || SHORT_LABELS[code] || code;
+    return `<option value="${esc(code)}"${code === currentIndicator ? ' selected' : ''}>${esc(label)}</option>`;
   }).join('');
 
   const yearSwitch = hasYears
     ? `
-      <div style="display:flex;align-items:center;gap:10px;">
-        <button type="button" id="yearPrev" aria-label="이전 연도" style="display:flex;align-items:center;justify-content:center;width:32px;height:44px;background:none;border:none;color:#98a2b3;cursor:pointer;">
+      <div style="display:flex;align-items:center;gap:6px;flex:none;">
+        <button type="button" id="yearPrev" aria-label="이전 연도" style="display:flex;align-items:center;justify-content:center;width:32px;height:44px;background:none;border:none;color:#98a2b3;cursor:pointer;flex:none;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#98a2b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
         </button>
-        <div class="num" style="font-size:14px;font-weight:700;">${esc(String(currentYear))}년</div>
-        <button type="button" id="yearNext" aria-label="다음 연도" style="display:flex;align-items:center;justify-content:center;width:32px;height:44px;background:none;border:none;color:#98a2b3;cursor:pointer;">
+        <div class="num" style="font-size:14px;font-weight:700;white-space:nowrap;">${esc(String(currentYear))}년</div>
+        <button type="button" id="yearNext" aria-label="다음 연도" style="display:flex;align-items:center;justify-content:center;width:32px;height:44px;background:none;border:none;color:#98a2b3;cursor:pointer;flex:none;">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#98a2b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg>
         </button>
       </div>`
     : '<div></div>';
 
   return `
-    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px 2px 16px;gap:8px;overflow-x:auto;">
+    <div style="display:flex;align-items:center;justify-content:space-between;padding:10px 16px 2px 16px;gap:8px;">
       ${yearSwitch}
-      <div style="display:flex;gap:6px;">${pills}</div>
+      <select id="indicatorSelect" class="num" aria-label="지표 선택" style="font-family:inherit;font-size:13px;font-weight:600;color:var(--text);background:var(--card);border:1px solid var(--border);padding:6px 10px;border-radius:8px;min-height:44px;min-width:0;flex:0 1 auto;">${options}</select>
     </div>`;
 }
 
@@ -220,48 +211,53 @@ function renderSourceLine(rec) {
   return `<div style="font-size:12px;color:#98a2b3;">원문 링크 확인 필요</div>`;
 }
 
-export function renderRow(rec, isExpanded, orgsMeta, records, rationaleItems = []) {
-  const badgeInfo = BADGE[rec.confidence] || { cls: 'badge--extracted', label: rec.confidence || '' };
+const CHEVRON = {
+  down: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#98a2b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>',
+  up: '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#98a2b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>',
+};
+
+// 접힌 행에는 발표일·전망치·증감만 둔다. 근거 문장은 펼쳐야 나온다.
+// 예전엔 근거를 접힌 행에 말줄임으로 밀어 넣었는데, 그 글자가 자리를 뺏어
+// 수치가 '20 / 만 / 명' 세 줄로 쪼개졌다(360px 실측). 수치는 flex:none 이다.
+//
+// 수집 상태(자동/검증/확인, OCR 확인필요)는 어느 쪽에도 싣지 않는다 — 사용자 결정이다.
+export function renderRow(rec, isExpanded, records, rationaleItems = []) {
   const delta = fmtDelta(rec);
   // DELTA_SVG.flat already renders its own "—", so don't also append delta.text
   // (which is also "—") — that would print it twice.
   const deltaMarkup = delta.dir === 'flat'
     ? DELTA_SVG.flat
     : `${DELTA_SVG[delta.dir] || ''}<span class="num">${esc(delta.text)}</span>`;
+  const deltaColor = delta.dir === 'up' ? 'color:#c73e3a;' : delta.dir === 'down' ? 'color:#2f6bd0;' : '';
   const monthLabel = mmdd(rec.published_at);
-  const foundRationale = rationaleFor(rec, rationaleItems);
-  const rationale = rationaleText(rec, orgsMeta, foundRationale);
-  // 접힌 행은 연도에 회차가 둘 이상일 때 기본값이라, 펼치기 전까지는 이
-  // 배지가 KEIS 수치임을 알려줄 유일한 표시다 — 펼침·접힘 양쪽에서 같은
-  // 배지를 재사용한다.
-  const ocrBadge = isOcrSourced(rec, orgsMeta)
-    ? `<div class="badge badge--ocr" title="${esc(OCR_WARNING_TITLE)}">확인필요</div>`
-    : '';
+
+  const summaryRow = (chevron, extra) => `
+        <div class="num" style="font-size:13px;font-weight:600;color:#667085;width:42px;flex:none;">${esc(monthLabel)}</div>
+        <div class="num" style="font-size:${extra};font-weight:700;flex:none;white-space:nowrap;">${esc(fmtValue(rec))}</div>
+        <div class="delta" style="${deltaColor}flex:none;white-space:nowrap;">${deltaMarkup}</div>
+        <div style="margin-left:auto;color:#98a2b3;flex:none;">${chevron}</div>`;
 
   if (isExpanded) {
+    // 근거가 없는 회차는 근거 문단을 아예 그리지 않는다. 예전엔 보고서 제목으로
+    // 떨어졌는데, 바로 아래 '원문 보기' 줄이 그 제목을 이미 말하고 있어서
+    // 펼친 칸의 절반이 같은 문장 두 번이 됐다.
+    const foundRationale = rationaleFor(rec, rationaleItems);
+    const rationale = foundRationale && foundRationale.text
+      ? `<div style="font-size:13px;line-height:1.5;color:#344054;">${esc(foundRationale.text)}</div>`
+      : '';
     const tags = (foundRationale?.tags || []).map(t => `<div style="font-size:11px;color:#23508f;background:#e7edf6;padding:2px 8px;border-radius:999px;">${esc(t)}</div>`).join('');
     const landingUrl = safeUrl(rec.landing_url);
     const landing = landingUrl
       ? `<a href="${esc(landingUrl)}" target="_blank" rel="noopener" style="font-size:11px;color:#667085;">기관 자료실</a>`
       : '';
-    const confidenceBadges = `<div style="display:flex;align-items:center;gap:6px;">
-          <div class="badge ${badgeInfo.cls}">${esc(badgeInfo.label)}</div>
-          ${ocrBadge}
-        </div>`;
     return `
       <div class="card" style="border-color:#b9c9e2;display:flex;flex-direction:column;padding:0;">
-        <button type="button" data-toggle="${esc(rec.id)}" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:none;border:none;width:100%;text-align:left;cursor:pointer;min-height:44px;">
-          <div class="num" style="font-size:13px;font-weight:600;color:#667085;width:42px;">${esc(monthLabel)}</div>
-          <div class="num" style="font-size:17px;font-weight:700;">${esc(fmtValue(rec))}</div>
-          <div class="delta" style="${delta.dir === 'up' ? 'color:#c73e3a;' : delta.dir === 'down' ? 'color:#2f6bd0;' : ''}">${deltaMarkup}</div>
-          <div style="margin-left:auto;color:#98a2b3;">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#98a2b3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
-          </div>
+        <button type="button" data-toggle="${esc(rec.id)}" style="display:flex;align-items:center;gap:10px;padding:10px 14px;background:none;border:none;width:100%;text-align:left;cursor:pointer;min-height:44px;">${summaryRow(CHEVRON.up, '17px')}
         </button>
         <div style="border-top:1px solid #eef0f3;padding:10px 14px;display:flex;flex-direction:column;gap:8px;">
-          <div style="font-size:13px;line-height:1.5;color:#344054;">${esc(rationale)}</div>
+          ${rationale}
           <div class="num" style="font-size:12px;color:#667085;">${esc(halfYearLabel(records, rec, { unit: true }))}</div>
-          ${tags || landing ? `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">${tags}<div style="margin-left:auto;">${confidenceBadges}</div></div>` : `<div style="align-self:flex-end;">${confidenceBadges}</div>`}
+          ${tags ? `<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;">${tags}</div>` : ''}
           ${renderSourceLine(rec)}
           ${landing}
         </div>
@@ -269,16 +265,11 @@ export function renderRow(rec, isExpanded, orgsMeta, records, rationaleItems = [
   }
 
   return `
-    <button type="button" class="card" data-toggle="${esc(rec.id)}" style="display:flex;align-items:center;gap:10px;padding:10px 14px;width:100%;text-align:left;cursor:pointer;">
-      <div class="num" style="font-size:13px;font-weight:600;color:#667085;width:42px;">${esc(monthLabel)}</div>
-      <div class="num" style="font-size:15px;font-weight:700;">${esc(fmtValue(rec))}</div>
-      ${ocrBadge ? `<div style="flex-shrink:0;">${ocrBadge}</div>` : ''}
-      <div class="delta" style="${delta.dir === 'up' ? 'color:#c73e3a;' : delta.dir === 'down' ? 'color:#2f6bd0;' : ''}">${deltaMarkup}</div>
-      <div style="font-size:12px;color:#98a2b3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${esc(rationale)}</div>
+    <button type="button" class="card" data-toggle="${esc(rec.id)}" style="display:flex;align-items:center;gap:10px;padding:10px 14px;width:100%;text-align:left;cursor:pointer;">${summaryRow(CHEVRON.down, '15px')}
     </button>`;
 }
 
-function renderHistory(series, orgsMeta, records, rationaleItems) {
+function renderHistory(series, records, rationaleItems) {
   if (!series.length) {
     return `<div style="padding:16px;text-align:center;font-size:13px;color:#98a2b3;">이 연도에는 데이터가 없습니다</div>`;
   }
@@ -286,7 +277,7 @@ function renderHistory(series, orgsMeta, records, rationaleItems) {
   const rows = series
     .slice()
     .reverse() // 최신 위
-    .map(rec => renderRow(rec, singleEdition || expandedIds.has(rec.id), orgsMeta, records, rationaleItems))
+    .map(rec => renderRow(rec, singleEdition || expandedIds.has(rec.id), records, rationaleItems))
     .join('');
   return `<div style="display:flex;flex-direction:column;gap:6px;padding:8px 16px;">${rows}</div>`;
 }
@@ -330,19 +321,28 @@ export function render(el, ctx) {
   el.innerHTML = `
     ${renderHeader(ctx, orgMeta, orgCode, latestRec, scheduleEntry)}
     ${renderSummaryCard(ctx, orgCode, indicators, currentYear, records)}
-    ${indicators.length ? renderYearAndPills(currentYear, indicatorYears, indicators, currentIndicator, ctx) : ''}
+    ${indicators.length ? renderYearAndIndicator(currentYear, indicatorYears, indicators, currentIndicator, ctx) : ''}
     ${renderChart(seriesCurrent)}
-    ${indicators.length ? renderHistory(seriesCurrent, ctx.orgs, ctx.records, ctx.rationales) : ''}
+    ${indicators.length ? renderHistory(seriesCurrent, ctx.records, ctx.rationales) : ''}
   `;
 
   wireBack(el, ctx);
 
+  // 요약카드의 지표 항목은 여전히 눌러서 지표를 바꾸는 버튼이다.
   el.querySelectorAll('[data-indicator]').forEach(btn => {
     btn.addEventListener('click', () => {
       state.indicator = btn.dataset.indicator;
       ctx.rerender();
     });
   });
+
+  const indicatorSelect = el.querySelector('#indicatorSelect');
+  if (indicatorSelect) {
+    indicatorSelect.addEventListener('change', () => {
+      state.indicator = indicatorSelect.value;
+      ctx.rerender();
+    });
+  }
 
   const prevBtn = el.querySelector('#yearPrev');
   const nextBtn = el.querySelector('#yearNext');

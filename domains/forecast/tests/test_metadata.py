@@ -18,3 +18,13 @@ def test_orgs_has_nine_orgs_with_tracks():
     assert {r["org"] for r in rows} == {"BOK", "KDI", "KLI", "MOEF", "IMF",
                                         "OECD", "ADB", "KIET", "KEIS"}
     assert all(r["track"] in ("A", "B") for r in rows)
+
+def test_every_org_has_a_short_name_that_fits_a_bar_label():
+    # 홈의 기관별 막대그래프는 막대 아래에 기관명을 적는다. 여섯 기관이면
+    # 한 칸이 55px 뿐이라 '한국고용정보원'(7자)은 옆 칸을 침범한다.
+    # 약칭은 화면이 지어내지 않고 여기 데이터가 갖는다 — 고용동향 도메인의
+    # sources.json/industries.json 과 같은 규칙이다.
+    rows = json.loads((DATA / "orgs.json").read_text(encoding="utf-8"))
+    for r in rows:
+        assert r["short_ko"], r["org"]
+        assert len(r["short_ko"]) <= 5, (r["org"], r["short_ko"])

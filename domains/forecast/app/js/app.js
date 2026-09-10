@@ -3,17 +3,9 @@ import { render as org } from './screens/org.js';
 import { render as compare } from './screens/compare.js';
 import { render as timeline } from './screens/timeline.js';
 import { loadJson } from '../core/shell.js';
+import { defaultYear } from './data.js';
 
 const screens = { home, org, compare, timeline };
-
-function computeDefaultYear(records, today) {
-  const todayYear = parseInt(today.slice(0, 4), 10);
-  const nextYear = todayYear + 1;
-  const years = records.map(r => r.target_year);
-  if (years.includes(nextYear)) return nextYear;
-  if (years.length) return Math.max(...years);
-  return nextYear;
-}
 
 // 헤더 날짜는 '수집기가 마지막으로 돈 날'(last_run.json 의 run_at)이다.
 // 레코드의 collected_at 최댓값이 아니다 — 그것은 '데이터가 마지막으로 바뀐 날'
@@ -103,17 +95,16 @@ async function boot() {
   const safeRationales = rationales || [];
 
   const today = new Date(Date.now() + 9 * 3600 * 1000).toISOString().slice(0, 10);
-  const defaultYear = computeDefaultYear(records, today);
+  const year = defaultYear(records, today);
 
   headerDateEl.textContent = computeHeaderDate(lastRun);
 
   const state = {
     indicator: 'emp_change',
-    year: defaultYear,
+    year,
     compare: {
       indicator: 'gdp_growth',
-      year: defaultYear,
-      filter: 'all',
+      year,
     },
   };
 
