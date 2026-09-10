@@ -1,5 +1,5 @@
-import { badgeLabel, understandLine, evidenceColumns } from './badge.js';
-import { renderAll } from './render.js';
+import { badgeLabel } from './badge.js';
+import { 묶음HTML } from './lookup.js';
 
 // Worker 배포 주소. 워커를 다시 배포해 주소가 바뀌면 이 한 줄을 고친다.
 // 워커 쪽 CORS 는 wrangler.jsonc 의 ASK_ALLOWED_ORIGIN 이 정한다 — 둘이 어긋나면
@@ -38,15 +38,26 @@ async function 물어본다(payload) {
   return res.json();
 }
 
-async function go(q, 유형 = null, 슬롯 = null) {
+// 출처 탐색이다 — 문장을 만들지 않는다. 유형·슬롯을 보내지 않는 이유는 워커가
+// 질문 원문에서 코드로 슬롯을 뽑기 때문이다(LLM 1패스 없음).
+async function go(q) {
   setBusy(true);
   try {
-    const 카드 = await 물어본다(슬롯 ? { 유형, 슬롯 } : { q });
-    if (카드?.오류) {
+    const r = await 물어본다({ q });
+    if (r?.오류) {
       renderError('질의 처리 중 오류가 발생했다 — 잠시 후 다시 시도한다');
       return;
     }
-    renderAll(카드, { esc, badgeLabel, understandLine, evidenceColumns, go });
+    document.getElementById('understand').hidden = true;
+    document.getElementById('answer').innerHTML = '';
+    document.getElementById('limits').innerHTML = '';
+    document.getElementById('sources').innerHTML = '';
+    document.getElementById('conflicts').innerHTML = '';
+    document.getElementById('followups').innerHTML = '';
+    document.getElementById('badges').innerHTML = (r.배지 ?? [])
+      .map((c) => { const b = badgeLabel(c); return `<span class="badge badge--${b.색}">${esc(b.라벨)}</span>`; })
+      .join('');
+    document.getElementById('evidence').innerHTML = 묶음HTML(r, { esc });
   } catch {
     renderError('서버에 연결하지 못했다 — 네트워크 상태를 확인한다');
   } finally {

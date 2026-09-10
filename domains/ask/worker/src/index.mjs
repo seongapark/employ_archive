@@ -1,6 +1,6 @@
 import { d1 } from './core/db.mjs';
 import { makeLlm } from './llm/provider.mjs';
-import { handleAsk } from './api/routes.mjs';
+import { handleLookup } from './api/routes.mjs';
 
 const cors = (env) => ({
   'access-control-allow-origin': env.ASK_ALLOWED_ORIGIN,
@@ -32,8 +32,9 @@ export default {
       const ip = request.headers.get('cf-connecting-ip') ?? '0.0.0.0';
       const today = new Date().toISOString().slice(0, 10);
 
-      const 카드 = await handleAsk(deps, {
-        질문: body.q, 유형: body.유형, 슬롯: body.슬롯, ip, today });
+      // 출처 탐색이다 — 문장을 만들지 않는다. `유형`·`슬롯` 을 몸통에서 받지
+      // 않는 이유는 슬롯을 코드가 질문 원문에서 뽑기 때문이다(LLM 1패스 없음).
+      const 결과 = await handleLookup(deps, { 질문: body.q, ip, today });
 
       // 후속질문은 **거르지 않고 그대로 낸다.**
       //
@@ -46,7 +47,7 @@ export default {
       // 1패스(LLM 슬롯 분해)가 또 필요하고, 그건 할당량과 지연을 후속질문 개수만큼
       // 곱한다. 그래서 지금은 그대로 낸다 — 아무 일도 안 하면서 D1 을 N 번 때리는
       // 코드보다 없는 편이 정직하다. 스펙 §6 도 이 동작에 맞게 고쳤다.
-      return json(카드, env);
+      return json(결과, env);
     } catch {
       // handleAsk·route·D1·KV 어디서든 미처리 예외가 올라올 수 있다 — classify/compose
       // 예외·검증실패·한도초과는 전부 안에서 막혀 있지만, 여기가 마지막 방어선이다.

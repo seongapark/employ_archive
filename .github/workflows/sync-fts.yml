@@ -1,0 +1,47 @@
+name: sync-fts
+
+# 출처 탐색 색인(doc_fts)을 다시 싣는다.
+#
+# **도메인별 수집 워크플로에 붙이지 않고 따로 둔다.** 색인이 네 도메인 데이터에
+# 걸쳐 있어서, 각 수집기가 저마다 밀면 같은 표를 하루에 네 번 비웠다 다시 채운다.
+# 게다가 적재는 전량 재적재(DELETE 후 INSERT)라 두 실행이 겹치면 그사이 조회가
+# 빈손을 본다 — concurrency 로 한 번에 하나만 돌게 막는다.
+#
+# 수집 워크플로들이 main 에 데이터를 커밋하므로 이 push 트리거가 저절로 걸린다.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'domains/reports/data/**'
+      - 'domains/forecast/data/rationales.json'
+      - 'domains/press/data/**'
+      - 'domains/ask/data/**'
+      - 'tools/fts_load.py'
+  workflow_dispatch:
+
+concurrency:
+  group: sync-fts
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      # 적재기가 깨졌으면 밀지 않는다 — 빈 색인이 낡은 색인보다 나쁘다.
+      - run: python -m pytest -q tools/tests/test_fts_load.py
+      - name: FTS 색인 재적재
+        env:
+          PYTHONIOENCODING: utf-8
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          python -m tools.fts_load > /tmp/fts.sql
+          wc -c /tmp/fts.sql
+          npx --yes wrangler@4 d1 execute employ-archive-ask --remote \
+            --config domains/ask/worker/wrangler.jsonc --file=/tmp/fts.sql

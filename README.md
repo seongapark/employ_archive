@@ -124,6 +124,7 @@ python -m domains.employment.pipeline.collect   # 고용동향 수집 1회 (KOSI
 python -m domains.reports.pipeline.collect     # 연구보고서 수집 1회 (회차당 게시판별 40건 상한)
 python -m domains.reports.pipeline.build      # 키워드만 고치고 재판정 (재수집 없이 수십 초)
 python -m domains.reports.pipeline.enrich      # 초록 빈 레코드의 원문 PDF 에서 요약 섹션 채우기 (회차 40건)
+python -m tools.fts_load > /tmp/fts.sql        # 출처 탐색 색인(doc_fts) 재적재 SQL 만들기
 ```
 
 웹앱은 `python -m tools.serve` 로 조립된 사이트를 그대로 띄운다. 앱 폴더의 `index.html`을

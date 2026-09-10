@@ -2,15 +2,18 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { domainState, updatedLabel, DOMAINS, askHref } from '../js/state.js';
 
-test('DOMAINS는 여섯 영역을 고정 순서로 갖는다', () => {
-  // ask(질의응답)를 맨 앞에 둔다 — 다른 도메인으로 가는 입구 역할을 겸한다.
-  // economy(경제동향) 자리는 press(행통 모니터링)로 바뀌었다 — 거시 지표 동향은
-  // 이 아카이브가 다루는 축이 아니었고, 고용행정통계 보도 모니터링이
-  // 앞의 세 도메인과 같은 원자료(고용노동부 보도자료)를 쓴다.
-  // reports(연구보고서)는 맨 뒤에 붙였다 — 수치가 아니라 문헌 축이라
-  // 앞의 다섯과 성격이 다르고, 나중에 붙은 순서 그대로가 읽기 쉽다.
+test('DOMAINS는 주요 도메인 넷을 고정 순서로 갖는다', () => {
+  // 질의응답은 카드가 아니라 맨 위 검색창이다 — 넷의 자료에서 출처를 찾아 주는
+  // 창구이지 나란한 다섯째 도메인이 아니다.
+  // supply(인력수급)는 카드만 있고 도메인 폴더가 없어 늘 '준비중' 이었다.
+  // reports(연구보고서)는 맨 뒤다 — 수치가 아니라 문헌 축이라 성격이 다르다.
   assert.deepEqual(DOMAINS.map(d => d.slug),
-    ['ask', 'forecast', 'employment', 'supply', 'press', 'reports']);
+    ['forecast', 'employment', 'press', 'reports']);
+});
+
+test('질의응답은 카드 목록에 없다', () => {
+  // 카드로도 두면 같은 것이 화면에 두 번 나온다.
+  assert.equal(DOMAINS.some(d => d.slug === 'ask'), false);
 });
 
 test('허브는 질문 문자열만 넘긴다 — 내용을 해석하지 않는다', () => {
@@ -39,4 +42,17 @@ test('updatedLabel은 값이 없으면 준비중을 돌려준다', () => {
 
 test('updatedLabel은 날짜 필드가 비어도 준비중으로 떨어진다', () => {
   assert.equal(updatedLabel({}), '준비중');
+});
+
+
+test('연구보고서의 at 필드도 실행 시각으로 읽는다', () => {
+  // 시각 필드가 도메인마다 다르다(run_at / at). 한쪽만 읽으면 그 카드가 늘
+  // '준비중' 으로 그려진다 — 실제로 연구보고서가 그랬다.
+  assert.equal(updatedLabel({ at: '2026-09-10T11:30:00+09:00' }), '09.10 갱신');
+  assert.equal(domainState({ at: '2026-09-10T11:30:00+09:00' }), 'ready');
+});
+
+test('시각이 없는 객체는 준비중이다', () => {
+  // {} 를 ready 로 보면 수집이 한 번도 안 돈 도메인이 갱신된 것처럼 보인다.
+  assert.equal(domainState({}), 'pending');
 });

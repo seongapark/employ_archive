@@ -2,22 +2,31 @@
 
 // 허브는 도메인 목록만 알고 내용은 모른다. 도메인이 사라지면 last_run.json이
 // 404가 되어 자동으로 '준비중'이 되고, 붙으면 자동으로 살아난다.
+// 주요 도메인 넷. **질의응답은 여기 없다** — 카드가 아니라 맨 위 검색창이 됐다.
+// 넷의 자료에서 질문에 맞는 출처를 찾아 주는 창구이지, 나란한 다섯째 도메인이
+// 아니기 때문이다(2026-09-10 사용자 결정).
+//
+// `supply`(인력수급)도 뺐다. 카드만 있고 도메인 폴더가 없어 늘 '준비중' 이었다 —
+// 중장기 인력수급전망은 `reports` 의 KEIS 인력수급전망으로 들어와 있다.
 export const DOMAINS = [
-  { slug: 'ask', name: '질의응답', desc: '질문으로 찾고, 못 주는 이유까지 답한다' },
   { slug: 'forecast', name: '고용전망', desc: '기관별 고용 전망치' },
   { slug: 'employment', name: '고용동향', desc: '경활·사업체·고용행정통계 비교' },
-  { slug: 'supply', name: '인력수급', desc: '중장기 인력수급전망' },
   { slug: 'press', name: '행통 모니터링', desc: '고용행정통계 기사 모니터링' },
   { slug: 'reports', name: '연구보고서', desc: 'KLI·KEIS·KDI·KIET 고용 보고서 검색' },
 ];
 
 export function domainState(lastRun) {
-  return lastRun ? 'ready' : 'pending';
+  return 실행시각(lastRun) ? 'ready' : 'pending';
 }
 
-// last_run.json의 실제 필드명은 run_at 이다 (수집기가 기록하는 실행 시각).
+// 실행 시각 필드가 도메인마다 다르다 — 셋은 `run_at`, 연구보고서는 `at` 이다.
+// 한쪽만 읽으면 그 도메인이 늘 '준비중' 으로 그려진다(2026-09-10 화면에서 확인).
+// 이름을 통일하는 편이 낫지만 그건 수집기와 각 앱을 함께 고치는 일이라, 허브는
+// 둘 다 받아 준다.
+const 실행시각 = (lastRun) => (lastRun && (lastRun.run_at ?? lastRun.at)) || null;
+
 export function updatedLabel(lastRun) {
-  const at = lastRun && lastRun.run_at;
+  const at = 실행시각(lastRun);
   if (!at) return '준비중';
   return `${at.slice(5, 7)}.${at.slice(8, 10)} 갱신`;
 }

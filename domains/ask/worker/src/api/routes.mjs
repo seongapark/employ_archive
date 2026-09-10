@@ -8,6 +8,7 @@
 //   핵심 산출물이 그 두 유형에서만 빠진다. (이전에 있던 NO_COMPOSE 게이트는 철회했다 —
 //   자세한 경위는 task-12-report.md 의 "수정 라운드 1" 참조.)
 
+import { lookup } from '../lookup/search.mjs';
 import { ask } from '../core/ask.mjs';
 import { verify } from '../core/verify.mjs';
 import { normalize } from '../core/classify.mjs';
@@ -146,4 +147,25 @@ export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
   카드.미확인 = [...new Set([...(카드.미확인 ?? []), ...(문장.미확인 ?? [])])];
   카드.후속질문 = 문장.후속질문 ?? [];
   return 카드;
+}
+
+
+// ── 출처 탐색 ──────────────────────────────────────────────────────────────
+//
+// **문장을 만들지 않는다. LLM 을 부르지 않는다.** 질문에 맞는 출처를 도메인별로
+// 모아 "가서 보라" 를 낸다. 위의 `handleAsk`(유형 분기 + 2패스 서술)는 지우지
+// 않고 남긴다 — 나중에 "이 출처들로 요약" 을 얹을 때 그대로 쓴다.
+//
+// 할당량은 그대로 검사하되 **찾기를 막지는 않는다.** 그 장치는 LLM 비용을
+// 막으려고 둔 것이고, 여기서 드는 비용은 D1 읽기뿐이다(한 질문에 최대 여덟 번).
+// "초과하면 LLM 만 건너뛰고 카드는 그대로 낸다" 는 이 설계의 원칙과 같은 자리다.
+// 오늘 몫을 다 쓴 것과 우리 KV 가 죽은 것은 배지를 달리해 가른다 — 사용자가 할
+// 수 있는 일이 다르다(내일 다시 / 잠시 뒤 다시).
+export async function handleLookup(deps, { 질문, ip, today }) {
+  const q = await checkQuota(deps.kv, ip, today, deps.quota);
+  const r = await lookup(deps, 질문);
+  const 배지 = [];
+  if (q.확인불가) 배지.push('할당량확인불가');
+  else if (!q.허용) 배지.push('한도초과');
+  return { ...r, 배지 };
 }
