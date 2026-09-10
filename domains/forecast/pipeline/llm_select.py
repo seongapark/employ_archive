@@ -21,6 +21,18 @@ ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 MODEL_ANTHROPIC = "claude-sonnet-5"
 MODEL_OPENROUTER = "anthropic/claude-sonnet-5"
+OPENAI_URL = "https://api.openai.com/v1/chat/completions"
+# gpt-4.1-**mini** 다. 셋을 다 만족해야 했다:
+#  (1) 긴 문맥 — 이 도구는 보고서 **전문**을 한 번에 준다(BOK 69~168쪽).
+#      1M 이라 통과. gpt-4o-mini 는 128k 라 큰 회차가 안 들어간다.
+#  (2) 고전 파라미터 — max_tokens·temperature 를 그대로 받는다. gpt-5 계열은
+#      max_tokens 를 거부하고(400) temperature=0 도 조용히 무시될 수 있다.
+#  (3) **분당 토큰 한도** — 이게 결정적이었다. 실측한 이 계정의 한도가
+#      gpt-4.1 은 30,000 TPM 인데 KIET 한 회차가 48,000 토큰이라 요청 하나도
+#      못 넣는다(429 "Request too large"). mini 는 200,000 TPM 이다.
+# 작은 모델이지만 이 도구에서 모델은 선별자다 — llm_verify 가 원문 대조를
+# 하므로 지어낸 문장은 저장되지 않는다. 갈리는 것은 '어느 문장을 골랐나' 뿐이다.
+MODEL_OPENAI = "gpt-4.1-mini"
 # 추론(thinking)을 켜는 경로에서는 추론 토큰이 이 예산을 함께 먹는다 —
 # 실측(OpenRouter, claude-sonnet-5): 한 회차가 completion 1,491 토큰 중
 # 1,191 이 추론이었다. 2000 이면 긴 회차에서 답을 쓸 자리가 안 남아 JSON 이
@@ -145,13 +157,25 @@ def provider() -> tuple[str, str, dict] | None:
     if key:
         return (OPENROUTER_URL, MODEL_OPENROUTER,
                 {"Authorization": f"Bearer {key}", "content-type": "application/json"})
+    # **세 번째 대타**. 앞의 둘이 없을 때만 쓴다 — 차례를 앞으로 옮기지 말 것.
+    # 이미 쌓인 근거는 claude-sonnet-5 가 고른 문장이라, 공급자가 회차마다
+    # 갈리면 "왜 이 문장을 골랐나" 를 한 가지로 설명할 수 없다.
+    #
+    # 그래도 이 갈래를 두는 것이 안전한 이유: **이 도구에서 모델은 선별자이지
+    # 저자가 아니다.** llm_verify 가 후보를 원문과 프로그램으로 대조해, 원문에
+    # 없는 문장은 저장되지 않는다. 모델이 갈려도 지어낸 근거가 들어올 길은
+    # 없고, 갈리는 것은 '어느 문장을 골랐나' 뿐이다.
+    key = os.environ.get("OPENAI_API_KEY", "").strip()
+    if key:
+        return (OPENAI_URL, MODEL_OPENAI,
+                {"Authorization": f"Bearer {key}", "content-type": "application/json"})
     return None
 
 
 def _call_api(prompt: str) -> str:
     got = provider()
     if got is None:
-        raise RuntimeError("ANTHROPIC_API_KEY 도 OPENROUTER_API_KEY 도 없다")
+        raise RuntimeError("ANTHROPIC_API_KEY·OPENROUTER_API_KEY·OPENAI_API_KEY 가 모두 없다")
     url, model, headers = got
     resp = requests.post(
         url,

@@ -375,3 +375,32 @@ def test_still_rejects_a_wrapped_continuation_line_that_has_no_marker():
     page = "우리 경제는 반도체경기 호황에 힘입어\n기록한 뒤 2.2% 성장할 전망"
     with pytest.raises(v.Rejected):
         v.verify("기록한 뒤 2.2% 성장할 전망", page)
+
+
+# ── OCR 잡음 ──────────────────────────────────────────────────────────
+# 검사기의 원문 대조로는 못 잡는 결함이다: OCR 원문 자체가 깨져 있으면
+# 깨진 그대로가 '원문에 있는' 문장이라 통과한다. 실제로 KEIS 근거 열넷 중
+# 일곱이 그렇게 들어왔다.
+
+@pytest.mark.parametrize("text, noise", [
+    ("2026년 고용의 OF 확대 SS 제한적인 모습", "OF"),
+    ("경제활동 참여가 지속 SOTA 노동공급 기반이 유지되고", "SOTA"),
+    ("‘AWS’ 인구는 증가하고 있으며", "AWS"),
+    ("취업 경험이 없는 APE 대다수가 청년층에 해당하며", "APE"),
+    ("임시직 SHS 증가한 것으로 확인", "SHS"),
+])
+def test_OCR_가_한글을_대문자로_잘못_읽은_자국을_잡는다(text, noise):
+    assert v.ocr_noise(text) == noise
+
+
+@pytest.mark.parametrize("text", [
+    "하반기에는 건설경기 부진 완화와 내수 회복이 점진적으로 반영되고",
+    "만성적인 인력 공급제약(인력 부족)은 취업자 수 감소에 영향을 미칠 것으로 예상됨",
+    # 이 도메인 글에 정말로 나오는 약어는 통과해야 한다 — 안 그러면
+    # 멀쩡한 근거가 통째로 걸린다.
+    "OECD 와 IMF 는 2026년 GDP 성장률을 상향 조정했다",
+    "AI 반도체 호조로 IT 수출이 늘었다",
+    "R&D 투자와 FTA 효과가 성장을 뒷받침",
+])
+def test_멀쩡한_문장과_아는_약어는_통과한다(text):
+    assert v.ocr_noise(text) is None

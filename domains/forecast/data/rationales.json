@@ -1,5 +1,510 @@
 [
   {
+    "org": "MOEF",
+    "published_at": "2014-12-22",
+    "indicator": "cpi",
+    "text": "□ 소비자물가는 국제유가 하락 등 하락압력이 있으나 내수개선, * 농산물가격 변동 가능성 ,담배가격 인상 등으로 상승폭 확대",
+    "tags": [
+      "내수",
+      "유가",
+      "농산물"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_OLD_00004092744&fileSn=458777",
+    "source_page": 8,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2014-12-22",
+    "indicator": "emp_change",
+    "text": "□ 경기개선,청년․여성층 고용률 제고 노력 등으로 취업자 증가세가 지속되겠으나 기저효과 등으로 증가 폭은 둔화 예상",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_OLD_00004092744&fileSn=458777",
+    "source_page": 7,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2014-12-22",
+    "indicator": "emp_rate",
+    "text": "ㅇ 고용률(15~64세)은 금년(65.3%)보다 0.9%p수준 개선된 66.2% *고용률 70% 로드맵 추진을 통해 45만명 이상의 고용 창출 노력",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_OLD_00004092744&fileSn=458777",
+    "source_page": 38,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2014-12-22",
+    "indicator": "gdp_growth",
+    "text": "ㅇ 내수 여건이 개선되면서 그간 GDP성장률을 크게 하회했던 내수 증가율이 GDP성장률 수준으로 상승",
+    "tags": [
+      "내수"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_OLD_00004092744&fileSn=458777",
+    "source_page": 38,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2015-06-25",
+    "indicator": "cpi",
+    "text": "소비자물가는 담배가격 상승에도 불구, 유가 하락, 도시가스요금 인하*, 공업제품 가격 안정 등의 영향으로 0%대 안정세 지속",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_OLD_00004095123&fileSn=464170",
+    "source_page": 9,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2015-12-16",
+    "indicator": "cpi",
+    "text": "소비자물가는 내수회복과 함께 저유가에 따른 기저효과가 점차 완화되면서 완만한 상승세 예상",
+    "tags": [
+      "내수",
+      "유가"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_OLD_00004096919&fileSn=468080",
+    "source_page": 9,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2015-12-16",
+    "indicator": "emp_change",
+    "text": "서비스업 회복세 지속,청년․여성 등 일자리 대책,일자리 예산 증가(+1.8조원)등으로 향후 고용여건 개선 예상",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_OLD_00004096919&fileSn=468080",
+    "source_page": 8,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2016-06-28",
+    "indicator": "cpi",
+    "text": "□ 소비자물가는 전년대비 석유류 가격 하락,도시가스 요금 인하 등 공급측 요인 영향으로 1%내외의 낮은 흐름 지속",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000002206&fileSn=1",
+    "source_page": 9,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2016-06-28",
+    "indicator": "emp_change",
+    "text": "□ 생산가능인구 증가세 둔화,수출부진․기업 구조조정 영향 등에 따른 고용창출력 약화로 ‘15년(34만명)보다 둔화 예상",
+    "tags": [
+      "수출",
+      "인구구조"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000002206&fileSn=1",
+    "source_page": 56,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2016-06-28",
+    "indicator": "emp_rate",
+    "text": "□ 청년․여성 일자리 창출 등 일자리 중심 국정운영으로 구직 활동이 증가하며 고용률 상승 흐름을 뒷받침",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000002206&fileSn=1",
+    "source_page": 8,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2016-06-28",
+    "indicator": "gdp_growth",
+    "text": "□ (성장흐름)재정․통화 등 확장적 거시정책 효과에 힘입어 ‘15년보다 개선된 연간 2.8% 성장",
+    "tags": [
+      "재정정책"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000002206&fileSn=1",
+    "source_page": 53,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2016-12-29",
+    "indicator": "cpi",
+    "text": "소비자물가는 유가하락 효과 소멸*등 공급측 하방요인이 점차 해소되면서 완만한 상승흐름을 보일 전망",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000003640&fileSn=4",
+    "source_page": 7,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2016-12-29",
+    "indicator": "emp_rate",
+    "text": "고용률(15~64세)은 ‘16년보다 0.5%p수준 개선된 66.5% 예상",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000003640&fileSn=4",
+    "source_page": 42,
+    "warnings": [
+      "모델이 댄 쪽번호 40 이(가) 실제 42 쪽과 달라 고쳤다"
+    ]
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2017-07-25",
+    "indicator": "cpi",
+    "text": "(물가 전반) 공급측 상방압력 완화로 4/4분기부터 상승세 둔화",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000005748&fileSn=2",
+    "source_page": 43,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2017-07-25",
+    "indicator": "emp_change",
+    "text": "(고용전반) 수출 회복, 건설업 호조로 취업자 증가폭 개선",
+    "tags": [
+      "수출",
+      "건설업고용"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000005748&fileSn=2",
+    "source_page": 42,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2017-07-25",
+    "indicator": "emp_rate",
+    "text": "에코붐세대(91~96년생)의 노동시장 본격 진입으로 청년 취업경쟁 심화",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000005748&fileSn=2",
+    "source_page": 42,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2017-07-25",
+    "indicator": "gdp_growth",
+    "text": "(상승요인) 세계경제회복, 산유국 정정불안 (하락요인) 美 증산, 산유국 감산합의 이탈",
+    "tags": [
+      "글로벌경기"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000005748&fileSn=2",
+    "source_page": 29,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2018-12-17",
+    "indicator": "cpi",
+    "text": "ㅇ (여건) 소비 증가세가 다소 둔화되며 수요압력은 완화되나, 농축수산물, 석유류 가격 등 공급측면에서는 상하방 요인 혼재",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000009805&fileSn=2",
+    "source_page": 72,
+    "warnings": [
+      "모델이 댄 쪽번호 71 이(가) 실제 72 쪽과 달라 고쳤다"
+    ]
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2018-12-17",
+    "indicator": "emp_change",
+    "text": "ㅇ ’19년 고용 증가는 ‘18년(10만명)보다 개선된 15만명 예상",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000009805&fileSn=2",
+    "source_page": 71,
+    "warnings": [
+      "모델이 댄 쪽번호 70 이(가) 실제 71 쪽과 달라 고쳤다"
+    ]
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2018-12-17",
+    "indicator": "emp_rate",
+    "text": "ㅇ 고용률은 취업자 둔화에도 인구 감소로 전년보다 소폭 상승, 실업률도 신규채용 위축, 구조조정 등이 복합 작용하며 상승",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000009805&fileSn=2",
+    "source_page": 58,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2018-12-17",
+    "indicator": "gdp_growth",
+    "text": "ㅇ 상반기는 세계교역 둔화, 통상마찰 영향 등으로 수출이 둔화되나 재정조기집행 등 정책노력이 성장세 보완",
+    "tags": [
+      "수출",
+      "통상정책",
+      "재정정책"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000009805&fileSn=2",
+    "source_page": 65,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2019-07-03",
+    "indicator": "emp_rate",
+    "text": "고용률(15~64세)은 전년보다 다소 개선된 66.8% 예상",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000011353&fileSn=2",
+    "source_page": 48,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2019-07-03",
+    "indicator": "gdp_growth",
+    "text": "대외여건 악화로 투자․수출이 어려운 가운데, 추경, 투자 수출활성화 등 활력제고 노력이 경기 하방리스크 보완 예상",
+    "tags": [
+      "수출",
+      "재정정책"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000011353&fileSn=2",
+    "source_page": 48,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2019-12-19",
+    "indicator": "emp_change",
+    "text": "생산가능인구의 큰 폭 감소 영향으로 취업자 증가폭은 ’19년 보다 소폭 둔화된 25만명 예상",
+    "tags": [
+      "인구구조"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000012764&fileSn=2",
+    "source_page": 110,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2019-12-19",
+    "indicator": "emp_rate",
+    "text": "고용률(15~64세)은 ‘19년(66.8%)보다 소폭 개선된 67.1% 예상",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000012764&fileSn=2",
+    "source_page": 110,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2019-12-19",
+    "indicator": "gdp_growth",
+    "text": "세계경제 및 반도체 업황 회복, 투자 내수활성화 등 정책효과 등 에 힘입어 투자 수출을 중심으로 성장세 개선 예상",
+    "tags": [
+      "수출",
+      "글로벌경기",
+      "내수"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000012764&fileSn=2",
+    "source_page": 110,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2020-06-01",
+    "indicator": "emp_rate",
+    "text": "고용률(15~64세)은 취업자수 증가폭 둔화로 인해 작년보다 소폭 하락한 66.4% 예상",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000014275&fileSn=2",
+    "source_page": 119,
+    "warnings": [
+      "모델이 댄 쪽번호 117 이(가) 실제 119 쪽과 달라 고쳤다"
+    ]
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2020-06-01",
+    "indicator": "gdp_growth",
+    "text": "불안심리에 따른 경제활동 위축으로 내수가 부진한 가운데, 대외여건 악화에 따른 수출 어려움 가중",
+    "tags": [
+      "수출",
+      "내수"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000014275&fileSn=2",
+    "source_page": 119,
+    "warnings": [
+      "모델이 댄 쪽번호 117 이(가) 실제 119 쪽과 달라 고쳤다"
+    ]
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2020-12-17",
+    "indicator": "cpi",
+    "text": " (물가) 수요 회복, 국제유가 상승 영향 등으로 ‘20년(0.5%)보다 오름폭이 확대되면서 1.1% 상승 전망",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000016364&fileSn=2",
+    "source_page": 26,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2020-12-17",
+    "indicator": "emp_change",
+    "text": " (고용) 경기 개선, 일자리정책 효과 등이 일자리 수요 회복을 뒷받침하면서 취업자수는 15만명 증가 전망",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000016364&fileSn=2",
+    "source_page": 26,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2020-12-17",
+    "indicator": "emp_rate",
+    "text": "ㅇ 취업자 증가 전환에 따라 고용률(15~64세)도 ‘20년(65.8%)보다 소폭 개선된 65.9% 예상",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000016364&fileSn=2",
+    "source_page": 26,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2020-12-17",
+    "indicator": "gdp_growth",
+    "text": "ㅇ 글로벌 교역 반도체 업황 개선, 확장적 거시정책 및 전방위적 활력제고 노력 등에 힘입어 내수 수출의 동반 개선 예상",
+    "tags": [
+      "수출",
+      "글로벌경기",
+      "내수"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000016364&fileSn=2",
+    "source_page": 26,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2021-06-28",
+    "indicator": "emp_rate",
+    "text": "월 취업자 수도 위기직전(’20.2월, 2,751만명) 수준을 조속히 회복할 수 있도록 일자리 창출 및 고용유지 노력 강화",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000017891&fileSn=2",
+    "source_page": 25,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2021-06-28",
+    "indicator": "gdp_growth",
+    "text": "내수의 경우 거주자 국내소비 기준으로는 취약부문 보강을 위한 정책노력 등에 힘입어 위기 이전수준 회복 기대",
+    "tags": [
+      "내수"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000017891&fileSn=2",
+    "source_page": 25,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2021-12-20",
+    "indicator": "cpi",
+    "text": " (물가) 당분간 수요측･공급측 상방압력이 지속될 것으로 전망",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000019373&fileSn=3",
+    "source_page": 6,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2021-12-20",
+    "indicator": "emp_change",
+    "text": "ㅇ (수요) 고용창출력이 높은 대면 서비스업 업황 회복, 일자리 정책지원 확대 등이 노동수요 개선을 뒷받침",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000019373&fileSn=3",
+    "source_page": 6,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2021-12-20",
+    "indicator": "emp_rate",
+    "text": "ㅇ 기저 영향, 생산가능인구 감소 등 구조적 제약 요인에도 불구, 내수 개선 일자리 지원 정책 등이 고용 회복을 뒷받침",
+    "tags": [
+      "내수",
+      "인구구조"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000019373&fileSn=3",
+    "source_page": 27,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2021-12-20",
+    "indicator": "gdp_growth",
+    "text": " (성장) 소비･투자･수출의 고른 증가로 회복세를 이어갈 전망",
+    "tags": [
+      "수출"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000019373&fileSn=3",
+    "source_page": 5,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2022-06-16",
+    "indicator": "cpi",
+    "text": "ㅇ 금년 들어 국제 원자재가격 급등 등 해외발 공급측 요인에 수요 회복이 더해져 높은 물가 상승세 지속",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000020529&fileSn=3",
+    "source_page": 53,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2022-06-16",
+    "indicator": "emp_change",
+    "text": "ㅇ 향후 대면서비스업을 중심으로 회복세를 지속하겠으나, 하반기로 갈수록 기저 영향이 크게 작용하며 증가폭 둔화 전망",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000020529&fileSn=3",
+    "source_page": 52,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2022-06-16",
+    "indicator": "emp_rate",
+    "text": "ㅇ 취업자 수 증가로 고용률(15~64세)은 ’21년(66.5%) 보다 1.5%p 상승한 68.0%, 실업률은 ‘21년(3.7%) 대비 하락한 3.1% 예상",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000020529&fileSn=3",
+    "source_page": 52,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2022-12-21",
+    "indicator": "cpi",
+    "text": "ㅇ ('23년) 소비자물가는 둔화 흐름을 이어가며 금년(5.1%) 보다 상당폭 낮아진 3.5% 상승 전망\n▪ 유가·곡물가격 등 국제원자재 가격이 금년보다 낮아지고,\n수요측 상방압력도 완화 예상\n* 국제유가 전망($/B, 두바이유) : (’22)96내외 → (’23)88내외\n▪ 다만, 전기･가스요금 현실화 등 공공요금 상방압력 확대가\n예상되는 가운데, 원자재가격 관련 불확실성도 지속 가능성",
+    "tags": [
+      "유가",
+      "공공요금"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000021992&fileSn=3",
+    "source_page": 59,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2022-12-21",
+    "indicator": "emp_change",
+    "text": "ㅇ ('23년) 금년 이례적 호조에 따른 기저효과, 경기둔화 영향\n등으로 취업자 증가폭은 올해 대비 상당폭 둔화 전망\n▪ 코로나 방역･보건 일자리 감소 등도 고용 하방요인으로 작용\n▪ 다만, 통계적 기저효과가 크게 작용하여 실제 고용상황 보다\n취업자 증가세 둔화폭이 크게 나타나는 측면\n* 금년 장기 추세를 큰 폭 상회했던 고용 흐름이 추세 수준으로 복귀하는 과정",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000021992&fileSn=3",
+    "source_page": 58,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2022-12-21",
+    "indicator": "emp_rate",
+    "text": "ㅇ ('23년) 금년 이례적 호조에 따른 기저효과, 경기둔화 영향\n등으로 취업자 증가폭은 올해 대비 상당폭 둔화 전망\n▪ 코로나 방역･보건 일자리 감소 등도 고용 하방요인으로 작용\n▪ 다만, 통계적 기저효과가 크게 작용하여 실제 고용상황 보다\n취업자 증가세 둔화폭이 크게 나타나는 측면\n* 금년 장기 추세를 큰 폭 상회했던 고용 흐름이 추세 수준으로 복귀하는 과정",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000021992&fileSn=3",
+    "source_page": 58,
+    "warnings": []
+  },
+  {
     "org": "KLI",
     "published_at": "2023-05-19",
     "indicator": "emp_change",
@@ -8,7 +513,8 @@
       "통화정책"
     ],
     "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=142698&seq=1",
-    "source_page": 1
+    "source_page": 1,
+    "warnings": []
   },
   {
     "org": "KLI",
@@ -22,7 +528,8 @@
       "통화정책"
     ],
     "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=142697&seq=1",
-    "source_page": 23
+    "source_page": 23,
+    "warnings": []
   },
   {
     "org": "KLI",
@@ -31,7 +538,52 @@
     "text": "실업률은 사실상 장기적으로도 가장 낮은 수\n준에 도달해 있어 향후 추가적으로 감소할 여력은 크지 않다.",
     "tags": [],
     "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=142698&seq=1",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2023-07-04",
+    "indicator": "cpi",
+    "text": "ㅇ 소비자물가는 원자재가격 안정, 정책지원 효과, 서비스가격 상승세 완화 등으로 둔화 흐름 지속 전망",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000023463&fileSn=2",
+    "source_page": 5,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2023-07-04",
+    "indicator": "emp_change",
+    "text": "ㅇ 대면서비스·보건복지업 중심의 양호한 취업자 증가세를 이어 가며 고용률･실업률 개선 흐름 지속 전망",
+    "tags": [
+      "돌봄일자리"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000023463&fileSn=2",
+    "source_page": 6,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2023-07-04",
+    "indicator": "emp_rate",
+    "text": "ㅇ 이에 따라 당분간 고용률 및 실업률 개선 흐름 지속 예상",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000023463&fileSn=2",
+    "source_page": 7,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2023-07-04",
+    "indicator": "gdp_growth",
+    "text": "ㅇ 교역 둔화 등에 따른 수출 부진으로 금년 성장률은 당초 예상(1.6%)을 소폭 하회하겠으나, 하반기 성장률은 상반기 대비 반등 예상",
+    "tags": [
+      "수출"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000023463&fileSn=2",
+    "source_page": 48,
+    "warnings": []
   },
   {
     "org": "KLI",
@@ -42,7 +594,28 @@
       "인구구조"
     ],
     "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=143042&seq=1",
-    "source_page": 51
+    "source_page": 51,
+    "warnings": []
+  },
+  {
+    "org": "KLI",
+    "published_at": "2023-08-14",
+    "indicator": "emp_rate",
+    "text": "다른 연령대는 인구가 감소 중이므로 총량적인 측면에서 고용상황을 파악할 때 고용률 변화를 먼저 살펴야 한다.",
+    "tags": [],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=143042&seq=1",
+    "source_page": 4,
+    "warnings": []
+  },
+  {
+    "org": "KLI",
+    "published_at": "2023-08-14",
+    "indicator": "unemp_rate",
+    "text": "이와 더불어 비경제활동인구도 동 기간 감소했던 상황임을 감안하면 감소한 실업자는 취업으로 이행한 것으로 판단할 수 있다.",
+    "tags": [],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=143042&seq=1",
+    "source_page": 6,
+    "warnings": []
   },
   {
     "org": "KLI",
@@ -51,7 +624,34 @@
     "text": "그러나 올해 1~3분기, 그리고 10월까지의 강건한 노동시장 상황에 기반하여 고용이 조정되는 정도가 기존에 논의되었던 것보다 더 천천히 진행될 수 있을 수 있는 가능성을 이전보다 높게 고려하게 되었다.",
     "tags": [],
     "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=143542&seq=1",
-    "source_page": 41
+    "source_page": 41,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2024-01-04",
+    "indicator": "emp_change",
+    "text": "ㅇ ('24년) ‘22~’23년간 높은 증가세에 따른 기저영향 등으로\n‘23년 대비 취업자수 증가폭은 둔화 전망\n* 2년간 장기 추세를 큰 폭 상회했던 고용 흐름이 추세 수준으로 복귀하는 과정\n▪ 지난해 큰 폭으로 증가했던 대면 서비스업 일자리가 정상화\n▪ 다만, 돌봄수요 증가, 여성·고령층 중심 노동공급 확대 등에\n힘입어 보건복지·공공행정 서비스업 고용 증가세는 유지 예상\n▪ 고용률은 인구 증가세 둔화에도 불구, 양호한 취업자수\n증가세가 유지되며 상승세 지속 전망(’23년 62.6 → ‘24년 62.8%)",
+    "tags": [
+      "인구구조",
+      "돌봄일자리"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000024886&fileSn=3",
+    "source_page": 62,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2024-01-04",
+    "indicator": "emp_rate",
+    "text": "ㅇ ('24년) ‘22~’23년간 높은 증가세에 따른 기저영향 등으로\n‘23년 대비 취업자수 증가폭은 둔화 전망\n* 2년간 장기 추세를 큰 폭 상회했던 고용 흐름이 추세 수준으로 복귀하는 과정\n▪ 지난해 큰 폭으로 증가했던 대면 서비스업 일자리가 정상화\n▪ 다만, 돌봄수요 증가, 여성·고령층 중심 노동공급 확대 등에\n힘입어 보건복지·공공행정 서비스업 고용 증가세는 유지 예상\n▪ 고용률은 인구 증가세 둔화에도 불구, 양호한 취업자수\n증가세가 유지되며 상승세 지속 전망(’23년 62.6 → ‘24년 62.8%)",
+    "tags": [
+      "인구구조",
+      "돌봄일자리"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000024886&fileSn=3",
+    "source_page": 62,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -62,7 +662,8 @@
       "내수"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=SI7ePpSkjvN7i9kNOU%2BYyQ%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -74,7 +675,8 @@
       "인구구조"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=SI7ePpSkjvN7i9kNOU%2BYyQ%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -85,7 +687,18 @@
       "수출"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=SI7ePpSkjvN7i9kNOU%2BYyQ%3D%3D",
-    "source_page": 2
+    "source_page": 2,
+    "warnings": []
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-02-14",
+    "indicator": "unemp_rate",
+    "text": "실업률도 기존 전망과 동일한 3.0%로 전망",
+    "tags": [],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=SI7ePpSkjvN7i9kNOU%2BYyQ%3D%3D",
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -96,7 +709,8 @@
       "내수"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=ECRFSi6ZjSoJZkI%2Feu6tEA%3D%3D",
-    "source_page": 4
+    "source_page": 4,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -108,7 +722,8 @@
       "인구구조"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=ECRFSi6ZjSoJZkI%2Feu6tEA%3D%3D",
-    "source_page": 4
+    "source_page": 4,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -120,7 +735,57 @@
       "내수"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=ECRFSi6ZjSoJZkI%2Feu6tEA%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-05-16",
+    "indicator": "unemp_rate",
+    "text": "실업률은 2024년 2.8%, 2025년 2.7%로 2023년(2.7%)과 유사할 것으로 예상됨.",
+    "tags": [],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=ECRFSi6ZjSoJZkI%2Feu6tEA%3D%3D",
+    "source_page": 4,
+    "warnings": []
+  },
+  {
+    "org": "KIET",
+    "published_at": "2024-05-30",
+    "indicator": "gdp_growth",
+    "text": "○ 2024년 국내경제는 내수 부문에서 오랜 기간 유지되어 온 고물가와 고금리의 영향이 성장세를 제약할 전망이나, 반도체를 중심으로 자동차, 조선 등의 주력산업의 수출 호조세가 전체 경제 성장을 주도함에 따라 2.5% 성장할 전망",
+    "tags": [
+      "수출",
+      "내수",
+      "통화정책"
+    ],
+    "source_url": "https://www.kiet.re.kr/common/file/userDownload?atch_no=b0yyQcL6S4H9Xo1XrQ%2FKzw%3D%3D",
+    "source_page": 35,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2024-07-03",
+    "indicator": "cpi",
+    "text": "상반기에 농산물·석유류 등 상방압력이 다소 확대되었으나, 하반기로 갈수록 공급측 요인이 완화되며 2% 초중반대까지 둔화 예상",
+    "tags": [
+      "농산물"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000026526&fileSn=3",
+    "source_page": 15,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2024-07-03",
+    "indicator": "gdp_growth",
+    "text": "ㅇ 수출은 세계경제의 완만한 성장세, AI 수요 확대에 따른 반도체 경기 호전 등으로 하반기에도 개선 흐름을 지속할 전망",
+    "tags": [
+      "수출",
+      "글로벌경기"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000026526&fileSn=3",
+    "source_page": 14,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -132,7 +797,8 @@
       "유가"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=iwRP2r0lNuG62oBxu%2FkhKg%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -143,7 +809,8 @@
       "내수"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=iwRP2r0lNuG62oBxu%2FkhKg%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -156,7 +823,8 @@
       "설비투자"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=iwRP2r0lNuG62oBxu%2FkhKg%3D%3D",
-    "source_page": 2
+    "source_page": 2,
+    "warnings": []
   },
   {
     "org": "KLI",
@@ -167,7 +835,34 @@
       "건설업고용"
     ],
     "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=144795&seq=1",
-    "source_page": 31
+    "source_page": 31,
+    "warnings": []
+  },
+  {
+    "org": "KLI",
+    "published_at": "2024-10-04",
+    "indicator": "emp_rate",
+    "text": "30대는 상반기 취업자 수가 9.1만 명 늘었다. 취업자 증가분 전체가 인구효과와는 무관하게 나타났다. 전년동기대비 인구변화가 없는 가운데 취업자 수가 증가할 수 있었던 이유는 30대 여성의 경제활동 참여가 꾸준히 증가했기 때문이다.",
+    "tags": [],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=144795&seq=1",
+    "source_page": 9,
+    "warnings": [
+      "모델이 댄 쪽번호 58 이(가) 실제 9 쪽과 달라 고쳤다"
+    ]
+  },
+  {
+    "org": "KLI",
+    "published_at": "2024-10-04",
+    "indicator": "unemp_rate",
+    "text": "현재 고령층의 실업률이 소폭 증가하는 것은 민간 일자리에 참여하고자 하는 고령층이 늘어난 영향으로 해석할 수 있다.",
+    "tags": [
+      "인구구조"
+    ],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=144795&seq=1",
+    "source_page": 3,
+    "warnings": [
+      "모델이 댄 쪽번호 52 이(가) 실제 3 쪽과 달라 고쳤다"
+    ]
   },
   {
     "org": "KDI",
@@ -178,7 +873,8 @@
       "유가"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=XyooFSHZitPoP94uAMRBkw%3D%3D",
-    "source_page": 4
+    "source_page": 4,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -190,7 +886,8 @@
       "인구구조"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=XyooFSHZitPoP94uAMRBkw%3D%3D",
-    "source_page": 4
+    "source_page": 4,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -202,7 +899,70 @@
       "내수"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=XyooFSHZitPoP94uAMRBkw%3D%3D",
-    "source_page": 1
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "KDI",
+    "published_at": "2024-11-12",
+    "indicator": "unemp_rate",
+    "text": "실업률은 2024년 2.7%에서 2025년 2.8%로 소폭 상승할 전망",
+    "tags": [],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=XyooFSHZitPoP94uAMRBkw%3D%3D",
+    "source_page": 4,
+    "warnings": []
+  },
+  {
+    "org": "KIET",
+    "published_at": "2024-11-25",
+    "indicator": "gdp_growth",
+    "text": "○ 2025년 국내 경제는 건설투자의 부진이 지속되겠으나, 수출이 증가 흐름을 유지하고,소비와 설비투자가 완만히 회복하면서 2.1% 성장할 전망",
+    "tags": [
+      "수출",
+      "건설투자",
+      "설비투자"
+    ],
+    "source_url": "https://www.kiet.re.kr/common/file/userDownload?atch_no=6xVUWLubWriyVwkZiQ%2BZPQ%3D%3D",
+    "source_page": 11,
+    "warnings": [
+      "모델이 댄 쪽번호 33 이(가) 실제 11 쪽과 달라 고쳤다"
+    ]
+  },
+  {
+    "org": "BOK",
+    "published_at": "2024-11-28",
+    "indicator": "emp_change",
+    "text": "이는 생산연령인구의 감소로 노동공급 증가세가 둔화되는 가운데 업황부진에 따라 제조업과 건설업의 노동수요도 약화될 것으로 예상되기 때문이다.",
+    "tags": [
+      "제조업고용",
+      "건설업고용"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/686e75f27bf04f44a8c7c8ad6d32b4bf/1/4667448d69fb4ea18b336c9f7dcfa8dd.pdf",
+    "source_page": 8,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2024-11-28",
+    "indicator": "gdp_growth",
+    "text": "내년에는 소비를 중심으로 완만한 성장세를 이어가겠으나 그 속도는 내수와 수출 모두 지난 전망에 다소 미치지 못할 것으로 판단된다.",
+    "tags": [
+      "수출",
+      "내수"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/686e75f27bf04f44a8c7c8ad6d32b4bf/1/4667448d69fb4ea18b336c9f7dcfa8dd.pdf",
+    "source_page": 29,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2024-11-28",
+    "indicator": "unemp_rate",
+    "text": "최근 실업률이 매우 낮은 수준에서 등락하고 있으나 고용률이 정체되면서 팬데믹 이후 빠르게 진행되었던 고용 증가세가 둔화하고 있는 것으로 평가된다.",
+    "tags": [],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/686e75f27bf04f44a8c7c8ad6d32b4bf/1/4667448d69fb4ea18b336c9f7dcfa8dd.pdf",
+    "source_page": 40,
+    "warnings": []
   },
   {
     "org": "KLI",
@@ -211,7 +971,56 @@
     "text": "이러한 증가폭 둔화의 주요 원인으로는 경기둔화의 영향과 함께 인구효과와 정부 직접일자리사업 증가세의 둔화가 꼽힌다.",
     "tags": [],
     "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=145319&seq=1",
-    "source_page": 22
+    "source_page": 22,
+    "warnings": []
+  },
+  {
+    "org": "KLI",
+    "published_at": "2024-12-30",
+    "indicator": "emp_rate",
+    "text": "생산가능인구(15∼64세)는 올해 34만 명 줄어들었으며, 2025년에는 감소폭이 38만 명으로 확대될 전망이다. 이는 취업자 증가폭을 약 2만 명 감소시키는 요인으로 작용할 것으로 보인다.",
+    "tags": [
+      "인구구조"
+    ],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=145319&seq=1",
+    "source_page": 22,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2025-01-02",
+    "indicator": "cpi",
+    "text": "ㅇ 물가는 유가하락 등 공급측 요인 완화로 최근 2% 이내 안정세",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000028007&fileSn=4",
+    "source_page": 3,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2025-01-02",
+    "indicator": "emp_change",
+    "text": "ㅇ 고용은 생산연령인구 감소, 건설 부진･수출 둔화 등 영향으로 취업자 증가폭이 축소되며 어려운 여건 예상",
+    "tags": [
+      "수출"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000028007&fileSn=4",
+    "source_page": 5,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2025-01-02",
+    "indicator": "emp_rate",
+    "text": "ㅇ 고용률은 여성･고령층 경제활동 참여 확대로 높은 수준 지속",
+    "tags": [
+      "인구구조"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000028007&fileSn=4",
+    "source_page": 6,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -220,7 +1029,8 @@
     "text": "소비자물가는 낮은 수요 압력이 지속되면서 전년(2.3%)보다 낮은 1.6%의 상승률을 나타낼 전망",
     "tags": [],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=J1VygJv4GPyl6Gn6c5xHlg%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -232,7 +1042,8 @@
       "인구구조"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=J1VygJv4GPyl6Gn6c5xHlg%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -244,7 +1055,62 @@
       "내수"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=J1VygJv4GPyl6Gn6c5xHlg%3D%3D",
-    "source_page": 2
+    "source_page": 2,
+    "warnings": []
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-02-11",
+    "indicator": "unemp_rate",
+    "text": "실업률은 전년(2.8%)보다 소폭 상승한 2.9%로 전망",
+    "tags": [],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=J1VygJv4GPyl6Gn6c5xHlg%3D%3D",
+    "source_page": 3,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2025-02-25",
+    "indicator": "cpi",
+    "text": "금년중 소비자물가 상승률은 원/달러환율 상승에 따른 상방요인과 낮은 수요압력, 정부 물가안정대책 등 하방요인이 상쇄되면서 11월 전망에 부합한 1.9%로 전망된다.",
+    "tags": [
+      "환율"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/8758a03a95cd4447ba5efc3c7daea835/1/eea0ed4d850e40458a3ed8726f234dc9.pdf",
+    "source_page": 40,
+    "warnings": [
+      "모델이 댄 쪽번호 39 이(가) 실제 40 쪽과 달라 고쳤다"
+    ]
+  },
+  {
+    "org": "BOK",
+    "published_at": "2025-02-25",
+    "indicator": "emp_change",
+    "text": "§ 제조업의 고용 부진이 지속되는 가운데 건설투자 위축, 내수회복 지연 등으로 건설업과 대면서비스업의 고용 부진이 심화될 것으로 예상된다. 다만 정부 일자리 사업 확대 와 보건복지 등의 견조한 증가세가 고용 둔화폭을 제한할 전망이다.",
+    "tags": [
+      "내수",
+      "건설투자",
+      "돌봄일자리",
+      "제조업고용",
+      "건설업고용"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/8758a03a95cd4447ba5efc3c7daea835/1/eea0ed4d850e40458a3ed8726f234dc9.pdf",
+    "source_page": 8,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2025-02-25",
+    "indicator": "gdp_growth",
+    "text": "금년중 국내경제는 美관세정책, 정치 불확실성 등의 영향으로 수출과 내수 모두 하방압력이 증대되면서 1.5% 성장하는 데 그칠 전망이다.",
+    "tags": [
+      "수출",
+      "통상정책",
+      "내수"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/8758a03a95cd4447ba5efc3c7daea835/1/eea0ed4d850e40458a3ed8726f234dc9.pdf",
+    "source_page": 31,
+    "warnings": []
   },
   {
     "org": "OECD",
@@ -255,7 +1121,8 @@
       "통상정책"
     ],
     "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/03/oecd-economic-outlook-interim-report-march-2025_47a36021/89af4857-en.pdf",
-    "source_page": 18
+    "source_page": 18,
+    "warnings": []
   },
   {
     "org": "OECD",
@@ -266,7 +1133,8 @@
       "통상정책"
     ],
     "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/03/oecd-economic-outlook-interim-report-march-2025_47a36021/89af4857-en.pdf",
-    "source_page": 15
+    "source_page": 15,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -277,7 +1145,8 @@
       "유가"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=%2FxwjQYioi8mBMiV99xGqUQ%3D%3D",
-    "source_page": 4
+    "source_page": 4,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -288,7 +1157,8 @@
       "인구구조"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=%2FxwjQYioi8mBMiV99xGqUQ%3D%3D",
-    "source_page": 4
+    "source_page": 4,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -300,7 +1170,45 @@
       "통상정책"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=%2FxwjQYioi8mBMiV99xGqUQ%3D%3D",
-    "source_page": 2
+    "source_page": 2,
+    "warnings": []
+  },
+  {
+    "org": "KDI",
+    "published_at": "2025-05-14",
+    "indicator": "unemp_rate",
+    "text": "실업률은 작년 2.8%에서 금년과 내년에 각각 3.0% 수준으로 소폭 상승할 전망",
+    "tags": [],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=%2FxwjQYioi8mBMiV99xGqUQ%3D%3D",
+    "source_page": 4,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2025-05-29",
+    "indicator": "cpi",
+    "text": "금년중 소비자물가 상승률은 가공식품 및 일부 서비스가격 인상 움직임에 따른 상방요인과 낮은 수요압력, 국제유가 하락 등의 하방요인이 상쇄되면서 지난 전망과 동일한 1.9%로 예상된다.",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/f4e84470826d43dbb68975127f1eb8ac/1/e3fb83fa6a7643c2afa49945d3c7d6ed.pdf",
+    "source_page": 39,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2025-05-29",
+    "indicator": "emp_change",
+    "text": "건설투자 부진, 美관세정책 등의 영향으로 건설‧제조업 고용 감소가 지속되겠으나 정부 일자리 대책에 힘입어 공공행정‧보건복지 일자리가 당초 전망을 상당폭 웃돌 것으로 예상된다.",
+    "tags": [
+      "통상정책",
+      "건설투자",
+      "돌봄일자리",
+      "제조업고용"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/f4e84470826d43dbb68975127f1eb8ac/1/e3fb83fa6a7643c2afa49945d3c7d6ed.pdf",
+    "source_page": 10,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -309,7 +1217,8 @@
     "text": "소비자물가는 낮은 경제성장세에 따라 작년 2.3%에서 금년과 내년에 각각\n2.0%, 1.8% 정도로 상승세가 둔화될 전망",
     "tags": [],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=lbNOcbJ6YPSL2%2FimIvIRog%3D%3D",
-    "source_page": 1
+    "source_page": 1,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -320,7 +1229,8 @@
       "인구구조"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=lbNOcbJ6YPSL2%2FimIvIRog%3D%3D",
-    "source_page": 1
+    "source_page": 1,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -333,7 +1243,86 @@
       "건설투자"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=lbNOcbJ6YPSL2%2FimIvIRog%3D%3D",
-    "source_page": 1
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2025-08-22",
+    "indicator": "cpi",
+    "text": "ㅇ 다만, 지정학적 요인(국제유가 변동성), 이상기후 등 불확실성 상존",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000029805&fileSn=3",
+    "source_page": 57,
+    "warnings": [
+      "모델이 댄 쪽번호 67 이(가) 실제 57 쪽과 달라 고쳤다"
+    ]
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2025-08-22",
+    "indicator": "emp_change",
+    "text": "ㅇ 다만, 하반기 관세 영향 등에 따른 수출 둔화 가능성과 건설투자의 더딘 회복속도 등은 취업자 증가세 제약 요인",
+    "tags": [
+      "수출",
+      "통상정책",
+      "건설투자"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000029805&fileSn=3",
+    "source_page": 66,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2025-08-22",
+    "indicator": "emp_rate",
+    "text": "ㅇ 취업자 증가 및 경제활동 참여 확대 등으로 고용률은 상승 (’24년 62.7 → ‘25년 62.8%), 실업률은 보합(’24, ‘25년 2.8%) 전망",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000029805&fileSn=3",
+    "source_page": 66,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2025-08-22",
+    "indicator": "gdp_growth",
+    "text": "ㅇ 1분기 실적 부진에도 불구하고 하반기 회복세 확대로 ‘25년 0.9% 성장 예상 ▪ 하반기에 수출은 美 관세 영향으로 둔화 가능성이 있으나, 추경 등 정책효과가 가시화되며 소비 중심 성장세 예상",
+    "tags": [
+      "수출",
+      "통상정책",
+      "재정정책"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000029805&fileSn=3",
+    "source_page": 62,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2025-08-28",
+    "indicator": "cpi",
+    "text": "▢ 금년중 소비자물가 상승률은 국제유가 하락에도 기상여건 악화에 따른 농축수산물가격 상승 등의 영향으로 5월 전망 에 비해 소폭 높은 2.0%로 예상된다.",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/d873ecaa7b4b47539c3be0c73320f394/1/48421f25b1d540deb331871c8be9b275.pdf",
+    "source_page": 8,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2025-08-28",
+    "indicator": "emp_change",
+    "text": "§ 건설투자 부진, 美관세정책에 따른 수익성 악화 등의 영향으로 건설‧제조업 고용 감소세가 지속되겠으나 정부 일자리정책, 소비 개선 등으로 서비스업 증가세가 당초 전망을 큰 폭 웃돌 것으로 예상된다.",
+    "tags": [
+      "통상정책",
+      "건설투자",
+      "제조업고용"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/d873ecaa7b4b47539c3be0c73320f394/1/48421f25b1d540deb331871c8be9b275.pdf",
+    "source_page": 8,
+    "warnings": []
   },
   {
     "org": "KLI",
@@ -344,7 +1333,40 @@
       "인구구조"
     ],
     "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=146724&seq=1",
-    "source_page": 24
+    "source_page": 24,
+    "warnings": []
+  },
+  {
+    "org": "KLI",
+    "published_at": "2025-08-29",
+    "indicator": "unemp_rate",
+    "text": "15∼29세는 실업자는 소폭 줄었지만, 인구 감소의 영향으로 실업률이 0.3%p 증가했다.",
+    "tags": [],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=146724&seq=1",
+    "source_page": 18,
+    "warnings": [
+      "모델이 댄 쪽번호 16 이(가) 실제 18 쪽과 달라 고쳤다"
+    ]
+  },
+  {
+    "org": "KEIS",
+    "published_at": "2025-09-01",
+    "indicator": "emp_change",
+    "text": "- 취업자 증가를 요인분해''하면 공급측 요인이 취업자 증가에 크게 기여",
+    "tags": [],
+    "source_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20250901025242144.pdf&path=pblc&fn=%5B%EB%B3%B8%EB%AC%B8%5D+2025%EB%85%84+%EA%B3%A0%EC%9A%A9%EB%8F%99%ED%96%A5%EB%B8%8C%EB%A6%AC%ED%94%84_6%ED%98%B8_%EB%82%B4%EC%A7%80_%EC%B5%9C%EC%A2%85.pdf&sn=11240&fsn=22291&ty=P",
+    "source_page": 3,
+    "warnings": []
+  },
+  {
+    "org": "KEIS",
+    "published_at": "2025-09-01",
+    "indicator": "emp_rate",
+    "text": "30 여성 고용률의 증가는 미혼 인구 증가의 영향이 크나, 30대 후반 기혼 여성의 경제활동 참여 확대가 지속되면서 나타난 결과로 해석됨",
+    "tags": [],
+    "source_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20250901025242144.pdf&path=pblc&fn=%5B%EB%B3%B8%EB%AC%B8%5D+2025%EB%85%84+%EA%B3%A0%EC%9A%A9%EB%8F%99%ED%96%A5%EB%B8%8C%EB%A6%AC%ED%94%84_6%ED%98%B8_%EB%82%B4%EC%A7%80_%EC%B5%9C%EC%A2%85.pdf&sn=11240&fsn=22291&ty=P",
+    "source_page": 12,
+    "warnings": []
   },
   {
     "org": "OECD",
@@ -353,7 +1375,8 @@
     "text": "Aggregate consumer price inflation for the G20 countries is expected to decline as economic growth and labour markets ease (Figure 8, Panel B).",
     "tags": [],
     "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/09/oecd-economic-outlook-interim-report-september-2025_ae3d418b/67b10c01-en.pdf",
-    "source_page": 17
+    "source_page": 17,
+    "warnings": []
   },
   {
     "org": "OECD",
@@ -364,7 +1387,8 @@
       "통상정책"
     ],
     "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/09/oecd-economic-outlook-interim-report-september-2025_ae3d418b/67b10c01-en.pdf",
-    "source_page": 16
+    "source_page": 16,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -376,7 +1400,8 @@
       "유가"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=mU4SZU%2F0gWSawfrzWKLCpA%3D%3D",
-    "source_page": 4
+    "source_page": 4,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -388,7 +1413,8 @@
       "인구구조"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=mU4SZU%2F0gWSawfrzWKLCpA%3D%3D",
-    "source_page": 4
+    "source_page": 4,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -400,7 +1426,8 @@
       "내수"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=mU4SZU%2F0gWSawfrzWKLCpA%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -409,7 +1436,23 @@
     "text": "실업률은 구조적 요인에 주로 기인하여 2.8%의 낮은 수준을 유지할 전망",
     "tags": [],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=mU4SZU%2F0gWSawfrzWKLCpA%3D%3D",
-    "source_page": 4
+    "source_page": 4,
+    "warnings": []
+  },
+  {
+    "org": "KIET",
+    "published_at": "2025-11-24",
+    "indicator": "gdp_growth",
+    "text": "○ 2026년 국내 경제는 미국 관세 정책의 불확실성이 이어지는 가운데 수출이 전년도의 호실적에 따른 기저효과 등으로 소폭의 감소가 예상되나, 소비의 견조한 증가세, 정부의 확장적 재정 기조 등으로 내수가 성장의 모멘텀으로 작용하면서 연간 1.9%의 성장률이 예상",
+    "tags": [
+      "수출",
+      "통상정책",
+      "내수",
+      "재정정책"
+    ],
+    "source_url": "https://www.kiet.re.kr/common/file/userDownload?atch_no=xsxLwLye4mxKdbjMveiBXQ%3D%3D",
+    "source_page": 38,
+    "warnings": []
   },
   {
     "org": "KEIS",
@@ -418,7 +1461,8 @@
     "text": "만성적인 인력 공급제약(인력 부족)은 이 업종의 취업자 수 감소에 추가적 영향을 미칠 것으로 예상됨",
     "tags": [],
     "source_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20251231110535986.pdf&path=pblc&fn=%5B%EB%B3%B8%EB%AC%B8%5D+2025%EB%85%84+%EA%B3%A0%EC%9A%A9%EB%8F%99%ED%96%A5%EB%B8%8C%EB%A6%AC%ED%94%84_10%ED%98%B8_%EC%B5%9C%EC%A2%85.pdf&sn=11264&fsn=22414&ty=P",
-    "source_page": 11
+    "source_page": 11,
+    "warnings": []
   },
   {
     "org": "KLI",
@@ -427,7 +1471,82 @@
     "text": "2025년 하반기 고용 증가폭은 20만 명을 상회할 것으로 예상되는데, 이는 보건업 및 사회복지 서비스업, 정보통신업, 전문ㆍ과학 및 기술서비스업 등 서비스업 전반의 견조한 고용 증가가 뒷받침된 결과이다.",
     "tags": [],
     "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=147627&seq=1",
-    "source_page": 24
+    "source_page": 24,
+    "warnings": []
+  },
+  {
+    "org": "KLI",
+    "published_at": "2026-01-02",
+    "indicator": "emp_rate",
+    "text": "인구는 감소하지만, 그로 인해 취업자 수가 크게 줄어들 가능성은 낮은 것으로 보인다.",
+    "tags": [],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=147627&seq=1",
+    "source_page": 24,
+    "warnings": []
+  },
+  {
+    "org": "KLI",
+    "published_at": "2026-01-02",
+    "indicator": "unemp_rate",
+    "text": "청년층에서는 시간관련 추가취업 가능자의 증가(+0.1%p)와 취업자 감소로 인한 경제활동인구의 축소(+0.7%p) 영향으로 확장실업률이 증가했다.",
+    "tags": [],
+    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=147627&seq=1",
+    "source_page": 20,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2026-01-09",
+    "indicator": "cpi",
+    "text": "ㅇ ('26년) 내수 개선 등 상방요인에도 주요 산유국 증산 등에 따른 국제유가 하락으로 ’25년과 유사한 2.1% 상승 전망",
+    "tags": [
+      "내수",
+      "유가"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000030752&fileSn=3",
+    "source_page": 54,
+    "warnings": [
+      "모델이 댄 쪽번호 52 이(가) 실제 54 쪽과 달라 고쳤다"
+    ]
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2026-01-09",
+    "indicator": "emp_change",
+    "text": "ㅇ ('26년) 생산연령인구 감소, 고령화 등 인구구조 변화로 취업자 증가폭은 ’25년 대비 소폭 축소 전망",
+    "tags": [
+      "인구구조"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000030752&fileSn=3",
+    "source_page": 53,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2026-01-09",
+    "indicator": "emp_rate",
+    "text": "▪ 고용률(’25년 62.9→’26년 63.0%)은 고령층·여성 경제활동 참여 확대, 내수 개선 등으로 역대 최고 수준 전망",
+    "tags": [
+      "내수",
+      "인구구조"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000030752&fileSn=3",
+    "source_page": 53,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2026-01-09",
+    "indicator": "gdp_growth",
+    "text": "ㅇ ('26년) 내수 중심으로 ’25년보다 성장세 확대 전망\n▪ 내수는 심리개선, 정책효과 등에 따른 소비 증가세 확대, 선행지표 개선에 따른 건설부진 완화 등으로 회복세 확대 전망\n▪ 순수출은 반도체 호조*에도 관세영향 본격화와 내수 회복에 따른 수입 증가 등으로 ’25년 대비 성장기여 약화 전망",
+    "tags": [
+      "수출",
+      "통상정책",
+      "내수"
+    ],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000030752&fileSn=3",
+    "source_page": 47,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -438,7 +1557,8 @@
       "유가"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=360DkHhQV2Udsh1Tgu%2BHeQ%3D%3D",
-    "source_page": 4
+    "source_page": 4,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -449,7 +1569,8 @@
       "인구구조"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=360DkHhQV2Udsh1Tgu%2BHeQ%3D%3D",
-    "source_page": 4
+    "source_page": 4,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -462,7 +1583,40 @@
       "건설투자"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=360DkHhQV2Udsh1Tgu%2BHeQ%3D%3D",
-    "source_page": 2
+    "source_page": 2,
+    "warnings": []
+  },
+  {
+    "org": "KDI",
+    "published_at": "2026-02-11",
+    "indicator": "unemp_rate",
+    "text": "실업률은 전년에 이어 2.8% 정도를 기록할 것으로 예상됨.",
+    "tags": [],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=360DkHhQV2Udsh1Tgu%2BHeQ%3D%3D",
+    "source_page": 4,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2026-02-26",
+    "indicator": "cpi",
+    "text": "금년중 소비자물가는 수요측 압력이 아직 제한적*인 가운데 일부 품목 전자기기·보험료 등의 비용상승 압력 등으로 지난 11월 전망을 소폭 상회**하는 2.2% 상승할 전망이다.",
+    "tags": [],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/abee0d98aefe40b8abadc5744ec5d613/1/8e9cda349b1049f8be89054aa1d21d18.pdf",
+    "source_page": 11,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2026-02-26",
+    "indicator": "emp_change",
+    "text": "전체 취업자수는 생산연령인구 감소 등으로 증가규모가 지난해보다 축소되겠으나, 민간고용은 서비스업 업황 개선, 건설경기 부진 완화로 개선될 전망이다.",
+    "tags": [
+      "건설투자"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/abee0d98aefe40b8abadc5744ec5d613/1/8e9cda349b1049f8be89054aa1d21d18.pdf",
+    "source_page": 11,
+    "warnings": []
   },
   {
     "org": "OECD",
@@ -473,7 +1627,8 @@
       "글로벌경기"
     ],
     "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/03/oecd-economic-outlook-interim-report-march-2026_254a8d56/d4623013-en.pdf",
-    "source_page": 20
+    "source_page": 20,
+    "warnings": []
   },
   {
     "org": "OECD",
@@ -484,7 +1639,28 @@
       "통상정책"
     ],
     "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/03/oecd-economic-outlook-interim-report-march-2026_254a8d56/d4623013-en.pdf",
-    "source_page": 6
+    "source_page": 6,
+    "warnings": []
+  },
+  {
+    "org": "KEIS",
+    "published_at": "2026-03-30",
+    "indicator": "unemp_rate",
+    "text": "최근 청년 고용률 하락은 경기적 요인 뿐 아니라 노동시장 진입 지연 및 구직 활동 축소 등 참여 행태 변화에 기인한 측면이 있음",
+    "tags": [],
+    "source_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20260330030801043.pdf&path=pblc&fn=2026%EB%85%84+%EC%A0%9C1%ED%98%B8+%EA%B3%A0%EC%9A%A9%EB%8F%99%ED%96%A5%EB%B8%8C%EB%A6%AC%ED%94%84.pdf&sn=11273&fsn=22456&ty=P",
+    "source_page": 15,
+    "warnings": []
+  },
+  {
+    "org": "KEIS",
+    "published_at": "2026-04-30",
+    "indicator": "unemp_rate",
+    "text": "국내 만 15세 이상 상주 외국인의 실업률은 2025년 5월 기준 6.4%로 전년 동월 대비 O.7%p 상승",
+    "tags": [],
+    "source_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20260430051535037.pdf&path=pblc&fn=2026%EB%85%84+%EC%A0%9C2%ED%98%B8+%EA%B3%A0%EC%9A%A9%EB%8F%99%ED%96%A5%EB%B8%8C%EB%A6%AC%ED%94%84.pdf&sn=11278&fsn=22489&ty=P",
+    "source_page": 14,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -495,7 +1671,8 @@
       "유가"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=2PGfm9R3%2Bsq%2Fbzo5hJt4%2Fw%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -507,7 +1684,8 @@
       "인구구조"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=2PGfm9R3%2Bsq%2Fbzo5hJt4%2Fw%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -519,7 +1697,33 @@
       "내수"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=2PGfm9R3%2Bsq%2Fbzo5hJt4%2Fw%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
+  },
+  {
+    "org": "KIET",
+    "published_at": "2026-05-26",
+    "indicator": "gdp_growth",
+    "text": "○ 2026년 국내경제는 중동 전쟁에 따른 에너지 수급 불안정성 및 관련 비용 상승이 소비와\n생산의 하방 압력으로 작용할 것이나, 추경 등 정부의 확장적 재정 기조와 함께 반도체\n등 IT 경기 호조로 인한 투자 및 수출 증가세가 이어지면서 2.5% 내외 성장률이 예상",
+    "tags": [
+      "수출",
+      "재정정책"
+    ],
+    "source_url": "https://www.kiet.re.kr/common/file/userDownload?atch_no=flnWDFIkqbfOQT7TI5Kscg%3D%3D",
+    "source_page": 36,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2026-05-28",
+    "indicator": "cpi",
+    "text": "소비자물가는 석유류가격이 큰 폭 상승하고, 고유가 충격이 시차를 두고 여타 품목으로 파급되면서 당초 예상 보다 크게 높은 2.7% 상승할 전망이다.",
+    "tags": [
+      "유가"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/411de844aef442e7ad07896b7bbe2eef/1/4e0f66601a6a4f95ac4164f9286de537.pdf",
+    "source_page": 8,
+    "warnings": []
   },
   {
     "org": "BOK",
@@ -531,7 +1735,48 @@
       "돌봄일자리"
     ],
     "source_url": "https://www.bok.or.kr/fileSrc/portal/411de844aef442e7ad07896b7bbe2eef/1/4e0f66601a6a4f95ac4164f9286de537.pdf",
-    "source_page": 11
+    "source_page": 11,
+    "warnings": []
+  },
+  {
+    "org": "KEIS",
+    "published_at": "2026-06-30",
+    "indicator": "emp_rate",
+    "text": "고용보험 피보험자의 71.7%가 동일 일자리 유지자이고, 전문 서비스업의 노동 수요 감소로 신규 인력 유입이 약화되고 있음을 알 수 있었음",
+    "tags": [],
+    "source_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20260630043527483.pdf&path=pblc&fn=%EA%B3%A0%EC%9A%A9%EB%8F%99%ED%96%A5%EB%B8%8C%EB%A6%AC%ED%94%84+2026+%EC%A0%9C4%ED%98%B8+.pdf&sn=11318&fsn=22592&ty=P",
+    "source_page": 11,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2026-07-14",
+    "indicator": "emp_change",
+    "text": "ㅇ ’26년 고용은 중동전쟁 영향에 따른 4~5월 실적 부진 등으로\n당초 예상(16만명)보다 증가폭 둔화 전망",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000032188&fileSn=3",
+    "source_page": 51,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2026-07-14",
+    "indicator": "emp_rate",
+    "text": "ㅇ 고용률은 올해 하반기 이후 고용 회복세 등으로 상승(’25년62.9→\n’26년63.0 →’27년63.1%), 실업률은 보합(2.8%) 전망",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000032188&fileSn=3",
+    "source_page": 51,
+    "warnings": []
+  },
+  {
+    "org": "MOEF",
+    "published_at": "2026-07-14",
+    "indicator": "gdp_growth",
+    "text": "ㅇ 반도체 호조세 확대, 정책효과 등으로 ’26년 3.0% 성장 전망",
+    "tags": [],
+    "source_url": "https://www.moef.go.kr/com/cmm/fms/FileDown.do?atchFileId=ATCH_000000000032188&fileSn=3",
+    "source_page": 47,
+    "warnings": []
   },
   {
     "org": "KEIS",
@@ -544,7 +1789,8 @@
       "돌봄일자리"
     ],
     "source_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20260803024446542.pdf&path=pblc&fn=%EA%B3%A0%EC%9A%A9%EB%8F%99%ED%96%A5%EB%B8%8C%EB%A6%AC%ED%94%84+2026%EB%85%84+%EC%A0%9C5%ED%98%B8.pdf&sn=11349&fsn=22677&ty=P",
-    "source_page": 20
+    "source_page": 20,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -555,7 +1801,8 @@
       "유가"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=t0ttotGKwxjCSAgCQUEjRA%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -566,7 +1813,8 @@
       "내수"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=t0ttotGKwxjCSAgCQUEjRA%3D%3D",
-    "source_page": 3
+    "source_page": 3,
+    "warnings": []
   },
   {
     "org": "KDI",
@@ -577,7 +1825,18 @@
       "글로벌경기"
     ],
     "source_url": "https://www.kdi.re.kr/file/download?atch_no=t0ttotGKwxjCSAgCQUEjRA%3D%3D",
-    "source_page": 1
+    "source_page": 1,
+    "warnings": []
+  },
+  {
+    "org": "KDI",
+    "published_at": "2026-08-19",
+    "indicator": "unemp_rate",
+    "text": "경제성장이 고용 유발효과가 낮은 반도체 부문에 집중되면서 높은 성장세가 고용 여건의 뚜렷한 개선으로 이어지지 못함.",
+    "tags": [],
+    "source_url": "https://www.kdi.re.kr/file/download?atch_no=t0ttotGKwxjCSAgCQUEjRA%3D%3D",
+    "source_page": 1,
+    "warnings": []
   },
   {
     "org": "BOK",
@@ -586,6 +1845,19 @@
     "text": "금년중 소비자물가는 비용충격의 전이가 지속되고 수요압력도 점차 확대됨에 따라 2.7% 상승할 것으로 예상된다.",
     "tags": [],
     "source_url": "https://www.bok.or.kr/fileSrc/portal/dfe965a8e38a4e4b9fd1a6989a7ee18e/1/d8feb2de24a34fe38ef9db25182c8b05.pdf",
-    "source_page": 11
+    "source_page": 11,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2026-08-27",
+    "indicator": "emp_change",
+    "text": "금년 취업자수는 중동전쟁의 영향, 건설업 등 취약업종의 부진으로 지난 5월 전망을 4만명 하회할 것으로 예상된다.",
+    "tags": [
+      "건설업고용"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/dfe965a8e38a4e4b9fd1a6989a7ee18e/1/d8feb2de24a34fe38ef9db25182c8b05.pdf",
+    "source_page": 11,
+    "warnings": []
   }
 ]

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import io
 import re
 from datetime import date, datetime, timedelta, timezone
 
@@ -203,4 +204,135 @@ def collect_vintage(label: str) -> list[ForecastRecord]:
     records: list[ForecastRecord] = []
     for code in IMF_CODE_TO_INDICATOR:
         records.extend(parse_vintage(fetch_vintage(flow, code), code, label, title, published_at))
+    return records
+
+
+# ── 과거 회차: WEO Historical Forecasts Database ──────────────────────────
+#
+# **SDMX 아카이브에는 vintage 가 하나뿐이다**(WEO_2025_OCT_VINTAGE). 다른 이름은
+# 전부 404 이고(2025 JAN/APR/JUL · 2026 JAN/APR/JUL · 2024 OCT 실측), IMF 데이터
+# 포털의 Dataset Vintages 목록도 "Result 1 of 1" 이다. DataMapper 는 현행 회차만
+# 준다. 그래서 지난 회차는 이 파일에서만 온다 — IMF 가 "그때 그 회차가 무엇을
+# 전망했는가" 를 모아 배포하는 엑셀이다.
+#
+# **범위가 좁다는 것을 알고 쓴다:**
+#  - 시트가 셋뿐이라 **실업률(LUR)이 없다.** 성장률·물가만 채워진다.
+#  - 열이 S<연도>(4월판)·F<연도>(10월판) 뿐이라 **1·7월 Update 는 없다** —
+#    Update 는 데이터베이스를 내지 않는다. 그 회차를 채우려면 Update PDF 를
+#    따로 읽어야 한다(미착수).
+#
+# 발표일은 지어내지 않고 **기획재정부 보도참고**로 대조했다. 그 대조법이 맞다는
+# 근거: 이미 들어 있던 두 회차의 기재부 날짜가 정확히 일치한다
+# (F2025 2025-10-14 · S2026 2026-04-14).
+HISTORICAL_URL = ("https://data.imf.org/-/media/iData/External-Storage/Documents/"
+                  "977574FA66914EAD900D3FEC55C7316A/en/WEOhistorical.xlsx")
+HISTORICAL_SHEETS = {"ngdp_rpch": "gdp_growth", "pcpi_pch": "cpi"}
+# 열 접두 → (표제, 발표일). 기재부 보도참고로 확인한 것만 싣는다.
+HISTORICAL_VINTAGES: dict[str, tuple[str, date]] = {
+    "F2024": ("IMF World Economic Outlook, October 2024", date(2024, 10, 22)),
+    "S2025": ("IMF World Economic Outlook, April 2025", date(2025, 4, 22)),
+}
+
+_XL_NS = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+_REL_NS = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"
+_COL = re.compile(r"[A-Z]+")
+
+
+def _sheet_rows(zf, sheet_file: str, shared: list[str]):
+    """시트를 한 줄씩 {열문자: 값} 으로 흘려보낸다.
+
+    openpyxl 을 쓰지 않는다 — 사람이 한 번 돌리는 백필 때문에 의존성을 늘리지
+    않으려는 것이다. xlsx 는 zip 안의 XML 이라 표준 라이브러리로 읽힌다.
+    시트 하나가 28MB 라 통째로 올리지 않고 iterparse 로 흘린다.
+    """
+    from xml.etree import ElementTree as ET
+
+    with zf.open("xl/" + sheet_file.lstrip("/")) as handle:
+        for _, element in ET.iterparse(handle, events=("end",)):
+            if element.tag != _XL_NS + "row":
+                continue
+            row = {}
+            for cell in element:
+                value = cell.find(_XL_NS + "v")
+                if value is None:
+                    continue
+                column = _COL.match(cell.get("r")).group(0)
+                row[column] = (shared[int(value.text)] if cell.get("t") == "s"
+                               else value.text)
+            yield row
+            element.clear()
+
+
+def read_historical(data: bytes, sheet_name: str,
+                    iso3: str = "KOR") -> dict[str, dict[int, float]]:
+    """{열접두: {전망연도: 값}} 을 준다. 열접두는 'S2025' 처럼 회차를 가리킨다."""
+    import zipfile
+    from xml.etree import ElementTree as ET
+
+    zf = zipfile.ZipFile(io.BytesIO(data))
+    shared = [(t.text or "") for t in
+              ET.fromstring(zf.read("xl/sharedStrings.xml")).iter(_XL_NS + "t")]
+    rels = {r.get("Id"): r.get("Target") for r in
+            ET.fromstring(zf.read("xl/_rels/workbook.xml.rels"))}
+    sheets = {s.get("name"): rels[s.get(_REL_NS + "id")] for s in
+              ET.fromstring(zf.read("xl/workbook.xml")).iter(_XL_NS + "sheet")}
+    if sheet_name not in sheets:
+        raise ValueError(f"WEO 과거 전망 파일에 {sheet_name} 시트가 없다 "
+                         f"— 있는 것: {sorted(sheets)}")
+
+    rows = _sheet_rows(zf, sheets[sheet_name], shared)
+    header = next(rows)
+    column_of = {name: col for col, name in header.items()}
+    if "year" not in column_of or "ISOAlpha_3Code" not in column_of:
+        raise ValueError(f"{sheet_name} 시트의 머리글이 바뀌었다: {sorted(column_of)[:8]}")
+
+    out: dict[str, dict[int, float]] = {}
+    for row in rows:
+        if row.get(column_of["ISOAlpha_3Code"]) != iso3:
+            continue
+        year = int(row[column_of["year"]])
+        for name, col in column_of.items():
+            if not name.startswith(("S", "F")) or not name[1:5].isdigit():
+                continue
+            raw = row.get(col)
+            # 값이 없는 칸은 "." 로 온다
+            if raw is None or raw == ".":
+                continue
+            out.setdefault(name[:5], {})[year] = float(raw)
+    if not out:
+        raise ValueError(f"{sheet_name} 시트에서 {iso3} 행을 찾지 못했다")
+    return out
+
+
+def collect_vintage_historical(label: str, *, data: bytes | None = None
+                               ) -> list[ForecastRecord]:
+    """WEO 과거 전망 파일에서 회차 하나를 레코드로 옮긴다(백필 전용)."""
+    title, published_at = HISTORICAL_VINTAGES[label]
+    if data is None:
+        from curl_cffi import requests as cf_requests
+        resp = cf_requests.get(HISTORICAL_URL, impersonate="chrome", timeout=300)
+        resp.raise_for_status()
+        data = resp.content
+
+    url = report_url(title.split(", ")[-1], published_at)
+    collected_at = datetime.now(KST)
+    records: list[ForecastRecord] = []
+    for sheet_name, indicator in HISTORICAL_SHEETS.items():
+        series = read_historical(data, sheet_name).get(label)
+        if not series:
+            raise ValueError(f"{label} 회차가 {sheet_name} 시트에 없다")
+        meta = INDICATOR_META[indicator]
+        for year in (published_at.year, published_at.year + 1):
+            if year not in series:
+                continue
+            records.append(ForecastRecord(
+                id=make_id("IMF", published_at, indicator, year),
+                org="IMF", org_name_ko="IMF", report_title=title,
+                published_at=published_at, target_year=year, indicator=indicator,
+                value=round(series[year], meta["decimals"]), unit=meta["unit"],
+                source_url=url, landing_url=url, confidence="verified",
+                collected_at=collected_at,
+            ))
+    if not records:
+        raise ValueError(f"{label} 회차에서 레코드가 하나도 안 나왔다")
     return records

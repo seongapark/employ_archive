@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Callable
 
 from . import store
-from .collectors import bok, imf, kdi, keis, kiet, kli, oecd
+from .collectors import bok, imf, kdi, keis, kiet, kli, moef, oecd
 from .models import ForecastRecord
 
 KST = timezone(timedelta(hours=9))
@@ -20,6 +20,7 @@ COLLECTORS: dict[str, Callable[[date], list[ForecastRecord]]] = {
     "kli": kli.collect,
     "kiet": kiet.collect,
     "keis": keis.collect,
+    "moef": moef.collect,
 }
 
 

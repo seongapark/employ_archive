@@ -428,3 +428,40 @@ def test_per_issue_line_reports_picked_stored_and_rejected_counts(tmp_path):
                          select=lambda *a, **k: _pick())
     assert any("후보 1건" in line and "저장 1건" in line and "거절 0건" in line
                for line in rep.lines)
+
+
+def test_수치가_없는_회차는_묻지_않는다(tmp_path, monkeypatch):
+    """근거는 수치 레코드에 붙어야 화면에 뜬다. 없는 회차를 물으면 그 API
+    호출은 통째로 헛돈다 — MOEF 목록이 2013년까지 이어져 51건이 짝 없이
+    쌓인 적이 있다."""
+    import json
+    from datetime import date
+    from domains.forecast.pipeline import documents
+
+    (tmp_path / "rationales.json").write_text("[]", encoding="utf-8")
+    (tmp_path / "forecasts.json").write_text(json.dumps([{
+        "org": "MOEF", "published_at": "2026-07-14", "indicator": "emp_change",
+    }]), encoding="utf-8")
+
+    asked = []
+
+    def listing():
+        return [
+            documents.Listed("MOEF", "있는 회차", date(2026, 7, 14), ("emp_change",),
+                             lambda: ("u", ["본문"])),
+            documents.Listed("MOEF", "없는 회차", date(2015, 6, 25), ("emp_change",),
+                             lambda: ("u", ["본문"])),
+        ]
+
+    def select(org, title, indicators, pages):
+        asked.append(title)
+        return []
+
+    rep = rationales.run(tmp_path, sources={"moef": listing}, select=select)
+    assert asked == ["있는 회차"], "수치 없는 회차까지 물었다"
+    assert any("수치가 없다" in line for line in rep.lines)
+
+
+def test_forecasts_를_못_읽으면_거르지_않는다(tmp_path):
+    """이 파일을 못 읽는 것이 근거 수집을 막을 이유는 아니다."""
+    assert rationales.covered_rounds(tmp_path) is None

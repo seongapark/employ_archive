@@ -291,3 +291,24 @@ def test_call_api_pins_the_temperature_so_reruns_reproduce(monkeypatch):
     s._call_api("x")
 
     assert captured["temperature"] == 0
+
+
+def test_provider_는_openai_를_마지막에_쓴다(monkeypatch):
+    # 차례가 뒤집히면 이미 쌓인 근거(claude-sonnet-5 가 고른 문장)와
+    # 앞으로 쌓일 근거의 선별자가 회차마다 갈린다.
+    monkeypatch.setenv("ANTHROPIC_API_KEY", "a")
+    monkeypatch.setenv("OPENROUTER_API_KEY", "o")
+    monkeypatch.setenv("OPENAI_API_KEY", "p")
+    assert s.provider()[0] == s.ANTHROPIC_URL
+
+    monkeypatch.delenv("ANTHROPIC_API_KEY")
+    assert s.provider()[0] == s.OPENROUTER_URL
+
+    monkeypatch.delenv("OPENROUTER_API_KEY")
+    url, model, headers = s.provider()
+    assert url == s.OPENAI_URL
+    assert model == s.MODEL_OPENAI
+    assert headers["Authorization"] == "Bearer p"
+
+    monkeypatch.delenv("OPENAI_API_KEY")
+    assert s.provider() is None

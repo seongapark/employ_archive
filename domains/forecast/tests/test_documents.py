@@ -3,8 +3,10 @@ from datetime import date
 from domains.forecast.pipeline import documents as d
 
 
-def test_sources_covers_the_six_text_bearing_orgs():
-    assert set(d.SOURCES) == {"bok", "kdi", "kli", "kiet", "keis", "oecd_interim"}
+def test_sources_covers_the_text_bearing_orgs():
+    # MOEF 는 2026-09-10 에 붙였다 — 수집기가 생기면서 근거 대상이 됐다.
+    assert set(d.SOURCES) == {"bok", "kdi", "kli", "kiet", "keis", "oecd_interim",
+                              "moef"}
 
 
 def test_imf_and_oecd_are_absent_because_they_have_no_document_text():
@@ -200,3 +202,20 @@ def test_kdi_chapter_search_uses_the_unbroken_text_so_the_february_header_unfold
 
     assert seen["pages"] == [unfolded]   # 장 선택은 펴진 원문으로
     assert pages == [broken]             # LLM 에는 문단 나눔이 든 원문으로
+
+
+def test_bok_만_쪽을_좁힌다():
+    # 좁힘은 조용한 미수확을 부른다 — 꼭 좁혀야 하는 곳에만 준다.
+    # BOK 은 큰 회차가 프롬프트 276k 토큰이라 분당 한도(200k)에 안 들어간다.
+    assert d.BOK_MAX_PAGES == 40
+
+
+def test_쪽_제한이_없으면_전문을_그대로_준다(monkeypatch):
+    from domains.forecast.pipeline import pdf, http
+    monkeypatch.setattr(http, "get", lambda url, **kw: type("R", (), {"text": "", "content": b""})())
+    monkeypatch.setattr(pdf, "page_texts_with_breaks", lambda data: [f"{i}쪽" for i in range(60)])
+    full = d._via_detail("u", lambda html: "pdf")()
+    capped = d._via_detail("u", lambda html: "pdf", max_pages=40)()
+    assert len(full[1]) == 60
+    assert len(capped[1]) == 40
+    assert capped[1][-1] == "39쪽"
