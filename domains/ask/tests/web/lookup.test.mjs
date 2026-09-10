@@ -88,3 +88,57 @@ test('글로 찾는 도메인은 주제를 몰라도 찾아본다', () => {
 test('질문이 비면 아무 도메인도 부르지 않는다', () => {
   assert.equal(도메인적용('   ').every((x) => x.적용 === false), true);
 });
+
+
+// ── 워커 배선: /api/ask 가 lookup 을 태운다 ────────────────────────────────
+
+import { handleLookup } from '../../worker/src/api/routes.mjs';
+
+const 빈DB = { all: async () => [] };
+const memKv = (seed = {}) => {
+  const m = new Map(Object.entries(seed));
+  return {
+    get: async (k) => m.get(k) ?? null,
+    put: async (k, v) => {
+      // 실물 Workers KV 는 문자열만 받는다. 가짜가 관대하면 거짓 안심을 준다.
+      if (typeof v !== 'string') throw new TypeError('KV 는 문자열만 받는다');
+      m.set(k, v);
+    },
+  };
+};
+
+test('질문을 넣으면 도메인별 묶음이 돌아온다', async () => {
+  const r = await handleLookup({ db: 빈DB, kv: memKv(), quota: 30 },
+                               { 질문: '청년 고용률', ip: '1.1.1.1', today: '2026-09-10' });
+  assert.equal(r.질문, '청년 고용률');
+  assert.ok(Array.isArray(r.묶음));
+  assert.equal(r.답변, undefined, '이 기능은 문장을 만들지 않는다');
+});
+
+test('LLM 을 주입해도 부르지 않는다', async () => {
+  // 이 경로에는 LLM 이 없다. 있으면 언젠가 슬그머니 쓰게 된다.
+  const llm = { classify: () => { throw new Error('불렀다'); },
+                compose: () => { throw new Error('불렀다'); } };
+  const r = await handleLookup({ db: 빈DB, kv: memKv(), quota: 30, llm },
+                               { 질문: '청년 고용률', ip: '1.1.1.1', today: '2026-09-10' });
+  assert.ok(r.묶음);
+});
+
+test('한도를 넘으면 배지를 달되 찾기는 한다', async () => {
+  // 할당량은 LLM 비용을 막으려고 둔 장치다. 찾기만 하는 지금은 카드를 그대로 낸다 —
+  // "초과하면 LLM 만 건너뛰고 카드는 낸다" 는 이 설계의 원칙과 같다.
+  const kv = memKv({ 'q:1.1.1.1:2026-09-10': '30' });
+  const r = await handleLookup({ db: 빈DB, kv, quota: 30 },
+                               { 질문: '청년 고용률', ip: '1.1.1.1', today: '2026-09-10' });
+  assert.ok(r.배지.includes('한도초과'), JSON.stringify(r.배지));
+  assert.ok(r.묶음.length);
+});
+
+test('이용량을 셀 수 없으면 한도초과와 다른 배지를 단다', async () => {
+  // 오늘 몫을 다 쓴 것(내일 다시)과 우리 저장소가 죽은 것(잠시 뒤 다시)은 다른 사실이다.
+  const 죽은Kv = { get: async () => { throw new Error('KV 죽음'); }, put: async () => {} };
+  const r = await handleLookup({ db: 빈DB, kv: 죽은Kv, quota: 30 },
+                               { 질문: '청년 고용률', ip: '1.1.1.1', today: '2026-09-10' });
+  assert.ok(r.배지.includes('할당량확인불가'), JSON.stringify(r.배지));
+  assert.equal(r.배지.includes('한도초과'), false);
+});
