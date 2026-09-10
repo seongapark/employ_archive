@@ -1,4 +1,5 @@
 {
+  "id": "/employ_archive/hub",
   "name": "고용데이터 아카이브",
   "short_name": "고용아카이브",
   "start_url": "./",

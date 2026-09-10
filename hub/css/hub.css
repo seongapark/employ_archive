@@ -66,3 +66,17 @@
 .domain--pending {
   opacity: 0.5;
 }
+
+/* 설치 버튼. 설치할 수 있을 때만 보인다(hub.js 가 hidden 을 푼다). */
+.header__install {
+  margin-left: auto;
+  padding: 5px 12px;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--accent);
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+.header__install:hover { background: var(--accent-light); }

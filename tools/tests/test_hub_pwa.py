@@ -72,3 +72,29 @@ def test_the_worker_never_deletes_another_apps_cache():
 def test_the_worker_leaves_domain_apps_alone():
     # 스코프가 사이트 전체라, 남의 파일까지 캐시하면 옛 사고가 되풀이된다.
     assert "허브것" in sw_text()
+
+
+def test_the_hub_has_its_own_app_identity():
+    # 크롬은 앱을 신원(id, 없으면 start_url)으로 식별한다. 개편 전 루트 앱이
+    # 같은 start_url(/employ_archive/)로 설치돼 있으면 허브를 '이미 설치된 앱'
+    # 으로 보고 설치 대신 바로가기만 내놓는다 — 폰에서 실제로 그랬다.
+    m = json.loads((HUB / "manifest.webmanifest").read_text(encoding="utf-8"))
+    assert m.get("id"), "id 가 없으면 옛 루트 앱과 신원이 겹친다"
+    assert m["id"] != m["start_url"]
+
+
+def test_the_install_button_listens_before_the_event_can_fire():
+    # 크롬은 beforeinstallprompt 를 페이지가 뜨자마자 한 번 주고 만다.
+    # 리스너를 다른 코드 뒤에 걸면 이미 지나간 뒤라 버튼이 영영 안 뜬다.
+    js = (HUB / "js" / "hub.js").read_text(encoding="utf-8")
+    assert "beforeinstallprompt" in js
+    listener = js.index("beforeinstallprompt")
+    첫동작 = js.index("render();")
+    assert listener < 첫동작, "설치 리스너가 화면 그리기보다 뒤에 걸려 있다"
+
+
+def test_the_install_button_is_hidden_until_it_can_do_something():
+    # 없는 기능을 그리지 않는다 — 이미 설치했거나 조건이 안 되면 크롬이 이벤트를
+    # 안 주고, 그때 버튼이 보이면 눌러도 아무 일이 없다.
+    html = (HUB / "index.html").read_text(encoding="utf-8")
+    assert re.search(r'id="install"[^>]*hidden', html), "설치 버튼이 기본으로 숨겨져 있지 않다"
