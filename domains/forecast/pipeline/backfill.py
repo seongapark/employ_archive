@@ -65,11 +65,35 @@ def oecd_interim_rounds() -> list[Round]:
 
 
 def imf_rounds() -> list[Round]:
-    """보관된 지난 회차. 현행 회차는 일상 수집기가 발표일과 함께 가져온다."""
-    return [
+    """보관된 지난 회차. 현행 회차는 일상 수집기가 발표일과 함께 가져온다.
+
+    두 경로를 함께 낸다:
+      - SDMX 아카이브 vintage — 실업률까지 오지만 **회차가 하나뿐이다**
+        (다른 이름은 전부 404).
+      - WEO 과거 전망 엑셀 — 4·10월판이 다 오지만 **성장률·물가만** 있다.
+    한 회차를 둘 다에서 받으면 store.merge 가 id 로 거른다.
+    엑셀은 10MB 라 회차마다 다시 받지 않고 한 번만 받아 돌려 쓴다.
+    """
+    rounds = [
         Round(label, pub, lambda label=label: imf.collect_vintage(label))
         for label, (_, _, pub) in imf.VINTAGES.items()
     ]
+    cache: dict[str, bytes] = {}
+
+    def fetch(label: str) -> list[ForecastRecord]:
+        if "data" not in cache:
+            from curl_cffi import requests as cf_requests
+            resp = cf_requests.get(imf.HISTORICAL_URL, impersonate="chrome",
+                                   timeout=300)
+            resp.raise_for_status()
+            cache["data"] = resp.content
+        return imf.collect_vintage_historical(label, data=cache["data"])
+
+    rounds += [
+        Round(f"WEO {label}", pub, lambda label=label: fetch(label))
+        for label, (_, pub) in imf.HISTORICAL_VINTAGES.items()
+    ]
+    return rounds
 
 
 def kiet_rounds() -> list[Round]:
