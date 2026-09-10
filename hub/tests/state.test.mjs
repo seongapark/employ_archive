@@ -6,9 +6,10 @@ test('DOMAINS는 주요 도메인 넷을 고정 순서로 갖는다', () => {
   // 질의응답은 카드가 아니라 맨 위 검색창이다 — 넷의 자료에서 출처를 찾아 주는
   // 창구이지 나란한 다섯째 도메인이 아니다.
   // supply(인력수급)는 카드만 있고 도메인 폴더가 없어 늘 '준비중' 이었다.
-  // reports(연구보고서)는 맨 뒤다 — 수치가 아니라 문헌 축이라 성격이 다르다.
+  // 순서는 사용자가 정했다: 지금 수치 → 그 수치가 어떻게 보도됐나 → 앞으로의
+  // 전망 → 관련 연구. 알파벳순도 추가순도 아니라 고치기 쉬워서 여기서 못 박는다.
   assert.deepEqual(DOMAINS.map(d => d.slug),
-    ['forecast', 'employment', 'press', 'reports']);
+    ['employment', 'press', 'forecast', 'reports']);
 });
 
 test('질의응답은 카드 목록에 없다', () => {
@@ -82,9 +83,9 @@ test('요청 주소는 도메인마다 자기 last_run 이다', async () => {
   const 본것 = [];
   await 갱신상태((p) => { 본것.push(p); return Promise.resolve(null); });
   assert.deepEqual(본것, [
-    './forecast/data/last_run.json',
     './employment/data/last_run.json',
     './press/data/last_run.json',
+    './forecast/data/last_run.json',
     './reports/data/last_run.json',
   ]);
 });

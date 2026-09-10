@@ -8,10 +8,13 @@
 //
 // `supply`(인력수급)도 뺐다. 카드만 있고 도메인 폴더가 없어 늘 '준비중' 이었다 —
 // 중장기 인력수급전망은 `reports` 의 KEIS 인력수급전망으로 들어와 있다.
+//
+// **순서는 사용자가 정한다**(2026-09-10): 지금 수치 → 그 수치가 어떻게 보도됐나 →
+// 앞으로의 전망 → 관련 연구. 알파벳순도 추가순도 아니므로 손대지 말 것.
 export const DOMAINS = [
-  { slug: 'forecast', name: '고용전망', desc: '기관별 고용 전망치' },
   { slug: 'employment', name: '고용동향', desc: '경활·사업체·고용행정통계 비교' },
   { slug: 'press', name: '행통 모니터링', desc: '고용행정통계 기사 모니터링' },
+  { slug: 'forecast', name: '고용전망', desc: '기관별 고용 전망치' },
   { slug: 'reports', name: '연구보고서', desc: 'KLI·KEIS·KDI·KIET 고용 보고서 검색' },
 ];
 
