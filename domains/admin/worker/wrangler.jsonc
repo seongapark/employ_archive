@@ -1,0 +1,18 @@
+// domains/admin/worker/wrangler.jsonc
+//
+// ask 워커와 **따로 선다.** 통계 쪽 예외나 폭주가 질의응답을 같이 죽이면 안 되고,
+// D1 은 더더욱 갈라야 한다 — sync-catalog·sync-fts 워크플로가 ask 의 표를 주기적으로
+// 지우고 다시 채우기 때문에, 같은 DB 에 방문 기록을 두면 어느 날 통째로 사라진다.
+{
+  "name": "employ-archive-metrics",
+  "main": "./src/index.mjs",
+  "compatibility_date": "2026-09-11",
+  "d1_databases": [
+    { "binding": "DB", "database_name": "employ-archive-metrics", "database_id": "REPLACE-AFTER-D1-CREATE" }
+  ],
+  "vars": {
+    "ALLOWED_ORIGIN": "https://seongapark.github.io"
+  }
+  // METRICS_TOKEN 은 secret 이다 — `wrangler secret put METRICS_TOKEN`.
+  // 여기에 절대 적지 않는다.
+}

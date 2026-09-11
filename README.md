@@ -12,6 +12,9 @@
 - `hub/` — 4개 영역 런처. 도메인의 `data/last_run.json` 유무로 활성/준비중을 판정한다
 - `domains/<이름>/` — 도메인 수직 슬라이스. `app/`(화면) `data/`(데이터)
   `pipeline/`(수집기) `tests/`
+- `domains/admin/` — 방문 통계 대시보드. 관리자 전용이라 허브 카드에는 뜨지
+  않고 `/employ_archive/admin/` 으로 직접 들어간다. 배포 절차는
+  `domains/admin/DEPLOY.md`
 - `tools/build.py` — 사이트 조립. 배포와 로컬 서버가 이 함수를 공유한다
 - `.github/workflows/` — 도메인별 수집 + Pages 배포
 
