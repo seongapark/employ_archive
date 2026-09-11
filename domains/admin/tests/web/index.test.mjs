@@ -119,3 +119,37 @@ test('D1 이 죽어도 204 가 나가고 예외가 새어 나오지 않는다', 
   const res = await 응답;
   assert.equal(res.status, 204);
 });
+
+const 통계요청 = (token, qs = '?days=30') =>
+  new Request(`https://m.workers.dev/api/stats${qs}`, {
+    headers: token ? { origin: ORIGIN, authorization: `Bearer ${token}` } : { origin: ORIGIN },
+  });
+
+test('토큰이 없거나 틀리면 401 이고 숫자가 한 톨도 안 나간다', async () => {
+  for (const t of [null, '', 'wrong', 'secret ', 'SECRET']) {
+    const { env } = 환경();
+    const res = await worker.fetch(통계요청(t), env);
+    assert.equal(res.status, 401, String(t));
+    assert.deepEqual(await res.json(), { 오류: '인증' });
+  }
+});
+
+test('맞는 토큰이면 집계를 낸다', async () => {
+  const { env } = 환경();
+  await worker.fetch(비콘(몸통), env);
+  const res = await worker.fetch(통계요청('secret'), env);
+  assert.equal(res.status, 200);
+  const s = await res.json();
+  assert.equal(s.요약.조회, 1);
+  assert.equal(s.도메인[0].도메인, 'employment');
+});
+
+// days 를 그대로 믿으면 음수·NaN 이 창 계산을 뒤집는다.
+test('days 를 허용 목록으로 접는다', async () => {
+  const { env } = 환경();
+  for (const [qs, 일수] of [['?days=7', 7], ['?days=0', 0], ['', 30],
+    ['?days=-5', 30], ['?days=abc', 30], ['?days=9999', 30]]) {
+    const res = await worker.fetch(통계요청('secret', qs), env);
+    assert.equal((await res.json()).기간.일수, 일수, qs);
+  }
+});
