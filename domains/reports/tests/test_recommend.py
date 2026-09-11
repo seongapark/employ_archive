@@ -63,6 +63,53 @@ def test_a_pick_without_a_reason_is_an_error():
         recommend.parse_response(body, 1, PROFILE.axes)
 
 
+def test_axis_matching_ignores_whitespace_but_stores_the_canonical_name():
+    # 모델이 '청년 고용' 을 '청년고용' 으로 쓰는 정도의 한 글자 차이로
+    # 묶음 20건 전체를 잃으면 안 된다. 공백만 눌러 대조하고, 저장은
+    # 프로파일의 정식 이름('청년 고용', 공백 있음)으로 한다.
+    body = json.dumps([{'n': 1, 'pick': True, 'axis': '청년고용', 'why': 'ㄱ'}],
+                      ensure_ascii=False)
+    got = recommend.parse_response(body, 1, PROFILE.axes)
+    assert got[0].axis == '청년 고용'
+
+
+def test_a_non_picked_row_with_an_unknown_axis_is_not_an_error():
+    # 안 고른 항목의 axis 는 버리는 값이라 검증하지 않는다(의도).
+    body = json.dumps([{'n': 1, 'pick': False, 'axis': '없는축', 'why': 'ㄱ'}],
+                      ensure_ascii=False)
+    got = recommend.parse_response(body, 1, PROFILE.axes)
+    assert got[0].pick is False and got[0].axis == ''
+
+
+def test_a_non_array_response_is_an_error():
+    body = json.dumps({'n': 1, 'pick': True, 'axis': '청년 고용', 'why': 'ㄱ'},
+                      ensure_ascii=False)
+    with pytest.raises(ValueError, match='배열'):
+        recommend.parse_response(body, 1, PROFILE.axes)
+
+
+def test_a_non_object_row_is_an_error():
+    body = json.dumps(['이건 객체가 아니다'], ensure_ascii=False)
+    with pytest.raises(ValueError, match='객체'):
+        recommend.parse_response(body, 1, PROFILE.axes)
+
+
+def test_an_out_of_range_n_is_an_error():
+    body = json.dumps([{'n': 5, 'pick': True, 'axis': '청년 고용', 'why': 'ㄱ'}],
+                      ensure_ascii=False)
+    with pytest.raises(ValueError, match='범위'):
+        recommend.parse_response(body, 1, PROFILE.axes)
+
+
+def test_a_duplicate_n_is_an_error():
+    body = json.dumps([
+        {'n': 1, 'pick': True, 'axis': '청년 고용', 'why': 'ㄱ'},
+        {'n': 1, 'pick': False, 'axis': '', 'why': 'ㄴ'},
+    ], ensure_ascii=False)
+    with pytest.raises(ValueError, match='중복'):
+        recommend.parse_response(body, 2, PROFILE.axes)
+
+
 def test_judge_splits_into_batches_and_renumbers_globally():
     # 25건이면 20 + 5 두 묶음이다. 묶음마다 n 은 1부터 다시 세지만,
     # 돌려줄 때는 전체 기준 번호여야 호출자가 id 에 되맞출 수 있다.

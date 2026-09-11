@@ -38,6 +38,18 @@ _FENCE = re.compile(r'```(?:json)?\s*(.*?)\s*```', re.S)
 _WS = re.compile(r'\s+')
 
 
+def _axis_key(s: str) -> str:
+    """공백을 지운 대조용 키.
+
+    '청년 고용' 을 '청년고용' 으로, 'AI·기술변화의 직종별 고용영향' 의
+    가운뎃점을 빠뜨리는 정도의 한 글자 차이로 묶음 20건 전체가 ValueError 로
+    죽으면 안 된다. 공백만 눌러 대조하고, 실제 저장은 프로파일의 정식
+    이름으로 한다 — 진짜 모르는 축(오타가 아니라 존재하지 않는 이름)은
+    여전히 걸린다.
+    """
+    return re.sub(r'\s+', '', s or '')
+
+
 class Verdict(NamedTuple):
     n: int          # 묶음 안의 번호 (1부터). 호출자가 순서로 id 에 되맞춘다
     pick: bool
@@ -69,6 +81,7 @@ def build_prompt(profile: Profile, rows: Sequence[dict]) -> str:
 - 정기 통계 공표·동향 요약처럼 **읽을 새 내용이 없으면** 고르지 않는다.
 - 초록이 없어 제목만 있는 것은 제목이 분명히 관심축에 닿을 때만 고른다.
 - 애매하면 고르지 않는 쪽으로 판정하라. 다만 그 이유를 적어라.
+- 여러 축에 걸치면 **가장 강하게 닿는 하나**만 고른다.
 
 축 이름은 아래 중 하나를 **그대로** 쓴다. 고르지 않으면 빈 문자열로 둔다:
 {axes}
@@ -96,7 +109,7 @@ def parse_response(body: str, n_expected: int, axes: Sequence[str]) -> list[Verd
     if not isinstance(rows, list):
         raise ValueError(f'배열이 아니다: {body[:200]}')
 
-    known = set(axes)
+    by_key = {_axis_key(a): a for a in axes}
     out, seen = [], set()
     for row in rows:
         if not isinstance(row, dict):
@@ -115,11 +128,20 @@ def parse_response(body: str, n_expected: int, axes: Sequence[str]) -> list[Verd
         pick = bool(row['pick'])
         axis = str(row.get('axis', '')).strip()
         why = str(row.get('why', '')).strip()
-        if pick and axis not in known:
-            raise ValueError(f'모르는 축이다({axis!r}): {row!r}')
+        if pick:
+            canonical = by_key.get(_axis_key(axis))
+            if canonical is None:
+                raise ValueError(f'모르는 축이다({axis!r}): {row!r}')
+            axis = canonical
+        else:
+            # 안 고른 항목의 axis 는 버리는 값이라 검증하지 않는다(의도).
+            # 모델이 '없는축' 같은 값을 넣어도 무해하다 — 어차피 빈 문자열로
+            # 치환된다. 여기서 검증하면 정작 고르지 않은 항목의 사소한 이탈
+            # 때문에 묶음 20건 전체가 죽는다.
+            axis = ''
         if not why:
             raise ValueError(f'이유가 비었다: {row!r}')
-        out.append(Verdict(n, pick, axis if pick else '', why))
+        out.append(Verdict(n, pick, axis, why))
     missing = sorted(set(range(1, n_expected + 1)) - seen)
     if missing:
         # 빠진 보고서를 조용히 '고르지 않음' 으로 두면 누락이 안 보인다.
