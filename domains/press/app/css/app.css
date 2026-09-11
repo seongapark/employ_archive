@@ -273,16 +273,14 @@
   color: var(--text-muted);
 }
 
-.pie__body {
-  display: flex;
-  align-items: center;
-  gap: 14px;
+.pie__svg {
+  display: block;
+  margin: 0 auto;
+  overflow: visible;
 }
 
-.pie__svg { flex: 0 0 auto; display: block; }
-
 .pie__empty {
-  flex: 0 0 auto;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -292,39 +290,35 @@
   color: var(--text-muted);
 }
 
-.pie__legend {
-  flex: 1 1 auto;
-  min-width: 0;
-  display: grid;
-  grid-template-columns: auto 1fr auto auto;
-  align-items: center;
-  gap: 2px 6px;
-  font-size: 11px;
+/* 레이블은 조각 위에 얹는다. 조각 색이 밝은 것도 어두운 것도 있어서 글자를
+   한 색으로 못 두므로, 어두운 글자에 흰 테두리를 둘러 양쪽에서 다 읽히게 한다
+   (paint-order 를 안 주면 테두리가 글자를 덮는다 — 그래프 라벨과 같은 수법).
+   font-size 는 viewBox(100) 단위라 150px 로 그리면 화면에서 약 10px 이 된다. */
+.pie__lab {
+  font-family: inherit;
+  font-size: 6.6px;
+  font-weight: 700;
+  fill: var(--text);
+  stroke: var(--card);
+  stroke-width: 2.2px;
+  paint-order: stroke fill;
 }
 
-.pie__item {
-  display: contents;                 /* 네 칸이 표처럼 세로로 맞는다 */
+.pie__lab--n {
+  font-size: 5.8px;
+  font-weight: 500;
+  fill: var(--text-secondary);
 }
 
-.pie__dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  border: 1px solid;
+/* 조각이 좁아 레이블을 못 단 것과 0건 항목. 조각이 없다고 지우면
+   「구직급여 보도 0건」이 화면에서 사라진다 — 그게 이 도메인이 잡아야 할 것이다. */
+.pie__tail {
+  margin-top: 5px;
+  font-size: 10px;
+  line-height: 1.5;
+  color: var(--text-muted);
+  text-align: center;
 }
-
-.pie__name {
-  color: var(--text-secondary);
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-
-.pie__n { font-weight: 700; color: var(--text); text-align: right; }
-.pie__pct { color: var(--text-muted); text-align: right; min-width: 30px; }
-
-.pie__item--zero .pie__name,
-.pie__item--zero .pie__n { color: var(--text-muted); font-weight: 400; }
 
 /* 헤드라인 한 줄 — 제목이 길면 제목만 줄이고 언론사는 끝까지 남긴다.
    줄바꿈을 허용하면 묶음의 크기가 제목 길이에 따라 달라 보인다. */

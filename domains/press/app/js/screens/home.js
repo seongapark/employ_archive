@@ -17,7 +17,7 @@ function kpis(round) {
   const st = round.stance || { label: '판정 없음', judged: 0 };
   const cells = [
     { n: r.kept, label: '수집', sub: `검색 ${r.collected}건 중`, info: true },
-    { n: r.cited, label: `인용 · ${citeRate(round)}%`, sub: `딴 얘기 ${r.kept - r.cited}건` },
+    { n: r.cited, label: '인용', sub: `해당 보도자료 직접인용 ${citeRate(round)}%` },
     // 내역(부정12·긍정31)은 바로 아래 막대와 범례가 말한다 — 여기서 또 쓰면
     // 같은 숫자가 두 줄 연달아 나온다.
     { n: st.label, label: '언론 논조',

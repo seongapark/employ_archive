@@ -87,54 +87,78 @@ function arcPath(cx, cy, r, a0, a1) {
     + `A ${r} ${r} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)} Z`;
 }
 
-/** 한 축을 파이 하나로. 0건 항목은 조각이 없지만 **범례에는 남긴다** —
- *  「구직급여 보도 0건」은 이 도메인이 잡아야 할 사실이라 지우면 안 된다.
+/** 한 축을 파이 하나로. **큰 조각부터 시계방향**으로 놓고 레이블을 조각 위에 얹는다.
  *
- *  조각은 축의 합계를 100%로 놓는다. 그 합계는 인용 기사 수가 아니다 —
- *  한 기사가 여러 칸에 들어가기 때문이다(제조업은 반도체·조선을 품는다).
- *  그래서 축 이름 옆에 「중복 포함」을 붙인다.
+ *  크기 순으로 놓는 것과 색을 항목에 묶는 것은 서로 다른 일이다 — 그리는 순서만
+ *  바뀌고 색은 항목을 따라간다(`PIE_COLORS[원래 자리]`). 색이 순위를 따라가면
+ *  회차를 오갈 때 같은 산업이 매달 다른 색이 되어 비교할 수 없다.
+ *
+ *  조각이 좁으면 글자가 안 들어간다. 9% 아래는 레이블을 얹지 않고 아래 한 줄로
+ *  이름을 부른다. **0건 항목도 그 줄에 남긴다** — 조각이 없다고 지우면
+ *  「구직급여 보도 0건」이 화면에서 사라지는데, 그게 이 도메인이 잡아야 할 것이다.
+ *
+ *  조각 합은 인용 기사 수가 아니다. 한 기사가 여러 칸에 들어가기 때문이다
+ *  (제조업이 반도체·조선을 품는다). 그래서 축 이름 옆에 「중복 포함」을 붙인다.
  */
 export function pieChart(title, rows, opts = {}) {
-  const { note = '중복 포함', size = 96 } = opts;
+  const { note = '중복 포함', size = 150, minLabel = 9 } = opts;
   const total = rows.reduce((n, r) => n + r.n, 0);
-  const drawn = rows.filter((r) => r.n > 0);
 
-  let a = -Math.PI / 2;
-  const slices = rows.map((r, i) => {
-    if (!r.n || !total) return '';
-    const color = PIE_COLORS[i % PIE_COLORS.length];
-    const tip = `<title>${esc(r.name)} ${r.n}건</title>`;
-    if (drawn.length === 1) {                 // 100% 는 호가 아니라 원 하나다
-      return `<circle cx="50" cy="50" r="46" fill="${color}">${tip}</circle>`;
-    }
+  const cx = 50;
+  const cy = 50;
+  const r = 47;
+  // 원래 자리를 들고 큰 것부터 — 색은 자리를 따라가고 순서만 크기를 따라간다.
+  const drawn = rows.map((x, i) => ({ ...x, i })).filter((x) => x.n > 0)
+    .sort((a, b) => b.n - a.n || a.i - b.i);
+
+  let a = -Math.PI / 2;                        // 12시에서 시작해 시계방향으로 돈다
+  const slices = [];
+  const labels = [];
+  for (const d of drawn) {
+    const color = PIE_COLORS[d.i % PIE_COLORS.length];
+    const pct = Math.round((d.n / total) * 100);
+    const tip = `<title>${esc(d.name)} ${d.n}건 ${pct}%</title>`;
     const a0 = a;
-    a += (r.n / total) * Math.PI * 2;
-    return `<path d="${arcPath(50, 50, 46, a0, a)}" fill="${color}"
-      stroke="var(--card)" stroke-width="1.6">${tip}</path>`;
-  }).join('');
+    a += (d.n / total) * Math.PI * 2;
+    if (drawn.length === 1) {                 // 100% 는 호가 아니라 원 하나다
+      slices.push(`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${color}">${tip}</circle>`);
+    } else {
+      slices.push(`<path d="${arcPath(cx, cy, r, a0, a)}" fill="${color}"
+        stroke="var(--card)" stroke-width="1.4">${tip}</path>`);
+    }
+    if (pct < minLabel) {
+      labels.push(null);
+      continue;
+    }
+    // 조각 한가운데. 원 하나뿐이면 가운데에 얹는다.
+    const mid = (a0 + a) / 2;
+    const away = drawn.length === 1 ? 0 : r * 0.58;
+    const lx = cx + Math.cos(mid) * away;
+    const ly = cy + Math.sin(mid) * away;
+    labels.push(`<text x="${lx.toFixed(1)}" y="${(ly - 1.5).toFixed(1)}"
+        text-anchor="middle" class="pie__lab">${esc(d.name)}</text>
+      <text x="${lx.toFixed(1)}" y="${(ly + 7).toFixed(1)}"
+        text-anchor="middle" class="pie__lab pie__lab--n">${d.n} · ${pct}%</text>`);
+  }
 
-  const legend = rows.map((r, i) => {
-    const color = PIE_COLORS[i % PIE_COLORS.length];
-    const swatch = r.n
-      ? `background:${color};border-color:${color};`
-      : `background:transparent;border-color:var(--border);`;
-    return `<div class="pie__item${r.n ? '' : ' pie__item--zero'}">
-      <i class="pie__dot" style="${swatch}"></i>
-      <span class="pie__name">${esc(r.name)}</span>
-      <span class="pie__n num">${r.n}</span>
-      <span class="pie__pct num">${total ? Math.round((r.n / total) * 100) : 0}%</span>
-    </div>`;
-  }).join('');
+  // 레이블을 못 단 조각과 0건 항목은 이름만 한 줄로 부른다.
+  const tiny = drawn.filter((d, k) => labels[k] === null).map((d) => `${d.name} ${d.n}`);
+  const zero = rows.filter((x) => !x.n).map((x) => x.name);
+  const tail = [
+    tiny.length ? `작은 조각 ${tiny.join(' · ')}` : '',
+    zero.length ? `보도 0건 ${zero.join(' · ')}` : '',
+  ].filter(Boolean).join('  ·  ');
 
-  const disc = total
+  const body = total
     ? `<svg class="pie__svg" viewBox="0 0 100 100" width="${size}" height="${size}"
-         role="img" aria-label="${esc(title)} 구성">${slices}</svg>`
+         role="img" aria-label="${esc(title)} 구성">${slices.join('')}${labels.join('')}</svg>`
     : `<div class="pie__empty" style="width:${size}px;height:${size}px;">0건</div>`;
 
   return `<div class="pie">
     <div class="sec-title">${esc(title)}
       <span class="pie__note">${esc(note)}</span></div>
-    <div class="pie__body">${disc}<div class="pie__legend">${legend}</div></div>
+    ${body}
+    ${tail ? `<div class="pie__tail">${esc(tail)}</div>` : ''}
   </div>`;
 }
 
