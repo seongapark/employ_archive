@@ -116,3 +116,27 @@ def test_last_run_records_each_board(tmp_path, monkeypatch):
     last = json.loads((tmp_path / 'last_run.json').read_text(encoding='utf-8'))
     assert last['boards']['kli-research']['parsed'] == 12
     assert last['at']
+
+
+def test_a_partial_run_does_not_erase_other_boards_last_run(tmp_path, monkeypatch):
+    # --board/--org 로 게시판 하나만 돌려도 results 에는 그 게시판만 담긴다.
+    # write_last_run 이 예전처럼 통째로 덮어쓰면 나머지 게시판의 최근 기록이
+    # 사라지고, check_run.py 는 그 게시판들이 돌았는지 아예 알 수 없게 된다.
+    monkeypatch.setattr(collect, 'DATA', tmp_path)
+    collect.write_last_run(
+        {'kli-research': {'ok': True, 'parsed': 12, 'added': 3},
+         'keis-issue': {'ok': True, 'parsed': 5, 'added': 1}}, [])
+    collect.write_last_run({'kli-research': {'ok': True, 'parsed': 1, 'added': 0}}, [])
+    last = json.loads((tmp_path / 'last_run.json').read_text(encoding='utf-8'))
+    assert last['boards']['kli-research']['parsed'] == 1, '이번 회차 결과로 갱신돼야 한다'
+    assert last['boards']['keis-issue']['parsed'] == 5, '이번 회차에 안 돈 게시판 기록이 지워졌다'
+
+
+def test_last_run_drops_boards_no_longer_registered(tmp_path, monkeypatch):
+    # boards.json 에서 지워진 게시판의 낡은 키는 계속 남아 있으면 안 된다.
+    monkeypatch.setattr(collect, 'DATA', tmp_path)
+    collect.write_last_run({'no-longer-a-board': {'ok': True, 'parsed': 1, 'added': 0}}, [])
+    collect.write_last_run({'kli-research': {'ok': True, 'parsed': 2, 'added': 0}}, [])
+    last = json.loads((tmp_path / 'last_run.json').read_text(encoding='utf-8'))
+    assert 'no-longer-a-board' not in last['boards']
+    assert last['boards']['kli-research']['parsed'] == 2
