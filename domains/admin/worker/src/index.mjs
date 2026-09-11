@@ -31,7 +31,9 @@ async function 수집(request, env) {
     ua, country: request.cf?.country ?? null, nowMs: Date.now() });
   if (!row) return 조용히(env);
 
-  try { await 기록(d1(env.DB), row); } catch { /* 통계가 죽어도 조용하다 */ }
+  // 통계가 죽어도 방문자에게는 조용하다(응답은 그대로 204) — 하지만 우리에게까지
+  // 조용하면 "왜 0 이지"를 진단할 수단이 없다. wrangler tail 에 한 줄 남겨 둔다.
+  try { await 기록(d1(env.DB), row); } catch (e) { console.error('기록 실패', e); }
   return 조용히(env);
 }
 
