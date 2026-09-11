@@ -19,17 +19,28 @@ if hasattr(sys.stdout, 'reconfigure'):
 import json
 import os
 import re
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Callable, NamedTuple, Sequence
 
 import requests
 
 from .interests import Profile
 
+KST = timezone(timedelta(hours=9))
+DATA = Path(__file__).resolve().parent.parent / 'data'
+
 ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages'
 OPENROUTER_URL = 'https://openrouter.ai/api/v1/chat/completions'
+OPENAI_URL = 'https://api.openai.com/v1/chat/completions'
 MODEL_ANTHROPIC = 'claude-opus-5'
 MODEL_OPENROUTER = 'anthropic/claude-opus-5'
+MODEL_OPENAI = 'gpt-5.5'        # OPENAI_MODEL 로 바꿀 수 있다
 MAX_TOKENS = 4000
+# OpenAI 의 gpt-5 계열은 답 말고 **추론 토큰**을 따로 쓴다. 같은 4000 으로
+# 두면 20건짜리 묶음이 JSON 중간에서 잘린다(domains/press/pipeline/llm_cite.py
+# 실측과 같은 이유).
+MAX_TOKENS_OPENAI = 16000
 TIMEOUT = 180
 BATCH = 20                  # 한 번에 판정할 보고서 수
 ABSTRACT_CAP = 800          # 초록을 이보다 길게 보내지 않는다
@@ -39,15 +50,17 @@ _WS = re.compile(r'\s+')
 
 
 def _axis_key(s: str) -> str:
-    """공백을 지운 대조용 키.
+    """공백·가운뎃점을 지운 대조용 키.
 
-    '청년 고용' 을 '청년고용' 으로, 'AI·기술변화의 직종별 고용영향' 의
-    가운뎃점을 빠뜨리는 정도의 한 글자 차이로 묶음 20건 전체가 ValueError 로
-    죽으면 안 된다. 공백만 눌러 대조하고, 실제 저장은 프로파일의 정식
+    '청년 고용' 을 '청년고용' 으로, 'AI·기술변화의 직종별 고용영향' 을
+    모델이 'AI 기술변화의 직종별 고용영향' 처럼 가운뎃점을 공백으로 바꿔
+    쓰는 정도의 한 글자 차이로 묶음 20건 전체가 ValueError 로 죽으면 안
+    된다. 공백과 '·' 만 눌러 대조하고, 실제 저장은 프로파일의 정식
     이름으로 한다 — 진짜 모르는 축(오타가 아니라 존재하지 않는 이름)은
-    여전히 걸린다.
+    여전히 걸린다. 현재 축 여덟 개는 이 둘을 지워도 서로 충돌하지 않는다
+    (확인됨).
     """
-    return re.sub(r'\s+', '', s or '')
+    return re.sub(r'[\s·]+', '', s or '')
 
 
 class Verdict(NamedTuple):
@@ -150,7 +163,13 @@ def parse_response(body: str, n_expected: int, axes: Sequence[str]) -> list[Verd
 
 
 def provider() -> tuple[str, str, dict] | None:
-    """(url, model, headers) — 있는 키를 쓴다. 없으면 None."""
+    """(url, model, headers) — 있는 키를 쓴다. 없으면 None.
+
+    **순서가 곧 선호다.** 판정 품질은 `claude-opus-5` 기준으로 프롬프트를
+    설계했으므로 그 모델을 쓸 수 있으면 그걸 쓴다. OpenAI 는 마지막이다 —
+    같은 프롬프트로 돌지만 그 전제(축 이름 매칭, why 길이감)를 물려받지
+    않는다(domains/press/pipeline/llm_cite.py 의 선례와 같은 순서).
+    """
     key = os.environ.get('ANTHROPIC_API_KEY', '').strip()
     if key:
         return (ANTHROPIC_URL, MODEL_ANTHROPIC,
@@ -160,17 +179,36 @@ def provider() -> tuple[str, str, dict] | None:
     if key:
         return (OPENROUTER_URL, MODEL_OPENROUTER,
                 {'Authorization': f'Bearer {key}', 'content-type': 'application/json'})
+    key = os.environ.get('OPENAI_API_KEY', '').strip()
+    if key:
+        model = os.environ.get('OPENAI_MODEL', '').strip() or MODEL_OPENAI
+        return (OPENAI_URL, model,
+                {'Authorization': f'Bearer {key}', 'content-type': 'application/json'})
     return None
+
+
+def payload_for(url: str, model: str, prompt: str) -> dict:
+    """공급자마다 토큰 한도의 이름이 다르다.
+
+    OpenAI 의 gpt-5 계열은 `max_tokens` 를 **거부한다**(400: Unsupported
+    parameter). 이름만 다른 게 아니라 뜻도 다르다 — 추론 토큰까지 그
+    한도에서 쓰므로 한도를 넉넉히 잡아야 답이 안 잘린다.
+    """
+    msg = [{'role': 'user', 'content': prompt}]
+    if 'openai.com' in url:
+        return {'model': model, 'max_completion_tokens': MAX_TOKENS_OPENAI,
+                'messages': msg}
+    return {'model': model, 'max_tokens': MAX_TOKENS, 'messages': msg}
 
 
 def _call_api(prompt: str) -> str:
     got = provider()
     if got is None:
-        raise RuntimeError('ANTHROPIC_API_KEY 도 OPENROUTER_API_KEY 도 없다')
+        raise RuntimeError('ANTHROPIC_API_KEY · OPENROUTER_API_KEY · OPENAI_API_KEY '
+                           '중 아무것도 없다')
     url, model, headers = got
-    payload = {'model': model, 'max_tokens': MAX_TOKENS,
-               'messages': [{'role': 'user', 'content': prompt}]}
-    resp = requests.post(url, headers=headers, json=payload, timeout=TIMEOUT)
+    resp = requests.post(url, headers=headers, json=payload_for(url, model, prompt),
+                         timeout=TIMEOUT)
     if resp.status_code != 200:
         raise ValueError(f'API 가 {resp.status_code} 를 돌려줬다: {resp.text[:300]}')
     data = resp.json()
@@ -195,3 +233,223 @@ def judge(profile: Profile, rows: Sequence[dict], *,
                              len(chunk), profile.axes)
         out.extend(Verdict(v.n + start, v.pick, v.axis, v.why) for v in got)
     return out
+
+
+def load_cache(path: Path | str | None = None) -> dict:
+    p = Path(path or (DATA / 'recommendations.json'))
+    if not p.exists():
+        return {}
+    return json.loads(p.read_text(encoding='utf-8'))
+
+
+def pending(reports: Sequence[dict], cache: dict, profile: Profile) -> list[dict]:
+    """아직 안 물어본 것과, 프로파일이 바뀐 뒤로 안 물어본 것."""
+    todo = []
+    for r in reports:
+        got = cache.get(r['id'])
+        if got is None or got.get('profile_version') != profile.version:
+            todo.append(r)
+    return todo
+
+
+def merge(cache: dict, rows: Sequence[dict], verdicts: Sequence[Verdict],
+          profile: Profile) -> dict:
+    """판정을 캐시에 얹는다. 이번에 안 물어본 것은 그대로 둔다."""
+    now = datetime.now(KST).isoformat(timespec='seconds')
+    out = dict(cache)
+    for v in verdicts:
+        row = rows[v.n - 1]
+        out[row['id']] = {
+            'pick': v.pick, 'axis': v.axis, 'why': v.why,
+            # 초록이 없어 제목만으로 판정한 것을 표시한다. 나중에 원문에서
+            # 초록을 채우면 그 레코드만 다시 물어보면 된다.
+            'basis': 'abstract' if (row.get('abstract') or '').strip() else 'title',
+            'model': MODEL_ANTHROPIC,
+            'profile_version': profile.version,
+            'judged_at': now,
+        }
+    return out
+
+
+def judge_and_cache(profile: Profile, rows: Sequence[dict], cache: dict, *,
+                     call: Callable[[str], str] | None = None,
+                     cache_path: Path | str | None = None,
+                     log: Callable[[str], None] = print) -> dict:
+    """묶음마다 판정하고, 묶음이 끝날 때마다 그 자리에서 캐시 파일에 반영한다.
+
+    judge() 를 통째로 불러 다 끝난 뒤에야 파일을 쓰면, 113회 호출 중
+    한 번만 파싱에 실패해도 예외가 올라와 그때까지 판정한 것이 전부
+    날아간다. 2,200건을 돌릴 예정이고 비용이 들기 때문에 이 위험을 감수할
+    수 없다. 그래서 여기서는 BATCH 묶음 하나가 끝날 때마다 즉시
+    write_text 한다 — 다음 묶음에서 예외가 나도 앞선 묶음은 디스크에
+    남고, 다시 돌리면 pending() 이 그만큼을 걸러 다시 묻지 않는다.
+    """
+    call = call or _call_api
+    path = Path(cache_path or (DATA / 'recommendations.json'))
+    cache = dict(cache)
+    for start in range(0, len(rows), BATCH):
+        chunk = list(rows[start:start + BATCH])
+        log(f'  판정 {start + 1}~{start + len(chunk)} / {len(rows)}')
+        # judge() 를 쓰지 않는다 — judge() 는 전체를 다 돌고서야 돌려주므로
+        # 묶음마다 즉시 반영하려면 여기서 직접 한 묶음씩 부른다.
+        verdicts = parse_response(call(build_prompt(profile, chunk)),
+                                  len(chunk), profile.axes)
+        cache = merge(cache, chunk, verdicts, profile)
+        path.write_text(json.dumps(cache, ensure_ascii=False, indent=1) + '\n',
+                        encoding='utf-8')
+    return cache
+
+
+def main(argv=None, *, call=None) -> int:
+    import argparse
+
+    from . import interests as interests_mod
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--limit', type=int, default=0, help='이번에 판정할 최대 건수')
+    ap.add_argument('--dry-run', action='store_true')
+    args = ap.parse_args(argv)
+
+    profile = interests_mod.load()
+    reports = json.loads((DATA / 'reports.json').read_text(encoding='utf-8'))
+    abstracts = json.loads((DATA / 'abstracts.json').read_text(encoding='utf-8'))
+    rows = [{'id': r['id'], 'org': r['org'], 'series': r['series'], 'title': r['title'],
+             'abstract': (abstracts.get(r['id']) or {}).get('abstract', '')}
+            for r in reports]
+
+    cache = load_cache()
+    todo = pending(rows, cache, profile)
+    if args.limit:
+        todo = todo[:args.limit]
+    print(f'판정 대상 {len(todo)} / 전체 {len(rows)} (프로파일 {profile.version})')
+    # --dry-run 은 API 키 없이도 돌아야 한다 — provider()/_call_api 는
+    # 아래에서 실제로 판정할 것이 있을 때만 불린다.
+    if args.dry_run or not todo:
+        return 0
+
+    cache_path = DATA / 'recommendations.json'
+    cache = judge_and_cache(profile, todo, cache, call=call, cache_path=cache_path)
+    picked = sum(1 for v in cache.values() if v.get('pick'))
+    print(f'추천 {picked} / 판정 {len(cache)}')
+
+    last_path = DATA / 'last_run.json'
+    last = json.loads(last_path.read_text(encoding='utf-8')) if last_path.exists() else {}
+    last['recommend'] = {'judged': len(cache), 'picked': picked,
+                         'profile_version': profile.version,
+                         'title_only': sum(1 for v in cache.values()
+                                           if v.get('basis') == 'title')}
+    last_path.write_text(json.dumps(last, ensure_ascii=False, indent=2) + '\n',
+                         encoding='utf-8')
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
+
+
+def load_cache(path: Path | str | None = None) -> dict:
+    p = Path(path or (DATA / 'recommendations.json'))
+    if not p.exists():
+        return {}
+    return json.loads(p.read_text(encoding='utf-8'))
+
+
+def pending(reports: Sequence[dict], cache: dict, profile: Profile) -> list[dict]:
+    """아직 안 물어본 것과, 프로파일이 바뀐 뒤로 안 물어본 것."""
+    todo = []
+    for r in reports:
+        got = cache.get(r['id'])
+        if got is None or got.get('profile_version') != profile.version:
+            todo.append(r)
+    return todo
+
+
+def merge(cache: dict, rows: Sequence[dict], verdicts: Sequence[Verdict],
+          profile: Profile) -> dict:
+    """판정을 캐시에 얹는다. 이번에 안 물어본 것은 그대로 둔다."""
+    now = datetime.now(KST).isoformat(timespec='seconds')
+    out = dict(cache)
+    for v in verdicts:
+        row = rows[v.n - 1]
+        out[row['id']] = {
+            'pick': v.pick, 'axis': v.axis, 'why': v.why,
+            # 초록이 없어 제목만으로 판정한 것을 표시한다. 나중에 원문에서
+            # 초록을 채우면 그 레코드만 다시 물어보면 된다.
+            'basis': 'abstract' if (row.get('abstract') or '').strip() else 'title',
+            'model': MODEL_ANTHROPIC,
+            'profile_version': profile.version,
+            'judged_at': now,
+        }
+    return out
+
+
+def judge_and_cache(profile: Profile, todo: Sequence[dict], cache: dict, *,
+                     call: Callable[[str], str] | None = None,
+                     cache_path: Path | str | None = None,
+                     log: Callable[[str], None] = print) -> dict:
+    """묶음(BATCH)마다 판정하고, 묶음이 끝나는 즉시 캐시 파일에 반영한다.
+
+    judge() 를 통째로 불러 전부 끝난 뒤에 한 번만 쓰면, 113번 호출 중
+    한 번만 파싱에 실패해도 예외가 올라오면서 그때까지 판정한 것이 전부
+    날아간다. 2,200건을 돌릴 예정이고 비용이 걸려 있어(약 $8) 이 손실을
+    감당할 수 없다 — 그래서 묶음이 끝날 때마다 디스크에 쓴다.
+
+    한 묶음(BATCH=20 건)만 judge() 에 넘기므로 judge() 내부에서는 항상
+    한 번만 순회한다 — 여러 묶음에 걸친 재시도 단위를 여기서 우리가
+    직접 쥔다. 중간에 예외가 올라오면 그 예외는 그대로 호출자에게
+    전파하되(조용히 삼키지 않는다), 이미 성공한 앞선 묶음은 파일에 남아
+    있어 다음 실행에서 pending() 이 걸러 이어서 할 수 있다.
+    """
+    path = Path(cache_path or (DATA / 'recommendations.json'))
+    for start in range(0, len(todo), BATCH):
+        chunk = list(todo[start:start + BATCH])
+        verdicts = judge(profile, chunk, call=call, log=log)
+        cache = merge(cache, chunk, verdicts, profile)
+        path.write_text(json.dumps(cache, ensure_ascii=False, indent=1) + '\n',
+                        encoding='utf-8')
+    return cache
+
+
+def main(argv=None, *, call=None) -> int:
+    import argparse
+
+    from . import interests as interests_mod
+
+    ap = argparse.ArgumentParser()
+    ap.add_argument('--limit', type=int, default=0, help='이번에 판정할 최대 건수')
+    ap.add_argument('--dry-run', action='store_true')
+    args = ap.parse_args(argv)
+
+    profile = interests_mod.load()
+    reports = json.loads((DATA / 'reports.json').read_text(encoding='utf-8'))
+    abstracts = json.loads((DATA / 'abstracts.json').read_text(encoding='utf-8'))
+    rows = [{'id': r['id'], 'org': r['org'], 'series': r['series'], 'title': r['title'],
+             'abstract': (abstracts.get(r['id']) or {}).get('abstract', '')}
+            for r in reports]
+
+    # API 키 확인은 여기서 하지 않는다 — --dry-run 은 키 없이도 돌아야 한다.
+    cache = load_cache()
+    todo = pending(rows, cache, profile)
+    if args.limit:
+        todo = todo[:args.limit]
+    print(f'판정 대상 {len(todo)} / 전체 {len(rows)} (프로파일 {profile.version})')
+    if args.dry_run or not todo:
+        return 0
+
+    cache = judge_and_cache(profile, todo, cache, call=call)
+    picked = sum(1 for v in cache.values() if v.get('pick'))
+    print(f'추천 {picked} / 판정 {len(cache)}')
+
+    last_path = DATA / 'last_run.json'
+    last = json.loads(last_path.read_text(encoding='utf-8')) if last_path.exists() else {}
+    last['recommend'] = {'judged': len(cache), 'picked': picked,
+                         'profile_version': profile.version,
+                         'title_only': sum(1 for v in cache.values()
+                                           if v.get('basis') == 'title')}
+    last_path.write_text(json.dumps(last, ensure_ascii=False, indent=2) + '\n',
+                         encoding='utf-8')
+    return 0
+
+
+if __name__ == '__main__':
+    raise SystemExit(main())
