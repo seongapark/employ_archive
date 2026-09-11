@@ -11,11 +11,15 @@ export function detailModel(id, ctx) {
   const links = [];
   if (report.file_url) links.push({ label: '원문 PDF 열기', href: report.file_url });
   if (report.landing_url) links.push({ label: '기관 페이지 열기', href: report.landing_url });
+  const p = (ctx.picks || {})[report.id];
   return {
     report,
     abstract: (body && body.abstract) || '',
     toc: (body && body.toc) || [],
     links,
+    // 목록에서 이유를 보고 들어온 사람이 여기서 그걸 다시 못 보면 왜 여기
+    // 있는지 잊는다.
+    pick: p && p.pick ? { axis: p.axis, why: p.why } : null,
   };
 }
 
@@ -27,6 +31,11 @@ export function render(el, ctx) {
   }
   const r = model.report;
   const authors = (r.authors || []).join(', ');
+  const pickHtml = model.pick ? `
+    <div class="pick-note">
+      <span class="pick-note__axis">${esc(model.pick.axis)}</span>
+      <span class="pick-note__why">${esc(model.pick.why)}</span>
+    </div>` : '';
   el.innerHTML = `
     <button class="back" type="button" id="back">← 뒤로</button>
     <div class="detail">
@@ -36,6 +45,7 @@ export function render(el, ctx) {
         <span class="row__date">${esc(dateLabel(r.published, r.date_precision))}</span>
       </div>
       <h2 class="detail__title">${esc(r.title)}</h2>
+      ${pickHtml}
       <div class="detail__meta">
         ${authors ? `저자 ${esc(authors)}<br>` : ''}
         ${r.pages ? `${r.pages}쪽<br>` : ''}

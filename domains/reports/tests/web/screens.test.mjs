@@ -208,3 +208,19 @@ test('초록을 아직 안 받았으면 빈 문자열이지 오류가 아니다'
 test('없는 id 는 null 이다', () => {
   assert.equal(detailModel('없다', DETAIL_CTX), null);
 });
+
+test('추천된 보고서는 축과 이유를 들고 온다', () => {
+  const ctx = { ...DETAIL_CTX, picks: { 'kli-1': { pick: true, axis: '청년 고용', why: '경력 사다리 분해' } } };
+  const model = detailModel('kli-1', ctx);
+  assert.equal(model.pick.axis, '청년 고용');
+  assert.equal(model.pick.why, '경력 사다리 분해');
+});
+
+test('고르지 않은 보고서는 pick 이 없다', () => {
+  const ctx = { ...DETAIL_CTX, picks: { 'kli-1': { pick: false, axis: '', why: '무관' } } };
+  assert.equal(detailModel('kli-1', ctx).pick, null);
+});
+
+test('추천 파일이 없어도 상세가 죽지 않는다', () => {
+  assert.equal(detailModel('kli-1', DETAIL_CTX).pick, null);
+});
