@@ -17,6 +17,7 @@ import sys
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
+import gzip
 import json
 from pathlib import Path
 
@@ -129,6 +130,15 @@ def main(argv=None) -> int:
     last['reports'] = len(kept)
     last['abstract_missing'] = missing
     last['abstract_missing_why'] = missing_reasons(kept)
+
+    def _gz(name: str) -> int:
+        return len(gzip.compress((DATA / name).read_bytes()))
+
+    # 초록은 검색창을 누를 때 통째로 받는다. 3MB 를 넘으면 기관별로 쪼갠다 —
+    # 미리 쪼개면 검색 품질과 복잡도를 숫자가 나오기 전에 내주는 셈이다.
+    last['sizes'] = {'reports_gzip': _gz('reports.json'),
+                     'abstracts_gzip': _gz('abstracts.json')}
+
     last_path.write_text(json.dumps(last, ensure_ascii=False, indent=2) + '\n',
                          encoding='utf-8')
     print(f'built: {len(kept)} reports')

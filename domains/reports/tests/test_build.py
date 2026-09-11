@@ -1,3 +1,5 @@
+import json
+
 from domains.reports.pipeline import build
 from domains.reports.pipeline.boards import Board
 from domains.reports.pipeline.models import RawReport
@@ -167,3 +169,15 @@ def test_dedupe_titles_isolates_by_board():
     # a 게시판: a-1 (이른 날짜) 선택, a-2 제거
     # b 게시판: b-1 (이른 날짜) 선택, b-2 제거
     assert sorted(r.id for r in kept) == ['a-1', 'b-1']
+
+
+def test_the_gzipped_size_of_each_data_file_is_recorded(tmp_path, monkeypatch):
+    monkeypatch.setattr(build, 'DATA', tmp_path)
+    monkeypatch.setattr(build.store, 'load_all_raw',
+                        lambda: [raw('kli-20', KLI_BOARD, '제목', abstract='초록')])
+    monkeypatch.setattr(build.boards_mod, 'load_boards', lambda: [KLI_BOARD])
+    monkeypatch.setattr(build.kw_mod, 'load_keywords', lambda: KW)
+    build.main([])
+    last = json.loads((tmp_path / 'last_run.json').read_text(encoding='utf-8'))
+    assert last['sizes']['reports_gzip'] > 0
+    assert last['sizes']['abstracts_gzip'] > 0
