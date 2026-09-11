@@ -129,5 +129,5 @@
    "menu_no": "201757", "item_re": "nttId=(\\d+)", "body": "toc"},
   {"id": "bok-research", "org": "bok", "name": "조사연구자료", "series": "조사연구자료",
    "list_url": "https://www.bok.or.kr/portal/singl/newsData/list.do?menuNo=200560",
-   "menu_no": "200560", "item_re": "nttId=(\\d+)", "body": "none"}
+   "menu_no": "200560", "item_re": "nttId=(\\d+)", "body": "none", "dedupe_titles": true}
 ]

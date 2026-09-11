@@ -116,15 +116,29 @@ def test_why_an_abstract_is_missing_is_counted():
     assert why == {'텍스트가 없는 스캔본': 1, '아직 안 받음': 1}
 
 
-def test_the_same_study_posted_by_two_branches_is_kept_once():
+def test_dedupe_titles_enabled_removes_same_title_duplicates():
     # 조사연구자료에서 실제로 7쌍 나온다 — 강원본부와 강릉본부가 같은 연구를
     # 각각 올린다. nttId 가 달라 id 로는 안 잡힌다.
-    rows = [raw('bok-1', KDI_BOARD, '강원지역 주택가격이 실물경제에 미치는 영향 점검'),
-            raw('bok-2', KDI_BOARD, '강원지역 주택가격이 실물경제에 미치는 영향 점검')]
+    # dedupe_titles 가 켜진 게시판에서만 제거한다.
+    dedup_board = KDI_BOARD.model_copy(update={'id': 'bok-research', 'dedupe_titles': True})
+    rows = [raw('bok-1', dedup_board, '강원지역 주택가격이 실물경제에 미치는 영향 점검'),
+            raw('bok-2', dedup_board, '강원지역 주택가격이 실물경제에 미치는 영향 점검')]
     rows[0].published = '2023-07-18'
     rows[1].published = '2023-07-20'
-    kept, _, _ = build.build(rows, [KDI_BOARD], KW)
+    kept, _, _ = build.build(rows, [dedup_board], KW)
     assert [r.id for r in kept] == ['bok-1']      # 이른 날짜가 원발행
+
+
+def test_dedupe_titles_disabled_keeps_same_title_duplicates():
+    # KIET 월간 산업경제의 '실물경제 주요 지표'와 이슈페이퍼의 '새해 한국 경제에 바란다'
+    # 같은 고정 제목 칼럼은 회차마다 다른 글이므로 지우면 안 된다.
+    # dedupe_titles 가 꺼진(기본값) 게시판에서는 같은 제목이어도 보존한다.
+    rows = [raw('kli-1', KLI_BOARD, '월간 산업경제'),
+            raw('kli-2', KLI_BOARD, '월간 산업경제')]
+    rows[0].published = '2025-01-01'
+    rows[1].published = '2025-02-01'
+    kept, _, _ = build.build(rows, [KLI_BOARD], KW)
+    assert sorted(r.id for r in kept) == ['kli-1', 'kli-2']
 
 
 def test_the_same_title_on_different_boards_is_kept_twice():

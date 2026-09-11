@@ -52,6 +52,11 @@ class Board(BaseModel):
     # 목차이기도, "첨부파일 참조" 안내문이기도 하다. 실측표는 스펙 §3-3.
     # 이 값을 바꾸면 그 게시판만 재수집해야 한다(분류가 수집 시점에 일어난다).
     body: Literal['abstract', 'toc', 'none'] = 'abstract'
+    # 같은 연구를 두 지역본부가 각각 올리는 게시판이 있다(BOK 조사연구자료에서 7쌍).
+    # 글 번호가 달라 id 로는 안 잡힌다. 반대로 연속간행물에는 고정 제목 칼럼이 흔해서
+    # (KIET 월간 산업경제의 '실물경제 주요 지표', 이슈페이퍼의 '새해 한국 경제에 바란다')
+    # 전 게시판에 걸면 멀쩡한 회차가 사라진다. 그래서 게시판이 지정한 경우에만 없앤다.
+    dedupe_titles: bool = False
 
 
 def load_boards(path: Path | str | None = None) -> list[Board]:
