@@ -2,16 +2,18 @@
  {
   "n": 1,
   "cites": true,
-  "why": "제조업 15개월만 증가",
+  "why": "제조업 가입자 증가 전함",
   "tone": "긍정",
+  "focus": "주제",
   "title": "반도체 호황에 제조업 고용보험 가입자 15개월 만에 증가",
   "press": "labortoday.co.kr"
  },
  {
   "n": 2,
-  "cites": true,
-  "why": "제조업 증가·건설 부진",
+  "cites": false,
+  "why": "경제뉴스 모음 성격",
   "tone": "중립",
+  "focus": "",
   "title": "[굿모닝경제] 나쁜 임대인 '퇴짜' / 서울 아파트 거래 10건 중 9건 '비강...",
   "press": "mbn.co.kr"
  },
@@ -20,38 +22,43 @@
   "cites": false,
   "why": "소상공인 보험료 지원",
   "tone": "중립",
+  "focus": "",
   "title": "경상원, 1인 소상공인 고용보험료 최대 30% 지원",
   "press": "bizwnews.com"
  },
  {
   "n": 4,
   "cites": true,
-  "why": "청년가입자 감소 전함",
+  "why": "청년 가입자 감소 전함",
   "tone": "부정",
+  "focus": "언급",
   "title": "문제는 '양극화'…부동산·성과급·일자리 모두 '극과 극'",
   "press": "뉴스토마토"
  },
  {
   "n": 5,
   "cites": false,
-  "why": "청년 실업급여 해설",
+  "why": "청년고용 인터뷰",
   "tone": "부정",
+  "focus": "",
   "title": "[논설위원의 단도직입]“청년고용 부진 고착화…‘경력 사다리’ 끊기지...",
   "press": "경향신문"
  },
  {
   "n": 6,
   "cites": true,
-  "why": "청년 48개월 감소",
+  "why": "청년 감소·60대 증가",
   "tone": "부정",
+  "focus": "주제",
   "title": "고용보험 가입 늘었지만…4년 새 증가분 99% '60대 이상'",
   "press": "kado.net"
  },
  {
   "n": 7,
   "cites": true,
-  "why": "가입자·제조업 증가",
+  "why": "가입자·제조업 증가 전함",
   "tone": "긍정",
+  "focus": "주제",
   "title": "고용보험 가입자 1590만명 돌파…제조업 5개월 만에 증가세 전환",
   "press": "gukjenews.com"
  },
@@ -60,22 +67,25 @@
   "cites": false,
   "why": "소상공인 보험료 지원",
   "tone": "중립",
+  "focus": "",
   "title": "경상원, 보험료 부담 낮춰 1인 소상공인 재기 돕는다",
   "press": "pointdaily.co.kr"
  },
  {
   "n": 9,
   "cites": true,
-  "why": "전체증가·청년감소",
-  "tone": "중립",
+  "why": "전체 증가·청년 감소",
+  "tone": "긍정",
+  "focus": "언급",
   "title": "6주간 ‘가상사원’으로 직무 경험… 채용 미스매치 풀었다[사람 살리는...",
   "press": "문화일보"
  },
  {
   "n": 10,
   "cites": false,
-  "why": "플랫폼노동 세제 논의",
+  "why": "플랫폼 과세 논쟁",
   "tone": "부정",
+  "focus": "",
   "title": "[플랫폼3.3%족쇄]① \"이재용은 근로소득, 라이더는 왜 사업소득인가\"",
   "press": "bloter.net"
  },
@@ -83,39 +93,44 @@
   "n": 11,
   "cites": true,
   "why": "조선업 가입자 증가",
-  "tone": "중립",
+  "tone": "부정",
+  "focus": "주제",
   "title": "조선 고용 늘어도 청년 인력난…취업 연계 강화",
   "press": "ulsanpress.net"
  },
  {
   "n": 12,
   "cites": true,
-  "why": "제조업 반등·청년감소",
+  "why": "제조업 반등·청년 감소",
   "tone": "부정",
+  "focus": "주제",
   "title": "[사설] 미래의 경제 주춧돌 청년만 고용 회복에서 빠졌다",
   "press": "imaeil.com"
  },
  {
   "n": 13,
   "cites": true,
-  "why": "제조업 2천명 증가",
+  "why": "제조업 가입자 증가",
   "tone": "부정",
+  "focus": "주제",
   "title": "[목요세평] 수출은 뛰는데, 고용은 걷고 있다",
   "press": "cctoday.co.kr"
  },
  {
   "n": 14,
   "cites": false,
-  "why": "거제 부동산 홍보",
+  "why": "거제 분양 홍보",
   "tone": "긍정",
+  "focus": "",
   "title": "거제 최대규모 랜드마크 단지, '힐스테이트 거제시그니처'가 주목받는 ...",
   "press": "rcast.co.kr"
  },
  {
   "n": 15,
   "cites": false,
-  "why": "예술인 산재보험 문제",
+  "why": "예술인 안전 사각지대",
   "tone": "부정",
+  "focus": "",
   "title": "\"다친 뒤 보상만으론 부족\" 공연예술인 '안전' 사각지대",
   "press": "labortoday.co.kr"
  },
@@ -124,6 +139,7 @@
   "cites": false,
   "why": "지역 브리핑 모음",
   "tone": "중립",
+  "focus": "",
   "title": "[경남 브리핑 모음(9월11일)] 진주시, 진주형 미래 모빌리티사업 ‘우수...",
   "press": "dnews.co.kr"
  },
@@ -132,22 +148,25 @@
   "cites": false,
   "why": "퇴직자 제도 안내",
   "tone": "중립",
+  "focus": "",
   "title": "“퇴직 후 놓치면 손해” 꼭 확인해야 할 제도와 혜택",
   "press": "이투데이"
  },
  {
   "n": 18,
   "cites": false,
-  "why": "나라살림 재정통계",
+  "why": "재정수지 기사",
   "tone": "중립",
+  "focus": "",
   "title": "세수 호조에 7월까지 나라살림 적자 22조 개선…5년 만에 최소",
   "press": "뉴시스"
  },
  {
   "n": 19,
   "cites": false,
-  "why": "나라살림 재정통계",
+  "why": "재정수지 기사",
   "tone": "중립",
+  "focus": "",
   "title": "나라살림 적자, 5년 만에 가장 작았다…국세수입 41조원 급증",
   "press": "whitepaper.co.kr"
  }

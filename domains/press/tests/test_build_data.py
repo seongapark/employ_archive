@@ -2,10 +2,10 @@ from domains.press.pipeline import build_data as b
 
 
 def art(title, cites=True, kw=(), hits=(), tone=(), press='뉴스1', pub='2026-09-07 12:00',
-        stance=''):
+        stance='', focus='주제'):
     return {'title': title, 'url': '', 'press': press, 'pub': pub,
             'cites': cites, 'why': '', 'hits': list(hits), 'tone': list(tone),
-            'kw': list(kw), 'stance': stance}
+            'kw': list(kw), 'stance': stance, 'focus': focus if cites else ''}
 
 
 def test_signals_count_only_what_the_caller_passed():
@@ -22,6 +22,20 @@ def test_noise_words_are_not_frames():
         assert b.is_noise(w), w
     for w in ['홈플러스', '반등', 'AI', '고용한파']:
         assert not b.is_noise(w), w
+
+
+def test_a_passing_mention_is_not_a_cited_article_on_screen():
+    # 「'싼 게 비지떡' 청년 주거 엇박」은 도입부에 수치를 끌어다 썼다. 인용은
+    # 맞지만 이 보도자료의 후속 보도는 아니다 — 세면 번진 범위가 부풀어 보인다.
+    assert b.is_cited(art('본론', focus='주제'))
+    assert not b.is_cited(art('곁들임', focus='언급'))
+    assert not b.is_cited(art('딴 얘기', cites=False))
+
+
+def test_old_verdicts_without_a_weight_still_count_as_cited():
+    # 무게는 나중에 붙인 항목이다. 없다고 빈 화면을 주지는 않는다.
+    old = {'title': 't', 'cites': True}
+    assert b.is_cited(old)
 
 
 def test_stance_says_which_way_the_coverage_leaned():
@@ -67,6 +81,23 @@ def test_coverage_reports_zero_rather_than_omitting_the_row():
     assert next(x for x in cov['section'] if x['name'] == '구직급여')['n'] == 0
 
 
+def test_trend_series_stops_at_the_last_day_actually_collected():
+    # 아직 오지 않은 날을 0 으로 이으면 「사라졌다」로 읽힌다.
+    reg = [art('반등', kw=['반등'], pub='2026-09-07 12:00'),
+           art('반등 둘', kw=['반등'], pub='2026-09-07 13:00')]
+    rows = b.frames(reg, [], '2026-09-07', covered=3)
+    assert rows[0]['series'] == [2, 0, 0, 0]
+
+
+def test_covered_days_takes_the_earlier_of_window_end_and_last_run():
+    # 구간이 D+21 까지 열려 있어도 오늘이 D+4 면 거기까지가 진짜다.
+    assert b.covered_days('2026-09-07', {
+        'window': ['2026-09-08', '2026-09-28'], 'at': '2026-09-11 10:53'}) == 4
+    assert b.covered_days('2026-08-10', {
+        'window': ['2026-08-11', '2026-08-25'], 'at': '2026-09-11 10:00'}) == 15
+    assert b.covered_days('2026-09-07', None) == 0
+
+
 def test_frames_call_a_word_gone_when_no_follow_up_uses_it():
     reg = [art('홈플러스 여파', kw=['홈플러스']), art('홈플러스 둔화', kw=['홈플러스'])]
     rows = b.frames(reg, [])
@@ -75,9 +106,39 @@ def test_frames_call_a_word_gone_when_no_follow_up_uses_it():
 
 def test_frames_call_a_word_spreading_when_follow_up_matches_or_exceeds():
     reg = [art('홈플러스 여파', kw=['홈플러스']), art('홈플러스 둔화', kw=['홈플러스'])]
-    fol = [art('홈플러스 후속1'), art('홈플러스 후속2'), art('홈플러스 후속3')]
+    fol = [art('홈플러스 후속%d' % i, kw=['홈플러스']) for i in (1, 2, 3)]
     rows = b.frames(reg, fol)
     assert rows[0]['state'] == '확산' and rows[0]['later'] == 3
+
+
+def test_frames_track_industry_and_age_not_only_words_outside_the_release():
+    # 「제조업」은 보도자료 항목사전에 있어 kw 가 아니라 hits 로 온다. 밖 표현만
+    # 세던 때에는 정기 8건·후속 7건으로 계속 나오는데도 그래프에 없었다.
+    reg = [art('제조업 가입자 증가', hits=['산업:제조업']),
+           art('제조업 반등', hits=['산업:제조업'], kw=['반등'])]
+    fol = [art('제조업 고용 회복', hits=['산업:제조업'])]
+    rows = {r['kw']: r for r in b.frames(reg, fol)}
+    assert rows['제조업']['d0'] == 2 and rows['제조업']['later'] == 1
+
+
+def test_frames_leave_out_the_indicator_axis():
+    # 「고용보험」·「가입자」는 보도자료 제목 그 자체라 거의 모든 기사에 있다.
+    # 늘 1등으로 서서 진짜 신호를 덮는다.
+    reg = [art('고용보험 가입자 증가', hits=['지표:고용보험', '지표:가입자']),
+           art('고용보험 가입자 감소', hits=['지표:고용보험', '지표:가입자'])]
+    assert b.frames(reg, []) == []
+
+
+def test_frames_merge_names_that_mean_the_same_axis():
+    # 「29세이하」와 「청년」이 갈리면 한 축이 두 선으로 쪼개진다.
+    # 괄호는 항목사전이 붙인 표준분류라 뗀다.
+    reg = [art('29세이하 감소', hits=['연령:29세이하']),
+           art('청년 감소', hits=['연령:청년']),
+           art('반도체 증가', hits=['산업:반도체(전자·통신)']),
+           art('반도체 호황', hits=['산업:반도체(전자·통신)'])]
+    rows = {r['kw']: r['d0'] for r in b.frames(reg, [])}
+    assert rows['청년'] == 2 and rows['반도체'] == 2
+    assert '29세이하' not in rows
 
 
 def test_enrich_drops_repeats_of_the_same_headline():

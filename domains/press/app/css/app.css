@@ -336,6 +336,51 @@
   text-align: center;
 }
 
+/* 추세 선 — 여러 표현의 날짜별 건수를 겹쳐 그린다.
+   표에서 바꿨다(2026-09-11): 표는 양 끝만 보여줘 언제 번졌는지가 안 보였다. */
+
+.tr__svg { display: block; width: 100%; height: auto; }
+
+.tr__grid { stroke: var(--border); stroke-width: 1; }
+
+.tr__ax {
+  font-family: inherit;
+  font-size: 9px;
+  fill: var(--text-muted);
+}
+
+.tr__s { transition: opacity .2s ease; }
+.tr__line--dim { opacity: .12; }
+
+.tr__keys {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  margin-top: 8px;
+}
+
+.tr__key {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 28px;
+  padding: 0;
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.tr__key i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex: 0 0 auto;
+}
+
+.tr__key--on { color: var(--text); font-weight: 700; }
+
 /* 헤드라인 한 줄 — 제목이 길면 제목만 줄이고 언론사는 끝까지 남긴다.
    줄바꿈을 허용하면 묶음의 크기가 제목 길이에 따라 달라 보인다. */
 

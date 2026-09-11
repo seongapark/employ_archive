@@ -32,52 +32,52 @@ def test_prompt_asks_for_the_tone_of_the_headline_not_of_the_number():
 
 
 def test_parses_verdicts_in_order():
-    got = c.parse_response('[{"n":2,"cites":false,"why":"국회 심의","tone":"중립"},'
-                           ' {"n":1,"cites":true,"why":"27만8천명","tone":"긍정"}]', 2)
+    got = c.parse_response('[{"n":2,"cites":false,"why":"국회 심의","tone":"중립","focus":""},'
+                           ' {"n":1,"cites":true,"why":"27만8천명","tone":"긍정","focus":"주제"}]', 2)
     assert [v.n for v in got] == [1, 2]
     assert got[0].cites is True and got[1].cites is False
     assert [v.tone for v in got] == ['긍정', '중립']
 
 
 def test_accepts_a_fenced_answer():
-    got = c.parse_response('```json\n[{"n":1,"cites":true,"tone":"부정"}]\n```', 1)
+    got = c.parse_response('```json\n[{"n":1,"cites":true,"tone":"부정","focus":"주제"}]\n```', 1)
     assert got[0].cites is True
 
 
 def test_missing_article_is_an_error_not_a_silent_no():
     # 빠진 기사를 '인용 아님'으로 흘려보내면 누락이 화면에서 정상처럼 보인다.
     with pytest.raises(ValueError, match='빠진'):
-        c.parse_response('[{"n":1,"cites":true,"tone":"긍정"}]', 2)
+        c.parse_response('[{"n":1,"cites":true,"tone":"긍정","focus":"주제"}]', 2)
 
 
 def test_out_of_range_index_is_rejected():
     with pytest.raises(ValueError, match='범위'):
-        c.parse_response('[{"n":1,"cites":true,"tone":"긍정"},'
-                         ' {"n":9,"cites":true,"tone":"긍정"}]', 2)
+        c.parse_response('[{"n":1,"cites":true,"tone":"긍정","focus":"주제"},'
+                         ' {"n":9,"cites":true,"tone":"긍정","focus":"주제"}]', 2)
 
 
 def test_duplicate_index_is_rejected():
     with pytest.raises(ValueError, match='중복'):
-        c.parse_response('[{"n":1,"cites":true,"tone":"긍정"},'
-                         ' {"n":1,"cites":false,"tone":"부정"}]', 2)
+        c.parse_response('[{"n":1,"cites":true,"tone":"긍정","focus":"주제"},'
+                         ' {"n":1,"cites":false,"tone":"부정","focus":""}]', 2)
 
 
 def test_missing_cites_field_is_rejected():
     # cites 가 없을 때 bool(None) 로 떨어지면 '인용 아님' 이 조용히 만들어진다.
     with pytest.raises(ValueError, match='cites'):
-        c.parse_response('[{"n":1,"why":"…","tone":"긍정"}]', 1)
+        c.parse_response('[{"n":1,"why":"…","tone":"긍정","focus":"주제"}]', 1)
 
 
 def test_missing_tone_field_is_rejected():
     # 빈 논조를 '중립'으로 접으면 판정이 없는 상태와 정말 중립인 회차가
     # 화면에서 똑같아 보인다.
     with pytest.raises(ValueError, match='tone'):
-        c.parse_response('[{"n":1,"cites":true,"why":"x"}]', 1)
+        c.parse_response('[{"n":1,"cites":true,"why":"x","focus":"주제"}]', 1)
 
 
 def test_an_unknown_tone_value_is_rejected():
     with pytest.raises(ValueError, match='tone'):
-        c.parse_response('[{"n":1,"cites":true,"tone":"약간 긍정"}]', 1)
+        c.parse_response('[{"n":1,"cites":true,"tone":"약간 긍정","focus":"주제"}]', 1)
 
 
 def test_non_json_is_an_error():
@@ -92,7 +92,7 @@ def test_judge_batches_and_renumbers_to_the_whole_list():
     def fake(prompt):
         n = prompt.count('\n   ')          # 배치에 실린 기사 수
         seen.append(n)
-        return json.dumps([{'n': i, 'cites': True, 'tone': '중립'}
+        return json.dumps([{'n': i, 'cites': True, 'tone': '중립', 'focus': '주제'}
                            for i in range(1, n + 1)])
 
     got = c.judge('제목', '2026-09-07', '요지', arts, call=fake, log=lambda _: None)
@@ -147,3 +147,28 @@ def test_blank_key_is_treated_as_absent(monkeypatch):
     monkeypatch.setenv('ANTHROPIC_API_KEY', '   ')
     monkeypatch.delenv('OPENROUTER_API_KEY', raising=False)
     assert c.provider() is None
+
+
+def test_missing_focus_field_is_rejected():
+    # 「수치를 전했나」와 「그 수치가 기사의 본론인가」는 다른 질문이다.
+    # 빠진 것을 '주제'로 채우면 곁들인 인용이 후속 보도로 세어진다.
+    with pytest.raises(ValueError, match='focus'):
+        c.parse_response('[{"n":1,"cites":true,"tone":"긍정"}]', 1)
+
+
+def test_an_unknown_focus_value_is_rejected():
+    with pytest.raises(ValueError, match='focus'):
+        c.parse_response('[{"n":1,"cites":true,"tone":"긍정","focus":"살짝"}]', 1)
+
+
+def test_focus_is_blank_when_the_article_does_not_cite():
+    # 인용이 아니면 무게를 따질 것이 없다. 모델이 뭘 보내든 비운다.
+    got = c.parse_response('[{"n":1,"cites":false,"tone":"중립","focus":"주제"}]', 1)
+    assert got[0].focus == ''
+
+
+def test_prompt_tells_the_two_weights_apart():
+    p = c.build_prompt('제목', '2026-09-07', '요지', ARTS)
+    for f in c.FOCUSES:
+        assert f in p
+    assert '통계를 빼도 기사는 남는다' in p

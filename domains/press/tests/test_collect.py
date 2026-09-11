@@ -18,10 +18,11 @@ def test_window_regular_is_the_release_day_and_the_next():
     assert (a.strftime('%m.%d'), b.strftime('%m.%d')) == ('09.07', '09.08')
 
 
-def test_window_follow_is_the_fortnight_after():
+def test_window_follow_runs_three_weeks_from_the_release():
+    # 정기(D~D+1)와 합쳐 배포일부터 3주다 — 화면이 그렇게 말한다.
     a, b, kind = c.window_of('2026-09-07', follow=True)
     assert kind == 'follow'
-    assert (a.strftime('%m.%d'), b.strftime('%m.%d')) == ('09.08', '09.22')
+    assert (a.strftime('%m.%d'), b.strftime('%m.%d')) == ('09.08', '09.28')
 
 
 def test_regular_net_is_wide_because_the_release_day_already_filters():

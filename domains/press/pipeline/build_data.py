@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import collections
 import re
+from datetime import datetime
 
 from .collect import ANCHOR
 from .press_parser import parse_release, build_dict, analyze_title
@@ -67,9 +68,28 @@ def enrich(arts, verdicts, D, body):
             'hits': ['%s:%s' % (axis, name) for axis, name in hits],
             'tone': tone,
             'stance': got.get('tone', ''),
+            # 인용의 무게. '주제' 만 화면에 띄운다 — '언급' 은 다른 주제를
+            # 말하면서 이 통계를 근거로 한두 줄 끌어다 쓴 기사다.
+            'focus': got.get('focus', ''),
             'kw': [w for w in kw if not is_noise(w)],
         })
     return out
+
+
+def is_cited(a):
+    """화면이 「인용 기사」라고 부르는 것.
+
+    수치를 전했고(`cites`) **그 수치가 기사의 본론인**(`focus != '언급'`) 것만이다.
+    「'싼 게 비지떡' 청년 주거 엇박」처럼 주거·주식·수기 기사가 도입부에 통계를
+    끌어다 쓴 것은 인용은 맞지만 이 보도자료의 후속 보도가 아니다.
+
+    **후속에서 특히 크다** — 실측(2026-09-11): 배포 당일은 인용 중 언급이
+    1~8건뿐인데 '26.7월분 후속은 31건 중 12건(39%)이 언급이었다. 구간이 3주라
+    통계를 근거로 끌어다 쓴 기사가 쌓인다.
+
+    무게가 아직 없는 옛 판정에서는 `cites` 만으로 본다(빈 화면보다 낫다).
+    """
+    return bool(a.get('cites')) and a.get('focus', '') != '언급'
 
 
 def _names(a):
@@ -176,18 +196,109 @@ def issues(cited):
     return sorted(rows, key=lambda r: -r['n'])
 
 
-def frames(reg_cited, fol_cited):
-    """배포 당일 밖 키워드가 후속 구간에서 며칠째 살아있나."""
-    d0 = collections.Counter(w for a in reg_cited for w in a['kw'] if not is_noise(w))
+# 추세 그래프의 가로축 길이. 배포일(0)부터 3주 — 수집 구간과 같다.
+TREND_DAYS = 21
+
+
+def _day_index(release, pub):
+    """배포일을 0 으로 놓은 날짜 번호. 구간 밖이면 None."""
+    a = datetime.strptime(release, '%Y-%m-%d').date()
+    try:
+        b = datetime.strptime(pub[:10], '%Y-%m-%d').date()
+    except ValueError:
+        return None
+    n = (b - a).days
+    return n if 0 <= n <= TREND_DAYS else None
+
+
+# 추세에 세울 축. **지표축은 뺀다** — 「고용보험」·「가입자」는 보도자료 제목
+# 그 자체라 거의 모든 기사에 있고, 늘 1등으로 서서 진짜 신호를 덮는다.
+# 실측('26.8월분): 지표축을 넣으면 고용보험 31 · 가입자 30 이 상위를 먹는데
+# 그 선은 「보도자료가 고용보험 얘기였다」는 뜻밖에 없다.
+TREND_AXES = ('산업', '연령')
+
+# 같은 것을 가리키는 말은 하나로 — 안 묶으면 한 축이 두 선으로 쪼개진다.
+_TREND_SAME = {'29세이하': '청년'}
+
+
+def trend_name(name):
+    """'반도체(전자·통신)' → '반도체'. 괄호는 항목사전이 붙인 표준분류다."""
+    short = re.sub(r'\s*\(.*\)\s*$', '', str(name))
+    return _TREND_SAME.get(short, short)
+
+
+def trend_terms(a):
+    """기사 하나가 들고 있는 추세 축.
+
+    **제목 문자열이 아니라 항목 매칭 결과로 센다.** 제목으로 세면 「29세이하」만
+    쓴 기사가 「청년」 선에 안 잡히고, 「반도체(전자·통신)」처럼 사전이 붙인
+    괄호 때문에도 어긋난다.
+    """
+    out = set(a['kw'])
+    for h in a['hits']:
+        axis, name = h.split(':', 1)
+        if axis in TREND_AXES:
+            out.add(trend_name(name))
+    return out
+
+
+def covered_days(release, fol):
+    """추세 그래프의 가로축이 어디까지 진짜인가.
+
+    **아직 오지 않은 날을 0 으로 그리면 「사라졌다」로 읽힌다.** 수집 구간이
+    D+21 까지 열려 있어도 오늘이 D+4 면 그 뒤는 아직 아무 일도 안 일어난 것이지
+    0 건이 아니다. 실제로 훑은 마지막 날까지만 그린다 — 수집 구간의 끝과
+    마지막 수집 시각 중 **이른 쪽**이다.
+    """
+    if not fol:
+        return 0
+    ends = [d for d in ((fol.get('window') or [None, None])[1:2]) if d]
+    at = (fol.get('at') or fol.get('collected_at') or '')[:10]
+    if at:
+        ends.append(at)
+    if not ends:
+        return 0
+    i = _day_index(release, min(ends))
+    return i if i is not None else TREND_DAYS
+
+
+def frames(reg_cited, fol_cited, release=None, covered=None):
+    """배포 당일 밖 키워드가 후속 구간에서 며칠째 살아있나.
+
+    표가 아니라 **선**으로 보여주므로 날짜별 건수(`series`)도 같이 낸다.
+    가로축은 배포일 0 부터 D+21 까지 고정이라 회차를 오갈 때 모양을 비교할 수 있다.
+
+    **보도자료 밖 표현만이 아니라 산업·연령 축도 함께 센다.** 밖 표현만 세던
+    때에는 「제조업」이 정기 8건·후속 7건으로 계속 나오는데도 그래프에 없었다
+    (제조업은 보도자료 항목사전에 있어 `kw` 가 아니라 `hits` 로 간다).
+    이름이 「후속 보도 추세」인데 보도자료 안 항목이 빠지면 이름이 거짓말이다.
+
+    `d0`·`later`·`series` 를 모두 `trend_terms` 하나로 센다 — 기준이 갈리면
+    같은 표의 세 숫자가 서로 안 맞는다.
+    """
+    terms = {id(a): trend_terms(a) for a in list(reg_cited) + list(fol_cited)}
+    d0 = collections.Counter(w for a in reg_cited for w in terms[id(a)] if not is_noise(w))
     rows = []
     for w, c0 in d0.most_common():
         if c0 < 2:
             continue
-        hit = [a for a in fol_cited if w in a['title']]
+        hit = [a for a in fol_cited if w in terms[id(a)]]
         days = sorted(x['pub'][:10] for x in hit)
+        series = []
+        if release:
+            series = [0] * (TREND_DAYS + 1)
+            for a in list(reg_cited) + list(fol_cited):
+                if w not in terms[id(a)]:
+                    continue
+                i = _day_index(release, a['pub'])
+                if i is not None:
+                    series[i] += 1
+            if covered is not None:
+                series = series[:covered + 1]
         rows.append({'kw': w, 'd0': c0, 'later': len(hit),
                      'first': days[0] if days else '', 'last': days[-1] if days else '',
-                     'state': '확산' if len(hit) >= c0 else ('유지' if hit else '소멸')})
+                     'state': '확산' if len(hit) >= c0 else ('유지' if hit else '소멸'),
+                     'series': series})
     return rows
 
 
@@ -304,9 +415,15 @@ def build_round(release, month, hwpx, reg, reg_v, fol=None, fol_v=None):
     rel = parse_release(hwpx)
     D, body = build_dict(rel), rel['body']
     r_all = enrich(reg['articles'], reg_v, D, body)
-    r_cited = [a for a in r_all if a['cites']]
+    r_cited = [a for a in r_all if is_cited(a)]
     f_all = enrich(fol['articles'], fol_v, D, body) if fol else []
-    f_cited = [a for a in f_all if a['cites']]
+    f_cited = [a for a in f_all if is_cited(a)]
+
+    summary_fol = ({'collected': fol['volume']['collected'], 'kept': len(f_all),
+                    'cited': len(f_cited), 'press': len({a['press'] for a in f_cited}),
+                    'mentioned': sum(1 for a in f_all if a['cites'] and not is_cited(a)),
+                    'window': fol.get('window', []), 'at': fol.get('collected_at', '')}
+                   if fol else None)
 
     press_now = {a['press'] for a in r_cited}
     outside, tone = signals(r_cited)
@@ -325,13 +442,11 @@ def build_round(release, month, hwpx, reg, reg_v, fol=None, fol_v=None):
             # 다르다(보도자료 요약부에서 파생하므로) — 화면에 박으면 틀린다.
             # 실제로 '26.6월분은 11개, 7·8월분은 3개로 긁었다. 그물 폭이 다르다는
             # 사실이 인용률 옆에 같이 보여야 한다.
+            'mentioned': sum(1 for a in r_all if a['cites'] and not is_cited(a)),
             'queries': [q['query'] for q in reg.get('queries', [])],
             'anchors': list(ANCHOR),
         },
-        'follow': ({'collected': fol['volume']['collected'], 'kept': len(f_all),
-                    'cited': len(f_cited), 'press': len({a['press'] for a in f_cited}),
-                    'window': fol.get('window', []), 'at': fol.get('collected_at', '')}
-                   if fol else None),
+        'follow': summary_fol,
         'coverage': cov,
         'outside': outside,
         'tone': tone,
@@ -339,7 +454,8 @@ def build_round(release, month, hwpx, reg, reg_v, fol=None, fol_v=None):
         'issues': issues(r_cited),
         'rivals': rivals([a for a in r_all if not a['cites']]),
         'graph': graph(r_cited),
-        'frames': frames(r_cited, f_cited) if fol else [],
+        'frames': (frames(r_cited, f_cited, release, covered_days(release, summary_fol))
+                   if fol else []),
         'truncated': reg.get('truncated_queries', []),
         'unjudged': sum(1 for a in r_all + f_all if not a['judged']),
     }

@@ -7,8 +7,8 @@ RELEASES = ['2026-07-13', '2026-08-10', '2026-09-07', '2026-10-14']
 
 
 def test_nothing_to_do_on_an_ordinary_day():
-    # 후속 구간(D+1~D+15)과 그 마감일(D+16)을 지난 날.
-    assert plan.decide('2026-09-30', RELEASES) == (None, None)
+    # 후속 구간(D+1~D+21)과 그 마감일(D+22)을 지난 날.
+    assert plan.decide('2026-10-05', RELEASES) == (None, None)
 
 
 def test_release_day_and_the_next_collect_the_regular_round():
@@ -19,16 +19,16 @@ def test_release_day_and_the_next_collect_the_regular_round():
 
 
 def test_follow_runs_every_day_while_its_window_is_open():
-    # 한 번만 긁으면 후속 화면이 보름 내내 비어 있다가 갑자기 찬다. 그 사이에
+    # 한 번만 긁으면 후속 화면이 3주 내내 비어 있다가 갑자기 찬다. 그 사이에
     # 프레임이 번져도 아무도 모른다 — 이 도메인에서 가장 나쁜 것이 늦게 아는 것이다.
-    for day in ('2026-09-09', '2026-09-15', '2026-09-22'):     # D+2 · D+8 · D+15
+    for day in ('2026-09-09', '2026-09-15', '2026-09-28'):     # D+2 · D+8 · D+21
         assert plan.decide(day, RELEASES) == ('follow', '2026-09-07'), day
 
 
 def test_follow_runs_once_more_the_day_its_window_closes():
-    # 후속 구간은 D+1~D+15 다. D+16 이 구간 전체를 담는 마지막 실행이다.
-    assert plan.decide('2026-09-23', RELEASES) == ('follow', '2026-09-07')
-    assert plan.decide('2026-09-24', RELEASES) == (None, None)
+    # 후속 구간은 D+1~D+21 이다. D+22 가 구간 전체를 담는 마지막 실행이다.
+    assert plan.decide('2026-09-29', RELEASES) == ('follow', '2026-09-07')
+    assert plan.decide('2026-09-30', RELEASES) == (None, None)
 
 
 def test_the_day_after_the_release_stays_regular():
@@ -105,7 +105,7 @@ def test_judge_only_asks_about_articles_that_have_no_verdict(tmp_path, monkeypat
     (tmp_path / 'raw' / 'articles_2026-09-07_regular.json').write_text(
         json.dumps(raw, ensure_ascii=False), encoding='utf-8')
     (tmp_path / 'verdicts' / 'verdict_2026-09-07_regular.json').write_text(
-        json.dumps([{'n': 1, 'cites': True, 'why': 'x', 'tone': '긍정',
+        json.dumps([{'n': 1, 'cites': True, 'why': 'x', 'tone': '긍정', 'focus': '주제',
                      'title': '이미 판정한 기사'}], ensure_ascii=False), encoding='utf-8')
     monkeypatch.setattr(run_round, 'RAW', str(tmp_path / 'raw'))
     monkeypatch.setattr(run_round, 'VERDICTS', str(tmp_path / 'verdicts'))
@@ -116,7 +116,8 @@ def test_judge_only_asks_about_articles_that_have_no_verdict(tmp_path, monkeypat
 
     def fake(prompt):
         asked['prompt'] = prompt
-        return json.dumps([{'n': 1, 'cites': False, 'why': '딴 얘기', 'tone': '중립'}])
+        return json.dumps([{'n': 1, 'cites': False, 'why': '딴 얘기',
+                            'tone': '중립', 'focus': ''}])
 
     n = run_round.judge_missing('2026-09-07', 'regular', call=fake, log=lambda _m: None)
     assert n == 1
@@ -128,9 +129,9 @@ def test_judge_only_asks_about_articles_that_have_no_verdict(tmp_path, monkeypat
     assert {v['title'] for v in merged} == {'이미 판정한 기사', '새로 들어온 기사'}
 
 
-def test_a_verdict_without_a_tone_is_asked_again(tmp_path, monkeypatch):
-    # 논조는 나중에 붙인 항목이라 옛 판정 파일에는 없다. 빈 값을 '중립'으로
-    # 채우면 LLM 키가 없는 상태와 정말 중립인 회차가 화면에서 똑같아 보인다.
+def test_a_verdict_without_a_tone_or_focus_is_asked_again(tmp_path, monkeypatch):
+    # 논조·무게는 나중에 붙인 항목이라 옛 판정 파일에는 없다. 빈 값을 기본값으로
+    # 채우면 판정이 없는 상태와 진짜 값이 화면에서 똑같아 보인다.
     raw = {'articles': [{'title': '논조 없는 옛 판정', 'press': 'A', 'desc': ''}]}
     (tmp_path / 'raw').mkdir()
     (tmp_path / 'verdicts').mkdir()
@@ -145,14 +146,16 @@ def test_a_verdict_without_a_tone_is_asked_again(tmp_path, monkeypatch):
     monkeypatch.setenv('OPENROUTER_API_KEY', 'sk-or-x')
 
     def fake(_prompt):
-        return json.dumps([{'n': 1, 'cites': True, 'why': 'x', 'tone': '부정'}])
+        return json.dumps([{'n': 1, 'cites': True, 'why': 'x',
+                            'tone': '부정', 'focus': '언급'}])
 
     assert run_round.judge_missing('2026-09-07', 'regular',
                                    call=fake, log=lambda _m: None) == 1
     merged = json.loads(
         (tmp_path / 'verdicts' / 'verdict_2026-09-07_regular.json').read_text('utf-8'))
     # 다시 물은 기사의 옛 판정이 남으면 같은 제목이 두 줄이 된다.
-    assert len(merged) == 1 and merged[0]['tone'] == '부정'
+    assert len(merged) == 1
+    assert merged[0]['tone'] == '부정' and merged[0]['focus'] == '언급'
 
 
 def test_judging_is_skipped_without_a_key(tmp_path, monkeypatch):

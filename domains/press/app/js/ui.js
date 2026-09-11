@@ -1,5 +1,5 @@
 // 여러 화면이 같이 쓰는 조각. 문자열을 만들고 붙이는 일만 한다.
-import { esc, scale, timeLabel, dayLabel } from './data.js';
+import { esc, scale, timeLabel, dayLabel, isCited } from './data.js';
 
 /** 회차 스위치. 셸이 한 번만 그리고 네 화면이 같은 것을 본다.
     회차가 매달 늘어나므로 버튼이 아니라 select 다. */
@@ -57,13 +57,18 @@ export function columnChart(title, rows, opts = {}) {
 export function articleRow(a) {
   const tags = (a.kw || []).slice(0, 2)
     .map((w) => `<span class="art__tag">${esc(w)}</span>`).join('');
-  const why = !a.cites && a.why ? `<span>· ${esc(a.why)}</span>` : '';
+  const on = isCited(a);
+  // 수치는 전했지만 본론이 아닌 기사는 이유 대신 그 사실을 적는다 —
+  // 판정 이유(「7월 가입자·청년 감소」)만 보면 왜 흐린지 알 수 없다.
+  const note = a.cites && !on
+    ? '<span>· 곁들인 인용</span>'
+    : (!a.cites && a.why ? `<span>· ${esc(a.why)}</span>` : '');
   const inner = `
     <div class="art__title" title="${esc(a.title)}">${esc(a.title)}</div>
-    <div class="art__meta"><span>${esc(a.press)}</span><span class="num">${esc(timeLabel(a.pub))}</span>${why}${tags}</div>`;
+    <div class="art__meta"><span>${esc(a.press)}</span><span class="num">${esc(timeLabel(a.pub))}</span>${note}${tags}</div>`;
   return a.url
-    ? `<a class="art${a.cites ? '' : ' art--other'}" href="${esc(a.url)}" target="_blank" rel="noopener">${inner}</a>`
-    : `<div class="art${a.cites ? '' : ' art--other'}">${inner}</div>`;
+    ? `<a class="art${on ? '' : ' art--other'}" href="${esc(a.url)}" target="_blank" rel="noopener">${inner}</a>`
+    : `<div class="art${on ? '' : ' art--other'}">${inner}</div>`;
 }
 
 /** 파이 조각 색. **축마다 항목 순서가 고정**이라(SECTIONS·AGES·INDUSTRIES)
@@ -165,6 +170,67 @@ export function pieChart(title, rows, opts = {}) {
     <div class="sec-title">${esc(title)}${noteHtml}</div>
     ${body}
     ${tail.map((t) => `<div class="pie__tail">${t}</div>`).join('')}
+  </div>`;
+}
+
+/** 여러 표현의 날짜별 건수를 겹쳐 그린다 — 구글 트렌드처럼.
+ *
+ * 표에서 바꿨다(2026-09-11). 표는 「당일 8 · 이후 1」처럼 **양 끝만** 보여줘서
+ * 언제 번졌는지가 안 보였다. 선은 하루하루의 모양을 그대로 보여준다 —
+ * 배포 당일에 솟았다 이튿날 꺼진 말과, 사흘 뒤에 다시 오른 말이 다르게 생겼다.
+ *
+ * **소멸한 표현도 그린다.** 표에서는 뺐었다(행이 늘면 살아남은 것이 묻힌다).
+ * 선에서는 반대다 — 0 으로 가라앉는 선이 있어야 살아남은 선이 도드라진다.
+ *
+ * 가로축은 배포일 0 부터 **실제로 수집한 날까지**만이다. 아직 오지 않은 날을
+ * 0 으로 이으면 「사라졌다」로 읽힌다(`covered_days` 가 잘라서 넘긴다).
+ */
+export function trendChart(rows, opts = {}) {
+  const { width = 320, height = 150, pad = 26, picked = null } = opts;
+  const series = rows.filter((r) => (r.series || []).length > 1);
+  if (!series.length) return '';
+
+  const n = Math.max(...series.map((r) => r.series.length));
+  const max = Math.max(1, ...series.map((r) => Math.max(...r.series)));
+  const x = (i) => pad + (i / Math.max(n - 1, 1)) * (width - pad - 6);
+  const y = (v) => height - 18 - (v / max) * (height - 18 - 8);
+
+  const grid = [0, max].map((v) => `
+    <line x1="${pad}" y1="${y(v).toFixed(1)}" x2="${width - 6}" y2="${y(v).toFixed(1)}"
+      class="tr__grid"></line>
+    <text x="${pad - 5}" y="${(y(v) + 3).toFixed(1)}" text-anchor="end" class="tr__ax">${v}</text>`).join('');
+
+  // 가로 눈금은 시작·끝과 한가운데만. 스물두 칸에 날짜를 다 적으면 못 읽는다.
+  const ticks = [0, Math.round((n - 1) / 2), n - 1].filter((v, i, a) => a.indexOf(v) === i);
+  const xlab = ticks.map((i) => {
+    // 양 끝 눈금은 가운데 맞춤으로 두면 그림 밖으로 삐져나가 잘린다.
+    const anchor = i === 0 ? 'start' : (i === n - 1 ? 'end' : 'middle');
+    return `<text x="${x(i).toFixed(1)}" y="${height - 5}" text-anchor="${anchor}"
+      class="tr__ax">${i === 0 ? '배포일' : `D+${i}`}</text>`;
+  }).join('');
+
+  const lines = series.map((r, k) => {
+    const color = PIE_COLORS[k % PIE_COLORS.length];
+    const d = r.series.map((v, i) => `${i ? 'L' : 'M'} ${x(i).toFixed(1)} ${y(v).toFixed(1)}`).join(' ');
+    const dim = picked && picked !== r.kw ? ' tr__line--dim' : '';
+    const dots = r.series.map((v, i) => (v > 0
+      ? `<circle cx="${x(i).toFixed(1)}" cy="${y(v).toFixed(1)}" r="2.4" fill="${color}"
+           ><title>${esc(r.kw)} · ${i === 0 ? '배포일' : `D+${i}`} ${v}건</title></circle>` : '')).join('');
+    return `<g class="tr__s${dim}" data-kw="${esc(r.kw)}">
+      <path d="${d}" fill="none" stroke="${color}" stroke-width="2"
+        stroke-linejoin="round" stroke-linecap="round"></path>${dots}</g>`;
+  }).join('');
+
+  // 계열이 둘 이상이면 범례는 늘 있다. 색만으로 뜻을 나르지 않는다.
+  const legend = series.map((r, k) => `
+    <button type="button" class="tr__key${picked === r.kw ? ' tr__key--on' : ''}"
+      data-kw="${esc(r.kw)}">
+      <i style="background:${PIE_COLORS[k % PIE_COLORS.length]};"></i>${esc(r.kw)}</button>`).join('');
+
+  return `<div class="tr">
+    <svg viewBox="0 0 ${width} ${height}" class="tr__svg" role="img"
+      aria-label="표현별 날짜 추세">${grid}${xlab}${lines}</svg>
+    <div class="tr__keys">${legend}</div>
   </div>`;
 }
 

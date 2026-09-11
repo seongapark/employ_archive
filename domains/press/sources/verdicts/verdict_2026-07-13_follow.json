@@ -4,134 +4,151 @@
   "cites": true,
   "why": "제조업 13개월 감소",
   "tone": "부정",
+  "focus": "주제",
   "title": "제조업 고용 13개월째 감소",
   "press": "gjdream.com"
  },
  {
   "n": 2,
   "cites": true,
-  "why": "건설 가입자 8천명↓",
+  "why": "건설업 74.4만·8천 감소",
   "tone": "부정",
+  "focus": "주제",
   "title": "건설업 고용, 35개월째 감소…“바닥은 다졌지만 회복은 아직”",
   "press": "dnews.co.kr"
  },
  {
   "n": 3,
   "cites": false,
-  "why": "당진 지역 고용위기",
+  "why": "당진 지역 고용위기 주장",
   "tone": "부정",
+  "focus": "",
   "title": "당진 노사 \"철강산업 실질적 위기 반영해야\"",
   "press": "ohmynews.com"
  },
  {
   "n": 4,
   "cites": false,
-  "why": "경기도 기업지원 사업",
+  "why": "기업 환경개선 지원사업",
   "tone": "중립",
+  "focus": "",
   "title": "경기중소벤처기업연합회, 도내 자동차 기업 환경개선 최대 1000만원 지원",
   "press": "finomy.com"
  },
  {
   "n": 5,
   "cites": false,
-  "why": "직업력 입증 칼럼",
+  "why": "직업력 인정 법률 칼럼",
   "tone": "중립",
+  "focus": "",
   "title": "[변호사 칼럼] 객관적 자료의 한계를 넘는 직업력 인정의 필요성",
   "press": "idsn.co.kr"
  },
  {
   "n": 6,
   "cites": true,
-  "why": "청년 가입 46개월↓",
+  "why": "청년 가입자 46개월 감소",
   "tone": "부정",
+  "focus": "주제",
   "title": "청년 고용보험 가입자 46개월째 감소",
   "press": "데이터솜"
  },
  {
   "n": 7,
   "cites": false,
-  "why": "당진 선제대응 촉구",
+  "why": "당진 고용위기 지정 촉구",
   "tone": "부정",
+  "focus": "",
   "title": "통계 뒤에 숨은 위기..당진 노사(勞使), 고용위기 선제대응지역 지정 촉...",
   "press": "idjnews.kr"
  },
  {
   "n": 8,
   "cites": false,
-  "why": "고흥군 장려금 사업",
+  "why": "지자체 근속장려금 안내",
   "tone": "중립",
+  "focus": "",
   "title": "고흥군, 취업청년 근속장려금 지원…40여명 선발·최대 350만원",
   "press": "polinews.co.kr"
  },
  {
   "n": 9,
   "cites": true,
-  "why": "AI업종 청년 가입↓",
+  "why": "AI 업종 청년가입 감소",
   "tone": "부정",
+  "focus": "언급",
   "title": "AI에 대항하기보다 동행해야 하는 시대[딥 포인트]",
   "press": "머니투데이"
  },
  {
   "n": 10,
   "cites": true,
-  "why": "6월 동향 직접 인용",
+  "why": "건설업 74.4만·8천 감소",
   "tone": "부정",
+  "focus": "주제",
   "title": "벼랑 끝 건설·제조업, 3대 메가 프로젝트로 반전 노린다",
   "press": "00news.co.kr"
  },
  {
   "n": 11,
   "cites": false,
-  "why": "KOSIS 5월 통계",
+  "why": "AI와 무경력 청년 취업난",
   "tone": "부정",
+  "focus": "",
   "title": "“신입보다 AI가 돈 덜 들어”… 무경력 청년, 취업 문 더 좁아진다 [쉬...",
   "press": "서울신문"
  },
  {
   "n": 12,
   "cites": false,
-  "why": "직무교육 안내",
+  "why": "기술교육 과정 안내",
   "tone": "중립",
+  "focus": "",
   "title": "K-FINCO 기술교육원, 8월 직무능력향상 과정 운영",
   "press": "대한전문건설신문"
  },
  {
   "n": 13,
   "cites": true,
-  "why": "청년 가입 감소 전함",
+  "why": "전체 증가·청년 감소",
   "tone": "부정",
+  "focus": "주제",
   "title": "청년만 비켜간 고용 회복…취업난 '구조화' [세대별 PICK]",
   "press": "newspost.kr"
  },
  {
   "n": 14,
   "cites": true,
-  "why": "업종별 가입 증감",
+  "why": "제조·건설 가입자 감소",
   "tone": "부정",
+  "focus": "언급",
   "title": "2분기 대졸 실업자 48만명 넘어...20·30대 비중 64%",
   "press": "getnews.co.kr"
  },
  {
   "n": 15,
   "cites": false,
-  "why": "육아기 급여 제도",
+  "why": "육아기 단축급여 제도",
   "tone": "부정",
+  "focus": "",
   "title": "[OK제보] \"굶어도 실업급여는 안돼\"…워킹맘 울리는 육아기 단축급여 그...",
   "press": "연합뉴스"
  },
  {
   "n": 16,
   "cites": false,
-  "why": "육아기 급여 제도",
+  "why": "육아기 단축급여 제도",
   "tone": "부정",
+  "focus": "",
   "title": "\"굶어도 실업급여는 안돼\"…워킹맘 울리는 육아기 단축급여 그늘",
   "press": "news.sbs.co.kr"
  },
  {
   "n": 17,
   "cites": false,
-  "why": "육아 지원 논란",
+  "why": "실업급여·육아지원 문제",
   "tone": "부정",
+  "focus": "",
   "title": "실업급여냐 육아 지원이냐…워킹맘 옥죄는 '양자택일'",
   "press": "jnilbo.com"
  },
@@ -140,78 +157,88 @@
   "cites": true,
   "why": "제조업 9천명 감소",
   "tone": "부정",
+  "focus": "언급",
   "title": "“이과라서 죄송합니다”… 2030 이공계 ‘쉬었음’ 2년째 10만명",
   "press": "문화일보"
  },
  {
   "n": 19,
   "cites": false,
-  "why": "고용보험 적용 확대",
+  "why": "고용보험 적용범위 연구",
   "tone": "중립",
+  "focus": "",
   "title": "고용보험 가입 범위 '사업소득세 3.3%' 포용할까…연말까지 연구",
   "press": "뉴스핌"
  },
  {
   "n": 20,
   "cites": false,
-  "why": "직종별 적용 확대",
+  "why": "고용보험 적용확대 정책",
   "tone": "중립",
+  "focus": "",
   "title": "내년부터 유치원 방과후 강사·교차모집 보험설계사도 고용보험 적용",
   "press": "kyeonggi.com"
  },
  {
   "n": 21,
   "cites": false,
-  "why": "보험설계사 적용확대",
-  "tone": "긍정",
+  "why": "보험설계사 적용 확대",
+  "tone": "중립",
+  "focus": "",
   "title": "교차모집 보험설계사도 고용보험 가입 가능해져",
   "press": "insnews.co.kr"
  },
  {
   "n": 22,
   "cites": false,
-  "why": "시행령 적용확대",
-  "tone": "긍정",
+  "why": "시행령 적용범위 확대",
+  "tone": "중립",
+  "focus": "",
   "title": "고용보험, 유치원 방과후강사·교차모집 보험설계사도 적용",
   "press": "labortoday.co.kr"
  },
  {
   "n": 23,
   "cites": false,
-  "why": "급여공개·퇴사율",
+  "why": "급여공개·퇴사율 논의",
   "tone": "부정",
+  "focus": "",
   "title": "대통령도 “일리 있다” 했는데…채용공고 92%는 아직도 ‘깜깜이 급여...",
   "press": "헤럴드경제"
  },
  {
   "n": 24,
   "cites": false,
-  "why": "공공SW 계약 문제",
+  "why": "공공SW 계약 편법",
   "tone": "부정",
+  "focus": "",
   "title": "[공공SW사업 난맥상③] \"증빙 기준만 바꾸면 된다\"…'반프리 계약' 편법...",
   "press": "ddaily.co.kr"
  },
  {
   "n": 25,
   "cites": false,
-  "why": "5월 청년 가입자 감소",
+  "why": "5월 청년가입자 감소",
   "tone": "부정",
+  "focus": "",
   "title": "청년 고용 한파에 막힌 정년연장?…특위 \"지금도 늦었다\"",
   "press": "nocutnews.co.kr"
  },
  {
   "n": 26,
   "cites": true,
-  "why": "청년 가입자 감소 전함",
+  "why": "청년 업종별 감소 전함",
   "tone": "부정",
+  "focus": "주제",
   "title": "AI가 청년 일자리부터 삼켰다 … IT·전문직 8만개 증발",
   "press": "biz.newdaily.co.kr"
  },
  {
   "n": 27,
   "cites": false,
-  "why": "개별기업 고용증가",
+  "why": "기업 수상·고용증가",
   "tone": "긍정",
+  "focus": "",
   "title": "[강원경제인대상](주)메쥬, 원주서 키운 원격의료 기술로 일자리까지 넓...",
   "press": "kwnews.co.kr"
  }

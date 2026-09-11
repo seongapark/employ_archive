@@ -46,12 +46,20 @@ _FENCE = re.compile(r"```(?:json)?\s*(.*?)\s*```", re.S)
 # 모델이 딴소리를 해도 화면이 멀쩡해 보인다.
 TONES = ('긍정', '부정', '중립')
 
+# 인용의 **무게**. 「수치를 전했나」와 「그 수치가 기사의 본론인가」는 다른 질문이다.
+# 실측('26.7월분 후속): 인용 31건 중 「'싼 게 비지떡' 청년 주거 엇박」처럼 주거·주식·
+# 수기 기사가 도입부에 통계를 끌어다 쓴 것이 여럿 섞여 있었다. 네이버가 주는 요약에
+# 실제로 수치가 있으니 인용은 맞지만, 후속 보도로 세면 「이 회차가 어디까지 번졌나」가
+# 부풀어 보인다. 그래서 인용 여부와 무게를 따로 받는다.
+FOCUSES = ('주제', '언급')
+
 
 class Verdict(NamedTuple):
     n: int          # 기사 번호 (1부터)
     cites: bool
     why: str
     tone: str       # 긍정 | 부정 | 중립
+    focus: str      # 주제 | 언급 (인용이 아니면 빈 문자열)
 
 
 def build_prompt(release_label: str, release_date: str, digest: str,
@@ -89,8 +97,15 @@ def build_prompt(release_label: str, release_date: str, digest: str,
 같은 낱말이라도 **무엇이 늘고 줄었는지**를 보라. 「구직급여 신청 급증」은
 부정이고 「가입자 급증」은 긍정이다. 인용이 아닌 기사도 논조는 판정하라.
 
+인용이라면 그 수치가 기사에서 **어떤 무게**인지도 판정하라(`focus`):
+- "주제" — 이 통계를 전하는 것이 기사의 본론이다. 제목이나 첫 문단이 이 수치를
+  다루고, 통계를 빼면 기사가 성립하지 않는다.
+- "언급" — 다른 주제(주거·주식·수기·정책 논쟁·기업 분석)를 말하면서 이 통계를
+  근거로 한두 줄 끌어다 썼을 뿐이다. 통계를 빼도 기사는 남는다.
+인용이 아니면 `focus` 는 빈 문자열("")로 둬라.
+
 각 기사마다 한 줄씩, JSON 배열로만 답하라. 다른 말을 덧붙이지 마라:
-[{{"n": 1, "cites": true, "why": "8월 가입자 27만8천명 증가를 전함", "tone": "긍정"}}]
+[{{"n": 1, "cites": true, "why": "8월 가입자 27만8천명 증가를 전함", "tone": "긍정", "focus": "주제"}}]
 
 `why` 는 20자 안팎으로 짧게. 인용이 아니면 무엇을 다룬 기사인지 적어라.
 `tone` 은 긍정·부정·중립 중 하나만 쓴다.
@@ -129,7 +144,15 @@ def parse_response(body: str, n_expected: int) -> list[Verdict]:
         tone = str(row["tone"]).strip()
         if tone not in TONES:
             raise ValueError(f"tone 이 {'·'.join(TONES)} 가 아니다({tone!r}): {row!r}")
-        out.append(Verdict(n, bool(row["cites"]), str(row.get("why", "")).strip(), tone))
+        cites = bool(row["cites"])
+        if "focus" not in row:
+            raise ValueError(f"focus 가 없다: {row!r}")
+        focus = str(row["focus"]).strip()
+        if cites and focus not in FOCUSES:
+            raise ValueError(f"focus 가 {'·'.join(FOCUSES)} 가 아니다({focus!r}): {row!r}")
+        if not cites:
+            focus = ''          # 인용이 아니면 무게를 따질 것이 없다
+        out.append(Verdict(n, cites, str(row.get("why", "")).strip(), tone, focus))
     missing = sorted(set(range(1, n_expected + 1)) - seen)
     if missing:
         # 빠진 기사를 조용히 '인용 아님' 으로 두면 누락이 안 보인다.
@@ -207,5 +230,5 @@ def judge(release_label: str, release_date: str, digest: str, arts: Sequence[dic
         log(f"  판정 {start + 1}~{start + len(chunk)} / {len(arts)}")
         got = parse_response(
             call(build_prompt(release_label, release_date, digest, chunk)), len(chunk))
-        out.extend(Verdict(v.n + start, v.cites, v.why, v.tone) for v in got)
+        out.extend(Verdict(v.n + start, v.cites, v.why, v.tone, v.focus) for v in got)
     return out

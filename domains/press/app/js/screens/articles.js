@@ -2,7 +2,7 @@ import { esc, roundOf, filterArticles } from '../data.js';
 import { articleRow, card, section } from '../ui.js';
 import { graphSvg, legendHtml, applyPick } from '../graph.js';
 
-// 배포 당일(정기) 보도만 다룬다. 그 뒤 보름은 후속 화면이 맡는다.
+// 배포 당일(정기) 보도만 다룬다. 그 뒤 3주는 후속 화면이 맡는다.
 //
 // 그래프가 맨 위에 있는 이유: 이 화면의 지도다. 점을 누르면 바로 아래
 // 목록이 그 말로 걸러진다 — 그림과 목록이 떨어져 있으면 둘을 잇는 것은
@@ -53,8 +53,10 @@ export function render(root, ctx) {
 
     // 「인용만」 토글은 버튼 줄에서 이 한 줄로 옮겼다. 기능은 남기고 장치만 줄인다 —
     // 그날 같이 돈 기사를 볼 길이 없으면 낮은 인용률이 무슨 뜻인지 알 수 없다.
+    // 「나머지」에는 두 종류가 섞여 있다(곁들인 인용 · 딴 얘기). 어느 쪽인지는
+    // 줄마다 적히므로 여기서는 합쳐 센다.
     const toggle = ctx.state.onlyCited
-      ? (other ? ` · <a href="#" data-toggle="cited">딴 얘기 ${other}건 함께 보기</a>` : '')
+      ? (other ? ` · <a href="#" data-toggle="cited">나머지 ${other}건 함께 보기</a>` : '')
       : ' · <a href="#" data-toggle="cited">인용만 보기</a>';
     const picked = kw
       ? ` · 「${esc(kw)}」로 걸러짐 <a href="#" data-clear="1">전체로</a>` : '';

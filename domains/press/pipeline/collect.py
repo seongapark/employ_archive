@@ -93,7 +93,7 @@ def relevant(title, desc):
 
 
 def relevant_follow(title, desc, months):
-    """후속(D+1~D+15)용 그물. 2주 구간이라 일반 고용노동 기사가 대량으로 섞인다.
+    """후속(D+1~D+21)용 그물. 3주 구간이라 일반 고용노동 기사가 대량으로 섞인다.
 
     좁혀도 되는지 실측했다(2026-09-08, '26.7월분 후속): 이 그물이 떨어뜨린
     188건 중 앵커를 통과했을 85건을 LLM 에 물었더니 **인용이 0건**이었다.
@@ -111,10 +111,20 @@ def relevant_follow(title, desc, months):
 
 
 def window_of(release, follow):
-    """회차 → 수집 구간. 정기는 배포 당일 하루, 후속은 그 뒤 보름."""
+    """회차 → 수집 구간.
+
+    정기는 배포 당일 하루(D~D+1), 후속은 그 뒤 3주(D+1~D+21). 둘을 합치면
+    **배포일부터 3주**다 — 화면이 그렇게 말한다.
+
+    2026-09-11 에 보름(D+15)에서 늘렸다. 네이버 검색 API 는 최신순 1,000건까지만
+    거슬러 가므로 구간이 길수록 상한에 가까워지는데, 매일 수집으로 바뀌어
+    거슬러 갈 거리가 늘 21일 안쪽으로 묶인다(전에는 D+16 에 한 번 긁느라
+    그때까지 쌓인 것을 한꺼번에 훑었다). 상한에 닿으면 조용히 빠지지 않고
+    `truncated_queries` 에 남고 화면에 경고가 뜬다.
+    """
     d0 = datetime.strptime(release, '%Y-%m-%d').replace(tzinfo=KST)
     if follow:
-        return d0 + timedelta(days=1), d0 + timedelta(days=15), 'follow'
+        return d0 + timedelta(days=1), d0 + timedelta(days=21), 'follow'
     return d0, d0 + timedelta(days=1), 'regular'
 
 
@@ -305,7 +315,7 @@ def hwpx_for(release):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--release', required=True, help='배포일 YYYY-MM-DD')
-    ap.add_argument('--follow', action='store_true', help='후속 모드(D+1 ~ D+15)')
+    ap.add_argument('--follow', action='store_true', help='후속 모드(D+1 ~ D+21)')
     ap.add_argument('--hwpx', help='보도자료 hwpx (기본: sources/releases 에서 찾는다)')
     a = ap.parse_args()
     run(a.release, a.hwpx or hwpx_for(a.release), a.follow)

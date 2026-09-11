@@ -40,10 +40,24 @@ export function scale(rows) {
   return rows.map((r) => ({ ...r, pct: max > 0 ? Math.round((r.n / max) * 100) : 0 }));
 }
 
+/** 화면이 「인용 기사」라고 부르는 것.
+ *
+ * 수치를 전했고(`cites`) **그 수치가 기사의 본론인**(`focus === '주제'`) 것만이다.
+ * 「'싼 게 비지떡' 청년 주거 엇박」처럼 주거·주식·수기 기사가 도입부에 통계를
+ * 끌어다 쓴 것은 인용은 맞지만 이 보도자료의 후속 보도가 아니다 — 그것까지
+ * 세면 「이 회차가 어디까지 번졌나」가 부풀어 보인다.
+ *
+ * 판정에 무게가 아직 없는 옛 데이터에서는 `cites` 만으로 본다(빈 화면보다 낫다).
+ */
+export function isCited(a) {
+  if (!a.cites) return false;
+  return a.focus === undefined || a.focus === '' || a.focus === '주제';
+}
+
 /** 기사 목록 필터. kw 가 있으면 제목에 그 말이 든 기사만. */
 export function filterArticles(arts, { onlyCited = true, kw = null } = {}) {
   return arts.filter((a) => {
-    if (onlyCited && !a.cites) return false;
+    if (onlyCited && !isCited(a)) return false;
     if (kw && !a.title.includes(kw)) return false;
     return true;
   });
