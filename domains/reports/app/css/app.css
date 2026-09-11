@@ -1,4 +1,4 @@
-/* 기관 색은 이 도메인 전용 개념이라 토큰도 이 앱이 갖는다. 네 기관을 한 줄에
+/* 기관 색은 이 도메인 전용 개념이라 토큰도 이 앱이 갖는다. 다섯 기관을 한 줄에
    섞어 보여주므로 배지 색이 곧 출처 구분이다. */
 :root {
   --org-kli: #23508f;
@@ -308,3 +308,10 @@
   font-size: 13px;
   line-height: 1.7;
 }
+
+/* 추천 — 축별 묶음과 그 밑에 붙는 이유 한 줄 */
+
+.axis { margin-bottom: 22px; }
+.axis__name { font-weight: 600; margin: 0 0 6px; padding: 0 16px; }
+.axis__count { color: var(--text-muted); font-weight: 400; font-size: 0.88em; }
+.why { color: var(--text-secondary); font-size: 0.86em; margin: -4px 0 10px 2px; }

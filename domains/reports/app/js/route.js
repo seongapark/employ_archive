@@ -12,6 +12,7 @@ export function parseRoute(hash) {
   if (h === '/' || h === '') return { name: 'home', params: [], tab: 'home' };
   const [, head, ...rest] = h.split('/');
   const params = rest.filter((s) => s !== '').map(decodeSegment);
+  if (head === 'picks') return { name: 'picks', params, tab: 'picks' };
   if (head === 'topics') return { name: 'topics', params, tab: 'topics' };
   if (head === 'orgs') return { name: 'orgs', params, tab: 'orgs' };
   if (head === 'r') return { name: 'report', params, tab: null };
