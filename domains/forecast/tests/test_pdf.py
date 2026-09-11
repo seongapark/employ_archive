@@ -313,3 +313,57 @@ def test_overlapping_lines_do_not_drag_the_wrap_gap_below_the_real_line_spacing(
     assert got.count("\n\n") == 2
     assert got.startswith("L0\n\nL1\n\nL2\nL3\nL4")
     assert got.endswith("L15\nL16")
+
+
+# ── 2단 편집 가르기 ───────────────────────────────────────────────────
+# 왜 필요한가: 추출은 2단을 **한 줄에 이어 붙인다**. 실측(KLI 고용·노동브리프
+# 제115호 2쪽) —
+#     다. 성장의 대부분이 고용창출이 미미한 반도체 부문 화된 것으로 볼 수 있다.
+# 앞이 왼쪽 단, 뒤가 오른쪽 단이다. 이런 원문에서 모델이 뜻이 통하는 문장을
+# 만들면 원문의 부분열이 아니라 llm_verify 가 전부 '원문에 없다'로 거절한다
+# (KLI 21자리 중 20이 그렇게 떨어졌다).
+
+def _chars(spans, step=1.0):
+    """(x0, x1) 구간들을 글자로 촘촘히 채운다.
+
+    step 을 작게 둬 글자 수가 판정 하한(200)을 넘게 한다 — 그 하한은 표지처럼
+    글자가 몇 개뿐인 쪽에서 우연한 공백을 단으로 보지 않으려는 것이다.
+    """
+    out = []
+    for x0, x1 in spans:
+        x = float(x0)
+        while x < x1:
+            out.append({"x0": x, "x1": min(x + step, x1)})
+            x += step
+    return out
+
+
+def test_두_단_사이의_빈_띠를_찾는다():
+    # 실측값: 쪽 폭 595, 단 사이가 x 350~361 로 **11pt** 뿐이다.
+    chars = _chars([(30, 350), (361, 565)])
+    assert 350 <= pdf.column_split(chars, 595.0) <= 361
+
+
+def test_단_간격이_좁아도_잡는다():
+    # 처음에 40pt 로 잡았다가 2단인데도 1단으로 읽혔다. 단 간격은 좁다.
+    chars = _chars([(30, 292), (302, 565)])
+    assert pdf.column_split(chars, 595.0) is not None
+
+
+def test_한_단_쪽은_가르지_않는다():
+    # 글자가 폭을 가로질러 이어지면 가운데에 빈 띠가 없다.
+    assert pdf.column_split(_chars([(30, 565)]), 595.0) is None
+
+
+def test_가장자리_여백은_단_경계가_아니다():
+    # 바깥 여백(0~30)과 왼쪽 단 안의 들여쓰기는 가운데 구역 밖이라 안 걸린다.
+    # 실측에서 x 128~141 에도 13pt 짜리 띠가 있었는데 그건 들여쓰기였다.
+    chars = _chars([(30, 128), (141, 565)])
+    assert pdf.column_split(chars, 595.0) is None
+
+
+def test_글자가_적은_쪽은_판정하지_않는다():
+    # 표지·간지처럼 글자가 몇 개뿐인 쪽에서 우연한 공백을 단으로 보면 안 된다.
+    sparse = _chars([(30, 100), (400, 470)], step=5.0)
+    assert len(sparse) < 200
+    assert pdf.column_split(sparse, 595.0) is None

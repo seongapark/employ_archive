@@ -158,8 +158,108 @@ def page_texts_with_breaks(data: bytes) -> list[str]:
     import pdfplumber
 
     with pdfplumber.open(io.BytesIO(data)) as doc:
-        return [text_with_paragraph_breaks(page.extract_text_lines())
+        fallback = _document_split_x(doc.pages)
+        # **쪽이 자기 경계를 갖고 있으면 그걸 쓴다.** 한 문서 안에서도 판형이
+        # 섞인다 — 실측한 KLI 브리프는 쪽마다 경계가 355.5 이기도 하고 242.5
+        # 이기도 하다. 문서 하나로 못박으면 다른 판형 쪽이 어긋난다.
+        # 문서값은 전면 표에 가려 자기 경계를 못 찾은 쪽의 대타다.
+        return [_page_text_with_breaks(
+                    page,
+                    column_split(page.chars, float(page.width)) or fallback)
                 for page in doc.pages]
+
+
+def _document_split_x(pages) -> float | None:
+    """문서의 단 경계를 **한 번** 정한다. 1단 문서면 None.
+
+    쪽마다 따로 재면 안 된다 — 전면 표가 실린 쪽은 가운데가 글자로 덮여
+    빈 띠가 사라지고, 그 쪽만 1단으로 읽혀 두 단이 한 줄에 섞인다
+    (KLI 브리프 제115호 11쪽이 실제로 그랬다: 10쪽은 갈렸는데 11쪽은 안 갈렸다).
+    2단 문서의 단 경계는 쪽마다 바뀌지 않으므로 깨끗한 쪽에서 정해 전체에 쓴다.
+
+    두 쪽 이상에서 같은 자리가 잡혀야 인정한다 — 한 쪽만 잡히면 그 쪽의
+    우연한 여백일 수 있다.
+    """
+    found = []
+    for page in pages:
+        x = column_split(page.chars, float(page.width))
+        if x is not None:
+            found.append(x)
+    if len(found) < 2:
+        return None
+    found.sort()
+    return found[len(found) // 2]
+
+
+# 단 사이 빈 띠의 최소 폭. 실측한 KLI 브리프의 단 간격은 **11pt** 다
+# (x 350~361). 처음에 40pt 로 잡았다가 2단인데도 1단으로 읽혔다 — 단 간격은
+# 생각보다 좁다. 대신 '쪽 전체 높이에 걸쳐 글자가 하나도 없을 것' 을 함께
+# 요구해 우연한 낱말 사이 공백과 가른다(한 줄에만 뚫린 구멍은 안 걸린다).
+_COLUMN_GUTTER = 8.0
+# 가운데 부근에서만 찾는다. 바깥 여백·들여쓰기를 단 경계로 오인하지 않기 위해서다
+# (실측에서 x 128~141 에도 13pt 짜리 띠가 있었는데 그건 왼쪽 단 안의 들여쓰기다).
+_COLUMN_ZONE = (0.35, 0.65)
+
+
+def column_split(chars, page_width: float) -> float | None:
+    """2단이면 단을 가르는 x 를, 아니면 None 을 준다.
+
+    **낱말이 아니라 글자로 잰다.** 낱말 중심으로 히스토그램을 그리면 긴 낱말이
+    골을 메워 2단인 쪽도 1단으로 보인다(실측으로 그랬다). 글자가 덮는 x 구간을
+    칠해 놓고 가운데에서 **아무 글자도 없는 띠**를 찾는다.
+    """
+    if len(chars) < 200:
+        return None
+    covered = set()
+    for ch in chars:
+        for x in range(int(ch["x0"]), int(ch["x1"]) + 1):
+            covered.add(x)
+    lo, hi = page_width * _COLUMN_ZONE[0], page_width * _COLUMN_ZONE[1]
+    best_width, best_mid, start = 0.0, None, None
+    for x in range(int(lo), int(hi) + 1):
+        if x not in covered:
+            if start is None:
+                start = x
+        elif start is not None:
+            if x - start > best_width:
+                best_width, best_mid = x - start, (start + x) / 2
+            start = None
+    if start is not None and hi - start > best_width:
+        best_width, best_mid = hi - start, (start + hi) / 2
+    return best_mid if best_width >= _COLUMN_GUTTER else None
+
+
+def _page_text_with_breaks(page, split_x: float | None) -> str:
+    """한 쪽의 원문. **2단이면 왼쪽 단을 다 읽고 오른쪽 단으로 넘어간다.**
+
+    안 그러면 추출이 두 단을 한 줄에 이어 붙인다 — 실측(KLI 고용·노동브리프
+    제115호 2쪽):
+
+        다. 성장의 대부분이 고용창출이 미미한 반도체 부문 화된 것으로 볼 수 있다.
+
+    앞이 왼쪽 단, 뒤가 오른쪽 단이다. 이런 원문에서 모델이 읽어서 뜻이 통하는
+    문장을 만들면 그 문장은 원문의 부분열이 아니므로 llm_verify 가 전부
+    '원문에 없다'로 거절한다(실제로 KLI 21자리 중 20이 그렇게 떨어졌다).
+    """
+    if split_x is None:
+        return text_with_paragraph_breaks(page.extract_text_lines())
+
+    # **쪽을 잘라서 각각 추출한다.** 줄 객체를 x 로 가르는 것으로는 안 된다 —
+    # extract_text_lines() 가 두 단을 이미 **한 줄 객체로 합쳐** 놓아서, 그
+    # 뒤에 가르면 합쳐진 줄이 통째로 한쪽에 들어갈 뿐이다. 그리고 합쳐진 줄과
+    # 진짜 전면 줄(표 행)은 bbox 로 구별되지 않는다 — 둘 다 경계를 가로지른다.
+    #
+    # 그 대가로 **전면 표는 좌우로 쪼개진다.** 받아들일 만하다: 표를 읽는 것은
+    # 수치 경로(page_texts)이고 이 함수는 근거 경로 전용이다. 근거는 서술
+    # 문장을 뽑는 것이라 반토막 난 표를 인용할 일이 없다.
+    height, width = float(page.height), float(page.width)
+    left = page.crop((0, 0, split_x, height)).extract_text_lines()
+    right = page.crop((split_x, 0, width, height)).extract_text_lines()
+    if not left or not right:
+        return text_with_paragraph_breaks(page.extract_text_lines())
+    # 단 사이는 문단이 갈리는 자리이기도 하다 — 빈 줄로 띄운다.
+    return (text_with_paragraph_breaks(left) + "\n\n"
+            + text_with_paragraph_breaks(right))
 
 
 def find_summary_table(
