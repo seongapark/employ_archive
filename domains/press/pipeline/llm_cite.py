@@ -7,7 +7,8 @@
 따로 놀았다. 둘 다 예외 없이 그럴듯한 숫자를 냈다.
 
 판정과 근거를 함께 받는다. 근거가 없으면 왜 틀렸는지 아무도 못 본다.
-공급자는 둘 중 있는 키를 쓴다 — 판정 로직은 어느 쪽이든 같다.
+공급자는 있는 키를 쓴다(Anthropic → OpenRouter → OpenAI) — 프롬프트와 파싱은
+어느 쪽이든 같고, 요청 모양만 `payload_for` 가 맞춘다.
 
 **논조도 같은 호출에서 받는다.** 고정 어휘표로는 못 센다는 것이 실측으로
 드러났다 — 어휘표 14개('빨간불'·'한파'·'훈풍'…)는 '26.8월분 인용 73건 중
@@ -27,9 +28,14 @@ import requests
 
 ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
+OPENAI_URL = "https://api.openai.com/v1/chat/completions"
 MODEL_ANTHROPIC = "claude-opus-5"
 MODEL_OPENROUTER = "anthropic/claude-opus-5"
+MODEL_OPENAI = "gpt-5.5"        # OPENAI_MODEL 로 바꿀 수 있다
 MAX_TOKENS = 4000
+# OpenAI 의 gpt-5 계열은 답 말고 **추론 토큰**을 따로 쓴다(실측: 기사 1건에
+# 답 57 + 추론 53). 같은 4000 으로 두면 20건짜리 배치가 JSON 중간에서 잘린다.
+MAX_TOKENS_OPENAI = 16000
 TIMEOUT = 180
 BATCH = 20                      # 한 번에 판정할 기사 수
 
@@ -132,7 +138,12 @@ def parse_response(body: str, n_expected: int) -> list[Verdict]:
 
 
 def provider() -> tuple[str, str, dict] | None:
-    """(url, model, headers) — 있는 키를 쓴다. 없으면 None (호출자가 규칙으로 간다)."""
+    """(url, model, headers) — 있는 키를 쓴다. 없으면 None.
+
+    **순서가 곧 선호다.** 인용 판정의 품질은 `claude-opus-5` 로 실측했으므로
+    (규칙과의 불일치 7건이 전부 LLM 이 맞았다) 그 모델을 쓸 수 있으면 그걸 쓴다.
+    OpenAI 는 마지막이다 — 같은 프롬프트로 돌지만 그 실측을 물려받지는 않는다.
+    """
     key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
     if key:
         return (ANTHROPIC_URL, MODEL_ANTHROPIC,
@@ -142,21 +153,38 @@ def provider() -> tuple[str, str, dict] | None:
     if key:
         return (OPENROUTER_URL, MODEL_OPENROUTER,
                 {"Authorization": f"Bearer {key}", "content-type": "application/json"})
+    key = os.environ.get("OPENAI_API_KEY", "").strip()
+    if key:
+        model = os.environ.get("OPENAI_MODEL", "").strip() or MODEL_OPENAI
+        return (OPENAI_URL, model,
+                {"Authorization": f"Bearer {key}", "content-type": "application/json"})
     return None
+
+
+def payload_for(url: str, model: str, prompt: str) -> dict:
+    """공급자마다 토큰 한도의 이름이 다르다.
+
+    OpenAI 의 gpt-5 계열은 `max_tokens` 를 **거부한다**(400: Unsupported
+    parameter). 이름만 다른 게 아니라 뜻도 다르다 — 추론 토큰까지 그 한도에서
+    쓰므로 한도를 넉넉히 잡아야 답이 안 잘린다.
+    """
+    msg = [{"role": "user", "content": prompt}]
+    if "anthropic.com" in url:
+        return {"model": model, "max_tokens": MAX_TOKENS, "messages": msg}
+    if "openai.com" in url:
+        return {"model": model, "max_completion_tokens": MAX_TOKENS_OPENAI,
+                "messages": msg}
+    return {"model": model, "max_tokens": MAX_TOKENS, "messages": msg}
 
 
 def _call_api(prompt: str) -> str:
     got = provider()
     if got is None:
-        raise RuntimeError("ANTHROPIC_API_KEY 도 OPENROUTER_API_KEY 도 없다")
+        raise RuntimeError("ANTHROPIC_API_KEY · OPENROUTER_API_KEY · OPENAI_API_KEY "
+                           "중 아무것도 없다")
     url, model, headers = got
-    if "anthropic.com" in url:
-        payload = {"model": model, "max_tokens": MAX_TOKENS,
-                   "messages": [{"role": "user", "content": prompt}]}
-    else:
-        payload = {"model": model, "max_tokens": MAX_TOKENS,
-                   "messages": [{"role": "user", "content": prompt}]}
-    resp = requests.post(url, headers=headers, json=payload, timeout=TIMEOUT)
+    resp = requests.post(url, headers=headers, json=payload_for(url, model, prompt),
+                         timeout=TIMEOUT)
     if resp.status_code != 200:
         raise ValueError(f"API 가 {resp.status_code} 를 돌려줬다: {resp.text[:300]}")
     data = resp.json()

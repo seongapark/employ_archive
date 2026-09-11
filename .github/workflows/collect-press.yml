@@ -83,10 +83,12 @@ jobs:
         env:
           NAVER_ID: ${{ secrets.NAVER_ID }}
           NAVER_SECRET: ${{ secrets.NAVER_SECRET }}
-          # 둘 중 있는 쪽을 쓴다. 둘 다 없으면 판정 없이 수집만 하고,
-          # 화면에는 그 기사들이 '인용 아님'으로 세어진다(로그에 경고가 남는다).
+          # 있는 쪽을 쓴다(Anthropic → OpenRouter → OpenAI). 하나도 없으면
+          # 판정 없이 수집만 하고, 화면에는 그 기사들이 '인용 아님'으로
+          # 세어진다(로그에 경고가 남는다).
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
         run: |
           python -m domains.press.pipeline.run_round \
             --release "${{ needs.plan.outputs.release }}" \

@@ -100,10 +100,16 @@ def test_judge_batches_and_renumbers_to_the_whole_list():
     assert [v.n for v in got] == list(range(1, 26))
 
 
-def test_provider_prefers_anthropic_then_openrouter_then_none(monkeypatch):
-    monkeypatch.delenv('ANTHROPIC_API_KEY', raising=False)
-    monkeypatch.delenv('OPENROUTER_API_KEY', raising=False)
+def test_provider_prefers_anthropic_then_openrouter_then_openai_then_none(monkeypatch):
+    # 순서가 곧 선호다. 인용 판정 품질은 claude-opus-5 로 실측했으므로 그게 먼저다.
+    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY', 'OPENAI_API_KEY'):
+        monkeypatch.delenv(k, raising=False)
     assert c.provider() is None
+
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-oa-x')
+    url, model, headers = c.provider()
+    assert 'api.openai.com' in url and headers['Authorization'] == 'Bearer sk-oa-x'
+    assert model == c.MODEL_OPENAI
 
     monkeypatch.setenv('OPENROUTER_API_KEY', 'sk-or-x')
     url, model, headers = c.provider()
@@ -112,6 +118,27 @@ def test_provider_prefers_anthropic_then_openrouter_then_none(monkeypatch):
     monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-x')
     url, model, headers = c.provider()
     assert 'anthropic.com' in url and headers['x-api-key'] == 'sk-ant-x'
+
+
+def test_openai_model_can_be_overridden(monkeypatch):
+    monkeypatch.delenv('ANTHROPIC_API_KEY', raising=False)
+    monkeypatch.delenv('OPENROUTER_API_KEY', raising=False)
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-oa-x')
+    monkeypatch.setenv('OPENAI_MODEL', 'gpt-5.5-pro')
+    assert c.provider()[1] == 'gpt-5.5-pro'
+
+
+def test_openai_gets_max_completion_tokens_not_max_tokens():
+    # gpt-5 계열은 max_tokens 를 400 으로 거부한다. 이름만 다른 게 아니라
+    # 추론 토큰까지 그 한도에서 쓰므로 한도도 따로 잡는다.
+    body = c.payload_for(c.OPENAI_URL, 'gpt-5.5', 'p')
+    assert 'max_tokens' not in body
+    assert body['max_completion_tokens'] == c.MAX_TOKENS_OPENAI
+
+    for url in (c.ANTHROPIC_URL, c.OPENROUTER_URL):
+        body = c.payload_for(url, 'm', 'p')
+        assert body['max_tokens'] == c.MAX_TOKENS
+        assert 'max_completion_tokens' not in body
 
 
 def test_blank_key_is_treated_as_absent(monkeypatch):
