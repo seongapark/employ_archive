@@ -1,0 +1,81 @@
+import { test } from 'node:test';
+import assert from 'node:assert/strict';
+import { 불러오기, 미배포, 제외상태, 제외설정 } from '../../app/js/api.js';
+
+const 저장소 = (seed = {}) => {
+  const m = new Map(Object.entries(seed));
+  return { getItem: (k) => m.get(k) ?? null, setItem: (k, v) => m.set(k, String(v)),
+    removeItem: (k) => m.delete(k), _m: m };
+};
+
+test('토큰이 없으면 부르지도 않는다', async () => {
+  let 불렀나 = false;
+  const r = await 불러오기(30, { fetch: async () => { 불렀나 = true; }, store: 저장소() });
+  assert.equal(r.상태, '인증');
+  assert.equal(불렀나, false);
+});
+
+// 배포가 안 끝난 것과 네트워크가 죽은 것은 다른 사실이다. ask 에서 이 구분이 없어
+// 배포 미완료를 네트워크 장애로 읽은 적이 있다(domains/ask/DEPLOY.md).
+test('엔드포인트가 자리표시자면 미배포라고 말한다', () => {
+  assert.equal(미배포('https://REPLACE-AFTER-DEPLOY.workers.dev/api/stats'), true);
+  assert.equal(미배포('https://employ-archive-metrics.x.workers.dev/api/stats'), false);
+});
+
+// 아래 세 테스트는 "배포가 끝난 뒤 fetch 가 실제로 어떻게 분기하는가"만 본다 —
+// 그래서 자리표시자가 아닌 url 을 명시한다. 기본값(API 상수)은 아직 자리표시자라
+// 그걸 그대로 넘기면 fetch 를 부르기도 전에 미배포() 사전 검사에 걸리는 게
+// 맞다 — 그 사전 검사 자체는 바로 아래 별도 테스트에서 확인한다.
+const 배포됨 = 'https://employ-archive-metrics.x.workers.dev/api/stats';
+
+test('401 이면 저장한 토큰을 지운다', async () => {
+  const store = 저장소({ 'ea:token': '틀린값' });
+  const r = await 불러오기(30, {
+    fetch: async () => ({ ok: false, status: 401, json: async () => ({ 오류: '인증' }) }),
+    store, url: 배포됨 });
+  assert.equal(r.상태, '인증');
+  assert.equal(store.getItem('ea:token'), null);
+});
+
+test('네트워크 실패는 연결실패다', async () => {
+  const store = 저장소({ 'ea:token': 'secret' });
+  const r = await 불러오기(30, { fetch: async () => { throw new Error('offline'); },
+    store, url: 배포됨 });
+  assert.equal(r.상태, '연결실패');
+});
+
+test('성공하면 통계를 그대로 준다', async () => {
+  const store = 저장소({ 'ea:token': 'secret' });
+  let 받은 = null;
+  const r = await 불러오기(7, {
+    fetch: async (url, opt) => { 받은 = { url, opt };
+      return { ok: true, status: 200, json: async () => ({ 요약: { 조회: 3 } }) }; },
+    store, url: 배포됨 });
+  assert.equal(r.상태, 'ok');
+  assert.equal(r.통계.요약.조회, 3);
+  assert.match(받은.url, /days=7/);
+  assert.equal(받은.opt.headers.authorization, 'Bearer secret');
+});
+
+// 토큰 검사 뒤, fetch 를 부르기 전에 미배포() 가 가로챈다는 것 자체를 확인한다 —
+// url 을 안 넘기면 기본값이 자리표시자이므로, 이 검사가 없으면 admin.js 가
+// 실제 배포 전에 "서버에 연결하지 못했다" 를 잘못 보여줄 것이다(Step 8 참고).
+test('기본 url(자리표시자)이면 fetch 없이 미배포다', async () => {
+  const store = 저장소({ 'ea:token': 'secret' });
+  let 불렀나 = false;
+  const r = await 불러오기(30, { fetch: async () => { 불렀나 = true; }, store });
+  assert.equal(r.상태, '미배포');
+  assert.equal(불렀나, false);
+});
+
+// 같은 오리진이라 여기서 켜면 여섯 앱 전부에 적용된다.
+test('제외 스위치를 켜고 끈다', () => {
+  const store = 저장소();
+  assert.equal(제외상태(store), false);
+  제외설정(store, true);
+  assert.equal(store.getItem('ea:off'), '1');
+  assert.equal(제외상태(store), true);
+  제외설정(store, false);
+  assert.equal(store.getItem('ea:off'), null);
+  assert.equal(제외상태(store), false);
+});

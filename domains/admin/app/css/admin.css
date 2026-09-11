@@ -1,0 +1,113 @@
+/* 관리자 화면. 한 페이지 스크롤이라 탭도 라우터도 없다.
+   `.app { height: 100dvh }`(core/base.css)를 건드리지 않는다 — 스크롤 주체는
+   `.screen` 이어야 하고, min-height 로 바꾸면 헤더가 밀려 나간다. */
+:root {
+  /* Task 7 Step 1 에서 dataviz 팔레트 검증기로 확정한 값이다 — forecast 는
+     채도 하한, hub 는 정상시각 구분 하한 때문에 바뀌었다. 되돌리지 마라. */
+  --dom-employment: #23508f;
+  --dom-press:      #b8472f;
+  --dom-forecast:   #0f9a6e;
+  --dom-reports:    #7a5ba6;
+  --dom-ask:        #9a6b15;
+  --dom-hub:        #4d5563;
+}
+
+.screen { padding: 12px; }
+.sec { font-size: 13px; color: var(--text-secondary); margin: 20px 0 8px; font-weight: 600; }
+.empty { color: var(--text-muted); font-size: 13px; padding: 12px 0; }
+.note { color: var(--text-muted); font-size: 12px; margin-top: 8px; line-height: 1.5; }
+
+/* ── 기간 ── */
+.periods { display: flex; gap: 6px; margin-bottom: 12px; }
+.period {
+  flex: 1; padding: 8px 0; border: 1px solid var(--border); border-radius: 8px;
+  background: var(--card); color: var(--text-secondary); font: inherit; font-size: 13px;
+  cursor: pointer;
+}
+.period--on { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+/* ── 요약 ── */
+.summary { display: flex; gap: 8px; }
+.summary__cell {
+  flex: 1; background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 12px; text-align: center;
+}
+.summary__label { font-size: 12px; color: var(--text-secondary); }
+.summary__value { font-size: 22px; font-weight: 700; margin: 2px 0; }
+.summary__new { font-size: 13px; color: var(--text-secondary); margin-top: 8px; }
+
+/* ── 도메인별 ── */
+.domains { display: flex; flex-direction: column; gap: 8px; }
+.dom { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+.dom__head { display: flex; align-items: center; gap: 6px; }
+.dom__dot { width: 9px; height: 9px; border-radius: 50%; flex: none; }
+.dom__name { flex: 1; font-size: 14px; font-weight: 600; }
+.dom__visitors { font-size: 16px; font-weight: 700; }
+.dom__bar { height: 5px; border-radius: 3px; background: var(--bg); margin: 8px 0 6px; overflow: hidden; }
+.dom__bar i { display: block; height: 100%; }
+.dom__meta { font-size: 12px; color: var(--text-secondary); }
+
+/* ── 추이 ── */
+.trend { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 8px; }
+.legend { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; font-size: 11px; color: var(--text-secondary); }
+.legend__i { display: inline-flex; align-items: center; gap: 4px; }
+.legend__i i { width: 8px; height: 8px; border-radius: 2px; }
+
+/* ── 목록 표 ──
+   table-layout: fixed 와 overflow-wrap 이 함께 있어야 긴 경로·호스트가 표를
+   400px 밖으로 밀어내지 않는다. 가로 스크롤은 이 화면에 없어야 한다. */
+.rows {
+  width: 100%; table-layout: fixed; border-collapse: collapse;
+  background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+}
+.rows td { padding: 8px 10px; border-top: 1px solid var(--border); font-size: 13px; }
+.rows tr:first-child td { border-top: 0; }
+.rows__tag { width: 76px; font-size: 11px; font-weight: 600; }
+.rows__key { overflow-wrap: anywhere; color: var(--text); }
+.rows__bar { width: 68px; }
+.rows__bar i { display: block; height: 5px; border-radius: 3px; background: var(--accent); min-width: 2px; }
+.rows__num { width: 56px; text-align: right; color: var(--text-secondary); }
+
+/* ── 유입 종류 ── */
+.kinds { display: flex; gap: 6px; margin-bottom: 8px; }
+.kind {
+  flex: 1; background: var(--card); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 4px; text-align: center;
+}
+.kind__name { font-size: 12px; color: var(--text-secondary); }
+.kind__num { font-size: 17px; font-weight: 700; }
+.kind__pct { font-size: 11px; color: var(--text-muted); }
+
+/* ── 분포 셋 ── */
+.dist { margin-bottom: 12px; }
+.dist__title { font-size: 12px; color: var(--text-secondary); margin: 0 0 6px; font-weight: 600; }
+
+/* ── 잠금 ── */
+.unlock {
+  display: flex; flex-direction: column; gap: 10px; max-width: 320px;
+  margin: 48px auto; background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 20px;
+}
+.unlock__label { font-size: 13px; color: var(--text-secondary); }
+.unlock__input {
+  font: inherit; padding: 10px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--bg);
+}
+.unlock__go {
+  font: inherit; padding: 10px; border: 0; border-radius: 8px;
+  background: var(--accent); color: #fff; cursor: pointer;
+}
+.unlock__hint { font-size: 12px; color: var(--text-muted); margin: 0; }
+
+/* ── 도구 ── */
+.tools {
+  margin: 24px 0 8px; padding: 12px; background: var(--card);
+  border: 1px solid var(--border); border-radius: 10px;
+  display: flex; flex-direction: column; gap: 10px;
+}
+.toggle { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.toggle__btn {
+  font: inherit; font-size: 13px; align-self: flex-start; padding: 6px 10px;
+  border: 1px solid var(--border); border-radius: 8px;
+  background: var(--bg); color: var(--text-secondary); cursor: pointer;
+}
