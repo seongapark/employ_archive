@@ -9,10 +9,21 @@ export const ENDPOINT = 'https://REPLACE-AFTER-DEPLOY.workers.dev/api/hit';
 // 숫자를 품은 세그먼트는 값으로 본다. 라우트 이름(overview, industry, sex)에는
 // 숫자가 없고 값(산업코드, 연도, 보고서 id)에는 있다 — 이 비대칭이 근거다.
 // 언젠가 `/top10` 같은 라우트 이름이 생기면 예외 한 줄을 더한다.
+//
+// `key=value` 모양의 세그먼트(질의응답의 `#/q=검색어`)는 따로 다룬다. 값에 숫자가
+// 섞여 있는지는 우연이라 방어선이 못 된다 — 영문 검색어는 숫자가 없어 그대로
+// 새어 나간다. 그래서 `=` 가 있으면 무조건 키만 남기고 값은 버린다: "검색
+// 화면이 쓰였다"는 남기되 "무엇을 검색했는지"는 안 남긴다(design §4.3).
+const 세그먼트접기 = (s) => {
+  const eq = s.indexOf('=');
+  if (eq >= 0) return `${s.slice(0, eq)}=:id`;
+  return /\d/.test(s) ? ':id' : s;
+};
+
 export function 경로정규화(hash) {
   const segs = String(hash ?? '').replace(/^#/, '').split('/').filter(Boolean).slice(0, 4);
   if (!segs.length) return '/';
-  return `/${segs.map((s) => (/\d/.test(s) ? ':id' : s)).join('/')}`;
+  return `/${segs.map(세그먼트접기).join('/')}`;
 }
 
 // 호스트만 남긴다. 검색어(쿼리)는 안 가져간다 — 우리가 쓸 데도 없으면서 남의 것이다.

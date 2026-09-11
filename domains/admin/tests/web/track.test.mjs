@@ -17,6 +17,18 @@ test('세그먼트는 넷까지만 남긴다', () => {
   assert.equal(경로정규화('#/a/b/c/d/e/f'), '/a/b/c/d');
 });
 
+// 질의응답 앱은 검색어를 `location.hash = '#/q=' + encodeURIComponent(q)` 로 싣는다
+// (domains/ask/app/js/ask.js). 지금까지는 한글 검색어가 퍼센트 인코딩에 숫자가
+// 섞여 우연히 `:id` 로 접혔을 뿐이라 방어선이 아니었다 — 영문 검색어는 숫자가
+// 없어 그대로 D1 에 남는다. 여기서 진짜로 시험하는 것은 영문이다: 한글이
+// 통과한다고 이 규칙이 옳다는 증거가 안 된다.
+test('자기 해시의 검색어를 안 가져간다 — 키만 남고 값은 :id 로 접힌다', () => {
+  assert.equal(경로정규화('#/q=employment'), '/q=:id');
+  assert.equal(경로정규화('#/q=%EC%B2%A8%EB%B6%80'), '/q=:id');
+  // 기존 규칙(숫자 세그먼트 뭉개기)은 `=` 가 없는 자리에서 그대로 산다.
+  assert.equal(경로정규화('#/b/industry/300'), '/b/industry/:id');
+});
+
 test('유입은 호스트만 남기고 검색어는 안 가져간다', () => {
   assert.equal(유입호스트('https://www.google.com/search?q=취업자', 'seongapark.github.io'),
     'google.com');
