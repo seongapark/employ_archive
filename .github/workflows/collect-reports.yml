@@ -44,6 +44,20 @@ jobs:
         # 서지는 이미 위에서 받아 뒀다.
         continue-on-error: true
         run: python -m domains.reports.pipeline.enrich
+      - name: 빌드
+        env:
+          PYTHONIOENCODING: utf-8
+        run: python -m domains.reports.pipeline.build
+      - name: 추천 판정
+        env:
+          PYTHONIOENCODING: utf-8
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        # 새로 들어온 것만 판정한다(id 캐시). 실패해도 그날 수집을 버리지
+        # 않는다 — 아카이브 본체는 키 없이도 돌고, 추천은 다음 회차에 붙는다.
+        continue-on-error: true
+        run: python -m domains.reports.pipeline.recommend
       - name: Commit data
         run: |
           git config user.name "reports-bot"
