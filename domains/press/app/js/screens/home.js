@@ -16,20 +16,22 @@ function kpis(round) {
   const r = round.regular;
   const st = round.stance || { label: '판정 없음', judged: 0 };
   const cells = [
-    { n: r.kept, label: '수집', sub: `검색 ${r.collected}건 중`, info: true },
+    { n: r.kept, label: '수집', sub: '', info: true },
     { n: r.cited, label: '인용', sub: `해당 보도자료 직접인용 ${citeRate(round)}%` },
     // 내역(부정12·긍정31)은 바로 아래 막대와 범례가 말한다 — 여기서 또 쓰면
     // 같은 숫자가 두 줄 연달아 나온다.
     { n: st.label, label: '언론 논조',
       sub: st.judged ? `인용 ${st.judged}건 기준` : 'LLM 판정 필요', small: true },
   ];
+  // 이름이 먼저, 숫자가 뒤. 숫자만 셋이 나란히 서면 무엇의 숫자인지 밑줄까지
+  // 내려가 읽어야 한다 — 셋을 훑는 눈이 매번 위아래로 왕복한다.
   const body = cells.map((c) => `
     <div class="card kpi" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;">
       ${c.info ? `<button type="button" class="kpi__info" data-info
           aria-expanded="false" aria-controls="collectInfo" aria-label="수집 기준 보기">i</button>` : ''}
-      <div class="num" style="font-size:${c.small ? 15 : 22}px;font-weight:700;line-height:1.3;padding:${c.small ? '3px 0 2px' : '0'};">${esc(String(c.n))}</div>
       <div style="font-size:11px;color:var(--text-secondary);">${esc(c.label)}</div>
-      <div class="num" style="font-size:10px;color:var(--text-muted);">${esc(c.sub)}</div>
+      <div class="num" style="font-size:${c.small ? 15 : 22}px;font-weight:700;line-height:1.3;padding:${c.small ? '2px 0 1px' : '0'};">${esc(String(c.n))}</div>
+      ${c.sub ? `<div class="num" style="font-size:10px;color:var(--text-muted);">${esc(c.sub)}</div>` : ''}
     </div>`).join('');
   // 수집 기준은 늘 펼쳐 두지 않는다 — 매번 읽을 글은 아니지만, 숫자만 있고
   // 기준이 없으면 '81건'이 무엇의 81건인지 알 수 없어 지울 수도 없다.
