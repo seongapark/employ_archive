@@ -67,3 +67,65 @@ def parse_list(html: str, board: Board) -> list[dict]:
             'dept': common.text(dept.group(1)) if dept else '',
         })
     return items
+
+
+# 상세 본문 블록. class="dbdata" 뒤에 공백이 하나 붙는 게시판도 있어 \s* 로
+# 흡수한다. 안쪽에 <div> 가 없어(전부 <p>) 첫 </div> 가 곧 블록의 끝이다.
+_BODY = re.compile(r'<div class="dbdata\s*"[^>]*>(.*?)</div>\s*(?:<div|</div>)', re.S)
+_FILE = re.compile(r'<a href="(/fileSrc/[^"]+)"')
+# 이슈노트·심층연구는 초록 앞에 "본 내용은 ... 확인 가능합니다" 출처 안내문이
+# 붙는 회차가 있다. 없는 회차도 있어 없으면 그냥 통과시킨다.
+_SOURCE_NOTE = re.compile(
+    r'^\s*\*?\s*본 내용은.*?확인 가능합니다\s*\.?', re.S)
+_ATTACH_ONLY = re.compile(r'첨부파일')
+
+
+def _strip_source_note(text: str) -> str:
+    return _SOURCE_NOTE.sub('', text or '').strip()
+
+
+def _body_text(html: str) -> str:
+    m = _BODY.search(html or '')
+    return common.text(m.group(1)) if m else ''
+
+
+def _body_lines(html: str) -> list[str]:
+    m = _BODY.search(html or '')
+    return common.lines(m.group(1)) if m else []
+
+
+def parse_detail(html: str, item: dict, board: Board) -> RawReport:
+    published, precision = normalize_published(item['published_raw'])
+    abstract, toc, note = None, [], None
+
+    if board.body == 'toc':
+        toc = [line for line in _body_lines(html) if line]
+        note = '요약 없음'
+    elif board.body == 'none':
+        note = '요약 없음'
+    else:
+        text = _strip_source_note(_body_text(html))
+        # 안내문만 든 회차를 초록으로 세면 결측률이 거짓으로 내려간다.
+        if len(text) < 80 and _ATTACH_ONLY.search(text):
+            note = '요약 없음'
+        elif text:
+            abstract = text
+        else:
+            note = '요약 없음'
+
+    file_m = _FILE.search(html or '')
+    return RawReport(
+        id=report_id('bok', board.id_prefix + item['native_id']),
+        org='bok',
+        board=board.id,
+        series=board.series,
+        title=item['title'],
+        authors=[item['dept']] if item.get('dept') else [],
+        published=published,
+        date_precision=precision,
+        landing_url=item['detail_url'],
+        file_url=common.absolute(BASE, file_m.group(1)) if file_m else None,
+        abstract=abstract,
+        toc=toc,
+        abstract_note=note,
+    )
