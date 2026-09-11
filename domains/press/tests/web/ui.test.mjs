@@ -127,13 +127,15 @@ test('pieChart: 0건 항목은 조각이 없어도 이름이 남는다', () => {
   // 「구직급여 보도 0건」은 이 도메인이 잡아야 할 사실이다. 조각이 없다고
   // 지우면 화면에서 사라진다.
   const h = pieChart('산업', INDUSTRY);
-  assert.ok(h.includes('보도 0건 도소매업 · 보건복지업'));
+  // 이름이 먼저, 설명이 뒤 — 읽는 순서와 같게.
+  assert.ok(h.includes('도소매업 · 보건복지업 보도 0건'));
 });
 
 test('pieChart: 좁은 조각은 레이블 대신 아래 줄에서 부른다', () => {
   const h = pieChart('산업', INDUSTRY);
-  assert.ok(h.includes('작은 조각 서비스업 1'));
+  assert.ok(h.includes('건설업 11 · 서비스업 1'));
   assert.ok(!h.includes('>서비스업</text>'));
+  assert.ok(!h.includes('>건설업</text>'));      // 10% 는 12% 문턱 아래다
   assert.ok(h.includes('>제조업</text>'));
 });
 
@@ -148,6 +150,11 @@ test('pieChart: 100% 는 호가 아니라 원 하나다', () => {
 test('pieChart: 축 이름 옆에 중복 포함을 붙인다', () => {
   // 조각 합이 인용 기사 수가 아니다 — 제조업이 반도체·조선을 품는다.
   assert.ok(pieChart('산업', INDUSTRY).includes('중복 포함'));
+});
+
+test('pieChart: 조각이 하나면 중복 포함을 안 붙인다 — 겹칠 것이 없다', () => {
+  const h = pieChart('연령', [{ name: '청년', n: 13 }, { name: '30대', n: 0 }]);
+  assert.ok(!h.includes('중복 포함'));
 });
 
 test('pieChart: 전부 0건이면 원을 그리지 않는다', () => {

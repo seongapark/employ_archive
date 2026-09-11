@@ -84,9 +84,11 @@ function coverageCard(round) {
   const c = round.coverage;
   return card(`
     <div style="font-size:13px;font-weight:700;margin-bottom:8px;">기사화 현황</div>
-    ${pieChart('보도자료 섹션', c.section)}
-    ${pieChart('연령', c.age)}
-    ${pieChart('산업', c.industry)}`);
+    <div class="pie__row">
+      ${pieChart('섹션', c.section)}
+      ${pieChart('연령', c.age)}
+      ${pieChart('산업', c.industry)}
+    </div>`);
 }
 
 function issueCard(round, ctx) {

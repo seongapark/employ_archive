@@ -101,7 +101,7 @@ function arcPath(cx, cy, r, a0, a1) {
  *  (제조업이 반도체·조선을 품는다). 그래서 축 이름 옆에 「중복 포함」을 붙인다.
  */
 export function pieChart(title, rows, opts = {}) {
-  const { note = '중복 포함', size = 150, minLabel = 9 } = opts;
+  const { note = '중복 포함', minLabel = 12 } = opts;
   const total = rows.reduce((n, r) => n + r.n, 0);
 
   const cx = 50;
@@ -141,24 +141,29 @@ export function pieChart(title, rows, opts = {}) {
         text-anchor="middle" class="pie__lab pie__lab--n">${d.n} · ${pct}%</text>`);
   }
 
-  // 레이블을 못 단 조각과 0건 항목은 이름만 한 줄로 부른다.
+  // 레이블을 못 단 조각과 0건 항목은 이름만 아래에 부른다.
+  // **이름이 먼저 오고 설명이 뒤에 붙는다** — 「보도 0건 구직급여」보다
+  // 「구직급여 보도 0건」이 읽는 순서와 같다.
   const tiny = drawn.filter((d, k) => labels[k] === null).map((d) => `${d.name} ${d.n}`);
   const zero = rows.filter((x) => !x.n).map((x) => x.name);
   const tail = [
-    tiny.length ? `작은 조각 ${tiny.join(' · ')}` : '',
-    zero.length ? `보도 0건 ${zero.join(' · ')}` : '',
-  ].filter(Boolean).join('  ·  ');
+    tiny.length ? tiny.join(' · ') : '',
+    zero.length ? `${zero.join(' · ')} 보도 0건` : '',
+  ].filter(Boolean);
 
   const body = total
-    ? `<svg class="pie__svg" viewBox="0 0 100 100" width="${size}" height="${size}"
+    ? `<svg class="pie__svg" viewBox="0 0 100 100"
          role="img" aria-label="${esc(title)} 구성">${slices.join('')}${labels.join('')}</svg>`
-    : `<div class="pie__empty" style="width:${size}px;height:${size}px;">0건</div>`;
+    : '<div class="pie__empty">0건</div>';
+
+  // 조각이 하나뿐이면 겹칠 것도 없다 — 100% 옆의 「중복 포함」은 헛말이다.
+  const noteHtml = note && drawn.length > 1
+    ? `<span class="pie__note">${esc(note)}</span>` : '';
 
   return `<div class="pie">
-    <div class="sec-title">${esc(title)}
-      <span class="pie__note">${esc(note)}</span></div>
+    <div class="sec-title">${esc(title)}${noteHtml}</div>
     ${body}
-    ${tail ? `<div class="pie__tail">${esc(tail)}</div>` : ''}
+    ${tail.map((t) => `<div class="pie__tail">${esc(t)}</div>`).join('')}
   </div>`;
 }
 
