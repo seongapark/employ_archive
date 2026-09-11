@@ -18,21 +18,27 @@ import {
 // 그림에 쓰는 기간. 25개월이면 휴대폰 가로폭에서 막대가 아직 구분된다.
 const TREND_MONTHS = 25;
 
+// 주요 지표는 **행이 지표, 열이 연령 기준**인 2×3 판이다.
+//
+// 같은 열을 세로로 읽으면 한 연령대의 고용률과 실업률이 나란히 오고, 같은 행을
+// 가로로 읽으면 한 지표가 연령에 따라 어떻게 갈리는지가 보인다. 청년 고용률
+// 44.1% 는 그 옆에 15~64세 70.4% 가 없으면 높은지 낮은지 알 수 없는 숫자다.
+//
+// 연령 기준을 세 열에 고정했으므로 지표를 한 행 더 얹기도 쉽다(참가율 등).
+const KPI_SCOPES = [
+  { label: '15세 이상', sub: '전체' },
+  { label: '15~64세', sub: 'OECD 기준', breakdown: 'scope', category: '15-64' },
+  { label: '15~29세', sub: '청년층', breakdown: 'scope', category: '15-29' },
+];
+
 // 출처마다 발표하는 지표가 다르다. 지금은 경활만 총괄 지표를 읽는다 —
 // 사업체·행정통계는 이 화면을 보고 넓히기로 했다(2026-09-11 사용자 판단).
 // 여기 없는 출처는 지표 구역 자체가 뜨지 않는다.
 const INDICATORS = {
   eaps: {
-    // KPI 는 보도자료가 직접 앞세우는 넷이다. 그래서 아래 접힌 요약과 숫자가
-    // 딱 맞아떨어진다 — 요약이 "15~64세 고용률 70.4%" 라고 말하면 타일도 70.4% 다.
-    kpis: [
-      { label: '15~64세 고용률', sub: 'OECD 비교기준', indicator: 'employment_rate',
-        breakdown: 'scope', category: '15-64' },
-      { label: '청년층 고용률', sub: '15~29세', indicator: 'employment_rate',
-        breakdown: 'scope', category: '15-29' },
-      { label: '실업률', sub: '15세 이상', indicator: 'unemployment_rate' },
-      { label: '청년층 실업률', sub: '15~29세', indicator: 'unemployment_rate',
-        breakdown: 'scope', category: '15-29' },
+    kpiRows: [
+      { name: '고용률', indicator: 'employment_rate' },
+      { name: '실업률', indicator: 'unemployment_rate' },
     ],
     trends: [
       { name: '취업자', indicator: 'headcount' },
@@ -78,18 +84,38 @@ function moversHtml(groups) {
     + '<p class="movers__note">전년동월대비 증감 · 누르면 세 출처를 나란히 봅니다</p>';
 }
 
-function kpiHtml(spec, point) {
+function kpiHtml(scope, point) {
+  const label = `<div class="kpi__label">${esc(scope.label)}<span class="kpi__sub">${esc(scope.sub)}</span></div>`;
   if (!point) {
-    return `<div class="kpi kpi--empty">
-      <div class="kpi__label">${esc(spec.label)}<span class="kpi__sub">${esc(spec.sub)}</span></div>
-      <div class="kpi__value kpi__value--empty">미발표</div>
-    </div>`;
+    // 없는 달에 빈 칸을 두면 판이 무너져 열이 어긋난다. 자리는 지키되 숫자는
+    // 짓지 않는다.
+    return `<div class="kpi kpi--empty">${label}
+      <div class="kpi__value kpi__value--empty">미발표</div></div>`;
   }
-  return `<div class="kpi">
-    <div class="kpi__label">${esc(spec.label)}<span class="kpi__sub">${esc(spec.sub)}</span></div>
+  return `<div class="kpi">${label}
     <div class="kpi__value num">${esc(fmtValue(point.value, point.unit))}</div>
     <div class="kpi__delta num ${deltaTone(point.yoy)}">${esc(fmtChange(point.yoy, point.unit))}</div>
   </div>`;
+}
+
+// 순수 함수라 테스트가 된다 — 이 판의 값이 어긋나면 화면에서 눈으로 찾기 전에
+// 여기서 걸린다.
+export function kpiBlockHtml(series, { source, period } = {}) {
+  const spec = INDICATORS[source];
+  if (!spec || !spec.kpiRows) return '';
+  const rows = spec.kpiRows.map(row => {
+    const tiles = KPI_SCOPES.map(scope => {
+      const points = indicatorSeries(series, {
+        source, indicator: row.indicator,
+        breakdown: scope.breakdown || 'total', category: scope.category || null,
+      });
+      return kpiHtml(scope, points.find(p => p.period === period) || null);
+    }).join('');
+    // 행 이름은 한 번만 쓴다. 타일마다 `고용률` 을 반복하면 여섯 칸이 전부
+    // 같은 말로 시작해 정작 다른 것(연령 기준)이 묻힌다.
+    return `<h3 class="kpis__row">${esc(row.name)}</h3><div class="kpis">${tiles}</div>`;
+  }).join('');
+  return `<h2 class="section__title">주요 지표</h2>${rows}`;
 }
 
 // 머리줄이 스크럽 라벨을 겸한다. 그림 위에 뜨는 말풍선을 따로 두면 손가락이
@@ -168,14 +194,7 @@ export function render(el, ctx) {
   let trendBlock = '';
 
   if (spec) {
-    const kpis = spec.kpis.map(k => {
-      const points = indicatorSeries(ctx.series, {
-        source: code, indicator: k.indicator,
-        breakdown: k.breakdown || 'total', category: k.category || null,
-      });
-      return kpiHtml(k, points.find(p => p.period === ctx.state.period) || null);
-    }).join('');
-    kpiBlock = `<h2 class="section__title">주요 지표</h2><div class="kpis">${kpis}</div>`;
+    kpiBlock = kpiBlockHtml(ctx.series, { source: code, period: ctx.state.period });
 
     const drawn = spec.trends.map(t => {
       const points = indicatorSeries(ctx.series, {
