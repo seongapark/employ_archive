@@ -25,11 +25,19 @@ const TREND_MONTHS = 25;
 // 44.1% 는 그 옆에 15~64세 70.4% 가 없으면 높은지 낮은지 알 수 없는 숫자다.
 //
 // 연령 기준을 세 열에 고정했으므로 지표를 한 행 더 얹기도 쉽다(참가율 등).
-const KPI_SCOPES = [
-  { label: '15세 이상', sub: '전체' },
-  { label: '15~64세', sub: 'OECD 기준', breakdown: 'scope', category: '15-64' },
-  { label: '15~29세', sub: '청년층', breakdown: 'scope', category: '15-29' },
+const SCOPES = [
+  { key: 'total', label: '15세 이상', tab: '15세 이상', sub: '전체' },
+  { key: '15-64', label: '15~64세', tab: '15~64세', sub: 'OECD 기준',
+    breakdown: 'scope', category: '15-64' },
+  { key: '15-29', label: '15~29세', tab: '청년', sub: '청년층',
+    breakdown: 'scope', category: '15-29' },
 ];
+
+export const DEFAULT_SCOPE = 'total';
+
+function scopeOf(key) {
+  return SCOPES.find(s => s.key === key) || SCOPES[0];
+}
 
 // 출처마다 발표하는 지표가 다르다. 지금은 경활만 총괄 지표를 읽는다 —
 // 사업체·행정통계는 이 화면을 보고 넓히기로 했다(2026-09-11 사용자 판단).
@@ -104,7 +112,7 @@ export function kpiBlockHtml(series, { source, period } = {}) {
   const spec = INDICATORS[source];
   if (!spec || !spec.kpiRows) return '';
   const rows = spec.kpiRows.map(row => {
-    const tiles = KPI_SCOPES.map(scope => {
+    const tiles = SCOPES.map(scope => {
       const points = indicatorSeries(series, {
         source, indicator: row.indicator,
         breakdown: scope.breakdown || 'total', category: scope.category || null,
@@ -125,6 +133,47 @@ function trendHead(name, point) {
     <span class="trend__month num">${esc(monthLabel(point.period))}</span>
     <span class="trend__now num">${esc(fmtValue(point.value, point.unit))}</span>
     <span class="trend__delta num ${deltaTone(point.yoy)}">${esc(fmtChange(point.yoy, point.unit))}</span>`;
+}
+
+// 추이는 세 범위 중 하나를 본다. KPI 판이 세 범위를 한꺼번에 보여주는 것과
+// 역할이 다르다 — 저기는 지금 값을 나란히 놓아 비교하는 자리고, 여기는 한
+// 범위를 골라 시간에 따라 훑는 자리다. 한 그림에 세 범위를 겹치면 25개월짜리
+// 낮은 그림에 선이 셋 들어가 아무것도 안 읽힌다.
+function scopeTabs(current) {
+  return `<div class="scopes" role="tablist">${SCOPES.map(s =>
+    `<button type="button" class="scopes__tab${s.key === current ? ' scopes__tab--active' : ''}"
+      role="tab" aria-selected="${s.key === current}" data-scope="${esc(s.key)}">${esc(s.tab)}</button>`
+  ).join('')}</div>`;
+}
+
+// 순수 함수. 그림에 쓸 점들(byIndicator)을 같이 돌려준다 — 스크럽이 그림과
+// 똑같은 점 목록을 봐야 짚은 달과 라벨이 어긋나지 않는다.
+export function trendSection(series, { source, scope = DEFAULT_SCOPE } = {}) {
+  const spec = INDICATORS[source];
+  const byIndicator = new Map();
+  if (!spec || !spec.trends) return { html: '', byIndicator };
+
+  const picked = scopeOf(scope);
+  const drawn = spec.trends.map(t => {
+    const points = indicatorSeries(series, {
+      source, indicator: t.indicator, months: TREND_MONTHS,
+      breakdown: picked.breakdown || 'total', category: picked.category || null,
+    });
+    // 그 범위가 안 내는 지표는 자리도 만들지 않는다. 빈 그림을 그리면 "안 낸다"
+    // 는 사실이 "0 이다" 처럼 보인다.
+    if (!points.length) return '';
+    byIndicator.set(t.indicator, points);
+    return trendHtml(t, points);
+  }).filter(Boolean).join('');
+
+  if (!drawn) return { html: '', byIndicator };
+  return {
+    html: `<div class="section__head">
+        <h2 class="section__title section__title--inline">추이</h2>
+        ${scopeTabs(picked.key)}
+      </div><div class="trends">${drawn}</div>`,
+    byIndicator,
+  };
 }
 
 function trendHtml(spec, points) {
@@ -188,26 +237,9 @@ export function render(el, ctx) {
     return;
   }
 
-  const spec = INDICATORS[code];
-  const byIndicator = new Map();
-  let kpiBlock = '';
-  let trendBlock = '';
-
-  if (spec) {
-    kpiBlock = kpiBlockHtml(ctx.series, { source: code, period: ctx.state.period });
-
-    const drawn = spec.trends.map(t => {
-      const points = indicatorSeries(ctx.series, {
-        source: code, indicator: t.indicator, months: TREND_MONTHS,
-      });
-      if (!points.length) return '';
-      byIndicator.set(t.indicator, points);
-      return trendHtml(t, points);
-    }).filter(Boolean).join('');
-    if (drawn) {
-      trendBlock = `<h2 class="section__title">추이</h2><div class="trends">${drawn}</div>`;
-    }
-  }
+  const scope = ctx.state.trendScope || DEFAULT_SCOPE;
+  const kpiBlock = kpiBlockHtml(ctx.series, { source: code, period: ctx.state.period });
+  const trend = trendSection(ctx.series, { source: code, scope });
 
   const groups = topMovers(ctx.series, {
     source: code, period: ctx.state.period,
@@ -221,7 +253,7 @@ export function render(el, ctx) {
     // 같은 화면으로 가는 링크가 된다.
     + `<div class="cards">${cardHtml(card, { linked: false })}</div>`
     + kpiBlock
-    + trendBlock
+    + `<div class="trendbox">${trend.html}</div>`
     + `<details class="fold">
         <summary>보도자료 요약 ${card.summaryLines.length
           ? `<span class="fold__count">${card.summaryLines.length}줄</span>` : ''}</summary>
@@ -234,5 +266,24 @@ export function render(el, ctx) {
       </details>` : '');
 
   bindSwitcher(el, ctx);
-  bindScrub(el, byIndicator);
+  bindScrub(el, trend.byIndicator);
+
+  // 범위를 바꿀 때 화면 전체를 다시 그리지 않는다. 스위치는 화면 중간에 있어서
+  // 전체를 다시 그리면 스크롤이 맨 위로 튀고 방금 누른 스위치가 시야 밖으로
+  // 사라진다. 추이 상자 안만 갈아 끼운다.
+  //
+  // 듣는 자리는 화면(el)이다. 스위치 자체에 걸면 갈아 끼우는 순간 그 버튼이
+  // 사라져 두 번째 누름부터 아무 일도 안 일어난다.
+  el.addEventListener('click', event => {
+    const tab = event.target.closest('.scopes__tab');
+    if (!tab) return;
+    const next = tab.dataset.scope;
+    if (next === (ctx.state.trendScope || DEFAULT_SCOPE)) return;
+    ctx.state.trendScope = next;
+    const box = el.querySelector('.trendbox');
+    if (!box) return;
+    const drawn = trendSection(ctx.series, { source: code, scope: next });
+    box.innerHTML = drawn.html;
+    bindScrub(el, drawn.byIndicator);
+  });
 }
