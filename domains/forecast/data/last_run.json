@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-09-10T16:46:26.876576+09:00",
+  "run_at": "2026-09-11T16:40:23.048986+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -35,8 +35,15 @@
       "ok": true,
       "fetched": 9,
       "added": 0
+    },
+    "moef": {
+      "ok": false,
+      "fetched": 0,
+      "added": 0
     }
   },
   "conflicts": [],
-  "errors": []
+  "errors": [
+    "moef: Timeout: Failed to perform, curl: (28) Connection timed out after 120002 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
+  ]
 }
