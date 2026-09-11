@@ -26,11 +26,11 @@ from . import boards as boards_mod
 from . import build as build_mod
 from . import http, store
 from .models import CUTOFF, RawReport, normalize_published, report_id
-from .sites import kdi, keis, kiet, kli
+from .sites import bok, kdi, keis, kiet, kli
 
 KST = timezone(timedelta(hours=9))
 DATA = Path(__file__).resolve().parent.parent / 'data'
-SITES = {'kli': kli, 'keis': keis, 'kdi': kdi, 'kiet': kiet}
+SITES = {'kli': kli, 'keis': keis, 'kdi': kdi, 'kiet': kiet, 'bok': bok}
 DETAIL_CAP = 40          # 회차당 게시판별 상세 조회 상한
 MAX_PAGES = 60
 DELAY = 1.0
@@ -112,8 +112,18 @@ def write_last_run(results: dict, unregistered_found: list[str]) -> None:
     DATA.mkdir(parents=True, exist_ok=True)
     path = DATA / 'last_run.json'
     last = json.loads(path.read_text(encoding='utf-8')) if path.exists() else {}
+    # boards 는 덮어쓰기가 아니라 병합이다. --board/--org 로 일부만 돌리면
+    # results 에는 그 게시판들만 들어 있는데, 통째로 덮어쓰면 이번 회차에
+    # 돌지 않은 나머지 게시판의 최근 기록이 사라진다. check_run.py 가 이
+    # boards 를 읽어 게시판 단위로 실패를 판정하므로, 기록이 사라지면
+    # "그 게시판이 최근에 돌았는지 안 돌았는지"조차 알 수 없게 된다.
+    # boards.json 에서 이미 빠진(등록이 없어진) 게시판의 낡은 키만 정리한다.
+    boards = dict(last.get('boards', {}))
+    boards.update(results)
+    registered = {b.id for b in boards_mod.load_boards()}
+    boards = {bid: r for bid, r in boards.items() if bid in registered}
     last['at'] = datetime.now(KST).isoformat(timespec='seconds')
-    last['boards'] = results
+    last['boards'] = boards
     last['unregistered'] = unregistered_found
     path.write_text(json.dumps(last, ensure_ascii=False, indent=2) + '\n',
                     encoding='utf-8')

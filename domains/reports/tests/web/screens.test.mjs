@@ -1,6 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { homeRows, headHtml, bodyHtml } from '../../app/js/screens/home.js';
+import {
+  homeRows, headHtml, bodyHtml, topPicks,
+} from '../../app/js/screens/home.js';
 import { topicChips, reportsForTopic } from '../../app/js/screens/topics.js';
 import { shelf } from '../../app/js/screens/orgs.js';
 import { detailModel } from '../../app/js/screens/report.js';
@@ -84,6 +86,47 @@ test('머리는 기관·연도 칩 상태는 반영한다', () => {
   assert.ok(on.includes('chip--active'));
 });
 
+// ── 홈: 검색창 아래 추천 ─────────────────────────────────────────────
+
+test('홈 추천은 여섯 줄까지다', () => {
+  const reports = Array.from({ length: 10 }, (_, i) => ({
+    id: `r${i}`, org: 'bok', title: `ㄱ${i}`, published: `2026-01-${String(i + 1).padStart(2, '0')}`,
+  }));
+  const picks = Object.fromEntries(
+    reports.map((r) => [r.id, { pick: true, axis: '청년 고용', why: 'ㄱ' }]));
+  assert.ok(topPicks(reports, picks).length <= 6);
+});
+
+test('한 기관이 홈 추천을 다 채우지 못한다', () => {
+  const reports = [
+    ...Array.from({ length: 5 }, (_, i) => ({
+      id: `b${i}`, org: 'bok', title: `ㄱ${i}`, published: `2026-02-${String(i + 1).padStart(2, '0')}`,
+    })),
+    { id: 'k1', org: 'kli', title: 'ㄴ', published: '2026-01-01' },
+  ];
+  const picks = Object.fromEntries(
+    reports.map((r) => [r.id, { pick: true, axis: '청년 고용', why: 'ㄱ' }]));
+  const rows = topPicks(reports, picks);
+  assert.ok(rows.filter((r) => r.org === 'bok').length <= 2);
+  assert.ok(rows.some((r) => r.org === 'kli'));
+});
+
+test('홈 추천은 최신 순이다', () => {
+  const reports = [
+    { id: 'a', org: 'bok', title: 'ㄱ', published: '2026-01-01' },
+    { id: 'b', org: 'kli', title: 'ㄴ', published: '2026-03-01' },
+  ];
+  const picks = {
+    a: { pick: true, axis: '청년 고용', why: 'ㄱ' },
+    b: { pick: true, axis: '청년 고용', why: 'ㄴ' },
+  };
+  assert.deepEqual(topPicks(reports, picks).map((r) => r.id), ['b', 'a']);
+});
+
+test('추천 파일이 없어도 홈이 죽지 않는다', () => {
+  assert.deepEqual(topPicks(CTX.reports, undefined), []);
+});
+
 // ── 주제 ──────────────────────────────────────────────────────────────
 
 const TOPIC_ROWS = [
@@ -164,4 +207,20 @@ test('초록을 아직 안 받았으면 빈 문자열이지 오류가 아니다'
 
 test('없는 id 는 null 이다', () => {
   assert.equal(detailModel('없다', DETAIL_CTX), null);
+});
+
+test('추천된 보고서는 축과 이유를 들고 온다', () => {
+  const ctx = { ...DETAIL_CTX, picks: { 'kli-1': { pick: true, axis: '청년 고용', why: '경력 사다리 분해' } } };
+  const model = detailModel('kli-1', ctx);
+  assert.equal(model.pick.axis, '청년 고용');
+  assert.equal(model.pick.why, '경력 사다리 분해');
+});
+
+test('고르지 않은 보고서는 pick 이 없다', () => {
+  const ctx = { ...DETAIL_CTX, picks: { 'kli-1': { pick: false, axis: '', why: '무관' } } };
+  assert.equal(detailModel('kli-1', ctx).pick, null);
+});
+
+test('추천 파일이 없어도 상세가 죽지 않는다', () => {
+  assert.equal(detailModel('kli-1', DETAIL_CTX).pick, null);
 });

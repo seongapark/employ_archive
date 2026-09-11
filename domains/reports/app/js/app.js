@@ -2,11 +2,12 @@
 import { loadJson } from '../core/shell.js';
 import { parseRoute } from './route.js';
 import * as home from './screens/home.js';
+import * as picks from './screens/picks.js';
 import * as topics from './screens/topics.js';
 import * as orgs from './screens/orgs.js';
 import * as report from './screens/report.js';
 
-const screens = { home, topics, orgs, report };
+const screens = { home, picks, topics, orgs, report };
 
 function setActiveTab(tabbarEl, tab) {
   tabbarEl.querySelectorAll('.tab').forEach((el) => {
@@ -20,11 +21,14 @@ async function start() {
   const countEl = document.getElementById('headerCount');
   const offlineEl = document.getElementById('offlineBanner');
 
-  const [reports, boards, orgList, lastRun] = await Promise.all([
+  const [reports, boards, orgList, lastRun, picksData] = await Promise.all([
     loadJson('./data/reports.json'),
     loadJson('./data/boards.json'),
     loadJson('./data/orgs.json'),
     loadJson('./data/last_run.json'),
+    // 추천 판정은 실제로 돌려야 생긴다. 판정 전에는 파일이 없어 404 이고,
+    // loadJson 이 그때 null 을 돌려주므로 아래에서 {} 로 받는다.
+    loadJson('./data/recommendations.json'),
   ]);
 
   if (!reports) {
@@ -39,6 +43,7 @@ async function start() {
     boards: boards || [],
     orgs: orgList || [],
     lastRun: lastRun || {},
+    picks: picksData || {},
     abstracts: null,
     state: { q: '', orgs: [], years: [], sort: 'score', expanded: new Set() },
     route: parseRoute(location.hash),

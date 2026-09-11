@@ -78,7 +78,10 @@ class RawReport(BaseModel):
 
 
 class Report(RawReport):
-    """build 가 판정을 붙인 모양."""
+    """build 가 주제 태그를 붙인 모양.
 
-    employment: bool
+    수록 여부를 가르는 필드는 없다 — 전량 수록이다. 읽을 만한 것을 고르는 일은
+    recommend 가 별도 파일에서 한다.
+    """
+
     matched: list[str] = Field(default_factory=list)

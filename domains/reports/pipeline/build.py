@@ -1,8 +1,10 @@
 """raw + keywords.json → data/reports.json · abstracts.json · 결측률.
 
-수집기는 게시판에 있는 것을 전부 raw 에 넣는다. 고용 여부를 가르는 것은 여기다.
-경계가 여기 있는 이유는 비용이다 — 판정이 수집 안에 있으면 키워드 한 줄을 고칠
-때마다 KDI·KIET 를 며칠에 걸쳐 다시 긁어야 한다. 여기서는 수십 초다.
+**전량 수록한다.** 이 사이트는 외부기관 보고서를 취합하는 아카이브이고, 읽을
+만한 것을 고르는 일은 recommend 가 별도 파일에서 한다.
+
+keywords 는 거르는 도구가 아니라 **분류하는 도구**다 — matched 가 주제 화면의
+입구다. 키워드를 고치면 재수집 없이 여기서 수십 초에 다시 매겨진다.
 
   python -m domains.reports.pipeline.build
 """
@@ -15,23 +17,23 @@ import sys
 if hasattr(sys.stdout, 'reconfigure'):
     sys.stdout.reconfigure(encoding='utf-8', errors='replace')
 
+import gzip
 import json
 from pathlib import Path
 
 from . import boards as boards_mod
 from . import keywords as kw_mod
 from . import store
+from .boards import Board
 from .models import RawReport, Report
 
 DATA = Path(__file__).resolve().parent.parent / 'data'
 
 
 def judge(raw: RawReport, board, kw: dict) -> Report:
+    """주제 태그만 붙인다. 수록 여부는 가르지 않는다 — 전량 수록이다."""
     text = ' '.join([raw.title, raw.abstract or '', ' '.join(raw.toc)])
-    matched = kw_mod.match(text, kw)
-    # 매칭은 네 기관 전부에 남긴다. 담을지 말지에 쓰는 것만 filter 게시판이다.
-    employment = bool(matched) if board.filter else True
-    return Report(**raw.model_dump(), employment=employment, matched=matched)
+    return Report(**raw.model_dump(), matched=kw_mod.match(text, kw))
 
 
 def abstract_missing(reports: list[Report]) -> dict:
@@ -62,6 +64,32 @@ def missing_reasons(reports: list[Report]) -> dict:
     return dict(sorted(out.items(), key=lambda kv: -kv[1]))
 
 
+def dedupe(reports: list[Report], by_id: dict[str, Board]) -> list[Report]:
+    """같은 게시판에 제목이 똑같은 게 둘이면 이른 날짜 하나만 남긴다.
+
+    조사연구자료에서 같은 연구를 두 지역본부가 각각 올린다(실측 7쌍). nttId 가
+    달라 id 로는 안 잡힌다. dedupe_titles 가 켜진 게시판만 대상으로 한다.
+    **게시판 간에는 보지 않는다** — 고른 게시판 사이 중복은 실측 0건이고,
+    우연한 동명이 지워지면 안 된다.
+    """
+    # dedupe_titles 가 켜지지 않은 게시판은 손대지 않고 통과시킨다.
+    passthrough = [r for r in reports
+                   if not getattr(by_id.get(r.board), 'dedupe_titles', False)]
+
+    # dedupe_titles 가 켜진 게시판만 같은 제목 중복 제거 대상으로 한다.
+    target = [r for r in reports
+              if getattr(by_id.get(r.board), 'dedupe_titles', False)]
+
+    best: dict[tuple[str, str], Report] = {}
+    for r in target:
+        key = (r.board, r.title.strip())
+        prev = best.get(key)
+        if prev is None or (r.published, r.id) < (prev.published, prev.id):
+            best[key] = r
+
+    return passthrough + list(best.values())
+
+
 def build(raw_rows: list[RawReport], boards: list, kw: dict):
     by_id = {b.id: b for b in boards}
     kept: list[Report] = []
@@ -70,8 +98,8 @@ def build(raw_rows: list[RawReport], boards: list, kw: dict):
         if board is None or not board.enabled:
             continue
         rec = judge(raw, board, kw)
-        if rec.employment:
-            kept.append(rec)
+        kept.append(rec)
+    kept = dedupe(kept, by_id)
     kept.sort(key=lambda r: (r.published, r.id), reverse=True)
     abstracts = {r.id: {'abstract': r.abstract or '', 'toc': r.toc} for r in kept}
     return kept, abstracts, abstract_missing(kept)
@@ -102,6 +130,15 @@ def main(argv=None) -> int:
     last['reports'] = len(kept)
     last['abstract_missing'] = missing
     last['abstract_missing_why'] = missing_reasons(kept)
+
+    def _gz(name: str) -> int:
+        return len(gzip.compress((DATA / name).read_bytes()))
+
+    # 초록은 검색창을 누를 때 통째로 받는다. 3MB 를 넘으면 기관별로 쪼갠다 —
+    # 미리 쪼개면 검색 품질과 복잡도를 숫자가 나오기 전에 내주는 셈이다.
+    last['sizes'] = {'reports_gzip': _gz('reports.json'),
+                     'abstracts_gzip': _gz('abstracts.json')}
+
     last_path.write_text(json.dumps(last, ensure_ascii=False, indent=2) + '\n',
                          encoding='utf-8')
     print(f'built: {len(kept)} reports')

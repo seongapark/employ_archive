@@ -26,6 +26,7 @@ export function reportRow(report, { snippet = '', query = '', inGroup = false } 
     <a class="row${inGroup ? ' row--in-group' : ''}" href="#/r/${encodeURIComponent(report.id)}">
       <div class="row__top">
         ${orgBadge(report.org)}
+        ${report.picked ? '<span class="pick-badge">추천</span>' : ''}
         <span class="row__series">${esc(report.series || '')}</span>
         <span class="row__date">${esc(dateLabel(report.published, report.date_precision))}</span>
       </div>

@@ -1,3 +1,5 @@
+import json
+
 from domains.reports.pipeline import build
 from domains.reports.pipeline.boards import Board
 from domains.reports.pipeline.models import RawReport
@@ -6,10 +8,10 @@ KW = {'청년고용': ['청년고용'], '임금': ['임금']}
 
 KLI_BOARD = Board(id='kli-research', org='kli', name='연구보고서',
                   series='연구보고서', list_url='https://x/1',
-                  item_re=r'(\d+)', filter=False)
+                  item_re=r'(\d+)')
 KDI_BOARD = Board(id='kdi-report', org='kdi', name='연구보고서',
                   series='연구보고서', list_url='https://x/2',
-                  item_re=r'(\d+)', filter=True)
+                  item_re=r'(\d+)')
 
 
 def raw(rid, board, title='제목', abstract=None):
@@ -20,31 +22,17 @@ def raw(rid, board, title='제목', abstract=None):
     )
 
 
-def test_unfiltered_board_is_kept_even_without_a_keyword():
-    # KLI·KEIS 는 기관 전체가 고용·노동이다.
+def test_a_report_with_no_keyword_match_is_still_kept():
+    # 전량 수록이다 — 키워드가 하나도 안 걸려도 담는다.
     reports, _, _ = build.build([raw('kli-1', KLI_BOARD, '노사협의회 운영실태')],
                                 [KLI_BOARD], KW)
     assert [r.id for r in reports] == ['kli-1']
-    assert reports[0].employment is True
 
 
 def test_matched_is_recorded_even_on_unfiltered_boards():
     # 주제 화면이 네 기관을 덮으려면 KLI 에도 matched 가 있어야 한다.
     reports, _, _ = build.build([raw('kli-2', KLI_BOARD, '청년고용 실태')],
                                 [KLI_BOARD], KW)
-    assert reports[0].matched == ['청년고용']
-
-
-def test_filtered_board_drops_a_report_with_no_keyword():
-    reports, _, _ = build.build([raw('kdi-1', KDI_BOARD, '반도체 수출 전망')],
-                                [KDI_BOARD], KW)
-    assert reports == []
-
-
-def test_filtered_board_keeps_a_report_that_matches():
-    reports, _, _ = build.build([raw('kdi-2', KDI_BOARD, '청년고용 대책 평가')],
-                                [KDI_BOARD], KW)
-    assert [r.id for r in reports] == ['kdi-2']
     assert reports[0].matched == ['청년고용']
 
 
@@ -55,13 +43,26 @@ def test_the_abstract_counts_toward_the_match():
     assert [r.id for r in reports] == ['kdi-3']
 
 
-def test_changing_keywords_flips_the_verdict_without_recollecting():
-    # 이 과제의 존재 이유. raw 는 그대로고 keywords 만 바뀐다.
-    rows = [raw('kdi-4', KDI_BOARD, '플랫폼 종사자 실태')]
-    assert build.build(rows, [KDI_BOARD], KW)[0] == []
+def test_every_raw_record_is_kept_regardless_of_keywords():
+    # 취지가 바뀌었다 — 거르는 일은 수록이 아니라 추천이 한다.
+    rows = [raw('kdi-4', KDI_BOARD, '반도체 경기와 거시경제'),
+            raw('kdi-5', KDI_BOARD, '청년고용 부진의 원인')]
+    kept, _, _ = build.build(rows, [KDI_BOARD], KW)
+    assert sorted(r.id for r in kept) == ['kdi-4', 'kdi-5']
+
+
+def test_changing_keywords_flips_the_topic_tag_without_recollecting():
+    # 재수집 없이 주제 태깅이 바뀌는 성질은 그대로 지킨다. raw 는 그대로고
+    # keywords 만 바뀐다.
+    rows = [raw('kdi-6', KDI_BOARD, '플랫폼 종사자 실태')]
+    assert build.build(rows, [KDI_BOARD], KW)[0][0].matched == []
     wider = dict(KW, 고용형태=['플랫폼 종사자'])
-    kept, _, _ = build.build(rows, [KDI_BOARD], wider)
-    assert [r.id for r in kept] == ['kdi-4']
+    assert build.build(rows, [KDI_BOARD], wider)[0][0].matched == ['고용형태']
+
+
+def test_the_employment_flag_is_gone_from_the_app_record():
+    kept, _, _ = build.build([raw('kli-9', KLI_BOARD, '제목')], [KLI_BOARD], KW)
+    assert 'employment' not in build._light(kept[0])
 
 
 def test_abstracts_are_split_out_by_id():
@@ -88,8 +89,8 @@ def test_a_raw_record_from_a_disabled_board_is_skipped():
 
 
 def test_newest_first():
-    a = raw('kli-8', KLI_BOARD)
-    b = raw('kli-9', KLI_BOARD)
+    a = raw('kli-8', KLI_BOARD, '첫 번째 보고서')
+    b = raw('kli-9', KLI_BOARD, '두 번째 보고서')
     b.published = '2026-01-01'
     kept, _, _ = build.build([a, b], [KLI_BOARD], KW)
     assert [r.id for r in kept] == ['kli-9', 'kli-8']
@@ -108,10 +109,75 @@ def test_the_pdf_bookkeeping_fields_never_reach_the_app():
 
 def test_why_an_abstract_is_missing_is_counted():
     # 결측률만 보면 스캔본(영영 못 채움)과 아직 안 받아 본 것이 한 칸에 섞인다.
-    a = raw('kli-14', KLI_BOARD); a.abstract_tried = True; a.abstract_note = '텍스트가 없는 스캔본'
-    b = raw('kli-15', KLI_BOARD)                       # 아직 안 받아 봤다
+    a = raw('kli-14', KLI_BOARD, 'ㄱ'); a.abstract_tried = True; a.abstract_note = '텍스트가 없는 스캔본'
+    b = raw('kli-15', KLI_BOARD, 'ㄴ')                 # 아직 안 받아 봤다
     b.file_url = 'https://example.org/b.pdf'
-    c = raw('kli-16', KLI_BOARD, abstract='있다')
+    c = raw('kli-16', KLI_BOARD, 'ㄷ', abstract='있다')
     kept, _, _ = build.build([a, b, c], [KLI_BOARD], KW)
     why = build.missing_reasons(kept)
     assert why == {'텍스트가 없는 스캔본': 1, '아직 안 받음': 1}
+
+
+def test_dedupe_titles_enabled_removes_same_title_duplicates():
+    # 조사연구자료에서 실제로 7쌍 나온다 — 강원본부와 강릉본부가 같은 연구를
+    # 각각 올린다. nttId 가 달라 id 로는 안 잡힌다.
+    # dedupe_titles 가 켜진 게시판에서만 제거한다.
+    dedup_board = KDI_BOARD.model_copy(update={'id': 'bok-research', 'dedupe_titles': True})
+    rows = [raw('bok-1', dedup_board, '강원지역 주택가격이 실물경제에 미치는 영향 점검'),
+            raw('bok-2', dedup_board, '강원지역 주택가격이 실물경제에 미치는 영향 점검')]
+    rows[0].published = '2023-07-18'
+    rows[1].published = '2023-07-20'
+    kept, _, _ = build.build(rows, [dedup_board], KW)
+    assert [r.id for r in kept] == ['bok-1']      # 이른 날짜가 원발행
+
+
+def test_dedupe_titles_disabled_keeps_same_title_duplicates():
+    # KIET 월간 산업경제의 '실물경제 주요 지표'와 이슈페이퍼의 '새해 한국 경제에 바란다'
+    # 같은 고정 제목 칼럼은 회차마다 다른 글이므로 지우면 안 된다.
+    # dedupe_titles 가 꺼진(기본값) 게시판에서는 같은 제목이어도 보존한다.
+    rows = [raw('kli-1', KLI_BOARD, '실물경제 주요 지표 & KIET 업종별 경기지수'),
+            raw('kli-2', KLI_BOARD, '실물경제 주요 지표 & KIET 업종별 경기지수')]
+    rows[0].published = '2025-01-01'
+    rows[1].published = '2025-02-01'
+    kept, _, _ = build.build(rows, [KLI_BOARD], KW)
+    assert sorted(r.id for r in kept) == ['kli-1', 'kli-2']
+
+
+def test_the_same_title_on_different_boards_is_kept_twice():
+    # 게시판 간 중복은 실측 0건이었다. 우연히 제목이 같을 때 지우면 안 된다.
+    other = KDI_BOARD.model_copy(update={'id': 'kdi-other'})
+    rows = [raw('x-1', KDI_BOARD, '같은 제목'), raw('x-2', other, '같은 제목')]
+    kept, _, _ = build.build(rows, [KDI_BOARD, other], KW)
+    assert sorted(r.id for r in kept) == ['x-1', 'x-2']
+
+
+def test_dedupe_titles_isolates_by_board():
+    # dedupe_titles 가 켜진 게시판끼리도 격리된다 — 각 게시판에서 이른 날짜만 남는다.
+    # key 의 (board, title) 조합이 격리를 보장하는지 확인한다.
+    board_a = KDI_BOARD.model_copy(update={'id': 'board-a', 'dedupe_titles': True})
+    board_b = KDI_BOARD.model_copy(update={'id': 'board-b', 'dedupe_titles': True})
+    rows = [
+        raw('a-1', board_a, '같은 제목'),  # 2025-05-01
+        raw('a-2', board_a, '같은 제목'),  # 2025-05-01
+        raw('b-1', board_b, '같은 제목'),  # 2025-05-01
+        raw('b-2', board_b, '같은 제목'),  # 2025-05-01
+    ]
+    rows[1].published = '2025-06-01'  # a-2는 나중 날짜
+    rows[2].published = '2025-04-01'  # b-1은 더 이른 날짜
+    rows[3].published = '2025-07-01'  # b-2는 더 나중 날짜
+    kept, _, _ = build.build(rows, [board_a, board_b], KW)
+    # a 게시판: a-1 (이른 날짜) 선택, a-2 제거
+    # b 게시판: b-1 (이른 날짜) 선택, b-2 제거
+    assert sorted(r.id for r in kept) == ['a-1', 'b-1']
+
+
+def test_the_gzipped_size_of_each_data_file_is_recorded(tmp_path, monkeypatch):
+    monkeypatch.setattr(build, 'DATA', tmp_path)
+    monkeypatch.setattr(build.store, 'load_all_raw',
+                        lambda: [raw('kli-20', KLI_BOARD, '제목', abstract='초록')])
+    monkeypatch.setattr(build.boards_mod, 'load_boards', lambda: [KLI_BOARD])
+    monkeypatch.setattr(build.kw_mod, 'load_keywords', lambda: KW)
+    build.main([])
+    last = json.loads((tmp_path / 'last_run.json').read_text(encoding='utf-8'))
+    assert last['sizes']['reports_gzip'] > 0
+    assert last['sizes']['abstracts_gzip'] > 0

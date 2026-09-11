@@ -8,6 +8,9 @@ from urllib.parse import quote, urljoin
 from ..boards import Board
 
 _TAG = re.compile(r'<[^>]+>')
+# 주석 안의 태그가 따로 지워지면 그 안의 글자와 '-->' 가 본문으로 살아남는다.
+# BOK 목록이 제목 앵커 안에 공지 배지를 주석으로 감싸 두어 100건 전부가 그랬다.
+_COMMENT = re.compile(r'<!--.*?-->', re.S)
 # 문단을 나누는 태그. 전부 공백으로 뭉개면 긴 초록이 한 덩어리가 되어 안 읽힌다.
 _BLOCK = re.compile(r'</(?:p|div|li|tr|h[1-6])\s*>|<br\s*/?>', re.I)
 _WS = re.compile(r'[ \t\r\f\v ]+')
@@ -35,7 +38,8 @@ def page_url(board: Board, page: int) -> str:
 
 def text(fragment: str) -> str:
     """태그를 걷어내고 엔티티를 푼 뒤 공백을 다듬는다. 문단은 살린다."""
-    s = _BLOCK.sub('\n', fragment or '')
+    s = _COMMENT.sub('', fragment or '')
+    s = _BLOCK.sub('\n', s)
     s = _TAG.sub(' ', s)
     s = html_mod.unescape(s)
     s = _WS.sub(' ', s)

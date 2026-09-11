@@ -122,7 +122,8 @@ python -m tools.serve                         # 로컬 서버 (http://127.0.0.1:
 python -m domains.forecast.pipeline.collect   # 전망 수집 1회
 python -m domains.employment.pipeline.collect   # 고용동향 수집 1회 (KOSIS_API_KEY 필요)
 python -m domains.reports.pipeline.collect     # 연구보고서 수집 1회 (회차당 게시판별 40건 상한)
-python -m domains.reports.pipeline.build      # 키워드만 고치고 재판정 (재수집 없이 수십 초)
+python -m domains.reports.pipeline.build      # 전량 수록 + 주제 태깅 재계산 (재수집 없이 수십 초)
+python -m domains.reports.pipeline.recommend    # 읽을 만한 보고서를 LLM 이 고른다 (id 캐시, 새 것만)
 python -m domains.reports.pipeline.enrich      # 초록 빈 레코드의 원문 PDF 에서 요약 섹션 채우기 (회차 40건)
 python -m tools.fts_load > /tmp/fts.sql        # 출처 탐색 색인(doc_fts) 재적재 SQL 만들기
 ```
