@@ -1,4 +1,4 @@
-import { 기간선택, 순서 } from './model.js';
+import { 기간선택, 순서, 이름 } from './model.js';
 import { 요약HTML, 도메인HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML } from './render.js';
 import { 막대SVG } from './chart.js';
 import { 불러오기, 토큰쓰기, 토큰지우기, 제외상태, 제외설정 } from './api.js';
@@ -21,7 +21,7 @@ function 그리기(s) {
     <h2 class="sec">일별 추이</h2>
     <div class="trend">${막대SVG(s.일별, 순서, { width: 320, height: 120 })}</div>
     <div class="legend">${순서.map((k) => `
-      <span class="legend__i"><i style="background:var(--dom-${k})"></i>${k}</span>`).join('')}</div>
+      <span class="legend__i"><i style="background:var(--dom-${k})"></i>${이름[k] ?? k}</span>`).join('')}</div>
     <h2 class="sec">화면</h2>${화면HTML(s)}
     <h2 class="sec">유입</h2>${유입HTML(s)}
     <h2 class="sec">방문자</h2>${분포HTML(s)}
