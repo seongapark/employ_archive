@@ -19,9 +19,9 @@ def test_only_kdi_and_kiet_boards_are_filtered():
             assert b.org in ('kdi', 'kiet'), f'{b.id} 에 필터가 켜져 있다'
 
 
-def test_all_four_orgs_are_present():
+def test_all_five_orgs_are_present():
     orgs = {b.org for b in boards.load_boards()}
-    assert orgs == {'kli', 'keis', 'kdi', 'kiet'}
+    assert orgs == {'kli', 'keis', 'kdi', 'kiet', 'bok'}
 
 
 def test_only_the_boards_without_a_detail_page_read_it_from_the_list():
@@ -54,3 +54,18 @@ def test_a_registered_board_is_not_reported():
     )]
     html = '<a href="/menu.es?mid=a10102060000">연구보고서</a>'
     assert boards.unregistered(html, 'kli', known) == []
+
+
+def test_every_bok_board_is_registered_with_a_menu_number_and_body_kind():
+    bok_boards = {b.id: b for b in boards.load_boards() if b.org == 'bok'}
+    assert set(bok_boards) == {
+        'bok-outlook', 'bok-assess', 'bok-region', 'bok-industry',
+        'bok-note', 'bok-issue', 'bok-intl', 'bok-research'}
+    for b in bok_boards.values():
+        assert b.menu_no and b.menu_no.isdigit()
+        assert b.body in ('abstract', 'toc', 'none')
+
+
+def test_bok_board_ids_do_not_collide_with_other_orgs():
+    ids = [b.id for b in boards.load_boards()]
+    assert len(ids) == len(set(ids))

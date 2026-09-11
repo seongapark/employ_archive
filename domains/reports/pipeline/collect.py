@@ -26,11 +26,11 @@ from . import boards as boards_mod
 from . import build as build_mod
 from . import http, store
 from .models import CUTOFF, RawReport, normalize_published, report_id
-from .sites import kdi, keis, kiet, kli
+from .sites import bok, kdi, keis, kiet, kli
 
 KST = timezone(timedelta(hours=9))
 DATA = Path(__file__).resolve().parent.parent / 'data'
-SITES = {'kli': kli, 'keis': keis, 'kdi': kdi, 'kiet': kiet}
+SITES = {'kli': kli, 'keis': keis, 'kdi': kdi, 'kiet': kiet, 'bok': bok}
 DETAIL_CAP = 40          # 회차당 게시판별 상세 조회 상한
 MAX_PAGES = 60
 DELAY = 1.0

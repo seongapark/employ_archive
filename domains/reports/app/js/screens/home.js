@@ -13,7 +13,7 @@ import { searchReports, sortByDate } from '../search.js';
 import { reportRow, foldRow, chip, empty } from '../ui.js';
 
 const ORGS = [
-  ['kli', 'KLI'], ['keis', 'KEIS'], ['kdi', 'KDI'], ['kiet', 'KIET'],
+  ['kli', 'KLI'], ['keis', 'KEIS'], ['kdi', 'KDI'], ['kiet', 'KIET'], ['bok', 'BOK'],
 ];
 
 // 순수 함수. 상태와 데이터를 받아 무엇을 그릴지만 정한다.

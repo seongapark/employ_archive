@@ -2,5 +2,6 @@
   {"code": "kli", "name": "한국노동연구원", "short": "KLI", "color": "--org-kli"},
   {"code": "keis", "name": "한국고용정보원", "short": "KEIS", "color": "--org-keis"},
   {"code": "kdi", "name": "한국개발연구원", "short": "KDI", "color": "--org-kdi"},
-  {"code": "kiet", "name": "산업연구원", "short": "KIET", "color": "--org-kiet"}
+  {"code": "kiet", "name": "산업연구원", "short": "KIET", "color": "--org-kiet"},
+  {"code": "bok", "name": "한국은행", "short": "BOK", "color": "--org-bok"}
 ]

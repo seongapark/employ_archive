@@ -5,6 +5,7 @@
   --org-keis: #17714a;
   --org-kdi: #8a4b16;
   --org-kiet: #6b3a8f;
+  --org-bok: #862d39;
   --snippet-bg: #f5f7fa;
 }
 
@@ -149,6 +150,7 @@
 .org--keis { background: var(--org-keis); }
 .org--kdi { background: var(--org-kdi); }
 .org--kiet { background: var(--org-kiet); }
+.org--bok { background: var(--org-bok); }
 
 .row__series { font-size: 11px; color: var(--text-muted); }
 .row__date { font-size: 11px; color: var(--text-muted); margin-left: auto; }
