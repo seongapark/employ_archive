@@ -1,0 +1,912 @@
+{
+ "round_release": "2026-09-07",
+ "mode": "follow",
+ "auth": "HUB",
+ "window": [
+  "2026-09-08",
+  "2026-09-22"
+ ],
+ "collected_at": "2026-09-11 19:06",
+ "volume": {
+  "collected": 79,
+  "articles": 19,
+  "press": 18,
+  "queries": 11
+ },
+ "truncated_queries": [],
+ "queries": [
+  {
+   "query": "고용보험 가입자",
+   "api_total": 29251,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 26,
+   "relevant": 19,
+   "new": 26
+  },
+  {
+   "query": "구직급여",
+   "api_total": 94306,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 53,
+   "relevant": 2,
+   "new": 46
+  },
+  {
+   "query": "구인배수",
+   "api_total": 2636,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 2,
+   "relevant": 1,
+   "new": 1
+  },
+  {
+   "query": "제조업 고용보험",
+   "api_total": 18502,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 13,
+   "relevant": 8,
+   "new": 2
+  },
+  {
+   "query": "건설업 고용보험",
+   "api_total": 8368,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 5,
+   "relevant": 4,
+   "new": 1
+  },
+  {
+   "query": "비금속광물 고용보험",
+   "api_total": 106,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 1,
+   "relevant": 1,
+   "new": 0
+  },
+  {
+   "query": "교육서비스업 고용보험",
+   "api_total": 3626,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 3,
+   "relevant": 2,
+   "new": 0
+  },
+  {
+   "query": "전자·통신 고용보험",
+   "api_total": 3649,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 1,
+   "relevant": 1,
+   "new": 0
+  },
+  {
+   "query": "자동차 고용보험",
+   "api_total": 13952,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 2,
+   "relevant": 1,
+   "new": 0
+  },
+  {
+   "query": "기타운송장비 고용보험",
+   "api_total": 2491,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 3,
+   "relevant": 2,
+   "new": 0
+  },
+  {
+   "query": "공공행정 고용보험",
+   "api_total": 11157,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 5,
+   "relevant": 1,
+   "new": 3
+  }
+ ],
+ "articles": [
+  {
+   "title": "반도체 호황에 제조업 고용보험 가입자 15개월 만에 증가",
+   "desc": "▲ 자료사진 정기훈 기자 반도체 호황과 선박·식품 수출 호조로 지난달 제조업 고용보험 가입자가 15개월 만에 증가세로 전환했다. 고용노동부가 7일 발표한 '2026년 8월 고용행정 통계로 본 노동시장 동향'에...",
+   "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=236649",
+   "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=236649",
+   "press": "labortoday.co.kr",
+   "pub": "2026-09-08 06:34",
+   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 교육서비스업 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "[굿모닝경제] 나쁜 임대인 '퇴짜' / 서울 아파트 거래 10건 중 9건 '비강...",
+   "desc": "지난달 제조업 고용보험 가입자는 384만 7천 명으로 1년 전보다 2천 명가량 늘었는데요, 가입자 수가 전년 대비 늘어난 건 지난해 5월 이후 처음입니다. 반면, 건설경기 부진이 이어지면서 건설업 고용보험 가입자는 1년...",
+   "link": "https://n.news.naver.com/mnews/article/057/0001967862?sid=101",
+   "originallink": "http://www.mbn.co.kr/pages/news/newsView.php?news_seq_no=5217737",
+   "press": "mbn.co.kr",
+   "pub": "2026-09-08 10:02",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "경상원, 1인 소상공인 고용보험료 최대 30% 지원",
+   "desc": "지원 대상은 경기도에 사업장을 두고 상시근로자 없이 영업하는 소상공인 가운데 자영업자 고용보험에 가입한 사업주다. 공동사업장은 대표자 한 명만 신청할 수 있다. 경상원은 가입자가 선택한 기준보수 등급에 따라...",
+   "link": "http://www.bizwnews.com/news/articleView.html?idxno=145563",
+   "originallink": "http://www.bizwnews.com/news/articleView.html?idxno=145563",
+   "press": "bizwnews.com",
+   "pub": "2026-09-08 11:46",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "문제는 '양극화'…부동산·성과급·일자리 모두 '극과 극'",
+   "desc": "지난달 청년층 고용보험 가입자는 223만8000명으로 1년 전보다 5만5700명 줄었습니다. 감소 폭은 전월보다 다소 축소됐지만 48개월째 감소세가 이어지며 청년 고용 부진이 장기화하고 있습니다. 기업의 채용 수요가...",
+   "link": "http://www.newstomato.com/ReadNews.aspx?no=1312995&inflow=N",
+   "originallink": "http://www.newstomato.com/ReadNews.aspx?no=1312995&inflow=N",
+   "press": "뉴스토마토",
+   "pub": "2026-09-08 18:04",
+   "q": "고용보험 가입자, 구직급여, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "[논설위원의 단도직입]“청년고용 부진 고착화…‘경력 사다리’ 끊기지...",
+   "desc": "고용보험 가입자 중 자발적 이직 비율이 60%인데 청년의 경우 70%입니다. 청년들이 이직 사유 때문에 실업급여를 받을 가능성이 더 낮은 거죠. 그런데 이직을 무조건 개인의 선택 내지 책임이라고 볼 수 있을까요....",
+   "link": "https://n.news.naver.com/mnews/article/032/0003469203?sid=110",
+   "originallink": "https://www.khan.co.kr/article/202609082010005",
+   "press": "경향신문",
+   "pub": "2026-09-08 20:10",
+   "q": "고용보험 가입자, 구직급여, 제조업 고용보험, 교육서비스업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입 늘었지만…4년 새 증가분 99% '60대 이상'",
+   "desc": "전국적으로 고용보험 가입자는 늘었지만 청년층은 48개월 연속 감소한 가운데, 강원지역은 최근 4년간 전체 가입자 증가분의 98.6%를 60세 이상이 차지한 것으로 나타났다. 최근 1년간 증가분에서도 60세...",
+   "link": "https://n.news.naver.com/mnews/article/654/0000199557?sid=101",
+   "originallink": "https://www.kado.net/news/articleView.html?idxno=2071450",
+   "press": "kado.net",
+   "pub": "2026-09-09 00:09",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "고용보험 가입자 1590만명 돌파…제조업 5개월 만에 증가세 전환",
+   "desc": "제조업 고용보험 가입자는 384만 7000명으로 15개월 만에 2000명 증가했다. 제조업 가입자는 5개월 만에 증가세로 전환됐으며, 남성은 증가 폭이 확대되고 여성은 감소 폭이 줄었다. 연령별로는 60세 이상과...",
+   "link": "https://www.gukjenews.com/news/articleView.html?idxno=3689090",
+   "originallink": "https://www.gukjenews.com/news/articleView.html?idxno=3689090",
+   "press": "gukjenews.com",
+   "pub": "2026-09-09 00:50",
+   "q": "고용보험 가입자, 구직급여, 제조업 고용보험, 건설업 고용보험, 교육서비스업 고용보험, 공공행정 고용보험",
+   "rel": true
+  },
+  {
+   "title": "경상원, 보험료 부담 낮춰 1인 소상공인 재기 돕는다",
+   "desc": "고용보험료 지원을 통해 가입자의 경제적 부담을 낮추고, 불가피하게 폐업할 경우 실업급여 등을 통해 생활 안정과 재도전의 기반을 마련하도록 하겠다는 취지다. 소상공인에게 폐업은 단순히 사업체 하나가 문을 닫는 데...",
+   "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=318530",
+   "originallink": "https://www.pointdaily.co.kr/news/articleView.html?idxno=318530",
+   "press": "pointdaily.co.kr",
+   "pub": "2026-09-09 07:30",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "6주간 ‘가상사원’으로 직무 경험… 채용 미스매치 풀었다[사람 살리는...",
+   "desc": "고용노동부에 따르면 지난달 전체 고용보험 상시가입자는 전년 동월보다 28만 명 가까이 늘었지만, 29세 이하 가입자는 5만5700명 줄어든 223만8000명에 그쳤다. 2022년 9월 이후 48개월 연속 감소세다. 구직 현장에서도...",
+   "link": "https://n.news.naver.com/mnews/article/021/0002817385?sid=101",
+   "originallink": "https://www.munhwa.com/article/11615616?ref=naver",
+   "press": "문화일보",
+   "pub": "2026-09-09 09:16",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[플랫폼3.3%족쇄]① \"이재용은 근로소득, 라이더는 왜 사업소득인가\"",
+   "desc": "라이더들은 세법상 근로자가 아니라는 이유로 국민연금·건강보험을 전액 본인이 부담하는 지역가입자로... 두루누리 지원금과 특고 고용보험 국고 지원 등 특고·플랫폼 종사자 고용보험 지원에 투입된 연간 재정만 약...",
+   "link": "https://n.news.naver.com/mnews/article/293/0000090205?sid=101",
+   "originallink": "https://www.bloter.net/news/articleView.html?idxno=673015",
+   "press": "bloter.net",
+   "pub": "2026-09-09 10:23",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "조선 고용 늘어도 청년 인력난…취업 연계 강화",
+   "desc": "고용노동부의 8월 고용행정 통계를 보면 선박·보트 건조업 고용보험 가입자는 전년 동월보다 5,700명 늘며 45개월 연속 증가했다. 제조업 전체 가입자도 15개월 만에 증가로 돌아섰다. 한국고용정보원과...",
+   "link": "https://www.ulsanpress.net/news/articleView.html?idxno=582699",
+   "originallink": "https://www.ulsanpress.net/news/articleView.html?idxno=582699",
+   "press": "ulsanpress.net",
+   "pub": "2026-09-09 21:42",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "[사설] 미래의 경제 주춧돌 청년만 고용 회복에서 빠졌다",
+   "desc": "제조업 고용보험 가입자가 15개월 만에 증가세로 돌아섰다지만 29세 이하 가입자는 48개월 연속 감소다. 물론 취업이 모든 문제를 해결하는 것은 아니다. 올해 조사에서 첫 직장을 얻은 청년 4명 중 1명꼴로 월 150만...",
+   "link": "https://n.news.naver.com/mnews/article/088/0001027677?sid=110",
+   "originallink": "https://www.imaeil.com/page/view/2026090918023438986",
+   "press": "imaeil.com",
+   "pub": "2026-09-10 05:01",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "[목요세평] 수출은 뛰는데, 고용은 걷고 있다",
+   "desc": "8월 제조업 고용보험 가입자는 전년보다 2000명 증가했다. 지난해 6월 이후 14개월 연속 감소하다 15개월 만에 플러스로 돌아섰다.그런데 수출의 속도와 나란히 놓아보면 조금 다른 질문이 생긴다. 수출은 68.7% 뛰었는데...",
+   "link": "https://www.cctoday.co.kr/news/articleView.html?idxno=2236505",
+   "originallink": "https://www.cctoday.co.kr/news/articleView.html?idxno=2236505",
+   "press": "cctoday.co.kr",
+   "pub": "2026-09-10 06:00",
+   "q": "고용보험 가입자, 제조업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "거제 최대규모 랜드마크 단지, '힐스테이트 거제시그니처'가 주목받는 ...",
+   "desc": "올해 6월 기준 거제시 전체 고용보험 가입자 7만5,770명 가운데 조선업 종사자는 57.35%를 차지했습니다. 수출에서도 올해 상반기 거제 전체 수출액 66억7,732만달러 가운데 조선업 수출액이 64억163만달러로 95.87%에...",
+   "link": "https://www.rcast.co.kr/news/articleView.html?idxno=31592",
+   "originallink": "https://www.rcast.co.kr/news/articleView.html?idxno=31592",
+   "press": "rcast.co.kr",
+   "pub": "2026-09-10 09:00",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "\"다친 뒤 보상만으론 부족\" 공연예술인 '안전' 사각지대",
+   "desc": "최 변호사는 \"2012년 예술인 산재보험이 임의가입 방식으로 도입됐는데도 고용보험 가입 예술인이 15만명을 넘는 동안 2025년 말 기준 산재보험 가입자는 3천740명에 불과하다\"며 \"예술인 고용보험이 당연적용되는 것과 달리...",
+   "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=236737",
+   "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=236737",
+   "press": "labortoday.co.kr",
+   "pub": "2026-09-11 06:34",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[경남 브리핑 모음(9월11일)] 진주시, 진주형 미래 모빌리티사업 ‘우수...",
+   "desc": "지난해 10월 시행 후10개월간 가입자 66만 명을 돌파하며 140만명 이상 이용했고, 이 가운데 3만 4000여 명이... 고용보험 피보험자 수에 따라 △5인 이상 10인 미만 기업은 1명 △10인 이상 기업은 최대 2명까지 지원받을 수...",
+   "link": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202609101906211060566",
+   "originallink": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202609101906211060566",
+   "press": "dnews.co.kr",
+   "pub": "2026-09-11 08:02",
+   "q": "고용보험 가입자, 공공행정 고용보험",
+   "rel": true
+  },
+  {
+   "title": "“퇴직 후 놓치면 손해” 꼭 확인해야 할 제도와 혜택",
+   "desc": "②건강보험료, 지역가입 전에 비교부터 퇴직 후 직장가입자 자격을 잃으면 건강보험 지역가입자로... 다만 고용보험 가입 기간 등 다른 수급요건을 충족해야 한다. 퇴직을 앞두고 실업급여 등 고용 관련 제도가...",
+   "link": "https://bravo.etoday.co.kr/view/atc_view/20037",
+   "originallink": "https://bravo.etoday.co.kr/view/atc_view/20037",
+   "press": "이투데이",
+   "pub": "2026-09-11 08:12",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "세수 호조에 7월까지 나라살림 적자 22조 개선…5년 만에 최소",
+   "desc": "국민연금·고용보험 등 각종 기금에서 보험료나 운용수익 등의 형태로 들어오 기금수입은 152조원으로... 건강보험 가입자 지원, 국민연금 지급 증가 등이 영향을 미쳤다. 특히 올해 추가경정예산(추경)...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014183994?sid=101",
+   "originallink": "https://www.newsis.com/view/NISX20260911_0003785279",
+   "press": "뉴시스",
+   "pub": "2026-09-11 09:49",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "나라살림 적자, 5년 만에 가장 작았다…국세수입 41조원 급증",
+   "desc": "국민연금, 고용보험 등 각종 기금에서 들어온 기금수입은 152조원으로 같은 기간 20조7000억원 늘었다.... 올해 이전지출 증가는 고유가 피해 지원금과 지방교부세, 지방교육재정교부금, 건강보험 가입자 지원...",
+   "link": "http://www.whitepaper.co.kr/news/articleView.html?idxno=266698",
+   "originallink": "http://www.whitepaper.co.kr/news/articleView.html?idxno=266698",
+   "press": "whitepaper.co.kr",
+   "pub": "2026-09-11 11:18",
+   "q": "고용보험 가입자",
+   "rel": true
+  }
+ ],
+ "excluded": [
+  {
+   "title": "비대면이 대세된 은행… 신입공채 16% 줄였다",
+   "desc": "올해 상반기 5개 주요 은행의 1인당 평균 급여는 6800만 원으로 삼성전자(6300만 원)보다 500만 원가량 높다. 육아휴직 사용률도 국민은행을 제외하고는 50%가 넘는다. 유연근무제도 활성화돼 워라밸을 중시하는 구직자들...",
+   "link": "https://n.news.naver.com/mnews/article/020/0003746361?sid=101",
+   "originallink": "https://www.donga.com/news/Economy/article/all/20260907/134622296/2",
+   "press": "동아일보",
+   "pub": "2026-09-08 00:31",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "약가 규제에 인재 놓치는 韓ㆍ日 제약, 임금 정체 우려",
+   "desc": "이러한 격차로 인해 구직자와 기존 연구 인력이 대졸 초임을 33만 엔으로 올리고 평균 10%의 기본급 인상을... 나우팜컨설팅이 제약바이오 기업 입사자 274명의 2026년도 급여를 분석한 결과, 대졸 신입사원의 초임 연봉은 4...",
+   "link": "https://www.pharmnews.com/news/articleView.html?idxno=306113",
+   "originallink": "https://www.pharmnews.com/news/articleView.html?idxno=306113",
+   "press": "pharmnews.com",
+   "pub": "2026-09-08 05:56",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[60초 노동정책] 노동부 예산안 38.9조…청년 일자리·양극화 완화 초점",
+   "desc": "대상으로 구직촉진수당 월 65만원 등을 지원할 예정이다. 진로탐색과 모의면접, 일경험 훈련 연계 등 취업... 국정과제인 산업재해보험 선보장 도입 예산은 436억원을 반영해, 이를 포함한 산재보험급여는 올해...",
+   "link": "https://www.newspim.com/news/view/20260907000985",
+   "originallink": "https://www.newspim.com/news/view/20260907000985",
+   "press": "뉴스핌",
+   "pub": "2026-09-08 06:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "잡플래닛, 하반기 '일하기 좋은 기업' 59곳 선정…SK하이닉스 '대상'",
+   "desc": "평가에는 급여·복지와 승진 기회, 일과 삶의 균형, 사내문화, 기업 추천율, 성장 가능성, 최고경영자(CEO)... 잡플래닛 관계자는 \"산업과 직무별 조직 경험을 살펴볼 수 있도록 평가 체계를 개편했다\"며 \"구직자가...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009156590?sid=101",
+   "originallink": "https://www.news1.kr/industry/general-industry/6282968",
+   "press": "뉴스1",
+   "pub": "2026-09-08 09:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[기고] 네덜란드 노동법 및 세법 관련 유의사항",
+   "desc": "실업보험(WW), 질병급여보험(ZW), 노동능력상실보험(WIA) 등 근로자 사회보험 제도의 가입자로 소급 분류될... 특히 관련 보험의 보장 범위가 제한적이거나, 애초에 해당 보험이 고용관계로 재분류된 상황을 전제로...",
+   "link": "http://dream.kotra.or.kr/kotranews/cms/news/actionKotraBoardDetail.do?SITE_NO=3&MENU_ID=130&CONTENTS_NO=1&bbsGbn=246&bbsSn=246&pNttSn=243787",
+   "originallink": "http://dream.kotra.or.kr/kotranews/cms/news/actionKotraBoardDetail.do?SITE_NO=3&MENU_ID=130&CONTENTS_NO=1&bbsGbn=246&bbsSn=246&pNttSn=243787",
+   "press": "dream.kotra.or.kr",
+   "pub": "2026-09-08 09:03",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": false
+  },
+  {
+   "title": "잡플래닛, 하반기 '일하기 좋은 기업' 59곳 선정…대상 SK하이닉스",
+   "desc": "기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO 지지율 등을 종합... 이번 개편은 회사 전체 평점만 보는 방식에서 한발 더 나아가 구직자가 실제 지원하려는 산업과 직무 기준으로...",
+   "link": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
+   "originallink": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
+   "press": "kdfnews.com",
+   "pub": "2026-09-08 09:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "올 하반기 일하기 좋은 기업 59곳..1위 SK하이닉스",
+   "desc": "잡플래닛은 매년 일하기 좋은 회사를 발표해왔으며, 지난해부터 구직자들에게... 기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO...",
+   "link": "http://www.breaknews.com/1234816",
+   "originallink": "http://www.breaknews.com/1234816",
+   "press": "breaknews.com",
+   "pub": "2026-09-08 09:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[정치쇼] 김영훈 \"'영업이익 N%' 성과급 쟁의 제한…모든 성과급 제외는...",
+   "desc": "그리고 지난달 노동부 업무보고 때 보니까 35세 미만 청년이 자발적으로 퇴사해도 생애 한 번 구직급여를 받을 수 있도록 연내에 법을 개정하고, 내년도 예산에도 반영하겠다 이렇게 말씀하셨는데요. 이게 지금 사실상...",
+   "link": "https://n.news.naver.com/mnews/article/055/0001386623?sid=100",
+   "originallink": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008742259&plink=ORI&cooper=NAVER",
+   "press": "news.sbs.co.kr",
+   "pub": "2026-09-08 09:18",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "잡플래닛, 하반기 '일하기 좋은 기업' 선정…SK하이닉스 '대상'",
+   "desc": "기업 평가는 △급여·복지 △승진 기회 △워라밸 △사내문화 △기업 추천율 △성장 가능성 △CEO 지지율 등을 종합적으로 반영했다. 특히 직무 재직자가 남긴 리뷰만 별도로 분석해 구직자가 자신의 직무 관점에서...",
+   "link": "https://www.asiatime.co.kr/article/20260908500035",
+   "originallink": "https://www.asiatime.co.kr/article/20260908500035",
+   "press": "asiatime.co.kr",
+   "pub": "2026-09-08 09:32",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "잡플래닛 \"SK하이닉스, 일하기 좋은 기업 1위\"",
+   "desc": "지난해부터는 구직자가 참고할 수 있는 신뢰도 높은 지표를 제공하기 위해 잡플래닛 어워즈를 도입했다.... 기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO 지지율 등을 종합적으로...",
+   "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=863025",
+   "originallink": "http://www.hansbiz.co.kr/news/articleView.html?idxno=863025",
+   "press": "hansbiz.co.kr",
+   "pub": "2026-09-08 09:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"산업·직무별 일하기 좋은 기업은?\" 잡플래닛, 2026 하반기 어워즈 발표...",
+   "desc": "잡플래닛은 매년 일하기 좋은 회사를 발표해왔으며, 지난해부터는 단순 순위 발표를 넘어 구직자가 참고할... 기업 평가는 ▲급여·복지 ▲승진 기회 ▲워라밸 ▲사내문화 ▲기업 추천율 ▲성장 가능성 ▲CEO 지지율 등을...",
+   "link": "https://edu.donga.com/news/articleView.html?idxno=111669",
+   "originallink": "https://edu.donga.com/news/articleView.html?idxno=111669",
+   "press": "동아일보",
+   "pub": "2026-09-08 09:52",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"기업 순위 아닌 직무 리뷰로\"… SK하이닉스, 잡플래닛 어워즈 종합 대...",
+   "desc": "잡플래닛 관계자는 \"앞으로 반기마다 진행할 잡플래닛 어워즈는 구직자가 자신에게 맞는 '일하기 좋은 회사... 급여·복지 부문에는 SK텔레콤, 글락소스미스클라인, 네이버클라우드, 현대모비스 등이, 워라밸 부문에는...",
+   "link": "https://www.news2day.co.kr/article/20260908500038",
+   "originallink": "https://www.news2day.co.kr/article/20260908500038",
+   "press": "news2day.co.kr",
+   "pub": "2026-09-08 09:58",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "SK하이닉스, 전·현직 직원 평가도 대학생 선호도도 1위",
+   "desc": "급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, 최고경영자(CEO) 지지율 등의... 잡플래닛은 단순 순위 발표를 넘어 구직자가 참고할 수 있는 신뢰도 높은 지표를 제공하기 위해 미식 평가지...",
+   "link": "https://n.news.naver.com/mnews/article/243/0000102781?sid=101",
+   "originallink": "https://economist.co.kr/article/view/ecn202609080008",
+   "press": "economist.co.kr",
+   "pub": "2026-09-08 10:01",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"SK하이닉스 일하기 좋다\"…리뷰 뜯었더니 '종합 1위'",
+   "desc": "구직자가 실제 지원할 때 고려하는 산업·직무 중심으로 개편했다. 산업 부문은 제조·화학, 정보기술(IT), 유통·무역, 미디어·디자인 등 4개로 구분했다. 직무는 개발, 기획, 마케팅, 영업 등 4개로 나눴다. 평가는 급여...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005329890?sid=105",
+   "originallink": "https://www.hankyung.com/article/202609080505g",
+   "press": "한국경제",
+   "pub": "2026-09-08 10:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "김영훈 “‘N% 성과급’ 파업, 노란봉투법 새 지침 적용시 불법”",
+   "desc": "자발적으로 이직한 경우에도 생애 최초 1회는 구직급여(실업급여)를 지급하는 방안이 내년도 예산안에서 제외된 데 관한 입장도 밝혔다. 앞서 정부는 이 같은 제도를 내년부터 시행하겠다고 예고했다. 김 장관은...",
+   "link": "https://n.news.naver.com/mnews/article/022/0004157262?sid=101",
+   "originallink": "https://www.segye.com/newsView/20260908504994?OutUrl=naver",
+   "press": "세계일보",
+   "pub": "2026-09-08 10:11",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "삼성, 하반기 공채 시작… AI 호황에 채용 규모 확대 기대",
+   "desc": "삼성전자를 선택한 주된 이유로는 급여와 보상 제도가 꼽혔으며, 남성 구직자와 공학·전자 전공생들로부터 높은 지지를 얻은 것으로 나타났다. 삼성이 올해 하반기 공채를 8일 시작한다고 지난 7일 밝혔다. 사진...",
+   "link": "https://www.mediawatch.kr/news/article.html?no=260934",
+   "originallink": "https://www.mediawatch.kr/news/article.html?no=260934",
+   "press": "mediawatch.kr",
+   "pub": "2026-09-08 10:42",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "아르헨티나 광업·에너지 조달시장 기회 확대… 2026 산업전시회 참관기",
+   "desc": "31.] 아르헨티나 노동위험감독청(SRT) 기준, 2026년 2월 보험료 납부 고용사업체 수는 48만 7920개로, 2023년 12월 대비 2만 4978개(약 4.9%) 감소했다. 특히 제조업 사업체는 같은 기간 3173개(약 6.4%) 감소해 전체 사업체보다...",
+   "link": "http://dream.kotra.or.kr/kotranews/cms/news/actionKotraBoardDetail.do?SITE_NO=3&MENU_ID=110&CONTENTS_NO=1&bbsGbn=245&bbsSn=245&pNttSn=243922",
+   "originallink": "http://dream.kotra.or.kr/kotranews/cms/news/actionKotraBoardDetail.do?SITE_NO=3&MENU_ID=110&CONTENTS_NO=1&bbsGbn=245&bbsSn=245&pNttSn=243922",
+   "press": "dream.kotra.or.kr",
+   "pub": "2026-09-08 10:55",
+   "q": "제조업 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": false
+  },
+  {
+   "title": "잡플래닛, '2026 하반기 어워즈' 발표⋯SK하이닉스 종합 대상",
+   "desc": "평가에는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, 최고경영자(CEO) 지지율 등이... 잡플래닛 관계자는 \"산업·직무별 조직 경험을 살펴 구직자가 자신에게 맞는 일하기 좋은 회사를 찾는 데...",
+   "link": "https://n.news.naver.com/mnews/article/031/0001056311?sid=101",
+   "originallink": "http://www.inews24.com/view/2003055",
+   "press": "아이뉴스24",
+   "pub": "2026-09-08 11:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[코스닥 루키즈 점검] 한패스, 공모가 72% 하회…적자·오버행 부담",
+   "desc": "급여는 94억원으로 전년 동기 79억원보다 18.6% 증가했다. 외환차손은 45억원에서 69억원으로 54.4% 늘었다.... 한패스는 신사업으로 택시 호출 등 모빌리티 서비스와 외국인 구인구직, KTX·고속버스 예매, 커머스 등을...",
+   "link": "https://n.news.naver.com/mnews/article/293/0000090156?sid=101",
+   "originallink": "https://www.bloter.net/news/articleView.html?idxno=672893",
+   "press": "bloter.net",
+   "pub": "2026-09-08 11:10",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "의무지출 늘었는데 68.8조 구조조정?…\"증가폭 줄인 만큼 '절감' 계산\"",
+   "desc": "기획처에 따르면 의무지출 구조조정 규모는 약 69조원으로, 지방교부세 30조5000억원, 교육교부금 32조5000억원, 구직급여 1조4000억원 등이 주요 항목이다. 이 가운데 교부세와 교부금에서만 63조원의 구조조정 효과가...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014176224?sid=101",
+   "originallink": "https://www.newsis.com/view/NISX20260908_0003780595",
+   "press": "뉴시스",
+   "pub": "2026-09-08 11:31",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "김영훈 \"영업이익 N% 파업, 새 지침상 불법\"…삼성 합의는 유효",
+   "desc": "\"모든 성과급 쟁의 대상서 제외되는 것 아냐\" 화이트칼라 이그젬션에는 신중…청년 구직급여 확대 보류  김영훈 고용노동부 장관이 기업 영업이익의 일정 비율을 성과급으로 요구하며 벌이는 파업은 정부의 새 노동쟁의...",
+   "link": "http://www.srtimes.kr/news/articleView.html?idxno=211864",
+   "originallink": "http://www.srtimes.kr/news/articleView.html?idxno=211864",
+   "press": "srtimes.kr",
+   "pub": "2026-09-08 11:32",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "장애인부담금 손금 인정· 위탁제조 세액감면… 감사원, 주요 심사청구...",
+   "desc": "고용산재보험료징수법 제26조(산재보험가입자로부터 보험급여액 징수 등) 제1항 제2호 등에 따르면 사업주가 산재보험료의 납부를 게을리 한 기간 중에 발생한 재해에 대해 재해자에게 산재보험급여를 지급하는...",
+   "link": "http://www.intn.co.kr/news/articleView.html?idxno=2053134",
+   "originallink": "http://www.intn.co.kr/news/articleView.html?idxno=2053134",
+   "press": "intn.co.kr",
+   "pub": "2026-09-08 12:02",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "[2060년 한국 가장 늙은 나라] 노인 41% ‘세계 최다’…빈곤·질병·돌봄...",
+   "desc": "고용·의료·돌봄을 포함한 사회 운영체계 전환으로 접근할 필요성이 제기된다. 일하면서 세금이나 사회보험료를 내는 인구층의 감소와 그 혜택을 받는 인구의 빠른 증가는 국민연금과 건강보험은 보험료를 낼 가입자...",
+   "link": "https://www.naeil.com/news/read/601530?ref=naver",
+   "originallink": "https://www.naeil.com/news/read/601530?ref=naver",
+   "press": "naeil.com",
+   "pub": "2026-09-08 13:06",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "직원들이 직접 뽑았다… '일하기 좋은 기업' 종합 1위는?",
+   "desc": "급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, 최고경영자(CEO) 지지율 등 평가 항목... 대신 구직자가 참고할 수 있는 신뢰도 높은 지표를 제공하기 위해 '잡플래닛 어워즈'를 도입했다. 산업...",
+   "link": "https://www.wikitree.co.kr/articles/1158080",
+   "originallink": "https://www.wikitree.co.kr/articles/1158080",
+   "press": "wikitree.co.kr",
+   "pub": "2026-09-08 13:48",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[인천 도시이야기] 도시계획에 '사람'을 넣어야 풀린다",
+   "desc": "기업과 구직자가 서로에 대해 가진 정보가 너무 부족하기 때문이다. 기업 채용공고는 회사명·업종·연봉... 기업정보는 급여와 복지를 넘어 실제 업무, 사용 장비와 소프트웨어, 근무환경, 승진경로까지 상세하게...",
+   "link": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3033953",
+   "originallink": "https://www.kihoilbo.co.kr/news/articleView.html?idxno=3033953",
+   "press": "kihoilbo.co.kr",
+   "pub": "2026-09-08 15:18",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "김영훈 장관 “삼성전자 ‘N% 성과급’ 요구 파업, 새 지침대로면 불법...",
+   "desc": "35세 미만 청년이 자발적으로 퇴사하더라도 일정 요건을 충족하면 생애 한 차례 구직급여를 지급하는 방안이 내년도 예산안에서 제외된 데 대해서는 도덕적 해이와 포퓰리즘 등의 우려를 고려해 도입을 보류했다고 밝혔다....",
+   "link": "https://www.viva100.com/article/20260908501102",
+   "originallink": "https://www.viva100.com/article/20260908501102",
+   "press": "viva100.com",
+   "pub": "2026-09-08 15:22",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "삼성전자 '성과급 파업' 막힌다… 김영훈 \"노봉법 새 지침엔 불법\"",
+   "desc": "35세 미만 청년이 자발적으로 퇴사하더라도 구직급여를 지급하는 방안이 내년도 예산안에서 제외된 배경도 밝혔다. 김 장관은 \"포퓰리즘 아니냐는 비판이 있어 내년도 예산에는 일단 포함되지 않았다\"고 말했다. 뉴데일리...",
+   "link": "https://biz.newdaily.co.kr/site/data/html/2026/09/08/2026090800257.html",
+   "originallink": "https://biz.newdaily.co.kr/site/data/html/2026/09/08/2026090800257.html",
+   "press": "biz.newdaily.co.kr",
+   "pub": "2026-09-08 15:48",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "충북경총, 중장년 재취업 체계적 지원",
+   "desc": "또 교육 참가자들에게는 실업급여 수급을 위한 구직 외 활동 인정, 만 50세 이상 구직자 고용촉진장려금 대상 자격 부여 등의 혜택이 주어진다. 충북중장년내일센터는 교육 수료 이후에도 청주고용복지+센터와 연계해...",
+   "link": "https://www.ccdn.co.kr/news/articleView.html?idxno=1098589",
+   "originallink": "https://www.ccdn.co.kr/news/articleView.html?idxno=1098589",
+   "press": "충청매일",
+   "pub": "2026-09-08 19:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "충북중장년내일센터, 재도약프로그램 3회 추가 운영",
+   "desc": "프로그램 참여 시 실업급여 수급을 위한 구직 외 활동(재취업활동)으로 인정받을 수 있으며, 수료자 중 만 50세 이상 구직자에게는 채용 기업이 지원받을 수 있는 '고용촉진장려금' 대상 자격이 부여된다....",
+   "link": "http://www.cctimes.kr/news/articleView.html?idxno=926231",
+   "originallink": "http://www.cctimes.kr/news/articleView.html?idxno=926231",
+   "press": "cctimes.kr",
+   "pub": "2026-09-08 21:44",
+   "q": "구직급여, 구직급여",
+   "rel": false
+  },
+  {
+   "title": "잡플래닛, 하반기 '일하기 좋은 기업' 59곳 선정…SK하이닉스 종합대상",
+   "desc": "지난해부터는 단순 기업 순위에서 벗어나 구직자들이 기업을 비교·판단할 수 있는 객관적인 정보를... 기업 평가는 급여와 복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, 최고경영자(CEO) 지지율 등을...",
+   "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=89002",
+   "originallink": "http://www.worktoday.co.kr/news/articleView.html?idxno=89002",
+   "press": "worktoday.co.kr",
+   "pub": "2026-09-09 00:28",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"일해도 노동자 아니다?\" 간병·예술노동자 '동병상련'",
+   "desc": "▲ 간병노동자 산재보험 적용 대책회의와 문화예술노동연대는 8일 오전 서울고용노동청 앞에서 기자회견을... 한국예술인복지재단은 2026년부터 가입자의 납부보험료 50%를 환급 지원하고 있다. 그러나...",
+   "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=236685",
+   "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=236685",
+   "press": "labortoday.co.kr",
+   "pub": "2026-09-09 06:34",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "일하기 좋은 기업 '1위' SK하닉…잡플래닛 '2026 하반기 어워즈'서 대상",
+   "desc": "급여·복지·워라밸·사내문화 등 7개 항목 종합 평가…전·현직자 리뷰 기반 선정 대학생 취업 선호도에서... 잡플래닛 관계자는 \"앞으로 반기마다 진행할 잡플래닛 어워즈는 구직자가 자신에게 맞는 '일하기 좋은 회사...",
+   "link": "http://www.srtimes.kr/news/articleView.html?idxno=211934",
+   "originallink": "http://www.srtimes.kr/news/articleView.html?idxno=211934",
+   "press": "srtimes.kr",
+   "pub": "2026-09-09 08:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "국가장학금 받은 학생, 첫 직장 월급 3% 더 높았다",
+   "desc": "지원 규모가 클수록 급여 격차도 비례해 벌어졌다. 장학금 지원액이 1% 증가할 때마다 첫 직장에서 받는 월급은 0.007%씩 동반 상승했다. 재정적 지원이 학업과 취업 준비 시간을 실질적으로 확보해 주면서 구직 시장 내...",
+   "link": "https://www.insight.co.kr/news/572570",
+   "originallink": "https://www.insight.co.kr/news/572570",
+   "press": "insight.co.kr",
+   "pub": "2026-09-09 09:28",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "진에어 합격한 신입 객실승무원 중 50명 입사 4개월 이상 늦어져 … \"다...",
+   "desc": "다만 입사가 미뤄진 기간에는 급여나 수당이 지급되지 않았다. 항공업계에서는 외부 변수로 최종... 부산’에도 공동으로 참여해 부스를 운영하고 항공산업 분야 구직자들에게 취업 멘토링을 제공했다. 뉴데일리 이보현",
+   "link": "https://biz.newdaily.co.kr/site/data/html/2026/09/09/2026090900131.html",
+   "originallink": "https://biz.newdaily.co.kr/site/data/html/2026/09/09/2026090900131.html",
+   "press": "biz.newdaily.co.kr",
+   "pub": "2026-09-09 11:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[커뮤니티저널리즘스쿨] 돌봄의 무게가 삶의 격차가 될 때, ‘영케어러...",
+   "desc": "현재 구직 중(28.95%)에 이어 두 번째로 높은 비중이다. 니트 청년 중 일부가 교육과 노동시장에서 이탈한... 취업과 복지 사이, 영케어러가 올라탄 저울 ▲ 가족돌봄청년의 월급에 따른 생계·의료급여 변화 예시. 2026년 2인...",
+   "link": "https://www.newsmin.co.kr/news/136680/",
+   "originallink": "https://www.newsmin.co.kr/news/136680/",
+   "press": "newsmin.co.kr",
+   "pub": "2026-09-09 13:48",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "퇴사한 회사 리뷰 썼다가 '2000만원 배상' 소송 당했다면?",
+   "desc": "법무법인 목민 박현익 변호사는 \"실제 겪은 사실을 바탕으로 작성한 리뷰는 다른 구직자를 위한 공공의... 법무법인 쉴드 박수범 변호사는 \"판례상 업무 성격, 지시 여부, 인수인계 여부, 급여 수준 등을 종합해 '손해의...",
+   "link": "https://lawtalknews.co.kr/article/X4P7CKG91EZX",
+   "originallink": "https://lawtalknews.co.kr/article/X4P7CKG91EZX",
+   "press": "lawtalknews.co.kr",
+   "pub": "2026-09-09 14:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“우리 아들 같아서”…음식 쏟은 배달 기사에 용돈 준 중년 여성의 마...",
+   "desc": "대기업과 중소기업의 급여, 복리후생 차이가 워낙 커서 특정 기업 입사에만 매달리고 있다는 지적도 있다. 이번 여름은 배달기사에 최악의 시기 취업난 속에 '그냥 쉬는' 청년들도 많다. 밖에서 구직 활동도 하지 않고...",
+   "link": "https://n.news.naver.com/mnews/article/296/0000104650?sid=103",
+   "originallink": "https://kormedi.com/?p=2862856",
+   "press": "kormedi.com",
+   "pub": "2026-09-09 14:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "국민연금 보험료율 인상안 정기국회 심의 돌입",
+   "desc": "자영업을 하는 이모 씨(52)는 \"지역가입자는 보험료를 온전히 혼자 부담해야 하는데, 인상 폭이 커지면 생계에... 경영계 관계자는 \"가뜩이나 인건비 부담이 큰 중소기업의 경우 보험료율 인상이 고용 축소로 이어질 수 있다...",
+   "link": "https://www.gokorea.kr/news/articleView.html?idxno=877727",
+   "originallink": "https://www.gokorea.kr/news/articleView.html?idxno=877727",
+   "press": "gokorea.kr",
+   "pub": "2026-09-09 14:14",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "'38억' 받으면서 \"많이 줘야 뇌물 안 받죠\"…세계 최고 총리연봉인데 64...",
+   "desc": "이날 현지 온라인에서는 정리해고와 대졸 신규 구직자의 취업난, 물가 상승에 대한 우려를 고려할 때 급여 인상이 현실과 동떨어진 결정이라는 비판이 나왔다. 정부 통계에 따르면 지난 분기 싱가포르의 정리해고...",
+   "link": "https://n.news.naver.com/mnews/article/277/0005814041?sid=104",
+   "originallink": "https://view.asiae.co.kr/article/2026090914025346706",
+   "press": "아시아경제",
+   "pub": "2026-09-09 14:16",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"강의실=개발사\"…청강대, '268석 실전 인프라'로 실전 게임 인재 키워",
+   "desc": "학생들은 아이디어 발표부터 팀 빌딩을 위한 구인·구직 과정까지 직접 주도하며 기획자, 프로그래머... 2027학년도 총 238명 선발…면접 2배수 단계별 전형 및 실기고사 청강문화산업대 게임콘텐츠스쿨의 2027학년도...",
+   "link": "https://n.news.naver.com/mnews/article/092/0002436817?sid=105",
+   "originallink": "https://zdnet.co.kr/view/?no=20260909110033",
+   "press": "zdnet.co.kr",
+   "pub": "2026-09-09 14:59",
+   "q": "구인배수",
+   "rel": false
+  },
+  {
+   "title": "[현장] 한국세무사회, 세무사 제도 도입 65년 역사 위 ‘황금시대’ 선...",
+   "desc": "세무행정의 합리화를 꿈꿨습니다. 이제 한국 세무사제도는 일본을 능가할 만큼 비약적으로 발전했습니다.... 또한 변호사의 세무사 자동자격 폐지 및 업무 제한에 대한 헌법소원 6건 전원 승소, 회계사의 고용·산재보험...",
+   "link": "https://www.tfmedia.co.kr/news/article.html?no=207097",
+   "originallink": "https://www.tfmedia.co.kr/news/article.html?no=207097",
+   "press": "tfmedia.co.kr",
+   "pub": "2026-09-09 15:22",
+   "q": "공공행정 고용보험",
+   "rel": false
+  },
+  {
+   "title": "메디케어 가입, 시기 놓치면 ‘평생 벌금’",
+   "desc": "병원보험인 파트 A와 의사 진료 및 외래 치료 등을 보장하는 파트 B로 구성된다. 65세 신규 가입자는... 고용 또는 직장 보험이 종료된 달의 다음달부터 8개월 이내에 가입해야 연체 벌금 없이 가입이 가능하다. 매년...",
+   "link": "http://www.koreatimes.com/article/1628933",
+   "originallink": "http://www.koreatimes.com/article/1628933",
+   "press": "koreatimes.com",
+   "pub": "2026-09-09 15:40",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "\"발 디딜 틈 없었다\"...전북 일자리페스티벌 구직자 '북적'",
+   "desc": "행사장 한편에는 참여기업들의 모집직무와 채용인원, 급여 수준, 근무지, 우대사항 등이 적힌 채용정보가 빼곡히 게시됐다. 구직자들은 게시판과 QR코드를 번갈아 확인하며 자신에게 맞는 기업을 찾는 모습이었다. 많은...",
+   "link": "http://www.jeonmin.co.kr/news/articleView.html?idxno=446694",
+   "originallink": "http://www.jeonmin.co.kr/news/articleView.html?idxno=446694",
+   "press": "jeonmin.co.kr",
+   "pub": "2026-09-09 15:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "노인 일자리 115만 개··· 중장년은 공백",
+   "desc": "기업이 최저임금 이상의 급여를 먼저 지급하면 시가 참여자 한 명당 월 최대 64만7,060원을 보조하는... 4세까지 일하기를 바라는 것으로 조사됐다\"며 \"중장년 구직자가 퇴직 전에도 다음 일자리를 찾는 고용 유연성과...",
+   "link": "https://n.news.naver.com/mnews/article/469/0000953075?sid=102",
+   "originallink": "https://www.hankookilbo.com/news/article/A2026090910490004301?did=NA",
+   "press": "한국일보",
+   "pub": "2026-09-09 15:52",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[더벨][Company Watch] 당근, 광고 의존 낮추기 시동…중개 매출 '급성장...",
+   "desc": "상반기 종업원급여는 441억원으로 전년 동기(370억원) 대비 19.1% 늘었고 지급수수료도 413억원에서... 당근은 중고거래에서 출발해 구인·구직, 중고차, 부동산, 커머스 등으로 서비스 범위를 넓혀왔다. 여기에...",
+   "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202609071548445960103525",
+   "originallink": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202609071548445960103525",
+   "press": "thebell.co.kr",
+   "pub": "2026-09-09 15:58",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[현장] 기업은 “사람이 없다”는데 “일자리가 없다”는 구직자···전...",
+   "desc": "급여와 업무 역량을 둘러싼 기업 측의 불만도 나왔다. 한 부스 관계자는 상담을 온 구직자에게 “요즘 청년들은 초봉으로 연봉 3600만 원을 원하는데, 그 돈을 주면 도대체 본인들이 할 수 있는 일이 무엇이냐”고 묻고...",
+   "link": "https://www.jjan.kr/article/20260909500448",
+   "originallink": "https://www.jjan.kr/article/20260909500448",
+   "press": "jjan.kr",
+   "pub": "2026-09-09 16:18",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "대학 나와 취업해도 집은 '언감생심'…美 청년들, 주식·부업 전선으로",
+   "desc": "반면 클라크는 지난해 노스캐롤라이나대 샬럿캠퍼스에서 경영학을 전공하고 졸업한 뒤 수개월간 구직한... 니콜 잉엄(33)은 핀테크 회사에서 투자를 접한 뒤 남편의 연소득 6만5000달러로 부부가 생활하면서 자신의 급여...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014180450?sid=104",
+   "originallink": "https://www.newsis.com/view/NISX20260909_0003783159",
+   "press": "뉴시스",
+   "pub": "2026-09-09 17:15",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"전북서 일하고 싶어요\" 청년부터 중장년까지 취업박람회 북적",
+   "desc": "9일 전주대학교 스타센터 하림미션홀에서 열린 '2026 전북특별자치도 일자리페스티벌'에서 대학생과 특성화고 학생 등 청년 구직자들이 채용정보를 살펴보고 있다. 이수훈 기자 \"급여도 중요하지만 복지나 근무환경도 잘...",
+   "link": "http://www.domin.co.kr/news/articleView.html?idxno=1568286",
+   "originallink": "http://www.domin.co.kr/news/articleView.html?idxno=1568286",
+   "press": "domin.co.kr",
+   "pub": "2026-09-09 17:48",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "스리랑카 용접공들이 그날 울산 앞바다에 모인 이유",
+   "desc": "회사 측이 계약을 연장하지 않으면 구직활동(D10) 비자를 받을 수도 있지만, D10 비자 체류 기간은 통상... 그동안 급여에서 공제했던 식비를 2023년 1월 기준으로 소급 적용해 반환하고, 앞으로는 식사를 무상으로...",
+   "link": "https://n.news.naver.com/mnews/article/308/0000038740?sid=102",
+   "originallink": "https://www.sisain.co.kr/news/articleView.html?idxno=58439",
+   "press": "sisain.co.kr",
+   "pub": "2026-09-10 06:35",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "미국이나 한국이나 “답이 없다, 주식 해야지”…청년들 ‘내 집 마련’...",
+   "desc": "그러나 클라크는 지난해 노스캐롤라이나대 샬럿캠퍼스에서 경영학을 전공하고도 수개월간 구직한 끝에... 33세 니콜 잉엄은 남편의 연소득 6만5000달러로 부부의 생활비를 충당하면서 자신의 급여 대부분을 투자했다....",
+   "link": "https://n.news.naver.com/mnews/article/011/0004660370?sid=104",
+   "originallink": "https://www.sedaily.com/article/20089195?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-09-10 07:56",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "2030 주택 보유율 역대 최저치 기록... 부모 세대와 자산 격차 벌어지게...",
+   "desc": "클라크는 지난해 노스캐롤라이나대 샬럿캠퍼스에서 경영학을 전공했지만 몇 달간 구직 끝에 연봉 5만달러... 33세 니콜 잉엄은 남편의 연소득 6만5000달러로 부부 생활비를 해결하면서 자신의 급여 대부분을 투자했다....",
+   "link": "https://www.insight.co.kr/news/572825",
+   "originallink": "https://www.insight.co.kr/news/572825",
+   "press": "insight.co.kr",
+   "pub": "2026-09-10 11:04",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "2060년 세계에서 가장 나이 든 나라, 일본 아닌 한국",
+   "desc": "범위·급여 수준, 길어진 기대수명, 연공서열형 임금체계에서 비롯된 이른 주된 일자리 퇴직 등을 함께... 여기서 경제활동참가율은 실제 취업자뿐 아니라 구직 중인 실업자까지 포함해 ‘일할 의사가 있어...",
+   "link": "https://bravo.etoday.co.kr/view/atc_view/20035",
+   "originallink": "https://bravo.etoday.co.kr/view/atc_view/20035",
+   "press": "이투데이",
+   "pub": "2026-09-10 13:34",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[162조 미래, 왜 기금인가] ① 적립인가 사업인가…커지는 '쌈짓돈' 논란",
+   "desc": "고용보험기금이나 주택도시기금처럼 사업을 수행하는 기금도 있다. 다만 미래기금은 '미래'라는 포괄적인... 왼쪽부터 김민재 행정안전부 차관, 박홍근 장관, 최교진 교육부 장관. [사진 = 뉴스핌DB] 신설 심사·평가...",
+   "link": "https://www.newspim.com/news/view/20260910000650",
+   "originallink": "https://www.newspim.com/news/view/20260910000650",
+   "press": "뉴스핌",
+   "pub": "2026-09-10 14:00",
+   "q": "공공행정 고용보험",
+   "rel": false
+  },
+  {
+   "title": "재취업율 3년째 30%인데…청년 실업급여 확대 답일까?",
+   "desc": "권고사직이나 계약기간 만료 등 비자발적으로 회사를 그만둔 노동자들이 구직급여(실업급여)를 받는 동안 재취업하는 비율이 30%에 머물면서, 실업급여의 실효성에 대한 지적이 제기됐습니다. 10일 국회입법조사처의...",
+   "link": "https://n.news.naver.com/mnews/article/374/0000532250?sid=101",
+   "originallink": "https://biz.sbs.co.kr/article_hub/20000333854?division=NAVER",
+   "press": "biz.sbs.co.kr",
+   "pub": "2026-09-10 14:56",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "7월까지 나라살림 64.8조 적자…국가채무 1354조",
+   "desc": "국민연금기금과 사립학교교직원연금기금, 고용보험기금, 산업재해보상보험및예방기금 등... 이 가운데 국가가 청사·도로·하천 등 공용·공공용으로 사용하는 행정재산은 1031조7000억원, 매각이나 대부가...",
+   "link": "https://www.thepowernews.co.kr/view.php?ud=20260911095329680de3f0aa1be_7",
+   "originallink": "https://www.thepowernews.co.kr/view.php?ud=20260911095329680de3f0aa1be_7",
+   "press": "thepowernews.co.kr",
+   "pub": "2026-09-11 09:56",
+   "q": "공공행정 고용보험",
+   "rel": false
+  },
+  {
+   "title": "국민소득 4만 달러 시대 열린다는데…내 지갑은 왜 그대로?",
+   "desc": "반면 임금과 고용주의 사회보험 부담 등을 포함한 근로자 몫, 즉 피용자보수는 전 분기보다 1.9% 늘어나는... 제조업도 반도체를 포함한 컴퓨터·전자·광학기기를 중심으로 1.4% 성장했다. 4만 달러를 눈앞에 둔 소득...",
+   "link": "https://www.pennmike.com/news/articleView.html?idxno=127579",
+   "originallink": "https://www.pennmike.com/news/articleView.html?idxno=127579",
+   "press": "pennmike.com",
+   "pub": "2026-09-11 10:28",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "싱가포르 NUS 대학교 '한-싱 해외인재 유치사절단' 참관기",
+   "desc": "이상의 급여와 자격 요건을 충족해야 한다. 현재 EP 신청자는 최소 월 S$5600의 급여 기준을 충족해야 하며... 기존의 해외 채용박람회가 다수 기업과 구직자가 참여하는 대규모 행사 형태로 진행되는 것과 달리, 이번...",
+   "link": "http://dream.kotra.or.kr/kotranews/cms/news/actionKotraBoardDetail.do?SITE_NO=3&MENU_ID=110&CONTENTS_NO=1&bbsGbn=245&bbsSn=245&pNttSn=243948",
+   "originallink": "http://dream.kotra.or.kr/kotranews/cms/news/actionKotraBoardDetail.do?SITE_NO=3&MENU_ID=110&CONTENTS_NO=1&bbsGbn=245&bbsSn=245&pNttSn=243948",
+   "press": "dream.kotra.or.kr",
+   "pub": "2026-09-11 10:48",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "기업·고용 일부 개선 추세, 건설업 부진은 여전",
+   "desc": "올해 5월 피보험자 수는 16만3136명이었지만, 6월에는 16만4782명으로 조금 늘어났다. 다만, 건설업은 여전히 침체된 상황이다. 기업과 고용 양쪽에서 하락세가 뚜렷했다. 올해 7월 기준으로 제주에서 신설...",
+   "link": "https://www.jejusori.net/news/articleView.html?idxno=506467",
+   "originallink": "https://www.jejusori.net/news/articleView.html?idxno=506467",
+   "press": "jejusori.net",
+   "pub": "2026-09-11 15:00",
+   "q": "건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "\"아파도 일하라는 상병수당?\"…시민 1만 명, 정부안 전면 수정 촉구",
+   "desc": "정부안은 건강보험 가입자를 대상으로 하되 만 65세 연령 상한을 두고, 인적용역 노무제공자와 초단시간... 869만 명 인적용역 노동자도 사각지대 고용 형태에 따른 배제 역시 비판의 대상이 됐다. 최영미 한국노총...",
+   "link": "http://www.gjdream.com/news/articleView.html?idxno=672626",
+   "originallink": "http://www.gjdream.com/news/articleView.html?idxno=672626",
+   "press": "gjdream.com",
+   "pub": "2026-09-11 15:50",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "정부 160조원 미래대응기금에 전문가들 정부저축 ‘최선’·‘적절’ 평...",
+   "desc": "이정혁 교수는 특히 지방교육재정교부금과 구직급여(실업급여) 등 지금까지 하지 못한 근본적인 의무지출 개혁 시도를 긍정적으로 평가하며 크게 늘어난 세수를 미래 투자와 경제 전반으로의 온기 확산에 활용하기 위한...",
+   "link": "https://www.viva100.com/article/20260911500806",
+   "originallink": "https://www.viva100.com/article/20260911500806",
+   "press": "viva100.com",
+   "pub": "2026-09-11 16:40",
+   "q": "구직급여",
+   "rel": false
+  }
+ ]
+}
