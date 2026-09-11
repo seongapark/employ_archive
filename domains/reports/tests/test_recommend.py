@@ -242,3 +242,45 @@ def test_openai_gets_max_completion_tokens_not_max_tokens():
         body = recommend.payload_for(url, 'm', 'p')
         assert body['max_tokens'] == recommend.MAX_TOKENS
         assert 'max_completion_tokens' not in body
+
+
+def test_merge_records_the_model_that_actually_judged(monkeypatch):
+    # 실측(2026-09-11): 이 저장소엔 OPENAI_API_KEY 밖에 없어 실제로는
+    # gpt-5.5 로 판정했는데, merge() 가 MODEL_ANTHROPIC 상수를 그대로
+    # 박는 바람에 캐시엔 전부 claude-opus-5 로 거짓 기록됐다. model 은
+    # "누가 판정했나"의 유일한 기록이라, 상수를 박으면 나중에 앤트로픽
+    # 키가 들어와도 무엇을 gpt-5.5 로 다시 물어야 할지 구분할 수 없다.
+    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY', 'OPENAI_API_KEY'):
+        monkeypatch.delenv(k, raising=False)
+
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-oa-x')
+    _, model, _ = recommend.provider()
+    cache = recommend.merge({}, [ROWS[0]], [recommend.Verdict(1, True, '청년 고용', 'ㄱ')],
+                            PROFILE, model=model)
+    assert cache['bok-1']['model'] == 'gpt-5.5'
+
+    monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-x')
+    _, model, _ = recommend.provider()
+    cache = recommend.merge({}, [ROWS[0]], [recommend.Verdict(1, True, '청년 고용', 'ㄱ')],
+                            PROFILE, model=model)
+    assert cache['bok-1']['model'] == 'claude-opus-5'
+
+
+def test_judge_and_cache_records_the_actual_provider_model(monkeypatch, tmp_path):
+    # merge() 단위 테스트와 별도로, main() 이 실제로 부르는 경로인
+    # judge_and_cache() 도 provider() 가 고른 모델을 그대로 캐시에
+    # 남기는지 재확인한다.
+    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY'):
+        monkeypatch.delenv(k, raising=False)
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-oa-x')
+
+    def fake_call(prompt):
+        return json.dumps([{'n': 1, 'pick': True, 'axis': '청년 고용', 'why': 'ㄱ'}],
+                          ensure_ascii=False)
+
+    cache_path = tmp_path / 'recommendations.json'
+    cache = recommend.judge_and_cache(PROFILE, [ROWS[0]], {}, call=fake_call,
+                                      cache_path=cache_path, log=lambda *_: None)
+    assert cache['bok-1']['model'] == 'gpt-5.5'
+    on_disk = json.loads(cache_path.read_text(encoding='utf-8'))
+    assert on_disk['bok-1']['model'] == 'gpt-5.5'

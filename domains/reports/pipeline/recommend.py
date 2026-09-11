@@ -253,8 +253,21 @@ def pending(reports: Sequence[dict], cache: dict, profile: Profile) -> list[dict
 
 
 def merge(cache: dict, rows: Sequence[dict], verdicts: Sequence[Verdict],
-          profile: Profile) -> dict:
-    """판정을 캐시에 얹는다. 이번에 안 물어본 것은 그대로 둔다."""
+          profile: Profile, model: str = MODEL_ANTHROPIC) -> dict:
+    """판정을 캐시에 얹는다. 이번에 안 물어본 것은 그대로 둔다.
+
+    `model` 은 **실제로 판정에 쓴 모델**을 호출자가 넘겨야 한다. 여기서
+    상수(MODEL_ANTHROPIC)를 그대로 박으면, 이 저장소처럼 OPENAI_API_KEY
+    밖에 없어 실제로는 gpt-5.5 로 판정했는데도 캐시에는 claude-opus-5 로
+    거짓 기록된다(실측: 2026-09-11, 20건을 gpt-5.5 로 판정했더니 캐시엔
+    전부 claude-opus-5 로 찍혔다). 이 필드는 "이 판정을 누가 내렸나"의
+    유일한 기록이라, 나중에 앤트로픽 키가 들어와 모델별 판정 품질을
+    비교하거나 특정 모델의 판정만 골라 재판정하려 할 때 이 값이 진실이
+    아니면 아무것도 구분할 수 없다. 기본값은 단위 테스트에서 model 을
+    안 넘기고 merge() 를 직접 부르던 기존 호출을 깨지 않기 위함이다 —
+    실제 판정 경로(judge_and_cache)는 항상 provider() 가 돌려준 실제
+    모델을 넘긴다.
+    """
     now = datetime.now(KST).isoformat(timespec='seconds')
     out = dict(cache)
     for v in verdicts:
@@ -264,7 +277,7 @@ def merge(cache: dict, rows: Sequence[dict], verdicts: Sequence[Verdict],
             # 초록이 없어 제목만으로 판정한 것을 표시한다. 나중에 원문에서
             # 초록을 채우면 그 레코드만 다시 물어보면 된다.
             'basis': 'abstract' if (row.get('abstract') or '').strip() else 'title',
-            'model': MODEL_ANTHROPIC,
+            'model': model,
             'profile_version': profile.version,
             'judged_at': now,
         }
@@ -283,9 +296,18 @@ def judge_and_cache(profile: Profile, rows: Sequence[dict], cache: dict, *,
     수 없다. 그래서 여기서는 BATCH 묶음 하나가 끝날 때마다 즉시
     write_text 한다 — 다음 묶음에서 예외가 나도 앞선 묶음은 디스크에
     남고, 다시 돌리면 pending() 이 그만큼을 걸러 다시 묻지 않는다.
+
+    실제로 어느 모델이 판정했는지는 provider() 가 안다 — call 을 주입해도
+    (테스트처럼) 마찬가지로 provider() 를 물어서 model 을 정하고, 키가
+    하나도 없으면 MODEL_ANTHROPIC 으로 fallback 한다(그 경우는 call 이
+    주입돼 있지 않는 한 어차피 _call_api 에서 RuntimeError 로 먼저
+    끊긴다 — fallback 은 테스트에서 call 을 주입했을 때 model 표기가
+    비지 않게 하려는 것뿐이다).
     """
     call = call or _call_api
     path = Path(cache_path or (DATA / 'recommendations.json'))
+    got = provider()
+    model = got[1] if got is not None else MODEL_ANTHROPIC
     cache = dict(cache)
     for start in range(0, len(rows), BATCH):
         chunk = list(rows[start:start + BATCH])
@@ -294,7 +316,7 @@ def judge_and_cache(profile: Profile, rows: Sequence[dict], cache: dict, *,
         # 묶음마다 즉시 반영하려면 여기서 직접 한 묶음씩 부른다.
         verdicts = parse_response(call(build_prompt(profile, chunk)),
                                   len(chunk), profile.axes)
-        cache = merge(cache, chunk, verdicts, profile)
+        cache = merge(cache, chunk, verdicts, profile, model=model)
         path.write_text(json.dumps(cache, ensure_ascii=False, indent=1) + '\n',
                         encoding='utf-8')
     return cache
@@ -329,114 +351,6 @@ def main(argv=None, *, call=None) -> int:
 
     cache_path = DATA / 'recommendations.json'
     cache = judge_and_cache(profile, todo, cache, call=call, cache_path=cache_path)
-    picked = sum(1 for v in cache.values() if v.get('pick'))
-    print(f'추천 {picked} / 판정 {len(cache)}')
-
-    last_path = DATA / 'last_run.json'
-    last = json.loads(last_path.read_text(encoding='utf-8')) if last_path.exists() else {}
-    last['recommend'] = {'judged': len(cache), 'picked': picked,
-                         'profile_version': profile.version,
-                         'title_only': sum(1 for v in cache.values()
-                                           if v.get('basis') == 'title')}
-    last_path.write_text(json.dumps(last, ensure_ascii=False, indent=2) + '\n',
-                         encoding='utf-8')
-    return 0
-
-
-if __name__ == '__main__':
-    raise SystemExit(main())
-
-
-def load_cache(path: Path | str | None = None) -> dict:
-    p = Path(path or (DATA / 'recommendations.json'))
-    if not p.exists():
-        return {}
-    return json.loads(p.read_text(encoding='utf-8'))
-
-
-def pending(reports: Sequence[dict], cache: dict, profile: Profile) -> list[dict]:
-    """아직 안 물어본 것과, 프로파일이 바뀐 뒤로 안 물어본 것."""
-    todo = []
-    for r in reports:
-        got = cache.get(r['id'])
-        if got is None or got.get('profile_version') != profile.version:
-            todo.append(r)
-    return todo
-
-
-def merge(cache: dict, rows: Sequence[dict], verdicts: Sequence[Verdict],
-          profile: Profile) -> dict:
-    """판정을 캐시에 얹는다. 이번에 안 물어본 것은 그대로 둔다."""
-    now = datetime.now(KST).isoformat(timespec='seconds')
-    out = dict(cache)
-    for v in verdicts:
-        row = rows[v.n - 1]
-        out[row['id']] = {
-            'pick': v.pick, 'axis': v.axis, 'why': v.why,
-            # 초록이 없어 제목만으로 판정한 것을 표시한다. 나중에 원문에서
-            # 초록을 채우면 그 레코드만 다시 물어보면 된다.
-            'basis': 'abstract' if (row.get('abstract') or '').strip() else 'title',
-            'model': MODEL_ANTHROPIC,
-            'profile_version': profile.version,
-            'judged_at': now,
-        }
-    return out
-
-
-def judge_and_cache(profile: Profile, todo: Sequence[dict], cache: dict, *,
-                     call: Callable[[str], str] | None = None,
-                     cache_path: Path | str | None = None,
-                     log: Callable[[str], None] = print) -> dict:
-    """묶음(BATCH)마다 판정하고, 묶음이 끝나는 즉시 캐시 파일에 반영한다.
-
-    judge() 를 통째로 불러 전부 끝난 뒤에 한 번만 쓰면, 113번 호출 중
-    한 번만 파싱에 실패해도 예외가 올라오면서 그때까지 판정한 것이 전부
-    날아간다. 2,200건을 돌릴 예정이고 비용이 걸려 있어(약 $8) 이 손실을
-    감당할 수 없다 — 그래서 묶음이 끝날 때마다 디스크에 쓴다.
-
-    한 묶음(BATCH=20 건)만 judge() 에 넘기므로 judge() 내부에서는 항상
-    한 번만 순회한다 — 여러 묶음에 걸친 재시도 단위를 여기서 우리가
-    직접 쥔다. 중간에 예외가 올라오면 그 예외는 그대로 호출자에게
-    전파하되(조용히 삼키지 않는다), 이미 성공한 앞선 묶음은 파일에 남아
-    있어 다음 실행에서 pending() 이 걸러 이어서 할 수 있다.
-    """
-    path = Path(cache_path or (DATA / 'recommendations.json'))
-    for start in range(0, len(todo), BATCH):
-        chunk = list(todo[start:start + BATCH])
-        verdicts = judge(profile, chunk, call=call, log=log)
-        cache = merge(cache, chunk, verdicts, profile)
-        path.write_text(json.dumps(cache, ensure_ascii=False, indent=1) + '\n',
-                        encoding='utf-8')
-    return cache
-
-
-def main(argv=None, *, call=None) -> int:
-    import argparse
-
-    from . import interests as interests_mod
-
-    ap = argparse.ArgumentParser()
-    ap.add_argument('--limit', type=int, default=0, help='이번에 판정할 최대 건수')
-    ap.add_argument('--dry-run', action='store_true')
-    args = ap.parse_args(argv)
-
-    profile = interests_mod.load()
-    reports = json.loads((DATA / 'reports.json').read_text(encoding='utf-8'))
-    abstracts = json.loads((DATA / 'abstracts.json').read_text(encoding='utf-8'))
-    rows = [{'id': r['id'], 'org': r['org'], 'series': r['series'], 'title': r['title'],
-             'abstract': (abstracts.get(r['id']) or {}).get('abstract', '')}
-            for r in reports]
-
-    # API 키 확인은 여기서 하지 않는다 — --dry-run 은 키 없이도 돌아야 한다.
-    cache = load_cache()
-    todo = pending(rows, cache, profile)
-    if args.limit:
-        todo = todo[:args.limit]
-    print(f'판정 대상 {len(todo)} / 전체 {len(rows)} (프로파일 {profile.version})')
-    if args.dry_run or not todo:
-        return 0
-
-    cache = judge_and_cache(profile, todo, cache, call=call)
     picked = sum(1 for v in cache.values() if v.get('pick'))
     print(f'추천 {picked} / 판정 {len(cache)}')
 
