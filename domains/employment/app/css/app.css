@@ -101,10 +101,19 @@
   white-space: nowrap;
 }
 
+/* 숫자의 이름(취업자수·종사자수·상시가입자수). 숫자 바로 위에 붙어야 이름표로
+   읽힌다 — 아래에 두면 그 밑의 포괄범위 줄과 한 덩어리가 되어 다시 섞인다. */
+.card__headline {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
 .card__value {
   font-size: 24px;
   font-weight: 700;
-  margin-top: 6px;
+  margin-top: 1px;
 }
 
 .card__value--empty {
