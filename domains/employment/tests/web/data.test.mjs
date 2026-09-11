@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { originOf, monthOptions, overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData, topMovers, EMPTY_LABEL, emptyLabel } from '../../app/js/data.js';
+import { originOf, monthOptions, overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData, topMovers, totalRow, EMPTY_LABEL, emptyLabel } from '../../app/js/data.js';
 
 function rec(over = {}) {
   return {
@@ -337,4 +337,65 @@ test('topMovers ignores records whose change is unknown', () => {
 test('topMovers returns nothing for a month the source never published', () => {
   const series = [rec({ source: 'eaps', breakdown: 'industry', category: 'C', period: '2026-06' })];
   assert.deepEqual(topMovers(series, { source: 'eaps', period: '2026-07', segments: MOVER_SEGMENTS }), []);
+});
+
+// ── 지표 축이 생긴 뒤: 기존 조회는 취업자수만 본다 ────────────────────
+//
+// series.json 에 고용률·실업률이 같이 들어오면서 생긴 문제다. 아래 조회들은
+// 오래도록 `series` 를 안 보고 살았고, 그래서 breakdown='total' 인 고용률
+// 레코드를 취업자수 자리에서 집어 총괄 카드에 63.3 을 그릴 수 있었다.
+
+const RATE = rec({ series: 'employment_rate', unit: '%', value: 63.3, yoy: 0.0 });
+
+test('overviewCards reads the headcount, not whatever record comes first', () => {
+  const series = [RATE, rec({ value: 29151.0, yoy: 184.0 })];
+  const card = overviewCards(series, SOURCES, '2026-07', {})[0];
+  assert.equal(card.value, 29151.0);
+  assert.equal(card.yoy, 184.0);
+});
+
+test('overviewCards treats a month with only rates as unpublished', () => {
+  // 취업자수가 없으면 없는 것이다. 고용률이 있다고 카드가 채워지면 안 된다.
+  const card = overviewCards([RATE], SOURCES, '2026-07', {})[0];
+  assert.equal(card.state, 'unpublished');
+});
+
+test('totalRow reads the headcount', () => {
+  const series = [RATE, rec({ value: 29151.0, yoy: 184.0 })];
+  assert.equal(totalRow(series, '2026-07').cells.eaps.value, 29151.0);
+});
+
+test('breakdownMatrix reads the headcount', () => {
+  const series = [
+    rec({ breakdown: 'industry', category: 'C', series: 'employment_rate', unit: '%', yoy: 0.3 }),
+    rec({ breakdown: 'industry', category: 'C', yoy: -68.0 }),
+  ];
+  const rows = breakdownMatrix(series, [{ code: 'C', name_ko: '제조업' }], '2026-07',
+    { breakdown: 'industry' });
+  assert.equal(rows[0].cells.eaps.yoy, -68.0);
+});
+
+test('categoryTimeline reads the headcount', () => {
+  const series = [RATE, rec({ value: 29151.0 })];
+  assert.deepEqual(categoryTimeline(series).eaps.map(p => p.value), [29151.0]);
+});
+
+test('topMovers reads the headcount', () => {
+  const series = [
+    rec({ breakdown: 'industry', category: 'C', series: 'employment_rate', unit: '%', yoy: 9.9 }),
+    rec({ breakdown: 'industry', category: 'C', yoy: -68.0 }),
+  ];
+  const [industry] = topMovers(series, { source: 'eaps', period: '2026-07', segments: MOVER_SEGMENTS });
+  assert.deepEqual(industry.rows.map(r => r.yoy), [-68.0]);
+});
+
+test('the scope axis never reaches the attribute matrix', () => {
+  // 15~64세는 연령 구간들을 가로지른다. 속성별 조회에 새면 이중 계상이 된다.
+  const series = [
+    rec({ breakdown: 'scope', category: '15-64', series: 'employment_rate', unit: '%', yoy: 0.5 }),
+    rec({ value: 29151.0, yoy: 184.0 }),
+  ];
+  assert.equal(totalRow(series, '2026-07').cells.eaps.value, 29151.0);
+  const groups = topMovers(series, { source: 'eaps', period: '2026-07', segments: MOVER_SEGMENTS });
+  assert.deepEqual(groups, []);
 });

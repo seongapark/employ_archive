@@ -3,6 +3,13 @@
 
 export const SOURCE_ORDER = ['eaps', 'est', 'ei'];
 
+// 지금 이 앱의 "그 출처의 수치"는 취업자수·종사자수·상시가입자수, 곧 headcount 다.
+// 2026-09 부터 같은 파일에 고용률·실업률 같은 다른 지표가 함께 들어오므로,
+// **아래 조회들은 반드시 이걸 통과시켜야 한다.** 안 그러면 breakdown='total' 인
+// 고용률 레코드를 취업자수 자리에서 집어 총괄 카드가 `6.3만명` 을 그린다.
+// (지표별 화면은 이 필터를 쓰지 않고 indicatorSeries 로 따로 간다.)
+const isHeadcount = r => r.series === 'headcount';
+
 // 색은 출처 정체성만 나른다. 부호는 0선 기준 막대 방향이 말한다.
 // 고정 배정이며 순환하지 않는다 — 출처가 빠져도 남은 색은 그대로다.
 export const SOURCE_COLORS = { eaps: '#2a78d6', est: '#eb6834', ei: '#1baf7a' };
@@ -94,7 +101,7 @@ export function overviewCards(series, sources, period, releases = {}) {
   const byCode = new Map(sources.map(s => [s.code, s]));
   return SOURCE_ORDER.filter(code => byCode.has(code)).map(code => {
     const meta = byCode.get(code);
-    const totals = series.filter(r => r.source === code && r.breakdown === 'total');
+    const totals = series.filter(r => isHeadcount(r) && r.source === code && r.breakdown === 'total');
     const here = totals.find(r => r.period === period) || null;
     const newest = totals.slice().sort((a, b) => a.period.localeCompare(b.period)).pop() || null;
     const base = {
@@ -198,7 +205,7 @@ function cellState(record, provided) {
 export function breakdownMatrix(series, categories, period, { sort = 'delta', breakdown } = {}) {
   const byKey = new Map();
   for (const r of series) {
-    if (r.period !== period) continue;
+    if (r.period !== period || !isHeadcount(r)) continue;
     byKey.set(`${r.source}|${r.breakdown}|${r.category}`, r);
   }
   const rows = categories.map(category => {
@@ -231,7 +238,7 @@ export function breakdownMatrix(series, categories, period, { sort = 'delta', br
 export function totalRow(series, period) {
   const cells = {};
   for (const source of SOURCE_ORDER) {
-    const record = series.find(r => r.source === source
+    const record = series.find(r => isHeadcount(r) && r.source === source
       && r.period === period && r.breakdown === 'total');
     cells[source] = cellState(record, true);
   }
@@ -242,7 +249,7 @@ export function categoryTimeline(series, { breakdown, category, months = 24 } = 
   const out = {};
   for (const source of SOURCE_ORDER) {
     const points = series
-      .filter(r => r.source === source
+      .filter(r => isHeadcount(r) && r.source === source
         && r.breakdown === (breakdown || 'total')
         && (r.category ?? null) === (category ?? null))
       .sort((a, b) => a.period.localeCompare(b.period))
@@ -259,7 +266,7 @@ export function sheetData(series, {
 } = {}) {
   const meta = categories && categories.find(c => c.code === category);
   const snapshot = SOURCE_ORDER.map(source => {
-    const record = series.find(r => r.source === source && r.period === period
+    const record = series.find(r => isHeadcount(r) && r.source === source && r.period === period
       && r.breakdown === (breakdown || 'total')
       && (r.category ?? null) === (category ?? null));
     const provided = meta && meta.provided ? meta.provided[source] : true;
@@ -286,7 +293,7 @@ export function topMovers(series, { source, period, segments, limit = 3 } = {}) 
     const rows = [];
     for (const category of segment.categories || []) {
       if (category.provided && category.provided[source] === false) continue;
-      const record = series.find(r => r.source === source && r.period === period
+      const record = series.find(r => isHeadcount(r) && r.source === source && r.period === period
         && r.breakdown === segment.breakdown && r.category === category.code);
       if (!record || record.yoy === null || record.yoy === undefined) continue;
       rows.push({
