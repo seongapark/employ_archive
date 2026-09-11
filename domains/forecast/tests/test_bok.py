@@ -78,7 +78,7 @@ def test_parse_record_fields():
     r = by_key(bok.parse(TABLE, ISSUE, PDF_URL, source_page=16))[("emp_change", 2026)]
     assert r.id == "bok-2026-08-emp_change-2026"
     assert r.org == "BOK"
-    assert r.org_name_ko == "한국은행"
+    assert r.org_name_ko == "BOK"
     assert r.report_title == "경제전망보고서(2026년 8월)"
     assert r.published_at == date(2026, 8, 27)
     assert r.unit == "만명"

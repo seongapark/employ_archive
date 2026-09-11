@@ -93,7 +93,7 @@ def parse(page_text: str, issue: Issue, source_url: str,
         key: round(value * SCALE.get(key[0], 1.0), 2) for key, value in values.items()
     }
     return report.records_from_values(
-        scaled, org="KLI", org_name_ko="한국노동연구원", issue=issue,
+        scaled, org="KLI", org_name_ko="KLI", issue=issue,
         source_url=source_url, source_page=source_page,
     )
 

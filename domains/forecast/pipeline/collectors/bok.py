@@ -68,7 +68,7 @@ def parse_pdf_link(html: str) -> str:
 def parse(text: str, issue: Issue, source_url: str, source_page: int) -> list[ForecastRecord]:
     return report.records_from_table(
         text, LABEL_TO_INDICATOR,
-        org="BOK", org_name_ko="한국은행",
+        org="BOK", org_name_ko="BOK",
         issue=issue, source_url=source_url, source_page=source_page,
     )
 

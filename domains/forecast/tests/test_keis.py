@@ -296,7 +296,7 @@ def test_parse_keeps_the_elapsed_first_half():
 def test_parse_marks_records_as_extracted_with_the_source_page():
     record = keis.parse(PAGE_2026_08, ISSUE_2026_08, "https://x/y.pdf", 19)[0]
     assert record.org == "KEIS"
-    assert record.org_name_ko == "한국고용정보원"
+    assert record.org_name_ko == "KEIS"
     assert record.confidence == "extracted"
     assert record.source_page == 19
     assert record.source_url == "https://x/y.pdf"

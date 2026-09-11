@@ -1,10 +1,10 @@
 [
-  {"org": "BOK", "name_ko": "한국은행", "short_ko": "한은", "homepage": "https://www.bok.or.kr", "report": "경제전망보고서", "track": "A", "method": "pdf"},
+  {"org": "BOK", "name_ko": "BOK", "short_ko": "BOK", "homepage": "https://www.bok.or.kr", "report": "경제전망보고서", "track": "A", "method": "pdf"},
   {"org": "KDI", "name_ko": "KDI", "short_ko": "KDI", "homepage": "https://www.kdi.re.kr", "report": "경제전망", "track": "A", "method": "pdf"},
-  {"org": "KLI", "name_ko": "한국노동연구원", "short_ko": "노동연", "homepage": "https://www.kli.re.kr", "report": "노동시장 평가와 전망(노동리뷰)", "track": "A", "method": "pdf"},
-  {"org": "MOEF", "name_ko": "기획재정부", "short_ko": "기재부", "homepage": "https://www.moef.go.kr", "report": "경제성장전략(구 경제정책방향)", "track": "A", "method": "pdf"},
+  {"org": "KLI", "name_ko": "KLI", "short_ko": "KLI", "homepage": "https://www.kli.re.kr", "report": "노동시장 평가와 전망(노동리뷰)", "track": "A", "method": "pdf"},
+  {"org": "MOEF", "name_ko": "재정부", "short_ko": "재정부", "homepage": "https://www.moef.go.kr", "report": "경제성장전략(구 경제정책방향)", "track": "A", "method": "pdf"},
   {"org": "IMF", "name_ko": "IMF", "short_ko": "IMF", "homepage": "https://www.imf.org", "report": "WEO / WEO Update", "track": "A", "method": "api"},
   {"org": "OECD", "name_ko": "OECD", "short_ko": "OECD", "homepage": "https://www.oecd.org", "report": "Economic Outlook / Interim", "track": "A", "method": "api"},
   {"org": "KIET", "name_ko": "산업연구원", "short_ko": "산업연", "homepage": "https://www.kiet.re.kr", "report": "경제·산업전망", "track": "A", "method": "pdf"},
-  {"org": "KEIS", "name_ko": "한국고용정보원", "short_ko": "고용정보원", "homepage": "https://www.keis.or.kr", "report": "고용동향브리프", "track": "B", "method": "ocr"}
+  {"org": "KEIS", "name_ko": "KEIS", "short_ko": "KEIS", "homepage": "https://www.keis.or.kr", "report": "고용동향브리프", "track": "B", "method": "ocr"}
 ]

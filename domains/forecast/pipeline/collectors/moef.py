@@ -279,7 +279,7 @@ def collect_issue(issue: Issue) -> list[ForecastRecord]:
                 failures.append(f"{name} {page_no}쪽: {exc}")
                 continue
             records = report.records_from_values(
-                values, org="MOEF", org_name_ko="기획재정부", issue=issue,
+                values, org="MOEF", org_name_ko="재정부", issue=issue,
                 source_url=url, source_page=page_no,
             )
             # 표는 읽혔는데 남은 레코드가 없다면 열이 한 해씩 밀린 것이다

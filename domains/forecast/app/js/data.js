@@ -184,7 +184,7 @@ export function halfYears(records, rec) {
 }
 
 // compact 는 홈 카드 전용이다. 홈은 기관명·연간값·증감·상하반기가 **한 줄**에
-// 서는데, '한국고용정보원 14.6만명 ▼-1.6만명 상반 10.8 · 하반 11.0' 이 390px
+// 서는데, 기관명이 긴 회차는 '… 14.6만명 ▼-1.6만명 상반 10.8 · 하반 11.0' 이 390px
 // 폰에서 그 줄을 넘긴다(실측 321px 대 317px). '상반/하반'을 '상/하'로 줄이면
 // 22px 이 빠져 들어간다. 기관 상세는 한 줄에 이것뿐이라 온전한 말을 쓴다.
 export function halfYearLabel(records, rec, { unit = false, compact = false } = {}) {

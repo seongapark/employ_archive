@@ -48,7 +48,7 @@ def test_parse_drops_years_before_publication():
 def test_parse_record_fields():
     r = by_key(kli.parse(PAGE, ISSUE, "https://x/y.pdf", 24))[("emp_change", 2026, "annual")]
     assert r.org == "KLI"
-    assert r.org_name_ko == "한국노동연구원"
+    assert r.org_name_ko == "KLI"
     assert r.unit == "만명"
     assert r.confidence == "extracted"
     assert r.published_at == date(2026, 1, 2)

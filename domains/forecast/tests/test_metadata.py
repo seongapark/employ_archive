@@ -23,7 +23,7 @@ def test_orgs_has_eight_orgs_with_tracks():
 
 def test_every_org_has_a_short_name_that_fits_a_bar_label():
     # 홈의 기관별 막대그래프는 막대 아래에 기관명을 적는다. 여섯 기관이면
-    # 한 칸이 55px 뿐이라 '한국고용정보원'(7자)은 옆 칸을 침범한다.
+    # 한 칸이 55px 뿐이라 긴 이름은 옆 칸을 침범한다(5자 이하로 못박는다).
     # 약칭은 화면이 지어내지 않고 여기 데이터가 갖는다 — 고용동향 도메인의
     # sources.json/industries.json 과 같은 규칙이다.
     rows = json.loads((DATA / "orgs.json").read_text(encoding="utf-8"))

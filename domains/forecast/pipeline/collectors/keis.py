@@ -232,7 +232,7 @@ def parse_table(text: str) -> dict[tuple[str, int, str], float]:
 def parse(text: str, issue: Issue, source_url: str,
           source_page: int) -> list[ForecastRecord]:
     return report.records_from_values(
-        parse_table(text), org="KEIS", org_name_ko="한국고용정보원", issue=issue,
+        parse_table(text), org="KEIS", org_name_ko="KEIS", issue=issue,
         source_url=source_url, source_page=source_page,
     )
 
