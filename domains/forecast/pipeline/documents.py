@@ -136,7 +136,7 @@ def _kdi() -> list[Listed]:
 def _kli() -> list[Listed]:
     indicators = tuple(sorted(kli.INDICATORS))
     return [Listed("KLI", i.title, i.published_at, indicators,
-                   _direct(kli.DOWNLOAD_URL.format(no=kli._list_no(i.url))))
+                   _via_detail(i.url, kli.pdf_url))
             for i in kli.list_issues()]
 
 

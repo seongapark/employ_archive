@@ -47,12 +47,14 @@ def test_fetch_pages_returns_the_source_url_with_the_pages(monkeypatch):
     from domains.forecast.pipeline.collectors import kli
     from domains.forecast.pipeline.report import Issue
 
-    # kli._list_no 는 "list_no=" 뒤의 숫자를 읽는다(kli.VIEW_URL 참고) — 브리프
-    # 원문의 "https://x/list?no=7" 은 이 낱말을 담지 않아 _list_no 가
-    # AttributeError 로 터진다. 실제 회차 URL 모양대로 "list_no=" 를 넣는다.
+    # KLI 는 2026-09-11 부터 브리프 게시판을 본다 — PDF 주소를 상세 페이지에서
+    # 읽으므로 응답에 text 가 있어야 한다.
     monkeypatch.setattr(kli, "list_issues",
-                        lambda: [Issue("t", date(2026, 1, 2), "https://x/list_no=7")])
-    monkeypatch.setattr(http, "get", lambda url, **k: _Resp(b"pdf"))
+                        lambda: [Issue("t", date(2026, 8, 6),
+                                       "https://x/issuePaperView.es?pblct_sn=7")])
+    monkeypatch.setattr(
+        http, "get",
+        lambda url, **k: _Resp(b"pdf", '<a href="/kliFileDownload?fileName=a.pdf">'))
     monkeypatch.setattr(pdf, "page_texts_with_breaks", lambda data: ["1쪽", "2쪽"])
     url, pages = d.SOURCES["kli"]()[0].fetch_pages()
     assert url.startswith("http")
@@ -114,8 +116,9 @@ def test_keis_fetch_pages_ocrs_the_full_document_at_400dpi(monkeypatch):
 
 
 class _Resp:
-    def __init__(self, content):
+    def __init__(self, content, text=""):
         self.content = content
+        self.text = text
 
 
 class _TextResp:
@@ -136,8 +139,11 @@ def test_pdf_paths_read_the_text_with_paragraph_breaks(monkeypatch):
     from domains.forecast.pipeline.report import Issue
 
     monkeypatch.setattr(kli, "list_issues",
-                        lambda: [Issue("t", date(2026, 1, 2), "https://x/list_no=7")])
-    monkeypatch.setattr(http, "get", lambda url, **k: _Resp(b"pdf"))
+                        lambda: [Issue("t", date(2026, 8, 6),
+                                       "https://x/issuePaperView.es?pblct_sn=7")])
+    monkeypatch.setattr(
+        http, "get",
+        lambda url, **k: _Resp(b"pdf", '<a href="/kliFileDownload?fileName=a.pdf">'))
     monkeypatch.setattr(pdf, "page_texts", _boom)
     monkeypatch.setattr(pdf, "page_texts_with_breaks",
                         lambda data: ["항목 하나\n\n항목 둘"])
