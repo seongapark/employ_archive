@@ -117,7 +117,7 @@ OCR 로 읽어야 하고 회차당 1분 반쯤 걸린다 — 매일 도는 것�
 ```bash
 pip install -r requirements.txt
 python -m pytest                              # 파이썬 테스트 (네트워크 불필요)
-node --test "core/tests/*.mjs" "hub/tests/*.mjs" "domains/forecast/tests/web/*.mjs" "domains/employment/tests/web/*.mjs" "domains/reports/tests/web/*.mjs"   # 웹 테스트
+node --test "core/tests/*.mjs" "hub/tests/*.mjs" "domains/forecast/tests/web/*.mjs" "domains/employment/tests/web/*.mjs" "domains/reports/tests/web/*.mjs" "domains/ask/tests/web/*.test.mjs" "domains/press/tests/web/*.test.mjs"   # 웹 테스트
 python -m tools.serve                         # 로컬 서버 (http://127.0.0.1:8642/)
 python -m domains.forecast.pipeline.collect   # 전망 수집 1회
 python -m domains.employment.pipeline.collect   # 고용동향 수집 1회 (KOSIS_API_KEY 필요)

@@ -131,9 +131,48 @@ export function radiusOf(n) {
   return Math.min(4 + Math.sqrt(n) * 1.7, 15);
 }
 
+/** 고른 점과 **직접 이어진** 점들의 번호. 나머지는 옅게 둔다.
+ *
+ * 프레임은 낱말 하나가 아니라 같이 다니는 낱말 뭉치다. 하나를 짚었을 때
+ * 그 뭉치가 어디까지인지 보이지 않으면 그림이 목록의 버튼 노릇밖에 못 한다.
+ */
+export function neighborsOf(g, i) {
+  const keep = new Set([i]);
+  for (const [a, b] of (g && g.edges) || []) {
+    if (a === i) keep.add(b);
+    if (b === i) keep.add(a);
+  }
+  return keep;
+}
+
+/** 라벨 → 노드 번호. 없으면 -1. */
+export function indexOfLabel(g, label) {
+  if (!label) return -1;
+  return ((g && g.nodes) || []).findIndex((nd) => labelOf(nd.id) === label);
+}
+
+/** 고른 점을 바꾼다. **다시 그리지 않고 class 만 바꾼다** — innerHTML 을
+ *  갈아끼우면 CSS 전환이 안 먹어서 그림이 툭 바뀐다. */
+export function applyPick(svg, g, label) {
+  if (!svg) return;
+  const i = indexOfLabel(g, label);
+  const keep = i < 0 ? null : neighborsOf(g, i);
+  svg.classList.toggle('gnet--picked', i >= 0);
+  svg.querySelectorAll('[data-node]').forEach((el) => {
+    const n = Number(el.dataset.node);
+    el.classList.toggle('gnode--on', i >= 0 && n === i);
+    el.classList.toggle('gnode--dim', keep !== null && !keep.has(n));
+  });
+  svg.querySelectorAll('[data-edge]').forEach((el) => {
+    const [a, b] = el.dataset.edge.split(',').map(Number);
+    el.classList.toggle('gedge--on', i >= 0 && (a === i || b === i));
+    el.classList.toggle('gedge--dim', i >= 0 && a !== i && b !== i);
+  });
+}
+
 /** 노드를 누르면 그 말이 든 기사로 간다. 그림만 보여주고 끝내지 않는다. */
 export function graphSvg(g, opts = {}) {
-  const { width = 420, height = 360 } = opts;
+  const { width = 420, height = 360, selected = null } = opts;
   const nodes = (g && g.nodes) || [];
   const edges = (g && g.edges) || [];
   if (!nodes.length) return '';
@@ -142,9 +181,15 @@ export function graphSvg(g, opts = {}) {
   const labelY = spreadLabels(pos, nodes, { height });
   const maxW = edges.reduce((m, e) => Math.max(m, e[2]), 1);
 
+  const sel = indexOfLabel(g, selected);
+  const keep = sel < 0 ? null : neighborsOf(g, sel);
+
   const lines = edges.map(([a, b, w]) => {
     const o = 0.18 + 0.42 * (w / maxW);
-    return `<line x1="${pos[a].x.toFixed(1)}" y1="${pos[a].y.toFixed(1)}"
+    const on = sel >= 0 && (a === sel || b === sel);
+    const cls = sel < 0 ? '' : (on ? ' gedge--on' : ' gedge--dim');
+    return `<line data-edge="${a},${b}" class="gedge${cls}"
+      x1="${pos[a].x.toFixed(1)}" y1="${pos[a].y.toFixed(1)}"
       x2="${pos[b].x.toFixed(1)}" y2="${pos[b].y.toFixed(1)}"
       stroke="#c9ccd2" stroke-opacity="${o.toFixed(2)}"
       stroke-width="${(0.6 + (w / maxW) * 2.4).toFixed(2)}"></line>`;
@@ -154,16 +199,22 @@ export function graphSvg(g, opts = {}) {
     const label = labelOf(nd.id);
     const r = radiusOf(nd.n);
     const color = AXIS_COLOR[nd.axis] || AXIS_COLOR.밖;
-    return `<a href="#/articles/${encodeURIComponent(label)}" aria-label="${esc(label)} ${nd.n}건">
-      <circle cx="${pos[i].x.toFixed(1)}" cy="${pos[i].y.toFixed(1)}" r="${r.toFixed(1)}"
-        fill="${color}" fill-opacity="0.9"></circle>
+    const cls = 'gnode'
+      + (sel === i ? ' gnode--on' : '')
+      + (keep !== null && !keep.has(i) ? ' gnode--dim' : '');
+    return `<a class="${cls}" data-node="${i}" data-kw="${esc(label)}"
+      href="#/articles/${encodeURIComponent(label)}" aria-label="${esc(label)} ${nd.n}건">
+      <circle class="gnode__hit" cx="${pos[i].x.toFixed(1)}" cy="${pos[i].y.toFixed(1)}"
+        r="${Math.max(r + 5, 12).toFixed(1)}"></circle>
+      <circle class="gnode__dot" cx="${pos[i].x.toFixed(1)}" cy="${pos[i].y.toFixed(1)}"
+        r="${r.toFixed(1)}" fill="${color}" fill-opacity="0.9"></circle>
       <text x="${pos[i].x.toFixed(1)}" y="${labelY[i].toFixed(1)}"
         text-anchor="middle" class="gnode__label">${esc(label)}</text>
     </a>`;
   }).join('');
 
   return `<svg viewBox="0 0 ${width} ${height}" width="100%" height="${height}"
-    role="img" class="gnet">${lines}${dots}</svg>`;
+    role="img" class="gnet${sel >= 0 ? ' gnet--picked' : ''}">${lines}${dots}</svg>`;
 }
 
 /** 범례. 색이 무엇을 뜻하는지 화면이 직접 말한다. */

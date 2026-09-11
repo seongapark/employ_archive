@@ -43,7 +43,7 @@ function aliveTable(round) {
       ${rows}
     </table>
     <div style="font-size:10px;color:var(--text-muted);margin-top:6px;">
-      「이후」가 「당일」 이상이면 확산 · 후속 구간 ${esc(round.follow.window.join(' ~ '))}</div>
+      「이후」가 「당일」 이상이면 확산 · 후속 구간 ${esc(round.follow.window.join(' ~ '))} · 매일 갱신</div>
     ${goneLine}`);
 }
 
@@ -74,7 +74,7 @@ function timeline(round, ctx) {
   return card(`
     <div style="font-size:13px;font-weight:700;margin-bottom:2px;">후속 기사</div>
     <div style="font-size:11px;color:var(--text-secondary);margin-bottom:8px;">
-      인용 ${cited.length}건 · 최근 날짜부터</div>
+      인용 ${cited.length}건 · 최근 날짜부터 · 구간이 닫힐 때까지 매일 채워집니다</div>
     <div class="tl">${blocks}</div>`);
 }
 
@@ -87,9 +87,8 @@ export function render(root, ctx) {
 
   if (!round.follow) {
     root.innerHTML = section(`<div class="empty">
-      후속 수집을 아직 안 돌렸습니다.<br>
-      후속 구간은 배포 다음날부터 15일까지라, ${esc(round.label)} 회차는
-      그 구간이 끝난 뒤에 채워집니다.</div>`);
+      후속 수집은 배포 이튿날부터 매일 돕니다.<br>
+      ${esc(round.label)} 회차는 아직 첫 수집 전입니다.</div>`);
     return;
   }
 

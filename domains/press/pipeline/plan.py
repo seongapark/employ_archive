@@ -18,8 +18,15 @@ from datetime import date, datetime, timedelta, timezone
 
 KST = timezone(timedelta(hours=9))
 
-# 후속 구간은 D+1~D+15 다. 구간이 닫힌 다음날에 한 번 긁는다.
-FOLLOW_DAY = 16
+# 후속 구간은 D+1~D+15 다. **그 구간이 열려 있는 동안 매일 긁는다** —
+# D+16 에 딱 한 번만 긁던 것을 2026-09-11 에 바꿨다. 한 번만 긁으면 후속
+# 화면이 보름 내내 비어 있다가 어느 날 갑자기 차고, 그 사이에 프레임이
+# 번져도 아무도 모른다. 이 도메인에서 가장 나쁜 것이 늦게 아는 것이다.
+#
+# D+1 은 빼 둔다 — 그날은 정기 수집이 도는 날이고, 후속 구간이 하루치뿐이라
+# 긁을 것이 사실상 없다. D+16 은 구간이 닫힌 다음날이라 마지막으로 한 번 더 돈다.
+FOLLOW_FROM = 2
+FOLLOW_LAST = 16
 
 
 def today_kst():
@@ -43,8 +50,12 @@ def decide(today, releases):
 
     - 배포 당일과 그 이튿날 → 정기. 이튿날까지 도는 이유는 수집 구간이
       D~D+1 이라서다. 당일 밤 기사는 이튿날 실행이 담는다.
-    - 배포 +16일 → 후속. 구간(D+1~D+15)이 닫힌 바로 다음날이다.
+    - 배포 +2일 ~ +16일 → 후속. 구간(D+1~D+15)이 열려 있는 동안 **매일**
+      긁고, 닫힌 다음날(D+16)에 한 번 더 긁어 마감한다.
     - 그 밖의 날 → 아무것도 안 한다.
+
+    매일 다시 긁어도 손해가 없다: 수집은 발행일로 거르므로 같은 구간을
+    통째로 다시 훑고, 판정은 제목으로 이어져 새 기사만 LLM 에 간다.
     """
     today = _d(today)
     rel = latest_release(releases, today)
@@ -53,7 +64,7 @@ def decide(today, releases):
     gap = (today - rel).days
     if gap in (0, 1):
         return 'regular', rel.strftime('%Y-%m-%d')
-    if gap == FOLLOW_DAY:
+    if FOLLOW_FROM <= gap <= FOLLOW_LAST:
         return 'follow', rel.strftime('%Y-%m-%d')
     return None, None
 
@@ -90,7 +101,7 @@ def should_run(today, releases, last=None):
                   and prev.get('kind') == kind and prev.get('release') == release)
     if done_today:
         return None, None, '오늘 이미 수집했다(배포 당일이 아니면 하루 한 번)'
-    return kind, release, '배포 이튿날 · 창 마감' if kind == 'regular' else '후속 구간 마감'
+    return kind, release, '배포 이튿날 · 창 마감' if kind == 'regular' else '후속 구간 — 하루 한 번'
 
 
 def load_state(path):

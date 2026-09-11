@@ -40,43 +40,6 @@
 .tab--active { color: var(--accent); }
 .tab--active span { font-weight: 700; }
 
-/* Pill (회차·필터 선택) */
-
-.pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--text-secondary);
-  background: var(--card);
-  border: 1px solid var(--border);
-  padding: 6px 12px;
-  border-radius: 999px;
-  white-space: nowrap;
-  cursor: pointer;
-}
-
-.pill--active {
-  color: #ffffff;
-  font-weight: 600;
-  background: var(--accent);
-  border-color: var(--accent);
-}
-
-/* 프레임 칩은 pill 과 같은 골격에 색만 다르다 — 누르면 기사가 걸러진다 */
-.pill--frame {
-  color: var(--frame-fg);
-  background: var(--frame-bg);
-  border-color: var(--frame-bg);
-}
-
-.pill--frame.pill--active {
-  color: #ffffff;
-  background: var(--frame-fg);
-  border-color: var(--frame-fg);
-}
-
 /* Switcher (회차 선택)
 
    화면 안이 아니라 셸(헤더 바로 아래)에 둔다. 네 화면이 같은 회차를 보므로
@@ -105,25 +68,6 @@
   min-height: 44px;
 }
 
-/* Summary band */
-
-.band {
-  margin: 6px 16px 0 16px;
-  padding: 10px 14px;
-  background: var(--accent-light);
-  border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.band__title { font-size: 13px; font-weight: 600; color: var(--accent); }
-.band__meta { font-size: 12px; color: var(--text-secondary); }
-
-/* 경보 밴드 — 보도자료 밖 표현이 몇 개 매체에서 공통으로 쓰였나 */
-.band--frame { background: var(--frame-bg); }
-.band--frame .band__title { color: var(--frame-fg); }
-
 /* 격차 상자 — 보도자료가 말했는데 기사가 안 다룬 것 */
 .gapbox {
   background: var(--gap-bg);
@@ -142,42 +86,266 @@
 .badge--other { color: var(--badge-other-fg); background: var(--badge-other-bg); }
 .badge--frame { color: var(--frame-fg); background: var(--frame-bg); }
 
-/* 커버리지 막대 — 축마다 눈금이 달라 축 안에서만 비교한다 */
+/* 세로 막대 — 축마다 눈금이 달라 축 안에서만 비교한다.
+   가로 막대에서 바꿨다(2026-09-11): 축이 셋이면 15줄이 되어 휴대폰 한 화면에
+   안 들어왔고, 스크롤하는 동안 축이 머리에서 흩어졌다. 기둥은 한 축이 한 줄이라
+   셋을 나란히 볼 수 있다. 계열이 하나라 범례가 없고, 값을 기둥마다 직접 적는다. */
 
-.bars { display: flex; flex-direction: column; gap: 5px; }
+.vchart { margin-bottom: 12px; }
 
-.bar-row {
-  display: grid;
-  grid-template-columns: 84px 1fr 28px;
-  align-items: center;
-  gap: 8px;
+.vchart__plot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  gap: 3px;                  /* 기둥 사이로 바탕이 보여야 둘이 안 붙어 보인다 */
 }
 
-.bar-row__name {
+.vcol {
+  flex: 1 1 0;
+  min-width: 0;
+  /* 칸이 셋뿐일 때 기둥 하나가 140px 짜리 판때기가 되는 것을 막는다.
+     막대의 길이가 값이고 두께는 값이 아니다 — 두꺼워지면 값이 커 보인다. */
+  max-width: 88px;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.vcol__n {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  line-height: 1;
+}
+
+/* 기둥은 바닥에 붙는다 — 값이 끝나는 위쪽만 둥글게 둔다.
+   양끝을 둥글게 하면 작은 값이 실제보다 짧아 보인다. */
+.vcol__track {
+  height: 62px;
+  background: var(--bg);
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.vcol__fill {
+  width: 100%;
+  background: var(--accent);
+  border-radius: 4px 4px 0 0;
+  /* 1건이 0.5% 로 떨어지면 화면에서 0건과 구별이 안 된다. 있는 것은 보이게 둔다. */
+  min-height: 3px;
+  transition: height .2s ease;
+}
+
+/* 0건은 빈 칸이 아니라 '안 다뤄졌다'는 사실이다 — 빗금 기둥으로 남긴다 */
+.vcol__track--zero {
+  background: repeating-linear-gradient(45deg,
+    var(--bg), var(--bg) 3px, #e2e5ea 3px, #e2e5ea 6px);
+}
+
+.vcol:hover .vcol__fill { background: var(--link-hover); }
+
+.vcol__name {
+  font-size: 10px;
+  line-height: 1.25;
+  color: var(--text-secondary);
+  text-align: center;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+/* KPI 의 i 버튼과 그 아래 뜨는 설명.
+   설명이 늘 펼쳐져 있으면 매번 읽히지도 않으면서 아래 것을 밀어낸다.
+   그렇다고 지울 수는 없다 — 기준이 없으면 '81건'이 무엇의 81건인지 모른다. */
+
+.kpi { position: relative; }
+
+.kpi__info {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 26px;                /* 손가락이 짚을 넓이. 보이는 동그라미는 그 안에 있다 */
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  font-style: italic;
+  line-height: 1;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.kpi__info::before {
+  content: '';
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+}
+
+.kpi__info[aria-expanded="true"] {
+  color: var(--accent);
+}
+
+.kpi__info[aria-expanded="true"]::before { border-color: var(--accent); }
+
+/* 좌우를 KPI 줄에 맞춰 붙인다 — 버튼 밑에 매달면 좁은 화면에서 오른쪽이 잘린다 */
+.infobox {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: calc(100% + 6px);
+  z-index: 5;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 6px 20px rgba(25, 29, 36, .13);
+  padding: 10px 14px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+
+.infobox__title { font-weight: 700; color: var(--text); }
+
+/* 논조 막대 — 부정↔긍정 두 극과 가운데 회색.
+   녹/적으로 두면 적록색약에서 구분이 안 된다(ΔE 4.1, 검증기 FAIL).
+   파랑↔주황은 protan·deutan·tritan 전부 통과한다(ΔE 19.7).
+   색만으로 뜻을 나르지도 않는다 — 바로 아래에 건수를 글자로 적는다. */
+
+.stance {
+  display: flex;
+  gap: 2px;
+  height: 8px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.stance__seg { min-width: 3px; }
+
+.stance__keys {
+  display: flex;
+  gap: 12px;
+  margin-top: 5px;
   font-size: 11px;
   color: var(--text-secondary);
-  text-align: right;
+}
+
+.stance__dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+.stance__seg--neg { background: var(--frame-fg); }
+.stance__seg--neu { background: var(--text-muted); }
+.stance__seg--pos { background: var(--accent); }
+
+/* 기사 목록 위 한 줄 — 「인용만」 토글이 버튼 줄에서 여기로 옮겨왔다 */
+
+.artmeta {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin: 0 0 -4px 2px;
+  line-height: 1.7;
+}
+
+.artmeta a { color: var(--link); }
+
+/* 파이 — 한 축이 한 줄이다. 원 왼쪽, 범례 오른쪽.
+   0건 항목은 조각이 없지만 범례에 빈 동그라미로 남는다:
+   「구직급여 보도 0건」은 이 도메인이 잡아야 할 사실이라 지우면 안 된다. */
+
+.pie { margin-bottom: 12px; }
+
+.pie__note {
+  margin-left: 5px;
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.pie__body {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.pie__svg { flex: 0 0 auto; display: block; }
+
+.pie__empty {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--border);
+  border-radius: 50%;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.pie__legend {
+  flex: 1 1 auto;
+  min-width: 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto;
+  align-items: center;
+  gap: 2px 6px;
+  font-size: 11px;
+}
+
+.pie__item {
+  display: contents;                 /* 네 칸이 표처럼 세로로 맞는다 */
+}
+
+.pie__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  border: 1px solid;
+}
+
+.pie__name {
+  color: var(--text-secondary);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.bar-row__track {
-  height: 10px;
-  background: var(--bg);
-  border-radius: 3px;
+.pie__n { font-weight: 700; color: var(--text); text-align: right; }
+.pie__pct { color: var(--text-muted); text-align: right; min-width: 30px; }
+
+.pie__item--zero .pie__name,
+.pie__item--zero .pie__n { color: var(--text-muted); font-weight: 400; }
+
+/* 헤드라인 한 줄 — 제목이 길면 제목만 줄이고 언론사는 끝까지 남긴다.
+   줄바꿈을 허용하면 묶음의 크기가 제목 길이에 따라 달라 보인다. */
+
+.hl {
+  display: flex;
+  align-items: baseline;
+  gap: 5px;
+  margin-top: 3px;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.hl__t {
+  min-width: 0;
   overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.bar-row__fill { height: 100%; background: var(--accent); border-radius: 3px; }
-
-/* 0건은 빈 칸이 아니라 '안 다뤄졌다'는 사실이다 — 빗금으로 남긴다 */
-.bar-row__track--zero {
-  background: repeating-linear-gradient(45deg,
-    var(--bg), var(--bg) 3px, #e2e5ea 3px, #e2e5ea 6px);
-}
-
-.bar-row__n { font-size: 11px; color: var(--text-secondary); text-align: right; }
+.hl__p { flex: 0 0 auto; color: var(--text-muted); }
 
 /* 기사 줄 — 많이 보이는 것이 목적이라 조밀하게 둔다 */
 
@@ -194,24 +362,51 @@
   line-height: 1.45;
   color: var(--text);
   font-weight: 500;
+  /* 한 줄로 자른다 — 줄마다 높이가 같아야 목록을 훑는 눈이 일정하게 떨어진다 */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .art--other .art__title { color: var(--text-secondary); font-weight: 400; }
 
+/* 아래 줄도 한 줄로 묶어 둔다 — 판정 이유가 길다고 줄이 늘면 제목을 한 줄로
+   자른 뜻이 없어진다. 줄어드는 것은 이유 쪽이고, 매체·시각·태그는 안 줄인다. */
 .art__meta {
   display: flex;
   align-items: center;
+  flex-wrap: nowrap;
   gap: 6px;
   margin-top: 3px;
   font-size: 11px;
+  /* 줄 높이를 못 박는다. 태그가 붙은 줄만 1px 높아지면 목록이 미세하게
+     들쭉날쭉해져서 한 줄로 자른 뜻이 반쯤 없어진다. */
+  line-height: 16px;
+  height: 16px;
   color: var(--text-muted);
+  overflow: hidden;
+  white-space: nowrap;
 }
+
+.art__meta > span { flex: 0 0 auto; }
+
+/* 판정 이유만 줄어든다 */
+.art__meta > span:nth-child(3) {
+  flex: 0 1 auto;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.art__meta .art__tag { margin-left: 0; }
 
 .art__tag {
   margin-left: 5px;
+  display: inline-block;
   font-size: 10px;
   font-weight: 600;
-  padding: 1px 6px;
+  line-height: 14px;          /* 줄 높이(16px) 안에 들어가야 줄이 안 늘어난다 */
+  padding: 0 6px;
   border-radius: 4px;
   color: var(--frame-fg);
   background: var(--frame-bg);
@@ -315,6 +510,25 @@
 
 .gnet a { cursor: pointer; }
 .gnet a:hover circle { fill-opacity: 1; }
+
+/* 점을 고르면 그와 **직접 이어진** 것만 남기고 나머지를 옅게 둔다.
+   프레임은 낱말 하나가 아니라 같이 다니는 낱말 뭉치라, 하나를 짚었을 때
+   그 뭉치가 어디까지인지 보여야 그림이 목록의 버튼 노릇을 넘어선다.
+
+   전환이 보이려면 다시 그리지 말고 class 만 바꿔야 한다 — innerHTML 을
+   갈아끼우면 요소가 새로 생겨 transition 이 안 먹는다(articles.js 참고). */
+.gnode, .gedge { transition: opacity .25s ease, stroke-opacity .25s ease; }
+
+.gnode--dim { opacity: .16; }
+.gedge--dim { opacity: .1; }
+
+.gnet--picked .gnode--on .gnode__dot { stroke: var(--text); stroke-width: 2px; }
+.gnet--picked .gnode--on text { font-weight: 700; }
+.gedge--on { stroke: var(--accent); stroke-opacity: .5; }
+
+/* 손가락이 9px 짜리 점을 정확히 못 짚는다. 보이는 점을 키우면 '기사 수'가
+   거짓말이 되므로, 안 보이는 원을 따로 겹쳐 잡히는 넓이만 넓힌다. */
+.gnode__hit { fill: transparent; }
 
 /* 섹션 제목 */
 

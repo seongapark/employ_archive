@@ -1,7 +1,9 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { layout, spreadLabels, labelOf, radiusOf, graphSvg, legendHtml, AXIS_COLOR }
-  from '../../app/js/graph.js';
+import {
+  layout, spreadLabels, labelOf, radiusOf, graphSvg, legendHtml, AXIS_COLOR,
+  neighborsOf, indexOfLabel,
+} from '../../app/js/graph.js';
 
 const NODES = [
   { id: '제조업', axis: '산업', n: 51 },
@@ -60,7 +62,10 @@ test('빈 그래프는 빈 문자열이지 깨진 svg 가 아니다', () => {
 test('svg 는 노드마다 기사 목록으로 가는 링크를 단다', () => {
   const h = graphSvg(G);
   assert.match(h, /href="#\/articles\/%EB%B0%98%EB%93%B1"/);   // '반등'
-  assert.equal((h.match(/<circle/g) || []).length, NODES.length);
+  // 점마다 원이 둘이다: 보이는 점과, 손가락이 짚을 수 있게 겹쳐 둔 안 보이는 원.
+  // 보이는 점을 키우면 '점 크기 = 기사 수'가 거짓말이 된다.
+  assert.equal((h.match(/gnode__dot/g) || []).length, NODES.length);
+  assert.equal((h.match(/gnode__hit/g) || []).length, NODES.length);
   assert.equal((h.match(/<line/g) || []).length, EDGES.length);
 });
 
@@ -73,4 +78,48 @@ test('범례는 실제로 쓰인 축만 싣는다', () => {
   const h = legendHtml(G);
   assert.match(h, /보도자료 밖/);
   assert.ok(!h.includes('논조'));      // G 에 논조 노드가 없다
+});
+
+
+test('neighborsOf: 고른 점과 직접 이어진 점만 남는다', () => {
+  // 0(제조업)은 1·2·4 와 이어져 있고 3(청년)과는 안 이어져 있다.
+  assert.deepEqual([...neighborsOf(G, 0)].sort((a, b) => a - b), [0, 1, 2, 4]);
+  assert.deepEqual([...neighborsOf(G, 3)].sort((a, b) => a - b), [3, 4]);
+});
+
+test('indexOfLabel 은 괄호를 뗀 이름으로 찾는다 — 링크가 그 이름으로 걸린다', () => {
+  assert.equal(indexOfLabel(G, '반도체'), 1);
+  assert.equal(indexOfLabel(G, '반도체(전자·통신)'), -1);
+  assert.equal(indexOfLabel(G, null), -1);
+});
+
+test('고른 점 없이 그리면 아무것도 옅어지지 않는다', () => {
+  const h = graphSvg(G);
+  assert.ok(!h.includes('gnode--dim'));
+  assert.ok(!h.includes('gedge--dim'));
+  assert.ok(!h.includes('gnet--picked'));
+});
+
+test('점을 고르면 이웃이 아닌 점과 안 닿는 선이 옅어진다', () => {
+  const h = graphSvg(G, { selected: '청년' });
+  assert.ok(h.includes('gnet--picked'));
+  // 청년(3)의 이웃은 4 뿐 — 0·1·2 는 옅어진다.
+  assert.equal((h.match(/gnode--dim/g) || []).length, 3);
+  assert.equal((h.match(/gnode--on/g) || []).length, 1);
+  // 청년에 닿는 선은 [3,4] 하나, 나머지 셋은 옅어진다.
+  assert.equal((h.match(/gedge--dim/g) || []).length, 3);
+  assert.equal((h.match(/gedge--on/g) || []).length, 1);
+});
+
+test('없는 이름을 고르면 고르지 않은 것과 같다 — 깨진 해시로 그림이 비지 않는다', () => {
+  const h = graphSvg(G, { selected: '없는말' });
+  assert.ok(!h.includes('gnode--dim'));
+  assert.ok(!h.includes('gnet--picked'));
+});
+
+test('노드와 선은 번호를 달고 나온다 — 다시 그리지 않고 class 만 바꾸기 위해서다', () => {
+  const h = graphSvg(G);
+  assert.ok(h.includes('data-node="0"'));
+  assert.ok(h.includes('data-edge="0,1"'));
+  assert.ok(h.includes('data-kw="반도체"'));
 });

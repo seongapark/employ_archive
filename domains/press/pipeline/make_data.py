@@ -57,7 +57,6 @@ def month_of(release):
 
 def main():
     summaries, articles = [], {}
-    prev_press = None
     for release, kinds in rounds_on_disk():
         month = month_of(release)
         hwpx = os.path.join(RELEASES, 'ei_%s.hwpx' % month)
@@ -71,12 +70,10 @@ def main():
         reg_v = _load(os.path.join(VERDICTS, 'verdict_%s_regular.json' % release)) or []
         fol = _load(os.path.join(RAW, 'articles_%s_follow.json' % release))
         fol_v = _load(os.path.join(VERDICTS, 'verdict_%s_follow.json' % release)) or []
-        summary, arts = build_round(release, month, hwpx, reg, reg_v, fol, fol_v,
-                                    prev_press=prev_press)
+        summary, arts = build_round(release, month, hwpx, reg, reg_v, fol, fol_v)
         summary['judged'] = bool(reg_v)
         summaries.append(summary)
         articles[release] = arts
-        prev_press = summary['all_press']
         f = summary['follow']
         if summary['unjudged']:
             print('  ⚠ %s — 판정 없는 기사 %d건. 인용 아님으로 세어진다.'

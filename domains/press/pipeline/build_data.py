@@ -14,6 +14,7 @@ from __future__ import annotations
 import collections
 import re
 
+from .collect import ANCHOR
 from .press_parser import parse_release, build_dict, analyze_title
 
 # 제조업 중분류는 대분류로 굴린다 — 반도체·조선을 따로 이슈로 쪼개지 않는다.
@@ -65,6 +66,7 @@ def enrich(arts, verdicts, D, body):
             'why': got.get('why', ''),
             'hits': ['%s:%s' % (axis, name) for axis, name in hits],
             'tone': tone,
+            'stance': got.get('tone', ''),
             'kw': [w for w in kw if not is_noise(w)],
         })
     return out
@@ -121,6 +123,34 @@ def signals(cited, min_count=2):
     tone = collections.Counter(w for a in cited for w in a['tone'])
     return ([{'w': w, 'n': n} for w, n in kw.most_common() if n >= min_count],
             [{'w': w, 'n': n} for w, n in tone.most_common()])
+
+
+def stance(cited):
+    """언론이 대체로 긍정적인가 부정적인가. LLM 이 기사마다 매긴 논조를 센다.
+
+    **고정 어휘표로는 못 센다.** 어휘표 14개는 '26.8월분 인용 73건 중 10건만
+    잡았고, 그 회차를 이끈 「반등 16 · 호황 8 · 호조 2」는 목록에 없어 '보도자료
+    밖 표현'으로 흘러갔다 — 그 표로 셌다면 긍정 우세인 회차를 '부정 우세'로
+    표시했을 것이다. 어휘를 늘려도 「구직급여 급증」과 「가입자 급증」은 못 가른다.
+
+    **판정이 없으면 없다고 말한다.** 빈 값을 '중립'으로 접으면 LLM 키가 없는
+    상태와 정말 중립인 회차가 화면에서 똑같아 보인다.
+    """
+    c = collections.Counter(a['stance'] for a in cited if a['stance'] in ('긍정', '부정', '중립'))
+    pos, neg, neu = c['긍정'], c['부정'], c['중립']
+    judged = pos + neg + neu
+    if not judged:
+        label = '판정 없음'
+    elif pos > neg:
+        label = '긍정 우세'
+    elif neg > pos:
+        label = '부정 우세'
+    elif pos:
+        label = '엇갈림'
+    else:
+        label = '중립'
+    return {'pos': pos, 'neg': neg, 'neu': neu, 'judged': judged,
+            'total': len(cited), 'label': label}
 
 
 def issues(cited):
@@ -269,22 +299,7 @@ def _terms(a):
     return ({h.split(':', 1)[1] for h in a['hits']} | set(a['kw']) | set(a['tone']))
 
 
-def gaps(cov, cited, body):
-    """보도자료 ↔ 기사의 어긋남. 숫자를 문장으로 부풀리지 않고 사실만 적는다."""
-    out = []
-    zero = [s['name'] for s in cov['section'] if s['n'] == 0]
-    if zero:
-        out.append('보도자료 3개 섹션 중 %s 보도 0건' % ' · '.join(zero))
-    svc = next((s['n'] for s in cov['industry'] if s['name'] == '서비스업'), None)
-    if svc is not None and svc <= 2 and '서비스업' in body:
-        out.append('요약부가 증가 견인으로 제시한 서비스업 보도 %d건' % svc)
-    young = next((s['n'] for s in cov['age'] if s['name'] == '29세이하·청년'), 0)
-    if cited:
-        out.append('청년 보도 %d건 (%d%%)' % (young, round(young * 100 / len(cited))))
-    return out
-
-
-def build_round(release, month, hwpx, reg, reg_v, fol=None, fol_v=None, prev_press=None):
+def build_round(release, month, hwpx, reg, reg_v, fol=None, fol_v=None):
     """한 회차 → (요약 dict, 기사 dict)."""
     rel = parse_release(hwpx)
     D, body = build_dict(rel), rel['body']
@@ -306,21 +321,25 @@ def build_round(release, month, hwpx, reg, reg_v, fol=None, fol_v=None, prev_pre
             'collected': reg['volume']['collected'], 'kept': len(r_all),
             'cited': len(r_cited), 'press': len(press_now),
             'window': reg.get('window', []), 'at': reg.get('collected_at', ''),
+            # 수집 기준을 화면이 직접 말할 수 있게 같이 넘긴다. 검색어는 회차마다
+            # 다르다(보도자료 요약부에서 파생하므로) — 화면에 박으면 틀린다.
+            # 실제로 '26.6월분은 11개, 7·8월분은 3개로 긁었다. 그물 폭이 다르다는
+            # 사실이 인용률 옆에 같이 보여야 한다.
+            'queries': [q['query'] for q in reg.get('queries', [])],
+            'anchors': list(ANCHOR),
         },
         'follow': ({'collected': fol['volume']['collected'], 'kept': len(f_all),
                     'cited': len(f_cited), 'press': len({a['press'] for a in f_cited}),
                     'window': fol.get('window', []), 'at': fol.get('collected_at', '')}
                    if fol else None),
         'coverage': cov,
-        'gaps': gaps(cov, r_cited, body),
         'outside': outside,
         'tone': tone,
+        'stance': stance(r_cited),
         'issues': issues(r_cited),
         'rivals': rivals([a for a in r_all if not a['cites']]),
         'graph': graph(r_cited),
         'frames': frames(r_cited, f_cited) if fol else [],
-        'new_press': sorted(press_now - set(prev_press or [])) if prev_press else [],
-        'all_press': sorted(press_now),
         'truncated': reg.get('truncated_queries', []),
         'unjudged': sum(1 for a in r_all + f_all if not a['judged']),
     }

@@ -20,33 +20,136 @@ export function bindRoundSwitch(el, ctx) {
   });
 }
 
-/** 커버리지 막대 한 축. 0건은 빗금으로 남긴다 — 빈 칸은 사실을 안 보여준다. */
-export function barGroup(title, rows) {
+/** 세로 막대 한 축. 0건은 빗금 기둥으로 남긴다 — 빈 칸은 사실을 안 보여준다.
+ *
+ * 가로 막대에서 바꿨다(2026-09-11). 축이 셋이면 가로 막대는 15줄이 되어
+ * 휴대폰에서 한 화면에 안 들어오고, 스크롤하는 동안 축이 머리에서 흩어진다.
+ * 기둥은 한 축이 한 줄이라 셋을 나란히 볼 수 있다.
+ *
+ * 계열이 하나라 범례가 없다. 대신 값을 기둥마다 직접 적는다 — 기둥이 일곱 개
+ * 안쪽이라 숫자가 붙어도 안 겹친다.
+ */
+export function columnChart(title, rows, opts = {}) {
+  const { unit = '건' } = opts;
   const body = scale(rows).map((r) => `
-    <div class="bar-row">
-      <div class="bar-row__name">${esc(r.name)}</div>
-      <div class="bar-row__track${r.n === 0 ? ' bar-row__track--zero' : ''}">
-        ${r.n > 0 ? `<div class="bar-row__fill" style="width:${r.pct}%;"></div>` : ''}
+    <div class="vcol" title="${esc(r.name)} ${r.n}${esc(unit)}">
+      <div class="vcol__n num">${r.n}</div>
+      <div class="vcol__track${r.n === 0 ? ' vcol__track--zero' : ''}">
+        ${r.n > 0 ? `<div class="vcol__fill" style="height:${r.pct}%;"></div>` : ''}
       </div>
-      <div class="bar-row__n num">${r.n}</div>
+      <div class="vcol__name">${esc(r.name)}</div>
     </div>`).join('');
-  return `<div style="margin-bottom:10px;">
+  return `<div class="vchart">
     <div class="sec-title">${esc(title)}</div>
-    <div class="bars">${body}</div>
+    <div class="vchart__plot">${body}</div>
   </div>`;
 }
 
-/** 기사 한 줄. 인용이 아닌 기사는 흐리게 두되 지우지는 않는다. */
+/** 기사 한 줄. 인용이 아닌 기사는 흐리게 두되 지우지는 않는다.
+ *
+ * 제목은 한 줄로 자른다(CSS 가 … 를 붙인다). 줄마다 높이가 같아야 목록을
+ * 훑을 때 눈이 일정한 간격으로 떨어진다 — 두 줄짜리가 섞이면 스크롤하면서
+ * 몇 건을 지났는지 감각이 끊긴다. 전문은 눌러서 원문으로 간다.
+ *
+ * 태그는 제목 줄에서 아래 줄로 내렸다. 제목을 한 줄로 자르면 태그가 먼저
+ * 잘려 나가 붙여 둔 뜻이 없다.
+ */
 export function articleRow(a) {
   const tags = (a.kw || []).slice(0, 2)
     .map((w) => `<span class="art__tag">${esc(w)}</span>`).join('');
-  const why = !a.cites && a.why ? ` · ${esc(a.why)}` : '';
+  const why = !a.cites && a.why ? `<span>· ${esc(a.why)}</span>` : '';
   const inner = `
-    <div class="art__title">${esc(a.title)}${tags}</div>
-    <div class="art__meta"><span>${esc(a.press)}</span><span class="num">${esc(timeLabel(a.pub))}</span><span>${why}</span></div>`;
+    <div class="art__title" title="${esc(a.title)}">${esc(a.title)}</div>
+    <div class="art__meta"><span>${esc(a.press)}</span><span class="num">${esc(timeLabel(a.pub))}</span>${why}${tags}</div>`;
   return a.url
     ? `<a class="art${a.cites ? '' : ' art--other'}" href="${esc(a.url)}" target="_blank" rel="noopener">${inner}</a>`
     : `<div class="art${a.cites ? '' : ' art--other'}">${inner}</div>`;
+}
+
+/** 파이 조각 색. **축마다 항목 순서가 고정**이라(SECTIONS·AGES·INDUSTRIES)
+ *  n번째 항목은 늘 n번째 색이다 — 회차가 바뀌어 크기 순서가 달라져도 제조업은
+ *  계속 같은 색이다. 색이 순위를 따라가면 지난달과 비교할 수 없다.
+ *
+ *  앞 여섯은 색각 검증을 통과한 조합이다(protan·deutan·tritan 전 구간).
+ *  일곱 색이 되는 순간 어떤 조합도 통과하지 못해서, 일곱째 칸은 회색으로 둔다
+ *  — 보건복지업 자리이고 세 회차 내내 0건이라 조각으로 그려진 적이 없다.
+ *  색만으로 읽히지 않게 범례가 이름·건수·비율을 직접 적는다.
+ */
+export const PIE_COLORS = ['#0072B2', '#D55E00', '#009E73', '#CC79A7',
+                           '#56B4E9', '#E69F00', '#98a2b3'];
+
+function arcPath(cx, cy, r, a0, a1) {
+  const at = (a) => [cx + r * Math.cos(a), cy + r * Math.sin(a)];
+  const [x0, y0] = at(a0);
+  const [x1, y1] = at(a1);
+  const large = a1 - a0 > Math.PI ? 1 : 0;
+  return `M ${cx} ${cy} L ${x0.toFixed(2)} ${y0.toFixed(2)} `
+    + `A ${r} ${r} 0 ${large} 1 ${x1.toFixed(2)} ${y1.toFixed(2)} Z`;
+}
+
+/** 한 축을 파이 하나로. 0건 항목은 조각이 없지만 **범례에는 남긴다** —
+ *  「구직급여 보도 0건」은 이 도메인이 잡아야 할 사실이라 지우면 안 된다.
+ *
+ *  조각은 축의 합계를 100%로 놓는다. 그 합계는 인용 기사 수가 아니다 —
+ *  한 기사가 여러 칸에 들어가기 때문이다(제조업은 반도체·조선을 품는다).
+ *  그래서 축 이름 옆에 「중복 포함」을 붙인다.
+ */
+export function pieChart(title, rows, opts = {}) {
+  const { note = '중복 포함', size = 96 } = opts;
+  const total = rows.reduce((n, r) => n + r.n, 0);
+  const drawn = rows.filter((r) => r.n > 0);
+
+  let a = -Math.PI / 2;
+  const slices = rows.map((r, i) => {
+    if (!r.n || !total) return '';
+    const color = PIE_COLORS[i % PIE_COLORS.length];
+    const tip = `<title>${esc(r.name)} ${r.n}건</title>`;
+    if (drawn.length === 1) {                 // 100% 는 호가 아니라 원 하나다
+      return `<circle cx="50" cy="50" r="46" fill="${color}">${tip}</circle>`;
+    }
+    const a0 = a;
+    a += (r.n / total) * Math.PI * 2;
+    return `<path d="${arcPath(50, 50, 46, a0, a)}" fill="${color}"
+      stroke="var(--card)" stroke-width="1.6">${tip}</path>`;
+  }).join('');
+
+  const legend = rows.map((r, i) => {
+    const color = PIE_COLORS[i % PIE_COLORS.length];
+    const swatch = r.n
+      ? `background:${color};border-color:${color};`
+      : `background:transparent;border-color:var(--border);`;
+    return `<div class="pie__item${r.n ? '' : ' pie__item--zero'}">
+      <i class="pie__dot" style="${swatch}"></i>
+      <span class="pie__name">${esc(r.name)}</span>
+      <span class="pie__n num">${r.n}</span>
+      <span class="pie__pct num">${total ? Math.round((r.n / total) * 100) : 0}%</span>
+    </div>`;
+  }).join('');
+
+  const disc = total
+    ? `<svg class="pie__svg" viewBox="0 0 100 100" width="${size}" height="${size}"
+         role="img" aria-label="${esc(title)} 구성">${slices}</svg>`
+    : `<div class="pie__empty" style="width:${size}px;height:${size}px;">0건</div>`;
+
+  return `<div class="pie">
+    <div class="sec-title">${esc(title)}
+      <span class="pie__note">${esc(note)}</span></div>
+    <div class="pie__body">${disc}<div class="pie__legend">${legend}</div></div>
+  </div>`;
+}
+
+/** 헤드라인 한 줄. 제목이 길면 제목만 줄이고 언론사는 끝까지 남긴다.
+ *
+ * 줄바꿈을 허용하면 어떤 기사는 한 줄, 어떤 기사는 세 줄이 되어 묶음의
+ * 크기가 제목 길이에 따라 달라 보인다. 어느 매체가 썼는지는 제목만큼
+ * 중요하므로, 줄이는 것은 제목 쪽이다.
+ */
+export function headlineRow(h) {
+  const title = h.url
+    ? `<a class="hl__t" href="${esc(h.url)}" target="_blank" rel="noopener">${esc(h.title)}</a>`
+    : `<span class="hl__t">${esc(h.title)}</span>`;
+  return `<div class="hl" title="${esc(h.title)}">
+    ${title}<span class="hl__p">(${esc(h.press)})</span></div>`;
 }
 
 export function card(inner, style = '') {

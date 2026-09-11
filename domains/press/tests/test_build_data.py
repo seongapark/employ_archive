@@ -1,10 +1,11 @@
 from domains.press.pipeline import build_data as b
 
 
-def art(title, cites=True, kw=(), hits=(), tone=(), press='뉴스1', pub='2026-09-07 12:00'):
+def art(title, cites=True, kw=(), hits=(), tone=(), press='뉴스1', pub='2026-09-07 12:00',
+        stance=''):
     return {'title': title, 'url': '', 'press': press, 'pub': pub,
             'cites': cites, 'why': '', 'hits': list(hits), 'tone': list(tone),
-            'kw': list(kw)}
+            'kw': list(kw), 'stance': stance}
 
 
 def test_signals_count_only_what_the_caller_passed():
@@ -23,6 +24,32 @@ def test_noise_words_are_not_frames():
         assert not b.is_noise(w), w
 
 
+def test_stance_says_which_way_the_coverage_leaned():
+    cited = [art('a', stance='긍정'), art('b', stance='긍정'), art('c', stance='부정'),
+             art('d', stance='중립')]
+    got = b.stance(cited)
+    assert got['label'] == '긍정 우세'
+    assert (got['pos'], got['neg'], got['neu'], got['judged']) == (2, 1, 1, 4)
+
+
+def test_stance_calls_a_tie_a_tie():
+    got = b.stance([art('a', stance='긍정'), art('b', stance='부정')])
+    assert got['label'] == '엇갈림'
+
+
+def test_stance_without_verdicts_says_so_instead_of_guessing_neutral():
+    # LLM 키가 없으면 논조가 빈 채로 온다. '중립'으로 접으면 판정이 없는
+    # 회차와 정말 중립인 회차가 화면에서 똑같아 보인다.
+    got = b.stance([art('a'), art('b')])
+    assert got['label'] == '판정 없음'
+    assert got['judged'] == 0 and got['total'] == 2
+
+
+def test_stance_ignores_values_the_model_was_not_supposed_to_send():
+    got = b.stance([art('a', stance='약간 긍정'), art('b', stance='부정')])
+    assert (got['judged'], got['label']) == (1, '부정 우세')
+
+
 def test_coverage_rolls_manufacturing_subsectors_up():
     cited = [art('반도체 호황', hits=['산업:반도체']), art('조선 회복', hits=['산업:조선'])]
     cov = b.coverage(cited)
@@ -38,18 +65,6 @@ def test_coverage_reports_zero_rather_than_omitting_the_row():
     names = [x['name'] for x in cov['section']]
     assert names == b.SECTIONS
     assert next(x for x in cov['section'] if x['name'] == '구직급여')['n'] == 0
-
-
-def test_gaps_name_the_unreported_sections():
-    cov = b.coverage([art('고용보험 가입자 증가', hits=['지표:고용보험'])])
-    lines = b.gaps(cov, [art('x')], '서비스업이 증가를 견인했다')
-    assert any('구직급여' in ln and '0건' in ln for ln in lines)
-
-
-def test_gaps_are_silent_when_there_are_no_cited_articles():
-    cov = b.coverage([])
-    lines = b.gaps(cov, [], '본문')
-    assert not any('청년 보도' in ln for ln in lines)   # 0으로 나누지 않는다
 
 
 def test_frames_call_a_word_gone_when_no_follow_up_uses_it():

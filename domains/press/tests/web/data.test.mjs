@@ -74,3 +74,5 @@ test('인용 기사가 0건이어도 비율이 NaN 이 되지 않는다', () => 
   assert.equal(youthShare(empty), 0);
   assert.equal(citeRate(empty), 0);
 });
+
+

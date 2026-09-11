@@ -7,20 +7,34 @@ RELEASES = ['2026-07-13', '2026-08-10', '2026-09-07', '2026-10-14']
 
 
 def test_nothing_to_do_on_an_ordinary_day():
-    assert plan.decide('2026-09-20', RELEASES) == (None, None)
+    # 후속 구간(D+1~D+15)과 그 마감일(D+16)을 지난 날.
+    assert plan.decide('2026-09-30', RELEASES) == (None, None)
 
 
 def test_release_day_and_the_next_collect_the_regular_round():
     # 수집 구간이 D~D+1 이라 이튿날 한 번 더 돌아야 그날 밤 기사가 담긴다.
     assert plan.decide('2026-09-07', RELEASES) == ('regular', '2026-09-07')
     assert plan.decide('2026-09-08', RELEASES) == ('regular', '2026-09-07')
-    assert plan.decide('2026-09-09', RELEASES) == (None, None)
+    assert plan.decide('2026-09-09', RELEASES) == ('follow', '2026-09-07')
 
 
-def test_follow_runs_the_day_after_its_window_closes():
-    # 후속 구간은 D+1~D+15 다. D+16 에 긁어야 구간이 다 찬 뒤다.
+def test_follow_runs_every_day_while_its_window_is_open():
+    # 한 번만 긁으면 후속 화면이 보름 내내 비어 있다가 갑자기 찬다. 그 사이에
+    # 프레임이 번져도 아무도 모른다 — 이 도메인에서 가장 나쁜 것이 늦게 아는 것이다.
+    for day in ('2026-09-09', '2026-09-15', '2026-09-22'):     # D+2 · D+8 · D+15
+        assert plan.decide(day, RELEASES) == ('follow', '2026-09-07'), day
+
+
+def test_follow_runs_once_more_the_day_its_window_closes():
+    # 후속 구간은 D+1~D+15 다. D+16 이 구간 전체를 담는 마지막 실행이다.
     assert plan.decide('2026-09-23', RELEASES) == ('follow', '2026-09-07')
-    assert plan.decide('2026-09-22', RELEASES) == (None, None)
+    assert plan.decide('2026-09-24', RELEASES) == (None, None)
+
+
+def test_the_day_after_the_release_stays_regular():
+    # D+1 은 후속 구간의 첫날이지만 긁을 것이 하루치뿐이고, 그날은 정기 수집이
+    # 배포 당일 밤 기사를 담아야 한다. 후속은 D+2 부터.
+    assert plan.decide('2026-09-08', RELEASES) == ('regular', '2026-09-07')
 
 
 def test_a_new_release_takes_over_from_the_previous_one():
@@ -91,8 +105,8 @@ def test_judge_only_asks_about_articles_that_have_no_verdict(tmp_path, monkeypat
     (tmp_path / 'raw' / 'articles_2026-09-07_regular.json').write_text(
         json.dumps(raw, ensure_ascii=False), encoding='utf-8')
     (tmp_path / 'verdicts' / 'verdict_2026-09-07_regular.json').write_text(
-        json.dumps([{'n': 1, 'cites': True, 'why': 'x', 'title': '이미 판정한 기사'}],
-                   ensure_ascii=False), encoding='utf-8')
+        json.dumps([{'n': 1, 'cites': True, 'why': 'x', 'tone': '긍정',
+                     'title': '이미 판정한 기사'}], ensure_ascii=False), encoding='utf-8')
     monkeypatch.setattr(run_round, 'RAW', str(tmp_path / 'raw'))
     monkeypatch.setattr(run_round, 'VERDICTS', str(tmp_path / 'verdicts'))
     monkeypatch.setattr(run_round, 'SOURCES', str(tmp_path))
@@ -102,7 +116,7 @@ def test_judge_only_asks_about_articles_that_have_no_verdict(tmp_path, monkeypat
 
     def fake(prompt):
         asked['prompt'] = prompt
-        return json.dumps([{'n': 1, 'cites': False, 'why': '딴 얘기'}])
+        return json.dumps([{'n': 1, 'cites': False, 'why': '딴 얘기', 'tone': '중립'}])
 
     n = run_round.judge_missing('2026-09-07', 'regular', call=fake, log=lambda _m: None)
     assert n == 1
@@ -112,6 +126,33 @@ def test_judge_only_asks_about_articles_that_have_no_verdict(tmp_path, monkeypat
     merged = json.loads(
         (tmp_path / 'verdicts' / 'verdict_2026-09-07_regular.json').read_text('utf-8'))
     assert {v['title'] for v in merged} == {'이미 판정한 기사', '새로 들어온 기사'}
+
+
+def test_a_verdict_without_a_tone_is_asked_again(tmp_path, monkeypatch):
+    # 논조는 나중에 붙인 항목이라 옛 판정 파일에는 없다. 빈 값을 '중립'으로
+    # 채우면 LLM 키가 없는 상태와 정말 중립인 회차가 화면에서 똑같아 보인다.
+    raw = {'articles': [{'title': '논조 없는 옛 판정', 'press': 'A', 'desc': ''}]}
+    (tmp_path / 'raw').mkdir()
+    (tmp_path / 'verdicts').mkdir()
+    (tmp_path / 'raw' / 'articles_2026-09-07_regular.json').write_text(
+        json.dumps(raw, ensure_ascii=False), encoding='utf-8')
+    (tmp_path / 'verdicts' / 'verdict_2026-09-07_regular.json').write_text(
+        json.dumps([{'n': 1, 'cites': True, 'why': 'x', 'title': '논조 없는 옛 판정'}],
+                   ensure_ascii=False), encoding='utf-8')
+    monkeypatch.setattr(run_round, 'RAW', str(tmp_path / 'raw'))
+    monkeypatch.setattr(run_round, 'VERDICTS', str(tmp_path / 'verdicts'))
+    monkeypatch.setattr(run_round, 'SOURCES', str(tmp_path))
+    monkeypatch.setenv('OPENROUTER_API_KEY', 'sk-or-x')
+
+    def fake(_prompt):
+        return json.dumps([{'n': 1, 'cites': True, 'why': 'x', 'tone': '부정'}])
+
+    assert run_round.judge_missing('2026-09-07', 'regular',
+                                   call=fake, log=lambda _m: None) == 1
+    merged = json.loads(
+        (tmp_path / 'verdicts' / 'verdict_2026-09-07_regular.json').read_text('utf-8'))
+    # 다시 물은 기사의 옛 판정이 남으면 같은 제목이 두 줄이 된다.
+    assert len(merged) == 1 and merged[0]['tone'] == '부정'
 
 
 def test_judging_is_skipped_without_a_key(tmp_path, monkeypatch):

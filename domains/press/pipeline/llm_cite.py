@@ -8,6 +8,13 @@
 
 판정과 근거를 함께 받는다. 근거가 없으면 왜 틀렸는지 아무도 못 본다.
 공급자는 둘 중 있는 키를 쓴다 — 판정 로직은 어느 쪽이든 같다.
+
+**논조도 같은 호출에서 받는다.** 고정 어휘표로는 못 센다는 것이 실측으로
+드러났다 — 어휘표 14개('빨간불'·'한파'·'훈풍'…)는 '26.8월분 인용 73건 중
+10건만 잡았고, 정작 그 회차를 이끈 「반등 16 · 호황 8 · 호조 2」는 목록에
+없어 '보도자료 밖 표현'으로 흘러갔다. 그 표로 KPI 를 세웠다면 **긍정 우세인
+회차를 '부정 우세'로 표시**했을 것이다. 어휘를 늘려도 「구직급여 급증」과
+「가입자 급증」을 못 가른다 — 같은 낱말이 주어에 따라 뒤집힌다.
 """
 from __future__ import annotations
 
@@ -29,10 +36,16 @@ BATCH = 20                      # 한 번에 판정할 기사 수
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)\s*```", re.S)
 
 
+# 논조 판정값. 이 셋 밖의 답은 에러다 — 모르는 값을 '중립'으로 접으면
+# 모델이 딴소리를 해도 화면이 멀쩡해 보인다.
+TONES = ('긍정', '부정', '중립')
+
+
 class Verdict(NamedTuple):
     n: int          # 기사 번호 (1부터)
     cites: bool
     why: str
+    tone: str       # 긍정 | 부정 | 중립
 
 
 def build_prompt(release_label: str, release_date: str, digest: str,
@@ -61,10 +74,20 @@ def build_prompt(release_label: str, release_date: str, digest: str,
 기사 목록:
 {listing}
 
+그리고 각 기사의 **논조**를 함께 판정하라. 지표가 좋고 나쁜지가 아니라
+**제목·요약이 노동시장을 어떻게 그리는가**다:
+- "긍정" — 나아지고 있다고 그린다. 반등·호황·회복·증가 전환·훈풍.
+- "부정" — 나빠지고 있다고 그린다. 한파·감소·부진·역주행·빙하기·최악.
+- "중립" — 수치만 전하거나, 좋고 나쁨이 섞여 어느 쪽도 아니다.
+
+같은 낱말이라도 **무엇이 늘고 줄었는지**를 보라. 「구직급여 신청 급증」은
+부정이고 「가입자 급증」은 긍정이다. 인용이 아닌 기사도 논조는 판정하라.
+
 각 기사마다 한 줄씩, JSON 배열로만 답하라. 다른 말을 덧붙이지 마라:
-[{{"n": 1, "cites": true, "why": "8월 가입자 27만8천명 증가를 전함"}}]
+[{{"n": 1, "cites": true, "why": "8월 가입자 27만8천명 증가를 전함", "tone": "긍정"}}]
 
 `why` 는 20자 안팎으로 짧게. 인용이 아니면 무엇을 다룬 기사인지 적어라.
+`tone` 은 긍정·부정·중립 중 하나만 쓴다.
 """
 
 
@@ -95,7 +118,12 @@ def parse_response(body: str, n_expected: int) -> list[Verdict]:
         seen.add(n)
         if "cites" not in row:
             raise ValueError(f"cites 가 없다: {row!r}")
-        out.append(Verdict(n, bool(row["cites"]), str(row.get("why", "")).strip()))
+        if "tone" not in row:
+            raise ValueError(f"tone 이 없다: {row!r}")
+        tone = str(row["tone"]).strip()
+        if tone not in TONES:
+            raise ValueError(f"tone 이 {'·'.join(TONES)} 가 아니다({tone!r}): {row!r}")
+        out.append(Verdict(n, bool(row["cites"]), str(row.get("why", "")).strip(), tone))
     missing = sorted(set(range(1, n_expected + 1)) - seen)
     if missing:
         # 빠진 기사를 조용히 '인용 아님' 으로 두면 누락이 안 보인다.
@@ -151,5 +179,5 @@ def judge(release_label: str, release_date: str, digest: str, arts: Sequence[dic
         log(f"  판정 {start + 1}~{start + len(chunk)} / {len(arts)}")
         got = parse_response(
             call(build_prompt(release_label, release_date, digest, chunk)), len(chunk))
-        out.extend(Verdict(v.n + start, v.cites, v.why) for v in got)
+        out.extend(Verdict(v.n + start, v.cites, v.why, v.tone) for v in got)
     return out

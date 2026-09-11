@@ -13,7 +13,19 @@
     "2026-09-07",
     "2026-09-08"
    ],
-   "at": "2026-09-08 14:11"
+   "at": "2026-09-08 14:11",
+   "queries": [
+    "고용보험 가입자",
+    "구직급여",
+    "구인배수"
+   ],
+   "anchors": [
+    "고용보험",
+    "피보험자",
+    "구직급여",
+    "구인배수",
+    "고용행정"
+   ]
   },
   "follow": null,
   "coverage": {
@@ -84,11 +96,6 @@
     }
    ]
   },
-  "gaps": [
-   "보도자료 3개 섹션 중 구직급여 · 고용24 구인·구직 보도 0건",
-   "요약부가 증가 견인으로 제시한 서비스업 보도 1건",
-   "청년 보도 13건 (18%)"
-  ],
   "outside": [
    {
     "w": "반등",
@@ -137,6 +144,14 @@
     "n": 1
    }
   ],
+  "stance": {
+   "pos": 0,
+   "neg": 0,
+   "neu": 0,
+   "judged": 0,
+   "total": 73,
+   "label": "판정 없음"
+  },
   "issues": [
    {
     "key": "제조업",
@@ -438,13 +453,13 @@
      "n": 2
     },
     {
-     "id": "자동차",
-     "axis": "산업",
+     "id": "주력산업",
+     "axis": "밖",
      "n": 2
     },
     {
-     "id": "주력산업",
-     "axis": "밖",
+     "id": "자동차",
+     "axis": "산업",
      "n": 2
     }
    ],
@@ -725,106 +740,14 @@
      2
     ],
     [
-     17,
      18,
+     17,
      2
     ]
    ],
    "trimmed": 1
   },
   "frames": [],
-  "new_press": [
-   "asiatime.co.kr",
-   "biz.sbs.co.kr",
-   "cctimes.kr",
-   "gosiweek.com",
-   "hitepaper.co.kr",
-   "idsn.co.kr",
-   "imaeil.com",
-   "kbmaeil.com",
-   "kfenews.co.kr",
-   "korea.kr",
-   "ktv.go.kr",
-   "mtnews.net",
-   "news.tf.co.kr",
-   "newsway.co.kr",
-   "ngetnews.com",
-   "obsnews.co.kr",
-   "pointe.co.kr",
-   "segyebiz.com",
-   "theopiniontimes.news",
-   "ulsanpress.net",
-   "vegannews.co.kr",
-   "뉴스토마토",
-   "대한전문건설신문",
-   "디지털타임스",
-   "연합뉴스",
-   "조선일보",
-   "중앙이코노미뉴스",
-   "청년일보",
-   "한겨레"
-  ],
-  "all_press": [
-   "asiatime.co.kr",
-   "biz.sbs.co.kr",
-   "ccdailynews.com",
-   "cctimes.kr",
-   "dailian.co.kr",
-   "delighti.co.kr",
-   "dnews.co.kr",
-   "fntoday.co.kr",
-   "ggilbo.com",
-   "gokorea.kr",
-   "gosiweek.com",
-   "hitepaper.co.kr",
-   "idsn.co.kr",
-   "imaeil.com",
-   "kbmaeil.com",
-   "kfenews.co.kr",
-   "kidd.co.kr",
-   "korea.kr",
-   "ktv.go.kr",
-   "mbnmoney.mbn.co.kr",
-   "mtnews.net",
-   "news.bbsi.co.kr",
-   "news.tf.co.kr",
-   "news.tvchosun.com",
-   "news2day.co.kr",
-   "newsfc.co.kr",
-   "newsway.co.kr",
-   "ngetnews.com",
-   "nocutnews.co.kr",
-   "obsnews.co.kr",
-   "pointe.co.kr",
-   "segyebiz.com",
-   "seouleconews.com",
-   "theopiniontimes.news",
-   "thepowernews.co.kr",
-   "ulsanpress.net",
-   "vegannews.co.kr",
-   "viva100.com",
-   "남도일보",
-   "뉴스1",
-   "뉴스토마토",
-   "뉴스핌",
-   "뉴시스",
-   "대한전문건설신문",
-   "디지털타임스",
-   "머니투데이",
-   "아주경제",
-   "연합뉴스",
-   "이데일리",
-   "이투데이",
-   "전자신문",
-   "조선일보",
-   "중앙이코노미뉴스",
-   "천지일보",
-   "청년일보",
-   "파이낸셜뉴스",
-   "한겨레",
-   "한국경제",
-   "헤럴드경제"
-  ],
   "truncated": [],
   "unjudged": 0,
   "judged": true
@@ -843,7 +766,19 @@
     "2026-08-10",
     "2026-08-11"
    ],
-   "at": "2026-09-08 14:11"
+   "at": "2026-09-08 14:11",
+   "queries": [
+    "고용보험 가입자",
+    "구직급여",
+    "구인배수"
+   ],
+   "anchors": [
+    "고용보험",
+    "피보험자",
+    "구직급여",
+    "구인배수",
+    "고용행정"
+   ]
   },
   "follow": {
    "collected": 257,
@@ -924,11 +859,6 @@
     }
    ]
   },
-  "gaps": [
-   "보도자료 3개 섹션 중 구직급여 · 고용24 구인·구직 보도 0건",
-   "요약부가 증가 견인으로 제시한 서비스업 보도 1건",
-   "청년 보도 46건 (77%)"
-  ],
   "outside": [
    {
     "w": "AI",
@@ -1005,6 +935,14 @@
     "n": 1
    }
   ],
+  "stance": {
+   "pos": 0,
+   "neg": 0,
+   "neu": 0,
+   "judged": 0,
+   "total": 60,
+   "label": "판정 없음"
+  },
   "issues": [
    {
     "key": "청년",
@@ -1285,12 +1223,12 @@
      "n": 14
     },
     {
-     "id": "경력직",
+     "id": "AI",
      "axis": "밖",
      "n": 11
     },
     {
-     "id": "AI",
+     "id": "경력직",
      "axis": "밖",
      "n": 11
     },
@@ -1412,24 +1350,19 @@
      11
     ],
     [
-     6,
      5,
+     6,
      10
     ],
     [
-     6,
-     1,
-     9
-    ],
-    [
      5,
      1,
      9
     ],
     [
      6,
-     8,
-     8
+     1,
+     9
     ],
     [
      5,
@@ -1438,11 +1371,16 @@
     ],
     [
      6,
+     8,
+     8
+    ],
+    [
+     5,
      0,
      7
     ],
     [
-     5,
+     6,
      0,
      7
     ],
@@ -1472,13 +1410,13 @@
      5
     ],
     [
-     6,
+     5,
      2,
      5
     ],
     [
      2,
-     5,
+     6,
      5
     ],
     [
@@ -1517,12 +1455,12 @@
      4
     ],
     [
-     6,
+     5,
      12,
      4
     ],
     [
-     5,
+     6,
      12,
      4
     ],
@@ -1558,12 +1496,12 @@
     ],
     [
      3,
-     6,
+     5,
      3
     ],
     [
      3,
-     5,
+     6,
      3
     ],
     [
@@ -1637,7 +1575,7 @@
      2
     ],
     [
-     6,
+     5,
      17,
      2
     ],
@@ -1800,93 +1738,6 @@
     "state": "소멸"
    }
   ],
-  "new_press": [
-   "00news.co.kr",
-   "KNN",
-   "ccdailynews.com",
-   "delighti.co.kr",
-   "dnews.co.kr",
-   "fntoday.co.kr",
-   "ggilbo.com",
-   "gokorea.kr",
-   "jeonmae.co.kr",
-   "joongdo.co.kr",
-   "kbsm.net",
-   "kidd.co.kr",
-   "kihoilbo.co.kr",
-   "lawtv.kr",
-   "mediapen.com",
-   "news.cpbc.co.kr",
-   "news2day.co.kr",
-   "newsfc.co.kr",
-   "owtv.co.kr",
-   "seouleconews.com",
-   "shinailbo.co.kr",
-   "slist.kr",
-   "뉴스프리존",
-   "데이터솜",
-   "서울경제",
-   "아시아투데이",
-   "이데일리",
-   "천지일보",
-   "충청매일",
-   "한국경제",
-   "한국일보"
-  ],
-  "all_press": [
-   "00news.co.kr",
-   "KNN",
-   "ccdailynews.com",
-   "dailian.co.kr",
-   "delighti.co.kr",
-   "dnews.co.kr",
-   "fntoday.co.kr",
-   "ggilbo.com",
-   "gokorea.kr",
-   "imnews.imbc.com",
-   "jeonmae.co.kr",
-   "joongdo.co.kr",
-   "kbsm.net",
-   "kidd.co.kr",
-   "kihoilbo.co.kr",
-   "lawtv.kr",
-   "mbnmoney.mbn.co.kr",
-   "mediapen.com",
-   "metroseoul.co.kr",
-   "news.bbsi.co.kr",
-   "news.cpbc.co.kr",
-   "news.tvchosun.com",
-   "news2day.co.kr",
-   "newsfc.co.kr",
-   "nocutnews.co.kr",
-   "owtv.co.kr",
-   "seouleconews.com",
-   "shinailbo.co.kr",
-   "slist.kr",
-   "thepowernews.co.kr",
-   "viva100.com",
-   "남도일보",
-   "뉴스1",
-   "뉴스프리존",
-   "뉴스핌",
-   "뉴시스",
-   "데이터솜",
-   "매일경제",
-   "머니투데이",
-   "서울경제",
-   "아시아경제",
-   "아시아투데이",
-   "아주경제",
-   "이데일리",
-   "이투데이",
-   "전자신문",
-   "천지일보",
-   "충청매일",
-   "파이낸셜뉴스",
-   "한국경제",
-   "한국일보",
-   "헤럴드경제"
-  ],
   "truncated": [],
   "unjudged": 0,
   "judged": true
@@ -1905,7 +1756,27 @@
     "2026-07-13",
     "2026-07-14"
    ],
-   "at": "2026-08-18 21:52"
+   "at": "2026-08-18 21:52",
+   "queries": [
+    "고용보험 가입자",
+    "구직급여",
+    "구인배수",
+    "식료품 고용보험",
+    "제조업 고용보험",
+    "건설업 고용보험",
+    "보건복지업 고용보험",
+    "전자·통신 고용보험",
+    "전기장비 고용보험",
+    "자동차 고용보험",
+    "29세이하 고용보험"
+   ],
+   "anchors": [
+    "고용보험",
+    "피보험자",
+    "구직급여",
+    "구인배수",
+    "고용행정"
+   ]
   },
   "follow": {
    "collected": 252,
@@ -1986,11 +1857,6 @@
     }
    ]
   },
-  "gaps": [
-   "보도자료 3개 섹션 중 고용24 구인·구직 보도 0건",
-   "요약부가 증가 견인으로 제시한 서비스업 보도 2건",
-   "청년 보도 16건 (36%)"
-  ],
   "outside": [
    {
     "w": "홈플러스",
@@ -2027,6 +1893,14 @@
     "n": 1
    }
   ],
+  "stance": {
+   "pos": 0,
+   "neg": 0,
+   "neu": 0,
+   "judged": 0,
+   "total": 45,
+   "label": "판정 없음"
+  },
   "issues": [
    {
     "key": "전체 가입자",
@@ -2253,7 +2127,7 @@
   ],
   "rivals": [
    {
-    "topic": "개편",
+    "topic": "고용보험",
     "n": 2,
     "heads": [
      {
@@ -2263,10 +2137,10 @@
       "why": "고용보험 소득기준 개편 사설"
      },
      {
-      "title": "신혼부부 주담대 소득기준 한시 완화… 청년일자리 20만개 창출",
-      "url": "https://www.sedaily.com/article/20067251?ref=naver",
-      "press": "서울경제",
-      "why": "정부 청년일자리·제도 개편 대책"
+      "title": "전 국민 고용보험 시대 열린다",
+      "url": "https://www.hidomin.com/news/articleView.html?idxno=713112",
+      "press": "hidomin.com",
+      "why": "고용보험 제도 확대·기금 재정 논평"
      }
     ]
    },
@@ -2551,49 +2425,6 @@
     "last": "",
     "state": "소멸"
    }
-  ],
-  "new_press": [],
-  "all_press": [
-   "asiatime.co.kr",
-   "biz.newdaily.co.kr",
-   "dailian.co.kr",
-   "dealsite.co.kr",
-   "ebn.co.kr",
-   "gosiweek.com",
-   "imnews.imbc.com",
-   "m-economynews.com",
-   "mbnmoney.mbn.co.kr",
-   "metroseoul.co.kr",
-   "news.bbsi.co.kr",
-   "news.sbs.co.kr",
-   "news.tf.co.kr",
-   "news.tvchosun.com",
-   "ngetnews.com",
-   "nocutnews.co.kr",
-   "omennews.co.kr",
-   "pointe.co.kr",
-   "sisajournal.com",
-   "startuptoday.co.kr",
-   "theopiniontimes.news",
-   "thepowernews.co.kr",
-   "viva100.com",
-   "남도일보",
-   "뉴스1",
-   "뉴스핌",
-   "뉴시스",
-   "대한전문건설신문",
-   "매일경제",
-   "머니투데이",
-   "아시아경제",
-   "아주경제",
-   "이투데이",
-   "전기신문",
-   "전자신문",
-   "조선일보",
-   "청년일보",
-   "파이낸셜뉴스",
-   "한겨레",
-   "헤럴드경제"
   ],
   "truncated": [],
   "unjudged": 0,

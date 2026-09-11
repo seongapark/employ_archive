@@ -10,6 +10,10 @@ YAML 이 얇아야 하는 이유: 워크플로 안의 로직은 테스트할 수
 **판정은 아직 판정 없는 기사에만 돌린다.** 배포 당일 매시간 도는데 매번 전체를
 다시 물으면 비용이 스물네 배가 된다. 판정을 제목으로 잇게 해 두었으므로,
 이미 판정한 기사는 그대로 두고 새로 들어온 것만 묻는다.
+
+다만 **판정에 논조(`tone`)가 없으면 다시 묻는다.** 논조는 나중에 붙인 항목이라
+옛 판정 파일에는 없다. 없는 것을 '중립'으로 채우면 화면이 채워진 것처럼
+보이므로, 한 번은 다시 물어서 실제 값을 받는다(회차당 한 번이면 끝난다).
 """
 from __future__ import annotations
 
@@ -47,11 +51,12 @@ def judge_missing(release, kind, *, log=print, call=None):
     arts = raw['articles']
     vpath = os.path.join(VERDICTS, 'verdict_%s_%s.json' % (release, kind))
     old = _load(vpath) or []
-    known = {_norm(v['title']) for v in old if v.get('title')}
+    known = {_norm(v['title']) for v in old if v.get('title') and v.get('tone')}
     todo = [a for a in arts if _norm(a['title']) not in known]
     if not todo:
         log('  새로 판정할 기사 없음 (기존 %d건 유지)' % len(old))
         return 0
+    stale = sum(1 for v in old if v.get('title') and not v.get('tone'))
     if llm_cite.provider() is None:
         log('  ⚠ LLM 키가 없다 — %d건이 판정 없이 남는다(화면에서 인용 아님으로 센다)'
             % len(todo))
@@ -61,12 +66,16 @@ def judge_missing(release, kind, *, log=print, call=None):
     hwpx = os.path.join(SOURCES, 'releases', 'ei_%s.hwpx' % month)
     digest = _digest(hwpx)
     label = '%s년 %d월 고용행정 통계로 본 노동시장 동향' % (month[:4], int(month[5:]))
-    log('  판정 대상 %d건 (기존 %d건은 그대로)' % (len(todo), len(old)))
+    log('  판정 대상 %d건 (기존 %d건 중 논조 없는 %d건 포함)' % (len(todo), len(old), stale))
     verdicts = llm_cite.judge(label, release, digest, todo, call=call, log=log)
 
-    merged = list(old) + [{'n': v.n, 'cites': v.cites, 'why': v.why,
-                           'title': todo[v.n - 1]['title'], 'press': todo[v.n - 1]['press']}
-                          for v in verdicts]
+    # 다시 물은 기사의 옛 판정은 버린다 — 남겨 두면 같은 제목이 두 줄이 되고,
+    # build_data 가 둘 중 아무거나 집는다.
+    redone = {_norm(a['title']) for a in todo}
+    merged = [v for v in old if _norm(v.get('title', '')) not in redone]
+    merged += [{'n': v.n, 'cites': v.cites, 'why': v.why, 'tone': v.tone,
+                'title': todo[v.n - 1]['title'], 'press': todo[v.n - 1]['press']}
+               for v in verdicts]
     os.makedirs(VERDICTS, exist_ok=True)
     json.dump(merged, io.open(vpath, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
     log('  판정 %d건 추가 → 총 %d건' % (len(verdicts), len(merged)))

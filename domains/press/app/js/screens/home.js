@@ -1,65 +1,97 @@
 import { esc, roundOf, dayLabel, citeRate } from '../data.js';
-import { barGroup, card, section } from '../ui.js';
+import { pieChart, card, headlineRow, section } from '../ui.js';
 
-// 홈은 '지금 무엇이 번지고 있나'를 먼저 보여준다. 기사 목록은 기사 탭이 맡는다.
-// 순서를 바꾸지 말 것 — 이 도메인의 목적은 왜곡을 늦게 발견하지 않는 것이다.
-
-function frameBand(round) {
-  const top = round.outside.slice(0, 4);
-  if (!top.length) {
-    return `<div class="band"><div class="band__title">보도자료 밖 표현 없음</div>
-      <div class="band__meta">두 곳 이상이 공통으로 쓴 새 표현이 없습니다.</div></div>`;
-  }
-  const words = top.map((x) => `${esc(x.w)} <span class="num">${x.n}</span>`).join(' · ');
-  return `<div class="band band--frame">
-    <div class="band__title">${words}</div>
-    <div class="band__meta">보도자료에 없는 말 · 인용 ${round.regular.cited}건에서 셈</div>
-  </div>`;
-}
+// 홈은 '이 회차 보도가 어떻게 됐나'를 세 숫자로 먼저 말한다.
+//
+// KPI 는 **수집 → 인용 → 논조** 순이다. 앞의 것이 뒤의 것의 분모다 —
+// 81건을 모아 73건이 인용이고, 그 73건의 논조가 어느 쪽이었다. 순서를 바꾸면
+// 숫자끼리 무슨 관계인지 알 수 없다.
+//
+// 「보도자료 밖 표현」 밴드와 「보도자료 ↔ 기사의 격차」 상자는 2026-09-11 에
+// 뺐다. 낱말 몇 개와 숫자 세 줄이 화면 맨 위에서 시선을 먼저 가져갔는데,
+// 그것만 보고는 무엇을 해야 하는지 알 수 없었다. 밖 표현은 기사 화면의
+// 키워드그래프와 후속 화면의 「살아남은 표현」이 이미 더 잘 보여준다.
 
 function kpis(round) {
   const r = round.regular;
-  const f = round.follow;
+  const st = round.stance || { label: '판정 없음', judged: 0 };
   const cells = [
-    { n: r.cited, label: '인용 기사', sub: `수집 ${r.collected}건 중` },
-    { n: r.press, label: '보도 언론사', sub: f ? `후속 ${f.press}곳` : '정기 기준' },
-    { n: round.outside.length, label: '밖 표현', sub: '2건 이상 반복' },
-    { n: `${citeRate(round)}%`, label: '인용률', sub: `나머지 ${r.kept - r.cited}건은 딴 얘기` },
+    { n: r.kept, label: '수집', sub: `검색 ${r.collected}건 중`, info: true },
+    { n: r.cited, label: `인용 · ${citeRate(round)}%`, sub: `딴 얘기 ${r.kept - r.cited}건` },
+    // 내역(부정12·긍정31)은 바로 아래 막대와 범례가 말한다 — 여기서 또 쓰면
+    // 같은 숫자가 두 줄 연달아 나온다.
+    { n: st.label, label: '언론 논조',
+      sub: st.judged ? `인용 ${st.judged}건 기준` : 'LLM 판정 필요', small: true },
   ];
   const body = cells.map((c) => `
-    <div class="card" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;">
-      <div class="num" style="font-size:22px;font-weight:700;line-height:1.2;">${esc(String(c.n))}</div>
+    <div class="card kpi" style="flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;">
+      ${c.info ? `<button type="button" class="kpi__info" data-info
+          aria-expanded="false" aria-controls="collectInfo" aria-label="수집 기준 보기">i</button>` : ''}
+      <div class="num" style="font-size:${c.small ? 15 : 22}px;font-weight:700;line-height:1.3;padding:${c.small ? '3px 0 2px' : '0'};">${esc(String(c.n))}</div>
       <div style="font-size:11px;color:var(--text-secondary);">${esc(c.label)}</div>
       <div class="num" style="font-size:10px;color:var(--text-muted);">${esc(c.sub)}</div>
     </div>`).join('');
-  return `<div style="display:flex;gap:8px;">${body}</div>`;
+  // 수집 기준은 늘 펼쳐 두지 않는다 — 매번 읽을 글은 아니지만, 숫자만 있고
+  // 기준이 없으면 '81건'이 무엇의 81건인지 알 수 없어 지울 수도 없다.
+  return `<div style="position:relative;">
+    <div style="display:flex;gap:8px;">${body}</div>
+    ${criteria(round)}
+  </div>`;
 }
 
-function gapCard(round) {
-  if (!round.gaps.length) return '';
-  const rows = round.gaps.map((g) => `<div>· ${esc(g)}</div>`).join('');
-  return `<div class="gapbox">
-    <div style="font-weight:700;">보도자료 ↔ 기사의 격차</div>${rows}</div>`;
+/** 논조 막대. 판정이 없으면 그리지 않는다 — 빈 막대는 '중립'처럼 보인다. */
+function stanceBar(round) {
+  const st = round.stance;
+  if (!st || !st.judged) {
+    return `<div style="font-size:10px;color:var(--text-muted);padding:0 2px;">
+      논조는 기사마다 LLM 이 판정합니다. 이 회차는 아직 판정이 없습니다.</div>`;
+  }
+  const seg = (n, cls, name) => (n ? `<div class="stance__seg ${cls}"
+    style="flex:${n};" title="${esc(name)} ${n}건"></div>` : '');
+  // 색만으로 뜻을 나르지 않는다 — 어느 색이 무엇인지 바로 아래가 글자로 말한다.
+  const key = (n, cls, name) => (n ? `<span class="stance__key">
+    <i class="stance__dot ${cls}"></i>${name} ${n}</span>` : '');
+  return `<div style="padding:0 2px;">
+    <div class="stance">
+      ${seg(st.neg, 'stance__seg--neg', '부정')}
+      ${seg(st.neu, 'stance__seg--neu', '중립')}
+      ${seg(st.pos, 'stance__seg--pos', '긍정')}
+    </div>
+    <div class="stance__keys">
+      ${key(st.neg, 'stance__seg--neg', '부정')}
+      ${key(st.neu, 'stance__seg--neu', '중립')}
+      ${key(st.pos, 'stance__seg--pos', '긍정')}
+    </div>
+  </div>`;
+}
+
+/** 수집 기준 — 수집 KPI 의 i 를 누르면 그 아래에 뜬다. */
+function criteria(round) {
+  const r = round.regular;
+  const qs = r.queries || [];
+  const shown = qs.slice(0, 3).join(' · ');
+  const more = qs.length > 3 ? ` 외 ${qs.length - 3}개` : '';
+  const win = (r.window || []).map(dayLabel).join('~');
+  return `<div class="infobox" id="collectInfo" hidden>
+    <div class="infobox__title">수집 기준</div>
+    <div>· 네이버 뉴스 검색어 ${qs.length}개 — ${esc(shown)}${esc(more)}</div>
+    <div>· 발행 ${esc(win)} (배포 당일과 그 이튿날)</div>
+    <div>· 제목·요약에 ${esc((r.anchors || []).join(' · '))} 중 하나가 든 것만 남김</div>
+  </div>`;
 }
 
 function coverageCard(round) {
   const c = round.coverage;
   return card(`
-    <div style="font-size:13px;font-weight:700;margin-bottom:8px;">보도자료가 다룬 것 중 무엇이 기사화됐나</div>
-    ${barGroup('보도자료 섹션', c.section)}
-    ${barGroup('연령', c.age)}
-    ${barGroup('산업', c.industry)}
-    <div style="font-size:10px;color:var(--text-muted);">빗금 = 0건 · 축마다 눈금이 다르므로 막대 길이는 같은 축 안에서만 비교</div>`);
+    <div style="font-size:13px;font-weight:700;margin-bottom:8px;">기사화 현황</div>
+    ${pieChart('보도자료 섹션', c.section)}
+    ${pieChart('연령', c.age)}
+    ${pieChart('산업', c.industry)}`);
 }
 
 function issueCard(round, ctx) {
   const rows = round.issues.slice(0, 4).map((iss) => {
-    const heads = iss.heads.slice(0, 3).map((h) => `
-      <div style="font-size:12px;line-height:1.5;margin-top:3px;">
-        ${h.url ? `<a href="${esc(h.url)}" target="_blank" rel="noopener">${esc(h.title)}</a>`
-                : esc(h.title)}
-        <span style="color:var(--text-muted);">(${esc(h.press)})</span>
-      </div>`).join('');
+    const heads = iss.heads.slice(0, 3).map(headlineRow).join('');
     const kw = iss.kw.length
       ? ` <span style="font-weight:400;color:var(--frame-fg);">— ${esc(iss.kw.join('·'))}</span>` : '';
     return `<div style="padding:8px 0;border-top:1px solid var(--border);">
@@ -86,12 +118,7 @@ function rivalCard(round) {
   }
 
   const body = named.map((r) => {
-    const heads = r.heads.slice(0, 2).map((h) => `
-      <div style="font-size:12px;line-height:1.5;margin-top:3px;">
-        ${h.url ? `<a href="${esc(h.url)}" target="_blank" rel="noopener">${esc(h.title)}</a>`
-                : esc(h.title)}
-        <span style="color:var(--text-muted);">(${esc(h.press)})</span>
-      </div>`).join('');
+    const heads = r.heads.slice(0, 2).map(headlineRow).join('');
     return `<div style="padding:8px 0;border-top:1px solid var(--border);">
       <div style="font-size:12px;font-weight:600;">${esc(r.topic)} ${r.n}건</div>
       ${heads}</div>`;
@@ -108,16 +135,6 @@ function rivalCard(round) {
     ${body}${tail}`);
 }
 
-function pressCard(round) {
-  if (!round.new_press.length) return '';
-  const names = round.new_press.slice(0, 12).join(' · ');
-  const more = round.new_press.length > 12 ? ` 외 ${round.new_press.length - 12}곳` : '';
-  return card(`
-    <div style="font-size:13px;font-weight:700;margin-bottom:4px;">지난 회차엔 없던 매체 ${round.new_press.length}곳</div>
-    <div style="font-size:11px;color:var(--text-secondary);line-height:1.6;">${esc(names)}${esc(more)}</div>
-    <div style="font-size:10px;color:var(--text-muted);margin-top:5px;">늘 쓰던 곳 밖에서 들어온 보도는 새 프레임이 생기는 자리입니다.</div>`);
-}
-
 function warnCard(round) {
   if (!round.truncated.length) return '';
   return `<div class="gapbox" style="color:var(--frame-fg);background:var(--frame-bg);">
@@ -131,21 +148,35 @@ export function render(root, ctx) {
     root.innerHTML = '<div class="empty">회차가 없습니다.</div>';
     return;
   }
-  const f = round.follow;
-  const meta = `${dayLabel(round.release)} 배포 · ${esc(round.title)}`
-    + (f ? ` · 후속 ${f.cited}건` : ' · 후속 미수집');
-
   root.innerHTML = `
-        ${frameBand(round)}
     ${section(`
-      <div style="font-size:11px;color:var(--text-muted);margin:-2px 0 -2px 2px;">${meta}</div>
       ${warnCard(round)}
       ${kpis(round)}
-      ${gapCard(round)}
+      ${stanceBar(round)}
       ${coverageCard(round)}
       ${issueCard(round, ctx)}
       ${rivalCard(round)}
-      ${pressCard(round)}
     `)}`;
 
+  bindInfo(root);
+}
+
+/** i 버튼. 한 번 더 누르거나 바깥을 누르면 닫힌다 — 열어 둔 채로는 덮인 곳을 못 본다. */
+function bindInfo(root) {
+  const btn = root.querySelector('[data-info]');
+  const box = root.querySelector('#collectInfo');
+  if (!btn || !box) return;
+
+  const close = () => {
+    box.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+  };
+  btn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    const open = box.hidden;
+    box.hidden = !open;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+  root.addEventListener('click', (e) => { if (!box.contains(e.target)) close(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') close(); });
 }
