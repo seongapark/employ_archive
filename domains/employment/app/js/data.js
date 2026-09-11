@@ -309,3 +309,39 @@ export function topMovers(series, { source, period, segments, limit = 3 } = {}) 
   }
   return out;
 }
+
+// ── 지표 축 ───────────────────────────────────────────────────────────
+//
+// 2026-09 부터 경활이 취업자수 말고도 고용률·실업률·실업자 같은 총괄 지표를
+// 함께 싣는다. 아래 둘은 그 지표들을 읽는 길이고, 위쪽 조회들(isHeadcount)과
+// 일부러 갈라 둔다 — 총괄 카드와 속성별 매트릭스는 계속 취업자수만 본다.
+
+// 단위를 모르는 포맷터가 가장 위험하다. fmtLevel/fmtDelta 는 천명→만명 변환을
+// 무조건 하므로 고용률 63.3 을 넣으면 `6.3만명` 이 된다. 이 둘은 레코드가 들고
+// 있는 unit 을 보고 갈라진다.
+export function fmtValue(value, unit) {
+  if (value === null || value === undefined) return EMPTY_LABEL.unpublished;
+  return unit === '%' ? `${value.toFixed(1)}%` : fmtLevel(value);
+}
+
+// 비율의 증감은 증감량이 아니라 %p 차이다. 그리고 정확히 0 은 부호를 달지
+// 않는다 — `전년동월과 동일` 을 `+0.0%p` 라 쓰면 올랐다는 뜻으로 읽힌다.
+export function fmtChange(yoy, unit) {
+  if (yoy === null || yoy === undefined) return EMPTY_LABEL.noDelta;
+  if (unit !== '%') return fmtDelta(yoy);
+  const sign = yoy > 0 ? '+' : yoy < 0 ? '-' : '';
+  return `${sign}${Math.abs(yoy).toFixed(1)}%p`;
+}
+
+// 한 출처의 한 지표를 시간 순으로. breakdown 기본값이 'total' 이라 인구 범위
+// (scope)를 달라고 하지 않으면 15세 이상 전체가 온다.
+export function indicatorSeries(series, {
+  source, indicator, breakdown = 'total', category = null, months = null,
+} = {}) {
+  const points = series
+    .filter(r => r.source === source && r.series === indicator
+      && r.breakdown === breakdown && (r.category ?? null) === (category ?? null))
+    .sort((a, b) => a.period.localeCompare(b.period))
+    .map(r => ({ period: r.period, value: r.value, yoy: r.yoy ?? null, unit: r.unit }));
+  return months ? points.slice(-months) : points;
+}

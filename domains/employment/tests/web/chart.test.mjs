@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { barsSvg, timelineSvg, sheetTable, LABEL_W, timelinePeriods, periodAtRatio } from '../../app/js/chart.js';
+import { barsSvg, timelineSvg, sheetTable, LABEL_W, timelinePeriods, periodAtRatio, comboSvg, indexAtRatio } from '../../app/js/chart.js';
 
 // 한국어 값 라벨(`+27.7만명` 류)이 11px 기준으로 실제 차지하는 폭의 하한.
 // chart.js 의 VALUE_GUTTER 를 그대로 들여오면 여백이 좁아져도 이 테스트가
@@ -157,4 +157,80 @@ test('the marker carries a grip so it reads as draggable', () => {
   const svg = timelineSvg(TL, { width: 320, height: 160, selected: '2024-09' });
   assert.match(svg, /class="chart__marker"/);
   assert.match(svg, /class="chart__grip"/);
+});
+
+// ── 지표 그림 (수준 선 + 증감 막대) ───────────────────────────────────
+
+function pts(rows, unit = '%') {
+  return rows.map(([period, value, yoy]) => ({ period, value, yoy, unit }));
+}
+
+const SAMPLE = pts([
+  ['2026-05', 63.1, 0.2],
+  ['2026-06', 63.4, 0.0],
+  ['2026-07', 63.3, -0.1],
+  ['2026-08', 63.3, 0.5],
+]);
+
+test('the combo draws one level line and one bar per month', () => {
+  const svg = comboSvg(SAMPLE);
+  assert.equal((svg.match(/<polyline/g) || []).length, 1);
+  assert.equal((svg.match(/<rect/g) || []).length, 4);
+});
+
+test('the level line carries no area fill', () => {
+  // 막대와 같이 놓으면 음영이 어수선해진다(사용자 판단).
+  assert.equal(comboSvg(SAMPLE).includes('<polygon'), false);
+});
+
+test('bars sit on both sides of a zero line and wear the sign colours', () => {
+  const svg = comboSvg(pts([['2026-07', 63.3, -0.4], ['2026-08', 63.3, 0.4]]));
+  assert.match(svg, /class="combo__zero"/);
+  assert.ok(svg.includes('#c73e3a'), '증가는 --up');
+  assert.ok(svg.includes('#2f6bd0'), '감소는 --down');
+});
+
+test('a month with no known change draws no bar', () => {
+  // yoy 가 null 이면 `증감없음` 이지 0 이 아니다. 0 자리에 납작한 막대를
+  // 그리면 "변동 없음" 을 그린 것이 되어 없는 사실을 말한다.
+  const svg = comboSvg(pts([['2026-07', 63.3, null], ['2026-08', 63.3, 0.4]]));
+  assert.equal((svg.match(/<rect/g) || []).length, 1);
+});
+
+test('the two scales never share a band', () => {
+  // 겹쳐 그리면 눈금을 맞출 수 없어 선이 막대를 뚫고 지나가는 착시가 생긴다.
+  const svg = comboSvg(SAMPLE, { height: 100 });
+  const lineYs = svg.match(/<polyline points="([^"]+)"/)[1]
+    .split(' ').map(p => Number(p.split(',')[1]));
+  const zeroY = Number(svg.match(/class="combo__zero"[^>]*y1="([\d.]+)"/)[1]);
+  assert.ok(Math.max(...lineYs) < zeroY, `선(${Math.max(...lineYs)})이 0선(${zeroY}) 위에 있어야 한다`);
+});
+
+test('selecting a month stands a crosshair on it', () => {
+  const bare = comboSvg(SAMPLE);
+  const picked = comboSvg(SAMPLE, { selected: '2026-06' });
+  assert.equal(bare.includes('combo__cross'), false);
+  assert.match(picked, /class="combo__cross"/);
+});
+
+test('an empty series draws nothing rather than an empty box', () => {
+  assert.equal(comboSvg([]), '');
+});
+
+test('indexAtRatio maps the touch across the plot to a month', () => {
+  assert.equal(indexAtRatio(SAMPLE, 0), 0);
+  assert.equal(indexAtRatio(SAMPLE, 1), 3);
+  assert.equal(indexAtRatio(SAMPLE, 0.5), 2);
+});
+
+test('indexAtRatio clamps a finger that slid off the edge', () => {
+  assert.equal(indexAtRatio(SAMPLE, -3), 0);
+  assert.equal(indexAtRatio(SAMPLE, 9), 3);
+  assert.equal(indexAtRatio([], 0.5), null);
+});
+
+test('a flat series still draws a line instead of dividing by zero', () => {
+  const svg = comboSvg(pts([['2026-07', 63.3, 0], ['2026-08', 63.3, 0]]));
+  assert.match(svg, /<polyline points="[\d., ]+"/);
+  assert.equal(svg.includes('NaN'), false);
 });
