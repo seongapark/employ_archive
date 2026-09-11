@@ -27,7 +27,17 @@
     "고용행정"
    ]
   },
-  "follow": null,
+  "follow": {
+   "collected": 79,
+   "kept": 19,
+   "cited": 9,
+   "press": 9,
+   "window": [
+    "2026-09-08",
+    "2026-09-22"
+   ],
+   "at": "2026-09-11 19:06"
+  },
   "coverage": {
    "section": [
     {
@@ -145,12 +155,12 @@
    }
   ],
   "stance": {
-   "pos": 0,
-   "neg": 0,
-   "neu": 0,
-   "judged": 0,
+   "pos": 27,
+   "neg": 12,
+   "neu": 34,
+   "judged": 73,
    "total": 73,
-   "label": "판정 없음"
+   "label": "긍정 우세"
   },
   "issues": [
    {
@@ -335,32 +345,56 @@
   ],
   "rivals": [
    {
+    "topic": "구직급여",
+    "n": 3,
+    "heads": [
+     {
+      "title": "\"일 그만둬도 실업급여?\"…예산 빠진 '청년 자발적 이직급여' 난항",
+      "url": "https://view.asiae.co.kr/article/2026090710470173106",
+      "press": "아시아경제",
+      "why": "청년 구직급여 제도"
+     },
+     {
+      "title": "8년 다닌 회사에서 잘렸다, 구직급여 신청하고 깨달은 것 [신필규의 아...",
+      "url": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003264631&CMPT_CD=P0010&utm_source=naver&utm_medium=newsearch&utm_campaign=naver_news",
+      "press": "ohmynews.com",
+      "why": "개인 구직급여 수기"
+     },
+     {
+      "title": "실업급여 받은 날 첫 출근한 직장인…180만원대 환수 통보",
+      "url": "https://lawtalknews.co.kr/article/DG4C0HI3GS3P",
+      "press": "lawtalknews.co.kr",
+      "why": "실업급여 환수 사례"
+     }
+    ]
+   },
+   {
     "topic": "그 밖",
-    "n": 8,
+    "n": 5,
     "heads": [
      {
       "title": "변호사, 법률 사무원, 변리사… AI 시대서 버틸 수 있을까 [서베이 행간...",
       "url": "https://www.thescoop.co.kr/news/articleView.html?idxno=311502",
       "press": "thescoop.co.kr",
-      "why": "AI 노출도 서베이 분석, 다른 조사"
+      "why": "AI 노출 직무 조사"
      },
      {
       "title": "육아휴직 급여 상한 250만원 인상안 국회 환노위 심의",
       "url": "https://www.gokorea.kr/news/articleView.html?idxno=877384",
       "press": "gokorea.kr",
-      "why": "육아휴직 급여 국회 심의"
+      "why": "육아휴직 급여 법안"
      },
      {
       "title": "전환기 복지국가와 노동 : 좋은 일자리에서 가치 있는 활동까지",
       "url": "http://news.inochong.org/detail.php?number=6573&thread=22r06",
       "press": "news.inochong.org",
-      "why": "복지국가·노동 담론 칼럼"
+      "why": "복지국가 노동 논의"
      },
      {
-      "title": "\"일 그만둬도 실업급여?\"…예산 빠진 '청년 자발적 이직급여' 난항",
-      "url": "https://view.asiae.co.kr/article/2026090710470173106",
-      "press": "아시아경제",
-      "why": "청년 자발적 이직급여 제도화 논의"
+      "title": "[연합뉴스 이 시각 헤드라인] - 14:30",
+      "url": "https://www.yna.co.kr/view/AKR20260907097900011?input=1195m",
+      "press": "연합뉴스",
+      "why": "헤드라인 모음 기사"
      }
     ]
    }
@@ -453,13 +487,13 @@
      "n": 2
     },
     {
-     "id": "자동차",
-     "axis": "산업",
+     "id": "주력산업",
+     "axis": "밖",
      "n": 2
     },
     {
-     "id": "주력산업",
-     "axis": "밖",
+     "id": "자동차",
+     "axis": "산업",
      "n": 2
     }
    ],
@@ -740,14 +774,79 @@
      2
     ],
     [
-     17,
      18,
+     17,
      2
     ]
    ],
    "trimmed": 1
   },
-  "frames": [],
+  "frames": [
+   {
+    "kw": "반등",
+    "d0": 16,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "호황",
+    "d0": 8,
+    "later": 1,
+    "first": "2026-09-08",
+    "last": "2026-09-08",
+    "state": "유지"
+   },
+   {
+    "kw": "푸드",
+    "d0": 8,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "역주행",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "호조",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "감소세",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "온도차",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "주력산업",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   }
+  ],
   "truncated": [],
   "unjudged": 0,
   "judged": true
@@ -760,7 +859,7 @@
   "regular": {
    "collected": 79,
    "kept": 74,
-   "cited": 60,
+   "cited": 59,
    "press": 52,
    "window": [
     "2026-08-10",
@@ -783,8 +882,8 @@
   "follow": {
    "collected": 257,
    "kept": 69,
-   "cited": 30,
-   "press": 23,
+   "cited": 31,
+   "press": 24,
    "window": [
     "2026-08-11",
     "2026-08-25"
@@ -936,12 +1035,12 @@
    }
   ],
   "stance": {
-   "pos": 0,
-   "neg": 0,
-   "neu": 0,
-   "judged": 0,
-   "total": 60,
-   "label": "판정 없음"
+   "pos": 6,
+   "neg": 43,
+   "neu": 10,
+   "judged": 59,
+   "total": 59,
+   "label": "부정 우세"
   },
   "issues": [
    {
@@ -1020,12 +1119,11 @@
    },
    {
     "key": "전체 가입자",
-    "n": 7,
+    "n": 6,
     "kw": [
      "최대",
      "고용노동부",
-     "견인",
-     "문제"
+     "견인"
     ],
     "heads": [
      {
@@ -1142,55 +1240,85 @@
   "rivals": [
    {
     "topic": "구직급여",
-    "n": 11,
+    "n": 8,
     "heads": [
      {
       "title": "1년도 안 돼 짐싸는 청년들…자발적 실업급여 역효과 우려",
       "url": "https://www.newsis.com/view/NISX20260809_0003741882",
       "press": "뉴시스",
-      "why": "청년 자발적 실업급여 제도 개편 논쟁"
+      "why": "청년 실업급여 개편"
      },
      {
       "title": "“수당처럼 인식할라”… 청년 자발적 실업급여 추진 시끌",
       "url": "https://www.kmib.co.kr/article/view.asp?arcid=0030228338&code=61121111&cp=nv",
       "press": "국민일보",
-      "why": "청년 자발적 실업급여 추진 논란"
+      "why": "청년 실업급여 논란"
      },
      {
       "title": "“못 타먹으면 바보”20대 초반 80%가 1년 미만 퇴사…실업급여 확대의...",
       "url": "https://www.munhwa.com/article/11608292?ref=naver",
       "press": "문화일보",
-      "why": "실업급여 확대 정책 비판 기사"
+      "why": "실업급여 확대 우려"
      },
      {
       "title": "[전인미답] '쉬었음 청년' 양산하는 구직급여 개정안",
       "url": "https://www.lcnews.co.kr/news/articleView.html?idxno=206246",
       "press": "lcnews.co.kr",
-      "why": "구직급여 개정안 칼럼"
+      "why": "구직급여 개정안 비판"
+     }
+    ]
+   },
+   {
+    "topic": "청년",
+    "n": 3,
+    "heads": [
+     {
+      "title": "‘실업급여 준다는데…’ 청년 자진퇴사 3명 중 2명, 1년도 못 채웠다",
+      "url": "https://www.segye.com/newsView/20260810506050?OutUrl=naver",
+      "press": "세계일보",
+      "why": "청년 자진퇴사 급여"
+     },
+     {
+      "title": "자진퇴사 청년도 실업급여?...입사 1년 못 채우는 청년 66% 지원 논쟁 확...",
+      "url": "https://www.m-economynews.com/news/article.html?no=69576",
+      "press": "m-economynews.com",
+      "why": "청년 자진퇴사 지원"
+     },
+     {
+      "title": "“1년도 못 채웠다” 청년 자진퇴사 66.5%… 실업급여 확대 ‘딜레마’",
+      "url": "https://www.jibs.co.kr/news/articles/articlesDetail/64361?feed=na",
+      "press": "jibs.co.kr",
+      "why": "청년 자진퇴사·급여 확대"
      }
     ]
    },
    {
     "topic": "그 밖",
-    "n": 3,
+    "n": 4,
     "heads": [
      {
       "title": "野, 황희 '폐버스 하우스' 맹공…\"민주당사부터 폐버스로 옮겨라\"",
       "url": "https://www.news1.kr/politics/assembly/6254132",
       "press": "뉴스1",
-      "why": "정치 공방 기사"
+      "why": "정치권 정책 공방"
      },
      {
       "title": "[연합뉴스 이 시각 헤드라인] - 14:30",
       "url": "https://www.yna.co.kr/view/AKR20260810088900011?input=1195m",
       "press": "연합뉴스",
-      "why": "여러 기사 묶은 헤드라인 모음"
+      "why": "이 시각 헤드라인 모음"
      },
      {
       "title": "[업앤다운]보험 업종 희비 엇갈려…현대해상↑·삼성화재↓",
       "url": "https://www.nspna.com/news/?mode=view&newsid=823702",
       "press": "nspna.com",
-      "why": "증시 업종 등락 기사, 헤드라인만 병기"
+      "why": "보험주 등락 기사"
+     },
+     {
+      "title": "[왈가왈부] 황희 “버스하우스, 깊이 사과”…부동산 문제, 더 신중해야...",
+      "url": "https://www.sedaily.com/article/20077735?ref=naver",
+      "press": "서울경제",
+      "why": "여러 이슈 단신 모음"
      }
     ]
    }
@@ -1781,8 +1909,8 @@
   "follow": {
    "collected": 252,
    "kept": 27,
-   "cited": 7,
-   "press": 7,
+   "cited": 9,
+   "press": 9,
    "window": [
     "2026-07-14",
     "2026-07-28"
@@ -1894,12 +2022,12 @@
    }
   ],
   "stance": {
-   "pos": 0,
-   "neg": 0,
-   "neu": 0,
-   "judged": 0,
+   "pos": 3,
+   "neg": 16,
+   "neu": 26,
+   "judged": 45,
    "total": 45,
-   "label": "판정 없음"
+   "label": "부정 우세"
   },
   "issues": [
    {
@@ -2127,56 +2255,56 @@
   ],
   "rivals": [
    {
-    "topic": "개편",
+    "topic": "고용보험",
     "n": 2,
     "heads": [
      {
       "title": "[사설]고용보험 소득 기준 전환, 기금 재정 개선 선행돼야",
       "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=01384166645514192",
       "press": "이데일리",
-      "why": "고용보험 소득기준 개편 사설"
+      "why": "고용보험 제도개편 사설"
      },
      {
-      "title": "신혼부부 주담대 소득기준 한시 완화… 청년일자리 20만개 창출",
-      "url": "https://www.sedaily.com/article/20067251?ref=naver",
-      "press": "서울경제",
-      "why": "정부 청년일자리·제도 개편 대책"
+      "title": "전 국민 고용보험 시대 열린다",
+      "url": "https://www.hidomin.com/news/articleView.html?idxno=713112",
+      "press": "hidomin.com",
+      "why": "고용보험 확대 논의"
      }
     ]
    },
    {
-    "topic": "기업",
+    "topic": "보험료",
     "n": 2,
     "heads": [
      {
-      "title": "[경제소식] 교보생명, 제42회 꿈나무체육대회 개막",
-      "url": "http://www.4th.kr/news/articleView.html?idxno=2114655",
-      "press": "4th.kr",
-      "why": "기업 홍보성 경제소식 모음"
+      "title": "퇴직 후 발견된 건강보험료ㆍ고용보험료, 누가 부담해야 하는가",
+      "url": "http://www.worklaw.co.kr/view/view.asp?accessSite=Naver&accessMethod=Search&accessMenu=News&in_cate=106&in_cate2=0&gopage=1&bi_pidx=39317",
+      "press": "orklaw.co.kr",
+      "why": "보험료 부담 법률상담"
      },
      {
       "title": "하나증권, 연금자산 일임 서비스 '1Q 스마트 개인연금 랩' 출시 外",
       "url": "https://www.rcast.co.kr/news/articleView.html?idxno=31250",
       "press": "rcast.co.kr",
-      "why": "증권사 연금상품 등 기업 소식"
+      "why": "금융상품·보험료 납부"
      }
     ]
    },
    {
-    "topic": "노동회의소",
+    "topic": "정부",
     "n": 2,
     "heads": [
      {
-      "title": "정부, 'K-노동회의소' 만든다…'플랫폼·프리랜서' 지원 추진",
-      "url": "https://www.newsis.com/view/NISX20260713_0003707441",
-      "press": "뉴시스",
-      "why": "K-노동회의소 정책 발표 기사"
+      "title": "\"3대 메가 프로젝트 최우선 재정 투입⋯재정 혁신으로 투자 여력 확보\"",
+      "url": "https://www.etoday.co.kr/news/view/2603182",
+      "press": "이투데이",
+      "why": "정부 재정·정책 추진"
      },
      {
-      "title": "김영훈 노동부 장관, ‘K-노동회의소’ 제안…플랫폼 노동자 보호 강화",
-      "url": "https://www.viva100.com/article/20260713501289",
-      "press": "viva100.com",
-      "why": "장관 K-노동회의소 제안 기사"
+      "title": "신혼부부 주담대 소득기준 한시 완화… 청년일자리 20만개 창출",
+      "url": "https://www.sedaily.com/article/20067251?ref=naver",
+      "press": "서울경제",
+      "why": "정부 청년일자리 대책"
      }
     ]
    },
@@ -2185,28 +2313,28 @@
     "n": 5,
     "heads": [
      {
-      "title": "퇴직 후 발견된 건강보험료ㆍ고용보험료, 누가 부담해야 하는가",
-      "url": "http://www.worklaw.co.kr/view/view.asp?accessSite=Naver&accessMethod=Search&accessMenu=News&in_cate=106&in_cate2=0&gopage=1&bi_pidx=39317",
-      "press": "orklaw.co.kr",
-      "why": "보험료 부담 주체 법률 해설"
-     },
-     {
       "title": "伊, 협동조합 중심 '디지털 연대'로 DX·AX 성공 스토리 쓰다",
       "url": "http://www.kbiznews.co.kr/news/articleView.html?idxno=114504",
       "press": "kbiznews.co.kr",
-      "why": "이탈리아 협동조합 사례"
+      "why": "협동조합 DX 사례"
+     },
+     {
+      "title": "[경제소식] 교보생명, 제42회 꿈나무체육대회 개막",
+      "url": "http://www.4th.kr/news/articleView.html?idxno=2114655",
+      "press": "4th.kr",
+      "why": "경제 단신 모음 기사"
      },
      {
       "title": "고용둔화 창원 전기장비·김해양산 금속가공 근로자에 지원금",
       "url": "https://www.yna.co.kr/view/AKR20260713104500052?input=1195m",
       "press": "연합뉴스",
-      "why": "지자체 고용위기 지원금 사업 기사"
+      "why": "지역 고용둔화 지원금"
      },
      {
-      "title": "\"3대 메가 프로젝트 최우선 재정 투입⋯재정 혁신으로 투자 여력 확보\"",
-      "url": "https://www.etoday.co.kr/news/view/2603182",
-      "press": "이투데이",
-      "why": "정부 재정운용·부처 업무계획 기사"
+      "title": "김영훈 노동부 장관, ‘K-노동회의소’ 제안…플랫폼 노동자 보호 강화",
+      "url": "https://www.viva100.com/article/20260713501289",
+      "press": "viva100.com",
+      "why": "플랫폼 노동자 보호책"
      }
     ]
    }
@@ -2274,13 +2402,13 @@
      "n": 2
     },
     {
-     "id": "여전히",
-     "axis": "밖",
+     "id": "한파",
+     "axis": "논조",
      "n": 2
     },
     {
-     "id": "한파",
-     "axis": "논조",
+     "id": "여전히",
+     "axis": "밖",
      "n": 2
     }
    ],
@@ -2377,22 +2505,22 @@
     ],
     [
      0,
-     12,
+     13,
      2
     ],
     [
      0,
-     13,
-     2
-    ],
-    [
      12,
+     2
+    ],
+    [
+     13,
      2,
      2
     ],
     [
      2,
-     13,
+     12,
      2
     ],
     [
