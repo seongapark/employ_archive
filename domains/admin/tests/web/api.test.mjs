@@ -57,13 +57,21 @@ test('성공하면 통계를 그대로 준다', async () => {
   assert.equal(받은.opt.headers.authorization, 'Bearer secret');
 });
 
-// 토큰 검사 뒤, fetch 를 부르기 전에 미배포() 가 가로챈다는 것 자체를 확인한다 —
-// url 을 안 넘기면 기본값이 자리표시자이므로, 이 검사가 없으면 admin.js 가
-// 실제 배포 전에 "서버에 연결하지 못했다" 를 잘못 보여줄 것이다(Step 8 참고).
-test('기본 url(자리표시자)이면 fetch 없이 미배포다', async () => {
+// 토큰 검사 뒤, fetch 를 부르기 전에 미배포() 가 가로챈다는 것 자체를 확인한다.
+// 이 순서가 깨지면 배포가 안 끝난 상태가 "서버에 연결하지 못했다" 로 잘못 보인다 —
+// ask 도메인에서 실제로 겪은 혼동이다.
+//
+// **자리표시자 URL 을 명시적으로 넘긴다.** 예전에는 `url` 을 생략해 기본 상수(`API`)가
+// 자리표시자라는 데 기댔는데, 2026-09-12 배포로 그 상수가 실제 주소가 되면서 이 테스트가
+// 저 혼자 빨개졌다. 전제를 코드 바깥(배포 상태)에 두면 테스트가 배포 한 번에 무너진다.
+test('자리표시자 url 이면 fetch 없이 미배포다', async () => {
   const store = 저장소({ 'ea:token': 'secret' });
   let 불렀나 = false;
-  const r = await 불러오기(30, { fetch: async () => { 불렀나 = true; }, store });
+  const r = await 불러오기(30, {
+    fetch: async () => { 불렀나 = true; },
+    store,
+    url: 'https://REPLACE-AFTER-DEPLOY.workers.dev/api/stats',
+  });
   assert.equal(r.상태, '미배포');
   assert.equal(불렀나, false);
 });

@@ -4,7 +4,7 @@
 // **불변식 하나: 통계가 화면을 못 건드린다.** 모든 경로가 try/catch 안에서 끝나고,
 // 실패해도 다시 시도하지 않는다. 저장소가 막힌 브라우저에서도 던지지 않는다.
 
-export const ENDPOINT = 'https://REPLACE-AFTER-DEPLOY.workers.dev/api/hit';
+export const ENDPOINT = 'https://employ-archive-metrics.seongapark92.workers.dev/api/hit';
 
 // 숫자를 품은 세그먼트는 값으로 본다. 라우트 이름(overview, industry, sex)에는
 // 숫자가 없고 값(산업코드, 연도, 보고서 id)에는 있다 — 이 비대칭이 근거다.

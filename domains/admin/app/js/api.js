@@ -1,6 +1,6 @@
 // 워커와 말하는 곳. 배포 뒤 아래 주소를 실제 workers.dev 주소로 바꾼다
 // (domains/admin/DEPLOY.md). core/track.js 의 ENDPOINT 도 같이 바꿔야 한다.
-export const API = 'https://REPLACE-AFTER-DEPLOY.workers.dev/api/stats';
+export const API = 'https://employ-archive-metrics.seongapark92.workers.dev/api/stats';
 
 const 키 = 'ea:token';
 const 제외키 = 'ea:off';

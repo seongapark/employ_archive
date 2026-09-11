@@ -8,7 +8,7 @@
   "main": "./src/index.mjs",
   "compatibility_date": "2026-09-11",
   "d1_databases": [
-    { "binding": "DB", "database_name": "employ-archive-metrics", "database_id": "REPLACE-AFTER-D1-CREATE" }
+    { "binding": "DB", "database_name": "employ-archive-metrics", "database_id": "80714071-5731-4b59-9cec-ad6814488521" }
   ],
   "vars": {
     "ALLOWED_ORIGIN": "https://seongapark.github.io"
