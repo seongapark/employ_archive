@@ -34,6 +34,7 @@ export function 도메인HTML(s) {
         <span class="dom__dot" style="background:var(--dom-${esc(d.도메인)})"></span>
         <span class="dom__name">${esc(이름[d.도메인] ?? d.도메인)}</span>
         <span class="dom__visitors num">${수(d.방문자)}</span>
+        ${'직전방문자' in d ? 델타(d.방문자, d.직전방문자) : ''}
       </div>
       <div class="dom__bar"><i style="width:${퍼센트(d.조회, 전체)}%;
         background:var(--dom-${esc(d.도메인)})"></i></div>
@@ -83,6 +84,18 @@ export function 분포HTML(s) {
           <td class="rows__num num">${수(x.방문자)}</td></tr>`).join('')}</table>`
         : 없음(제목)}</div>`;
   }).join('');
+}
+
+// 제외 스위치와 토큰 지우기. 정상 화면과 오류 화면(미배포·연결실패) 둘 다에서
+// 쓴다 — 오류 화면이라고 이 둘이 사라지면, 토큰을 잘못 넣은 채로 오류 화면에
+// 갇혔을 때 잠금 화면으로 돌아갈 길이 없어 localStorage 를 손으로 지워야 한다
+// (design §7.4: "지금 켜져 있는지를 화면이 보여 준다").
+export function 도구HTML(제외켜짐) {
+  return `<div class="tools">
+    <label class="toggle"><input id="off" type="checkbox"${제외켜짐 ? ' checked' : ''}>
+      내 방문을 통계에서 뺀다</label>
+    <button id="logout" class="toggle__btn" type="button">토큰 지우기</button>
+  </div>`;
 }
 
 export function 잠금HTML() {

@@ -64,6 +64,11 @@ export function 질의목록(창) {
     목록.push({ 키: '직전', sql: `SELECT COUNT(DISTINCT visitor) 방문자,
         COUNT(DISTINCT session) 세션, COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2`,
       params: [창.직전시작, 창.직전끝] });
+    // 전체 증감만으로는 "어느 도메인이 늘었나"에 답을 못 한다(design §1·§7.2) —
+    // 그 판단을 받쳐 주는 숫자라 도메인별로도 직전 기간을 물어 둔다.
+    목록.push({ 키: '직전도메인', sql: `SELECT domain 도메인,
+        COUNT(DISTINCT visitor) 방문자 FROM hit WHERE day BETWEEN ?1 AND ?2 GROUP BY domain`,
+      params: [창.직전시작, 창.직전끝] });
   }
   return 목록;
 }
@@ -74,6 +79,16 @@ export function 조립(창, r) {
   const 요약 = r.요약?.[0] ?? {};
   const 신규 = r.신규?.[0] ?? {};
   const 직전 = r.직전?.[0] ?? null;
+
+  // 직전 기간이 없으면(전 기간, days=0) 도메인마다 필드 자체를 안 붙인다 —
+  // "직전이 없다"와 "직전이 0이다"는 다른 사실이고, 0 으로 채우면 그 둘이
+  // 뭉개져 델타()가 거짓으로 "-100%"를 그리게 된다.
+  const 직전도메인맵 = r.직전도메인
+    ? new Map(r.직전도메인.map((row) => [row.도메인, 수(row.방문자)]))
+    : null;
+  const 도메인 = (r.도메인 ?? []).map((d) => (
+    직전도메인맵 ? { ...d, 직전방문자: 직전도메인맵.get(d.도메인) ?? 0 } : d
+  ));
 
   // 일별은 (날짜, 도메인) 쌍으로 오므로 날짜로 접는다. 그날 0 인 도메인은 아예
   // 행이 없다 — 화면이 0 으로 채운다.
@@ -99,7 +114,7 @@ export function 조립(창, r) {
       신규: 수(신규.신규), 재방문: 수(신규.재방문),
     },
     직전: 직전 ? { 방문자: 수(직전.방문자), 세션: 수(직전.세션), 조회: 수(직전.조회) } : null,
-    도메인: r.도메인 ?? [],
+    도메인,
     일별: [...날짜별.values()],
     화면: r.화면 ?? [],
     유입: { 종류: r.유입종류 ?? [], 호스트: r.유입호스트 ?? [] },

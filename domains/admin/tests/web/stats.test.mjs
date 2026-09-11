@@ -58,6 +58,26 @@ test('도메인별은 방문자 내림차순이다', async () => {
   assert.equal(s.도메인[0].조회, 2);
 });
 
+// design §6.2·§7.2 — 도메인 카드는 전체 증감만으로는 "어느 도메인이 늘었나"에
+// 답을 못 한다. employment 는 8/20(직전 기간)에도 방문이 있었으니 직전방문자가
+// 나오고, forecast 는 직전 기간에 없었으니 0 이 나와야 한다(필드 자체가 없는
+// 것과는 다르다 — 아래 전 기간 테스트가 그 구분을 잡는다).
+test('도메인별 직전 방문자가 나온다', async () => {
+  const { db } = await 채운DB();
+  const s = await 통계(db, 30, '2026-09-30');
+  const 맵 = Object.fromEntries(s.도메인.map((d) => [d.도메인, d.직전방문자]));
+  assert.equal(맵.employment, 1);
+  assert.equal(맵.forecast, 0);
+});
+
+// 전 기간(days=0)에는 직전이 없다 — 0 으로 채우면 "직전이 없다"와 "직전이
+// 0이다"가 뭉개져 델타()가 거짓으로 -100%를 그린다. 그래서 필드 자체를 뺀다.
+test('전 기간에는 도메인 카드에 직전방문자가 없다', async () => {
+  const { db } = await 채운DB();
+  const s = await 통계(db, 0, '2026-09-30');
+  for (const d of s.도메인) assert.equal('직전방문자' in d, false, d.도메인);
+});
+
 // 설계 §6.3 — 프로토타입으로 재현한 결함이다. 세션 내부 이동은 referrer 가 같은
 // 사이트라 direct 로 기록되므로, 모든 줄을 세면 구글로 들어온 세션 하나가
 // search 에도 direct 에도 잡혀 합이 실제 세션 수를 넘는다.
