@@ -125,8 +125,15 @@ const 통계요청 = (token, qs = '?days=30') =>
     headers: token ? { origin: ORIGIN, authorization: `Bearer ${token}` } : { origin: ORIGIN },
   });
 
+// 끝에 공백을 붙인 토큰('secret ')은 여기 없다 — WHATWG Headers 가 값의 앞뒤
+// 공백을 정규화해서 버리므로 그런 값은 애초에 서버에 도달하지 않는다(직접 확인:
+// `{ authorization: 'Bearer secret ' }` 로 만든 Request 의 headers.get() 이 이미
+// "Bearer secret"). 브라우저도 Workers 도 같은 명세라 실제 클라이언트가 이 값을
+// 보내는 시나리오 자체가 성립하지 않는다 — 다시 넣지 마라.
 test('토큰이 없거나 틀리면 401 이고 숫자가 한 톨도 안 나간다', async () => {
-  for (const t of [null, '', 'wrong', 'secret ', 'SECRET']) {
+  // 'secretx' 는 올바른 토큰을 접두사로 품은 더 긴 값이다 — 누가 비교를
+  // startsWith 로 바꾸는 사고를 잡는다.
+  for (const t of [null, '', 'wrong', 'secretx', 'SECRET']) {
     const { env } = 환경();
     const res = await worker.fetch(통계요청(t), env);
     assert.equal(res.status, 401, String(t));
@@ -148,7 +155,7 @@ test('맞는 토큰이면 집계를 낸다', async () => {
 test('days 를 허용 목록으로 접는다', async () => {
   const { env } = 환경();
   for (const [qs, 일수] of [['?days=7', 7], ['?days=0', 0], ['', 30],
-    ['?days=-5', 30], ['?days=abc', 30], ['?days=9999', 30]]) {
+    ['?days=-5', 30], ['?days=abc', 30], ['?days=9999', 30], ['?days=', 30]]) {
     const res = await worker.fetch(통계요청('secret', qs), env);
     assert.equal((await res.json()).기간.일수, 일수, qs);
   }

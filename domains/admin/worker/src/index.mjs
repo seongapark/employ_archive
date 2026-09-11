@@ -46,11 +46,13 @@ function 같은토큰(a, b) {
 }
 
 // 허용 목록으로 접는다 — 음수나 NaN 이 그대로 들어가면 창 계산이 뒤집힌다.
-// v 가 없을 때(파라미터를 아예 안 줬을 때) 를 먼저 가려야 한다 — 안 그러면
-// Number(null) 이 0 이 되어 "생략" 이 "전 기간(days=0)" 과 같아져 버린다.
+//
+// **숫자 모양인지 먼저 본다.** `Number(null)` 도 `Number('')` 도 0 인데 0 은
+// 허용 목록의 유효값(전 기간)이라, 그냥 Number() 로 접으면 days 를 아예 안 보낸
+// 요청과 `?days=` 빈 값이 전 기간으로 잘못 해석된다.
 const 허용일수 = new Set([0, 7, 30, 90]);
 const 일수읽기 = (v) => {
-  if (v === null) return 30;
+  if (typeof v !== 'string' || !/^\d+$/.test(v)) return 30;
   const n = Number(v);
   return 허용일수.has(n) ? n : 30;
 };
