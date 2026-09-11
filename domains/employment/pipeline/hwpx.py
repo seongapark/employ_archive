@@ -53,16 +53,42 @@ def _cell_text(el) -> str:
     return re.sub(r"\s+", " ", " ".join(paragraphs)).strip()
 
 
-def tables(data: bytes) -> list[list[list[str]]]:
+def _payloads(data: bytes) -> list[bytes]:
+    """섹션 XML 을 번호순으로. 섹션이 여러 개일 수 있다 — 경활 보도자료는
+    section0~2 이고 본문 표도 요약 상자도 section2 에 있다(section0 은 표지다).
+    문자열 정렬은 section10 을 section2 앞에 놓으므로 번호로 정렬한다."""
     with zipfile.ZipFile(io.BytesIO(data)) as z:
-        # 섹션이 여러 개일 수 있다. 경활 보도자료는 section0~2 이고 본문 표가
-        # section2 에 있다 — section0 만 읽으면 표지만 나온다.
-        # 번호로 정렬한다. 문자열 정렬은 section10 을 section2 앞에 놓는다.
         sections = sorted(
             (int(m.group(1)), n)
             for n in z.namelist() if (m := _SECTION.match(n))
         )
-        payloads = [z.read(n) for _, n in sections]
+        return [z.read(n) for _, n in sections]
+
+
+def paragraphs(data: bytes) -> list[str]:
+    """문서의 문단 텍스트를 나온 순서대로.
+
+    표 안의 문단도 그대로 내놓는다 — 세 출처의 요약 상자가 모두 표 셀이다.
+    대신 표를 품은 바깥 문단은 _iter_own 덕에 셀 텍스트를 가져가지 않는다.
+    그러지 않으면 같은 줄이 두 번 나온다: 한 번은 줄 단위로, 한 번은 상자
+    전체가 통째로 이어붙은 채로.
+
+    한 문단의 조각(t)은 공백 없이 잇는다. 굵게 칠한 숫자 때문에 문단이
+    쪼개지므로, 띄어서 이으면 `27만 8천명` 이 `27 만 8 천명` 이 된다.
+    """
+    out: list[str] = []
+    for payload in _payloads(data):
+        root = ET.fromstring(payload)
+        for p in (e for e in root.iter() if _local(e.tag) == "p"):
+            text = "".join(t.text or "" for t in _iter_own(p, "t"))
+            text = re.sub(r"\s+", " ", text).strip()
+            if text:
+                out.append(text)
+    return out
+
+
+def tables(data: bytes) -> list[list[list[str]]]:
+    payloads = _payloads(data)
 
     out: list[list[list[str]]] = []
     for payload in payloads:

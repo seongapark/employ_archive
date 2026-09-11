@@ -112,6 +112,9 @@ export function overviewCards(series, sources, period, releases = {}) {
       releaseUrl: found ? found.url : meta.board_url,
       releaseTitle: found ? (found.title || null) : null,
       attachments: found ? (found.attachments || []) : [],
+      // 보도자료 원문에서 그대로 뽑아 온 요약 줄. 아직 못 읽은 달은 빈 배열이고,
+      // 화면은 그걸 `아직 없습니다` 로 말한다 — 비슷한 문장을 지어내지 않는다.
+      summaryLines: (found && found.summary && found.summary.lines) || [],
     };
     if (here) {
       // 레코드가 있다고 곧 'value' 가 아니다. yoy 가 null 이면 noDelta 다 —
@@ -267,4 +270,35 @@ export function sheetData(series, {
   const timeline = categoryTimeline(series, { breakdown, category, months });
   const all = Object.values(timeline).flat().map(p => p.period).sort();
   return { snapshot, timeline, latest: all.length ? all[all.length - 1] : period };
+}
+
+// 한 출처가 그달 어디서 가장 크게 움직였나. 보도자료 화면에서 요약 아래에 붙는다.
+//
+// 매트릭스(breakdownMatrix)와 달리 **한 출처만** 보고, 세 출처를 나란히 놓지
+// 않는다. 여기서 비교하려 들면 속성별 화면을 한 번 더 만드는 셈이 된다.
+//
+// `provided` 가 false 인 속성은 통째로 뺀다. 사업체노동력조사에는 성·연령이
+// 아예 없는데, 빈 칸으로 그리면 `변동 없음` 처럼 읽힌다. yoy 가 null 인 칸도
+// 같은 이유로 순위에서 뺀다 — `증감없음` 은 0 이 아니다.
+export function topMovers(series, { source, period, segments, limit = 3 } = {}) {
+  const out = [];
+  for (const segment of segments || []) {
+    const rows = [];
+    for (const category of segment.categories || []) {
+      if (category.provided && category.provided[source] === false) continue;
+      const record = series.find(r => r.source === source && r.period === period
+        && r.breakdown === segment.breakdown && r.category === category.code);
+      if (!record || record.yoy === null || record.yoy === undefined) continue;
+      rows.push({
+        code: category.code, name_ko: category.name_ko,
+        short_ko: category.short_ko || null, value: record.value, yoy: record.yoy,
+      });
+    }
+    rows.sort((a, b) => Math.abs(b.yoy) - Math.abs(a.yoy));
+    if (rows.length) {
+      out.push({ breakdown: segment.breakdown, name_ko: segment.name_ko,
+                 rows: rows.slice(0, limit) });
+    }
+  }
+  return out;
 }

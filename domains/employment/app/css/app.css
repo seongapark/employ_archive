@@ -666,3 +666,125 @@
 .note + .note {
   margin-top: 8px;
 }
+
+/* 보도자료 화면 (#/r/…)
+   ─────────────────────────────────────────────────────────────────────
+   총괄 카드를 눌러 들어가는 총괄의 아래층이다. 세그먼트바에서는 총괄이
+   켜진 채로 남으므로, 돌아가는 길은 이 화면 맨 위의 되돌아가기 줄이 맡는다. */
+
+.card__open {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.card__chev {
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+/* 카드 전체가 눌린다(위임 핸들러). 손가락에는 보이지 않으므로 커서로만 알린다. */
+.cards .card:has(.card__open) {
+  cursor: pointer;
+}
+
+.backlink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  /* 탭 표적 44px. 왼쪽 여백은 카드와 같은 16px 이라 글자 시작선이 맞는다. */
+  min-height: 44px;
+  padding: 0 16px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.section__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  margin: 0 0 8px 0;
+}
+
+.digest {
+  padding: 8px 16px 4px 16px;
+}
+
+/* 원문의 층을 들여쓰기로만 옮긴다. 글머리표(□ ○ ▣)는 줄 안에 이미 있으므로
+   <ul> 로 감싸면 점이 두 개가 된다. */
+.digest__line {
+  margin: 0 0 6px 0;
+  font-size: 13px;
+  line-height: 1.55;
+  color: var(--text);
+  /* 줄이 넘칠 때 둘째 줄이 글머리표 아래로 들어가지 않게 한다. */
+  padding-left: 1.1em;
+  text-indent: -1.1em;
+}
+
+.digest__line[data-depth="2"] { margin-left: 12px; color: var(--text-secondary); }
+.digest__line[data-depth="3"] { margin-left: 12px; font-size: 12px; color: var(--text-muted); }
+
+.digest__empty {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.digest__note {
+  margin: 10px 0 0 0;
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.movers {
+  padding: 16px 16px 8px 16px;
+}
+
+.movers__group + .movers__group {
+  margin-top: 14px;
+}
+
+.movers__title {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin: 0 0 4px 0;
+}
+
+.movers__rows {
+  display: flex;
+  flex-direction: column;
+}
+
+.mover {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-height: 40px;
+  padding: 0 2px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+  text-decoration: none;
+  font-size: 13px;
+}
+
+.movers__group .mover:last-child { border-bottom: 0; }
+
+.mover__delta {
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.mover__delta.is-up { color: var(--up); }
+.mover__delta.is-down { color: var(--down); }
+.mover__delta.is-flat { color: var(--text-secondary); }
+
+.movers__note {
+  margin: 10px 0 0 0;
+  font-size: 11px;
+  color: var(--text-muted);
+}

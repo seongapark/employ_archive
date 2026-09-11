@@ -35,7 +35,7 @@ function deltaRow(card) {
   return `<div class="card__delta num ${deltaTone(card.yoy)}">${esc(fmtDelta(card.yoy))} <span class="card__deltaNote">전년동월대비</span></div>`;
 }
 
-function cardHtml(card) {
+export function cardHtml(card, { linked = true } = {}) {
   // 잠정/확정 배지를 그리지 않는다(스펙 5장·상위 7.5 는 이걸 요구했다).
   //
   // 세 수집기 어디에도 status 를 넘기는 곳이 없어 2,082개 레코드가 전부 기본값
@@ -48,7 +48,15 @@ function cardHtml(card) {
   //
   // 되살리려면 배지를 다시 그리기 전에 수집기가 원문에서 잠정/확정을 읽어
   // status 로 넘겨야 한다. 레코드의 status 필드는 그때를 위해 남겨 둔다.
-  const head = `<div class="card__head"><span class="card__name">${esc(card.name_ko)}</span>
+  // 카드 전체가 보도자료 화면으로 가는 문이다. 다만 카드를 통째로 <a> 로 감쌀
+  // 수는 없다 — 안에 보도자료·KOSIS·첨부 링크가 이미 있고, 링크 안의 링크는
+  // 없는 문법이다(브라우저가 바깥 <a> 를 잘라 카드가 조각난다).
+  // 그래서 **이름만 진짜 링크**로 두고(키보드·스크린리더가 지나는 길) 카드
+  // 전체의 탭은 render() 의 위임 핸들러가 받는다.
+  const name = linked
+    ? `<a class="card__name card__open" href="#/r/${esc(card.code)}">${esc(card.name_ko)}<span class="card__chev" aria-hidden="true">›</span></a>`
+    : `<span class="card__name">${esc(card.name_ko)}</span>`;
+  const head = `<div class="card__head">${name}
     <span class="card__meta num">${esc(releaseLabel(card))}</span></div>`;
 
   const body = card.state === 'unpublished'
@@ -77,7 +85,17 @@ function cardHtml(card) {
 
 export function render(el, ctx) {
   const cards = overviewCards(ctx.series, ctx.sources, ctx.state.period, ctx.releases);
-  el.innerHTML = switcherHtml(ctx) + `<div class="cards">${cards.map(cardHtml).join('')}</div>`;
+  el.innerHTML = switcherHtml(ctx)
+    + `<div class="cards">${cards.map(card => cardHtml(card)).join('')}</div>`;
 
   bindSwitcher(el, ctx);
+
+  // 카드 어디를 눌러도 보도자료 화면으로 간다. 안쪽 링크(보도자료·KOSIS·첨부)를
+  // 누른 것이면 비켜 준다 — 첨부 받기는 총괄에 그대로 두기로 했으므로, 이 한 줄이
+  // 없으면 파일을 받으려던 손가락이 화면 전환에 먹힌다.
+  el.querySelector('.cards')?.addEventListener('click', e => {
+    if (e.target.closest('a')) return;
+    const card = e.target.closest('.card');
+    if (card && card.dataset.source) location.hash = `#/r/${card.dataset.source}`;
+  });
 }
