@@ -490,5 +490,11 @@
   "sizes": {
     "reports_gzip": 192861,
     "abstracts_gzip": 1893936
+  },
+  "recommend": {
+    "judged": 20,
+    "picked": 3,
+    "profile_version": "535603ab",
+    "title_only": 9
   }
 }
