@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { originOf, monthOptions, overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData, EMPTY_LABEL, emptyLabel } from '../../app/js/data.js';
+import { originOf, monthOptions, overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData, topMovers, EMPTY_LABEL, emptyLabel } from '../../app/js/data.js';
 
 function rec(over = {}) {
   return {
@@ -269,4 +269,72 @@ test('a card knows whether its number came from KOSIS or a press release', () =>
   assert.equal(july.origin, 'press');
   assert.equal(originOf({ release_url: 'https://kosis.kr/x' }), 'kosis');
   assert.equal(originOf({}), 'press');
+});
+
+// ── 보도자료 요약 / 속성별 상위 ─────────────────────────────────────────
+
+const MOVER_SEGMENTS = [
+  { breakdown: 'industry', name_ko: '산업별', categories: [
+    { code: 'C', name_ko: '제조업', short_ko: '제조' },
+    { code: 'F', name_ko: '건설업', short_ko: '건설' },
+    { code: 'Q', name_ko: '보건업 및 사회복지 서비스업', short_ko: '보건복지' },
+    { code: 'G', name_ko: '도매 및 소매업', short_ko: '도소매' },
+  ] },
+  { breakdown: 'age', name_ko: '연령별', categories: [
+    { code: '15-29', name_ko: '29세 이하', provided: { eaps: true, est: false, ei: true } },
+    { code: '60+', name_ko: '60세 이상', provided: { eaps: true, est: false, ei: true } },
+  ] },
+];
+
+test('overviewCards carries the summary lines the collector read from the release', () => {
+  const series = [rec({ period: '2026-07' })];
+  const releases = { eaps: { '2026-07': {
+    url: 'https://mods.go.kr/post', title: '2026년 7월 고용동향', attachments: [],
+    summary: { lines: ['□ 취업자는 2,915만 1천명으로 전년동월대비 18만 4천명 증가'] },
+  } } };
+  const card = overviewCards(series, SOURCES, '2026-07', releases)[0];
+  assert.deepEqual(card.summaryLines,
+    ['□ 취업자는 2,915만 1천명으로 전년동월대비 18만 4천명 증가']);
+});
+
+test('a month with no summary yet gets an empty list, never a made-up line', () => {
+  const series = [rec({ period: '2026-07' })];
+  const withNone = { eaps: { '2026-07': { url: 'u', attachments: [] } } };
+  assert.deepEqual(overviewCards(series, SOURCES, '2026-07', withNone)[0].summaryLines, []);
+  assert.deepEqual(overviewCards(series, SOURCES, '2026-07', {})[0].summaryLines, []);
+});
+
+test('topMovers ranks categories by how far they moved, biggest first', () => {
+  const series = [
+    rec({ source: 'eaps', breakdown: 'industry', category: 'C', yoy: -68.0 }),
+    rec({ source: 'eaps', breakdown: 'industry', category: 'F', yoy: -12.0 }),
+    rec({ source: 'eaps', breakdown: 'industry', category: 'Q', yoy: 112.0 }),
+    rec({ source: 'eaps', breakdown: 'industry', category: 'G', yoy: 3.0 }),
+  ];
+  const [industry] = topMovers(series, { source: 'eaps', period: '2026-07', segments: MOVER_SEGMENTS });
+  assert.equal(industry.name_ko, '산업별');
+  assert.deepEqual(industry.rows.map(r => r.code), ['Q', 'C', 'F']);
+  assert.equal(industry.rows[0].yoy, 112.0);
+});
+
+test('topMovers leaves out attributes the source does not provide', () => {
+  // 사업체노동력조사는 성·연령이 아예 없다. 빈 칸을 그리면 '0명 변동' 으로 읽힌다.
+  const series = [rec({ source: 'est', breakdown: 'industry', category: 'C', yoy: 2.0 })];
+  const got = topMovers(series, { source: 'est', period: '2026-07', segments: MOVER_SEGMENTS });
+  assert.deepEqual(got.map(g => g.breakdown), ['industry']);
+});
+
+test('topMovers ignores records whose change is unknown', () => {
+  // yoy 가 null 이면 `증감없음` 이지 0 이 아니다 — 순위에 끼면 0 처럼 정렬된다.
+  const series = [
+    rec({ source: 'eaps', breakdown: 'industry', category: 'C', yoy: null }),
+    rec({ source: 'eaps', breakdown: 'industry', category: 'F', yoy: -12.0 }),
+  ];
+  const [industry] = topMovers(series, { source: 'eaps', period: '2026-07', segments: MOVER_SEGMENTS });
+  assert.deepEqual(industry.rows.map(r => r.code), ['F']);
+});
+
+test('topMovers returns nothing for a month the source never published', () => {
+  const series = [rec({ source: 'eaps', breakdown: 'industry', category: 'C', period: '2026-06' })];
+  assert.deepEqual(topMovers(series, { source: 'eaps', period: '2026-07', segments: MOVER_SEGMENTS }), []);
 });

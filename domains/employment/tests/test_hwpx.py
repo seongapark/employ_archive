@@ -97,3 +97,50 @@ def test_paragraphs_in_a_cell_are_separated(data):
     # 구분자 없이 이으면 "(044-202-7256)(044-202-7247)…" 처럼 뭉쳐 값이 깨진다
     joined = " ".join(" ".join(" ".join(r) for r in t) for t in hwpx.tables(data))
     assert "(044-202-7256) (044-202-7247) (044-202-7287) (044-202-7255)" in joined
+
+
+def test_paragraphs_read_every_section_in_order():
+    # 요약 블록은 문서마다 다른 섹션에 있다(경활은 section2, 사업체는 section1).
+    # 한 섹션만 읽으면 그 출처의 요약을 통째로 놓친다.
+    def section(*texts):
+        body = "".join(f"<hp:p><hp:t>{t}</hp:t></hp:p>" for t in texts)
+        return (
+            '<?xml version="1.0" encoding="UTF-8"?>'
+            '<hs:sec xmlns:hs="http://www.hancom.co.kr/hwpml/2011/section"'
+            ' xmlns:hp="http://www.hancom.co.kr/hwpml/2011/paragraph">'
+            f"{body}</hs:sec>"
+        ).encode("utf-8")
+
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        z.writestr("Contents/section0.xml", section("표지", "목차"))
+        z.writestr("Contents/section1.xml", section("요약"))
+    assert hwpx.paragraphs(buf.getvalue()) == ["표지", "목차", "요약"]
+
+
+def test_paragraph_holding_a_table_does_not_absorb_its_text():
+    # 요약 박스는 표 셀 안에 있다. 표를 품은 바깥 문단이 .iter() 로 셀 텍스트까지
+    # 긁으면 같은 줄이 두 번 나온다 — 한 번은 통째로 이어붙은 채로.
+    payload = (
+        '<?xml version="1.0" encoding="UTF-8"?>'
+        '<hs:sec xmlns:hs="http://www.hancom.co.kr/hwpml/2011/section"'
+        ' xmlns:hp="http://www.hancom.co.kr/hwpml/2011/paragraph">'
+        '<hp:p><hp:tbl><hp:tr><hp:tc>'
+        '<hp:p><hp:t>□ 첫째 줄</hp:t></hp:p>'
+        '<hp:p><hp:t>○ 둘째 줄</hp:t></hp:p>'
+        '</hp:tc></hp:tr></hp:tbl></hp:p>'
+        '</hs:sec>'
+    ).encode("utf-8")
+
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, "w") as z:
+        z.writestr("Contents/section0.xml", payload)
+    assert hwpx.paragraphs(buf.getvalue()) == ["□ 첫째 줄", "○ 둘째 줄"]
+
+
+def test_paragraph_text_joins_styled_runs_without_spaces(data):
+    # 굵게 칠한 숫자 때문에 한 문단이 여러 t 로 쪼개진다. 공백으로 이으면
+    # "27만 8천명" 이 "27 만 8 천명" 이 된다.
+    lines = hwpx.paragraphs(data)
+    assert any("고용보험 상시가입자수" in line for line in lines)
+    assert not any("  " in line for line in lines)

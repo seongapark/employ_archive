@@ -1,24 +1,13 @@
 import { render as overview } from './screens/overview.js';
 import { render as breakdown } from './screens/breakdown.js';
 import { render as sources } from './screens/sources.js';
+import { render as release } from './screens/release.js';
 import { mountSheet } from './sheet.js';
 import { monthOptions } from './data.js';
 import { loadJson } from '../core/shell.js';
+import { parseRoute } from './route.js';
 
-const screens = { overview, breakdown, sources };
-
-export function parseRoute(hash) {
-  const h = (hash || '').replace(/^#/, '') || '/';
-  if (h === '/' || h === '') return { name: 'overview', params: {} };
-  if (h === '/sources') return { name: 'sources', params: {} };
-  const m = h.match(/^\/b\/(industry|sex|age)(?:\/(.+))?$/);
-  if (m) {
-    let category = null;
-    if (m[2]) { try { category = decodeURIComponent(m[2]); } catch { category = null; } }
-    return { name: 'breakdown', params: { breakdown: m[1], category } };
-  }
-  return { name: 'overview', params: {} };
-}
+const screens = { overview, breakdown, sources, release };
 
 async function boot() {
   const screenEl = document.getElementById('screen');
@@ -58,7 +47,7 @@ async function boot() {
     // 두고 카드가 게시판 목록으로 떨어진다.
     releases: releases || {},
     months,
-    state: { period: months.latest, breakdown: null, category: null },
+    state: { period: months.latest, breakdown: null, category: null, releaseCode: null },
     rerender: () => route(),
   };
 
@@ -71,8 +60,11 @@ async function boot() {
     const parsed = parseRoute(location.hash);
     ctx.state.breakdown = parsed.name === 'breakdown' ? parsed.params.breakdown : null;
     ctx.state.category = parsed.name === 'breakdown' ? parsed.params.category : null;
+    ctx.state.releaseCode = parsed.name === 'release' ? parsed.params.code : null;
+    // 활성 탭은 화면 이름이 아니라 parsed.segment 로 고른다 — 보도자료 화면은
+    // 총괄의 아래층이라 거기 있는 동안 총괄 탭이 켜져 있어야 한다.
     segmentsEl.querySelectorAll('.segment').forEach(el => {
-      el.classList.toggle('segment--active', el.dataset.route === parsed.name);
+      el.classList.toggle('segment--active', el.dataset.route === parsed.segment);
     });
     screenEl.innerHTML = '';
     (screens[parsed.name] || overview)(screenEl, ctx);

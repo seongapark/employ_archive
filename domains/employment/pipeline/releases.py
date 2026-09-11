@@ -23,6 +23,8 @@ from typing import Callable
 
 import requests
 
+from . import summary
+
 # 제목의 연·월. 경활은 `26년 7월 고용동향` 처럼 두 자리 연도를 쓰기도 한다.
 _TITLE_PERIOD = re.compile(r"(\d{2,4})\s*년\s*(\d{1,2})\s*월")
 _COMMENT = re.compile(r"<!--.*?-->", re.S)
@@ -205,6 +207,19 @@ BOARDS = {
 # 출처라서 며칠에 걸쳐 채워져도 화면이 틀리지 않는다(그동안 그 달은 게시판 목록으로 간다).
 MAX_DETAILS_PER_RUN = 12
 
+# 요약은 회차마다 1.5MB 짜리 hwpx 를 받아야 나온다.
+#
+# 두 숫자가 서로 다른 일을 한다. **창(MONTHS)** 은 "어느 달까지 요약을 둘 것인가"
+# 이고, **상한(PER_RUN)** 은 "한 번에 몇 개까지 받을 것인가" 다. 상한만 두면
+# 최신월을 채운 다음 실행부터 한 달씩 과거로 내려가 결국 있는 달을 다 받는다 —
+# `최근 한 달만 해 보고 늘린다` 는 결정(2026-09-11 사용자 판단)이 며칠 만에
+# 저절로 뒤집히는 셈이다. 그래서 창을 따로 둔다.
+#
+# 화면에서 결과를 보고 **MONTHS 만 올리면** 과거로 넓어진다. 그때는 상한이
+# 하루치 분량을 정하므로, 늘린 달들이 며칠에 걸쳐 채워진다.
+SUMMARY_MONTHS = 1
+MAX_SUMMARIES_PER_RUN = 1
+
 
 def _get(url: str, params: dict, *, tries: int = 3, timeout: int = 60) -> str | None:
     """실패해도 예외를 올리지 않는다. 색인은 있으면 좋은 것이지 수집의 전제가
@@ -262,20 +277,93 @@ def fill_attachments(index: dict, source: str, *,
     return out, filled
 
 
+def _hwpx_url(post: dict) -> str | None:
+    for att in post.get("attachments") or []:
+        if att.get("type") == "hwpx":
+            return att.get("url")
+    return None
+
+
+def missing_summaries(index: dict, source: str,
+                      months: int = SUMMARY_MONTHS) -> list[str]:
+    """요약을 아직 못 읽은 달. hwpx 가 없는 달은 애초에 대상이 아니다.
+
+    창은 **색인에 있는 달**의 최신 `months` 개로 잰다. 이미 읽은 달을 빼고
+    세면 창이 한 칸씩 과거로 기어간다 — 최신월을 읽자마자 그 전 달이 창 안으로
+    들어와, 창이 1이어도 날마다 한 달씩 내려간다.
+    """
+    slot = index.get(source, {})
+    window = sorted(slot)[-months:] if months else []
+    return sorted(p for p in window
+                  if "summary" not in slot[p] and _hwpx_url(slot[p]))
+
+
+def _fetch_file(url: str, *, tries: int = 2, timeout: int = 120) -> bytes | None:
+    for attempt in range(tries):
+        try:
+            res = requests.get(url, headers=HEADERS, timeout=timeout)
+            if res.ok and res.content:
+                return res.content
+        except Exception:
+            pass
+        time.sleep(2 * (attempt + 1))
+    return None
+
+
+def fill_summaries(index: dict, source: str, *,
+                   limit: int = MAX_SUMMARIES_PER_RUN,
+                   months: int = SUMMARY_MONTHS,
+                   fetch: Callable = _fetch_file) -> tuple[dict, int]:
+    """최신월부터 hwpx 를 받아 보도자료 요약을 색인에 적는다.
+
+    한 줄도 못 뽑았으면 **빈 요약을 적어 둔다**. 안 적으면 그 달이 매 실행마다
+    상한을 잡아먹어 뒤의 달이 영영 안 채워진다. 화면은 빈 요약을 "아직 없습니다"
+    로 다루고, 실행 요약이 몇 건이 비었는지 알린다.
+
+    받기에 실패한 달은 건드리지 않는다 — 그건 원문 형식 문제가 아니라 네트워크
+    문제이고, 다음 실행에서 다시 시도하는 게 맞다.
+    """
+    out = {k: dict(v) for k, v in index.items()}
+    slot = dict(out.get(source, {}))
+    filled = 0
+    for period in missing_summaries(index, source, months)[::-1]:   # 최신월부터
+        if filled >= limit:
+            break
+        data = fetch(_hwpx_url(slot[period]))
+        if data is None:
+            continue
+        slot[period] = {**slot[period],
+                        "summary": {"lines": summary.from_hwpx(source, data)}}
+        filled += 1
+    out[source] = slot
+    return out, filled
+
+
 def refresh(existing: dict, *, get: Callable = _get,
-            limit: int = MAX_DETAILS_PER_RUN) -> tuple[dict, dict]:
+            limit: int = MAX_DETAILS_PER_RUN,
+            fetch_file: Callable = _fetch_file,
+            summary_limit: int = MAX_SUMMARIES_PER_RUN,
+            summary_months: int = SUMMARY_MONTHS) -> tuple[dict, dict]:
     """색인 한 바퀴. (새 색인, 출처별 요약) 을 돌려준다."""
     index = {k: dict(v) for k, v in (existing or {}).items()}
-    summary: dict[str, dict] = {}
+    report: dict[str, dict] = {}
     for source in BOARDS:
         before = len(index.get(source, {}))
         found = fetch_list(source, get=get)
         index = merge(index, source, found)
         index, filled = fill_attachments(index, source, limit=limit, get=get)
-        summary[source] = {
+        index, summarised = fill_summaries(index, source, limit=summary_limit,
+                                           months=summary_months, fetch=fetch_file)
+        report[source] = {
             "months": len(index.get(source, {})),
             "added": len(index.get(source, {})) - before,
             "attachments_filled": filled,
             "pending": len(missing_attachments(index, source)),
+            "summaries_filled": summarised,
+            # 요약을 읽어는 봤지만 한 줄도 못 뽑은 달. 늘어나면 원문 형식이 바뀐 것이다.
+            "summaries_empty": sum(
+                1 for v in index.get(source, {}).values()
+                if not (v.get("summary") or {}).get("lines", True)),
+            "summaries_pending": len(missing_summaries(index, source, summary_months)),
         }
-    return index, summary
+    return index, report
