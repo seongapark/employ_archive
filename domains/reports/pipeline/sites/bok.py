@@ -78,10 +78,20 @@ _FILE = re.compile(r'<a href="(/fileSrc/[^"]+)"')
 _SOURCE_NOTE = re.compile(
     r'^\s*\*?\s*본 내용은.*?확인 가능합니다\s*\.?', re.S)
 _ATTACH_ONLY = re.compile(r'첨부파일')
+# _SOURCE_NOTE 를 걷어내도 그 뒤에 탐색 경로 한 줄이 남는 회차가 있다
+# ("한국은행 홈페이지 > 조사·연구 > 간행물 > ..."). 원문 내용이 아니라 CMS 가
+# 붙인 내비게이션인데, 이슈분석·심층연구 21건 전부에 달려 초록 맨 앞을
+# 차지한다 — 검색 색인과 추천 판정 프롬프트가 이 줄부터 읽어 '간행물'·
+# '경제전망보고서' 같은 엉뚱한 단어로 오염된다. 맨 앞 줄에서만 지운다(본문
+# 중간에 같은 문구가 인용되면 그건 원문이라 건드리면 안 된다). 회차마다
+# 자간이 벌어지기도 해서("경제 전망보 고서") 경로 끝 모양에 기대지 않고
+# 줄 끝까지 통째로 지운다.
+_LEADING_NAV = re.compile(r'^한국은행 홈페이지[^\n]*>[^\n]*\n?')
 
 
 def _strip_source_note(text: str) -> str:
-    return _SOURCE_NOTE.sub('', text or '').strip()
+    text = _SOURCE_NOTE.sub('', text or '').strip()
+    return _LEADING_NAV.sub('', text).strip()
 
 
 def _body_text(html: str) -> str:

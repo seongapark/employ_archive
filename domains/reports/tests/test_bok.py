@@ -139,3 +139,7 @@ def test_the_source_note_is_stripped_from_a_real_issue_paper():
     assert not rec.abstract.startswith('본 내용은')
     assert '확인 가능합니다' not in rec.abstract[:200]
     assert len(rec.abstract) > 500
+    # 안내문 뒤에 남는 탐색 경로 한 줄("한국은행 홈페이지 > ...")도 내용이
+    # 아니라 CMS 내비게이션이라 초록 맨 앞에서 지워져야 한다.
+    assert not rec.abstract.startswith('한국은행 홈페이지')
+    assert '>' not in rec.abstract[:80]
