@@ -111,8 +111,31 @@ def test_the_attachment_url_is_the_stable_one_not_the_expiring_cdn():
     assert 'token=' not in rec.file_url
 
 
+def test_an_abstract_board_that_only_says_see_the_attachment_records_no_abstract():
+    # 안내문만 든 회차를 초록으로 세면 결측률이 거짓으로 내려간다.
+    item = {'native_id': '999002', 'title': 'ㄱ',
+            'detail_url': 'https://www.bok.or.kr/portal/bbs/B0000357/view.do?nttId=999002',
+            'published_raw': '2025.02.17', 'dept': ''}
+    b = board(id='bok-x', menu_no='201127', body='abstract')
+    rec = bok.parse_detail(_detail('bok_detail_industry.html'), item, b)
+    assert rec.abstract is None
+    assert rec.abstract_note == '요약 없음'
+
+
 def test_the_source_note_prefix_is_stripped_from_an_issue_abstract():
     body = ('* 본 내용은 2026년 5월 경제전망보고서 에 수록된 <중장기 심층연구> 입니다.\n'
             '경 제 전 망 보 고 서 전문 은 아래의 경로에서 확인 가능합니다.\n'
             '실제 초록 문장이 여기서 시작한다. ' + '가' * 300)
     assert bok._strip_source_note(body).startswith('실제 초록 문장이')
+
+
+def test_the_source_note_is_stripped_from_a_real_issue_paper():
+    item = {'native_id': '999003', 'title': 'ㄱ',
+            'detail_url': 'https://www.bok.or.kr/portal/bbs/B0000368/view.do?nttId=999003',
+            'published_raw': '2026.06.04', 'dept': ''}
+    b = board(id='bok-issue', menu_no='201140', body='abstract')
+    rec = bok.parse_detail(_detail('bok_detail_issue.html'), item, b)
+    assert rec.abstract
+    assert not rec.abstract.startswith('본 내용은')
+    assert '확인 가능합니다' not in rec.abstract[:200]
+    assert len(rec.abstract) > 500
