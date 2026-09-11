@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { originOf, monthOptions, overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData, topMovers, EMPTY_LABEL, emptyLabel } from '../../app/js/data.js';
+import { originOf, monthOptions, overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData, topMovers, totalRow, indicatorSeries, fmtValue, fmtChange, EMPTY_LABEL, emptyLabel } from '../../app/js/data.js';
 
 function rec(over = {}) {
   return {
@@ -337,4 +337,133 @@ test('topMovers ignores records whose change is unknown', () => {
 test('topMovers returns nothing for a month the source never published', () => {
   const series = [rec({ source: 'eaps', breakdown: 'industry', category: 'C', period: '2026-06' })];
   assert.deepEqual(topMovers(series, { source: 'eaps', period: '2026-07', segments: MOVER_SEGMENTS }), []);
+});
+
+// ── 지표 축이 생긴 뒤: 기존 조회는 취업자수만 본다 ────────────────────
+//
+// series.json 에 고용률·실업률이 같이 들어오면서 생긴 문제다. 아래 조회들은
+// 오래도록 `series` 를 안 보고 살았고, 그래서 breakdown='total' 인 고용률
+// 레코드를 취업자수 자리에서 집어 총괄 카드에 63.3 을 그릴 수 있었다.
+
+const RATE = rec({ series: 'employment_rate', unit: '%', value: 63.3, yoy: 0.0 });
+
+test('overviewCards reads the headcount, not whatever record comes first', () => {
+  const series = [RATE, rec({ value: 29151.0, yoy: 184.0 })];
+  const card = overviewCards(series, SOURCES, '2026-07', {})[0];
+  assert.equal(card.value, 29151.0);
+  assert.equal(card.yoy, 184.0);
+});
+
+test('overviewCards treats a month with only rates as unpublished', () => {
+  // 취업자수가 없으면 없는 것이다. 고용률이 있다고 카드가 채워지면 안 된다.
+  const card = overviewCards([RATE], SOURCES, '2026-07', {})[0];
+  assert.equal(card.state, 'unpublished');
+});
+
+test('totalRow reads the headcount', () => {
+  const series = [RATE, rec({ value: 29151.0, yoy: 184.0 })];
+  assert.equal(totalRow(series, '2026-07').cells.eaps.value, 29151.0);
+});
+
+test('breakdownMatrix reads the headcount', () => {
+  const series = [
+    rec({ breakdown: 'industry', category: 'C', series: 'employment_rate', unit: '%', yoy: 0.3 }),
+    rec({ breakdown: 'industry', category: 'C', yoy: -68.0 }),
+  ];
+  const rows = breakdownMatrix(series, [{ code: 'C', name_ko: '제조업' }], '2026-07',
+    { breakdown: 'industry' });
+  assert.equal(rows[0].cells.eaps.yoy, -68.0);
+});
+
+test('categoryTimeline reads the headcount', () => {
+  const series = [RATE, rec({ value: 29151.0 })];
+  assert.deepEqual(categoryTimeline(series).eaps.map(p => p.value), [29151.0]);
+});
+
+test('topMovers reads the headcount', () => {
+  const series = [
+    rec({ breakdown: 'industry', category: 'C', series: 'employment_rate', unit: '%', yoy: 9.9 }),
+    rec({ breakdown: 'industry', category: 'C', yoy: -68.0 }),
+  ];
+  const [industry] = topMovers(series, { source: 'eaps', period: '2026-07', segments: MOVER_SEGMENTS });
+  assert.deepEqual(industry.rows.map(r => r.yoy), [-68.0]);
+});
+
+test('the scope axis never reaches the attribute matrix', () => {
+  // 15~64세는 연령 구간들을 가로지른다. 속성별 조회에 새면 이중 계상이 된다.
+  const series = [
+    rec({ breakdown: 'scope', category: '15-64', series: 'employment_rate', unit: '%', yoy: 0.5 }),
+    rec({ value: 29151.0, yoy: 184.0 }),
+  ];
+  assert.equal(totalRow(series, '2026-07').cells.eaps.value, 29151.0);
+  const groups = topMovers(series, { source: 'eaps', period: '2026-07', segments: MOVER_SEGMENTS });
+  assert.deepEqual(groups, []);
+});
+
+// ── 지표 조회와 단위별 표기 ───────────────────────────────────────────
+
+test('fmtValue follows the unit, not a guess', () => {
+  // 천명 규칙을 비율에 적용하면 고용률 63.3 이 `6.3만명` 이 된다.
+  assert.equal(fmtValue(29151.0, '천명'), '2,915.1만명');
+  assert.equal(fmtValue(63.3, '%'), '63.3%');
+});
+
+test('a rate changes by percentage points, not by headcount', () => {
+  assert.equal(fmtChange(184.0, '천명'), '+18.4만명');
+  assert.equal(fmtChange(0.5, '%'), '+0.5%p');
+  assert.equal(fmtChange(-1.0, '%'), '-1.0%p');
+});
+
+test('a change of exactly zero carries no sign', () => {
+  // 실업률 `전년동월과 동일` 을 `+0.0%p` 라 쓰면 올랐다는 뜻으로 읽힌다.
+  assert.equal(fmtChange(0, '%'), '0.0%p');
+  assert.equal(deltaTone(0), 'is-flat');
+});
+
+test('an unknown change says so instead of printing zero', () => {
+  assert.equal(fmtChange(null, '%'), EMPTY_LABEL.noDelta);
+  assert.equal(fmtChange(undefined, '천명'), EMPTY_LABEL.noDelta);
+});
+
+test('indicatorSeries returns one indicator in time order', () => {
+  const series = [
+    rec({ period: '2026-07', series: 'employment_rate', unit: '%', value: 63.3, yoy: -0.1 }),
+    rec({ period: '2026-05', series: 'employment_rate', unit: '%', value: 63.1, yoy: 0.2 }),
+    rec({ period: '2026-06', series: 'employment_rate', unit: '%', value: 63.4, yoy: 0.0 }),
+    rec({ period: '2026-06', series: 'unemployment_rate', unit: '%', value: 2.8 }),
+    rec({ period: '2026-06', source: 'ei', series: 'employment_rate', unit: '%', value: 99.9 }),
+  ];
+  const got = indicatorSeries(series, { source: 'eaps', indicator: 'employment_rate' });
+  assert.deepEqual(got.map(p => p.period), ['2026-05', '2026-06', '2026-07']);
+  assert.deepEqual(got.map(p => p.value), [63.1, 63.4, 63.3]);
+  assert.equal(got[0].unit, '%');
+});
+
+test('indicatorSeries keeps the scope apart from the whole population', () => {
+  const series = [
+    rec({ period: '2026-08', series: 'employment_rate', unit: '%', value: 63.3 }),
+    rec({ period: '2026-08', series: 'employment_rate', unit: '%', value: 70.4,
+          breakdown: 'scope', category: '15-64' }),
+  ];
+  assert.deepEqual(
+    indicatorSeries(series, { source: 'eaps', indicator: 'employment_rate' }).map(p => p.value),
+    [63.3]);
+  assert.deepEqual(
+    indicatorSeries(series, { source: 'eaps', indicator: 'employment_rate',
+                              breakdown: 'scope', category: '15-64' }).map(p => p.value),
+    [70.4]);
+});
+
+test('indicatorSeries takes only the most recent months asked for', () => {
+  const series = ['2026-05', '2026-06', '2026-07'].map(period =>
+    rec({ period, series: 'employment_rate', unit: '%', value: 60 }));
+  assert.deepEqual(
+    indicatorSeries(series, { source: 'eaps', indicator: 'employment_rate', months: 2 })
+      .map(p => p.period),
+    ['2026-06', '2026-07']);
+});
+
+test('indicatorSeries is empty when the source never published the indicator', () => {
+  const series = [rec({ value: 29151.0 })];
+  assert.deepEqual(indicatorSeries(series, { source: 'est', indicator: 'employment_rate' }), []);
 });

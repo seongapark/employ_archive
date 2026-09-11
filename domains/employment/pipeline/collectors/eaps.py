@@ -249,8 +249,152 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
 
 def collect(today: date) -> list[SeriesRecord]:
     title, released_at, view_url, data, attachments = latest_issue()
+    now = datetime.now(KST)
     records = parse(data, released_at=released_at, release_url=view_url,
-                    attachments=attachments, collected_at=datetime.now(KST))
+                    attachments=attachments, collected_at=now)
+    # 두 검사는 취업자수 계열을 두고 쓰인 것이다. 총괄 지표를 섞은 뒤에 돌리면
+    # `있어야 할 산업 21개` 같은 셈이 어긋난다 — 그래서 먼저 돌리고 뒤에 얹는다.
     check_coverage(records)
     check_freshness(records, today)
+    return records + parse_totals(data, released_at=released_at, release_url=view_url,
+                                  attachments=attachments, collected_at=now)
+
+
+# ── 총괄 지표 (1.전체 · 1564 · 1529) ──────────────────────────────────────
+#
+# 세 시트의 레이아웃이 완전히 같다 — 인구·경제활동인구·취업자·실업자·비경활·
+# 참가율·고용률·실업률 여덟 열이고, 증감 시트도 같은 배치다. 그래서 파서 하나가
+# (범위, 수준시트, 증감시트) 셋을 돌면 끝난다.
+#
+# 열은 **위치가 아니라 이름으로** 찾는다. 위치로 집으면 국가데이터처가 열을
+# 하나 끼워 넣는 날 고용률 자리에서 실업률을 읽고도 아무 일 없이 지나간다.
+
+TOTAL_SCOPES = (
+    # (breakdown, category, 수준 시트, 증감 시트)
+    ("total", None, "1.전체", "1.전체증감"),
+    ("scope", "15-64", "1564", "1564증감"),
+    ("scope", "15-29", "1529", "1529증감"),
+)
+
+# 비율은 unit 이 %, 그 yoy 는 증감량이 아니라 %p 차이다.
+TOTAL_UNITS = {
+    "population": "천명", "labor_force": "천명", "headcount": "천명",
+    "unemployed": "천명", "inactive": "천명",
+    "participation_rate": "%", "employment_rate": "%", "unemployment_rate": "%",
+}
+
+
+def total_series_of(label: str) -> str | None:
+    """열 이름 → 지표. 순서가 중요하다 — `비경제활동인구` 는 `경제활동인구` 를
+    품고 있고, 증감 시트의 실업률 열에는 단위 주석이 통째로 붙어 있다
+    (`(단위:전년대비,천명)실업률(%p)`)."""
+    if "참가율" in label:
+        return "participation_rate"
+    if "고용률" in label:
+        return "employment_rate"
+    if "실업률" in label:
+        return "unemployment_rate"
+    if label == "실업자":
+        return "unemployed"
+    if label == "비경제활동인구":
+        return "inactive"
+    if label == "경제활동인구":
+        return "labor_force"
+    if label == "취업자":
+        return "headcount"
+    if label in ("15세이상인구", "인구"):
+        return "population"
+    return None
+
+
+def _totals_sheet(data: bytes, sheet: str) -> dict[str, dict[str, float]]:
+    """{기간: {지표: 값}}. 여덟 지표가 다 안 잡히면 형식이 바뀐 것이므로 멈춘다."""
+    rows = xlsx.read_sheet(data, sheet)
+    labels = _header_labels(rows)
+    picked = {col: s for col, label in labels.items()
+              if (s := total_series_of(label)) is not None}
+    missing = set(TOTAL_UNITS) - set(picked.values())
+    if missing:
+        raise ValueError(f"{sheet} 에서 못 찾은 지표: {sorted(missing)} (열: {labels})")
+
+    out: dict[str, dict[str, float]] = {}
+    for period, row in month_rows(rows):
+        bucket = out.setdefault(period, {})
+        for col, series in picked.items():
+            if col >= len(row):
+                continue
+            raw = (row[col] or "").replace(",", "").strip()
+            if not raw:
+                continue
+            try:
+                bucket[series] = round(float(raw), 1)
+            except ValueError:
+                continue
+    return out
+
+
+def contiguous_tail(periods) -> list[str]:
+    """끝에서부터 한 달씩 이어지는 구간만.
+
+    회차마다 앞쪽 몇 행은 연도별 8월이라 띄엄띄엄하다(2021-08, 2022-08, …).
+    그대로 시계열로 그리면 2년 간격이 한 칸으로 붙어 급변한 것처럼 보인다.
+    """
+    ordered = sorted(periods)
+    if not ordered:
+        return []
+    run = [ordered[-1]]
+    for period in reversed(ordered[:-1]):
+        year, month = int(run[0][:4]), int(run[0][5:7]) - 1
+        if month < 1:
+            year, month = year - 1, 12
+        if period != f"{year}-{month:02d}":
+            break
+        run.insert(0, period)
+    return run
+
+
+def total_headcount_matches(data: bytes) -> bool:
+    """`1.전체` 와 `3.산업(신)` 이 같은 취업자수를 말하는가.
+
+    어긋나면 두 시트를 섞어 쓰고 있다는 뜻이고, 화면의 카드와 지표가 서로 다른
+    숫자를 말하게 된다. 그래서 총괄 지표에서는 전체 취업자수를 다시 내지 않고
+    (산업 시트가 주인이다) 대신 이걸로 확인한다.
+    """
+    totals = _totals_sheet(data, "1.전체")
+    industry = _collect_sheets(data, LEVEL_SHEETS)
+    shared = set(totals) & set(industry)
+    return bool(shared) and all(
+        totals[p].get("headcount") == industry[p].get(TOTAL_COLUMN) for p in shared)
+
+
+def parse_totals(data: bytes, *, released_at: date, release_url: str,
+                 attachments: list[Attachment],
+                 collected_at: datetime) -> list[SeriesRecord]:
+    """경제활동인구조사 총괄 지표. 취업자수 계열(parse)과 겹치지 않는다."""
+    # 교차 확인은 적어만 두면 소용없다. 어긋난 채로 통과시키면 카드는 산업
+    # 시트의 취업자수를, 지표는 총괄 시트의 숫자를 말하게 되고 둘이 다른데도
+    # 화면은 아무 말을 하지 않는다.
+    if not total_headcount_matches(data):
+        raise ValueError("`1.전체` 와 `3.산업(신)` 의 취업자수가 어긋난다")
+
+    records: list[SeriesRecord] = []
+    for breakdown, category, level_sheet, delta_sheet in TOTAL_SCOPES:
+        levels = _totals_sheet(data, level_sheet)
+        deltas = _totals_sheet(data, delta_sheet)
+        for period in contiguous_tail(levels):
+            delta = deltas.get(period, {})
+            for series, value in levels[period].items():
+                # 전체 취업자수는 산업 시트가 만든다. 여기서 또 내면 같은 id 를
+                # 두 곳이 쓰게 되고, 언젠가 둘이 어긋나면 어느 쪽이 이겼는지
+                # 아무도 모른다(total_headcount_matches 가 둘의 일치를 지킨다).
+                if series == "headcount" and breakdown == "total":
+                    continue
+                records.append(SeriesRecord(
+                    id=make_id("eaps", period, breakdown, category, series=series),
+                    source="eaps", series=series, breakdown=breakdown,
+                    category=category, period=period,
+                    value=value, unit=TOTAL_UNITS[series], yoy=delta.get(series),
+                    released_at=released_at, release_url=release_url,
+                    attachments=attachments, collected_at=collected_at,
+                ))
     return records

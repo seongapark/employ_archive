@@ -127,3 +127,81 @@ export function sheetTable(snapshot, { sourceNames = {} } = {}) {
     `<thead><tr><th scope="col">출처</th><th scope="col">수준</th><th scope="col">증감</th></tr></thead>` +
     `<tbody>${rows}</tbody></table>`;
 }
+
+// ── 지표 그림: 수준 선 + 증감 막대 ────────────────────────────────────
+//
+// 한 그림, 한 x축, 두 개의 y 척도다. **두 척도를 겹쳐 그리지 않는다** — 눈금을
+// 서로 맞출 방법이 없으므로 겹치면 선이 막대를 뚫고 지나가는 착시가 생긴다.
+// 위쪽 띠에 수준 선, 아래쪽 띠에 0선 기준 증감 막대를 놓는다.
+//
+// 수준 선은 0 기준이 아니라 그 구간의 최저~최고에 맞춘다. 추세를 보는 그림이지
+// 크기를 재는 그림이 아니다(크기는 위의 카드와 KPI 가 말한다).
+
+export const COMBO_PAD = { l: 4, r: 4, t: 10, b: 4 };
+// 위쪽 띠(선)가 가져가는 몫. 나머지가 막대 띠다.
+const LINE_SHARE = 0.56;
+
+export function comboSvg(points, { width = 320, height = 96, selected = null } = {}) {
+  if (!points.length) return '';
+
+  const pad = COMBO_PAD;
+  const plotW = width - pad.l - pad.r;
+  const plotH = height - pad.t - pad.b;
+  const lineH = plotH * LINE_SHARE;
+  const barTop = pad.t + lineH + 6;
+  const barH = height - pad.b - barTop;
+  const zeroY = barTop + barH / 2;
+
+  const values = points.map(p => p.value);
+  const lo = Math.min(...values);
+  const hi = Math.max(...values);
+  // 값이 한 줄로 평평하면 span 이 0 이다. 그대로 나누면 좌표가 NaN 이 된다.
+  const span = (hi - lo) || 1;
+  const deltas = points.map(p => p.yoy).filter(v => v !== null && v !== undefined);
+  const maxDelta = Math.max(1e-9, ...deltas.map(Math.abs));
+
+  const x = i => pad.l + (points.length === 1 ? plotW / 2
+    : (i / (points.length - 1)) * plotW);
+  const y = v => pad.t + lineH - ((v - lo) / span) * lineH;
+
+  const parts = [];
+
+  // 막대. yoy 가 null 이면 그리지 않는다 — 0 자리에 납작한 막대를 그리면
+  // `변동 없음` 을 그린 셈이 되어 모르는 것을 아는 것처럼 말하게 된다.
+  const barW = Math.max(2, Math.min(9, plotW / points.length - 2));
+  points.forEach((p, i) => {
+    if (p.yoy === null || p.yoy === undefined) return;
+    const h = (Math.abs(p.yoy) / maxDelta) * (barH / 2);
+    const top = p.yoy >= 0 ? zeroY - h : zeroY;
+    parts.push(`<rect x="${(x(i) - barW / 2).toFixed(1)}" y="${top.toFixed(1)}" width="${barW.toFixed(1)}" height="${Math.max(h, 1).toFixed(1)}" rx="1.5" fill="${p.yoy >= 0 ? '#c73e3a' : '#2f6bd0'}"></rect>`);
+  });
+  parts.push(`<line class="combo__zero" x1="${pad.l}" y1="${zeroY.toFixed(1)}" x2="${(width - pad.r).toFixed(1)}" y2="${zeroY.toFixed(1)}" stroke="#e2e5ea" stroke-width="1"></line>`);
+
+  // 수준 선. 음영은 없다 — 막대와 같이 놓으면 어수선해진다(사용자 판단).
+  const line = points.map((p, i) => `${x(i).toFixed(1)},${y(p.value).toFixed(1)}`).join(' ');
+  parts.push(`<polyline points="${line}" fill="none" stroke="#23508f" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"></polyline>`);
+
+  const picked = selected === null ? -1 : points.findIndex(p => p.period === selected);
+  if (picked >= 0) {
+    parts.push(
+      `<line class="combo__cross" x1="${x(picked).toFixed(1)}" y1="${pad.t - 4}" x2="${x(picked).toFixed(1)}" y2="${(height - pad.b).toFixed(1)}" stroke="#98a2b3" stroke-width="1" stroke-dasharray="3 3"></line>`,
+      `<circle cx="${x(picked).toFixed(1)}" cy="${y(points[picked].value).toFixed(1)}" r="3.5" fill="#23508f" stroke="#ffffff" stroke-width="2"></circle>`,
+    );
+  } else {
+    const last = points.length - 1;
+    parts.push(`<circle cx="${x(last).toFixed(1)}" cy="${y(points[last].value).toFixed(1)}" r="3" fill="#23508f" stroke="#ffffff" stroke-width="2"></circle>`);
+  }
+
+  return `<svg class="combo" viewBox="0 0 ${width} ${height}" width="100%" height="${height}" role="img" preserveAspectRatio="none">${parts.join('')}</svg>`;
+}
+
+// SVG 가로 비율(0~1) → 점 번호. 좌표 계산을 화면 코드에 두면 그림과 어긋나는
+// 날이 오므로 여기 둔다(timelineSvg 의 periodAtRatio 와 같은 이유다).
+export function indexAtRatio(points, ratio, { width = 320 } = {}) {
+  if (!points.length) return null;
+  const pad = COMBO_PAD;
+  const plotW = width - pad.l - pad.r;
+  const step = plotW / Math.max(1, points.length - 1);
+  const idx = Math.round((ratio * width - pad.l) / step);
+  return Math.min(points.length - 1, Math.max(0, idx));
+}
