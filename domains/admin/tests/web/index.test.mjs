@@ -23,6 +23,19 @@ function 환경() {
   return { env: { DB: 바인딩(raw), ALLOWED_ORIGIN: ORIGIN, METRICS_TOKEN: 'secret' }, raw };
 }
 
+// D1 자체가 장애일 때(네트워크·용량·일시적 5xx 등) 를 흉내 낸다. run() 에서
+// 던지게 해 실제 장애에 가까운 자리(쓰기 시점)를 고른다.
+function 깨진바인딩() {
+  return {
+    prepare: () => ({
+      bind: () => ({
+        all: async () => { throw new Error('D1 장애'); },
+        run: async () => { throw new Error('D1 장애'); },
+      }),
+    }),
+  };
+}
+
 // **`new Request(url, { cf })` 는 cf 를 안 들고 있다** — node 의 Request 는 모르는
 // init 항목을 조용히 버려서, 그대로 쓰면 request.cf 가 undefined 이고 국가 테스트가
 // 통과할 수 없다(실제로 돌려 확인했다). Cloudflare 런타임이 붙여 주는 속성이므로
@@ -92,4 +105,17 @@ test('OPTIONS 에 CORS 헤더를 낸다', async () => {
   const res = await worker.fetch(new Request('https://m.workers.dev/api/hit',
     { method: 'OPTIONS', headers: { origin: ORIGIN } }), env);
   assert.equal(res.headers.get('access-control-allow-origin'), ORIGIN);
+});
+
+// **통계가 다른 것을 못 건드린다** 가 이 설계의 불변식이다 — D1 이 죽어도 비콘을
+// 보낸 페이지는 아무 것도 몰라야 한다. index.mjs 의 `try { await 기록(...) } catch {}`
+// 가 그 마지막 방어선이고, 이 테스트가 그 방어선을 지킨다. 나중에 누가 그 catch 를
+// 지우거나 기록()을 await 밖으로 옮기면(예: 응답을 먼저 보내고 나서야 실행되게
+// 바꾸면) 여기서 예외가 워커 밖으로 새어 나가 잡아낸다.
+test('D1 이 죽어도 204 가 나가고 예외가 새어 나오지 않는다', async () => {
+  const env = { DB: 깨진바인딩(), ALLOWED_ORIGIN: ORIGIN, METRICS_TOKEN: 'secret' };
+  const 응답 = worker.fetch(비콘(몸통), env);
+  await assert.doesNotReject(응답);
+  const res = await 응답;
+  assert.equal(res.status, 204);
 });
