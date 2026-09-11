@@ -28,7 +28,8 @@ test('유입은 호스트만 남기고 검색어는 안 가져간다', () => {
 
 // 창 대역. localStorage 를 던지게 만들어 사생활 보호 모드를 흉내낸다.
 function 창({ hash = '#/', host = 'seongapark.github.io', hostname = 'seongapark.github.io',
-  referrer = '', off = null, standalone = false, 저장소죽음 = false } = {}) {
+  referrer = '', off = null, standalone = false, 저장소죽음 = false,
+  matchMedia죽음 = false } = {}) {
   const m = new Map(off === null ? [] : [['ea:off', off]]);
   const store = 저장소죽음
     ? { getItem() { throw new Error('막힘'); }, setItem() { throw new Error('막힘'); } }
@@ -38,7 +39,9 @@ function 창({ hash = '#/', host = 'seongapark.github.io', hostname = 'seongapar
     document: { referrer },
     localStorage: store,
     sessionStorage: store,
-    matchMedia: () => ({ matches: standalone }),
+    matchMedia: matchMedia죽음
+      ? () => { throw new Error('막힘'); }
+      : () => ({ matches: standalone }),
   };
 }
 
@@ -58,6 +61,16 @@ test('저장소가 막혀 있어도 던지지 않는다', () => {
   const p = 페이로드(창({ 저장소죽음: true }), 'hub');
   assert.equal(typeof p.v, 'string');
   assert.ok(p.v.length > 0);
+});
+
+// matchMedia 는 `win.matchMedia?.(...)` 로 '없는 경우'만 막혀 있었지 '호출
+// 자체가 던지는 경우'는 뚫려 있었다 — 부팅 코드에서 이 한 곳만 try 밖이라
+// 최초 전송에서 던지면 그 뒤 hashchange 리스너 등록 줄이 영영 실행되지 않아
+// 세션 내내 비콘이 통째로 죽을 뻔했다(수정 라운드 1). 여기서는 페이로드()
+// 자체가 그 상황에서도 던지지 않는지를 잡는다.
+test('matchMedia 가 던져도 던지지 않는다', () => {
+  const p = 페이로드(창({ matchMedia죽음: true }), 'hub');
+  assert.equal(p.m, 'browser');
 });
 
 test('페이로드는 여섯 개다', () => {
