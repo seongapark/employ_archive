@@ -110,14 +110,11 @@ function rivalCard(round) {
   const total = rows.reduce((n, r) => n + r.n, 0);
   if (!total) return '';
 
-  // 이름 붙은 의제(2건 이상 모인 것)가 없으면 카드를 세우지 않는다 —
-  // 서로 다른 주제 여덟 건은 '경쟁 의제'가 아니라 그냥 그날의 잡음이다.
+  // 이름 붙은 의제(2건 이상 모인 것)가 없으면 아무것도 안 그린다 —
+  // 서로 다른 주제 여덟 건은 '경쟁 의제'가 아니라 그냥 그날의 잡음이고,
+  // 「없습니다」는 한 줄은 자리만 차지한다.
   const named = rows.filter((r) => r.topic !== '그 밖');
-  if (!named.length) {
-    return `<div style="font-size:11px;color:var(--text-muted);padding:0 2px;">
-      인용이 아닌 ${total}건은 서로 다른 주제였습니다 — 같이 번진 의제는 없습니다.
-      <a href="#/articles">기사에서 보기 ›</a></div>`;
-  }
+  if (!named.length) return '';
 
   const body = named.map((r) => {
     const heads = r.heads.slice(0, 2).map(headlineRow).join('');

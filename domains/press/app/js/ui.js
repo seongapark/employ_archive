@@ -144,11 +144,12 @@ export function pieChart(title, rows, opts = {}) {
   // 레이블을 못 단 조각과 0건 항목은 이름만 아래에 부른다.
   // **이름이 먼저 오고 설명이 뒤에 붙는다** — 「보도 0건 구직급여」보다
   // 「구직급여 보도 0건」이 읽는 순서와 같다.
-  const tiny = drawn.filter((d, k) => labels[k] === null).map((d) => `${d.name} ${d.n}`);
-  const zero = rows.filter((x) => !x.n).map((x) => x.name);
+  const tiny = drawn.filter((d, k) => labels[k] === null)
+    .map((d) => `${esc(d.name)} ${d.n}`);
+  const zero = rows.filter((x) => !x.n).map((x) => esc(x.name));
   const tail = [
     tiny.length ? tiny.join(' · ') : '',
-    zero.length ? `* ${zero.join(' · ')} 보도 0건` : '',
+    zero.length ? `* ${zero.join(' · ')} <span class="nw">0건</span>` : '',
   ].filter(Boolean);
 
   const body = total
@@ -163,7 +164,7 @@ export function pieChart(title, rows, opts = {}) {
   return `<div class="pie">
     <div class="sec-title">${esc(title)}${noteHtml}</div>
     ${body}
-    ${tail.map((t) => `<div class="pie__tail">${esc(t)}</div>`).join('')}
+    ${tail.map((t) => `<div class="pie__tail">${t}</div>`).join('')}
   </div>`;
 }
 

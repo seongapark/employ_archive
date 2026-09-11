@@ -123,13 +123,20 @@ test('pieChart: 색은 순위가 아니라 항목을 따라간다', () => {
   assert.ok(fill('건설업').includes(PIE_COLORS[1]));
 });
 
+test('pieChart: 이름 속 꺾쇠는 아래 줄에서도 이스케이프된다', () => {
+  // 항목 이름은 코드 상수지만 tail 은 HTML 로 붙으므로 새는 길을 막아 둔다.
+  const h = pieChart('축', [{ name: '<script>', n: 0 }, { name: 'ok', n: 3 }]);
+  assert.ok(!h.includes('<script>'));
+});
+
 test('pieChart: 0건 항목은 조각이 없어도 이름이 남는다', () => {
   // 「구직급여 보도 0건」은 이 도메인이 잡아야 할 사실이다. 조각이 없다고
   // 지우면 화면에서 사라진다.
   const h = pieChart('산업', INDUSTRY);
   // 이름이 먼저, 설명이 뒤 — 읽는 순서와 같게.
   // * 로 시작한다 — 조각이 없어 파이에서 찾을 수 없는 항목이라는 표시다.
-  assert.ok(h.includes('* 도소매업 · 보건복지업 보도 0건'));
+  // 0건이 줄 끝에서 「0 / 건」으로 쪼개지지 않게 묶어 둔다.
+  assert.ok(h.includes('* 도소매업 · 보건복지업 <span class="nw">0건</span>'));
 });
 
 test('pieChart: 좁은 조각은 레이블 대신 아래 줄에서 부른다', () => {
