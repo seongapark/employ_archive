@@ -96,6 +96,17 @@ def main():
             print('→ schedule.json (%d개 회차 배포일)' % len(sched))
 
     summaries.sort(key=lambda r: r['release'], reverse=True)
+
+    # 회차는 늘기만 한다. 줄었다면 무언가가 빠진 것이다 — 대개 보도자료 hwpx 가
+    # 없어서 건너뛴 것이고, 그대로 쓰면 화면에서 지난 회차가 사라진다.
+    # 2026-09-11 에 3회차가 1회차로 줄어든 채 배포까지 나갔다. 쓰지 말고 죽는다.
+    before = _load(os.path.join(DATA, 'rounds.json')) or []
+    if len(summaries) < len(before):
+        gone = sorted({r['release'] for r in before} - {r['release'] for r in summaries})
+        raise SystemExit(
+            '회차가 %d → %d 로 줄었다(%s). 보도자료 hwpx 가 없어 건너뛴 것이 아닌지 '
+            '보라 — 덮어쓰지 않고 멈춘다.' % (len(before), len(summaries), ', '.join(gone)))
+
     json.dump(summaries, io.open(os.path.join(DATA, 'rounds.json'), 'w', encoding='utf-8'),
               ensure_ascii=False, indent=1)
     json.dump(articles, io.open(os.path.join(DATA, 'articles.json'), 'w', encoding='utf-8'),

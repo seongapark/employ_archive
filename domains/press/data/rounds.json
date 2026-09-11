@@ -850,5 +850,1712 @@
   "truncated": [],
   "unjudged": 0,
   "judged": true
+ },
+ {
+  "release": "2026-08-10",
+  "month": "2026-07",
+  "label": "'26.7월분",
+  "title": "2026년 7월 고용행정 통계로 본 노동시장 동향",
+  "regular": {
+   "collected": 79,
+   "kept": 74,
+   "cited": 59,
+   "press": 52,
+   "window": [
+    "2026-08-10",
+    "2026-08-11"
+   ],
+   "at": "2026-09-08 14:11",
+   "queries": [
+    "고용보험 가입자",
+    "구직급여",
+    "구인배수"
+   ],
+   "anchors": [
+    "고용보험",
+    "피보험자",
+    "구직급여",
+    "구인배수",
+    "고용행정"
+   ]
+  },
+  "follow": {
+   "collected": 257,
+   "kept": 69,
+   "cited": 31,
+   "press": 24,
+   "window": [
+    "2026-08-11",
+    "2026-08-25"
+   ],
+   "at": "2026-09-08 14:11"
+  },
+  "coverage": {
+   "section": [
+    {
+     "name": "가입자수 현황",
+     "n": 42
+    },
+    {
+     "name": "구직급여",
+     "n": 0
+    },
+    {
+     "name": "구인·구직",
+     "n": 0
+    }
+   ],
+   "age": [
+    {
+     "name": "29세이하·청년",
+     "n": 46
+    },
+    {
+     "name": "30대",
+     "n": 0
+    },
+    {
+     "name": "40대",
+     "n": 3
+    },
+    {
+     "name": "50대",
+     "n": 0
+    },
+    {
+     "name": "60세이상",
+     "n": 2
+    }
+   ],
+   "industry": [
+    {
+     "name": "제조업",
+     "n": 9
+    },
+    {
+     "name": "건설업",
+     "n": 2
+    },
+    {
+     "name": "반도체",
+     "n": 4
+    },
+    {
+     "name": "조선",
+     "n": 2
+    },
+    {
+     "name": "서비스업",
+     "n": 1
+    },
+    {
+     "name": "도소매업",
+     "n": 0
+    },
+    {
+     "name": "보건복지업",
+     "n": 0
+    }
+   ]
+  },
+  "outside": [
+   {
+    "w": "AI",
+    "n": 11
+   },
+   {
+    "w": "경력직",
+    "n": 11
+   },
+   {
+    "w": "선호",
+    "n": 8
+   },
+   {
+    "w": "고용한파",
+    "n": 6
+   },
+   {
+    "w": "도입",
+    "n": 4
+   },
+   {
+    "w": "반등",
+    "n": 2
+   },
+   {
+    "w": "청년고용",
+    "n": 2
+   },
+   {
+    "w": "뚜렷",
+    "n": 2
+   },
+   {
+    "w": "채용",
+    "n": 2
+   },
+   {
+    "w": "문턱",
+    "n": 2
+   },
+   {
+    "w": "청년들",
+    "n": 2
+   },
+   {
+    "w": "찬바람",
+    "n": 2
+   },
+   {
+    "w": "언제",
+    "n": 2
+   }
+  ],
+  "tone": [
+   {
+    "w": "한파",
+    "n": 14
+   },
+   {
+    "w": "양극화",
+    "n": 4
+   },
+   {
+    "w": "부진",
+    "n": 2
+   },
+   {
+    "w": "개선",
+    "n": 1
+   },
+   {
+    "w": "훈풍",
+    "n": 1
+   }
+  ],
+  "stance": {
+   "pos": 6,
+   "neg": 43,
+   "neu": 10,
+   "judged": 59,
+   "total": 59,
+   "label": "부정 우세"
+  },
+  "issues": [
+   {
+    "key": "청년",
+    "n": 28,
+    "kw": [
+     "AI",
+     "경력직",
+     "선호",
+     "도입"
+    ],
+    "heads": [
+     {
+      "title": "고용보험 7개월째 20만명대 증가…청년은 5.7만명 줄었다",
+      "url": "https://www.news1.kr/economy/employment-labor/6253903",
+      "press": "뉴스1"
+     },
+     {
+      "title": "고용보험 가입자 증가폭 7개월째 20만명대…청년 가입자만 감소",
+      "url": "https://www.newspim.com/news/view/20260810000598",
+      "press": "뉴스핌"
+     },
+     {
+      "title": "고용보험 상시가입자 7개월 연속 20만명대 증가…청년·제조업 취업자는...",
+      "url": "https://www.mt.co.kr/economy/2026/08/10/2026081010555834440",
+      "press": "머니투데이"
+     },
+     {
+      "title": "반도체·조선 살아나도 청년고용 '한파'…제조업 고용 '양극화'",
+      "url": "https://www.etnews.com/20260810000197",
+      "press": "전자신문"
+     },
+     {
+      "title": "청년 고용보험 가입자 '뚝' 5만 7천 명 감소... 47개월 연속 감소",
+      "url": "https://news.bbsi.co.kr/news/articleView.html?idxno=4099881",
+      "press": "news.bbsi.co.kr"
+     }
+    ]
+   },
+   {
+    "key": "29세이하",
+    "n": 17,
+    "kw": [
+     "고용한파",
+     "AI",
+     "경력직",
+     "선호"
+    ],
+    "heads": [
+     {
+      "title": "29세 이하 고용보험 47개월째 감소… AI·경력직 선호에 막힌 청년 문턱",
+      "url": "https://biz.heraldcorp.com/article/10836001?ref=naver",
+      "press": "헤럴드경제"
+     },
+     {
+      "title": "\"경력직 뽑고 AI 늘리니\"…29세 이하 고용보험 가입자 47개월 연속 감소",
+      "url": "https://view.asiae.co.kr/article/2026081014035284119",
+      "press": "아시아경제"
+     },
+     {
+      "title": "29세 이하 고용보험 5.7만명 감소…청년 고용 한파는 계속",
+      "url": "https://www.thepowernews.co.kr/view.php?ud=202608101422492245de3f0aa1be_7",
+      "press": "thepowernews.co.kr"
+     },
+     {
+      "title": "청년 고용한파 계속...29세이하 고용보험 가입자 47개월째 감소",
+      "url": "https://www.slist.kr/news/articleView.html?idxno=757873",
+      "press": "slist.kr"
+     },
+     {
+      "title": "29세 이하 고용보험 가입자 47개월째 감소",
+      "url": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005897805",
+      "press": "mbnmoney.mbn.co.kr"
+     }
+    ]
+   },
+   {
+    "key": "전체 가입자",
+    "n": 6,
+    "kw": [
+     "최대",
+     "고용노동부",
+     "견인"
+    ],
+    "heads": [
+     {
+      "title": "고용보험 가입자 증가 폭 29개월 만에 최대",
+      "url": "https://www.etoday.co.kr/news/view/2612703",
+      "press": "이투데이"
+     },
+     {
+      "title": "노동시장 7개월 연속 안정적 증가",
+      "url": "https://www.news1.kr/photos/8048646",
+      "press": "뉴스1"
+     },
+     {
+      "title": "고용노동부, 7월 노동시장 동향 발표",
+      "url": "https://www.news1.kr/photos/8048647",
+      "press": "뉴스1"
+     },
+     {
+      "title": "고용보험 가입자 7개월째 증가...제조는 14개월, 건설은 36개월 연속 내...",
+      "url": "http://www.metroseoul.co.kr/article/20260810500414",
+      "press": "metroseoul.co.kr"
+     },
+     {
+      "title": "고용보험 가입자 7개월 연속 20만명대↑",
+      "url": "https://www.viva100.com/article/20260810500706",
+      "press": "viva100.com"
+     }
+    ]
+   },
+   {
+    "key": "40대",
+    "n": 3,
+    "kw": [
+     "반등"
+    ],
+    "heads": [
+     {
+      "title": "고용보험 가입자 27.7만명↑…40대 33개월 만에 반등",
+      "url": "https://www.newsis.com/view/NISX20260810_0003742698",
+      "press": "뉴시스"
+     },
+     {
+      "title": "고용보험 가입자, 40대 33개월 만에 증가 전환…청년층은 감소 지속",
+      "url": "https://www.nocutnews.co.kr/news/6560518?utm_source=naver&utm_medium=article&utm_campaign=20260810120040",
+      "press": "nocutnews.co.kr"
+     },
+     {
+      "title": "[그래픽] 고용보험 가입자 27.7만명↑…40대 33개월 만에 반등",
+      "url": "https://www.newsis.com/view/NISI20260810_0002208408",
+      "press": "뉴시스"
+     }
+    ]
+   },
+   {
+    "key": "제조업",
+    "n": 3,
+    "kw": [
+     "의존",
+     "징조",
+     "마이너스",
+     "발복"
+    ],
+    "heads": [
+     {
+      "title": "제조업 고용보험 14개월째 감소…외국인 빼면 1만5000명 줄었다",
+      "url": "https://www.ajunews.com/view/20260810101049682",
+      "press": "아주경제"
+     },
+     {
+      "title": "제조업 고용 14개월 연속 감소…'반도체 의존 고용 양극화' 징조",
+      "url": "http://www.fnnews.com/news/202608101307420339",
+      "press": "파이낸셜뉴스"
+     },
+     {
+      "title": "반도체 호황에도 제조업 고용 '마이너스'⋯기존 주력산업 부진에 발복",
+      "url": "https://www.etoday.co.kr/news/view/2612742",
+      "press": "이투데이"
+     }
+    ]
+   },
+   {
+    "key": "60세이상",
+    "n": 1,
+    "kw": [
+     "격차",
+     "뚜렷",
+     "세대별",
+     "증가분"
+    ],
+    "heads": [
+     {
+      "title": "고용보험 가입자 증가분 75%가 60세 이상…세대별 고용 격차 ‘뚜렷’",
+      "url": "https://www.dailian.co.kr/news/view/1676646/?sc=Naver",
+      "press": "dailian.co.kr"
+     }
+    ]
+   },
+   {
+    "key": "고령",
+    "n": 1,
+    "kw": [
+     "고령층",
+     "일하"
+    ],
+    "heads": [
+     {
+      "title": "일하는 고령층 또 늘고…건설업 고용보험 가입자 36개월 연속 감소",
+      "url": "https://www.hankookilbo.com/news/article/A2026081014410004352?did=NA",
+      "press": "한국일보"
+     }
+    ]
+   }
+  ],
+  "rivals": [
+   {
+    "topic": "구직급여",
+    "n": 8,
+    "heads": [
+     {
+      "title": "1년도 안 돼 짐싸는 청년들…자발적 실업급여 역효과 우려",
+      "url": "https://www.newsis.com/view/NISX20260809_0003741882",
+      "press": "뉴시스",
+      "why": "청년 실업급여 개편"
+     },
+     {
+      "title": "“수당처럼 인식할라”… 청년 자발적 실업급여 추진 시끌",
+      "url": "https://www.kmib.co.kr/article/view.asp?arcid=0030228338&code=61121111&cp=nv",
+      "press": "국민일보",
+      "why": "청년 실업급여 논란"
+     },
+     {
+      "title": "“못 타먹으면 바보”20대 초반 80%가 1년 미만 퇴사…실업급여 확대의...",
+      "url": "https://www.munhwa.com/article/11608292?ref=naver",
+      "press": "문화일보",
+      "why": "실업급여 확대 우려"
+     },
+     {
+      "title": "[전인미답] '쉬었음 청년' 양산하는 구직급여 개정안",
+      "url": "https://www.lcnews.co.kr/news/articleView.html?idxno=206246",
+      "press": "lcnews.co.kr",
+      "why": "구직급여 개정안 비판"
+     }
+    ]
+   },
+   {
+    "topic": "청년",
+    "n": 3,
+    "heads": [
+     {
+      "title": "‘실업급여 준다는데…’ 청년 자진퇴사 3명 중 2명, 1년도 못 채웠다",
+      "url": "https://www.segye.com/newsView/20260810506050?OutUrl=naver",
+      "press": "세계일보",
+      "why": "청년 자진퇴사 급여"
+     },
+     {
+      "title": "자진퇴사 청년도 실업급여?...입사 1년 못 채우는 청년 66% 지원 논쟁 확...",
+      "url": "https://www.m-economynews.com/news/article.html?no=69576",
+      "press": "m-economynews.com",
+      "why": "청년 자진퇴사 지원"
+     },
+     {
+      "title": "“1년도 못 채웠다” 청년 자진퇴사 66.5%… 실업급여 확대 ‘딜레마’",
+      "url": "https://www.jibs.co.kr/news/articles/articlesDetail/64361?feed=na",
+      "press": "jibs.co.kr",
+      "why": "청년 자진퇴사·급여 확대"
+     }
+    ]
+   },
+   {
+    "topic": "그 밖",
+    "n": 4,
+    "heads": [
+     {
+      "title": "野, 황희 '폐버스 하우스' 맹공…\"민주당사부터 폐버스로 옮겨라\"",
+      "url": "https://www.news1.kr/politics/assembly/6254132",
+      "press": "뉴스1",
+      "why": "정치권 정책 공방"
+     },
+     {
+      "title": "[연합뉴스 이 시각 헤드라인] - 14:30",
+      "url": "https://www.yna.co.kr/view/AKR20260810088900011?input=1195m",
+      "press": "연합뉴스",
+      "why": "이 시각 헤드라인 모음"
+     },
+     {
+      "title": "[업앤다운]보험 업종 희비 엇갈려…현대해상↑·삼성화재↓",
+      "url": "https://www.nspna.com/news/?mode=view&newsid=823702",
+      "press": "nspna.com",
+      "why": "보험주 등락 기사"
+     },
+     {
+      "title": "[왈가왈부] 황희 “버스하우스, 깊이 사과”…부동산 문제, 더 신중해야...",
+      "url": "https://www.sedaily.com/article/20077735?ref=naver",
+      "press": "서울경제",
+      "why": "여러 이슈 단신 모음"
+     }
+    ]
+   }
+  ],
+  "graph": {
+   "nodes": [
+    {
+     "id": "고용보험",
+     "axis": "지표",
+     "n": 42
+    },
+    {
+     "id": "청년",
+     "axis": "연령",
+     "n": 40
+    },
+    {
+     "id": "가입자",
+     "axis": "지표",
+     "n": 30
+    },
+    {
+     "id": "29세이하",
+     "axis": "연령",
+     "n": 17
+    },
+    {
+     "id": "한파",
+     "axis": "논조",
+     "n": 14
+    },
+    {
+     "id": "경력직",
+     "axis": "밖",
+     "n": 11
+    },
+    {
+     "id": "AI",
+     "axis": "밖",
+     "n": 11
+    },
+    {
+     "id": "제조업",
+     "axis": "산업",
+     "n": 8
+    },
+    {
+     "id": "선호",
+     "axis": "밖",
+     "n": 8
+    },
+    {
+     "id": "고용한파",
+     "axis": "밖",
+     "n": 6
+    },
+    {
+     "id": "양극화",
+     "axis": "논조",
+     "n": 4
+    },
+    {
+     "id": "반도체(전자·통신)",
+     "axis": "산업",
+     "n": 4
+    },
+    {
+     "id": "도입",
+     "axis": "밖",
+     "n": 4
+    },
+    {
+     "id": "40대",
+     "axis": "연령",
+     "n": 3
+    },
+    {
+     "id": "반등",
+     "axis": "밖",
+     "n": 2
+    },
+    {
+     "id": "청년고용",
+     "axis": "밖",
+     "n": 2
+    },
+    {
+     "id": "뚜렷",
+     "axis": "밖",
+     "n": 2
+    },
+    {
+     "id": "채용",
+     "axis": "밖",
+     "n": 2
+    },
+    {
+     "id": "문턱",
+     "axis": "밖",
+     "n": 2
+    },
+    {
+     "id": "부진",
+     "axis": "논조",
+     "n": 2
+    },
+    {
+     "id": "청년들",
+     "axis": "밖",
+     "n": 2
+    },
+    {
+     "id": "찬바람",
+     "axis": "밖",
+     "n": 2
+    },
+    {
+     "id": "언제",
+     "axis": "밖",
+     "n": 2
+    }
+   ],
+   "edges": [
+    [
+     2,
+     0,
+     30
+    ],
+    [
+     0,
+     1,
+     27
+    ],
+    [
+     2,
+     1,
+     18
+    ],
+    [
+     3,
+     0,
+     17
+    ],
+    [
+     1,
+     4,
+     14
+    ],
+    [
+     3,
+     2,
+     12
+    ],
+    [
+     3,
+     1,
+     11
+    ],
+    [
+     6,
+     5,
+     10
+    ],
+    [
+     6,
+     1,
+     9
+    ],
+    [
+     5,
+     1,
+     9
+    ],
+    [
+     6,
+     8,
+     8
+    ],
+    [
+     5,
+     8,
+     8
+    ],
+    [
+     6,
+     0,
+     7
+    ],
+    [
+     5,
+     0,
+     7
+    ],
+    [
+     8,
+     1,
+     7
+    ],
+    [
+     0,
+     4,
+     7
+    ],
+    [
+     9,
+     1,
+     6
+    ],
+    [
+     9,
+     4,
+     6
+    ],
+    [
+     7,
+     1,
+     5
+    ],
+    [
+     6,
+     2,
+     5
+    ],
+    [
+     2,
+     5,
+     5
+    ],
+    [
+     0,
+     8,
+     5
+    ],
+    [
+     3,
+     4,
+     5
+    ],
+    [
+     2,
+     4,
+     5
+    ],
+    [
+     0,
+     9,
+     5
+    ],
+    [
+     10,
+     7,
+     4
+    ],
+    [
+     3,
+     9,
+     4
+    ],
+    [
+     2,
+     9,
+     4
+    ],
+    [
+     6,
+     12,
+     4
+    ],
+    [
+     5,
+     12,
+     4
+    ],
+    [
+     12,
+     8,
+     4
+    ],
+    [
+     13,
+     2,
+     3
+    ],
+    [
+     13,
+     0,
+     3
+    ],
+    [
+     0,
+     7,
+     3
+    ],
+    [
+     11,
+     7,
+     3
+    ],
+    [
+     10,
+     1,
+     3
+    ],
+    [
+     3,
+     6,
+     3
+    ],
+    [
+     3,
+     5,
+     3
+    ],
+    [
+     2,
+     8,
+     3
+    ],
+    [
+     0,
+     12,
+     3
+    ],
+    [
+     12,
+     1,
+     3
+    ],
+    [
+     13,
+     14,
+     2
+    ],
+    [
+     2,
+     14,
+     2
+    ],
+    [
+     0,
+     14,
+     2
+    ],
+    [
+     11,
+     10,
+     2
+    ],
+    [
+     11,
+     1,
+     2
+    ],
+    [
+     11,
+     4,
+     2
+    ],
+    [
+     10,
+     4,
+     2
+    ],
+    [
+     7,
+     4,
+     2
+    ],
+    [
+     1,
+     15,
+     2
+    ],
+    [
+     15,
+     4,
+     2
+    ],
+    [
+     0,
+     16,
+     2
+    ],
+    [
+     6,
+     17,
+     2
+    ],
+    [
+     17,
+     1,
+     2
+    ],
+    [
+     3,
+     8,
+     2
+    ],
+    [
+     0,
+     18,
+     2
+    ],
+    [
+     18,
+     1,
+     2
+    ],
+    [
+     19,
+     7,
+     2
+    ],
+    [
+     2,
+     12,
+     2
+    ],
+    [
+     1,
+     20,
+     2
+    ],
+    [
+     21,
+     1,
+     2
+    ],
+    [
+     22,
+     1,
+     2
+    ],
+    [
+     22,
+     4,
+     2
+    ]
+   ],
+   "trimmed": 1
+  },
+  "frames": [
+   {
+    "kw": "AI",
+    "d0": 11,
+    "later": 3,
+    "first": "2026-08-12",
+    "last": "2026-08-18",
+    "state": "유지"
+   },
+   {
+    "kw": "경력직",
+    "d0": 11,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "선호",
+    "d0": 8,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "고용한파",
+    "d0": 6,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "도입",
+    "d0": 4,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "반등",
+    "d0": 2,
+    "later": 1,
+    "first": "2026-08-11",
+    "last": "2026-08-11",
+    "state": "유지"
+   },
+   {
+    "kw": "청년고용",
+    "d0": 2,
+    "later": 2,
+    "first": "2026-08-11",
+    "last": "2026-08-11",
+    "state": "확산"
+   },
+   {
+    "kw": "뚜렷",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "채용",
+    "d0": 2,
+    "later": 3,
+    "first": "2026-08-11",
+    "last": "2026-08-18",
+    "state": "확산"
+   },
+   {
+    "kw": "문턱",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "청년들",
+    "d0": 2,
+    "later": 1,
+    "first": "2026-08-13",
+    "last": "2026-08-13",
+    "state": "유지"
+   },
+   {
+    "kw": "찬바람",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "언제",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   }
+  ],
+  "truncated": [],
+  "unjudged": 0,
+  "judged": true
+ },
+ {
+  "release": "2026-07-13",
+  "month": "2026-06",
+  "label": "'26.6월분",
+  "title": "2026년 6월 고용행정 통계로 본 노동시장 동향",
+  "regular": {
+   "collected": 74,
+   "kept": 56,
+   "cited": 45,
+   "press": 40,
+   "window": [
+    "2026-07-13",
+    "2026-07-14"
+   ],
+   "at": "2026-08-18 21:52",
+   "queries": [
+    "고용보험 가입자",
+    "구직급여",
+    "구인배수",
+    "식료품 고용보험",
+    "제조업 고용보험",
+    "건설업 고용보험",
+    "보건복지업 고용보험",
+    "전자·통신 고용보험",
+    "전기장비 고용보험",
+    "자동차 고용보험",
+    "29세이하 고용보험"
+   ],
+   "anchors": [
+    "고용보험",
+    "피보험자",
+    "구직급여",
+    "구인배수",
+    "고용행정"
+   ]
+  },
+  "follow": {
+   "collected": 252,
+   "kept": 27,
+   "cited": 9,
+   "press": 9,
+   "window": [
+    "2026-07-14",
+    "2026-07-28"
+   ],
+   "at": "2026-08-18 21:53"
+  },
+  "coverage": {
+   "section": [
+    {
+     "name": "가입자수 현황",
+     "n": 38
+    },
+    {
+     "name": "구직급여",
+     "n": 1
+    },
+    {
+     "name": "구인·구직",
+     "n": 0
+    }
+   ],
+   "age": [
+    {
+     "name": "29세이하·청년",
+     "n": 16
+    },
+    {
+     "name": "30대",
+     "n": 0
+    },
+    {
+     "name": "40대",
+     "n": 0
+    },
+    {
+     "name": "50대",
+     "n": 0
+    },
+    {
+     "name": "60세이상",
+     "n": 3
+    }
+   ],
+   "industry": [
+    {
+     "name": "제조업",
+     "n": 7
+    },
+    {
+     "name": "건설업",
+     "n": 4
+    },
+    {
+     "name": "반도체",
+     "n": 1
+    },
+    {
+     "name": "조선",
+     "n": 0
+    },
+    {
+     "name": "서비스업",
+     "n": 2
+    },
+    {
+     "name": "도소매업",
+     "n": 5
+    },
+    {
+     "name": "보건복지업",
+     "n": 0
+    }
+   ]
+  },
+  "outside": [
+   {
+    "w": "홈플러스",
+    "n": 6
+   },
+   {
+    "w": "여전히",
+    "n": 2
+   }
+  ],
+  "tone": [
+   {
+    "w": "부진",
+    "n": 5
+   },
+   {
+    "w": "둔화",
+    "n": 4
+   },
+   {
+    "w": "빨간불",
+    "n": 2
+   },
+   {
+    "w": "한파",
+    "n": 2
+   },
+   {
+    "w": "회복",
+    "n": 1
+   },
+   {
+    "w": "양극화",
+    "n": 1
+   }
+  ],
+  "stance": {
+   "pos": 3,
+   "neg": 16,
+   "neu": 26,
+   "judged": 45,
+   "total": 45,
+   "label": "부정 우세"
+  },
+  "issues": [
+   {
+    "key": "전체 가입자",
+    "n": 14,
+    "kw": [
+     "구직자당",
+     "근접",
+     "회복세",
+     "곪아간"
+    ],
+    "heads": [
+     {
+      "title": "고용보험 가입 6개월째 20만명대↑…실업급여는 증가세 전환",
+      "url": "https://www.newsis.com/view/NISX20260713_0003706739",
+      "press": "뉴시스"
+     },
+     {
+      "title": "고용보험 가입자 6개월째 25만 이상 ↑…건설·제조는 부진",
+      "url": "https://www.nocutnews.co.kr/news/6547173?utm_source=naver&utm_medium=article&utm_campaign=20260713120012",
+      "press": "nocutnews.co.kr"
+     },
+     {
+      "title": "구인인원 회복세…구직자당 일자리 수 0.5개 근접",
+      "url": "https://www.etoday.co.kr/news/view/2603063",
+      "press": "이투데이"
+     },
+     {
+      "title": "6월 고용보험 상시가입자 전년동월대비 1.7% 증가",
+      "url": "https://www.news1.kr/photos/8005362",
+      "press": "뉴스1"
+     },
+     {
+      "title": "고용보험 상시가입자 6개월 연속 20만명대 증가…서비스·제조 양극화",
+      "url": "https://www.mt.co.kr/economy/2026/07/13/2026071311413779674",
+      "press": "머니투데이"
+     }
+    ]
+   },
+   {
+    "key": "청년",
+    "n": 13,
+    "kw": [
+     "여전히",
+     "지켰",
+     "이슈",
+     "청년고용"
+    ],
+    "heads": [
+     {
+      "title": "고용보험 6개월째 20만명대 후반 증가…제조·건설·청년은 '빨간불'",
+      "url": "https://www.news1.kr/society/labor/6226173",
+      "press": "뉴스1"
+     },
+     {
+      "title": "고용보험 가입자 6개월 연속 20만명 후반대↑…청년층 46개월 연속 감소...",
+      "url": "https://www.ajunews.com/view/20260713104819320",
+      "press": "아주경제"
+     },
+     {
+      "title": "고용보험 가입 6개월째 20만명대↑…청년·제조·건설은 여전히 한파",
+      "url": "https://www.dailian.co.kr/news/view/1666442/?sc=Naver",
+      "press": "dailian.co.kr"
+     },
+     {
+      "title": "고용보험 가입 6개월째 20만명대 지켰지만… ‘청년층 46개월째 감소’...",
+      "url": "http://www.metroseoul.co.kr/article/20260713500216",
+      "press": "metroseoul.co.kr"
+     },
+     {
+      "title": "고용보험 가입자 6개월 연속 20만명 이상 늘어…제조·건설·청년 고용은...",
+      "url": "https://www.gosiweek.com/article/1065589727274651",
+      "press": "gosiweek.com"
+     }
+    ]
+   },
+   {
+    "key": "제조업",
+    "n": 5,
+    "kw": [
+     "견인",
+     "감소세",
+     "떠난",
+     "버텨"
+    ],
+    "heads": [
+     {
+      "title": "고용보험 가입자 26만4천명 증가…서비스업 견인·제조업은 13개월 연속...",
+      "url": "https://www.youthdaily.co.kr/news/article.html?no=222876",
+      "press": "청년일보"
+     },
+     {
+      "title": "반도체 증가세에도…제조업 고용보험 13개월 연속 감소",
+      "url": "https://www.etnews.com/20260713000254",
+      "press": "전자신문"
+     },
+     {
+      "title": "제조업 가입자 13개월째 감소세…구직급여 신규 신청 4개월 만에 증가 ...",
+      "url": "https://www.pointe.co.kr/news/articleView.html?idxno=81728",
+      "press": "pointe.co.kr"
+     },
+     {
+      "title": "노동부, 고용보험 가입자 26만 명 증가…제조업은 13개월째 감소",
+      "url": "https://news.bbsi.co.kr/news/articleView.html?idxno=4094779",
+      "press": "news.bbsi.co.kr"
+     },
+     {
+      "title": "20대 떠난 제조업, 외국인 근로자로 버텨",
+      "url": "https://dealsite.co.kr/articles/165233",
+      "press": "dealsite.co.kr"
+     }
+    ]
+   },
+   {
+    "key": "도소매업",
+    "n": 5,
+    "kw": [
+     "홈플러스",
+     "사태"
+    ],
+    "heads": [
+     {
+      "title": "고용보험 20만 명대 증가세…홈플러스 영향에 도소매업은 둔화",
+      "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008654958&plink=ORI&cooper=NAVER",
+      "press": "news.sbs.co.kr"
+     },
+     {
+      "title": "6월 고용보험 가입자, 26만4천명↑…도소매업은 감소",
+      "url": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005878351",
+      "press": "mbnmoney.mbn.co.kr"
+     },
+     {
+      "title": "고용보험 가입 6개월째 20만명대 증가…홈플러스 영향에 도소매업 둔화",
+      "url": "https://www.newspim.com/news/view/20260713000786",
+      "press": "뉴스핌"
+     },
+     {
+      "title": "'홈플러스 사태' 영향에 도소매업 고용보험 가입자 증가세 둔화",
+      "url": "https://www.sisajournal.com/news/articleView.html?idxno=379611",
+      "press": "sisajournal.com"
+     },
+     {
+      "title": "고용보험 20만 명대 증가세‥홈플러스 영향에 도소매업은 둔화",
+      "url": "https://imnews.imbc.com/news/2026/society/article/6837019_36918.html",
+      "press": "imnews.imbc.com"
+     }
+    ]
+   },
+   {
+    "key": "29세이하",
+    "n": 3,
+    "kw": [
+     "여파",
+     "주춤",
+     "홈플러스"
+    ],
+    "heads": [
+     {
+      "title": "고용 보험 가입 6개월 연속 증가… 60세 이상 늘고, 29세 이하 줄어",
+      "url": "https://biz.chosun.com/policy/policy_sub/2026/07/13/FQB3MWMRJFC3LHOKML6MYGFVPU/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+      "press": "조선일보"
+     },
+     {
+      "title": "29세 이하 고용보험 가입자 46개월째 감소…감소폭은 완화",
+      "url": "https://biz.heraldcorp.com/article/10806804?ref=naver",
+      "press": "헤럴드경제"
+     },
+     {
+      "title": "홈플러스 여파에 도소매 고용 ‘주춤’…29세 이하 46개월째 감소",
+      "url": "https://www.etoday.co.kr/news/view/2603153",
+      "press": "이투데이"
+     }
+    ]
+   },
+   {
+    "key": "건설업",
+    "n": 3,
+    "kw": [],
+    "heads": [
+     {
+      "title": "고용보험 가입자 6개월 연속 증가...건설업 33개월째 감소",
+      "url": "https://www.womennews.co.kr/news/articleView.html?idxno=279851",
+      "press": "omennews.co.kr"
+     },
+     {
+      "title": "고용보험 가입 6개월째 20만명대↑···건설업은 35개월째 감소",
+      "url": "https://www.koscaj.com/news/articleView.html?idxno=325274",
+      "press": "대한전문건설신문"
+     },
+     {
+      "title": "고용보험 가입 6개월째 20만명대 증가…제조·건설업은 '부진'",
+      "url": "https://www.namdonews.com/news/articleView.html?idxno=916753",
+      "press": "남도일보"
+     }
+    ]
+   },
+   {
+    "key": "고령",
+    "n": 1,
+    "kw": [
+     "고령층"
+    ],
+    "heads": [
+     {
+      "title": "6달 연속 고용보험 가입자 늘었지만...대부분이 ‘고령층 일자리’",
+      "url": "https://www.chosun.com/national/labor/2026/07/13/NS4Q4PON4FAHFLIIQKIC23Y4IY/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+      "press": "조선일보"
+     }
+    ]
+   },
+   {
+    "key": "60세이상",
+    "n": 1,
+    "kw": [
+     "년새"
+    ],
+    "heads": [
+     {
+      "title": "60세 이상 고용보험 가입자 1년새 20만6000명 늘어",
+      "url": "https://bravo.etoday.co.kr/view/atc_view/19635",
+      "press": "이투데이"
+     }
+    ]
+   }
+  ],
+  "rivals": [
+   {
+    "topic": "고용보험",
+    "n": 2,
+    "heads": [
+     {
+      "title": "[사설]고용보험 소득 기준 전환, 기금 재정 개선 선행돼야",
+      "url": "https://www.edaily.co.kr/news/newspath.asp?newsid=01384166645514192",
+      "press": "이데일리",
+      "why": "고용보험 제도개편 사설"
+     },
+     {
+      "title": "전 국민 고용보험 시대 열린다",
+      "url": "https://www.hidomin.com/news/articleView.html?idxno=713112",
+      "press": "hidomin.com",
+      "why": "고용보험 확대 논의"
+     }
+    ]
+   },
+   {
+    "topic": "보험료",
+    "n": 2,
+    "heads": [
+     {
+      "title": "퇴직 후 발견된 건강보험료ㆍ고용보험료, 누가 부담해야 하는가",
+      "url": "http://www.worklaw.co.kr/view/view.asp?accessSite=Naver&accessMethod=Search&accessMenu=News&in_cate=106&in_cate2=0&gopage=1&bi_pidx=39317",
+      "press": "orklaw.co.kr",
+      "why": "보험료 부담 법률상담"
+     },
+     {
+      "title": "하나증권, 연금자산 일임 서비스 '1Q 스마트 개인연금 랩' 출시 外",
+      "url": "https://www.rcast.co.kr/news/articleView.html?idxno=31250",
+      "press": "rcast.co.kr",
+      "why": "금융상품·보험료 납부"
+     }
+    ]
+   },
+   {
+    "topic": "추진",
+    "n": 2,
+    "heads": [
+     {
+      "title": "\"3대 메가 프로젝트 최우선 재정 투입⋯재정 혁신으로 투자 여력 확보\"",
+      "url": "https://www.etoday.co.kr/news/view/2603182",
+      "press": "이투데이",
+      "why": "정부 재정·정책 추진"
+     },
+     {
+      "title": "정부, 'K-노동회의소' 만든다…'플랫폼·프리랜서' 지원 추진",
+      "url": "https://www.newsis.com/view/NISX20260713_0003707441",
+      "press": "뉴시스",
+      "why": "노동회의소 추진 기사"
+     }
+    ]
+   },
+   {
+    "topic": "그 밖",
+    "n": 5,
+    "heads": [
+     {
+      "title": "伊, 협동조합 중심 '디지털 연대'로 DX·AX 성공 스토리 쓰다",
+      "url": "http://www.kbiznews.co.kr/news/articleView.html?idxno=114504",
+      "press": "kbiznews.co.kr",
+      "why": "협동조합 DX 사례"
+     },
+     {
+      "title": "[경제소식] 교보생명, 제42회 꿈나무체육대회 개막",
+      "url": "http://www.4th.kr/news/articleView.html?idxno=2114655",
+      "press": "4th.kr",
+      "why": "경제 단신 모음 기사"
+     },
+     {
+      "title": "고용둔화 창원 전기장비·김해양산 금속가공 근로자에 지원금",
+      "url": "https://www.yna.co.kr/view/AKR20260713104500052?input=1195m",
+      "press": "연합뉴스",
+      "why": "지역 고용둔화 지원금"
+     },
+     {
+      "title": "김영훈 노동부 장관, ‘K-노동회의소’ 제안…플랫폼 노동자 보호 강화",
+      "url": "https://www.viva100.com/article/20260713501289",
+      "press": "viva100.com",
+      "why": "플랫폼 노동자 보호책"
+     }
+    ]
+   }
+  ],
+  "graph": {
+   "nodes": [
+    {
+     "id": "고용보험",
+     "axis": "지표",
+     "n": 37
+    },
+    {
+     "id": "가입자",
+     "axis": "지표",
+     "n": 22
+    },
+    {
+     "id": "청년",
+     "axis": "연령",
+     "n": 13
+    },
+    {
+     "id": "제조업",
+     "axis": "산업",
+     "n": 7
+    },
+    {
+     "id": "홈플러스",
+     "axis": "밖",
+     "n": 6
+    },
+    {
+     "id": "부진",
+     "axis": "논조",
+     "n": 5
+    },
+    {
+     "id": "도소매업",
+     "axis": "산업",
+     "n": 5
+    },
+    {
+     "id": "건설업",
+     "axis": "산업",
+     "n": 4
+    },
+    {
+     "id": "둔화",
+     "axis": "논조",
+     "n": 4
+    },
+    {
+     "id": "29세이하",
+     "axis": "연령",
+     "n": 3
+    },
+    {
+     "id": "빨간불",
+     "axis": "논조",
+     "n": 2
+    },
+    {
+     "id": "60세이상",
+     "axis": "연령",
+     "n": 2
+    },
+    {
+     "id": "한파",
+     "axis": "논조",
+     "n": 2
+    },
+    {
+     "id": "여전히",
+     "axis": "밖",
+     "n": 2
+    }
+   ],
+   "edges": [
+    [
+     1,
+     0,
+     21
+    ],
+    [
+     0,
+     2,
+     12
+    ],
+    [
+     1,
+     2,
+     7
+    ],
+    [
+     0,
+     5,
+     5
+    ],
+    [
+     0,
+     3,
+     5
+    ],
+    [
+     0,
+     6,
+     5
+    ],
+    [
+     7,
+     0,
+     4
+    ],
+    [
+     0,
+     8,
+     4
+    ],
+    [
+     0,
+     4,
+     4
+    ],
+    [
+     6,
+     8,
+     4
+    ],
+    [
+     6,
+     4,
+     4
+    ],
+    [
+     8,
+     4,
+     4
+    ],
+    [
+     1,
+     3,
+     3
+    ],
+    [
+     0,
+     10,
+     2
+    ],
+    [
+     10,
+     2,
+     2
+    ],
+    [
+     1,
+     5,
+     2
+    ],
+    [
+     9,
+     0,
+     2
+    ],
+    [
+     11,
+     0,
+     2
+    ],
+    [
+     0,
+     13,
+     2
+    ],
+    [
+     0,
+     12,
+     2
+    ],
+    [
+     13,
+     2,
+     2
+    ],
+    [
+     2,
+     12,
+     2
+    ],
+    [
+     1,
+     6,
+     2
+    ],
+    [
+     3,
+     2,
+     2
+    ]
+   ],
+   "trimmed": 0
+  },
+  "frames": [
+   {
+    "kw": "홈플러스",
+    "d0": 6,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   },
+   {
+    "kw": "여전히",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸"
+   }
+  ],
+  "truncated": [],
+  "unjudged": 0,
+  "judged": true
  }
 ]

@@ -21,7 +21,7 @@ import argparse
 import io
 import json
 import os
-from . import collect, fetch_release, llm_cite, plan
+from . import collect, fetch_release, llm_cite, make_data, plan
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SOURCES = os.path.abspath(os.path.join(HERE, '..', 'sources'))
@@ -99,6 +99,24 @@ def _digest(hwpx):
     return rel['body'][:1400] + '\n\n[표에서 읽은 최신 수치]\n' + '\n'.join(lines)
 
 
+def fetch_all_releases():
+    """raw/ 에 있는 **모든** 회차의 보도자료를 확보한다.
+
+    hwpx 는 저장소에 안 담는다(회차당 1.4MB). 그래서 CI 체크아웃에는 하나도
+    없고, 그 달 것만 받아 두면 `make_data` 가 나머지 회차를 「보도자료가 없다」
+    로 건너뛴다 — **rounds.json 이 조용히 한 회차짜리로 줄어든다.**
+    2026-09-11 에 실제로 그렇게 됐다(3회차 → 1회차가 배포까지 나갔다).
+    """
+    for release, _kinds in make_data.rounds_on_disk():
+        month = plan.month_of(release)
+        if os.path.exists(os.path.join(SOURCES, 'releases', 'ei_%s.hwpx' % month)):
+            continue
+        try:
+            fetch_release.save(month)
+        except Exception as exc:
+            print('  %s 보도자료를 못 받았다: %s' % (month, exc))
+
+
 def known_releases(today):
     """배포일 목록. 먼저 저장해 둔 일정표를 보고, 모자랄 때만 게시판에 묻는다.
 
@@ -152,6 +170,7 @@ def main(argv=None):
     judge_missing(release, kind)
 
     from . import make_data
+    fetch_all_releases()
     make_data.main()
     plan.save_state(STATE, release, kind, today)
     return 0

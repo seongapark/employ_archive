@@ -195,3 +195,30 @@ def test_the_schedule_lets_the_gate_see_next_months_release():
     # 게시판을 안 두드려도 10/14 를 미리 안다 — 매시간 도는 게이트의 핵심이다.
     releases = sorted(plan.schedule_to_releases(SCHEDULE, 2026).values())
     assert plan.decide('2026-10-14', releases) == ('regular', '2026-10-14')
+
+
+def test_make_data_refuses_to_shrink_the_round_list(tmp_path, monkeypatch):
+    # 2026-09-11 에 실제로 일어난 일: CI 체크아웃에는 보도자료 hwpx 가 없어서
+    # make_data 가 옛 회차를 건너뛰었고, rounds.json 이 3회차 → 1회차로 줄어든 채
+    # 배포까지 나갔다. 조용히 줄어드는 것이 가장 나쁘다.
+    import pytest
+    from domains.press.pipeline import make_data
+
+    data = tmp_path / 'data'
+    raw = tmp_path / 'raw'
+    data.mkdir()
+    raw.mkdir()
+    (data / 'rounds.json').write_text(json.dumps(
+        [{'release': '2026-09-07'}, {'release': '2026-08-10'}], ensure_ascii=False),
+        encoding='utf-8')
+    (raw / 'articles_2026-09-07_regular.json').write_text('{}', encoding='utf-8')
+    monkeypatch.setattr(make_data, 'DATA', str(data))
+    monkeypatch.setattr(make_data, 'RAW', str(raw))
+    monkeypatch.setattr(make_data, 'RELEASES', str(tmp_path / 'releases'))
+
+    with pytest.raises(SystemExit, match='줄었다'):
+        make_data.main()
+
+    # 멈췄으니 옛 목록이 그대로 남아 있어야 한다.
+    kept = json.loads((data / 'rounds.json').read_text('utf-8'))
+    assert [r['release'] for r in kept] == ['2026-09-07', '2026-08-10']
