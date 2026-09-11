@@ -148,7 +148,7 @@ export function pieChart(title, rows, opts = {}) {
   const zero = rows.filter((x) => !x.n).map((x) => x.name);
   const tail = [
     tiny.length ? tiny.join(' · ') : '',
-    zero.length ? `${zero.join(' · ')} 보도 0건` : '',
+    zero.length ? `* ${zero.join(' · ')} 보도 0건` : '',
   ].filter(Boolean);
 
   const body = total
