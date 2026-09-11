@@ -101,10 +101,19 @@
   white-space: nowrap;
 }
 
+/* 숫자의 이름(취업자수·종사자수·상시가입자수). 숫자 바로 위에 붙어야 이름표로
+   읽힌다 — 아래에 두면 그 밑의 포괄범위 줄과 한 덩어리가 되어 다시 섞인다. */
+.card__headline {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-top: 8px;
+}
+
 .card__value {
   font-size: 24px;
   font-weight: 700;
-  margin-top: 6px;
+  margin-top: 1px;
 }
 
 .card__value--empty {
@@ -708,9 +717,6 @@
   margin: 0 0 8px 0;
 }
 
-.digest {
-  padding: 8px 16px 4px 16px;
-}
 
 /* 원문의 층을 들여쓰기로만 옮긴다. 글머리표(□ ○ ▣)는 줄 안에 이미 있으므로
    <ul> 로 감싸면 점이 두 개가 된다. */
@@ -787,4 +793,201 @@
   margin: 10px 0 0 0;
   font-size: 11px;
   color: var(--text-muted);
+}
+
+/* 주요 지표 (KPI 4장)
+   ─────────────────────────────────────────────────────────────────────
+   이 화면에서 큰 숫자를 쓰는 자리는 카드와 여기뿐이다. 넷은 보도자료가
+   직접 앞세우는 지표라, 아래 접힌 요약을 펴면 같은 숫자가 문장으로 나온다. */
+
+/* 행이 지표, 열이 연령 기준(15세 이상 · 15~64세 · 15~29세). 세 열을 고정해
+   두었으므로 지표를 한 행 더 얹어도 판이 그대로 선다. */
+.kpis {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 0 16px;
+}
+
+.kpis__row {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text);
+  margin: 10px 16px 4px 16px;
+}
+
+/* 첫 행 이름은 `주요 지표` 바로 아래라 사이가 뜨면 두 제목이 따로 논다. */
+.section__title + .kpis__row {
+  margin-top: 2px;
+}
+
+.kpi {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  /* 세 칸이 나란히 서므로 여백이 좁다. 400px 화면에서 한 칸이 약 113px 이고,
+     그 안에 `15~64세` · `70.4%` · `+0.5%p` 가 줄바꿈 없이 들어간다. */
+  padding: 9px 9px 10px 9px;
+}
+
+.kpi__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  line-height: 1.3;
+  white-space: nowrap;
+}
+
+.kpi__sub {
+  display: block;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.kpi__value {
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 5px;
+  letter-spacing: -0.02em;
+}
+
+.kpi__value--empty {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.kpi__delta {
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 1px;
+}
+
+.kpi__delta.is-up { color: var(--up); }
+.kpi__delta.is-down { color: var(--down); }
+.kpi__delta.is-flat { color: var(--text-secondary); }
+
+/* 추이 (수준 선 + 증감 막대)
+   ─────────────────────────────────────────────────────────────────────
+   머리줄이 스크럽 라벨을 겸한다. 그림 위에 말풍선을 띄우면 짚고 있는 손가락이
+   그걸 가린다 — 읽을 자리를 손가락 밖에 고정해 둔다. 그래서 이 줄의 글자는
+   드래그 중에 계속 바뀐다: 달·수준·증감. */
+
+.trends {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 0 16px;
+}
+
+.trend {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px 6px 12px;
+}
+
+.trend__head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.trend__name {
+  font-size: 13px;
+  font-weight: 600;
+  margin: 0;
+  flex: none;
+}
+
+.trend__month {
+  font-size: 11px;
+  color: var(--text-muted);
+  flex: none;
+}
+
+.trend__now {
+  margin-left: auto;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.trend__delta {
+  font-size: 12px;
+  font-weight: 600;
+  flex: none;
+}
+
+.trend__delta.is-up { color: var(--up); }
+.trend__delta.is-down { color: var(--down); }
+.trend__delta.is-flat { color: var(--text-secondary); }
+
+/* 짚는 곳이다. 손가락이 닿는 면을 그림보다 넓게 잡고, 끄는 동안 글자가
+   선택되거나 화면이 가로로 밀리지 않게 한다. */
+.trend__plot {
+  margin-top: 6px;
+  padding: 2px 0;
+  cursor: crosshair;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.combo {
+  display: block;
+  width: 100%;
+}
+
+.trend__foot {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 10px;
+  color: var(--text-muted);
+  padding: 2px 2px 4px 2px;
+}
+
+/* 접힌 둘 (보도자료 요약 · 가장 크게 움직인 곳)
+   지표가 주인공이고, 이들은 거기 있다는 것만 알린다. */
+
+.fold {
+  margin: 8px 16px 0 16px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.fold > summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  /* 탭 표적 44px. 접기는 이 화면에서 가장 자주 눌리는 것이다. */
+  min-height: 44px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.fold > summary::-webkit-details-marker { display: none; }
+.fold > summary::before { content: "▸"; color: var(--text-muted); }
+.fold[open] > summary::before { content: "▾"; }
+
+.fold > summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+  border-radius: 10px;
+}
+
+.fold__count {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+}
+
+.fold__body {
+  padding: 10px 14px 12px 14px;
+  border-top: 1px solid var(--border);
 }

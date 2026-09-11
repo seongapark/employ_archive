@@ -59,14 +59,22 @@ export function cardHtml(card, { linked = true } = {}) {
   const head = `<div class="card__head">${name}
     <span class="card__meta num">${esc(releaseLabel(card))}</span></div>`;
 
-  const body = card.state === 'unpublished'
+  // 숫자의 이름. 세 출처가 저마다 다른 것을 센다 — 취업자수·종사자수·상시가입자수 —
+  // 이고, 그 차이를 보여주는 것이 이 앱의 요점이다. 이름이 없으면 숫자 바로 밑의
+  // 포괄범위 줄(`15세 이상 인구 · 조사대상주간 …`)이 이름표처럼 읽혀서 취업자수를
+  // 인구수로 보게 된다(2026-09-11 사용자가 짚었다). 미발표인 달에도 남긴다 —
+  // 이름이 같이 사라지면 무엇의 미발표인지 알 수 없다.
+  const headline = card.headline_ko
+    ? `<div class="card__headline">${esc(card.headline_ko)}</div>` : '';
+
+  const body = headline + (card.state === 'unpublished'
     ? `<div class="card__value card__value--empty">${esc(monthLabel(card.period))} 기준 미발표</div>` +
       (card.fallback
         ? `<div class="card__fallback num">최신 ${esc(monthLabel(card.fallback.period))} · ${esc(fmtLevel(card.fallback.value))} (${esc(
             card.fallback.state === 'noDelta' ? EMPTY_LABEL.noDelta : fmtDelta(card.fallback.yoy))})</div>`
         : '')
     : `<div class="card__value num">${esc(fmtLevel(card.value))}</div>
-       ${deltaRow(card)}`;
+       ${deltaRow(card)}`);
 
   // coverage 는 접히지 않는다. 정의 차이의 인지가 이 앱의 핵심 가치다(스펙 7.5).
   const coverage = `<div class="card__coverage">${esc(card.coverage)}</div>`;

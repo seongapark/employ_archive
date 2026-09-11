@@ -156,3 +156,100 @@ def test_coverage_guard_fails_when_an_age_band_is_missing(records):
     kept = [r for r in records if not (r.breakdown == "age" and r.category == "60+")]
     with pytest.raises(ValueError, match="연령"):
         eaps.check_coverage(kept)
+
+
+# ── 총괄 지표 (1.전체 · 1564 · 1529) ──────────────────────────────────
+
+@pytest.fixture(scope="module")
+def totals():
+    return eaps.parse_totals(
+        FIXTURE.read_bytes(),
+        released_at=date(2026, 8, 12),
+        release_url="https://mods.go.kr/x",
+        attachments=[],
+        collected_at=datetime(2026, 8, 30, 9, 0),
+    )
+
+
+def pick(records, series, breakdown="total", category=None, period="2026-07"):
+    hits = [r for r in records if r.series == series and r.breakdown == breakdown
+            and r.category == category and r.period == period]
+    assert len(hits) == 1, (series, breakdown, category, period, len(hits))
+    return hits[0]
+
+
+def test_reads_the_headline_rates_the_release_leads_with(totals):
+    # 2026년 7월 회차의 보도자료 요약이 말하는 숫자들이다.
+    assert pick(totals, "employment_rate", "scope", "15-64").value == 70.3
+    assert pick(totals, "employment_rate", "scope", "15-29").value == 44.2
+    assert pick(totals, "unemployment_rate").value == 2.6
+    assert pick(totals, "unemployment_rate", "scope", "15-29").value == 6.8
+
+
+def test_rates_are_percent_and_their_change_is_percentage_points(totals):
+    r = pick(totals, "employment_rate", "scope", "15-64")
+    assert r.unit == "%"
+    assert r.yoy == 0.1              # 증감 시트에 적힌 %p. 우리가 빼서 만들지 않는다.
+
+
+def test_levels_stay_in_thousands(totals):
+    assert pick(totals, "unemployed").unit == "천명"
+    assert pick(totals, "unemployed").value == 776.1
+    assert pick(totals, "inactive").value == 16102.6
+    assert pick(totals, "population").value == 46014.8
+    assert pick(totals, "labor_force").value == 29912.2
+
+
+def test_the_change_comes_from_the_paired_delta_sheet(totals):
+    # 취업자 +107.6천명 = 보도자료의 `10만 7천명 증가`
+    assert pick(totals, "labor_force").yoy == 158.0
+    assert pick(totals, "unemployed").yoy == 50.4
+
+
+def test_does_not_re_emit_the_total_headcount(totals):
+    """취업자수 전체는 산업 시트가 만든다. 두 곳에서 만들면 같은 id 를 두 번
+    쓰게 되고, 언젠가 둘이 어긋나면 어느 쪽이 이겼는지 아무도 모른다."""
+    assert not [r for r in totals if r.series == "headcount" and r.breakdown == "total"]
+
+
+def test_still_carries_headcount_for_the_age_scopes(totals):
+    # 15~64세·15~29세 취업자수는 산업 시트에 없다 — 여기서만 나온다.
+    assert pick(totals, "headcount", "scope", "15-64").value == 24519.5
+    assert pick(totals, "headcount", "scope", "15-29").value == 3441.2
+
+
+def test_the_two_sheets_agree_on_the_total_headcount():
+    """`1.전체` 와 `3.산업(신)` 이 같은 취업자수를 말하는지 확인한다.
+
+    어긋나면 우리가 두 시트를 섞어 쓰고 있다는 뜻이고, 화면의 카드와 지표가
+    서로 다른 숫자를 말하게 된다. 2026-07 회차에서 28개월이 전부 일치했다.
+    """
+    data = FIXTURE.read_bytes()
+    assert eaps.total_headcount_matches(data) is True
+
+
+def test_ids_never_collide_with_the_headcount_records(records, totals):
+    assert not ({r.id for r in totals} & {r.id for r in records})
+
+
+def test_every_month_is_contiguous(totals):
+    """회차마다 앞쪽 몇 행은 연도별 8월이라 띄엄띄엄하다. 그 구간을 시계열로
+    그리면 2년 간격이 한 칸으로 붙어 급변한 것처럼 보인다."""
+    months = sorted({r.period for r in totals})
+    def nxt(p):
+        y, m = int(p[:4]), int(p[5:7]) + 1
+        return f"{y + 1}-01" if m > 12 else f"{y}-{m:02d}"
+    assert all(nxt(a) == b for a, b in zip(months, months[1:])), months
+
+
+def test_parse_totals_stops_when_the_two_sheets_disagree(monkeypatch):
+    """교차 확인은 적어만 두면 소용없다 — 어긋나면 수집이 멈춰야 한다.
+
+    어긋난 채로 통과시키면 카드는 산업 시트의 취업자수를, 지표는 총괄 시트의
+    숫자를 말하게 되고 둘이 다른데도 화면은 아무 말을 하지 않는다.
+    """
+    monkeypatch.setattr(eaps, "total_headcount_matches", lambda data: False)
+    with pytest.raises(ValueError, match="취업자수"):
+        eaps.parse_totals(FIXTURE.read_bytes(), released_at=date(2026, 8, 12),
+                          release_url="https://mods.go.kr/x", attachments=[],
+                          collected_at=datetime(2026, 8, 30, 9, 0))
