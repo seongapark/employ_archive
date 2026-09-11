@@ -4,9 +4,9 @@
  "auth": "HUB",
  "window": [
   "2026-09-08",
-  "2026-09-22"
+  "2026-09-28"
  ],
- "collected_at": "2026-09-11 19:53",
+ "collected_at": "2026-09-12 06:35",
  "volume": {
   "collected": 79,
   "articles": 19,
@@ -359,21 +359,21 @@
    "rel": false
   },
   {
-   "title": "잡플래닛, 하반기 '일하기 좋은 기업' 59곳 선정…대상 SK하이닉스",
-   "desc": "기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO 지지율 등을 종합... 이번 개편은 회사 전체 평점만 보는 방식에서 한발 더 나아가 구직자가 실제 지원하려는 산업과 직무 기준으로...",
-   "link": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
-   "originallink": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
-   "press": "kdfnews.com",
-   "pub": "2026-09-08 09:06",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "올 하반기 일하기 좋은 기업 59곳..1위 SK하이닉스",
    "desc": "잡플래닛은 매년 일하기 좋은 회사를 발표해왔으며, 지난해부터 구직자들에게... 기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO...",
    "link": "http://www.breaknews.com/1234816",
    "originallink": "http://www.breaknews.com/1234816",
    "press": "breaknews.com",
+   "pub": "2026-09-08 09:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "잡플래닛, 하반기 '일하기 좋은 기업' 59곳 선정…대상 SK하이닉스",
+   "desc": "기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO 지지율 등을 종합... 이번 개편은 회사 전체 평점만 보는 방식에서 한발 더 나아가 구직자가 실제 지원하려는 산업과 직무 기준으로...",
+   "link": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
+   "originallink": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
+   "press": "kdfnews.com",
    "pub": "2026-09-08 09:06",
    "q": "구직급여",
    "rel": false
