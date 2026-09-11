@@ -17,6 +17,12 @@ def test_all_five_orgs_are_present():
     assert orgs == {'kli', 'keis', 'kdi', 'kiet', 'bok'}
 
 
+def test_the_filter_field_is_gone_from_the_board_model():
+    # 취지가 바뀌어 게시판이 레코드를 거르지 않는다. 필드가 되살아나면
+    # 거르는 코드도 같이 돌아온다 — 그때 여기서 걸려야 한다.
+    assert 'filter' not in boards.Board.model_fields
+
+
 def test_only_the_boards_without_a_detail_page_read_it_from_the_list():
     # 실측(2026-09-10): KEIS proj 게시판은 detail.do 상세가 따로 있고, 인력수급전망
     # (bbs/115)만 목록이 곧 상세다. 이 플래그가 잘못 켜지면 초록이 통째로 비고,
