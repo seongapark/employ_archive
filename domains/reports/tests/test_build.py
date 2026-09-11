@@ -133,8 +133,8 @@ def test_dedupe_titles_disabled_keeps_same_title_duplicates():
     # KIET 월간 산업경제의 '실물경제 주요 지표'와 이슈페이퍼의 '새해 한국 경제에 바란다'
     # 같은 고정 제목 칼럼은 회차마다 다른 글이므로 지우면 안 된다.
     # dedupe_titles 가 꺼진(기본값) 게시판에서는 같은 제목이어도 보존한다.
-    rows = [raw('kli-1', KLI_BOARD, '월간 산업경제'),
-            raw('kli-2', KLI_BOARD, '월간 산업경제')]
+    rows = [raw('kli-1', KLI_BOARD, '실물경제 주요 지표 & KIET 업종별 경기지수'),
+            raw('kli-2', KLI_BOARD, '실물경제 주요 지표 & KIET 업종별 경기지수')]
     rows[0].published = '2025-01-01'
     rows[1].published = '2025-02-01'
     kept, _, _ = build.build(rows, [KLI_BOARD], KW)
@@ -147,3 +147,23 @@ def test_the_same_title_on_different_boards_is_kept_twice():
     rows = [raw('x-1', KDI_BOARD, '같은 제목'), raw('x-2', other, '같은 제목')]
     kept, _, _ = build.build(rows, [KDI_BOARD, other], KW)
     assert sorted(r.id for r in kept) == ['x-1', 'x-2']
+
+
+def test_dedupe_titles_isolates_by_board():
+    # dedupe_titles 가 켜진 게시판끼리도 격리된다 — 각 게시판에서 이른 날짜만 남는다.
+    # key 의 (board, title) 조합이 격리를 보장하는지 확인한다.
+    board_a = KDI_BOARD.model_copy(update={'id': 'board-a', 'dedupe_titles': True})
+    board_b = KDI_BOARD.model_copy(update={'id': 'board-b', 'dedupe_titles': True})
+    rows = [
+        raw('a-1', board_a, '같은 제목'),  # 2025-05-01
+        raw('a-2', board_a, '같은 제목'),  # 2025-05-01
+        raw('b-1', board_b, '같은 제목'),  # 2025-05-01
+        raw('b-2', board_b, '같은 제목'),  # 2025-05-01
+    ]
+    rows[1].published = '2025-06-01'  # a-2는 나중 날짜
+    rows[2].published = '2025-04-01'  # b-1은 더 이른 날짜
+    rows[3].published = '2025-07-01'  # b-2는 더 나중 날짜
+    kept, _, _ = build.build(rows, [board_a, board_b], KW)
+    # a 게시판: a-1 (이른 날짜) 선택, a-2 제거
+    # b 게시판: b-1 (이른 날짜) 선택, b-2 제거
+    assert sorted(r.id for r in kept) == ['a-1', 'b-1']

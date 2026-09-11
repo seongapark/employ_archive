@@ -23,6 +23,7 @@ from pathlib import Path
 from . import boards as boards_mod
 from . import keywords as kw_mod
 from . import store
+from .boards import Board
 from .models import RawReport, Report
 
 DATA = Path(__file__).resolve().parent.parent / 'data'
@@ -62,7 +63,7 @@ def missing_reasons(reports: list[Report]) -> dict:
     return dict(sorted(out.items(), key=lambda kv: -kv[1]))
 
 
-def dedupe(reports: list[Report], by_id: dict) -> list[Report]:
+def dedupe(reports: list[Report], by_id: dict[str, Board]) -> list[Report]:
     """같은 게시판에 제목이 똑같은 게 둘이면 이른 날짜 하나만 남긴다.
 
     조사연구자료에서 같은 연구를 두 지역본부가 각각 올린다(실측 7쌍). nttId 가
@@ -70,20 +71,22 @@ def dedupe(reports: list[Report], by_id: dict) -> list[Report]:
     **게시판 간에는 보지 않는다** — 고른 게시판 사이 중복은 실측 0건이고,
     우연한 동명이 지워지면 안 된다.
     """
+    # dedupe_titles 가 켜지지 않은 게시판은 손대지 않고 통과시킨다.
+    passthrough = [r for r in reports
+                   if not getattr(by_id.get(r.board), 'dedupe_titles', False)]
+
+    # dedupe_titles 가 켜진 게시판만 같은 제목 중복 제거 대상으로 한다.
+    target = [r for r in reports
+              if getattr(by_id.get(r.board), 'dedupe_titles', False)]
+
     best: dict[tuple[str, str], Report] = {}
-    for r in reports:
-        board = by_id.get(r.board)
-        # dedupe_titles가 켜진 게시판만 중복 제거 대상
-        if board and board.dedupe_titles:
-            key = (r.board, r.title.strip())
-            prev = best.get(key)
-            if prev is None or (r.published, r.id) < (prev.published, prev.id):
-                best[key] = r
-            continue
-        # 켜지지 않은 게시판은 그대로 통과
-        key = (r.board, id(r))  # 유일한 키
-        best[key] = r
-    return list(best.values())
+    for r in target:
+        key = (r.board, r.title.strip())
+        prev = best.get(key)
+        if prev is None or (r.published, r.id) < (prev.published, prev.id):
+            best[key] = r
+
+    return passthrough + list(best.values())
 
 
 def build(raw_rows: list[RawReport], boards: list, kw: dict):
