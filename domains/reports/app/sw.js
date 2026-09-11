@@ -12,6 +12,7 @@ const SHELL_ASSETS = [
   './js/ui.js',
   './js/search.js',
   './js/screens/home.js',
+  './js/screens/picks.js',
   './js/screens/topics.js',
   './js/screens/orgs.js',
   './js/screens/report.js',
