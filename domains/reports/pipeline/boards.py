@@ -8,7 +8,7 @@ from __future__ import annotations
 import json
 import re
 from pathlib import Path
-from typing import Optional
+from typing import Literal, Optional
 from urllib.parse import urlsplit
 
 from pydantic import BaseModel
@@ -46,6 +46,13 @@ class Board(BaseModel):
     # KEIS 는 목록 항목이 초록·PDF 를 다 들고 있고 상세 페이지가 따로 없다.
     # 켜져 있으면 수집기가 상세를 다시 요청하지 않는다.
     detail_in_list: bool = False
+    # 한국은행은 게시판을 menuNo 로 구분한다. 목록 주소가 전 게시판 공통이라
+    # list_url 만으로는 어느 게시판인지 알 수 없다.
+    menu_no: Optional[str] = None
+    # 상세 본문 블록(div.dbdata)이 게시판마다 다른 것을 담는다 — 초록이기도,
+    # 목차이기도, "첨부파일 참조" 안내문이기도 하다. 실측표는 스펙 §3-3.
+    # 이 값을 바꾸면 그 게시판만 재수집해야 한다(분류가 수집 시점에 일어난다).
+    body: Literal['abstract', 'toc', 'none'] = 'abstract'
 
 
 def load_boards(path: Path | str | None = None) -> list[Board]:
