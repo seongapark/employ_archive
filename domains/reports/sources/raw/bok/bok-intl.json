@@ -1,0 +1,29 @@
+[
+  {
+    "id": "bok-11064374",
+    "org": "bok",
+    "board": "bok-intl",
+    "series": "국제경제이슈",
+    "title": "중국 반도체 수출 호조의 배경과 우리 경제에 대한 시사점",
+    "authors": [
+      "중국경제팀"
+    ],
+    "published": "2026-09-02",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/B0000565/view.do?nttId=11064374&searchCnd=1&searchKwd=&depth2=201157&depth3=201757&date=&sdate=&edate=&sort=1&pageUnit=100&depth=201757&pageIndex=1&programType=newsData&menuNo=201757&oldMenuNo=201757",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/f728649862364c7bbfac11d10c667770/1/9903d0b89f2c43ca97ac5f459da3b12d.pdf",
+    "abstract": null,
+    "toc": [
+      "<목차>",
+      "1 . 중국 반도체 수출 동향",
+      "2. 글로벌 반도체 공급망에서 중국의 역할",
+      "3. 중국의 반도체 수출과 한국의 對中 반도체 수출간 연계",
+      "4. 한·중 반도체 산업 경쟁력 평가",
+      "5. 종합평가"
+    ],
+    "abstract_tried": false,
+    "abstract_note": "요약 없음",
+    "collected_at": "2026-09-11T20:17:48+09:00"
+  }
+]

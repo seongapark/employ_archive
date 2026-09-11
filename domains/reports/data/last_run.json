@@ -1,234 +1,18 @@
 {
-  "at": "2026-09-11T16:39:31+09:00",
+  "at": "2026-09-11T20:17:50+09:00",
   "boards": {
-    "kli-research": {
-      "ok": true,
-      "parsed": 150,
-      "added": 40,
-      "details": 40,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 140
-    },
-    "kli-review": {
-      "ok": true,
-      "parsed": 70,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 68
-    },
-    "kli-policy": {
-      "ok": true,
-      "parsed": 30,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 22
-    },
-    "kli-intl": {
-      "ok": true,
-      "parsed": 60,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 50
-    },
-    "kli-brief": {
-      "ok": true,
-      "parsed": 20,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 11
-    },
-    "kli-wage": {
-      "ok": true,
-      "parsed": 50,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 47
-    },
-    "kli-panel": {
-      "ok": true,
-      "parsed": 10,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 10
-    },
-    "kli-eia": {
-      "ok": true,
-      "parsed": 40,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 33
-    },
-    "keis-research": {
-      "ok": true,
-      "parsed": 150,
-      "added": 40,
-      "details": 40,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 120
-    },
-    "keis-supply": {
-      "ok": true,
-      "parsed": 38,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 38
-    },
-    "keis-issue": {
-      "ok": true,
-      "parsed": 50,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 21
-    },
-    "keis-trend": {
-      "ok": true,
-      "parsed": 100,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 50
-    },
-    "keis-region": {
-      "ok": true,
-      "parsed": 20,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 20
-    },
-    "keis-transition": {
-      "ok": true,
-      "parsed": 5,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 5
-    },
-    "kiet-report": {
-      "ok": true,
-      "parsed": 150,
-      "added": 40,
-      "details": 40,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 120
-    },
-    "kiet-redata": {
-      "ok": true,
-      "parsed": 90,
-      "added": 2,
-      "details": 2,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 82
-    },
-    "kiet-podata": {
-      "ok": true,
-      "parsed": 60,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 36
-    },
-    "kiet-paper": {
-      "ok": true,
-      "parsed": 90,
-      "added": 2,
-      "details": 2,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 82
-    },
-    "kiet-issue": {
-      "ok": true,
-      "parsed": 150,
-      "added": 40,
-      "details": 40,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 120
-    },
-    "kiet-economy": {
-      "ok": true,
-      "parsed": 150,
-      "added": 40,
-      "details": 40,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 120
-    },
-    "kdi-report": {
-      "ok": true,
-      "parsed": 130,
-      "added": 40,
-      "details": 40,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 120
-    },
-    "kdi-analysis": {
-      "ok": true,
-      "parsed": 40,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
-      "error": null,
-      "total": 31
-    },
-    "kdi-focus": {
-      "ok": true,
-      "parsed": 131,
-      "added": 40,
-      "details": 40,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 117
-    },
-    "kdi-trends": {
-      "ok": true,
-      "parsed": 69,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": false,
-      "error": null,
-      "total": 69
-    },
-    "kdi-etc": {
+    "bok-intl": {
       "ok": true,
       "parsed": 1,
-      "added": 0,
-      "details": 0,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "error": null,
       "total": 1
     }
   },
   "unregistered": [],
-  "reports": 950,
+  "reports": 951,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -255,6 +39,13 @@
         "total": 7,
         "missing": 1,
         "rate": 0.143
+      }
+    },
+    "bok": {
+      "국제경제이슈": {
+        "total": 1,
+        "missing": 1,
+        "rate": 1.0
       }
     },
     "kli": {
@@ -368,6 +159,7 @@
     "요약 섹션 없음": 232,
     "아직 안 받음": 45,
     "텍스트가 없는 스캔본": 38,
+    "요약 없음": 1,
     "파일이 너무 큼(67MB)": 1,
     "파일이 너무 큼(79MB)": 1
   }
