@@ -6,10 +6,10 @@ KW = {'청년고용': ['청년고용'], '임금': ['임금']}
 
 KLI_BOARD = Board(id='kli-research', org='kli', name='연구보고서',
                   series='연구보고서', list_url='https://x/1',
-                  item_re=r'(\d+)', filter=False)
+                  item_re=r'(\d+)')
 KDI_BOARD = Board(id='kdi-report', org='kdi', name='연구보고서',
                   series='연구보고서', list_url='https://x/2',
-                  item_re=r'(\d+)', filter=True)
+                  item_re=r'(\d+)')
 
 
 def raw(rid, board, title='제목', abstract=None):
@@ -20,31 +20,17 @@ def raw(rid, board, title='제목', abstract=None):
     )
 
 
-def test_unfiltered_board_is_kept_even_without_a_keyword():
-    # KLI·KEIS 는 기관 전체가 고용·노동이다.
+def test_a_report_with_no_keyword_match_is_still_kept():
+    # 전량 수록이다 — 키워드가 하나도 안 걸려도 담는다.
     reports, _, _ = build.build([raw('kli-1', KLI_BOARD, '노사협의회 운영실태')],
                                 [KLI_BOARD], KW)
     assert [r.id for r in reports] == ['kli-1']
-    assert reports[0].employment is True
 
 
 def test_matched_is_recorded_even_on_unfiltered_boards():
     # 주제 화면이 네 기관을 덮으려면 KLI 에도 matched 가 있어야 한다.
     reports, _, _ = build.build([raw('kli-2', KLI_BOARD, '청년고용 실태')],
                                 [KLI_BOARD], KW)
-    assert reports[0].matched == ['청년고용']
-
-
-def test_filtered_board_drops_a_report_with_no_keyword():
-    reports, _, _ = build.build([raw('kdi-1', KDI_BOARD, '반도체 수출 전망')],
-                                [KDI_BOARD], KW)
-    assert reports == []
-
-
-def test_filtered_board_keeps_a_report_that_matches():
-    reports, _, _ = build.build([raw('kdi-2', KDI_BOARD, '청년고용 대책 평가')],
-                                [KDI_BOARD], KW)
-    assert [r.id for r in reports] == ['kdi-2']
     assert reports[0].matched == ['청년고용']
 
 
@@ -55,13 +41,26 @@ def test_the_abstract_counts_toward_the_match():
     assert [r.id for r in reports] == ['kdi-3']
 
 
-def test_changing_keywords_flips_the_verdict_without_recollecting():
-    # 이 과제의 존재 이유. raw 는 그대로고 keywords 만 바뀐다.
-    rows = [raw('kdi-4', KDI_BOARD, '플랫폼 종사자 실태')]
-    assert build.build(rows, [KDI_BOARD], KW)[0] == []
+def test_every_raw_record_is_kept_regardless_of_keywords():
+    # 취지가 바뀌었다 — 거르는 일은 수록이 아니라 추천이 한다.
+    rows = [raw('kdi-4', KDI_BOARD, '반도체 경기와 거시경제'),
+            raw('kdi-5', KDI_BOARD, '청년고용 부진의 원인')]
+    kept, _, _ = build.build(rows, [KDI_BOARD], KW)
+    assert sorted(r.id for r in kept) == ['kdi-4', 'kdi-5']
+
+
+def test_changing_keywords_flips_the_topic_tag_without_recollecting():
+    # 재수집 없이 주제 태깅이 바뀌는 성질은 그대로 지킨다. raw 는 그대로고
+    # keywords 만 바뀐다.
+    rows = [raw('kdi-6', KDI_BOARD, '플랫폼 종사자 실태')]
+    assert build.build(rows, [KDI_BOARD], KW)[0][0].matched == []
     wider = dict(KW, 고용형태=['플랫폼 종사자'])
-    kept, _, _ = build.build(rows, [KDI_BOARD], wider)
-    assert [r.id for r in kept] == ['kdi-4']
+    assert build.build(rows, [KDI_BOARD], wider)[0][0].matched == ['고용형태']
+
+
+def test_the_employment_flag_is_gone_from_the_app_record():
+    kept, _, _ = build.build([raw('kli-9', KLI_BOARD, '제목')], [KLI_BOARD], KW)
+    assert 'employment' not in build._light(kept[0])
 
 
 def test_abstracts_are_split_out_by_id():

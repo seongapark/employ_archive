@@ -39,7 +39,6 @@ class Board(BaseModel):
     id_prefix: str = ''
     # 항목이 앵커가 아니라 버튼인 게시판(KDI 경제동향)의 목록 모양.
     list_style: str = 'list'
-    filter: bool = False
     enabled: bool = True
     collapse: bool = False
     category_keep: Optional[str] = None

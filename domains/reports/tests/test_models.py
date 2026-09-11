@@ -31,11 +31,12 @@ def test_report_id_uses_the_number_the_org_gave():
     assert models.report_id('kli', '10302') == 'kli-10302'
 
 
-def test_raw_report_has_no_verdict_fields():
-    # 판정은 build 가 붙인다. raw 에 있으면 수집이 판정한 것이다.
-    assert 'employment' not in models.RawReport.model_fields
+def test_raw_report_has_no_topic_tag_field():
+    # 주제 태그는 build 가 붙인다. raw 에 있으면 수집이 태깅한 것이다.
+    # 전량 수록이므로 수록 여부를 가르는 필드는 아예 없다 — employment 는 없다.
     assert 'matched' not in models.RawReport.model_fields
-    assert 'employment' in models.Report.model_fields
+    assert 'employment' not in models.Report.model_fields
+    assert 'matched' in models.Report.model_fields
 
 
 def test_report_rejects_dates_before_the_cutoff():

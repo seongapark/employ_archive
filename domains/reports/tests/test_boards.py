@@ -12,13 +12,6 @@ def test_board_ids_are_unique():
     assert len(ids) == len(set(ids))
 
 
-def test_only_kdi_and_kiet_boards_are_filtered():
-    # KLI·KEIS 는 기관 전체가 고용·노동이라 거르지 않는다(스펙 §5-2).
-    for b in boards.load_boards():
-        if b.filter:
-            assert b.org in ('kdi', 'kiet'), f'{b.id} 에 필터가 켜져 있다'
-
-
 def test_all_five_orgs_are_present():
     orgs = {b.org for b in boards.load_boards()}
     assert orgs == {'kli', 'keis', 'kdi', 'kiet', 'bok'}

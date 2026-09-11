@@ -1,8 +1,10 @@
 """raw + keywords.json → data/reports.json · abstracts.json · 결측률.
 
-수집기는 게시판에 있는 것을 전부 raw 에 넣는다. 고용 여부를 가르는 것은 여기다.
-경계가 여기 있는 이유는 비용이다 — 판정이 수집 안에 있으면 키워드 한 줄을 고칠
-때마다 KDI·KIET 를 며칠에 걸쳐 다시 긁어야 한다. 여기서는 수십 초다.
+**전량 수록한다.** 이 사이트는 외부기관 보고서를 취합하는 아카이브이고, 읽을
+만한 것을 고르는 일은 recommend 가 별도 파일에서 한다.
+
+keywords 는 거르는 도구가 아니라 **분류하는 도구**다 — matched 가 주제 화면의
+입구다. 키워드를 고치면 재수집 없이 여기서 수십 초에 다시 매겨진다.
 
   python -m domains.reports.pipeline.build
 """
@@ -27,11 +29,9 @@ DATA = Path(__file__).resolve().parent.parent / 'data'
 
 
 def judge(raw: RawReport, board, kw: dict) -> Report:
+    """주제 태그만 붙인다. 수록 여부는 가르지 않는다 — 전량 수록이다."""
     text = ' '.join([raw.title, raw.abstract or '', ' '.join(raw.toc)])
-    matched = kw_mod.match(text, kw)
-    # 매칭은 네 기관 전부에 남긴다. 담을지 말지에 쓰는 것만 filter 게시판이다.
-    employment = bool(matched) if board.filter else True
-    return Report(**raw.model_dump(), employment=employment, matched=matched)
+    return Report(**raw.model_dump(), matched=kw_mod.match(text, kw))
 
 
 def abstract_missing(reports: list[Report]) -> dict:
@@ -70,8 +70,7 @@ def build(raw_rows: list[RawReport], boards: list, kw: dict):
         if board is None or not board.enabled:
             continue
         rec = judge(raw, board, kw)
-        if rec.employment:
-            kept.append(rec)
+        kept.append(rec)
     kept.sort(key=lambda r: (r.published, r.id), reverse=True)
     abstracts = {r.id: {'abstract': r.abstract or '', 'toc': r.toc} for r in kept}
     return kept, abstracts, abstract_missing(kept)
