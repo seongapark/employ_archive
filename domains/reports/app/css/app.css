@@ -146,6 +146,16 @@
   border-radius: 999px;
   flex: none;
 }
+.pick-badge {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 2px 7px;
+  border-radius: 999px;
+  flex: none;
+}
+
 .org--kli { background: var(--org-kli); }
 .org--keis { background: var(--org-keis); }
 .org--kdi { background: var(--org-kdi); }
@@ -229,6 +239,12 @@
   font-weight: 700;
   color: var(--text);
   padding: 16px 16px 4px 16px;
+}
+
+.section-title .more {
+  float: right;
+  font-weight: 500;
+  color: var(--link);
 }
 
 .back {

@@ -1,6 +1,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { homeRows, headHtml, bodyHtml } from '../../app/js/screens/home.js';
+import {
+  homeRows, headHtml, bodyHtml, topPicks,
+} from '../../app/js/screens/home.js';
 import { topicChips, reportsForTopic } from '../../app/js/screens/topics.js';
 import { shelf } from '../../app/js/screens/orgs.js';
 import { detailModel } from '../../app/js/screens/report.js';
@@ -82,6 +84,47 @@ test('머리는 기관·연도 칩 상태는 반영한다', () => {
   // 그림에서는 상태가 맞아야 한다.
   const on = headHtml({ q: '', orgs: ['kli'], years: [] }, CTX);
   assert.ok(on.includes('chip--active'));
+});
+
+// ── 홈: 검색창 아래 추천 ─────────────────────────────────────────────
+
+test('홈 추천은 여섯 줄까지다', () => {
+  const reports = Array.from({ length: 10 }, (_, i) => ({
+    id: `r${i}`, org: 'bok', title: `ㄱ${i}`, published: `2026-01-${String(i + 1).padStart(2, '0')}`,
+  }));
+  const picks = Object.fromEntries(
+    reports.map((r) => [r.id, { pick: true, axis: '청년 고용', why: 'ㄱ' }]));
+  assert.ok(topPicks(reports, picks).length <= 6);
+});
+
+test('한 기관이 홈 추천을 다 채우지 못한다', () => {
+  const reports = [
+    ...Array.from({ length: 5 }, (_, i) => ({
+      id: `b${i}`, org: 'bok', title: `ㄱ${i}`, published: `2026-02-${String(i + 1).padStart(2, '0')}`,
+    })),
+    { id: 'k1', org: 'kli', title: 'ㄴ', published: '2026-01-01' },
+  ];
+  const picks = Object.fromEntries(
+    reports.map((r) => [r.id, { pick: true, axis: '청년 고용', why: 'ㄱ' }]));
+  const rows = topPicks(reports, picks);
+  assert.ok(rows.filter((r) => r.org === 'bok').length <= 2);
+  assert.ok(rows.some((r) => r.org === 'kli'));
+});
+
+test('홈 추천은 최신 순이다', () => {
+  const reports = [
+    { id: 'a', org: 'bok', title: 'ㄱ', published: '2026-01-01' },
+    { id: 'b', org: 'kli', title: 'ㄴ', published: '2026-03-01' },
+  ];
+  const picks = {
+    a: { pick: true, axis: '청년 고용', why: 'ㄱ' },
+    b: { pick: true, axis: '청년 고용', why: 'ㄴ' },
+  };
+  assert.deepEqual(topPicks(reports, picks).map((r) => r.id), ['b', 'a']);
+});
+
+test('추천 파일이 없어도 홈이 죽지 않는다', () => {
+  assert.deepEqual(topPicks(CTX.reports, undefined), []);
 });
 
 // ── 주제 ──────────────────────────────────────────────────────────────
