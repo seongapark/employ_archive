@@ -1,5 +1,5 @@
 import { 기간선택, 순서 } from './model.js';
-import { 요약HTML, 도메인HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML } from './render.js';
+import { 요약HTML, 도메인HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML } from './render.js';
 import { 막대SVG } from './chart.js';
 import { 불러오기, 토큰쓰기, 토큰지우기, 제외상태, 제외설정 } from './api.js';
 
@@ -25,11 +25,7 @@ function 그리기(s) {
     <h2 class="sec">화면</h2>${화면HTML(s)}
     <h2 class="sec">유입</h2>${유입HTML(s)}
     <h2 class="sec">방문자</h2>${분포HTML(s)}
-    <div class="tools">
-      <label class="toggle"><input id="off" type="checkbox"${제외상태(localStorage) ? ' checked' : ''}>
-        내 방문을 통계에서 뺀다</label>
-      <button id="logout" class="toggle__btn" type="button">토큰 지우기</button>
-    </div>`;
+    ${도구HTML(제외상태(localStorage))}`;
 }
 
 async function 새로고침() {
@@ -37,7 +33,10 @@ async function 새로고침() {
     store: localStorage });
   if (r.상태 === '인증') 화면().innerHTML = 잠금HTML();
   else if (r.상태 === 'ok') 그리기(r.통계);
-  else 화면().innerHTML = `<p class="empty">${안내[r.상태]}</p>`;
+  // 미배포·연결실패 상태에도 .tools 를 같이 그린다 — 안 그리면 제외 스위치도
+  // 토큰 지우기 버튼도 사라져, 배포 도중 토큰을 잘못 넣었을 때 이 화면에
+  // 갇혀 빠져나갈 길이 없어진다(localStorage 를 손으로 지워야 했다).
+  else 화면().innerHTML = `<p class="empty">${안내[r.상태]}</p>${도구HTML(제외상태(localStorage))}`;
 }
 
 // 화면을 다시 그릴 때마다 리스너를 새로 걸지 않는다 — 한 번만 위임한다.
