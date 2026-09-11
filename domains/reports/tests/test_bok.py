@@ -54,6 +54,12 @@ def test_parse_list_does_not_duplicate_ids(list_html):
     assert len(ids) == len(set(ids))
 
 
+def test_the_announcement_badge_comment_does_not_leak_into_the_title(list_html):
+    items = bok.parse_list(list_html, board())
+    assert not any('-->' in i['title'] for i in items)
+    assert not any(i['title'].startswith('공지사항') for i in items)
+
+
 def _detail(name):
     return (FIX / name).read_text(encoding='utf-8')
 
