@@ -1,0 +1,462 @@
+[
+  {
+    "id": "bok-10062426",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "최근의 국내외 경제동향 (2021.1)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2021-01-15",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10062426&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/e6331200c92c21ed31581180507a8c65/1/202101211024121680.hwp",
+    "abstract": "□ 최근 국내경제는 완만한 회복흐름을 지속하였음\n□ 금년중 성장률은 지난 11월에 전망한 대로 3% 내외 수준을 나타낼 것으로 예상\n※ 자세한 내용은 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10063998",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "최근의 국내외 경제동향 (2021.4)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2021-04-15",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10063998&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/b89a5baa481876cebb51a25a870171b6/1/202104151135575090.hwp",
+    "abstract": "□ 최근 국내경제는 성장세가 예상보다 확대\n□ 금년중 성장률은 지난 2월 전망수준(3.0%)을 상회할 것으로 예상\n※ 자세한 내용은 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10065525",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "최근의 국내외 경제동향 (2021.7)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2021-07-15",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10065525&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/2c1c6635a04d1778829b60d9384573dc/1/202107151149316120.hwp",
+    "abstract": "□ 최근 국내경제는 양호한 회복세를 지속하였음\n□ 금년중 성장률은 지난 5월 전망수준(4.0%)에 대체로 부합할 것으로 예상\n※ 자세한 내용은 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10066943",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "최근의 국내외 경제동향 (2021.10)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2021-10-12",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10066943&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/55231454543100997ed05542b693e913/1/202110120400147670.hwp",
+    "abstract": "□ 최근 국내경제는 양호한 회복세를 지속\n□ 금년중 경제성장률은 지난 8월 전망수준(4.0%)에 대체로 부합할 것으로 예상\n※ 자세한 내용은 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10068521",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "최근의 국내외 경제동향 (2022.1)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2022-01-14",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10068521&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/d972d31c19c11e33653b1dc303d43b19/1/202201140155260170.pdf",
+    "abstract": "□ 최근 국내경제는 코로나19 재확산에도 회복세를 지속하였음\n□ 금년중 경제성장률은 지난 11월 전망한 대로 3% 수준을 나타낼 것으로 예상\n※ 자세한 내용은 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10070042",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "최근의 국내외 경제동향 (2022.4)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2022-04-14",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10070042&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/67244abb592dbbde04b7caac54352a3d/1/202204141107098830.pdf",
+    "abstract": "□ 최근 국내경제는 감염병 확산세 심화에도 수출 호조 등으로 회복세를 지속\n□ 금년중 경제성장률은 지난 2월 전망수준(3.0%)을 다소 하회할 것으로 예상\n※ 자세한 내용은 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10071648",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "최근의 국내외 경제동향 (2022.7)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2022-07-13",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10071648&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/7d2e620029820c5146112e5bb75612a4/1/202207131138345600.pdf",
+    "abstract": "□ 최근 국내경제는 대외여건 악화에도 소비가 개선되면서 회복세를 지속\n□ 금년중 경제성장률은 지난 5월 전망수준(2.7%)을 다소 하회할 것으로 예상\n※ 자세한 내용은 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10073471",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "최근의 국내외 경제동향 (2022.10)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2022-10-12",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10073471&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/90bba565e01e4b9168847b4776700ed0/1/202210260306203910.hwp",
+    "abstract": "□ 최근 국내경기는 성장세가 둔화되는 모습\n□ 금년중 경제성장률은 8월 전망수준(2.6%)에 대체로 부합할 것으로 예상\n※ 자세한 내용은 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10074994",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "최근의 국내외 경제동향 (2023.1)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2023-01-13",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10074994&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/ee2a384cea8a8d0ed40d44a48de01623/1/202301131153319890.hwp",
+    "abstract": "□ 최근 국내경제는 성장세 둔화가 지속\n□ 금년중 경제성장률은 지난 11월 전망수준(1.7%)을 하회할 것으로 예상\n※ 자세한 내용은 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10076724",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "최근의 국내외 경제동향 (2023.4)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2023-04-11",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10076724&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/072bd369b07c502645870d9239c36d45/1/202304111111228610.hwp",
+    "abstract": "□ 최근 국내경제는 성장세 둔화흐름이 지속\n□ 금년중 경제성장률은 2월 전망수준(1.6%)을 소폭 하회할 것으로 예상\n※ 자세한 내용은 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10078385",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2023.7월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2023-07-13",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10078385&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/c3adc9d70707758007a08976a5d8472c/1/202307130154411980.hwp",
+    "abstract": "□ 최근 우리경제는 그간 빠르게 둔화되었던 수출과 제조업 부문을 중심으로 부진이 다소 완화되었다.\nㅇ 하반기 이후에는 IT경기 개선 등에 힘입어 점차 나아지겠으나, 중국경제 회복 속도, 주요 선진국의 경기흐름 등과 관련한 불확실성이 큰 상황이다.\n□ 소비자물가 상승률은 예상대로 기저효과가 크게 작용하면서 2%대로 낮아졌다.\nㅇ 8월 이후 다시 높아져 연말까지 3% 안팎에서 등락할 것으로 예상되지만 국제유가 및 경기흐름 등과 관련한 불확실성이 크다.\n※ 자세한 내용은 첨부파일 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10080498",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2023.10월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2023-10-13",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10080498&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/8288ed68e2bb4c8acecc91da7700b944/1/202311130346197330.hwp",
+    "abstract": "□ 국내경제는 소비 회복세가 다소 더딘 모습이나 수출 부진이 완화되면서 당초 예상에 부합하는 완만한 개선흐름을 이어갈 것으로 보인다.\nㅇ 다만 향후 성장경로에는 지정학적 리스크 증대, 주요국 통화긴축 기조 장기화 등의 영향으로 불확실성이 높아진 것으로 판단된다.\n□ 소비자물가 상승률은 근원물가 오름세가 축소되면서 완만한 둔화 흐름을 재개할 것으로 보이나 최근 이스라엘·하마스 사태 등으로 상방리스크가 다소 확대되었다.\nㅇ 향후 물가경로에는 국제유가 및 환율 추이, 국내외 경기흐름 등과 관련한 불확실성이 높은 상황이다.\n※ 자세한 내용은 첨부파일 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10081745",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2024.1월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2024-01-11",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10081745&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/8bc7e4b5560d7a09604e69c608879663/1/202401110129421430.hwp",
+    "abstract": "▣국내경제는 소비 회복세가 예상보다 약화되었으나 수출을 중심으로 완만한 개선흐름을 이어갈 전망이다.\n▣소비자물가 상승률은 수요측 압력이 약한 가운데 공급 충격의 영향이 점차 줄어들면서 둔화 추세를 나타내겠으나 그 속도는 완만할 것으로 보인다.\n▣경상수지는 반도체경기 회복 등에 힘입어 흑자기조를 지속하겠으며, 취업자수는 서비스업을 중심으로 완만하게 둔화될 것으로 예상된다.\n※자세한 내용은 (붙임) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10083552",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2024.4월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2024-04-12",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10083552&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/5612cc4d0e807d87a87213a0dec3e8a9/1/202404120450288830.hwp",
+    "abstract": "▣ 금년 성장률 2 월 전망 수준(2.1%) 대체로 부합 ,\n빠른 수출회복 감안하면 다소 상회 가능성도 있음\n￭ 국내경제는 IT 경기 상승 , 美 경제 호조 등으로 수출이 빠르게 회복되고 있으나 높아진 생활물가와 금리의 영향이 이어지면서 가계와 내수기업은 회복온기 체감 어려워\n▣ 소비자물가는 둔화흐름이 주춤한 모습을 보이고 있어\n목표수렴 확신을 위해 향후 물가흐름을 좀 더 지켜볼 필요\n￭ 근원물가 상승률은 예상대로 완만히 둔화되고 있는 반면 소비자물가는 유가 · 농산물가격 상승으로 둔화흐름이 주춤\n※ 자세한 내용은 ( 붙임 ) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10085710",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2024.7월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2024-07-11",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10085710&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/b1689ca11c704a97b4b32fbcc1a2a801/1/7320f0015a0e4f34b46d4d25c0f4b137.pdf",
+    "abstract": "▣ 내수 회복이 지연되고 있지만 수출 개선세 힘입어 5 월 전망 (금년 성장률 2.5%) 에 대체로 부합하는 성장세 지속\n- 하반기부터 내수경기도 점차 나아지면서 수출 · 내수 온도차 줄어들 것\n▣ 소비자물가 상승률 , 농산물가격이 상당폭 둔화되면서 예상을 소폭 하회\n- 앞으로도 둔화추세 이어가겠으나 , 환율 · 유가 등과 관련한 불확실성 상존\n▣ 경상수지 흑자 폭 확대 , 수출 개선 덕분이지만 내수 회복 지연도 영향\n한국은행은 2024 년 7 월부터 경제상황 평가에 주요 이슈 분석 BOX 을 새롭게 확충 하였습니다 .\n※ 자세한 내용은 < 붙 임 > 경제상황 평가 (2024 년 7 월 ) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10087418",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2024.10월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2024-10-11",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10087418&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/889295fcadd3428ba3f5a1f2b2ba57d5/1/bf47aef0ec7746a5a82893107ace418a.hwp",
+    "abstract": "▣ 국내경기는 소비 회복 , 수출 증가세 지속 등으로 성장흐름 재개 , 그러나 건설투자 부진으로 그 속도는 완만\n￭ 지난 전망 대비 향후 성장경로 상의 불확실성 다소 증대\n▣ 소비자물가는 유가 등 공급측 하방압력으로 1% 대로 둔화 , 근원물가는 2% 수준 안정\n￭ 물가안정 기반이 다져지고 있으나 , 중동사태 관련 불확실성은 큰 상황\n※ 자세한 내용은 < 붙 임 > 경제상황 평가 (2024 년 10 월 ) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10089276",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2025.1월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2025-01-16",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10089276&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/2326704cc2914a589c0f5c023d15fa15/1/f609e77a2e0c4b9cb0cfd57ee6c91b35.hwp",
+    "abstract": "▣ 국내경제는 정치 불확실성 증대 등에 따른 심리 악화로 소비 · 건설투자 중심으로 24 년 , 25 년 모두 지난 전망경로를 하회할 것으로 예상\n￭ 향후 성장경로는 국내 정치 불확실성 완화 시기 , 추경 등 경제정책 추진 여부 ･ 속도 등에 크게 영향 받을 것임\n▣ 소비자물가는 고환율 , 유가상승의 상방요인과 낮은 수요압력 , 정부 물가안정대책의 하방요인이 상쇄되며 2% 에 근접하는 안정 기조 예상\n￭ 환율 · 유가 추이 , 공공요금 인상 시기 , 내수 흐름 관련 불확실성은 커진 상황\n▣ (Box) 최근 유럽의 정치 불확실성 증대 , 유로지역 성장에 하방압력으로 작용\n※ 자세한 내용은 < 붙 임 > 경제상황 평가 (2025 년 1 월 ) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10090948",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2025.4월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2025-04-17",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10090948&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/3e82d61a784748349167f6992e48490e/1/cfbcb209911548b293b99a8ed871151b.hwp",
+    "abstract": "▣ 국내경제는 경제심리 회복이 지연되는 가운데 글로벌 통상여건도 악화되면서 성장세가 지난 전망경로를 하회할 가능성*\n* (BOX) 『금년 1/4분기 및 향후 성장 흐름 평가』 참조\n￭ 무역협상의 전개양상, 추경의 규모 및 시점, 경제심리의 회복 속도 등과 관련한 성장경로의 불확실성이 크게 증대\n▣ 소비자물가는 높아진 환율 수준이 상방요인으로 작용하겠지만 유가 하락, 낮은 수요압력 등으로 2% 내외의 안정세를 지속할 것으로 예상\n￭ 향후 물가경로는 국내외 경기 흐름, 환율·유가 움직임 등에 영향받을 전망\n※ 자세한 내용은 < 붙 임 > 경제상황 평가 (2025 년 4 월 ) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10092427",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2025.7월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2025-07-10",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10092427&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/0ed4877346f4400d8df93dd505bdeed0/1/e7d1d22651964a65a2af5e95f4111d6f.hwp",
+    "abstract": "▣ 국내경제는 건설투자의 감소세가 지속되었으나 소비가 개선되고 수출도 증가*하면서 성장 부진이 다소 완화\n* (BOX) 『반도체 수출 경기사이클cycle, 이번에는 다를까?』 참조\n￭ 향후 대미 무역협상 전개양상과 관련한 성장경로의 불확실성이 매우 높은 상황\n▣ 소비자물가는 국제유가 안정세, 정부 물가대책 등의 영향으로 2% 근방의 오름세를 지속할 전망\n￭ 향후 물가경로는 국내외 경기 흐름, 환율 및 국제유가 움직임 등에 영향받을 전망\n※ 자세한 내용은 < 붙 임 > 경제상황 평가 (2025 년 7 월 ) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10094130",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2025.10월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2025-10-23",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10094130&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/3a83472a4e984f01bb23d146d6c8104c/1/4c15acd0ca2e498495c6f55a50e712a3.hwp",
+    "abstract": "▣ 국내경제는 건설투자의 부진에도 소비와 수출이 양호한 흐름을 나타내면서 올해 성장률이 8월 전망 0.9% 에 대체로 부합할 것으로 예상\n￭ 내년에는 내수 중심의 회복세를 이어가는 가운데 수출은 美관세 영향으로 둔화될 전망\n￭ 한·미 및 미 ·중 무역협상, 반도체 경기 등과 관련한 상 ·하방 불확실성은 확대\n▣ 소비자물가는 환율상승 등에도 불구하고 낮은 수요압력, 국제유가 안정 등으로 2% 내외의 오름세를 지속할 것으로 예상\n￭ 향후 물가경로는 국내외 경기 흐름, 환율 · 유가 움직임 등에 영향받을 전망\n※ 자세한 내용은 < 붙 임 > 경제상황 평가 (2025 년 10 월 ) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10095717",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2026.1월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2026-01-15",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10095717&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/134a13de6dfe47ad858c31226ff33f95/1/22593b74705c4d3a86706fc727f02fe1.docx",
+    "abstract": "▣ 국내경제는 반도체 경기 호조와 소비 회복세가 이어지며 25.11월 전망경로에 부합하는 성장세 예상\n￭ 반도체 경기, 글로벌 통상환경, 주요국 성장 흐름 등이 성장경로의 주요 불확실성 요인\n▣ 금년 소비자물가 상승률은 고환율 등 상방요인과 국제유가 약세, 정부 물가대책 등 하방요인이 상쇄되며 당초 예상에 부합하는 안정 흐름 전망\n￭ 향후 물가경로는 환율과 유가 움직임, 국내외 경기흐름 등에 주로 영향받을 전망\n※ 자세한 내용은 < 붙 임 > 경제상황 평가 (2026 년 1 월 ) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-10097445",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2026.4월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2026-04-10",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=10097445&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/bd25e0370f5149f9a2a6f676f2a978b8/1/6415f3e5651d435e95e4270685655068.docx",
+    "abstract": "▣ 국내경제는 반도체 경기 호조와 추경에도 불구하고 중동전쟁에 따른 공급충격으로 성장세가 당초 예상보다 둔화될 전망\n▣ 물가상승률은 국제유가 상승으로 인한 상방압력이 크게 확대되었지만, 정부 물가안정대책이 이를 일부 완화할 것으로 예상\n▣ 美관세정책의 향방이 불투명한 가운데 지정학적 리스크가 확대되며 성장과 물가 전망경로에 대한 불확실성이 그 어느 때보다 커진 상황\n※ 자세한 내용은 < 붙 임 > 경제상황 평가 (2026 년 4 월 ) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-11062937",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2026.7월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2026-07-16",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=11062937&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/61416281c6dc44d6ab6761b800e86ee5/1/0c85a190cf2b4c8598c7434e1c435897.docx",
+    "abstract": "▣ 금년중 국내경제는 중동정세 불확실성 지속에도 반도체 경기 호조와 그에 따른 파급효과에 힘입어 성장세가 확대될 전망\n▣ 물가상승률은 경기 개선으로 인한 수요압력 확대, 비용충격 전이 등으로 높은 수준을 지속할 전망\n▣ 향후 전망경로상에는 중동사태 전개상황, 글로벌 AI투자 등과 관련한 불확실성이 큰 상황\n※ 자세한 내용은 < 붙 임 > 경제상황 평가 (2026 년 7 월 ) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-11T23:24:59+09:00"
+  }
+]
