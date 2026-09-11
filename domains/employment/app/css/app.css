@@ -710,11 +710,15 @@
   font-weight: 600;
 }
 
+/* 화면의 모든 덩어리가 좌우 16px 에 선다 — 카드·타일·그림·접힘 모두. 구역
+   제목도 같은 선에 서야 한다. 처음에는 `<section class="digest">` 안에 있어서
+   바깥이 여백을 갖고 있었는데, 접기로 바뀌며 제목만 화면 직속이 되어 혼자
+   왼쪽 끝에 붙어 있었다. */
 .section__title {
   font-size: 13px;
   font-weight: 700;
   color: var(--text-secondary);
-  margin: 0 0 8px 0;
+  margin: 18px 16px 8px 16px;
 }
 
 
@@ -743,10 +747,6 @@
   margin: 10px 0 0 0;
   font-size: 11px;
   color: var(--text-muted);
-}
-
-.movers {
-  padding: 16px 16px 8px 16px;
 }
 
 .movers__group + .movers__group {
@@ -866,6 +866,55 @@
 .kpi__delta.is-up { color: var(--up); }
 .kpi__delta.is-down { color: var(--down); }
 .kpi__delta.is-flat { color: var(--text-secondary); }
+
+/* 구역 제목 옆의 스위치(연령 범위). 제목과 한 줄에 서되, 좁아지면 스위치가
+   아래로 내려간다 — 제목을 줄여 두 개가 한 줄에 우겨지는 것보다 낫다. */
+.section__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px 12px;
+  margin: 18px 16px 8px 16px;
+}
+
+.section__title--inline {
+  margin: 0;
+}
+
+.scopes {
+  display: flex;
+  gap: 2px;
+  padding: 2px;
+  background: var(--border);
+  border-radius: 8px;
+}
+
+.scopes__tab {
+  appearance: none;
+  border: 0;
+  /* 탭 표적이 너무 낮지 않게. 세 칸이 한 줄에 서므로 가로는 글자에 맡긴다. */
+  min-height: 30px;
+  padding: 0 10px;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--text-secondary);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.scopes__tab--active {
+  background: var(--card);
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.scopes__tab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
 
 /* 추이 (수준 선 + 증감 막대)
    ─────────────────────────────────────────────────────────────────────

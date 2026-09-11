@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { kpiBlockHtml } from '../../app/js/screens/release.js';
+import { kpiBlockHtml, trendSection } from '../../app/js/screens/release.js';
 
 function rate(over = {}) {
   return {
@@ -64,4 +64,61 @@ test('a month the survey has not published yet shows no invented numbers', () =>
 
 test('a source with no indicators of its own gets no grid at all', () => {
   assert.equal(kpiBlockHtml(SERIES, { source: 'est', period: '2026-08' }), '');
+});
+
+// ── 추이의 연령 범위 스위치 ────────────────────────────────────────────
+
+function level(over = {}) {
+  return {
+    id: 'x', source: 'eaps', series: 'headcount', breakdown: 'total',
+    category: null, period: '2026-08', value: 29151.0, unit: '천명', yoy: 184.0,
+    released_at: '2026-09-09', release_url: 'https://mods.go.kr/x',
+    attachments: [], collected_at: '2026-09-11T09:00:00+09:00', ...over,
+  };
+}
+
+// 세 범위가 같은 지표를 저마다 들고 있다(실측: 18개 조합이 25개월씩 연속).
+const TRENDS = ['2026-07', '2026-08'].flatMap(period => [
+  level({ period, value: 29151.0 }),
+  level({ period, value: 24540.2, breakdown: 'scope', category: '15-64' }),
+  level({ period, value: 3428.0, breakdown: 'scope', category: '15-29' }),
+  level({ period, series: 'unemployed', value: 588.1 }),
+  level({ period, series: 'unemployed', value: 540.9, breakdown: 'scope', category: '15-64' }),
+  level({ period, series: 'unemployed', value: 195.0, breakdown: 'scope', category: '15-29' }),
+]);
+
+test('the switch offers the three age ranges and marks the one in use', () => {
+  const { html } = trendSection(TRENDS, { source: 'eaps', scope: '15-64' });
+  for (const label of ['15세 이상', '15~64세', '청년']) assert.ok(html.includes(label));
+  const active = [...html.matchAll(/data-scope="([^"]+)"[^>]*class="[^"]*scopes__tab--active/g)];
+  const marked = [...html.matchAll(/class="[^"]*scopes__tab--active[^"]*"[^>]*data-scope="([^"]+)"/g)];
+  assert.equal(active.length + marked.length, 1, '활성 탭은 하나뿐이어야 한다');
+});
+
+test('picking an age range changes the numbers the charts show', () => {
+  const all = trendSection(TRENDS, { source: 'eaps', scope: 'total' });
+  const young = trendSection(TRENDS, { source: 'eaps', scope: '15-29' });
+  assert.equal(all.byIndicator.get('headcount').at(-1).value, 29151.0);
+  assert.equal(young.byIndicator.get('headcount').at(-1).value, 3428.0);
+  assert.ok(all.html.includes('2,915.1만명'));
+  assert.ok(young.html.includes('342.8만명'));
+});
+
+test('every age range draws the same set of charts', () => {
+  const counts = ['total', '15-64', '15-29'].map(scope =>
+    trendSection(TRENDS, { source: 'eaps', scope }).byIndicator.size);
+  assert.deepEqual(counts, [2, 2, 2]);
+});
+
+test('an indicator the age range never publishes is simply absent', () => {
+  // 빈 그림을 그리면 그 범위에서 그 지표를 안 낸다는 사실이 사라진다.
+  const only = [level({ breakdown: 'scope', category: '15-29', value: 3428.0 })];
+  const { byIndicator } = trendSection(only, { source: 'eaps', scope: '15-29' });
+  assert.deepEqual([...byIndicator.keys()], ['headcount']);
+});
+
+test('a source with no indicators of its own gets no trend section', () => {
+  const { html, byIndicator } = trendSection(TRENDS, { source: 'ei', scope: 'total' });
+  assert.equal(html, '');
+  assert.equal(byIndicator.size, 0);
 });
