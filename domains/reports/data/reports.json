@@ -1255,22 +1255,6 @@
   "matched": []
  },
  {
-  "id": "kiet-ec3229",
-  "org": "kiet",
-  "board": "kiet-economy",
-  "series": "월간 산업경제",
-  "title": "실물경제 주요 지표 & KIET 업종별 경기지수",
-  "authors": [
-   "KIET"
-  ],
-  "published": "2026-06-30",
-  "date_precision": "day",
-  "pages": null,
-  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3229&year=&month=&stype=&sval=&pg=2&pp=30",
-  "file_url": null,
-  "matched": []
- },
- {
   "id": "kiet-ec3228",
   "org": "kiet",
   "board": "kiet-economy",
@@ -7938,22 +7922,6 @@
   "matched": []
  },
  {
-  "id": "kiet-ec3174",
-  "org": "kiet",
-  "board": "kiet-economy",
-  "series": "월간 산업경제",
-  "title": "실물경제 주요 지표 & KIET 업종별 경기지수",
-  "authors": [
-   "KIET"
-  ],
-  "published": "2026-03-31",
-  "date_precision": "day",
-  "pages": null,
-  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3174&year=&month=&stype=&sval=&pg=3&pp=30",
-  "file_url": null,
-  "matched": []
- },
- {
   "id": "kdi-19115",
   "org": "kdi",
   "board": "kdi-trends",
@@ -8929,22 +8897,6 @@
   "matched": []
  },
  {
-  "id": "kiet-ec3148",
-  "org": "kiet",
-  "board": "kiet-economy",
-  "series": "월간 산업경제",
-  "title": "실물경제 주요 지표 & KIET 업종별 경기지수",
-  "authors": [
-   "KIET"
-  ],
-  "published": "2026-01-30",
-  "date_precision": "day",
-  "pages": null,
-  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3148&year=&month=&stype=&sval=&pg=4&pp=30",
-  "file_url": null,
-  "matched": []
- },
- {
   "id": "kiet-is841",
   "org": "kiet",
   "board": "kiet-issue",
@@ -9019,22 +8971,6 @@
    "고용형태",
    "일자리정책"
   ]
- },
- {
-  "id": "kiet-is838",
-  "org": "kiet",
-  "board": "kiet-issue",
-  "series": "i-KIET",
-  "title": "새해 한국 경제에 바란다",
-  "authors": [
-   "권남훈"
-  ],
-  "published": "2026-01-01",
-  "date_precision": "day",
-  "pages": null,
-  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=838&skey=&sval=&pg=1&pp=30",
-  "file_url": null,
-  "matched": []
  },
  {
   "id": "kli-10281",
@@ -15459,24 +15395,6 @@
   "matched": [
    "일자리정책",
    "인력수급"
-  ]
- },
- {
-  "id": "kiet-is815",
-  "org": "kiet",
-  "board": "kiet-issue",
-  "series": "i-KIET",
-  "title": "새해 한국경제에 바란다",
-  "authors": [
-   "권남훈"
-  ],
-  "published": "2025-01-01",
-  "date_precision": "day",
-  "pages": null,
-  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=815&skey=&sval=&pg=2&pp=30",
-  "file_url": null,
-  "matched": [
-   "노사관계"
   ]
  },
  {
@@ -24291,22 +24209,6 @@
    "노사관계",
    "직업훈련"
   ]
- },
- {
-  "id": "kiet-is784",
-  "org": "kiet",
-  "board": "kiet-issue",
-  "series": "i-KIET",
-  "title": "새해 한국 경제에 바란다",
-  "authors": [
-   "주현"
-  ],
-  "published": "2023-01-01",
-  "date_precision": "day",
-  "pages": null,
-  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=784&skey=&sval=&pg=3&pp=30",
-  "file_url": null,
-  "matched": []
  },
  {
   "id": "kiet-1103",

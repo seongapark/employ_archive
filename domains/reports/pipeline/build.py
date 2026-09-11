@@ -62,6 +62,22 @@ def missing_reasons(reports: list[Report]) -> dict:
     return dict(sorted(out.items(), key=lambda kv: -kv[1]))
 
 
+def dedupe(reports: list[Report]) -> list[Report]:
+    """같은 게시판에 제목이 똑같은 게 둘이면 이른 날짜 하나만 남긴다.
+
+    조사연구자료에서 같은 연구를 두 지역본부가 각각 올린다(실측 7쌍). nttId 가
+    달라 id 로는 안 잡힌다. **게시판 간에는 보지 않는다** — 고른 게시판 사이
+    중복은 실측 0건이고, 우연한 동명이 지워지면 안 된다.
+    """
+    best: dict[tuple[str, str], Report] = {}
+    for r in reports:
+        key = (r.board, r.title.strip())
+        prev = best.get(key)
+        if prev is None or (r.published, r.id) < (prev.published, prev.id):
+            best[key] = r
+    return list(best.values())
+
+
 def build(raw_rows: list[RawReport], boards: list, kw: dict):
     by_id = {b.id: b for b in boards}
     kept: list[Report] = []
@@ -71,6 +87,7 @@ def build(raw_rows: list[RawReport], boards: list, kw: dict):
             continue
         rec = judge(raw, board, kw)
         kept.append(rec)
+    kept = dedupe(kept)
     kept.sort(key=lambda r: (r.published, r.id), reverse=True)
     abstracts = {r.id: {'abstract': r.abstract or '', 'toc': r.toc} for r in kept}
     return kept, abstracts, abstract_missing(kept)

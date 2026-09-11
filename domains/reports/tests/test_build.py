@@ -87,8 +87,8 @@ def test_a_raw_record_from_a_disabled_board_is_skipped():
 
 
 def test_newest_first():
-    a = raw('kli-8', KLI_BOARD)
-    b = raw('kli-9', KLI_BOARD)
+    a = raw('kli-8', KLI_BOARD, '첫 번째 보고서')
+    b = raw('kli-9', KLI_BOARD, '두 번째 보고서')
     b.published = '2026-01-01'
     kept, _, _ = build.build([a, b], [KLI_BOARD], KW)
     assert [r.id for r in kept] == ['kli-9', 'kli-8']
@@ -107,10 +107,29 @@ def test_the_pdf_bookkeeping_fields_never_reach_the_app():
 
 def test_why_an_abstract_is_missing_is_counted():
     # 결측률만 보면 스캔본(영영 못 채움)과 아직 안 받아 본 것이 한 칸에 섞인다.
-    a = raw('kli-14', KLI_BOARD); a.abstract_tried = True; a.abstract_note = '텍스트가 없는 스캔본'
-    b = raw('kli-15', KLI_BOARD)                       # 아직 안 받아 봤다
+    a = raw('kli-14', KLI_BOARD, 'ㄱ'); a.abstract_tried = True; a.abstract_note = '텍스트가 없는 스캔본'
+    b = raw('kli-15', KLI_BOARD, 'ㄴ')                 # 아직 안 받아 봤다
     b.file_url = 'https://example.org/b.pdf'
-    c = raw('kli-16', KLI_BOARD, abstract='있다')
+    c = raw('kli-16', KLI_BOARD, 'ㄷ', abstract='있다')
     kept, _, _ = build.build([a, b, c], [KLI_BOARD], KW)
     why = build.missing_reasons(kept)
     assert why == {'텍스트가 없는 스캔본': 1, '아직 안 받음': 1}
+
+
+def test_the_same_study_posted_by_two_branches_is_kept_once():
+    # 조사연구자료에서 실제로 7쌍 나온다 — 강원본부와 강릉본부가 같은 연구를
+    # 각각 올린다. nttId 가 달라 id 로는 안 잡힌다.
+    rows = [raw('bok-1', KDI_BOARD, '강원지역 주택가격이 실물경제에 미치는 영향 점검'),
+            raw('bok-2', KDI_BOARD, '강원지역 주택가격이 실물경제에 미치는 영향 점검')]
+    rows[0].published = '2023-07-18'
+    rows[1].published = '2023-07-20'
+    kept, _, _ = build.build(rows, [KDI_BOARD], KW)
+    assert [r.id for r in kept] == ['bok-1']      # 이른 날짜가 원발행
+
+
+def test_the_same_title_on_different_boards_is_kept_twice():
+    # 게시판 간 중복은 실측 0건이었다. 우연히 제목이 같을 때 지우면 안 된다.
+    other = KDI_BOARD.model_copy(update={'id': 'kdi-other'})
+    rows = [raw('x-1', KDI_BOARD, '같은 제목'), raw('x-2', other, '같은 제목')]
+    kept, _, _ = build.build(rows, [KDI_BOARD, other], KW)
+    assert sorted(r.id for r in kept) == ['x-1', 'x-2']

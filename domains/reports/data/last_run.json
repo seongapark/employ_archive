@@ -237,7 +237,7 @@
     }
   },
   "unregistered": [],
-  "reports": 1534,
+  "reports": 1528,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -349,14 +349,14 @@
     },
     "kiet": {
       "i-KIET": {
-        "total": 120,
+        "total": 117,
         "missing": 0,
         "rate": 0.0
       },
       "월간 산업경제": {
-        "total": 120,
+        "total": 117,
         "missing": 10,
-        "rate": 0.083
+        "rate": 0.085
       },
       "연구자료": {
         "total": 82,
