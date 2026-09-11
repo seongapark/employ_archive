@@ -47,9 +47,12 @@ curl https://employ-archive-metrics.<계정>.workers.dev/api/health
 - `core/track.js` 의 `ENDPOINT` → `<주소>/api/hit`
 - `domains/admin/app/js/api.js` 의 `API` → `<주소>/api/stats`
 
-이 두 줄을 고쳐 `main` 에 올리면 `pages.yml` 이 다시 돌아 여섯 앱 전부(허브 +
-도메인 다섯 + admin)의 `core/track.js` 가 새 주소로 갱신된다 — `tools/build.py`
-가 `core/` 를 각 앱 폴더로 복사하기 때문에 한 곳만 고치면 된다.
+`core/track.js` 의 `ENDPOINT` 를 고쳐 `main` 에 올리면 `pages.yml` 이 다시 돌아
+여섯 앱(허브 + 도메인 다섯)의 사본이 새 주소로 갱신된다 — `tools/build.py` 가
+`core/` 를 각 앱 폴더로 복사하기 때문에 한 곳만 고치면 된다. **admin 은 이
+갱신에서 빠진다** — `domains/admin/app/index.html` 은 `core/track.js` 를 붙이는
+`<script>` 도 `data-track-domain` 도 일부러 갖지 않는다. 관리자 화면 방문까지
+통계에 섞이면 본인 제외 스위치가 무의미해지기 때문이다.
 
 ### 배포 후 확인
 
