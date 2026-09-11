@@ -505,43 +505,6 @@
     "warnings": []
   },
   {
-    "org": "KLI",
-    "published_at": "2023-05-19",
-    "indicator": "emp_change",
-    "text": "다만, 최근 고용증가폭이 서서히 둔화되고 있다는 점과 금리 및 물가 인상, 대외 경제 불확실성\n증가 등 경제적 불확실성이 시차를 두고 노동시장에 반영될 수 있어 내년의 고용성과는 예년\n수준보다 오히려 감소할 것으로 전망된다.",
-    "tags": [
-      "통화정책"
-    ],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=142698&seq=1",
-    "source_page": 1,
-    "warnings": []
-  },
-  {
-    "org": "KLI",
-    "published_at": "2023-05-19",
-    "indicator": "emp_rate",
-    "text": "글로벌 공급망 교란이 장기화되고, 미국의 기준금리 인상여파에 따른 내수 악화의 가능성\n이 적다고 볼 수는 없지만, 고용사정에 있어서는 여전히 침체되어 있는 대면서비스업 고용의\n반등 가능성이 존재하는 가운데, 비대면 고용의 증가세 지속, 재정지원의 효과 등이 반영되면서\n양호한 수준의 고용회복세를 이어갈 것으로 전망된다.",
-    "tags": [
-      "글로벌경기",
-      "내수",
-      "재정정책",
-      "통화정책"
-    ],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=142697&seq=1",
-    "source_page": 23,
-    "warnings": []
-  },
-  {
-    "org": "KLI",
-    "published_at": "2023-05-19",
-    "indicator": "unemp_rate",
-    "text": "실업률은 사실상 장기적으로도 가장 낮은 수\n준에 도달해 있어 향후 추가적으로 감소할 여력은 크지 않다.",
-    "tags": [],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=142698&seq=1",
-    "source_page": 3,
-    "warnings": []
-  },
-  {
     "org": "MOEF",
     "published_at": "2023-07-04",
     "indicator": "cpi",
@@ -586,38 +549,6 @@
     "warnings": []
   },
   {
-    "org": "KLI",
-    "published_at": "2023-08-14",
-    "indicator": "emp_change",
-    "text": "노동공급 측면에서는 고령층과 여성, 여성 중에서 30대 여성 취업자 수가 구조적인 요인으로서의 고용증가세를 보였고, 청년과 20~40대 남성이 경기와 함께 고용둔화 모습을 보였다.",
-    "tags": [
-      "인구구조"
-    ],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=143042&seq=1",
-    "source_page": 51,
-    "warnings": []
-  },
-  {
-    "org": "KLI",
-    "published_at": "2023-08-14",
-    "indicator": "emp_rate",
-    "text": "다른 연령대는 인구가 감소 중이므로 총량적인 측면에서 고용상황을 파악할 때 고용률 변화를 먼저 살펴야 한다.",
-    "tags": [],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=143042&seq=1",
-    "source_page": 4,
-    "warnings": []
-  },
-  {
-    "org": "KLI",
-    "published_at": "2023-08-14",
-    "indicator": "unemp_rate",
-    "text": "이와 더불어 비경제활동인구도 동 기간 감소했던 상황임을 감안하면 감소한 실업자는 취업으로 이행한 것으로 판단할 수 있다.",
-    "tags": [],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=143042&seq=1",
-    "source_page": 6,
-    "warnings": []
-  },
-  {
     "org": "OECD",
     "published_at": "2023-11-29",
     "indicator": "cpi",
@@ -659,12 +590,26 @@
   },
   {
     "org": "KLI",
-    "published_at": "2023-12-13",
+    "published_at": "2023-12-12",
     "indicator": "emp_change",
-    "text": "그러나 올해 1~3분기, 그리고 10월까지의 강건한 노동시장 상황에 기반하여 고용이 조정되는 정도가 기존에 논의되었던 것보다 더 천천히 진행될 수 있을 수 있는 가능성을 이전보다 높게 고려하게 되었다.",
+    "text": "올해 상반기에는 제조업과 수출 부문 경기가 좋지 않았고, 민간소비와 서비스업 부문이 상대적으로 좋았다.",
+    "tags": [
+      "수출",
+      "내수",
+      "제조업고용"
+    ],
+    "source_url": "https://www.kli.re.kr/kliFileDownload?fileName=8D2361D5E866794949258A910030BA40_0.pdf&fileNameOrg=KLI 고용노동브리프 제110호.pdf&filePath1=jsphome/DATA/pblctList/issue/8D2361D5E866794949258A910030BA40",
+    "source_page": 11,
+    "warnings": []
+  },
+  {
+    "org": "KLI",
+    "published_at": "2023-12-12",
+    "indicator": "unemp_rate",
+    "text": "2023년 상반기 확장실업률은 2.1%p 감소했으며 하반기에는 비교적 감소폭이 축소된 1.3%p 감소를 보였다. 이는 2023년 상반기 실업률 감소를 견인한 잠재활동경제인구의 감소세가 하반기에 축소되었기 때문이다.",
     "tags": [],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=143542&seq=1",
-    "source_page": 41,
+    "source_url": "https://www.kli.re.kr/kliFileDownload?fileName=8D2361D5E866794949258A910030BA40_0.pdf&fileNameOrg=KLI 고용노동브리프 제110호.pdf&filePath1=jsphome/DATA/pblctList/issue/8D2361D5E866794949258A910030BA40",
+    "source_page": 3,
     "warnings": []
   },
   {
@@ -910,41 +855,15 @@
   },
   {
     "org": "KLI",
-    "published_at": "2024-10-04",
+    "published_at": "2024-08-30",
     "indicator": "emp_change",
-    "text": "2분기 중에 급감한 취업자 증가폭은 건설업과 보건사회복지서비스업의 부진에서 기인한 바가 크며, 하반기에도 반등하기 어려울 것으로 보인다.",
+    "text": "2분기 중 급감한 취업자 증가폭은 건설업과 보건업 및 사회복지서비스업의 부진에서 기인한 바가 크다.",
     "tags": [
       "건설업고용"
     ],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=144795&seq=1",
-    "source_page": 31,
+    "source_url": "https://www.kli.re.kr/kliFileDownload?fileName=7DAFBF68B74F8CBE49258B9600297CE8_0.pdf&fileNameOrg=KLI 고용노동브리프 제 111호(2024-01).pdf&filePath1=jsphome/DATA/pblctList/issue/7DAFBF68B74F8CBE49258B9600297CE8",
+    "source_page": 8,
     "warnings": []
-  },
-  {
-    "org": "KLI",
-    "published_at": "2024-10-04",
-    "indicator": "emp_rate",
-    "text": "30대는 상반기 취업자 수가 9.1만 명 늘었다. 취업자 증가분 전체가 인구효과와는 무관하게 나타났다. 전년동기대비 인구변화가 없는 가운데 취업자 수가 증가할 수 있었던 이유는 30대 여성의 경제활동 참여가 꾸준히 증가했기 때문이다.",
-    "tags": [],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=144795&seq=1",
-    "source_page": 9,
-    "warnings": [
-      "모델이 댄 쪽번호 58 이(가) 실제 9 쪽과 달라 고쳤다"
-    ]
-  },
-  {
-    "org": "KLI",
-    "published_at": "2024-10-04",
-    "indicator": "unemp_rate",
-    "text": "현재 고령층의 실업률이 소폭 증가하는 것은 민간 일자리에 참여하고자 하는 고령층이 늘어난 영향으로 해석할 수 있다.",
-    "tags": [
-      "인구구조"
-    ],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=144795&seq=1",
-    "source_page": 3,
-    "warnings": [
-      "모델이 댄 쪽번호 52 이(가) 실제 3 쪽과 달라 고쳤다"
-    ]
   },
   {
     "org": "KDI",
@@ -1087,28 +1006,6 @@
     "tags": [],
     "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2024/12/oecd-economic-outlook-volume-2024-issue-2_67bb8fac/d8814e8b-en.pdf",
     "source_page": 1,
-    "warnings": []
-  },
-  {
-    "org": "KLI",
-    "published_at": "2024-12-30",
-    "indicator": "emp_change",
-    "text": "이러한 증가폭 둔화의 주요 원인으로는 경기둔화의 영향과 함께 인구효과와 정부 직접일자리사업 증가세의 둔화가 꼽힌다.",
-    "tags": [],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=145319&seq=1",
-    "source_page": 22,
-    "warnings": []
-  },
-  {
-    "org": "KLI",
-    "published_at": "2024-12-30",
-    "indicator": "emp_rate",
-    "text": "생산가능인구(15∼64세)는 올해 34만 명 줄어들었으며, 2025년에는 감소폭이 38만 명으로 확대될 전망이다. 이는 취업자 증가폭을 약 2만 명 감소시키는 요인으로 작용할 것으로 보인다.",
-    "tags": [
-      "인구구조"
-    ],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=145319&seq=1",
-    "source_page": 22,
     "warnings": []
   },
   {
@@ -1470,27 +1367,27 @@
   },
   {
     "org": "KLI",
-    "published_at": "2025-08-29",
+    "published_at": "2025-08-28",
     "indicator": "emp_change",
-    "text": "그보다는 상반기에 취업자 수 증가가 예상보다 컸던 이유가 예상을 넘어선 고령층 취업자 수 증가에 힘입었던 것처럼 하반 기에도 이러한 경향이 지속된다면 그로 인해 20만 명을 상회하는 취업자 증가도 실현될 수 있다.",
+    "text": "하지만 심각한 경제 위축 상황에도 불구하고 2025년 상반기에는 취업자가 18.1만 명 증가하여, 비교적 양호한 취업자 수 증가가 나타났다. 이는 상반기 고령층 취업자 증가폭이 예상보다 매우 컸던 결과이다.",
     "tags": [
       "인구구조"
     ],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=146724&seq=1",
-    "source_page": 24,
+    "source_url": "https://www.kli.re.kr/kliFileDownload?fileName=B9207F2F16D23E3749258CF400383093_1.pdf&fileNameOrg=KLI 고용노동브리프 제 113호(2025-01).pdf&filePath1=jsphome/DATA/pblctList/issue/B9207F2F16D23E3749258CF400383093",
+    "source_page": 6,
     "warnings": []
   },
   {
     "org": "KLI",
-    "published_at": "2025-08-29",
-    "indicator": "unemp_rate",
-    "text": "15∼29세는 실업자는 소폭 줄었지만, 인구 감소의 영향으로 실업률이 0.3%p 증가했다.",
-    "tags": [],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=146724&seq=1",
-    "source_page": 18,
-    "warnings": [
-      "모델이 댄 쪽번호 16 이(가) 실제 18 쪽과 달라 고쳤다"
-    ]
+    "published_at": "2025-08-28",
+    "indicator": "emp_rate",
+    "text": "2025년에도 만 15세 이상 64세 미만 인구는 감소세를 이어가고 있지만, 고령층 인구는 큰 폭으로 증가하고 있고, 이들의 고용률도 지속 성장 중이다.",
+    "tags": [
+      "인구구조"
+    ],
+    "source_url": "https://www.kli.re.kr/kliFileDownload?fileName=B9207F2F16D23E3749258CF400383093_1.pdf&fileNameOrg=KLI 고용노동브리프 제 113호(2025-01).pdf&filePath1=jsphome/DATA/pblctList/issue/B9207F2F16D23E3749258CF400383093",
+    "source_page": 6,
+    "warnings": []
   },
   {
     "org": "KEIS",
@@ -1610,6 +1507,26 @@
     "warnings": []
   },
   {
+    "org": "KLI",
+    "published_at": "2025-12-30",
+    "indicator": "emp_change",
+    "text": "국내외 주요 기관들의 상향된 경제성장률 전망이 이를 뒷받침한다.",
+    "tags": [],
+    "source_url": "https://www.kli.re.kr/kliFileDownload?fileName=AD6F8CF812B3630849258D71001EBA8C_1.pdf&fileNameOrg=KLI 고용노동브리프 제 114호(2025-02).pdf&filePath1=jsphome/DATA/pblctList/issue/AD6F8CF812B3630849258D71001EBA8C",
+    "source_page": 7,
+    "warnings": []
+  },
+  {
+    "org": "KLI",
+    "published_at": "2025-12-30",
+    "indicator": "unemp_rate",
+    "text": "청년층에서는 시간 관련 추가취업 가능자의 증가(+0.1%p)와 취업자 감소로 인한 경제활동인구의 축소(+0.7%p) 영향으로 확장실업률이 증가했다.",
+    "tags": [],
+    "source_url": "https://www.kli.re.kr/kliFileDownload?fileName=AD6F8CF812B3630849258D71001EBA8C_1.pdf&fileNameOrg=KLI 고용노동브리프 제 114호(2025-02).pdf&filePath1=jsphome/DATA/pblctList/issue/AD6F8CF812B3630849258D71001EBA8C",
+    "source_page": 6,
+    "warnings": []
+  },
+  {
     "org": "KEIS",
     "published_at": "2025-12-31",
     "indicator": "emp_change",
@@ -1617,36 +1534,6 @@
     "tags": [],
     "source_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20251231110535986.pdf&path=pblc&fn=%5B%EB%B3%B8%EB%AC%B8%5D+2025%EB%85%84+%EA%B3%A0%EC%9A%A9%EB%8F%99%ED%96%A5%EB%B8%8C%EB%A6%AC%ED%94%84_10%ED%98%B8_%EC%B5%9C%EC%A2%85.pdf&sn=11264&fsn=22414&ty=P",
     "source_page": 11,
-    "warnings": []
-  },
-  {
-    "org": "KLI",
-    "published_at": "2026-01-02",
-    "indicator": "emp_change",
-    "text": "2025년 하반기 고용 증가폭은 20만 명을 상회할 것으로 예상되는데, 이는 보건업 및 사회복지 서비스업, 정보통신업, 전문ㆍ과학 및 기술서비스업 등 서비스업 전반의 견조한 고용 증가가 뒷받침된 결과이다.",
-    "tags": [],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=147627&seq=1",
-    "source_page": 24,
-    "warnings": []
-  },
-  {
-    "org": "KLI",
-    "published_at": "2026-01-02",
-    "indicator": "emp_rate",
-    "text": "인구는 감소하지만, 그로 인해 취업자 수가 크게 줄어들 가능성은 낮은 것으로 보인다.",
-    "tags": [],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=147627&seq=1",
-    "source_page": 24,
-    "warnings": []
-  },
-  {
-    "org": "KLI",
-    "published_at": "2026-01-02",
-    "indicator": "unemp_rate",
-    "text": "청년층에서는 시간관련 추가취업 가능자의 증가(+0.1%p)와 취업자 감소로 인한 경제활동인구의 축소(+0.7%p) 영향으로 확장실업률이 증가했다.",
-    "tags": [],
-    "source_url": "https://www.kli.re.kr/boardDownload.es?bid=0002&list_no=147627&seq=1",
-    "source_page": 20,
     "warnings": []
   },
   {
@@ -1963,6 +1850,21 @@
     ],
     "source_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20260803024446542.pdf&path=pblc&fn=%EA%B3%A0%EC%9A%A9%EB%8F%99%ED%96%A5%EB%B8%8C%EB%A6%AC%ED%94%84+2026%EB%85%84+%EC%A0%9C5%ED%98%B8.pdf&sn=11349&fsn=22677&ty=P",
     "source_page": 20,
+    "warnings": []
+  },
+  {
+    "org": "KLI",
+    "published_at": "2026-08-06",
+    "indicator": "emp_change",
+    "text": "다. 성장의 대부분이 고용창출이 미미한 반도체 부문에서 일어나는 동안, 고용의 대부분을 결정하는 내수·비반도체 부문의 성장이 고유가·고환율·고금리의 부담, 대외불확실성의 확대 등에 눌려 있었기 때문으 로 판단된다.",
+    "tags": [
+      "환율",
+      "내수",
+      "통화정책",
+      "유가"
+    ],
+    "source_url": "https://www.kli.re.kr/kliFileDownload?fileName=5F3A4543850556CE49258E4A002B44B9_1.pdf&fileNameOrg=고용노동브리프 제115호(2026-01).pdf&filePath1=jsphome/DATA/pblctList/issue/5F3A4543850556CE49258E4A002B44B9",
+    "source_page": 2,
     "warnings": []
   },
   {
