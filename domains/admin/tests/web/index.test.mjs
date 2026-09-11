@@ -18,9 +18,14 @@ function 바인딩(raw) {
   };
 }
 
-function 환경() {
+// token 을 생략하면(기존 테스트 전부) 'secret' 그대로다. null 을 넘기면
+// METRICS_TOKEN 키 자체를 안 만든다 — secret 을 아예 안 넣은 배포(undefined)를
+// 흉내 낸다.
+function 환경(token = 'secret') {
   const { raw } = 열린DB();
-  return { env: { DB: 바인딩(raw), ALLOWED_ORIGIN: ORIGIN, METRICS_TOKEN: 'secret' }, raw };
+  const env = { DB: 바인딩(raw), ALLOWED_ORIGIN: ORIGIN };
+  if (token !== null) env.METRICS_TOKEN = token;
+  return { env, raw };
 }
 
 // D1 자체가 장애일 때(네트워크·용량·일시적 5xx 등) 를 흉내 낸다. run() 에서
@@ -158,5 +163,24 @@ test('days 를 허용 목록으로 접는다', async () => {
     ['?days=-5', 30], ['?days=abc', 30], ['?days=9999', 30], ['?days=', 30]]) {
     const res = await worker.fetch(통계요청('secret', qs), env);
     assert.equal((await res.json()).기간.일수, 일수, qs);
+  }
+});
+
+// `같은토큰('', '')` 은 길이가 같고(0) XOR 루프가 한 번도 안 돌아 diff 가 그대로
+// 0 이라 true 를 낸다. 그래서 `if (!env.METRICS_TOKEN || !같은토큰(...))` 에서
+// **앞의 `!env.METRICS_TOKEN` 가드가 사실상 유일한 방어선**이다 — 이 가드가
+// 없어지거나 `||` 의 순서가 바뀌면, secret 을 안 넣은 배포(wrangler secret put 을
+// 빠뜨린 경우, env.METRICS_TOKEN 이 '' 이거나 아예 undefined)가 아무 토큰에나
+// 통계를 통째로 내주게 된다. 이 저장소는 ask 배포에서 절차를 하나 빠뜨리는 사고를
+// 이미 겪었으므로, 이 보증은 테스트로 묶어 둔다.
+test('METRICS_TOKEN 을 안 넣은 배포는 무슨 토큰을 보내도 401 이다', async () => {
+  for (const 시크릿 of ['', null]) {
+    const { env } = 환경(시크릿);
+    for (const t of [null, '']) {
+      const res = await worker.fetch(통계요청(t), env);
+      assert.equal(res.status, 401,
+        `METRICS_TOKEN=${JSON.stringify(env.METRICS_TOKEN)} token=${JSON.stringify(t)}`);
+      assert.deepEqual(await res.json(), { 오류: '인증' });
+    }
   }
 });
