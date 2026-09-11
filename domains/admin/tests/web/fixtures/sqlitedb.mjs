@@ -12,9 +12,15 @@ const 마이그레이션 = join(여기, '..', '..', '..', 'worker', 'migrations'
 export function 열린DB() {
   const raw = new DatabaseSync(':memory:');
   raw.exec(readFileSync(마이그레이션, 'utf8'));
+  // node:sqlite 는 행을 프로토타입이 null 인 객체로 낸다. 실물 D1 은 JSON 으로
+  // 직렬화된 평범한 객체를 낸다 — 여기서 맞춰 주지 않으면 집계 코드가 그대로
+  // 돌려주는 행이 `assert.deepEqual` 에서 값은 같아도 프로토타입이 달라 깨진다.
   const db = {
-    all: async (sql, params = []) => raw.prepare(sql).all(...params),
-    one: async (sql, params = []) => raw.prepare(sql).get(...params) ?? null,
+    all: async (sql, params = []) => raw.prepare(sql).all(...params).map((r) => ({ ...r })),
+    one: async (sql, params = []) => {
+      const r = raw.prepare(sql).get(...params);
+      return r ? { ...r } : null;
+    },
     run: async (sql, params = []) => { raw.prepare(sql).run(...params); },
   };
   return { db, raw };
