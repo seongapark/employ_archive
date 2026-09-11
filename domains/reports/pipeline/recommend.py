@@ -138,7 +138,11 @@ def parse_response(body: str, n_expected: int, axes: Sequence[str]) -> list[Verd
         seen.add(n)
         if 'pick' not in row:
             raise ValueError(f'pick 이 없다: {row!r}')
-        pick = bool(row['pick'])
+        if not isinstance(row['pick'], bool):
+            # bool(row['pick']) 로 느슨하게 받으면 문자열 "false" 도 참이 되어
+            # 안 고른 보고서가 추천으로 둔갑한다 — 진짜 불리언만 받는다.
+            raise ValueError(f'pick 이 불리언이 아니다: {row!r}')
+        pick = row['pick']
         axis = str(row.get('axis', '')).strip()
         why = str(row.get('why', '')).strip()
         if pick:

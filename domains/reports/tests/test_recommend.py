@@ -81,6 +81,34 @@ def test_a_non_picked_row_with_an_unknown_axis_is_not_an_error():
     assert got[0].pick is False and got[0].axis == ''
 
 
+def test_a_string_pick_is_an_error_even_when_falsy():
+    # bool("false") 는 파이썬에서 True 다 — 느슨하게 받으면 안 고른 보고서가
+    # 추천으로 둔갑한다. 진짜 불리언만 받는다.
+    body = json.dumps([{'n': 1, 'pick': 'false', 'axis': '청년 고용', 'why': 'ㄱ'}],
+                      ensure_ascii=False)
+    with pytest.raises(ValueError, match='불리언'):
+        recommend.parse_response(body, 1, PROFILE.axes)
+
+
+def test_a_string_true_pick_is_also_an_error():
+    body = json.dumps([{'n': 1, 'pick': 'true', 'axis': '청년 고용', 'why': 'ㄱ'}],
+                      ensure_ascii=False)
+    with pytest.raises(ValueError, match='불리언'):
+        recommend.parse_response(body, 1, PROFILE.axes)
+
+
+def test_a_numeric_pick_is_an_error():
+    body = json.dumps([{'n': 1, 'pick': 0, 'axis': '청년 고용', 'why': 'ㄱ'}],
+                      ensure_ascii=False)
+    with pytest.raises(ValueError, match='불리언'):
+        recommend.parse_response(body, 1, PROFILE.axes)
+
+    body = json.dumps([{'n': 1, 'pick': 1, 'axis': '청년 고용', 'why': 'ㄱ'}],
+                      ensure_ascii=False)
+    with pytest.raises(ValueError, match='불리언'):
+        recommend.parse_response(body, 1, PROFILE.axes)
+
+
 def test_a_non_array_response_is_an_error():
     body = json.dumps({'n': 1, 'pick': True, 'axis': '청년 고용', 'why': 'ㄱ'},
                       ensure_ascii=False)
