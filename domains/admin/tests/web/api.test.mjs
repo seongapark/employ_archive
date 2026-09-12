@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { 불러오기, 미배포, 주인등록, 주인상태 } from '../../app/js/api.js';
+import { 불러오기, 미배포, 주인등록, 주인상태, 현황불러오기 } from '../../app/js/api.js';
 
 const 저장소 = (seed = {}) => {
   const m = new Map(Object.entries(seed));
@@ -74,6 +74,42 @@ test('자리표시자 url 이면 fetch 없이 미배포다', async () => {
   });
   assert.equal(r.상태, '미배포');
   assert.equal(불렀나, false);
+});
+
+// 도메인 현황은 워커가 아니라 같은 사이트의 상대경로에서 정적 JSON 을
+// 읽는다 — 절대경로를 박으면 배포 경로 접두사가 바뀔 때마다 깨진다.
+test('현황불러오기는 상대경로로 도메인별 JSON 을 읽는다', async () => {
+  const 본요청 = [];
+  const fetch = async (url) => {
+    본요청.push(url);
+    return { ok: true, json: async () => ({ run_at: 'x' }) };
+  };
+  const 결과 = await 현황불러오기({ fetch, 목록: ['employment', 'reports'] });
+  assert.deepEqual(본요청.sort(), ['../employment/data/last_run.json', '../reports/data/last_run.json']);
+  assert.deepEqual(결과.employment, { run_at: 'x' });
+  assert.deepEqual(결과.reports, { run_at: 'x' });
+});
+
+// 하나가 404 여도(그 도메인 배포가 안 끝났거나 자동 수집이 한 번도 안 돈
+// 경우) 나머지는 그대로 보여야 한다 — 하나가 없다고 전체가 죽으면 안 된다.
+test('한 도메인이 404 여도 다른 도메인은 그대로 온다', async () => {
+  const fetch = async (url) => {
+    if (url.includes('press')) return { ok: false, status: 404 };
+    return { ok: true, json: async () => ({ run_at: 'x' }) };
+  };
+  const 결과 = await 현황불러오기({ fetch, 목록: ['press', 'ask'] });
+  assert.equal(결과.press, null);
+  assert.deepEqual(결과.ask, { run_at: 'x' });
+});
+
+test('네트워크 예외도 그 도메인만 null 로 처리하고 나머지는 살린다', async () => {
+  const fetch = async (url) => {
+    if (url.includes('forecast')) throw new Error('offline');
+    return { ok: true, json: async () => ({ run_at: 'x' }) };
+  };
+  const 결과 = await 현황불러오기({ fetch, 목록: ['forecast', 'ask'] });
+  assert.equal(결과.forecast, null);
+  assert.deepEqual(결과.ask, { run_at: 'x' });
 });
 
 // 주인 등록 — 관리자 화면이 집계를 성공적으로 받은 뒤 자동으로 시도한다.

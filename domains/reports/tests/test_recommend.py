@@ -294,6 +294,65 @@ def test_merge_records_the_model_that_actually_judged(monkeypatch):
     assert cache['bok-1']['model'] == 'claude-opus-5'
 
 
+def test_main_records_a_failed_attempt_and_reraises(tmp_path, monkeypatch):
+    # 판정 실패가 조용히 사라진 사고를 막는 테스트다: 워크플로가
+    # continue-on-error 라 실패해도 전체 실행은 '성공'으로 남고, 예외가
+    # main() 을 그대로 뚫고 올라가면 last_run.json 에는 시도한 흔적조차
+    # 안 남는다(2,236건 중 356건이 미판정인 채 아무도 몰랐던 사고). try/finally
+    # 로 감싸 실패해도 기록은 남기되, 예외는 그대로 다시 던져 워크플로가
+    # 실패를 실패로 안다.
+    monkeypatch.setattr(recommend, 'DATA', tmp_path)
+    reports = [{'id': f'r-{i}', 'org': 'BOK', 'series': 'BOK 이슈노트',
+               'title': f'제목 {i}'} for i in range(3)]
+    (tmp_path / 'reports.json').write_text(json.dumps(reports, ensure_ascii=False),
+                                           encoding='utf-8')
+    (tmp_path / 'abstracts.json').write_text('{}', encoding='utf-8')
+
+    def boom(prompt):
+        raise RuntimeError('API 가 429 를 돌려줬다: insufficient_quota')
+
+    with pytest.raises(RuntimeError, match='429'):
+        recommend.main([], call=boom)
+
+    last = json.loads((tmp_path / 'last_run.json').read_text(encoding='utf-8'))
+    rec = last['recommend']
+    assert rec['judged'] == 0
+    assert rec['unjudged'] == 3
+    assert rec['picked'] == 0
+    assert '429' in rec['error']
+    assert 'at' in rec and 'profile_version' in rec
+
+
+def test_main_keeps_the_batches_judged_before_a_later_failure(tmp_path, monkeypatch):
+    # 45건 = 20 + 20 + 5, 세 묶음. 세 번째에서 실패해도 앞선 40건은 디스크에
+    # 남아 있고(judge_and_cache 의 기존 보장), main() 이 다시 읽어 그 40건을
+    # judged 로, 나머지 5건을 unjudged 로 남겨야 한다.
+    monkeypatch.setattr(recommend, 'DATA', tmp_path)
+    reports = [{'id': f'r-{i}', 'org': 'BOK', 'series': 'BOK 이슈노트',
+               'title': f'제목 {i}'} for i in range(45)]
+    (tmp_path / 'reports.json').write_text(json.dumps(reports, ensure_ascii=False),
+                                           encoding='utf-8')
+    (tmp_path / 'abstracts.json').write_text('{}', encoding='utf-8')
+    calls = []
+
+    def flaky(prompt):
+        calls.append(prompt)
+        if len(calls) == 3:
+            raise RuntimeError('모의 API 오류')
+        n = sum(1 for line in prompt.splitlines() if re.match(r'^\d+\. \[', line))
+        return json.dumps([{'n': i + 1, 'pick': False, 'axis': '', 'why': 'ㄱ'}
+                           for i in range(n)], ensure_ascii=False)
+
+    with pytest.raises(RuntimeError, match='모의 API 오류'):
+        recommend.main([], call=flaky)
+
+    last = json.loads((tmp_path / 'last_run.json').read_text(encoding='utf-8'))
+    rec = last['recommend']
+    assert rec['judged'] == 40
+    assert rec['unjudged'] == 5
+    assert '모의 API 오류' in rec['error']
+
+
 def test_judge_and_cache_records_the_actual_provider_model(monkeypatch, tmp_path):
     # merge() 단위 테스트와 별도로, main() 이 실제로 부르는 경로인
     # judge_and_cache() 도 provider() 가 고른 모델을 그대로 캐시에

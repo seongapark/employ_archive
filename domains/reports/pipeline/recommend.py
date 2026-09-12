@@ -354,18 +354,39 @@ def main(argv=None, *, call=None) -> int:
         return 0
 
     cache_path = DATA / 'recommendations.json'
-    cache = judge_and_cache(profile, todo, cache, call=call, cache_path=cache_path)
-    picked = sum(1 for v in cache.values() if v.get('pick'))
-    print(f'추천 {picked} / 판정 {len(cache)}')
-
     last_path = DATA / 'last_run.json'
-    last = json.loads(last_path.read_text(encoding='utf-8')) if last_path.exists() else {}
-    last['recommend'] = {'judged': len(cache), 'picked': picked,
-                         'profile_version': profile.version,
-                         'title_only': sum(1 for v in cache.values()
-                                           if v.get('basis') == 'title')}
-    last_path.write_text(json.dumps(last, ensure_ascii=False, indent=2) + '\n',
-                         encoding='utf-8')
+    error: str | None = None
+    try:
+        cache = judge_and_cache(profile, todo, cache, call=call, cache_path=cache_path)
+    except Exception as exc:
+        # API 크레딧 소진 같은 실패가 여기서 조용히 사라진 적이 있다 —
+        # 워크플로가 continue-on-error 라 전체 실행은 '성공'으로 남고,
+        # 예외가 여기서 그대로 올라가면 last_run.json 에는 시도한 흔적조차
+        # 안 남는다(2,236건 중 356건이 미판정인 채 아무도 몰랐던 사고).
+        # 그래서 실패해도 finally 에서 기록은 남기고, 예외는 그대로 다시
+        # 던진다 — 실패를 성공으로 둔갑시키지 않는다.
+        error = f'{type(exc).__name__}: {exc}'[:300]
+        raise
+    finally:
+        # judge_and_cache() 는 묶음이 끝날 때마다 recommendations.json 에
+        # 즉시 반영하므로, 실패했더라도 디스크에서 다시 읽으면 그때까지
+        # 판정된 만큼은 반영된 최신 값이다.
+        cache_now = load_cache(cache_path)
+        picked = sum(1 for v in cache_now.values() if v.get('pick'))
+        last = json.loads(last_path.read_text(encoding='utf-8')) if last_path.exists() else {}
+        block = {'judged': len(cache_now), 'picked': picked,
+                 'unjudged': max(len(rows) - len(cache_now), 0),
+                 'profile_version': profile.version,
+                 'title_only': sum(1 for v in cache_now.values()
+                                   if v.get('basis') == 'title'),
+                 'at': datetime.now(KST).isoformat(timespec='seconds')}
+        if error is not None:
+            block['error'] = error
+        last['recommend'] = block
+        last_path.write_text(json.dumps(last, ensure_ascii=False, indent=2) + '\n',
+                             encoding='utf-8')
+
+    print(f'추천 {picked} / 판정 {len(cache_now)}')
     return 0
 
 
