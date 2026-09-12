@@ -1,14 +1,14 @@
 {
-  "at": "2026-09-11T23:36:32+09:00",
+  "at": "2026-09-12T16:31:38+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
-      "parsed": 150,
+      "parsed": 190,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
       "error": null,
-      "total": 140
+      "total": 180
     },
     "kli-review": {
       "ok": true,
@@ -75,12 +75,12 @@
     },
     "keis-research": {
       "ok": true,
-      "parsed": 150,
+      "parsed": 200,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
       "error": null,
-      "total": 120
+      "total": 160
     },
     "keis-supply": {
       "ok": true,
@@ -129,18 +129,18 @@
     },
     "kiet-report": {
       "ok": true,
-      "parsed": 150,
-      "added": 40,
-      "details": 40,
-      "reached_cutoff": false,
+      "parsed": 180,
+      "added": 39,
+      "details": 39,
+      "reached_cutoff": true,
       "error": null,
-      "total": 120
+      "total": 159
     },
     "kiet-redata": {
       "ok": true,
       "parsed": 90,
-      "added": 2,
-      "details": 2,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": true,
       "error": null,
       "total": 82
@@ -157,8 +157,8 @@
     "kiet-paper": {
       "ok": true,
       "parsed": 90,
-      "added": 2,
-      "details": 2,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": true,
       "error": null,
       "total": 82
@@ -166,29 +166,29 @@
     "kiet-issue": {
       "ok": true,
       "parsed": 150,
-      "added": 40,
-      "details": 40,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": true,
       "error": null,
       "total": 120
     },
     "kiet-economy": {
       "ok": true,
-      "parsed": 150,
+      "parsed": 180,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
       "error": null,
-      "total": 120
+      "total": 160
     },
     "kdi-report": {
       "ok": true,
-      "parsed": 130,
+      "parsed": 170,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
       "error": null,
-      "total": 120
+      "total": 160
     },
     "kdi-analysis": {
       "ok": true,
@@ -201,12 +201,12 @@
     },
     "kdi-focus": {
       "ok": true,
-      "parsed": 131,
+      "parsed": 175,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
       "error": null,
-      "total": 117
+      "total": 157
     },
     "kdi-trends": {
       "ok": true,
@@ -247,8 +247,8 @@
     "bok-assess": {
       "ok": true,
       "parsed": 100,
-      "added": 23,
-      "details": 23,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": true,
       "error": null,
       "total": 23
@@ -256,8 +256,8 @@
     "bok-region": {
       "ok": true,
       "parsed": 52,
-      "added": 19,
-      "details": 19,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": true,
       "error": null,
       "total": 19
@@ -274,8 +274,8 @@
     "bok-note": {
       "ok": true,
       "parsed": 300,
-      "added": 211,
-      "details": 211,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": true,
       "error": null,
       "total": 211
@@ -283,8 +283,8 @@
     "bok-issue": {
       "ok": true,
       "parsed": 21,
-      "added": 21,
-      "details": 21,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "error": null,
       "total": 21
@@ -292,15 +292,15 @@
     "bok-research": {
       "ok": true,
       "parsed": 500,
-      "added": 403,
-      "details": 403,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": true,
       "error": null,
       "total": 403
     }
   },
   "unregistered": [],
-  "reports": 2236,
+  "reports": 2475,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -314,14 +314,14 @@
         "rate": 0.0
       },
       "연구보고서": {
-        "total": 120,
-        "missing": 1,
-        "rate": 0.008
+        "total": 160,
+        "missing": 2,
+        "rate": 0.013
       },
       "KDI FOCUS": {
-        "total": 117,
+        "total": 157,
         "missing": 38,
-        "rate": 0.325
+        "rate": 0.242
       },
       "현안분석": {
         "total": 31,
@@ -373,9 +373,9 @@
     },
     "kli": {
       "연구보고서": {
-        "total": 140,
-        "missing": 31,
-        "rate": 0.221
+        "total": 180,
+        "missing": 40,
+        "rate": 0.222
       },
       "국제노동브리프": {
         "total": 50,
@@ -420,7 +420,7 @@
         "rate": 0.0
       },
       "연구사업보고서": {
-        "total": 120,
+        "total": 160,
         "missing": 0,
         "rate": 0.0
       },
@@ -452,9 +452,9 @@
         "rate": 0.0
       },
       "월간 산업경제": {
-        "total": 120,
-        "missing": 10,
-        "rate": 0.083
+        "total": 160,
+        "missing": 14,
+        "rate": 0.087
       },
       "연구자료": {
         "total": 82,
@@ -467,9 +467,9 @@
         "rate": 0.0
       },
       "연구보고서": {
-        "total": 120,
-        "missing": 4,
-        "rate": 0.033
+        "total": 159,
+        "missing": 7,
+        "rate": 0.044
       },
       "정책자료": {
         "total": 36,
@@ -480,24 +480,24 @@
   },
   "abstract_missing_why": {
     "요약 없음": 473,
-    "요약 섹션 없음": 273,
-    "아직 안 받음": 47,
+    "요약 섹션 없음": 282,
+    "아직 안 받음": 48,
     "텍스트가 없는 스캔본": 38,
-    "원문 없음": 15,
+    "원문 없음": 22,
     "파일이 너무 큼(67MB)": 1,
     "파일이 너무 큼(79MB)": 1
   },
   "sizes": {
-    "reports_gzip": 192861,
-    "abstracts_gzip": 1893936
+    "reports_gzip": 213805,
+    "abstracts_gzip": 2242477
   },
   "recommend": {
     "judged": 1880,
     "picked": 545,
-    "unjudged": 356,
+    "unjudged": 595,
     "profile_version": "f2dfd921",
     "title_only": 662,
-    "at": "2026-09-12T13:20:23+09:00",
+    "at": "2026-09-12T16:35:09+09:00",
     "error": "ValueError: API 가 429 를 돌려줬다: {\n    \"error\": {\n        \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        \"code\": \"credit_balance_exhaus"
   }
 }
