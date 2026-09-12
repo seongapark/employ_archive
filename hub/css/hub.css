@@ -80,3 +80,20 @@
   cursor: pointer;
 }
 .header__install:hover { background: var(--accent-light); }
+
+/* 관리자(방문 현황) 문. 설치 버튼이 숨어 있을 때도 제목 오른쪽 끝에 붙게
+   margin-left:auto 를 둔다 — 설치 버튼은 조건이 맞을 때만 나타나므로 그쪽
+   정렬에 기댈 수 없다. 제목은 margin-right:auto 라 둘은 충돌하지 않는다. */
+.header__admin {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+  color: var(--text-muted);
+  flex: none;
+}
+/* 설치 버튼이 보이는 동안에는 그 오른쪽에 나란히 선다. */
+.header__install:not([hidden]) + .header__admin { margin-left: 8px; }
+.header__admin:hover { color: var(--accent); }

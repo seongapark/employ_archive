@@ -17,6 +17,17 @@
     <header class="header">
       <div class="header__title">고용데이터 아카이브</div>
       <button id="install" class="header__install" type="button" hidden>앱 설치</button>
+      <!-- 관리자(방문 현황)로 가는 유일한 문이다. 이게 없으면 주소를 외운 사람만
+           들어갈 수 있다 — 관리자 화면은 허브 카드 목록에도 없기 때문이다.
+           아무나 눌러도 되는 이유는 잠금이 화면이 아니라 워커의 /api/stats 에
+           걸려 있어서다. 비밀번호 없이는 숫자가 한 톨도 안 나간다. -->
+      <a class="header__admin" href="./admin/" aria-label="방문 현황" title="방문 현황">
+        <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor"
+             stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="3"></circle>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+        </svg>
+      </a>
     </header>
     <main class="screen">
       <form id="askform" class="askform">
