@@ -68,3 +68,39 @@ def test_the_header_title_names_the_app_not_a_tab():
     html = admin_html()
     제목 = html.split('class="header__title">')[1].split('<')[0]
     assert 제목 == '관리자', f"헤더 제목이 앱 이름이 아니다: {제목}"
+
+
+SW = REPO / "domains" / "admin" / "app" / "sw.js"
+
+
+def test_the_admin_worker_never_touches_any_cache():
+    # 이 저장소는 워커가 **남의 앱 캐시를 지워** 다섯 앱의 오프라인이 허브를 열
+    # 때마다 날아간 사고를 겪었다. 관리자 워커는 신선도만을 위한 것이라 저장할
+    # 이유가 없다 — 캐시를 아예 안 건드리면 그 사고가 재현될 수 없다.
+    t = SW.read_text(encoding="utf-8")
+    코드 = "\n".join(줄 for 줄 in t.splitlines() if not 줄.lstrip().startswith("//"))
+    for 금지 in ("caches.delete", "caches.open", "cache.put", "cache.addAll"):
+        assert 금지 not in 코드, f"관리자 워커가 캐시를 건드린다: {금지}"
+
+
+def test_the_admin_worker_always_revalidates():
+    # no-cache 가 빠지면 이 워커가 있으나 마나다 — 배포 직후 옛 JS 가 그대로 나온다.
+    t = SW.read_text(encoding="utf-8")
+    코드 = "\n".join(줄 for 줄 in t.splitlines() if not 줄.lstrip().startswith("//"))
+    assert "cache: 'no-cache'" in 코드, "재검증 없이 그냥 fetch 한다"
+
+
+def test_the_admin_worker_leaves_other_origins_alone():
+    # 집계·비콘은 워커 API(다른 오리진)로 간다. 여기서 가로채면 CORS 가 꼬인다.
+    t = SW.read_text(encoding="utf-8")
+    assert "self.location.origin" in t, "남의 오리진을 통과시키는 가드가 없다"
+    assert "request.method !== 'GET'" in t, "POST(비콘·등록)를 통과시키는 가드가 없다"
+
+
+def test_the_admin_page_registers_that_worker_but_stays_uninstallable():
+    html = admin_html()
+    assert "serviceWorker" in html and "./sw.js" in html, "워커를 등록하지 않는다"
+    # manifest 가 붙으면 설치 대상이 된다 — 관리자 화면은 앱으로 설치할 물건이
+    # 아니다. **낱말이 아니라 태그를 본다**: 주석에 그 낱말을 쓰는 것까지 막으면
+    # 왜 안 붙이는지 설명할 수가 없다(이 테스트가 실제로 그렇게 걸렸다).
+    assert 'rel="manifest"' not in html, "관리자 화면에 manifest 가 붙었다"

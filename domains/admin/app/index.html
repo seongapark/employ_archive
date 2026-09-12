@@ -29,5 +29,11 @@
     <main id="screen" class="screen"></main>
   </div>
   <script type="module" src="./js/admin.js"></script>
+  <script>
+    // 이 워커는 오프라인이 아니라 **신선도**를 위한 것이다 — 배포 직후 옛 JS 가
+    // 캐시에서 나와 화면이 안 바뀐 것처럼 보이는 일을 막는다(sw.js 주석 참고).
+    // manifest 는 여전히 없다: 이 화면은 설치 대상이 아니다.
+    if ('serviceWorker' in navigator) navigator.serviceWorker.register('./sw.js').catch(() => {});
+  </script>
 </body>
 </html>
