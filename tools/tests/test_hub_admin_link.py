@@ -39,3 +39,32 @@ def test_the_admin_page_does_not_carry_the_beacon():
     # 허브에 문을 낸 김에 실수로 비콘까지 붙이지 않았는지 함께 지킨다.
     assert "data-track-domain" not in ADMIN.read_text(encoding="utf-8"), (
         "관리자 화면에 비콘이 붙었다 — 자기 방문이 통계에 섞인다")
+
+
+def admin_html() -> str:
+    return ADMIN.read_text(encoding="utf-8")
+
+
+def test_the_admin_page_has_both_tabs():
+    # 성격이 다른 두 화면을 탭으로 갈라 뒀다. 하나라도 사라지면 그 기능으로 가는
+    # 길이 없어진다 — 관리자 화면은 라우터가 없어 주소로 우회할 수도 없다.
+    html = admin_html()
+    assert 'data-tab="현황"' in html, "도메인 현황 탭이 없다"
+    assert 'data-tab="방문"' in html, "방문 현황 탭이 없다"
+
+
+def test_the_tabs_sit_outside_the_scrolling_area():
+    # 탭바가 `.screen` 안으로 들어가면 내용과 함께 스크롤돼, 아래로 내려간 사람이
+    # 탭을 못 찾는다. 이 저장소가 헤더·탭바에서 반복해 지키는 규칙이다.
+    html = admin_html()
+    탭 = html.index('id="tabs"')
+    스크린 = html.index('id="screen"')
+    assert 탭 < 스크린, "탭바가 스크롤 영역 안에 있다"
+
+
+def test_the_header_title_names_the_app_not_a_tab():
+    # 헤더 제목은 탭을 따라 바뀌지 않는다(저장소 공통 규칙). 탭이 둘이 된 이상
+    # 제목이 한쪽 탭 이름이면 다른 탭에 있을 때 거짓말이 된다.
+    html = admin_html()
+    제목 = html.split('class="header__title">')[1].split('<')[0]
+    assert 제목 == '관리자', f"헤더 제목이 앱 이름이 아니다: {제목}"

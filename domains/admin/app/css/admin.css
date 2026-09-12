@@ -12,6 +12,30 @@
   --dom-hub:        #4d5563;
 }
 
+/* ── 탭 ──
+   고용동향 앱의 세그먼트와 같은 모양이다(각 앱이 자기 CSS 로 들고 있어 공용이
+   아니다). 성격이 다른 두 화면을 가른다 — 한 두루마리로 이어 붙이면 "수집이 잘
+   도나" 와 "사람이 오나" 가 눈에 구분되지 않는다.
+   `.screen` 밖에 있어 내용이 길어져도 탭은 제자리에 남는다. */
+.segments {
+  display: flex;
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+}
+.segment {
+  flex: 1;
+  padding: 11px 4px;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+}
+.segment--active { color: var(--accent); font-weight: 700; border-bottom-color: var(--accent); }
+
 .screen { padding: 12px; }
 .sec { font-size: 13px; color: var(--text-secondary); margin: 20px 0 8px; font-weight: 600; }
 .empty { color: var(--text-muted); font-size: 13px; padding: 12px 0; }
