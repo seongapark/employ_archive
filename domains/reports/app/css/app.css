@@ -192,6 +192,24 @@
   padding: 0 1px;
 }
 
+/* 추천 이유 — 카드 안에 넣어야 "어느 카드 것인지" 가 읽힌다(전에는 카드
+   바깥의 형제 요소였다). 발췌문(.row__snippet)은 원문 조각, 이 상자는 LLM
+   판정 근거라 성격이 달라 배경을 accent 계열로 갈라 구분한다. */
+.row__why {
+  font-size: 12px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 6px;
+  padding: 6px 8px;
+  background: var(--accent-light);
+  border-radius: 6px;
+}
+.row__why-label {
+  font-weight: 700;
+  color: var(--accent);
+  margin-right: 5px;
+}
+
 .fold {
   display: flex;
   align-items: center;
@@ -347,4 +365,3 @@
 .axis { margin-bottom: 22px; }
 .axis__name { font-weight: 600; margin: 0 0 6px; padding: 0 16px; }
 .axis__count { color: var(--text-muted); font-weight: 400; font-size: 0.88em; }
-.why { color: var(--text-secondary); font-size: 0.86em; margin: -4px 0 10px 2px; }

@@ -19,7 +19,9 @@ export function highlight(text, query) {
   }
 }
 
-export function reportRow(report, { snippet = '', query = '', inGroup = false } = {}) {
+export function reportRow(report, {
+  snippet = '', query = '', inGroup = false, why = '',
+} = {}) {
   const authors = (report.authors || []).slice(0, 3).join(', ');
   const more = (report.authors || []).length > 3 ? ' 외' : '';
   return `
@@ -33,6 +35,7 @@ export function reportRow(report, { snippet = '', query = '', inGroup = false } 
       <div class="row__title">${highlight(report.title, query)}</div>
       ${authors ? `<div class="row__authors">${esc(authors + more)}</div>` : ''}
       ${snippet ? `<div class="row__snippet">${highlight(snippet, query)}</div>` : ''}
+      ${why ? `<div class="row__why"><span class="row__why-label">추천 이유</span>${esc(why)}</div>` : ''}
     </a>`;
 }
 
