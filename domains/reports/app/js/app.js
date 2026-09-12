@@ -7,6 +7,8 @@ import * as topics from './screens/topics.js';
 import * as orgs from './screens/orgs.js';
 import * as report from './screens/report.js';
 
+// 화면 파일 이름은 route.js 의 route.name 과 맞춘다. 탭 표시는 route.tab 을
+// 따로 쓰므로(예: 'home' 화면인데 탭은 'search') 여기서는 건드릴 필요가 없다.
 const screens = { home, picks, topics, orgs, report };
 
 function setActiveTab(tabbarEl, tab) {

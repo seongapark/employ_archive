@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import {
-  homeRows, headHtml, bodyHtml, topPicks,
+  homeRows, headHtml, bodyHtml,
 } from '../../app/js/screens/home.js';
 import { topicChips, reportsForTopic } from '../../app/js/screens/topics.js';
 import { shelf } from '../../app/js/screens/orgs.js';
@@ -86,45 +86,38 @@ test('머리는 기관·연도 칩 상태는 반영한다', () => {
   assert.ok(on.includes('chip--active'));
 });
 
-// ── 홈: 검색창 아래 추천 ─────────────────────────────────────────────
+// ── 홈: 타임라인의 추천 배지 ─────────────────────────────────────────
+// 추천 섹션 자체는 독립 탭('#/')으로 옮겨서 여기서는 지웠다. 다만 타임라인
+// 행에 붙는 '추천' 배지는 검색 결과에서 "이건 추천된 것" 을 알려주는
+// 표시라 여전히 쓸모가 있어 남긴다 — 그게 안 붙으면 검색 탭에서 추천작을
+// 구분할 길이 없어진다.
 
-test('홈 추천은 여섯 줄까지다', () => {
-  const reports = Array.from({ length: 10 }, (_, i) => ({
-    id: `r${i}`, org: 'bok', title: `ㄱ${i}`, published: `2026-01-${String(i + 1).padStart(2, '0')}`,
-  }));
-  const picks = Object.fromEntries(
-    reports.map((r) => [r.id, { pick: true, axis: '청년 고용', why: 'ㄱ' }]));
-  assert.ok(topPicks(reports, picks).length <= 6);
-});
-
-test('한 기관이 홈 추천을 다 채우지 못한다', () => {
-  const reports = [
-    ...Array.from({ length: 5 }, (_, i) => ({
-      id: `b${i}`, org: 'bok', title: `ㄱ${i}`, published: `2026-02-${String(i + 1).padStart(2, '0')}`,
-    })),
-    { id: 'k1', org: 'kli', title: 'ㄴ', published: '2026-01-01' },
-  ];
-  const picks = Object.fromEntries(
-    reports.map((r) => [r.id, { pick: true, axis: '청년 고용', why: 'ㄱ' }]));
-  const rows = topPicks(reports, picks);
-  assert.ok(rows.filter((r) => r.org === 'bok').length <= 2);
-  assert.ok(rows.some((r) => r.org === 'kli'));
-});
-
-test('홈 추천은 최신 순이다', () => {
-  const reports = [
-    { id: 'a', org: 'bok', title: 'ㄱ', published: '2026-01-01' },
-    { id: 'b', org: 'kli', title: 'ㄴ', published: '2026-03-01' },
-  ];
-  const picks = {
-    a: { pick: true, axis: '청년 고용', why: 'ㄱ' },
-    b: { pick: true, axis: '청년 고용', why: 'ㄴ' },
+test('타임라인에서 추천된 보고서는 배지를 단다', () => {
+  const ctx = {
+    ...CTX,
+    picks: { a: { pick: true, axis: '청년 고용', why: 'ㄱ' } },
   };
-  assert.deepEqual(topPicks(reports, picks).map((r) => r.id), ['b', 'a']);
+  const rows = homeRows({ q: '', orgs: [], years: [] }, ctx);
+  const flat = rows.groups.flatMap((g) => g.rows).filter((r) => r.report);
+  const a = flat.find((r) => r.report.id === 'a');
+  const b = flat.find((r) => r.report.id === 'b');
+  assert.equal(a.report.picked, true);
+  assert.ok(!b.report.picked);
+});
+
+test('검색 결과에는 추천 배지를 붙이지 않는다', () => {
+  // 관련도가 이미 검색 결과의 주인공이라 배지를 겹치지 않는다.
+  const ctx = {
+    ...CTX,
+    picks: { a: { pick: true, axis: '청년 고용', why: 'ㄱ' } },
+  };
+  const rows = homeRows({ q: '청년고용', orgs: [], years: [] }, ctx);
+  assert.ok(!rows.hits.some((h) => h.report.picked));
 });
 
 test('추천 파일이 없어도 홈이 죽지 않는다', () => {
-  assert.deepEqual(topPicks(CTX.reports, undefined), []);
+  const rows = homeRows({ q: '', orgs: [], years: [] }, { ...CTX, picks: undefined });
+  assert.ok(rows.groups.length >= 1);
 });
 
 // ── 주제 ──────────────────────────────────────────────────────────────

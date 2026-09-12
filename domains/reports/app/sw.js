@@ -8,6 +8,7 @@ const SHELL_ASSETS = [
   './core/shell.js',
   './css/app.css',
   './js/app.js',
+  './js/route.js',
   './js/data.js',
   './js/ui.js',
   './js/search.js',
