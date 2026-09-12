@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-09-11T17:00:45.242210+09:00",
+  "run_at": "2026-09-12T16:52:51.706019+09:00",
   "collectors": {
     "eaps": {
       "ok": false,
@@ -9,15 +9,15 @@
       "rejected": 0
     },
     "est": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 589,
       "added": 0,
       "updated": 0,
       "rejected": 0
     },
     "ei": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 728,
       "added": 0,
       "updated": 0,
       "rejected": 0
@@ -25,10 +25,8 @@
   },
   "conflicts": [],
   "errors": [
-    "eaps: ConnectTimeout: HTTPSConnectionPool(host='mods.go.kr', port=443): Max retries exceeded with url: /board.es?mid=a10301030100&bid=a103010301&ref_bid=210%2C211%2C11109%2C11113%2C11814 (Caused by ConnectTimeoutError(<HTTPSConnection(host='mods.go.kr', port=443) at 0x7ff7a711ff20>, 'Connection to mods.go.kr timed out. (connect timeout=30)'))",
-    "est: ConnectTimeout: HTTPSConnectionPool(host='kosis.kr', port=443): Max retries exceeded with url: /openapi/Param/statisticsParameterData.do?method=getList&apiKey=ZjI2NzMzNDFjOGZjMGI2ZTNiYjQ5YjFmMDk1ZDc0YmM%3D&orgId=118&tblId=DT_118N_MON066&itmId=16118MF_1&objL1=ALL&objL2=13102732820SIZES.0&prdSe=M&newEstPrdCnt=36&format=json&jsonVD=Y (Caused by ConnectTimeoutError(<HTTPSConnection(host='kosis.kr', port=443) at 0x7ff7a711f7a0>, 'Connection to kosis.kr timed out. (connect timeout=120)'))",
-    "ei: ConnectTimeout: HTTPSConnectionPool(host='www.moel.go.kr', port=443): Max retries exceeded with url: /news/enews/report/enewsList.do (Caused by ConnectTimeoutError(<HTTPSConnection(host='www.moel.go.kr', port=443) at 0x7ff7a71498e0>, 'Connection to www.moel.go.kr timed out. (connect timeout=30)'))",
-    "kosis_check: ConnectTimeout: HTTPSConnectionPool(host='kosis.kr', port=443): Max retries exceeded with url: /openapi/Param/statisticsParameterData.do?method=getList&apiKey=ZjI2NzMzNDFjOGZjMGI2ZTNiYjQ5YjFmMDk1ZDc0YmM%3D&format=json&jsonVD=Y&userStatsId=&prdSe=M&startPrdDe=202608&endPrdDe=202608&orgId=101&tblId=DT_1DA7002S&itmId=T30&objL1=00 (Caused by ConnectTimeoutError(<HTTPSConnection(host='kosis.kr', port=443) at 0x7ff7a7148e90>, 'Connection to kosis.kr timed out. (connect timeout=30)'))"
+    "eaps: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))",
+    "kosis_check: ValueError: KOSIS DT_1DA7002S 가 보도자료와 다르다: 2026-08 KOSIS 29151.0 vs 보도자료 63.3 — 분류 개편으로 표가 바뀌었는지 확인하고 sources.json 의 eaps.kosis_url 을 고칠 것"
   ],
   "releases": {
     "eaps": {
