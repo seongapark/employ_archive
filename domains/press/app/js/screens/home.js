@@ -136,11 +136,24 @@ function rivalCard(round) {
     ${body}${tail}`);
 }
 
+// 화면이 자기 결함을 먼저 말한다. 수집이나 판정이 덜 된 채로 그린 숫자는
+// 「언론이 덜 다뤘다」와 구별이 안 되는데, 뜻이 정반대다.
 function warnCard(round) {
-  if (!round.truncated.length) return '';
+  const rows = [];
+  if (round.truncated.length) {
+    rows.push(`<div style="font-weight:700;">이 회차 수집은 불완전합니다</div>
+      <div>검색어 ${esc(round.truncated.join(', '))} 가 1,000건 상한에 걸려 구간 전체를 못 훑었습니다.</div>`);
+  }
+  // 판정 없는 기사는 '인용 아님'으로 세어진다 — 말하지 않으면 인용률이 떨어진
+  // 것처럼만 보이고, 그게 언론 탓인지 판정 탓인지 알 수 없다.
+  if (round.unjudged) {
+    rows.push(`<div style="font-weight:700;">판정이 덜 됐습니다</div>
+      <div>기사 ${round.unjudged}건이 판정 없이 남아 인용이 아닌 것으로 세어지고 있습니다.
+      아래 숫자는 그만큼 적게 잡힌 값입니다.</div>`);
+  }
+  if (!rows.length) return '';
   return `<div class="gapbox" style="color:var(--frame-fg);background:var(--frame-bg);">
-    <div style="font-weight:700;">이 회차 수집은 불완전합니다</div>
-    <div>검색어 ${esc(round.truncated.join(', '))} 가 1,000건 상한에 걸려 구간 전체를 못 훑었습니다.</div></div>`;
+    ${rows.join('<div style="height:6px;"></div>')}</div>`;
 }
 
 export function render(root, ctx) {

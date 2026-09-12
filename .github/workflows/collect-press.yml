@@ -94,6 +94,9 @@ jobs:
             --release "${{ needs.plan.outputs.release }}" \
             --kind "${{ needs.plan.outputs.kind }}"
       - name: Commit data
+        # 앞 단계가 죽어도 **담은 것은 담는다.** 러너는 사라지므로 여기서 커밋하지
+        # 않으면 그날 긁은 원자료가 없어진다(2026-09-12 에 이 구멍을 찾았다).
+        if: always()
         run: |
           git config user.name "press-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"

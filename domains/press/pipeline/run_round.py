@@ -172,7 +172,17 @@ def main(argv=None):
 
     hwpx = os.path.join(SOURCES, 'releases', 'ei_%s.hwpx' % month)
     collect.run(release, hwpx if os.path.exists(hwpx) else None, kind == 'follow')
-    judge_missing(release, kind)
+
+    # **판정이 죽어도 수집은 살린다.** 수집에는 마감이 있고(네이버 검색은 약 50일이면
+    # 그 회차에 못 닿는다) 판정에는 없다. 여기서 예외가 위로 올라가면 뒤따르는
+    # 커밋 단계가 안 돌고, 러너가 사라지면서 **그날 긁은 것이 통째로 버려진다.**
+    # 판정은 원자료가 남아 있는 한 언제든 다시 할 수 있다.
+    try:
+        judge_missing(release, kind)
+    except Exception as exc:
+        print('  ⚠ 판정이 실패했다: %s' % exc)
+        print('     수집한 기사는 그대로 담는다 — 판정은 나중에 다시 돌리면 된다.')
+        print('     화면에는 그 기사들이 「판정 없음」으로 표시된다.')
 
     from . import make_data
     fetch_all_releases()

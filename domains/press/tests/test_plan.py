@@ -225,3 +225,36 @@ def test_make_data_refuses_to_shrink_the_round_list(tmp_path, monkeypatch):
     # 멈췄으니 옛 목록이 그대로 남아 있어야 한다.
     kept = json.loads((data / 'rounds.json').read_text('utf-8'))
     assert [r['release'] for r in kept] == ['2026-09-07', '2026-08-10']
+
+
+def test_a_failed_judgement_does_not_throw_away_the_collection(tmp_path, monkeypatch):
+    # 수집에는 마감이 있고(네이버 검색은 약 50일이면 그 회차에 못 닿는다) 판정에는
+    # 없다. 판정 예외가 위로 올라가면 워크플로의 커밋 단계가 안 돌고, 러너가
+    # 사라지면서 그날 긁은 원자료가 통째로 없어진다.
+    raw = {'articles': [{'title': '새 기사', 'press': 'A', 'desc': ''}]}
+    (tmp_path / 'raw').mkdir()
+    (tmp_path / 'raw' / 'articles_2026-09-07_follow.json').write_text(
+        json.dumps(raw, ensure_ascii=False), encoding='utf-8')
+    monkeypatch.setattr(run_round, 'RAW', str(tmp_path / 'raw'))
+    monkeypatch.setattr(run_round, 'VERDICTS', str(tmp_path / 'verdicts'))
+    monkeypatch.setattr(run_round, 'SOURCES', str(tmp_path))
+    monkeypatch.setenv('OPENAI_API_KEY', 'sk-oa-exhausted')
+
+    def quota_exceeded(_prompt):
+        raise ValueError('API 가 429 를 돌려줬다: insufficient_quota')
+
+    done = []
+    monkeypatch.setattr(run_round, 'collect',
+                        type('C', (), {'run': staticmethod(lambda *a, **k: done.append('collect'))}))
+    monkeypatch.setattr(run_round, 'fetch_all_releases', lambda: done.append('hwpx'))
+    monkeypatch.setattr(run_round.plan, 'save_state', lambda *a: done.append('state'))
+    monkeypatch.setattr(run_round.fetch_release, 'save', lambda *a: None)
+    import domains.press.pipeline.make_data as md
+    monkeypatch.setattr(md, 'main', lambda: done.append('make_data'))
+    monkeypatch.setattr(run_round.llm_cite, '_call_api', quota_exceeded)
+
+    rc = run_round.main(['--release', '2026-09-07', '--kind', 'follow'])
+
+    assert rc == 0                      # 죽지 않는다
+    assert 'make_data' in done          # 조립까지 간다 = 커밋 단계가 돈다
+    assert 'state' in done
