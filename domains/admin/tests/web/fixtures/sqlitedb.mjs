@@ -2,16 +2,20 @@
 // 씌운다. D1 도 SQLite 라서 이 대역은 실물보다 관대할 수 없다 — 문법 오류도
 // 제약 위반도 여기서 그대로 터진다.
 import { DatabaseSync } from 'node:sqlite';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const 여기 = dirname(fileURLToPath(import.meta.url));
-const 마이그레이션 = join(여기, '..', '..', '..', 'worker', 'migrations', '0001_init.sql');
+const 마이그레이션폴더 = join(여기, '..', '..', '..', 'worker', 'migrations');
 
 export function 열린DB() {
   const raw = new DatabaseSync(':memory:');
-  raw.exec(readFileSync(마이그레이션, 'utf8'));
+  // 파일 이름 앞자리 번호(0001, 0002, ...)로 정렬해 전부 순서대로 적용한다.
+  // 최신 파일 하나만 읽으면 "뒤 번호만 돌려 no such column" 사고가 그대로
+  // 재현된다 — 이 저장소가 이미 한 번 겪었다.
+  const 목록 = readdirSync(마이그레이션폴더).filter((f) => f.endsWith('.sql')).sort();
+  for (const f of 목록) raw.exec(readFileSync(join(마이그레이션폴더, f), 'utf8'));
   // node:sqlite 는 행을 프로토타입이 null 인 객체로 낸다. 실물 D1 은 JSON 으로
   // 직렬화된 평범한 객체를 낸다 — 여기서 맞춰 주지 않으면 집계 코드가 그대로
   // 돌려주는 행이 `assert.deepEqual` 에서 값은 같아도 프로토타입이 달라 깨진다.

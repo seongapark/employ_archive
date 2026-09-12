@@ -77,13 +77,27 @@ test('잠금 화면은 숫자를 하나도 안 보인다', () => {
 });
 
 // 오류 화면(미배포·연결실패)도 이 블록을 그대로 쓴다 — 잠금 화면으로 돌아갈
-// 길이 오직 이 두 컨트롤뿐이라, 어느 화면에서든 빠뜨리면 갇힌다.
-test('도구 블록은 제외 스위치와 토큰 지우기를 낸다', () => {
-  const html = 도구HTML(false);
-  assert.match(html, /id="off"/);
+// 길이 오직 토큰 지우기 버튼뿐이라, 어느 화면에서든 빠뜨리면 갇힌다.
+//
+// 제외 스위치(체크박스)는 더 이상 없다 — 본인 방문은 이제 관리자 화면이 자동으로
+// 등록하는 주인 표(owner)로 빠지고, 여기는 그 상태를 문장으로만 보여준다.
+test('도구 블록에는 체크박스가 없고 토큰 지우기가 있다', () => {
+  const html = 도구HTML('등록됨');
+  assert.ok(!html.includes('type="checkbox"'));
+  assert.ok(!html.includes('id="off"'));
   assert.match(html, /id="logout"/);
-  assert.ok(!html.includes('checked'));
-  assert.match(도구HTML(true), /checked/);
+});
+
+test('등록됐으면 모든 숫자에서 빠진다고 말한다', () => {
+  assert.match(도구HTML('등록됨'), /빠진다/);
+});
+
+test('ea:v 가 없어 등록 못 했으면 그 사실을 말한다', () => {
+  assert.match(도구HTML('없음'), /연 적이 없어/);
+});
+
+test('등록을 아직 못 했으면(보류) 그 사실을 말한다', () => {
+  assert.match(도구HTML('보류'), /올리지 못했다/);
 });
 
 // 유입 호스트는 남이 정한 문자열이다 — 그대로 붙이면 스크립트가 실린다.

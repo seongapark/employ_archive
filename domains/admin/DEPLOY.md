@@ -25,6 +25,9 @@ wrangler d1 create employ-archive-metrics
 wrangler d1 execute employ-archive-metrics --remote \
   --config wrangler.jsonc --file=migrations/0001_init.sql
 
+wrangler d1 execute employ-archive-metrics --remote \
+  --config wrangler.jsonc --file=migrations/0002_owner.sql
+
 wrangler secret put METRICS_TOKEN
 # 관리자 화면 로그인 비밀번호다. 저장소 어디에도 커밋하지 않는다.
 
@@ -70,6 +73,16 @@ curl https://employ-archive-metrics.<계정>.workers.dev/api/health
 | 파일 | 무엇을 만드나 |
 |---|---|
 | `0001_init.sql` | `hit`·`visitor` 두 표와 인덱스 셋(`hit_day`·`hit_domain_day`·`visitor_first`) |
+| `0002_owner.sql` | `owner` 표 — 관리자 비밀번호로 들어온 기기의 방문자 id. `stats.mjs` 의 모든 집계가 여기 있는 방문자를 뺀다 |
+
+**이미 배포된 워커에 `0002_owner.sql` 만 얹으려면** — `d1 create`·`secret put`·
+`deploy` 는 다시 돌 것 없이 아래 한 줄만 돌리고 `wrangler deploy` 로 새 코드만
+올린다:
+
+```bash
+wrangler d1 execute employ-archive-metrics --remote \
+  --config domains/admin/worker/wrangler.jsonc --file=domains/admin/worker/migrations/0002_owner.sql
+```
 
 ---
 
