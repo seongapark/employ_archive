@@ -2,9 +2,20 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { parseRoute } from '../../app/js/route.js';
 
-test('홈', () => {
-  assert.deepEqual(parseRoute(''), { name: 'home', params: [], tab: 'home' });
-  assert.deepEqual(parseRoute('#/'), { name: 'home', params: [], tab: 'home' });
+test('루트는 추천이다', () => {
+  // 앱을 열면 바로 추천이 보여야 헷갈리지 않는다 — 첫 탭이 곧 루트다.
+  assert.deepEqual(parseRoute(''), { name: 'picks', params: [], tab: 'picks' });
+  assert.deepEqual(parseRoute('#/'), { name: 'picks', params: [], tab: 'picks' });
+});
+
+test('검색은 #/search 다', () => {
+  assert.deepEqual(parseRoute('#/search'), { name: 'home', params: [], tab: 'search' });
+});
+
+test('옛 주소 #/picks 는 여전히 추천이다', () => {
+  // 루트가 추천이 되기 전에 이미 이 주소가 나갔다. 북마크가 있을 수 있어
+  // 새 루트와 같은 화면으로 계속 보낸다.
+  assert.deepEqual(parseRoute('#/picks'), { name: 'picks', params: [], tab: 'picks' });
 });
 
 test('한글 주제가 디코드되어 온다', () => {
@@ -37,8 +48,10 @@ test('탭 표시는 라우트를 따른다', () => {
   assert.equal(parseRoute('#/r/kli-1').tab, null, '상세는 어느 탭도 켜지 않는다');
 });
 
-test('모르는 주소는 홈으로 떨어진다', () => {
-  assert.equal(parseRoute('#/없는화면/x').name, 'home');
+test('모르는 주소는 검색으로 떨어진다', () => {
+  const r = parseRoute('#/없는화면/x');
+  assert.equal(r.name, 'home');
+  assert.equal(r.tab, 'search');
 });
 
 test('손상된 퍼센트 인코딩이 화면을 죽이지 않는다', () => {
