@@ -36,26 +36,6 @@ export function homeRows(state, ctx) {
   return { mode: 'search', hits };
 }
 
-const HOME_PICKS = 6;
-const PER_ORG = 2;   // BOK 이슈노트가 여섯 줄을 통째로 채우는 걸 막는다
-
-// 발행일 내림차순 6건, 한 기관 최대 2건. 검색창 아래 '읽을 만한 보고서' 에 쓴다.
-export function topPicks(reports, picks) {
-  const picked = (reports || [])
-    .filter((r) => (picks || {})[r.id] && picks[r.id].pick)
-    .sort((a, b) => (a.published < b.published ? 1 : -1));
-  const out = [];
-  const seen = new Map();
-  for (const r of picked) {
-    const n = seen.get(r.org) || 0;
-    if (n >= PER_ORG) continue;
-    seen.set(r.org, n + 1);
-    out.push({ ...r, why: picks[r.id].why, axis: picks[r.id].axis });
-    if (out.length >= HOME_PICKS) break;
-  }
-  return out;
-}
-
 // 머리는 검색어에 기대지 않는다. 이 함수가 state.q 를 읽기 시작하면 머리를 다시
 // 그려야 하고, 그 순간 입력창이 교체돼 한글 조합이 깨진다.
 export function headHtml(state, ctx) {
@@ -94,21 +74,15 @@ export function bodyHtml(state, ctx) {
     })).join('')}</div>`;
   }
   // 검색 중에는 그리지 않는다 — 여기 도달했다면 이미 timeline 모드다.
-  const picks = topPicks(ctx.reports, ctx.picks);
-  const picksHtml = picks.length ? `
-    <div class="section-title">
-      읽을 만한 보고서
-      <a class="more" href="#/picks">더보기 ›</a>
-    </div>
-    <div class="list">
-      ${picks.map((r) => `${reportRow(r)}<div class="why">${esc(r.why)}</div>`).join('')}
-    </div>` : '';
+  // 추천은 이제 독립 탭(추천, '#/')이 맡는다 — 여기서 또 보여주면 같은 걸
+  // 두 번 보게 된다. 다만 타임라인 행의 '추천' 배지(위 homeRows)는 남긴다 —
+  // 검색 결과 안에서 "이건 추천된 것" 을 알려주는 표시라 몫이 다르다.
   if (!rows.groups.length) {
-    return picksHtml + empty(ctx.reports.length
+    return empty(ctx.reports.length
       ? '고른 조건에 맞는 보고서가 없습니다.'
       : '아직 수집된 보고서가 없습니다.');
   }
-  return picksHtml + rows.groups.map((g) => `
+  return rows.groups.map((g) => `
     <div class="month">${esc(monthLabel(g.month))}</div>
     <div class="list">
       ${g.rows.map((row) => (row.kind === 'collapsed'
