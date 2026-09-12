@@ -495,9 +495,9 @@
     "judged": 1880,
     "picked": 545,
     "unjudged": 356,
-    "profile_version": "535603ab",
+    "profile_version": "f2dfd921",
     "title_only": 662,
-    "at": "2026-09-12T12:45:58+09:00",
+    "at": "2026-09-12T13:20:23+09:00",
     "error": "ValueError: API 가 429 를 돌려줬다: {\n    \"error\": {\n        \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        \"code\": \"credit_balance_exhaus"
   }
 }
