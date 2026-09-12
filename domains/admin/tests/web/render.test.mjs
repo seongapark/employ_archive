@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { 요약HTML, 도메인HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML }
+import { 요약HTML, 도메인HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML, 현황HTML }
   from '../../app/js/render.js';
 
 const 통계 = {
@@ -92,4 +92,60 @@ test('호스트를 이스케이프한다', () => {
     유입: { 종류: [], 호스트: [{ 호스트: '<img src=x onerror=1>', 세션: 1 }] } });
   assert.ok(!html.includes('<img'));
   assert.match(html, /&lt;img/);
+});
+
+// ── 도메인 현황 ──────────────────────────────────────────────────────
+// model.js 의 도메인현황() 이 만드는 모양을 그대로 흉내낸다 — render.js 는
+// 이 모양을 안다고만 가정하고 정규화 로직 자체는 모른다.
+const 정상카드 = { 키: 'forecast', 이름: '고용전망', 형식오류: false, 이유: null,
+  실행시각: '2026-09-11T16:40:23+09:00', 경과시간: 19.3,
+  지표: [{ 라벨: '수집기 실패', 값: 1 }, { 라벨: '오류', 값: 1 }], 경고: [] };
+const 경고카드 = { 키: 'reports', 이름: '연구보고서', 형식오류: false, 이유: null,
+  실행시각: '2026-09-11T23:36:32+09:00', 경과시간: 12.4,
+  지표: [{ 라벨: '미판정', 값: 2216 }], 경고: ['미판정 2216건'] };
+const 오류카드 = { 키: 'ask', 이름: '질의응답', 형식오류: true, 이유: '형식을 못 읽음',
+  실행시각: null, 경과시간: null, 지표: [], 경고: [] };
+
+test('현황은 다섯 도메인의 한글 이름을 낸다', () => {
+  const html = 현황HTML([정상카드, 경고카드]);
+  assert.match(html, /고용전망/);
+  assert.match(html, /연구보고서/);
+});
+
+test('큰 숫자는 천단위로 끊어서 낸다 — 356건 미판정 같은 값이 그대로 보여야 한다', () => {
+  const html = 현황HTML([경고카드]);
+  assert.match(html, /2,216/);
+});
+
+test('경고가 있는 카드가 먼저 온다', () => {
+  const html = 현황HTML([정상카드, 경고카드]);
+  assert.ok(html.indexOf('연구보고서') < html.indexOf('고용전망'),
+    '경고 없는 forecast 가 경고 있는 reports 보다 먼저 나왔다');
+});
+
+test('경고 카드에는 status__card--warn 클래스가 붙는다', () => {
+  const html = 현황HTML([경고카드]);
+  assert.match(html, /status__card--warn/);
+});
+
+test('경고가 없는 카드에는 status__card--warn 이 안 붙는다', () => {
+  const html = 현황HTML([정상카드]);
+  assert.ok(!html.includes('status__card--warn'));
+});
+
+test('형식오류 카드는 지표 없이 이유만 보인다', () => {
+  const html = 현황HTML([오류카드]);
+  assert.match(html, /형식을 못 읽음/);
+  assert.match(html, /status__card--warn/);
+});
+
+test('경고 목록은 한 줄씩 이스케이프해서 낸다', () => {
+  const 악성 = { ...경고카드, 경고: ['<script>alert(1)</script>'] };
+  const html = 현황HTML([악성]);
+  assert.ok(!html.includes('<script>'));
+  assert.match(html, /&lt;script&gt;/);
+});
+
+test('빈 목록이면 안내 문구를 낸다', () => {
+  assert.match(현황HTML([]), /아직 기록이 없다/);
 });

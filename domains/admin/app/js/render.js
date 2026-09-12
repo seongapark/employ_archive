@@ -43,6 +43,42 @@ export function 도메인HTML(s) {
     <p class="note">한 사람이 두 도메인을 보면 양쪽에 세어진다 — 합계가 전체 방문자보다 크다.</p>`;
 }
 
+// 마지막 실행이 24시간 넘었거나, 형식오류거나, 도메인이 스스로 경고를 냈으면
+// 눈에 먼저 들어와야 한다 — 그게 이 구역의 존재 이유다.
+const 위태로움 = (s) => s.형식오류 || s.경고.length > 0;
+
+// "2026-09-11T17:00:45.242210+09:00" → "2026-09-11 17:00". 초·타임존까지
+// 보여줄 필요는 없다 — 얼마나 됐는지는 경과시간 배지가 이미 말한다.
+const 짧은시각 = (iso) => iso.replace('T', ' ').slice(0, 16);
+
+function 나이HTML(s) {
+  if (s.형식오류) return `<span class="status__age status__age--stale">${esc(s.이유)}</span>`;
+  const 경과 = s.경과시간;
+  const 나이말 = 경과 === null ? '경과 불명'
+    : (경과 < 1 ? '1시간 이내' : `${Math.floor(경과)}시간 전`);
+  const stale = 경과 !== null && 경과 >= 24 ? ' status__age--stale' : '';
+  return `<span class="status__age${stale}">${esc(짧은시각(s.실행시각))} · ${esc(나이말)}</span>`;
+}
+
+export function 현황HTML(목록) {
+  if (!목록.length) return 없음('도메인 현황');
+  // 경고가 있는 카드를 앞으로 — 나머지는 도메인목록 순서를 그대로 지킨다
+  // (Array#sort 는 안정 정렬이라 동률은 원래 순서가 유지된다).
+  const 정렬 = [...목록].sort((a, b) => 위태로움(b) - 위태로움(a));
+  return `<div class="status">${정렬.map((s) => `
+    <div class="status__card${위태로움(s) ? ' status__card--warn' : ''}">
+      <div class="status__head">
+        <span class="status__name">${esc(s.이름)}</span>
+        ${나이HTML(s)}
+      </div>
+      ${s.형식오류 ? '' : `<div class="status__metrics">${s.지표.map((m) =>
+        `${esc(m.라벨)} ${typeof m.값 === 'number' ? 수(m.값) : esc(String(m.값))}`)
+        .join(' · ')}</div>`}
+      ${s.경고.length ? `<ul class="status__warns">${s.경고.map((w) =>
+        `<li>${esc(w)}</li>`).join('')}</ul>` : ''}
+    </div>`).join('')}</div>`;
+}
+
 export function 화면HTML(s) {
   if (!s.화면.length) return 없음('화면별 조회');
   const max = Math.max(...s.화면.map((r) => r.조회), 1);

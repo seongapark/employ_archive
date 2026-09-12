@@ -99,6 +99,21 @@
 }
 .unlock__hint { font-size: 12px; color: var(--text-muted); margin: 0; }
 
+/* ── 도메인 현황 ──
+   워커가 죽어도(미배포·연결실패) 이 구역만은 살아 있어야 한다 — 정적
+   JSON 만 읽으므로 워커와 무관하다. --warn-fg/--warn-bg 는 core/tokens.css
+   의 기존 경고 색이다(ask.css 에서도 같은 값을 쓴다). */
+.status { display: flex; flex-direction: column; gap: 8px; }
+.status__card { background: var(--card); border: 1px solid var(--border); border-radius: 10px; padding: 10px 12px; }
+.status__card--warn { border-color: var(--warn-fg); background: var(--warn-bg); }
+.status__head { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.status__name { flex: 1; font-size: 14px; font-weight: 600; }
+.status__age { font-size: 12px; color: var(--text-secondary); white-space: nowrap; }
+.status__age--stale { color: var(--warn-fg); font-weight: 600; }
+.status__metrics { font-size: 12px; color: var(--text-secondary); margin-top: 6px; }
+.status__warns { margin: 6px 0 0; padding-left: 18px; font-size: 12px; color: var(--warn-fg); }
+.status__warns li { margin: 2px 0; overflow-wrap: anywhere; }
+
 /* ── 도구 ── */
 .tools {
   margin: 24px 0 8px; padding: 12px; background: var(--card);

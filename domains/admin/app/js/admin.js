@@ -1,7 +1,8 @@
-import { 기간선택, 순서, 이름 } from './model.js';
-import { 요약HTML, 도메인HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML } from './render.js';
+import { 기간선택, 순서, 이름, 도메인현황 } from './model.js';
+import { 요약HTML, 도메인HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML, 현황HTML }
+  from './render.js';
 import { 막대SVG } from './chart.js';
-import { 불러오기, 토큰쓰기, 토큰지우기, 제외상태, 제외설정 } from './api.js';
+import { 불러오기, 토큰쓰기, 토큰지우기, 제외상태, 제외설정, 현황불러오기 } from './api.js';
 
 const 화면 = () => document.getElementById('screen');
 let 현재일수 = 기간선택.find((x) => x.기본).days;
@@ -11,8 +12,9 @@ const 안내 = {
   연결실패: '서버에 연결하지 못했다 — 네트워크 상태를 확인한다.',
 };
 
-function 그리기(s) {
+function 그리기(s, 현황) {
   화면().innerHTML = `
+    <h2 class="sec">도메인 현황</h2>${현황HTML(현황)}
     <nav class="periods">${기간선택.map((p) => `
       <button class="period${p.days === 현재일수 ? ' period--on' : ''}"
         data-days="${p.days}" type="button">${p.label}</button>`).join('')}</nav>
@@ -31,12 +33,19 @@ function 그리기(s) {
 async function 새로고침() {
   const r = await 불러오기(현재일수, { fetch: globalThis.fetch.bind(globalThis),
     store: localStorage });
-  if (r.상태 === '인증') 화면().innerHTML = 잠금HTML();
-  else if (r.상태 === 'ok') 그리기(r.통계);
+  if (r.상태 === '인증') { 화면().innerHTML = 잠금HTML(); return; }
+
+  // 도메인 현황은 정적 JSON 만 읽으므로 워커가 죽어 있어도(미배포·연결실패)
+  // 봐야 한다 — 그래서 r.상태 분기 밖에서, 잠금 화면이 아닌 한 항상 부른다.
+  const 현황 = 도메인현황(await 현황불러오기({ fetch: globalThis.fetch.bind(globalThis) }));
+
+  if (r.상태 === 'ok') { 그리기(r.통계, 현황); return; }
   // 미배포·연결실패 상태에도 .tools 를 같이 그린다 — 안 그리면 제외 스위치도
   // 토큰 지우기 버튼도 사라져, 배포 도중 토큰을 잘못 넣었을 때 이 화면에
   // 갇혀 빠져나갈 길이 없어진다(localStorage 를 손으로 지워야 했다).
-  else 화면().innerHTML = `<p class="empty">${안내[r.상태]}</p>${도구HTML(제외상태(localStorage))}`;
+  화면().innerHTML = `<p class="empty">${안내[r.상태]}</p>
+    <h2 class="sec">도메인 현황</h2>${현황HTML(현황)}
+    ${도구HTML(제외상태(localStorage))}`;
 }
 
 // 화면을 다시 그릴 때마다 리스너를 새로 걸지 않는다 — 한 번만 위임한다.
