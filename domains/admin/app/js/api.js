@@ -20,14 +20,33 @@ const OWNER = API.replace('/api/stats', '/api/owner');
 
 export const 등록됐나 = (store) => store.getItem(등록키) === '1';
 
-// 도구 영역이 보여줄 문장을 정한다. `ea:owner` 표식이 있으면 이미 등록을
-// 마친 것이고, `ea:v` 가 없으면 이 브라우저가 도메인 앱을 한 번도 안 열어
-// 애초에 뺄 방문자가 없다는 뜻이다. 둘 다 아니면(v 는 있는데 아직 못
-// 등록했다 — 첫 시도 전이거나 지난 시도가 실패했다) 화면이 그 사실을 따로
-// 말해야 한다(그렇지 않으면 두 서로 다른 사실이 같은 문장으로 뭉개진다).
+// 도구 영역이 보여줄 문장을 정한다. 두 가지뿐이다 — 등록을 마쳤거나, 아직
+// 못 했거나. `ea:v` 가 없어서 못 하는 경우는 없앴다: 등록할 때 없으면 만든다.
 export function 주인상태(store) {
-  if (등록됐나(store)) return '등록됨';
-  return store.getItem('ea:v') ? '보류' : '없음';
+  return 등록됐나(store) ? '등록됨' : '보류';
+}
+
+// 이 브라우저가 사이트를 한 번도 안 열었으면 `ea:v` 가 없다 — 관리자 화면에는
+// 비콘이 안 붙어 있기 때문이다. 그때 **여기서 만들어 둔다.**
+//
+// 안 만들고 그냥 돌아가면 구멍이 생긴다: 관리자 화면만 먼저 연 기기(예: 노트북)는
+// 등록될 것이 없어 지나가고, **나중에 그 기기로 사이트를 둘러보는 순간** 비콘이
+// 새 id 를 만들어 남처럼 세어진다. 그 뒤로는 관리자 화면을 다시 열기 전까지
+// 계속 세어진다 — 사용자가 "옵션이 아니라 기본으로" 빼 달라고 한 것과 어긋난다.
+//
+// 여기서 미리 만들어 두면 비콘이 나중에 `아이디()` 로 **같은 값을 그대로 쓰므로**,
+// 그 기기의 첫 방문부터 이미 제외 목록에 있다.
+function 방문자아이디(store) {
+  try {
+    let v = store.getItem('ea:v');
+    if (!v) {
+      v = crypto.randomUUID();
+      store.setItem('ea:v', v);
+    }
+    return v;
+  } catch {
+    return null;   // 저장소가 막힌 브라우저 — 등록할 수도, 셀 수도 없다
+  }
 }
 
 // 이 브라우저의 방문자 id 를 주인으로 등록한다. **한 번만 보낸다** — 표식이
@@ -36,7 +55,7 @@ export function 주인상태(store) {
 // 관리자 화면에도 그대로 적용된다.
 export async function 주인등록(store, { fetch, url = OWNER } = {}) {
   if (등록됐나(store)) return;
-  const v = store.getItem('ea:v');
+  const v = 방문자아이디(store);
   if (!v) return;
   const token = 토큰읽기(store);
   if (!token) return;

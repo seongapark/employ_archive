@@ -113,6 +113,13 @@
   line-height: 1.5;
   color: var(--text-secondary);
 }
+.tools__hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
 /* 이름이 `toggle__` 로 남아 있지만 짝이던 `.toggle`(체크박스 줄)은 없어졌다.
    지금은 '토큰 지우기' 버튼 하나만 쓴다. */
 .toggle__btn {

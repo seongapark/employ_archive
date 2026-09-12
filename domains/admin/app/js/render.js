@@ -95,13 +95,14 @@ export function 분포HTML(s) {
 const 주인문구 = {
   등록됨: '이 기기의 방문은 모든 숫자에서 빠진다.',
   보류: '이 기기의 방문을 아직 제외 목록에 올리지 못했다 — 새로고침하면 다시 시도한다.',
-  없음: '이 기기로 아직 사이트를 연 적이 없어 뺄 방문자가 없다.',
 };
 
 export function 도구HTML(주인상태) {
   return `<div class="tools">
-    <p class="owner-status">${esc(주인문구[주인상태] ?? 주인문구.없음)}</p>
-    <button id="logout" class="toggle__btn" type="button">토큰 지우기</button>
+    <p class="owner-status">${esc(주인문구[주인상태] ?? 주인문구.보류)}</p>
+    <button id="logout" class="toggle__btn" type="button">로그아웃</button>
+    <p class="tools__hint">로그아웃하면 이 브라우저가 기억한 비밀번호를 지우고
+      다시 물어본다. 남의 기기에서 열었을 때 쓴다 — 쌓인 기록은 지워지지 않는다.</p>
   </div>`;
 }
 
