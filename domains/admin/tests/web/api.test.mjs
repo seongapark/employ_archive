@@ -86,11 +86,30 @@ test('ea:owner 표식이 있으면 다시 보내지 않는다', async () => {
   assert.equal(불렀나, false);
 });
 
-test('ea:v 가 없으면 뺄 방문자가 없으니 보내지 않는다', async () => {
+// 관리자 화면만 먼저 연 기기(예: 노트북)는 ea:v 가 없다 — 이 화면엔 비콘이 없다.
+// 그냥 돌아가면 그 기기가 **나중에** 사이트를 둘러보는 순간 새 id 로 남처럼 세어지고,
+// 관리자 화면을 다시 열기 전까지 계속 세어진다. 그래서 여기서 만들어 등록해 둔다 —
+// 비콘이 나중에 같은 값을 그대로 쓰므로 첫 방문부터 제외된다.
+test('ea:v 가 없으면 만들어서 등록한다', async () => {
   const store = 저장소({ 'ea:token': 'secret' });
-  let 불렀나 = false;
-  await 주인등록(store, { fetch: async () => { 불렀나 = true; }, url: 등록됨 });
-  assert.equal(불렀나, false);
+  let 받은 = null;
+  await 주인등록(store, {
+    fetch: async (url, opt) => { 받은 = opt; return { ok: true, status: 200 }; },
+    url: 등록됨 });
+  const 만든id = store.getItem('ea:v');
+  assert.ok(만든id, 'ea:v 를 안 만들었다');
+  assert.deepEqual(JSON.parse(받은.body), { v: 만든id }, '만든 id 를 그대로 보내야 한다');
+  assert.equal(store.getItem('ea:owner'), '1');
+});
+
+test('이미 있는 ea:v 는 새로 만들지 않고 그대로 쓴다', async () => {
+  const store = 저장소({ 'ea:token': 'secret', 'ea:v': '원래값' });
+  let 받은 = null;
+  await 주인등록(store, {
+    fetch: async (url, opt) => { 받은 = opt; return { ok: true, status: 200 }; },
+    url: 등록됨 });
+  assert.equal(store.getItem('ea:v'), '원래값');
+  assert.deepEqual(JSON.parse(받은.body), { v: '원래값' });
 });
 
 test('토큰이 없으면 보내지 않는다', async () => {
@@ -126,8 +145,9 @@ test('서버가 200 이 아니면(예: 401) 표식을 남기지 않는다', asyn
   assert.equal(store.getItem('ea:owner'), null);
 });
 
-test('주인상태는 등록됨·없음·보류 셋을 구분한다', () => {
+// 상태는 둘뿐이다. 'ea:v 가 없어서 등록 못 함' 은 없앴다 — 없으면 만들기 때문이다.
+test('주인상태는 등록됨과 보류 둘이다', () => {
   assert.equal(주인상태(저장소({ 'ea:owner': '1' })), '등록됨');
-  assert.equal(주인상태(저장소()), '없음');
+  assert.equal(주인상태(저장소()), '보류');
   assert.equal(주인상태(저장소({ 'ea:v': 'v1' })), '보류');
 });
