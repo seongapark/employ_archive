@@ -2,7 +2,7 @@ import { 기간선택, 순서, 이름, 도메인현황 } from './model.js';
 import { 요약HTML, 도메인HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML, 현황HTML }
   from './render.js';
 import { 막대SVG } from './chart.js';
-import { 불러오기, 토큰쓰기, 토큰지우기, 제외상태, 제외설정, 현황불러오기 } from './api.js';
+import { 불러오기, 토큰쓰기, 토큰지우기, 주인등록, 주인상태, 현황불러오기 } from './api.js';
 
 const 화면 = () => document.getElementById('screen');
 let 현재일수 = 기간선택.find((x) => x.기본).days;
@@ -27,7 +27,7 @@ function 그리기(s, 현황) {
     <h2 class="sec">화면</h2>${화면HTML(s)}
     <h2 class="sec">유입</h2>${유입HTML(s)}
     <h2 class="sec">방문자</h2>${분포HTML(s)}
-    ${도구HTML(제외상태(localStorage))}`;
+    ${도구HTML(주인상태(localStorage))}`;
 }
 
 async function 새로고침() {
@@ -39,13 +39,20 @@ async function 새로고침() {
   // 봐야 한다 — 그래서 r.상태 분기 밖에서, 잠금 화면이 아닌 한 항상 부른다.
   const 현황 = 도메인현황(await 현황불러오기({ fetch: globalThis.fetch.bind(globalThis) }));
 
-  if (r.상태 === 'ok') { 그리기(r.통계, 현황); return; }
-  // 미배포·연결실패 상태에도 .tools 를 같이 그린다 — 안 그리면 제외 스위치도
+  if (r.상태 === 'ok') {
+    // 집계를 성공적으로 받은 뒤에만 등록을 시도한다 — 인증 실패·미배포·연결실패
+    // 상태에서는 시도하지 않는다(토큰이 없거나 워커가 없다). 그리기() 전에
+    // await 해 두면 도구HTML 이 방금 등록된 상태를 바로 보여준다.
+    await 주인등록(localStorage, { fetch: globalThis.fetch.bind(globalThis) });
+    그리기(r.통계, 현황);
+    return;
+  }
+  // 미배포·연결실패 상태에도 .tools 를 같이 그린다 — 안 그리면 도메인 현황도
   // 토큰 지우기 버튼도 사라져, 배포 도중 토큰을 잘못 넣었을 때 이 화면에
   // 갇혀 빠져나갈 길이 없어진다(localStorage 를 손으로 지워야 했다).
   화면().innerHTML = `<p class="empty">${안내[r.상태]}</p>
     <h2 class="sec">도메인 현황</h2>${현황HTML(현황)}
-    ${도구HTML(제외상태(localStorage))}`;
+    ${도구HTML(주인상태(localStorage))}`;
 }
 
 // 화면을 다시 그릴 때마다 리스너를 새로 걸지 않는다 — 한 번만 위임한다.
@@ -53,9 +60,6 @@ async function 새로고침() {
   const p = e.target.closest('.period');
   if (p) { 현재일수 = Number(p.dataset.days); 새로고침(); return; }
   if (e.target.id === 'logout') { 토큰지우기(localStorage); 새로고침(); }
-});
-화면().addEventListener('change', (e) => {
-  if (e.target.id === 'off') 제외설정(localStorage, e.target.checked);
 });
 화면().addEventListener('submit', (e) => {
   if (e.target.id !== 'unlock') return;

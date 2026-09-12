@@ -21,53 +21,62 @@ export function 기간(days, todayKst) {
   };
 }
 
+// 주인(관리자 비밀번호로 들어온 기기)의 방문은 모든 숫자에서 뺀다. 한 군데라도
+// 빠뜨리면 그 지표만 부풀어 오른다 — 그래서 조각을 하나로 두고 전부 같은 것을 쓴다.
+const 주인빼기 = 'AND visitor NOT IN (SELECT o.visitor FROM owner o)';
+
 // 유입만 세션의 첫 줄로 좁힌다(설계 §6.3). MIN(id) 옆의 열은 **최솟값이 나온 그
 // 행의 값**이다 — SQLite 가 min()/max() 단일 집계에 보장하는 동작이고 D1 은
 // SQLite 다. 다른 DB 로 옮기면 깨지는 자리라 옮길 일이 생기면 여기부터 본다.
+//
+// 주인빼기는 이 하위질의 **안**에 붙인다 — 바깥(유입종류·유입호스트 쪽)에 붙이면
+// 이미 GROUP BY 로 접힌 뒤라 visitor 열이 없어 질의 자체가 깨진다.
 const 세션첫줄 = `SELECT session, ref, ref_kind, MIN(id) FROM hit
-  WHERE day BETWEEN ?1 AND ?2 GROUP BY session`;
+  WHERE day BETWEEN ?1 AND ?2 ${주인빼기} GROUP BY session`;
 
 export function 질의목록(창) {
   const p = [창.시작, 창.끝];
   const 목록 = [
     { 키: '요약', sql: `SELECT COUNT(DISTINCT visitor) 방문자, COUNT(DISTINCT session) 세션,
-        COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2`, params: p },
+        COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}`, params: p },
+    // 주인빼기는 안쪽 DISTINCT visitor 하위질의에 붙인다 — 바깥 JOIN 은 visitor
+    // 표 전체를 보므로 거기 붙이면 주인의 다른 방문자 행까지 걸러 버릴 수 있다.
     { 키: '신규', sql: `SELECT
         SUM(CASE WHEN v.first_day >= ?1 THEN 1 ELSE 0 END) 신규,
         SUM(CASE WHEN v.first_day <  ?1 THEN 1 ELSE 0 END) 재방문
-      FROM (SELECT DISTINCT visitor FROM hit WHERE day BETWEEN ?1 AND ?2) h
+      FROM (SELECT DISTINCT visitor FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}) h
       JOIN visitor v ON v.id = h.visitor`, params: p },
     // 마지막 `domain` 은 동점을 깨는 기준이다. 없으면 방문자·조회가 같은 도메인의
     // 순서가 미정이라 테스트가 운에 기댄다(실제로 실행해 보니 우연히 맞았다).
     { 키: '도메인', sql: `SELECT domain 도메인, COUNT(DISTINCT visitor) 방문자,
-        COUNT(DISTINCT session) 세션, COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2
+        COUNT(DISTINCT session) 세션, COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}
       GROUP BY domain ORDER BY 방문자 DESC, 조회 DESC, domain`, params: p },
     { 키: '일별', sql: `SELECT day 날짜, domain 도메인, COUNT(DISTINCT visitor) 방문자,
-        COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2
+        COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}
       GROUP BY day, domain ORDER BY day`, params: p },
     { 키: '화면', sql: `SELECT domain 도메인, path 경로, COUNT(*) 조회,
-        COUNT(DISTINCT visitor) 방문자 FROM hit WHERE day BETWEEN ?1 AND ?2
+        COUNT(DISTINCT visitor) 방문자 FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}
       GROUP BY domain, path ORDER BY 조회 DESC, 도메인, 경로 LIMIT 20`, params: p },
     { 키: '유입종류', sql: `SELECT ref_kind 종류, COUNT(*) 세션 FROM (${세션첫줄})
       GROUP BY ref_kind ORDER BY 세션 DESC`, params: p },
     { 키: '유입호스트', sql: `SELECT ref 호스트, COUNT(*) 세션 FROM (${세션첫줄})
       WHERE ref IS NOT NULL GROUP BY ref ORDER BY 세션 DESC LIMIT 10`, params: p },
     { 키: '기기', sql: `SELECT device 값, COUNT(DISTINCT visitor) 방문자
-      FROM hit WHERE day BETWEEN ?1 AND ?2 GROUP BY device ORDER BY 방문자 DESC`, params: p },
+      FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기} GROUP BY device ORDER BY 방문자 DESC`, params: p },
     { 키: '표시모드', sql: `SELECT mode 값, COUNT(DISTINCT visitor) 방문자
-      FROM hit WHERE day BETWEEN ?1 AND ?2 GROUP BY mode ORDER BY 방문자 DESC`, params: p },
+      FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기} GROUP BY mode ORDER BY 방문자 DESC`, params: p },
     { 키: '국가', sql: `SELECT country 값, COUNT(DISTINCT visitor) 방문자
-      FROM hit WHERE day BETWEEN ?1 AND ?2 AND country IS NOT NULL
+      FROM hit WHERE day BETWEEN ?1 AND ?2 AND country IS NOT NULL ${주인빼기}
       GROUP BY country ORDER BY 방문자 DESC LIMIT 10`, params: p },
   ];
   if (창.직전시작) {
     목록.push({ 키: '직전', sql: `SELECT COUNT(DISTINCT visitor) 방문자,
-        COUNT(DISTINCT session) 세션, COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2`,
+        COUNT(DISTINCT session) 세션, COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}`,
       params: [창.직전시작, 창.직전끝] });
     // 전체 증감만으로는 "어느 도메인이 늘었나"에 답을 못 한다(design §1·§7.2) —
     // 그 판단을 받쳐 주는 숫자라 도메인별로도 직전 기간을 물어 둔다.
     목록.push({ 키: '직전도메인', sql: `SELECT domain 도메인,
-        COUNT(DISTINCT visitor) 방문자 FROM hit WHERE day BETWEEN ?1 AND ?2 GROUP BY domain`,
+        COUNT(DISTINCT visitor) 방문자 FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기} GROUP BY domain`,
       params: [창.직전시작, 창.직전끝] });
   }
   return 목록;

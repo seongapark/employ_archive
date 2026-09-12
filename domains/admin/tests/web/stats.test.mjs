@@ -120,3 +120,31 @@ test('빈 DB 도 모양이 같다', async () => {
   assert.deepEqual(s.도메인, []);
   assert.deepEqual(s.유입.종류, []);
 });
+
+// 주인(관리자 비밀번호로 들어온 기기)의 방문은 모든 숫자에서 빠져야 한다. v1 을
+// 주인으로 등록하면 채운DB() 의 트래픽 대부분(employment 8/20·9/06, press 9/06)이
+// 전부 v1 소유라 통계에서 사라지고, v2(9/07 신규, forecast, direct)만 남는다.
+// 질의 하나하나(요약·신규재방문·도메인·일별·화면·유입종류·유입호스트·기기·
+// 표시모드·국가·직전·직전도메인)를 전부 이 하나의 시나리오로 덮는다 — 직전도메인은
+// 도메인 카드의 직전방문자 필드로 드러난다.
+test('주인으로 등록한 방문자는 모든 지표에서 빠진다', async () => {
+  const { db, raw } = await 채운DB();
+  raw.prepare('INSERT INTO owner (visitor, added) VALUES (?, ?)').run('v1', '2026-09-01');
+
+  const s = await 통계(db, 30, '2026-09-30');
+
+  assert.deepEqual(s.요약, { 방문자: 1, 세션: 1, 조회: 1, 신규: 1, 재방문: 0 });
+  assert.deepEqual(s.직전, { 방문자: 0, 세션: 0, 조회: 0 });
+  assert.deepEqual(s.도메인, [
+    { 도메인: 'forecast', 방문자: 1, 세션: 1, 조회: 1, 직전방문자: 0 },
+  ]);
+  assert.deepEqual(s.일별, [
+    { 날짜: '2026-09-07', 방문자: 1, 도메인별: { forecast: 1 } },
+  ]);
+  assert.deepEqual(s.화면, [{ 도메인: 'forecast', 경로: '/', 조회: 1, 방문자: 1 }]);
+  assert.deepEqual(s.유입.종류, [{ 종류: 'direct', 세션: 1 }]);
+  assert.deepEqual(s.유입.호스트, []);
+  assert.deepEqual(s.기기, [{ 값: 'mobile', 방문자: 1 }]);
+  assert.deepEqual(s.표시모드, [{ 값: 'browser', 방문자: 1 }]);
+  assert.deepEqual(s.국가, [{ 값: 'KR', 방문자: 1 }]);
+});

@@ -39,9 +39,7 @@ export function render(el, ctx) {
       <div class="axis">
         <div class="axis__name">${esc(g.axis)} <span class="axis__count">${g.rows.length}</span></div>
         <div class="list">
-          ${g.rows.map((r) => `
-            ${reportRow(r)}
-            <div class="why">${esc(r.why)}</div>`).join('')}
+          ${g.rows.map((r) => reportRow(r, { why: r.why })).join('')}
         </div>
       </div>`).join('')}`;
 }

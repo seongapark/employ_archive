@@ -120,7 +120,23 @@
   border: 1px solid var(--border); border-radius: 10px;
   display: flex; flex-direction: column; gap: 10px;
 }
-.toggle { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+/* 주인 방문 제외 상태. 스위치가 아니라 **사실을 알리는 문장**이다 — 본인 방문을
+   빼는 것은 켜고 끄는 옵션이 아니라 기본 동작이라, 누를 것이 없어야 한다. */
+.owner-status {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--text-secondary);
+}
+.tools__hint {
+  margin: 0;
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+/* 이름이 `toggle__` 로 남아 있지만 짝이던 `.toggle`(체크박스 줄)은 없어졌다.
+   지금은 '토큰 지우기' 버튼 하나만 쓴다. */
 .toggle__btn {
   font: inherit; font-size: 13px; align-self: flex-start; padding: 6px 10px;
   border: 1px solid var(--border); border-radius: 8px;

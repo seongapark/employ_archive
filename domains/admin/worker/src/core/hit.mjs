@@ -38,7 +38,10 @@ export function deviceOf(ua) {
   return 'desktop';
 }
 
-const 문자열 = (v, max) =>
+// index.mjs 의 /api/owner 도 방문자 id 검증에 이 규칙을 그대로 쓴다 — 비콘의
+// visitor 검증과 다른 모양을 허용하면 owner.visitor 가 hit.visitor 와 안 맞는
+// 값을 받아들일 수 있다.
+export const 문자열 = (v, max) =>
   (typeof v === 'string' && v.length > 0 && v.length <= max ? v : null);
 
 export function 정규화(body, { ua, country, nowMs }) {

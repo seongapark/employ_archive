@@ -122,15 +122,23 @@ export function 분포HTML(s) {
   }).join('');
 }
 
-// 제외 스위치와 토큰 지우기. 정상 화면과 오류 화면(미배포·연결실패) 둘 다에서
-// 쓴다 — 오류 화면이라고 이 둘이 사라지면, 토큰을 잘못 넣은 채로 오류 화면에
-// 갇혔을 때 잠금 화면으로 돌아갈 길이 없어 localStorage 를 손으로 지워야 한다
-// (design §7.4: "지금 켜져 있는지를 화면이 보여 준다").
-export function 도구HTML(제외켜짐) {
+// 주인(본인 방문) 제외는 더 이상 스위치가 아니다 — 관리자 화면이 집계를 성공적으로
+// 받을 때마다 이 브라우저의 방문자 id 를 자동으로 owner 표에 올리고(api.js 의
+// 주인등록()), 여기는 그 상태를 문장으로만 보여준다. 토큰 지우기는 그대로 둔다 —
+// 정상 화면과 오류 화면(미배포·연결실패) 둘 다에서 쓴다. 오류 화면이라고 이게
+// 사라지면, 토큰을 잘못 넣은 채로 오류 화면에 갇혔을 때 잠금 화면으로 돌아갈
+// 길이 없어 localStorage 를 손으로 지워야 한다.
+const 주인문구 = {
+  등록됨: '이 기기의 방문은 모든 숫자에서 빠진다.',
+  보류: '이 기기의 방문을 아직 제외 목록에 올리지 못했다 — 새로고침하면 다시 시도한다.',
+};
+
+export function 도구HTML(주인상태) {
   return `<div class="tools">
-    <label class="toggle"><input id="off" type="checkbox"${제외켜짐 ? ' checked' : ''}>
-      내 방문을 통계에서 뺀다</label>
-    <button id="logout" class="toggle__btn" type="button">토큰 지우기</button>
+    <p class="owner-status">${esc(주인문구[주인상태] ?? 주인문구.보류)}</p>
+    <button id="logout" class="toggle__btn" type="button">로그아웃</button>
+    <p class="tools__hint">로그아웃하면 이 브라우저가 기억한 비밀번호를 지우고
+      다시 물어본다. 남의 기기에서 열었을 때 쓴다 — 쌓인 기록은 지워지지 않는다.</p>
   </div>`;
 }
 
