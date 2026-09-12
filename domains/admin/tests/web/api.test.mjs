@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { 불러오기, 미배포, 제외상태, 제외설정 } from '../../app/js/api.js';
+import { 불러오기, 미배포, 주인등록, 주인상태 } from '../../app/js/api.js';
 
 const 저장소 = (seed = {}) => {
   const m = new Map(Object.entries(seed));
@@ -76,14 +76,58 @@ test('자리표시자 url 이면 fetch 없이 미배포다', async () => {
   assert.equal(불렀나, false);
 });
 
-// 같은 오리진이라 여기서 켜면 여섯 앱 전부에 적용된다.
-test('제외 스위치를 켜고 끈다', () => {
-  const store = 저장소();
-  assert.equal(제외상태(store), false);
-  제외설정(store, true);
-  assert.equal(store.getItem('ea:off'), '1');
-  assert.equal(제외상태(store), true);
-  제외설정(store, false);
-  assert.equal(store.getItem('ea:off'), null);
-  assert.equal(제외상태(store), false);
+// 주인 등록 — 관리자 화면이 집계를 성공적으로 받은 뒤 자동으로 시도한다.
+const 등록됨 = 'https://employ-archive-metrics.x.workers.dev/api/owner';
+
+test('ea:owner 표식이 있으면 다시 보내지 않는다', async () => {
+  const store = 저장소({ 'ea:owner': '1', 'ea:v': 'v1', 'ea:token': 'secret' });
+  let 불렀나 = false;
+  await 주인등록(store, { fetch: async () => { 불렀나 = true; }, url: 등록됨 });
+  assert.equal(불렀나, false);
+});
+
+test('ea:v 가 없으면 뺄 방문자가 없으니 보내지 않는다', async () => {
+  const store = 저장소({ 'ea:token': 'secret' });
+  let 불렀나 = false;
+  await 주인등록(store, { fetch: async () => { 불렀나 = true; }, url: 등록됨 });
+  assert.equal(불렀나, false);
+});
+
+test('토큰이 없으면 보내지 않는다', async () => {
+  const store = 저장소({ 'ea:v': 'v1' });
+  let 불렀나 = false;
+  await 주인등록(store, { fetch: async () => { 불렀나 = true; }, url: 등록됨 });
+  assert.equal(불렀나, false);
+});
+
+test('처음이면 ea:v 를 보내고 성공하면 표식을 남긴다', async () => {
+  const store = 저장소({ 'ea:v': 'v1', 'ea:token': 'secret' });
+  let 받은 = null;
+  await 주인등록(store, {
+    fetch: async (url, opt) => { 받은 = { url, opt }; return { ok: true, status: 200 }; },
+    url: 등록됨,
+  });
+  assert.equal(받은.url, 등록됨);
+  assert.equal(받은.opt.headers.authorization, 'Bearer secret');
+  assert.deepEqual(JSON.parse(받은.opt.body), { v: 'v1' });
+  assert.equal(store.getItem('ea:owner'), '1');
+});
+
+test('실패해도 던지지 않고 표식을 남기지 않는다 — 다음에 다시 시도한다', async () => {
+  const store = 저장소({ 'ea:v': 'v1', 'ea:token': 'secret' });
+  await assert.doesNotReject(주인등록(store,
+    { fetch: async () => { throw new Error('offline'); }, url: 등록됨 }));
+  assert.equal(store.getItem('ea:owner'), null);
+});
+
+test('서버가 200 이 아니면(예: 401) 표식을 남기지 않는다', async () => {
+  const store = 저장소({ 'ea:v': 'v1', 'ea:token': 'secret' });
+  await 주인등록(store, { fetch: async () => ({ ok: false, status: 401 }), url: 등록됨 });
+  assert.equal(store.getItem('ea:owner'), null);
+});
+
+test('주인상태는 등록됨·없음·보류 셋을 구분한다', () => {
+  assert.equal(주인상태(저장소({ 'ea:owner': '1' })), '등록됨');
+  assert.equal(주인상태(저장소()), '없음');
+  assert.equal(주인상태(저장소({ 'ea:v': 'v1' })), '보류');
 });

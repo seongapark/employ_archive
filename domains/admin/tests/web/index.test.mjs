@@ -184,3 +184,46 @@ test('METRICS_TOKEN 을 안 넣은 배포는 무슨 토큰을 보내도 401 이�
     }
   }
 });
+
+const 주인등록요청 = (token, body) =>
+  new Request('https://m.workers.dev/api/owner', {
+    method: 'POST',
+    headers: token ? { origin: ORIGIN, authorization: `Bearer ${token}` } : { origin: ORIGIN },
+    body: JSON.stringify(body),
+  });
+
+// /api/stats 와 같은 인증이다 — 아무나 자기 기기를 주인으로 올려 통계를 가릴 수
+// 있으면 이 기능 자체가 구멍이 된다.
+test('주인 등록은 토큰이 없으면 401 이고 표에 안 쌓인다', async () => {
+  const { env, raw } = 환경();
+  const res = await worker.fetch(주인등록요청(null, { v: 'v1' }), env);
+  assert.equal(res.status, 401);
+  assert.deepEqual(await res.json(), { 오류: '인증' });
+  assert.equal(raw.prepare('SELECT COUNT(*) n FROM owner').get().n, 0);
+});
+
+test('맞는 토큰이면 주인이 등록된다', async () => {
+  const { env, raw } = 환경();
+  const res = await worker.fetch(주인등록요청('secret', { v: 'v1' }), env);
+  assert.equal(res.status, 200);
+  assert.deepEqual(await res.json(), { ok: true });
+  assert.equal(raw.prepare('SELECT visitor FROM owner WHERE visitor = ?').get('v1').visitor, 'v1');
+});
+
+// INSERT OR IGNORE 라 같은 id 를 두 번 보내도 터지지 않고 줄이 하나로 유지된다.
+test('같은 방문자 id 를 두 번 등록해도 안 터지고 한 줄만 남는다', async () => {
+  const { env, raw } = 환경();
+  await worker.fetch(주인등록요청('secret', { v: 'v1' }), env);
+  const res = await worker.fetch(주인등록요청('secret', { v: 'v1' }), env);
+  assert.equal(res.status, 200);
+  assert.equal(raw.prepare('SELECT COUNT(*) n FROM owner').get().n, 1);
+});
+
+test('방문자 id 가 없거나 규칙을 벗어나면 400 이고 안 쌓인다', async () => {
+  const { env, raw } = 환경();
+  for (const body of [{}, { v: '' }, { v: 'x'.repeat(65) }, { v: 123 }]) {
+    const res = await worker.fetch(주인등록요청('secret', body), env);
+    assert.equal(res.status, 400, JSON.stringify(body));
+  }
+  assert.equal(raw.prepare('SELECT COUNT(*) n FROM owner').get().n, 0);
+});

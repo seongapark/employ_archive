@@ -1,5 +1,5 @@
 import { d1 } from './core/db.mjs';
-import { isBot, 정규화, kstDay } from './core/hit.mjs';
+import { isBot, 정규화, kstDay, 문자열 } from './core/hit.mjs';
 import { 기록 } from './core/write.mjs';
 import { 통계 } from './core/stats.mjs';
 
@@ -47,6 +47,15 @@ function 같은토큰(a, b) {
   return diff === 0;
 }
 
+// /api/stats 와 /api/owner 가 같은 인증을 쓴다 — 복사해 두면 한쪽만 고치다 잠금이
+// 어긋나는 사고가 난다. `env.METRICS_TOKEN` 이 비어 있으면(secret 을 안 넣은 배포)
+// 무슨 토큰을 보내도 거부한다 — 아래 index.test.mjs 가 이 가드를 지킨다.
+function 인증됨(request, env) {
+  const auth = request.headers.get('authorization') ?? '';
+  const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
+  return Boolean(env.METRICS_TOKEN) && 같은토큰(token, env.METRICS_TOKEN);
+}
+
 // 허용 목록으로 접는다 — 음수나 NaN 이 그대로 들어가면 창 계산이 뒤집힌다.
 //
 // **숫자 모양인지 먼저 본다.** `Number(null)` 도 `Number('')` 도 0 인데 0 은
@@ -60,17 +69,33 @@ const 일수읽기 = (v) => {
 };
 
 async function 집계(request, env, url) {
-  const auth = request.headers.get('authorization') ?? '';
-  const token = auth.startsWith('Bearer ') ? auth.slice(7) : null;
-  if (!env.METRICS_TOKEN || !같은토큰(token, env.METRICS_TOKEN)) {
-    return json({ 오류: '인증' }, env, 401);
-  }
+  if (!인증됨(request, env)) return json({ 오류: '인증' }, env, 401);
   try {
     return json(await 통계(d1(env.DB), 일수읽기(url.searchParams.get('days')),
       kstDay(Date.now())), env);
   } catch {
     return json({ 오류: '집계 실패' }, env, 500);
   }
+}
+
+// 주인(관리자 비밀번호로 들어온 기기) 등록. /api/stats 와 같은 Bearer 인증을
+// 요구한다 — 아무나 자기 기기를 주인으로 올려 통계를 가릴 수 있으면 이 기능
+// 자체가 구멍이 된다.
+//
+// 방문자 id 검증은 hit.mjs 의 비콘 규칙과 같은 문자열(1~64자) 규칙을 그대로
+// 쓴다 — 다른 모양을 허용하면 owner.visitor 가 hit.visitor 와 안 맞는 값을
+// 받아들일 수 있다. 인증까지 통과한 뒤의 실수라 401 처럼 정체를 숨길 이유가
+// 없으므로 400 으로 사유를 그대로 알린다.
+async function 주인등록(request, env) {
+  if (!인증됨(request, env)) return json({ 오류: '인증' }, env, 401);
+  let body = null;
+  try { body = JSON.parse(await request.text()); } catch { return json({ 오류: '잘못된 요청' }, env, 400); }
+  const visitor = 문자열(body?.v, 64);
+  if (!visitor) return json({ 오류: '잘못된 요청' }, env, 400);
+  await d1(env.DB).run(
+    'INSERT OR IGNORE INTO owner (visitor, added) VALUES (?, ?)',
+    [visitor, kstDay(Date.now())]);
+  return json({ ok: true }, env);
 }
 
 export default {
@@ -81,6 +106,8 @@ export default {
     if (url.pathname === '/api/hit' && request.method === 'POST') return 수집(request, env);
     if (url.pathname === '/api/stats' && request.method === 'GET')
       return 집계(request, env, url);
+    if (url.pathname === '/api/owner' && request.method === 'POST')
+      return 주인등록(request, env);
     return json({ 오류: '없는 경로' }, env, 404);
   },
 };
