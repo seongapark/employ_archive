@@ -371,3 +371,177 @@ def test_judge_and_cache_records_the_actual_provider_model(monkeypatch, tmp_path
     assert cache['bok-1']['model'] == 'gpt-5.5'
     on_disk = json.loads(cache_path.read_text(encoding='utf-8'))
     assert on_disk['bok-1']['model'] == 'gpt-5.5'
+
+
+# ── 선택적 재판정: 뒤집힐 수 있는 것만 다시 묻는다 ──────────────────────
+#
+# 축을 늘리면 profile_version 이 바뀌어 캐시가 통째로 낡는다. 하지만 늘린
+# 축은 추천을 늘릴 뿐 줄이지 않으므로, 기각됐던 것 중 새 키워드 주제에
+# 닿는 것만 뒤집힐 수 있다. plan_rejudge() 가 그 갈래를 낸다.
+
+TOPIC_KEYWORDS = {'고령자': ['고령자', '정년', '계속고용'], '외국인력': ['외국인력']}
+
+REJ_ROWS = [
+    {'id': 'r-hit', 'org': 'X', 'series': 'Y',
+     'title': '고령자 계속고용 정책 평가', 'abstract': ''},
+    {'id': 'r-miss', 'org': 'X', 'series': 'Y',
+     'title': '가계부채 리스크 평가', 'abstract': ''},
+    {'id': 'r-new', 'org': 'X', 'series': 'Y',
+     'title': '신규 미판정 보고서', 'abstract': ''},
+]
+
+
+def _old(pick=False, axis='', why='ㄱ', profile_version='old-ver'):
+    return {'pick': pick, 'axis': axis, 'why': why, 'basis': 'title',
+            'model': 'claude-opus-5', 'profile_version': profile_version,
+            'judged_at': 'x'}
+
+
+def test_plan_rejudge_asks_only_keyword_hits_and_separates_the_unjudged():
+    cache = {'r-hit': _old(pick=False), 'r-miss': _old(pick=False)}
+    plan = recommend.plan_rejudge(REJ_ROWS, cache, PROFILE, ['고령자'],
+                                  keywords=TOPIC_KEYWORDS)
+    assert [r['id'] for r in plan.ask] == ['r-hit']
+    assert [r['id'] for r in plan.carry] == ['r-miss']
+    assert [r['id'] for r in plan.unjudged] == ['r-new']
+
+
+def test_plan_rejudge_leaves_up_to_date_rows_alone():
+    # 이미 최신 프로파일로 판정된 것은 다시 묻지도 이어받지도 않는다.
+    cache = {'r-hit': _old(pick=False, profile_version=PROFILE.version)}
+    plan = recommend.plan_rejudge([REJ_ROWS[0]], cache, PROFILE, ['고령자'],
+                                  keywords=TOPIC_KEYWORDS)
+    assert plan.ask == [] and plan.carry == [] and plan.unjudged == []
+
+
+def test_plan_rejudge_always_reasks_a_recommended_row_whose_axis_vanished():
+    # 축을 줄이거나 이름을 바꾼 경우: 이미 추천된 레코드의 axis 가 새
+    # 프로파일에 없으면, 키워드에 안 걸려도 반드시 다시 묻는다 — 이어받으면
+    # 화면에서 없는 축에 묶인다.
+    cache = {'r-miss': _old(pick=True, axis='없어진축')}
+    plan = recommend.plan_rejudge([REJ_ROWS[1]], cache, PROFILE, ['고령자'],
+                                  keywords=TOPIC_KEYWORDS)
+    assert [r['id'] for r in plan.ask] == ['r-miss']
+    assert plan.carry == []
+
+
+def test_plan_rejudge_does_not_reask_a_rejected_row_whose_axis_field_is_empty():
+    # 기각된 레코드는 axis 가 애초에 빈 문자열이다 — '축이 사라졌다'는
+    # 안전장치가 기각 레코드에는 적용되지 않고, 그냥 키워드로만 가른다.
+    cache = {'r-miss': _old(pick=False, axis='')}
+    plan = recommend.plan_rejudge([REJ_ROWS[1]], cache, PROFILE, ['고령자'],
+                                  keywords=TOPIC_KEYWORDS)
+    assert plan.ask == [] and [r['id'] for r in plan.carry] == ['r-miss']
+
+
+def test_plan_rejudge_rejects_a_topic_not_in_keywords_json():
+    with pytest.raises(ValueError, match='keywords.json'):
+        recommend.plan_rejudge(REJ_ROWS, {}, PROFILE, ['없는주제'], keywords=TOPIC_KEYWORDS)
+
+
+def test_carry_over_keeps_the_old_verdict_but_marks_where_it_came_from():
+    cache = {'r-miss': _old(pick=True, axis='청년 고용', why='경력 사다리 분석',
+                            profile_version='old-ver')}
+    got = recommend.carry_over(cache, [REJ_ROWS[1]], PROFILE)
+    row = got['r-miss']
+    # pick·axis·why 는 옛 판정 그대로다 — LLM 을 다시 안 불렀으니 바뀔 이유가
+    # 없다.
+    assert row['pick'] is True
+    assert row['axis'] == '청년 고용'
+    assert row['why'] == '경력 사다리 분석'
+    # profile_version 은 새 값으로 바뀐다 — 안 바꾸면 pending() 이 다음
+    # 실행에서 또 낡았다고 보고 이어받기를 반복한다.
+    assert row['profile_version'] == PROFILE.version
+    # carried_from 에 원래 판정한 프로파일을 남긴다 — profile_version 만
+    # 새 값이면 "새 프로파일이 판정했다"는 거짓이 된다.
+    assert row['carried_from'] == 'old-ver'
+
+
+def test_main_rejudge_keywords_calls_the_llm_only_for_matches(tmp_path, monkeypatch):
+    # main() 은 실제 data/interests.md · data/keywords.json 을 읽는다(그
+    # 경로는 recommend.DATA 로 갈아끼울 수 없다) — 실제 저장소의 '고령자'
+    # 주제로 시험한다.
+    monkeypatch.setattr(recommend, 'DATA', tmp_path)
+    reports = [
+        {'id': 'r-hit', 'org': 'X', 'series': 'Y', 'title': '고령자 계속고용 정책 평가'},
+        {'id': 'r-miss', 'org': 'X', 'series': 'Y', 'title': '가계부채 리스크 평가'},
+    ]
+    (tmp_path / 'reports.json').write_text(json.dumps(reports, ensure_ascii=False),
+                                           encoding='utf-8')
+    (tmp_path / 'abstracts.json').write_text('{}', encoding='utf-8')
+    old_cache = {'r-hit': _old(pick=False), 'r-miss': _old(pick=False)}
+    (tmp_path / 'recommendations.json').write_text(
+        json.dumps(old_cache, ensure_ascii=False), encoding='utf-8')
+
+    calls = []
+
+    def fake_call(prompt):
+        calls.append(prompt)
+        return json.dumps([{'n': 1, 'pick': False, 'axis': '', 'why': 'ㄱ'}],
+                          ensure_ascii=False)
+
+    recommend.main(['--rejudge-keywords', '고령자'], call=fake_call)
+
+    assert len(calls) == 1  # r-hit 만 물었다
+    on_disk = json.loads((tmp_path / 'recommendations.json').read_text(encoding='utf-8'))
+    assert 'carried_from' not in on_disk['r-hit']       # 이번에 실제로 판정했다
+    assert on_disk['r-miss']['carried_from'] == 'old-ver'  # 이어받았다
+
+
+def test_dry_run_needs_no_api_key_and_prints_the_three_counts(tmp_path, monkeypatch, capsys):
+    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY', 'OPENAI_API_KEY'):
+        monkeypatch.delenv(k, raising=False)
+    monkeypatch.setattr(recommend, 'DATA', tmp_path)
+    reports = [
+        {'id': 'r-hit', 'org': 'X', 'series': 'Y', 'title': '고령자 계속고용 정책 평가'},
+        {'id': 'r-miss', 'org': 'X', 'series': 'Y', 'title': '가계부채 리스크 평가'},
+        {'id': 'r-new', 'org': 'X', 'series': 'Y', 'title': '신규 미판정 보고서'},
+    ]
+    (tmp_path / 'reports.json').write_text(json.dumps(reports, ensure_ascii=False),
+                                           encoding='utf-8')
+    (tmp_path / 'abstracts.json').write_text('{}', encoding='utf-8')
+    old_cache = {'r-hit': _old(pick=False), 'r-miss': _old(pick=False)}
+    (tmp_path / 'recommendations.json').write_text(
+        json.dumps(old_cache, ensure_ascii=False), encoding='utf-8')
+
+    rc = recommend.main(['--dry-run', '--rejudge-keywords', '고령자'])
+
+    assert rc == 0
+    out = capsys.readouterr().out
+    assert '다시 물을 것 1건' in out
+    assert '이어받을 것 1건' in out
+    assert '안 물어본 것 1건' in out
+    # dry-run 은 이어받기조차 쓰지 않는다 — 캐시 파일이 그대로여야 한다.
+    on_disk = json.loads((tmp_path / 'recommendations.json').read_text(encoding='utf-8'))
+    assert on_disk == old_cache
+
+
+def test_without_the_option_main_still_rejudges_everything(tmp_path, monkeypatch):
+    # 옵션을 안 주면 종전대로 낡은 것 전부를 다시 묻는다 — 이어받기는
+    # 전혀 관여하지 않는다.
+    monkeypatch.setattr(recommend, 'DATA', tmp_path)
+    reports = [
+        {'id': 'r-hit', 'org': 'X', 'series': 'Y', 'title': '고령자 계속고용 정책 평가'},
+        {'id': 'r-miss', 'org': 'X', 'series': 'Y', 'title': '가계부채 리스크 평가'},
+    ]
+    (tmp_path / 'reports.json').write_text(json.dumps(reports, ensure_ascii=False),
+                                           encoding='utf-8')
+    (tmp_path / 'abstracts.json').write_text('{}', encoding='utf-8')
+    old_cache = {'r-hit': _old(pick=False), 'r-miss': _old(pick=False)}
+    (tmp_path / 'recommendations.json').write_text(
+        json.dumps(old_cache, ensure_ascii=False), encoding='utf-8')
+
+    calls = []
+
+    def fake_call(prompt):
+        calls.append(prompt)
+        n = sum(1 for line in prompt.splitlines() if re.match(r'^\d+\. \[', line))
+        return json.dumps([{'n': i + 1, 'pick': False, 'axis': '', 'why': 'ㄱ'}
+                           for i in range(n)], ensure_ascii=False)
+
+    recommend.main([], call=fake_call)
+
+    assert len(calls) == 1  # 두 건 다 한 묶음으로 같이 다시 물었다
+    on_disk = json.loads((tmp_path / 'recommendations.json').read_text(encoding='utf-8'))
+    assert 'carried_from' not in on_disk['r-hit']
+    assert 'carried_from' not in on_disk['r-miss']

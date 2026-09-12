@@ -26,6 +26,7 @@ from typing import Callable, NamedTuple, Sequence
 import requests
 
 from .interests import Profile
+from .keywords import load_keywords, match as keyword_match
 
 KST = timezone(timedelta(hours=9))
 DATA = Path(__file__).resolve().parent.parent / 'data'
@@ -256,6 +257,94 @@ def pending(reports: Sequence[dict], cache: dict, profile: Profile) -> list[dict
     return todo
 
 
+class RejudgePlan(NamedTuple):
+    """관심축을 늘렸을 때 무엇을 다시 물어야 하는지 가른 결과.
+
+    `ask` 와 `unjudged` 만 LLM 에 넘긴다(judge_and_cache 의 rows 로).
+    `carry` 는 LLM 을 부르지 않고 carry_over() 로 캐시에 그대로 옮겨
+    적는다 — 이 갈래가 이 기능의 존재 이유다(112회를 3회로 줄인다).
+    """
+    ask: list[dict]
+    carry: list[dict]
+    unjudged: list[dict]
+
+
+def plan_rejudge(reports: Sequence[dict], cache: dict, profile: Profile,
+                  rejudge_topics: Sequence[str], *,
+                  keywords: dict[str, list[str]] | None = None) -> RejudgePlan:
+    """캐시가 낡았을 때(profile_version 불일치) 다시 물을 것만 추린다.
+
+    축을 늘리면 추천은 늘어날 뿐 줄지 않는다 — 이미 추천된 545건을 다시
+    물을 이유가 없고, 기각된 것 중에서도 새로 늘린 키워드 주제에 제목·
+    초록이 걸리는 것만 뒤집힐 수 있다(실측: 기각 1,335건 중 49건).
+    그래서 낡은 레코드를 셋으로 가른다:
+
+    - **안 물어본 것**: 캐시에 아예 없다. 이어받을 옛 판정 자체가 없으니
+      무조건 다시(처음) 묻는다. 키워드·축 판단이 끼어들 자리가 없다.
+    - **다시 물을 것**: (a) 이미 추천된 레코드인데 그 axis 가 새
+      프로파일의 축 목록에 없다 — 축을 줄이거나 이름을 바꾼 경우로,
+      이어받으면 화면에서 없는 축에 묶인다. 키워드와 무관하게 다시
+      묻는다. (b) 그 밖의 낡은 레코드 중 rejudge_topics 가 제목·초록에
+      걸리는 것 — keywords.match() 를 그대로 쓴다(새 매칭기를 안
+      만든다).
+    - **이어받을 것**: 그 밖의 낡은 레코드. LLM 을 안 부른다.
+    """
+    kw = keywords if keywords is not None else load_keywords()
+    unknown = sorted(set(rejudge_topics) - set(kw))
+    if unknown:
+        raise ValueError(f'keywords.json 에 없는 주제다: {unknown}')
+    topics = set(rejudge_topics)
+    axes = set(profile.axes)
+
+    ask, carry, unjudged = [], [], []
+    for r in reports:
+        got = cache.get(r['id'])
+        if got is None:
+            unjudged.append(r)
+            continue
+        if got.get('profile_version') == profile.version:
+            continue  # 이미 최신 — 다시 묻지도 이어받지도 않는다
+        if got.get('pick'):
+            # 이미 추천된 것은 축을 늘리는 것으로는 뒤집히지 않는다(추천은
+            # 늘어날 뿐 줄지 않는다) — 키워드를 볼 필요조차 없다. 그
+            # axis 가 새 프로파일에서 사라졌을 때만 다시 묻는다.
+            axis = got.get('axis') or ''
+            if axis and axis not in axes:
+                ask.append(r)
+            else:
+                carry.append(r)
+            continue
+        # 기각된 것만 키워드로 가른다 — 새로 늘린 주제에 닿아야 뒤집힐 수
+        # 있다.
+        text = f"{r.get('title', '')} {r.get('abstract') or ''}"
+        if topics & set(keyword_match(text, kw)):
+            ask.append(r)
+        else:
+            carry.append(r)
+    return RejudgePlan(ask=ask, carry=carry, unjudged=unjudged)
+
+
+def carry_over(cache: dict, rows: Sequence[dict], profile: Profile) -> dict:
+    """옛 판정을 그대로 이어받되, 이어받았다는 사실과 원래 판정한 프로파일을 남긴다.
+
+    profile_version 만 새 값으로 바꾸면 "새 프로파일이 이 레코드를
+    판정했다"는 거짓이 된다 — 실제로 판정한 건 옛 프로파일이다. 그래서
+    carried_from 에 원래 profile_version 을 남겨 이 거짓을 막는다.
+    profile_version 자체는 새 값으로 바꾼다 — 안 바꾸면 pending() 이
+    다음 실행에서 또 낡았다고 보고 다시 묻는다(이어받은 의미가 없다).
+    두 가지 다 있어야 한다: profile_version 만 있으면 거짓말이 되고,
+    carried_from 만 있으면 캐시가 영영 낡은 채로 남는다.
+    """
+    out = dict(cache)
+    for r in rows:
+        old = out[r['id']]
+        new = dict(old)
+        new['carried_from'] = old['profile_version']
+        new['profile_version'] = profile.version
+        out[r['id']] = new
+    return out
+
+
 def merge(cache: dict, rows: Sequence[dict], verdicts: Sequence[Verdict],
           profile: Profile, model: str = MODEL_ANTHROPIC) -> dict:
     """판정을 캐시에 얹는다. 이번에 안 물어본 것은 그대로 둔다.
@@ -334,6 +423,11 @@ def main(argv=None, *, call=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--limit', type=int, default=0, help='이번에 판정할 최대 건수')
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--rejudge-keywords', default='',
+                    help='콤마로 구분한 keywords.json 주제 이름. 있으면 캐시가 낡은 '
+                         '레코드 중 이 주제에 제목·초록이 걸리는 것만 다시 묻고, '
+                         '나머지 낡은 레코드는 옛 판정을 이어받아 LLM 을 안 부른다. '
+                         '안 주면 종전대로 낡은 것 전부를 다시 묻는다.')
     args = ap.parse_args(argv)
 
     profile = interests_mod.load()
@@ -344,16 +438,41 @@ def main(argv=None, *, call=None) -> int:
             for r in reports]
 
     cache = load_cache()
-    todo = pending(rows, cache, profile)
+    cache_path = DATA / 'recommendations.json'
+    rejudge_topics = [t.strip() for t in args.rejudge_keywords.split(',') if t.strip()]
+
+    if rejudge_topics:
+        plan = plan_rejudge(rows, cache, profile, rejudge_topics)
+        todo = plan.ask + plan.unjudged
+        calls = -(-len(plan.ask) // BATCH) if plan.ask else 0  # ceil
+        print(f'다시 물을 것 {len(plan.ask)}건 ({calls}회 호출)')
+        print(f'이어받을 것 {len(plan.carry)}건 (호출 없음)')
+        print(f'안 물어본 것 {len(plan.unjudged)}건')
+    else:
+        plan = None
+        todo = pending(rows, cache, profile)
+        print(f'판정 대상 {len(todo)} / 전체 {len(rows)} (프로파일 {profile.version})')
+
     if args.limit:
         todo = todo[:args.limit]
-    print(f'판정 대상 {len(todo)} / 전체 {len(rows)} (프로파일 {profile.version})')
+
     # --dry-run 은 API 키 없이도 돌아야 한다 — provider()/_call_api 는
-    # 아래에서 실제로 판정할 것이 있을 때만 불린다.
-    if args.dry_run or not todo:
+    # 아래에서 실제로 판정할 것이 있을 때만(그리고 dry-run 이 아닐 때만)
+    # 불린다. 이어받기는 LLM 을 안 쓰므로 dry-run 뒤로 미룬다.
+    if args.dry_run:
         return 0
 
-    cache_path = DATA / 'recommendations.json'
+    if plan is not None and plan.carry:
+        # 실제로 물을 것(todo)이 비어 있어도 이어받기는 먼저 반영한다 —
+        # 캐시를 낡은 채로 남겨두면 다음 실행에서 pending() 이 또 이
+        # 레코드들을 낡았다고 보고 이어받기 계산을 반복하게 된다.
+        cache = carry_over(cache, plan.carry, profile)
+        cache_path.write_text(json.dumps(cache, ensure_ascii=False, indent=1) + '\n',
+                              encoding='utf-8')
+
+    if not todo:
+        return 0
+
     last_path = DATA / 'last_run.json'
     error: str | None = None
     try:
