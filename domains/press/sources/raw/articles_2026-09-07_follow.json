@@ -6,9 +6,9 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-12 06:35",
+ "collected_at": "2026-09-13 06:16",
  "volume": {
-  "collected": 79,
+  "collected": 83,
   "articles": 19,
   "press": 18,
   "queries": 11
@@ -26,12 +26,12 @@
   },
   {
    "query": "구직급여",
-   "api_total": 94306,
+   "api_total": 94309,
    "fetched": 100,
    "truncated": false,
-   "in_window": 53,
+   "in_window": 56,
    "relevant": 2,
-   "new": 46
+   "new": 49
   },
   {
    "query": "구인배수",
@@ -44,12 +44,12 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18502,
+   "api_total": 18503,
    "fetched": 100,
    "truncated": false,
-   "in_window": 13,
+   "in_window": 14,
    "relevant": 8,
-   "new": 2
+   "new": 3
   },
   {
    "query": "건설업 고용보험",
@@ -905,6 +905,46 @@
    "originallink": "https://www.viva100.com/article/20260911500806",
    "press": "viva100.com",
    "pub": "2026-09-11 16:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"김승원 아들, 엄마 복지기관서 일하며 한 달에 6일꼴로 자리 비워\"",
+   "desc": "월평균 급여는 각각 약 350만 원과 306만 원이라고 했다. 발달장애인 돌봄 업무의 강도가 높아 인력을 구하기 어려운 탓에 자녀들이 근무하게 됐다는 것이다. 장남이 채용 공고에 인사담당자로 기재된 것은 구직사이트...",
+   "link": "https://www.wikitree.co.kr/articles/1159007",
+   "originallink": "https://www.wikitree.co.kr/articles/1159007",
+   "press": "wikitree.co.kr",
+   "pub": "2026-09-12 08:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "섬유업 고용 감소 지속…종사자 고령화도 가속",
+   "desc": "보고서는 제조업 고용 감소 속에서도 섬유업의 구조적 변화가 두드러졌다고 분석했다. 섬유업 고용보험 피보험자는 2018년 이후 꾸준히 감소세를 이어갔으며, 사업체는 소규모 중심으로 재편되면서 영세화가...",
+   "link": "https://www.viva100.com/article/20260809500429",
+   "originallink": "https://www.viva100.com/article/20260809500429",
+   "press": "viva100.com",
+   "pub": "2026-09-12 09:02",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "북한, 미국 기업 침투 계획의 일환 \"해외 인재 물색 중\"",
+   "desc": "나아가 북한의 원격 근무 제도가 급증하면서, 미국 기업에 배치된 노동자들의 급여가 불법 프로그램... 수천 명의 구직자들이 수백 개의 미국 기업에 지원하는 것으로 추정되는 이 계획은 매년 수억 달러의 수익을...",
+   "link": "http://www.newstown.co.kr/news/articleView.html?idxno=715598",
+   "originallink": "http://www.newstown.co.kr/news/articleView.html?idxno=715598",
+   "press": "newstown.co.kr",
+   "pub": "2026-09-12 09:19",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“‘X소’ 다닐 바에 ‘시럽급여’ 타먹어”... 받는 돈 ‘거기서 거기...",
+   "desc": "자진퇴사는 구직급여 대상이 아니지만 김씨는 현재 구직급여를 190만원씩 받으며 쉬고 있다. 올해 영화관에서 2개월간 계약직으로 일한 뒤 계약만료로 퇴사하면서 수급 요건을 갖췄기 때문이다. 중소기업을 자진퇴사한...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002696363?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10870836?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-09-13 06:00",
    "q": "구직급여",
    "rel": false
   }
