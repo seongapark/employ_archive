@@ -13,6 +13,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import subprocess
 from typing import Callable, NamedTuple, Sequence
 
 import requests
@@ -47,6 +48,10 @@ MAX_TOKENS = 8000
 # 답이 오고(2회), 추론(thinking)을 켠 채로도 받아들여진다.
 TEMPERATURE = 0
 TIMEOUT = 120
+CLI_URL = "cli://claude"   # 센티넬 — HTTP 가 아니라 `claude -p` 를 부른다
+# 회차 하나가 보고서 전문이다(BOK 40쪽 = 프롬프트 42,000자 실측). 묶음 판정인
+# reports 보다 한 번이 길다.
+CLI_TIMEOUT = 900
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)\s*```", re.S)
 
@@ -148,6 +153,12 @@ def provider() -> tuple[str, str, dict] | None:
     도메인마다 다른 공급자를 쓰면, 같은 프롬프트가 왜 다른 답을 냈는지
     설명할 수 없게 된다.
     """
+    if os.environ.get("JUDGE_PROVIDER", "").strip().lower() == "cli":
+        # 스위치가 켜지면 어떤 API 키보다 먼저다. 밀리면 잔액 0 인 키로 돌다가
+        # 크레딧 부족으로 죽는다 — 구독으로 도는 줄 착각하기 쉽다.
+        # reports 의 recommend.provider() 와 같은 이름(JUDGE_PROVIDER)을 쓴다 —
+        # 스위치를 도메인마다 따로 두면 "구독으로 돌린다" 가 한 번에 안 켜진다.
+        return (CLI_URL, _cli_model(), {})
     key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
     if key:
         return (ANTHROPIC_URL, MODEL_ANTHROPIC,
@@ -172,11 +183,64 @@ def provider() -> tuple[str, str, dict] | None:
     return None
 
 
+def _cli_model() -> str:
+    """`claude -p` 에 넘길 모델. Pro 요금제는 Opus 사용이 제한될 수 있으므로
+    `JUDGE_CLI_MODEL` 로 갈아끼울 수 있게 둔다. provider() 와 _call_cli() 가
+    **같은 값**을 봐야 보고서에 적히는 모델 이름이 거짓이 되지 않는다.
+    """
+    return os.environ.get("JUDGE_CLI_MODEL", "").strip() or MODEL_ANTHROPIC
+
+
+def _call_cli(prompt: str) -> str:
+    """`claude -p` 로 문장을 고른다 — API 크레딧이 아니라 **구독 한도**를 쓴다.
+
+    **프롬프트를 argv 가 아니라 stdin 으로 준다.** 이 도구는 보고서 **전문**을
+    한 번에 준다 — BOK 한 회차가 42,000자(실측)라 Windows 의 명령줄 상한
+    32,767자를 넘는다. reports 는 제목·초록 20건이라 argv 로 됐지만 여기서는
+    안 된다. `-p` 는 프롬프트 인자가 없으면 stdin 을 읽는다(실측).
+
+    **자식 환경에서 API 키를 지운다.** Claude Code 의 인증 우선순위는
+    `ANTHROPIC_API_KEY`(3위) > `CLAUDE_CODE_OAUTH_TOKEN`(5위) 이고,
+    비대화형(`-p`)에서는 키가 있으면 **항상** 그걸 쓴다. 잔액 0 인 키가 환경에
+    남아 있으면 구독으로 도는 줄 알고 크레딧 부족으로 죽는다.
+
+    **`--bare` 를 쓰지 않는다.** 그 모드는 `CLAUDE_CODE_OAUTH_TOKEN` 을 읽지
+    않아 인증이 통째로 안 된다.
+
+    **TEMPERATURE 를 못 넘긴다.** CLI 에 그 손잡이가 없다. 0 으로 둔 이유
+    (재실행이 '재현' 이어야 한다)가 이 경로에서는 지켜지지 않는다 — 같은
+    회차를 두 번 돌리면 다른 문장이 올 수 있다. 지어낸 문장이 들어올 길은
+    그래도 없다: llm_verify 가 원문과 프로그램으로 대조한다. 갈리는 것은
+    '어느 문장을 골랐나' 뿐이다(OPENAI 갈래를 둔 것과 같은 이유).
+    """
+    env = {k: v for k, v in os.environ.items()
+           if k not in ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN")}
+    argv = ["claude", "-p", "--output-format", "json", "--model", _cli_model()]
+    done = subprocess.run(argv, input=prompt, env=env, capture_output=True,
+                          text=True, encoding="utf-8", timeout=CLI_TIMEOUT)
+    if done.returncode != 0:
+        raise ValueError(f"claude -p 가 {done.returncode} 로 끝났다: "
+                         f"{(done.stderr or done.stdout or '')[:300]}")
+    try:
+        data = json.loads(done.stdout)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"claude -p 출력이 JSON 이 아니다: "
+                         f"{done.stdout[:300]}") from exc
+    if data.get("is_error"):
+        raise ValueError(f"claude -p 가 오류를 돌려줬다: {str(data)[:300]}")
+    text = data.get("result")
+    if not isinstance(text, str):
+        raise ValueError(f"봉투에 result 문자열이 없다: {str(data)[:300]}")
+    return text
+
+
 def _call_api(prompt: str) -> str:
     got = provider()
     if got is None:
         raise RuntimeError("ANTHROPIC_API_KEY·OPENROUTER_API_KEY·OPENAI_API_KEY 가 모두 없다")
     url, model, headers = got
+    if url == CLI_URL:
+        return _call_cli(prompt)
     resp = requests.post(
         url,
         headers=headers,
