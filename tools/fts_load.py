@@ -19,6 +19,7 @@
 from __future__ import annotations
 
 import json
+import pathlib
 import re
 import sys
 
@@ -36,7 +37,14 @@ BATCH = 200
 # **행 수로만 끊으면 안 된다.** 한글은 UTF-8 로 한 자가 3바이트라 2000자 본문을
 # 원문·색인 두 벌로 담으면 한 행이 12KB 다 — 200행이면 2.4MB 로 제한의 24배다.
 # 처음에 행 수로만 끊었다가 테스트가 잡았다.
-BUDGET = 80_000
+#
+# D1 한도(100KB)보다 한참 낮게 잡은 이유는 **wrangler 쪽**이다. 2026-09-13 에 한 파일로
+# 5,379행을 밀었더니 `Warning: leftover buffer from sql.ingest` 를 내며 뒤쪽 문장들을
+# 조용히 버리고 **종료코드 0** 으로 끝났다 — 색인에 reports 만 남고 forecast·press·
+# 카탈로그 526행이 사라졌는데 워크플로는 초록이었다. 문장을 작게 끊고(아래) 도메인별
+# 파일로 나눠 밀고(`write_files`) 적재 뒤 도메인별 건수를 확인하는(`verify.py`) 세 겹으로
+# 막는다.
+BUDGET = 20_000
 
 _WS = re.compile(r'\s+')
 # 문장 끝. 한국어 종결어미와 마침표를 함께 본다 — 초록에는 마침표 없이 끝나는
@@ -198,13 +206,17 @@ def rows() -> list[dict]:
     return [*_reports(), *_forecast(), *_press(), *_catalog()]
 
 
-def build_sql(rs: list[dict], batch: int = BATCH, budget: int = BUDGET) -> str:
+def build_sql(rs: list[dict], batch: int = BATCH, budget: int = BUDGET,
+              지우기: bool = True) -> str:
     """비우고 다시 넣는다.
 
     FTS5 가상표는 `ON CONFLICT` 를 못 받아 `d1_sync` 의 upsert 방식을 쓸 수 없다.
     전량 재적재라 중간에 끊겨도 다시 돌리면 같은 상태가 된다.
+
+    `지우기=False` 는 도메인별 파일을 쓸 때다 — DELETE 를 파일마다 넣으면 뒤 파일이
+    앞 파일이 넣은 것을 지운다.
     """
-    out = ['DELETE FROM doc_fts;']
+    out = ['DELETE FROM doc_fts;'] if 지우기 else []
     cols = ', '.join(COLUMNS)
     head = f'INSERT INTO doc_fts ({cols}) VALUES\n  '
 
@@ -226,7 +238,57 @@ def build_sql(rs: list[dict], batch: int = BATCH, budget: int = BUDGET) -> str:
     return '\n'.join(out) + '\n'
 
 
+def write_files(out_dir) -> list[tuple[str, int]]:
+    """도메인별 SQL 파일을 쓴다. 앞 번호가 실행 순서다.
+
+    **한 파일로 밀지 않는다.** wrangler 의 `--file` 이 큰 파일의 뒤쪽을 조용히 버린
+    적이 있다(위 BUDGET 주석). 나눠 두면 한 파일이 통째로 실패해도 어느 도메인이
+    비었는지 곧 드러나고, 적재 뒤 건수 확인이 그 사실을 잡는다.
+
+    `00_delete.sql` 만 표를 비운다 — 도메인 파일은 INSERT 뿐이라 순서를 바꿔도 안전하다.
+    """
+    out_dir = pathlib.Path(out_dir)
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / '00_delete.sql').write_text('DELETE FROM doc_fts;\n', encoding='utf-8')
+    지은것 = [('00_delete.sql', 0)]
+    for i, (도메인, 만들기) in enumerate(
+            [('reports', _reports), ('forecast', _forecast),
+             ('press', _press), ('catalog', _catalog)], start=1):
+        rs = 만들기()
+        # 파일도 크면 안 된다 — reports 한 도메인이 19MB 라 한 파일로 두면 같은 곳에서
+        # 또 뒤가 잘린다. 도메인 안에서도 조각으로 나눈다.
+        for j, 조각 in enumerate(_파일조각(rs), start=1):
+            name = f'{i * 10:02d}_{도메인}_{j:02d}.sql'
+            (out_dir / name).write_text(build_sql(조각, 지우기=False), encoding='utf-8')
+            지은것.append((name, len(조각)))
+    return 지은것
+
+
+# 한 파일의 바이트 상한. 작을수록 안전하지만 파일이 늘면 wrangler 실행 횟수가 늘어
+# 워크플로가 느려진다(2MB 면 reports 가 열 조각쯤이다).
+FILE_BUDGET = 2_000_000
+
+
+def _파일조각(rs: list[dict], budget: int = FILE_BUDGET):
+    조각: list[dict] = []
+    size = 0
+    for r in rs:
+        n = sum(len(str(r.get(c) or '').encode('utf-8')) for c in COLUMNS) + 40
+        if 조각 and size + n > budget:
+            yield 조각
+            조각, size = [], 0
+        조각.append(r)
+        size += n
+    if 조각:
+        yield 조각
+
+
 def main(argv=None) -> int:
+    argv = list(sys.argv[1:] if argv is None else argv)
+    if argv and argv[0] == '--out-dir':
+        for name, n in write_files(argv[1]):
+            print(f'{name}\t{n}', file=sys.stderr)
+        return 0
     rs = rows()
     sys.stdout.write(build_sql(rs))
     print(f'-- {len(rs)} rows', file=sys.stderr)
