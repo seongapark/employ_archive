@@ -89,15 +89,24 @@ jobs:
       - name: 질의응답 현황 기록
         if: always()
         run: |
-          python -m tools.ask_stamp /tmp/fts/counts.json --status ${{ steps.verify.outcome }}
           git config user.name "ask-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add domains/ask/data/last_run.json
-          if git diff --cached --quiet; then
-            echo "바뀐 것이 없다 — 커밋하지 않는다"
-            exit 0
-          fi
-          git commit -m "chore(ask): 색인 적재 기록 갱신 [skip ci]"
-          # 색인을 싣는 사이 다른 워크플로가 main 에 올렸을 수 있다.
-          git pull --rebase origin main
-          git push
+          # **최신 위에 다시 쓰고 민다.** 기록은 회차마다 시각이 달라지는 생성
+          # 파일이라, 커밋해 두고 rebase 하면 남의 기록과 늘 충돌한다(2026-09-13
+          # 에 `could not apply chore(ask)...` 로 죽었다). 다시 만드는 것이
+          # 합치는 것보다 싸다 — 그래서 받아온 다음에 쓴다.
+          for i in 1 2 3; do
+            git fetch origin main
+            git reset --hard FETCH_HEAD
+            python -m tools.ask_stamp /tmp/fts/counts.json --status ${{ steps.verify.outcome }}
+            git add domains/ask/data/last_run.json
+            if git diff --cached --quiet; then
+              echo "바뀐 것이 없다 — 커밋하지 않는다"
+              exit 0
+            fi
+            git commit -m "chore(ask): 색인 적재 기록 갱신 [skip ci]"
+            if git push; then exit 0; fi
+            echo "밀리는 사이 남이 올렸다 — 다시 받는다 ($i)"
+          done
+          echo "세 번 시도했는데 못 밀었다"
+          exit 1
