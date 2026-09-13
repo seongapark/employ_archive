@@ -203,3 +203,36 @@ test('24시간 안이면 경과 경고를 안 낸다', () => {
   assert.ok(press.경과시간 < 24);
   assert.deepEqual(press.경고, []);
 });
+
+// 초록 파일은 검색창을 누를 때 통째로 내려간다. 3MB(gzip)를 넘으면 기관별로
+// 쪼개기로 정해 뒀는데 지켜보는 곳이 없어 2026-09-13 에 3.08MB 로 이미 넘어
+// 있었다. 이 눈을 빼면 다시 조용히 커진다.
+test('reports 는 초록 gzip 크기를 보이고 3MB 를 넘으면 경고한다', () => {
+  const 만들기 = (bytes) => 도메인현황({
+    reports: {
+      at: '2026-09-13T16:45:58+09:00', boards: {}, unregistered: [], reports: 10,
+      sizes: { reports_gzip: 1000, abstracts_gzip: bytes },
+      recommend: { judged: 10 },
+    },
+  })[3];
+
+  const 넘음 = 만들기(3_225_577);
+  assert.equal(넘음.지표.find((m) => m.라벨 === '초록 gzip').값, '3.08MB');
+  assert.ok(넘음.경고.some((w) => w.includes('쪼갤 때다')));
+
+  const 안넘음 = 만들기(2_000_000);
+  assert.equal(안넘음.지표.find((m) => m.라벨 === '초록 gzip').값, '1.91MB');
+  assert.equal(안넘음.경고.length, 0);
+});
+
+// sizes 가 없던 옛 회차를 형식오류로 만들면 안 된다 — 크기는 곁가지다.
+test('reports 는 sizes 가 없어도 정상으로 읽는다', () => {
+  const [, , , reports] = 도메인현황({
+    reports: {
+      at: '2026-09-13T16:45:58+09:00', boards: {}, unregistered: [], reports: 10,
+      recommend: { judged: 10 },
+    },
+  });
+  assert.equal(reports.형식오류, false);
+  assert.equal(reports.지표.some((m) => m.라벨 === '초록 gzip'), false);
+});

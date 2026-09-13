@@ -94,6 +94,8 @@ function 어댑터_ask(j) {
 // reports 만 `at` 이고, 전량 수록(reports) 대비 판정 수(recommend.judged)의
 // 차이가 미판정이다. recommend 블록이 아예 없으면(옛 형식이거나 한 번도
 // 성공적으로 안 돈 경우) 그 사실 자체를 알린다.
+export const 초록상한 = 3 * 1_048_576;   // 3MB(gzip)
+
 function 어댑터_reports(j) {
   if (!j || typeof j.at !== 'string' || typeof j.boards !== 'object'
       || j.boards === null || Array.isArray(j.boards)
@@ -105,6 +107,15 @@ function 어댑터_reports(j) {
   const 경고 = [];
   if (실패게시판.length) 경고.push(`게시판 실패: ${실패게시판.join(', ')}`);
   if (미등록) 경고.push(`미등록 게시판 ${미등록}건`);
+
+  // 검색창을 누르면 abstracts.json 을 통째로 받는다. 3MB(gzip)를 넘으면
+  // 기관별로 쪼개기로 정해 뒀는데, build.py 가 `sizes` 를 적기만 하고 아무도
+  // 안 봤다 — 2026-09-13 에 3.08MB 로 이미 넘어 있었다. 여기가 그 눈이다.
+  const 초록 = Number(j.sizes?.abstracts_gzip);
+  if (Number.isFinite(초록) && 초록 > 0) {
+    지표.push({ 라벨: '초록 gzip', 값: `${(초록 / 1_048_576).toFixed(2)}MB` });
+    if (초록 > 초록상한) 경고.push(`초록 gzip ${(초록 / 1_048_576).toFixed(2)}MB — 기관별로 쪼갤 때다`);
+  }
 
   const 추천 = j.recommend;
   if (!추천 || typeof 추천.judged !== 'number') {
