@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { 용어뽑기, 매치식, 스니펫, lookup } from '../../worker/src/lookup/search.mjs';
+import { 용어뽑기, 매치식, 스니펫, 점수, lookup } from '../../worker/src/lookup/search.mjs';
 
 // ── 용어 뽑기: 질문을 통째로 던지면 아무것도 안 걸린다 ──────────────────────
 
@@ -206,4 +206,116 @@ test('관측이 가진 축을 고르고, 못 내는 축은 말한다', async () 
   const 고용 = r.묶음.find((g) => g.도메인 === 'employment');
   assert.equal(고용.결과.length, 1, JSON.stringify(고용));
   assert.match(고용.사유 ?? '', /직업/);
+});
+
+// ── 순위: 도메인을 가로질러 견준다 ────────────────────────────────────────
+
+test('점수는 제목에 걸린 낱말을 더 세게 본다', () => {
+  const 제목걸림 = 점수({ 제목: '청년 고용 연구', 본문: '무관한 본문' }, ['청년']);
+  const 본문걸림 = 점수({ 제목: '무관한 제목', 본문: '청년이 나온다' }, ['청년']);
+  assert.ok(제목걸림 > 본문걸림, `${제목걸림} vs ${본문걸림}`);
+});
+
+test('점수는 공백을 무시한다 — 색인과 같은 규칙이다', () => {
+  assert.ok(점수({ 제목: '', 본문: '청년 고용 실태' }, ['청년고용']) > 0);
+});
+
+test('잘 걸린 도메인이 위로 온다 — 배열 순서가 아니다', async () => {
+  // 전에는 `글도메인` 배열 순서가 곧 화면 순서라 연구보고서가 늘 맨 위였다.
+  const deps = { db: { all: async (sql, p) => {
+    if (!/doc_fts/.test(sql)) return [];
+    // MATCH 경로는 (식, 도메인, ...), LIKE 경로는 (도메인, ...) 이다. 두 글자 낱말만
+    // 있는 질문은 LIKE 로만 간다 — 자리를 하나로 가정하면 가짜가 빈손을 준다.
+    const 도메인 = /MATCH/.test(sql) ? p[1] : p[0];
+    if (도메인 === 'press') {
+      return [{ doc_id: 'press:1:기사:0', 종류: '기사', 링크: '', 날짜: '2026-09-07',
+                제목: '정년 연장 합의', 본문: '정년 연장 논의가 이어진다' }];
+    }
+    if (도메인 === 'reports') {
+      return [{ doc_id: 'reports:kli-1:초록:0', 종류: '초록', 링크: '', 날짜: '2019-03-01',
+                제목: '무관한 보고서', 본문: '정년 이야기가 한 번 나온다' }];
+    }
+    return [];
+  } } };
+  const r = await lookup(deps, '정년 연장');
+  const 글순서 = r.묶음.filter((g) => g.도메인 !== 'employment').map((g) => g.도메인);
+  assert.equal(글순서[0], 'press', JSON.stringify(글순서));
+});
+
+test('점수가 같으면 새 글이 위다', async () => {
+  const 행 = (id, 날짜) => ({ doc_id: id, 종류: '초록', 링크: '', 날짜,
+                             제목: '정년 연장 연구', 본문: '같은 본문이다' });
+  const deps = { db: { all: async (sql) => (/doc_fts/.test(sql)
+    ? [행('reports:a:초록:0', '2014-05-01'), 행('reports:b:초록:0', '2026-05-01')] : []) } };
+  const r = await lookup(deps, '정년 연장');
+  const 보고서 = r.묶음.find((g) => g.도메인 === 'reports');
+  assert.equal(보고서.결과[0].날짜, '2026-05-01', JSON.stringify(보고서.결과));
+});
+
+// ── 기간: 날짜 열로 거른다 ────────────────────────────────────────────────
+
+test('기간을 물으면 날짜로 거르고, 날짜 없는 글은 남긴다', async () => {
+  const 본 = [];
+  const deps = { db: { all: async (sql, p) => { 본.push({ sql, p }); return []; } } };
+  await lookup(deps, '2025년 정년 연장 논의');
+  const 조회 = 본.filter((x) => /doc_fts/.test(x.sql));
+  assert.ok(조회.length, '색인 조회가 없다');
+  assert.ok(조회.every((x) => /날짜 = ''/.test(x.sql)), 조회[0].sql);
+  // **자리수를 맞춘 값이어야 한다.** `'2025-12-15' <= '2025-12'` 는 거짓이라
+  // 안 맞추면 12월 글이 통째로 빠진다.
+  assert.ok(조회[0].p.includes('2025-01-01'), JSON.stringify(조회[0].p));
+  assert.ok(조회[0].p.includes('2025-12-31'), JSON.stringify(조회[0].p));
+});
+
+// ── 넓은 질문: 한 점이 아니라 창 ──────────────────────────────────────────
+
+const 관측DB = (본) => ({
+  all: async (sql, p) => {
+    본.push({ sql, p });
+    if (!/observation/.test(sql)) return [];
+    if (/MAX\(period\)/.test(sql)) return [{ 최신: '2026-08' }];
+    const 창 = /period >= \?/.test(sql);
+    const 행 = (period, value) => ({ source: 'eaps', breakdown: 'total', category: null,
+                                    period, value, unit: '천명', yoy: 12.3, release_url: '' });
+    return 창 ? [행('2025-08', 28000), 행('2026-07', 28900), 행('2026-08', 29151)]
+              : [행('2026-08', 29151)];
+  },
+});
+
+test('넓은 질문에는 추세 창을 열고 파생을 만든다', async () => {
+  const 본 = [];
+  const r = await lookup({ db: 관측DB(본) }, '최근 고용상황은?');
+  const 고용 = r.묶음.find((g) => g.도메인 === 'employment');
+  assert.equal(고용.관측.length, 3, JSON.stringify(고용.관측));
+  // 차이·증감률은 두 점부터 생긴다. 한 점만 주면 여기가 늘 빈손이 된다.
+  assert.equal(고용.파생.차이, 1151);
+  assert.ok(고용.파생.증감률 != null);
+  assert.match(고용.사유 ?? '', /추세를 본다/);
+  // 화면은 최신부터 본다 — 조회는 period 오름차순이라 그대로 자르면 가장 오래된 게 박힌다.
+  assert.match(고용.결과[0].제목, /2026-08/, JSON.stringify(고용.결과));
+});
+
+test('축을 집은 질문에는 창을 열지 않는다 — 단면이 사라진다', async () => {
+  const 본 = [];
+  const r = await lookup({ db: 관측DB(본) }, '30대 취업자');
+  const 고용 = r.묶음.find((g) => g.도메인 === 'employment');
+  assert.equal(고용.관측.length, 1, JSON.stringify(고용.관측));
+  assert.equal(본.some((x) => /period >= \?/.test(x.sql)), false);
+});
+
+test('고용동향은 순위와 무관하게 맨 앞이다', async () => {
+  const deps = { db: { all: async (sql, p) => {
+    if (/MAX\(period\)/.test(sql)) return [{ 최신: '2026-08' }];
+    if (/observation/.test(sql)) {
+      return [{ source: 'eaps', breakdown: 'total', period: '2026-08', value: 1,
+                unit: '천명', yoy: null, release_url: '' }];
+    }
+    if (/doc_fts/.test(sql) && p[1] === 'press') {
+      return [{ doc_id: 'press:1:기사:0', 종류: '기사', 링크: '', 날짜: '2026-09-07',
+                제목: '취업자 급증', 본문: '취업자가 늘었다' }];
+    }
+    return [];
+  } } };
+  const r = await lookup(deps, '취업자');
+  assert.equal(r.묶음[0].도메인, 'employment', JSON.stringify(r.묶음.map((g) => g.도메인)));
 });

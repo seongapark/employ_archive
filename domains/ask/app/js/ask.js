@@ -1,5 +1,5 @@
 import { badgeLabel } from './badge.js';
-import { 묶음HTML } from './lookup.js';
+import { 묶음HTML, 답변HTML } from './lookup.js';
 
 // Worker 배포 주소. 워커를 다시 배포해 주소가 바뀌면 이 한 줄을 고친다.
 // 워커 쪽 CORS 는 wrangler.jsonc 의 ASK_ALLOWED_ORIGIN 이 정한다 — 둘이 어긋나면
@@ -38,8 +38,8 @@ async function 물어본다(payload) {
   return res.json();
 }
 
-// 출처 탐색이다 — 문장을 만들지 않는다. 유형·슬롯을 보내지 않는 이유는 워커가
-// 질문 원문에서 코드로 슬롯을 뽑기 때문이다(LLM 1패스 없음).
+// 출처 탐색 + 요약. 유형·슬롯을 보내지 않는 이유는 워커가 질문 원문에서 코드로
+// 슬롯을 뽑기 때문이다 — 분해에는 LLM 을 안 쓴다(요약에만 쓴다).
 async function go(q) {
   setBusy(true);
   try {
@@ -57,6 +57,9 @@ async function go(q) {
     document.getElementById('badges').innerHTML = (r.배지 ?? [])
       .map((c) => { const b = badgeLabel(c); return `<span class="badge badge--${b.색}">${esc(b.라벨)}</span>`; })
       .join('');
+    // 문장이 먼저, 출처가 아래다. 문장이 없으면(한도초과·요약실패·검증실패) 이
+    // 자리는 비고 CSS 가 블록을 감춘다 — 출처는 그대로 남는다.
+    document.getElementById('answer').innerHTML = 답변HTML(r, { esc });
     document.getElementById('evidence').innerHTML = 묶음HTML(r, { esc });
   } catch {
     renderError('서버에 연결하지 못했다 — 네트워크 상태를 확인한다');

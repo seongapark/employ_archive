@@ -2,6 +2,8 @@
 
 네트워크에 나가지 않는다 — 저장소의 정본 JSON 만 읽는다.
 """
+import re
+
 from tools import fts_load
 
 
@@ -135,3 +137,25 @@ def test_press_rows_carry_the_round_month():
     rows = [r for r in fts_load.rows() if r['도메인'] == 'press']
     assert all(any(ch.isdigit() for ch in r['제목']) for r in rows[:20]), \
         [r['제목'] for r in rows[:3]]
+
+
+def test_dated_domains_carry_a_comparable_date():
+    # 날짜는 문자열 비교로 기간을 거르고 최신성을 정렬하는 값이다. 자리수가 어긋나거나
+    # 조용히 비면 "최근 고용상황" 질문에서 2014년 글이 2026년 글과 같은 자격으로 올라온다.
+    rows = [r for r in fts_load.rows() if r['도메인'] != 'catalog']
+    assert rows
+    for r in rows:
+        assert re.fullmatch(r'\d{4}-\d{2}(-\d{2})?', r['날짜']), (r['doc_id'], r['날짜'])
+
+
+def test_catalog_rows_have_no_date_and_that_is_deliberate():
+    # 한계·충돌은 특정 시점의 글이 아니라 상시 사실이다. 빈 날짜여야 기간 필터에서
+    # 빠지지 않는다(빈 값을 "오래된 것" 으로 취급하면 그 사실이 조용히 사라진다).
+    rows = [r for r in fts_load.rows() if r['도메인'] == 'catalog']
+    assert rows
+    assert all(r['날짜'] == '' for r in rows)
+
+
+def test_the_date_column_is_in_the_sql():
+    sql = fts_load.build_sql(fts_load.rows()[:5])
+    assert '날짜' in sql.split('VALUES')[0]

@@ -10,11 +10,13 @@
     { "binding": "QUOTA", "id": "36a8c6cdef34411295826d7ee64ac386" }
   ],
   "vars": {
-    // 공급자를 갈아끼울 때 코드가 아니라 이 두 줄만 바꾼다. OpenAI 호환 형식이면 그대로 붙는다.
-    "ASK_API_BASE": "https://api.openai.com/v1",
-    // secret 이 아니다. 스파이크로 확인한 모델을 넣고, 품질이 모자라면 이 값만 바꾼다
-    "ASK_MODEL": "gpt-4o-mini",
-    "ASK_DAILY_QUOTA": "500",
+    // 요약 문장은 Claude 로 쓴다(2026-09-13 교체). 요청 형식이 OpenAI 와 달라
+    // provider.mjs 의 makeClaude 가 짝이다 — base 만 바꿔서는 안 옮겨간다.
+    "ASK_API_BASE": "https://api.anthropic.com/v1",
+    // secret 이 아니다. 품질이 모자라거나 지연이 거슬리면 이 값만 바꾼다.
+    "ASK_MODEL": "claude-sonnet-5",
+    // **질문마다 LLM 을 한 번 부른다.** 이 값이 곧 하루 비용 상한이다.
+    "ASK_DAILY_QUOTA": "30",
     "ASK_ALLOWED_ORIGIN": "https://seongapark.github.io"
   }
 }

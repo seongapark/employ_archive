@@ -56,6 +56,8 @@ done
 | `0001_init.sql` | 12표 + `hypothesis_verdict` 뷰 |
 | `0002_phenomenon_axes.sql` | `phenomenon.집단축`(JSON) — 현상이 자기 축을 선언한다 |
 | `0003_forecast_org_name.sql` | `forecast.org_name_ko` — 전망 카드의 한글 기관명 |
+| `0004_fts.sql` | `doc_fts` — 초록·목차·전망근거·기사·카탈로그를 담는 검색 색인 |
+| `0005_fts_date.sql` | `doc_fts` 에 `날짜` 열 추가(최신성 정렬·기간 필터). **표를 지우고 다시 세운다** — 적용 뒤 `sync-fts` 워크플로를 손으로 한 번 돌려 색인을 채운다(안 채우면 글 도메인이 전부 0건이다) |
 
 **컬럼을 늘리면 `tools/d1_sync.py` 의 `COLUMNS` 도 같이 늘린다.**
 `tools/tests/test_d1_sync.py` 가 마이그레이션 전부와 대조해 어긋나면 잡는다.
@@ -82,6 +84,12 @@ wrangler d1 execute employ-archive-ask --remote \
 wrangler secret put ASK_API_KEY --config domains/ask/worker/wrangler.jsonc
 # 프롬프트에 키를 붙여 넣는다. 이 값은 저장소 어디에도 커밋하지 않는다.
 ```
+
+**이 키는 Anthropic API 키다**(`sk-ant-...`, 2026-09-13 에 OpenAI 에서 갈아끼웠다).
+`ASK_API_BASE` 가 `https://api.anthropic.com/v1` 이고 코드도 Anthropic 요청 모양
+(`x-api-key` 헤더 · top-level `system`)으로 보내므로, **OpenAI 키를 그대로 두면 401 이
+나고 문장만 빠진 채 출처 카드만 나간다**(배지는 `요약실패`). 구독(Claude Pro/Max)
+크레덴셜은 여기에 쓸 수 없다 — 방문자가 부르는 자리라 남의 사용량이 내 한도를 먹는다.
 
 `ASK_API_BASE` · `ASK_MODEL` · `ASK_DAILY_QUOTA` · `ASK_ALLOWED_ORIGIN` 은 secret 이 **아니다** —
 `wrangler.jsonc` 의 `vars` 에 평문으로 둔다(§3).
@@ -163,16 +171,17 @@ const API = 'https://employ-archive-ask.<subdomain>.workers.dev/api/ask';  // �
 `vars.ASK_API_BASE`(공급자 주소) · `vars.ASK_MODEL`(품질이 모자라면 이 값만 바꾼다) ·
 `vars.ASK_DAILY_QUOTA`(IP 별 하루 한도).
 
-**`ASK_DAILY_QUOTA` 는 지금 `500` 이다 — 링크를 남에게 공유하기 전까지의 값이다.**
-질문 한 건이 LLM 호출 두 번(슬롯 분해·문장 작성)을 쓰고 그 비용이 `ASK_API_KEY` 주인에게
-간다. 공개 링크를 돌리는 시점에 **다시 조인다**(직접 개발·시연 기준으로 `30` 이 원래 값).
+**`ASK_DAILY_QUOTA` 는 `30` 이다**(2026-09-13 에 500 에서 다시 조였다 — 질문마다 요약
+문장을 자동으로 만들기 시작해서, 이 값이 곧 IP 당 하루 LLM 호출 상한이자 비용 상한이다).
+질문 한 건이 LLM 호출 **한 번**(요약)을 쓰고 그 비용이 `ASK_API_KEY` 주인에게 간다.
+한도를 넘겨도 **출처 카드는 그대로 나간다** — 찾기는 D1 읽기뿐이라 LLM 과 무관하다.
 바꾸는 방법은 이 줄 하나 고치고 `wrangler deploy` 다.
 
-**공급자를 갈아끼울 때는 코드가 아니라 `ASK_API_BASE`·`ASK_MODEL` 두 줄과 `ASK_API_KEY`
-시크릿만 바꾼다.** 요청·응답 형식이 OpenAI 호환이면 그대로 붙는다 — 실제로 한 번
-갈아끼웠다(OpenRouter → OpenAI). 다만 **공급자를 바꾸면 모델 선정 근거가 같이 옮겨가지
-않는다**: 구조화 출력 지원 여부·유형 분류 정확도·응답 지연을 스파이크로 다시 재고
-`ASK_MODEL` 을 정해야 한다.
+**공급자를 갈아끼우는 것은 이제 두 줄로 끝나지 않는다.** `ASK_API_BASE`·`ASK_MODEL`·
+`ASK_API_KEY` 외에 `llm/provider.mjs` 의 짝(`makeClaude` / `makeLlm`)도 골라야 한다 —
+Anthropic 과 OpenAI 는 키 헤더·시스템 프롬프트 자리·응답 구조가 다르다. `makeLlm`
+(OpenAI 호환, 옛 2패스 경로)은 지우지 않고 남겨 뒀지만 지금은 호출되지 않는다.
+모델을 바꿀 때는 지연을 다시 잰다 — 검색창은 기다림이 그대로 보이는 화면이다.
 
 ---
 

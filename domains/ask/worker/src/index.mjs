@@ -1,5 +1,5 @@
 import { d1 } from './core/db.mjs';
-import { makeLlm } from './llm/provider.mjs';
+import { makeClaude } from './llm/provider.mjs';
 import { handleLookup } from './api/routes.mjs';
 
 const cors = (env) => ({
@@ -27,14 +27,16 @@ export default {
         quota: Number(env.ASK_DAILY_QUOTA ?? 30),
         // ASK_API_KEY 는 wrangler secret 으로만 들어온다 — 여기서도 값 자체는
         // 절대 리터럴로 쓰지 않고 env 를 통해서만 읽는다.
-        llm: makeLlm({ apiKey: env.ASK_API_KEY, model: env.ASK_MODEL, baseUrl: env.ASK_API_BASE }),
+        // 요약 문장을 쓰는 유일한 LLM. 방문자가 부르는 자리라 **구독이 아니라
+        // 계량되는 API 키**다(구독 크레덴셜은 내 5시간 한도를 남이 쓰게 된다).
+        llm: makeClaude({ apiKey: env.ASK_API_KEY, model: env.ASK_MODEL, baseUrl: env.ASK_API_BASE }),
       };
       const ip = request.headers.get('cf-connecting-ip') ?? '0.0.0.0';
       const today = new Date().toISOString().slice(0, 10);
 
-      // 출처 탐색이다 — 문장을 만들지 않는다. `유형`·`슬롯` 을 몸통에서 받지
-      // 않는 이유는 슬롯을 코드가 질문 원문에서 뽑기 때문이다(LLM 1패스 없음).
-      const 결과 = await handleLookup(deps, { 질문: body.q, ip, today });
+      // 출처 탐색 + 요약. `유형`·`슬롯` 을 몸통에서 받지 않는 이유는 슬롯을 코드가
+      // 질문 원문에서 뽑기 때문이다 — 분해에는 LLM 을 안 쓴다(요약에만 쓴다).
+      const 결과 = await handleLookup(deps, { 질문: body.q, ip, today, now: new Date() });
 
       // 후속질문은 **거르지 않고 그대로 낸다.**
       //
