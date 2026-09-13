@@ -80,3 +80,21 @@ jobs:
           # kdi 가 되살아난 것을 이 검사가 잡아내 2026-09-02 에 지웠다.
           KNOWN_DOWN: ""
         run: python -m domains.forecast.pipeline.check_run
+
+  deploy:
+    # 수집이 커밋한 데이터를 사이트에 올린다. **봇이 민 커밋은 push 트리거를
+    # 만들지 않는다** — 기본 토큰으로 한 푸시는 다른 워크플로를 트리거하지
+    # 않는 것이 GitHub 규칙이다. 그래서 pages.yml 의 push 트리거가 안 걸리고,
+    # 이 호출이 없으면 오늘 수집 결과가 12:20 예약 배포 때까지 화면에 안 나온다
+    # (2026-09-13 에 고쳐진 실패를 화면이 계속 실패로 보여줬다).
+    #
+    # 수집 잡이 빨개도 배포한다 — 마지막 검사가 실패해도 담은 것은 이미
+    # 커밋됐고, 그것이 화면에 안 올라오면 사람이 옛 상태를 보고 판단한다.
+    # 건너뛴 경우(press 의 아무 날도 아닌 실행)만 배포하지 않는다.
+    needs: collect
+    if: ${{ !cancelled() && needs.collect.result != 'skipped' }}
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    uses: ./.github/workflows/pages.yml

@@ -11,10 +11,17 @@ on:
       - ".github/workflows/pages.yml"
   schedule:
     # 12:20 KST — 일일 수집(12:00) 20분 후. 수집 시각을 앞당긴 이유는
-    # collect-forecast.yml 의 schedule 주석에 있다. 이 예약은 보조일
-    # 뿐이다 — domains/** 가 바뀌면 push 로 이미 재배포된다.
+    # collect-forecast.yml 의 schedule 주석에 있다. 이 예약은 그물이다 —
+    # 수집 워크플로가 끝에서 이 워크플로를 직접 부르므로(workflow_call) 보통은
+    # 그때 이미 배포돼 있다. **push 트리거는 사람 푸시에만 걸린다** — 봇이 민
+    # 데이터 커밋은 push 이벤트를 만들지 않는다(GitHub 규칙).
     - cron: "20 3 * * *"
   workflow_dispatch:
+  # 수집 워크플로가 데이터를 커밋한 뒤 이 워크플로를 **불러서** 배포한다.
+  # 봇이 민 커밋은 push 이벤트를 만들지 않으므로(GitHub 규칙: 기본 토큰으로
+  # 한 푸시는 다른 워크플로를 트리거하지 않는다) 위의 push 트리거가 안 걸린다.
+  # 2026-09-13 에 그걸 모르고 "고쳤는데 화면이 그대로"를 한참 쫓았다.
+  workflow_call:
 
 permissions:
   contents: read
