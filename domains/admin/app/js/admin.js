@@ -65,10 +65,14 @@ function 잠그기() {
   화면().innerHTML = 잠금HTML();
 }
 
+const 새로고침단추 = () => document.getElementById('refresh');
+
 async function 새로고침() {
+  const b = 새로고침단추();
+  if (b) { if (b.disabled) return; b.disabled = true; }   // 도는 중 두 번 눌러 D1 조회를 늘리지 않는다
   const fetch1 = globalThis.fetch.bind(globalThis);
   const r = await 불러오기(현재일수, { fetch: fetch1, store: localStorage });
-  if (r.상태 === '인증') { 잠그기(); return; }
+  if (r.상태 === '인증') { 잠그기(); if (b) b.disabled = false; return; }
 
   // 도메인 현황은 정적 JSON 만 읽으므로 워커가 죽어 있어도(미배포·연결실패)
   // 봐야 한다 — 그래서 r.상태 분기 밖에서, 잠금 화면이 아닌 한 항상 부른다.
@@ -86,6 +90,7 @@ async function 새로고침() {
     마지막.오류 = r.상태;
   }
   그리기();
+  if (b) b.disabled = false;
 }
 
 // ── 이벤트 ───────────────────────────────────────────────────────────────
@@ -93,6 +98,10 @@ async function 새로고침() {
 
 // 탭바는 `.screen` 밖에 있으므로 리스너도 따로 건다. 탭만 바꾸는 것은 이미 받아
 // 둔 것을 다시 그리는 일이라 네트워크를 타지 않는다 — 누르면 곧바로 바뀐다.
+// 헤더 단추는 `.screen` 밖이라 리스너를 따로 건다. 탭 전환과 달리 이것은
+// **다시 받는** 동작이다 — 워커 집계와 도메인 현황 JSON 을 둘 다 새로 읽는다.
+새로고침단추()?.addEventListener('click', () => { 새로고침(); });
+
 탭바().addEventListener('click', (e) => {
   const b = e.target.closest('.segment');
   if (!b || b.dataset.tab === 현재탭) return;

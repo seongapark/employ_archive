@@ -17,7 +17,11 @@ export async function 현황불러오기({ fetch, 목록 = 도메인목록 } = {
   const 결과 = {};
   await Promise.all(목록.map(async (키) => {
     try {
-      const res = await f(`../${키}/data/last_run.json`);
+      // `no-cache` 는 "캐시를 쓰지 마라"가 아니라 "쓰기 전에 서버에 물어라"다.
+      // GitHub Pages 가 이 JSON 에도 max-age=600 을 붙이므로, 새로고침을 눌러도
+      // 10분 동안 옛 파일이 그대로 나올 수 있다 — 단추가 아무것도 안 한 것처럼
+      // 보이는 가장 흔한 길이다. 서비스워커가 아직 안 잡은 첫 로드에서도 같다.
+      const res = await f(`../${키}/data/last_run.json`, { cache: 'no-cache' });
       결과[키] = res.ok ? await res.json() : null;
     } catch {
       결과[키] = null;
