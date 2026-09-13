@@ -11,6 +11,11 @@
 
 **문장 경계를 아는 쪽이 나눈다.** `fts_load` 가 `;\\n` 으로 문장을 끝내며 파일을 썼으니,
 같은 규칙으로 여기서 나눈다. 추측이 들어갈 자리가 없다.
+
+**한 요청에 한 문장만 보낸다.** 여러 문장을 한 `sql` 에 담아 보냈더니 D1 이 문장 안의
+세미콜론에서 똑같이 넘어졌다 — `unrecognized token: "'현행 노동쟁의제도에서는 …"`. 글
+안의 세미콜론은 경계가 아닌데 그렇게 읽은 것이다. 한 문장씩 보내면 쪼갤 일이 없다.
+문장이 280개쯤이라 요청당 0.2초로 1분 안에 끝난다(한 문장에 80KB까지 담는다).
 """
 from __future__ import annotations
 
@@ -22,9 +27,6 @@ import sys
 import urllib.error
 import urllib.request
 
-# 한 요청에 담는 SQL 바이트. D1 은 한 문장 100KB 제한이 있고, 요청 전체도 너무 크면
-# 거부한다. 문장 하나(최대 20KB)의 몇 배로 둔다.
-REQ_BUDGET = 80_000
 API = 'https://api.cloudflare.com/client/v4'
 
 
@@ -46,21 +48,6 @@ def statements(paths) -> list[str]:
             문장 = 문장.strip()
             if 문장:
                 out.append(문장)
-    return out
-
-
-def batches(stmts, budget: int = REQ_BUDGET) -> list[str]:
-    """문장을 요청 단위로 묶는다. 한 문장이 예산을 넘으면 혼자 보낸다."""
-    out, cur, size = [], [], 0
-    for s in stmts:
-        n = len(s.encode('utf-8')) + 2
-        if cur and size + n > budget:
-            out.append(';\n'.join(cur) + ';')
-            cur, size = [], 0
-        cur.append(s)
-        size += n
-    if cur:
-        out.append(';\n'.join(cur) + ';')
     return out
 
 
@@ -93,12 +80,11 @@ def main(argv=None) -> int:
     db = database_id()
 
     stmts = statements(sorted(paths))
-    묶음 = batches(stmts)
-    print(f'{len(stmts)} 문장을 {len(묶음)} 번에 나눠 보낸다', file=sys.stderr)
-    for i, sql in enumerate(묶음, start=1):
-        post(sql, account=account, db=db, token=token)
-        if i % 10 == 0 or i == len(묶음):
-            print(f'  {i}/{len(묶음)}', file=sys.stderr)
+    print(f'{len(stmts)} 문장을 하나씩 보낸다', file=sys.stderr)
+    for i, sql in enumerate(stmts, start=1):
+        post(f'{sql};', account=account, db=db, token=token)
+        if i % 25 == 0 or i == len(stmts):
+            print(f'  {i}/{len(stmts)}', file=sys.stderr)
     return 0
 
 

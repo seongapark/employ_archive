@@ -18,22 +18,14 @@ def test_statements_are_split_on_the_terminator_we_wrote(tmp_path):
     assert "'가;나'" in stmts[1]
 
 
-def test_batches_respect_the_budget():
-    stmts = ['X' * 30_000, 'Y' * 30_000, 'Z' * 30_000]
-    묶음 = d1_push.batches(stmts, budget=70_000)
-    assert len(묶음) == 2
-    assert all(len(b.encode('utf-8')) <= 70_000 + 100 for b in 묶음)
-
-
-def test_a_statement_bigger_than_the_budget_goes_alone():
-    묶음 = d1_push.batches(['A' * 90_000, 'B'], budget=50_000)
-    assert len(묶음) == 2
-    assert 묶음[0].startswith('A')
-
-
-def test_every_batch_ends_with_a_terminator():
-    for b in d1_push.batches(['INSERT 1', 'INSERT 2']):
-        assert b.endswith(';')
+def test_statements_keep_their_inner_semicolons_intact(tmp_path):
+    # **한 요청에 한 문장만 보내는 이유.** 여러 문장을 한 sql 에 담아 보냈더니 D1 이 글
+    # 안의 세미콜론을 문장 경계로 읽고 넘어졌다(unrecognized token). 문장은 안 쪼갠다.
+    한글 = "INSERT INTO t VALUES ('가; 나');\nINSERT INTO t VALUES ('다');\n"
+    (tmp_path / 'a.sql').write_text(한글, encoding='utf-8')
+    stmts = d1_push.statements([tmp_path / 'a.sql'])
+    assert len(stmts) == 2
+    assert "'가; 나'" in stmts[0]
 
 
 def test_database_id_comes_from_the_wrangler_config():
