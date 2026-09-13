@@ -16,6 +16,22 @@
   ]
  },
  {
+  "id": "bok-11064677",
+  "org": "bok",
+  "board": "bok-note",
+  "series": "BOK 이슈노트",
+  "title": "[제2026-24호] 지정학적 분절 속 글로벌 경제연계는 어떻게 재편되고 있는가?",
+  "authors": [
+   "거시분석팀, 아태경제팀"
+  ],
+  "published": "2026-09-13",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?nttId=11064677&searchCnd=1&searchKwd=&depth2=201157&depth3=200433&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200433&pageIndex=1&programType=newsData&menuNo=200433&oldMenuNo=200433",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/6cfda60ec1e545e59f32d23eddfc745c/1/6e0381d0135b4d88b54639c2cc7000e5.pdf",
+  "matched": []
+ },
+ {
   "id": "bok-11064644",
   "org": "bok",
   "board": "bok-research",
@@ -5825,6 +5841,22 @@
   "matched": []
  },
  {
+  "id": "kdi-17755",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "요양병원 이용과 지불제도 개선방안 연구",
+  "authors": [
+   "권정현"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 75,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=17755",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=2XaevYNMsXhaE%2BQ8zl0UYg%3D%3D",
+  "matched": []
+ },
+ {
   "id": "kdi-17725",
   "org": "kdi",
   "board": "kdi-report",
@@ -8051,6 +8083,22 @@
   ]
  },
  {
+  "id": "kdi-16347",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "기업에 대한 정책 왜곡의 거시경제적 함의: 생산, 투자 및 생산성에 대한 비교",
+  "authors": [
+   "오지윤"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 64,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=16347",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=GpUgzZdaacGDf2p0cGuoDg%3D%3D",
+  "matched": []
+ },
+ {
   "id": "kdi-16346",
   "org": "kdi",
   "board": "kdi-focus",
@@ -8488,6 +8536,24 @@
   "matched": []
  },
  {
+  "id": "kdi-16125",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "국민연금제도 개혁방안의 거시경제적 파급효과 및 세대 간 비용부담 분석",
+  "authors": [
+   "권규호"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 79,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=16125",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=vtv%2BI%2Bezaci8NZmUj4GSSg%3D%3D",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kdi-16124",
   "org": "kdi",
   "board": "kdi-report",
@@ -8735,6 +8801,22 @@
   "matched": [
    "임금"
   ]
+ },
+ {
+  "id": "kdi-15932",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "대기업 개별 충격이 우리나라의 거시 변동성에 미치는 영향과 정책적 함의",
+  "authors": [
+   "정성훈"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 66,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15932",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=%2FLYKSNAAW8%2B6BK%2FapekL0w%3D%3D",
+  "matched": []
  },
  {
   "id": "kdi-15920",
@@ -9037,6 +9119,31 @@
   ]
  },
  {
+  "id": "kdi-15706",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "우리 경제의 생산성 향상을 위한 공공투자의 역할과 과제",
+  "authors": [
+   "이재준",
+   "김강수",
+   "하연섭",
+   "안상훈",
+   "문외솔",
+   "한성민",
+   "이호준",
+   "남창우",
+   "이종연",
+   "김형태"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 400,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15706",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=2JcdAUSrgC4o5BncdAMhzA%3D%3D",
+  "matched": []
+ },
+ {
   "id": "kdi-15660",
   "org": "kdi",
   "board": "kdi-report",
@@ -9121,6 +9228,28 @@
   "matched": []
  },
  {
+  "id": "kdi-15602",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "프로젝트 학습을 통한 교육개혁(Ⅱ)",
+  "authors": [
+   "이주호",
+   "박윤수",
+   "김부열",
+   "최승주",
+   "김태완",
+   "신은철",
+   "장경원"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 180,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15602",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=iDbF8UNuROsh2zZI7GKlzg%3D%3D",
+  "matched": []
+ },
+ {
   "id": "kdi-15575",
   "org": "kdi",
   "board": "kdi-report",
@@ -9167,6 +9296,31 @@
   "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15566",
   "file_url": "https://www.kdi.re.kr/file/download?atch_no=cU1VMS5UjNC9l13tpfRtsQ%3D%3D",
   "matched": []
+ },
+ {
+  "id": "kdi-15562",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "기간제 근로의 고용기간 제한에 관한 실증연구",
+  "authors": [
+   "박우람",
+   "박윤수",
+   "김세익"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 144,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15562",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=gc5g7Jrx%2FFCTL0NW0HWeQg%3D%3D",
+  "matched": [
+   "임금",
+   "근로시간",
+   "고용형태",
+   "노사관계",
+   "고용보험",
+   "일자리정책"
+  ]
  },
  {
   "id": "kdi-15557",
@@ -9235,6 +9389,24 @@
   "pages": 78,
   "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15518",
   "file_url": "https://www.kdi.re.kr/file/download?atch_no=V1XbcBMo1kfx4H3BWt9qqw%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15496",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "중학생 경제교육 활성화를 위한 프로젝트 학습 적용 및 영향 평가",
+  "authors": [
+   "김부열",
+   "박윤수",
+   "최승주"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 67,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15496",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=oNvBbwrAkYeEdm0%2FCaRoUw%3D%3D",
   "matched": []
  },
  {
@@ -9343,6 +9515,27 @@
   "matched": []
  },
  {
+  "id": "kdi-15346",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "고령화와 가계부채: 장기간 미시 자료 분석을 중심으로",
+  "authors": [
+   "김지섭",
+   "오윤해"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 154,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15346",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=%2FmWyCXEzVSw1aES%2FBsSWwQ%3D%3D",
+  "matched": [
+   "고령자",
+   "직업훈련",
+   "고용서비스"
+  ]
+ },
+ {
   "id": "kdi-15332",
   "org": "kdi",
   "board": "kdi-focus",
@@ -9357,6 +9550,24 @@
   "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=15332",
   "file_url": "https://www.kdi.re.kr/file/download?atch_no=20%2Fa86tTjI3%2B0tqxq%2FbOOA%3D%3D",
   "matched": []
+ },
+ {
+  "id": "kdi-15331",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "자원분배와 생산성: 한국 제조업의 역동성과 시사점",
+  "authors": [
+   "김민호"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 62,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15331",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=sgaoqhjNflW9IjaVkkKEIg%3D%3D",
+  "matched": [
+   "일자리정책"
+  ]
  },
  {
   "id": "kdi-15322",
@@ -9375,6 +9586,45 @@
   "matched": []
  },
  {
+  "id": "kdi-15319",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "정부신뢰 개념에 관한 비교 연구: 빅데이터를 이용한 접근",
+  "authors": [
+   "김재훈",
+   "오형나",
+   "송민",
+   "안주영",
+   "홍수린"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 228,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15319",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=6N427IFVXBPokqIZJi%2F8qg%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15318",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "역동성 제고를 위한 금융정책의 역할: 진입·퇴출 활성화를 중심으로",
+  "authors": [
+   "정대희",
+   "장우현",
+   "구자현",
+   "남창우"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 228,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15318",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=Y7LYYZcgYY4yD9DHDO%2BXjQ%3D%3D",
+  "matched": []
+ },
+ {
   "id": "kdi-15304",
   "org": "kdi",
   "board": "kdi-focus",
@@ -9388,6 +9638,22 @@
   "pages": 7,
   "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=15304",
   "file_url": "https://www.kdi.re.kr/file/download?atch_no=lxeRly7NFtoYtF6f0btX6w%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15298",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "구조적 모형을 이용한 조세제도 변화효과 분석",
+  "authors": [
+   "이태석"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 102,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15298",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=R6kHiN%2BEPDbAUt6g%2FpXYKg%3D%3D",
   "matched": []
  },
  {
@@ -9409,6 +9675,61 @@
   ]
  },
  {
+  "id": "kdi-15290",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "구직급여제도의 변화가 노동시장에 미치는 영향",
+  "authors": [
+   "김지운"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 121,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15290",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=%2B5SCncrTB4D%2ByRCjvPudbg%3D%3D",
+  "matched": [
+   "임금",
+   "고용서비스",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-15281",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "우리나라 지역산업의 구조 변화: 지역산업 협력 네트워크를 중심으로",
+  "authors": [
+   "서중해"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 114,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15281",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=KwELsM1SFdtCLdhQoph%2Fnw%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15279",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "공유경제에 대한 경제학적 분석: 기대효과와 우려요인 및 정책적 함의",
+  "authors": [
+   "김민정",
+   "이화령",
+   "황순주"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 394,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15279",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=lRDUMKvow4z2uod%2BrbjaLA%3D%3D",
+  "matched": []
+ },
+ {
   "id": "kdi-15275",
   "org": "kdi",
   "board": "kdi-focus",
@@ -9423,6 +9744,29 @@
   "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=15275",
   "file_url": "https://www.kdi.re.kr/file/download?atch_no=b5QSZELiTgr33blqsU%2FpWA%3D%3D",
   "matched": []
+ },
+ {
+  "id": "kdi-15273",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "공직개혁방안 연구",
+  "authors": [
+   "김재훈",
+   "박윤수",
+   "강창희",
+   "백지선",
+   "김상신"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 200,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15273",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=3ifGv98ssV8KGzmBgExsdQ%3D%3D",
+  "matched": [
+   "고령자",
+   "임금"
+  ]
  },
  {
   "id": "kdi-15254",
@@ -9445,6 +9789,159 @@
   ]
  },
  {
+  "id": "kdi-15223",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "국내 금융회사 그룹 리스크 평가와 관련 제도 개선 방향",
+  "authors": [
+   "이기영"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 108,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15223",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=M132azKyQlFCW%2BdgxJs9wA%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15222",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "혁신생태계 조성을 위한 정부 개혁",
+  "authors": [
+   "이주호",
+   "최창용",
+   "하연섭",
+   "김진영",
+   "문성욱",
+   "박상욱",
+   "안준모",
+   "박진",
+   "오호영",
+   "지상훈",
+   "최흥석"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 329,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15222",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=o98MgU5ClQqeBsQMEj4DoQ%3D%3D",
+  "matched": [
+   "직업훈련",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-15219",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "국민연금이 가계의 저축 및 자산구성에 미친 영향: 소득분위별 및 부채부담수준별 분석",
+  "authors": [
+   "김성태",
+   "이준상"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 49,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15219",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=mpzYJ71r3xtxbU23ZamYjQ%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15210",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "최근 북한의 경제정책 평가 및 향후 전망",
+  "authors": [
+   "이종규"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 110,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15210",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=tpdDv7muPlPGf57fao4GAg%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15209",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "기업집단 내부거래의 평가와 정책대응",
+  "authors": [
+   "이재형",
+   "박병형"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 207,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15209",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=kn2p7wIufgYwwZ%2BPm5vnrw%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15203",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "대형유통업체 자체상품 확대의 경제적 효과에 관한 연구",
+  "authors": [
+   "이진국"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 97,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15203",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=PUlANUDiGa17eswbY3CVFA%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15202",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "재정책무성 강화를 통한 재정건전성 제고방안",
+  "authors": [
+   "윤희숙",
+   "이영욱",
+   "김도형",
+   "박현",
+   "박창균",
+   "주만수",
+   "최용옥",
+   "정장훈",
+   "박병원"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 465,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15202",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=rJt8OWwIYyoYPgDJ6fu4vQ%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15201",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "글로벌 투자 부진이 우리나라 부가가치 창출에 미치는 영향",
+  "authors": [
+   "정규철"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 60,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15201",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=ncrt3chen0lStdUzh%2FsiXA%3D%3D",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kdi-15199",
   "org": "kdi",
   "board": "kdi-focus",
@@ -9461,6 +9958,87 @@
   "matched": []
  },
  {
+  "id": "kdi-15187",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "대북경제제재의 영향력 추정과 실효성 증진방안",
+  "authors": [
+   "이석",
+   "전병곤"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 117,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15187",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=qfa8f%2FEQTYUG412pCXhmMw%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15184",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "인터넷 포털의 경쟁과 뉴스 콘텐츠의 선택",
+  "authors": [
+   "최동욱"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 65,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15184",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=cIH51iR4uxfjAtXA9LDIVQ%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15178",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "동북아 국제질서의 변화와 우리의 대응전략",
+  "authors": [
+   "이석",
+   "조병구",
+   "김두얼",
+   "장형수",
+   "이상현",
+   "신범식",
+   "이동률",
+   "이원덕",
+   "조남훈"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 525,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15178",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=SVWkND9E%2Fr25DSz%2FpU4pxQ%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15168",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "기업성장의 동태성과 청년일자리",
+  "authors": [
+   "최경수",
+   "김정호"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 192,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15168",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=mGtOQLOE%2FmiVMwCdpMn7kg%3D%3D",
+  "matched": [
+   "청년고용",
+   "임금",
+   "직업훈련",
+   "고용보험",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
   "id": "kdi-15166",
   "org": "kdi",
   "board": "kdi-focus",
@@ -9474,6 +10052,39 @@
   "pages": 7,
   "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=15166",
   "file_url": "https://www.kdi.re.kr/file/download?atch_no=ymT6X49ajXY8Z8sAj25N4w%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15152",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "계열기업 간 출자에 있어 새로운 규율방안에 관한 연구",
+  "authors": [
+   "조성익",
+   "양용현"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 411,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15152",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=S%2BDol%2Bxv44VFzqIL4WTWRg%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15108",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "주택임대시장 구조변화에 대응한 정책개선 방향",
+  "authors": [
+   "송인호"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 73,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15108",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=Y8%2BoW5RuvUz07%2Bpi2ndTIg%3D%3D",
   "matched": []
  },
  {
@@ -9493,6 +10104,22 @@
   "matched": []
  },
  {
+  "id": "kdi-15104",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "Economic Effect of Regulatory Reforms in Korea",
+  "authors": [
+   "김정욱"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 28,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15104",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=svRW33uZuB58MGy9XwQyYQ%3D%3D",
+  "matched": []
+ },
+ {
   "id": "kdi-15079",
   "org": "kdi",
   "board": "kdi-focus",
@@ -9506,6 +10133,23 @@
   "pages": 8,
   "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=15079",
   "file_url": "https://www.kdi.re.kr/file/download?atch_no=7CRcwHYfhmSChIsy4ndLzg%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15071",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "해외직접투자통계의 개선방안 연구",
+  "authors": [
+   "이재형",
+   "이진면"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 188,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15071",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=a0lh%2B9uvnAMwYSAHOgLzXw%3D%3D",
   "matched": []
  },
  {
@@ -9525,6 +10169,41 @@
   "matched": [
    "일자리정책"
   ]
+ },
+ {
+  "id": "kdi-15012",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "물류산업의 선진화와 규제개선 방안",
+  "authors": [
+   "김정욱",
+   "손의영"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 70,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15012",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=OEhzObQbST1EBuRmB3p%2BFg%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-15009",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "공적연금 재정추계모형 개발: 공무원연금 재정추계모형을 중심으로",
+  "authors": [
+   "이태석",
+   "최용옥",
+   "김도형"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 218,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=15009",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=HXUr191fW6dhSQnRtEuu2g%3D%3D",
+  "matched": []
  },
  {
   "id": "kdi-15004",
@@ -9575,6 +10254,26 @@
   "matched": []
  },
  {
+  "id": "kdi-14969",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "우리나라 영유아발달의 결정요인과 정책적 함의",
+  "authors": [
+   "김인경"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 98,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=14969",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=CHNXeCLLijwzoAszBhKjRA%3D%3D",
+  "matched": [
+   "여성고용",
+   "근로시간",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kdi-14916",
   "org": "kdi",
   "board": "kdi-focus",
@@ -9592,6 +10291,27 @@
    "고용보험",
    "일자리정책"
   ]
+ },
+ {
+  "id": "kdi-14915",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "개방과 경제발전",
+  "authors": [
+   "정성훈",
+   "송의영",
+   "신관호",
+   "한진희",
+   "정성훈",
+   "정혁"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 273,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=14915",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=EPcXwPQGtFhfIIxZjwyVKg%3D%3D",
+  "matched": []
  },
  {
   "id": "kdi-14907",
@@ -9725,6 +10445,33 @@
   "matched": []
  },
  {
+  "id": "kdi-14791",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "프로젝트 학습을 통한 교육개혁",
+  "authors": [
+   "이주호",
+   "김태완",
+   "박윤수",
+   "임걸",
+   "김부열",
+   "최승주",
+   "백혜리",
+   "최중희",
+   "조형정",
+   "김명랑",
+   "강민석",
+   "손진영"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 201,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=14791",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=uPgbiIf9b2jcBXdBAfBorQ%3D%3D",
+  "matched": []
+ },
+ {
   "id": "kdi-14779",
   "org": "kdi",
   "board": "kdi-focus",
@@ -9776,6 +10523,24 @@
   "matched": []
  },
  {
+  "id": "kdi-14685",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "Participatory Governance and Policy Diffusion in Local Governments in Korea: Implementation of Participatory Budgeting",
+  "authors": [
+   "김순희",
+   "이주후",
+   "이준수"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 120,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=14685",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=m%2BLYqNCeNve6RfKE1%2BG1rw%3D%3D",
+  "matched": []
+ },
+ {
   "id": "kdi-14662",
   "org": "kdi",
   "board": "kdi-focus",
@@ -9789,6 +10554,22 @@
   "pages": 8,
   "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=14662",
   "file_url": "https://www.kdi.re.kr/file/download?atch_no=xfr0isNEnq%2FxbwACFwaWPA%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "kdi-14648",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "채권자 손실부담형 은행정리체제의 실행 가능성과 정책적 시사점",
+  "authors": [
+   "황순주"
+  ],
+  "published": "2026-05-13",
+  "date_precision": "day",
+  "pages": 186,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=14648",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=dh5o0Vze3UZJeCkCjJKXfA%3D%3D",
   "matched": []
  },
  {
@@ -24228,6 +25009,87 @@
   ]
  },
  {
+  "id": "kiet-ec3264",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "[통합본] 월간 KIET 산업경제 2025년 1월 통권 제316호",
+  "authors": [],
+  "published": "2025-01-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3264&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3027",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "중국, 내수 확대를 위한 2025년 신규 자동차 이구환신 정책 발표",
+  "authors": [
+   "박소희"
+  ],
+  "published": "2025-01-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3027&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3026",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "STORM 속 생존을 위한 한국의 해법",
+  "authors": [
+   "장상식 (한국무역협회 국제무역통상연구원장)"
+  ],
+  "published": "2025-01-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3026&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3025",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "CES 2025로 본 우리의 나아갈 방향",
+  "authors": [
+   "이규복(한국전자기술연구원 석좌연구위원(前 부원장",
+   "반도체공학회장))"
+  ],
+  "published": "2025-01-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3025&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3024",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "CES 2025에서 나타난 주요 산업의 변화 방향과 시사점: 자동차, 로봇, 가전, 스마트 헬스 등을 중심으로",
+  "authors": [
+   "조철",
+   "심우중",
+   "오승환"
+  ],
+  "published": "2025-01-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3024&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
   "id": "kiet-ec3023",
   "org": "kiet",
   "board": "kiet-economy",
@@ -24326,6 +25188,22 @@
   "date_precision": "day",
   "pages": null,
   "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3018&year=&month=&stype=&sval=&pg=8&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3017",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "실물경제 주요 지표 & KIET 업종별 경기지수",
+  "authors": [
+   "KIET"
+  ],
+  "published": "2025-01-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3017&year=&month=&stype=&sval=&pg=9&pp=30",
   "file_url": null,
   "matched": []
  },
@@ -24984,6 +25862,204 @@
   "date_precision": "day",
   "pages": null,
   "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=816&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3265",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "[통합본] 월간 KIET 산업경제 2024년 12월 통권 제315호",
+  "authors": [],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3265&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3015",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "EU의 외국인 투자 심사 강화",
+  "authors": [
+   "조수정(고려대학교 법학전문대학원 교수)"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3015&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3014",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "중국 중앙경제공작회의, 2025년 전방위적 내수 확대를 최우선 과제로",
+  "authors": [
+   "박소희"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3014&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3012",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "트럼프 2기 행정부 출범과 중국의 대응",
+  "authors": [
+   "홍창표(KOTRA아카데미 원장)"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3012&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3011",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "2025년 13대 주력산업 전망",
+  "authors": [
+   "이재윤"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3011&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3010",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "2025년 거시경제 전망",
+  "authors": [
+   "박성근",
+   "한정민"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3010&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3009",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "건설활동이 제조업에 미치는 파급효과 분석",
+  "authors": [
+   "박훈"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3009&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": [
+   "산업별고용",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-ec3008",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "인도네시아의 외국인 직접투자 추이와 신정부 출범에 따른 한국의 투자 기회",
+  "authors": [
+   "이정윤"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3008&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
+  "id": "kiet-ec3007",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "중국 산업용 로봇산업의 동향과 우리의 대응 전략",
+  "authors": [
+   "박상수"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3007&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3006",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "국가별 XR산업 동향 및 경쟁력 제고 방안",
+  "authors": [
+   "김성진",
+   "심우중",
+   "김종기"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3006&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3005",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "고령지역의 경제성장 유형별 특성: 일본의 특별구·시정촌(市町村)을 중심으로",
+  "authors": [
+   "허문구"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3005&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3004",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "실물경제 주요 지표 & KIET 업종별 경기지수",
+  "authors": [
+   "KIET"
+  ],
+  "published": "2024-12-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3004&year=&month=&stype=&sval=&pg=9&pp=30",
   "file_url": null,
   "matched": []
  },
@@ -27340,6 +28416,190 @@
   ]
  },
  {
+  "id": "kiet-ec3266",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "[통합본] 월간 KIET 산업경제 2024년 11월 통권 제314호",
+  "authors": [],
+  "published": "2024-11-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3266&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3003",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "실물경제주요지표 & KIET 업종별경기지수",
+  "authors": [
+   "KIET"
+  ],
+  "published": "2024-11-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3003&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3002",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "중국, 17년 만에 국가자연과학기금조례 개정 통해 기초연구 지원 가속화",
+  "authors": [
+   "박소희"
+  ],
+  "published": "2024-11-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3002&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3001",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "전환 금융, 미래 산업경쟁력 확보를 위한 오늘의 금융 지원 프레임워크",
+  "authors": [
+   "오형나(경희대학교 국제대학 국제학과 교수)"
+  ],
+  "published": "2024-11-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3001&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-ec3000",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "법차손 문제와 바이오텍의 자금 조달",
+  "authors": [
+   "묵현상 ((주)퍼스트바이오테라퓨틱스 이사회 의장)"
+  ],
+  "published": "2024-11-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3000&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec2999",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "인구변동 유형별 공간분포 특성 분석",
+  "authors": [
+   "허문구",
+   "이상호"
+  ],
+  "published": "2024-11-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2999&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": [
+   "고령자"
+  ]
+ },
+ {
+  "id": "kiet-ec2998",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "신냉전 시대, 중국의 사이버 안보 조치와 통상 이슈 및 시사점",
+  "authors": [
+   "육지희"
+  ],
+  "published": "2024-11-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2998&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kiet-ec2997",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "글로벌 로봇산업 동향 분석과 우리의 발전 방향",
+  "authors": [
+   "박상수"
+  ],
+  "published": "2024-11-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2997&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec2996",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "최근 배터리 업황 긴급 진단: 부진 원인과 향후 전망을 중심으로",
+  "authors": [
+   "황경인"
+  ],
+  "published": "2024-11-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2996&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec2995",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "글로벌 방산 생태계 최근 동향과 K-방산 혁신생태계 조성 방안",
+  "authors": [
+   "장원준",
+   "박혜지"
+  ],
+  "published": "2024-11-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2995&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": [
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-ec2994",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "미국 생물보안법 입법 동향과 산업 정책 시사점",
+  "authors": [
+   "정지은"
+  ],
+  "published": "2024-11-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2994&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
   "id": "bok-10088282",
   "org": "bok",
   "board": "bok-outlook",
@@ -27849,6 +29109,153 @@
    "직업훈련",
    "일자리정책"
   ]
+ },
+ {
+  "id": "kiet-ec3267",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "[통합본] 월간 KIET 산업경제 2024년 10월 통권 제313호",
+  "authors": [],
+  "published": "2024-10-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3267&year=&month=&stype=&sval=&pg=10&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec2993",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "애플 R&D센터, 중국 허타오 선전-홍콩 과학기술혁신협력구에 설립",
+  "authors": [
+   "박소희"
+  ],
+  "published": "2024-10-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2993&year=&month=&stype=&sval=&pg=10&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec2992",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "핵심광물 공급망 안정화를 위한 정책 제언",
+  "authors": [
+   "김민수(한국광해광업공단 핵심광물기획팀 차장)"
+  ],
+  "published": "2024-10-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2992&year=&month=&stype=&sval=&pg=10&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec2991",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "AI 시대, 미·중 기술 패권 경쟁이 던져줄 충격",
+  "authors": [
+   "김용래(경희대학교 첨단기술비즈니스학과 교수(전 특허청장))"
+  ],
+  "published": "2024-10-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2991&year=&month=&stype=&sval=&pg=10&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec2990",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "북한의 지방발전 20×10 정책의 분석과 전망",
+  "authors": [
+   "김수정"
+  ],
+  "published": "2024-10-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2990&year=&month=&stype=&sval=&pg=10&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec2989",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "지방시대 종합계획의 실효성 제고 방향",
+  "authors": [
+   "송우경"
+  ],
+  "published": "2024-10-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2989&year=&month=&stype=&sval=&pg=10&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec2988",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "저탄소 경제 이행, 어디까지 왔는가: 전문가들의 진단 및 정책 제언",
+  "authors": [
+   "이상원"
+  ],
+  "published": "2024-10-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2988&year=&month=&stype=&sval=&pg=10&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec2987",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "최근 일본의 외국인력 도입 제도 변화와 시사점",
+  "authors": [
+   "김주영"
+  ],
+  "published": "2024-10-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2987&year=&month=&stype=&sval=&pg=9&pp=30",
+  "file_url": null,
+  "matched": [
+   "외국인력",
+   "직업훈련",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kiet-ec2986",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "실물경제 주요 지표 & KIET 업종별 경기지수",
+  "authors": [
+   "KIET"
+  ],
+  "published": "2024-10-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2986&year=&month=&stype=&sval=&pg=10&pp=30",
+  "file_url": null,
+  "matched": []
  },
  {
   "id": "kiet-1146",
@@ -28711,6 +30118,36 @@
   "date_precision": "day",
   "pages": null,
   "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=367&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3268",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "[통합본] 월간 KIET 산업경제 2024년 9월 통권 제312호",
+  "authors": [],
+  "published": "2024-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3268&year=&month=&stype=&sval=&pg=10&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec2978",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "실물경제 주요 지표 & KIET 업종별 경기지수",
+  "authors": [
+   "KIET"
+  ],
+  "published": "2024-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=2978&year=&month=&stype=&sval=&pg=10&pp=30",
   "file_url": null,
   "matched": []
  },
@@ -45128,6 +46565,55 @@
   ]
  },
  {
+  "id": "keis-8752",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "한국의 일자리사업 재정 배분 현황 및 향후 방향",
+  "authors": [
+   "장기영",
+   "권우현",
+   "강지성",
+   "손경현",
+   "신서하",
+   "우석진"
+  ],
+  "published": "2022-07-20",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8752",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220720105710_a1d33d0dfec820b41b54430b50e96b5c.pdf&path=pblc&fn=%282020%29+%ED%95%9C%EA%B5%AD%EC%9D%98+%EC%9D%BC%EC%9E%90%EB%A6%AC%EC%82%AC%EC%97%85+%EC%9E%AC%EC%A0%95+%EB%B0%B0%EB%B6%84+%ED%98%84%ED%99%A9+%EB%B0%8F+%ED%96%A5%ED%9B%84+%EB%B0%A9%ED%96%A5.pdf&sn=8752&fsn=18532&ty=P",
+  "matched": [
+   "직업훈련",
+   "고용서비스",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8732",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "특수형태근로종사자 및 자영업자의 고용보험 사각지대 분석",
+  "authors": [
+   "박진희",
+   "정재현",
+   "김수현",
+   "이정아",
+   "이혜연",
+   "김영달"
+  ],
+  "published": "2022-07-18",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8732",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220718102344_9fc3d7152ba9336a670e36d0ed79bc43.pdf&path=pblc&fn=%ED%8A%B9%EC%88%98%ED%98%95%ED%83%9C%EA%B7%BC%EB%A1%9C%EC%9E%90+%EB%B0%8F+%EC%9E%90%EC%98%81%EC%97%85%EC%9E%90%EC%9D%98+%EA%B3%A0%EC%9A%A9%EB%B3%B4%ED%97%98+%EC%82%AC%EA%B0%81%EC%A7%80%EB%8C%80+%EB%B6%84%EC%84%9D_%EC%9D%B8%EC%87%84%EC%B5%9C%EC%A2%85%EB%B3%B8.pdf&sn=8732&fsn=18512&ty=P",
+  "matched": [
+   "고용형태",
+   "고용보험"
+  ]
+ },
+ {
   "id": "bok-10071706",
   "org": "bok",
   "board": "bok-research",
@@ -45220,6 +46706,30 @@
   "matched": []
  },
  {
+  "id": "keis-8712",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "노인 돌봄 노동시장 현황과 전망",
+  "authors": [
+   "홍현균",
+   "공정승"
+  ],
+  "published": "2022-07-14",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8712",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220714095115_57aeee35c98205091e18d1140e9f38cf.pdf&path=pblc&fn=04.%EB%85%B8%EC%9D%B8%EB%8F%8C%EB%B4%84+%EB%85%B8%EB%8F%99%EC%8B%9C%EC%9E%A5+%ED%98%84%ED%99%A9%EA%B3%BC+%EC%A0%84%EB%A7%9D.pdf&sn=8712&fsn=18472&ty=P",
+  "matched": [
+   "여성고용",
+   "임금",
+   "직업훈련",
+   "산업별고용",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
   "id": "keis-8692",
   "org": "keis",
   "board": "keis-trend",
@@ -45253,6 +46763,53 @@
   "matched": []
  },
  {
+  "id": "keis-8672",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "이민자 고용실태와 정책방향",
+  "authors": [
+   "김새봄"
+  ],
+  "published": "2022-07-08",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8672",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220708130816_3ef815416f775098fe977004015c6193.pdf&path=pblc&fn=13.%EC%9D%B4%EB%AF%BC%EC%9E%90+%EA%B3%A0%EC%9A%A9%EC%8B%A4%ED%83%9C%EC%99%80+%EC%A0%95%EC%B1%85%EB%B0%A9%ED%96%A5.pdf&sn=8672&fsn=18411&ty=P",
+  "matched": [
+   "외국인력",
+   "임금",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8652",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "광역 지역별 인력수급 전망 2019~2029",
+  "authors": [
+   "박진희",
+   "김수현",
+   "홍현균",
+   "정순기",
+   "방글",
+   "공정승",
+   "이혜연",
+   "김영달",
+   "이진면"
+  ],
+  "published": "2022-07-06",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8652",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220706150544_352fe25daf686bdb4edca223c921acea.pdf&path=pblc&fn=06.%EA%B4%91%EC%97%AD%EC%A7%80%EC%97%AD%EB%B3%84+%EC%9D%B8%EB%A0%A5%EC%88%98%EA%B8%89+%EC%A0%84%EB%A7%9D+2019-2029.pdf&sn=8652&fsn=18392&ty=P",
+  "matched": [
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
   "id": "bok-10071513",
   "org": "bok",
   "board": "bok-note",
@@ -45283,6 +46840,134 @@
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?nttId=10071487&searchCnd=1&searchKwd=&depth2=201157&depth3=200433&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200433&pageIndex=2&programType=newsData&menuNo=200433&oldMenuNo=200433",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/241de3c148360c874b3db24d8607497a/1/202207080131412830.pdf",
   "matched": []
+ },
+ {
+  "id": "keis-8637",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "행정DB를 활용한 지역 산업 고용 동향 분석",
+  "authors": [
+   "강민정",
+   "김두순"
+  ],
+  "published": "2022-07-01",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8637",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220725094939_389bc7bb1e1c2a5e7e147703232a88f6.pdf&path=pblc&fn=%ED%96%89%EC%A0%95DB%EB%A5%BC+%ED%99%9C%EC%9A%A9%ED%95%9C+%EC%A7%80%EC%97%AD+%EC%82%B0%EC%97%85+%EA%B3%A0%EC%9A%A9+%EB%8F%99%ED%96%A5+%EB%B6%84%EC%84%9D.pdf&sn=8637&fsn=18571&ty=P",
+  "matched": [
+   "노사관계",
+   "지역고용",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8636",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "행정DB를 이용한 청년층 노동시장 참여 현황과 취업성과 분석",
+  "authors": [
+   "박세정",
+   "강민정"
+  ],
+  "published": "2022-07-01",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8636",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220711095659_9fc3d7152ba9336a670e36d0ed79bc43.pdf&path=pblc&fn=%ED%96%89%EC%A0%95DB%EB%A5%BC+%EC%9D%B4%EC%9A%A9%ED%95%9C+%EC%B2%AD%EB%85%84%EC%B8%B5+%EB%85%B8%EB%8F%99%EC%8B%9C%EC%9E%A5+%EC%B0%B8%EC%97%AC+%ED%98%84%ED%99%A9%EA%B3%BC+%EC%B7%A8%EC%97%85%EC%84%B1%EA%B3%BC+%EB%B6%84%EC%84%9D.pdf&sn=8636&fsn=18431&ty=P",
+  "matched": [
+   "청년고용",
+   "직업훈련",
+   "고용보험",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "keis-8635",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "한국의 고용구조 현황과 정책과제",
+  "authors": [
+   "신종각",
+   "이덕재",
+   "고재성",
+   "조민수"
+  ],
+  "published": "2022-07-01",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8635",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220715093753_6f3ef77ac0e3619e98159e9b6febf557.pdf&path=pblc&fn=%ED%95%9C%EA%B5%AD%EC%9D%98+%EA%B3%A0%EC%9A%A9%EA%B5%AC%EC%A1%B0+%ED%98%84%ED%99%A9%EA%B3%BC+%EC%A0%95%EC%B1%85%EA%B3%BC%EC%A0%9C.pdf&sn=8635&fsn=18491&ty=P",
+  "matched": [
+   "청년고용",
+   "고령자",
+   "고용형태",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8634",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "직업훈련과 기업 내 임금성과",
+  "authors": [
+   "김두순"
+  ],
+  "published": "2022-07-01",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8634",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220701182240_3dc4876f3f08201c7c76cb71fa1da439.pdf&path=pblc&fn=%EC%A7%81%EC%97%85%ED%9B%88%EB%A0%A8%EA%B3%BC+%EA%B8%B0%EC%97%85+%EB%82%B4+%EC%9E%84%EA%B8%88%EC%84%B1%EA%B3%BC.pdf&sn=8634&fsn=18376&ty=P",
+  "matched": [
+   "임금",
+   "직업훈련"
+  ]
+ },
+ {
+  "id": "keis-8633",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "디지털 일자리와 고용: 데이터 산업을 중심으로",
+  "authors": [
+   "이정아",
+   "김수현",
+   "이시균",
+   "한수연"
+  ],
+  "published": "2022-07-01",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8633",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220701175602_4f4adcbf8c6f66dcfc8a3282ac2bf10a.pdf&path=pblc&fn=%EB%94%94%EC%A7%80%ED%84%B8+%EC%9D%BC%EC%9E%90%EB%A6%AC%EC%99%80+%EA%B3%A0%EC%9A%A9-%EB%8D%B0%EC%9D%B4%ED%84%B0+%EC%82%B0%EC%97%85%EC%9D%84+%EC%A4%91%EC%8B%AC%EC%9C%BC%EB%A1%9C.pdf&sn=8633&fsn=18373&ty=P",
+  "matched": [
+   "임금",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8632",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "40대 노동시장 분석과 정책과제",
+  "authors": [
+   "조민수"
+  ],
+  "published": "2022-07-01",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8632",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220701174732_51ef186e18dc00c2d31982567235c559.pdf&path=pblc&fn=40%EB%8C%80+%EB%85%B8%EB%8F%99%EC%8B%9C%EC%9E%A5+%EB%B6%84%EC%84%9D%EA%B3%BC+%EC%A0%95%EC%B1%85%EA%B3%BC%EC%A0%9C.pdf&sn=8632&fsn=18372&ty=P",
+  "matched": [
+   "일자리정책"
+  ]
  },
  {
   "id": "kli-9744",
@@ -45339,6 +47024,44 @@
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=35452CEA7AD22D96492588710027CF01_0.pdf&fileNameOrg=기초연금 도입이 노인의 노동공급에 미치는 영향.pdf&filePath1=jsphome/DATA/pblctList/issue/35452CEA7AD22D96492588710027CF01",
   "matched": [
    "근로시간",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8614",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "지역일자리사업 성과분석 연구",
+  "authors": [
+   "이재성"
+  ],
+  "published": "2022-06-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8614",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220630172642_ffeabd223de0d4eacb9a3e6e53e5448d.pdf&path=pblc&fn=%EC%A7%80%EC%97%AD%EC%9D%BC%EC%9E%90%EB%A6%AC%EC%82%AC%EC%97%85+%EC%84%B1%EA%B3%BC%EB%B6%84%EC%84%9D+%EC%97%B0%EA%B5%AC.pdf&sn=8614&fsn=18356&ty=P",
+  "matched": [
+   "지역고용",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8612",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "지역-산업 고용위기 모니터링 지표체계 연구",
+  "authors": [
+   "김수진"
+  ],
+  "published": "2022-06-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8612",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220630171048_f0e52b27a7a5d6a1a87373dffa53dbe5.pdf&path=pblc&fn=%EC%A7%80%EC%97%AD-%EC%82%B0%EC%97%85+%EA%B3%A0%EC%9A%A9%EC%9C%84%EA%B8%B0+%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81+%EC%A7%80%ED%91%9C%EC%B2%B4%EA%B3%84+%EC%97%B0%EA%B5%AC.pdf&sn=8612&fsn=18352&ty=P",
+  "matched": [
+   "지역고용",
    "일자리정책"
   ]
  },
@@ -45414,6 +47137,110 @@
   ]
  },
  {
+  "id": "keis-8574",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "DW행정DB를 이용한 고용서비스 효과 분석",
+  "authors": [
+   "박진희",
+   "이시균",
+   "정재현",
+   "이정아",
+   "강민정",
+   "한수연",
+   "최영섭"
+  ],
+  "published": "2022-06-24",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8574",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220624102455_ec5aa0b7846082a2415f0902f0da88f2.pdf&path=pblc&fn=07.%ED%96%89%EC%A0%95%EC%9E%90%EB%A3%8C%EB%A5%BC+%EC%9D%B4%EC%9A%A9%ED%95%9C+%EA%B3%A0%EC%9A%A9%EC%84%9C%EB%B9%84%EC%8A%A4%EC%A0%95%EC%B1%85+%ED%9A%A8%EA%B3%BC%EB%B6%84%EC%84%9D%28DW+%ED%96%89%EC%A0%95%EC%9E%90%EB%A3%8C+%EB%B6%84%EC%84%9D+%EC%8B%9C%EB%A6%AC%EC%A6%88%29.pdf&sn=8574&fsn=18316&ty=P",
+  "matched": [
+   "청년고용",
+   "고용서비스",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8573",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "디지털 기술혁신을 반영한 장기 인력수요 전망 2020-2035",
+  "authors": [
+   "박진희",
+   "정재현",
+   "김수현",
+   "홍현균",
+   "정순기",
+   "방글",
+   "공정승",
+   "이혜연",
+   "김영달",
+   "허재준",
+   "정현준"
+  ],
+  "published": "2022-06-24",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8573",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220624102004_647bba344396e7c8170902bcf2e15551.pdf&path=pblc&fn=03.%EB%94%94%EC%A7%80%ED%84%B8%EA%B8%B0%EC%88%A0%ED%98%81%EC%8B%A0%EC%9D%84+%EB%B0%98%EC%98%81%ED%95%9C+%EC%9E%A5%EA%B8%B0+%EC%9D%B8%EB%A0%A5%EC%88%98%EC%9A%94+%EC%A0%84%EB%A7%9D+2020-2035.pdf&sn=8573&fsn=18314&ty=P",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8572",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "디지털 저탄소전환을 반영한 장기 인력수요 전망(2020-2035)",
+  "authors": [
+   "박진희",
+   "정재현",
+   "김수현",
+   "홍현균",
+   "정순기",
+   "방글",
+   "공정승",
+   "이혜연",
+   "김영달",
+   "이용호",
+   "정은미",
+   "허재준",
+   "옥우석"
+  ],
+  "published": "2022-06-24",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8572",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220624101501_f0adc8838f4bdedde4ec2cfad0515589.pdf&path=pblc&fn=02.%EB%94%94%EC%A7%80%ED%84%B8%26middot%3B%EC%A0%80%ED%83%84%EC%86%8C%EC%A0%84%ED%99%98%EC%9D%84+%EB%B0%98%EC%98%81%ED%95%9C+%EC%9E%A5%EA%B8%B0+%EC%9D%B8%EB%A0%A5%EC%88%98%EC%9A%94+%EC%A0%84%EB%A7%9D.pdf&sn=8572&fsn=18312&ty=P",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8552",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "직업가치관검사 개정 2차 년도 연구보고서 -규준개발 및 타당성 검증을 중심으로-",
+  "authors": [
+   "서현주",
+   "김강호",
+   "조아름",
+   "박은규"
+  ],
+  "published": "2022-06-22",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8552",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220622154751_67e103b0761e60683e83c559be18d40c.pdf&path=pblc&fn=%28%EC%B5%9C%EC%A2%85%EC%9D%B8%EC%87%84%EB%B3%B8%29+%EC%A7%81%EC%97%85%EA%B0%80%EC%B9%98%EA%B4%80%EA%B2%80%EC%82%AC+%EA%B0%9C%EC%A0%95+2%EC%B0%A8%EB%85%84%EB%8F%84+%EC%97%B0%EA%B5%AC%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf&sn=8552&fsn=18292&ty=P",
+  "matched": []
+ },
+ {
   "id": "bok-10071186",
   "org": "bok",
   "board": "bok-note",
@@ -45467,6 +47294,51 @@
   "matched": []
  },
  {
+  "id": "keis-8538",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "한국적 고용안전망 제도화 방안 연구",
+  "authors": [
+   "이덕재",
+   "이호근",
+   "손정순"
+  ],
+  "published": "2022-06-17",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8538",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220617184102_c81e728d9d4c2f636f067f89cc14862c.pdf&path=pblc&fn=%ED%95%9C%EA%B5%AD%EC%A0%81+%EA%B3%A0%EC%9A%A9%EC%95%88%EC%A0%84%EB%A7%9D+%EC%A0%9C%EB%8F%84%ED%99%94+%EB%B0%A9%EC%95%88+%EC%97%B0%EA%B5%AC.pdf&sn=8538&fsn=18264&ty=P",
+  "matched": [
+   "고용서비스",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8537",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "2020 고령화연구패널(KLoSA) 기초분석보고서",
+  "authors": [
+   "김경희",
+   "박진아",
+   "이선호",
+   "이태현"
+  ],
+  "published": "2022-06-17",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8537",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220617182939_02e74f10e0327ad868d138f2b4fdd6f0.pdf&path=pblc&fn=2020+%EA%B3%A0%EB%A0%B9%ED%99%94%EC%97%B0%EA%B5%AC%ED%8C%A8%EB%84%90%28KLoSA%29+%EA%B8%B0%EC%B4%88%EB%B6%84%EC%84%9D%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf&sn=8537&fsn=18262&ty=P",
+  "matched": [
+   "고령자",
+   "임금",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "keis-8536",
   "org": "keis",
   "board": "keis-trend",
@@ -45481,6 +47353,63 @@
   "matched": [
    "직업훈련",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8532",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "디지털 저탄소 전환에 따른 인력수요 구조 변화 분석 -FGI를 중심으로-",
+  "authors": [
+   "정순기",
+   "홍현균",
+   "김수현",
+   "방글",
+   "공정승",
+   "이혜연",
+   "김영달"
+  ],
+  "published": "2022-06-17",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8532",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220617144155_060ad92489947d410d897474079c1477.pdf&path=pblc&fn=220526_%ED%95%9C%EA%B5%AD%EA%B3%A0%EC%9A%A9%EC%A0%95%EB%B3%B4%EC%9B%90_5.%EB%94%94%EC%A7%80%ED%84%B8+%EB%B0%8F+%EC%A0%80%ED%83%84%EC%86%8C+%EC%A0%84%ED%99%98-FGI_%ED%91%9C%EC%A7%80%ED%95%A9%EB%B3%B8+%EC%9B%90%EB%B3%B8.pdf&sn=8532&fsn=18252&ty=P",
+  "matched": []
+ },
+ {
+  "id": "keis-8512",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "중장기 인력수급 전망 2020~2030",
+  "authors": [
+   "박진희",
+   "정재현",
+   "김수현",
+   "홍현균",
+   "김새봄",
+   "정순기",
+   "방글",
+   "공정승",
+   "이혜연",
+   "김영달",
+   "이용호",
+   "권혁진",
+   "김종숙",
+   "이학기",
+   "홍성민",
+   "윤문희"
+  ],
+  "published": "2022-06-16",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8512",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220616172324_f8c1f23d6a8d8d7904fc0ea8e066b3bb.pdf&path=pblc&fn=1.+%EC%A4%91%EC%9E%A5%EA%B8%B0+%EC%9D%B8%EB%A0%A5%EC%88%98%EA%B8%89%EC%A0%84%EB%A7%9D+0520%28%ED%8E%B8%EC%A7%91%29-R6-%ED%91%9C%EC%A7%80%ED%95%A9%EB%B3%B8-%EC%9B%90%EB%B3%B8.pdf&sn=8512&fsn=18233&ty=P",
+  "matched": [
+   "여성고용",
+   "일자리정책",
+   "인력수급"
   ]
  },
  {
@@ -45941,6 +47870,29 @@
   "matched": []
  },
  {
+  "id": "keis-8472",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "지역고용주체 역량강화를 위한 교육 운영 및 개선 방안Ⅱ",
+  "authors": [
+   "이서정",
+   "이성재",
+   "이혜선",
+   "길혜지",
+   "이현민"
+  ],
+  "published": "2022-05-02",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8472",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220502165528_d93ed5b6db83be78efb0d05ae420158e.pdf&path=pblc&fn=%EC%A7%80%EC%97%AD%EA%B3%A0%EC%9A%A9%EC%A3%BC%EC%B2%B4+%EC%97%AD%EB%9F%89%EA%B0%95%ED%99%94%EB%A5%BC+%EC%9C%84%ED%95%9C+%EA%B5%90%EC%9C%A1+%EC%9A%B4%EC%98%81+%EB%B0%8F+%EA%B0%9C%EC%84%A0+%EB%B0%A9%EC%95%88+%E2%85%A1.pdf&sn=8472&fsn=18131&ty=P",
+  "matched": [
+   "지역고용",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-9689",
   "org": "kli",
   "board": "kli-wage",
@@ -46125,6 +48077,66 @@
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=10070269&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=3&programType=newsData&menuNo=200560&oldMenuNo=200560",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/918a9365a5ae4347b2cbac2ae241080a/1/202204281031575690.hwp",
   "matched": []
+ },
+ {
+  "id": "keis-8434",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "디지털 뉴딜 직업 발굴 및 미래 직업역량",
+  "authors": [
+   "김동규",
+   "최화영"
+  ],
+  "published": "2022-04-27",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8434",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220428143213_621461af90cadfdaf0e8d4cc25129f91.pdf&path=pblc&fn=%ED%95%9C%EA%B5%AD%EA%B3%A0%EC%9A%A9%EC%A0%95%EB%B3%B4%EC%9B%90-%EB%94%94%EC%A7%80%ED%84%B8+%EB%89%B4%EB%94%9C+%EC%A7%81%EC%97%85+%EB%B0%9C%EA%B5%B4+%EB%B0%8F+%EB%AF%B8%EB%9E%98+%EC%A7%81%EC%97%85%EC%97%AD%EB%9F%89-%EB%82%B4%EC%A7%80%280428%EC%B5%9C%EC%A2%85%29.pdf&sn=8434&fsn=18071&ty=P",
+  "matched": [
+   "직업훈련"
+  ]
+ },
+ {
+  "id": "keis-8433",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "인구구조 변화가 인력수급에 미치는 영향",
+  "authors": [
+   "정재현",
+   "박진희",
+   "신우진"
+  ],
+  "published": "2022-04-27",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8433",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220427095700_67e103b0761e60683e83c559be18d40c.pdf&path=pblc&fn=%EC%9D%B8%EA%B5%AC%EA%B5%AC%EC%A1%B0+%EB%B3%80%ED%99%94%EA%B0%80+%EC%9D%B8%EB%A0%A5%EC%88%98%EA%B8%89%EC%97%90+%EB%AF%B8%EC%B9%98%EB%8A%94+%EC%98%81%ED%96%A5.pdf&sn=8433&fsn=18054&ty=P",
+  "matched": [
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "keis-8432",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "지능형 로봇 산업 인력수요 전망",
+  "authors": [
+   "정재현"
+  ],
+  "published": "2022-04-27",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8432",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220427095348_06997f04a7db92466a2baa6ebc8b872d.pdf&path=pblc&fn=%EC%A7%80%EB%8A%A5%ED%98%95+%EB%A1%9C%EB%B4%87+%EC%82%B0%EC%97%85+%EC%9D%B8%EB%A0%A5%EC%88%98%EC%9A%94+%EC%A0%84%EB%A7%9D.pdf&sn=8432&fsn=18053&ty=P",
+  "matched": [
+   "산업별고용",
+   "일자리정책",
+   "인력수급"
+  ]
  },
  {
   "id": "kli-9698",
@@ -46317,6 +48329,29 @@
   "matched": []
  },
  {
+  "id": "keis-8372",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "청년패널2007 14차(2020) 조사 기초분석보고서",
+  "authors": [
+   "권재혁",
+   "양수경",
+   "이승윤",
+   "박세정"
+  ],
+  "published": "2022-04-15",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8372",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220427143208_8f468c873a32bb0619eaeb2050ba45d1.pdf&path=pblc&fn=%EC%B2%AD%EB%85%84%ED%8C%A8%EB%84%902007+14%EC%B0%A8%282020%29+%EC%A1%B0%EC%82%AC+%EA%B8%B0%EC%B4%88%EB%B6%84%EC%84%9D%EB%B3%B4%EA%B3%A0%EC%84%9C_%EC%B5%9C%EC%A2%85.pdf&sn=8372&fsn=18058&ty=P",
+  "matched": [
+   "청년고용",
+   "직업훈련",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "bok-10070042",
   "org": "bok",
   "board": "bok-assess",
@@ -46367,6 +48402,31 @@
   "matched": []
  },
  {
+  "id": "keis-8352",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "중장년 고용서비스 인프라 개선방안",
+  "authors": [
+   "김준영",
+   "김진성",
+   "이해춘",
+   "김기덕",
+   "주수인",
+   "최재문"
+  ],
+  "published": "2022-04-12",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8352",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220412184924_1f4477bad7af3616c1f933a02bfabe4e.pdf&path=pblc&fn=%EC%A4%91%EC%9E%A5%EB%85%84+%EA%B3%A0%EC%9A%A9%EC%84%9C%EB%B9%84%EC%8A%A4+%EC%9D%B8%ED%94%84%EB%9D%BC+%EA%B0%9C%EC%84%A0%EB%B0%A9%EC%95%88.pdf&sn=8352&fsn=17952&ty=P",
+  "matched": [
+   "고령자",
+   "고용서비스",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kiet-is772",
   "org": "kiet",
   "board": "kiet-issue",
@@ -46383,6 +48443,25 @@
   "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=772&skey=&sval=&pg=4&pp=30",
   "file_url": null,
   "matched": []
+ },
+ {
+  "id": "keis-8332",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "2020 한국의 직업정보",
+  "authors": [
+   "최기성",
+   "이은수"
+  ],
+  "published": "2022-04-07",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8332",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220407140746_f3f27a324736617f20abbf2ffd806f6d.pdf&path=pblc&fn=%EC%B5%9C%EC%A2%85_%28%EB%B3%B8%EB%AC%B8%292020+%ED%95%9C%EA%B5%AD%EC%9D%98+%EC%A7%81%EC%97%85%EC%A0%95%EB%B3%B4.pdf&sn=8332&fsn=17913&ty=P",
+  "matched": [
+   "일자리정책"
+  ]
  },
  {
   "id": "kiet-is770",
@@ -46422,6 +48501,29 @@
   "matched": []
  },
  {
+  "id": "keis-8312",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "고령자 고용정책 해외사례 연구",
+  "authors": [
+   "조성은",
+   "안준기",
+   "김민서",
+   "이주원"
+  ],
+  "published": "2022-04-05",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8312",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220510151135_0f96613235062963ccde717b18f97592.pdf&path=pblc&fn=%EA%B3%A0%EB%A0%B9%EC%9E%90+%EA%B3%A0%EC%9A%A9%EC%A0%95%EC%B1%85+%ED%95%B4%EC%99%B8%EC%82%AC%EB%A1%80+%EC%97%B0%EA%B5%AC.pdf&sn=8312&fsn=18171&ty=P",
+  "matched": [
+   "고령자",
+   "고용서비스",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "bok-10069922",
   "org": "bok",
   "board": "bok-research",
@@ -46452,6 +48554,29 @@
   "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=769&skey=&sval=&pg=4&pp=30",
   "file_url": null,
   "matched": []
+ },
+ {
+  "id": "keis-8292",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "지방소멸 위기 극복을 위한 지역 일자리 사례와 모델",
+  "authors": [
+   "이상호",
+   "서룡",
+   "김필",
+   "박선미",
+   "황규성"
+  ],
+  "published": "2022-04-01",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8292",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220401145902_54a367d629152b720749e187b3eaa11b.pdf&path=pblc&fn=%EC%A7%80%EB%B0%A9%EC%86%8C%EB%A9%B8+%EC%9C%84%EA%B8%B0+%EA%B7%B9%EB%B3%B5%EC%9D%84+%EC%9C%84%ED%95%9C+%EC%A7%80%EC%97%AD+%EC%9D%BC%EC%9E%90%EB%A6%AC+%EC%82%AC%EB%A1%80%EC%99%80+%EB%AA%A8%EB%8D%B8_%EC%B5%9C%EC%A2%85.pdf&sn=8292&fsn=17851&ty=P",
+  "matched": [
+   "지역고용",
+   "일자리정책"
+  ]
  },
  {
   "id": "bok-10076069",
@@ -46577,6 +48702,46 @@
   ]
  },
  {
+  "id": "keis-8272",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "2020 국내외 직업비교분석을 통한 신직업 연구(문화예술분야-2차 연도 연구)",
+  "authors": [
+   "김중진",
+   "김동규",
+   "최영순",
+   "최화영"
+  ],
+  "published": "2022-03-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8272",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220407134738_38db3aed920cf82ab059bfccbd02be6a.pdf&path=pblc&fn=7%EC%B0%A8%ED%8E%B8%EC%A7%91-%5B220310-%EC%A0%84%EC%9A%B0%EA%B5%90%EC%A0%95%ED%8C%8C%EC%9D%BC%5D2021%EC%8B%A0%EC%A7%81%EC%97%85%EB%B3%B4%EA%B3%A0%EC%84%9C%280328v2%29.pdf&sn=8272&fsn=17911&ty=P",
+  "matched": [
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "keis-8192",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "대학 취업 지원 서비스 이용 현황과 성과",
+  "authors": [
+   "천영민 외 5명"
+  ],
+  "published": "2022-03-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8192",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220404154603_ccb1d45fb76f7c5a0bf619f979c6cf36.pdf&path=pblc&fn=%EB%8C%80%ED%95%99+%EC%B7%A8%EC%97%85%EC%A7%80%EC%9B%90%EC%84%9C%EB%B9%84%EC%8A%A4+%EC%9D%B4%EC%9A%A9+%ED%98%84%ED%99%A9%EA%B3%BC+%EC%84%B1%EA%B3%BC.pdf&sn=8192&fsn=17871&ty=P",
+  "matched": [
+   "고용서비스"
+  ]
+ },
+ {
   "id": "bok-10069778",
   "org": "bok",
   "board": "bok-research",
@@ -46607,6 +48772,49 @@
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?nttId=10069751&searchCnd=1&searchKwd=&depth2=201157&depth3=200433&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200433&pageIndex=2&programType=newsData&menuNo=200433&oldMenuNo=200433",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/9890a9505727328b7dc7bd0c1532157a/1/202203290231022930.pdf",
   "matched": []
+ },
+ {
+  "id": "keis-8253",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "2021년 주요과제 성과 보고서",
+  "authors": [
+   "한국고용정보원"
+  ],
+  "published": "2022-03-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8253",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220329144923_430c3626b879b4005d41b8a46172e0c0.pdf&path=pblc&fn=2021%EB%85%84%EB%8F%84+%EC%A3%BC%EC%9A%94%EA%B3%BC%EC%A0%9C+%EC%84%B1%EA%B3%BC+%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf&sn=8253&fsn=17813&ty=P",
+  "matched": [
+   "고령자",
+   "고용서비스",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "keis-8252",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "공공고용서비스 국민체감도 평가시스템 개발",
+  "authors": [
+   "양지윤",
+   "노승민",
+   "김은영"
+  ],
+  "published": "2022-03-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8252",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220329142720_bbcbff5c1f1ded46c25d28119a85c6c2.pdf&path=pblc&fn=4_%EA%B3%B5%EA%B3%B5%EA%B3%A0%EC%9A%A9%EC%84%9C%EB%B9%84%EC%8A%A4+%EA%B5%AD%EB%AF%BC%EC%B2%B4%EA%B0%90%EB%8F%84+%ED%8F%89%EA%B0%80%EC%8B%9C%EC%8A%A4%ED%85%9C+%EA%B0%9C%EB%B0%9C-%EB%B3%B8%EB%AC%B8.pdf&sn=8252&fsn=17811&ty=P",
+  "matched": [
+   "청년고용",
+   "고용서비스",
+   "일자리정책"
+  ]
  },
  {
   "id": "bok-10069727",
@@ -46659,6 +48867,28 @@
   ]
  },
  {
+  "id": "keis-8213",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "고령자 노동시장분석",
+  "authors": [
+   "안준기",
+   "김은석",
+   "조성은"
+  ],
+  "published": "2022-03-25",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8213",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220519140913_e836d813fd184325132fca8edcdfb40e.pdf&path=pblc&fn=%EA%B3%A0%EB%A0%B9%EC%9E%90+%EB%85%B8%EB%8F%99%EC%8B%9C%EC%9E%A5+%EB%B6%84%EC%84%9D.pdf&sn=8213&fsn=18191&ty=P",
+  "matched": [
+   "고령자",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "keis-8212",
   "org": "keis",
   "board": "keis-trend",
@@ -46674,6 +48904,55 @@
    "임금",
    "근로시간",
    "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8153",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "세대간 일자리 대체관계 및 상생을 위한 정책방향",
+  "authors": [
+   "지은정",
+   "오학수",
+   "정미경",
+   "손동기"
+  ],
+  "published": "2022-03-24",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8153",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220503102108_757b505cfd34c64c85ca5b5690ee5293.pdf&path=pblc&fn=%EA%B8%B0%EB%B3%B8%EC%97%B0%EA%B5%AC+21-05+%EC%84%B8%EB%8C%80%EA%B0%84+%EC%9D%BC%EC%9E%90%EB%A6%AC+%EB%8C%80%EC%B2%B4%EA%B4%80%EA%B3%84+%EB%B0%8F+%EC%83%81%EC%83%9D%EC%9D%84+%EC%9C%84%ED%95%9C+%EC%A0%95%EC%B1%85%EB%B0%A9%ED%96%A5.pdf&sn=8153&fsn=18151&ty=P",
+  "matched": [
+   "고령자",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-8152",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "인구구조 변화에 따른 고령자 고용촉진 제도 현황 및 개선 방안",
+  "authors": [
+   "김은석",
+   "안준기",
+   "조성은",
+   "지은정",
+   "김진관",
+   "김민서",
+   "황기돈",
+   "전용일",
+   "박수경"
+  ],
+  "published": "2022-03-23",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8152",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220324180801_2838023a778dfaecdc212708f721b788.pdf&path=pblc&fn=20220324+%EC%9D%B8%EA%B5%AC%EA%B5%AC%EC%A1%B0+%EB%B3%80%ED%99%94%EC%97%90+%EB%94%B0%EB%A5%B8+%EA%B3%A0%EB%A0%B9%EC%9E%90+%EA%B3%A0%EC%9A%A9%EC%B4%89%EC%A7%84+%EC%A0%9C%EB%8F%84+%ED%98%84%ED%99%A9+%EB%B0%8F+%EA%B0%9C%EC%84%A0+%EB%B0%A9%EC%95%88%28%EC%88%98%EC%A0%95%29.pdf&sn=8152&fsn=17732&ty=P",
+  "matched": [
+   "고령자",
    "일자리정책"
   ]
  },
@@ -46954,6 +49233,29 @@
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0002359/view.do?nttId=10069214&searchCnd=1&searchKwd=&depth2=201157&depth3=200066&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200066&pageIndex=1&programType=newsData&menuNo=200066&oldMenuNo=200066",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/de19592b44dbb0940a55c9c803004313/1/202203020447483330.pdf",
   "matched": []
+ },
+ {
+  "id": "keis-8092",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "빅데이터와 고용행정DB를 이용한 지역-산업 고용위기 모니터링 지표체계 연구",
+  "authors": [
+   "김수진",
+   "박성근",
+   "양준석"
+  ],
+  "published": "2022-02-23",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8092",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220223170607_8d6dc35e506fc23349dd10ee68dabb64.pdf&path=pblc&fn=%EC%A7%80%EC%97%AD-%EC%82%B0%EC%97%85+%EA%B3%A0%EC%9A%A9%EC%9C%84%EA%B8%B0+%EB%AA%A8%EB%8B%88%ED%84%B0%EB%A7%81+%EC%A7%80%ED%91%9C%EC%B2%B4%EA%B3%84+%EC%97%B0%EA%B5%AC.pdf&sn=8092&fsn=17612&ty=P",
+  "matched": [
+   "근로시간",
+   "고용보험",
+   "지역고용",
+   "일자리정책"
+  ]
  },
  {
   "id": "bok-10069168",
@@ -47742,6 +50044,27 @@
   "matched": []
  },
  {
+  "id": "keis-8054",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "미래 유망 신직업 발굴 및 국내 활성화 방안 연구",
+  "authors": [
+   "김동규",
+   "김중진",
+   "최영순",
+   "신지선"
+  ],
+  "published": "2022-01-03",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=8054",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20220103141436_632cee946db83e7a52ce5e8d6f0fed35.pdf&path=pblc&fn=%EB%AF%B8%EB%9E%98%EC%9C%A0%EB%A7%9D+%EC%8B%A0%EC%A7%81%EC%97%85+%EB%B0%9C%EA%B5%B4+%EB%B0%8F+%EA%B5%AD%EB%82%B4+%ED%99%9C%EC%84%B1%ED%99%94+%EB%B0%A9%EC%95%88+%EC%97%B0%EA%B5%AC-%EC%B5%9C%EC%A2%85+%282%29.pdf&sn=8054&fsn=17576&ty=P",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "bok-10068315",
   "org": "bok",
   "board": "bok-research",
@@ -48487,6 +50810,880 @@
   ]
  },
  {
+  "id": "kli-9690",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "장치산업 인적경쟁력 강화방안 연구-철강산업을 중심으로",
+  "authors": [
+   "이성희",
+   "노용진",
+   "임무송",
+   "진숙경"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9690&mid=a10102060000&nPage=27&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=41C797C84E0AF1444925883300176D98_4.pdf&fileNameOrg=장치산업 인적경쟁력 강화방안 연구-철강산업을 중심으로_web.pdf&filePath1=jsphome/DATA/pblctList/issue/41C797C84E0AF1444925883300176D98",
+  "matched": [
+   "고령자",
+   "임금",
+   "근로시간",
+   "직업훈련",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kli-9688",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "비표준고용의 유형과 안전보건 과제",
+  "authors": [
+   "박종식",
+   "박고은",
+   "신희주",
+   "이승윤"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9688&mid=a10102060000&nPage=27&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=84FD3FA206451B2249258832001BC94C_1.pdf&fileNameOrg=비표준고용의 유형과 안전보건 과제_web.pdf&filePath1=jsphome/DATA/pblctList/issue/84FD3FA206451B2249258832001BC94C",
+  "matched": [
+   "임금",
+   "근로시간",
+   "고용형태",
+   "노사관계",
+   "직업훈련",
+   "지역고용",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kli-9687",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "저출산이 여성 노동시장에 미치는 영향",
+  "authors": [
+   "강신혁"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9687&mid=a10102060000&nPage=27&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=E3B47BCDE807CECC49258832001B553F_1.pdf&fileNameOrg=저출산이 여성 노동시장에 미치는 영향_web.pdf&filePath1=jsphome/DATA/pblctList/issue/E3B47BCDE807CECC49258832001B553F",
+  "matched": [
+   "여성고용",
+   "임금",
+   "근로시간",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9686",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "자영업자의 코로나19 영향 및 정부정책에 대한 평가",
+  "authors": [
+   "홍민기",
+   "이승호",
+   "오상봉"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9686&mid=a10102060000&nPage=27&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=FA6D2361C3142F444925882C0034D7D5_2.pdf&fileNameOrg=자영업자의 코로나19 영향 및 정부정책에 대한 평가_web.pdf&filePath1=jsphome/DATA/pblctList/issue/FA6D2361C3142F444925882C0034D7D5",
+  "matched": [
+   "임금",
+   "고용형태",
+   "고용서비스",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9685",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "고용 변동성이 가구소득 변동성 및 소비에 미치는 영향",
+  "authors": [
+   "장인성"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9685&mid=a10102060000&nPage=27&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=2B55FAFCCD3A93C44925882C00345897_2.pdf&fileNameOrg=고용 변동성이 가구소득 변동성 및 소비에 미치는 영향_web.pdf&filePath1=jsphome/DATA/pblctList/issue/2B55FAFCCD3A93C44925882C00345897",
+  "matched": [
+   "청년고용",
+   "근로시간",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9684",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "독일 근로시간법제의 현황과 변화",
+  "authors": [
+   "김근주",
+   "박귀천",
+   "오상호",
+   "한인상",
+   "황수옥"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9684&mid=a10102060000&nPage=27&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=27E888249C40EF6E4925882C000BCF26_3.pdf&fileNameOrg=독일 근로시간법제의 현황과 변화_web.pdf&filePath1=jsphome/DATA/pblctList/issue/27E888249C40EF6E4925882C000BCF26",
+  "matched": [
+   "근로시간",
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kli-9683",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "경영평가제도 쟁점 및 개선방안",
+  "authors": [
+   "정동관",
+   "김경근",
+   "김철",
+   "이승협",
+   "이종욱",
+   "최은석",
+   "김준현",
+   "박용석",
+   "이민창",
+   "박석희",
+   "박수정"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9683&mid=a10102060000&nPage=27&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=50D1EB081A467F534925882C000B4813_3.pdf&fileNameOrg=경영평가제도 쟁점 및 개선방안_web.pdf&filePath1=jsphome/DATA/pblctList/issue/50D1EB081A467F534925882C000B4813",
+  "matched": [
+   "임금",
+   "직업훈련"
+  ]
+ },
+ {
+  "id": "kli-9682",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "동남아시아 주요국 직업훈련 제도 및 동남아시아 진출기업의 직업훈련 현황 연구",
+  "authors": [
+   "오선정",
+   "김주섭"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9682&mid=a10102060000&nPage=27&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=E8654D65023D4F374925882C000AB290_3.pdf&fileNameOrg=동남아시아 주요국 직업훈련 제도 및 동남아시아 진출기업의 직업훈련 현황 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/E8654D65023D4F374925882C000AB290",
+  "matched": [
+   "외국인력",
+   "노사관계",
+   "직업훈련",
+   "고용서비스",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9681",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "ASEAN 국가 간 직업자격의 통용성 강화방안 연구",
+  "authors": [
+   "김주섭",
+   "조정윤",
+   "김민규",
+   "정동열"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9681&mid=a10102060000&nPage=27&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=A0118BAAC9F4D87B4925882C000A37FF_3.pdf&fileNameOrg=ASEAN 국가 간 직업자격의 통용성 강화방안 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/A0118BAAC9F4D87B4925882C000A37FF",
+  "matched": [
+   "외국인력",
+   "직업훈련",
+   "산업별고용",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kli-9679",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "비대면 근무방식의 출현과 과제",
+  "authors": [
+   "노세리",
+   "권현지",
+   "노용진",
+   "박은연",
+   "정선욱",
+   "김미희"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9679&mid=a10102060000&nPage=27&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=0666973E215EAD544925882B0018716A_3.pdf&fileNameOrg=비대면 근무방식의 출현과 과제_web.pdf&filePath1=jsphome/DATA/pblctList/issue/0666973E215EAD544925882B0018716A",
+  "matched": [
+   "근로시간",
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kli-9678",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "일･생활 균형제도의 법체계 현황과 정책방향",
+  "authors": [
+   "김근주",
+   "방준식",
+   "이은주",
+   "강주리"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9678&mid=a10102060000&nPage=28&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=AF33735EA35843E149258827007F6DEC_3.pdf&fileNameOrg=일생활균형제도의 현황과 정책 방향_web.pdf&filePath1=jsphome/DATA/pblctList/issue/AF33735EA35843E149258827007F6DEC",
+  "matched": [
+   "여성고용",
+   "임금",
+   "근로시간",
+   "고용형태",
+   "고용서비스",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9677",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "채용에 관한 법적 규율과 제도적 개선 사항",
+  "authors": [
+   "김근주",
+   "강신일",
+   "김명수",
+   "이수연"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9677&mid=a10102060000&nPage=28&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=9D9C11C3928AD40149258823001F58F3_2.pdf&fileNameOrg=채용에 관한 법적 규율과 제도적 개선 사항_web.pdf&filePath1=jsphome/DATA/pblctList/issue/9D9C11C3928AD40149258823001F58F3",
+  "matched": [
+   "고용형태",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9675",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "언택트 시대 한국형 인사관리의 새로운 패러다임",
+  "authors": [
+   "오계택",
+   "유규창",
+   "이혜정"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9675&mid=a10102060000&nPage=28&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=B17ED3CDEB5374B94925881C00320D41_0.pdf&fileNameOrg=언택트 시대 한국형 인사관리의 새로운 패러다임_web.pdf&filePath1=jsphome/DATA/pblctList/issue/B17ED3CDEB5374B94925881C00320D41",
+  "matched": [
+   "노사관계",
+   "직업훈련",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9674",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "지역사랑상품권(지역화폐) 도입의 지역경제 영향과 정책 시사점: 지역고용 측면을 중심으로",
+  "authors": [
+   "강동우",
+   "최 충"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9674&mid=a10102060000&nPage=28&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=3A0FE8D6B19B045F4925881C003101E9_2.pdf&fileNameOrg=지역사랑상품권(지역화폐) 도입의 지역경제 영향과 정책 시사점_지역고용 측면을 중심으로_web.pdf&filePath1=jsphome/DATA/pblctList/issue/3A0FE8D6B19B045F4925881C003101E9",
+  "matched": [
+   "임금",
+   "지역고용",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9671",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "실·지불근로시간 실태와 격차 완화",
+  "authors": [
+   "정진호",
+   "이성희 조태형"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9671&mid=a10102060000&nPage=28&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=7425F1E711D5886649258816002FAEEB_1.pdf&fileNameOrg=실 지불근로시간 실태와 격차 완화_web.pdf&filePath1=jsphome/DATA/pblctList/issue/7425F1E711D5886649258816002FAEEB",
+  "matched": [
+   "여성고용",
+   "임금",
+   "근로시간",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9670",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "수요독점, 소득분배와 총수요",
+  "authors": [
+   "홍민기"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9670&mid=a10102060000&nPage=28&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=98C900AD772E44B649258816002CECF3_3.pdf&fileNameOrg=수요독점 소득분배와 총수요_web.pdf&filePath1=jsphome/DATA/pblctList/issue/98C900AD772E44B649258816002CECF3",
+  "matched": [
+   "임금",
+   "노사관계",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9668",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "코로나19가 일터혁신에 미치는 영향",
+  "authors": [
+   "이장원",
+   "강혜정",
+   "전이영"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9668&mid=a10102060000&nPage=28&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=101552A2750B5C1D4925881300048174_1.pdf&fileNameOrg=코로나 19가 일터혁신에 미치는 영향_web.pdf&filePath1=jsphome/DATA/pblctList/issue/101552A2750B5C1D4925881300048174",
+  "matched": [
+   "임금",
+   "근로시간",
+   "노사관계",
+   "직업훈련",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9666",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "청년기 노동시장 상황이 삶에 미치는 영향",
+  "authors": [
+   "윤준현"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9666&mid=a10102060000&nPage=28&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=29F166F3CEB3BCC94925880F0012EBC6_0.pdf&fileNameOrg=청년기 노동시장 상황_web.pdf&filePath1=jsphome/DATA/pblctList/issue/29F166F3CEB3BCC94925880F0012EBC6",
+  "matched": [
+   "근로시간",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9665",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "경기침체와 청년·여성 노동시장",
+  "authors": [
+   "곽은혜"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9665&mid=a10102060000&nPage=28&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=64BD5A17A2CE29CF4925880F0011EDCA_1.pdf&fileNameOrg=경기침체와 청년여성_노동시장_web.pdf&filePath1=jsphome/DATA/pblctList/issue/64BD5A17A2CE29CF4925880F0011EDCA",
+  "matched": [
+   "청년고용",
+   "여성고용",
+   "임금",
+   "근로시간",
+   "고용형태",
+   "직업훈련",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9664",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "제조업에서의 경쟁과 고용",
+  "authors": [
+   "방형준"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9664&mid=a10102060000&nPage=28&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=37A7E7EAB6E2D05F4925880D00261312_2.pdf&fileNameOrg=제조업에서의 경쟁과 고용_web.pdf&filePath1=jsphome/DATA/pblctList/issue/37A7E7EAB6E2D05F4925880D00261312",
+  "matched": [
+   "임금",
+   "고용형태",
+   "노사관계",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9663",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "취업자로서 자영업자 연구",
+  "authors": [
+   "김영아",
+   "손연정",
+   "윤준현",
+   "홍정림"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9663&mid=a10102060000&nPage=29&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=9A89710F37F2FB8C4925880D000A6B85_2.pdf&fileNameOrg=취업자로서 자영업자 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/9A89710F37F2FB8C4925880D000A6B85",
+  "matched": [
+   "청년고용",
+   "고령자",
+   "여성고용",
+   "임금",
+   "직업훈련",
+   "고용서비스",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9662",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "노동시간과 건강",
+  "authors": [
+   "홍정림"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9662&mid=a10102060000&nPage=29&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=2AFF41E55ACD11F64925880D0008EE9F_2.pdf&fileNameOrg=노동시간과 건강_web.pdf&filePath1=jsphome/DATA/pblctList/issue/2AFF41E55ACD11F64925880D0008EE9F",
+  "matched": [
+   "임금",
+   "근로시간",
+   "노사관계",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9661",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "업종 수준의 직무체계 개발 및 활용연구",
+  "authors": [
+   "오계택",
+   "김봄이",
+   "송영욱",
+   "정호석",
+   "서한형",
+   "정현승",
+   "윤태일"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9661&mid=a10102060000&nPage=29&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=ED336D4059DB744E4925880C000D53BB_2.pdf&fileNameOrg=업종 수준의 직무체계 개발 및 활용연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/ED336D4059DB744E4925880C000D53BB",
+  "matched": [
+   "임금",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9660",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "출산의 소득탄력성-미시적 이론과 거시적 결과",
+  "authors": [
+   "강신혁",
+   "김선빈",
+   "홍재화",
+   "오준석"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9660&mid=a10102060000&nPage=29&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=290B7D708A24A8A94925880C000CD656_1.pdf&fileNameOrg=출산의 소득탄력성 미시적 이론과 거시적 결과_web.pdf&filePath1=jsphome/DATA/pblctList/issue/290B7D708A24A8A94925880C000CD656",
+  "matched": [
+   "여성고용",
+   "임금",
+   "근로시간",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9658",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "노동궤적과 건강불평등",
+  "authors": [
+   "김영아",
+   "곽은혜"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9658&mid=a10102060000&nPage=29&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=D18476F632E26BB449258809001A0E05_3.pdf&fileNameOrg=노동궤적과 건강불평등_web.pdf&filePath1=jsphome/DATA/pblctList/issue/D18476F632E26BB449258809001A0E05",
+  "matched": [
+   "청년고용",
+   "임금",
+   "근로시간",
+   "고용형태",
+   "노사관계",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9657",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "생애노동과 행복의 패널분석",
+  "authors": [
+   "안주엽",
+   "오선정",
+   "최세림",
+   "이승호",
+   "신선호"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9657&mid=a10102060000&nPage=29&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=860E4B4E230EF1B64925880900178DC0_0.pdf&fileNameOrg=생애노동과 행복의 패널분석.pdf&filePath1=jsphome/DATA/pblctList/issue/860E4B4E230EF1B64925880900178DC0",
+  "matched": [
+   "여성고용",
+   "임금",
+   "근로시간",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9656",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "주된 일자리 중고령층 노동시장 연구",
+  "authors": [
+   "남재량",
+   "김선빈",
+   "장용성",
+   "한종석"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9656&mid=a10102060000&nPage=29&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=0D4D6F182B2453DA492587FF0040E5E8_1.pdf&fileNameOrg=주된 일자리 중고령층 노동시장 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/0D4D6F182B2453DA492587FF0040E5E8",
+  "matched": [
+   "고령자",
+   "임금",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9655",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "대졸 청년들의 효과적인 노동시장 이행방안 연구 -고용서비스를 중심으로-",
+  "authors": [
+   "이성희",
+   "오선정"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9655&mid=a10102060000&nPage=29&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=2F4A903B7BFB7627492587FF004074C4_2.pdf&fileNameOrg=대졸 청년들의 효과적인 노동시장 이행방안 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/2F4A903B7BFB7627492587FF004074C4",
+  "matched": [
+   "청년고용",
+   "고용서비스",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
+  "id": "kli-9654",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "서비스산업 비공식 여성노동의 구조와 동학",
+  "authors": [
+   "조혁진",
+   "이태정"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9654&mid=a10102060000&nPage=29&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=891D0D90248B2E7F492587FF003FE97D_1.pdf&fileNameOrg=서비스산업 비공식 여성노동의 구조와 동학_web.pdf&filePath1=jsphome/DATA/pblctList/issue/891D0D90248B2E7F492587FF003FE97D",
+  "matched": [
+   "여성고용",
+   "임금",
+   "근로시간",
+   "노사관계",
+   "고용서비스",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9653",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "비대면 시대 일하는 방식의 변화와 일·생활균형",
+  "authors": [
+   "손연정",
+   "이은주",
+   "채민희"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9653&mid=a10102060000&nPage=29&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=093FE366378AEA28492587FF003EA558_1.pdf&fileNameOrg=비대면 시대 일하는 방식의 변화와 일_생활균형_web.pdf&filePath1=jsphome/DATA/pblctList/issue/093FE366378AEA28492587FF003EA558",
+  "matched": [
+   "여성고용",
+   "근로시간",
+   "노사관계",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9652",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "고령자 고용지원 정책의 국가 비교 연구",
+  "authors": [
+   "이승호",
+   "박명준",
+   "김근주",
+   "주은선",
+   "이다미",
+   "손동영"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9652&mid=a10102060000&nPage=30&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=249E13949B89FB0A492587FF003E0C22_2.pdf&fileNameOrg=고령자 고용지원 정책의 국가 비교 연구_web.pdf&filePath1=jsphome/DATA/pblctList/issue/249E13949B89FB0A492587FF003E0C22",
+  "matched": [
+   "고령자",
+   "임금",
+   "근로시간",
+   "고용형태",
+   "직업훈련",
+   "고용서비스",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9651",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "출산지원정책의 효과 분석",
+  "authors": [
+   "곽은혜"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9651&mid=a10102060000&nPage=30&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=C71E5AE9646DC666492587FF003D69A2_1.pdf&fileNameOrg=출산지원정책의 효과 분석_web.pdf&filePath1=jsphome/DATA/pblctList/issue/C71E5AE9646DC666492587FF003D69A2",
+  "matched": [
+   "여성고용",
+   "임금",
+   "근로시간",
+   "고용형태",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9650",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "패널자료 품질개선 연구(XI)",
+  "authors": [
+   "장인성",
+   "이지은",
+   "김기민",
+   "김우영",
+   "이상혁",
+   "이지희",
+   "채민희",
+   "최효미"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9650&mid=a10102060000&nPage=30&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=9EB4D4118722E0AB492587FA0039E83C_1.pdf&fileNameOrg=패널자료 품질개선 연구(XI)_web.pdf&filePath1=jsphome/DATA/pblctList/issue/9EB4D4118722E0AB492587FA0039E83C",
+  "matched": [
+   "고령자",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9648",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "실업과 건강",
+  "authors": [
+   "홍정림"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9648&mid=a10102060000&nPage=30&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=2A265B6DAF2AAA3B492587FA00267334_2.pdf&fileNameOrg=실업과 건강_web.pdf&filePath1=jsphome/DATA/pblctList/issue/2A265B6DAF2AAA3B492587FA00267334",
+  "matched": [
+   "직업훈련",
+   "고용서비스",
+   "고용보험",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9645",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "한국노동패널 1-23차년도 조사자료_유저가이드",
+  "authors": [
+   "장인성",
+   "이지은",
+   "신선옥",
+   "정현상",
+   "권익성"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9645&mid=a10102060000&nPage=30&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=370D640632ED4300492587EC00074F6C_1.pdf&fileNameOrg=한국노동패널 1-23차년도 조사자료_유저가이드_web.pdf&filePath1=jsphome/DATA/pblctList/issue/370D640632ED4300492587EC00074F6C",
+  "matched": []
+ },
+ {
+  "id": "kli-9644",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "한국노동패널 1-23차년도 조사자료 : 통합설문지",
+  "authors": [
+   "장인성",
+   "이지은",
+   "신선옥",
+   "정현상",
+   "권익성",
+   "임태민"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9644&mid=a10102060000&nPage=30&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=3FF559F89105B54C492587EC0006AD64_2.pdf&fileNameOrg=한국노동패널 1-23차년도 조사자료_통합설문지_web.pdf&filePath1=jsphome/DATA/pblctList/issue/3FF559F89105B54C492587EC0006AD64",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-9642",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "제23차(2020)년도 한국 가구와 개인의 경제활동 : 한국노동패널 기초분석보고서",
+  "authors": [
+   "장인성",
+   "이지은",
+   "신선옥",
+   "정현상",
+   "권익성"
+  ],
+  "published": "2021-12-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9642&mid=a10102060000&nPage=30&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=C6F174F199881442492587EB001BD657_2.pdf&fileNameOrg=제23차(2020)년도 한국노동패널 기초분석보고서_web.pdf&filePath1=jsphome/DATA/pblctList/issue/C6F174F199881442492587EB001BD657",
+  "matched": [
+   "청년고용",
+   "고령자",
+   "임금",
+   "근로시간",
+   "고용형태",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-9640",
   "org": "kli",
   "board": "kli-wage",
@@ -48540,6 +51737,28 @@
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?nttId=10068209&searchCnd=1&searchKwd=&depth2=201157&depth3=200433&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200433&pageIndex=2&programType=newsData&menuNo=200433&oldMenuNo=200433",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/79a18a77e7c375727915aa9655c33736/1/202112291125157280.pdf",
   "matched": []
+ },
+ {
+  "id": "kli-9646",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "2021 KLI 비정규직 노동통계",
+  "authors": [
+   "이기쁨",
+   "지상훈"
+  ],
+  "published": "2021-12-28",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9646&mid=a10102060000&nPage=30&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=73572B1CCCAA8D9A492587EC00299F46_0.pdf&fileNameOrg=2021 KLI 비정규직 노동통계_web.pdf&filePath1=jsphome/DATA/pblctList/issue/73572B1CCCAA8D9A492587EC00299F46",
+  "matched": [
+   "임금",
+   "근로시간",
+   "고용형태",
+   "노사관계"
+  ]
  },
  {
   "id": "kiet-1031",
@@ -49283,6 +52502,32 @@
   ]
  },
  {
+  "id": "kli-9627",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "2021 KLI 해외노동통계",
+  "authors": [
+   "김유빈",
+   "김종욱",
+   "지상훈",
+   "임용빈",
+   "이기쁨",
+   "조규준"
+  ],
+  "published": "2021-11-15",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9627&mid=a10102060000&nPage=30&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=73F7FFFFE29CEA2049258792002CA15B_0.pdf&fileNameOrg=2021 KLI 해외노동통계_web.pdf&filePath1=jsphome/DATA/pblctList/issue/73F7FFFFE29CEA2049258792002CA15B",
+  "matched": [
+   "임금",
+   "근로시간",
+   "노사관계",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kiet-1018",
   "org": "kiet",
   "board": "kiet-report",
@@ -49593,6 +52838,22 @@
   ]
  },
  {
+  "id": "kli-9624",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "2020 KLI 연차보고서",
+  "authors": [
+   "한국노동연구원"
+  ],
+  "published": "2021-10-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=9624&mid=a10102060000&nPage=30&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=530C84340F5986B54925878000092160_0.pdf&fileNameOrg=2020 연차보고서.pdf&filePath1=jsphome/DATA/pblctList/issue/530C84340F5986B54925878000092160",
+  "matched": []
+ },
+ {
   "id": "keis-7933",
   "org": "keis",
   "board": "keis-issue",
@@ -49609,6 +52870,24 @@
    "고용서비스",
    "고용보험",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "keis-7932",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "직업 고용 전망 연구 -국내외 전망 사례를 중심으로-",
+  "authors": [
+   "홍현균"
+  ],
+  "published": "2021-10-29",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=7932",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20211029132817_5b69b9cb83065d403869739ae7f0995e.pdf&path=pblc&fn=%ED%95%9C%EA%B5%AD%EA%B3%A0%EC%9A%A9%EC%A0%95%EB%B3%B4%EC%9B%90-%EC%A7%81%EC%97%85+%EA%B3%A0%EC%9A%A9+%EC%A0%84%EB%A7%9D+%EC%97%B0%EA%B5%AC.pdf&sn=7932&fsn=17371&ty=P",
+  "matched": [
+   "인력수급"
   ]
  },
  {
