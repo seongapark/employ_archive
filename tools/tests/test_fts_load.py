@@ -159,3 +159,23 @@ def test_catalog_rows_have_no_date_and_that_is_deliberate():
 def test_the_date_column_is_in_the_sql():
     sql = fts_load.build_sql(fts_load.rows()[:5])
     assert '날짜' in sql.split('VALUES')[0]
+
+
+def test_domain_files_are_split_and_never_repeat_the_delete(tmp_path):
+    # 한 파일로 밀었다가 wrangler 가 뒤쪽을 조용히 버렸다(2026-09-13). 파일을 나누고
+    # DELETE 는 첫 파일에만 둔다 — 파일마다 두면 뒤 파일이 앞 파일을 지운다.
+    지은것 = fts_load.write_files(tmp_path)
+    names = [n for n, _ in 지은것]
+    assert names[0] == '00_delete.sql'
+    assert (tmp_path / '00_delete.sql').read_text(encoding='utf-8').strip() == 'DELETE FROM doc_fts;'
+    for 도메인 in ('reports', 'forecast', 'press', 'catalog'):
+        assert any(도메인 in n for n in names), (도메인, names)
+    for name in names[1:]:
+        assert 'DELETE' not in (tmp_path / name).read_text(encoding='utf-8')
+
+
+def test_no_domain_file_is_huge(tmp_path):
+    # 파일이 커지면 같은 곳에서 또 뒤가 잘린다. 조각마다 상한 안이어야 한다.
+    for name, _ in fts_load.write_files(tmp_path)[1:]:
+        크기 = (tmp_path / name).stat().st_size
+        assert 크기 <= fts_load.FILE_BUDGET * 1.6, (name, 크기)

@@ -41,7 +41,26 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          python -m tools.fts_load > /tmp/fts.sql
-          wc -c /tmp/fts.sql
-          npx --yes wrangler@4 d1 execute employ-archive-ask --remote \
-            --config domains/ask/worker/wrangler.jsonc --file=/tmp/fts.sql
+          # **한 파일로 밀지 않는다.** 2026-09-13 에 5,379행을 한 파일로 밀었더니
+          # wrangler 가 `Warning: leftover buffer from sql.ingest` 를 내며 뒤쪽 문장을
+          # 조용히 버리고 **종료코드 0** 으로 끝났다 — 색인에 reports 만 남고
+          # forecast·press·카탈로그 526행이 사라졌는데 이 워크플로는 초록이었다.
+          python -m tools.fts_load --out-dir /tmp/fts
+          ls -l /tmp/fts
+          for f in /tmp/fts/*.sql; do
+            echo "== $f"
+            npx --yes wrangler@4 d1 execute employ-archive-ask --remote \
+              --config domains/ask/worker/wrangler.jsonc --file="$f"
+          done
+      # 적재가 조용히 반만 되는 실패가 실제로 있었다. **건수를 세서 확인한다** —
+      # 네 도메인 중 하나라도 비면 여기서 빨갛게 죽는다.
+      - name: 색인 건수 확인
+        env:
+          PYTHONIOENCODING: utf-8
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx --yes wrangler@4 d1 execute employ-archive-ask --remote --json \
+            --config domains/ask/worker/wrangler.jsonc \
+            --command "SELECT 도메인, COUNT(*) AS n FROM doc_fts GROUP BY 도메인" \
+            | python -m tools.fts_verify
