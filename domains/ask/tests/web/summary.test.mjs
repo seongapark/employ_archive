@@ -30,10 +30,10 @@ const 응답 = {
 test('재료는 도메인·출처·관측·파생을 담는다', () => {
   const { 재료 } = 요약재료(응답);
   assert.equal(재료.질문, '최근 고용상황은?');
-  const 고용 = 재료.도메인.find((d) => d.도메인 === 'employment');
+  const 고용 = 재료.도메인.find((d) => d.도메인.startsWith('고용동향'));
   assert.equal(고용.관측.length, 2);
   assert.equal(고용.파생.차이, 1151);
-  assert.equal(재료.도메인.find((d) => d.도메인 === 'press').출처[0].종류, '기사');
+  assert.equal(재료.도메인.find((d) => d.도메인.startsWith('행정통계')).출처[0].종류, '기사');
 });
 
 test('점수는 재료에 넣지 않는다 — 뜻 없는 수가 허용 집합에 섞인다', () => {
@@ -64,7 +64,9 @@ test('빈 응답에도 모양을 지킨다', () => {
 test('건수를 재료에 싣는다 — 안 싣으면 개수를 말한 문장이 버려진다', () => {
   // 실측: 위반 [6] 하나로 모든 답변이 버려졌다. "보고서 6건" 의 6 이 재료에 없었다.
   const { 재료, 허용숫자 } = 요약재료(응답);
-  assert.equal(재료.도메인.find((d) => d.도메인 === 'press').건수, 1);
+  // 코드 이름(press)이 아니라 사람이 쓰는 이름을 넘긴다 — 문장이 "reports 도메인에서"
+  // 라고 쓰던 것을 고쳤다.
+  assert.equal(재료.도메인.find((d) => d.도메인.startsWith('행정통계')).건수, 1);
   assert.ok(허용숫자.includes(1), JSON.stringify(허용숫자));
 });
 
