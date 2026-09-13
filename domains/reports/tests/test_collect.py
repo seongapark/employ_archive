@@ -140,3 +140,43 @@ def test_last_run_drops_boards_no_longer_registered(tmp_path, monkeypatch):
     last = json.loads((tmp_path / 'last_run.json').read_text(encoding='utf-8'))
     assert 'no-longer-a-board' not in last['boards']
     assert last['boards']['kli-research']['parsed'] == 2
+
+
+def test_an_undated_old_item_is_skipped_not_failed():
+    # 목록에 날짜가 없는 줄(고정 공지 등)은 위쪽 cutoff 검사를 지나친다.
+    # 상세를 열어야 옛 글인 게 드러나는데, 그때 RawReport 검증 예외가 게시판
+    # 전체를 죽이면 그날 그 게시판 수집이 통째로 버려진다 — 2026-09-13 에
+    # kdi-focus 가 2009-03-31 공지 하나로 그렇게 실패했다.
+    rows = [{'native_id': '1', 'detail_url': 'https://x/1',
+             'published_raw': '2025-05-01', 'title': 'ㄱ'},
+            {'native_id': '9', 'detail_url': 'https://x/9', 'title': '공지'}]
+
+    def detail(html, item, board):
+        if item['native_id'] == '9':
+            item = dict(item, published_raw='2009-03-31')
+        return collect.stub_record(item, board)
+
+    recs, result = collect.collect_board(
+        BOARD, fetch=lambda url, **kw: '<html></html>',
+        throttle=collect.NoThrottle(), detail_cap=40, existing=[],
+        parse_list=one_page(rows), parse_detail=detail)
+
+    assert result['ok'] is True and result['error'] is None
+    assert [r.id for r in recs] == ['kli-1']
+    assert result['skipped_old'] == 1
+
+
+def test_a_broken_parser_still_fails_the_board():
+    # 컷오프만 봐준다. 제목이 비는 것 같은 진짜 파서 고장까지 삼키면
+    # 이 가드가 지키려던 것을 잃는다.
+    rows = [{'native_id': '1', 'detail_url': 'https://x/1',
+             'published_raw': '2025-05-01', 'title': 'ㄱ'}]
+
+    def detail(html, item, board):
+        return collect.stub_record(dict(item, published_raw='깨진 날짜'), board)
+
+    _, result = collect.collect_board(
+        BOARD, fetch=lambda url, **kw: '<html></html>',
+        throttle=collect.NoThrottle(), detail_cap=40, existing=[],
+        parse_list=one_page(rows), parse_detail=detail)
+    assert result['ok'] is False and result['error']

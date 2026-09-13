@@ -22,6 +22,8 @@ import os
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
+from pydantic import ValidationError
+
 from . import boards as boards_mod
 from . import build as build_mod
 from . import http, store
@@ -52,6 +54,18 @@ def stub_record(item: dict, board) -> RawReport:
     )
 
 
+def _only_cutoff(exc: ValidationError) -> bool:
+    """이 예외가 **컷오프 하나뿐**인가.
+
+    파서가 깨진 신호(제목 없음·URL 형식 오류 등)까지 같이 삼키면 이 가드가
+    지키려는 것을 잃는다. published 한 곳에서, 컷오프 문구로 난 것만 참으로 본다.
+    """
+    errs = exc.errors()
+    return bool(errs) and all(
+        e.get('loc') == ('published',) and CUTOFF in str(e.get('msg', ''))
+        for e in errs)
+
+
 def collect_board(board, *, fetch, throttle, detail_cap, existing,
                   parse_list=None, parse_detail=None):
     site = SITES[board.org]
@@ -60,7 +74,7 @@ def collect_board(board, *, fetch, throttle, detail_cap, existing,
     list_url = site.list_url
     known = {r.id for r in existing}
     result = {'ok': True, 'parsed': 0, 'added': 0, 'details': 0,
-              'reached_cutoff': False, 'error': None}
+              'reached_cutoff': False, 'skipped_old': 0, 'error': None}
     records: list[RawReport] = []
     details = 0
     now = datetime.now(KST).isoformat(timespec='seconds')
@@ -93,7 +107,18 @@ def collect_board(board, *, fetch, throttle, detail_cap, existing,
                     throttle.wait()
                     detail_html = fetch(item['detail_url'])
                     details += 1
-                rec = parse_detail(detail_html, item, board)
+                try:
+                    rec = parse_detail(detail_html, item, board)
+                except ValidationError as exc:
+                    if not _only_cutoff(exc):
+                        raise
+                    # 목록에 날짜가 없는 줄(고정 공지 등)은 위쪽 cutoff 검사를
+                    # 그냥 지나친다. 상세를 열어야 옛 글인 게 드러나는데, 그때
+                    # RawReport 검증이 올리는 예외가 **게시판 전체를 실패**시켰다
+                    # (2026-09-13 kdi-focus 에 2009-03-31 글이 올라와 그랬다).
+                    # 목록에서 걸렀을 때와 같게 그 항목만 건너뛴다.
+                    result['skipped_old'] += 1
+                    continue
                 rec.collected_at = now
                 records.append(rec)
             if stop:
