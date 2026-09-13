@@ -70,15 +70,28 @@ API 에서 가져오지만 저장하는 원문 링크는 API 응답이 아니라
 설계는 `docs/superpowers/specs/2026-09-01-전망근거-LLM선별-design.md`.
 
 ```bash
-export ANTHROPIC_API_KEY=...          # 환경변수로만 넣는다 — GitHub Secret 이 아니다
+export JUDGE_PROVIDER=cli              # 구독(Claude Code)으로 돌린다 — API 크레딧을 안 쓴다
 python -m tools.rationales             # 전체 소스 수집
 python -m tools.rationales --only bok --only kdi        # 특정 소스만
 python -m tools.rationales --refresh KDI:2026-08-19:emp_change   # 특정 근거만 다시 만든다
 ```
 
+`JUDGE_PROVIDER` 를 비우면 옛 차례(`ANTHROPIC_API_KEY` → `OPENROUTER_API_KEY` →
+`OPENAI_API_KEY`)로 되돌아간다. **구독 경로는 temperature 를 못 넘긴다** — CLI 에
+그 손잡이가 없어서, 같은 회차를 두 번 돌리면 다른 문장이 올 수 있다(API 경로는
+`TEMPERATURE = 0` 으로 재현된다). 지어낸 문장이 들어올 길은 그래도 없다 —
+`llm_verify` 가 원문과 프로그램으로 대조한다. 로컬 대화형 로그인은 토큰이
+갱신되므로 긴 배치는 여기서 돌리는 쪽이 맞다(헤드리스 OAuth 토큰은 10~15분이면
+만료된다).
+
 **CI 는 이 도구를 부르지 않는다.** `collect-forecast.yml` 은 이 도구를 한 줄도
 참조하지 않고 그대로 매일 돌아 수치를 수집하고 사이트를 배포한다 — LLM 호출이
-실패하거나 `ANTHROPIC_API_KEY` 가 없어도 수집·배포에는 지장이 없다.
+실패하거나 키가 없어도 수집·배포에는 지장이 없다.
+
+LLM 을 쓰는 나머지 둘도 같은 스위치를 쓴다: 행통 모니터링의 인용 판정
+(`collect-press.yml`)과 연구보고서 추천 판정(`collect-reports.yml`)은 워크플로에
+`JUDGE_PROVIDER: cli` 와 `CLAUDE_CODE_OAUTH_TOKEN` 시크릿이 박혀 있어 구독으로
+돈다. 방문자가 부르는 질의응답 워커는 LLM 을 호출하지 않는다.
 
 이미 있는 근거는 절대 덮어쓰지 않는다 — 사람이 손으로 문장을 고쳤을 수 있기
 때문이다. 일부러 다시 만들려면 `--refresh` 로 대상을 명시해야 한다. `--only` 와
