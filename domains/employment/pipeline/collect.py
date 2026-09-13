@@ -13,6 +13,7 @@ from pathlib import Path
 from typing import Callable
 
 from . import check_kosis, releases, store
+from .http import 오류줄
 from .collectors import eaps, ei, est
 from .models import SeriesRecord
 
@@ -95,7 +96,7 @@ def main(data_dir: Path = DATA_DIR,
             encoding="utf-8")
         summary["releases"] = index_summary
     except Exception as exc:
-        summary["errors"].append(f"releases: {type(exc).__name__}: {exc}")
+        summary["errors"].append(오류줄("releases", exc))
 
     for name, collect_fn in collectors.items():
         try:
@@ -111,7 +112,7 @@ def main(data_dir: Path = DATA_DIR,
             summary["collectors"][name] = {
                 "ok": False, "fetched": 0, "added": 0, "updated": 0, "rejected": 0,
             }
-            summary["errors"].append(f"{name}: {type(exc).__name__}: {exc}")
+            summary["errors"].append(오류줄(name, exc))
 
     # KOSIS 표가 아직 보도자료와 같은 것을 말하는지 대조한다. 분류 개편으로 표
     # id 가 바뀌면 화면의 KOSIS 링크가 조용히 다른 표를 가리키게 된다 — 이 도메인이
@@ -122,7 +123,7 @@ def main(data_dir: Path = DATA_DIR,
         if note:
             summary["kosis_check"] = note
     except Exception as exc:
-        summary["errors"].append(f"kosis_check: {type(exc).__name__}: {exc}")
+        summary["errors"].append(오류줄("kosis_check", exc))
 
     # 수기 입력은 마지막에 얹어 수집 결과를 이긴다.
     # 손으로 급히 채운 파일이 깨져 있어도 이미 수집한 세 결과를 버리지 않는다 —
@@ -133,7 +134,7 @@ def main(data_dir: Path = DATA_DIR,
         if manual:
             merged = store.upsert(merged, manual).records
     except Exception as exc:
-        summary["errors"].append(f"manual: {type(exc).__name__}: {exc}")
+        summary["errors"].append(오류줄("manual", exc))
 
     store.save_series(series_path, merged)
     last_run_path.write_text(

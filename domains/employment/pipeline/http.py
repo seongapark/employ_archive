@@ -11,6 +11,8 @@
 """
 from __future__ import annotations
 
+import re
+
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -37,3 +39,20 @@ def session() -> requests.Session:
 # 수집기들이 같이 쓴다. 세션 하나면 연결도 재사용된다.
 SESSION = session()
 get = SESSION.get
+
+
+# 예외 문자열에는 요청 URL 이 통째로 들어 있고, KOSIS 는 키를 질의문자열에 싣는다.
+# 그 문자열을 last_run.json 에 그대로 적으면 **공개 저장소와 사이트에 키가 실린다**
+# — 2026-09-10·09-11·09-13 세 회차가 실제로 그랬다. 여기서 값을 가린다.
+_비밀질의 = re.compile(
+    r"([?&](?:apikey|api_key|servicekey|service_key|key|token|auth)=)[^&\s'\"]+",
+    re.IGNORECASE)
+
+
+def 가린다(text: str) -> str:
+    return _비밀질의.sub(r"\1***", str(text))
+
+
+def 오류줄(이름: str, exc: BaseException) -> str:
+    """last_run.json 에 남길 한 줄. 비밀은 빼고 무엇이 터졌는지는 남긴다."""
+    return 가린다(f"{이름}: {type(exc).__name__}: {exc}")

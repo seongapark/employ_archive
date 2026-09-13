@@ -24,3 +24,16 @@ def test_수집기가_맨_requests_를_직접_쓰지_않는다():
     for mod in (eaps, ei, est, releases, check_kosis):
         assert not hasattr(mod, "requests"), mod.__name__
         assert mod.SESSION is SESSION, mod.__name__
+
+
+def test_KOSIS_키가_오류줄에_안_남는다():
+    """공개 저장소·사이트에 실리는 문자열이다 — 2026-09 에 세 회차가 키를 실었다."""
+    from domains.employment.pipeline.http import 오류줄
+
+    url = ("https://kosis.kr/openapi/Param/statisticsParameterData.do"
+           "?method=getList&apiKey=ZjI2NzMzNDFjOGZj%3D&orgId=118")
+    줄 = 오류줄("est", ConnectionError(f"Max retries exceeded with url: {url}"))
+    assert "ZjI2" not in 줄
+    assert "apiKey=***" in 줄
+    assert "orgId=118" in 줄          # 진단에 필요한 나머지는 남는다
+    assert 줄.startswith("est: ConnectionError:")
