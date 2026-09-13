@@ -240,8 +240,11 @@ def _call_cli(prompt: str) -> str:
     done = subprocess.run(argv, input=prompt, env=env, capture_output=True,
                           text=True, encoding="utf-8", timeout=CLI_TIMEOUT)
     if done.returncode != 0:
+        # 봉투를 통째로 싣는다. 300자로 자르면 앞의 usage·session_id 만 남고
+        # 정작 이유(잔액·만료·로그인 필요)가 잘린다 — 2026-09-13 reports 회차가
+        # 그래서 무엇이 틀렸는지 모른 채 빨갛기만 했다.
         raise ValueError(f"claude -p 가 {done.returncode} 로 끝났다: "
-                         f"{(done.stderr or done.stdout or '')[:300]}")
+                         f"{done.stdout[:2000]} {done.stderr[:500]}")
     try:
         data = json.loads(done.stdout)
     except json.JSONDecodeError as exc:
