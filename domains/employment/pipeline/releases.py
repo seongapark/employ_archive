@@ -21,8 +21,7 @@ import re
 import time
 from typing import Callable
 
-import requests
-
+from .http import SESSION
 from . import summary
 
 # 제목의 연·월. 경활은 `26년 7월 고용동향` 처럼 두 자리 연도를 쓰기도 한다.
@@ -226,7 +225,7 @@ def _get(url: str, params: dict, *, tries: int = 3, timeout: int = 60) -> str | 
     아니다 — 게시판이 잠깐 죽었다고 그날 숫자 수집까지 같이 죽으면 안 된다."""
     for attempt in range(tries):
         try:
-            res = requests.get(url, params=params, headers=HEADERS, timeout=timeout)
+            res = SESSION.get(url, params=params, headers=HEADERS, timeout=timeout)
             if res.ok:
                 return res.text
         except Exception:
@@ -301,7 +300,7 @@ def missing_summaries(index: dict, source: str,
 def _fetch_file(url: str, *, tries: int = 2, timeout: int = 120) -> bytes | None:
     for attempt in range(tries):
         try:
-            res = requests.get(url, headers=HEADERS, timeout=timeout)
+            res = SESSION.get(url, headers=HEADERS, timeout=timeout)
             if res.ok and res.content:
                 return res.content
         except Exception:

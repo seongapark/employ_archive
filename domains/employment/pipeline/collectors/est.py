@@ -9,8 +9,7 @@ import os
 import re
 from datetime import date, datetime, timedelta, timezone
 
-import requests
-
+from ..http import SESSION
 from .. import hwpx
 from ..models import Attachment, SeriesRecord, make_id
 from ..periods import squash
@@ -92,7 +91,7 @@ def fetch(api_key: str, months: int = 36) -> list[dict]:
               "tblId": TBL_ID, "itmId": ITEM_TOTAL_EMPLOYEES_CODE, "objL1": "ALL",
               "objL2": SIZE_TOTAL_CODE, "prdSe": "M", "newEstPrdCnt": str(months),
               "format": "json", "jsonVD": "Y"}
-    payload = requests.get(API, params=params, timeout=120).json()
+    payload = SESSION.get(API, params=params, timeout=120).json()
     if isinstance(payload, dict):
         raise ValueError(f"KOSIS 오류: {payload.get('errMsg', payload)}")
     return payload
@@ -227,7 +226,7 @@ def _release_date(post) -> date | None:
 
 def _download(url: str) -> bytes | None:
     try:
-        res = requests.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=90)
+        res = SESSION.get(url, headers={"User-Agent": "Mozilla/5.0"}, timeout=90)
         return res.content if res.ok else None
     except Exception:
         return None

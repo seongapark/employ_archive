@@ -9,8 +9,7 @@ from __future__ import annotations
 import re
 from datetime import date, datetime, timedelta, timezone
 
-import requests
-
+from ..http import SESSION
 from .. import xlsx
 from ..models import Attachment, SeriesRecord, make_id
 from ..periods import month_rows, squash
@@ -223,7 +222,7 @@ def check_freshness(records: list[SeriesRecord], today: date) -> None:
 
 
 def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
-    html = requests.get(BOARD, params=BOARD_PARAMS, headers=HEADERS,
+    html = SESSION.get(BOARD, params=BOARD_PARAMS, headers=HEADERS,
                         timeout=30).text.replace("&amp;", "&")
     m = re.search(
         r'href="(/boardDownload\.es\?[^"]*?list_no=(\d+)[^"]*)"\s+class="bf_xlsx">'
@@ -241,7 +240,7 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
 
     view_url = (f"https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301"
                 f"&list_no={list_no}&act=view")
-    data = requests.get("https://mods.go.kr" + href,
+    data = SESSION.get("https://mods.go.kr" + href,
                         headers={**HEADERS, "Referer": BOARD}, timeout=90).content
     attachments = [Attachment(type="xlsx", url="https://mods.go.kr" + href)]
     return title, released_at, view_url, data, attachments

@@ -9,8 +9,7 @@ from __future__ import annotations
 import re
 from datetime import date, datetime, timedelta, timezone
 
-import requests
-
+from ..http import SESSION
 from .. import hwpx
 from ..models import Attachment, SeriesRecord, make_id
 from ..periods import month_rows, squash
@@ -340,7 +339,7 @@ def check_freshness(records: list[SeriesRecord], today: date) -> None:
 
 
 def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
-    html = requests.post(LIST_URL, data=SEARCH,
+    html = SESSION.post(LIST_URL, data=SEARCH,
                          headers={**HEADERS, "Referer": LIST_URL}, timeout=30).text
     m = re.search(r'news_seq=(\d+)[^>]*>(.*?)</a>', html, re.S)
     if m is None:
@@ -351,7 +350,7 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
         raise ValueError(f"고용행정통계 회차가 아니다: {title}")
 
     view = f"{VIEW_URL}?news_seq={seq}"
-    detail = requests.get(view, headers=HEADERS, timeout=30).text.replace("&amp;", "&")
+    detail = SESSION.get(view, headers=HEADERS, timeout=30).text.replace("&amp;", "&")
     link = re.search(r'href="(/common/downloadFile\.do\?[^"]*file_ext=hwpx)"', detail)
     if link is None:
         raise ValueError(f"hwpx 첨부를 찾지 못했다: {title}")
@@ -363,7 +362,7 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
         raise ValueError(f"등록일을 찾지 못했다: {title}")
     released_at = date(int(posted.group(1)), int(posted.group(2)), int(posted.group(3)))
 
-    data = requests.get("https://www.moel.go.kr" + link.group(1),
+    data = SESSION.get("https://www.moel.go.kr" + link.group(1),
                         headers={**HEADERS, "Referer": view}, timeout=120).content
     attachments = [Attachment(type="hwpx", url="https://www.moel.go.kr" + link.group(1))]
     return title, released_at, view, data, attachments

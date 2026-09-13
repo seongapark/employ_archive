@@ -15,8 +15,7 @@ from __future__ import annotations
 
 import os
 
-import requests
-
+from .http import SESSION
 KOSIS_URL = "https://kosis.kr/openapi/Param/statisticsParameterData.do"
 
 # 경활 취업자(15세 이상 전체). 2026-08-31 에 보도자료와 최근 4개월이 모두 일치함을
@@ -43,7 +42,7 @@ TOLERANCE = 0.2
 
 
 def fetch_latest(period: str, *, api_key: str | None = None,
-                 get=requests.get) -> float | None:
+                 get=SESSION.get) -> float | None:
     """KOSIS 에서 그 달의 취업자를 천명으로. 못 받으면 None."""
     key = api_key if api_key is not None else os.environ.get("KOSIS_API_KEY", "").strip()
     if not key:
@@ -65,7 +64,7 @@ def fetch_latest(period: str, *, api_key: str | None = None,
         return None
 
 
-def check(records, *, api_key: str | None = None, get=requests.get) -> str | None:
+def check(records, *, api_key: str | None = None, get=SESSION.get) -> str | None:
     """경활 최신월을 KOSIS 와 대조한다.
 
     돌려주는 값은 사람이 읽을 한 줄이거나 None(대조 못 함)이다. 어긋나면
