@@ -16,6 +16,22 @@ jobs:
         with:
           node-version: "22"
       - run: npm install -g @anthropic-ai/claude-code
+      - name: 토큰 모양 확인
+        env:
+          TOK: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+        # 값은 안 찍는다. 길이·앞머리·공백 유무만 본다 — 401 의 흔한 원인이
+        # 잘린 붙여넣기, 앞뒤 공백, 그리고 **API 키를 OAuth 자리에 넣은 것**이라
+        # 이 셋은 값을 몰라도 가른다. OAuth 토큰은 `sk-ant-oat` 로 시작한다.
+        run: |
+          python - <<'PY'
+          import os
+          t = os.environ.get('TOK', '')
+          print('길이', len(t))
+          print('앞머리', t[:11])
+          print('앞뒤 공백 있음', t != t.strip())
+          print('줄바꿈 포함', chr(10) in t or chr(13) in t)
+          PY
+
       - name: 토큰 확인
         env:
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
