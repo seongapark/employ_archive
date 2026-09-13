@@ -319,3 +319,36 @@ test('고용동향은 순위와 무관하게 맨 앞이다', async () => {
   const r = await lookup(deps, '취업자');
   assert.equal(r.묶음[0].도메인, 'employment', JSON.stringify(r.묶음.map((g) => g.도메인)));
 });
+
+// ── 계열: 안 걸러면 한 출처의 아홉 계열이 섞인다 ──────────────────────────
+
+test('주제가 출처와 계열을 정한다', async () => {
+  const 본 = [];
+  const deps = { db: { all: async (sql, p) => {
+    본.push({ sql, p });
+    if (/MAX\(period\)/.test(sql)) return [{ 최신: '2026-08' }];
+    return [];
+  } } };
+  await lookup(deps, '종사자 수 알려줘');
+  const 관측 = 본.filter((x) => /observation/.test(x.sql));
+  assert.ok(관측.length, '관측 조회가 없다');
+  // 전에는 source 가 'eaps' 로 박혀 있어 종사자수를 물어도 경활을 읽었다.
+  assert.ok(관측.every((x) => x.p.includes('est')), JSON.stringify(관측[0].p));
+  // 계열을 안 걸면 취업자·실업자·인구·고용률이 같은 시점에 나란히 걸린다.
+  assert.ok(관측.every((x) => /series = \?/.test(x.sql)), 관측[0].sql);
+  assert.ok(관측.every((x) => x.p.includes('headcount')), JSON.stringify(관측[0].p));
+});
+
+test('계열을 걸러 한 시점에 한 줄만 남는다', async () => {
+  // 실물에서 같은 제목(`2026-08 전체`)이 다섯 번 찍혔다. 계열이 다른 지표들이었다.
+  const deps = { db: { all: async (sql, p) => {
+    if (/MAX\(period\)/.test(sql)) return [{ 최신: '2026-08' }];
+    if (!/observation/.test(sql)) return [];
+    assert.ok(p.includes('headcount'), '계열 없이 조회했다');
+    return [{ source: 'eaps', series: 'headcount', breakdown: 'total', category: null,
+              period: '2026-08', value: 29151, unit: '천명', yoy: 12.3, release_url: '' }];
+  } } };
+  const r = await lookup(deps, '2026년 8월 취업자');
+  const 고용 = r.묶음.find((g) => g.도메인 === 'employment');
+  assert.equal(고용.결과.length, 1, JSON.stringify(고용.결과));
+});

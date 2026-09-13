@@ -110,10 +110,16 @@ async function 최신시점(deps, where, p) {
   return rows?.[0]?.최신 ?? null;
 }
 
+// **`series` 를 안 주면 한 출처의 모든 계열이 섞여 나온다.** 실물 D1 에서 eaps 는
+// headcount 말고도 unemployed·labor_force·population·employment_rate 등 아홉 계열을
+// 갖고 있어(2026-09-13 실측), source+breakdown 만으로 조회하면 한 시점에 여러 행이
+// 걸린다. 화면에는 같은 제목이 여러 번 찍히고, 더 나쁘게는 `derive` 가 서로 다른
+// 지표를 한 시계열로 보고 차이·증감률을 만든다 — 뜻 없는 숫자가 허용 집합에 들어간다.
 export async function queryObservations(deps,
-  { source, breakdown, category, from, to, 최신만 = false }) {
+  { source, series, breakdown, category, from, to, 최신만 = false }) {
   const where = ['source = ?', 'breakdown = ?'];
   const p = [source, breakdown];
+  if (series) { where.push('series = ?'); p.push(series); }
   if (category) { where.push('category = ?'); p.push(category); }
 
   if (최신만 && !from && !to) {

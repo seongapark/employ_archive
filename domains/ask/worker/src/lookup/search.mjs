@@ -202,6 +202,17 @@ async function 글조회(deps, 도메인, 용어들, limit, 기간 = { from: '',
 // observation 의 breakdown 열은 이 셋뿐이다(실측). 직업 축은 값이 한 건도 없다.
 const 축_BREAKDOWN = { 연령: 'age', 성: 'sex', 산업: 'industry' };
 
+// **주제가 출처와 계열을 정한다.** 전에는 `source: 'eaps'` 가 박혀 있어서 "종사자수" 를
+// 물어도 경활을 조회했고, 계열을 안 걸러 한 출처의 아홉 계열이 섞여 나왔다(2026-09-13
+// 배포 후 실측: "최근 고용상황" 카드에 `2026-08 전체` 가 다섯 번 찍혔다 — 취업자·실업자·
+// 경제활동인구·인구·고용률이 같은 제목으로 나란히 선 것이다). 세 출처 모두 계열 이름은
+// `headcount` 다.
+const 주제_계열 = {
+  취업자수: { source: 'eaps', series: 'headcount' },
+  종사자수: { source: 'est', series: 'headcount' },
+  상시가입자수: { source: 'ei', series: 'headcount' },
+};
+
 // 추세를 볼 창의 길이(개월). 13이면 **전년동월이 창 안에 들어온다** — 12로 잡으면
 // 한 달이 모자라 "작년 같은 달과 비교" 가 창 밖으로 떨어진다.
 const 창개월 = 13;
@@ -223,8 +234,13 @@ async function 관측조회(deps, 슬롯, limit, { 넓은질문 = false } = {}) 
   if (안됨.length) 한계.push(`${안됨.join('·')}별 관측은 적재돼 있지 않다`);
   if (됨.length > 1) 한계.push(`${됨[0]} 축만 본다 — ${됨.slice(1).join('·')} 과의 교차는 못 낸다`);
 
+  // 주제를 못 알아들었으면 여기까지 오지 않는다(`도메인적용` 이 고용동향을 안 켠다).
+  // 그래도 기본값을 둔다 — 표에 없는 주제가 새로 생겨도 조용히 엉뚱한 출처를 읽는
+  // 것보다 취업자수로 읽고 그 사실을 슬롯으로 밝히는 편이 낫다.
+  const 계열 = 주제_계열[슬롯.주제] ?? 주제_계열.취업자수;
   const 조건 = {
-    source: 'eaps', breakdown: 축 ? 축_BREAKDOWN[축] : 'total',
+    ...계열,
+    breakdown: 축 ? 축_BREAKDOWN[축] : 'total',
     category: 축 ? (슬롯.category[축] ?? null) : null,
   };
   let rows = await queryObservations(deps, {
