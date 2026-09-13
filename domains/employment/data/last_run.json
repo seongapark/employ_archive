@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-09-12T16:52:51.706019+09:00",
+  "run_at": "2026-09-13T11:58:03.419606+09:00",
   "collectors": {
     "eaps": {
       "ok": false,
@@ -25,8 +25,7 @@
   },
   "conflicts": [],
   "errors": [
-    "eaps: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))",
-    "kosis_check: ValueError: KOSIS DT_1DA7002S 가 보도자료와 다르다: 2026-08 KOSIS 29151.0 vs 보도자료 63.3 — 분류 개편으로 표가 바뀌었는지 확인하고 sources.json 의 eaps.kosis_url 을 고칠 것"
+    "eaps: ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
   ],
   "releases": {
     "eaps": {
@@ -56,5 +55,6 @@
       "summaries_empty": 0,
       "summaries_pending": 0
     }
-  }
+  },
+  "kosis_check": "2026-08 29151.0 일치"
 }
