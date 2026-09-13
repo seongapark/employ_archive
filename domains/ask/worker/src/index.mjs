@@ -34,7 +34,7 @@ export default {
 
       // 출처 탐색이다 — 문장을 만들지 않는다. `유형`·`슬롯` 을 몸통에서 받지
       // 않는 이유는 슬롯을 코드가 질문 원문에서 뽑기 때문이다(LLM 1패스 없음).
-      const 결과 = await handleLookup(deps, { 질문: body.q, ip, today });
+      const 결과 = await handleLookup(deps, { 질문: body.q, ip, today, now: new Date() });
 
       // 후속질문은 **거르지 않고 그대로 낸다.**
       //

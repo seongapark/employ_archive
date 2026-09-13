@@ -161,9 +161,10 @@ export async function handleAsk(deps, { 질문, 유형, 슬롯, ip, today }) {
 // "초과하면 LLM 만 건너뛰고 카드는 그대로 낸다" 는 이 설계의 원칙과 같은 자리다.
 // 오늘 몫을 다 쓴 것과 우리 KV 가 죽은 것은 배지를 달리해 가른다 — 사용자가 할
 // 수 있는 일이 다르다(내일 다시 / 잠시 뒤 다시).
-export async function handleLookup(deps, { 질문, ip, today }) {
+export async function handleLookup(deps, { 질문, ip, today, now }) {
   const q = await checkQuota(deps.kv, ip, today, deps.quota);
-  const r = await lookup(deps, 질문);
+  // `now` 를 넘긴다 — '작년'·'지난달' 은 오늘을 알아야 풀린다(KST 기준).
+  const r = await lookup(deps, 질문, { now });
   const 배지 = [];
   if (q.확인불가) 배지.push('할당량확인불가');
   else if (!q.허용) 배지.push('한도초과');

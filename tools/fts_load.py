@@ -24,7 +24,7 @@ import sys
 
 from .d1_sync import REPO, sql_literal
 
-COLUMNS = ['doc_id', '도메인', '종류', '링크', '제목', '본문', '제목색인', '본문색인']
+COLUMNS = ['doc_id', '도메인', '종류', '링크', '제목', '본문', '날짜', '제목색인', '본문색인']
 
 # 한 행의 본문 상한. 스니펫으로 보여줄 수 있는 크기여야 한다 — 초록 한 건이
 # 6천 자라 통째로 넣으면 어디가 걸렸는지 보여줄 수가 없다.
@@ -90,10 +90,16 @@ def _load(rel: str):
     return json.loads((REPO / rel).read_text(encoding='utf-8'))
 
 
-def _row(doc_id, 도메인, 종류, 링크, 제목, 본문) -> dict:
+def _row(doc_id, 도메인, 종류, 링크, 제목, 본문, 날짜='') -> dict:
+    """한 행. `날짜` 는 정렬·필터용이고 검색어가 아니다(0005 주석 참조).
+
+    `YYYY-MM-DD` 나 `YYYY-MM` 만 담는다 — 문자열 비교로 기간을 거르므로 자리수가
+    어긋나면 조용히 틀린다. 값이 없으면 **빈 문자열**이고, 카탈로그의 한계·충돌이
+    거기 해당한다(상시 사실이라 날짜가 없다).
+    """
     return {
         'doc_id': doc_id, '도메인': 도메인, '종류': 종류,
-        '링크': 링크 or '', '제목': 제목 or '', '본문': 본문,
+        '링크': 링크 or '', '제목': 제목 or '', '본문': 본문, '날짜': 날짜 or '',
         '제목색인': squash(제목), '본문색인': squash(본문),
     }
 
@@ -108,12 +114,13 @@ def _reports() -> list[dict]:
         # **원문이 아니라 기관 페이지로 보낸다.** 기관이 개정판을 올리면 링크 쪽이
         # 자동으로 최신이 된다 — reports 도메인이 상세 화면에서 쓰는 규칙과 같다.
         링크 = m.get('landing_url') or m.get('file_url') or ''
+        날짜 = m.get('published') or ''
         for i, c in enumerate(chunks(b.get('abstract') or '')):
-            out.append(_row(f'reports:{rid}:초록:{i}', 'reports', '초록', 링크, 제목, c))
+            out.append(_row(f'reports:{rid}:초록:{i}', 'reports', '초록', 링크, 제목, c, 날짜))
         # 초록이 없는 보고서가 257건이다. 목차라도 걸려야 그 보고서가 검색에 존재한다.
         toc = ' / '.join(b.get('toc') or [])
         for i, c in enumerate(chunks(toc)):
-            out.append(_row(f'reports:{rid}:목차:{i}', 'reports', '목차', 링크, 제목, c))
+            out.append(_row(f'reports:{rid}:목차:{i}', 'reports', '목차', 링크, 제목, c, 날짜))
     return out
 
 
@@ -124,7 +131,8 @@ def _forecast() -> list[dict]:
         key = f"forecast:{r.get('org')}:{r.get('published_at')}:{r.get('indicator')}"
         for i, c in enumerate(chunks(r.get('text') or '')):
             out.append(_row(f'{key}:{i}', 'forecast', '전망근거',
-                            r.get('source_url') or '', 제목, c))
+                            r.get('source_url') or '', 제목, c,
+                            r.get('published_at') or ''))
     return out
 
 
@@ -164,7 +172,7 @@ def _press() -> list[dict]:
                 if not 본문:
                     continue
                 out.append(_row(f'press:{release}:{구분}:{i}', 'press', '기사',
-                                a.get('url') or '', 제목, 본문))
+                                a.get('url') or '', 제목, 본문, release))
 
     # 회차 분석은 "우리 발표가 어떻게 받아졌나" 를 묻는 질문의 답이다. 누락·논조·
     # 쟁점을 한 행에 모은다 — 따로 두면 "왜" 를 물었을 때 조각만 걸린다.
@@ -182,7 +190,7 @@ def _press() -> list[dict]:
         본문 = ' '.join(조각)
         for i, c in enumerate(chunks(본문)):
             out.append(_row(f"press:{r.get('release')}:회차:{i}", 'press', '회차분석',
-                            '', 제목, c))
+                            '', 제목, c, str(r.get('release') or '')))
     return out
 
 
