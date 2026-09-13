@@ -39,7 +39,10 @@ jobs:
           python-version: "3.12"
       - run: pip install -r requirements.txt
       # 적재기가 깨졌으면 밀지 않는다 — 빈 색인이 낡은 색인보다 나쁘다.
-      - run: python -m pytest -q tools/tests/test_fts_load.py
+      # **생성한 SQL 을 sqlite3 로 실제 실행해 보는 검사가 여기 있다**
+      # (tools/tests/test_fts_sql_parses.py). 본문에 든 NUL·주석 표시 때문에 원격
+      # 적재가 조용히 반만 되던 일을 CI 를 태우기 전에 잡는다.
+      - run: python -m pytest -q tools
       - name: FTS 색인 재적재
         env:
           PYTHONIOENCODING: utf-8
