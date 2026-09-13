@@ -261,12 +261,24 @@ def write_files(out_dir) -> list[tuple[str, int]]:
             name = f'{i * 10:02d}_{도메인}_{j:02d}.sql'
             (out_dir / name).write_text(build_sql(조각, 지우기=False), encoding='utf-8')
             지은것.append((name, len(조각)))
+    # **예상 건수를 남긴다.** 도메인이 비었는지만 보면 4% 가 사라진 적재를 통과시킨다
+    # (실측). 확인기가 이 숫자와 실제 건수를 맞춰 본다.
+    셈: dict[str, int] = {}
+    for name, n in 지은것:
+        if name == '00_delete.sql':
+            continue
+        셈[name.split('_')[1]] = 셈.get(name.split('_')[1], 0) + n
+    (out_dir / 'counts.json').write_text(json.dumps(셈, ensure_ascii=False), encoding='utf-8')
     return 지은것
 
 
-# 한 파일의 바이트 상한. 작을수록 안전하지만 파일이 늘면 wrangler 실행 횟수가 늘어
-# 워크플로가 느려진다(2MB 면 reports 가 열 조각쯤이다).
-FILE_BUDGET = 2_000_000
+# 한 파일의 바이트 상한.
+#
+# **1MB 를 넘기면 안 된다.** 2MB 로 잡았더니 조각마다 `leftover buffer from sql.ingest`
+# 경고와 함께 한두 문장이 사라졌다(실측: 4,853행 중 202행 소실, 종료코드는 0). wrangler
+# 가 파일을 대략 1MB 단위로 읽어 문장을 끊는데, 경계에 걸친 문장을 버리는 것으로 보인다.
+# 파일이 그 경계보다 작으면 걸칠 문장이 아예 없다. 실행 횟수는 늘지만 조각당 0.5초다.
+FILE_BUDGET = 700_000
 
 
 def _파일조각(rs: list[dict], budget: int = FILE_BUDGET):
