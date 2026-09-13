@@ -47,14 +47,10 @@ jobs:
           # forecast·press·카탈로그 526행이 사라졌는데 이 워크플로는 초록이었다.
           python -m tools.fts_load --out-dir /tmp/fts
           ls -l /tmp/fts
-          # wrangler 를 한 번만 설치한다 — 조각이 쉰 개가 넘어 npx 가 매번 해석하면
-          # 그 시간이 적재 시간보다 길어진다.
-          npm i -g wrangler@4 >/dev/null
-          for f in /tmp/fts/*.sql; do
-            echo "== $f"
-            wrangler d1 execute employ-archive-ask --remote \
-              --config domains/ask/worker/wrangler.jsonc --file="$f"
-          done
+          # **wrangler 의 파일 적재를 쓰지 않는다.** 조각 크기를 2MB→700KB→400KB 로
+          # 줄여 가며 재 봤지만 소실이 202→138→30행으로 줄기만 하고 사라지지 않았다.
+          # 문장 경계를 아는 쪽(우리)이 나눠 REST API 로 직접 보낸다.
+          python -m tools.d1_push /tmp/fts/*.sql
       # 적재가 조용히 반만 되는 실패가 실제로 있었다. **건수를 세서 확인한다** —
       # 네 도메인 중 하나라도 비면 여기서 빨갛게 죽는다.
       - name: 색인 건수 확인
@@ -63,7 +59,7 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
-          wrangler d1 execute employ-archive-ask --remote --json \
+          npx --yes wrangler@4 d1 execute employ-archive-ask --remote --json \
             --config domains/ask/worker/wrangler.jsonc \
             --command "SELECT 도메인, COUNT(*) AS n FROM doc_fts GROUP BY 도메인" \
             | python -m tools.fts_verify /tmp/fts/counts.json
