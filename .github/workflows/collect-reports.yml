@@ -94,6 +94,16 @@ jobs:
           KNOWN_DOWN: ""
         run: python -m domains.reports.pipeline.check_run
 
+  sync:
+    # 색인은 네 도메인에 걸쳐 있다. 수집이 담은 것을 여기서 바로 싣지 않으면
+    # 사람이 다음에 무언가 밀 때까지 검색이 옛 색인으로 답한다.
+    needs: collect
+    if: ${{ !cancelled() && needs.collect.result != 'skipped' }}
+    permissions:
+      contents: write
+    secrets: inherit
+    uses: ./.github/workflows/sync-fts.yml
+
   deploy:
     # 수집이 커밋한 데이터를 사이트에 올린다. **봇이 민 커밋은 push 트리거를
     # 만들지 않는다** — 기본 토큰으로 한 푸시는 다른 워크플로를 트리거하지
@@ -104,7 +114,7 @@ jobs:
     # 수집 잡이 빨개도 배포한다 — 마지막 검사가 실패해도 담은 것은 이미
     # 커밋됐고, 그것이 화면에 안 올라오면 사람이 옛 상태를 보고 판단한다.
     # 건너뛴 경우(press 의 아무 날도 아닌 실행)만 배포하지 않는다.
-    needs: collect
+    needs: [collect, sync]
     if: ${{ !cancelled() && needs.collect.result != 'skipped' }}
     permissions:
       contents: read

@@ -7,7 +7,11 @@ name: sync-fts
 # 게다가 적재는 전량 재적재(DELETE 후 INSERT)라 두 실행이 겹치면 그사이 조회가
 # 빈손을 본다 — concurrency 로 한 번에 하나만 돌게 막는다.
 #
-# 수집 워크플로들이 main 에 데이터를 커밋하므로 이 push 트리거가 저절로 걸린다.
+# **수집 워크플로가 끝에서 이 워크플로를 직접 부른다(workflow_call).** 봇이 민
+# 커밋은 push 이벤트를 만들지 않으므로(기본 토큰으로 한 푸시는 다른 워크플로를
+# 트리거하지 않는 것이 GitHub 규칙이다) 아래 push 트리거는 **사람 푸시에만**
+# 걸린다. 2026-09-13 에 실행 이력을 세어 보고 알았다 — 그때까지 매일의 수집
+# 결과는 색인에 실리지 않았고, 사람이 무언가 밀 때에야 따라 실렸다.
 
 on:
   push:
@@ -24,6 +28,12 @@ on:
       - 'tools/fts_verify.py'
       - '.github/workflows/sync-fts.yml'
   workflow_dispatch:
+  workflow_call:
+
+# 이 워크플로가 질의응답 현황(domains/ask/data/last_run.json)을 커밋한다.
+# 선언이 없으면 저장소 기본값에 따라 읽기 전용이 되어 push 가 403 으로 죽는다.
+permissions:
+  contents: write
 
 concurrency:
   group: sync-fts
@@ -62,6 +72,7 @@ jobs:
       # 적재가 조용히 반만 되는 실패가 실제로 있었다. **건수를 세서 확인한다** —
       # 네 도메인 중 하나라도 비면 여기서 빨갛게 죽는다.
       - name: 색인 건수 확인
+        id: verify
         env:
           PYTHONIOENCODING: utf-8
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -71,3 +82,22 @@ jobs:
             --config domains/ask/worker/wrangler.jsonc \
             --command "SELECT 도메인, COUNT(*) AS n FROM doc_fts GROUP BY 도메인" \
             | python -m tools.fts_verify /tmp/fts/counts.json
+
+      # 질의응답 카드의 값은 여기서 나온다. 이 기록이 없으면 관리자 화면은
+      # 2026-09-08 에 손으로 박아 둔 "카탈로그 정상" 을 영원히 보여준다 —
+      # 색인이 깨진 날에도 그렇다. 실패한 회차도 남긴다(그래야 화면이 말한다).
+      - name: 질의응답 현황 기록
+        if: always()
+        run: |
+          python -m tools.ask_stamp /tmp/fts/counts.json --status ${{ steps.verify.outcome }}
+          git config user.name "ask-bot"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add domains/ask/data/last_run.json
+          if git diff --cached --quiet; then
+            echo "바뀐 것이 없다 — 커밋하지 않는다"
+            exit 0
+          fi
+          git commit -m "chore(ask): 색인 적재 기록 갱신 [skip ci]"
+          # 색인을 싣는 사이 다른 워크플로가 main 에 올렸을 수 있다.
+          git pull --rebase origin main
+          git push
