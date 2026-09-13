@@ -492,12 +492,11 @@
     "abstracts_gzip": 2242477
   },
   "recommend": {
-    "judged": 1880,
-    "picked": 545,
-    "unjudged": 595,
+    "judged": 2475,
+    "picked": 673,
+    "unjudged": 0,
     "profile_version": "f2dfd921",
-    "title_only": 662,
-    "at": "2026-09-12T16:35:09+09:00",
-    "error": "ValueError: API 가 429 를 돌려줬다: {\n    \"error\": {\n        \"message\": \"You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.\",\n        \"type\": \"insufficient_quota\",\n        \"param\": null,\n        \"code\": \"credit_balance_exhaus"
+    "title_only": 865,
+    "at": "2026-09-13T10:21:54+09:00"
   }
 }
