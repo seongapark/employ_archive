@@ -181,7 +181,7 @@ def provider() -> tuple[str, str, dict] | None:
     if os.environ.get('JUDGE_PROVIDER', '').strip().lower() == 'cli':
         # 스위치가 켜지면 어떤 API 키보다 먼저다. 밀리면 잔액 0 인 키로
         # 돌다가 크레딧 부족으로 죽는다 — 구독으로 도는 줄 착각하기 쉽다.
-        return (CLI_URL, MODEL_ANTHROPIC, {})
+        return (CLI_URL, _cli_model(), {})
     key = os.environ.get('ANTHROPIC_API_KEY', '').strip()
     if key:
         return (ANTHROPIC_URL, MODEL_ANTHROPIC,
@@ -213,6 +213,14 @@ def payload_for(url: str, model: str, prompt: str) -> dict:
     return {'model': model, 'max_tokens': MAX_TOKENS, 'messages': msg}
 
 
+def _cli_model() -> str:
+    """`claude -p` 에 넘길 모델. Pro 요금제는 Opus 사용이 제한될 수 있으므로
+    `JUDGE_CLI_MODEL` 로 갈아끼울 수 있게 둔다. provider() 와 _call_cli() 가
+    **같은 값**을 봐야 캐시의 model 필드가 거짓이 되지 않는다.
+    """
+    return os.environ.get('JUDGE_CLI_MODEL', '').strip() or MODEL_ANTHROPIC
+
+
 def _call_cli(prompt: str) -> str:
     """`claude -p` 로 판정한다 — API 크레딧이 아니라 **구독 한도**를 쓴다.
 
@@ -227,7 +235,7 @@ def _call_cli(prompt: str) -> str:
     env = {k: v for k, v in os.environ.items()
            if k not in ('ANTHROPIC_API_KEY', 'ANTHROPIC_AUTH_TOKEN')}
     argv = ['claude', '-p', prompt, '--output-format', 'json',
-            '--model', MODEL_ANTHROPIC]
+            '--model', _cli_model()]
     done = subprocess.run(argv, env=env, capture_output=True, text=True,
                           encoding='utf-8', timeout=CLI_TIMEOUT)
     if done.returncode != 0:

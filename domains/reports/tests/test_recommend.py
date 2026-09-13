@@ -642,3 +642,20 @@ def test_call_api_routes_the_cli_provider_to_the_cli(monkeypatch):
     monkeypatch.setattr(recommend.requests, 'post',
                         lambda *a, **k: pytest.fail('CLI 경로가 HTTP 를 쳤다'))
     assert recommend._call_api('프롬프트') == 'ok'
+
+
+def test_the_cli_model_can_be_overridden(monkeypatch):
+    # Pro 요금제는 Opus 사용이 제한될 수 있다 — 코드를 고치지 않고 갈아탈 수 있어야 한다.
+    seen = _fake_cli(monkeypatch, result=json.dumps({'result': '[]'}))
+    monkeypatch.setenv('JUDGE_CLI_MODEL', 'claude-sonnet-5')
+    recommend._call_cli('프롬프트')
+    assert 'claude-sonnet-5' in seen['argv']
+    assert recommend.MODEL_ANTHROPIC not in seen['argv']
+
+
+def test_the_cli_provider_reports_the_model_it_will_actually_use(monkeypatch):
+    # 캐시의 model 필드가 거짓이 되면 무엇이 판정했는지 추적이 끊긴다.
+    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
+    monkeypatch.setenv('JUDGE_CLI_MODEL', 'claude-sonnet-5')
+    _, model, _ = recommend.provider()
+    assert model == 'claude-sonnet-5'
