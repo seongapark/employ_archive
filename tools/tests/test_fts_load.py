@@ -204,3 +204,19 @@ def test_no_row_carries_a_newline():
 def test_braces_in_real_prose_survive():
     # 글에 쓰인 중괄호는 버리지 않는다 — CSS·JSON 만 버린다.
     assert '{가나}' in fts_load.plain('앞말 {가나} 뒷말')
+
+
+def test_no_row_carries_a_sql_comment_marker():
+    # **적재를 반만 되게 한 두 번째 원인.** 게시판 CSS 주석과 보도자료 상투구 때문에
+    # 생성 SQL 에 `/*` 가 207개인데 `*/` 는 54개였다 — 짝이 안 맞으니 원격 ingest 가
+    # 파일 끝까지 주석으로 삼켰다(종료코드 0).
+    for r in fts_load.rows():
+        for c in ('제목', '본문', '제목색인', '본문색인'):
+            assert '/*' not in r[c], (r['doc_id'], c)
+            assert '*/' not in r[c], (r['doc_id'], c)
+            assert '--' not in r[c], (r['doc_id'], c)
+
+
+def test_squashing_does_not_create_a_comment_marker():
+    # 공백을 지우면 원문에 없던 짝이 생긴다: `.// *세부` → `.//*세부`
+    assert '/*' not in fts_load.squash('보도하여 주시기 바랍니다.// *세부내용은')

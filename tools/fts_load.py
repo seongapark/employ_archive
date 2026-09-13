@@ -64,6 +64,13 @@ _SENT = re.compile(r'(?<=[.?!])\s+|(?<=다\.)\s*|(?<=음\.)\s*|(?<=함\.)\s*')
 #
 # 뿌리는 수집기다(기관 페이지의 style 블록까지 초록으로 담았다). 다만 색인으로 들어오는
 # 글이 전부 이 함수를 지나므로, 한 곳에서 막는 것이 재수집보다 싸고 확실하다.
+# SQL 주석으로 읽히는 글자 짝. **이것이 적재를 반만 되게 한 두 번째 원인이다** —
+# 게시판 CSS 에 `/* 표 헤더 스타일 */` 같은 주석이 남아 있고 보도자료 상투구에 `//*` 가
+# 있어서, 생성된 SQL 전체에 `/*` 가 207개인데 `*/` 는 54개였다. 짝이 안 맞으니 원격
+# ingest 가 파일 끝까지 주석으로 삼켜 뒤쪽 INSERT 를 통째로 버렸다(종료코드는 0).
+# 주석 표시는 색인할 글에서 아무 뜻이 없으므로 짝을 지어 지우고 남은 조각도 지운다.
+_COMMENT = re.compile(r'/\*.*?\*/', re.S)
+_COMMENT_MARK = re.compile(r'/\*|\*/|--+')
 _TAGBLOCK = re.compile(r'(?is)<(style|script)[^>]*>.*?</\1>')
 _TAG = re.compile(r'<[^<>]{0,400}>')
 _BRACE = re.compile(r'\{[^{}]{0,4000}\}')
@@ -75,6 +82,7 @@ _ENTITIES = {'&nbsp;': ' ', '&amp;': '&', '&lt;': '<', '&gt;': '>',
 def plain(text) -> str:
     """본문에서 마크업·CSS·JSON 블록을 걷어내고 공백을 한 칸으로 접는다."""
     s = str(text or '')
+    s = _COMMENT.sub(' ', s)
     s = _TAGBLOCK.sub(' ', s)
     s = _TAG.sub(' ', s)
     # 중괄호 블록이 CSS·JSON 이면 통째로 버린다. 글에 쓰인 중괄호는 `:`·`;` 가 없어 남는다.
@@ -86,6 +94,8 @@ def plain(text) -> str:
     for k, v in _ENTITIES.items():
         s = s.replace(k, v)
     s = _ENTITY.sub(' ', s)
+    # 짝이 없어 남은 주석 표시. 여기까지 오면 글이 아니라 마크업 잔해다.
+    s = _COMMENT_MARK.sub(' ', s)
     return _WS.sub(' ', s).strip()
 
 
@@ -95,8 +105,12 @@ def squash(s) -> str:
     trigram 은 공백까지 그대로 맞아야 걸린다(2026-09-10 실물 D1 실측) — 본문이
     "청년고용" 이면 `청년 고용` 이 0건이다. 색인 사본과 질의 양쪽에서 같은 규칙으로
     지워야 그 문제가 사라진다. 웹앱 검색의 `squash()` 와 같은 해법이다.
+
+    **공백을 지우면 주석 표시가 새로 생긴다.** 보도자료 상투구 `.// *세부내용은` 이
+    공백을 잃으면 `.//*세부내용은` 이 되어 `/*` 가 만들어진다 — 원문에는 없던 짝이다.
+    그래서 지운 뒤 한 번 더 걷어낸다(왜 위험한지는 `_COMMENT_MARK` 주석).
     """
-    return _WS.sub('', str(s or ''))
+    return _COMMENT_MARK.sub('', _WS.sub('', str(s or '')))
 
 
 def chunks(text: str, limit: int = CHUNK) -> list[str]:
