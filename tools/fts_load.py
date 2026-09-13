@@ -77,11 +77,16 @@ _BRACE = re.compile(r'\{[^{}]{0,4000}\}')
 _ENTITY = re.compile(r'&[a-zA-Z]{2,8};|&#\d{2,5};')
 _ENTITIES = {'&nbsp;': ' ', '&amp;': '&', '&lt;': '<', '&gt;': '>',
              '&quot;': '"', '&#39;': "'", '&apos;': "'"}
+# 제어문자. **초록 본문에 NUL 이 들어 있었다**(PDF 에서 뽑은 글). SQLite 는 NUL 이 든
+# 질의를 거부하고(`the query contains a null character`), D1 은 그 자리에서 문자열이
+# 끝난 것처럼 읽어 `unrecognized token` 을 낸다. 이것이 적재가 조용히 반만 되던 마지막
+# 원인이다 — wrangler 의 파일 적재도 같은 자리에서 버퍼를 버렸을 것이다.
+_CONTROL = re.compile(r'[\x00-\x08\x0b\x0c\x0e-\x1f\x7f]')
 
 
 def plain(text) -> str:
     """본문에서 마크업·CSS·JSON 블록을 걷어내고 공백을 한 칸으로 접는다."""
-    s = str(text or '')
+    s = _CONTROL.sub(' ', str(text or ''))
     s = _COMMENT.sub(' ', s)
     s = _TAGBLOCK.sub(' ', s)
     s = _TAG.sub(' ', s)
@@ -257,6 +262,14 @@ def _press() -> list[dict]:
 
 def rows() -> list[dict]:
     return [*_reports(), *_forecast(), *_press(), *_catalog()]
+
+
+def rows_per_domain() -> dict[str, int]:
+    """도메인별 행 수. 적재 뒤 확인기가 이 숫자와 D1 실제 건수를 맞춰 본다."""
+    셈: dict[str, int] = {}
+    for r in rows():
+        셈[r['도메인']] = 셈.get(r['도메인'], 0) + 1
+    return 셈
 
 
 def build_sql(rs: list[dict], batch: int = BATCH, budget: int = BUDGET,
