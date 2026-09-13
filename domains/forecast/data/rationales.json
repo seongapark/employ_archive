@@ -1507,6 +1507,16 @@
     "warnings": []
   },
   {
+    "org": "OECD",
+    "published_at": "2025-12-02",
+    "indicator": "unemp_rate",
+    "text": "Increased female and elderly labour market participation will expand employment, and the unemployment rate will remain low.",
+    "tags": [],
+    "source_url": "https://www.oecd.org/content/dam/oecd/en/publications/reports/2025/12/oecd-economic-outlook-volume-2025-issue-2_413f7d0a/9f653ca1-en.pdf",
+    "source_page": 1,
+    "warnings": []
+  },
+  {
     "org": "KLI",
     "published_at": "2025-12-30",
     "indicator": "emp_change",
