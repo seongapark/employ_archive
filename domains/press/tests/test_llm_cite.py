@@ -172,3 +172,136 @@ def test_prompt_tells_the_two_weights_apart():
     for f in c.FOCUSES:
         assert f in p
     assert '통계를 빼도 기사는 남는다' in p
+
+
+# ── 구독(Claude Code CLI)으로 판정하기 ──────────────────────────────────────
+# API 크레딧을 채우지 않고 Pro/Max 구독으로 돌리는 경로. HTTP 가 아니라
+# `claude -p` 를 부르므로 provider() 의 url 자리에 센티넬이 들어가고 headers 는
+# 빈 dict 다. reports·forecast 와 같은 스위치(JUDGE_PROVIDER)를 쓴다.
+
+def test_the_cli_switch_wins_over_every_api_key(monkeypatch):
+    # 구독으로 돌리려고 켠 스위치가 API 키에 밀리면, 잔액 0 인 키로 돌다가
+    # 크레딧 부족으로 죽는다 — 구독으로 돌고 있다고 착각하기 가장 쉬운 실패다.
+    monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-zero-balance')
+    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
+    url, model, headers = c.provider()
+    assert url == c.CLI_URL
+    assert model == c.MODEL_ANTHROPIC
+    assert headers == {}
+
+
+def test_without_the_switch_the_key_order_is_unchanged(monkeypatch):
+    # 스위치를 켜지 않으면 기존 세 키 차례가 그대로여야 한다(회귀 방지).
+    monkeypatch.delenv('JUDGE_PROVIDER', raising=False)
+    monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-x')
+    url, _, headers = c.provider()
+    assert 'api.anthropic.com' in url and headers['x-api-key'] == 'sk-ant-x'
+
+
+def test_the_cli_provider_is_not_none_so_the_round_does_not_skip_judging(monkeypatch):
+    # run_round 는 provider() 가 None 이면 '키가 없다' 며 판정을 통째로 건너뛰고
+    # 그 기사들을 화면에서 '인용 아님' 으로 센다. 구독 경로에서 None 이 나오면
+    # 실패가 아니라 **조용한 오판정**이 된다.
+    monkeypatch.delenv('ANTHROPIC_API_KEY', raising=False)
+    monkeypatch.delenv('OPENROUTER_API_KEY', raising=False)
+    monkeypatch.delenv('OPENAI_API_KEY', raising=False)
+    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
+    assert c.provider() is not None
+
+
+def _fake_cli(monkeypatch, *, result='[]', returncode=0, stderr=''):
+    """subprocess.run 을 가로채고 argv·env·stdin 을 돌려준다."""
+    seen = {}
+
+    class Done:
+        pass
+
+    def fake_run(argv, **kw):
+        seen['argv'] = argv
+        seen['env'] = kw.get('env') or {}
+        seen['input'] = kw.get('input')
+        done = Done()
+        done.returncode = returncode
+        done.stdout = result if isinstance(result, str) else json.dumps(result)
+        done.stderr = stderr
+        return done
+
+    monkeypatch.setattr(c.subprocess, 'run', fake_run)
+    return seen
+
+
+def test_the_prompt_goes_through_stdin_not_argv(monkeypatch):
+    # 기사 20건에 요약까지 실으면 한 묶음이 수만 자다. argv 로 넘기면 리눅스는
+    # 인자 하나가 128KiB 를 넘을 때, 윈도우는 명령줄이 32,767자를 넘을 때 죽는다 —
+    # 둘 다 기사가 적은 회차에서는 멀쩡해 보인다.
+    seen = _fake_cli(monkeypatch, result=json.dumps({'result': '[]'}))
+    long_prompt = '가' * 40000
+    c._call_cli(long_prompt)
+    assert seen['input'] == long_prompt
+    assert long_prompt not in seen['argv']
+
+
+def test_the_cli_call_scrubs_api_keys_from_the_child_env(monkeypatch):
+    # `claude -p` 의 인증 우선순위는 ANTHROPIC_API_KEY(3위) >
+    # CLAUDE_CODE_OAUTH_TOKEN(5위) 이고, 비대화형(-p)에서는 키가 있으면 **항상**
+    # 그걸 쓴다. 잔액 0 키가 환경에 남아 있으면 구독이 아니라 그 키로 돈다.
+    seen = _fake_cli(monkeypatch, result=json.dumps({'result': '[]'}))
+    monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-zero')
+    monkeypatch.setenv('ANTHROPIC_AUTH_TOKEN', 'bearer-x')
+    monkeypatch.setenv('CLAUDE_CODE_OAUTH_TOKEN', 'oat-live')
+
+    c._call_cli('프롬프트')
+
+    assert 'ANTHROPIC_API_KEY' not in seen['env']
+    assert 'ANTHROPIC_AUTH_TOKEN' not in seen['env']
+    assert seen['env']['CLAUDE_CODE_OAUTH_TOKEN'] == 'oat-live'
+
+
+def test_the_cli_call_never_passes_bare(monkeypatch):
+    # --bare 는 CLAUDE_CODE_OAUTH_TOKEN 을 안 읽는다 — 붙이면 인증이 통째로 안 된다.
+    seen = _fake_cli(monkeypatch, result=json.dumps({'result': '[]'}))
+    c._call_cli('프롬프트')
+    assert '--bare' not in seen['argv']
+    assert '-p' in seen['argv']
+
+
+def test_the_cli_call_unwraps_the_json_envelope(monkeypatch):
+    # --output-format json 은 답을 봉투에 담아 준다. 봉투째 넘기면 parse_response
+    # 가 판정 배열이 아니라 봉투의 키들을 읽으려 한다.
+    body = json.dumps([{'n': 1, 'cites': True, 'why': '수치 인용', 'tone': '긍정',
+                        'focus': '주제'}], ensure_ascii=False)
+    _fake_cli(monkeypatch, result=json.dumps({'type': 'result', 'is_error': False,
+                                              'result': body}))
+    assert c._call_cli('프롬프트') == body
+
+
+def test_a_failing_cli_raises_instead_of_returning_nothing(monkeypatch):
+    # 조용히 빈 문자열을 돌려주면 그 회차 기사가 전부 '인용 아님' 으로 지나간다.
+    # 헤드리스 OAuth 토큰은 10~15분이면 만료된다 — 긴 배치에서 실제로 난다.
+    _fake_cli(monkeypatch, result='', returncode=1,
+              stderr='OAuth token has expired')
+    with pytest.raises(ValueError) as got:
+        c._call_cli('프롬프트')
+    assert 'OAuth token has expired' in str(got.value)
+
+
+def test_call_api_routes_the_cli_provider_to_the_cli(monkeypatch):
+    # provider() 가 센티넬 url 을 돌려줬는데 _call_api 가 그걸 requests.post 에
+    # 넘기면 cli:// 로 HTTP 를 치려 한다.
+    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
+    _fake_cli(monkeypatch, result=json.dumps({'result': 'ok'}))
+    monkeypatch.setattr(c.requests, 'post',
+                        lambda *a, **k: pytest.fail('CLI 경로가 HTTP 를 쳤다'))
+    assert c._call_api('프롬프트') == 'ok'
+
+
+def test_the_cli_model_can_be_swapped(monkeypatch):
+    # Pro 요금제는 Opus 사용이 제한될 수 있다. provider() 와 _call_cli 가 같은
+    # 값을 봐야 어느 모델이 판정했는지가 거짓이 되지 않는다.
+    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
+    monkeypatch.setenv('JUDGE_CLI_MODEL', 'claude-haiku-4-5-20251001')
+    seen = _fake_cli(monkeypatch, result=json.dumps({'result': '[]'}))
+    _, model, _ = c.provider()
+    c._call_cli('프롬프트')
+    assert model == 'claude-haiku-4-5-20251001'
+    assert seen['argv'][seen['argv'].index('--model') + 1] == model

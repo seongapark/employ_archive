@@ -7,8 +7,9 @@
 따로 놀았다. 둘 다 예외 없이 그럴듯한 숫자를 냈다.
 
 판정과 근거를 함께 받는다. 근거가 없으면 왜 틀렸는지 아무도 못 본다.
-공급자는 있는 키를 쓴다(Anthropic → OpenRouter → OpenAI) — 프롬프트와 파싱은
-어느 쪽이든 같고, 요청 모양만 `payload_for` 가 맞춘다.
+공급자는 `JUDGE_PROVIDER=cli` 면 구독(`claude -p`)이고, 아니면 있는 키를 쓴다
+(Anthropic → OpenRouter → OpenAI) — 프롬프트와 파싱은 어느 쪽이든 같고, 요청
+모양만 `payload_for` 가 맞춘다.
 
 **논조도 같은 호출에서 받는다.** 고정 어휘표로는 못 센다는 것이 실측으로
 드러났다 — 어휘표 14개('빨간불'·'한파'·'훈풍'…)는 '26.8월분 인용 73건 중
@@ -22,6 +23,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import subprocess
 from typing import Callable, NamedTuple, Sequence
 
 import requests
@@ -38,6 +40,8 @@ MAX_TOKENS = 4000
 MAX_TOKENS_OPENAI = 16000
 TIMEOUT = 180
 BATCH = 20                      # 한 번에 판정할 기사 수
+CLI_URL = "cli://claude"        # 센티넬 — HTTP 가 아니라 `claude -p` 를 부른다
+CLI_TIMEOUT = 600               # 20건 판정이 몇 분 걸린다(reports 실측 46초/묶음)
 
 _FENCE = re.compile(r"```(?:json)?\s*(.*?)\s*```", re.S)
 
@@ -167,6 +171,12 @@ def provider() -> tuple[str, str, dict] | None:
     (규칙과의 불일치 7건이 전부 LLM 이 맞았다) 그 모델을 쓸 수 있으면 그걸 쓴다.
     OpenAI 는 마지막이다 — 같은 프롬프트로 돌지만 그 실측을 물려받지는 않는다.
     """
+    if os.environ.get("JUDGE_PROVIDER", "").strip().lower() == "cli":
+        # 스위치가 켜지면 어떤 API 키보다 먼저다. 밀리면 잔액 0 인 키로 돌다가
+        # 크레딧 부족으로 죽는다 — 구독으로 도는 줄 착각하기 쉽다.
+        # reports·forecast 와 **같은 이름**(JUDGE_PROVIDER)을 쓴다. 스위치를
+        # 도메인마다 따로 두면 "구독으로 돌린다" 가 한 번에 안 켜진다.
+        return (CLI_URL, _cli_model(), {})
     key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
     if key:
         return (ANTHROPIC_URL, MODEL_ANTHROPIC,
@@ -200,12 +210,59 @@ def payload_for(url: str, model: str, prompt: str) -> dict:
     return {"model": model, "max_tokens": MAX_TOKENS, "messages": msg}
 
 
+def _cli_model() -> str:
+    """`claude -p` 에 넘길 모델. Pro 요금제는 Opus 사용이 제한될 수 있으므로
+    `JUDGE_CLI_MODEL` 로 갈아끼울 수 있게 둔다. provider() 와 _call_cli() 가
+    **같은 값**을 봐야 어느 모델이 판정했는지가 거짓이 되지 않는다.
+    """
+    return os.environ.get("JUDGE_CLI_MODEL", "").strip() or MODEL_ANTHROPIC
+
+
+def _call_cli(prompt: str) -> str:
+    """`claude -p` 로 판정한다 — API 크레딧이 아니라 **구독 한도**를 쓴다.
+
+    **프롬프트를 argv 가 아니라 stdin 으로 준다.** 기사 20건에 요약까지 실으면
+    한 묶음이 수만 자다. 리눅스는 인자 하나가 128KiB 를 넘으면 E2BIG 이고
+    윈도우는 명령줄 전체가 32,767자다 — 둘 다 묶음 크기에 따라 걸린다.
+    `-p` 는 프롬프트 인자가 없으면 stdin 을 읽는다(실측).
+
+    **자식 환경에서 API 키를 지운다.** Claude Code 의 인증 우선순위는
+    `ANTHROPIC_API_KEY`(3위) > `CLAUDE_CODE_OAUTH_TOKEN`(5위) 이고,
+    비대화형(`-p`)에서는 키가 있으면 **항상** 그걸 쓴다. 잔액 0 인 키가 환경에
+    남아 있으면 구독으로 도는 줄 알고 크레딧 부족으로 죽는다.
+
+    **`--bare` 를 쓰지 않는다.** 그 모드는 `CLAUDE_CODE_OAUTH_TOKEN` 을 읽지
+    않아 인증이 통째로 안 된다.
+    """
+    env = {k: v for k, v in os.environ.items()
+           if k not in ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN")}
+    argv = ["claude", "-p", "--output-format", "json", "--model", _cli_model()]
+    done = subprocess.run(argv, input=prompt, env=env, capture_output=True,
+                          text=True, encoding="utf-8", timeout=CLI_TIMEOUT)
+    if done.returncode != 0:
+        raise ValueError(f"claude -p 가 {done.returncode} 로 끝났다: "
+                         f"{(done.stderr or done.stdout or '')[:300]}")
+    try:
+        data = json.loads(done.stdout)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f"claude -p 출력이 JSON 이 아니다: "
+                         f"{done.stdout[:300]}") from exc
+    if data.get("is_error"):
+        raise ValueError(f"claude -p 가 오류를 돌려줬다: {str(data)[:300]}")
+    text = data.get("result")
+    if not isinstance(text, str):
+        raise ValueError(f"봉투에 result 문자열이 없다: {str(data)[:300]}")
+    return text
+
+
 def _call_api(prompt: str) -> str:
     got = provider()
     if got is None:
         raise RuntimeError("ANTHROPIC_API_KEY · OPENROUTER_API_KEY · OPENAI_API_KEY "
                            "중 아무것도 없다")
     url, model, headers = got
+    if url == CLI_URL:
+        return _call_cli(prompt)
     resp = requests.post(url, headers=headers, json=payload_for(url, model, prompt),
                          timeout=TIMEOUT)
     if resp.status_code != 200:
