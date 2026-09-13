@@ -15,7 +15,7 @@ export const DOMAINS = [
   { slug: 'employment', name: '고용동향', desc: '경활·사업체·고용행정통계 비교' },
   { slug: 'press', name: '행통 모니터링', desc: '고용행정통계 기사 모니터링' },
   { slug: 'forecast', name: '고용전망', desc: '기관별 고용 전망치' },
-  { slug: 'reports', name: '연구보고서', desc: 'KLI·KEIS·KDI·KIET 고용 보고서 검색' },
+  { slug: 'reports', name: '연구보고서', desc: '고용 및 경제 관련 보고서 아카이브' },
 ];
 
 export function domainState(lastRun) {
