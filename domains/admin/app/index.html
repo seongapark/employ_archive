@@ -16,6 +16,11 @@
     <header class="header">
       <a class="header__home" href="../" aria-label="허브로">←</a>
       <div class="header__title">관리자</div>
+      <!-- 이 화면의 숫자는 한 번 받아 두고 탭을 옮겨도 다시 받지 않는다(admin.js).
+           그래서 열어 둔 채로 회차가 돌면 화면만 옛 상태로 남는다 — 실제로
+           고쳐진 실패를 계속 실패로 읽은 적이 있다. 페이지를 새로 여는 대신
+           여기서 다시 받는다. -->
+      <button id="refresh" class="header__refresh" type="button" aria-label="새로고침">↻</button>
     </header>
     <!-- 성격이 다른 두 화면이라 탭으로 가른다. 한 두루마리로 이어 붙이면
          "수집이 잘 도나"(도메인 현황)와 "사람이 오나"(방문 현황)가 눈에

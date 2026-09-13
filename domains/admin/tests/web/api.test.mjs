@@ -80,12 +80,17 @@ test('자리표시자 url 이면 fetch 없이 미배포다', async () => {
 // 읽는다 — 절대경로를 박으면 배포 경로 접두사가 바뀔 때마다 깨진다.
 test('현황불러오기는 상대경로로 도메인별 JSON 을 읽는다', async () => {
   const 본요청 = [];
-  const fetch = async (url) => {
+  const 본옵션 = [];
+  const fetch = async (url, opt) => {
     본요청.push(url);
+    본옵션.push(opt);
     return { ok: true, json: async () => ({ run_at: 'x' }) };
   };
   const 결과 = await 현황불러오기({ fetch, 목록: ['employment', 'reports'] });
   assert.deepEqual(본요청.sort(), ['../employment/data/last_run.json', '../reports/data/last_run.json']);
+  // GitHub Pages 가 이 JSON 에도 max-age=600 을 붙인다. 재검증을 안 걸면
+  // 새로고침을 눌러도 10분 동안 옛 파일이 나와 단추가 안 듣는 것처럼 보인다.
+  assert.deepEqual(본옵션, [{ cache: 'no-cache' }, { cache: 'no-cache' }]);
   assert.deepEqual(결과.employment, { run_at: 'x' });
   assert.deepEqual(결과.reports, { run_at: 'x' });
 });
