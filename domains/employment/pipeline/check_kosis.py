@@ -21,12 +21,22 @@ KOSIS_URL = "https://kosis.kr/openapi/Param/statisticsParameterData.do"
 
 # 경활 취업자(15세 이상 전체). 2026-08-31 에 보도자료와 최근 4개월이 모두 일치함을
 # 확인하고 골랐다. sources.json 의 eaps.kosis_url 이 가리키는 표와 같아야 한다.
+#
+# **이 표는 취업자 하나만 담는다**(itmId T30). 그래서 대조 상대도 취업자여야 한다 —
+# 아래 SERIES 가 그것을 고정한다. 표를 다른 지표로 바꾸려면 둘을 같이 고쳐야 한다.
 EAPS_TABLE = {
     "orgId": "101",
     "tblId": "DT_1DA7002S",
     "itmId": "T30",        # 취업자
     "objL1": "00",         # 15세 이상 전체
 }
+
+# **대조할 지표.** 지표 축이 생기기 전에는 `source=eaps · breakdown=total` 이
+# 달마다 한 줄이라 이것 없이도 취업자가 잡혔다. 지금은 같은 달에 여덟 줄
+# (취업자·고용률·실업률·경제활동인구…)이 있어서, 거르지 않으면 max() 가 그중
+# 아무거나 집는다. 2026-09-12 수집이 그래서 죽었다 — 고용률 63.3(%)을 KOSIS 의
+# 취업자 29,151(천명)과 견주고는 "분류 개편으로 표가 바뀌었다" 고 말했다.
+SERIES = "headcount"
 
 # 천명 단위. KOSIS 와 보도자료는 같은 원자료이므로 반올림 차이만 허용한다.
 TOLERANCE = 0.2
@@ -65,7 +75,8 @@ def check(records, *, api_key: str | None = None, get=requests.get) -> str | Non
     키가 없거나 KOSIS 가 죽어 있으면 실패시키지 않는다. 대조를 못 한 것과
     대조에 실패한 것은 다르다.
     """
-    totals = [r for r in records if r.source == "eaps" and r.breakdown == "total"]
+    totals = [r for r in records if r.source == "eaps" and r.breakdown == "total"
+              and r.series == SERIES]
     if not totals:
         return None
     latest = max(totals, key=lambda r: r.period)
