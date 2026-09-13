@@ -127,3 +127,16 @@ test('요약 프롬프트가 지어내기를 막는 규칙을 담는다', async 
   assert.ok(본.system.includes('재료에 있는 숫자만'), 본.system);
   assert.ok(본.system.includes('인과를 단정하지 않는다'), 본.system);
 });
+
+test('기사는 제목만 있다는 규칙이 프롬프트에 있다', async () => {
+  let 본 = null;
+  const fake = async (url, opts) => {
+    본 = JSON.parse(opts.body);
+    return { ok: true, json: async () => ({ content: [{ type: 'text', text: 'x' }] }) };
+  };
+  await makeClaude({ apiKey: 'k', model: 'm', baseUrl: 'https://x/v1', fetch: fake }).요약({});
+  // press 도메인은 기사 제목만 색인한다 — 내용을 아는 척하면 안 되고, 훑어보기를 권해야 한다.
+  assert.ok(본.system.includes("'기사' 인 출처는 제목만"), 본.system);
+  assert.ok(본.system.includes('훑어보라'), 본.system);
+  assert.ok(본.system.includes('비슷한말'), 본.system);
+});

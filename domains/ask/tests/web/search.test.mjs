@@ -109,11 +109,14 @@ test('LLM 을 부르지 않는다', async () => {
 
 test('세 글자 미만 질의는 LIKE 로 훑는다', async () => {
   // trigram 은 세 글자가 최소 단위라 '고용' 이 색인으로는 0건이다.
+  // 원어 조회는 도메인마다 먼저 한 번 나간다 — 그 첫 조회에 MATCH 가 없어야 한다.
+  // (그 뒤 자리가 안 차면 비슷한 말로 보충하는데, 그쪽은 세 글자 말을 담아 MATCH 를 쓴다.)
   const 본 = [];
   const deps = { db: { all: async (sql, p) => { 본.push(sql); return []; } } };
   await lookup(deps, '고용');
-  assert.ok(본.some((s) => /LIKE/.test(s)), 본.join('\n'));
-  assert.equal(본.some((s) => /MATCH/.test(s)), false);
+  const 색인조회 = 본.filter((s) => /doc_fts/.test(s));
+  assert.ok(색인조회.some((s) => /LIKE/.test(s)), 색인조회.join('\n'));
+  assert.equal(/MATCH/.test(색인조회[0]), false, 색인조회[0]);
 });
 
 
@@ -147,7 +150,8 @@ test('여러 낱말이 걸린 글이 위로 온다', async () => {
   // '고용' 은 거의 모든 글에 있다. 걸린 낱말 수로 정렬하지 않으면 '고용' 하나만
   // 걸린 글이 '정년+연장+고용' 이 다 걸린 글보다 위로 온다.
   let sql = '';
-  const deps = { db: { all: async (s, p) => { if (/LIKE/.test(s)) sql = s; return []; } } };
+  // **첫 LIKE 조회만 본다.** 뒤따르는 보충 조회는 비슷한 말로 던지는 다른 조회다.
+  const deps = { db: { all: async (s, p) => { if (/LIKE/.test(s) && !sql) sql = s; return []; } } };
   await lookup(deps, '정년 연장이 고용에 미치는 영향');
   assert.match(sql, /ORDER BY/);
   // 걸린 낱말 수를 더해 내림차순으로 세운다
@@ -159,7 +163,8 @@ test('낱말이 여럿이면 하나만 걸린 글은 버린다', async () => {
   // '고용' 은 이 저장소의 거의 모든 글에 있다. 그것 하나만 걸린 글을 "정년 연장"
   // 질문의 답으로 내밀면 묻지 않은 것을 답한 셈이다.
   let p = null;
-  const deps = { db: { all: async (s, q) => { if (/LIKE/.test(s)) p = { s, q }; return []; } } };
+  // 원어 조회에만 걸리는 규칙이다. 보충 조회는 하나만 걸려도 받는다(점수 0 으로 뒤에 선다).
+  const deps = { db: { all: async (s, q) => { if (/LIKE/.test(s) && !p) p = { s, q }; return []; } } };
   await lookup(deps, '정년 연장이 고용에 미치는 영향');
   assert.match(p.s, />=\s*\?/);
   assert.ok(p.q.includes(2), JSON.stringify(p.q));
@@ -167,7 +172,7 @@ test('낱말이 여럿이면 하나만 걸린 글은 버린다', async () => {
 
 test('낱말이 하나뿐이면 그 하나로 찾는다', async () => {
   let p = null;
-  const deps = { db: { all: async (s, q) => { if (/LIKE/.test(s)) p = { s, q }; return []; } } };
+  const deps = { db: { all: async (s, q) => { if (/LIKE/.test(s) && !p) p = { s, q }; return []; } } };
   await lookup(deps, '임금');
   assert.ok(p.q.includes(1), JSON.stringify(p.q));
 });
