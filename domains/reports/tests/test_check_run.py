@@ -77,3 +77,32 @@ def test_high_abstract_miss_rate_warns_but_does_not_fail():
 def test_a_run_with_no_boards_at_all_is_reported():
     code, msgs = check_run.check(last({}))
     assert any('수집한 게시판이 없다' in m for m in msgs)
+
+
+def test_a_failed_judging_step_fails_the_run():
+    # 추천 단계는 continue-on-error 라 실패해도 워크플로가 초록으로 끝난다.
+    # recommend.py 는 last_run 에 error 를 남기지만 check_run 이 그걸 보지 않으면
+    # 미판정이 조용히 쌓인다 — 2,236건 중 356건이 정확히 그렇게 쌓였다.
+    code, msgs = check_run.check(last(
+        {'kli-eia': {'ok': True, 'parsed': 8, 'added': 0}},
+        recommend={'judged': 1880, 'picked': 545, 'unjudged': 356,
+                   'error': 'ValueError: API 가 400 을 돌려줬다'},
+    ))
+    assert code == 1
+    assert any('판정' in m for m in msgs)
+
+
+def test_unjudged_reports_warn_but_do_not_fail_the_run():
+    # 백로그를 여러 회차로 쪼개 소진하는 중에는 미판정이 남아 있는 게 정상이다.
+    code, msgs = check_run.check(last(
+        {'kli-eia': {'ok': True, 'parsed': 8, 'added': 0}},
+        recommend={'judged': 2000, 'picked': 600, 'unjudged': 236},
+    ))
+    assert code == 0
+    assert any('236' in m for m in msgs)
+
+
+def test_a_run_with_nothing_to_judge_passes():
+    # 판정할 게 없으면 recommend.py 는 블록을 아예 쓰지 않는다 — 정상이다.
+    code, _ = check_run.check(last({'kli-eia': {'ok': True, 'parsed': 8, 'added': 0}}))
+    assert code == 0

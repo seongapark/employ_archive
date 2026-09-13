@@ -78,6 +78,18 @@ def check(last_run: dict, known_down: str = '', today: str = '') -> tuple[int, l
                 msgs.append(f'초록 결측률 높음: {org}/{name} '
                             f"{cell['missing']}/{cell['total']}")
 
+    # 추천 단계는 워크플로에서 continue-on-error 다 — 실패해도 실행은 초록으로
+    # 끝난다. recommend.py 가 last_run 에 남긴 error 를 여기서 보지 않으면
+    # 미판정이 아무도 모르게 쌓인다(2,236건 중 356건이 그렇게 쌓였다).
+    rec = last_run.get('recommend') or {}
+    if rec.get('error'):
+        msgs.append(f"판정 실패: {rec['error']}")
+        failed = True
+    unjudged = rec.get('unjudged') or 0
+    if unjudged:
+        # 백로그를 회차로 쪼개 소진하는 중에는 정상이므로 실패시키지 않는다.
+        msgs.append(f'미판정 {unjudged}건 남음')
+
     if not boards:
         msgs.append('수집한 게시판이 없다')
     return (1 if failed else 0), msgs

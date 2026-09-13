@@ -19,6 +19,7 @@ if hasattr(sys.stdout, 'reconfigure'):
 import json
 import os
 import re
+import subprocess
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable, NamedTuple, Sequence
@@ -43,6 +44,8 @@ MAX_TOKENS = 4000
 # 실측과 같은 이유).
 MAX_TOKENS_OPENAI = 16000
 TIMEOUT = 180
+CLI_URL = 'cli://claude'   # 센티넬 — HTTP 가 아니라 `claude -p` 를 부른다
+CLI_TIMEOUT = 600          # 20건 판정이 몇 분 걸린다
 BATCH = 20                  # 한 번에 판정할 보고서 수
 ABSTRACT_CAP = 800          # 초록을 이보다 길게 보내지 않는다
 
@@ -175,6 +178,10 @@ def provider() -> tuple[str, str, dict] | None:
     같은 프롬프트로 돌지만 그 전제(축 이름 매칭, why 길이감)를 물려받지
     않는다(domains/press/pipeline/llm_cite.py 의 선례와 같은 순서).
     """
+    if os.environ.get('JUDGE_PROVIDER', '').strip().lower() == 'cli':
+        # 스위치가 켜지면 어떤 API 키보다 먼저다. 밀리면 잔액 0 인 키로
+        # 돌다가 크레딧 부족으로 죽는다 — 구독으로 도는 줄 착각하기 쉽다.
+        return (CLI_URL, MODEL_ANTHROPIC, {})
     key = os.environ.get('ANTHROPIC_API_KEY', '').strip()
     if key:
         return (ANTHROPIC_URL, MODEL_ANTHROPIC,
@@ -206,12 +213,47 @@ def payload_for(url: str, model: str, prompt: str) -> dict:
     return {'model': model, 'max_tokens': MAX_TOKENS, 'messages': msg}
 
 
+def _call_cli(prompt: str) -> str:
+    """`claude -p` 로 판정한다 — API 크레딧이 아니라 **구독 한도**를 쓴다.
+
+    **자식 환경에서 API 키를 지운다.** Claude Code 의 인증 우선순위는
+    `ANTHROPIC_API_KEY`(3위) > `CLAUDE_CODE_OAUTH_TOKEN`(5위) 이고,
+    비대화형(`-p`)에서는 키가 있으면 **항상** 그걸 쓴다. 잔액 0 인 키가 환경에
+    남아 있으면 구독으로 도는 줄 알고 크레딧 부족으로 죽는다.
+
+    **`--bare` 를 쓰지 않는다.** 그 모드는 `CLAUDE_CODE_OAUTH_TOKEN` 을 읽지
+    않아 인증이 통째로 안 된다.
+    """
+    env = {k: v for k, v in os.environ.items()
+           if k not in ('ANTHROPIC_API_KEY', 'ANTHROPIC_AUTH_TOKEN')}
+    argv = ['claude', '-p', prompt, '--output-format', 'json',
+            '--model', MODEL_ANTHROPIC]
+    done = subprocess.run(argv, env=env, capture_output=True, text=True,
+                          encoding='utf-8', timeout=CLI_TIMEOUT)
+    if done.returncode != 0:
+        raise ValueError(f'claude -p 가 {done.returncode} 로 끝났다: '
+                         f'{(done.stderr or done.stdout or "")[:300]}')
+    try:
+        data = json.loads(done.stdout)
+    except json.JSONDecodeError as exc:
+        raise ValueError(f'claude -p 출력이 JSON 이 아니다: '
+                         f'{done.stdout[:300]}') from exc
+    if data.get('is_error'):
+        raise ValueError(f'claude -p 가 오류를 돌려줬다: {str(data)[:300]}')
+    text = data.get('result')
+    if not isinstance(text, str):
+        raise ValueError(f'봉투에 result 문자열이 없다: {str(data)[:300]}')
+    return text
+
+
 def _call_api(prompt: str) -> str:
     got = provider()
     if got is None:
         raise RuntimeError('ANTHROPIC_API_KEY · OPENROUTER_API_KEY · OPENAI_API_KEY '
                            '중 아무것도 없다')
     url, model, headers = got
+    if url == CLI_URL:
+        return _call_cli(prompt)
     resp = requests.post(url, headers=headers, json=payload_for(url, model, prompt),
                          timeout=TIMEOUT)
     if resp.status_code != 200:
