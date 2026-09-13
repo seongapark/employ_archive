@@ -179,3 +179,28 @@ def test_no_domain_file_is_huge(tmp_path):
     for name, _ in fts_load.write_files(tmp_path)[1:]:
         크기 = (tmp_path / name).stat().st_size
         assert 크기 <= fts_load.FILE_BUDGET * 1.6, (name, 크기)
+
+
+def test_markup_and_css_are_stripped():
+    # 게시판 초록에 style 블록·JSON-LD·태그가 섞여 들어온다. 그대로 색인하면 스니펫에
+    # `color:#ffffff;` 가 뜨고 색인이 CSS 낱말로 찬다.
+    더러운것 = ('<p>청년 <b>고용</b>&nbsp;연구</p>'
+                '<style>.a{color:#fff;}</style> .kiet-wrap {\n display: grid;\n gap: 4px;\n}')
+    깨끗한것 = fts_load.plain(더러운것)
+    assert '청년 고용 연구' in 깨끗한것
+    assert 'color' not in 깨끗한것
+    assert 'grid' not in 깨끗한것
+
+
+def test_no_row_carries_a_newline():
+    # **이게 적재를 조용히 반만 되게 했다.** CSS 는 `;` 뒤에 줄바꿈이 오고, 그 `;\n` 이
+    # SQL 문자열 안에 있으면 wrangler 의 원격 ingest 가 문장이 끝난 줄로 읽어 뒤를 버린다.
+    for r in fts_load.rows():
+        assert '\n' not in r['본문'], r['doc_id']
+        assert '\n' not in r['제목'], r['doc_id']
+        assert ';\n' not in r['본문'], r['doc_id']
+
+
+def test_braces_in_real_prose_survive():
+    # 글에 쓰인 중괄호는 버리지 않는다 — CSS·JSON 만 버린다.
+    assert '{가나}' in fts_load.plain('앞말 {가나} 뒷말')
