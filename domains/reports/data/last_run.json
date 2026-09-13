@@ -492,12 +492,11 @@
     "abstracts_gzip": 2818918
   },
   "recommend": {
-    "judged": 2475,
-    "picked": 673,
-    "unjudged": 389,
+    "judged": 2864,
+    "picked": 777,
+    "unjudged": 0,
     "profile_version": "f2dfd921",
-    "title_only": 865,
-    "at": "2026-09-13T11:47:39+09:00",
-    "error": "ValueError: claude -p 가 1 로 끝났다: {\"duration_api_ms\":0,\"stop_reason\":\"stop_sequence\",\"session_id\":\"84278e44-8e2a-43f5-a45d-9e2736960b52\",\"total_cost_usd\":0,\"usage\":{\"output_tokens_details\":{\"thinking_tokens\":0},\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_token"
+    "title_only": 890,
+    "at": "2026-09-13T15:31:35+09:00"
   }
 }
