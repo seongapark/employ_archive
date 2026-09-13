@@ -2,7 +2,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { 묶음HTML, 답변HTML, 도메인이름 } from '../../app/js/lookup.js';
+import { 묶음HTML, 답변HTML, 질문해시, 도메인이름 } from '../../app/js/lookup.js';
 import { badgeLabel } from '../../app/js/badge.js';
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => (
@@ -86,4 +86,12 @@ test('문장도 이스케이프한다 — LLM 출력이 그대로 HTML 이 되�
 
 test('요약실패 배지에 제 라벨이 있다', () => {
   assert.match(badgeLabel('요약실패').라벨, /잠시 후 다시/);
+});
+
+test('질문 해시는 되풀이해도 같다 — 그래야 한 번 눌러 한 번만 보낸다', () => {
+  // 실측: 제출 때 해시를 바꾸고 go 도 직접 불러서 POST 가 2건 나갔다(LLM 비용 두 배).
+  const q = '최근 고용상황은?';
+  assert.equal(질문해시(q), 질문해시(q));
+  assert.equal(질문해시(` ${q} `), 질문해시(q), '앞뒤 공백이 다른 주소를 만들면 또 두 번 보낸다');
+  assert.equal(decodeURIComponent(질문해시(q).replace('#/q=', '')), q);
 });

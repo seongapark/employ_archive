@@ -1,5 +1,5 @@
 import { badgeLabel } from './badge.js';
-import { 묶음HTML, 답변HTML } from './lookup.js';
+import { 묶음HTML, 답변HTML, 질문해시 } from './lookup.js';
 
 // Worker 배포 주소. 워커를 다시 배포해 주소가 바뀌면 이 한 줄을 고친다.
 // 워커 쪽 CORS 는 wrangler.jsonc 의 ASK_ALLOWED_ORIGIN 이 정한다 — 둘이 어긋나면
@@ -71,7 +71,15 @@ async function go(q) {
 document.getElementById('qform').addEventListener('submit', (e) => {
   e.preventDefault();
   const q = document.getElementById('q').value.trim();
-  if (q) { location.hash = `#/q=${encodeURIComponent(q)}`; go(q); }
+  if (!q) return;
+  // **한 번 누르면 한 번만 보낸다.** 해시를 바꾸면 `hashchange` 가 `fromHash` 를 통해
+  // `go` 를 부른다 — 여기서 또 부르면 요청이 두 번 나간다. 워커 로그로 확인했다:
+  // 한 번 눌렀는데 POST 가 2건이었다(2026-09-13). 문장을 두 번 만들어 **LLM 비용이
+  // 두 배**였고, 화면은 늦게 온 응답으로 한 번 더 덮였다.
+  // 같은 질문을 다시 누르면 해시가 안 바뀌어 `hashchange` 가 안 오므로 그때만 직접 부른다.
+  const 해시 = 질문해시(q);
+  if (location.hash === 해시) go(q);
+  else location.hash = 해시;
 });
 
 function fromHash() {
