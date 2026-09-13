@@ -63,4 +63,4 @@ jobs:
           npx --yes wrangler@4 d1 execute employ-archive-ask --remote --json \
             --config domains/ask/worker/wrangler.jsonc \
             --command "SELECT 도메인, COUNT(*) AS n FROM doc_fts GROUP BY 도메인" \
-            | python -m tools.fts_verify
+            | python -m tools.fts_verify /tmp/fts/counts.json

@@ -52,6 +52,43 @@ _WS = re.compile(r'\s+')
 _SENT = re.compile(r'(?<=[.?!])\s+|(?<=다\.)\s*|(?<=음\.)\s*|(?<=함\.)\s*')
 
 
+# 게시판에서 긁어 온 초록에는 **본문이 아닌 것**이 섞여 있다 — CSS 규칙 블록,
+# JSON-LD, HTML 태그, 엔티티. 그대로 색인하면 두 가지가 망가진다.
+#
+# ① 검색 품질: 스니펫에 `color:#ffffff;` 가 뜨고, 색인이 CSS 낱말로 찬다.
+# ② **적재가 조용히 반만 된다.** CSS 는 `;` 뒤에 줄바꿈이 오는데, 그 `;\n` 이 SQL 문자열
+#    안에 들어가면 wrangler 의 원격 ingest 가 문장이 끝난 줄로 읽는다 — 2026-09-13 에
+#    `leftover buffer from sql.ingest` 경고와 함께 115행이 사라졌고 종료코드는 0이었다
+#    (CSS 블록이 든 두 파일에서만 났다. 인용문의 `; ` 는 줄바꿈이 아니라 멀쩡했다).
+#    그래서 여기서 **모든 공백을 한 칸으로 접는다** — 값 안에 줄바꿈이 남지 않는다.
+#
+# 뿌리는 수집기다(기관 페이지의 style 블록까지 초록으로 담았다). 다만 색인으로 들어오는
+# 글이 전부 이 함수를 지나므로, 한 곳에서 막는 것이 재수집보다 싸고 확실하다.
+_TAGBLOCK = re.compile(r'(?is)<(style|script)[^>]*>.*?</\1>')
+_TAG = re.compile(r'<[^<>]{0,400}>')
+_BRACE = re.compile(r'\{[^{}]{0,4000}\}')
+_ENTITY = re.compile(r'&[a-zA-Z]{2,8};|&#\d{2,5};')
+_ENTITIES = {'&nbsp;': ' ', '&amp;': '&', '&lt;': '<', '&gt;': '>',
+             '&quot;': '"', '&#39;': "'", '&apos;': "'"}
+
+
+def plain(text) -> str:
+    """본문에서 마크업·CSS·JSON 블록을 걷어내고 공백을 한 칸으로 접는다."""
+    s = str(text or '')
+    s = _TAGBLOCK.sub(' ', s)
+    s = _TAG.sub(' ', s)
+    # 중괄호 블록이 CSS·JSON 이면 통째로 버린다. 글에 쓰인 중괄호는 `:`·`;` 가 없어 남는다.
+    for _ in range(4):
+        나중 = _BRACE.sub(lambda m: ' ' if (':' in m.group(0) or ';' in m.group(0)) else m.group(0), s)
+        if 나중 == s:
+            break
+        s = 나중
+    for k, v in _ENTITIES.items():
+        s = s.replace(k, v)
+    s = _ENTITY.sub(' ', s)
+    return _WS.sub(' ', s).strip()
+
+
 def squash(s) -> str:
     """공백을 전부 지운다.
 
@@ -68,7 +105,7 @@ def chunks(text: str, limit: int = CHUNK) -> list[str]:
     문단 경계로 자르고 싶어도 못 자른다 — PDF 에서 뽑은 초록은 공백을 합쳐 넣었고
     게시판에서 받은 초록도 줄바꿈 보존 이전 파싱이라 문단이 없다.
     """
-    s = str(text or '').strip()
+    s = plain(text)
     if not s:
         return []
     out: list[str] = []
@@ -105,9 +142,11 @@ def _row(doc_id, 도메인, 종류, 링크, 제목, 본문, 날짜='') -> dict:
     어긋나면 조용히 틀린다. 값이 없으면 **빈 문자열**이고, 카탈로그의 한계·충돌이
     거기 해당한다(상시 사실이라 날짜가 없다).
     """
+    제목 = plain(제목)
+    본문 = plain(본문)
     return {
         'doc_id': doc_id, '도메인': 도메인, '종류': 종류,
-        '링크': 링크 or '', '제목': 제목 or '', '본문': 본문, '날짜': 날짜 or '',
+        '링크': 링크 or '', '제목': 제목, '본문': 본문, '날짜': 날짜 or '',
         '제목색인': squash(제목), '본문색인': squash(본문),
     }
 
