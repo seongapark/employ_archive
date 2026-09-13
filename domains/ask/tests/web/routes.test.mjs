@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { handleAsk, quotaKey, checkQuota } from '../../worker/src/api/routes.mjs';
+import { handleAsk, handleLookup, quotaKey, checkQuota } from '../../worker/src/api/routes.mjs';
 import { verify } from '../../worker/src/core/verify.mjs';
 import { makeFakeDb } from './fixtures/fakedb.mjs';
 
@@ -423,4 +423,79 @@ test('검증이 걸리면 환각인지 표기 차이인지 가를 정보를 싣�
   const 진단 = Object.fromEntries((r.검증진단 ?? []).map((d) => [d.숫자, d.판정]));
   assert.equal(진단[180000], '표기차이');
   assert.equal(진단[99], '근거밖');
+});
+
+// ── 출처 탐색 + 요약 ───────────────────────────────────────────────────────
+//
+// **카드는 네 경우 모두 그대로 나간다** — 한도초과·확인불가·요약 실패·검증 실패.
+// 문장만 빠진다. 카드가 같이 사라지면 LLM 장애가 곧 검색 장애가 된다.
+
+const 탐색DB = {
+  all: async (sql, p) => {
+    if (/MAX\(period\)/.test(sql)) return [{ 최신: '2026-08' }];
+    if (/observation/.test(sql)) {
+      return [{ source: 'eaps', breakdown: 'total', category: null, period: '2026-08',
+                value: 29151, unit: '천명', yoy: 12.3, release_url: 'https://kostat/1' }];
+    }
+    if (/doc_fts/.test(sql)) {
+      const 도메인 = /MATCH/.test(sql) ? p[1] : p[0];
+      if (도메인 !== 'press') return [];
+      return [{ doc_id: 'press:1:기사:0', 종류: '기사', 링크: 'https://x/1', 날짜: '2026-09-07',
+                제목: '취업자 증가폭 확대', 본문: '취업자가 늘었다는 보도다' }];
+    }
+    return [];
+  },
+};
+
+const 탐색deps = (llm, kv = memKv()) => ({ db: 탐색DB, kv, quota: 30, llm });
+
+test('요약 문장을 카드와 함께 낸다', async () => {
+  const llm = { 요약: async () => '2026년 8월 취업자는 29151천명이다.' };
+  const r = await handleLookup(탐색deps(llm), { 질문: '취업자', ip: '1.1.1.1', today: '2026-09-13' });
+  assert.equal(r.답변, '2026년 8월 취업자는 29151천명이다.');
+  assert.ok(r.묶음.length >= 2);
+  assert.deepEqual(r.배지, []);
+});
+
+test('재료에 없는 숫자를 쓰면 문장만 버리고 카드는 남긴다', async () => {
+  const llm = { 요약: async () => '취업자는 31400천명이다.' };
+  const r = await handleLookup(탐색deps(llm), { 질문: '취업자', ip: '1.1.1.1', today: '2026-09-13' });
+  assert.equal(r.답변, undefined);
+  assert.ok(r.배지.includes('검증실패'));
+  assert.deepEqual(r.검증위반, [31400]);
+  // 위반 숫자만으로는 환각인지 표기 문제인지 못 가른다 — 진단을 같이 싣는다.
+  assert.equal(r.검증진단[0].판정, '근거밖');
+  assert.ok(r.묶음.some((g) => g.결과.length), '카드가 사라졌다');
+});
+
+test('LLM 이 죽으면 요약실패 배지를 달고 카드를 낸다', async () => {
+  const llm = { 요약: async () => { throw new Error('boom'); } };
+  const r = await handleLookup(탐색deps(llm), { 질문: '취업자', ip: '1.1.1.1', today: '2026-09-13' });
+  assert.ok(r.배지.includes('요약실패'));
+  assert.ok(r.묶음.some((g) => g.결과.length));
+});
+
+test('한도를 넘기면 LLM 을 아예 부르지 않는다 — 카드는 그대로', async () => {
+  let 불렸나 = false;
+  const llm = { 요약: async () => { 불렸나 = true; return 'x'; } };
+  const kv = memKv({ 'q:1.1.1.1:2026-09-13': '30' });
+  const r = await handleLookup(탐색deps(llm, kv), { 질문: '취업자', ip: '1.1.1.1', today: '2026-09-13' });
+  assert.equal(불렸나, false);
+  assert.ok(r.배지.includes('한도초과'));
+  assert.ok(r.묶음.some((g) => g.결과.length));
+});
+
+test('할당량을 못 세면 한도초과와 다른 배지를 단다 — 할 수 있는 일이 다르다', async () => {
+  const 죽은kv = { get: async () => { throw new Error('kv down'); }, put: async () => {} };
+  const r = await handleLookup(탐색deps({ 요약: async () => 'x' }, 죽은kv),
+                               { 질문: '취업자', ip: '1.1.1.1', today: '2026-09-13' });
+  assert.ok(r.배지.includes('할당량확인불가'));
+  assert.equal(r.배지.includes('한도초과'), false);
+});
+
+test("'작년' 을 오늘 기준으로 풀어 슬롯에 담는다", async () => {
+  const r = await handleLookup(탐색deps({ 요약: async () => 'x' }),
+    { 질문: '작년 취업자', ip: '1.1.1.1', today: '2026-09-13',
+      now: new Date('2026-09-13T04:00:00Z') });
+  assert.deepEqual(r.슬롯.기간, { from: '2025-01', to: '2025-12' });
 });

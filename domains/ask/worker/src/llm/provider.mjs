@@ -107,6 +107,70 @@ const SYS_COMPOSE =
   '근거에 없는 수치를 절대 만들지 않고, 계산도 하지 않는다(파생값은 이미 들어 있다). ' +
   '인과를 단정하지 않고 상관·선후만 말한다. 한계와 미확인을 반드시 채운다.';
 
+// ── 요약: 지금 실제로 쓰이는 유일한 LLM 호출 ──────────────────────────────
+//
+// **JSON 을 요구하지 않는다.** 필요한 산출물이 문장 하나라서다 — 한계·사유는 이미
+// 코드가 만들어 카드에 담아 두었고(관측 창·못 내는 축·해당없음), LLM 이 다시 쓸
+// 필요가 없다. 스키마를 끼우는 순간 공급자마다 다른 그 문법이 실패 지점이 되는데,
+// 옛 2패스에서 `ANSWER_SCHEMA` 가 strict 위반으로 400 을 내 답변이 늘 null 이었던
+// 전례가 있다. 문장 하나면 파싱도 스키마도 없다.
+//
+// 숫자는 여기서 만들어지지 않는다 — `verify` 가 재료 밖의 숫자를 잡아내면 호출부가
+// 문장을 버리고 카드만 남긴다.
+function SYS_요약(오늘 = new Date()) {
+  const k = KST(오늘);
+  return `오늘: ${YM(k)} (한국 시각). 학습 시점을 현재로 쓰지 않는다.
+
+너는 한국 고용통계 아카이브의 검색 결과를 사람이 읽을 문장으로 옮긴다.
+주어진 재료(JSON)만 쓴다.
+
+규칙:
+- **재료에 있는 숫자만 쓴다.** 없는 숫자를 만들지 않고, 새로 계산하지 않는다
+  (차이·증감률은 '파생' 에 이미 들어 있다).
+- 인과를 단정하지 않는다. "때문이다" 가 아니라 "함께 나타났다"·"이 시기에" 로 쓴다.
+- 재료가 못 주는 것을 감추지 않는다. '사유'·'해당없음' 에 적힌 것은 그대로 말한다.
+- 관측 수치가 있으면 **그것부터** 말한다. 보고서·기사는 "무엇을 볼 수 있다" 로 덧붙인다.
+- 3~5문장. 제목을 나열하지 않는다. 표·목록·머리글 없이 줄글로 쓴다.
+- 재료가 비었으면 그렇다고 한 문장으로 말한다. 지어내서 채우지 않는다.`;
+}
+
+// Claude(Anthropic Messages API). 요청 형식이 OpenAI 와 다르다 — 키는 `x-api-key`,
+// 시스템 프롬프트는 `messages` 가 아니라 top-level `system`, 버전 헤더가 필수다.
+//
+// `thinking` 을 넘기지 않는다. 파라미터를 늘릴수록 400 으로 통째로 죽을 자리가
+// 늘고, 여기서 하는 일은 재료를 문장으로 옮기는 짧은 작업이다.
+export function makeClaude({ apiKey, model, baseUrl, fetch: f = fetch, now = () => new Date() }) {
+  async function once(재료) {
+    const res = await f(`${baseUrl}/messages`, {
+      method: 'POST',
+      signal: AbortSignal.timeout(20000),
+      headers: {
+        'x-api-key': apiKey,
+        'anthropic-version': '2023-06-01',
+        'content-type': 'application/json',
+      },
+      body: JSON.stringify({
+        model,
+        max_tokens: 1024,
+        system: SYS_요약(now()),
+        messages: [{ role: 'user', content: `재료(JSON):\n${JSON.stringify(재료, null, 1)}` }],
+      }),
+    });
+    if (!res.ok) throw new Error(`llm ${res.status}`);
+    const body = await res.json();
+    // content 는 블록 배열이다. text 블록만 이어 붙인다 — `content[0].text` 로 집으면
+    // 앞에 다른 블록이 한 번이라도 오는 날 조용히 빈손이 된다.
+    return (body.content ?? [])
+      .filter((b) => b?.type === 'text').map((b) => b.text).join('').trim() || null;
+  }
+  return {
+    // 한 번만 다시 건다 — 카드가 늦게 나가느니 카드만 내보내는 편이 낫다(옛 경로와 같은 규율).
+    요약: async (재료) => {
+      try { return await once(재료); } catch { return await once(재료); }
+    },
+  };
+}
+
 // baseUrl 을 주입으로 받는 이유: 공급자를 갈아끼울 때 코드가 아니라 설정만 바뀌게 한다.
 // 실제로 한 번 갈아끼웠다(OpenRouter → OpenAI). 요청·응답 형식이 같은 OpenAI 호환
 // 서비스면 wrangler.jsonc 의 ASK_API_BASE 한 줄로 옮겨갈 수 있다.

@@ -2,7 +2,8 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 
-import { 묶음HTML, 도메인이름 } from '../../app/js/lookup.js';
+import { 묶음HTML, 답변HTML, 도메인이름 } from '../../app/js/lookup.js';
+import { badgeLabel } from '../../app/js/badge.js';
 
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => (
   { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -61,4 +62,28 @@ test('제목에 든 태그를 그대로 넣지 않는다', () => {
 test('아무 도메인도 없으면 빈손이라고 말한다', () => {
   const html = 묶음HTML({ 묶음: [], 해당없음: [] }, { esc });
   assert.match(html, /찾지 못했다|없다/);
+});
+
+// ── 요약 문장 ──────────────────────────────────────────────────────────────
+
+test('문장이 있으면 그리고, 기계가 썼다는 것을 밝힌다', () => {
+  const h = 답변HTML({ 답변: '취업자는 29151천명이다.' }, { esc: (s) => String(s) });
+  assert.ok(h.includes('취업자는 29151천명이다.'));
+  assert.match(h, /자동 작성한 요약/);
+});
+
+test('문장이 없으면 빈 문자열이다 — 왜 없는지는 배지가 말한다', () => {
+  const esc = (s) => String(s);
+  assert.equal(답변HTML({}, { esc }), '');
+  assert.equal(답변HTML({ 답변: '   ' }, { esc }), '');
+});
+
+test('문장도 이스케이프한다 — LLM 출력이 그대로 HTML 이 되면 안 된다', () => {
+  const esc = (s) => String(s).replace(/</g, '&lt;');
+  const h = 답변HTML({ 답변: '<script>x</script>' }, { esc });
+  assert.equal(h.includes('<script>'), false, h);
+});
+
+test('요약실패 배지에 제 라벨이 있다', () => {
+  assert.match(badgeLabel('요약실패').라벨, /잠시 후 다시/);
 });
