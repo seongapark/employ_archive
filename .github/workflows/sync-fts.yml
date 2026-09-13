@@ -17,7 +17,12 @@ on:
       - 'domains/forecast/data/rationales.json'
       - 'domains/press/data/**'
       - 'domains/ask/data/**'
+      # 적재기·푸시기·이 워크플로 자체가 바뀌어도 다시 싣는다. 전에는 적재기 한
+      # 파일만 보다가, 푸시기를 바꾼 커밋이 색인을 그대로 두는 일이 있었다.
       - 'tools/fts_load.py'
+      - 'tools/d1_push.py'
+      - 'tools/fts_verify.py'
+      - '.github/workflows/sync-fts.yml'
   workflow_dispatch:
 
 concurrency:
