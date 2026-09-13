@@ -29054,5 +29054,1436 @@
   "model": "claude-opus-5",
   "profile_version": "f2dfd921",
   "judged_at": "2026-09-13T16:27:45+09:00"
+ },
+ "kdi-16784": {
+  "pick": false,
+  "axis": "",
+  "why": "중소기업 정책금융 효과, 생산성 분석",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-16357": {
+  "pick": false,
+  "axis": "",
+  "why": "수도권 녹지의 환경편익",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-16242": {
+  "pick": false,
+  "axis": "",
+  "why": "예타 용지보상비와 지가 분석",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-15107": {
+  "pick": false,
+  "axis": "",
+  "why": "통화정책·자연이자율, 닿지 않음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-15011": {
+  "pick": false,
+  "axis": "",
+  "why": "고령화의 주택수요·주택가격 영향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14945": {
+  "pick": false,
+  "axis": "",
+  "why": "법인세·배당세가 투자에 미친 영향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14895": {
+  "pick": false,
+  "axis": "",
+  "why": "인구구조와 장기 성장률 전망",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14867": {
+  "pick": false,
+  "axis": "",
+  "why": "세수추계 모형 개선",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14828": {
+  "pick": true,
+  "axis": "임금·근로조건",
+  "why": "주40시간제가 제조업 생산성에 준 효과",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14806": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 경제구조 변화와 통상",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14805": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 경제구조 변화와 통상",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14793": {
+  "pick": true,
+  "axis": "직업훈련과 취업성과",
+  "why": "고용보험 DB로 실업자 훈련 취업성과 추정",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14790": {
+  "pick": false,
+  "axis": "",
+  "why": "PIAAC 성인역량, 노동시장 성과 연결 약함",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14784": {
+  "pick": false,
+  "axis": "",
+  "why": "공기업 지배구조 개선",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14777": {
+  "pick": false,
+  "axis": "",
+  "why": "노동소득분배율과 대체탄력성, 거시 분배 논의",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14776": {
+  "pick": false,
+  "axis": "",
+  "why": "임금변동성의 후생효과, 가구 소비·후생 초점",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14764": {
+  "pick": false,
+  "axis": "",
+  "why": "환율과 거시안정성",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14756": {
+  "pick": false,
+  "axis": "",
+  "why": "장수리스크와 재정부담",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14745": {
+  "pick": false,
+  "axis": "",
+  "why": "신재생에너지 보급제도 개선",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14740": {
+  "pick": false,
+  "axis": "",
+  "why": "사모펀드와 기업구조조정",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:49:53+09:00"
+ },
+ "kdi-14714": {
+  "pick": false,
+  "axis": "",
+  "why": "북한 경제개발구 실태와 투자 시사점",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14712": {
+  "pick": true,
+  "axis": "임금·근로조건",
+  "why": "임금분포와 가구빈곤 불일치를 고용형태·시간제로 분해",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14686": {
+  "pick": false,
+  "axis": "",
+  "why": "북한 가구 경제실태 재구성, 남한 노동시장 함의 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14684": {
+  "pick": false,
+  "axis": "",
+  "why": "무역이 제조업 생산성에 미친 영향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14680": {
+  "pick": false,
+  "axis": "",
+  "why": "장시간근로의 가정생활 영향, 초록 없어 근로조건 연결 불확실",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14655": {
+  "pick": false,
+  "axis": "",
+  "why": "금융상품 판매 이해상충",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14654": {
+  "pick": false,
+  "axis": "",
+  "why": "연금개혁과 노후소득보장 제도",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14642": {
+  "pick": false,
+  "axis": "",
+  "why": "세대갈등 인식·재정형평성, 고용은 일부 절",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14641": {
+  "pick": false,
+  "axis": "",
+  "why": "개발제한구역 규제와 재산권",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14619": {
+  "pick": false,
+  "axis": "",
+  "why": "공공재 가치평가 방법론",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14618": {
+  "pick": false,
+  "axis": "",
+  "why": "도서정가제의 가격·후생 효과",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14614": {
+  "pick": false,
+  "axis": "",
+  "why": "가계부채·주택금융 균형모형",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14608": {
+  "pick": false,
+  "axis": "",
+  "why": "카르텔과 기업지배구조",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14597": {
+  "pick": false,
+  "axis": "",
+  "why": "국회선진화법의 입법성과 효과",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14579": {
+  "pick": false,
+  "axis": "",
+  "why": "공정성 규범과 재분배 선호",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14493": {
+  "pick": false,
+  "axis": "",
+  "why": "교육인프라투자와 학생 성과",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14299": {
+  "pick": false,
+  "axis": "",
+  "why": "고령화 맥락이나 금융시스템·연금 정책",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14233": {
+  "pick": false,
+  "axis": "",
+  "why": "통일독일 사회보장 통합, 노동시장은 통일 가정",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14215": {
+  "pick": false,
+  "axis": "",
+  "why": "국민연금 기금운용 지배구조",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-14214": {
+  "pick": false,
+  "axis": "",
+  "why": "중소기업 적합업종의 시장효과",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:07+09:00"
+ },
+ "kdi-11118": {
+  "pick": false,
+  "axis": "",
+  "why": "부동산 보유세 거시 시뮬레이션",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-11082": {
+  "pick": false,
+  "axis": "",
+  "why": "출산·여성 경력단절 기회비용, 관심축 밖",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-11080": {
+  "pick": false,
+  "axis": "",
+  "why": "단기 유동성·통화 판단",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-11014": {
+  "pick": false,
+  "axis": "",
+  "why": "위기 이후 거시·금융 정책방향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10999": {
+  "pick": false,
+  "axis": "",
+  "why": "중소기업 구조조정과 정부지원",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10964": {
+  "pick": false,
+  "axis": "",
+  "why": "빈곤율 추이와 성장·분배 분해",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10927": {
+  "pick": false,
+  "axis": "",
+  "why": "망 중립성 규제",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10926": {
+  "pick": false,
+  "axis": "",
+  "why": "주택공급·분양가 제도",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10779": {
+  "pick": false,
+  "axis": "",
+  "why": "남북교역과 대북정책",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10751": {
+  "pick": false,
+  "axis": "",
+  "why": "지방대 졸업자 임금격차를 다루나 초점은 대학정책",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10748": {
+  "pick": false,
+  "axis": "",
+  "why": "ICT 자본과 산업별 총요소생산성, 고용 연결 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10725": {
+  "pick": false,
+  "axis": "",
+  "why": "지역개발정책 거버넌스, 노동시장 분석 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10719": {
+  "pick": false,
+  "axis": "",
+  "why": "공무원연금 재정개혁",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10602": {
+  "pick": false,
+  "axis": "",
+  "why": "DTI 규제와 금융안정",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10553": {
+  "pick": true,
+  "axis": "임금·근로조건",
+  "why": "조세격차·고용보호 등 제도가 고용률에 미치는 국제비교",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10536": {
+  "pick": false,
+  "axis": "",
+  "why": "공공투자사업 관리제도",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10534": {
+  "pick": false,
+  "axis": "",
+  "why": "민간의료보험 가입과 의료이용",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10477": {
+  "pick": false,
+  "axis": "",
+  "why": "보험약가제도와 건강보험 지출",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10464": {
+  "pick": false,
+  "axis": "",
+  "why": "노인장기요양보험 재정, 노인일자리 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10459": {
+  "pick": false,
+  "axis": "",
+  "why": "성장회계로 본 성장 둔화",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:19+09:00"
+ },
+ "kdi-10457": {
+  "pick": false,
+  "axis": "",
+  "why": "서비스업 생산성·규제 개혁론",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10360": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 부상의 제조업 생산·투자 영향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10359": {
+  "pick": false,
+  "axis": "",
+  "why": "해외직접투자와 국내 설비투자 관계",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10357": {
+  "pick": false,
+  "axis": "",
+  "why": "정부 경제적 역할 재정립론",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10356": {
+  "pick": true,
+  "axis": "임금·근로조건",
+  "why": "능력 통제 후 학벌의 임금효과 추정",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10353": {
+  "pick": false,
+  "axis": "",
+  "why": "보육지원제도 설계와 정부 역할",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10349": {
+  "pick": false,
+  "axis": "",
+  "why": "공무원 순환보직 인사제도 개선",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10342": {
+  "pick": false,
+  "axis": "",
+  "why": "도로 교통량 예측 오차 분석",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10324": {
+  "pick": false,
+  "axis": "",
+  "why": "건강보험료 부과체계 형평",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10311": {
+  "pick": false,
+  "axis": "",
+  "why": "사회통합과 저소득층 소득·빈곤대책",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10300": {
+  "pick": false,
+  "axis": "",
+  "why": "기업 유보율과 설비투자",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10283": {
+  "pick": false,
+  "axis": "",
+  "why": "법조인력 공급규제와 로스쿨 정원",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10157": {
+  "pick": true,
+  "axis": "산업·직종 구조",
+  "why": "무역·투자가 기능수준별 고용기반에 준 영향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10156": {
+  "pick": false,
+  "axis": "",
+  "why": "서비스산업 생산성 향상 과제",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10155": {
+  "pick": false,
+  "axis": "",
+  "why": "FTA 노동기준·금융개방 협상 과제",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10154": {
+  "pick": false,
+  "axis": "",
+  "why": "수입자유화의 사업체 성장·임금불평등 효과, 통상 중심",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10153": {
+  "pick": false,
+  "axis": "",
+  "why": "관세 인하의 사업체 생산성 효과",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10152": {
+  "pick": false,
+  "axis": "",
+  "why": "소득불평등·양극화 지표 논쟁",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kdi-10151": {
+  "pick": false,
+  "axis": "",
+  "why": "공공병상 확대 필요성 검토",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kiet-ec2985": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 유통산업 AI 활용 동향, 고용 연결 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:32+09:00"
+ },
+ "kiet-ec2984": {
+  "pick": false,
+  "axis": "",
+  "why": "휴머노이드 로봇 산업 전망 에세이, 직종별 고용영향 분석 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2983": {
+  "pick": false,
+  "axis": "",
+  "why": "통상정책 로드맵, 닿지 않는 무역·통상",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2982": {
+  "pick": false,
+  "axis": "",
+  "why": "온디바이스 AI와 통신기기 부품산업 기술동향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2981": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 신질생산력 산업정책 대응",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2980": {
+  "pick": false,
+  "axis": "",
+  "why": "섬유산업 가치사슬 경쟁력 진단, 인력은 부수적 언급",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2979": {
+  "pick": false,
+  "axis": "",
+  "why": "디지털 전환 지수 국제비교, 고용 이동 분석 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec3269": {
+  "pick": false,
+  "axis": "",
+  "why": "월간지 통합본, 초록 없음",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2977": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 AI 산업 규모·특허 동향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2976": {
+  "pick": false,
+  "axis": "",
+  "why": "섬유패션산업 현황, 종사자 수 인용뿐 고용구조 분석 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2975": {
+  "pick": false,
+  "axis": "",
+  "why": "탄소규제 대응 공급망 전략, 일자리 전환 다루지 않음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2974": {
+  "pick": false,
+  "axis": "",
+  "why": "헬스케어 플랫폼 생태계와 규제",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2973": {
+  "pick": false,
+  "axis": "",
+  "why": "가전산업 AI 적용 경쟁력 전략",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2972": {
+  "pick": false,
+  "axis": "",
+  "why": "전기차·배터리 시장 전망",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2971": {
+  "pick": false,
+  "axis": "",
+  "why": "일본 반도체산업 흥망과 정책",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2970": {
+  "pick": false,
+  "axis": "",
+  "why": "정기 경기지수 공표, 새 내용 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec3270": {
+  "pick": false,
+  "axis": "",
+  "why": "월간지 통합본, 초록 없음",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2969": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 3중전회 경제정책 방향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2968": {
+  "pick": false,
+  "axis": "",
+  "why": "바이오산업 발전사 회고",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2967": {
+  "pick": false,
+  "axis": "",
+  "why": "수출 실적 전망, 닿지 않는 무역",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2966": {
+  "pick": false,
+  "axis": "",
+  "why": "천연가스 충격의 거시효과, 닿지 않는 물가",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:50:43+09:00"
+ },
+ "kiet-ec2965": {
+  "pick": false,
+  "axis": "",
+  "why": "이란 신정부와 외교·제재 대응",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2964": {
+  "pick": false,
+  "axis": "",
+  "why": "공급망 ODA 지원 현황과 과제",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2963": {
+  "pick": false,
+  "axis": "",
+  "why": "전기차 부품 공급망 구조 변화",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2962": {
+  "pick": false,
+  "axis": "",
+  "why": "기업활력법 과잉공급 요건 개선",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2961": {
+  "pick": false,
+  "axis": "",
+  "why": "국방 무기획득 프로세스 개선",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2960": {
+  "pick": false,
+  "axis": "",
+  "why": "고령친화산업 육성정책, 고용 아닌 산업",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2959": {
+  "pick": false,
+  "axis": "",
+  "why": "정기 경기지수 공표",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec3271": {
+  "pick": false,
+  "axis": "",
+  "why": "월간지 통합본, 초록 없음",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2958": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 증시 커촹반 개혁",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2957": {
+  "pick": false,
+  "axis": "",
+  "why": "이차전지 산업 전망과 과제",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2956": {
+  "pick": false,
+  "axis": "",
+  "why": "방산혁신기업 지정제도",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2955": {
+  "pick": false,
+  "axis": "",
+  "why": "주력산업 수출·경기 전망",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2954": {
+  "pick": false,
+  "axis": "",
+  "why": "인구감소 지역의 산업발전단계, 고용구조 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2953": {
+  "pick": false,
+  "axis": "",
+  "why": "거시경제·물가·환율 전망",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2952": {
+  "pick": false,
+  "axis": "",
+  "why": "방산 민군협력 R&D 현황",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2951": {
+  "pick": false,
+  "axis": "",
+  "why": "바이오 지역클러스터 전략, 고용분석 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2950": {
+  "pick": true,
+  "axis": "노동전환",
+  "why": "인구감소발 산업구조 전환과 인력불균형 대책",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2949": {
+  "pick": false,
+  "axis": "",
+  "why": "정기 경기지수 공표",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "kiet-ec2948": {
+  "pick": false,
+  "axis": "",
+  "why": "정기 경기지수 공표",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "keis-7832": {
+  "pick": true,
+  "axis": "청년 고용",
+  "why": "청년정책 2,930개 전수 구조 분석",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:12+09:00"
+ },
+ "keis-7815": {
+  "pick": true,
+  "axis": "청년 고용",
+  "why": "청년 1인 자영업자 이동·소득 분석",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7813": {
+  "pick": true,
+  "axis": "청년 고용",
+  "why": "청년 중소기업 인식·구직 실태조사",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7812": {
+  "pick": true,
+  "axis": "청년 고용",
+  "why": "해외 청년고용정책 중앙-지방 협력",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "kli-9620": {
+  "pick": false,
+  "axis": "",
+  "why": "산업안전보건법·중대재해법 과제",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7712": {
+  "pick": true,
+  "axis": "지역 노동시장",
+  "why": "조선업 고용위기지역 회복력·정책효과",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7692": {
+  "pick": true,
+  "axis": "노동전환",
+  "why": "신재생에너지산업 고용·인력양성",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7675": {
+  "pick": false,
+  "axis": "",
+  "why": "인문사회계열 전공별 직업정보 안내서",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7674": {
+  "pick": true,
+  "axis": "임금·근로조건",
+  "why": "시간제 일자리 양·질 동향 분석",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7672": {
+  "pick": false,
+  "axis": "",
+  "why": "고용통계조사 지표 색인집",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7632": {
+  "pick": true,
+  "axis": "AI·기술변화의 직종별 고용영향",
+  "why": "IoT 직무별 인력수요 전망",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7592": {
+  "pick": true,
+  "axis": "고용행정데이터와 방법론",
+  "why": "인력수급 변동요인 인구효과 분해",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7552": {
+  "pick": false,
+  "axis": "",
+  "why": "코로나 업종별 고용동향 요약",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7532": {
+  "pick": false,
+  "axis": "",
+  "why": "정기 중장기 인력수급 전망 공표",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "kli-9603": {
+  "pick": false,
+  "axis": "",
+  "why": "초록 없는 노동통계 연보",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7475": {
+  "pick": true,
+  "axis": "고용행정데이터와 방법론",
+  "why": "KEISIM 미시모의 전망모형 개선",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7474": {
+  "pick": true,
+  "axis": "고용행정데이터와 방법론",
+  "why": "행정DB로 고용보험 사각지대 추정",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7473": {
+  "pick": true,
+  "axis": "지역 노동시장",
+  "why": "지역별 인력수급 구조요인 분석",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7472": {
+  "pick": true,
+  "axis": "AI·기술변화의 직종별 고용영향",
+  "why": "기술혁신의 고용구조·양극화 효과",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7452": {
+  "pick": false,
+  "axis": "",
+  "why": "코로나 취약계층 고용동향 정리",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7432": {
+  "pick": true,
+  "axis": "청년 고용",
+  "why": "대졸자 산업·직업별 진입 전망",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:51:25+09:00"
+ },
+ "keis-7412": {
+  "pick": true,
+  "axis": "AI·기술변화의 직종별 고용영향",
+  "why": "AI·리걸테크가 변호사 직종에 주는 영향과 공급 확대",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7392": {
+  "pick": false,
+  "axis": "",
+  "why": "청년패널 조사 기초통계 요약, 새 분석 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7352": {
+  "pick": true,
+  "axis": "채용수요·구인구직",
+  "why": "업종별 기업 채용트렌드와 구직자 준비 실태 비교",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7332": {
+  "pick": false,
+  "axis": "",
+  "why": "대졸자 이동경로 조사 기초통계 요약",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7255": {
+  "pick": false,
+  "axis": "",
+  "why": "직업가치관 검사도구 문항 개정",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7254": {
+  "pick": false,
+  "axis": "",
+  "why": "진로지도 프로그램 운영 모니터링·요구조사",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7253": {
+  "pick": false,
+  "axis": "",
+  "why": "중학생 적성검사 개정",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7252": {
+  "pick": false,
+  "axis": "",
+  "why": "40대 구직자 집단상담 프로그램 개발물",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7233": {
+  "pick": false,
+  "axis": "",
+  "why": "개인 생애 경력개발 실태와 지원 방안",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7232": {
+  "pick": true,
+  "axis": "고령자 고용",
+  "why": "베이비부머 퇴직 후 경력경로 질적 종단 추적",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7213": {
+  "pick": true,
+  "axis": "고령자 고용",
+  "why": "산업별 고령화 요인분해와 인력부족 부문 예측",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7212": {
+  "pick": true,
+  "axis": "고용행정데이터와 방법론",
+  "why": "고용보험 행정DB로 본 고용동향과 사업 성과",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7192": {
+  "pick": false,
+  "axis": "",
+  "why": "온라인 심리검사 서비스 기능 개선 전략",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7172": {
+  "pick": true,
+  "axis": "AI·기술변화의 직종별 고용영향",
+  "why": "알고리즘이 만든 디지털 노동 계층화와 이행",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7072": {
+  "pick": false,
+  "axis": "",
+  "why": "직업정보 재직자 조사 수집 과정 보고",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-7052": {
+  "pick": false,
+  "axis": "",
+  "why": "문화예술 분야 신직업 후보 발굴",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "kli-9513": {
+  "pick": false,
+  "axis": "",
+  "why": "청년층 고용노동 통계집, 초록 없음",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "kli-9481": {
+  "pick": false,
+  "axis": "",
+  "why": "노동 판례 해설 모음",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
+ },
+ "keis-6972": {
+  "pick": false,
+  "axis": "",
+  "why": "인력수급전망 결과의 청소년용 재가공",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "f2dfd921",
+  "judged_at": "2026-09-13T16:52:05+09:00"
  }
 }
