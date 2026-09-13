@@ -1,9 +1,9 @@
 {
-  "run_at": "2026-09-13T17:36:02.374473+09:00",
+  "run_at": "2026-09-13T18:03:27.347491+09:00",
   "collectors": {
     "oecd": {
-      "ok": true,
-      "fetched": 8,
+      "ok": false,
+      "fetched": 0,
       "added": 0
     },
     "imf": {
@@ -43,5 +43,7 @@
     }
   },
   "conflicts": [],
-  "errors": []
+  "errors": [
+    "oecd: HTTPError: HTTP Error 403: "
+  ]
 }
