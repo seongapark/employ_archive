@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-09-14T13:26:48.904753+09:00",
+  "run_at": "2026-09-14T17:50:34.335845+09:00",
   "collectors": {
     "eaps": {
       "ok": true,
@@ -28,7 +28,7 @@
   "releases": {
     "eaps": {
       "months": 90,
-      "added": 50,
+      "added": 0,
       "attachments_filled": 0,
       "pending": 0,
       "summaries_filled": 0,
