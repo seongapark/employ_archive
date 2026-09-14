@@ -110,7 +110,7 @@ def test_judge_only_asks_about_articles_that_have_no_verdict(tmp_path, monkeypat
     monkeypatch.setattr(run_round, 'RAW', str(tmp_path / 'raw'))
     monkeypatch.setattr(run_round, 'VERDICTS', str(tmp_path / 'verdicts'))
     monkeypatch.setattr(run_round, 'SOURCES', str(tmp_path))
-    monkeypatch.setenv('OPENROUTER_API_KEY', 'sk-or-x')
+    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')   # 판정 경로는 구독뿐이다
 
     asked = {}
 
@@ -143,7 +143,7 @@ def test_a_verdict_without_a_tone_or_focus_is_asked_again(tmp_path, monkeypatch)
     monkeypatch.setattr(run_round, 'RAW', str(tmp_path / 'raw'))
     monkeypatch.setattr(run_round, 'VERDICTS', str(tmp_path / 'verdicts'))
     monkeypatch.setattr(run_round, 'SOURCES', str(tmp_path))
-    monkeypatch.setenv('OPENROUTER_API_KEY', 'sk-or-x')
+    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')   # 판정 경로는 구독뿐이다
 
     def fake(_prompt):
         return json.dumps([{'n': 1, 'cites': True, 'why': 'x',

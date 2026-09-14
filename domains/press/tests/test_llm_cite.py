@@ -100,55 +100,6 @@ def test_judge_batches_and_renumbers_to_the_whole_list():
     assert [v.n for v in got] == list(range(1, 26))
 
 
-def test_provider_prefers_anthropic_then_openrouter_then_openai_then_none(monkeypatch):
-    # 순서가 곧 선호다. 인용 판정 품질은 claude-opus-5 로 실측했으므로 그게 먼저다.
-    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY', 'OPENAI_API_KEY'):
-        monkeypatch.delenv(k, raising=False)
-    assert c.provider() is None
-
-    monkeypatch.setenv('OPENAI_API_KEY', 'sk-oa-x')
-    url, model, headers = c.provider()
-    assert 'api.openai.com' in url and headers['Authorization'] == 'Bearer sk-oa-x'
-    assert model == c.MODEL_OPENAI
-
-    monkeypatch.setenv('OPENROUTER_API_KEY', 'sk-or-x')
-    url, model, headers = c.provider()
-    assert 'openrouter' in url and headers['Authorization'] == 'Bearer sk-or-x'
-
-    monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-x')
-    url, model, headers = c.provider()
-    assert 'anthropic.com' in url and headers['x-api-key'] == 'sk-ant-x'
-
-
-def test_openai_model_can_be_overridden(monkeypatch):
-    monkeypatch.delenv('ANTHROPIC_API_KEY', raising=False)
-    monkeypatch.delenv('OPENROUTER_API_KEY', raising=False)
-    monkeypatch.setenv('OPENAI_API_KEY', 'sk-oa-x')
-    monkeypatch.setenv('OPENAI_MODEL', 'gpt-5.5-pro')
-    assert c.provider()[1] == 'gpt-5.5-pro'
-
-
-def test_openai_gets_max_completion_tokens_not_max_tokens():
-    # gpt-5 계열은 max_tokens 를 400 으로 거부한다. 이름만 다른 게 아니라
-    # 추론 토큰까지 그 한도에서 쓰므로 한도도 따로 잡는다.
-    body = c.payload_for(c.OPENAI_URL, 'gpt-5.5', 'p')
-    assert 'max_tokens' not in body
-    assert body['max_completion_tokens'] == c.MAX_TOKENS_OPENAI
-
-    for url in (c.ANTHROPIC_URL, c.OPENROUTER_URL):
-        body = c.payload_for(url, 'm', 'p')
-        assert body['max_tokens'] == c.MAX_TOKENS
-        assert 'max_completion_tokens' not in body
-
-
-def test_blank_key_is_treated_as_absent(monkeypatch):
-    # 워크플로가 시크릿을 안 넣으면 빈 문자열이 들어온다 — 있는 것처럼 굴면
-    # 401 을 받고 회차 전체가 판정 없이 끝난다.
-    monkeypatch.setenv('ANTHROPIC_API_KEY', '   ')
-    monkeypatch.delenv('OPENROUTER_API_KEY', raising=False)
-    assert c.provider() is None
-
-
 def test_missing_focus_field_is_rejected():
     # 「수치를 전했나」와 「그 수치가 기사의 본론인가」는 다른 질문이다.
     # 빠진 것을 '주제'로 채우면 곁들인 인용이 후속 보도로 세어진다.
@@ -178,25 +129,6 @@ def test_prompt_tells_the_two_weights_apart():
 # API 크레딧을 채우지 않고 Pro/Max 구독으로 돌리는 경로. HTTP 가 아니라
 # `claude -p` 를 부르므로 provider() 의 url 자리에 센티넬이 들어가고 headers 는
 # 빈 dict 다. reports·forecast 와 같은 스위치(JUDGE_PROVIDER)를 쓴다.
-
-def test_the_cli_switch_wins_over_every_api_key(monkeypatch):
-    # 구독으로 돌리려고 켠 스위치가 API 키에 밀리면, 잔액 0 인 키로 돌다가
-    # 크레딧 부족으로 죽는다 — 구독으로 돌고 있다고 착각하기 가장 쉬운 실패다.
-    monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-zero-balance')
-    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
-    url, model, headers = c.provider()
-    assert url == c.CLI_URL
-    assert model == c.MODEL_ANTHROPIC
-    assert headers == {}
-
-
-def test_without_the_switch_the_key_order_is_unchanged(monkeypatch):
-    # 스위치를 켜지 않으면 기존 세 키 차례가 그대로여야 한다(회귀 방지).
-    monkeypatch.delenv('JUDGE_PROVIDER', raising=False)
-    monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-x')
-    url, _, headers = c.provider()
-    assert 'api.anthropic.com' in url and headers['x-api-key'] == 'sk-ant-x'
-
 
 def test_the_cli_provider_is_not_none_so_the_round_does_not_skip_judging(monkeypatch):
     # run_round 는 provider() 가 None 이면 '키가 없다' 며 판정을 통째로 건너뛰고
@@ -286,13 +218,21 @@ def test_a_failing_cli_raises_instead_of_returning_nothing(monkeypatch):
 
 
 def test_call_api_routes_the_cli_provider_to_the_cli(monkeypatch):
-    # provider() 가 센티넬 url 을 돌려줬는데 _call_api 가 그걸 requests.post 에
-    # 넘기면 cli:// 로 HTTP 를 치려 한다.
     monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
     _fake_cli(monkeypatch, result=json.dumps({'result': 'ok'}))
-    monkeypatch.setattr(c.requests, 'post',
-                        lambda *a, **k: pytest.fail('CLI 경로가 HTTP 를 쳤다'))
     assert c._call_api('프롬프트') == 'ok'
+
+
+def test_call_api_refuses_when_the_subscription_is_off(monkeypatch):
+    # 예전에는 여기서 키를 찾아 HTTP 로 나갔다. 이제는 나갈 곳이 없어야 한다 —
+    # 조용히 다른 지갑으로 새는 대신 소리내어 실패하고, 그 실패가 도메인
+    # 현황에 뜬다.
+    monkeypatch.delenv('JUDGE_PROVIDER', raising=False)
+    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY', 'OPENAI_API_KEY'):
+        monkeypatch.setenv(k, 'sk-잔액있음')
+    assert not hasattr(c, 'requests')              # HTTP 를 칠 연장 자체가 없다
+    with pytest.raises(RuntimeError, match='구독'):
+        c._call_api('프롬프트')
 
 
 def test_the_cli_model_can_be_swapped(monkeypatch):
@@ -305,3 +245,25 @@ def test_the_cli_model_can_be_swapped(monkeypatch):
     c._call_cli('프롬프트')
     assert model == 'claude-haiku-4-5-20251001'
     assert seen['argv'][seen['argv'].index('--model') + 1] == model
+
+
+def test_an_api_key_can_no_longer_buy_a_judgement(monkeypatch):
+    # 2026-09-14 에 과금 경로를 지웠다. 예전에는 JUDGE_PROVIDER 가 빠지면
+    # ANTHROPIC → OPENROUTER → OPENAI 순으로 키를 찾아 썼고, 그 스위치 하나가
+    # 빠지거나 오타나는 것만으로 조용히 돈이 나갔다. 이제는 길이 없다.
+    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY', 'OPENAI_API_KEY'):
+        monkeypatch.setenv(k, 'sk-잔액있음')
+    monkeypatch.delenv('JUDGE_PROVIDER', raising=False)
+    assert c.provider() is None
+
+    # 오타도 같다 — 'cli' 가 아니면 전부 None 이다.
+    monkeypatch.setenv('JUDGE_PROVIDER', 'CLl')
+    assert c.provider() is None
+
+
+def test_the_only_route_is_the_subscription(monkeypatch):
+    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
+    url, model, headers = c.provider()
+    assert url == c.CLI_URL
+    assert model == c.MODEL_ANTHROPIC
+    assert headers == {}

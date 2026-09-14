@@ -112,8 +112,14 @@ def main():
               ensure_ascii=False, indent=1)
     json.dump(articles, io.open(os.path.join(DATA, 'articles.json'), 'w', encoding='utf-8'),
               ensure_ascii=False, indent=1)
+    # 판정은 구독(`claude -p`)으로만 돈다. 구독이 막히면(토큰 만기·한도 소진)
+    # run_round 가 판정을 건너뛰고 그 기사들은 화면에서 '인용 아님'으로 세어진다
+    # — 숫자가 조용히 틀리는 실패다. 미판정 건수를 여기 남겨 관리자 화면이
+    # 그것을 말하게 한다(domains/admin/app/js/model.js 의 어댑터_press).
+    미판정 = sum(s.get('unjudged') or 0 for s in summaries)
     json.dump({'run_at': datetime.now(KST).strftime('%Y-%m-%dT%H:%M:%S+09:00'),
-               'rounds': len(summaries)},
+               'rounds': len(summaries),
+               'unjudged': 미판정},
               io.open(os.path.join(DATA, 'last_run.json'), 'w', encoding='utf-8'),
               ensure_ascii=False, indent=1)
     print('→ rounds.json · articles.json · last_run.json (%d개 회차)' % len(summaries))

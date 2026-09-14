@@ -26,19 +26,10 @@ import re
 import subprocess
 from typing import Callable, NamedTuple, Sequence
 
-import requests
-
-ANTHROPIC_URL = "https://api.anthropic.com/v1/messages"
-OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-OPENAI_URL = "https://api.openai.com/v1/chat/completions"
+# 판정은 구독(`claude -p`)으로만 돈다. API 키로 도는 길은 2026-09-14 에
+# 지웠다 — 스위치 하나가 빠지면 조용히 과금되는 구조였다. 그래서 공급자별
+# 주소·모델·토큰 한도 상수와 payload_for, requests 의존이 다 같이 없어졌다.
 MODEL_ANTHROPIC = "claude-opus-5"
-MODEL_OPENROUTER = "anthropic/claude-opus-5"
-MODEL_OPENAI = "gpt-5.5"        # OPENAI_MODEL 로 바꿀 수 있다
-MAX_TOKENS = 4000
-# OpenAI 의 gpt-5 계열은 답 말고 **추론 토큰**을 따로 쓴다(실측: 기사 1건에
-# 답 57 + 추론 53). 같은 4000 으로 두면 20건짜리 배치가 JSON 중간에서 잘린다.
-MAX_TOKENS_OPENAI = 16000
-TIMEOUT = 180
 BATCH = 20                      # 한 번에 판정할 기사 수
 CLI_URL = "cli://claude"        # 센티넬 — HTTP 가 아니라 `claude -p` 를 부른다
 CLI_TIMEOUT = 600               # 20건 판정이 몇 분 걸린다(reports 실측 46초/묶음)
@@ -165,49 +156,22 @@ def parse_response(body: str, n_expected: int) -> list[Verdict]:
 
 
 def provider() -> tuple[str, str, dict] | None:
-    """(url, model, headers) — 있는 키를 쓴다. 없으면 None.
+    """(url, model, headers) — **구독(`claude -p`)만 쓴다.** 못 쓰면 None.
 
-    **순서가 곧 선호다.** 인용 판정의 품질은 `claude-opus-5` 로 실측했으므로
-    (규칙과의 불일치 7건이 전부 LLM 이 맞았다) 그 모델을 쓸 수 있으면 그걸 쓴다.
-    OpenAI 는 마지막이다 — 같은 프롬프트로 돌지만 그 실측을 물려받지는 않는다.
+    API 키로 도는 길은 2026-09-14 에 없앴다. 예전에는 `JUDGE_PROVIDER=cli` 가
+    아니면 ANTHROPIC → OPENROUTER → OPENAI 순으로 키를 찾아 썼는데, 그 스위치
+    하나가 빠지거나 오타나면 **조용히 과금 경로로 넘어간다.** 잔액이 있는 키가
+    하나라도 있으면 아무도 모르게 돈이 나간다.
+
+    그래서 키를 보는 코드를 지웠다. 순서를 바꾸거나 스위치를 더 다는 것으로는
+    같은 사고가 또 난다 — 길이 있으면 언젠가 그리로 간다. 지금은 길이 없다.
+
+    구독이 막히면(토큰 만기·한도 소진) 판정이 안 되고, 그 사실이 관리자
+    화면의 도메인 현황에 뜬다. 조용히 다른 지갑으로 새지 않는다.
     """
-    if os.environ.get("JUDGE_PROVIDER", "").strip().lower() == "cli":
-        # 스위치가 켜지면 어떤 API 키보다 먼저다. 밀리면 잔액 0 인 키로 돌다가
-        # 크레딧 부족으로 죽는다 — 구독으로 도는 줄 착각하기 쉽다.
-        # reports·forecast 와 **같은 이름**(JUDGE_PROVIDER)을 쓴다. 스위치를
-        # 도메인마다 따로 두면 "구독으로 돌린다" 가 한 번에 안 켜진다.
-        return (CLI_URL, _cli_model(), {})
-    key = os.environ.get("ANTHROPIC_API_KEY", "").strip()
-    if key:
-        return (ANTHROPIC_URL, MODEL_ANTHROPIC,
-                {"x-api-key": key, "anthropic-version": "2023-06-01",
-                 "content-type": "application/json"})
-    key = os.environ.get("OPENROUTER_API_KEY", "").strip()
-    if key:
-        return (OPENROUTER_URL, MODEL_OPENROUTER,
-                {"Authorization": f"Bearer {key}", "content-type": "application/json"})
-    key = os.environ.get("OPENAI_API_KEY", "").strip()
-    if key:
-        model = os.environ.get("OPENAI_MODEL", "").strip() or MODEL_OPENAI
-        return (OPENAI_URL, model,
-                {"Authorization": f"Bearer {key}", "content-type": "application/json"})
-    return None
-
-
-def payload_for(url: str, model: str, prompt: str) -> dict:
-    """공급자마다 토큰 한도의 이름이 다르다.
-
-    OpenAI 의 gpt-5 계열은 `max_tokens` 를 **거부한다**(400: Unsupported
-    parameter). 이름만 다른 게 아니라 뜻도 다르다 — 추론 토큰까지 그 한도에서
-    쓰므로 한도를 넉넉히 잡아야 답이 안 잘린다.
-    """
-    msg = [{"role": "user", "content": prompt}]
-    if "anthropic.com" in url:
-        return {"model": model, "max_tokens": MAX_TOKENS, "messages": msg}
-    if "openai.com" in url:
-        return {"model": model, "max_completion_tokens": MAX_TOKENS_OPENAI,
-                "messages": msg}
-    return {"model": model, "max_tokens": MAX_TOKENS, "messages": msg}
+    if os.environ.get("JUDGE_PROVIDER", "").strip().lower() != "cli":
+        return None
+    return (CLI_URL, _cli_model(), {})
 
 
 def _cli_model() -> str:
@@ -261,22 +225,10 @@ def _call_cli(prompt: str) -> str:
 def _call_api(prompt: str) -> str:
     got = provider()
     if got is None:
-        raise RuntimeError("ANTHROPIC_API_KEY · OPENROUTER_API_KEY · OPENAI_API_KEY "
-                           "중 아무것도 없다")
-    url, model, headers = got
-    if url == CLI_URL:
-        return _call_cli(prompt)
-    resp = requests.post(url, headers=headers, json=payload_for(url, model, prompt),
-                         timeout=TIMEOUT)
-    if resp.status_code != 200:
-        raise ValueError(f"API 가 {resp.status_code} 를 돌려줬다: {resp.text[:300]}")
-    data = resp.json()
-    try:
-        if "content" in data:                       # Anthropic Messages
-            return "".join(b.get("text", "") for b in data["content"])
-        return data["choices"][0]["message"]["content"]   # OpenAI 호환
-    except (KeyError, TypeError, IndexError, AttributeError) as exc:
-        raise ValueError(f"200 응답인데 형식이 예상과 다르다: {resp.text[:300]}") from exc
+        raise RuntimeError(
+            "구독 판정을 쓸 수 없다 — JUDGE_PROVIDER=cli 가 아니다. "
+            "API 키로 도는 길은 없다(과금 경로를 막았다).")
+    return _call_cli(prompt)
 
 
 def judge(release_label: str, release_date: str, digest: str, arts: Sequence[dict],

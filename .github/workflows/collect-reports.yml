@@ -60,15 +60,15 @@ jobs:
       - name: 추천 판정
         env:
           PYTHONIOENCODING: utf-8
-          # 구독 경로. 이 값을 비우면 아래 세 키의 기존 순서로 되돌아간다.
+          # 구독 경로. **이 값이 곧 유일한 판정 경로다** — 비우면 판정이
+          # 실패하고(폴백 없음), 미판정 건수가 last_run.json 에 남아
+          # 관리자 화면이 그것을 말한다.
           JUDGE_PROVIDER: cli
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          # ANTHROPIC_API_KEY 는 `claude -p` 의 인증에서 OAuth 토큰을 **이긴다**.
-          # _call_cli() 가 자식 환경에서 지우므로 여기 남아 있어도 구독을 가리지
-          # 않는다 — 지우는 쪽을 없애지 말 것.
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # **API 키는 넘기지 않는다.** 판정 코드에서 키로 도는 길을 지웠고
+          # (2026-09-14), 여기서도 안 넘겨 두 겹으로 막는다 — 코드가 되돌아가도
+          # 쓸 키가 없다. 구독이 막히면 판정이 실패하고, 그 사실이 관리자 화면의
+          # 도메인 현황에 뜬다. 조용히 다른 지갑으로 새지 않는다.
         # 새로 들어온 것만 판정한다(id 캐시). 실패해도 그날 수집을 버리지
         # 않는다 — 아카이브 본체는 키 없이도 돌고, 추천은 다음 회차에 붙는다.
         continue-on-error: true

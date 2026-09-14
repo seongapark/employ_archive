@@ -271,3 +271,30 @@ test('조각 기록이 없는 옛 형식은 종전처럼 합계로 경고한다'
     .find((x) => x.키 === 'reports');
   assert.ok(s.경고.some((w) => w.includes('기관별로 쪼갤 때다')));
 });
+
+test('press 는 판정 없는 기사를 경고로 올린다', () => {
+  // 판정은 구독(`claude -p`)으로만 돈다. 토큰이 만기면 run_round 가 판정을
+  // 건너뛰고 그 기사들이 화면에서 '인용 아님'으로 세어진다 — 실행은 초록이고
+  // 숫자만 조용히 틀리는 실패라, 여기서 말하지 않으면 아무도 모른다.
+  const 지금 = Date.parse('2026-09-14T13:00:00+09:00');
+  const 맑음 = 도메인현황(
+    { press: { run_at: '2026-09-14T12:49:32+09:00', rounds: 3, unjudged: 0 } }, 지금)
+    .find((s) => s.키 === 'press');
+  assert.deepEqual(맑음.경고, []);
+  assert.ok(맑음.지표.some((m) => m.라벨 === '미판정' && m.값 === 0));
+
+  const 막힘 = 도메인현황(
+    { press: { run_at: '2026-09-14T12:49:32+09:00', rounds: 3, unjudged: 21 } }, 지금)
+    .find((s) => s.키 === 'press');
+  assert.ok(막힘.경고.some((w) => w.includes('21건') && w.includes('구독')));
+});
+
+test('미판정 기록이 없는 옛 형식도 그대로 읽는다', () => {
+  // 배포 직후에는 last_run.json 에 unjudged 가 없다. 없는 것을 0 으로 지어내면
+  // "판정 다 됐다" 는 거짓이 되므로, 지표에서 아예 뺀다.
+  const s = 도메인현황(
+    { press: { run_at: '2026-09-14T12:49:32+09:00', rounds: 3 } },
+    Date.parse('2026-09-14T13:00:00+09:00')).find((x) => x.키 === 'press');
+  assert.deepEqual(s.경고, []);
+  assert.ok(!s.지표.some((m) => m.라벨 === '미판정'));
+});

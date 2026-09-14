@@ -231,63 +231,19 @@ def test_a_mid_run_failure_keeps_the_earlier_batches_on_disk(tmp_path):
     assert sorted(r['id'] for r in still_todo) == sorted(f'r-{i}' for i in range(40, 45))
 
 
-def test_provider_prefers_anthropic_then_openrouter_then_openai_then_none(monkeypatch):
-    # 순서가 곧 선호다 — 판정 품질은 claude-opus-5 로 프롬프트를 설계했다.
-    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY', 'OPENAI_API_KEY'):
-        monkeypatch.delenv(k, raising=False)
-    assert recommend.provider() is None
-
-    monkeypatch.setenv('OPENAI_API_KEY', 'sk-oa-x')
-    url, model, headers = recommend.provider()
-    assert 'api.openai.com' in url and headers['Authorization'] == 'Bearer sk-oa-x'
-    assert model == recommend.MODEL_OPENAI
-
-    monkeypatch.setenv('OPENROUTER_API_KEY', 'sk-or-x')
-    url, model, headers = recommend.provider()
-    assert 'openrouter' in url and headers['Authorization'] == 'Bearer sk-or-x'
-
-    monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-x')
-    url, model, headers = recommend.provider()
-    assert 'anthropic.com' in url and headers['x-api-key'] == 'sk-ant-x'
-
-
-def test_openai_model_can_be_overridden(monkeypatch):
-    monkeypatch.delenv('ANTHROPIC_API_KEY', raising=False)
-    monkeypatch.delenv('OPENROUTER_API_KEY', raising=False)
-    monkeypatch.setenv('OPENAI_API_KEY', 'sk-oa-x')
-    monkeypatch.setenv('OPENAI_MODEL', 'gpt-5.5-pro')
-    assert recommend.provider()[1] == 'gpt-5.5-pro'
-
-
-def test_openai_gets_max_completion_tokens_not_max_tokens():
-    # gpt-5 계열은 max_tokens 를 400 으로 거부한다. 이름만 다른 게 아니라
-    # 추론 토큰까지 그 한도에서 쓰므로 한도도 따로 잡는다.
-    body = recommend.payload_for(recommend.OPENAI_URL, 'gpt-5.5', 'p')
-    assert 'max_tokens' not in body
-    assert body['max_completion_tokens'] == recommend.MAX_TOKENS_OPENAI
-
-    for url in (recommend.ANTHROPIC_URL, recommend.OPENROUTER_URL):
-        body = recommend.payload_for(url, 'm', 'p')
-        assert body['max_tokens'] == recommend.MAX_TOKENS
-        assert 'max_completion_tokens' not in body
-
-
 def test_merge_records_the_model_that_actually_judged(monkeypatch):
-    # 실측(2026-09-11): 이 저장소엔 OPENAI_API_KEY 밖에 없어 실제로는
-    # gpt-5.5 로 판정했는데, merge() 가 MODEL_ANTHROPIC 상수를 그대로
-    # 박는 바람에 캐시엔 전부 claude-opus-5 로 거짓 기록됐다. model 은
-    # "누가 판정했나"의 유일한 기록이라, 상수를 박으면 나중에 앤트로픽
-    # 키가 들어와도 무엇을 gpt-5.5 로 다시 물어야 할지 구분할 수 없다.
-    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY', 'OPENAI_API_KEY'):
-        monkeypatch.delenv(k, raising=False)
-
-    monkeypatch.setenv('OPENAI_API_KEY', 'sk-oa-x')
+    # model 은 "누가 판정했나"의 유일한 기록이다. 호출자가 넘긴 것을 그대로
+    # 적어야 한다 — 상수를 박으면 실제 판정자와 기록이 어긋난다(2026-09-11 에
+    # 실제로 그랬다). 판정 경로가 구독 하나로 줄어든 지금도 규칙은 같다:
+    # JUDGE_CLI_MODEL 로 모델을 갈아끼울 수 있어서 값이 고정이 아니다.
+    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
+    monkeypatch.setenv('JUDGE_CLI_MODEL', 'claude-sonnet-5')
     _, model, _ = recommend.provider()
     cache = recommend.merge({}, [ROWS[0]], [recommend.Verdict(1, True, '청년 고용', 'ㄱ')],
                             PROFILE, model=model)
-    assert cache['bok-1']['model'] == 'gpt-5.5'
+    assert cache['bok-1']['model'] == 'claude-sonnet-5'
 
-    monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-x')
+    monkeypatch.delenv('JUDGE_CLI_MODEL', raising=False)
     _, model, _ = recommend.provider()
     cache = recommend.merge({}, [ROWS[0]], [recommend.Verdict(1, True, '청년 고용', 'ㄱ')],
                             PROFILE, model=model)
@@ -357,9 +313,8 @@ def test_judge_and_cache_records_the_actual_provider_model(monkeypatch, tmp_path
     # merge() 단위 테스트와 별도로, main() 이 실제로 부르는 경로인
     # judge_and_cache() 도 provider() 가 고른 모델을 그대로 캐시에
     # 남기는지 재확인한다.
-    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY'):
-        monkeypatch.delenv(k, raising=False)
-    monkeypatch.setenv('OPENAI_API_KEY', 'sk-oa-x')
+    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
+    monkeypatch.setenv('JUDGE_CLI_MODEL', 'claude-sonnet-5')
 
     def fake_call(prompt):
         return json.dumps([{'n': 1, 'pick': True, 'axis': '청년 고용', 'why': 'ㄱ'}],
@@ -368,9 +323,9 @@ def test_judge_and_cache_records_the_actual_provider_model(monkeypatch, tmp_path
     cache_path = tmp_path / 'recommendations.json'
     cache = recommend.judge_and_cache(PROFILE, [ROWS[0]], {}, call=fake_call,
                                       cache_path=cache_path, log=lambda *_: None)
-    assert cache['bok-1']['model'] == 'gpt-5.5'
+    assert cache['bok-1']['model'] == 'claude-sonnet-5'
     on_disk = json.loads(cache_path.read_text(encoding='utf-8'))
-    assert on_disk['bok-1']['model'] == 'gpt-5.5'
+    assert on_disk['bok-1']['model'] == 'claude-sonnet-5'
 
 
 # ── 선택적 재판정: 뒤집힐 수 있는 것만 다시 묻는다 ──────────────────────
@@ -552,25 +507,6 @@ def test_without_the_option_main_still_rejudges_everything(tmp_path, monkeypatch
 # `claude -p` 를 부르므로 provider() 의 (url, model, headers) 중 url 자리에
 # 센티넬이 들어가고 headers 는 빈 dict 다.
 
-def test_the_cli_switch_wins_over_every_api_key(monkeypatch):
-    # 구독으로 돌리려고 켠 스위치가 API 키에 밀리면, 잔액 0 인 키로 돌다가
-    # 크레딧 부족으로 죽는다 — 구독으로 돌고 있다고 착각하기 가장 쉬운 실패다.
-    monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-zero-balance')
-    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
-    url, model, headers = recommend.provider()
-    assert url == recommend.CLI_URL
-    assert model == recommend.MODEL_ANTHROPIC
-    assert headers == {}
-
-
-def test_without_the_switch_the_key_order_is_unchanged(monkeypatch):
-    # 스위치를 켜지 않으면 기존 세 키 순서가 그대로여야 한다(회귀 방지).
-    monkeypatch.delenv('JUDGE_PROVIDER', raising=False)
-    monkeypatch.setenv('ANTHROPIC_API_KEY', 'sk-ant-x')
-    url, _, headers = recommend.provider()
-    assert 'api.anthropic.com' in url and headers['x-api-key'] == 'sk-ant-x'
-
-
 def _fake_cli(monkeypatch, *, result='[]', returncode=0, stderr=''):
     """subprocess.run 을 가로채고 argv·env 를 돌려준다."""
     seen = {}
@@ -635,13 +571,21 @@ def test_a_failing_cli_raises_instead_of_returning_nothing(monkeypatch):
 
 
 def test_call_api_routes_the_cli_provider_to_the_cli(monkeypatch):
-    # provider() 가 센티넬 url 을 돌려줬는데 _call_api 가 그걸 requests.post 에
-    # 넘기면 cli:// 로 HTTP 를 치려 한다.
     monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
     _fake_cli(monkeypatch, result=json.dumps({'result': 'ok'}))
-    monkeypatch.setattr(recommend.requests, 'post',
-                        lambda *a, **k: pytest.fail('CLI 경로가 HTTP 를 쳤다'))
     assert recommend._call_api('프롬프트') == 'ok'
+
+
+def test_call_api_refuses_when_the_subscription_is_off(monkeypatch):
+    # 예전에는 여기서 키를 찾아 HTTP 로 나갔다. 이제는 나갈 곳이 없어야 한다 —
+    # 조용히 다른 지갑으로 새는 대신 소리내어 실패하고, 그 실패가 도메인
+    # 현황에 뜬다.
+    monkeypatch.delenv('JUDGE_PROVIDER', raising=False)
+    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY', 'OPENAI_API_KEY'):
+        monkeypatch.setenv(k, 'sk-잔액있음')
+    assert not hasattr(recommend, 'requests')      # HTTP 를 칠 연장 자체가 없다
+    with pytest.raises(RuntimeError, match='구독'):
+        recommend._call_api('프롬프트')
 
 
 def test_the_cli_model_can_be_overridden(monkeypatch):
@@ -659,3 +603,25 @@ def test_the_cli_provider_reports_the_model_it_will_actually_use(monkeypatch):
     monkeypatch.setenv('JUDGE_CLI_MODEL', 'claude-sonnet-5')
     _, model, _ = recommend.provider()
     assert model == 'claude-sonnet-5'
+
+
+def test_an_api_key_can_no_longer_buy_a_judgement(monkeypatch):
+    # 2026-09-14 에 과금 경로를 지웠다. 예전에는 JUDGE_PROVIDER 가 빠지면
+    # ANTHROPIC → OPENROUTER → OPENAI 순으로 키를 찾아 썼고, 그 스위치 하나가
+    # 빠지거나 오타나는 것만으로 조용히 돈이 나갔다. 이제는 길이 없다.
+    for k in ('ANTHROPIC_API_KEY', 'OPENROUTER_API_KEY', 'OPENAI_API_KEY'):
+        monkeypatch.setenv(k, 'sk-잔액있음')
+    monkeypatch.delenv('JUDGE_PROVIDER', raising=False)
+    assert recommend.provider() is None
+
+    # 오타도 같다 — 'cli' 가 아니면 전부 None 이다.
+    monkeypatch.setenv('JUDGE_PROVIDER', 'CLl')
+    assert recommend.provider() is None
+
+
+def test_the_only_route_is_the_subscription(monkeypatch):
+    monkeypatch.setenv('JUDGE_PROVIDER', 'cli')
+    url, model, headers = recommend.provider()
+    assert url == recommend.CLI_URL
+    assert model == recommend.MODEL_ANTHROPIC
+    assert headers == {}

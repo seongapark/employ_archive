@@ -75,9 +75,20 @@ function 어댑터_수집기계열(j) {
   };
 }
 
+// 판정이 막힌 것을 여기서 말한다. press 의 판정은 구독(`claude -p`)으로만 도는데
+// (API 키 경로는 2026-09-14 에 지웠다), 토큰이 만기거나 한도가 차면 run_round 가
+// 판정을 통째로 건너뛴다. 그때 그 기사들은 화면에서 **'인용 아님'으로 세어진다**
+// — 실행은 초록이고 숫자만 조용히 틀리는, 가장 알아채기 어려운 실패다.
 function 어댑터_press(j) {
   if (!j || typeof j.run_at !== 'string' || typeof j.rounds !== 'number') return null;
-  return { 실행시각: j.run_at, 지표: [{ 라벨: '회차', 값: j.rounds }], 경고: [] };
+  const 지표 = [{ 라벨: '회차', 값: j.rounds }];
+  const 경고 = [];
+  const 미판정 = Number(j.unjudged);
+  if (Number.isFinite(미판정)) {
+    지표.push({ 라벨: '미판정', 값: 미판정 });
+    if (미판정 > 0) 경고.push(`판정 없는 기사 ${미판정}건 — 구독 판정이 막혔는지 보라`);
+  }
+  return { 실행시각: j.run_at, 지표, 경고 };
 }
 
 function 어댑터_ask(j) {

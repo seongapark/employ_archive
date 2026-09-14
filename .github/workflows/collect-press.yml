@@ -91,17 +91,15 @@ jobs:
         env:
           NAVER_ID: ${{ secrets.NAVER_ID }}
           NAVER_SECRET: ${{ secrets.NAVER_SECRET }}
-          # 구독 경로. 이 값을 비우면 아래 세 키의 기존 차례로 되돌아간다
-          # (Anthropic → OpenRouter → OpenAI). 셋 다 없으면 판정 없이 수집만
-          # 하고, 화면에는 그 기사들이 '인용 아님'으로 세어진다.
+          # 구독 경로. **이 값이 곧 유일한 판정 경로다** — 비우면 판정이
+          # 실패하고(폴백 없음), 그 회차 기사는 화면에서 '인용 아님'으로
+          # 세어진다. 미판정 건수가 last_run.json 에 남아 관리자 화면이 말한다.
           JUDGE_PROVIDER: cli
           CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          # ANTHROPIC_API_KEY 는 `claude -p` 의 인증에서 OAuth 토큰을 **이긴다**.
-          # _call_cli() 가 자식 환경에서 지우므로 여기 남아 있어도 구독을 가리지
-          # 않는다 — 지우는 쪽을 없애지 말 것.
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          # **API 키는 넘기지 않는다.** 판정 코드에서 키로 도는 길을 지웠고
+          # (2026-09-14), 여기서도 안 넘겨 두 겹으로 막는다 — 코드가 되돌아가도
+          # 쓸 키가 없다. 구독이 막히면 판정이 실패하고, 그 사실이 관리자 화면의
+          # 도메인 현황에 뜬다. 조용히 다른 지갑으로 새지 않는다.
         run: |
           python -m domains.press.pipeline.run_round \
             --release "${{ needs.plan.outputs.release }}" \
