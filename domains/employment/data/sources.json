@@ -9,7 +9,7 @@
     "coverage": "15세 이상 인구 · 조사대상주간 1시간 이상 취업",
     "release_rule": "매월 중순, 전월 기준",
     "caveat": "자영업자·무급가족종사자를 포함한다",
-    "board_url": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&ref_bid=210,211,11109,11113,11814",
+    "board_url": "https://mods.go.kr/board.es?mid=a10301030200&bid=210&ref_bid=210,211,11109,11113,11814",
     "kosis_url": "https://kosis.kr/statHtml/statHtml.do?orgId=101&tblId=DT_1DA7002S"
   },
   {

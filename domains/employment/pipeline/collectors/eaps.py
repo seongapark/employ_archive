@@ -13,11 +13,11 @@ from ..http import SESSION
 from .. import xlsx
 from ..models import Attachment, SeriesRecord, make_id
 from ..periods import month_rows, squash
+# 게시판 주소는 releases.py 한 곳에만 둔다 — 그쪽이 같은 게시판의 목록을 읽고,
+# 두 벌로 두면 한쪽만 고쳐져 목록과 원문 링크가 어긋난다(주소 근거는 그 주석).
+from ..releases import MODS_BOARD as BOARD, MODS_PARAMS as BOARD_PARAMS, mods_view_url
 
 KST = timezone(timedelta(hours=9))
-BOARD = "https://mods.go.kr/board.es"
-BOARD_PARAMS = {"mid": "a10301030100", "bid": "a103010301",
-                "ref_bid": "210,211,11109,11113,11814"}
 HEADERS = {"User-Agent": "Mozilla/5.0", "Accept-Language": "ko-KR,ko;q=0.9"}
 
 LEVEL_SHEETS = ("3.산업(신)", "3.산업(신) (2)")
@@ -238,8 +238,7 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
         raise ValueError(f"게시일을 찾지 못했다: {title}")
     released_at = date.fromisoformat(posted.group(1))
 
-    view_url = (f"https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301"
-                f"&list_no={list_no}&act=view")
+    view_url = mods_view_url(list_no)
     data = SESSION.get("https://mods.go.kr" + href,
                         headers={**HEADERS, "Referer": BOARD}, timeout=90).content
     attachments = [Attachment(type="xlsx", url="https://mods.go.kr" + href)]

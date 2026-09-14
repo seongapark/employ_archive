@@ -100,8 +100,7 @@ def mods_list(html: str, *, must_contain: str = "고용동향") -> dict[str, dic
         if period is None:
             continue
         out.setdefault(period, {
-            "url": ("https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301"
-                    f"&list_no={list_no}&act=view"),
+            "url": mods_view_url(list_no),
             "title": title,
             "attachments": files.get(list_no, []),
         })
@@ -187,8 +186,22 @@ def missing_attachments(index: dict, source: str) -> list[str]:
 HEADERS = {"User-Agent": "Mozilla/5.0", "Accept-Language": "ko-KR,ko;q=0.9"}
 MOEL_LIST = "https://www.moel.go.kr/news/enews/report/enewsList.do"
 MODS_BOARD = "https://mods.go.kr/board.es"
-MODS_PARAMS = {"mid": "a10301030100", "bid": "a103010301",
-               "ref_bid": "210,211,11109,11113,11814"}
+# 경제활동인구조사 게시판(bid=210) 을 그대로 본다. 전에는 고용·노동 전체를 다섯
+# 게시판의 합집합(`ref_bid=210,211,...`)으로 걸러 봤는데, 그 조합에 두 문제가 있었다.
+#  - `act=view` 링크가 게시물이 아니라 **전체 목록으로 떨어진다**(2026-09-14 실측).
+#    저장해 둔 원문 링크 1,512개가 전부 그랬다 — 누르면 그 회차를 볼 수 없었다.
+#  - 같은 12쪽으로 40회차(2023-05~)까지만 닿는다. 이쪽은 90회차(2019-03~)까지
+#    닿고 쪽당 응답도 빠르다(0.95초 대 1.14초).
+#
+# **수집기도 이 값을 쓴다**(collectors/eaps.py). 주소가 두 벌이면 한쪽만 고쳐져서
+# 목록과 원문 링크가 다른 게시판을 가리키게 된다 — 위의 깨진 링크가 그렇게 났다.
+MODS_PARAMS = {"mid": "a10301030200", "bid": "210"}
+
+
+def mods_view_url(list_no: str) -> str:
+    """게시물 번호 → 원문 주소. 목록을 읽은 게시판과 반드시 같은 곳을 가리킨다."""
+    q = "&".join(f"{k}={v}" for k, v in MODS_PARAMS.items())
+    return f"{MODS_BOARD}?{q}&list_no={list_no}&act=view"
 
 # 게시판마다 페이지가 어떻게 도는지가 다르다. 고용노동부는 pageUnit 이 먹어서
 # 한 페이지에 30건을 받으면 2년치가 들어오고, 국가데이터처는 pageUnit 을 무시하고

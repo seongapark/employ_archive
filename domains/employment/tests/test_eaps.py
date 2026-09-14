@@ -13,7 +13,7 @@ def records():
     return eaps.parse(
         FIXTURE.read_bytes(),
         released_at=date(2026, 8, 12),
-        release_url="https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301&list_no=446465&act=view",
+        release_url="https://mods.go.kr/board.es?mid=a10301030200&bid=210&list_no=446465&act=view",
         attachments=[],
         collected_at=datetime(2026, 8, 30, 9, 0),
     )
@@ -253,3 +253,25 @@ def test_parse_totals_stops_when_the_two_sheets_disagree(monkeypatch):
         eaps.parse_totals(FIXTURE.read_bytes(), released_at=date(2026, 8, 12),
                           release_url="https://mods.go.kr/x", attachments=[],
                           collected_at=datetime(2026, 8, 30, 9, 0))
+
+
+def test_the_view_link_points_at_the_board_we_read_the_list_from():
+    """원문 링크와 목록이 같은 게시판이어야 한다.
+
+    2026-09-14 까지는 아니었다. 목록은 고용·노동 다섯 게시판의 합집합
+    (`ref_bid=210,211,...`)으로 읽으면서 `act=view` 링크도 그 주소로 지었는데,
+    그 조합의 view 는 게시물이 아니라 **전체 목록 페이지**를 돌려준다. 저장해 둔
+    원문 링크 1,512개가 전부 그래서, 눌러도 그 회차를 볼 수 없었다.
+    """
+    from domains.employment.pipeline import releases
+
+    assert eaps.BOARD_PARAMS is releases.MODS_PARAMS
+    assert eaps.BOARD == releases.MODS_BOARD
+
+    url = releases.mods_view_url("446913")
+    for key, value in releases.MODS_PARAMS.items():
+        assert f"{key}={value}" in url
+    assert url.endswith("&list_no=446913&act=view")
+
+    # 합집합 게시판으로 되돌아가면 링크가 다시 목록으로 떨어진다.
+    assert "ref_bid" not in url

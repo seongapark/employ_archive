@@ -1,7 +1,7 @@
 [
   { "id": "eaps", "name_ko": "경제활동인구조사", "agency": "국가데이터처",
     "grade": "B", "axis": "A", "method": "보도자료 첨부 xlsx", "auth": "불요",
-    "endpoint": "https://mods.go.kr/board.es?mid=a10301030100&bid=a103010301",
+    "endpoint": "https://mods.go.kr/board.es?mid=a10301030200&bid=210",
     "archived": true, "priority": 1,
     "evidence": "저장소 domains/employment/data/sources.json",
     "verified_at": "2026-09-08", "evidence_status": "확인" },
