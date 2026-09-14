@@ -6,32 +6,32 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-14 12:48",
+ "collected_at": "2026-09-15 07:17",
  "volume": {
-  "collected": 94,
-  "articles": 23,
-  "press": 22,
+  "collected": 104,
+  "articles": 25,
+  "press": 23,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29258,
+   "api_total": 29261,
    "fetched": 100,
    "truncated": false,
-   "in_window": 33,
-   "relevant": 24,
-   "new": 32
+   "in_window": 36,
+   "relevant": 26,
+   "new": 35
   },
   {
    "query": "구직급여",
-   "api_total": 94315,
+   "api_total": 94321,
    "fetched": 100,
    "truncated": false,
-   "in_window": 62,
-   "relevant": 2,
-   "new": 51
+   "in_window": 68,
+   "relevant": 3,
+   "new": 56
   },
   {
    "query": "구인배수",
@@ -44,19 +44,19 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18503,
+   "api_total": 18505,
    "fetched": 100,
    "truncated": false,
-   "in_window": 14,
+   "in_window": 16,
    "relevant": 8,
-   "new": 3
+   "new": 5
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8370,
+   "api_total": 8371,
    "fetched": 100,
    "truncated": false,
-   "in_window": 7,
+   "in_window": 8,
    "relevant": 4,
    "new": 2
   },
@@ -343,6 +343,26 @@
    "originallink": "https://www.news1.kr/economy/employment-labor/6289266",
    "press": "뉴스1",
    "pub": "2026-09-14 10:01",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "불황 속 자영업자 '수난'···폐업해도 실업급여는 '그림의 떡'",
+   "desc": "자영업자 고용보험 가입자가 꾸준히 늘면서 실업급여 수급자와 지급액도 증가한 것으로 나타났다. 다만 현행법은 자영업자인 피보험자가 매출액 등이 급격하게 감소한 사유로 폐업한 경우에만 실업급여...",
+   "link": "https://www.seoulfn.com/news/articleView.html?idxno=637930",
+   "originallink": "https://www.seoulfn.com/news/articleView.html?idxno=637930",
+   "press": "seoulfn.com",
+   "pub": "2026-09-14 17:46",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "보험료 지원에도 자영업자 고용보험 1%…\"미가입 구조 원인 살펴야\"",
+   "desc": "15일 오세희 더불어민주당 의원이 근로복지공단에서 제출받은 자료에 따르면 지난 7월 말 기준 자영업자 고용보험 가입자는 6만 9553명이다. 올해 6월 기준 전체 자영업자 580만 3500명과 단순 비교하면 약 1.2%에 불과한...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009169888?sid=101",
+   "originallink": "https://www.news1.kr/industry/sb-founded/6289835",
+   "press": "뉴스1",
+   "pub": "2026-09-15 06:10",
    "q": "고용보험 가입자, 구직급여",
    "rel": true
   }
@@ -1056,6 +1076,86 @@
    "press": "kbiznews.co.kr",
    "pub": "2026-09-14 10:18",
    "q": "자동차 고용보험, 공공행정 고용보험",
+   "rel": false
+  },
+  {
+   "title": "7월중 영동지역 투자, 제조업 생산 둔화…고용, 서비스업 생산은 개선",
+   "desc": "7월 중 영동지역 실물경제는 투자, 제조업 생산이 둔화됐으나 고용, 서비스업 생산은 개선된 것으로... 이와 함께 고용보험 피보험자는 서비스업(+2.4%)을 중심으로 전년동월 대비 증가(+1.5%)했으며 실업급여...",
+   "link": "https://n.news.naver.com/mnews/article/087/0001217778?sid=102",
+   "originallink": "https://www.kwnews.co.kr/article/20260914500987",
+   "press": "kwnews.co.kr",
+   "pub": "2026-09-14 14:52",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "관광객 줄었는데 숙박·음식 매출은 늘었다…강원 영동 관광 '씀씀이' 확...",
+   "desc": "관광·서비스 경기는 일자리로 이어졌다. 7월 고용보험 피보험자는 15만3900명으로 1.5% 늘었고, 서비스업이 2.4% 증가하며 전체 증가를 이끌었다. 제조업은 0.1%, 건설업은 1.1% 줄었다. 홍성우 머니투데이방송 MTN 기자",
+   "link": "https://news.mtn.co.kr/news-detail/2026091414561171355",
+   "originallink": "https://news.mtn.co.kr/news-detail/2026091414561171355",
+   "press": "news.mtn.co.kr",
+   "pub": "2026-09-14 15:44",
+   "q": "제조업 고용보험, 건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "인사 업무 빠르게 대체하는 AI…기업 인재전략의 새 과제",
+   "desc": "HR이 다루는 정보에는 평가 점수와 급여, 징계 이력 등 민감한 개인정보가 많다. 특히 출입 기록이나 이메일... 구직자와 직원에게 AI 도구 사용 사실도 알려야 한다. 유럽연합(EU)도 2024년 8월 발효된 AI법에서 채용과...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005332091?sid=101",
+   "originallink": "https://www.hankyung.com/article/2026091422821",
+   "press": "한국경제",
+   "pub": "2026-09-14 16:26",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "해고·폐업 실직자 지원한다더니…실업지원 '잠든 돈' 500억",
+   "desc": "노동부는 구직급여나 취업지원 등을 일반회계와 고용보험기금 등을 통해 집행하고 있습니다. 관련해 예산처는 \"일반회계의 재정부담이 커지는 상황에서 일부 실업 대책을 실업대책사업계정의 사업으로 편성해 지원하는...",
+   "link": "https://n.news.naver.com/mnews/article/374/0000532830?sid=101",
+   "originallink": "https://biz.sbs.co.kr/article_hub/20000334468?division=NAVER",
+   "press": "biz.sbs.co.kr",
+   "pub": "2026-09-14 17:47",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "군포시, 오는 10월 21일 하반기 일자리 박람회 개최…참여기업 모집",
+   "desc": "군포시는 구직자의 취업 촉진과 기업의 인력난 해소를 위해 오는 10월 21일 오후 2시부터 4시까지 시청 본관... 시는 업종의 다양성과 급여 수준, 상근직 여부 등을 꼼꼼히 대조해 최종 참여 기업 명단을 오는 10월 7일 공식...",
+   "link": "https://www.cnbnews.com/news/articleView.html?idxno=1015728",
+   "originallink": "https://www.cnbnews.com/news/articleView.html?idxno=1015728",
+   "press": "cnbnews.com",
+   "pub": "2026-09-14 21:04",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "울산남구가족센터, 결혼이민자 대상 '취존탐방' 진행",
+   "desc": "울산고용복지플러스센터는 취업알선과 국민취업지원제도, 구직급여, 고용안정 및 직업능력개발사업 등 구직자와 기업을 대상으로 종합적인 고용지원서비스를 제공하는 국가 일자리 전문기관이다. 프로그램에 참여한...",
+   "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1067306",
+   "originallink": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1067306",
+   "press": "ksilbo.co.kr",
+   "pub": "2026-09-15 00:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"너 안 뽑았어도 됐다\"…출근 7일차, 회사 어렵다고 위로금 주며 퇴사 요...",
+   "desc": "치 급여를 받고 새로운 직장을 찾는 것이 현실적인 선택이라는 의견도 나왔다. 누리꾼들은 \"3개월 안에 무조건 취업한다는 보장은 없지만 3개월이라는 시간이 짧지 않다. 받은 돈으로 버티면서 구직하면 충분히 가능할 듯...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009169792?sid=102",
+   "originallink": "https://www.news1.kr/society/general-society/6289528",
+   "press": "뉴스1",
+   "pub": "2026-09-15 05:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[사설]자영업자 고용보험 가입률 1%, 유인책 시급",
+   "desc": "지난해부터는 고용보험 가입 자영업자에 대해 정책자금 대출금리 0.1%포인트 감면 혜택도 부여했다. 그럼에도 가입은 여전히 지지부진하다. 전문가들의 분석에 따르면 자영업자들이 고용보험을 외면하는 가장 큰 이유는...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006369354?sid=110",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=01636726645580448&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-09-15 05:02",
+   "q": "고용보험 가입자",
    "rel": false
   }
  ]

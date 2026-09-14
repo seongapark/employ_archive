@@ -6678,6 +6678,44 @@
      "가입률",
      "보험료"
     ]
+   },
+   {
+    "title": "불황 속 자영업자 '수난'···폐업해도 실업급여는 '그림의 떡'",
+    "url": "https://www.seoulfn.com/news/articleView.html?idxno=637930",
+    "press": "seoulfn.com",
+    "pub": "2026-09-14 17:46",
+    "cites": false,
+    "judged": true,
+    "why": "자영업자 고용보험 제도 한계 다룸",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "불황",
+     "수난",
+     "폐업해"
+    ]
+   },
+   {
+    "title": "보험료 지원에도 자영업자 고용보험 1%…\"미가입 구조 원인 살펴야\"",
+    "url": "https://www.news1.kr/industry/sb-founded/6289835",
+    "press": "뉴스1",
+    "pub": "2026-09-15 06:10",
+    "cites": false,
+    "judged": true,
+    "why": "의원실 자료, 자영업자 가입률 문제",
+    "hits": [
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "보험료",
+     "살펴야",
+     "원인"
+    ]
    }
   ]
  }
