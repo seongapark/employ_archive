@@ -6,30 +6,30 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-14 09:20",
+ "collected_at": "2026-09-14 12:48",
  "volume": {
-  "collected": 83,
-  "articles": 22,
-  "press": 21,
-  "queries": 3
+  "collected": 94,
+  "articles": 23,
+  "press": 22,
+  "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29257,
+   "api_total": 29258,
    "fetched": 100,
    "truncated": false,
-   "in_window": 32,
-   "relevant": 23,
-   "new": 31
+   "in_window": 33,
+   "relevant": 24,
+   "new": 32
   },
   {
    "query": "구직급여",
-   "api_total": 94314,
+   "api_total": 94315,
    "fetched": 100,
    "truncated": false,
-   "in_window": 61,
+   "in_window": 62,
    "relevant": 2,
    "new": 51
   },
@@ -41,6 +41,78 @@
    "in_window": 2,
    "relevant": 1,
    "new": 1
+  },
+  {
+   "query": "제조업 고용보험",
+   "api_total": 18503,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 14,
+   "relevant": 8,
+   "new": 3
+  },
+  {
+   "query": "건설업 고용보험",
+   "api_total": 8370,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 7,
+   "relevant": 4,
+   "new": 2
+  },
+  {
+   "query": "비금속광물 고용보험",
+   "api_total": 106,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 1,
+   "relevant": 1,
+   "new": 0
+  },
+  {
+   "query": "교육서비스업 고용보험",
+   "api_total": 3626,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 3,
+   "relevant": 2,
+   "new": 0
+  },
+  {
+   "query": "전자·통신 고용보험",
+   "api_total": 3649,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 1,
+   "relevant": 1,
+   "new": 0
+  },
+  {
+   "query": "자동차 고용보험",
+   "api_total": 13954,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 4,
+   "relevant": 1,
+   "new": 2
+  },
+  {
+   "query": "기타운송장비 고용보험",
+   "api_total": 2491,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 3,
+   "relevant": 2,
+   "new": 0
+  },
+  {
+   "query": "공공행정 고용보험",
+   "api_total": 11159,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 7,
+   "relevant": 1,
+   "new": 3
   }
  ],
  "articles": [
@@ -51,7 +123,7 @@
    "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=236649",
    "press": "labortoday.co.kr",
    "pub": "2026-09-08 06:34",
-   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 교육서비스업 고용보험, 기타운송장비 고용보험",
    "rel": true
   },
   {
@@ -61,7 +133,7 @@
    "originallink": "http://www.mbn.co.kr/pages/news/newsView.php?news_seq_no=5217737",
    "press": "mbn.co.kr",
    "pub": "2026-09-08 10:02",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
    "rel": true
   },
   {
@@ -81,7 +153,7 @@
    "originallink": "http://www.newstomato.com/ReadNews.aspx?no=1312995&inflow=N",
    "press": "뉴스토마토",
    "pub": "2026-09-08 18:04",
-   "q": "고용보험 가입자, 구직급여",
+   "q": "고용보험 가입자, 구직급여, 제조업 고용보험",
    "rel": true
   },
   {
@@ -91,7 +163,7 @@
    "originallink": "https://www.khan.co.kr/article/202609082010005",
    "press": "경향신문",
    "pub": "2026-09-08 20:10",
-   "q": "고용보험 가입자, 구직급여",
+   "q": "고용보험 가입자, 구직급여, 제조업 고용보험, 교육서비스업 고용보험",
    "rel": true
   },
   {
@@ -101,7 +173,7 @@
    "originallink": "https://www.kado.net/news/articleView.html?idxno=2071450",
    "press": "kado.net",
    "pub": "2026-09-09 00:09",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험",
    "rel": true
   },
   {
@@ -111,7 +183,7 @@
    "originallink": "https://www.gukjenews.com/news/articleView.html?idxno=3689090",
    "press": "gukjenews.com",
    "pub": "2026-09-09 00:50",
-   "q": "고용보험 가입자, 구직급여",
+   "q": "고용보험 가입자, 구직급여, 제조업 고용보험, 건설업 고용보험, 교육서비스업 고용보험, 공공행정 고용보험",
    "rel": true
   },
   {
@@ -151,7 +223,7 @@
    "originallink": "https://www.ulsanpress.net/news/articleView.html?idxno=582699",
    "press": "ulsanpress.net",
    "pub": "2026-09-09 21:42",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험",
    "rel": true
   },
   {
@@ -161,7 +233,7 @@
    "originallink": "https://www.imaeil.com/page/view/2026090918023438986",
    "press": "imaeil.com",
    "pub": "2026-09-10 05:01",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
    "rel": true
   },
   {
@@ -171,7 +243,7 @@
    "originallink": "https://www.cctoday.co.kr/news/articleView.html?idxno=2236505",
    "press": "cctoday.co.kr",
    "pub": "2026-09-10 06:00",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
    "rel": true
   },
   {
@@ -201,7 +273,7 @@
    "originallink": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202609101906211060566",
    "press": "dnews.co.kr",
    "pub": "2026-09-11 08:02",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 공공행정 고용보험",
    "rel": true
   },
   {
@@ -261,6 +333,16 @@
    "originallink": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=522465",
    "press": "ilyoseoul.co.kr",
    "pub": "2026-09-14 08:00",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "보험료 지원에도 자영업자 고용보험 가입률 1.2%",
+   "desc": "정부가 보험료를 지원하는 자영업자 고용보험 가입자가 전체 자영업자의 1%대에 머문 것으로 나타났다. 보험료 부담을 낮추는 지원책과 함께 실제 수급 요건, 가입 구조를 점검해야 한다는 지적이 나온다. 14일 국회...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009168074?sid=101",
+   "originallink": "https://www.news1.kr/economy/employment-labor/6289266",
+   "press": "뉴스1",
+   "pub": "2026-09-14 10:01",
    "q": "고용보험 가입자, 구직급여",
    "rel": true
   }
@@ -427,6 +509,16 @@
    "rel": false
   },
   {
+   "title": "아르헨티나 광업·에너지 조달시장 기회 확대… '2026 산업·서비스 전시...",
+   "desc": "31.] 아르헨티나 노동위험감독청(SRT) 기준, 2026년 2월 보험료 납부 고용사업체 수는 48만 7920개로, 2023년 12월 대비 2만 4978개(약 4.9%) 감소했다. 특히 제조업 사업체는 같은 기간 3173개(약 6.4%) 감소해 전체 사업체보다...",
+   "link": "http://dream.kotra.or.kr/kotranews/cms/news/actionKotraBoardDetail.do?SITE_NO=3&MENU_ID=110&CONTENTS_NO=1&bbsGbn=245&bbsSn=245&pNttSn=243922",
+   "originallink": "http://dream.kotra.or.kr/kotranews/cms/news/actionKotraBoardDetail.do?SITE_NO=3&MENU_ID=110&CONTENTS_NO=1&bbsGbn=245&bbsSn=245&pNttSn=243922",
+   "press": "dream.kotra.or.kr",
+   "pub": "2026-09-08 10:55",
+   "q": "제조업 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": false
+  },
+  {
    "title": "잡플래닛, '2026 하반기 어워즈' 발표⋯SK하이닉스 종합 대상",
    "desc": "평가에는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, 최고경영자(CEO) 지지율 등이... 잡플래닛 관계자는 \"산업·직무별 조직 경험을 살펴 구직자가 자신에게 맞는 일하기 좋은 회사를 찾는 데...",
    "link": "https://n.news.naver.com/mnews/article/031/0001056311?sid=101",
@@ -473,7 +565,7 @@
    "originallink": "http://www.intn.co.kr/news/articleView.html?idxno=2053134",
    "press": "intn.co.kr",
    "pub": "2026-09-08 12:02",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험",
    "rel": false
   },
   {
@@ -657,6 +749,16 @@
    "rel": false
   },
   {
+   "title": "[현장] 한국세무사회, 세무사 제도 도입 65년 역사 위 ‘황금시대’ 선...",
+   "desc": "세무행정의 합리화를 꿈꿨습니다. 이제 한국 세무사제도는 일본을 능가할 만큼 비약적으로 발전했습니다.... 또한 변호사의 세무사 자동자격 폐지 및 업무 제한에 대한 헌법소원 6건 전원 승소, 회계사의 고용·산재보험...",
+   "link": "https://www.tfmedia.co.kr/news/article.html?no=207097",
+   "originallink": "https://www.tfmedia.co.kr/news/article.html?no=207097",
+   "press": "tfmedia.co.kr",
+   "pub": "2026-09-09 15:22",
+   "q": "공공행정 고용보험",
+   "rel": false
+  },
+  {
    "title": "메디케어 가입, 시기 놓치면 ‘평생 벌금’",
    "desc": "병원보험인 파트 A와 의사 진료 및 외래 치료 등을 보장하는 파트 B로 구성된다. 65세 신규 가입자는... 고용 또는 직장 보험이 종료된 달의 다음달부터 8개월 이내에 가입해야 연체 벌금 없이 가입이 가능하다. 매년...",
    "link": "http://www.koreatimes.com/article/1628933",
@@ -767,6 +869,16 @@
    "rel": false
   },
   {
+   "title": "[162조 미래, 왜 기금인가] ① 적립인가 사업인가…커지는 '쌈짓돈' 논란",
+   "desc": "고용보험기금이나 주택도시기금처럼 사업을 수행하는 기금도 있다. 다만 미래기금은 '미래'라는 포괄적인... 왼쪽부터 김민재 행정안전부 차관, 박홍근 장관, 최교진 교육부 장관. [사진 = 뉴스핌DB] 신설 심사·평가...",
+   "link": "https://www.newspim.com/news/view/20260910000650",
+   "originallink": "https://www.newspim.com/news/view/20260910000650",
+   "press": "뉴스핌",
+   "pub": "2026-09-10 14:00",
+   "q": "공공행정 고용보험",
+   "rel": false
+  },
+  {
    "title": "재취업율 3년째 30%인데…청년 실업급여 확대 답일까?",
    "desc": "권고사직이나 계약기간 만료 등 비자발적으로 회사를 그만둔 노동자들이 구직급여(실업급여)를 받는 동안 재취업하는 비율이 30%에 머물면서, 실업급여의 실효성에 대한 지적이 제기됐습니다. 10일 국회입법조사처의...",
    "link": "https://n.news.naver.com/mnews/article/374/0000532250?sid=101",
@@ -774,6 +886,26 @@
    "press": "biz.sbs.co.kr",
    "pub": "2026-09-10 14:56",
    "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "7월까지 나라살림 64.8조 적자…국가채무 1354조",
+   "desc": "국민연금기금과 사립학교교직원연금기금, 고용보험기금, 산업재해보상보험및예방기금 등... 이 가운데 국가가 청사·도로·하천 등 공용·공공용으로 사용하는 행정재산은 1031조7000억원, 매각이나 대부가...",
+   "link": "https://www.thepowernews.co.kr/view.php?ud=20260911095329680de3f0aa1be_7",
+   "originallink": "https://www.thepowernews.co.kr/view.php?ud=20260911095329680de3f0aa1be_7",
+   "press": "thepowernews.co.kr",
+   "pub": "2026-09-11 09:56",
+   "q": "공공행정 고용보험",
+   "rel": false
+  },
+  {
+   "title": "국민소득 4만 달러 시대 열린다는데…내 지갑은 왜 그대로?",
+   "desc": "반면 임금과 고용주의 사회보험 부담 등을 포함한 근로자 몫, 즉 피용자보수는 전 분기보다 1.9% 늘어나는... 제조업도 반도체를 포함한 컴퓨터·전자·광학기기를 중심으로 1.4% 성장했다. 4만 달러를 눈앞에 둔 소득...",
+   "link": "https://www.pennmike.com/news/articleView.html?idxno=127579",
+   "originallink": "https://www.pennmike.com/news/articleView.html?idxno=127579",
+   "press": "pennmike.com",
+   "pub": "2026-09-11 10:28",
+   "q": "제조업 고용보험",
    "rel": false
   },
   {
@@ -787,13 +919,23 @@
    "rel": false
   },
   {
+   "title": "기업·고용 일부 개선 추세, 건설업 부진은 여전",
+   "desc": "올해 5월 피보험자 수는 16만3136명이었지만, 6월에는 16만4782명으로 조금 늘어났다. 다만, 건설업은 여전히 침체된 상황이다. 기업과 고용 양쪽에서 하락세가 뚜렷했다. 올해 7월 기준으로 제주에서 신설...",
+   "link": "https://www.jejusori.net/news/articleView.html?idxno=506467",
+   "originallink": "https://www.jejusori.net/news/articleView.html?idxno=506467",
+   "press": "jejusori.net",
+   "pub": "2026-09-11 15:00",
+   "q": "건설업 고용보험",
+   "rel": false
+  },
+  {
    "title": "\"아파도 일하라는 상병수당?\"…시민 1만 명, 정부안 전면 수정 촉구",
    "desc": "정부안은 건강보험 가입자를 대상으로 하되 만 65세 연령 상한을 두고, 인적용역 노무제공자와 초단시간... 869만 명 인적용역 노동자도 사각지대 고용 형태에 따른 배제 역시 비판의 대상이 됐다. 최영미 한국노총...",
    "link": "http://www.gjdream.com/news/articleView.html?idxno=672626",
    "originallink": "http://www.gjdream.com/news/articleView.html?idxno=672626",
    "press": "gjdream.com",
    "pub": "2026-09-11 15:50",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험",
    "rel": false
   },
   {
@@ -817,6 +959,16 @@
    "rel": false
   },
   {
+   "title": "섬유업 고용 감소 지속…종사자 고령화도 가속",
+   "desc": "보고서는 제조업 고용 감소 속에서도 섬유업의 구조적 변화가 두드러졌다고 분석했다. 섬유업 고용보험 피보험자는 2018년 이후 꾸준히 감소세를 이어갔으며, 사업체는 소규모 중심으로 재편되면서 영세화가...",
+   "link": "https://www.viva100.com/article/20260809500429",
+   "originallink": "https://www.viva100.com/article/20260809500429",
+   "press": "viva100.com",
+   "pub": "2026-09-12 09:02",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
    "title": "북한, 미국 기업 침투 계획의 일환 \"해외 인재 물색 중\"",
    "desc": "나아가 북한의 원격 근무 제도가 급증하면서, 미국 기업에 배치된 노동자들의 급여가 불법 프로그램... 수천 명의 구직자들이 수백 개의 미국 기업에 지원하는 것으로 추정되는 이 계획은 매년 수억 달러의 수익을...",
    "link": "http://www.newstown.co.kr/news/articleView.html?idxno=715598",
@@ -827,7 +979,7 @@
    "rel": false
   },
   {
-   "title": "“‘X소’ 다닐 바에 ‘시럽급여’ 타먹어”... 받는 돈 ‘거기서 거기...",
+   "title": "‘좋소’ 다닐 바에 ‘시럽급여’…실업급여 요건만 채우고 회사 떠났다...",
    "desc": "자진퇴사는 구직급여 대상이 아니지만 김씨는 현재 구직급여를 190만원씩 받으며 쉬고 있다. 올해 영화관에서 2개월간 계약직으로 일한 뒤 계약만료로 퇴사하면서 수급 요건을 갖췄기 때문이다. 중소기업을 자진퇴사한...",
    "link": "https://n.news.naver.com/mnews/article/016/0002696363?sid=101",
    "originallink": "https://biz.heraldcorp.com/article/10870836?ref=naver",
@@ -867,6 +1019,16 @@
    "rel": false
   },
   {
+   "title": "“회사 몰래 대리운전 ‘투잡’…해고해도 정당한가요?”",
+   "desc": "특히 자동차 관련 콘텐츠에 추천인 코드를 연결해 광고 수익 약 900만 원을 얻고 2500만 원 상당의 크레디트와... 부업이 다른 회사에 ‘근로자’로 취업하는 형태라면 고용보험에서 드러날 가능성이 크다. 고용보험은 이중...",
+   "link": "https://n.news.naver.com/mnews/article/262/0000019685?sid=102",
+   "originallink": "https://shindonga.donga.com/3/all/13/6383050/1",
+   "press": "동아일보",
+   "pub": "2026-09-14 07:02",
+   "q": "자동차 고용보험, 공공행정 고용보험",
+   "rel": false
+  },
+  {
    "title": "[플랫폼 3.3% 족쇄]③ 월 60시간 변수…배민·쿠팡 수익성 가른다",
    "desc": "전 대변인은 \"고용·산재보험 적용 대상을 현행 19개 직종에서 확대하고 지역가입자로 분류된 플랫폼 노동자들을 국민연금 사업장가입 체계로 편입하는 방안을 서둘러 검토해야 한다\"고 말했다. 현장 노조 역시 소득...",
    "link": "https://n.news.naver.com/mnews/article/293/0000090409?sid=101",
@@ -874,6 +1036,26 @@
    "press": "bloter.net",
    "pub": "2026-09-14 09:00",
    "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "제주 산업·고용시장 개선 흐름…건설업 부진",
+   "desc": "제주도가 발표한 7월 지역경제 브리프를 보면 도내 기업 수는 10만 2천여 곳으로 1년 전보다 2% 늘었고, 고용보험 피보험자 수도 2% 가량 늘었습니다. 다만 건설업의 경우 폐업 기업 수가 1년전보다 50%나 늘었고...",
+   "link": "https://n.news.naver.com/mnews/article/056/0012256650?sid=101",
+   "originallink": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8662403&ref=A",
+   "press": "news.kbs.co.kr",
+   "pub": "2026-09-14 09:18",
+   "q": "건설업 고용보험, 건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "[2027년도 예산안] \"아플 때부터 문 닫을 때까지\"…소상공인·영세기업 ...",
+   "desc": "기존 고용보험과 국민연금에 더해 10인 미만 사업장 저임금 근로자와 노무제공자의 산재·건강보험료까지... 유럽연합(EU) 등을 중심으로 자동차 부품의 온실가스 배출량 정보 제출 요구가 커지면서 중소 수출...",
+   "link": "http://www.kbiznews.co.kr/news/articleView.html?idxno=114822",
+   "originallink": "http://www.kbiznews.co.kr/news/articleView.html?idxno=114822",
+   "press": "kbiznews.co.kr",
+   "pub": "2026-09-14 10:18",
+   "q": "자동차 고용보험, 공공행정 고용보험",
    "rel": false
   }
  ]

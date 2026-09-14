@@ -6600,6 +6600,84 @@
      "나라살림",
      "적자"
     ]
+   },
+   {
+    "title": "[경인어젠다] “예술계 산재보험, 당연적용 전환해야”",
+    "url": "https://www.kyeongin.com/article/1770736",
+    "press": "kyeongin.com",
+    "pub": "2026-09-13 18:44",
+    "cites": false,
+    "judged": true,
+    "why": "예술인 산재보험 임의가입 제도 개선 주장",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "경인어젠",
+     "산재보험",
+     "예술계",
+     "전환해야"
+    ]
+   },
+   {
+    "title": "[단독] 자영업자 고용보험 가입률 불과 ‘1%’",
+    "url": "https://www.kmib.co.kr/article/view.asp?arcid=9000011620&cp=nv",
+    "press": "국민일보",
+    "pub": "2026-09-14 00:58",
+    "cites": false,
+    "judged": true,
+    "why": "의원실 자영업자 고용보험 가입률 자료",
+    "hits": [
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "가입률"
+    ]
+   },
+   {
+    "title": "[기업과 시장을 흔드는 제도 개혁 3부작②] 고용보험 개편 논란",
+    "url": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=522465",
+    "press": "ilyoseoul.co.kr",
+    "pub": "2026-09-14 08:00",
+    "cites": false,
+    "judged": true,
+    "why": "고용보험료율 개편 논란 다룸",
+    "hits": [
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "개편",
+     "개혁",
+     "논란",
+     "부작",
+     "흔드"
+    ]
+   },
+   {
+    "title": "보험료 지원에도 자영업자 고용보험 가입률 1.2%",
+    "url": "https://www.news1.kr/economy/employment-labor/6289266",
+    "press": "뉴스1",
+    "pub": "2026-09-14 10:01",
+    "cites": false,
+    "judged": true,
+    "why": "자영업자 고용보험 가입률·국회 지적 다룬 기사",
+    "hits": [
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "가입률",
+     "보험료"
+    ]
    }
   ]
  }
