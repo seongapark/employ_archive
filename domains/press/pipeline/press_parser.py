@@ -9,7 +9,7 @@
 
 의존: lxml
 """
-import io, json, re, sys, zipfile, unicodedata
+import io, json, os, re, sys, zipfile, unicodedata
 from lxml import etree
 
 NS = '{http://www.hancom.co.kr/hwpml/2011/paragraph}'
@@ -41,8 +41,41 @@ def _cell(tc):
     return ' '.join(''.join(p.itertext()).strip() for p in tc.iter(NS + 'p')).strip()
 
 
+def cache_path(hwpx_path):
+    """파싱 결과를 담아 둘 자리 — hwpx 옆에 같은 이름의 .json."""
+    return os.path.splitext(hwpx_path)[0] + '.json'
+
+
+def have_release(hwpx_path):
+    """이 회차를 조립할 수 있나. hwpx 든 캐시든 하나만 있으면 된다."""
+    return os.path.exists(hwpx_path) or os.path.exists(cache_path(hwpx_path))
+
+
 def parse_release(hwpx_path):
-    """보도자료 hwpx → {alias, series, schedule, body}"""
+    """보도자료 hwpx → {alias, series, schedule, body}
+
+    **hwpx 가 없으면 캐시로 버틴다.** hwpx 는 회차당 1.4MB 라 저장소에 안 담고
+    매번 고용노동부 게시판에서 다시 받는데, 게시판이 한 번 안 열리면 그날 모든
+    회차가 「보도자료가 없다」로 건너뛰어진다 — 2026-09-14 에 실제로 세 회차가
+    한꺼번에 빠져 `회차 3 → 0` 방어가 걸렸고 수집이 통째로 죽었다. 게시판이
+    비어 보인 것이지 실제로 비어 있던 것이 아니다(같은 코드가 로컬에서는 56개월을
+    읽었다).
+
+    그래서 파싱 결과(회차당 104KB)는 담는다. hwpx 가 있으면 파싱하고 결과를
+    옆에 남기고, 없으면 남겨 둔 것으로 조립한다. 첫 수집 때 한 번만 게시판이
+    필요하고, 그다음부터 그 회차는 네트워크와 무관해진다.
+    """
+    cache = cache_path(hwpx_path)
+    if not os.path.exists(hwpx_path):
+        with io.open(cache, encoding='utf-8') as f:
+            return json.load(f)
+    rel = _parse_hwpx(hwpx_path)
+    with io.open(cache, 'w', encoding='utf-8') as f:
+        json.dump(rel, f, ensure_ascii=False)
+    return rel
+
+
+def _parse_hwpx(hwpx_path):
     with zipfile.ZipFile(hwpx_path) as z:
         xml = z.read('Contents/section0.xml')
     root = etree.fromstring(xml)

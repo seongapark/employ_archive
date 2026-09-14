@@ -227,6 +227,40 @@ def test_make_data_refuses_to_shrink_the_round_list(tmp_path, monkeypatch):
     assert [r['release'] for r in kept] == ['2026-09-07', '2026-08-10']
 
 
+def test_a_round_survives_without_its_hwpx_when_the_cache_is_there(tmp_path):
+    # 2026-09-14: 게시판이 한 번 안 열리자 세 회차의 hwpx 를 다 못 받았고,
+    # make_data 가 셋 다 건너뛰어 회차가 3 → 0 이 됐다(수집 exit 1). hwpx 는
+    # 저장소에 없으므로 매 실행이 그 다운로드에 매여 있었다. 파싱 결과를
+    # 옆에 담아 두면 그 회차는 다시는 네트워크에 매이지 않는다.
+    from domains.press.pipeline import press_parser as pp
+
+    hwpx = tmp_path / 'ei_2026-08.hwpx'
+    cache = tmp_path / 'ei_2026-08.json'
+    rel = {'alias': {'제조업': '제조업'}, 'series': [], 'schedule': {}, 'body': '본문'}
+    cache.write_text(json.dumps(rel, ensure_ascii=False), encoding='utf-8')
+
+    assert not hwpx.exists()
+    assert pp.have_release(str(hwpx))          # 캐시만으로 조립할 수 있다
+    assert pp.parse_release(str(hwpx)) == rel
+
+    # 캐시도 hwpx 도 없으면 없는 것이 맞다 — 건너뛰기는 그때만 일어나야 한다.
+    assert not pp.have_release(str(tmp_path / 'ei_2026-07.hwpx'))
+
+
+def test_board_failure_is_not_reported_as_a_missing_round():
+    # `_get` 은 실패를 None 으로 삼킨다(고용동향에서는 옳다). press 는 색인을
+    # 전제로 쓰므로 그 둘을 구분해야 한다 — 안 그러면 네트워크 장애가
+    # 「2026-08 회차가 없다」로 보이고, 그 오진이 회차 목록을 날린다.
+    import pytest
+    from domains.employment.pipeline import releases
+
+    with pytest.raises(RuntimeError, match='게시판을 못 읽었다'):
+        releases.fetch_list('ei', get=lambda *a, **k: None, strict=True)
+
+    # strict 가 아니면 예전대로 조용히 빈 색인이다.
+    assert releases.fetch_list('ei', get=lambda *a, **k: None) == {}
+
+
 def test_a_failed_judgement_does_not_throw_away_the_collection(tmp_path, monkeypatch):
     # 수집에는 마감이 있고(네이버 검색은 약 50일이면 그 회차에 못 닿는다) 판정에는
     # 없다. 판정 예외가 위로 올라가면 워크플로의 커밋 단계가 안 돌고, 러너가

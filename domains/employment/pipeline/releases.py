@@ -234,8 +234,17 @@ def _get(url: str, params: dict, *, tries: int = 3, timeout: int = 60) -> str | 
     return None
 
 
-def fetch_list(source: str, *, get: Callable = _get) -> dict[str, dict]:
-    """게시판 목록을 넘겨가며 {기간: 게시글} 을 모은다."""
+def fetch_list(source: str, *, get: Callable = _get,
+               strict: bool = False) -> dict[str, dict]:
+    """게시판 목록을 넘겨가며 {기간: 게시글} 을 모은다.
+
+    `strict` 는 **게시판을 못 읽은 것**과 **게시판에 그 회차가 없는 것**을
+    가르라는 뜻이다. `_get` 은 실패를 None 으로 삼키므로 기본값에서는 둘이
+    같은 빈 dict 로 보인다 — 고용동향은 그래도 되지만(색인은 있으면 좋은 것),
+    보도자료를 전제로 쓰는 쪽은 그 둘을 구분해야 한다. 2026-09-14 에 press 가
+    이것 때문에 네트워크 실패를 「2026-06·07·08 회차가 없다」로 읽고 회차
+    목록을 통째로 날릴 뻔했다.
+    """
     board = BOARDS[source]
     found: dict[str, dict] = {}
     for page in range(1, board["pages"] + 1):
@@ -247,6 +256,9 @@ def fetch_list(source: str, *, get: Callable = _get) -> dict[str, dict]:
         else:
             html = get(MODS_BOARD, {**MODS_PARAMS, "nPage": str(page)})
             page_found = mods_list(html, must_contain=board["title_contains"]) if html else {}
+        if html is None and strict:
+            raise RuntimeError('게시판을 못 읽었다(%s %d쪽) — 회차가 없는 것이 아니다'
+                               % (source, page))
         if not page_found and html is not None and page > 1:
             break               # 더 넘겨도 안 나온다
         for period, post in page_found.items():

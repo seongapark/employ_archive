@@ -15,7 +15,7 @@ from datetime import datetime, timedelta, timezone
 
 from .build_data import build_round
 from .plan import schedule_to_releases
-from .press_parser import parse_release
+from .press_parser import have_release, parse_release
 
 KST = timezone(timedelta(hours=9))
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -60,8 +60,9 @@ def main():
     for release, kinds in rounds_on_disk():
         month = month_of(release)
         hwpx = os.path.join(RELEASES, 'ei_%s.hwpx' % month)
-        if not os.path.exists(hwpx):
-            print('건너뜀 %s — 보도자료 %s 가 없다' % (release, os.path.basename(hwpx)))
+        if not have_release(hwpx):
+            print('건너뜀 %s — 보도자료도 파싱 캐시도 없다(%s)'
+                  % (release, os.path.basename(hwpx)))
             continue
         reg = _load(os.path.join(RAW, 'articles_%s_regular.json' % release))
         if reg is None:
@@ -88,7 +89,7 @@ def main():
     if summaries:
         newest = summaries[-1] if summaries[0]['release'] < summaries[-1]['release']             else summaries[0]
         hwpx = os.path.join(RELEASES, 'ei_%s.hwpx' % newest['month'])
-        if os.path.exists(hwpx):
+        if have_release(hwpx):
             year = int(newest['month'][:4])
             sched = schedule_to_releases(parse_release(hwpx)['schedule'], year)
             json.dump(sched, io.open(os.path.join(DATA, 'schedule.json'), 'w',

@@ -29,7 +29,9 @@ def index(*, fetch_list=None, fill=None):
     """게시판에서 고용행정통계 회차 목록과 첨부를 읽는다."""
     fetch_list = fetch_list or board.fetch_list
     fill = fill or board.fill_attachments
-    found = fetch_list('ei')
+    # strict — 게시판을 못 읽은 것을 「회차가 없다」로 읽지 않는다. press 는
+    # 고용동향과 달리 이 색인을 전제로 쓴다.
+    found = fetch_list('ei', strict=True)
     got = fill({'ei': found}, 'ei')
     # fill_attachments 는 (색인, 채운 수) 를 돌려준다. 첫 원소만 쓴다.
     idx = got[0] if isinstance(got, tuple) else got

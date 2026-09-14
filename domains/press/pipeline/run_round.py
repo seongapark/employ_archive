@@ -22,6 +22,7 @@ import io
 import json
 import os
 from . import collect, fetch_release, llm_cite, make_data, plan
+from .press_parser import have_release
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 SOURCES = os.path.abspath(os.path.join(HERE, '..', 'sources'))
@@ -89,7 +90,7 @@ def judge_missing(release, kind, *, log=print, call=None):
 
 def _digest(hwpx):
     """보도자료 요지. 없으면 최소 맥락으로도 판정은 된다(실측에서 결과가 같았다)."""
-    if not os.path.exists(hwpx):
+    if not have_release(hwpx):
         return ('(보도자료 원문을 아직 못 받았다. 기준월은 배포일의 전월이고, 내용은 '
                 '매월 같은 세 부분이다: 고용보험 상시가입자 현황(산업·연령·성별 증감), '
                 '구직급여 신규신청·지급자·지급액, 고용24 신규구인·신규구직·구인배수.)')
@@ -114,7 +115,7 @@ def fetch_all_releases():
     """
     for release, _kinds in make_data.rounds_on_disk():
         month = plan.month_of(release)
-        if os.path.exists(os.path.join(SOURCES, 'releases', 'ei_%s.hwpx' % month)):
+        if have_release(os.path.join(SOURCES, 'releases', 'ei_%s.hwpx' % month)):
             continue
         try:
             fetch_release.save(month)
@@ -171,7 +172,7 @@ def main(argv=None):
         print('  보도자료를 못 받았다: %s — 기본 검색어로 진행한다' % exc)
 
     hwpx = os.path.join(SOURCES, 'releases', 'ei_%s.hwpx' % month)
-    collect.run(release, hwpx if os.path.exists(hwpx) else None, kind == 'follow')
+    collect.run(release, hwpx if have_release(hwpx) else None, kind == 'follow')
 
     # **판정이 죽어도 수집은 살린다.** 수집에는 마감이 있고(네이버 검색은 약 50일이면
     # 그 회차에 못 닿는다) 판정에는 없다. 여기서 예외가 위로 올라가면 뒤따르는
