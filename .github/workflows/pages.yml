@@ -39,7 +39,25 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # **main 의 끝을 올린다. 이 실행을 띄운 SHA 가 아니라.**
+      #
+      # ref 를 안 주면 checkout 은 github.sha — 이 실행이 시작된 시점의 커밋 —
+      # 을 잡는다. 그런데 수집 워크플로가 이 배포를 workflow_call 로 부를 때,
+      # 올려야 할 데이터 커밋은 **그 실행 도중에** 생긴다. 그래서 수집기는
+      # 자기가 방금 만든 데이터를 자기 배포 잡으로는 결코 못 올렸고, 다음
+      # 누군가의 배포가 따라 올려 줄 때까지 화면이 옛 숫자를 보여줬다.
+      #
+      # 2026-09-14 에 네 도메인을 연달아 돌려 보고 알았다: 마지막 배포가 기준
+      # 삼은 SHA 이후에 커밋된 forecast·reports 의 갱신시각이 화면에서 전날로
+      # 남았다(employment·press 는 그 SHA 안에 들어와 멀쩡했다). 평소에도
+      # 매일 이랬다 — 마지막에 도는 수집기만 제때 올라갔다.
+      #
+      # 사람 push 로 걸릴 때는 그 push 가 곧 main 끝이라 동작이 같다. 수집이
+      # 겹쳐 남의 커밋까지 같이 올라가는 것은 문제가 아니라 맞는 동작이다 —
+      # 배포는 그 순간의 정본 전체여야 한다.
       - uses: actions/checkout@v4
+        with:
+          ref: main
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
