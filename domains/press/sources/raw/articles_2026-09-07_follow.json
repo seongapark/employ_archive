@@ -6,30 +6,30 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-14 06:41",
+ "collected_at": "2026-09-14 09:20",
  "volume": {
-  "collected": 81,
-  "articles": 21,
-  "press": 20,
+  "collected": 83,
+  "articles": 22,
+  "press": 21,
   "queries": 3
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29255,
+   "api_total": 29257,
    "fetched": 100,
    "truncated": false,
-   "in_window": 30,
-   "relevant": 22,
-   "new": 29
+   "in_window": 32,
+   "relevant": 23,
+   "new": 31
   },
   {
    "query": "구직급여",
-   "api_total": 94313,
+   "api_total": 94314,
    "fetched": 100,
    "truncated": false,
-   "in_window": 60,
+   "in_window": 61,
    "relevant": 2,
    "new": 51
   },
@@ -252,6 +252,16 @@
    "press": "국민일보",
    "pub": "2026-09-14 00:58",
    "q": "고용보험 가입자, 고용보험 가입자, 구직급여, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "[기업과 시장을 흔드는 제도 개혁 3부작②] 고용보험 개편 논란",
+   "desc": "저출생과 일·가정 양립을 국가 정책으로 추진하면서 관련 비용을 고용보험 가입자에게 먼저 부담시키는 것은 적절하지 않다는 주장이다. [사진 = 뉴시스] 민주노총은 정부가 2027년부터 노사에 각각 0.1%포인트씩 보험료...",
+   "link": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=522465",
+   "originallink": "https://www.ilyoseoul.co.kr/news/articleView.html?idxno=522465",
+   "press": "ilyoseoul.co.kr",
+   "pub": "2026-09-14 08:00",
+   "q": "고용보험 가입자, 구직급여",
    "rel": true
   }
  ],
@@ -853,6 +863,16 @@
    "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=236761",
    "press": "labortoday.co.kr",
    "pub": "2026-09-14 06:34",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "[플랫폼 3.3% 족쇄]③ 월 60시간 변수…배민·쿠팡 수익성 가른다",
+   "desc": "전 대변인은 \"고용·산재보험 적용 대상을 현행 19개 직종에서 확대하고 지역가입자로 분류된 플랫폼 노동자들을 국민연금 사업장가입 체계로 편입하는 방안을 서둘러 검토해야 한다\"고 말했다. 현장 노조 역시 소득...",
+   "link": "https://n.news.naver.com/mnews/article/293/0000090409?sid=101",
+   "originallink": "https://www.bloter.net/news/articleView.html?idxno=673287",
+   "press": "bloter.net",
+   "pub": "2026-09-14 09:00",
    "q": "고용보험 가입자",
    "rel": false
   }
