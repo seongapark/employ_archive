@@ -54,6 +54,7 @@ jobs:
       # 적재가 조용히 반만 되던 일을 CI 를 태우기 전에 잡는다.
       - run: python -m pytest -q tools
       - name: FTS 색인 재적재
+        id: load
         env:
           PYTHONIOENCODING: utf-8
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -65,10 +66,20 @@ jobs:
           # forecast·press·카탈로그 526행이 사라졌는데 이 워크플로는 초록이었다.
           python -m tools.fts_load --out-dir /tmp/fts
           ls -l /tmp/fts
+          # **같은 내용이면 안 민다.** FTS5 는 upsert 를 못 받아 DELETE 후 전량
+          # INSERT 다. 내용이 그대로여도 6,100행을 지우고 6,100행을 넣는다 —
+          # 2026-09-13 에 이 워크플로가 16번 돌아 하루 쓰기 한도를 넘겼다.
+          # 도장은 **아래 건수 확인까지 통과한 뒤에** 찍는다(record 스텝).
+          gate="$(python -m tools.d1_gate check fts /tmp/fts/*.sql)"
+          echo "gate=$gate" >> "$GITHUB_OUTPUT"
           # **wrangler 의 파일 적재를 쓰지 않는다.** 조각 크기를 2MB→700KB→400KB 로
           # 줄여 가며 재 봤지만 소실이 202→138→30행으로 줄기만 하고 사라지지 않았다.
           # 문장 경계를 아는 쪽(우리)이 나눠 REST API 로 직접 보낸다.
-          python -m tools.d1_push /tmp/fts/*.sql
+          if [ "$gate" = push ]; then
+            python -m tools.d1_push /tmp/fts/*.sql
+          else
+            echo "색인 내용이 그대로다 — 적재를 건너뛴다"
+          fi
       # 적재가 조용히 반만 되는 실패가 실제로 있었다. **건수를 세서 확인한다** —
       # 네 도메인 중 하나라도 비면 여기서 빨갛게 죽는다.
       - name: 색인 건수 확인
@@ -82,6 +93,17 @@ jobs:
             --config domains/ask/worker/wrangler.jsonc \
             --command "SELECT 도메인, COUNT(*) AS n FROM doc_fts GROUP BY 도메인" \
             | python -m tools.fts_verify /tmp/fts/counts.json
+
+      # **도장은 여기서 찍는다.** 적재가 반만 들어간 채 초록으로 끝난 회차가
+      # 실제로 있었다 — 그 상태에 지문을 남기면 다음 회차가 「그대로다」라며
+      # 건너뛰어 깨진 색인이 굳는다. 건수 확인까지 통과했을 때만 남긴다.
+      - name: 적재 지문 남기기
+        if: steps.load.outputs.gate == 'push'
+        env:
+          PYTHONIOENCODING: utf-8
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: python -m tools.d1_gate record fts /tmp/fts/*.sql
 
       # 질의응답 카드의 값은 여기서 나온다. 이 기록이 없으면 관리자 화면은
       # 2026-09-08 에 손으로 박아 둔 "카탈로그 정상" 을 영원히 보여준다 —

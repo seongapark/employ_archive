@@ -63,8 +63,14 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
           python -m tools.d1_sync employment > /tmp/employment.sql
-          npx --yes wrangler@4 d1 execute employ-archive-ask --remote \
-            --config domains/ask/worker/wrangler.jsonc --file=/tmp/employment.sql
+          # **같은 내용이면 안 민다.** D1 은 값이 같아도 쓰기로 센다 —
+          # 아무것도 안 바뀐 날에도 전량이 나가서 2026-09-13 에 하루 10만행
+          # 한도를 넘겼다. 지문은 D1 에 있고, 적재가 끝난 뒤에만 찍는다.
+          if [ "$(python -m tools.d1_gate check employment /tmp/employment.sql)" = push ]; then
+            npx --yes wrangler@4 d1 execute employ-archive-ask --remote \
+              --config domains/ask/worker/wrangler.jsonc --file=/tmp/employment.sql
+            python -m tools.d1_gate record employment /tmp/employment.sql
+          fi
       # 위 스텝은 continue-on-error 라 실패해도 이 실행은 초록으로 끝난다 — 그래서
       # 동기화가 며칠째 죽어 있어도 실행 목록만 봐서는 알 수 없다. 최소한 실행 페이지
       # 상단 요약에 한 줄은 남긴다(스텝을 하나하나 펼쳐 보지 않아도 되게).
