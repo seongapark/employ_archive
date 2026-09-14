@@ -224,3 +224,42 @@ def test_old_verdict_files_without_titles_still_line_up_by_number():
 def test_an_article_with_no_verdict_is_marked_unjudged():
     arts = [{'title': 't', 'press': 'A', 'pub': '', 'link': '', 'desc': ''}]
     assert b.enrich(arts, [], {}, '본문')[0]['judged'] is False
+
+
+def test_ties_are_broken_by_the_word_not_by_the_hash_seed():
+    """같은 입력이면 같은 파일이 나와야 한다.
+
+    2026-09-14 실측: PYTHONHASHSEED 만 바꿔 rounds.json 을 다시 만들면 한
+    회차에 20~60줄이 흔들렸다. 이 파일은 낱말을 set 에서 꺼내 세는데
+    (trend_terms·words), set 순회 순서가 문자열 해시 시드에 좌우되고 그것이
+    Counter 의 삽입 순서 = most_common() 의 동점 순서가 되기 때문이다.
+
+    쓸모없는 diff 가 매 회차 쌓이는 것보다 나쁜 것은 진짜 변경이 거기 묻히는
+    것이다. 동점은 낱말 순으로 깬다.
+    """
+    import collections
+
+    c = collections.Counter()
+    # 삽입 순서를 일부러 뒤집어 넣는다 — 그래도 결과가 같아야 한다.
+    for w in ('하', '가', '나'):
+        c[w] = 3
+    c['다'] = 5
+    assert b._by_count(c) == [('다', 5), ('가', 3), ('나', 3), ('하', 3)]
+
+    거꾸로 = collections.Counter()
+    거꾸로['다'] = 5
+    for w in ('나', '하', '가'):
+        거꾸로[w] = 3
+    assert b._by_count(거꾸로) == b._by_count(c)
+
+
+def test_signals_order_does_not_depend_on_article_order():
+    # 같은 기사 묶음을 순서만 바꿔 넣어도 프레임 표가 같아야 한다.
+    def 기사(kw, tone):
+        return {'kw': kw, 'tone': tone}
+
+    묶음 = [기사(['가입자'], ['반등']), 기사(['구직급여'], ['한파']),
+            기사(['가입자'], ['한파']), 기사(['구직급여'], ['반등'])]
+    앞 = b.signals(묶음)
+    뒤 = b.signals(list(reversed(묶음)))
+    assert 앞 == 뒤

@@ -134,6 +134,21 @@ STOP = {'그래픽', '사진', '표', '영상', '인포그래픽', '단독', '�
 _DERIVED = re.compile(r'.{1,6}(적|한|된|는)$')
 
 
+def _by_count(counter):
+    """(낱말, 횟수) 를 많은 순으로, **동점은 낱말 순으로** 돌려준다.
+
+    `Counter.most_common()` 의 동점 순서는 삽입 순서다. 그리고 이 파일은
+    낱말을 `set` 에서 꺼내 센다(trend_terms·words) — set 순회 순서는 파이썬의
+    문자열 해시 시드에 좌우되므로 **프로세스마다 다르다.** 그래서 같은 입력으로
+    돌려도 rounds.json 이 매번 달라졌다(실측 2026-09-14: PYTHONHASHSEED 만
+    바꿔도 파일 해시가 바뀌고, 한 회차에 20~60줄이 흔들렸다).
+
+    쓸모없는 diff 가 매 회차 쌓이는 것보다 나쁜 것은, 진짜 변경이 그 속에
+    묻히는 것이다. 동점을 낱말로 깨면 삽입 순서와 무관해진다.
+    """
+    return sorted(counter.items(), key=lambda kv: (-kv[1], kv[0]))
+
+
 def is_noise(w):
     return bool(_NOISE.match(w)) or bool(_DERIVED.match(w)) or w in STOP
 
@@ -141,8 +156,8 @@ def is_noise(w):
 def signals(cited, min_count=2):
     kw = collections.Counter(w for a in cited for w in a['kw'] if not is_noise(w))
     tone = collections.Counter(w for a in cited for w in a['tone'])
-    return ([{'w': w, 'n': n} for w, n in kw.most_common() if n >= min_count],
-            [{'w': w, 'n': n} for w, n in tone.most_common()])
+    return ([{'w': w, 'n': n} for w, n in _by_count(kw) if n >= min_count],
+            [{'w': w, 'n': n} for w, n in _by_count(tone)])
 
 
 def stance(cited):
@@ -188,12 +203,12 @@ def issues(cited):
                 break
         g.setdefault(key or '전체 가입자', []).append(a)
     rows = [{'key': k, 'n': len(v),
-             'kw': [w for w, _ in collections.Counter(
-                 x for a in v for x in a['kw'] if not is_noise(x)).most_common(4)],
+             'kw': [w for w, _ in _by_count(collections.Counter(
+                 x for a in v for x in a['kw'] if not is_noise(x)))[:4]],
              'heads': [{'title': a['title'], 'url': a['url'], 'press': a['press']}
                        for a in v[:5]]}
             for k, v in g.items()]
-    return sorted(rows, key=lambda r: -r['n'])
+    return sorted(rows, key=lambda r: (-r['n'], r['key']))
 
 
 # 추세 그래프의 가로축 길이. 배포일(0)부터 3주 — 수집 구간과 같다.
@@ -279,7 +294,7 @@ def frames(reg_cited, fol_cited, release=None, covered=None):
     terms = {id(a): trend_terms(a) for a in list(reg_cited) + list(fol_cited)}
     d0 = collections.Counter(w for a in reg_cited for w in terms[id(a)] if not is_noise(w))
     rows = []
-    for w, c0 in d0.most_common():
+    for w, c0 in _by_count(d0):
         if c0 < 2:
             continue
         hit = [a for a in fol_cited if w in terms[id(a)]]
@@ -332,7 +347,7 @@ def rivals(not_cited, min_count=2):
         return out
 
     freq = collections.Counter(w for a in not_cited for w in set(words(a)))
-    topics = [w for w, n in freq.most_common() if n >= min_count]
+    topics = [w for w, n in _by_count(freq) if n >= min_count]
 
     groups, rest = collections.OrderedDict(), []
     for a in not_cited:
@@ -352,7 +367,7 @@ def rivals(not_cited, min_count=2):
         rest.extend(groups.pop(t))
 
     rows = [{'topic': t, 'n': len(v), 'heads': head(v)} for t, v in groups.items()]
-    rows.sort(key=lambda r: -r['n'])
+    rows.sort(key=lambda r: (-r['n'], r['topic']))
     if rest:
         rows.append({'topic': '그 밖', 'n': len(rest), 'heads': head(rest)})
     return rows
@@ -379,7 +394,7 @@ def graph(cited, min_node=2, min_edge=2, max_nodes=28):
         for t in _terms(a):
             count[t] += 1
 
-    keep = [w for w, n in count.most_common() if n >= min_node][:max_nodes]
+    keep = [w for w, n in _by_count(count) if n >= min_node][:max_nodes]
     kept = set(keep)
 
     pairs = collections.Counter()
@@ -391,7 +406,7 @@ def graph(cited, min_node=2, min_edge=2, max_nodes=28):
 
     idx = {w: i for i, w in enumerate(keep)}
     edges = [[idx[x], idx[y], n] for (x, y), n in pairs.items() if n >= min_edge]
-    edges.sort(key=lambda e: -e[2])
+    edges.sort(key=lambda e: (-e[2], e[0], e[1]))
     # 어디에도 안 붙는 노드는 그래프에서 점 하나로 떠돈다 — 뺀다.
     linked = {i for e in edges for i in e[:2]}
     nodes, remap = [], {}
