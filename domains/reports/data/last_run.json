@@ -1,11 +1,11 @@
 {
-  "at": "2026-09-13T16:45:58+09:00",
+  "at": "2026-09-14T13:40:14+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
       "parsed": 310,
-      "added": 4,
-      "details": 4,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": true,
       "skipped_old": 0,
       "error": null,
@@ -84,8 +84,8 @@
     "keis-research": {
       "ok": true,
       "parsed": 350,
-      "added": 36,
-      "details": 36,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": true,
       "skipped_old": 0,
       "error": null,
@@ -193,23 +193,23 @@
     },
     "kiet-economy": {
       "ok": true,
-      "parsed": 330,
+      "parsed": 390,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 320
+      "total": 360
     },
     "kdi-report": {
       "ok": true,
-      "parsed": 330,
+      "parsed": 370,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 320
+      "total": 360
     },
     "kdi-analysis": {
       "ok": true,
@@ -223,13 +223,13 @@
     },
     "kdi-focus": {
       "ok": true,
-      "parsed": 296,
+      "parsed": 340,
       "added": 39,
       "details": 40,
       "reached_cutoff": false,
       "skipped_old": 1,
       "error": null,
-      "total": 265
+      "total": 304
     },
     "kdi-trends": {
       "ok": true,
@@ -243,13 +243,13 @@
     },
     "kdi-etc": {
       "ok": true,
-      "parsed": 1,
-      "added": 0,
-      "details": 0,
+      "parsed": 3,
+      "added": 2,
+      "details": 2,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 1
+      "total": 3
     },
     "bok-intl": {
       "ok": true,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3184,
+  "reports": 3305,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -342,19 +342,19 @@
         "rate": 0.0
       },
       "기타보고서": {
-        "total": 1,
+        "total": 3,
         "missing": 0,
         "rate": 0.0
       },
-      "연구보고서": {
-        "total": 320,
-        "missing": 8,
-        "rate": 0.025
-      },
       "KDI FOCUS": {
-        "total": 265,
-        "missing": 38,
-        "rate": 0.143
+        "total": 304,
+        "missing": 45,
+        "rate": 0.148
+      },
+      "연구보고서": {
+        "total": 360,
+        "missing": 12,
+        "rate": 0.033
       },
       "현안분석": {
         "total": 31,
@@ -385,8 +385,8 @@
       },
       "경제전망보고서": {
         "total": 24,
-        "missing": 24,
-        "rate": 1.0
+        "missing": 23,
+        "rate": 0.958
       },
       "지역경제보고서": {
         "total": 19,
@@ -485,9 +485,9 @@
         "rate": 0.0
       },
       "월간 산업경제": {
-        "total": 320,
-        "missing": 28,
-        "rate": 0.087
+        "total": 360,
+        "missing": 31,
+        "rate": 0.086
       },
       "연구자료": {
         "total": 82,
@@ -512,31 +512,30 @@
     }
   },
   "abstract_missing_why": {
-    "요약 없음": 473,
-    "요약 섹션 없음": 343,
-    "텍스트가 없는 스캔본": 40,
-    "원문 없음": 37,
-    "아직 안 받음": 17,
+    "요약 없음": 461,
+    "요약 섹션 없음": 375,
+    "텍스트가 없는 스캔본": 47,
+    "원문 없음": 40,
     "파일이 너무 큼(67MB)": 1,
     "파일이 너무 큼(79MB)": 1
   },
   "sizes": {
-    "reports_gzip": 285931,
-    "abstracts_gzip": 3143738,
+    "reports_gzip": 292032,
+    "abstracts_gzip": 3271652,
     "abstracts_shards_gzip": {
-      "bok": 208209,
-      "kdi": 711799,
-      "keis": 256203,
-      "kiet": 655421,
-      "kli": 1312106
+      "bok": 215922,
+      "kdi": 806828,
+      "keis": 256565,
+      "kiet": 678730,
+      "kli": 1313607
     }
   },
   "recommend": {
-    "judged": 3184,
-    "picked": 841,
+    "judged": 3305,
+    "picked": 845,
     "unjudged": 0,
     "profile_version": "f2dfd921",
-    "title_only": 912,
-    "at": "2026-09-13T16:52:05+09:00"
+    "title_only": 926,
+    "at": "2026-09-14T13:48:15+09:00"
   }
 }
