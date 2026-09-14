@@ -521,8 +521,15 @@
     "파일이 너무 큼(79MB)": 1
   },
   "sizes": {
-    "reports_gzip": 283614,
-    "abstracts_gzip": 3225577
+    "reports_gzip": 285931,
+    "abstracts_gzip": 3143738,
+    "abstracts_shards_gzip": {
+      "bok": 208209,
+      "kdi": 711799,
+      "keis": 256203,
+      "kiet": 655421,
+      "kli": 1312106
+    }
   },
   "recommend": {
     "judged": 3184,

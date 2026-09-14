@@ -96,6 +96,18 @@ function 어댑터_ask(j) {
 // 성공적으로 안 돈 경우) 그 사실 자체를 알린다.
 export const 초록상한 = 3 * 1_048_576;   // 3MB(gzip)
 
+// 조각 중 가장 큰 것. 기록이 없거나 비었으면 null — 0 으로 지어내지 않는다.
+export function 큰조각(조각) {
+  if (!조각 || typeof 조각 !== 'object') return null;
+  let 최대 = null;
+  for (const [기관, 값] of Object.entries(조각)) {
+    const 크기 = Number(값);
+    if (!Number.isFinite(크기) || 크기 <= 0) continue;
+    if (!최대 || 크기 > 최대.크기) 최대 = { 기관, 크기 };
+  }
+  return 최대;
+}
+
 function 어댑터_reports(j) {
   if (!j || typeof j.at !== 'string' || typeof j.boards !== 'object'
       || j.boards === null || Array.isArray(j.boards)
@@ -108,13 +120,24 @@ function 어댑터_reports(j) {
   if (실패게시판.length) 경고.push(`게시판 실패: ${실패게시판.join(', ')}`);
   if (미등록) 경고.push(`미등록 게시판 ${미등록}건`);
 
-  // 검색창을 누르면 abstracts.json 을 통째로 받는다. 3MB(gzip)를 넘으면
-  // 기관별로 쪼개기로 정해 뒀는데, build.py 가 `sizes` 를 적기만 하고 아무도
-  // 안 봤다 — 2026-09-13 에 3.08MB 로 이미 넘어 있었다. 여기가 그 눈이다.
+  // 초록은 2026-09-14 에 기관별 조각으로 쪼갰다(3.08MB 를 넘었다). 그 뒤로
+  // **상한에 닿는 것은 합계가 아니라 한 조각**이다 — 합계는 기관 필터 없이
+  // 검색할 때 받는 양이라 계속 커지지만, 그 자체가 쪼갤 신호는 아니다.
+  // 그래서 경고는 최대 조각을 보고, 합계는 옆에 숫자로만 적는다.
   const 초록 = Number(j.sizes?.abstracts_gzip);
   if (Number.isFinite(초록) && 초록 > 0) {
     지표.push({ 라벨: '초록 gzip', 값: `${(초록 / 1_048_576).toFixed(2)}MB` });
-    if (초록 > 초록상한) 경고.push(`초록 gzip ${(초록 / 1_048_576).toFixed(2)}MB — 기관별로 쪼갤 때다`);
+  }
+  const 조각 = j.sizes?.abstracts_shards_gzip;
+  const 최대 = 큰조각(조각);
+  if (최대) {
+    지표.push({ 라벨: '최대 조각', 값: `${최대.기관} ${(최대.크기 / 1_048_576).toFixed(2)}MB` });
+    if (최대.크기 > 초록상한) {
+      경고.push(`초록 조각 ${최대.기관} ${(최대.크기 / 1_048_576).toFixed(2)}MB — 또 쪼갤 때다`);
+    }
+  } else if (Number.isFinite(초록) && 초록 > 초록상한) {
+    // 조각 기록이 없는 옛 형식. 통짜 그대로라는 뜻이라 종전 경고를 낸다.
+    경고.push(`초록 gzip ${(초록 / 1_048_576).toFixed(2)}MB — 기관별로 쪼갤 때다`);
   }
 
   const 추천 = j.recommend;

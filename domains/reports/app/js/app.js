@@ -53,18 +53,29 @@ async function start() {
     prefetchAbstracts,
   };
 
-  let abstractsPromise = null;
-  function prefetchAbstracts() {
+  // 초록은 기관별 조각으로 나뉘어 있다(2026-09-14, 통짜가 3.08MB 였다).
+  // 조각마다 따로 받아 도착하는 대로 합치고 본문을 다시 그린다 — 다섯 개가
+  // 다 올 때까지 기다리면 첫 결과가 그만큼 늦고, 한 기관이 느리면 전부 늦는다.
+  const 받는중 = new Map();
+  function loadShard(org) {
+    if (!받는중.has(org)) {
+      받는중.set(org, loadJson(`./data/abstracts-${org}.json`).then((data) => {
+        ctx.abstracts = Object.assign(ctx.abstracts || {}, data || {});
+        // 검색 중이었다면 본문만 다시 그린다. 화면을 갈면 조합이 끊긴다.
+        if (ctx.refreshBody) ctx.refreshBody();
+        return ctx.abstracts;
+      }));
+    }
+    return 받는중.get(org);
+  }
+
+  function prefetchAbstracts(orgs) {
     // 초록은 첫 화면에 필요 없다. 검색창에 포커스가 가는 순간 받기 시작하면
-    // 타이핑을 시작할 때는 이미 와 있다.
-    if (abstractsPromise) return abstractsPromise;
-    abstractsPromise = loadJson('./data/abstracts.json').then((data) => {
-      ctx.abstracts = data || {};
-      // 검색 중이었다면 본문만 다시 그린다. 화면을 갈면 조합이 끊긴다.
-      if (ctx.refreshBody) ctx.refreshBody();
-      return ctx.abstracts;
-    });
-    return abstractsPromise;
+    // 타이핑을 시작할 때는 이미 와 있다. 기관을 지정하면 그 조각만 받는다 —
+    // 상세 화면은 한 기관이면 충분하다.
+    const 목록 = (orgs && orgs.length ? orgs : (ctx.orgs || []).map((o) => o.code))
+      .filter(Boolean);
+    return Promise.all(목록.map(loadShard)).then(() => ctx.abstracts || {});
   }
 
   // route 는 **화면을 바꿀 때만** 부른다. 같은 화면 안의 갱신(타이핑·칩·접기)은
@@ -78,9 +89,16 @@ async function start() {
     screenEl.scrollTop = 0;
     screenEl.innerHTML = '';
     fn(screenEl, ctx);
-    // 상세로 들어왔는데 초록이 아직 없으면 그때 받는다.
-    if (ctx.route.name === 'report' && !ctx.abstracts) {
-      prefetchAbstracts().then(() => route());
+    // 상세로 들어왔는데 그 보고서의 초록이 아직 없으면 그때 받는다.
+    // **그 기관 조각만** 받는다 — 한 장 보려고 다섯 조각을 다 받을 이유가 없다.
+    if (ctx.route.name === 'report') {
+      const 보고서 = (ctx.reports || []).find((r) => r.id === ctx.route.params[0]);
+      // 조건은 **조각을 받아 봤는가**지 초록이 있는가가 아니다. 초록이 없는
+      // 보고서가 912건이고, 받기에 실패해도 값은 안 생긴다 — 값으로 판정하면
+      // 그 두 경우에 route() 가 자기를 무한히 다시 부른다.
+      if (보고서 && !받는중.has(보고서.org)) {
+        prefetchAbstracts([보고서.org]).then(() => route());
+      }
     }
   }
 

@@ -306,7 +306,7 @@ def test_main_records_a_failed_attempt_and_reraises(tmp_path, monkeypatch):
                'title': f'제목 {i}'} for i in range(3)]
     (tmp_path / 'reports.json').write_text(json.dumps(reports, ensure_ascii=False),
                                            encoding='utf-8')
-    (tmp_path / 'abstracts.json').write_text('{}', encoding='utf-8')
+    (tmp_path / 'abstracts-bok.json').write_text('{}', encoding='utf-8')
 
     def boom(prompt):
         raise RuntimeError('API 가 429 를 돌려줬다: insufficient_quota')
@@ -332,7 +332,7 @@ def test_main_keeps_the_batches_judged_before_a_later_failure(tmp_path, monkeypa
                'title': f'제목 {i}'} for i in range(45)]
     (tmp_path / 'reports.json').write_text(json.dumps(reports, ensure_ascii=False),
                                            encoding='utf-8')
-    (tmp_path / 'abstracts.json').write_text('{}', encoding='utf-8')
+    (tmp_path / 'abstracts-bok.json').write_text('{}', encoding='utf-8')
     calls = []
 
     def flaky(prompt):
@@ -468,7 +468,7 @@ def test_main_rejudge_keywords_calls_the_llm_only_for_matches(tmp_path, monkeypa
     ]
     (tmp_path / 'reports.json').write_text(json.dumps(reports, ensure_ascii=False),
                                            encoding='utf-8')
-    (tmp_path / 'abstracts.json').write_text('{}', encoding='utf-8')
+    (tmp_path / 'abstracts-bok.json').write_text('{}', encoding='utf-8')
     old_cache = {'r-hit': _old(pick=False), 'r-miss': _old(pick=False)}
     (tmp_path / 'recommendations.json').write_text(
         json.dumps(old_cache, ensure_ascii=False), encoding='utf-8')
@@ -499,7 +499,7 @@ def test_dry_run_needs_no_api_key_and_prints_the_three_counts(tmp_path, monkeypa
     ]
     (tmp_path / 'reports.json').write_text(json.dumps(reports, ensure_ascii=False),
                                            encoding='utf-8')
-    (tmp_path / 'abstracts.json').write_text('{}', encoding='utf-8')
+    (tmp_path / 'abstracts-bok.json').write_text('{}', encoding='utf-8')
     old_cache = {'r-hit': _old(pick=False), 'r-miss': _old(pick=False)}
     (tmp_path / 'recommendations.json').write_text(
         json.dumps(old_cache, ensure_ascii=False), encoding='utf-8')
@@ -526,7 +526,7 @@ def test_without_the_option_main_still_rejudges_everything(tmp_path, monkeypatch
     ]
     (tmp_path / 'reports.json').write_text(json.dumps(reports, ensure_ascii=False),
                                            encoding='utf-8')
-    (tmp_path / 'abstracts.json').write_text('{}', encoding='utf-8')
+    (tmp_path / 'abstracts-bok.json').write_text('{}', encoding='utf-8')
     old_cache = {'r-hit': _old(pick=False), 'r-miss': _old(pick=False)}
     (tmp_path / 'recommendations.json').write_text(
         json.dumps(old_cache, ensure_ascii=False), encoding='utf-8')

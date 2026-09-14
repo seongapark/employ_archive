@@ -26,6 +26,7 @@ from typing import Callable, NamedTuple, Sequence
 
 import requests
 
+from . import build as build_mod
 from .interests import Profile
 from .keywords import load_keywords, match as keyword_match
 
@@ -485,7 +486,7 @@ def main(argv=None, *, call=None) -> int:
 
     profile = interests_mod.load()
     reports = json.loads((DATA / 'reports.json').read_text(encoding='utf-8'))
-    abstracts = json.loads((DATA / 'abstracts.json').read_text(encoding='utf-8'))
+    abstracts = build_mod.load_abstracts(DATA)
     rows = [{'id': r['id'], 'org': r['org'], 'series': r['series'], 'title': r['title'],
              'abstract': (abstracts.get(r['id']) or {}).get('abstract', '')}
             for r in reports]

@@ -8,7 +8,7 @@
 
 담는 것은 넷이다. 전부 이미 저장소에 있으면서 **검색 대상이 아니었던** 글이다.
 
-  reports  초록·목차     domains/reports/data/abstracts.json + reports.json
+  reports  초록·목차     domains/reports/data/abstracts-*.json + reports.json
   forecast 전망근거      domains/forecast/data/rationales.json
   press    기사·회차분석  domains/press/data/articles.json · rounds.json
   catalog  충돌·한계     domains/ask/data/conflicts.json · capabilities.json
@@ -172,7 +172,11 @@ def _row(doc_id, 도메인, 종류, 링크, 제목, 본문, 날짜='') -> dict:
 
 def _reports() -> list[dict]:
     meta = {r['id']: r for r in _load('domains/reports/data/reports.json')}
-    body = _load('domains/reports/data/abstracts.json')
+    # 초록은 기관별 조각으로 나뉘어 있다(domains/reports/pipeline/build.py).
+    # 색인은 기관을 가로지르므로 여기서 합쳐 읽는다.
+    body = {}
+    for shard in sorted((REPO / 'domains/reports/data').glob('abstracts-*.json')):
+        body.update(json.loads(shard.read_text(encoding='utf-8')))
     out = []
     for rid, b in body.items():
         m = meta.get(rid, {})

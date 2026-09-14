@@ -1,4 +1,4 @@
-"""raw + keywords.json → data/reports.json · abstracts.json · 결측률.
+"""raw + keywords.json → data/reports.json · abstracts-<기관>.json · 결측률.
 
 **전량 수록한다.** 이 사이트는 외부기관 보고서를 취합하는 아카이브이고, 읽을
 만한 것을 고르는 일은 recommend 가 별도 파일에서 한다.
@@ -105,8 +105,54 @@ def build(raw_rows: list[RawReport], boards: list, kw: dict):
     return kept, abstracts, abstract_missing(kept)
 
 
+def shard_name(org: str) -> str:
+    return f'abstracts-{org}.json'
+
+
+def by_org(kept: list[Report]) -> dict[str, list[Report]]:
+    out: dict[str, list[Report]] = {}
+    for r in kept:
+        out.setdefault(r.org, []).append(r)
+    return out
+
+
+def write_abstracts(data_dir, kept: list[Report], abstracts: dict) -> None:
+    """초록을 기관별 조각으로 쓴다.
+
+    검색창을 누르면 브라우저가 초록을 받는다. 한 파일이던 시절 그것이
+    3.08MB(gzip)까지 컸다 — 보고서 한 건만 새로 들어와도 그 3MB 전체가
+    캐시에서 무효가 되고, 상세 화면 한 장을 보려고도 전량을 받았다.
+
+    기관별로 쪼개면 바뀐 기관의 조각만 다시 받고(다섯 중 넷은 캐시에 남는다),
+    상세 화면은 그 기관 조각 하나만 받는다. 기관 필터 없는 검색은 다섯 조각을
+    다 받으므로 **총 전송량은 그대로**다 — 줄어드는 것은 재방문과 상세 화면이지
+    첫 검색이 아니다.
+
+    파이프라인 쪽(recommend·fts_load)은 조각을 합쳐 읽는다(load_abstracts).
+    """
+    written = set()
+    for org, rows in by_org(kept).items():
+        (data_dir / shard_name(org)).write_text(
+            json.dumps({r.id: abstracts[r.id] for r in rows}, ensure_ascii=False) + '\n',
+            encoding='utf-8')
+        written.add(shard_name(org))
+    # 기관이 빠지거나 코드가 바뀌면 옛 조각이 남아 검색에 유령을 띄운다.
+    for stale in data_dir.glob('abstracts-*.json'):
+        if stale.name not in written:
+            stale.unlink()
+    (data_dir / 'abstracts.json').unlink(missing_ok=True)
+
+
+def load_abstracts(data_dir) -> dict:
+    """조각을 합쳐 한 dict 로. 쓰는 쪽(write_abstracts)과 짝이다."""
+    out: dict = {}
+    for path in sorted(data_dir.glob('abstracts-*.json')):
+        out.update(json.loads(path.read_text(encoding='utf-8')))
+    return out
+
+
 def _light(r: Report) -> dict:
-    """목록용 경량 레코드. 초록·목차는 abstracts.json 으로 간다."""
+    """목록용 경량 레코드. 초록·목차는 abstracts-<기관>.json 으로 간다."""
     d = r.model_dump(mode='json')
     for k in ('abstract', 'toc', 'collected_at',
               'abstract_tried', 'abstract_note'):
@@ -122,8 +168,7 @@ def main(argv=None) -> int:
     (DATA / 'reports.json').write_text(
         json.dumps([_light(r) for r in kept], ensure_ascii=False, indent=1) + '\n',
         encoding='utf-8')
-    (DATA / 'abstracts.json').write_text(
-        json.dumps(abstracts, ensure_ascii=False) + '\n', encoding='utf-8')
+    write_abstracts(DATA, kept, abstracts)
 
     last_path = DATA / 'last_run.json'
     last = json.loads(last_path.read_text(encoding='utf-8')) if last_path.exists() else {}
@@ -134,10 +179,13 @@ def main(argv=None) -> int:
     def _gz(name: str) -> int:
         return len(gzip.compress((DATA / name).read_bytes()))
 
-    # 초록은 검색창을 누를 때 통째로 받는다. 3MB 를 넘으면 기관별로 쪼갠다 —
-    # 미리 쪼개면 검색 품질과 복잡도를 숫자가 나오기 전에 내주는 셈이다.
+    # 조각별 크기를 따로 적는다. 합계는 기관 필터 없이 검색할 때 받는 양이고,
+    # 최대 조각은 **다음에 또 쪼개야 하는지**를 말한다 — 상한에 닿는 것은
+    # 합계가 아니라 한 조각이다(관리자 화면이 최대 조각을 본다).
+    shards = {org: _gz(shard_name(org)) for org in sorted(by_org(kept))}
     last['sizes'] = {'reports_gzip': _gz('reports.json'),
-                     'abstracts_gzip': _gz('abstracts.json')}
+                     'abstracts_gzip': sum(shards.values()),
+                     'abstracts_shards_gzip': shards}
 
     last_path.write_text(json.dumps(last, ensure_ascii=False, indent=2) + '\n',
                          encoding='utf-8')

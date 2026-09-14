@@ -181,3 +181,42 @@ def test_the_gzipped_size_of_each_data_file_is_recorded(tmp_path, monkeypatch):
     last = json.loads((tmp_path / 'last_run.json').read_text(encoding='utf-8'))
     assert last['sizes']['reports_gzip'] > 0
     assert last['sizes']['abstracts_gzip'] > 0
+
+
+def test_abstracts_are_written_one_file_per_org(tmp_path):
+    # 한 파일이던 시절 3.08MB(gzip)까지 컸다. 보고서 한 건이 들어와도 그 3MB
+    # 전체가 캐시에서 무효가 되고, 상세 화면 한 장에도 전량을 받았다.
+    rows = [raw('kli-1', KLI_BOARD, 'ㄱ', abstract='노동'),
+            raw('kli-2', KLI_BOARD, 'ㄴ', abstract='임금'),
+            raw('kdi-1', KDI_BOARD, 'ㄷ', abstract='성장')]
+    kept, abstracts, _ = build.build(rows, [KLI_BOARD, KDI_BOARD], KW)
+    build.write_abstracts(tmp_path, kept, abstracts)
+
+    assert sorted(p.name for p in tmp_path.glob('abstracts*.json')) == [
+        'abstracts-kdi.json', 'abstracts-kli.json']
+    kli = json.loads((tmp_path / 'abstracts-kli.json').read_text(encoding='utf-8'))
+    assert sorted(kli) == ['kli-1', 'kli-2']
+    assert 'kdi-1' not in kli
+
+    # 파이프라인(recommend·fts_load)은 가로질러 읽으므로 합쳐도 원본과 같아야 한다.
+    assert build.load_abstracts(tmp_path) == abstracts
+
+
+def test_a_stale_shard_is_removed_so_it_cannot_haunt_the_search(tmp_path):
+    # 기관이 빠지거나 코드가 바뀌면 옛 조각이 남는다. 그대로 두면 사라진
+    # 보고서가 검색에 계속 걸린다 — 목록(reports.json)에는 없는데.
+    (tmp_path / 'abstracts-옛기관.json').write_text('{"없어진-1": {}}', encoding='utf-8')
+    kept, abstracts, _ = build.build([raw('kli-1', KLI_BOARD, 'ㄱ')], [KLI_BOARD], KW)
+    build.write_abstracts(tmp_path, kept, abstracts)
+
+    assert not (tmp_path / 'abstracts-옛기관.json').exists()
+    assert '없어진-1' not in build.load_abstracts(tmp_path)
+
+
+def test_the_monolith_is_cleaned_up_when_sharding(tmp_path):
+    # 옛 통짜 파일이 배포본에 남으면 3MB 를 계속 실어 나른다(아무도 안 읽는데).
+    (tmp_path / 'abstracts.json').write_text('{}', encoding='utf-8')
+    kept, abstracts, _ = build.build([raw('kli-1', KLI_BOARD, 'ㄱ')], [KLI_BOARD], KW)
+    build.write_abstracts(tmp_path, kept, abstracts)
+
+    assert not (tmp_path / 'abstracts.json').exists()

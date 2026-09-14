@@ -236,3 +236,38 @@ test('reports 는 sizes 가 없어도 정상으로 읽는다', () => {
   assert.equal(reports.형식오류, false);
   assert.equal(reports.지표.some((m) => m.라벨 === '초록 gzip'), false);
 });
+
+test('경고는 최대 조각을 본다 — 합계는 계속 커져도 쪼갤 신호가 아니다', () => {
+  // 2026-09-14 에 초록을 기관별로 쪼갰다. 그 뒤로 3MB 상한에 닿는 것은
+  // 합계가 아니라 한 조각이다. 합계로 경고하면 쪼갠 다음 날부터 영원히 빨갛다.
+  const 원본 = {
+    reports: {
+      at: '2026-09-13T16:45:58+09:00', boards: {}, reports: 10,
+      recommend: { judged: 10 },
+      sizes: { abstracts_gzip: 5 * 1048576,
+               abstracts_shards_gzip: { kli: 1310720, kdi: 713031 } },
+    },
+  };
+  const s = 도메인현황(원본, Date.parse('2026-09-13T18:00:00+09:00'))
+    .find((x) => x.키 === 'reports');
+  assert.deepEqual(s.경고, []);
+  assert.ok(s.지표.some((m) => m.라벨 === '최대 조각' && String(m.값).startsWith('kli')));
+
+  원본.reports.sizes.abstracts_shards_gzip.kli = 4 * 1048576;
+  const 넘음 = 도메인현황(원본, Date.parse('2026-09-13T18:00:00+09:00'))
+    .find((x) => x.키 === 'reports');
+  assert.ok(넘음.경고.some((w) => w.includes('kli') && w.includes('또 쪼갤 때다')));
+});
+
+test('조각 기록이 없는 옛 형식은 종전처럼 합계로 경고한다', () => {
+  const 원본 = {
+    reports: {
+      at: '2026-09-13T16:45:58+09:00', boards: {}, reports: 10,
+      recommend: { judged: 10 },
+      sizes: { abstracts_gzip: 4 * 1048576 },
+    },
+  };
+  const s = 도메인현황(원본, Date.parse('2026-09-13T18:00:00+09:00'))
+    .find((x) => x.키 === 'reports');
+  assert.ok(s.경고.some((w) => w.includes('기관별로 쪼갤 때다')));
+});
