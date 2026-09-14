@@ -1,5 +1,5 @@
 {
-  "at": "2026-09-14T13:40:14+09:00",
+  "at": "2026-09-14T17:35:26+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -82,63 +82,63 @@
       "total": 33
     },
     "keis-research": {
-      "ok": true,
-      "parsed": 350,
+      "ok": false,
+      "parsed": 0,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
-      "error": null,
+      "error": "Failed to perform, curl: (28) Connection timed out after 60003 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 316
     },
     "keis-supply": {
-      "ok": true,
-      "parsed": 38,
+      "ok": false,
+      "parsed": 0,
       "added": 0,
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": null,
+      "error": "Failed to perform, curl: (28) Connection timed out after 60002 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 38
     },
     "keis-issue": {
-      "ok": true,
-      "parsed": 50,
+      "ok": false,
+      "parsed": 0,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
-      "error": null,
+      "error": "Failed to perform, curl: (28) Connection timed out after 60002 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 21
     },
     "keis-trend": {
-      "ok": true,
-      "parsed": 100,
+      "ok": false,
+      "parsed": 0,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
-      "error": null,
+      "error": "Failed to perform, curl: (28) Connection timed out after 60002 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 50
     },
     "keis-region": {
-      "ok": true,
-      "parsed": 20,
+      "ok": false,
+      "parsed": 0,
       "added": 0,
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": null,
+      "error": "Failed to perform, curl: (28) Connection timed out after 60001 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 20
     },
     "keis-transition": {
-      "ok": true,
-      "parsed": 5,
+      "ok": false,
+      "parsed": 0,
       "added": 0,
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": null,
+      "error": "Failed to perform, curl: (28) Connection timed out after 60001 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 5
     },
     "kiet-report": {
@@ -193,23 +193,23 @@
     },
     "kiet-economy": {
       "ok": true,
-      "parsed": 390,
+      "parsed": 420,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 360
+      "total": 400
     },
     "kdi-report": {
       "ok": true,
-      "parsed": 370,
+      "parsed": 410,
       "added": 40,
       "details": 40,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 360
+      "total": 400
     },
     "kdi-analysis": {
       "ok": true,
@@ -223,13 +223,13 @@
     },
     "kdi-focus": {
       "ok": true,
-      "parsed": 340,
+      "parsed": 384,
       "added": 39,
       "details": 40,
       "reached_cutoff": false,
       "skipped_old": 1,
       "error": null,
-      "total": 304
+      "total": 343
     },
     "kdi-trends": {
       "ok": true,
@@ -244,8 +244,8 @@
     "kdi-etc": {
       "ok": true,
       "parsed": 3,
-      "added": 2,
-      "details": 2,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3305,
+  "reports": 3424,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -347,13 +347,13 @@
         "rate": 0.0
       },
       "KDI FOCUS": {
-        "total": 304,
+        "total": 343,
         "missing": 45,
-        "rate": 0.148
+        "rate": 0.131
       },
       "연구보고서": {
-        "total": 360,
-        "missing": 12,
+        "total": 400,
+        "missing": 13,
         "rate": 0.033
       },
       "현안분석": {
@@ -485,9 +485,9 @@
         "rate": 0.0
       },
       "월간 산업경제": {
-        "total": 360,
-        "missing": 31,
-        "rate": 0.086
+        "total": 400,
+        "missing": 35,
+        "rate": 0.087
       },
       "연구자료": {
         "total": 82,
@@ -512,30 +512,30 @@
     }
   },
   "abstract_missing_why": {
-    "요약 없음": 461,
-    "요약 섹션 없음": 375,
-    "텍스트가 없는 스캔본": 47,
-    "원문 없음": 40,
+    "요약 없음": 422,
+    "요약 섹션 없음": 409,
+    "텍스트가 없는 스캔본": 53,
+    "원문 없음": 44,
     "파일이 너무 큼(67MB)": 1,
     "파일이 너무 큼(79MB)": 1
   },
   "sizes": {
-    "reports_gzip": 292032,
-    "abstracts_gzip": 3271652,
+    "reports_gzip": 299822,
+    "abstracts_gzip": 3371801,
     "abstracts_shards_gzip": {
       "bok": 215922,
-      "kdi": 806828,
+      "kdi": 890362,
       "keis": 256565,
-      "kiet": 678730,
+      "kiet": 695345,
       "kli": 1313607
     }
   },
   "recommend": {
-    "judged": 3305,
-    "picked": 845,
+    "judged": 3424,
+    "picked": 849,
     "unjudged": 0,
     "profile_version": "f2dfd921",
-    "title_only": 926,
-    "at": "2026-09-14T13:48:15+09:00"
+    "title_only": 931,
+    "at": "2026-09-14T17:42:34+09:00"
   }
 }

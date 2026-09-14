@@ -1435,9 +1435,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/758ce6b459574682931686ed6b6912c2/1/202210170942594360.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:41:06+09:00"
   },
   {
     "id": "bok-10073340",

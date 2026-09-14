@@ -494,9 +494,9 @@
       "※ 경제전망보고서 ( Indigo Book ) 에 수록되는 핵심이슈 및 중장기 심층연구 는 아래 게시판에서도 확인 가능합니다.",
       "한국은행 홈페이지 > 조사·연 구 > 경제전망 핵심이슈 · 심층연구"
     ],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:24:15+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:35:53+09:00"
   },
   {
     "id": "bok-10084275",
@@ -540,9 +540,9 @@
       "혁신과 경제성장: 우리나라 기업의 혁신활동 분석 및 평가",
       "<부록> 국내외 경제지표"
     ],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:24:15+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:36:02+09:00"
   },
   {
     "id": "bok-10086579",
@@ -589,9 +589,9 @@
       "<부록 1> 국내외 주요 경제지표",
       "<부록 2> 주요 이슈 분석목록"
     ],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:24:15+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:36:14+09:00"
   },
   {
     "id": "bok-10088282",
@@ -638,9 +638,9 @@
       "<부록 1> 국내외 주요 경제지표",
       "<부록 2> 주요 이슈 분석목록"
     ],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:24:15+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:36:24+09:00"
   },
   {
     "id": "bok-10089959",
@@ -660,9 +660,9 @@
     "toc": [
       ".dbdata .template-box-con2, .dbData .template-box-con2 { background-color : #ffffff; } @media (min-width: 1200px) { .bd-view .dbdata { padding: 0px 0px !important; } } @media (min-width: 749px) { .bd-view .dbdata { padding: 0px 0px !important; } }"
     ],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:24:15+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:36:35+09:00"
   },
   {
     "id": "bok-10091650",
@@ -680,9 +680,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/f4e84470826d43dbb68975127f1eb8ac/1/e3fb83fa6a7643c2afa49945d3c7d6ed.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:24:15+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:36:45+09:00"
   },
   {
     "id": "bok-10093259",
@@ -723,9 +723,9 @@
       "<부록 1> 국내외 주요 경제지표",
       "<부록 2> 주요 이슈 분석목록"
     ],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:24:15+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:36:56+09:00"
   },
   {
     "id": "bok-10094817",
@@ -768,9 +768,9 @@
       "<부록 1> 국내외 주요 경제지표",
       "<부록 2> 주요 이슈 분석목록"
     ],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:24:15+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:37:05+09:00"
   },
   {
     "id": "bok-10096683",
@@ -810,9 +810,9 @@
       "<부록 1> 국내외 주요 경제지표",
       "<부록 2> 주요 이슈 분석목록"
     ],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:24:15+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:37:14+09:00"
   },
   {
     "id": "bok-10098209",
@@ -854,9 +854,9 @@
       "<부록 1> 국내외 주요 경제지표",
       "<부록 2> 주요 이슈 분석목록"
     ],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:24:15+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:37:23+09:00"
   },
   {
     "id": "bok-11064210",
@@ -898,8 +898,8 @@
       "수요주도 물가압력이 근원물가에 미치는 영향",
       "<부록> 국내외 주요 경제지표"
     ],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:24:15+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:37:34+09:00"
   }
 ]

@@ -15,9 +15,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/48528186da31315265456da6a73389d3/1/202305160431526580.hwp",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:24+09:00"
+    "abstract_tried": true,
+    "abstract_note": "텍스트가 없는 스캔본",
+    "collected_at": "2026-09-14T17:40:19+09:00"
   },
   {
     "id": "bok-10078931",
@@ -35,9 +35,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/792abd77944110d0a93ce146d6a5b157/1/202308100522354510.hwp",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:24+09:00"
+    "abstract_tried": true,
+    "abstract_note": "텍스트가 없는 스캔본",
+    "collected_at": "2026-09-14T17:40:23+09:00"
   },
   {
     "id": "bok-10080459",
@@ -55,9 +55,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/0c834b3cadec717d0b032e829a3c38d2/1/202311300908504040.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:24+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:40:32+09:00"
   },
   {
     "id": "bok-10082403",
@@ -75,9 +75,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/66dd8299b81b7a40e16b3837ccc51511/1/202402281001292050.hwp",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:24+09:00"
+    "abstract_tried": true,
+    "abstract_note": "텍스트가 없는 스캔본",
+    "collected_at": "2026-09-14T17:40:37+09:00"
   },
   {
     "id": "bok-10084125",
@@ -95,9 +95,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/38abc5dbdb4302bbeb8ad9e5aa4daec2/1/202405140618509800.hwp",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:24+09:00"
+    "abstract_tried": true,
+    "abstract_note": "텍스트가 없는 스캔본",
+    "collected_at": "2026-09-14T17:40:40+09:00"
   },
   {
     "id": "bok-10086376",
@@ -115,9 +115,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/8dd9951e588147dbbb8c024f44607b9d/1/c242e6b13cf344e4a693aaba76e4609b.hwp",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:24+09:00"
+    "abstract_tried": true,
+    "abstract_note": "텍스트가 없는 스캔본",
+    "collected_at": "2026-09-14T17:40:44+09:00"
   },
   {
     "id": "bok-10088074",
@@ -135,9 +135,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/9c0d0eeeebbf4dfcbf19916e1a7a2b16/1/2b23573496ec43b0925a537a2c1082b0.hwp",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:24+09:00"
+    "abstract_tried": true,
+    "abstract_note": "텍스트가 없는 스캔본",
+    "collected_at": "2026-09-14T17:40:48+09:00"
   },
   {
     "id": "bok-10089810",
@@ -155,8 +155,8 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/9e1f4b63a14346808a522253bab72ef3/1/805e035843e1469aa099285032183355.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:24+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-14T17:40:59+09:00"
   }
 ]
