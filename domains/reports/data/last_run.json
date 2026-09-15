@@ -1,62 +1,62 @@
 {
-  "at": "2026-09-14T17:35:26+09:00",
+  "at": "2026-09-15T17:48:21+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
-      "parsed": 310,
+      "parsed": 10,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 304
     },
     "kli-review": {
       "ok": true,
-      "parsed": 70,
+      "parsed": 10,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 68
     },
     "kli-policy": {
       "ok": true,
-      "parsed": 30,
+      "parsed": 10,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 22
     },
     "kli-intl": {
       "ok": true,
-      "parsed": 60,
+      "parsed": 10,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 50
     },
     "kli-brief": {
       "ok": true,
-      "parsed": 20,
+      "parsed": 10,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 11
     },
     "kli-wage": {
       "ok": true,
-      "parsed": 50,
+      "parsed": 10,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 47
@@ -73,10 +73,10 @@
     },
     "kli-eia": {
       "ok": true,
-      "parsed": 40,
+      "parsed": 10,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 33
@@ -88,7 +88,7 @@
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": "Failed to perform, curl: (28) Connection timed out after 60003 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "error": "Failed to perform, curl: (28) Connection timed out after 60001 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 316
     },
     "keis-supply": {
@@ -98,7 +98,7 @@
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": "Failed to perform, curl: (28) Connection timed out after 60002 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "error": "Failed to perform, curl: (28) Connection timed out after 60003 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 38
     },
     "keis-issue": {
@@ -108,7 +108,7 @@
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": "Failed to perform, curl: (28) Connection timed out after 60002 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "error": "Failed to perform, curl: (28) Connection timed out after 60003 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 21
     },
     "keis-trend": {
@@ -128,7 +128,7 @@
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": "Failed to perform, curl: (28) Connection timed out after 60001 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "error": "Failed to perform, curl: (28) Connection timed out after 60002 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 20
     },
     "keis-transition": {
@@ -138,64 +138,64 @@
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": "Failed to perform, curl: (28) Connection timed out after 60001 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "error": "Failed to perform, curl: (28) Connection timed out after 60002 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 5
     },
     "kiet-report": {
       "ok": true,
-      "parsed": 180,
+      "parsed": 30,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 159
     },
     "kiet-redata": {
       "ok": true,
-      "parsed": 90,
+      "parsed": 30,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 82
     },
     "kiet-podata": {
       "ok": true,
-      "parsed": 60,
+      "parsed": 30,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 36
     },
     "kiet-paper": {
       "ok": true,
-      "parsed": 90,
+      "parsed": 30,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 82
     },
     "kiet-issue": {
       "ok": true,
-      "parsed": 150,
+      "parsed": 30,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 120
     },
     "kiet-economy": {
       "ok": true,
-      "parsed": 420,
-      "added": 40,
-      "details": 40,
+      "parsed": 30,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -203,9 +203,9 @@
     },
     "kdi-report": {
       "ok": true,
-      "parsed": 410,
-      "added": 40,
-      "details": 40,
+      "parsed": 10,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -213,27 +213,27 @@
     },
     "kdi-analysis": {
       "ok": true,
-      "parsed": 40,
+      "parsed": 10,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 31
     },
     "kdi-focus": {
       "ok": true,
-      "parsed": 384,
-      "added": 39,
-      "details": 40,
+      "parsed": 10,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
-      "skipped_old": 1,
+      "skipped_old": 0,
       "error": null,
       "total": 343
     },
     "kdi-trends": {
       "ok": true,
-      "parsed": 69,
+      "parsed": 9,
       "added": 0,
       "details": 0,
       "reached_cutoff": false,
@@ -303,13 +303,13 @@
     },
     "bok-note": {
       "ok": true,
-      "parsed": 300,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": true,
+      "parsed": 200,
+      "added": 1,
+      "details": 1,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 212
+      "total": 213
     },
     "bok-issue": {
       "ok": true,
@@ -323,17 +323,17 @@
     },
     "bok-research": {
       "ok": true,
-      "parsed": 500,
+      "parsed": 100,
       "added": 0,
       "details": 0,
-      "reached_cutoff": true,
+      "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
       "total": 403
     }
   },
   "unregistered": [],
-  "reports": 3424,
+  "reports": 3425,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -364,7 +364,7 @@
     },
     "bok": {
       "BOK 이슈노트": {
-        "total": 212,
+        "total": 213,
         "missing": 23,
         "rate": 0.108
       },
@@ -512,18 +512,20 @@
     }
   },
   "abstract_missing_why": {
-    "요약 없음": 422,
-    "요약 섹션 없음": 409,
-    "텍스트가 없는 스캔본": 53,
+    "요약 섹션 없음": 437,
+    "요약 없음": 383,
+    "텍스트가 없는 스캔본": 62,
     "원문 없음": 44,
     "파일이 너무 큼(67MB)": 1,
-    "파일이 너무 큼(79MB)": 1
+    "파일이 너무 큼(79MB)": 1,
+    "PDF 를 열 수 없음: list index out of range": 1,
+    "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 299822,
-    "abstracts_gzip": 3371801,
+    "reports_gzip": 299944,
+    "abstracts_gzip": 3373800,
     "abstracts_shards_gzip": {
-      "bok": 215922,
+      "bok": 217921,
       "kdi": 890362,
       "keis": 256565,
       "kiet": 695345,
@@ -531,11 +533,11 @@
     }
   },
   "recommend": {
-    "judged": 3424,
-    "picked": 849,
+    "judged": 3425,
+    "picked": 850,
     "unjudged": 0,
     "profile_version": "f2dfd921",
     "title_only": 931,
-    "at": "2026-09-14T17:42:34+09:00"
+    "at": "2026-09-15T17:52:08+09:00"
   }
 }

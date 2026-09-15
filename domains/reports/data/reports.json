@@ -16,6 +16,28 @@
   ]
  },
  {
+  "id": "bok-11064752",
+  "org": "bok",
+  "board": "bok-note",
+  "series": "BOK 이슈노트",
+  "title": "[제2026-25호] AI와 지역 노동시장 - 지역간 격차 확대 위험과 새로운 기회",
+  "authors": [
+   "지역경제조사팀"
+  ],
+  "published": "2026-09-15",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?nttId=11064752&searchCnd=1&searchKwd=&depth2=201157&depth3=200433&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200433&pageIndex=1&programType=newsData&menuNo=200433&oldMenuNo=200433",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/a0aae0e7567a462ca22273cd6f62d472/1/555b99771c7d45908f6f5625acd5cb19.pdf",
+  "matched": [
+   "임금",
+   "직업훈련",
+   "지역고용",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
   "id": "bok-11064677",
   "org": "bok",
   "board": "bok-note",

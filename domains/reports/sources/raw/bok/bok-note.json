@@ -1455,9 +1455,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/5301ed1a66905c2eb43ee99565dd891c/1/202210191106139640.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:48:30+09:00"
   },
   {
     "id": "bok-10073360",
@@ -1635,9 +1635,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/07545a070ddeccec415591e6cc6d5bb6/1/202301250339573100.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:48:34+09:00"
   },
   {
     "id": "bok-10075249",
@@ -1775,9 +1775,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/2c6c7452cd0dc37be20b7cb179e32231/1/202303220601263260.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:48:39+09:00"
   },
   {
     "id": "bok-10076237",
@@ -1815,9 +1815,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/d4c2db98a1c9eb2d91d10ce1e2543d77/1/202304180320340960.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:48:44+09:00"
   },
   {
     "id": "bok-10076875",
@@ -1975,9 +1975,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/a540ca5888704082698bda6c87146a2a/1/202306140219357620.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:48:49+09:00"
   },
   {
     "id": "bok-10077939",
@@ -2055,9 +2055,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/e89063272222b55a71a235aead4d7538/1/202307200545122050.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:48:57+09:00"
   },
   {
     "id": "bok-10078541",
@@ -2095,9 +2095,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/9c65c96dc5aa2acc0e08d0106c55065d/1/202307260115404670.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:49:01+09:00"
   },
   {
     "id": "bok-10079453",
@@ -2115,9 +2115,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/7d55b6ed372183be6595dd75a17a1ac6/1/202309111144473170.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:49:06+09:00"
   },
   {
     "id": "bok-10079879",
@@ -2215,9 +2215,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/ceeb8e6b236e9405ba1e993398cc8aed/1/202311161024165220.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:49:10+09:00"
   },
   {
     "id": "bok-10080567",
@@ -2375,9 +2375,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/4231e3dcc4224ce7a6293383d1286082/1/202401181139057170.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:49:16+09:00"
   },
   {
     "id": "bok-10082165",
@@ -2395,9 +2395,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/30a867e4e1bbaec35789887b0aa76bd1/1/202401290410205380.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:49:23+09:00"
   },
   {
     "id": "bok-10082238",
@@ -2495,9 +2495,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/92c30168c21e0a9c172e7068618d220b/1/202404011030239110.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:49:33+09:00"
   },
   {
     "id": "bok-10083645",
@@ -2515,9 +2515,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/80b4710abeaceb5ad391e3d7dd31d1e8/1/202404180241534940.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:49:44+09:00"
   },
   {
     "id": "bok-10083711",
@@ -2535,9 +2535,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/b2c26d5d995d76805e2e190dcc669c6c/1/202404241039018420.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:49:49+09:00"
   },
   {
     "id": "bok-10083742",
@@ -2595,9 +2595,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/a7d7728dcaa621347731163c4cbbca0c/1/202406101041046380.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:49:54+09:00"
   },
   {
     "id": "bok-10084710",
@@ -3175,9 +3175,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/2115c82cfcdf470fa8546e9288b391b2/1/a304d2d93c384e359e8a4ef20ec27235.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:49:59+09:00"
   },
   {
     "id": "bok-10091147",
@@ -3195,9 +3195,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/439aed4fdaff4ea7969148aa2c3fac48/1/280962ff623f489f9f1731ffdce8c53b.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:50:05+09:00"
   },
   {
     "id": "bok-10091206",
@@ -3215,9 +3215,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/1129f4d82d2c4b19bfbcc04312541bee/1/ab9f1303fa5d40fc85b3dc04e004be13.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:50:10+09:00"
   },
   {
     "id": "bok-10091405",
@@ -3275,9 +3275,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/1ec01ba12b984106a67fd6a813d860db/1/4c58a344385b465993bd8e5e77d1c701.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:50:17+09:00"
   },
   {
     "id": "bok-10091925",
@@ -3315,9 +3315,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/701d5b00309a4344b4afae4bd343f1da/1/59010acff0f24d1b9c3aba9bfef509f6.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:50:22+09:00"
   },
   {
     "id": "bok-10091953",
@@ -3395,9 +3395,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/594127f9ac37430687d6ea7777dbc113/1/0ebd8fc5631841069b9590890593873f.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:50:32+09:00"
   },
   {
     "id": "bok-10092751",
@@ -3475,9 +3475,9 @@
     "file_url": "https://www.bok.or.kr/fileSrc/portal/a48b0a22ed1040c29fe0c7896a52df57/1/58de026bb61e45b3bf12c20656e38594.pdf",
     "abstract": null,
     "toc": [],
-    "abstract_tried": false,
-    "abstract_note": "요약 없음",
-    "collected_at": "2026-09-11T23:25:45+09:00"
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-15T17:50:40+09:00"
   },
   {
     "id": "bok-10093450",
@@ -4238,5 +4238,25 @@
     "abstract_tried": false,
     "abstract_note": null,
     "collected_at": "2026-09-13T16:20:36+09:00"
+  },
+  {
+    "id": "bok-11064752",
+    "org": "bok",
+    "board": "bok-note",
+    "series": "BOK 이슈노트",
+    "title": "[제2026-25호] AI와 지역 노동시장 - 지역간 격차 확대 위험과 새로운 기회",
+    "authors": [
+      "지역경제조사팀"
+    ],
+    "published": "2026-09-15",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?nttId=11064752&searchCnd=1&searchKwd=&depth2=201157&depth3=200433&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200433&pageIndex=1&programType=newsData&menuNo=200433&oldMenuNo=200433",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/a0aae0e7567a462ca22273cd6f62d472/1/555b99771c7d45908f6f5625acd5cb19.pdf",
+    "abstract": "1. AI의 확산은 수도권 집중을 심화시켜 지역간 노동시장 격차를 확대할 것인가, 아니면 오히려 이를 완화하는 요인이 될 것인가?\n이에 답하기 위해 먼저 AI를 생성형, 에이전틱, 피지컬의 세가지 유형으로 구분하고, 국내 최초로 각 유형에 따른 직업별·지역 별 노출도(AI 활용가능성)를 산출하였다. 이는 AI 유형에 따라 그 활용과 영향이 다를 수 있기 때문이다. 이어서 AI 확산 이후 취 업자수 변화 등 지역별 고용지표가 AI노출도와 어떤 관계를 보이는지 초기 징후를 살펴보았다.\n[직업별 AI노출도]\n2. 생성형AI는 문서작성, 정보처리 등 비중이 높은 사무직, 판매직, 전문가 직군에서 노출도가 높았으며, 에이전틱AI는 관리직이 가장 높았고 다음으로 사무직, 판매직 순이었다. 반면 피지컬AI는 장치·기계조작, 단순노무 등 직군에서 노출도가 높았다.\n[지역별 AI노출도]\n3. 지역별 노출도 산출 결과 ① 생성형AI의 경우 서울이 가장 높았고 다음으로 세종, 경기, 인천 순이었다. ② 에이전틱AI도 서울, 세종, 경기, 대전 순으로 1~3위가 같았다. 반면 ③ 피지컬AI 노출도는 경북, 전남, 충북, 울산 등의 순으로, 비수도권에서 더 높았다.\n• 이는 지식서비스업 등이 집중된 수도권에 생성형 및 에이전틱 AI 노출도가 높은 사무직(수도권내 비중 20.2%), 판매직 (8.9%), 관리자(1.5%), 전문가(28.1%) 일자리가 많기 때문이다(비수도권 각각 15.8%, 8.2%, 1.2%, 18.0%).\n• 반면 제조업과 농림어업 비중이 큰 비수도권에는 피지컬AI 노출도가 높은 장치·기계조작(12.0%), 단순노무(14.6%), 서비 스직(13.1%) 일자리가 많다(수도권 8.1%, 12.7%, 12.2%).\n[지역별 노동시장 변화 * ]\n* AI 확산 초기의 징후들로 AI가 고용지표 변화의 원인이라고 인과관계를 단정하기는 어렵다.\n4. 최근 생성형 및 에이전틱 AI 노출도가 높은 직업일수록 취업자수가 증가하였으며 이러한 증가세를 수도권이 주도하면서 비수도 권과의 격차는 확대되었다.\n• 생성형AI가 본격 확산하기 시작한 2023년 이후 3년간 생성형AI 고노출 일자리는 24.7만명 증가하였는데 그중 수도권 이 80.8%(19.9만명)를 차지하였다. 에이전틱AI 고노출 직군에서 2025년 중 증가한 일자리(10.5만명) 중 수도권 비중도 88.3%(9.3만명)에 달했다.\n• 수도권은 생성형AI 노출도[0~1]가 0.1 상승시 고용증가율이 1.0%p 상승하는 관계를 보였으나 비수도권은 두 변수 간 관계 가 통계적으로 유의하지 않았다.\n5. 에이전틱AI 고노출 취업자수의 증가에도 수도권 기업이 체감하는 인력부족수준은 비수도권보다 높았다. 관련 하여 해당 일자리 의 임금은 수도권 중심으로 상승 조짐이 나타났다.\n• AI 확산 이후 전문성, 실무경험 등에 대한 수요는 증가한 반면, 이에 부합하는 인력공급은 충분치 못한 미스매치와 전문성에 대한 임금프리미엄 상승 가능성을 시사한다.\n6. 반면 20대의 경우 전연령대(15~59세)와 달리 생성형 및 에이전틱 AI 고노출 일자리가 수도권과 비수도권 모두 줄어들면서 지 역간 격차 확대가 뚜렷하지 않았다.\n• 대학교육이 전통적인 지식축적에 초점을 두고 있어, 청년층이 전문성, 경험 등 역량을 갖추는 것은 지역과 무관하게 매우 어려 운 일로 보인다.\n7. 피지컬AI 노출도가 높은 직업의 취업자수는 생성형 및 에이전틱 AI 경우와 달리 수도권과 비수도권 모두에서 장기간 꾸준한 감 소세가 이어져 왔다.\n[지역 노동시장의 양극화: 위험요인과 기회요인]\n8. 위험요인\n① AI 발전은 이미 수도권에 집중된 지식서비스(종사자수 수도권 비중 71.9%)와 반도체 제조업(74.4%)의 집적경제를 강화할 가능성이 있다. AI투자와 숙련노동 간 높은 보완성으로 AI투자가 인재가 집적된 수도권에 집중되면 지역간 생산성 및 임금 격 차를 확대하고 이는 다시 비수도권 청년들을 끌어들이는 순환구조가 강화될 수 있다.\n② 향후 피지컬AI 발전이 가속화할 경우 피지컬AI 노출도가 높은 비수도권에서 제조, 숙박음식, 운수업 등을 중심으로 고용 감 소가 현실화될 우려가 있다.\n③ 인적자본, 혁신활동 등을 기준으로 지역별 AI 역량을 평가한 “AI 준비도” 산출결과 서울, 경기 등이 비수도권보다 크게 높은 수준인 점도 지역간 격차를 더 확대할 수 있다.\n9. 기회요인\n① AI와 인간 간 협업모델 발전, 피지컬AI 발전 등이 인재와 R&D의 수도권 집적을 완화할 가능성이 있다. 암묵지(문서화되 지 않은 비공식 경험·정보)의 AI화가 진전되면 사람 간 대면과 집적 필요성이 줄어들 수 있다. 또한 피지컬AI 발전과정에서 R&D의 상당부분이 산업현장에서 이뤄지면서 비수도권 제조업의 지식서비스화를 촉진할 수 있다.\n② AI가 인적자본이 부족한 비수도권 서비스업의 생산성을 더 크게 개선(상향평준화)하고 공급제약을 완화하여 지역내 서비스 소 비가 성장할 가능성이 있다.\n③ AI확산 이후 청년층의 수도권 취업경쟁이 치열한 상황에서 비수도권에서 상대적으로 양질의 일자리가 늘어난다면 수도권의 청년유출이 완화될 가능성이 있다.\n[정책적 시사점]\n10. 향후 ① 지역 서비스업 전문화 촉진을 위한 AI 교육시스템 강화와 혁신성장 지원, ② 지역 제조업의 지식서비스화를 위한 주력 제조 업 연계 서비스 특화 및 스타트업 육성, ③ 지역 거점대학의 AI 허브화를 위한 선택과 집중에 기초한 투자 확대 등을 적극 추진할 필요가 있다.",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-15T17:48:15+09:00"
   }
 ]
