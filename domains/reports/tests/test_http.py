@@ -92,3 +92,25 @@ def test_a_file_download_retries_too():
 
     assert http.get_bytes('https://x/f.pdf', fetch=flaky, sleep=lambda _: None) == b'%PDF-'
     assert len(calls) == 2
+
+
+def test_the_second_retry_waits_five_minutes():
+    """첫 재시도는 2초, 두 번째는 5분. 초 단위 세 번으로 끝나면 안 된다.
+
+    2026-09-14 에 KEIS 게시판 여섯 개가 한꺼번에 연결 시간초과로 죽었는데
+    재시도 세 번이 1분 안에 끝나 같은 차단 상태만 세 번 때렸다. 성격이 다른
+    두 실패(일시적 오류 · IP 차단)를 각각 노리는 간격이라는 것이 요점이다.
+    """
+    slept = []
+
+    def always(url, timeout):
+        raise RuntimeError('timed out')
+
+    with pytest.raises(RuntimeError):
+        http.get_text('https://x/1', fetch=always, sleep=slept.append)
+    assert slept == [2.0, 300.0]
+
+    slept.clear()
+    with pytest.raises(RuntimeError):
+        http.get_bytes('https://x/f.pdf', fetch=always, sleep=slept.append)
+    assert slept == [2.0, 300.0]

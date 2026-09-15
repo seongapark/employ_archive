@@ -13,6 +13,22 @@ from urllib.parse import quote
 from curl_cffi import requests as cf_requests
 
 
+# 재시도 사이 간격(초). **두 번째는 분 단위여야 한다.**
+#
+# 종전은 2초·4초였다. 502 같은 한 순간의 실패에는 맞지만, 2026-09-14 회차에
+# KEIS 게시판 6개가 전부 연결 시간초과로 죽었을 때는 세 번을 1분 안에 다 쓰고
+# 끝났다. 그날 같은 주소를 다른 워크플로가 4분 뒤에 받아왔으니(forecast 의
+# keis 수집) 사이트는 멀쩡했고, 그 실행의 러너 IP 로 가는 길만 막혔던 것이다.
+# 그런 차단·경로 장애는 초가 아니라 분 단위로 풀린다. 2초 뒤 한 번(일시적
+# 오류용), 5분 뒤 한 번(차단용)으로 성격이 다른 두 실패를 각각 노린다.
+BACKOFF = (2.0, 300.0)
+
+
+def _backoff(attempt: int) -> float:
+    """attempt 회째 실패 뒤 쉴 시간. 표를 넘어가면 마지막 값을 쓴다."""
+    return BACKOFF[min(attempt, len(BACKOFF)) - 1]
+
+
 def _default_fetch(url: str, timeout: int):
     return cf_requests.get(url, impersonate='chrome', timeout=timeout)
 
@@ -44,7 +60,7 @@ def get_text(url: str, *, timeout: int = 60, tries: int = 3,
             last = exc
             if attempt == tries:
                 break
-            sleep(2.0 * attempt)
+            sleep(_backoff(attempt))
     raise last                          # type: ignore[misc]
 
 
@@ -91,5 +107,5 @@ def get_bytes(url: str, *, timeout: int = 180, tries: int = 3,
             last = exc
             if attempt == tries:
                 break
-            sleep(2.0 * attempt)
+            sleep(_backoff(attempt))
     raise last                          # type: ignore[misc]
