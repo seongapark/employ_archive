@@ -19,3 +19,6 @@ domains/press/sources/releases/*.hwpx
 
 # wrangler 로컬 캐시·상태. 배포 산출물이 아니다.
 .wrangler/
+
+# 로컬 수집 실행 로그. 실행할 때마다 쌓이고 30회분만 남는다.
+logs/

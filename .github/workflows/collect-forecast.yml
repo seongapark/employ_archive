@@ -1,17 +1,11 @@
 name: collect-forecast
 
 on:
-  schedule:
-    # 12:00 KST = 03:00 UTC. 원래 16:00 KST 였는데 앞당겼다 — GitHub 의
-    # 예약 실행이 실제로는 5~8시간 늦게 시작하기 때문이다(2026-09-02 측정:
-    # 표본 8개, 최소 5.3h / 중앙 5.6h / 최대 7.9h, 세 워크플로가 같은 날
-    # 같은 폭으로 밀린다). 분을 옮겨서 해결되는 문제가 아니다 — 정각이
-    # 붐벼서가 아니라 이 저장소의 예약 큐 전체가 밀린다. push 로 도는
-    # 실행은 40초 안에 시작하므로 늦는 것은 schedule 이벤트뿐이다.
-    # 목적은 "퇴근(18:00) 전에 그날 수집 결과를 안다" 이므로 지연을 미리
-    # 빼서 적어 둔 것이고, 그래서 이 숫자는 발표 시각이 아니라 지연 관측값에
-    # 매여 있다. 지연이 줄면(또는 늘면) 이 값도 다시 재서 옮겨야 한다.
-    - cron: "0 3 * * *"
+  # **예약을 끊었다.** KEIS·기재부가 해외 IP 를 막아(2026-09-15 확인: 55개국
+  # 접속 시도, 성공 0) GitHub 러너로는 수집이 원리적으로 안 된다. 수집은 이제
+  # 국내 PC 의 작업 스케줄러가 collect-local.ps1 로 매일 11:30 에 돌리고,
+  # 결과만 push 한다. 이 워크플로는 손으로 부를 때만 돈다 — 차단이 풀렸는지
+  # 확인하는 용도다.
   workflow_dispatch:
 
 permissions:
@@ -53,35 +47,6 @@ jobs:
           # 커밋에 담기는 경로가 자기 도메인뿐이라 남의 것을 덮지 않는다.
           git pull --rebase -X theirs origin main
           git push
-      - name: D1 동기화
-        id: d1                           # 아래 요약 스텝이 outcome 을 읽는다
-        continue-on-error: true          # D1 이 죽어도 Pages 와 수집은 멀쩡히 돈다
-        env:
-          PYTHONIOENCODING: utf-8
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          python -m tools.d1_sync forecast > /tmp/forecast.sql
-          # **같은 내용이면 안 민다.** D1 은 값이 같아도 쓰기로 센다 —
-          # 아무것도 안 바뀐 날에도 전량이 나가서 2026-09-13 에 하루 10만행
-          # 한도를 넘겼다. 지문은 D1 에 있고, 적재가 끝난 뒤에만 찍는다.
-          if [ "$(python -m tools.d1_gate check forecast /tmp/forecast.sql)" = push ]; then
-            npx --yes wrangler@4 d1 execute employ-archive-ask --remote \
-              --config domains/ask/worker/wrangler.jsonc --file=/tmp/forecast.sql
-            python -m tools.d1_gate record forecast /tmp/forecast.sql
-          fi
-      # 위 스텝은 continue-on-error 라 실패해도 이 실행은 초록으로 끝난다 — 그래서
-      # 동기화가 며칠째 죽어 있어도 실행 목록만 봐서는 알 수 없다. 최소한 실행 페이지
-      # 상단 요약에 한 줄은 남긴다(스텝을 하나하나 펼쳐 보지 않아도 되게).
-      # 이 스텝 자체는 절대 실패시키지 않는다 — 그러면 continue-on-error 의 뜻이 사라진다.
-      - name: D1 동기화 실패를 요약에 남긴다
-        if: always()
-        run: |
-          if [ "${{ steps.d1.outcome }}" = "failure" ]; then
-            echo "⚠️ **D1 동기화 실패** — 질의응답(ask) 워커가 보는 전망 데이터가 오늘치로 갱신되지 않았다." >> "$GITHUB_STEP_SUMMARY"
-            echo "" >> "$GITHUB_STEP_SUMMARY"
-            echo "이 스텝은 \`continue-on-error: true\` 라 실행 자체는 초록이다. 원인은 위 \`D1 동기화\` 스텝 로그를 봐라 (자주 나오는 것: 원격 D1 에 \`0001_init.sql\` 이 아직 적용되지 않아 \`no such table\`, 또는 \`CLOUDFLARE_API_TOKEN\`/\`CLOUDFLARE_ACCOUNT_ID\` 시크릿 누락). 자세한 절차는 \`domains/ask/DEPLOY.md\`." >> "$GITHUB_STEP_SUMMARY"
-          fi
       - name: Fail on collector errors
         env:
           # 원인을 이미 아는 외부 장애. 이 수집기의 실패는 로그로만 남기고 통과시켜,
