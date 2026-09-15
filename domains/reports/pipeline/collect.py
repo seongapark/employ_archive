@@ -89,6 +89,7 @@ def collect_board(board, *, fetch, throttle, detail_cap, existing,
                 break
             result['parsed'] += len(items)
             stop = False
+            처음보는것 = 0
             for item in items:
                 if item.get('published_raw'):
                     published, _ = normalize_published(item['published_raw'])
@@ -98,6 +99,7 @@ def collect_board(board, *, fetch, throttle, detail_cap, existing,
                 rid = report_id(board.org, board.id_prefix + item['native_id'])
                 if rid in known:
                     continue
+                처음보는것 += 1
                 if details >= detail_cap:
                     stop = True
                     break
@@ -122,6 +124,27 @@ def collect_board(board, *, fetch, throttle, detail_cap, existing,
                 rec.collected_at = now
                 records.append(rec)
             if stop:
+                break
+            # **한 쪽이 통째로 아는 것뿐이면 거기서 멈춘다.**
+            #
+            # 종전은 컷오프(2021-01-01)에 닿을 때까지 매 회차 목록을 다 넘겼다.
+            # 신규가 0건인 날에도 33개 게시판에서 목록 요청이 약 205회 나갔고,
+            # 요청 사이 1초 예의를 지키니 3분 넘게 같은 목록을 다시 읽었다.
+            #
+            # 신규는 목록 앞쪽에 몰린다. 아는 것만 있는 쪽을 만났다는 것은 그
+            # 뒤로는 더 옛 글이라는 뜻이라 볼 이유가 없다. 그래서 평소 회차는
+            # 게시판당 한 쪽으로 끝난다.
+            #
+            # **쪽 단위로 끊는 것이 핵심이다.** "앞에서 N건만" 으로 줄이면
+            # KIET 연구보고서처럼 발행일이 뭉친 게시판에서 깨진다 — 목록은
+            # 발행일순인데 그 기관은 2025.12.31 자로 수십 건을 나중에 올린다.
+            # 2026-09-15 측정: 가장 최근 등록 8건이 목록 16~36번째에 앉아
+            # 상위 10위 안에 하나도 없었다. 쪽 단위면 그 쪽에 신규가 하나라도
+            # 있는 한 계속 넘어가므로, 며칠 밀려 쌓인 신규도 알아서 따라잡는다.
+            #
+            # 남는 구멍: 이미 아는 것만 있는 쪽 **너머**에 소급 등록분이 있으면
+            # 못 본다. 그것까지 줍고 싶으면 가끔 전체를 훑어야 한다.
+            if 처음보는것 == 0:
                 break
     except Exception as exc:                       # noqa: BLE001
         result['ok'] = False

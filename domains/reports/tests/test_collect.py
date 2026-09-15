@@ -180,3 +180,57 @@ def test_a_broken_parser_still_fails_the_board():
         throttle=collect.NoThrottle(), detail_cap=40, existing=[],
         parse_list=one_page(rows), parse_detail=detail)
     assert result['ok'] is False and result['error']
+
+
+def _pages(pages):
+    """쪽 번호대로 목록을 돌려주는 parse_list. 몇 쪽을 읽었는지 센다."""
+    state = {'read': 0}
+
+    def parse(html, board):
+        state['read'] += 1
+        idx = state['read'] - 1
+        return pages[idx] if idx < len(pages) else []
+    return parse, state
+
+
+def test_a_page_of_only_known_items_stops_the_paging():
+    """평소 회차는 한 쪽만 읽는다 — 컷오프까지 다시 훑지 않는다."""
+    rows = items(10)
+    existing = [collect.stub_record(it, BOARD) for it in rows]
+    parse, state = _pages([rows, items(10)])
+
+    recs, result = collect.collect_board(
+        BOARD, fetch=lambda url, **kw: '<html></html>',
+        throttle=collect.NoThrottle(), detail_cap=40, existing=existing,
+        parse_list=parse, parse_detail=stub_detail)
+
+    assert state['read'] == 1
+    assert recs == []
+    assert result['ok'] is True
+    assert result['parsed'] == 10
+
+
+def test_paging_follows_a_backlog_past_the_first_page():
+    """밀린 신규는 쪽을 넘어가며 따라잡는다. 앞 N건 고정이면 놓친다.
+
+    1쪽은 전부 신규(밀린 것), 2쪽은 신규가 한 건 섞여 있고, 3쪽은 전부 아는
+    것이다. 3쪽에서 멈추되 2쪽의 그 한 건은 담아야 한다.
+    """
+    쪽1 = items(10)
+    쪽2 = [dict(it, native_id=f'2-{it["native_id"]}',
+                detail_url=f'https://example.org/d/2-{it["native_id"]}')
+           for it in items(10)]
+    쪽3 = [dict(it, native_id=f'3-{it["native_id"]}',
+                detail_url=f'https://example.org/d/3-{it["native_id"]}')
+           for it in items(10)]
+    existing = [collect.stub_record(it, BOARD) for it in 쪽2[1:] + 쪽3]
+    parse, state = _pages([쪽1, 쪽2, 쪽3])
+
+    recs, result = collect.collect_board(
+        BOARD, fetch=lambda url, **kw: '<html></html>',
+        throttle=collect.NoThrottle(), detail_cap=40, existing=existing,
+        parse_list=parse, parse_detail=stub_detail)
+
+    assert state['read'] == 3
+    assert len(recs) == 11
+    assert result['parsed'] == 30
