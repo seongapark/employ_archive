@@ -29,6 +29,27 @@ KST = timezone(timedelta(hours=9))
 FOLLOW_FROM = 2
 FOLLOW_LAST = 22
 
+# 배포일이 아닌 날에 수집을 맡는 회차. 기사가 조간·석간 두 번 나오므로 두 번 돈다.
+#
+# **매시간 창을 그대로 두고 회차 둘을 따로 다는 이유**: 배포 당일은 12시 엠바고부터
+# 밤까지 기사가 올라오므로 매시간이 필요하고, 그 밖의 날은 두 번이면 된다.
+# 그런데 「하루치」를 첫 실행이 가져가는 규칙이라, KST 하루의 첫 슬롯인
+# 04:00(= 19:00 UTC 전날)이 제때 깨면 그날 수집이 오전에 끝난다. 2026-09-15 에
+# 실제로 그렇게 됐다 — 22:00 UTC 회차가 17분 만에 깨서 07:17 KST 로 찍혔고,
+# 다른 도메인은 같은 날 17:2x~17:5x 였다.
+#
+# **시각이 아니라 회차로 판단한다.** 예약 실행의 지연 폭이 같은 날에도 0.3시간에서
+# 8시간까지 벌어지므로(2026-09-14 실측: press 0.3h · employment 5.7h) 「몇 시에
+# 깼는가」로 거르면 늦게 깬 실행을 통째로 버리거나 이른 실행을 통과시킨다.
+# `github.event.schedule` 은 지연과 무관하게 **어느 크론이 깨웠는지**를 말한다.
+#
+# 분이 40 인 것은 매시간 창(정각)과 겹치지 않게 하려는 것이다. 같은 시각에 두 항목이
+# 맞으면 GitHub 은 항목마다 따로 실행을 만들어 배포 당일에 같은 일을 두 번 한다.
+DAILY_CRONS = {
+    '40 21 * * *': '조간',   # 06:40 KST 명목
+    '40 2 * * *': '석간',    # 11:40 KST 명목 — 다른 도메인과 같은 무리라 17시대에 착지한다
+}
+
 
 def today_kst():
     return datetime.now(KST).date()
@@ -74,15 +95,15 @@ def is_release_day(today, releases):
     """배포 당일인가. 이 날만 매시간 돈다.
 
     기사가 12시부터 밤까지 계속 올라오고, 이 도메인은 늦게 아는 것이 가장
-    나쁘다. 이튿날과 후속일은 하루 한 번이면 된다 — 그날 기사는 이미 다 나와
-    있어 매시간 돌아봐야 같은 것을 다시 긁는다.
+    나쁘다. 이튿날과 후속일은 조간·석간 두 번이면 된다 — 그날 기사는 그 두 판으로
+    나오고, 그 밖의 시각에 돌아봐야 같은 것을 다시 긁는다.
     """
     today = _d(today)
     rel = latest_release(releases, today)
     return rel is not None and rel == today
 
 
-def should_run(today, releases, last=None):
+def should_run(today, releases, last=None, schedule=None):
     """(무엇, 회차, 사유). 무엇이 None 이면 이번 실행은 아무것도 안 한다.
 
     「오늘 이미 돌았나」를 상태로 판단한다. 실행 시각으로 판단하지 않는 이유는
@@ -90,6 +111,9 @@ def should_run(today, releases, last=None):
     「10시 실행만 통과」 같은 규칙은 늦게 깬 실행을 전부 버린다.
 
     `last` 는 지난 실행 기록 {'release','kind','date'} 이고 없으면 처음이다.
+    `schedule` 은 이 실행을 깨운 크론 문자열(`github.event.schedule`)이다. 예약이
+    아닌 실행(손으로 돌린 것, 로컬)은 None 이고 회차 게이트를 타지 않는다 — 손으로
+    돌리는 것은 대개 「지금 당장 다시 돌려라」라는 뜻이다.
     """
     today = _d(today)
     kind, release = decide(today, releases)
@@ -97,12 +121,34 @@ def should_run(today, releases, last=None):
         return None, None, '오늘은 수집일이 아니다'
     if is_release_day(today, releases):
         return kind, release, '배포 당일 — 매시간 수집'
+    if schedule is not None and schedule not in DAILY_CRONS:
+        # 매시간 창은 배포 당일을 위한 것이다. 그 밖의 날에 이 창의 이른 회차가
+        # 하루치를 가져가면 수집이 오전에 끝나 다른 도메인과 기준 시각이 어긋난다.
+        return None, None, '비배포일은 조간·석간 회차에서만 수집한다'
+    slot = slot_of(schedule)
+    if slot in done_slots(last, today, release, kind):
+        return None, None, '오늘 %s 회차는 이미 수집했다' % slot
+    return kind, release, '%s 회차 — %s' % (
+        slot, '배포 이튿날 · 창 마감' if kind == 'regular' else '후속 구간')
+
+
+def slot_of(schedule):
+    """크론 문자열 → 회차 이름. 예약이 아닌 실행은 하나로 묶어 '수시' 로 센다."""
+    return DAILY_CRONS.get(schedule, '수시')
+
+
+def done_slots(last, today, release, kind):
+    """오늘 이 회차에서 이미 돈 슬롯들.
+
+    날짜·배포일·종류가 하나라도 다르면 지난 기록이므로 빈 것으로 본다. 슬롯 목록이
+    아예 없는 기록은 조간·석간을 나누기 전에 쓰인 것이라 역시 빈 것으로 본다 —
+    바꾸는 날 한 회차를 더 도는 쪽이, 그날을 통째로 건너뛰는 쪽보다 낫다.
+    """
     prev = last or {}
-    done_today = (prev.get('date') == today.strftime('%Y-%m-%d')
-                  and prev.get('kind') == kind and prev.get('release') == release)
-    if done_today:
-        return None, None, '오늘 이미 수집했다(배포 당일이 아니면 하루 한 번)'
-    return kind, release, '배포 이튿날 · 창 마감' if kind == 'regular' else '후속 구간 — 하루 한 번'
+    if (prev.get('date') != _d(today).strftime('%Y-%m-%d')
+            or prev.get('kind') != kind or prev.get('release') != release):
+        return []
+    return list(prev.get('slots') or [])
 
 
 def load_state(path):
@@ -115,11 +161,18 @@ def load_state(path):
         return {}          # 깨진 상태 파일 때문에 수집을 멈추지는 않는다
 
 
-def save_state(path, release, kind, today):
+def save_state(path, release, kind, today, schedule=None, last=None):
+    """이번 실행을 기록한다. 같은 날 같은 회차면 슬롯을 **덧붙인다** —
+    덮어쓰면 조간이 돈 사실이 지워져 석간이 조간인 줄 알고 또 돈다."""
+    slots = done_slots(last, today, release, kind)
+    slot = slot_of(schedule)
+    if slot not in slots:
+        slots.append(slot)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, 'w', encoding='utf-8') as f:
         json.dump({'release': release, 'kind': kind,
-                   'date': _d(today).strftime('%Y-%m-%d')}, f, ensure_ascii=False, indent=1)
+                   'date': _d(today).strftime('%Y-%m-%d'), 'slots': slots},
+                  f, ensure_ascii=False, indent=1)
 
 
 def schedule_to_releases(schedule, year):

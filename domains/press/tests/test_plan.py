@@ -60,18 +60,65 @@ def test_release_day_keeps_running_even_after_it_already_ran():
     assert '매시간' in why
 
 
-def test_other_days_run_once_and_then_stop():
-    kind, _, _ = plan.should_run('2026-09-08', RELEASES, None)
+_BY_NAME = {name: cron for cron, name in plan.DAILY_CRONS.items()}
+MORNING, EVENING = _BY_NAME['조간'], _BY_NAME['석간']
+
+
+def test_other_days_run_once_per_slot_and_then_stop():
+    # 기사는 조간·석간 두 판으로 나온다. 한 판을 담았다고 다른 판까지 막으면 안 된다.
+    kind, _, _ = plan.should_run('2026-09-08', RELEASES, None, schedule=MORNING)
     assert kind == 'regular'
-    done = {'release': '2026-09-07', 'kind': 'regular', 'date': '2026-09-08'}
-    kind, _, why = plan.should_run('2026-09-08', RELEASES, done)
+    done = {'release': '2026-09-07', 'kind': 'regular', 'date': '2026-09-08',
+            'slots': ['조간']}
+    kind, _, why = plan.should_run('2026-09-08', RELEASES, done, schedule=MORNING)
     assert kind is None and '이미 수집' in why
+    kind, _, why = plan.should_run('2026-09-08', RELEASES, done, schedule=EVENING)
+    assert kind == 'regular' and '석간' in why
+
+
+def test_the_hourly_window_does_not_collect_on_other_days():
+    # 이 창은 배포 당일용이다. 그 밖의 날에 이 창의 이른 회차(KST 04:00)가 하루치를
+    # 가져가면 수집이 오전에 끝나 다른 도메인과 기준 시각이 어긋난다 — 2026-09-15.
+    kind, _, why = plan.should_run('2026-09-08', RELEASES, None, schedule='0 22 * * *')
+    assert kind is None and '조간·석간' in why
+
+
+def test_the_hourly_window_still_collects_on_the_release_day():
+    kind, _, why = plan.should_run('2026-09-07', RELEASES, None, schedule='0 22 * * *')
+    assert kind == 'regular' and '매시간' in why
+
+
+def test_a_hand_run_is_never_blocked_by_the_slot_gate():
+    # 손으로 돌리는 것은 「지금 당장 돌려라」라는 뜻이다.
+    kind, _, _ = plan.should_run('2026-09-08', RELEASES, None, schedule=None)
+    assert kind == 'regular'
+
+
+def test_a_record_from_before_the_slots_existed_does_not_block_the_day():
+    # 바꾸는 날 한 회차를 더 도는 쪽이, 그날을 통째로 건너뛰는 쪽보다 낫다.
+    old = {'release': '2026-09-07', 'kind': 'regular', 'date': '2026-09-08'}
+    kind, _, _ = plan.should_run('2026-09-08', RELEASES, old, schedule=EVENING)
+    assert kind == 'regular'
+
+
+def test_saving_a_slot_keeps_the_ones_already_run_today():
+    # 덮어쓰면 조간이 돈 사실이 지워져 석간이 조간인 줄 알고 또 돈다.
+    import tempfile, os as _os
+    with tempfile.TemporaryDirectory() as tmp:
+        path = _os.path.join(tmp, 'last_run.json')
+        plan.save_state(path, '2026-09-07', 'regular', '2026-09-08', schedule=MORNING)
+        first = plan.load_state(path)
+        assert first['slots'] == ['조간']
+        plan.save_state(path, '2026-09-07', 'regular', '2026-09-08',
+                        schedule=EVENING, last=first)
+        assert plan.load_state(path)['slots'] == ['조간', '석간']
 
 
 def test_yesterdays_record_does_not_block_todays_run():
     # 상태가 날짜별이어야 한다. 회차만 보면 이튿날 실행이 영영 안 돈다.
-    stale = {'release': '2026-09-07', 'kind': 'regular', 'date': '2026-09-07'}
-    kind, _, _ = plan.should_run('2026-09-08', RELEASES, stale)
+    stale = {'release': '2026-09-07', 'kind': 'regular', 'date': '2026-09-07',
+             'slots': ['조간', '석간']}
+    kind, _, _ = plan.should_run('2026-09-08', RELEASES, stale, schedule=MORNING)
     assert kind == 'regular'
 
 
@@ -84,9 +131,9 @@ def test_state_survives_a_broken_file(tmp_path):
 
 def test_state_round_trips(tmp_path):
     p = str(tmp_path / 'sub' / 'last_run.json')
-    plan.save_state(p, '2026-09-07', 'regular', '2026-09-08')
+    plan.save_state(p, '2026-09-07', 'regular', '2026-09-08', schedule=EVENING)
     assert plan.load_state(p) == {'release': '2026-09-07', 'kind': 'regular',
-                                  'date': '2026-09-08'}
+                                  'date': '2026-09-08', 'slots': ['석간']}
 
 
 def test_month_is_the_one_before_the_release():
@@ -281,7 +328,8 @@ def test_a_failed_judgement_does_not_throw_away_the_collection(tmp_path, monkeyp
     monkeypatch.setattr(run_round, 'collect',
                         type('C', (), {'run': staticmethod(lambda *a, **k: done.append('collect'))}))
     monkeypatch.setattr(run_round, 'fetch_all_releases', lambda: done.append('hwpx'))
-    monkeypatch.setattr(run_round.plan, 'save_state', lambda *a: done.append('state'))
+    monkeypatch.setattr(run_round.plan, 'save_state',
+                        lambda *a, **k: done.append('state'))
     monkeypatch.setattr(run_round.fetch_release, 'save', lambda *a: None)
     import domains.press.pipeline.make_data as md
     monkeypatch.setattr(md, 'main', lambda: done.append('make_data'))

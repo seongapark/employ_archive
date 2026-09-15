@@ -14,7 +14,7 @@ on:
     #
     # 매시간 도는 것은 **배포 당일뿐**이다. 그날은 기사가 12시 엠바고부터 밤까지
     # 계속 올라오고, 이 도메인은 늦게 아는 것이 가장 나쁘다. 이튿날과 후속 구간은
-    # 하루 한 번이면 되고, 그 판단은 크론이 아니라 `plan.should_run` 이 한다 —
+    # 조간·석간 두 번이면 되고, 그 판단은 크론이 아니라 `plan.should_run` 이 한다 —
     # 늦게 깬 실행이 엉뚱한 날로 넘어가도 회차를 안 놓치게 하려면 시각이 아니라
     # 상태로 판단해야 한다.
     #
@@ -23,8 +23,24 @@ on:
     # 프레임이 번져도 아무도 모른다. 매일 다시 긁어도 손해가 없다: 수집은
     # 발행일로 거르므로 같은 구간을 통째로 다시 훑고, 판정은 제목으로 이어져
     # 새 기사만 LLM 에 간다.
+    #
+    # **비배포일은 조간·석간 두 회차만 수집한다.** 매시간 창의 첫 슬롯은 KST 04:00
+    # (= 19:00 UTC 전날)이라, 그 슬롯이 제때 깨면 하루치를 오전이 다 가져간다.
+    # 2026-09-15 에 그렇게 됐다 — 22:00 UTC 회차가 17분 만에 깨서 07:17 KST 로
+    # 찍혔고, 같은 날 다른 도메인은 17:2x~17:5x 였다. 지연 폭이 같은 날에도
+    # 0.3시간에서 8시간까지 벌어지므로(2026-09-14 실측: press 0.3h · employment 5.7h)
+    # 시각으로는 못 거른다. 어느 크론이 깨웠는지로 거른다 — `plan.DAILY_CRONS`.
     - cron: "0 19-23 * * *"
     - cron: "0 0-5 * * *"
+    # 비배포일 담당 두 회차. 기사가 조간·석간으로 두 번 나오므로 두 번 긁는다.
+    # 분이 40 인 것은 위 매시간 창(정각)과 겹치지 않게 하려는 것이다 — 같은 시각에
+    # 두 항목이 맞으면 GitHub 은 항목마다 따로 실행을 만들어 배포 당일에 같은 일을
+    # 두 번 한다. 이 값을 바꾸면 `domains/press/pipeline/plan.py` 의 DAILY_CRONS 도
+    # 같이 바꾼다.
+    - cron: "40 21 * * *"   # 조간 — 06:40 KST 명목
+    # 석간. 다른 도메인(연구보고서 02:30 · 전망 03:00 · 고용동향 03:10 · 재배포 03:20)과
+    # 같은 무리에 둔다 — 그 무리가 KST 17시대에 착지한다.
+    - cron: "40 2 * * *"
   workflow_dispatch:
     inputs:
       release:
@@ -64,7 +80,9 @@ jobs:
             echo "직접 지정: ${{ inputs.release }} ${{ inputs.kind }}"
             exit 0
           fi
-          python -m domains.press.pipeline.run_round --dry-run | tee plan.txt
+          # 어느 크론이 깨웠는지 넘긴다. 손으로 돌린 실행은 빈 값이고 게이트를
+          # 타지 않는다 — 그때는 「지금 당장 돌려라」라는 뜻이다.
+          python -m domains.press.pipeline.run_round --dry-run             --schedule "${{ github.event.schedule }}" | tee plan.txt
           grep '^PLAN_KIND=' plan.txt | sed 's/PLAN_//' | tr 'A-Z' 'a-z' >> "$GITHUB_OUTPUT"
           grep '^PLAN_RELEASE=' plan.txt | sed 's/PLAN_//' | tr 'A-Z' 'a-z' >> "$GITHUB_OUTPUT"
 

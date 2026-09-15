@@ -147,14 +147,18 @@ def main(argv=None):
     ap.add_argument('--release', help='배포일. 주면 계획을 건너뛴다')
     ap.add_argument('--kind', choices=['regular', 'follow'])
     ap.add_argument('--dry-run', action='store_true', help='할 일만 알려주고 끝낸다')
+    ap.add_argument('--schedule', default=None,
+                    help='이 실행을 깨운 크론(github.event.schedule). 비우면 손으로 돌린 것')
     a = ap.parse_args(argv)
 
     today = plan.today_kst()
+    state = plan.load_state(STATE)      # 직접 지정이어도 읽는다 — 오늘 돈 회차를 안 지우려는 것이다
     if a.release and a.kind:
         kind, release, why = a.kind, a.release, '직접 지정'
     else:
         releases = known_releases(today)
-        kind, release, why = plan.should_run(today, releases, plan.load_state(STATE))
+        kind, release, why = plan.should_run(today, releases, state,
+                                             schedule=a.schedule or None)
 
     print('오늘 %s · %s' % (today, why))
     if a.dry_run:
@@ -188,7 +192,8 @@ def main(argv=None):
     from . import make_data
     fetch_all_releases()
     make_data.main()
-    plan.save_state(STATE, release, kind, today)
+    plan.save_state(STATE, release, kind, today,
+                    schedule=a.schedule or None, last=state)
     return 0
 
 
