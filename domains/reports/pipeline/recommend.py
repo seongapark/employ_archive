@@ -332,6 +332,30 @@ def plan_rejudge(reports: Sequence[dict], cache: dict, profile: Profile,
     return RejudgePlan(ask=ask, carry=carry, unjudged=unjudged)
 
 
+def plan_narrow(reports: Sequence[dict], cache: dict,
+                profile: Profile) -> RejudgePlan:
+    """기준을 **좁혔을** 때 다시 물을 것만 추린다 — plan_rejudge 의 반대쪽.
+
+    좁히면 추천은 줄어들 뿐 늘지 않는다. 이미 기각된 것은 더 좁은 문턱에서도
+    기각이므로 다시 묻지 않고 이어받는다. 추천된 것만 다시 묻는다(실측
+    2026-09-15: 낡은 3,424건 중 849건 = 43회 호출, 172회가 아니라).
+
+    키워드를 보지 않는다 — 문턱은 주제를 가리지 않고 모든 축에 걸린다.
+    """
+    ask, carry, unjudged = [], [], []
+    for r in reports:
+        got = cache.get(r['id'])
+        if got is None:
+            unjudged.append(r)
+        elif got.get('profile_version') == profile.version:
+            continue  # 이미 최신
+        elif got.get('pick'):
+            ask.append(r)
+        else:
+            carry.append(r)
+    return RejudgePlan(ask=ask, carry=carry, unjudged=unjudged)
+
+
 def carry_over(cache: dict, rows: Sequence[dict], profile: Profile) -> dict:
     """옛 판정을 그대로 이어받되, 이어받았다는 사실과 원래 판정한 프로파일을 남긴다.
 
@@ -431,6 +455,10 @@ def main(argv=None, *, call=None) -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument('--limit', type=int, default=0, help='이번에 판정할 최대 건수')
     ap.add_argument('--dry-run', action='store_true')
+    ap.add_argument('--narrowed', action='store_true',
+                    help='판정 문턱을 좁혔을 때 쓴다. 캐시가 낡은 레코드 중 '
+                         '이미 추천된 것만 다시 묻고, 기각된 것은 옛 판정을 '
+                         '이어받아 LLM 을 안 부른다(좁히면 기각은 뒤집히지 않는다).')
     ap.add_argument('--rejudge-keywords', default='',
                     help='콤마로 구분한 keywords.json 주제 이름. 있으면 캐시가 낡은 '
                          '레코드 중 이 주제에 제목·초록이 걸리는 것만 다시 묻고, '
@@ -449,7 +477,18 @@ def main(argv=None, *, call=None) -> int:
     cache_path = DATA / 'recommendations.json'
     rejudge_topics = [t.strip() for t in args.rejudge_keywords.split(',') if t.strip()]
 
-    if rejudge_topics:
+    if args.narrowed and rejudge_topics:
+        ap.error('--narrowed 와 --rejudge-keywords 는 같이 쓸 수 없다 — '
+                 '문턱을 좁히는 것과 축을 늘리는 것은 반대 방향이다.')
+
+    if args.narrowed:
+        plan = plan_narrow(rows, cache, profile)
+        todo = plan.ask + plan.unjudged
+        calls = -(-len(plan.ask) // BATCH) if plan.ask else 0  # ceil
+        print(f'다시 물을 것(이미 추천) {len(plan.ask)}건 ({calls}회 호출)')
+        print(f'이어받을 것(기각) {len(plan.carry)}건 (호출 없음)')
+        print(f'안 물어본 것 {len(plan.unjudged)}건')
+    elif rejudge_topics:
         plan = plan_rejudge(rows, cache, profile, rejudge_topics)
         todo = plan.ask + plan.unjudged
         calls = -(-len(plan.ask) // BATCH) if plan.ask else 0  # ceil

@@ -625,3 +625,18 @@ def test_the_only_route_is_the_subscription(monkeypatch):
     assert url == recommend.CLI_URL
     assert model == recommend.MODEL_ANTHROPIC
     assert headers == {}
+
+
+def test_narrowing_the_bar_only_reasks_what_was_already_picked():
+    # 문턱을 좁히면 추천은 줄 뿐 늘지 않는다 — 기각된 것을 다시 묻는 것은
+    # 전액 낭비다(849건 43회 대신 3,424건 172회).
+    rows = [{'id': 'a'}, {'id': 'b'}, {'id': 'c'}, {'id': 'd'}]
+    cache = {
+        'a': {'pick': True, 'axis': '청년 고용', 'profile_version': '옛것'},
+        'b': {'pick': False, 'axis': '', 'profile_version': '옛것'},
+        'c': {'pick': True, 'axis': '청년 고용', 'profile_version': PROFILE.version},
+    }
+    plan = recommend.plan_narrow(rows, cache, PROFILE)
+    assert [r['id'] for r in plan.ask] == ['a']
+    assert [r['id'] for r in plan.carry] == ['b']
+    assert [r['id'] for r in plan.unjudged] == ['d']  # 캐시에 아예 없다
