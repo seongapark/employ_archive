@@ -94,12 +94,12 @@ def test_a_file_download_retries_too():
     assert len(calls) == 2
 
 
-def test_the_second_retry_waits_five_minutes():
-    """첫 재시도는 2초, 두 번째는 5분. 초 단위 세 번으로 끝나면 안 된다.
+def test_retries_back_off_in_seconds():
+    """2초·4초. 분 단위로 늘리지 않는다.
 
-    2026-09-14 에 KEIS 게시판 여섯 개가 한꺼번에 연결 시간초과로 죽었는데
-    재시도 세 번이 1분 안에 끝나 같은 차단 상태만 세 번 때렸다. 성격이 다른
-    두 실패(일시적 오류 · IP 차단)를 각각 노리는 간격이라는 것이 요점이다.
+    2026-09-14 에 두 번째를 5분으로 늘렸다가 되돌렸다. KEIS 의 해외 IP 차단은
+    기다려서 풀리는 것이 아니어서, 회차당 48분을 죽은 연결에 태우기만 했다.
+    수집은 이제 국내(collect-local.ps1)에서 돈다.
     """
     slept = []
 
@@ -108,9 +108,9 @@ def test_the_second_retry_waits_five_minutes():
 
     with pytest.raises(RuntimeError):
         http.get_text('https://x/1', fetch=always, sleep=slept.append)
-    assert slept == [2.0, 300.0]
+    assert slept == [2.0, 4.0]
 
     slept.clear()
     with pytest.raises(RuntimeError):
         http.get_bytes('https://x/f.pdf', fetch=always, sleep=slept.append)
-    assert slept == [2.0, 300.0]
+    assert slept == [2.0, 4.0]
