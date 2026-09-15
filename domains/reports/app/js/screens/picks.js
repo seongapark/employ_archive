@@ -6,9 +6,10 @@
 // recommendations.json 은 판정을 실제로 돌려야 생긴다 — 그 전까지는
 // ctx.picks 가 undefined 이거나 {} 다. groupByAxis 가 두 경우 모두 빈 배열을
 // 돌려주고, render 는 그때 '아직 없다' 를 보인다.
-// 축마다 최신 TOP 건만 내놓는다. 849건을 다 펼치면 첫 축 159행 아래에
-// 두 번째 축 제목이 묻혀, 어떤 테마로 추천되는지 자체를 볼 수 없다.
-// 나머지는 타임라인·검색에서 본다 — 여기는 입구다.
+// 축마다 최신 TOP 건만 펼친다. 850건을 다 펼치면 첫 축 159행 아래에
+// 두 번째 축 제목이 묻혀, 어떤 테마로 추천되는지 자체를 볼 수 없었다.
+// 나머지는 <details> 안에 접어 둔다 — 지우지 않는다. 이 화면 말고는
+// 축별로 묶어 보는 길이 없다(타임라인은 없고, 검색은 축을 모른다).
 import { esc } from '../data.js';
 import { reportRow, empty } from '../ui.js';
 
@@ -42,14 +43,19 @@ export function render(el, ctx) {
     <div class="section-title">추천 · ${groups.length}개 테마 · 테마별 최신 ${TOP}건 (전체 ${total}건)</div>
     ${groups.map((g) => {
       const shown = g.rows.slice(0, TOP);
-      const rest = g.rows.length - shown.length;
+      const rest = g.rows.slice(TOP);
       return `
       <div class="axis">
         <div class="axis__name">${esc(g.axis)} <span class="axis__count">${g.rows.length}</span></div>
         <div class="list">
           ${shown.map((r) => reportRow(r, { why: r.why })).join('')}
         </div>
-        ${rest ? `<div class="axis__more">그 밖 ${rest}건 — 타임라인·검색에서 봅니다</div>` : ''}
+        ${rest.length ? `<details class="axis__rest">
+          <summary>더보기 ${rest.length}건</summary>
+          <div class="list">
+            ${rest.map((r) => reportRow(r, { why: r.why })).join('')}
+          </div>
+        </details>` : ''}
       </div>`;
     }).join('')}`;
 }

@@ -34,7 +34,7 @@ test('추천이 아직 없어도 죽지 않는다', () => {
   assert.deepEqual(groupByAxis(undefined, {}), []);
 });
 
-test('축마다 최신 3건만 내놓고, 나머지는 건수로 알린다', () => {
+test('축마다 최신 3건만 펼치고, 나머지는 접어 둔다', () => {
   const reports = Array.from({ length: 5 }, (_, i) => ({
     id: `x${i}`, org: 'bok', title: `제목${i}`, published: `2026-0${i + 1}-01`,
   }));
@@ -43,7 +43,11 @@ test('축마다 최신 3건만 내놓고, 나머지는 건수로 알린다', () 
   );
   const el = { innerHTML: '' };
   render(el, { reports, picks });
-  const shown = reports.filter((r) => el.innerHTML.includes(r.title)).map((r) => r.id);
-  assert.deepEqual(shown, ['x2', 'x3', 'x4']);  // 최신 3건만, 옛것 둘은 없다
-  assert.match(el.innerHTML, /그 밖 2건/);
+  const open = el.innerHTML.split('<details')[0];
+  const folded = el.innerHTML.slice(el.innerHTML.indexOf('<details'));
+  assert.deepEqual(reports.filter((r) => open.includes(r.title)).map((r) => r.id),
+                   ['x2', 'x3', 'x4']);   // 펼친 건 최신 3건
+  assert.deepEqual(reports.filter((r) => folded.includes(r.title)).map((r) => r.id),
+                   ['x0', 'x1']);         // 나머지는 접힌 채로 있다 — 사라지지 않는다
+  assert.match(folded, /<summary>더보기 2건<\/summary>/);
 });

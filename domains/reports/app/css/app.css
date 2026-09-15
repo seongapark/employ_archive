@@ -365,4 +365,5 @@
 .axis { margin-bottom: 22px; }
 .axis__name { font-weight: 600; margin: 0 0 6px; padding: 0 16px; }
 .axis__count { color: var(--text-muted); font-weight: 400; font-size: 0.88em; }
-.axis__more { color: var(--text-muted); font-size: 0.82em; padding: 6px 16px 0; }
+.axis__rest > summary { color: var(--text-muted); font-size: 0.85em; padding: 8px 16px; cursor: pointer; }
+.axis__rest > summary:hover { color: var(--text); }
