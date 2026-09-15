@@ -6716,6 +6716,103 @@
      "살펴야",
      "원인"
     ]
+   },
+   {
+    "title": "[단독] 문 닫고 실업급여 받는 자영업자 7개월 만에 3000명 육박...역대...",
+    "url": "https://biz.heraldcorp.com/article/10873551?ref=naver",
+    "press": "헤럴드경제",
+    "pub": "2026-09-15 09:33",
+    "cites": false,
+    "judged": true,
+    "why": "자영업자 실업급여 수급 누적 집계",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "역대",
+     "육박"
+    ]
+   },
+   {
+    "title": "취업 먼저 나선 직업계고생들… 경기 취업률 전국 평균 밑돌아",
+    "url": "https://www.kmaeil.com/news/articleView.html?idxno=651756",
+    "press": "kmaeil.com",
+    "pub": "2026-09-15 11:00",
+    "cites": false,
+    "judged": true,
+    "why": "직업계고 취업률 조사",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "경기",
+     "나선",
+     "먼저",
+     "밑돌",
+     "전국",
+     "직업계고생들",
+     "취업률"
+    ]
+   },
+   {
+    "title": "실업급여 받는 자영업자 1~7월 벌써 3000명 ‘역대 최대’ [H-EXCLUSIVE]",
+    "url": "https://biz.heraldcorp.com/article/10873966?ref=naver",
+    "press": "헤럴드경제",
+    "pub": "2026-09-15 11:36",
+    "cites": false,
+    "judged": true,
+    "why": "자영업자 실업급여 역대 최대",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "EXCLUSIVE",
+     "벌써",
+     "역대",
+     "최대"
+    ]
+   },
+   {
+    "title": "장사 접고 실업급여 받는 자영업자 급증 … 7개월 만에 3000명 [위기의 자...",
+    "url": "https://biz.newdaily.co.kr/site/data/html/2026/09/15/2026091500311.html",
+    "press": "biz.newdaily.co.kr",
+    "pub": "2026-09-15 16:34",
+    "cites": false,
+    "judged": true,
+    "why": "자영업자 고용보험 사각지대",
+    "hits": [],
+    "tone": [
+     "급증"
+    ],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "위기",
+     "장사"
+    ]
+   },
+   {
+    "title": "취업 잘 되는 학교는 어디? 충청권 전체 직업계고교 2025학년도 취업률...",
+    "url": "https://www.dynews.co.kr/news/articleView.html?idxno=866077",
+    "press": "dynews.co.kr",
+    "pub": "2026-09-15 19:02",
+    "cites": false,
+    "judged": true,
+    "why": "충청권 직업계고 취업률 비교",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "어디",
+     "직업계고교",
+     "충청권",
+     "취업률",
+     "학년"
+    ]
    }
   ]
  }

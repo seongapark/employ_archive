@@ -6,32 +6,32 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-15 07:17",
+ "collected_at": "2026-09-15 21:00",
  "volume": {
-  "collected": 104,
-  "articles": 25,
-  "press": 23,
+  "collected": 127,
+  "articles": 30,
+  "press": 27,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29261,
+   "api_total": 29266,
    "fetched": 100,
    "truncated": false,
-   "in_window": 36,
-   "relevant": 26,
-   "new": 35
+   "in_window": 41,
+   "relevant": 31,
+   "new": 40
   },
   {
    "query": "구직급여",
-   "api_total": 94321,
+   "api_total": 94334,
    "fetched": 100,
    "truncated": false,
-   "in_window": 68,
+   "in_window": 81,
    "relevant": 3,
-   "new": 56
+   "new": 68
   },
   {
    "query": "구인배수",
@@ -44,21 +44,21 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18505,
+   "api_total": 18509,
    "fetched": 100,
    "truncated": false,
-   "in_window": 16,
-   "relevant": 8,
-   "new": 5
+   "in_window": 20,
+   "relevant": 9,
+   "new": 8
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8371,
+   "api_total": 8372,
    "fetched": 100,
    "truncated": false,
-   "in_window": 8,
+   "in_window": 9,
    "relevant": 4,
-   "new": 2
+   "new": 3
   },
   {
    "query": "비금속광물 고용보험",
@@ -89,12 +89,12 @@
   },
   {
    "query": "자동차 고용보험",
-   "api_total": 13954,
+   "api_total": 13955,
    "fetched": 100,
    "truncated": false,
-   "in_window": 4,
+   "in_window": 5,
    "relevant": 1,
-   "new": 2
+   "new": 3
   },
   {
    "query": "기타운송장비 고용보험",
@@ -107,12 +107,12 @@
   },
   {
    "query": "공공행정 고용보험",
-   "api_total": 11159,
+   "api_total": 11161,
    "fetched": 100,
    "truncated": false,
-   "in_window": 7,
-   "relevant": 1,
-   "new": 3
+   "in_window": 9,
+   "relevant": 2,
+   "new": 4
   }
  ],
  "articles": [
@@ -364,6 +364,56 @@
    "press": "뉴스1",
    "pub": "2026-09-15 06:10",
    "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "[단독] 문 닫고 실업급여 받는 자영업자 7개월 만에 3000명 육박...역대...",
+   "desc": "자영업자 고용보험 가입자가 늘어난 영향도 있지만, 내수 부진과 식재료비·인건비 상승 등으로 경영난에 내몰리는 자영업자가 증가한 현실도 반영됐다는 분석이다. 15일 고용노동부에 따르면 올해 1~7월 자영업자...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002697301?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10873551?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-09-15 09:33",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "취업 먼저 나선 직업계고생들… 경기 취업률 전국 평균 밑돌아",
+   "desc": "2024년 직업계고 졸업자 가운데 건강보험 또는 고용보험 가입자를 추적한 결과 6개월 뒤에도 취업 상태를 유지한 1차 유지취업률은 83.1%, 12개월 뒤 2차 유지취업률은 68.2%로 나타났다. 전년 조사보다 각각 0.9%p와 2.0%p...",
+   "link": "https://www.kmaeil.com/news/articleView.html?idxno=651756",
+   "originallink": "https://www.kmaeil.com/news/articleView.html?idxno=651756",
+   "press": "kmaeil.com",
+   "pub": "2026-09-15 11:00",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "실업급여 받는 자영업자 1~7월 벌써 3000명 ‘역대 최대’ [H-EXCLUSIVE]",
+   "desc": "자영업자 고용보험 가입자가 늘어난 영향도 있지만, 내수 부진과 식재료비·인건비 상승 등으로 경영난에 내몰리는 자영업자가 증가한 현실도 반영됐다는 분석이다. ▶관련기사 2면 15일 고용노동부에 따르면...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002697500?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10873966?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-09-15 11:36",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "장사 접고 실업급여 받는 자영업자 급증 … 7개월 만에 3000명 [위기의 자...",
+   "desc": "올해 7월 전체 자영업자는 580만7000명이지만 고용보험 가입자는 6만9553명으로 1.2%에 그쳤다. 실업급여 수급자가 역대 최대를 기록했어도 폐업 후 소득 안전망을 기대할 수 있는 자영업자는 극히 일부라는 의미다....",
+   "link": "https://biz.newdaily.co.kr/site/data/html/2026/09/15/2026091500311.html",
+   "originallink": "https://biz.newdaily.co.kr/site/data/html/2026/09/15/2026091500311.html",
+   "press": "biz.newdaily.co.kr",
+   "pub": "2026-09-15 16:34",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "취업 잘 되는 학교는 어디? 충청권 전체 직업계고교 2025학년도 취업률...",
+   "desc": "이 가운데 보험가입자는 건강보험(직장) 또는 고용보험 가입자를 합한 것이다. 전국평균취업률은 직업계고는 1만5296명(55.2%), 특성화고 1만1733명(52.4%), 마이스터고 3199명(73.1%), 일반고 직업반 364(38.2...",
+   "link": "https://www.dynews.co.kr/news/articleView.html?idxno=866077",
+   "originallink": "https://www.dynews.co.kr/news/articleView.html?idxno=866077",
+   "press": "dynews.co.kr",
+   "pub": "2026-09-15 19:02",
+   "q": "고용보험 가입자",
    "rel": true
   }
  ],
@@ -1156,6 +1206,186 @@
    "press": "이데일리",
    "pub": "2026-09-15 05:02",
    "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "강북구, 2차 추경서 280억원 투입…“복지·안전·지역상권 집중”",
+   "desc": "구는 복지급여 등 연말까지 반드시 필요한 필수경비를 우선 확보하고 생활안전 강화와 지역상권 회복... 편성해 구직활동과 취업 준비를 돕는다. 강북구 교육발전지원계획과 도서관 중장기 발전계획 수립에는 각각...",
+   "link": "https://n.news.naver.com/mnews/article/021/0002818744?sid=102",
+   "originallink": "https://www.munhwa.com/article/11616992?ref=naver",
+   "press": "문화일보",
+   "pub": "2026-09-15 07:35",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "고립청년 사회적 비용 5조3000억 원…기업은 무엇을 해야 하나",
+   "desc": "실업급여와 기초생활보장 등 정책비용은 35만8000원이고, 경제활동 참여와 직무 성과 감소에 따른 생산성... 구직 1개월 차 실업 청년의 은둔 확률은 15.1%였지만 14개월에는 24.1%로 높아졌다. 실업 기간이 42개월에 이르면...",
+   "link": "https://futurechosun.com/?p=160259",
+   "originallink": "https://futurechosun.com/?p=160259",
+   "press": "futurechosun.com",
+   "pub": "2026-09-15 10:32",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "강북구, 올해 제2회 추경예산 확정…복지·생활안전·지역상권·미래 분...",
+   "desc": "구는 복지급여 등 연말까지 반드시 필요한 필수경비를 우선 확보하고, 생활안전 강화와 지역상권 회복... 미취업 청년 200명에게 1인당 30만 원을 지원하는 '강북 청년 더나은 내일 지원 사업'에 6천만 원을 편성해 구직활...",
+   "link": "https://www.m-i.kr/news/articleView.html?idxno=1414030",
+   "originallink": "https://www.m-i.kr/news/articleView.html?idxno=1414030",
+   "press": "m-i.kr",
+   "pub": "2026-09-15 10:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "이소영 중기장관 후보 “코스닥 시장 신뢰 회복…국가창업시대 열 것”",
+   "desc": "중소 제조업의 AI 전환과 스마트공장 고도화 지원도 확대한다. 탄소국경조정제도(CBAM)와 공급망 실사, ESG... 자영업자의 건강돌봄 비용과 산재보험·고용보험 지원을 확대하고, 폐업 이후 재도전을 위한 제도도 정비할...",
+   "link": "https://www.viva100.com/article/20260915500571",
+   "originallink": "https://www.viva100.com/article/20260915500571",
+   "press": "viva100.com",
+   "pub": "2026-09-15 11:02",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "“월급보다 ‘시럽’급여”…구직급여 요건만 채우고 떠나는 2030",
+   "desc": "자진퇴사는 구직급여 대상이 아니지만 김씨는 현재 구직급여를 190만원씩 받으며 쉬고 있다. 올해 영화관에서 2개월간 계약직으로 일한 뒤 계약만료로 퇴사하면서 수급 요건을 갖췄기 때문이다. 중소기업을 자진퇴사한...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002697477?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10873928?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-09-15 11:27",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "강북구, 1조908억원 추경 확정…민생·안전·지역경제에 재정 집중",
+   "desc": "복지급여 등 연말까지 필요한 필수경비를 우선 확보하면서 청년과 교육 등 미래 분야에 대한 투자도... 청년층을 위한 직접적인 구직 지원도 눈에 띈다. 구는 '강북 청년 더나은 내일 지원 사업'에 6000만원을 편성한다....",
+   "link": "https://www.job-post.co.kr/news/articleView.html?idxno=227532",
+   "originallink": "https://www.job-post.co.kr/news/articleView.html?idxno=227532",
+   "press": "job-post.co.kr",
+   "pub": "2026-09-15 11:28",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "'주52시간 예외' 메가특구법...사회적 대화부터 삐걱",
+   "desc": "특히 5극 3특 체제에 조성될 반도체·AI·로봇 클러스터는 일반 노동집약적 제조업과 본질이 완전히 다르다.... 이용우 더불어민주당 의원실이 2025년 근로복지공단 고용보험 연보수 자료를 분석한 결과, 근로소득 상위 3...",
+   "link": "http://www.00news.co.kr/news/articleView.html?idxno=106594",
+   "originallink": "http://www.00news.co.kr/news/articleView.html?idxno=106594",
+   "press": "00news.co.kr",
+   "pub": "2026-09-15 13:10",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "노무법인명문, 건설 4대보험 무료 실무툴 ‘공무계산기’ 공개",
+   "desc": "건설업은 국민연금, 건강보험, 고용보험, 산재보험 등 4대보험 업무를 처리하는 과정에서 근로 형태와 현장 상황 등을 고려해야 하는 경우가 많다. 공무계산기는 이러한 건설업 4대보험 실무에서 필요한 계산을 보다...",
+   "link": "https://www.gosiweek.com/article/1065589596123154",
+   "originallink": "https://www.gosiweek.com/article/1065589596123154",
+   "press": "gosiweek.com",
+   "pub": "2026-09-15 14:10",
+   "q": "건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "쓸고 닦고 나르고 ‘AI가 안 하니까’…일본 알바 ‘최저임금보다 2천원...",
+   "desc": "인공지능(AI)이 대체할 수 없는 직종을 중심으로 업체들이 인력 선점을 위해 급여를 끌어올린 영향으로... 한국의 경우, 지난 7월 구인구직사이트 ‘알바천국’이 아르바이트 근무 경험이 있는 933명을 대상으로 한...",
+   "link": "https://n.news.naver.com/mnews/article/028/0002823159?sid=104",
+   "originallink": "https://www.hani.co.kr/arti/international/international_general/1277891.html",
+   "press": "한겨레",
+   "pub": "2026-09-15 14:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "‘코스파’를 넘어 ‘타이파’로, 시간의 효율화가 가져온 노동 시장의...",
+   "desc": "또한, 피크 타임에만 1시간 근무하거나, 오전 3시간만 근무하는 등 시간 조정이 자유로워 구직자 입장에서는 일정이 비는 시간에만 단기로 일을 할 수 있다. 급여 지급에서도 ‘타이파’를 추구한다. QR코드 등으로...",
+   "link": "http://dream.kotra.or.kr/kotranews/cms/news/actionKotraBoardDetail.do?SITE_NO=3&MENU_ID=180&CONTENTS_NO=1&bbsGbn=243&bbsSn=243&pNttSn=243967",
+   "originallink": "http://dream.kotra.or.kr/kotranews/cms/news/actionKotraBoardDetail.do?SITE_NO=3&MENU_ID=180&CONTENTS_NO=1&bbsGbn=243&bbsSn=243&pNttSn=243967",
+   "press": "dream.kotra.or.kr",
+   "pub": "2026-09-15 14:47",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "강북구, 올해 제2회 추가경정예산안 강북구의회 의결 거쳐 최종 확정......",
+   "desc": "구는 복지급여 등 연말까지 반드시 필요한 필수경비를 우선 확보하고, 생활안전 강화와 지역상권 회복... 미취업 청년 200명에게 1인당 30만 원을 지원하는 '강북 청년 더나은 내일 지원 사업'에 6천만 원을 편성해 구직활...",
+   "link": "https://www.cnbizm.com/news/articleView.html?idxno=315219",
+   "originallink": "https://www.cnbizm.com/news/articleView.html?idxno=315219",
+   "press": "cnbizm.com",
+   "pub": "2026-09-15 15:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "강북구, 280억 규모 추경 확정 “복지·생활안전·지역상권”",
+   "desc": "편성해 구직활동과 취업 준비를 돕는다. 정창수 강북구청장은 “이번 추경은 민선9기 출범 이후 처음 편성한 예산으로 어르신과 저소득 주민에게 필요한 복지급여 등 필수 재정수요를 우선 반영했다”며 “한정된...",
+   "link": "https://n.news.naver.com/mnews/article/081/0003680462?sid=100",
+   "originallink": "https://www.seoul.co.kr/news/publicnews/2026/09/15/20260915500206?wlog_tag3=naver",
+   "press": "서울신문",
+   "pub": "2026-09-15 16:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "이소영 \"규제 부처 장관들과 국무회의서 논쟁하겠다\"",
+   "desc": "바뀌고 제조업과 판매업이 분리되면서, 다양한 원료 활용과 소규모 기업의 시장 진입이 가능해졌다는... 소상공인·자영업자를 위해서는 '비용구조 개선 로드맵'을 마련하고 건강돌봄비용 지원, 산재보험·고용보험 지원...",
+   "link": "http://www.smedaily.co.kr/news/articleView.html?idxno=363255",
+   "originallink": "http://www.smedaily.co.kr/news/articleView.html?idxno=363255",
+   "press": "smedaily.co.kr",
+   "pub": "2026-09-15 16:14",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "\"금융위와 토론·소상공인 비용 지표화\"…이소영, 인사청문회서 규제 혁...",
+   "desc": "노란우산공제와 고용·산재보험 등 사회안전망을 대폭 넓혀야 한다고 요청했다.지역 생태계와 청년 창업... 중소 자동차 부품업계에 과도한 부담을 줄 수 있다고 비판했다. 이에 이 후보자는 사업 전환 지원을 포함한...",
+   "link": "https://www.asiatoday.co.kr/kn/view.php?key=20260915010005838",
+   "originallink": "https://www.asiatoday.co.kr/kn/view.php?key=20260915010005838",
+   "press": "아시아투데이",
+   "pub": "2026-09-15 17:00",
+   "q": "자동차 고용보험",
+   "rel": false
+  },
+  {
+   "title": "해고 통보 후 이직 준비했다고 ‘합의 퇴사’ 주장한 회사…법원의 판단...",
+   "desc": "일방적인 통보를 받은 A씨는 경영지원부 차장에게 연락해 실업급여 수급을 위한 고용보험 상실 신고 처리를 문의했다. 이후 A씨는 직속 상사에게 다른 회사 면접을 이유로 일찍 퇴근하겠다고 알리는 등 구직 활동을...",
+   "link": "https://lawtalknews.co.kr/article/3Z4YRCWSH0YL",
+   "originallink": "https://lawtalknews.co.kr/article/3Z4YRCWSH0YL",
+   "press": "lawtalknews.co.kr",
+   "pub": "2026-09-15 17:42",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“나라에서 주는 건데 못 타면 바보”…1년도 안 돼 퇴사하는 청년들",
+   "desc": "청년 3명 중 2명, 1년도 못 채우고 떠난다 이런 상황에서 고용노동부는 하반기 업무보고를 통해 35세 미만 청년이 일정 기간 이상 근무한 뒤 자발적으로 이직하면 생애 1회에 한해 구직급여를 지급하는 고용보험법...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004662174?sid=101",
+   "originallink": "https://www.sedaily.com/article/20091302?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-09-15 18:33",
+   "q": "구직급여, 공공행정 고용보험",
+   "rel": false
+  },
+  {
+   "title": "강북구, \"안전·상권·미래 집중\"… 280억 규모 제2회 추경 확정",
+   "desc": "주요 분야별로는 기초생활보장 등 복지급여 안정화에 15억 원, 도로 정비 및 스마트보안등 설치 등... 이외에도 미취업 청년을 위한 구직 지원금 6천만 원과 교육·도서관 중장기 발전계획 수립 예산 등 미래 세대를...",
+   "link": "https://www.gukjenews.com/news/articleView.html?idxno=3696282",
+   "originallink": "https://www.gukjenews.com/news/articleView.html?idxno=3696282",
+   "press": "gukjenews.com",
+   "pub": "2026-09-15 19:54",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "국적·성별·고용형태 이유로…\"차별받았다\"",
+   "desc": "전국공공운수노조 퇴직자지부 공동대표는 65세 이상 노동자의 고용보험·상병수당 배제와 이동권 격차 등을... 국적과 성별, 장애, 나이, 고용형태 등이 겹쳐 노동·복지·교통·행정 등 여러 영역에서 동시에 나타난다....",
+   "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1332125",
+   "originallink": "https://www.incheonilbo.com/news/articleView.html?idxno=1332125",
+   "press": "incheonilbo.com",
+   "pub": "2026-09-15 20:06",
+   "q": "공공행정 고용보험",
    "rel": false
   }
  ]
