@@ -6,9 +6,9 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-16 16:53",
+ "collected_at": "2026-09-17 08:50",
  "volume": {
-  "collected": 146,
+  "collected": 152,
   "articles": 33,
   "press": 30,
   "queries": 11
@@ -26,12 +26,12 @@
   },
   {
    "query": "구직급여",
-   "api_total": 94349,
-   "fetched": 100,
+   "api_total": 94354,
+   "fetched": 200,
    "truncated": false,
-   "in_window": 96,
+   "in_window": 101,
    "relevant": 3,
-   "new": 81
+   "new": 86
   },
   {
    "query": "구인배수",
@@ -107,12 +107,12 @@
   },
   {
    "query": "공공행정 고용보험",
-   "api_total": 11164,
+   "api_total": 11166,
    "fetched": 100,
    "truncated": false,
-   "in_window": 12,
-   "relevant": 4,
-   "new": 5
+   "in_window": 14,
+   "relevant": 5,
+   "new": 6
   }
  ],
  "articles": [
@@ -499,21 +499,21 @@
    "rel": false
   },
   {
-   "title": "잡플래닛, 하반기 '일하기 좋은 기업' 59곳 선정…대상 SK하이닉스",
-   "desc": "기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO 지지율 등을 종합... 이번 개편은 회사 전체 평점만 보는 방식에서 한발 더 나아가 구직자가 실제 지원하려는 산업과 직무 기준으로...",
-   "link": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
-   "originallink": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
-   "press": "kdfnews.com",
-   "pub": "2026-09-08 09:06",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "올 하반기 일하기 좋은 기업 59곳..1위 SK하이닉스",
    "desc": "잡플래닛은 매년 일하기 좋은 회사를 발표해왔으며, 지난해부터 구직자들에게... 기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO...",
    "link": "http://www.breaknews.com/1234816",
    "originallink": "http://www.breaknews.com/1234816",
    "press": "breaknews.com",
+   "pub": "2026-09-08 09:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "잡플래닛, 하반기 '일하기 좋은 기업' 59곳 선정…대상 SK하이닉스",
+   "desc": "기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO 지지율 등을 종합... 이번 개편은 회사 전체 평점만 보는 방식에서 한발 더 나아가 구직자가 실제 지원하려는 산업과 직무 기준으로...",
+   "link": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
+   "originallink": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
+   "press": "kdfnews.com",
    "pub": "2026-09-08 09:06",
    "q": "구직급여",
    "rel": false
@@ -1575,6 +1575,66 @@
    "originallink": "http://www.lawissue.co.kr/view.php?ud=2026091616093882489aeda69934_12",
    "press": "lawissue.co.kr",
    "pub": "2026-09-16 16:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"정부가 주는 공짜 돈\"…1년 안 채웠는데 청년들 '우르르'",
+   "desc": "이런 상황에서 정부가 35세 미만 청년이 일정 기간 이상 일한 뒤 자발적으로 퇴사하더라도 생애 한 차례 구직급여를 받을 수 있도록 고용보험법 개정을 추진하고 있는 겁니다. 현재는 원칙적으로 자발적으로 회사를...",
+   "link": "https://n.news.naver.com/mnews/article/055/0001388791?sid=102",
+   "originallink": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008756483&plink=ORI&cooper=NAVER",
+   "press": "news.sbs.co.kr",
+   "pub": "2026-09-16 17:04",
+   "q": "구직급여, 공공행정 고용보험",
+   "rel": false
+  },
+  {
+   "title": "연봉 안 알려주는 '깜깜이 채용' 손본다…노동부 개선 추진",
+   "desc": "구직자가 채용공고를 보고도 실제 임금 수준을 파악하기 어려운 '회사 내규에 따름' 등의 관행을... 또 육아휴직을 30일 미만 단위로 나눠 사용할 경우 일부 기간에 대해 급여를 받지 못하는 문제도 검토합니다. 장애인...",
+   "link": "https://n.news.naver.com/mnews/article/437/0000511413?sid=102",
+   "originallink": "https://news.jtbc.co.kr/article/NB12318691?influxDiv=NAVER",
+   "press": "news.jtbc.co.kr",
+   "pub": "2026-09-16 17:59",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"차별은 일상에 있었다\"…경기도민 6명이 직접 말한 차별의 현실",
+   "desc": "이상무 공공운수노조 퇴직자지부 공동대표는 고령층이 노동과 복지, 이동 영역에서 경험하는 연령차별 문제를 제기했다. 이미 우리 사회가 '노동하는 노인 시대'에 들어섰지만 65세 이상 신규 취업자의 고용보험 적용 문제...",
+   "link": "http://worknworld.kctu.org/news/articleView.html?idxno=510014",
+   "originallink": "http://worknworld.kctu.org/news/articleView.html?idxno=510014",
+   "press": "worknworld.kctu.org",
+   "pub": "2026-09-16 20:52",
+   "q": "공공행정 고용보험",
+   "rel": false
+  },
+  {
+   "title": "신입 뽑는다더니 \"경력이 없네요?\"...갈 곳 없는 청년들",
+   "desc": "노동시장에 나오지 않던 청년이 다시 구직에 나서더라도 실제 취업까지 이어지기는 쉽지 않다는 의미다.... AI 직업훈련을 수료했지만 취업하지 못한 청년이 기업의 AI 전환(AX) 프로젝트에 최대 2년간 참여하도록 급여를...",
+   "link": "https://n.news.naver.com/mnews/article/008/0005414924?sid=101",
+   "originallink": "https://www.mt.co.kr/economy/2026/09/17/2026091615211312934",
+   "press": "머니투데이",
+   "pub": "2026-09-17 04:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"숨만 쉬어도 채용된다\"… 전 세계 AI 인프라 확장 속 亞 반도체 '극심한...",
+   "desc": "원)의 급여를 제안받고 있다. 이는 과거 6~7년 차 중견 엔지니어가 받던 임금 수준이다. 채용 문턱도 완전히 허물어졌다. 승무원 출신의 비전공 구직자 아이비 첸(Ivy Chen) 씨는 \"과거 기술 기업 지원 시 서류 탈락이...",
+   "link": "https://www.g-enews.com/view.php?ud=2026091617414962520c8c1c064d_1",
+   "originallink": "https://www.g-enews.com/view.php?ud=2026091617414962520c8c1c064d_1",
+   "press": "g-enews.com",
+   "pub": "2026-09-17 05:26",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "신의 직장 취업 이렇게…금감원, 장애·청년 구직 지원",
+   "desc": "청년구직자를 위한 '금융권 취업 콘서트(FIN x CON)'를 개최했다고 밝혔다.  /한스경제 DB | 서울=한스경제... KB·신한·하나·우리·NH농협 등 5대 금융지주의 반기보고서에 따르면 이들의 직원 1인당 평균 급여는...",
+   "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=865781",
+   "originallink": "http://www.hansbiz.co.kr/news/articleView.html?idxno=865781",
+   "press": "hansbiz.co.kr",
+   "pub": "2026-09-17 07:50",
    "q": "구직급여",
    "rel": false
   }
