@@ -96,11 +96,21 @@ if ($LASTEXITCODE -ne 0) {
     Write-Host "올릴 변경 없음"
 }
 
-# 무엇이 비었는지 사람 말로 남긴다(실패시키지는 않는다 — 위에서 이미 셌다).
+# 무엇이 비었는지 사람 말로 남기고, **그 판정을 회차 성패에 넣는다.**
+#
+# 수집 단계는 게시판이 죽어도 exit 0 으로 끝난다 — 한 곳이 막힌 날에도 나머지를
+# 남기려고 그렇게 만들었다. 그래서 여기서 판정을 받지 않으면 마지막 줄이 거짓말을
+# 한다. 2026-09-16 11:36 회차가 KLI 두 게시판을 빈 채로 두고 "전부 성공" 으로
+# 끝났고, 작업 스케줄러에도 0 으로 남았다.
+#
+# 초록 결측률은 경고일 뿐 실패가 아니다 — 같은 목록을 찍고도 OK 로 끝난다.
+# 오래 가는 장애는 KNOWN_DOWN 으로 기한을 붙여 유예한다.
 Write-Host ""
 Write-Host "=== 회차 판정 ==="
 & $python -m domains.reports.pipeline.check_run
+if ($LASTEXITCODE -ne 0) { $failed += "reports 회차 판정" }
 & $python -m domains.forecast.pipeline.check_run
+if ($LASTEXITCODE -ne 0) { $failed += "forecast 회차 판정" }
 
 Write-Host ""
 if ($failed.Count -eq 0) {
