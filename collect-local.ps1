@@ -29,6 +29,27 @@ $env:PYTHONIOENCODING = "utf-8"
 $env:JUDGE_PROVIDER = "cli"
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
+# 도는 동안 잠들지 않게 붙잡는다.
+#
+# 2026-09-16 11:36 회차가 대기 모드(Modern Standby) 안에서 시작했다. git pull 만
+# 하고 94분을 멈춰 있다가, 사람이 노트북을 연 13:10:33 에야 이어졌다. 깨어난 직후
+# 6초 동안은 무선이 다시 붙기 전이라 이름 해석이 안 된다 — 그 창에 걸린 첫 두
+# 게시판(KLI 연구보고서·노동리뷰)이 재시도 세 번을 다 쓰고 빈 채로 끝났다.
+# 사이트가 막은 것이 아니다. 재시도 간격을 늘려 덮을 일도 아니다 — 수집이 대기
+# 모드 안에서 도는 것 자체가 틀렸다.
+#
+# ES_SYSTEM_REQUIRED 만 건다. 화면은 꺼져도 된다 — 깨어 있어야 하는 것은 회선이다.
+Add-Type -Namespace Win32 -Name Power -MemberDefinition @"
+[DllImport("kernel32.dll", SetLastError = true)]
+public static extern uint SetThreadExecutionState(uint esFlags);
+"@
+# PowerShell 5.1 은 0x80000000 을 음수 int 로 읽는다. L 을 붙여 long 으로 받은 뒤 uint32 로 옮긴다.
+$ES_CONTINUOUS = [uint32]0x80000000L
+$ES_SYSTEM_REQUIRED = [uint32]0x00000001
+if ([Win32.Power]::SetThreadExecutionState([uint32]($ES_CONTINUOUS -bor $ES_SYSTEM_REQUIRED)) -eq 0) {
+    Write-Host "!! 깨어 있기 요청 실패 — 이 회차는 잠자기에 끊길 수 있다"
+}
+
 $logDir = Join-Path $repo "logs"
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 $log = Join-Path $logDir ("collect-" + (Get-Date -Format "yyyyMMdd-HHmm") + ".log")
@@ -94,6 +115,9 @@ Get-ChildItem $logDir -Filter "collect-*.log" |
     Sort-Object LastWriteTime -Descending |
     Select-Object -Skip 30 |
     Remove-Item -Force -ErrorAction SilentlyContinue
+
+# 붙잡아 둔 것을 놓는다. 이 뒤로는 평소대로 잠들어도 된다.
+[void][Win32.Power]::SetThreadExecutionState($ES_CONTINUOUS)
 
 Stop-Transcript | Out-Null
 exit $failed.Count
