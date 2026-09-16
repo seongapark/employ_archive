@@ -1,0 +1,56 @@
+name: sync-d1-employment
+
+# 고용동향 데이터를 질의응답(ask) 워커가 읽는 D1 에 싣는다.
+#
+# **collect-employment 에서 떼어냈다(2026-09-16).** 수집은 이제 국내 PC 가
+# 돌린다 — mods.go.kr(경활)이 해외 IP 에서 자주 끊기고, 예약 실행이 5~8시간
+# 늦게 깨 그날 결과를 퇴근 전에 못 보기 때문이다. 하지만 D1 적재는 해외에서도
+# 되는 일이고, Cloudflare 토큰을 PC 로 옮기지 않으려면 여기 남는 편이 낫다.
+# 그래서 국내 PC 가 결과를 push 하면 이 워크플로가 그 push 를 받아 적재한다.
+#
+# 사람이 민 커밋에만 걸린다는 점이 여기서는 문제가 아니다 — 국내 PC 의 push 가
+# 곧 사람 푸시다(봇 토큰이 아니라 사용자 자격증명으로 민다). 봇이 민 커밋은
+# 다른 워크플로를 트리거하지 않는 것이 GitHub 규칙이다.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'domains/employment/data/**'
+      - 'tools/d1_sync.py'
+      - 'tools/d1_gate.py'
+      - '.github/workflows/sync-d1-employment.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: sync-d1-employment
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - name: D1 동기화
+        env:
+          PYTHONIOENCODING: utf-8
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          python -m tools.d1_sync employment > /tmp/employment.sql
+          # **같은 내용이면 안 민다.** D1 은 값이 같아도 쓰기로 센다 —
+          # 아무것도 안 바뀐 날에도 전량이 나가서 2026-09-13 에 하루 10만행
+          # 한도를 넘겼다. 지문은 D1 에 있고, 적재가 끝난 뒤에만 찍는다.
+          if [ "$(python -m tools.d1_gate check employment /tmp/employment.sql)" = push ]; then
+            npx --yes wrangler@4 d1 execute employ-archive-ask --remote \
+              --config domains/ask/worker/wrangler.jsonc --file=/tmp/employment.sql
+            python -m tools.d1_gate record employment /tmp/employment.sql
+          fi
+      # 여기서는 실패를 삼키지 않는다. 수집에 얹혀 있을 때는 D1 이 죽어도 그날
+      # 수집까지 빨개지면 안 되니 continue-on-error 로 덮고 요약에 한 줄을
+      # 남겼는데, 이제는 이 워크플로가 하는 일이 적재뿐이라 그냥 빨개지면 된다.
+      # 실행 목록에서 바로 보인다.

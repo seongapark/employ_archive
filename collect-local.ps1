@@ -27,6 +27,17 @@ if (Test-Path $tesseract) { $env:PATH = "$env:PATH;$tesseract" }
 $env:PYTHONIOENCODING = "utf-8"
 # 추천 판정은 구독(`claude -p`)으로 돈다. API 키로 도는 길은 코드에서 지웠다.
 $env:JUDGE_PROVIDER = "cli"
+# 고용동향의 사업체노동력조사(est)는 KOSIS 열쇠가 있어야 받는다. 저장소에 두지
+# 않는다 — 이 PC 의 ~\.config\kosis\apikey.txt 에서 읽는다. 없으면 est 하나만
+# 빠지고 나머지는 그대로 돈다. 빠진 것은 회차 판정이 잡는다.
+if (-not $env:KOSIS_API_KEY) {
+    $keyFile = Join-Path $env:USERPROFILE ".config\kosis\apikey.txt"
+    if (Test-Path $keyFile) {
+        $env:KOSIS_API_KEY = (Get-Content $keyFile -Raw).Trim()
+    } else {
+        Write-Host "!! KOSIS 열쇠 파일이 없다($keyFile) — 사업체노동력조사는 빠진다"
+    }
+}
 [Console]::OutputEncoding = [System.Text.Encoding]::UTF8
 
 # 도는 동안 잠들지 않게 붙잡는다.
@@ -78,11 +89,12 @@ Step "reports 초록"     @("-m", "domains.reports.pipeline.enrich")
 Step "reports 빌드"     @("-m", "domains.reports.pipeline.build")
 Step "reports 추천판정" @("-m", "domains.reports.pipeline.recommend")
 Step "forecast 수집"    @("-m", "domains.forecast.pipeline.collect")
+Step "employment 수집"  @("-m", "domains.employment.pipeline.collect")
 
 # **수집이 실패해도 여기까지 온다.** 부분 성공을 버리지 않는다.
 Write-Host ""
 Write-Host "=== push ==="
-git add domains/reports/data/ domains/reports/sources/ domains/forecast/data/
+git add domains/reports/data/ domains/reports/sources/ domains/forecast/data/ domains/employment/data/
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {
     git commit -m ("data: local collect " + (Get-Date -Format "yyyy-MM-dd"))
@@ -111,6 +123,8 @@ Write-Host "=== 회차 판정 ==="
 if ($LASTEXITCODE -ne 0) { $failed += "reports 회차 판정" }
 & $python -m domains.forecast.pipeline.check_run
 if ($LASTEXITCODE -ne 0) { $failed += "forecast 회차 판정" }
+& $python -m domains.employment.pipeline.check_run
+if ($LASTEXITCODE -ne 0) { $failed += "employment 회차 판정" }
 
 Write-Host ""
 if ($failed.Count -eq 0) {
