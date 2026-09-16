@@ -2633,6 +2633,28 @@
   ]
  },
  {
+  "id": "kli-10305",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "청년세대의 노동조합 참여의 양상과 발전 방향",
+  "authors": [
+   "김재웅"
+  ],
+  "published": "2026-06-19",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=10305&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=92FE081D9B47065749258E730083736E_1.pdf&fileNameOrg=청년세대의 노동조합 참여의 양상과 발전 방향.pdf&filePath1=jsphome/DATA/pblctList/issue/92FE081D9B47065749258E730083736E",
+  "matched": [
+   "임금",
+   "근로시간",
+   "고용형태",
+   "노사관계",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-10303",
   "org": "kli",
   "board": "kli-research",

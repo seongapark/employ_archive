@@ -1,24 +1,24 @@
 {
-  "at": "2026-09-16T13:11:22+09:00",
+  "at": "2026-09-16T13:34:22+09:00",
   "boards": {
     "kli-research": {
-      "ok": false,
-      "parsed": 0,
-      "added": 0,
-      "details": 0,
+      "ok": true,
+      "parsed": 20,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": "Failed to perform, curl: (6) Could not resolve host: www.kli.re.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-      "total": 304
+      "error": null,
+      "total": 305
     },
     "kli-review": {
-      "ok": false,
-      "parsed": 0,
+      "ok": true,
+      "parsed": 10,
       "added": 0,
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": "Failed to perform, curl: (6) Could not resolve host: www.kli.re.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "error": null,
       "total": 68
     },
     "kli-policy": {
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3425,
+  "reports": 3426,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -370,8 +370,8 @@
       },
       "조사연구자료": {
         "total": 396,
-        "missing": 395,
-        "rate": 0.997
+        "missing": 394,
+        "rate": 0.995
       },
       "국제경제이슈": {
         "total": 1,
@@ -406,7 +406,7 @@
     },
     "kli": {
       "연구보고서": {
-        "total": 304,
+        "total": 305,
         "missing": 67,
         "rate": 0.22
       },
@@ -512,32 +512,32 @@
     }
   },
   "abstract_missing_why": {
-    "요약 섹션 없음": 451,
-    "요약 없음": 305,
-    "텍스트가 없는 스캔본": 124,
+    "요약 섹션 없음": 459,
+    "요약 없음": 266,
+    "텍스트가 없는 스캔본": 153,
     "원문 없음": 44,
-    "PDF 를 열 수 없음: list index out of range": 2,
+    "PDF 를 열 수 없음: list index out of range": 3,
     "파일이 너무 큼(67MB)": 1,
     "파일이 너무 큼(79MB)": 1,
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 302506,
-    "abstracts_gzip": 3373638,
+    "reports_gzip": 302638,
+    "abstracts_gzip": 3383664,
     "abstracts_shards_gzip": {
-      "bok": 221802,
+      "bok": 226846,
       "kdi": 889333,
       "keis": 256203,
       "kiet": 694194,
-      "kli": 1312106
+      "kli": 1317088
     }
   },
   "recommend": {
-    "judged": 3425,
+    "judged": 3426,
     "picked": 366,
     "unjudged": 0,
     "profile_version": "5a624049",
     "title_only": 931,
-    "at": "2026-09-15T21:29:18+09:00"
+    "at": "2026-09-16T13:35:49+09:00"
   }
 }
