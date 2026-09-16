@@ -1,11 +1,11 @@
 {
-  "at": "2026-09-16T13:34:22+09:00",
+  "at": "2026-09-16T13:46:24+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
-      "parsed": 20,
-      "added": 1,
-      "details": 1,
+      "parsed": 10,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -370,8 +370,8 @@
       },
       "조사연구자료": {
         "total": 396,
-        "missing": 394,
-        "rate": 0.995
+        "missing": 393,
+        "rate": 0.992
       },
       "국제경제이슈": {
         "total": 1,
@@ -512,9 +512,9 @@
     }
   },
   "abstract_missing_why": {
-    "요약 섹션 없음": 459,
-    "요약 없음": 266,
-    "텍스트가 없는 스캔본": 153,
+    "요약 섹션 없음": 469,
+    "요약 없음": 227,
+    "텍스트가 없는 스캔본": 181,
     "원문 없음": 44,
     "PDF 를 열 수 없음: list index out of range": 3,
     "파일이 너무 큼(67MB)": 1,
@@ -523,9 +523,9 @@
   },
   "sizes": {
     "reports_gzip": 302638,
-    "abstracts_gzip": 3383664,
+    "abstracts_gzip": 3388355,
     "abstracts_shards_gzip": {
-      "bok": 226846,
+      "bok": 231537,
       "kdi": 889333,
       "keis": 256203,
       "kiet": 694194,
