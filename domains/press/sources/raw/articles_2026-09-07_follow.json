@@ -6,32 +6,32 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-17 17:10",
+ "collected_at": "2026-09-18 08:53",
  "volume": {
-  "collected": 144,
-  "articles": 34,
-  "press": 30,
+  "collected": 158,
+  "articles": 35,
+  "press": 31,
   "queries": 3
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29270,
+   "api_total": 29271,
    "fetched": 100,
    "truncated": false,
-   "in_window": 45,
-   "relevant": 35,
-   "new": 44
+   "in_window": 46,
+   "relevant": 36,
+   "new": 45
   },
   {
    "query": "구직급여",
-   "api_total": 94366,
+   "api_total": 94379,
    "fetched": 200,
    "truncated": false,
-   "in_window": 113,
+   "in_window": 126,
    "relevant": 3,
-   "new": 98
+   "new": 111
   },
   {
    "query": "구인배수",
@@ -383,6 +383,16 @@
    "pub": "2026-09-17 10:00",
    "q": "고용보험 가입자",
    "rel": true
+  },
+  {
+   "title": "K-FINCO 기술교육원, 10월 직무능력향상 과정 운영",
+   "desc": "이번 교육은 중소기업 고용보험 가입자를 대상으로 전액 무료로 제공되며, 업종과 면허에 관계없이 참여할 수 있어 실무 역량 강화를 희망하는 재직자들에게 실질적인 도움이 될 것으로 기대된다. 서울 동작구...",
+   "link": "https://www.koscaj.com/news/articleView.html?idxno=326570",
+   "originallink": "https://www.koscaj.com/news/articleView.html?idxno=326570",
+   "press": "대한전문건설신문",
+   "pub": "2026-09-18 08:00",
+   "q": "고용보험 가입자",
+   "rel": true
   }
  ],
  "excluded": [
@@ -437,21 +447,21 @@
    "rel": false
   },
   {
-   "title": "올 하반기 일하기 좋은 기업 59곳..1위 SK하이닉스",
-   "desc": "잡플래닛은 매년 일하기 좋은 회사를 발표해왔으며, 지난해부터 구직자들에게... 기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO...",
-   "link": "http://www.breaknews.com/1234816",
-   "originallink": "http://www.breaknews.com/1234816",
-   "press": "breaknews.com",
-   "pub": "2026-09-08 09:06",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "잡플래닛, 하반기 '일하기 좋은 기업' 59곳 선정…대상 SK하이닉스",
    "desc": "기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO 지지율 등을 종합... 이번 개편은 회사 전체 평점만 보는 방식에서 한발 더 나아가 구직자가 실제 지원하려는 산업과 직무 기준으로...",
    "link": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
    "originallink": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
    "press": "kdfnews.com",
+   "pub": "2026-09-08 09:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "올 하반기 일하기 좋은 기업 59곳..1위 SK하이닉스",
+   "desc": "잡플래닛은 매년 일하기 좋은 회사를 발표해왔으며, 지난해부터 구직자들에게... 기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO...",
+   "link": "http://www.breaknews.com/1234816",
+   "originallink": "http://www.breaknews.com/1234816",
+   "press": "breaknews.com",
    "pub": "2026-09-08 09:06",
    "q": "구직급여",
    "rel": false
@@ -1483,6 +1493,136 @@
    "originallink": "https://www.nocutnews.co.kr/news/6580027?utm_source=naver&utm_medium=article&utm_campaign=20260917050135",
    "press": "nocutnews.co.kr",
    "pub": "2026-09-17 17:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "대구서 실업급여 등 5억8000만원 부정수급 공모 혐의 사업주 구속",
+   "desc": "부정수급 규모는 구직급여 5억4000여만 원, 고용유지지원금 2000여만 원, 청년채용특별장려금 2000여만 원 등 총 5억 8000여만 원이다. 노동 당국의 수사가 시작된 이후 A씨는 텔레그램과 시그널 등 특정 메신저를 이용해...",
+   "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4084648",
+   "originallink": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4084648",
+   "press": "kyongbuk.co.kr",
+   "pub": "2026-09-17 17:32",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "구미시, 현장 중심 체납관리로 징수·복지 연계 강화",
+   "desc": "실제로 맞춤형 복지팀은 한부모가정에 사회보장급여를 연계하고, 홀로 생활하는 어르신에게 공적급여 상담과 함께 지역 나눔가게를 연계해 생필품을 지원했다. 장기간 구직활동으로 경제적 어려움을 겪던 시민에게는...",
+   "link": "https://www.hidomin.com/news/articleView.html?idxno=721709",
+   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=721709",
+   "press": "hidomin.com",
+   "pub": "2026-09-17 17:34",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "구미시, 체납 징수 현장에서 복지 사각지대 발굴",
+   "desc": "실제 한부모가정에는 사회보장급여를 연계하고 홀로 생활하는 어르신에게는 공적급여 상담과 함께 지역 나눔가게를 통한 생필품을 지원했다. 장기간 구직활동으로 생활고를 겪던 시민에게는 국민기초생활보장과...",
+   "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4084659",
+   "originallink": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4084659",
+   "press": "kyongbuk.co.kr",
+   "pub": "2026-09-17 18:04",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "실업급여 반복수급자 年 11만명…'60세 이상' 가장 많아",
+   "desc": "반복수급자에게 지급된 구직급여도 증가했다. 2021년 약 4989억원에서 2022년 4986억원, 2023년 5522억원, 2024년 5804억원을 거쳐 2025년 5998억원으로 늘었다. 4년 새 1009억원, 20.2% 증가했다. 연령별로 보면 고령층 비중이...",
+   "link": "https://www.ngetnews.com/news/articleView.html?idxno=553461",
+   "originallink": "https://www.ngetnews.com/news/articleView.html?idxno=553461",
+   "press": "ngetnews.com",
+   "pub": "2026-09-17 18:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "브로커 통해 실업급여 5.8억원 부정수급한 사업주 구속…\"엄정 수사\"",
+   "desc": "항목별로는 구직급여 5억4000여만원, 고용유지지원금 2000여만원, 청년채용특별장려금 2000여만원이다. A씨는 대구에서 5개 사업장을 운영하면서 최근 7년간 브로커 4명을 통해 허위근로자를 조직적으로 모집한 뒤 이들의...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014198261?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20260917_0003794632",
+   "press": "뉴시스",
+   "pub": "2026-09-17 19:55",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "꼼수로 ‘억대 실업급여’ 타먹은 ‘사장님’ 구속…브로커와 짜고 가짜...",
+   "desc": "이번 수사로 확인된 부정수급액 총 5억8000여만원 중 구직급여가 5억4000여만원, 고용유지지원금이 2000여만원, 청년채용특별장려금 2000여만원에 이른다. 당국에 다르면 A씨가 브로커들에게 가짜 근로자 모집을 맡기고...",
+   "link": "https://n.news.naver.com/mnews/article/029/0003048720?sid=102",
+   "originallink": "https://www.dt.co.kr/article/12084675?ref=naver",
+   "press": "디지털타임스",
+   "pub": "2026-09-17 20:21",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"실업급여 5억8000만원 꿀꺽\"...이 회사 기막힌 수법",
+   "desc": "구직급여가 5억4000여만원으로 대부분을 차지했으며 고용유지지원금과 청년채용특별장려금도 각각 2000여만원씩 부정수급한 것으로 파악됐다. 수사 과정에서는 A씨가 텔레그램 등 메신저를 이용해 공범들과 진술을...",
+   "link": "https://n.news.naver.com/mnews/article/008/0005415530?sid=102",
+   "originallink": "https://www.mt.co.kr/society/2026/09/17/2026091720361318771",
+   "press": "머니투데이",
+   "pub": "2026-09-17 20:45",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "딜, 전 세계 대학생 27만명 취업 돕는다…AI 면접부터 원격근무까지 연...",
+   "desc": "글로벌 HR·급여 플랫폼 딜(Deel)이 전 세계 27만명 이상의 학생을 대상으로 교육 이후... 가상 업무 프로그램과 구직 전략 수립, 직무 적합성 평가, 연봉 협상 지원 도구 등...",
+   "link": "https://www.venturesquare.net/1114818/",
+   "originallink": "https://www.venturesquare.net/1114818/",
+   "press": "venturesquare.net",
+   "pub": "2026-09-17 21:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "자진퇴사 청년 월 100만원 추진했는데…내년 예산엔 빠진 이유 [숫자 뒤...",
+   "desc": "정부가 이들에게도 생애 한 차례 구직급여를 주는 방안을 추진했지만, 내년도 예산에는 담기지 못했다. 정부가 35세 미만 청년의 자발적 이직에도 생애 한 차례 구직급여를 지급하는 방안을 추진하고 있지만, 관련...",
+   "link": "https://n.news.naver.com/mnews/article/022/0004160010?sid=101",
+   "originallink": "https://www.segye.com/newsView/20260918501087?OutUrl=naver",
+   "press": "세계일보",
+   "pub": "2026-09-18 05:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "면접 갔더니 \"경력 없네요?\"...인턴마저 퇴짜, 청년 어디로",
+   "desc": "있도록 급여 일부를 지원하는 사업이다. 참여 기업 역시 AI 솔루션 전문기업에 한정하지 않고 정부 AX... 제공하며 구직 공백을 없애기 위해 신규 추진 중인 '플레이그라운드' 사업과 연계해 구직활동을 끝까지 지원할 계획...",
+   "link": "https://n.news.naver.com/mnews/article/008/0005415613?sid=101",
+   "originallink": "https://www.mt.co.kr/economy/2026/09/18/2026091718494438647",
+   "press": "머니투데이",
+   "pub": "2026-09-18 06:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "인앤아웃 매니저 연봉 20만불 시대",
+   "desc": "구인·구직 플랫폼 인디드(Indeed)에 따르면 캘리포니아주 패스트푸드 매니저의 평균 기본급은 연 6만 8774달러... 신입 시간제 직원 역시 법정 최저임금을 상회하는 급여를 받는 것으로 전해졌다. ‘일한 만큼 확실하게...",
+   "link": "https://www.koreadaily.com/article/20260917155659438",
+   "originallink": "https://www.koreadaily.com/article/20260917155659438",
+   "press": "koreadaily.com",
+   "pub": "2026-09-18 07:58",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "가짜 근로자 57명 모집해 ‘5억대 실업급여’ 꿀꺽…간 큰 사장님 구속",
+   "desc": "구직급여가 5억4000여만원으로 가장 많았으며 고용유지지원금과 청년채용특별장려금도 각각 2000여만원씩 부정수급한 것으로 조사됐다. 수사 과정에서는 A씨가 텔레그램 등 메신저를 이용해 공범들과 진술을 맞추고...",
+   "link": "https://n.news.naver.com/mnews/article/022/0004160048?sid=102",
+   "originallink": "https://www.segye.com/newsView/20260918502622?OutUrl=naver",
+   "press": "세계일보",
+   "pub": "2026-09-18 08:01",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "‘퇴사 부추긴다’ 논란에 일단 보류?… ‘자발적 실업급여’ 상황 정리...",
+   "desc": "명분은 청년의 ‘경력 재설계’ 우리가 흔히 ‘실업급여’라고 부르는 돈은 사실 ‘구직급여’라고 불러야 더 정확합니다. 급여 대상자는 해고나 권고사직, 계약기간 만료처럼 비자발적으로 일자리를 잃은 경우에...",
+   "link": "https://n.news.naver.com/mnews/article/005/0001873784?sid=102",
+   "originallink": "https://www.kmib.co.kr/article/view.asp?arcid=9000013271&cp=nv",
+   "press": "국민일보",
+   "pub": "2026-09-18 08:32",
    "q": "구직급여",
    "rel": false
   }
