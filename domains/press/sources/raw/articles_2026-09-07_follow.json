@@ -6,9 +6,9 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-18 16:36",
+ "collected_at": "2026-09-19 08:35",
  "volume": {
-  "collected": 194,
+  "collected": 195,
   "articles": 35,
   "press": 31,
   "queries": 11
@@ -26,12 +26,12 @@
   },
   {
    "query": "구직급여",
-   "api_total": 94389,
+   "api_total": 94390,
    "fetched": 200,
    "truncated": false,
-   "in_window": 136,
+   "in_window": 137,
    "relevant": 3,
-   "new": 121
+   "new": 122
   },
   {
    "query": "구인배수",
@@ -2056,6 +2056,16 @@
    "press": "서울경제",
    "pub": "2026-09-18 16:03",
    "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "5억 대 실업급여 부정수급 사업주 구속",
+   "desc": "이번 수사로 확인된 부정수급 규모는 구직급여와 고용유지지원금, 청년채용특별장려금을 합쳐 총 5억 8천여만 원에 달합니다. 노동청은 A씨가 사업주와 브로커 간 역할을 분담해 장기간 반복적으로 범행을 저질렀으며...",
+   "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4107487",
+   "originallink": "https://news.bbsi.co.kr/news/articleView.html?idxno=4107487",
+   "press": "news.bbsi.co.kr",
+   "pub": "2026-09-18 22:12",
+   "q": "구직급여",
    "rel": false
   }
  ]
