@@ -6913,6 +6913,50 @@
      "기술교육원",
      "직무능력향상"
     ]
+   },
+   {
+    "title": "외국인 실업급여 '역대 최대'…수급자 열명 중 여덟 중국계 [곽용희의 ...",
+    "url": "https://www.hankyung.com/article/202609195257i",
+    "press": "한국경제",
+    "pub": "2026-09-20 07:01",
+    "cites": false,
+    "judged": true,
+    "why": "의원실 제출 외국인 수급 자료",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "곽용희",
+     "여덟",
+     "역대",
+     "열명",
+     "중국계",
+     "최대"
+    ]
+   },
+   {
+    "title": "건설업 고용시장 빨간불...\"비주택 대형 프로젝트 늘지만 분양 시장은 ...",
+    "url": "https://www.financialpost.co.kr/news/articleView.html?idxno=276517",
+    "press": "financialpost.co.kr",
+    "pub": "2026-09-20 07:10",
+    "cites": false,
+    "judged": true,
+    "why": "건설업 취업자 통계 중심 분석",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [
+     "빨간불"
+    ],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "대형",
+     "분양",
+     "비주택",
+     "프로젝트"
+    ]
    }
   ]
  }
