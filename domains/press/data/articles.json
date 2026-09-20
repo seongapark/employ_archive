@@ -6915,24 +6915,20 @@
     ]
    },
    {
-    "title": "외국인 실업급여 '역대 최대'…수급자 열명 중 여덟 중국계 [곽용희의 ...",
+    "title": "'中中中中中中中中'…1134억 받은 외국인 실업급여 봤더니 [곽용희의 일...",
     "url": "https://www.hankyung.com/article/202609195257i",
     "press": "한국경제",
     "pub": "2026-09-20 07:01",
     "cites": false,
     "judged": true,
-    "why": "의원실 제출 외국인 수급 자료",
+    "why": "의원실 자료, 외국인 실업급여 지급 실태",
     "hits": [],
     "tone": [],
     "stance": "부정",
     "focus": "",
     "kw": [
      "곽용희",
-     "여덟",
-     "역대",
-     "열명",
-     "중국계",
-     "최대"
+     "봤더니"
     ]
    },
    {
@@ -6956,6 +6952,115 @@
      "분양",
      "비주택",
      "프로젝트"
+    ]
+   },
+   {
+    "title": "“일 안 해도 되겠네” 달달한 ‘시럽급여’ 한국인만 받는 게 아니었다...",
+    "url": "https://www.sedaily.com/article/20092965?ref=naver",
+    "press": "서울경제",
+    "pub": "2026-09-20 09:23",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 고용보험·실업급여 역대 최대 비판",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "되겠네",
+     "시럽급여",
+     "한국인"
+    ]
+   },
+   {
+    "title": "국민연금만이 아니었다…실업급여도 압도적 '최다' 수령한 중국인",
+    "url": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008761986&plink=ORI&cooper=NAVER",
+    "press": "news.sbs.co.kr",
+    "pub": "2026-09-20 11:12",
+    "cites": false,
+    "judged": true,
+    "why": "의원실 자료, 중국인 실업급여 수령",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "국민연금만",
+     "중국인"
+    ]
+   },
+   {
+    "title": "외국인 실업급여 '역대 최대' 1134억원...10명 중 8명은 중국 국적",
+    "url": "https://www.abcn.kr/news/articleView.html?idxno=92116",
+    "press": "abcn.kr",
+    "pub": "2026-09-20 11:34",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 실업급여 1134억 국적별 분석",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "역대",
+     "중국",
+     "최대"
+    ]
+   },
+   {
+    "title": "외국인 실업급여 1134억 역대 최대…지급액 10건 중 8건은 중국계",
+    "url": "https://www.joongang.co.kr/article/25463362",
+    "press": "중앙일보",
+    "pub": "2026-09-20 14:03",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 실업급여 지급액 중국계 편중",
+    "hits": [
+     "지표:지급액"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "역대",
+     "중국계",
+     "최대"
+    ]
+   },
+   {
+    "title": "\"외국인 실업급여 1134억 역대 최다\"…중국인이 80% 가까이 차지",
+    "url": "https://www.jibs.co.kr/news/articles/articlesDetail/65695?feed=na",
+    "press": "jibs.co.kr",
+    "pub": "2026-09-20 14:15",
+    "cites": false,
+    "judged": true,
+    "why": "의원실 자료, 외국인 실업급여 역대 최다",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "가까",
+     "역대",
+     "중국인"
+    ]
+   },
+   {
+    "title": "외국인 실업급여 '역대 최대' 1,134억…10명 중 8명 중국계",
+    "url": "http://mbn.mk.co.kr/pages/news/newsView.php?category=mbn00003&news_seq_no=5220413",
+    "press": "매일경제",
+    "pub": "2026-09-20 15:09",
+    "cites": false,
+    "judged": true,
+    "why": "의원실 자료, 외국인 실업급여 역대 최대",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "역대",
+     "중국계",
+     "최대"
     ]
    }
   ]

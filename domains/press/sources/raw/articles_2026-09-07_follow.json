@@ -6,32 +6,32 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-20 08:32",
+ "collected_at": "2026-09-20 16:55",
  "volume": {
-  "collected": 198,
-  "articles": 37,
-  "press": 33,
+  "collected": 207,
+  "articles": 43,
+  "press": 39,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29273,
+   "api_total": 29279,
    "fetched": 100,
    "truncated": false,
-   "in_window": 48,
-   "relevant": 38,
-   "new": 47
+   "in_window": 54,
+   "relevant": 44,
+   "new": 53
   },
   {
    "query": "구직급여",
-   "api_total": 94390,
+   "api_total": 94392,
    "fetched": 200,
    "truncated": false,
-   "in_window": 137,
+   "in_window": 139,
    "relevant": 3,
-   "new": 122
+   "new": 124
   },
   {
    "query": "구인배수",
@@ -44,12 +44,12 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18512,
+   "api_total": 18513,
    "fetched": 100,
    "truncated": false,
-   "in_window": 23,
+   "in_window": 24,
    "relevant": 9,
-   "new": 10
+   "new": 11
   },
   {
    "query": "건설업 고용보험",
@@ -467,7 +467,7 @@
    "rel": true
   },
   {
-   "title": "외국인 실업급여 '역대 최대'…수급자 열명 중 여덟 중국계 [곽용희의 ...",
+   "title": "'中中中中中中中中'…1134억 받은 외국인 실업급여 봤더니 [곽용희의 일...",
    "desc": "19일 김위상 국민의힘 의원실이 고용노동부로부터 제출받은 자료에 따르면 외국인 고용보험 가입자는 2021년 17만7224명에서 2025년 45만8644명으로 4년 만에 2.6배 늘었다. 올해 7월 말 기준으로 47만3593명까지...",
    "link": "https://n.news.naver.com/mnews/article/015/0005334203?sid=101",
    "originallink": "https://www.hankyung.com/article/202609195257i",
@@ -484,6 +484,66 @@
    "press": "financialpost.co.kr",
    "pub": "2026-09-20 07:10",
    "q": "고용보험 가입자, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "“일 안 해도 되겠네” 달달한 ‘시럽급여’ 한국인만 받는 게 아니었다...",
+   "desc": "외국인 근로자의 고용보험 가입자 수가 5년 새 2.6배 늘어 역대 최대치를 나타냈다. 이들에게 지급된 실업급여 규모도 1134억원으로 역대 최고 수준을 기록했다. 외국인 가입자 4년 새 2.6배...47만명 돌파...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004663643?sid=102",
+   "originallink": "https://www.sedaily.com/article/20092965?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-09-20 09:23",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "국민연금만이 아니었다…실업급여도 압도적 '최다' 수령한 중국인",
+   "desc": "김위상 국민의힘 의원실이 고용노동부로부터 제출받은 자료에 따르면 외국인 고용보험 가입자는 2021년 17만 7천2백여 명에서 2025년 45만 8천6백여 명으로 4년 만에 2.6배 늘었습니다. 외국인 실업급여 수급자도...",
+   "link": "https://n.news.naver.com/mnews/article/055/0001389710?sid=101",
+   "originallink": "https://news.sbs.co.kr/news/endPage.do?news_id=N1008761986&plink=ORI&cooper=NAVER",
+   "press": "news.sbs.co.kr",
+   "pub": "2026-09-20 11:12",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "외국인 실업급여 '역대 최대' 1134억원...10명 중 8명은 중국 국적",
+   "desc": "반면 2025년 말 기준 중국동포와 중국 국적자의 고용보험 가입자는 11만8871명으로 전체 외국인 가입자의 25.9%였다. 가입자 비중에 비해 실업급여 수급자와 지급액 비중이 높게 나타난 셈이다. 중국...",
+   "link": "https://www.abcn.kr/news/articleView.html?idxno=92116",
+   "originallink": "https://www.abcn.kr/news/articleView.html?idxno=92116",
+   "press": "abcn.kr",
+   "pub": "2026-09-20 11:34",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "외국인 실업급여 1134억 역대 최대…지급액 10건 중 8건은 중국계",
+   "desc": "반면 2025년 말 기준 중국동포와 중국 국적자의 고용보험 가입자는 11만8871명으로 전체 외국인 가입자 45만8644명의 25.9%에 그쳤다. 국내에 장기간 체류하며 노동시장에 편입된 동포 인구가 많은 데다 영주...",
+   "link": "https://n.news.naver.com/mnews/article/025/0003552600?sid=102",
+   "originallink": "https://www.joongang.co.kr/article/25463362",
+   "press": "중앙일보",
+   "pub": "2026-09-20 14:03",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "\"외국인 실업급여 1134억 역대 최다\"…중국인이 80% 가까이 차지",
+   "desc": "김위상 국민의힘 의원실이 고용노동부로부터 받은 자료를 보면, 외국인 고용보험 가입자는 2021년 17만7200여명에서 2025년 45만8600여명으로 4년 만에 2.6배 늘었습니다. 같은 기간 외국인 실업급여 수급자도...",
+   "link": "https://n.news.naver.com/mnews/article/661/0000083553?sid=101",
+   "originallink": "https://www.jibs.co.kr/news/articles/articlesDetail/65695?feed=na",
+   "press": "jibs.co.kr",
+   "pub": "2026-09-20 14:15",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "외국인 실업급여 '역대 최대' 1,134억…10명 중 8명 중국계",
+   "desc": "김위상 국민의힘 의원실이 고용노동부로부터 받은 자료를 보면, 외국인 고용보험 가입자는 2021년 17만 7,224명에서 2025년 45만 8,644명으로 4년 만에 2.6배 늘었습니다. 같은 기간 외국인 실업급여 수급자도 1만 5...",
+   "link": "https://n.news.naver.com/mnews/article/057/0001969916?sid=101",
+   "originallink": "http://mbn.mk.co.kr/pages/news/newsView.php?category=mbn00003&news_seq_no=5220413",
+   "press": "매일경제",
+   "pub": "2026-09-20 15:09",
+   "q": "고용보험 가입자",
    "rel": true
   }
  ],
@@ -1779,21 +1839,21 @@
    "rel": false
   },
   {
-   "title": "브로커 동원해 57명 허위 근로자 모아 총 5억8000여 만원 고용보험 부정...",
-   "desc": "수사를 통해 확인된 구체적 부정수급 규모는 각각 구직급여 5억4000여 만원, 고용유지지원금 2000여 만원, 청년채용특별장려금 2000여 만원이다. 노동 당국 조사 결과 A씨는 수사망이 좁혀오자 텔레그램과 시그널 등...",
-   "link": "https://www.hidomin.com/news/articleView.html?idxno=721684",
-   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=721684",
-   "press": "hidomin.com",
-   "pub": "2026-09-17 16:22",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "[PICK! 이 안건] 정동만 등 11인 \"반복적인 구직급여 부정수급 효과적으...",
    "desc": "정 의원 등은 제안이유에 대해 \"현행법은 거짓이나 그 밖의 부정한 방법으로 구직급여를 받은 사람이 최근 10년간 3회 이상 지급제한을 받은 경우 최대 3년간 새로운 수급자격에 따른 구직급여를 지급하지 않도록 하고...",
    "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
    "originallink": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
    "press": "jeonmae.co.kr",
+   "pub": "2026-09-17 16:22",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "브로커 동원해 57명 허위 근로자 모아 총 5억8000여 만원 고용보험 부정...",
+   "desc": "수사를 통해 확인된 구체적 부정수급 규모는 각각 구직급여 5억4000여 만원, 고용유지지원금 2000여 만원, 청년채용특별장려금 2000여 만원이다. 노동 당국 조사 결과 A씨는 수사망이 좁혀오자 텔레그램과 시그널 등...",
+   "link": "https://www.hidomin.com/news/articleView.html?idxno=721684",
+   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=721684",
+   "press": "hidomin.com",
    "pub": "2026-09-17 16:22",
    "q": "구직급여",
    "rel": false
@@ -2096,6 +2156,36 @@
    "press": "choicenews.co.kr",
    "pub": "2026-09-19 08:44",
    "q": "구인배수",
+   "rel": false
+  },
+  {
+   "title": "명절에도 출근하는 알바생들…최저임금보다 더 원하는 금액은?",
+   "desc": "특히 20대의 근무 의향이 가장 높았고, 연휴 아르바이트를 고를 때 가장 중요하게 보는 조건은 ‘급여’였다. 지난 18일 구인·구직 아르바이트 전문 포털 알바천국이 아르바이트생 857명을 대상으로 실시한...",
+   "link": "https://www.wikitree.co.kr/articles/1160495",
+   "originallink": "https://www.wikitree.co.kr/articles/1160495",
+   "press": "wikitree.co.kr",
+   "pub": "2026-09-20 15:48",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“연애할 시간 줘야죠”…주 3.5일 근무에 야근 없앤 中 회사 [여기는 중...",
+   "desc": "일반 직원의 평균 월급은 약 7000위안(약 144만원)이며 영업 부서 직원은 이보다 많은 급여를 받는 것으로... 주씨가 운영하는 외식 브랜드는 ‘35세 이상’ 구직자를 우선 채용하는 것으로 알려져 관심을 끌기도 했다. 해당...",
+   "link": "https://n.news.naver.com/mnews/article/081/0003681936?sid=104",
+   "originallink": "https://nownews.seoul.co.kr/news/newsView.php?id=20260920601011&wlog_tag3=naver",
+   "press": "서울신문",
+   "pub": "2026-09-20 16:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“다들 月 430씩은 번다고? 진짜?”…우리나라 직장인 ‘평균 월급’, 그...",
+   "desc": "전자·통신업 특별급여 66% 급증 반도체 제조업이 포함된 전자·통신업의 월평균 임금총액은... 지급 여력을 확대해야 한다”고 덧붙였다. 최저임금보다 많던 달달한 ‘시럽급여’도 옛말? 한국 고용보험 뭐가 바뀌나",
+   "link": "https://n.news.naver.com/mnews/article/011/0004663718?sid=101",
+   "originallink": "https://www.sedaily.com/article/20093062?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-09-20 16:12",
+   "q": "제조업 고용보험",
    "rel": false
   }
  ]
