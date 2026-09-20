@@ -6915,20 +6915,26 @@
     ]
    },
    {
-    "title": "'中中中中中中中中'…1134억 받은 외국인 실업급여 봤더니 [곽용희의 일...",
+    "title": "외국인 실업급여 역대 최대…80%는 조선족·중국인 [곽용희의 일자리노...",
     "url": "https://www.hankyung.com/article/202609195257i",
     "press": "한국경제",
     "pub": "2026-09-20 07:01",
     "cites": false,
     "judged": true,
-    "why": "의원실 자료, 외국인 실업급여 지급 실태",
-    "hits": [],
+    "why": "의원실 제출 외국인 실업급여 자료",
+    "hits": [
+     "산업:조선(기타운송장비)"
+    ],
     "tone": [],
     "stance": "부정",
     "focus": "",
     "kw": [
      "곽용희",
-     "봤더니"
+     "역대",
+     "일자리노",
+     "조선족",
+     "중국인",
+     "최대"
     ]
    },
    {
@@ -7061,6 +7067,104 @@
      "역대",
      "중국계",
      "최대"
+    ]
+   },
+   {
+    "title": "외국인도 실업급여 타간다더니…10명 중 8명 '조선족·중국인'",
+    "url": "https://www.hankyung.com/article/2026092063801",
+    "press": "한국경제",
+    "pub": "2026-09-20 17:56",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 수급자 국적 쏠림 분석",
+    "hits": [
+     "산업:조선(기타운송장비)"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "조선족",
+     "중국인",
+     "타간다더니"
+    ]
+   },
+   {
+    "title": "[사설] 중국인에 외국인 실업급여 집중… 제도 허점 없는지 따져봐야",
+    "url": "https://www.dt.co.kr/article/12085008?ref=naver",
+    "press": "디지털타임스",
+    "pub": "2026-09-20 18:11",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 실업급여 제도 사설",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "따져봐야",
+     "사설",
+     "중국인",
+     "허점"
+    ]
+   },
+   {
+    "title": "\"실업급여 895억\"...중국계에 쏠린 이유",
+    "url": "https://www.edaily.co.kr/News/Read?newsId=01817126645582416&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+    "press": "이데일리",
+    "pub": "2026-09-21 07:03",
+    "cites": false,
+    "judged": true,
+    "why": "의원실 자료 기반 중국계 쏠림",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "이유",
+     "중국계"
+    ]
+   },
+   {
+    "title": "외국인 실업급여 1134억 ‘최대’…79% 중국계",
+    "url": "https://www.munhwa.com/article/11618418?ref=naver",
+    "press": "문화일보",
+    "pub": "2026-09-21 07:11",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 실업급여 지급액 집계",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "중국계",
+     "최대"
+    ]
+   },
+   {
+    "title": "[오늘의 신문] 반도체 호황에 성장률 상향 기대…고금리·전세 불안은 부...",
+    "url": "http://kor.theasian.asia/archives/415146",
+    "press": "kor.theasian.asia",
+    "pub": "2026-09-21 07:46",
+    "cites": false,
+    "judged": true,
+    "why": "여러 뉴스 묶은 오늘의 신문",
+    "hits": [
+     "산업:반도체(전자·통신)"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "고금리",
+     "기대",
+     "불안",
+     "상향",
+     "성장률",
+     "신문",
+     "전세",
+     "호황"
     ]
    }
   ]
