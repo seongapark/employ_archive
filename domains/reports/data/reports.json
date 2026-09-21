@@ -40687,7 +40687,10 @@
   "pages": null,
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=10081747&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=2&programType=newsData&menuNo=200560&oldMenuNo=200560",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/a68139ee792709616411e4634cd6040a/1/202401110207285430.pdf",
-  "matched": []
+  "matched": [
+   "임금",
+   "일자리정책"
+  ]
  },
  {
   "id": "bok-10081745",
