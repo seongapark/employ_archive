@@ -7166,6 +7166,122 @@
      "전세",
      "호황"
     ]
+   },
+   {
+    "title": "외국인 실업급여 1134억 원 '역대 최대'…79%는 중국동포·중국인에 지급",
+    "url": "https://www.insight.co.kr/news/574446",
+    "press": "insight.co.kr",
+    "pub": "2026-09-21 08:54",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 실업급여 지급액 통계, 다른 자료",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "역대",
+     "중국동포",
+     "중국인",
+     "최대"
+    ]
+   },
+   {
+    "title": "중국인, 국민연금 이어 실업급여까지?…895억 받아갔다 [잇슈#태그]",
+    "url": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8668640&ref=A",
+    "press": "news.kbs.co.kr",
+    "pub": "2026-09-21 13:07",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 실업급여 수급 논란",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "국민연금",
+     "받아갔",
+     "잇슈",
+     "중국인",
+     "태그"
+    ]
+   },
+   {
+    "title": "[기획] 잇딴 공급대책에도 건설고용 '침체' 지속…'첫 삽' 떠야 고용 회...",
+    "url": "https://www.m-i.kr/news/articleView.html?idxno=1416807",
+    "press": "m-i.kr",
+    "pub": "2026-09-21 14:00",
+    "cites": true,
+    "judged": true,
+    "why": "건설업 가입자 7천명 감소 전함",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "건설고용",
+     "공급대책",
+     "기획",
+     "떠야",
+     "잇딴",
+     "침체"
+    ]
+   },
+   {
+    "title": "“실업급여도 중국인?”…외국인 지급액 79%가 중국동포·중국인",
+    "url": "https://www.kyeonggi.com/article/20260921580381",
+    "press": "kyeonggi.com",
+    "pub": "2026-09-21 15:03",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 실업급여 지급액 통계",
+    "hits": [
+     "지표:지급액"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "중국동포",
+     "중국인"
+    ]
+   },
+   {
+    "title": "[단독] 유산·사산해도 ‘쉬겠다’ 말 못 해…휴가급여 수급자 연 2000명...",
+    "url": "https://www.seoul.co.kr/news/society/2026/09/21/20260921500257?wlog_tag3=naver",
+    "press": "서울신문",
+    "pub": "2026-09-21 16:07",
+    "cites": false,
+    "judged": true,
+    "why": "유·사산 휴가급여 수급 실태",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사산해",
+     "쉬겠",
+     "유산",
+     "휴가급여"
+    ]
+   },
+   {
+    "title": "외국인 실업급여 역대 최대…약 80%는 중국계가 받아",
+    "url": "https://view.asiae.co.kr/article/2026092117091244004",
+    "press": "아시아경제",
+    "pub": "2026-09-21 17:18",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 실업급여 역대 최대 보도",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "역대",
+     "중국계",
+     "최대"
+    ]
    }
   ]
  }
