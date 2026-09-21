@@ -16,6 +16,22 @@
   ]
  },
  {
+  "id": "kiet-is867",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "제조 AX를 위한 피지컬 AI 생태계 발전 전략",
+  "authors": [
+   "이준영"
+  ],
+  "published": "2026-09-15",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=867&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
   "id": "bok-11064752",
   "org": "bok",
   "board": "bok-note",
@@ -163,6 +179,255 @@
   "pages": null,
   "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=10299&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=6A1631CBC7F84C6D49258E640004A390_2.pdf&fileNameOrg=KLI Annual Report 2025_web.pdf&filePath1=jsphome/DATA/pblctList/issue/6A1631CBC7F84C6D49258E640004A390",
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3374",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "[KIET 50주년 해외석학 특별기고] EU 산업의 도전과 도약",
+  "authors": [
+   "로만 아르호나",
+   "프랭크 반데르메이렌"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3374&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3373",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "K-배터리, 위기인가 전환기인가:ESS를 중심으로 본 새로운 성장축의 모색",
+  "authors": [
+   "황경인"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3373&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "지역고용"
+  ]
+ },
+ {
+  "id": "kiet-ec3372",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "글로벌 AI 풀-스택 경쟁과 우리나라의 대응: AX 확산을 넘어 공급 역량으로",
+  "authors": [
+   "이상현"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3372&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3371",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "AI 시대에 주목받는 광섬유, 한국의 현주소와 과제",
+  "authors": [
+   "탁은명"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3371&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3370",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "에너지 안보 리스크와 한국 산업의 녹색전환 전략",
+  "authors": [
+   "이상현"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3370&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3369",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "전환기 국내 자동차산업의 연료유형별 시장 구조와 정책 과제",
+  "authors": [
+   "전보경",
+   "이홍"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3369&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3368",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "중국 저고도경제(低空經濟)의 전략적 추진과 한국에 대한 시사점",
+  "authors": [
+   "이자연"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3368&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3367",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "중국 15·5 시기 산업 녹색전환 전략과 한국의 대응",
+  "authors": [
+   "박소희"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3367&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kiet-ec3366",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "축소사회 시대, 국가는 무엇을 보장하고 지방은 무엇을 만들어야 하나",
+  "authors": [
+   "이민원(광주대학교 명예교수",
+   "전 국가균형발전위원회 위원장)"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3366&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3365",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "한일 소득 수준의 수평관계 진행 요인 및 시사점",
+  "authors": [
+   "국중호(요코하마시립대학교 교수",
+   "게이오기주쿠대학교 특임교수)"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3365&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "임금",
+   "노동전환"
+  ]
+ },
+ {
+  "id": "kiet-ec3364",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "EAR 개정과 AI 기회 파트너십으로 본 미국의 AI 협력",
+  "authors": [
+   "박소희"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3364&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3363",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "2026년 세계AI컨퍼런스(WAIC 2026)로 본 중국의 글로벌 AI 거버넌스 구상",
+  "authors": [
+   "박소희"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3363&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3362",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "말레이시아 디지털 행동계획(MD2030) 발표와 시사점",
+  "authors": [
+   "안유나"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3362&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-ec3361",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "실물경제 주요지표 & 업종별 경기지수",
+  "authors": [],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3361&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3360",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "2027년 8월호 통합본",
+  "authors": [],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3360&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
   "matched": []
  },
  {
@@ -43493,7 +43758,10 @@
   "pages": null,
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=10080347&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=2&programType=newsData&menuNo=200560&oldMenuNo=200560",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/e64d0c07901232d74a95853cc5b0855b/1/202311020255439590.pdf",
-  "matched": []
+  "matched": [
+   "지역고용",
+   "인력수급"
+  ]
  },
  {
   "id": "bok-10080345",

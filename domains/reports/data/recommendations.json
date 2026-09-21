@@ -33407,5 +33407,149 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-09-16T13:35:49+09:00"
+ },
+ "kiet-is867": {
+  "pick": false,
+  "axis": "",
+  "why": "제조 피지컬 AI 생태계 전략, 고용 측정 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3374": {
+  "pick": false,
+  "axis": "",
+  "why": "EU 산업 과제 해외석학 기고",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3373": {
+  "pick": false,
+  "axis": "",
+  "why": "배터리·ESS 산업 성장 전략",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3372": {
+  "pick": false,
+  "axis": "",
+  "why": "AI 풀스택 공급역량 산업 경쟁",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3371": {
+  "pick": false,
+  "axis": "",
+  "why": "광섬유 산업 현황과 과제",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3370": {
+  "pick": false,
+  "axis": "",
+  "why": "에너지 안보와 산업 녹색전환",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3369": {
+  "pick": false,
+  "axis": "",
+  "why": "자동차 연료유형별 시장 구조",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3368": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 저고도경제 정책 정리",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3367": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 녹색전환 전략 소개",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3366": {
+  "pick": false,
+  "axis": "",
+  "why": "축소사회 국가·지방 역할론, 초록 없음·방법 불명",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3365": {
+  "pick": false,
+  "axis": "",
+  "why": "한일 GDP·임금 수준 거시 비교",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3364": {
+  "pick": false,
+  "axis": "",
+  "why": "미국 AI 수출통제·협력 동향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3363": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 AI 거버넌스 구상 동향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3362": {
+  "pick": false,
+  "axis": "",
+  "why": "말레이시아 디지털 계획 소개",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3361": {
+  "pick": false,
+  "axis": "",
+  "why": "정기 실물경제 지표 공표",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "kiet-ec3360": {
+  "pick": false,
+  "axis": "",
+  "why": "월간지 통합본",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-21T11:20:41+09:00"
  }
 }

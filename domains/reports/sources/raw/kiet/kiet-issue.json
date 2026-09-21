@@ -4516,5 +4516,35 @@
     "abstract_tried": false,
     "abstract_note": null,
     "collected_at": "2026-09-10T02:17:46+09:00"
+  },
+  {
+    "id": "kiet-is867",
+    "org": "kiet",
+    "board": "kiet-issue",
+    "series": "i-KIET",
+    "title": "제조 AX를 위한 피지컬 AI 생태계 발전 전략",
+    "authors": [
+      "이준영"
+    ],
+    "published": "2026-09-15",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=867&skey=&sval=&pg=1&pp=30",
+    "file_url": null,
+    "abstract": "(배경 및 전망) 휴머노이드 로봇 등의 피지컬 AI(Physical AI) 기술은 인간과의 상호작용이 상대적 으로 적은 제조 현장에서 빠르게 상용화될 것으로 전망\n(제조 AX의 한계) 인간의 개입이 최소화되는 자율 제조를 통한 제조업 경쟁력 제고를 위해서는 다양한 비정형적 업무를 수행할 수 있는 ‘피지컬 AI 기반 제조 AX’가 필수\n(생태계 핵심 요소) 제조 AX 관점에서 피지컬 AI 생태계의 핵심 요소는 ① 폼팩터 개발·설계, ② 제조 특화 AI 행동 학습, ③ 액추에이터, ④ 로봇손, ⑤ AI 파운데이션 모델, ⑥ 온-디바이스 AI 반도체\n(생태계 확장 전략) 비교우위를 지닌 ‘제조 특화 AI 행동 학습’을 교두보로 피지컬 AI 생태계에서 우리나라의 영역을 확장하는 ‘K-피지컬 AI 생태계 확장 전략’이 필요\n(K-폼팩터 개발) 「대한민국 대도약 3대 메가프로젝트」의 ‘AI 로봇 글로벌 3강 도약’을 위해서는 ‘K-피지컬 AI 로봇 폼팩터’ 개발에 기초한 제조 특화 행동 학습·데이터 축적이 필수\n(단계적 전환 로드맵) 피지컬 AI 기술 성숙도와 현장 여건을 고려하여 경량·범용·고강도 작업용 AI 로봇으로 적용 범위를 단계적으로 확대하는 업종·공정별 제조 AX 로드맵 수립이 필요\n(주력 제조업 전환 전략) 주력 제조업 특화 피지컬 AI 전환의 경우, 각 업종·공정에 적합한 AI 로봇의 형태를 고려한 업종·산업단지 단위의 제조 피지컬 AI 전환 정책 추진이 필요",
+    "toc": [
+      "보도 자료",
+      "산업연구원 (KIET)",
+      "KOREA INSTITUTE FOR INDUSTRIAL ECONOMICS & TRADE",
+      "테이블 제목",
+      "제목",
+      "제조 AX를 위한 피지컬 AI 생태계 발전 전략",
+      "본문요약",
+      "제조 AX, ‘ 고정설비 ’ 넘어 ‘ 피지컬 AI 로봇 ’ 으로",
+      "제조 현장을 교두보로 K- 피지컬 AI 생태계 확장해야"
+    ],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-09-21T11:17:58+09:00"
   }
 ]
