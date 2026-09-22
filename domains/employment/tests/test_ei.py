@@ -104,11 +104,14 @@ def test_reads_every_month_in_the_table_not_just_the_latest(records):
 
 def test_industry_sum_tracks_the_total(records):
     # 열이 밀리거나 집계 열('서비스업', '기타*')이 섞이면 합이 전체에서 벗어난다.
+    # breakdown="industry" 는 이제 상시가입자(headcount)뿐 아니라 제조업 열
+    # (benefit_new·benefit_paid·job_openings, category="C")도 공유한다 —
+    # series 로 걸러야 상시가입자 19개 대분류의 합만 본다.
     latest = max(r.period for r in records)
     total = next(r.value for r in records
-                 if r.breakdown == "total" and r.period == latest)
+                 if r.breakdown == "total" and r.period == latest and r.series == "headcount")
     parts = sum(r.value for r in records
-                if r.breakdown == "industry" and r.period == latest)
+                if r.breakdown == "industry" and r.period == latest and r.series == "headcount")
     # 광업·가구내고용·국제기관이 '기타'로 빠지므로 합이 전체보다 조금 작다
     assert 0.97 < parts / total < 1.0
 
@@ -400,3 +403,44 @@ def test_find_market_tables_fails_when_a_third_candidate_appears(data):
     assert len(cand) == 2
     with pytest.raises(ValueError, match="3개"):
         ei.find_market_tables(cand + [cand[0]])
+
+
+# ── 범위 탭: 제조업·서비스업 ───────────────────────────────────────────
+
+def test_industry_pairs_are_matched_against_the_summary_totals(data):
+    pairs = ei.industry_pairs(hwpx.tables(data))
+    assert len(pairs) == 3          # 신규신청 · 지급자수 · 신규구인
+    for level, delta in pairs:
+        assert "전산업" in " ".join(ei.squash(c) for c in level[0])
+        assert "전산업" in " ".join(ei.squash(c) for c in delta[0])
+
+
+def test_manufacturing_columns_come_from_the_industry_tables(records):
+    made = {r.series: r for r in records
+            if r.period == "2026-07" and r.breakdown == "industry" and r.category == "C"}
+    assert (made["benefit_new"].value, made["benefit_new"].yoy) == (16.0, -1.1)
+    assert (made["benefit_paid"].value, made["benefit_paid"].yoy) == (110.0, -3.6)
+    assert (made["job_openings"].value, made["job_openings"].yoy) == (56.0, 3.3)
+
+
+def test_parse_fails_when_an_industry_table_disagrees_with_the_summary(data, monkeypatch):
+    # 표 순서가 흔들려 지급자수 표를 신규신청 자리에서 읽으면, 전산업 값이
+    # 요약표와 크게 어긋난다(109 vs 643).
+    monkeypatch.setattr(ei, "INDUSTRY_SERIES",
+                        ("benefit_paid", "benefit_new", "job_openings"))
+    with pytest.raises(ValueError, match="전산업"):
+        ei.parse(data, released_at=date(2026, 8, 11),
+                 release_url="https://x/view", attachments=[],
+                 collected_at=datetime(2026, 8, 30, 9, 0))
+
+
+def test_services_is_an_aggregate_on_the_scope_axis_not_an_industry(records):
+    services = [r for r in records if r.breakdown == "scope" and r.category == "services"]
+    latest = max(services, key=lambda r: r.period)
+    assert latest.period == "2026-07"
+    assert latest.value == 11139.0
+    assert latest.series == "headcount"
+    # 대분류 목록은 그대로여야 한다 — 서비스업이 industry 로 새면 이중 계상이다.
+    codes = {r.category for r in records if r.breakdown == "industry"
+             and r.series == "headcount"}
+    assert codes == set("ACDEFGHIJKLMNOPQRS")

@@ -455,6 +455,107 @@ def market_records(level, delta, **meta) -> list[SeriesRecord]:
     return out
 
 
+# ── 범위 탭이 쓰는 산업 열 ──────────────────────────────────────────────
+#
+# 산업별 표는 여섯 장이 헤더가 똑같다(신규신청 수준/증감, 지급자수 수준/증감,
+# 신규구인 수준/증감). 크기로도 못 가른다 — 보도자료 순서로 짝을 정하고,
+# **이미 읽은 요약표의 전산업 값과 맞춰** 그 짝이 맞는지 검증한다.
+#
+# `도소매` 가 열쇠다. 가입자수 표도 `전산업`·`제조업` 을 갖지만 거기서는
+# 도소매가 머리 **둘째 줄**에 있어 g[0] 에 안 걸린다. 이어지는 표
+# (`부동산업 … 기타*`)는 전산업이 없어 애초에 후보가 아니다.
+INDUSTRY_HEADER_KEYS = ("전산업", "제조업", "도소매")
+INDUSTRY_SERIES = ("benefit_new", "benefit_paid", "job_openings")
+
+# 서비스업은 표준산업분류 대분류가 아니라 여러 대분류를 묶은 집계다.
+# `industry` 에 넣으면 속성별 매트릭스에서 대분류들과 나란히 서서 이중
+# 계상으로 읽힌다. 경활의 15~64세가 같은 이유로 쓰는 `scope` 축에 싣는다.
+SERVICES_CATEGORY = "services"
+SERVICES_COLUMN = 6          # 앞 표의 서비스업 집계 열. check_layout 이 이름을 본다.
+MANUFACTURING_CATEGORY = "C"
+
+
+def _industry_column(header, name: str) -> int:
+    for i, cell in enumerate(header):
+        if squash(cell) == name:
+            return i
+    raise ValueError(f"산업별 표에 {name!r} 열이 없다 — 서식이 바뀌었을 수 있다")
+
+
+def _latest_month_value(table, column: int) -> tuple[str, float | None]:
+    rows = month_rows(table)
+    if not rows:
+        return "", None
+    period, row = rows[-1]
+    return period, (_num(row[column]) if column < len(row) else None)
+
+
+def industry_pairs(tables) -> list[tuple[list, list]]:
+    """산업별 (수준, 증감) 표 세 쌍. 보도자료 순서를 그대로 쓴다."""
+    cand = [g for g in tables
+            if g and len(g[0]) > 5 and all(k in _flat(g[0]) for k in INDUSTRY_HEADER_KEYS)]
+    need = len(INDUSTRY_SERIES) * 2
+    if len(cand) < need:
+        raise ValueError(f"산업별 표가 모자라다: {len(cand)}장, {need}장이 필요하다")
+    return [(cand[i * 2], cand[i * 2 + 1]) for i in range(len(INDUSTRY_SERIES))]
+
+
+def manufacturing_records(tables, totals: dict[str, tuple[float, float | None]],
+                          **meta) -> list[SeriesRecord]:
+    """산업별 표에서 **제조업 열 하나만** 읽는다.
+
+    19개 대분류를 다 읽으면 28개월 × 19분류 × 3지표 ≈ 1,600건이 쌓이는데
+    그릴 화면이 없다. 전산업 열은 저장하지 않고 대조에만 쓴다 — 그 값은
+    요약표에서 이미 읽었다.
+    """
+    out: list[SeriesRecord] = []
+    for series, (level, delta) in zip(INDUSTRY_SERIES, industry_pairs(tables)):
+        want_level, want_delta = totals[series]
+        for table, want, what in ((level, want_level, "수준"),
+                                  (delta, want_delta, "증감")):
+            period, got = _latest_month_value(table, _industry_column(table[0], "전산업"))
+            if got is None or want is None or abs(got - want) > 1.0:
+                raise ValueError(
+                    f"{series} 산업별 {what} 표의 전산업이 요약표와 다르다"
+                    f"({period}): {got} vs {want} — 표 순서가 흔들렸을 수 있다")
+
+        deltas = dict(month_rows(delta))
+        level_col = _industry_column(level[0], "제조업")
+        delta_col = _industry_column(delta[0], "제조업")
+        for period, row in month_rows(level):
+            value = _num(row[level_col]) if level_col < len(row) else None
+            if value is None:
+                continue
+            drow = deltas.get(period, [])
+            out.append(SeriesRecord(
+                id=make_id("ei", period, "industry", MANUFACTURING_CATEGORY, series=series),
+                source="ei", series=series, breakdown="industry",
+                category=MANUFACTURING_CATEGORY, period=period, value=value,
+                unit=(BENEFIT_UNITS.get(series) or MARKET_UNITS[series]),
+                yoy=_num(drow[delta_col]) if delta_col < len(drow) else None,
+                **meta,
+            ))
+    return out
+
+
+def services_records(level_lead, delta_lead, **meta) -> list[SeriesRecord]:
+    deltas = dict(month_rows(delta_lead))
+    out: list[SeriesRecord] = []
+    for period, row in month_rows(level_lead):
+        value = _num(row[SERVICES_COLUMN]) if SERVICES_COLUMN < len(row) else None
+        if value is None:
+            continue
+        drow = deltas.get(period, [])
+        out.append(SeriesRecord(
+            id=make_id("ei", period, "scope", SERVICES_CATEGORY),
+            source="ei", series="headcount", breakdown="scope",
+            category=SERVICES_CATEGORY, period=period, value=value, unit="천명",
+            yoy=_num(drow[SERVICES_COLUMN]) if SERVICES_COLUMN < len(drow) else None,
+            **meta,
+        ))
+    return out
+
+
 def parse(data: bytes, *, released_at: date, release_url: str,
           attachments: list[Attachment], collected_at: datetime) -> list[SeriesRecord]:
     tables = hwpx.tables(data)
@@ -544,20 +645,26 @@ def parse(data: bytes, *, released_at: date, release_url: str,
                 attachments=attachments, collected_at=collected_at,
             ))
 
+    meta = dict(released_at=released_at, release_url=release_url,
+                attachments=attachments, collected_at=collected_at)
+
     flow = find_flow_table(tables)
     check_flow(flow)
-    records += flow_records(flow, released_at=released_at, release_url=release_url,
-                            attachments=attachments, collected_at=collected_at)
+    records += flow_records(flow, **meta)
 
+    # 산업별 표는 헤더가 여섯 장 모두 같다. 요약표에서 읽은 전산업 값만이
+    # 어느 쌍이 어느 지표인지를 말해 주므로, 먼저 모아 둔다.
     benefit_level, benefit_delta = find_benefit_tables(tables)
-    records += benefit_records(benefit_level, benefit_delta,
-                               released_at=released_at, release_url=release_url,
-                               attachments=attachments, collected_at=collected_at)
-
+    summary = benefit_records(benefit_level, benefit_delta, **meta)
     market_level, market_delta = find_market_tables(tables)
-    records += market_records(market_level, market_delta,
-                              released_at=released_at, release_url=release_url,
-                              attachments=attachments, collected_at=collected_at)
+    summary += market_records(market_level, market_delta, **meta)
+    records += summary
+
+    newest = max(r.period for r in summary)
+    totals = {r.series: (r.value, r.yoy) for r in summary
+              if r.period == newest and r.breakdown == "total"}
+    records += manufacturing_records(tables, totals, **meta)
+    records += services_records(level_a, delta_a, **meta)
     return records
 
 
