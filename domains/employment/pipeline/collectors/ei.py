@@ -200,6 +200,72 @@ def _series_by_period(lead, cont) -> dict[str, dict[str, float]]:
     return out
 
 
+# ── 총괄 지표 ────────────────────────────────────────────────────────────
+#
+# 이 보도자료는 상시가입자수 말고도 고용보험 자격의 드나듦(취득·상실),
+# 구직급여, 고용24 구인·구직을 낸다. 전부 같은 hwpx 안에 있다.
+#
+# 표는 인덱스가 아니라 헤더로 찾는다. 픽스처(2026-07)와 그다음 회차(2026-08)만
+# 비교해도 표 번호가 통째로 하나씩 밀려 있다.
+
+FLOW_HEADER_KEYS = ("취득자수및상실자수", "증감률")
+
+# 이 표만은 **수준·증감·증감률이 한 장에** 있다. 다른 표들처럼 같은 헤더의
+# 표를 순서로 가르는 일이 없다.
+# 0=월 | 1=취득계 2=취득신규 3=취득경력 4=상실 | 5~8 증감 | 9~12 증감률
+FLOW_LEVEL = {"acquired": 1, "separated": 4}
+FLOW_DELTA = {"acquired": 5, "separated": 8}
+# (계, 신규, 경력). check_flow 가 이 셋으로 분해 항등식을 본다.
+FLOW_SPLIT = (1, 2, 3)
+
+
+def find_flow_table(tables) -> list:
+    for g in tables:
+        if g and len(g[0]) >= 4 and all(k in _flat(g[0]) for k in FLOW_HEADER_KEYS):
+            return g
+    raise ValueError("취득·상실 표를 찾지 못했다 — 서식이 바뀌었을 수 있다")
+
+
+def check_flow(table) -> None:
+    """문서 자체의 분해 항등식: 취득자수 계 = 신규 + 경력.
+
+    실측(2026-07): 660 = 67 + 593. 열이 하나라도 밀리면 여기서 걸린다.
+    이 표에는 헤더 이름으로 열을 짚을 방법이 없다 — 머리가 세 줄로 접히고
+    병합셀이 섞여 `취득자수` 가 3열을 덮는다. 위치로 읽고 항등식으로 검증한다.
+    """
+    rows = month_rows(table)
+    if not rows:
+        raise ValueError("취득·상실 표에서 월 행을 찾지 못했다")
+    total_col, new_col, exp_col = FLOW_SPLIT
+    for period, row in rows:
+        total, new, experienced = (_num(row[c]) if c < len(row) else None
+                                   for c in (total_col, new_col, exp_col))
+        if None in (total, new, experienced):
+            raise ValueError(f"{period} 취득자수 칸이 비었다")
+        if abs(total - (new + experienced)) > 1.0:
+            raise ValueError(
+                f"{period} 취득자수 계가 신규+경력과 다르다: "
+                f"{total} vs {new}+{experienced}")
+
+
+def flow_records(table, **meta) -> list[SeriesRecord]:
+    out: list[SeriesRecord] = []
+    for period, row in month_rows(table):
+        for series, col in FLOW_LEVEL.items():
+            value = _num(row[col]) if col < len(row) else None
+            if value is None:
+                continue
+            delta_col = FLOW_DELTA[series]
+            out.append(SeriesRecord(
+                id=make_id("ei", period, "total", None, series=series),
+                source="ei", series=series, breakdown="total", category=None,
+                period=period, value=value, unit="천명",
+                yoy=_num(row[delta_col]) if delta_col < len(row) else None,
+                **meta,
+            ))
+    return out
+
+
 def parse(data: bytes, *, released_at: date, release_url: str,
           attachments: list[Attachment], collected_at: datetime) -> list[SeriesRecord]:
     tables = hwpx.tables(data)
@@ -288,6 +354,11 @@ def parse(data: bytes, *, released_at: date, release_url: str,
                 released_at=released_at, release_url=release_url,
                 attachments=attachments, collected_at=collected_at,
             ))
+
+    flow = find_flow_table(tables)
+    check_flow(flow)
+    records += flow_records(flow, released_at=released_at, release_url=release_url,
+                            attachments=attachments, collected_at=collected_at)
     return records
 
 

@@ -88,7 +88,9 @@ def test_ids_are_unique(records):
 def test_reads_every_month_in_the_table_not_just_the_latest(records):
     # 표는 28개월치를 담고 있다. 마지막 행만 읽으면 24개월 시계열을 모으는 데
     # 2년이 걸린다.
-    totals = [r for r in records if r.breakdown == "total"]
+    # breakdown="total" 은 이제 상시가입자뿐 아니라 취득·상실도 공유한다 —
+    # series 로 걸러야 이 표(상시가입자) 하나만 본다.
+    totals = [r for r in records if r.breakdown == "total" and r.series == "headcount"]
     periods = [r.period for r in totals]
     assert len(periods) == len(set(periods)), "같은 기간이 여러 번 나왔다"
     assert len(periods) >= 24
@@ -240,3 +242,42 @@ def test_headline_delta_tolerates_spacing_and_particles():
         "○ ‘26.7월 고용보험 가입자는 27만 7천명이 증가",
     ]:
         assert ei.headline_delta(make(text)) == pytest.approx(277.0)
+
+
+# ── 총괄 지표: 취득·상실 ──────────────────────────────────────────────
+
+def test_finds_the_flow_table_by_header_not_index(data):
+    # 픽스처(2026-07)에서는 80번, 2026-08 회차에서는 81번이다. 표 번호가
+    # 회차마다 밀리므로 인덱스로 집으면 다음 달에 조용히 다른 표를 읽는다.
+    table = ei.find_flow_table(hwpx.tables(data))
+    assert len(table) > 30
+    assert "취득자수및상실자수" in " ".join(
+        ei.squash(c) for c in table[0])
+
+
+def test_acquisitions_split_into_new_and_experienced(data):
+    # 문서 자체의 분해 항등식. 열이 하나라도 밀리면 계가 신규+경력과 어긋난다.
+    ei.check_flow(ei.find_flow_table(hwpx.tables(data)))
+
+
+def test_check_flow_fails_when_a_column_shifts(data, monkeypatch):
+    table = ei.find_flow_table(hwpx.tables(data))
+    # 신규 열 자리에서 상실자수를 읽는 모양으로 바꾼다.
+    monkeypatch.setattr(ei, "FLOW_SPLIT", (1, 4, 3))
+    with pytest.raises(ValueError, match="취득자수"):
+        ei.check_flow(table)
+
+
+def test_flow_records_carry_the_latest_month(data, records):
+    latest = {(r.series, r.breakdown): r for r in records if r.period == "2026-07"}
+    assert latest[("acquired", "total")].value == 660.0
+    assert latest[("acquired", "total")].yoy == 33.0
+    assert latest[("separated", "total")].value == 634.0
+    assert latest[("separated", "total")].yoy == 23.0
+    assert latest[("acquired", "total")].unit == "천명"
+
+
+def test_flow_covers_every_month_not_just_the_latest(data, records):
+    periods = {r.period for r in records if r.series == "acquired"}
+    assert "2026-07" in periods
+    assert len(periods) >= 25
