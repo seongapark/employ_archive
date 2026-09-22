@@ -24,7 +24,7 @@ const SERIES = [
 ];
 
 function values(html) {
-  return [...html.matchAll(/class="kpi__value num">([^<]+)</g)].map(m => m[1]);
+  return [...html.matchAll(/class="kpi__value num[^"]*">([^<]+)</g)].map(m => m[1]);
 }
 
 test('the grid reads as two rows of three', () => {
@@ -64,6 +64,48 @@ test('a month the survey has not published yet shows no invented numbers', () =>
 
 test('a source with no indicators of its own gets no grid at all', () => {
   assert.equal(kpiBlockHtml(SERIES, { source: 'est', period: '2026-08' }), '');
+});
+
+// ── 행정통계 KPI ──────────────────────────────────────────────────────
+
+function ei(over = {}) {
+  return {
+    id: 'x', source: 'ei', series: 'acquired', breakdown: 'total',
+    category: null, period: '2026-07', value: 660.0, unit: '천명', yoy: 33.0,
+    released_at: '2026-08-11', release_url: 'https://www.moel.go.kr/x',
+    attachments: [], collected_at: '2026-09-21T09:00:00+09:00', ...over,
+  };
+}
+
+// 2026년 7월 실측값.
+const EI_SERIES = [
+  ei({ series: 'acquired', value: 660.0, yoy: 33.0 }),
+  ei({ series: 'separated', value: 634.0, yoy: 23.0 }),
+  ei({ series: 'benefit_new', value: 109.0, yoy: -2.0 }),
+  ei({ series: 'benefit_paid', value: 643.0, yoy: -31.0 }),
+  ei({ series: 'benefit_amount', value: 10904.0, unit: '억원', yoy: -218.0 }),
+];
+
+test('the administrative grid is two rows of two and three', () => {
+  const html = kpiBlockHtml(EI_SERIES, { source: 'ei', period: '2026-07' });
+  assert.deepEqual(values(html),
+    ['66.0만명', '63.4만명', '10.9만명', '64.3만명', '10,904억원']);
+  assert.ok(html.includes('--cols:2'), '고용보험 행은 두 칸이다');
+  assert.ok(html.includes('--cols:3'), '구직급여 행은 세 칸이다');
+});
+
+test('the insured headcount is not repeated under the card that already shows it', () => {
+  // 화면 맨 위 카드가 이미 상시가입자수와 증감을 말한다.
+  const html = kpiBlockHtml(
+    [...EI_SERIES, ei({ series: 'headcount', value: 15877.0, yoy: 277.0 })],
+    { source: 'ei', period: '2026-07' });
+  assert.ok(!html.includes('1,587.7만명'));
+});
+
+test('the payout keeps its own unit inside the grid', () => {
+  const html = kpiBlockHtml(EI_SERIES, { source: 'ei', period: '2026-07' });
+  assert.ok(html.includes('10,904억원'));
+  assert.ok(html.includes('-218억원'));
 });
 
 // ── 추이의 연령 범위 스위치 ────────────────────────────────────────────

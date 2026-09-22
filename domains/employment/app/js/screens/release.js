@@ -25,7 +25,7 @@ const TREND_MONTHS = 25;
 // 44.1% 는 그 옆에 15~64세 70.4% 가 없으면 높은지 낮은지 알 수 없는 숫자다.
 //
 // 연령 기준을 세 열에 고정했으므로 지표를 한 행 더 얹기도 쉽다(참가율 등).
-const SCOPES = [
+const EAPS_SCOPES = [
   { key: 'total', label: '15세 이상', tab: '15세 이상', sub: '전체' },
   { key: '15-64', label: '15~64세', tab: '15~64세', sub: 'OECD 기준',
     breakdown: 'scope', category: '15-64' },
@@ -33,10 +33,34 @@ const SCOPES = [
     breakdown: 'scope', category: '15-29' },
 ];
 
+// 행정통계의 범위 축은 연령이 아니라 산업이다.
+//
+// 제조업은 실제 표준산업분류 대분류라 산업 축(`industry`/`C`)에 그대로 있다.
+// 서비스업은 대분류가 아니라 여러 대분류를 묶은 집계여서, 산업 축에 넣으면
+// 속성별 매트릭스에서 대분류들과 나란히 서서 이중 계상으로 읽힌다 —
+// 경활의 15~64세와 같은 이유로 `scope` 축에 싣는다.
+const EI_SCOPES = [
+  { key: 'total', label: '전산업', tab: '전체', sub: '전 산업' },
+  { key: 'C', label: '제조업', tab: '제조업', sub: '대분류 C',
+    breakdown: 'industry', category: 'C' },
+  { key: 'services', label: '서비스업', tab: '서비스업', sub: '집계',
+    breakdown: 'scope', category: 'services' },
+];
+
+// 경활의 KPI 열은 연령 기준 셋이다. 지표 하나를 세 범위로 펼쳐 한 행을 만든다.
+// 이 헬퍼가 있어서 kpiRows 는 출처를 가리지 않는 한 가지 모양
+// (`{name, tiles}`)으로 통일되고, 경활이 뱉는 HTML 은 그대로다.
+function scopeTiles(indicator) {
+  return EAPS_SCOPES.map(s => ({
+    label: s.label, sub: s.sub, indicator,
+    breakdown: s.breakdown || 'total', category: s.category || null,
+  }));
+}
+
 export const DEFAULT_SCOPE = 'total';
 
 function scopeOf(key) {
-  return SCOPES.find(s => s.key === key) || SCOPES[0];
+  return EAPS_SCOPES.find(s => s.key === key) || EAPS_SCOPES[0];
 }
 
 // 출처마다 발표하는 지표가 다르다. 지금은 경활만 총괄 지표를 읽는다 —
@@ -44,9 +68,10 @@ function scopeOf(key) {
 // 여기 없는 출처는 지표 구역 자체가 뜨지 않는다.
 const INDICATORS = {
   eaps: {
+    scopes: EAPS_SCOPES,
     kpiRows: [
-      { name: '고용률', indicator: 'employment_rate' },
-      { name: '실업률', indicator: 'unemployment_rate' },
+      { name: '고용률', tiles: scopeTiles('employment_rate') },
+      { name: '실업률', tiles: scopeTiles('unemployment_rate') },
     ],
     trends: [
       { name: '취업자', indicator: 'headcount' },
@@ -55,6 +80,38 @@ const INDICATORS = {
       { name: '실업률', indicator: 'unemployment_rate' },
       { name: '경제활동참가율', indicator: 'participation_rate' },
       { name: '비경제활동인구', indicator: 'inactive' },
+    ],
+  },
+  ei: {
+    scopes: EI_SCOPES,
+    // 상시가입자수는 KPI 에 넣지 않는다 — 화면 맨 위 카드가 이미 그 숫자와
+    // 증감을 말하므로 바로 아래 판에서 되풀이된다. 경활은 카드가 취업자수,
+    // KPI 가 고용률·실업률이라 겹치지 않았다.
+    //
+    // 행마다 칸 수가 다르다. 두 칸짜리 행에 빈 칸을 하나 두면 판이 깨져
+    // 보이고, 세 번째 칸을 채우려면 원문에 없는 숫자(순증 = 취득 − 상실)를
+    // 만들어야 한다.
+    kpiRows: [
+      { name: '고용보험', tiles: [
+        { label: '취득자수', sub: '피보험자격', indicator: 'acquired' },
+        { label: '상실자수', sub: '피보험자격', indicator: 'separated' },
+      ] },
+      { name: '구직급여', tiles: [
+        { label: '신규신청', sub: '당월', indicator: 'benefit_new' },
+        { label: '지급자수', sub: '당월', indicator: 'benefit_paid' },
+        { label: '지급액', sub: '당월', indicator: 'benefit_amount' },
+      ] },
+    ],
+    trends: [
+      { name: '상시가입자', indicator: 'headcount' },
+      { name: '취득자', indicator: 'acquired' },
+      { name: '상실자', indicator: 'separated' },
+      { name: '구직급여 신규신청자', indicator: 'benefit_new' },
+      { name: '구직급여 지급자', indicator: 'benefit_paid' },
+      { name: '구직급여 지급액', indicator: 'benefit_amount' },
+      { name: '신규구인인원', indicator: 'job_openings' },
+      { name: '신규구직인원', indicator: 'job_seekers' },
+      { name: '구인배수', indicator: 'openings_ratio' },
     ],
   },
 };
@@ -92,16 +149,20 @@ function moversHtml(groups) {
     + '<p class="movers__note">전년동월대비 증감 · 누르면 세 출처를 나란히 봅니다</p>';
 }
 
-function kpiHtml(scope, point) {
-  const label = `<div class="kpi__label">${esc(scope.label)}<span class="kpi__sub">${esc(scope.sub)}</span></div>`;
+function kpiHtml(tile, point) {
+  const sub = tile.sub ? `<span class="kpi__sub">${esc(tile.sub)}</span>` : '';
+  const label = `<div class="kpi__label">${esc(tile.label)}${sub}</div>`;
   if (!point) {
     // 없는 달에 빈 칸을 두면 판이 무너져 열이 어긋난다. 자리는 지키되 숫자는
     // 짓지 않는다.
     return `<div class="kpi kpi--empty">${label}
       <div class="kpi__value kpi__value--empty">미발표</div></div>`;
   }
+  // 비율이 아닌 값은 글자가 길다 — `10,904억원`·`64.3만명` 은 20px 로 칸을
+  // 넘는다(400px 화면에서 한 칸이 약 113px).
+  const wide = point.unit === '%' ? '' : ' kpi__value--wide';
   return `<div class="kpi">${label}
-    <div class="kpi__value num">${esc(fmtValue(point.value, point.unit))}</div>
+    <div class="kpi__value num${wide}">${esc(fmtValue(point.value, point.unit))}</div>
     <div class="kpi__delta num ${deltaTone(point.yoy)}">${esc(fmtChange(point.yoy, point.unit))}</div>
   </div>`;
 }
@@ -112,16 +173,17 @@ export function kpiBlockHtml(series, { source, period } = {}) {
   const spec = INDICATORS[source];
   if (!spec || !spec.kpiRows) return '';
   const rows = spec.kpiRows.map(row => {
-    const tiles = SCOPES.map(scope => {
+    const tiles = row.tiles.map(tile => {
       const points = indicatorSeries(series, {
-        source, indicator: row.indicator,
-        breakdown: scope.breakdown || 'total', category: scope.category || null,
+        source, indicator: tile.indicator,
+        breakdown: tile.breakdown || 'total', category: tile.category || null,
       });
-      return kpiHtml(scope, points.find(p => p.period === period) || null);
+      return kpiHtml(tile, points.find(p => p.period === period) || null);
     }).join('');
     // 행 이름은 한 번만 쓴다. 타일마다 `고용률` 을 반복하면 여섯 칸이 전부
     // 같은 말로 시작해 정작 다른 것(연령 기준)이 묻힌다.
-    return `<h3 class="kpis__row">${esc(row.name)}</h3><div class="kpis">${tiles}</div>`;
+    return `<h3 class="kpis__row">${esc(row.name)}</h3>
+      <div class="kpis" style="--cols:${row.tiles.length}">${tiles}</div>`;
   }).join('');
   return `<h2 class="section__title">주요 지표</h2>${rows}`;
 }
@@ -140,7 +202,7 @@ function trendHead(name, point) {
 // 범위를 골라 시간에 따라 훑는 자리다. 한 그림에 세 범위를 겹치면 25개월짜리
 // 낮은 그림에 선이 셋 들어가 아무것도 안 읽힌다.
 function scopeTabs(current) {
-  return `<div class="scopes" role="tablist">${SCOPES.map(s =>
+  return `<div class="scopes" role="tablist">${EAPS_SCOPES.map(s =>
     `<button type="button" class="scopes__tab${s.key === current ? ' scopes__tab--active' : ''}"
       role="tab" aria-selected="${s.key === current}" data-scope="${esc(s.key)}">${esc(s.tab)}</button>`
   ).join('')}</div>`;

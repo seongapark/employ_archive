@@ -800,11 +800,11 @@
    이 화면에서 큰 숫자를 쓰는 자리는 카드와 여기뿐이다. 넷은 보도자료가
    직접 앞세우는 지표라, 아래 접힌 요약을 펴면 같은 숫자가 문장으로 나온다. */
 
-/* 행이 지표, 열이 연령 기준(15세 이상 · 15~64세 · 15~29세). 세 열을 고정해
-   두었으므로 지표를 한 행 더 얹어도 판이 그대로 선다. */
+/* 행이 저마다 칸 수를 싣는다. 경활은 셋(연령 기준)이고 행정통계는 행에 따라
+   둘·셋이다. 기본값 3 이라 경활 쪽은 아무것도 바뀌지 않는다. */
 .kpis {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(var(--cols, 3), 1fr);
   gap: 6px;
   padding: 0 16px;
 }
@@ -855,6 +855,12 @@
   font-size: 15px;
   font-weight: 600;
   color: var(--text-muted);
+}
+
+/* 비율이 아닌 값은 글자가 길다. `10,904억원` 은 20px 로 한 칸(약 113px)을
+   넘어 잘린다. */
+.kpi__value--wide {
+  font-size: 16px;
 }
 
 .kpi__delta {
