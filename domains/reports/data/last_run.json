@@ -1,5 +1,5 @@
 {
-  "at": "2026-09-21T11:22:13+09:00",
+  "at": "2026-09-22T11:30:43+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -163,13 +163,13 @@
     },
     "kiet-podata": {
       "ok": true,
-      "parsed": 30,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": false,
+      "parsed": 60,
+      "added": 1,
+      "details": 1,
+      "reached_cutoff": true,
       "skipped_old": 0,
       "error": null,
-      "total": 36
+      "total": 37
     },
     "kiet-paper": {
       "ok": true,
@@ -323,17 +323,17 @@
     },
     "bok-research": {
       "ok": true,
-      "parsed": 100,
-      "added": 0,
-      "details": 0,
+      "parsed": 200,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 403
+      "total": 404
     }
   },
   "unregistered": [],
-  "reports": 3442,
+  "reports": 3444,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -362,48 +362,16 @@
         "rate": 0.387
       }
     },
-    "kiet": {
-      "i-KIET": {
-        "total": 121,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "월간 산업경제": {
-        "total": 415,
-        "missing": 37,
-        "rate": 0.089
-      },
-      "연구자료": {
-        "total": 82,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "이슈페이퍼": {
-        "total": 82,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "연구보고서": {
-        "total": 159,
-        "missing": 7,
-        "rate": 0.044
-      },
-      "정책자료": {
-        "total": 36,
-        "missing": 0,
-        "rate": 0.0
-      }
-    },
     "bok": {
+      "조사연구자료": {
+        "total": 397,
+        "missing": 389,
+        "rate": 0.98
+      },
       "BOK 이슈노트": {
         "total": 213,
         "missing": 23,
         "rate": 0.108
-      },
-      "조사연구자료": {
-        "total": 396,
-        "missing": 390,
-        "rate": 0.985
       },
       "국제경제이슈": {
         "total": 1,
@@ -434,6 +402,38 @@
         "total": 8,
         "missing": 8,
         "rate": 1.0
+      }
+    },
+    "kiet": {
+      "i-KIET": {
+        "total": 121,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "월간 산업경제": {
+        "total": 415,
+        "missing": 37,
+        "rate": 0.089
+      },
+      "정책자료": {
+        "total": 37,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구자료": {
+        "total": 82,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "이슈페이퍼": {
+        "total": 82,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구보고서": {
+        "total": 159,
+        "missing": 7,
+        "rate": 0.044
       }
     },
     "kli": {
@@ -512,9 +512,9 @@
     }
   },
   "abstract_missing_why": {
-    "요약 섹션 없음": 487,
-    "텍스트가 없는 스캔본": 225,
-    "요약 없음": 148,
+    "요약 섹션 없음": 507,
+    "텍스트가 없는 스캔본": 242,
+    "요약 없음": 110,
     "원문 없음": 46,
     "내려받기 실패: Failed to perform, curl: (6) Could not resolve host: www.bok.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.": 13,
     "PDF 를 열 수 없음: list index out of range": 4,
@@ -523,22 +523,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 303596,
-    "abstracts_gzip": 3429566,
+    "reports_gzip": 303813,
+    "abstracts_gzip": 3447766,
     "abstracts_shards_gzip": {
-      "bok": 260984,
+      "bok": 277191,
       "kdi": 889333,
       "keis": 256203,
-      "kiet": 705958,
+      "kiet": 707951,
       "kli": 1317088
     }
   },
   "recommend": {
-    "judged": 3442,
+    "judged": 3444,
     "picked": 366,
     "unjudged": 0,
     "profile_version": "5a624049",
-    "title_only": 933,
-    "at": "2026-09-21T11:20:41+09:00"
+    "title_only": 934,
+    "at": "2026-09-22T11:32:37+09:00"
   }
 }

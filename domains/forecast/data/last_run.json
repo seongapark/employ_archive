@@ -1,56 +1,47 @@
 {
-  "run_at": "2026-09-21T11:38:34.531508+09:00",
+  "run_at": "2026-09-22T11:32:38.189202+09:00",
   "collectors": {
     "oecd": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 8,
       "added": 0
     },
     "imf": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 6,
       "added": 0
     },
     "bok": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 30,
       "added": 0
     },
     "kdi": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 16,
       "added": 0
     },
     "kli": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 9,
       "added": 0
     },
     "kiet": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 3,
       "added": 0
     },
     "keis": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 9,
       "added": 0
     },
     "moef": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 8,
       "added": 0
     }
   },
   "conflicts": [],
-  "errors": [
-    "oecd: ConnectionError: HTTPSConnectionPool(host='sdmx.oecd.org', port=443): Max retries exceeded with url: /public/rest/data/OECD.ECO.MAD,DSD_EO@DF_EO,/KOR.GDPV_ANNPCT+UNR+CPI_YTYPCT+ET.A?startPeriod=2000&endPeriod=2100&format=csvfilewithlabels (Caused by NameResolutionError(\"HTTPSConnection(host='sdmx.oecd.org', port=443): Failed to resolve 'sdmx.oecd.org' ([Errno 11001] getaddrinfo failed)\"))",
-    "imf: DNSError: Failed to perform, curl: (6) Could not resolve host: www.imf.org. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-    "bok: DNSError: Failed to perform, curl: (6) Could not resolve host: www.bok.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-    "kdi: DNSError: Failed to perform, curl: (6) Could not resolve host: www.kdi.re.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-    "kli: DNSError: Failed to perform, curl: (6) Could not resolve host: www.kli.re.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-    "kiet: DNSError: Failed to perform, curl: (6) Could not resolve host: www.kiet.re.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-    "keis: DNSError: Failed to perform, curl: (6) Could not resolve host: www.keis.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-    "moef: DNSError: Failed to perform, curl: (6) Could not resolve host: www.moef.go.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
-  ]
+  "errors": []
 }

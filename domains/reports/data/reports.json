@@ -16,6 +16,22 @@
   ]
  },
  {
+  "id": "bok-11064898",
+  "org": "bok",
+  "board": "bok-research",
+  "series": "조사연구자료",
+  "title": "호우·강풍이 제주 관광 소비에 미치는 영향",
+  "authors": [
+   "제주본부"
+  ],
+  "published": "2026-09-21",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11064898&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/e6a8f3acdd424889b050533b3317f0a6/1/01056913e90e489fb0d14ec976bcf4ad.hwpx",
+  "matched": []
+ },
+ {
   "id": "kiet-is867",
   "org": "kiet",
   "board": "kiet-issue",
@@ -1834,6 +1850,26 @@
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11062717&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/b1277db4be9b4193befd053d87ca19d2/1/0691c8651a1048bdb18098d253ef8c8b.hwp",
   "matched": []
+ },
+ {
+  "id": "kiet-pd384",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "자동차 시세하락손해의 실증분석과 정책 체계 개선 방안",
+  "authors": [
+   "이홍",
+   "천가현",
+   "박나연"
+  ],
+  "published": "2026-07-03",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=384&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "노사관계"
+  ]
  },
  {
   "id": "kiet-is862",
@@ -30164,7 +30200,9 @@
   "pages": null,
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=10089233&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=2&programType=newsData&menuNo=200560&oldMenuNo=200560",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/2ff1f3b5bd7445ca9b76ae925a353daf/1/f974a0ae79fb4b40a33eacf2073afb7b.pdf",
-  "matched": []
+  "matched": [
+   "일자리정책"
+  ]
  },
  {
   "id": "kli-10128",
@@ -30309,7 +30347,10 @@
   "pages": null,
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=10089159&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=2&programType=newsData&menuNo=200560&oldMenuNo=200560",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/a610401d44f4495ca70f4a7c1ce23cbd/1/7f7d4dbe0c654ccf97fbb87d4edb321d.pdf",
-  "matched": []
+  "matched": [
+   "외국인력",
+   "일자리정책"
+  ]
  },
  {
   "id": "bok-10089131",

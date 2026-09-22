@@ -33551,5 +33551,23 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-09-21T11:20:41+09:00"
+ },
+ "bok-11064898": {
+  "pick": false,
+  "axis": "",
+  "why": "기상이 제주 관광 소비에 주는 영향, 고용 무관",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-22T11:32:37+09:00"
+ },
+ "kiet-pd384": {
+  "pick": false,
+  "axis": "",
+  "why": "사고차 시세하락과 자동차보험 보상 산식 실증",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-22T11:32:37+09:00"
  }
 }
