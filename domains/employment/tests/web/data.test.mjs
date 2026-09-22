@@ -420,6 +420,24 @@ test('a change of exactly zero carries no sign', () => {
   assert.equal(deltaTone(0), 'is-flat');
 });
 
+test('money is counted in 억원, not in people', () => {
+  // 천명 규칙으로 그리면 구직급여 지급액 10,904억원이 `1,090.4만명` 이 된다.
+  assert.equal(fmtValue(10904.0, '억원'), '10,904억원');
+  assert.equal(fmtChange(-218.0, '억원'), '-218억원');
+  assert.equal(fmtChange(0, '억원'), '0억원');
+});
+
+test('the openings ratio keeps two decimals', () => {
+  // 첫째 자리로 줄이면 한 달 변화(0.02~0.04)가 전부 `+0.0배` 로 뭉개진다.
+  assert.equal(fmtValue(0.44, '배'), '0.44배');
+  assert.equal(fmtChange(0.04, '배'), '+0.04배');
+  assert.equal(fmtChange(-0.08, '배'), '-0.08배');
+});
+
+test('an unknown unit falls back to the headcount rule rather than printing NaN', () => {
+  assert.equal(fmtValue(29151.0, undefined), '2,915.1만명');
+});
+
 test('an unknown change says so instead of printing zero', () => {
   assert.equal(fmtChange(null, '%'), EMPTY_LABEL.noDelta);
   assert.equal(fmtChange(undefined, '천명'), EMPTY_LABEL.noDelta);

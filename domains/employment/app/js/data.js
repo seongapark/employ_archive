@@ -319,18 +319,47 @@ export function topMovers(series, { source, period, segments, limit = 3 } = {}) 
 // 단위를 모르는 포맷터가 가장 위험하다. fmtLevel/fmtDelta 는 천명→만명 변환을
 // 무조건 하므로 고용률 63.3 을 넣으면 `6.3만명` 이 된다. 이 둘은 레코드가 들고
 // 있는 unit 을 보고 갈라진다.
-export function fmtValue(value, unit) {
-  if (value === null || value === undefined) return EMPTY_LABEL.unpublished;
-  return unit === '%' ? `${value.toFixed(1)}%` : fmtLevel(value);
+function signOf(value) {
+  // 0 은 증가도 감소도 아니다. `+0.0%p` 라 쓰면 올랐다는 뜻으로 읽힌다.
+  return value > 0 ? '+' : value < 0 ? '-' : '';
 }
 
-// 비율의 증감은 증감량이 아니라 %p 차이다. 그리고 정확히 0 은 부호를 달지
-// 않는다 — `전년동월과 동일` 을 `+0.0%p` 라 쓰면 올랐다는 뜻으로 읽힌다.
+// 단위마다 값과 증감의 표기가 다르다. if 사슬로 두면 단위가 넷이 되는 순간
+// 읽히지 않고, 빠뜨린 단위가 조용히 천명 규칙으로 그려진다 — 구직급여
+// 지급액 10,904억원이 `1,090.4만명` 이 된다.
+const UNIT_FMT = {
+  '천명': { value: fmtLevel, change: fmtDelta },
+  // 비율의 증감은 증감량이 아니라 %p 차이다.
+  '%': {
+    value: v => `${v.toFixed(1)}%`,
+    change: v => `${signOf(v)}${Math.abs(v).toFixed(1)}%p`,
+  },
+  '억원': {
+    value: v => `${Math.round(v).toLocaleString('ko-KR')}억원`,
+    change: v => `${signOf(v)}${Math.round(Math.abs(v)).toLocaleString('ko-KR')}억원`,
+  },
+  // 배는 소수 둘째 자리까지다. 첫째 자리로 줄이면 한 달 변화(0.02~0.04)가
+  // 전부 `+0.0배` 로 뭉개진다.
+  '배': {
+    value: v => `${v.toFixed(2)}배`,
+    change: v => `${signOf(v)}${Math.abs(v).toFixed(2)}배`,
+  },
+};
+
+function fmtOf(unit) {
+  return UNIT_FMT[unit] || UNIT_FMT['천명'];
+}
+
+export function fmtValue(value, unit) {
+  if (value === null || value === undefined) return EMPTY_LABEL.unpublished;
+  return fmtOf(unit).value(value);
+}
+
+// 정확히 0 은 부호를 달지 않는다 — `전년동월과 동일` 을 `+0.0%p` 라 쓰면
+// 올랐다는 뜻으로 읽힌다.
 export function fmtChange(yoy, unit) {
   if (yoy === null || yoy === undefined) return EMPTY_LABEL.noDelta;
-  if (unit !== '%') return fmtDelta(yoy);
-  const sign = yoy > 0 ? '+' : yoy < 0 ? '-' : '';
-  return `${sign}${Math.abs(yoy).toFixed(1)}%p`;
+  return fmtOf(unit).change(yoy);
 }
 
 // 한 출처의 한 지표를 시간 순으로. breakdown 기본값이 'total' 이라 인구 범위
