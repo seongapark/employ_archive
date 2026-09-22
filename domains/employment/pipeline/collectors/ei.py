@@ -392,6 +392,69 @@ def benefit_records(level, delta, **meta) -> list[SeriesRecord]:
     return out
 
 
+MARKET_HEADER_KEYS = ("신규구인인원", "신규구직인원", "구인배수")
+
+# 0=월 1=신규구인 2=신규구직 3=구인배수 4~10=신규구직인원의 성·연령
+# 성·연령 분해는 저장하지 않는다 — 그릴 자리가 없다.
+MARKET_COLUMNS = {"job_openings": 1, "job_seekers": 2, "openings_ratio": 3}
+MARKET_UNITS = {"job_openings": "천명", "job_seekers": "천명", "openings_ratio": "배"}
+
+
+def _is_market_level(table) -> bool:
+    """수준 표에서만 구인배수 = 신규구인 ÷ 신규구직 이 맞는다.
+
+    실측(2026-07) 수준 177 ÷ 399 = 0.4436 vs 표 0.44 — 반올림 안이다.
+    증감 12.8 ÷ -11.5 = -1.11 vs 0.04 — 부호부터 다르다.
+    """
+    rows = month_rows(table)
+    if not rows:
+        return False
+    _, row = rows[-1]
+    openings, seekers, ratio = (_num(row[c]) if c < len(row) else None
+                                for c in (1, 2, 3))
+    if not openings or not seekers or ratio is None:
+        return False
+    return abs(openings / seekers - ratio) <= 0.01
+
+
+def find_market_tables(tables) -> tuple[list, list]:
+    """고용24 신규구인·신규구직·구인배수 표의 수준·증감 표.
+
+    헤더가 같은 표가 둘(수준·증감)뿐이다 — 증감률 표가 없어 판별에 쓸 세 번째
+    항등식이 없다. 후보가 정확히 둘이어야 한다는 개수 검사가 유일한 방패다.
+    셋 이상이면(증감률 표가 새로 생기는 등 서식이 바뀌면) cand[1]이 조용히
+    증감률이 되어 백분율이 yoy 로 들어갈 수 있으므로, 추측 대신 실패한다.
+    """
+    cand = [g for g in tables
+            if g and len(g[0]) >= 4 and all(k in _flat(g[0]) for k in MARKET_HEADER_KEYS)]
+    if len(cand) != 2:
+        raise ValueError(f"고용24 구인·구직 표 후보가 {len(cand)}개다(수준·증감 2개여야 한다) — 서식이 바뀌었을 수 있다")
+    if not _is_market_level(cand[0]):
+        raise ValueError(
+            "고용24 표의 첫 장이 수준 표가 아니다(구인배수가 신규구인÷신규구직과 "
+            "맞지 않는다) — 표 순서나 서식이 바뀌었을 수 있다")
+    return cand[0], cand[1]
+
+
+def market_records(level, delta, **meta) -> list[SeriesRecord]:
+    deltas = {period: row for period, row in month_rows(delta)}
+    out: list[SeriesRecord] = []
+    for period, row in month_rows(level):
+        drow = deltas.get(period, [])
+        for series, col in MARKET_COLUMNS.items():
+            value = _num(row[col]) if col < len(row) else None
+            if value is None:
+                continue
+            out.append(SeriesRecord(
+                id=make_id("ei", period, "total", None, series=series),
+                source="ei", series=series, breakdown="total", category=None,
+                period=period, value=value, unit=MARKET_UNITS[series],
+                yoy=_num(drow[col]) if col < len(drow) else None,
+                **meta,
+            ))
+    return out
+
+
 def parse(data: bytes, *, released_at: date, release_url: str,
           attachments: list[Attachment], collected_at: datetime) -> list[SeriesRecord]:
     tables = hwpx.tables(data)
@@ -490,6 +553,11 @@ def parse(data: bytes, *, released_at: date, release_url: str,
     records += benefit_records(benefit_level, benefit_delta,
                                released_at=released_at, release_url=release_url,
                                attachments=attachments, collected_at=collected_at)
+
+    market_level, market_delta = find_market_tables(tables)
+    records += market_records(market_level, market_delta,
+                              released_at=released_at, release_url=release_url,
+                              attachments=attachments, collected_at=collected_at)
     return records
 
 

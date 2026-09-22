@@ -77,9 +77,12 @@ def test_layout_check_rejects_a_changed_header(data):
 
 def test_every_record_is_ei_in_thousands(records):
     assert {r.source for r in records} == {"ei"}
-    # benefit_amount(구직급여 지급액)만 억원이다 — 사람 머릿수가 아니라 돈이라
-    # 단위가 다르다. 그 편은 test_the_payout_is_money_not_people 가 따로 본다.
-    assert {r.unit for r in records if r.series != "benefit_amount"} == {"천명"}
+    # benefit_amount(구직급여 지급액)는 억원, openings_ratio(구인배수)는 배다 —
+    # 둘 다 사람 머릿수가 아니라 돈·비율이라 단위가 다르다. 그 편은
+    # test_the_payout_is_money_not_people·test_the_ratio_is_counted_in_multiples_not_in_people 가
+    # 따로 본다.
+    assert {r.unit for r in records
+            if r.series not in ("benefit_amount", "openings_ratio")} == {"천명"}
 
 
 def test_ids_are_unique(records):
@@ -363,3 +366,37 @@ def test_find_benefit_tables_fails_when_delta_and_rate_are_swapped(data, monkeyp
     monkeypatch.setattr(ei, "_delta_matches_rate", lambda level, delta, rate: False)
     with pytest.raises(ValueError, match="순서"):
         ei.find_benefit_tables(hwpx.tables(data))
+
+
+# ── 총괄 지표: 고용24 구인·구직 ─────────────────────────────────────────
+
+def test_finds_the_market_level_table_by_the_ratio_identity(data):
+    level, delta = ei.find_market_tables(hwpx.tables(data))
+    assert ei._is_market_level(level) is True
+    # 증감 표에서는 12.8 ÷ -11.5 가 0.04 가 될 수 없다.
+    assert ei._is_market_level(delta) is False
+
+
+def test_market_records_carry_level_and_change(records):
+    latest = {r.series: r for r in records
+              if r.period == "2026-07" and r.breakdown == "total"}
+    assert (latest["job_openings"].value, latest["job_openings"].yoy) == (177.0, 12.8)
+    assert (latest["job_seekers"].value, latest["job_seekers"].yoy) == (399.0, -11.5)
+    assert (latest["openings_ratio"].value, latest["openings_ratio"].yoy) == (0.44, 0.04)
+
+
+def test_the_ratio_is_counted_in_multiples_not_in_people(records):
+    ratio = next(r for r in records
+                 if r.series == "openings_ratio" and r.period == "2026-07")
+    assert ratio.unit == "배"
+
+
+def test_find_market_tables_fails_when_a_third_candidate_appears(data):
+    # 고용24는 헤더가 같은 표가 수준·증감 둘뿐이다. 증감률 표까지 같은 헤더로
+    # 새로 생기면 판별에 쓸 세 번째 항등식이 없다 — 추측 대신 개수로 막는다.
+    # 그러지 않으면 cand[1]이 조용히 증감률이 되어 백분율이 yoy에 들어간다.
+    cand = [g for g in hwpx.tables(data)
+            if g and len(g[0]) >= 4 and all(k in ei._flat(g[0]) for k in ei.MARKET_HEADER_KEYS)]
+    assert len(cand) == 2
+    with pytest.raises(ValueError, match="3개"):
+        ei.find_market_tables(cand + [cand[0]])
