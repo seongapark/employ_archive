@@ -689,6 +689,9 @@ def parse(data: bytes, *, released_at: date, release_url: str,
 
 
 EXPECTED_CODES = set("ACDEFGHIJKLMNOPQRS")
+EXPECTED_SERIES = ("headcount", "acquired", "separated",
+                   "benefit_new", "benefit_paid", "benefit_amount",
+                   "job_openings", "job_seekers", "openings_ratio")
 
 
 def check_coverage(records: list[SeriesRecord]) -> None:
@@ -716,6 +719,26 @@ def check_coverage(records: list[SeriesRecord]) -> None:
         if missing:
             name = "성별" if breakdown == "sex" else "연령"
             raise ValueError(f"{latest} 에 빠진 {name} 분류: {sorted(missing)}")
+
+    # 지표 축. 열이 밀려 한 지표가 통째로 빠지면 화면에서는 그냥 없는 그림으로
+    # 보일 뿐 아무 흔적도 남지 않는다.
+    present = {r.series for r in records
+               if r.period == latest and r.breakdown == "total"}
+    missing = set(EXPECTED_SERIES) - present
+    if missing:
+        raise ValueError(f"{latest} 에 빠진 지표: {sorted(missing)}")
+
+    # 범위 탭이 쓰는 두 집계.
+    if not any(r.period == latest and r.breakdown == "scope"
+               and r.category == SERVICES_CATEGORY for r in records):
+        raise ValueError(f"{latest} 에 서비스업 집계가 없다")
+    made = {r.series for r in records
+            if r.period == latest and r.breakdown == "industry"
+            and r.category == MANUFACTURING_CATEGORY}
+    # 괄호가 필요하다 — `|` 보다 `-` 가 먼저 묶여 headcount 검사가 사라진다.
+    missing = (set(INDUSTRY_SERIES) | {"headcount"}) - made
+    if missing:
+        raise ValueError(f"{latest} 에 빠진 제조업 지표: {sorted(missing)}")
 
 
 MAX_MONTHS_BEHIND = 2      # 전월 기준으로 매월 공표된다 (sources.json 의 release_rule)

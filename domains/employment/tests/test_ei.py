@@ -136,6 +136,28 @@ def test_coverage_check_fails_when_the_total_row_vanishes(records):
         ei.check_coverage(thinned)
 
 
+def test_coverage_demands_every_indicator_in_the_latest_month(records):
+    ei.check_coverage(records)      # 실물은 통과해야 한다
+    thinned = [r for r in records if r.series != "benefit_amount"]
+    with pytest.raises(ValueError, match="benefit_amount"):
+        ei.check_coverage(thinned)
+
+
+def test_coverage_demands_the_services_aggregate(records):
+    thinned = [r for r in records
+               if not (r.breakdown == "scope" and r.category == "services")]
+    with pytest.raises(ValueError, match="서비스업"):
+        ei.check_coverage(thinned)
+
+
+def test_coverage_demands_the_manufacturing_columns(records):
+    thinned = [r for r in records
+               if not (r.breakdown == "industry" and r.category == "C"
+                       and r.series == "job_openings")]
+    with pytest.raises(ValueError, match="제조업"):
+        ei.check_coverage(thinned)
+
+
 def _shift(period: str, months: int) -> str:
     year, month = (int(x) for x in period.split("-"))
     total = year * 12 + (month - 1) - months
