@@ -486,6 +486,31 @@ def test_services_is_an_aggregate_on_the_scope_axis_not_an_industry(records):
 RELEASES = Path(__file__).parents[3] / "domains" / "press" / "sources" / "releases"
 
 
+def longest_consecutive_run(periods) -> int:
+    # 그래프가 첫 수집만으로 가득 차려면 개수가 아니라 '끊기지 않은 구간'이
+    # 필요하다 — 연도 경계가 잘못 밀리면 개수는 그대로인데 구간만 끊긴다.
+    months = sorted(periods)
+    if not months:
+        return 0
+    best = run = 1
+    for prev, cur in zip(months, months[1:]):
+        py, pm = (int(x) for x in prev.split("-"))
+        cy, cm = (int(x) for x in cur.split("-"))
+        if (py * 12 + pm) + 1 == (cy * 12 + cm):
+            run += 1
+        else:
+            run = 1
+        best = max(best, run)
+    return best
+
+
+def test_longest_consecutive_run_ignores_scattered_months():
+    scattered = {f"{2000 + i}-01" for i in range(25)}
+    assert longest_consecutive_run(scattered) < 25
+    consecutive = {_shift("2026-01", m) for m in range(25)}
+    assert longest_consecutive_run(consecutive) == 25
+
+
 @pytest.mark.parametrize("name", ["ei_2026-06", "ei_2026-07", "ei_2026-08"])
 def test_every_stored_issue_parses_with_all_nine_indicators(name):
     # 한 회차만 통과하는 파서는 다음 달에 깨진다. 표 번호가 회차마다 밀리므로
@@ -504,4 +529,5 @@ def test_every_stored_issue_parses_with_all_nine_indicators(name):
     for series in ei.EXPECTED_SERIES:
         periods = {r.period for r in parsed
                    if r.series == series and r.breakdown == "total"}
-        assert len(periods) >= 25, f"{series} 가 {len(periods)}개월뿐이다"
+        run = longest_consecutive_run(periods)
+        assert run >= 25, f"{series} 의 연속 구간이 {run}개월뿐이다"
