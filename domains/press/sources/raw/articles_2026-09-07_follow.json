@@ -6,10 +6,10 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-22 16:57",
+ "collected_at": "2026-09-23 08:49",
  "volume": {
-  "collected": 240,
-  "articles": 57,
+  "collected": 244,
+  "articles": 58,
   "press": 51,
   "queries": 11
  },
@@ -17,21 +17,21 @@
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29292,
+   "api_total": 29293,
    "fetched": 100,
    "truncated": false,
-   "in_window": 67,
-   "relevant": 57,
-   "new": 66
+   "in_window": 68,
+   "relevant": 58,
+   "new": 67
   },
   {
    "query": "구직급여",
-   "api_total": 94404,
+   "api_total": 94406,
    "fetched": 200,
    "truncated": false,
-   "in_window": 151,
+   "in_window": 153,
    "relevant": 3,
-   "new": 136
+   "new": 138
   },
   {
    "query": "구인배수",
@@ -44,12 +44,12 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18518,
+   "api_total": 18519,
    "fetched": 100,
    "truncated": false,
-   "in_window": 29,
+   "in_window": 30,
    "relevant": 11,
-   "new": 14
+   "new": 15
   },
   {
    "query": "건설업 고용보험",
@@ -683,6 +683,16 @@
    "originallink": "https://news.knn.co.kr/news/article_sns/1794",
    "press": "KNN",
    "pub": "2026-09-22 15:36",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "대전시 ‘미래두배 청년통장’ 1500명 신규 모집",
+   "desc": "임금근로자는 주 30시간 이상 근로해야 하며 고용보험 미가입 근로계약 근로자도 관련 증빙을 제출하면... 가입자는 24개월 동안 매월 15만원을 납부하고 대전 거주와 대전 소재 사업장 근로를 유지해야 한다. 가입 후...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009187867?sid=102",
+   "originallink": "https://www.news1.kr/local/daejeon-chungnam/6299746",
+   "press": "뉴스1",
+   "pub": "2026-09-23 08:27",
    "q": "고용보험 가입자",
    "rel": true
   }
@@ -2515,6 +2525,36 @@
    "originallink": "https://www.etnews.com/20260922000173",
    "press": "전자신문",
    "pub": "2026-09-22 10:18",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "전북서도 '가짜 3.3' 위장고용, 노동권 사각지대 우려",
+   "desc": "이 경우 임금과 수당, 휴가뿐 아니라 산재·고용보험 등 노동자로서 누려야 할 권리와 사회안전망에서도 배제될 수 있다. 전국적으로는 청년층의 첫 일자리 진입이 많은 숙박·음식점업과 제조업 등에서도 위장고용...",
+   "link": "http://www.domin.co.kr/news/articleView.html?idxno=1569920",
+   "originallink": "http://www.domin.co.kr/news/articleView.html?idxno=1569920",
+   "press": "domin.co.kr",
+   "pub": "2026-09-22 17:18",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "이력서 몇 번이나 써보셨어요?",
+   "desc": "발언을 한 청년 또한 불안정한 구직 과정을 몸으로 겪은 사람이다. 한 달에 400번을 지원하고 일주일에 20번... 대신 그 유연함이 개인에게 떠넘기는 위험, 즉 실업급여의 공백, 재훈련의 부재, 소득 단절의 기간을 사회가...",
+   "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=236929",
+   "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=236929",
+   "press": "labortoday.co.kr",
+   "pub": "2026-09-23 06:34",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "음성군, '미니 채용박람회'...10개 기업 참여 109명 현장 면접",
+   "desc": "실업급여 상담, 노인·중장년 일자리 상담을 제공했다. 타로카드 취업상담과 지문 적성 검사 이벤트도 마련됐다. 양신우 일자리경제과장은 \"구직자와 기업을 연결하기 위해 미니 채용박람회를 분기마다 개최하고 있다...",
+   "link": "https://www.gukjenews.com/news/articleView.html?idxno=3703999",
+   "originallink": "https://www.gukjenews.com/news/articleView.html?idxno=3703999",
+   "press": "gukjenews.com",
+   "pub": "2026-09-23 08:40",
    "q": "구직급여",
    "rel": false
   }
