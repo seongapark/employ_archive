@@ -139,3 +139,12 @@ def test_money_and_ratio_units_are_accepted():
 def test_an_unknown_unit_is_still_refused():
     with pytest.raises(ValidationError):
         rec(unit="천건")
+
+
+def test_the_old_ids_do_not_move():
+    # 이미 쌓인 2,892건의 id 가 한 글자라도 바뀌면 upsert 가 같은 관측을
+    # 새 레코드로 보아 통째로 두 벌이 된다.
+    assert make_id("ei", "2026-07", "total", None) == "ei-2026-07-headcount-total"
+    assert make_id("ei", "2026-07", "industry", "C") == "ei-2026-07-headcount-industry-C"
+    assert (make_id("ei", "2026-07", "total", None, series="benefit_paid")
+            == "ei-2026-07-benefit_paid-total")
