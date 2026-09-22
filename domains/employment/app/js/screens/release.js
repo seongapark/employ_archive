@@ -47,6 +47,13 @@ const EI_SCOPES = [
     breakdown: 'scope', category: 'services' },
 ];
 
+// 탭이 왜 얇은지를 화면이 말한다. 그림이 줄어든 것만 보이면 수집이 고장난
+// 것처럼 읽힌다 — 실제로는 보도자료가 그 산업 구분을 안 내는 것이다.
+const SCOPE_NOTE = {
+  services: '고용행정통계는 서비스업 집계를 가입자수에만 냅니다.',
+  C: '취득·상실과 지급액·구직인원·구인배수는 산업별로 내지 않습니다.',
+};
+
 // 경활의 KPI 열은 연령 기준 셋이다. 지표 하나를 세 범위로 펼쳐 한 행을 만든다.
 // 이 헬퍼가 있어서 kpiRows 는 출처를 가리지 않는 한 가지 모양
 // (`{name, tiles}`)으로 통일되고, 경활이 뱉는 HTML 은 그대로다.
@@ -59,8 +66,16 @@ function scopeTiles(indicator) {
 
 export const DEFAULT_SCOPE = 'total';
 
-function scopeOf(key) {
-  return EAPS_SCOPES.find(s => s.key === key) || EAPS_SCOPES[0];
+function scopesOf(source) {
+  const spec = INDICATORS[source];
+  return (spec && spec.scopes) || EAPS_SCOPES;
+}
+
+// 출처를 옮기면 이전 화면의 범위 key 가 남아 있을 수 있다(경활의 `15-64` 를
+// 들고 행정통계로 들어오는 식). 모르는 key 는 첫 범위로 떨어뜨린다.
+function scopeOf(source, key) {
+  const list = scopesOf(source);
+  return list.find(s => s.key === key) || list[0];
 }
 
 // 출처마다 발표하는 지표가 다르다. 지금은 경활만 총괄 지표를 읽는다 —
@@ -201,8 +216,8 @@ function trendHead(name, point) {
 // 역할이 다르다 — 저기는 지금 값을 나란히 놓아 비교하는 자리고, 여기는 한
 // 범위를 골라 시간에 따라 훑는 자리다. 한 그림에 세 범위를 겹치면 25개월짜리
 // 낮은 그림에 선이 셋 들어가 아무것도 안 읽힌다.
-function scopeTabs(current) {
-  return `<div class="scopes" role="tablist">${EAPS_SCOPES.map(s =>
+function scopeTabs(scopes, current) {
+  return `<div class="scopes" role="tablist">${scopes.map(s =>
     `<button type="button" class="scopes__tab${s.key === current ? ' scopes__tab--active' : ''}"
       role="tab" aria-selected="${s.key === current}" data-scope="${esc(s.key)}">${esc(s.tab)}</button>`
   ).join('')}</div>`;
@@ -215,7 +230,8 @@ export function trendSection(series, { source, scope = DEFAULT_SCOPE } = {}) {
   const byIndicator = new Map();
   if (!spec || !spec.trends) return { html: '', byIndicator };
 
-  const picked = scopeOf(scope);
+  const scopes = scopesOf(source);
+  const picked = scopeOf(source, scope);
   const drawn = spec.trends.map(t => {
     const points = indicatorSeries(series, {
       source, indicator: t.indicator, months: TREND_MONTHS,
@@ -229,11 +245,16 @@ export function trendSection(series, { source, scope = DEFAULT_SCOPE } = {}) {
   }).filter(Boolean).join('');
 
   if (!drawn) return { html: '', byIndicator };
+  // 범위가 하나뿐인 출처에는 탭을 그리지 않는다 — 누를 데가 없는 탭은
+  // 눌러도 아무 일이 없는 버튼이다.
+  const tabs = scopes.length > 1 ? scopeTabs(scopes, picked.key) : '';
+  const note = SCOPE_NOTE[picked.key]
+    ? `<p class="note">${esc(SCOPE_NOTE[picked.key])}</p>` : '';
   return {
     html: `<div class="section__head">
         <h2 class="section__title section__title--inline">추이</h2>
-        ${scopeTabs(picked.key)}
-      </div><div class="trends">${drawn}</div>`,
+        ${tabs}
+      </div><div class="trends">${drawn}</div>${note}`,
     byIndicator,
   };
 }

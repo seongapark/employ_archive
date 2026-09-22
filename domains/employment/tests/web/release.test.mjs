@@ -160,7 +160,52 @@ test('an indicator the age range never publishes is simply absent', () => {
 });
 
 test('a source with no indicators of its own gets no trend section', () => {
-  const { html, byIndicator } = trendSection(TRENDS, { source: 'ei', scope: 'total' });
+  // ei 는 이제 아홉 지표를 갖는다. 아직 넓히지 않은 출처는 사업체노동력조사다.
+  const { html, byIndicator } = trendSection(TRENDS, { source: 'est', scope: 'total' });
   assert.equal(html, '');
   assert.equal(byIndicator.size, 0);
+});
+
+// ── 행정통계 범위 탭 ──────────────────────────────────────────────────
+
+// 2026-07 실측값. 전체는 아홉, 제조업은 넷, 서비스업은 하나만 있다.
+const EI_TRENDS = ['2026-06', '2026-07'].flatMap(period => [
+  ei({ period, series: 'headcount', value: 15877.0, yoy: 277.0 }),
+  ei({ period, series: 'acquired', value: 660.0, yoy: 33.0 }),
+  ei({ period, series: 'separated', value: 634.0, yoy: 23.0 }),
+  ei({ period, series: 'benefit_new', value: 109.0, yoy: -2.0 }),
+  ei({ period, series: 'benefit_paid', value: 643.0, yoy: -31.0 }),
+  ei({ period, series: 'benefit_amount', value: 10904.0, unit: '억원', yoy: -218.0 }),
+  ei({ period, series: 'job_openings', value: 177.0, yoy: 12.8 }),
+  ei({ period, series: 'job_seekers', value: 399.0, yoy: -11.5 }),
+  ei({ period, series: 'openings_ratio', value: 0.44, unit: '배', yoy: 0.04 }),
+  ei({ period, series: 'headcount', value: 3844.0, breakdown: 'industry', category: 'C' }),
+  ei({ period, series: 'benefit_new', value: 16.0, yoy: -1.1, breakdown: 'industry', category: 'C' }),
+  ei({ period, series: 'benefit_paid', value: 110.0, yoy: -3.6, breakdown: 'industry', category: 'C' }),
+  ei({ period, series: 'job_openings', value: 56.0, yoy: 3.3, breakdown: 'industry', category: 'C' }),
+  ei({ period, series: 'headcount', value: 11139.0, breakdown: 'scope', category: 'services' }),
+]);
+
+test('the administrative tabs are the whole economy, manufacturing and services', () => {
+  const { html } = trendSection(EI_TRENDS, { source: 'ei', scope: 'total' });
+  for (const label of ['전체', '제조업', '서비스업']) assert.ok(html.includes(label));
+});
+
+test('each tab draws only the indicators that tab actually publishes', () => {
+  // 보도자료가 산업을 가르는 범위가 지표마다 다르다. 빈 그림을 그리면
+  // "안 낸다" 는 사실이 "0 이다" 처럼 보인다.
+  const counts = ['total', 'C', 'services'].map(scope =>
+    trendSection(EI_TRENDS, { source: 'ei', scope }).byIndicator.size);
+  assert.deepEqual(counts, [9, 4, 1]);
+});
+
+test('a thin tab says why it is thin', () => {
+  const { html } = trendSection(EI_TRENDS, { source: 'ei', scope: 'services' });
+  assert.ok(html.includes('서비스업 집계를 가입자수에만'));
+});
+
+test('the ratio keeps its own unit in the trend head', () => {
+  const { html } = trendSection(EI_TRENDS, { source: 'ei', scope: 'total' });
+  assert.ok(html.includes('0.44배'));
+  assert.ok(html.includes('+0.04배'));
 });
