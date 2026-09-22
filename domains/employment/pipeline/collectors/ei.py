@@ -215,8 +215,18 @@ FLOW_HEADER_KEYS = ("취득자수및상실자수", "증감률")
 # 0=월 | 1=취득계 2=취득신규 3=취득경력 4=상실 | 5~8 증감 | 9~12 증감률
 FLOW_LEVEL = {"acquired": 1, "separated": 4}
 FLOW_DELTA = {"acquired": 5, "separated": 8}
-# (계, 신규, 경력). check_flow 가 이 셋으로 분해 항등식을 본다.
-FLOW_SPLIT = (1, 2, 3)
+# (블록 이름, 계, 신규, 경력) 두 벌. check_flow 가 각각으로 분해 항등식을 본다.
+#
+# 수준 블록(1,2,3)만 보면 FLOW_LEVEL["separated"]=4 와 FLOW_DELTA 의 두 열
+# (5, 8)은 어떤 항등식에도 묶이지 않는다 — 4번 뒤로 열이 하나 끼어들어도
+# 1-2-3 항등식은 그대로 성립해 separated 와 yoy 가 엉뚱한 열에서 읽혀도
+# 아무도 눈치채지 못한다. 증감 블록(5,6,7)에도 같은 분해를 걸면 4~8번 열
+# 전체가 묶인다 — 4번에 열이 끼면 5/6/7 이 634/33/4 를 읽어 즉시 실패한다.
+# 실측(2026-07): 수준 660 = 67 + 593, 증감 33 = 4 + 29.
+FLOW_SPLIT = (
+    ("수준", 1, 2, 3),
+    ("증감", 5, 6, 7),
+)
 
 
 def find_flow_table(tables) -> list:
@@ -227,25 +237,28 @@ def find_flow_table(tables) -> list:
 
 
 def check_flow(table) -> None:
-    """문서 자체의 분해 항등식: 취득자수 계 = 신규 + 경력.
+    """문서 자체의 분해 항등식: 취득자수 계 = 신규 + 경력. 수준·증감 두 블록 모두에서 본다.
 
-    실측(2026-07): 660 = 67 + 593. 열이 하나라도 밀리면 여기서 걸린다.
-    이 표에는 헤더 이름으로 열을 짚을 방법이 없다 — 머리가 세 줄로 접히고
-    병합셀이 섞여 `취득자수` 가 3열을 덮는다. 위치로 읽고 항등식으로 검증한다.
+    실측(2026-07): 수준 660 = 67 + 593, 증감 33 = 4 + 29. 수준 블록만 보면
+    separated·yoy 두 열(4, 5, 8번)이 어떤 항등식에도 안 묶여 그 뒤로 열이
+    하나 끼어들어도 조용히 지나간다 — 증감 블록까지 봐야 4~8번 열 전체가
+    묶인다. 이 표에는 헤더 이름으로 열을 짚을 방법이 없다 — 머리가 세 줄로
+    접히고 병합셀이 섞여 `취득자수` 가 3열을 덮는다. 위치로 읽고 항등식으로
+    검증한다.
     """
     rows = month_rows(table)
     if not rows:
         raise ValueError("취득·상실 표에서 월 행을 찾지 못했다")
-    total_col, new_col, exp_col = FLOW_SPLIT
-    for period, row in rows:
-        total, new, experienced = (_num(row[c]) if c < len(row) else None
-                                   for c in (total_col, new_col, exp_col))
-        if None in (total, new, experienced):
-            raise ValueError(f"{period} 취득자수 칸이 비었다")
-        if abs(total - (new + experienced)) > 1.0:
-            raise ValueError(
-                f"{period} 취득자수 계가 신규+경력과 다르다: "
-                f"{total} vs {new}+{experienced}")
+    for name, total_col, new_col, exp_col in FLOW_SPLIT:
+        for period, row in rows:
+            total, new, experienced = (_num(row[c]) if c < len(row) else None
+                                       for c in (total_col, new_col, exp_col))
+            if None in (total, new, experienced):
+                raise ValueError(f"{period} 취득자수 {name} 칸이 비었다")
+            if abs(total - (new + experienced)) > 1.0:
+                raise ValueError(
+                    f"{period} 취득자수 {name} 계가 신규+경력과 다르다: "
+                    f"{total} vs {new}+{experienced}")
 
 
 def flow_records(table, **meta) -> list[SeriesRecord]:
@@ -491,7 +504,14 @@ def _latest_month_value(table, column: int) -> tuple[str, float | None]:
 
 
 def industry_pairs(tables) -> list[tuple[list, list]]:
-    """산업별 (수준, 증감) 표 세 쌍. 보도자료 순서를 그대로 쓴다."""
+    """산업별 (수준, 증감) 표 세 쌍. 보도자료 순서를 그대로 쓴다.
+
+    형제 find_market_tables 는 `!= 2` 로 정확히 개수를 맞추는데 여기는
+    `< need` 로 초과를 허용한다 — 비대칭이 맞다. find_market_tables 는
+    cand[1] 에 판별식이 없어 개수가 유일한 가드지만, 여기는 manufacturing_records
+    가 각 쌍을 수준·증감 모두 요약표 전산업과 대조하므로(짝이 밀리면 109 를
+    643 과 비교하게 되어 요란하게 터진다) 개수 이중으로 막혀 있다.
+    """
     cand = [g for g in tables
             if g and len(g[0]) > 5 and all(k in _flat(g[0]) for k in INDUSTRY_HEADER_KEYS)]
     need = len(INDUSTRY_SERIES) * 2
@@ -537,7 +557,8 @@ def manufacturing_records(tables, totals: dict[str, tuple[float, float | None]],
             if got is None or want is None or abs(got - want) > 1.0:
                 raise ValueError(
                     f"{series} 산업별 {what} 표의 전산업이 요약표와 다르다"
-                    f"({period}): {got} vs {want} — 표 순서가 흔들렸을 수 있다")
+                    f"({period}): {got} vs {want} — 표 순서가 흔들렸을 수 있다"
+                    "(산업별 표와 요약표의 최신월 자체가 다를 수도 있다 — period 를 확인한다)")
 
         deltas = dict(month_rows(delta))
         level_col = _industry_column(level[0], "제조업")
@@ -695,10 +716,11 @@ EXPECTED_SERIES = ("headcount", "acquired", "separated",
 
 
 def check_coverage(records: list[SeriesRecord]) -> None:
-    """최신월에 기대한 대분류와 전체 행이 다 왔는지 본다.
+    """최신월에 기대한 대분류·성별·연령·지표 아홉·집계 둘이 다 왔는지 본다.
 
-    열 위치가 밀리거나 값이 비면 그 산업이 조용히 빠진다. 화면에서는 그냥
-    없는 칸으로 보일 뿐 아무 흔적도 남지 않는다. 형제 수집기 둘도 같은 가드를 갖는다.
+    열 위치가 밀리거나 표 하나가 통째로 빠지면 그 산업·지표가 조용히 빠진다.
+    화면에서는 그냥 없는 칸이나 없는 그림으로 보일 뿐 아무 흔적도 남지 않는다.
+    형제 수집기 둘도 같은 가드를 갖는다.
     """
     if not records:
         raise ValueError("수집된 레코드가 없다")

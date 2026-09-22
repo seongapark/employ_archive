@@ -334,6 +334,9 @@ const UNIT_FMT = {
     value: v => `${v.toFixed(1)}%`,
     change: v => `${signOf(v)}${Math.abs(v).toFixed(1)}%p`,
   },
+  // 지급액은 원문이 정수(억원)로만 찍혀 나온다 — 소수를 반올림해 버려도
+  // 원문에 없던 정밀도를 지어내는 게 아니다. '배'가 둘째 자리까지 쓰는 것과
+  // 다른 이유다.
   '억원': {
     value: v => `${Math.round(v).toLocaleString('ko-KR')}억원`,
     change: v => `${signOf(v)}${Math.round(Math.abs(v)).toLocaleString('ko-KR')}억원`,
@@ -347,7 +350,10 @@ const UNIT_FMT = {
 };
 
 function fmtOf(unit) {
-  return UNIT_FMT[unit] || UNIT_FMT['천명'];
+  // 평범한 `||` 조회는 'constructor'·'toString' 같은 Object.prototype 키와
+  // 겹치는 단위 문자열이 오면 포맷터가 아닌 truthy 값을 돌려준다.
+  // hasOwn 으로 자기 소유 키인지부터 본다.
+  return Object.hasOwn(UNIT_FMT, unit) ? UNIT_FMT[unit] : UNIT_FMT['천명'];
 }
 
 export function fmtValue(value, unit) {

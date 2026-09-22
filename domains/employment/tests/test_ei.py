@@ -44,8 +44,11 @@ def test_headline_delta_is_read_from_the_summary_box(data):
 
 def test_total_matches_the_summary_box(data, records):
     # 문서가 스스로 검증 대조점을 갖고 있다: 요약문의 증감 = 증감표의 전산업.
+    # breakdown="total" 은 이제 아홉 계열이 같은 최신월을 공유한다 — series 로
+    # 걸러야 상시가입자(headcount) 하나만 본다. 형제 테스트 셋(취득·상실 등)은
+    # 이미 이 필터가 있는데 여기만 빠져 있었다.
     stated = ei.headline_delta(hwpx.tables(data))
-    totals = [r for r in records if r.breakdown == "total"]
+    totals = [r for r in records if r.breakdown == "total" and r.series == "headcount"]
     newest = max(totals, key=lambda r: r.period)
     assert newest.yoy == pytest.approx(stated, abs=1.0)
     assert 15000 < newest.value < 17000
@@ -293,8 +296,17 @@ def test_acquisitions_split_into_new_and_experienced(data):
 def test_check_flow_fails_when_a_column_shifts(data, monkeypatch):
     table = ei.find_flow_table(hwpx.tables(data))
     # 신규 열 자리에서 상실자수를 읽는 모양으로 바꾼다.
-    monkeypatch.setattr(ei, "FLOW_SPLIT", (1, 4, 3))
+    monkeypatch.setattr(ei, "FLOW_SPLIT", (("수준", 1, 4, 3), ("증감", 5, 6, 7)))
     with pytest.raises(ValueError, match="취득자수"):
+        ei.check_flow(table)
+
+
+def test_check_flow_fails_when_the_delta_block_shifts(data, monkeypatch):
+    # 수준 블록(1,2,3)은 멀쩡한데 4번 열 뒤로 열 하나가 끼어들어 증감 블록만
+    # 통째로 밀린 모양이다. 수준 항등식만 보면 이 사고를 놓친다.
+    table = ei.find_flow_table(hwpx.tables(data))
+    monkeypatch.setattr(ei, "FLOW_SPLIT", (("수준", 1, 2, 3), ("증감", 6, 7, 8)))
+    with pytest.raises(ValueError, match="증감"):
         ei.check_flow(table)
 
 
@@ -489,7 +501,9 @@ RELEASES = Path(__file__).parents[3] / "domains" / "press" / "sources" / "releas
 def longest_consecutive_run(periods) -> int:
     # 그래프가 첫 수집만으로 가득 차려면 개수가 아니라 '끊기지 않은 구간'이
     # 필요하다 — 연도 경계가 잘못 밀리면 개수는 그대로인데 구간만 끊긴다.
-    months = sorted(periods)
+    # 중복이 섞인 iterable 로 불리면 run 을 과소 계산한다 — 모든 호출부가
+    # set 을 넘기는 지금은 죽은 위험이지만 set() 으로 한 토큰에 닫는다.
+    months = sorted(set(periods))
     if not months:
         return 0
     best = run = 1
@@ -515,7 +529,15 @@ def test_longest_consecutive_run_ignores_scattered_months():
 def test_every_stored_issue_parses_with_all_nine_indicators(name):
     # 한 회차만 통과하는 파서는 다음 달에 깨진다. 표 번호가 회차마다 밀리므로
     # 헤더로 찾는 것이 실제로 되는지는 여러 회차로만 확인된다.
-    path = RELEASES / f"{name}.hwpx"
+    #
+    # domains/press/sources/releases/ 는 정책상 gitignore(회차당 1.4MB, 게시판에서
+    # 다시 받을 수 있음)라 CI 에서는 이 파일들이 없어 통째로 skip 된다. 그런데
+    # 2026-07 회차의 바이트는 domains/employment/tests/fixtures/ 에 이미 추적되어
+    # 있다(다른 테스트들이 쓰는 FIXTURE) — 굳이 gitignore 폴더에서 다시 찾을
+    # 이유가 없다. 이 경우만 추적된 경로로 돌려 25개월 연속 구간 단언이
+    # CI 에서도 실제로 실행되게 한다. 나머지 둘(06·08)은 다회차 보장용이라
+    # 정책상 여전히 파일이 있을 때만 돈다.
+    path = FIXTURE if name == "ei_2026-07" else RELEASES / f"{name}.hwpx"
     if not path.exists():
         pytest.skip(f"{name} 회차가 저장소에 없다")
     parsed = ei.parse(path.read_bytes(), released_at=date(2026, 9, 7),
