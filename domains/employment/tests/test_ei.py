@@ -326,3 +326,40 @@ def test_find_benefit_tables_fails_when_the_level_table_moves(data, monkeypatch)
     monkeypatch.setattr(ei, "_is_benefit_level", lambda table: False)
     with pytest.raises(ValueError, match="수준 표가 아니다"):
         ei.find_benefit_tables(hwpx.tables(data))
+
+
+def _benefit_candidates(data):
+    return [g for g in hwpx.tables(data)
+            if g and len(g[0]) > 5 and all(k in ei._flat(g[0]) for k in ei.BENEFIT_HEADER_KEYS)]
+
+
+def test_find_benefit_tables_fails_when_fewer_than_three_tables_are_found(data):
+    # 수준·증감·증감률 셋이 다 있어야 순서를 항등식으로 못 박을 수 있다.
+    # 둘만 찾히면 어느 게 증감이고 어느 게 증감률인지 가늠할 근거가 없다.
+    cand = _benefit_candidates(data)
+    with pytest.raises(ValueError, match="2개"):
+        ei.find_benefit_tables(cand[:2])
+
+
+def test_delta_matches_rate_on_the_real_fixture(data):
+    # 세 번째 항등식: 증감 ÷ (수준 − 증감) × 100 ≈ 증감률. 문서의 실제 순서
+    # (수준·증감·증감률)에서는 성립해야 한다.
+    cand = _benefit_candidates(data)
+    assert len(cand) >= 3
+    assert ei._delta_matches_rate(cand[0], cand[1], cand[2]) is True
+
+
+def test_delta_matches_rate_rejects_a_swapped_order(data):
+    # 증감과 증감률 표의 자리가 바뀌면 항등식이 크게 어긋난다(브리프 실측:
+    # 계산값이 218 어긋난다). 크기로는 못 가르는 자리를 이 식이 가른다.
+    cand = _benefit_candidates(data)
+    assert len(cand) >= 3
+    assert ei._delta_matches_rate(cand[0], cand[2], cand[1]) is False
+
+
+def test_find_benefit_tables_fails_when_delta_and_rate_are_swapped(data, monkeypatch):
+    # 둘째·셋째 표의 자리가 바뀐 상황을 흉내낸다 — find_benefit_tables 가
+    # 증감률을 증감으로 조용히 집지 않고 실패해야 한다.
+    monkeypatch.setattr(ei, "_delta_matches_rate", lambda level, delta, rate: False)
+    with pytest.raises(ValueError, match="순서"):
+        ei.find_benefit_tables(hwpx.tables(data))

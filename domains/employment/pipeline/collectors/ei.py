@@ -302,15 +302,74 @@ def _is_benefit_level(table) -> bool:
     return abs(amount * 100 / paid - per) <= abs(per) * 0.02
 
 
+def _benefit_rate_identity(level, delta, rate) -> tuple[float, float] | None:
+    """지급액(4번 열)으로 (계산한 증감률, 표에 찍힌 증감률) 쌍을 만든다.
+
+    값을 못 읽거나 분모(전년 수준 = 수준 − 증감)가 0이면 None — 이때
+    _delta_matches_rate 는 판별 불능을 '틀림'으로 본다.
+    """
+    lv_rows, dv_rows, rv_rows = month_rows(level), month_rows(delta), month_rows(rate)
+    if not lv_rows or not dv_rows or not rv_rows:
+        return None
+    _, lrow = lv_rows[-1]
+    _, drow = dv_rows[-1]
+    _, rrow = rv_rows[-1]
+    col = BENEFIT_AMOUNT_COLUMN
+    lv = _num(lrow[col]) if col < len(lrow) else None
+    dv = _num(drow[col]) if col < len(drow) else None
+    rv = _num(rrow[col]) if col < len(rrow) else None
+    if lv is None or dv is None or rv is None:
+        return None
+    denom = lv - dv
+    if denom == 0:
+        return None
+    return dv / denom * 100, rv
+
+
+def _delta_matches_rate(level, delta, rate) -> bool:
+    """문서가 가진 세 번째 항등식으로 증감 표와 증감률 표의 자리를 못 박는다:
+
+        증감률 ≈ 증감 ÷ (수준 − 증감) × 100        (수준 − 증감 = 전년 동월 값)
+
+    지급액(4번 열)으로 본다 — 셋 중 값이 가장 커서 반올림에 덜 흔들린다.
+
+    실측(2026-07): -218 ÷ (10904+218) × 100 = -1.96 vs 표의 -2.0(오차 0.04).
+    실측(2026-08): -245 ÷ (10084+245) × 100 = -2.372 vs 표의 -2.4(오차 0.028).
+    자리가 바뀌면(증감 자리에 증감률표, 증감률 자리에 증감표) -2.0 ÷
+    (10904+2.0) × 100 = -0.018 vs -218 — 218 어긋나 확실히 걸린다.
+
+    허용오차를 상대오차로만 두면 안 된다. 표가 수준·증감을 정수로 반올림해
+    작은 달에는 절대오차가 상대적으로 커진다(신규신청은 같은 달에 -1.80 vs
+    표의 -2.2). 그래서 절대 0.5와 상대 25% 중 큰 쪽을 쓴다.
+    """
+    values = _benefit_rate_identity(level, delta, rate)
+    if values is None:
+        return False
+    implied, printed = values
+    return abs(implied - printed) <= max(0.5, abs(printed) * 0.25)
+
+
 def find_benefit_tables(tables) -> tuple[list, list]:
     cand = [g for g in tables
             if g and len(g[0]) > 5 and all(k in _flat(g[0]) for k in BENEFIT_HEADER_KEYS)]
-    if len(cand) < 2:
-        raise ValueError(f"구직급여 표를 찾지 못했다 (후보 {len(cand)}개)")
+    if len(cand) < 3:
+        raise ValueError(f"구직급여 표를 찾지 못했다 (후보 {len(cand)}개, 수준·증감·증감률 3개 필요)")
     if not _is_benefit_level(cand[0]):
         raise ValueError(
             "구직급여 표의 첫 장이 수준 표가 아니다(지급액÷지급자수가 "
             "1인당 지급액과 맞지 않는다) — 표 순서나 서식이 바뀌었을 수 있다")
+    if not _delta_matches_rate(cand[0], cand[1], cand[2]):
+        # find_tables·find_demo_tables 는 순서를 크기로 지키지만, 이 표 셋은
+        # 크기만으로는 못 가른다(어느 달은 증감이 증감률보다 작다). 두 번째·
+        # 세 번째 자리가 바뀌면 benefit_records 가 증감률을 yoy 로 조용히
+        # 얹는다 — 그 전에 항등식으로 잡는다.
+        values = _benefit_rate_identity(cand[0], cand[1], cand[2])
+        if values is None:
+            raise ValueError("구직급여 증감·증감률 표의 지급액을 읽지 못해 순서를 확인할 수 없다")
+        implied, printed = values
+        raise ValueError(
+            "구직급여 표의 둘째·셋째 장 순서가 잘못된 것 같다(증감÷(수준−증감)×100이 "
+            f"증감률과 맞지 않는다): 계산값 {implied:.2f} vs 표의 {printed}")
     return cand[0], cand[1]
 
 
