@@ -6,32 +6,32 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-22 09:17",
+ "collected_at": "2026-09-22 16:57",
  "volume": {
-  "collected": 235,
-  "articles": 56,
-  "press": 50,
+  "collected": 240,
+  "articles": 57,
+  "press": 51,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29291,
+   "api_total": 29292,
    "fetched": 100,
    "truncated": false,
-   "in_window": 66,
-   "relevant": 56,
-   "new": 65
+   "in_window": 67,
+   "relevant": 57,
+   "new": 66
   },
   {
    "query": "구직급여",
-   "api_total": 94402,
+   "api_total": 94404,
    "fetched": 200,
    "truncated": false,
-   "in_window": 149,
+   "in_window": 151,
    "relevant": 3,
-   "new": 134
+   "new": 136
   },
   {
    "query": "구인배수",
@@ -44,12 +44,12 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18516,
+   "api_total": 18518,
    "fetched": 100,
    "truncated": false,
-   "in_window": 27,
+   "in_window": 29,
    "relevant": 11,
-   "new": 12
+   "new": 14
   },
   {
    "query": "건설업 고용보험",
@@ -71,10 +71,10 @@
   },
   {
    "query": "교육서비스업 고용보험",
-   "api_total": 3626,
+   "api_total": 3627,
    "fetched": 100,
    "truncated": false,
-   "in_window": 3,
+   "in_window": 4,
    "relevant": 2,
    "new": 0
   },
@@ -675,6 +675,16 @@
    "pub": "2026-09-21 18:04",
    "q": "고용보험 가입자, 제조업 고용보험, 자동차 고용보험, 공공행정 고용보험",
    "rel": true
+  },
+  {
+   "title": "외국인 실업급여 1,134억 ‘역대 최대’… 79%가 중국계",
+   "desc": "그런데 중국동포와 중국 국적자의 고용보험 가입자 비중은 25.9%에 그쳤습니다. 가입자 비중에 비해 실업급여 수급 비중이 크게 높은 겁니다. 전문가들은 중국동포의 경우 국내 장기 체류자가 많고, 영주나...",
+   "link": "https://news.knn.co.kr/news/article_sns/1794",
+   "originallink": "https://news.knn.co.kr/news/article_sns/1794",
+   "press": "KNN",
+   "pub": "2026-09-22 15:36",
+   "q": "고용보험 가입자",
+   "rel": true
   }
  ],
  "excluded": [
@@ -729,21 +739,21 @@
    "rel": false
   },
   {
-   "title": "올 하반기 일하기 좋은 기업 59곳..1위 SK하이닉스",
-   "desc": "잡플래닛은 매년 일하기 좋은 회사를 발표해왔으며, 지난해부터 구직자들에게... 기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO...",
-   "link": "http://www.breaknews.com/1234816",
-   "originallink": "http://www.breaknews.com/1234816",
-   "press": "breaknews.com",
-   "pub": "2026-09-08 09:06",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "잡플래닛, 하반기 '일하기 좋은 기업' 59곳 선정…대상 SK하이닉스",
    "desc": "기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO 지지율 등을 종합... 이번 개편은 회사 전체 평점만 보는 방식에서 한발 더 나아가 구직자가 실제 지원하려는 산업과 직무 기준으로...",
    "link": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
    "originallink": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
    "press": "kdfnews.com",
+   "pub": "2026-09-08 09:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "올 하반기 일하기 좋은 기업 59곳..1위 SK하이닉스",
+   "desc": "잡플래닛은 매년 일하기 좋은 회사를 발표해왔으며, 지난해부터 구직자들에게... 기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO...",
+   "link": "http://www.breaknews.com/1234816",
+   "originallink": "http://www.breaknews.com/1234816",
+   "press": "breaknews.com",
    "pub": "2026-09-08 09:06",
    "q": "구직급여",
    "rel": false
@@ -2466,6 +2476,46 @@
    "press": "dailian.co.kr",
    "pub": "2026-09-22 07:01",
    "q": "구인배수",
+   "rel": false
+  },
+  {
+   "title": "간호조무사 채용 공고시 ‘급여·복지 명시’ 최우선",
+   "desc": "사진=‘간호조무사 구인·구직 실태조사 구인구직 중인 간호조무사가 의료기관을 고를 때 가장 중요하게 고려하는 사항으로 급여와 복지가 꼽혔다. 2위는 근무지 위치였다. 특히 비수도권은 급여를, 수도권은 통근...",
+   "link": "https://www.medigatenews.com/news/1234223489",
+   "originallink": "https://www.medigatenews.com/news/1234223489",
+   "press": "medigatenews.com",
+   "pub": "2026-09-22 09:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[2026국감] '가짜 3.3' 적발 사업장 10곳 중 8곳이 30인 미만",
+   "desc": "산재·고용보험 등 노동관계법상 권리와 사회안전망 적용에서 배제될 수 있다. 업종별 위장고용 노동자는 숙박·음식점업이 367명으로 가장 많았고 제조업 337명, 사업지원·임대서비스업 220명, 운수·창고업 92명...",
+   "link": "https://www.straightnews.co.kr/news/articleView.html?idxno=311748",
+   "originallink": "https://www.straightnews.co.kr/news/articleView.html?idxno=311748",
+   "press": "straightnews.co.kr",
+   "pub": "2026-09-22 09:26",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "광주 65명·전남 5명 '가짜 3.3'…청년 일자리까지 파고들었다",
+   "desc": "산재보험과 고용보험 등 사회안전망에서도 배제될 수 있다. 전국적으로 문제는 더욱 뚜렷했다. 2025~2026년... 제조업에서도 337명이 확인됐다. 이어 사업지원·임대서비스업 220명, 운수 및 창고업 92명, 도매 및 소매업...",
+   "link": "https://www.namdonews.com/news/articleView.html?idxno=924184",
+   "originallink": "https://www.namdonews.com/news/articleView.html?idxno=924184",
+   "press": "남도일보",
+   "pub": "2026-09-22 09:28",
+   "q": "제조업 고용보험, 교육서비스업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "“평균연봉 1억원”…E1, 신입사원 채용 '돌입'",
+   "desc": "E1은 구직자들 사이에서 '꿈의 직장' 중 하나로 꼽힌다. 임직원 평균 연봉이 1억원을 웃돌며 업계 최상위권을 형성하고 있기 때문이다. E1의 지난해 연간 사업보고서에 따르면 직원 1인당 평균 급여액은 1억4400만원으로...",
+   "link": "https://n.news.naver.com/mnews/article/030/0003469242?sid=101",
+   "originallink": "https://www.etnews.com/20260922000173",
+   "press": "전자신문",
+   "pub": "2026-09-22 10:18",
+   "q": "구직급여",
    "rel": false
   }
  ]
