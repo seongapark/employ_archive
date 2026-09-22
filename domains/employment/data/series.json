@@ -1764,27 +1764,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2021-08-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2021-08",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": -3.2,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2021-08-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -1794,27 +1773,6 @@
     "value": 84.0,
     "unit": "천명",
     "yoy": -6.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2021-08-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2021-08",
-    "value": 112.0,
-    "unit": "천명",
-    "yoy": -25.5,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -2331,27 +2289,6 @@
     "collected_at": "2026-09-07T17:16:24.120696+09:00"
   },
   {
-    "id": "ei-2021-08-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2021-08",
-    "value": 9934.0,
-    "unit": "천명",
-    "yoy": 301.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2021-08-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -2413,27 +2350,6 @@
       }
     ],
     "collected_at": "2026-09-07T17:16:24.120696+09:00"
-  },
-  {
-    "id": "ei-2021-08-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2021-08",
-    "value": 97.0,
-    "unit": "천명",
-    "yoy": 36.2,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2021-08-job_openings-total",
@@ -4284,27 +4200,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2022-08-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2022-08",
-    "value": 12.0,
-    "unit": "천명",
-    "yoy": -1.4,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2022-08-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -4314,27 +4209,6 @@
     "value": 81.0,
     "unit": "천명",
     "yoy": -3.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2022-08-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2022-08",
-    "value": 100.0,
-    "unit": "천명",
-    "yoy": -11.5,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -4851,27 +4725,6 @@
     "collected_at": "2026-09-07T17:16:24.120696+09:00"
   },
   {
-    "id": "ei-2022-08-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2022-08",
-    "value": 10249.0,
-    "unit": "천명",
-    "yoy": 316.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2022-08-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -4933,27 +4786,6 @@
       }
     ],
     "collected_at": "2026-09-07T17:16:24.120696+09:00"
-  },
-  {
-    "id": "ei-2022-08-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2022-08",
-    "value": 102.0,
-    "unit": "천명",
-    "yoy": 5.2,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2022-08-job_openings-total",
@@ -6804,27 +6636,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2023-08-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2023-08",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": 1.5,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2023-08-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -6834,27 +6645,6 @@
     "value": 87.0,
     "unit": "천명",
     "yoy": 6.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2023-08-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2023-08",
-    "value": 107.0,
-    "unit": "천명",
-    "yoy": 6.1,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -7371,27 +7161,6 @@
     "collected_at": "2026-09-07T17:16:24.120696+09:00"
   },
   {
-    "id": "ei-2023-08-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2023-08",
-    "value": 10482.0,
-    "unit": "천명",
-    "yoy": 233.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2023-08-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -7453,27 +7222,6 @@
       }
     ],
     "collected_at": "2026-09-07T17:16:24.120696+09:00"
-  },
-  {
-    "id": "ei-2023-08-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2023-08",
-    "value": 86.0,
-    "unit": "천명",
-    "yoy": -16.3,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2023-08-job_openings-total",
@@ -11935,27 +11683,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2024-08-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-08",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": 0.2,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2024-08-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -11965,27 +11692,6 @@
     "value": 86.0,
     "unit": "천명",
     "yoy": 0.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2024-08-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-08",
-    "value": 104.0,
-    "unit": "천명",
-    "yoy": -2.1,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -12502,27 +12208,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2024-08-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2024-08",
-    "value": 10675.0,
-    "unit": "천명",
-    "yoy": 192.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2024-08-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -12584,27 +12269,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2024-08-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-08",
-    "value": 64.0,
-    "unit": "천명",
-    "yoy": -22.1,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2024-08-job_openings-total",
@@ -14108,27 +13772,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2024-09-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-09",
-    "value": 12.0,
-    "unit": "천명",
-    "yoy": -0.4,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2024-09-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -14138,27 +13781,6 @@
     "value": 81.0,
     "unit": "천명",
     "yoy": -1.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2024-09-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-09",
-    "value": 102.0,
-    "unit": "천명",
-    "yoy": -0.6,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -14675,27 +14297,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2024-09-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2024-09",
-    "value": 10681.0,
-    "unit": "천명",
-    "yoy": 177.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2024-09-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -14757,27 +14358,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2024-09-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-09",
-    "value": 62.0,
-    "unit": "천명",
-    "yoy": -24.9,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2024-09-job_openings-total",
@@ -16281,27 +15861,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2024-10-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-10",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": 1.2,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2024-10-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -16311,27 +15870,6 @@
     "value": 89.0,
     "unit": "천명",
     "yoy": 10.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2024-10-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-10",
-    "value": 102.0,
-    "unit": "천명",
-    "yoy": 1.4,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -16848,27 +16386,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2024-10-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2024-10",
-    "value": 10720.0,
-    "unit": "천명",
-    "yoy": 191.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2024-10-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -16930,27 +16447,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2024-10-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-10",
-    "value": 59.0,
-    "unit": "천명",
-    "yoy": -23.8,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2024-10-job_openings-total",
@@ -18454,27 +17950,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2024-11-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-11",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": -0.1,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2024-11-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -18484,27 +17959,6 @@
     "value": 90.0,
     "unit": "천명",
     "yoy": 2.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2024-11-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-11",
-    "value": 90.0,
-    "unit": "천명",
-    "yoy": -0.3,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -19021,27 +18475,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2024-11-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2024-11",
-    "value": 10704.0,
-    "unit": "천명",
-    "yoy": 176.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2024-11-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -19103,27 +18536,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2024-11-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-11",
-    "value": 50.0,
-    "unit": "천명",
-    "yoy": -32.4,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2024-11-job_openings-total",
@@ -20627,27 +20039,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2024-12-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-12",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": 2.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2024-12-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -20657,27 +20048,6 @@
     "value": 101.0,
     "unit": "천명",
     "yoy": 8.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2024-12-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-12",
-    "value": 87.0,
-    "unit": "천명",
-    "yoy": 1.7,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -21194,27 +20564,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2024-12-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2024-12",
-    "value": 10542.0,
-    "unit": "천명",
-    "yoy": 150.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2024-12-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -21276,27 +20625,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2024-12-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2024-12",
-    "value": 40.0,
-    "unit": "천명",
-    "yoy": -16.5,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2024-12-job_openings-total",
@@ -22800,27 +22128,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-01-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-01",
-    "value": 30.0,
-    "unit": "천명",
-    "yoy": -1.6,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-01-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -22830,27 +22137,6 @@
     "value": 186.0,
     "unit": "천명",
     "yoy": -16.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-01-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-01",
-    "value": 97.0,
-    "unit": "천명",
-    "yoy": -3.0,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -23367,27 +22653,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-01-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-01",
-    "value": 10438.0,
-    "unit": "천명",
-    "yoy": 125.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-01-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -23449,27 +22714,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-01-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-01",
-    "value": 40.0,
-    "unit": "천명",
-    "yoy": -49.7,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-01-job_openings-total",
@@ -24973,27 +24217,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-02-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-02",
-    "value": 18.0,
-    "unit": "천명",
-    "yoy": 3.4,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-02-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -25003,27 +24226,6 @@
     "value": 117.0,
     "unit": "천명",
     "yoy": 23.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-02-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-02",
-    "value": 110.0,
-    "unit": "천명",
-    "yoy": 6.6,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -25540,27 +24742,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-02-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-02",
-    "value": 10636.0,
-    "unit": "천명",
-    "yoy": 167.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-02-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -25622,27 +24803,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-02-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-02",
-    "value": 58.0,
-    "unit": "천명",
-    "yoy": -5.2,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-02-job_openings-total",
@@ -27146,27 +26306,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-03-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-03",
-    "value": 15.0,
-    "unit": "천명",
-    "yoy": 0.9,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-03-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -27176,27 +26315,6 @@
     "value": 137.0,
     "unit": "천명",
     "yoy": 6.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-03-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-03",
-    "value": 110.0,
-    "unit": "천명",
-    "yoy": 6.1,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -27713,27 +26831,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-03-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-03",
-    "value": 10688.0,
-    "unit": "천명",
-    "yoy": 170.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-03-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -27795,27 +26892,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-03-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-03",
-    "value": 50.0,
-    "unit": "천명",
-    "yoy": -22.2,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-03-job_openings-total",
@@ -29319,27 +28395,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-04-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-04",
-    "value": 17.0,
-    "unit": "천명",
-    "yoy": 1.3,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-04-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -29349,27 +28404,6 @@
     "value": 103.0,
     "unit": "천명",
     "yoy": 2.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-04-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-04",
-    "value": 113.0,
-    "unit": "천명",
-    "yoy": 7.7,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -29886,27 +28920,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-04-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-04",
-    "value": 10788.0,
-    "unit": "천명",
-    "yoy": 198.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-04-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -29968,27 +28981,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-04-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-04",
-    "value": 58.0,
-    "unit": "천명",
-    "yoy": -26.6,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-04-job_openings-total",
@@ -31492,27 +30484,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-05-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-05",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": 0.8,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-05-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -31522,27 +30493,6 @@
     "value": 85.0,
     "unit": "천명",
     "yoy": -3.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-05-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-05",
-    "value": 110.0,
-    "unit": "천명",
-    "yoy": 6.3,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -32059,27 +31009,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-05-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-05",
-    "value": 10829.0,
-    "unit": "천명",
-    "yoy": 203.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-05-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -32141,27 +31070,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-05-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-05",
-    "value": 45.0,
-    "unit": "천명",
-    "yoy": -23.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-05-job_openings-total",
@@ -33665,27 +32573,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-06-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-06",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": 0.9,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-06-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -33695,27 +32582,6 @@
     "value": 86.0,
     "unit": "천명",
     "yoy": 2.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-06-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-06",
-    "value": 109.0,
-    "unit": "천명",
-    "yoy": 8.1,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -34232,27 +33098,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-06-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-06",
-    "value": 10843.0,
-    "unit": "천명",
-    "yoy": 202.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-06-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -34314,27 +33159,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-06-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-06",
-    "value": 51.0,
-    "unit": "천명",
-    "yoy": -7.6,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-06-job_openings-total",
@@ -35838,27 +34662,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-07-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-07",
-    "value": 17.0,
-    "unit": "천명",
-    "yoy": 1.1,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-07-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -35868,27 +34671,6 @@
     "value": 111.0,
     "unit": "천명",
     "yoy": -1.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-07-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-07",
-    "value": 113.0,
-    "unit": "천명",
-    "yoy": 7.4,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -36405,27 +35187,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-07-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-07",
-    "value": 10854.0,
-    "unit": "천명",
-    "yoy": 203.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-07-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -36487,27 +35248,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-07-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-07",
-    "value": 52.0,
-    "unit": "천명",
-    "yoy": -18.9,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-07-job_openings-total",
@@ -38011,27 +36751,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-08-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-08",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": -0.6,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-08-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -38041,27 +36760,6 @@
     "value": 81.0,
     "unit": "천명",
     "yoy": -5.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-08-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-08",
-    "value": 110.0,
-    "unit": "천명",
-    "yoy": 6.0,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -38578,27 +37276,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-08-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-08",
-    "value": 10884.0,
-    "unit": "천명",
-    "yoy": 209.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-08-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -38660,27 +37337,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-08-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-08",
-    "value": 48.0,
-    "unit": "천명",
-    "yoy": -16.3,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-08-job_openings-total",
@@ -40184,27 +38840,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-09-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-09",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": 2.1,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-09-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -40214,27 +38849,6 @@
     "value": 89.0,
     "unit": "천명",
     "yoy": 8.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-09-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-09",
-    "value": 110.0,
-    "unit": "천명",
-    "yoy": 8.1,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -40751,27 +39365,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-09-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-09",
-    "value": 10900.0,
-    "unit": "천명",
-    "yoy": 219.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-09-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -40833,27 +39426,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-09-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-09",
-    "value": 55.0,
-    "unit": "천명",
-    "yoy": -7.5,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-09-job_openings-total",
@@ -42357,27 +40929,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-10-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-10",
-    "value": 13.0,
-    "unit": "천명",
-    "yoy": -1.4,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-10-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -42387,27 +40938,6 @@
     "value": 75.0,
     "unit": "천명",
     "yoy": -15.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-10-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-10",
-    "value": 104.0,
-    "unit": "천명",
-    "yoy": 2.8,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -42924,27 +41454,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-10-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-10",
-    "value": 10947.0,
-    "unit": "천명",
-    "yoy": 227.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-10-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -43006,27 +41515,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-10-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-10",
-    "value": 42.0,
-    "unit": "천명",
-    "yoy": -17.6,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-10-job_openings-total",
@@ -44530,27 +43018,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-11-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-11",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": 0.5,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-11-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -44560,27 +43027,6 @@
     "value": 84.0,
     "unit": "천명",
     "yoy": -6.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-11-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-11",
-    "value": 93.0,
-    "unit": "천명",
-    "yoy": 3.2,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -45097,27 +43543,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-11-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-11",
-    "value": 10912.0,
-    "unit": "천명",
-    "yoy": 208.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-11-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -45179,27 +43604,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-11-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-11",
-    "value": 45.0,
-    "unit": "천명",
-    "yoy": -5.1,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-11-job_openings-total",
@@ -46703,27 +45107,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2025-12-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-12",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": -0.2,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-12-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -46733,27 +45116,6 @@
     "value": 98.0,
     "unit": "천명",
     "yoy": -3.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2025-12-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-12",
-    "value": 92.0,
-    "unit": "천명",
-    "yoy": 4.6,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -47270,27 +45632,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2025-12-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2025-12",
-    "value": 10752.0,
-    "unit": "천명",
-    "yoy": 209.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2025-12-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -47352,27 +45693,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2025-12-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2025-12",
-    "value": 39.0,
-    "unit": "천명",
-    "yoy": -1.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2025-12-job_openings-total",
@@ -48876,27 +47196,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2026-01-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-01",
-    "value": 31.0,
-    "unit": "천명",
-    "yoy": 0.8,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-01-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -48906,27 +47205,6 @@
     "value": 201.0,
     "unit": "천명",
     "yoy": 15.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2026-01-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-01",
-    "value": 104.0,
-    "unit": "천명",
-    "yoy": 7.5,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -49443,27 +47721,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2026-01-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2026-01",
-    "value": 10715.0,
-    "unit": "천명",
-    "yoy": 277.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-01-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -49525,27 +47782,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2026-01-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-01",
-    "value": 53.0,
-    "unit": "천명",
-    "yoy": 13.7,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2026-01-job_openings-total",
@@ -51049,27 +49285,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2026-02-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-02",
-    "value": 14.0,
-    "unit": "천명",
-    "yoy": -4.5,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-02-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -51079,27 +49294,6 @@
     "value": 87.0,
     "unit": "천명",
     "yoy": -30.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2026-02-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-02",
-    "value": 107.0,
-    "unit": "천명",
-    "yoy": -2.7,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -51616,27 +49810,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2026-02-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2026-02",
-    "value": 10904.0,
-    "unit": "천명",
-    "yoy": 269.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-02-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -51698,27 +49871,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2026-02-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-02",
-    "value": 39.0,
-    "unit": "천명",
-    "yoy": -18.8,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2026-02-job_openings-total",
@@ -53222,27 +51374,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2026-03-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-03",
-    "value": 15.0,
-    "unit": "천명",
-    "yoy": -0.1,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-03-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -53252,27 +51383,6 @@
     "value": 132.0,
     "unit": "천명",
     "yoy": -5.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2026-03-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-03",
-    "value": 109.0,
-    "unit": "천명",
-    "yoy": -1.2,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -53789,27 +51899,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2026-03-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2026-03",
-    "value": 10968.0,
-    "unit": "천명",
-    "yoy": 280.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-03-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -53871,27 +51960,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2026-03-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-03",
-    "value": 54.0,
-    "unit": "천명",
-    "yoy": 3.2,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2026-03-job_openings-total",
@@ -55395,27 +53463,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2026-04-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-04",
-    "value": 17.0,
-    "unit": "천명",
-    "yoy": 0.2,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-04-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -55425,27 +53472,6 @@
     "value": 100.0,
     "unit": "천명",
     "yoy": -3.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2026-04-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-04",
-    "value": 109.0,
-    "unit": "천명",
-    "yoy": -3.7,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -55962,27 +53988,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2026-04-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2026-04",
-    "value": 11072.0,
-    "unit": "천명",
-    "yoy": 284.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-04-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -56044,27 +54049,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2026-04-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-04",
-    "value": 60.0,
-    "unit": "천명",
-    "yoy": 2.1,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2026-04-job_openings-total",
@@ -57568,27 +55552,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2026-05-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-05",
-    "value": 13.0,
-    "unit": "천명",
-    "yoy": -1.3,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-05-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -57598,27 +55561,6 @@
     "value": 79.0,
     "unit": "천명",
     "yoy": -6.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2026-05-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-05",
-    "value": 105.0,
-    "unit": "천명",
-    "yoy": -4.9,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -58135,27 +56077,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2026-05-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2026-05",
-    "value": 11114.0,
-    "unit": "천명",
-    "yoy": 284.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-05-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -58217,27 +56138,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2026-05-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-05",
-    "value": 46.0,
-    "unit": "천명",
-    "yoy": 1.8,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2026-05-job_openings-total",
@@ -59741,27 +57641,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2026-06-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-06",
-    "value": 16.0,
-    "unit": "천명",
-    "yoy": 1.7,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-06-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -59771,27 +57650,6 @@
     "value": 90.0,
     "unit": "천명",
     "yoy": 4.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2026-06-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-06",
-    "value": 107.0,
-    "unit": "천명",
-    "yoy": -2.0,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -60308,27 +58166,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2026-06-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2026-06",
-    "value": 11123.0,
-    "unit": "천명",
-    "yoy": 279.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-06-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -60390,27 +58227,6 @@
       }
     ],
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
-  },
-  {
-    "id": "ei-2026-06-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-06",
-    "value": 61.0,
-    "unit": "천명",
-    "yoy": 9.7,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2026-06-job_openings-total",
@@ -61914,27 +59730,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2026-07-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-07",
-    "value": 16.0,
-    "unit": "천명",
-    "yoy": -1.1,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-07-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -61944,27 +59739,6 @@
     "value": 109.0,
     "unit": "천명",
     "yoy": -2.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2026-07-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-07",
-    "value": 110.0,
-    "unit": "천명",
-    "yoy": -3.6,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -62481,27 +60255,6 @@
     "collected_at": "2026-08-30T20:56:42.228696+09:00"
   },
   {
-    "id": "ei-2026-07-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2026-07",
-    "value": 11140.0,
-    "unit": "천명",
-    "yoy": 285.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-07-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -62563,27 +60316,6 @@
       }
     ],
     "collected_at": "2026-09-07T17:16:24.120696+09:00"
-  },
-  {
-    "id": "ei-2026-07-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-07",
-    "value": 56.0,
-    "unit": "천명",
-    "yoy": 3.3,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2026-07-job_openings-total",
@@ -64087,27 +61819,6 @@
     "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
-    "id": "ei-2026-08-benefit_new-industry-C",
-    "source": "ei",
-    "series": "benefit_new",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-08",
-    "value": 12.0,
-    "unit": "천명",
-    "yoy": -1.6,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-08-benefit_new-total",
     "source": "ei",
     "series": "benefit_new",
@@ -64117,27 +61828,6 @@
     "value": 81.0,
     "unit": "천명",
     "yoy": 0.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
-    "id": "ei-2026-08-benefit_paid-industry-C",
-    "source": "ei",
-    "series": "benefit_paid",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-08",
-    "value": 106.0,
-    "unit": "천명",
-    "yoy": -4.3,
     "status": "잠정",
     "released_at": "2026-09-07",
     "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
@@ -64654,27 +62344,6 @@
     "collected_at": "2026-09-07T17:16:24.120696+09:00"
   },
   {
-    "id": "ei-2026-08-headcount-scope-services",
-    "source": "ei",
-    "series": "headcount",
-    "breakdown": "scope",
-    "category": "services",
-    "period": "2026-08",
-    "value": 11164.0,
-    "unit": "천명",
-    "yoy": 280.0,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
-  },
-  {
     "id": "ei-2026-08-headcount-sex-F",
     "source": "ei",
     "series": "headcount",
@@ -64736,27 +62405,6 @@
       }
     ],
     "collected_at": "2026-09-07T17:16:24.120696+09:00"
-  },
-  {
-    "id": "ei-2026-08-job_openings-industry-C",
-    "source": "ei",
-    "series": "job_openings",
-    "breakdown": "industry",
-    "category": "C",
-    "period": "2026-08",
-    "value": 52.0,
-    "unit": "천명",
-    "yoy": 4.1,
-    "status": "잠정",
-    "released_at": "2026-09-07",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896",
-    "attachments": [
-      {
-        "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260900430&bbs_seq=19896&bbs_id=12&file_ext=hwpx"
-      }
-    ],
-    "collected_at": "2026-09-22T10:49:44.612012+09:00"
   },
   {
     "id": "ei-2026-08-job_openings-total",

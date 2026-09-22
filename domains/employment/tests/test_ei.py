@@ -146,21 +146,6 @@ def test_coverage_demands_every_indicator_in_the_latest_month(records):
         ei.check_coverage(thinned)
 
 
-def test_coverage_demands_the_services_aggregate(records):
-    thinned = [r for r in records
-               if not (r.breakdown == "scope" and r.category == "services")]
-    with pytest.raises(ValueError, match="서비스업"):
-        ei.check_coverage(thinned)
-
-
-def test_coverage_demands_the_manufacturing_columns(records):
-    thinned = [r for r in records
-               if not (r.breakdown == "industry" and r.category == "C"
-                       and r.series == "job_openings")]
-    with pytest.raises(ValueError, match="제조업"):
-        ei.check_coverage(thinned)
-
-
 def _shift(period: str, months: int) -> str:
     year, month = (int(x) for x in period.split("-"))
     total = year * 12 + (month - 1) - months
@@ -437,60 +422,6 @@ def test_find_market_tables_fails_when_a_third_candidate_appears(data):
     assert len(cand) == 2
     with pytest.raises(ValueError, match="3개"):
         ei.find_market_tables(cand + [cand[0]])
-
-
-# ── 범위 탭: 제조업·서비스업 ───────────────────────────────────────────
-
-def test_industry_pairs_are_matched_against_the_summary_totals(data):
-    pairs = ei.industry_pairs(hwpx.tables(data))
-    assert len(pairs) == 3          # 신규신청 · 지급자수 · 신규구인
-    for level, delta in pairs:
-        assert "전산업" in " ".join(ei.squash(c) for c in level[0])
-        assert "전산업" in " ".join(ei.squash(c) for c in delta[0])
-
-
-def test_manufacturing_columns_come_from_the_industry_tables(records):
-    made = {r.series: r for r in records
-            if r.period == "2026-07" and r.breakdown == "industry" and r.category == "C"}
-    assert (made["benefit_new"].value, made["benefit_new"].yoy) == (16.0, -1.1)
-    assert (made["benefit_paid"].value, made["benefit_paid"].yoy) == (110.0, -3.6)
-    assert (made["job_openings"].value, made["job_openings"].yoy) == (56.0, 3.3)
-
-
-def test_parse_fails_when_an_industry_table_disagrees_with_the_summary(data, monkeypatch):
-    # 표 순서가 흔들려 지급자수 표를 신규신청 자리에서 읽으면, 전산업 값이
-    # 요약표와 크게 어긋난다(109 vs 643).
-    monkeypatch.setattr(ei, "INDUSTRY_SERIES",
-                        ("benefit_paid", "benefit_new", "job_openings"))
-    with pytest.raises(ValueError, match="전산업"):
-        ei.parse(data, released_at=date(2026, 8, 11),
-                 release_url="https://x/view", attachments=[],
-                 collected_at=datetime(2026, 8, 30, 9, 0))
-
-
-def test_manufacturing_records_fails_when_a_summary_total_is_missing(data):
-    # 구직급여·고용24 요약표가 서로 다른 최신월을 낸 모양을 흉내낸다(한쪽
-    # 표가 뒤처지면 totals 에 INDUSTRY_SERIES 세 지표 중 하나가 아예 빠진다).
-    # 맥락 없는 KeyError 대신, 어느 지표가 빠졌는지 말하는 ValueError 여야 한다.
-    tables = hwpx.tables(data)
-    totals = {"benefit_new": (109.0, -2.0), "benefit_paid": (643.0, -31.0)}
-    with pytest.raises(ValueError, match="job_openings"):
-        ei.manufacturing_records(
-            tables, totals, "2026-07",
-            released_at=date(2026, 8, 11), release_url="https://x/view",
-            attachments=[], collected_at=datetime(2026, 8, 30, 9, 0))
-
-
-def test_services_is_an_aggregate_on_the_scope_axis_not_an_industry(records):
-    services = [r for r in records if r.breakdown == "scope" and r.category == "services"]
-    latest = max(services, key=lambda r: r.period)
-    assert latest.period == "2026-07"
-    assert latest.value == 11139.0
-    assert latest.series == "headcount"
-    # 대분류 목록은 그대로여야 한다 — 서비스업이 industry 로 새면 이중 계상이다.
-    codes = {r.category for r in records if r.breakdown == "industry"
-             and r.series == "headcount"}
-    assert codes == set("ACDEFGHIJKLMNOPQRS")
 
 
 # ── 세 회차 통째 검증 ────────────────────────────────────────────────────

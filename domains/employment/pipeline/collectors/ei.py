@@ -468,135 +468,6 @@ def market_records(level, delta, **meta) -> list[SeriesRecord]:
     return out
 
 
-# ── 범위 탭이 쓰는 산업 열 ──────────────────────────────────────────────
-#
-# 산업별 표는 여섯 장이 헤더가 똑같다(신규신청 수준/증감, 지급자수 수준/증감,
-# 신규구인 수준/증감). 크기로도 못 가른다 — 보도자료 순서로 짝을 정하고,
-# **이미 읽은 요약표의 전산업 값과 맞춰** 그 짝이 맞는지 검증한다.
-#
-# `도소매` 가 열쇠다. 가입자수 표도 `전산업`·`제조업` 을 갖지만 거기서는
-# 도소매가 머리 **둘째 줄**에 있어 g[0] 에 안 걸린다. 이어지는 표
-# (`부동산업 … 기타*`)는 전산업이 없어 애초에 후보가 아니다.
-INDUSTRY_HEADER_KEYS = ("전산업", "제조업", "도소매")
-INDUSTRY_SERIES = ("benefit_new", "benefit_paid", "job_openings")
-
-# 서비스업은 표준산업분류 대분류가 아니라 여러 대분류를 묶은 집계다.
-# `industry` 에 넣으면 속성별 매트릭스에서 대분류들과 나란히 서서 이중
-# 계상으로 읽힌다. 경활의 15~64세가 같은 이유로 쓰는 `scope` 축에 싣는다.
-SERVICES_CATEGORY = "services"
-SERVICES_COLUMN = 6          # 앞 표의 서비스업 집계 열. check_layout 이 이름을 본다.
-MANUFACTURING_CATEGORY = "C"
-
-
-def _industry_column(header, name: str) -> int:
-    for i, cell in enumerate(header):
-        if squash(cell) == name:
-            return i
-    raise ValueError(f"산업별 표에 {name!r} 열이 없다 — 서식이 바뀌었을 수 있다")
-
-
-def _latest_month_value(table, column: int) -> tuple[str, float | None]:
-    rows = month_rows(table)
-    if not rows:
-        return "", None
-    period, row = rows[-1]
-    return period, (_num(row[column]) if column < len(row) else None)
-
-
-def industry_pairs(tables) -> list[tuple[list, list]]:
-    """산업별 (수준, 증감) 표 세 쌍. 보도자료 순서를 그대로 쓴다.
-
-    형제 find_market_tables 는 `!= 2` 로 정확히 개수를 맞추는데 여기는
-    `< need` 로 초과를 허용한다 — 비대칭이 맞다. find_market_tables 는
-    cand[1] 에 판별식이 없어 개수가 유일한 가드지만, 여기는 manufacturing_records
-    가 각 쌍을 수준·증감 모두 요약표 전산업과 대조하므로(짝이 밀리면 109 를
-    643 과 비교하게 되어 요란하게 터진다) 개수 이중으로 막혀 있다.
-    """
-    cand = [g for g in tables
-            if g and len(g[0]) > 5 and all(k in _flat(g[0]) for k in INDUSTRY_HEADER_KEYS)]
-    need = len(INDUSTRY_SERIES) * 2
-    if len(cand) < need:
-        raise ValueError(f"산업별 표가 모자라다: {len(cand)}장, {need}장이 필요하다")
-    return [(cand[i * 2], cand[i * 2 + 1]) for i in range(len(INDUSTRY_SERIES))]
-
-
-def manufacturing_records(tables, totals: dict[str, tuple[float, float | None]],
-                          newest: str, **meta) -> list[SeriesRecord]:
-    """산업별 표에서 **제조업 열 하나만** 읽는다.
-
-    산업별 표는 여섯 장이 헤더가 완전히 같다(신규신청 수준/증감, 지급자수
-    수준/증감, 신규구인 수준/증감) — 표 순서가 흔들리면 조용히 다른 지표를
-    읽는다. 그래서 각 짝을 쓰기 전에 전산업 열을 요약표 값과 맞춰 그 자리가
-    맞는지 검증한다.
-
-    실측(2026-07): 신규신청 109, 지급자수 643, 신규구인 177 이 각각 산업별
-    표의 전산업 열과 같다. 표 순서가 흔들려 지급자수 표를 신규신청 자리에서
-    읽으면 109 대신 643 이 나와 곧바로 어긋난다.
-
-    19개 대분류를 다 읽으면 28개월 × 19분류 × 3지표 ≈ 1,600건이 쌓이는데
-    그릴 화면이 없다. 전산업 열은 저장하지 않고 대조에만 쓴다 — 그 값은
-    요약표에서 이미 읽었다.
-
-    `totals` 는 구직급여·고용24 두 요약표에서 **각각 따로** 읽은 최신월
-    값이다. 두 표가 서로 다른 최신월을 냈다면(한쪽이 뒤처진 달을 냈다면)
-    `totals` 에 `INDUSTRY_SERIES` 세 지표 중 하나가 아예 빠질 수 있다 —
-    이때 `totals[series]` 를 그대로 찍으면 맥락 없는 `KeyError` 로 죽는다.
-    무엇이 어긋났는지 말해주는 `ValueError` 로 먼저 막는다.
-    """
-    out: list[SeriesRecord] = []
-    for series, (level, delta) in zip(INDUSTRY_SERIES, industry_pairs(tables)):
-        if series not in totals:
-            raise ValueError(
-                f"{series} 지표의 전산업 대조값이 {newest} 요약표에 없다 — "
-                "구직급여·고용24 요약표가 최신월을 서로 다르게 냈을 수 있다"
-                "(한쪽 표가 뒤처졌을 수 있다) — 어느 표가 뒤처졌는지 확인한다")
-        want_level, want_delta = totals[series]
-        for table, want, what in ((level, want_level, "수준"),
-                                  (delta, want_delta, "증감")):
-            period, got = _latest_month_value(table, _industry_column(table[0], "전산업"))
-            if got is None or want is None or abs(got - want) > 1.0:
-                raise ValueError(
-                    f"{series} 산업별 {what} 표의 전산업이 요약표와 다르다"
-                    f"({period}): {got} vs {want} — 표 순서가 흔들렸을 수 있다"
-                    "(산업별 표와 요약표의 최신월 자체가 다를 수도 있다 — period 를 확인한다)")
-
-        deltas = dict(month_rows(delta))
-        level_col = _industry_column(level[0], "제조업")
-        delta_col = _industry_column(delta[0], "제조업")
-        for period, row in month_rows(level):
-            value = _num(row[level_col]) if level_col < len(row) else None
-            if value is None:
-                continue
-            drow = deltas.get(period, [])
-            out.append(SeriesRecord(
-                id=make_id("ei", period, "industry", MANUFACTURING_CATEGORY, series=series),
-                source="ei", series=series, breakdown="industry",
-                category=MANUFACTURING_CATEGORY, period=period, value=value,
-                unit=(BENEFIT_UNITS.get(series) or MARKET_UNITS[series]),
-                yoy=_num(drow[delta_col]) if delta_col < len(drow) else None,
-                **meta,
-            ))
-    return out
-
-
-def services_records(level_lead, delta_lead, **meta) -> list[SeriesRecord]:
-    deltas = dict(month_rows(delta_lead))
-    out: list[SeriesRecord] = []
-    for period, row in month_rows(level_lead):
-        value = _num(row[SERVICES_COLUMN]) if SERVICES_COLUMN < len(row) else None
-        if value is None:
-            continue
-        drow = deltas.get(period, [])
-        out.append(SeriesRecord(
-            id=make_id("ei", period, "scope", SERVICES_CATEGORY),
-            source="ei", series="headcount", breakdown="scope",
-            category=SERVICES_CATEGORY, period=period, value=value, unit="천명",
-            yoy=_num(drow[SERVICES_COLUMN]) if SERVICES_COLUMN < len(drow) else None,
-            **meta,
-        ))
-    return out
-
-
 def parse(data: bytes, *, released_at: date, release_url: str,
           attachments: list[Attachment], collected_at: datetime) -> list[SeriesRecord]:
     tables = hwpx.tables(data)
@@ -693,19 +564,10 @@ def parse(data: bytes, *, released_at: date, release_url: str,
     check_flow(flow)
     records += flow_records(flow, **meta)
 
-    # 산업별 표는 헤더가 여섯 장 모두 같다. 요약표에서 읽은 전산업 값만이
-    # 어느 쌍이 어느 지표인지를 말해 주므로, 먼저 모아 둔다.
     benefit_level, benefit_delta = find_benefit_tables(tables)
-    summary = benefit_records(benefit_level, benefit_delta, **meta)
+    records += benefit_records(benefit_level, benefit_delta, **meta)
     market_level, market_delta = find_market_tables(tables)
-    summary += market_records(market_level, market_delta, **meta)
-    records += summary
-
-    newest = max(r.period for r in summary)
-    totals = {r.series: (r.value, r.yoy) for r in summary
-              if r.period == newest and r.breakdown == "total"}
-    records += manufacturing_records(tables, totals, newest, **meta)
-    records += services_records(level_a, delta_a, **meta)
+    records += market_records(market_level, market_delta, **meta)
     return records
 
 
@@ -716,7 +578,7 @@ EXPECTED_SERIES = ("headcount", "acquired", "separated",
 
 
 def check_coverage(records: list[SeriesRecord]) -> None:
-    """최신월에 기대한 대분류·성별·연령·지표 아홉·집계 둘이 다 왔는지 본다.
+    """최신월에 기대한 대분류·성별·연령·지표 아홉이 다 왔는지 본다.
 
     열 위치가 밀리거나 표 하나가 통째로 빠지면 그 산업·지표가 조용히 빠진다.
     화면에서는 그냥 없는 칸이나 없는 그림으로 보일 뿐 아무 흔적도 남지 않는다.
@@ -749,18 +611,6 @@ def check_coverage(records: list[SeriesRecord]) -> None:
     missing = set(EXPECTED_SERIES) - present
     if missing:
         raise ValueError(f"{latest} 에 빠진 지표: {sorted(missing)}")
-
-    # 범위 탭이 쓰는 두 집계.
-    if not any(r.period == latest and r.breakdown == "scope"
-               and r.category == SERVICES_CATEGORY for r in records):
-        raise ValueError(f"{latest} 에 서비스업 집계가 없다")
-    made = {r.series for r in records
-            if r.period == latest and r.breakdown == "industry"
-            and r.category == MANUFACTURING_CATEGORY}
-    # 괄호가 필요하다 — `|` 보다 `-` 가 먼저 묶여 headcount 검사가 사라진다.
-    missing = (set(INDUSTRY_SERIES) | {"headcount"}) - made
-    if missing:
-        raise ValueError(f"{latest} 에 빠진 제조업 지표: {sorted(missing)}")
 
 
 MAX_MONTHS_BEHIND = 2      # 전월 기준으로 매월 공표된다 (sources.json 의 release_rule)

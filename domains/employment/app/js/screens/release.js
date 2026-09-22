@@ -40,8 +40,10 @@ const EAPS_SCOPES = [
 // 9·4·1 로 들쭉날쭉했고, 서비스업은 가입자수 한 장뿐이라 누를 보람이 없었다.
 //
 // 범위가 하나뿐이므로 trendSection 이 탭 줄 자체를 그리지 않는다.
-// 제조업·서비스업 열은 수집기가 계속 모은다 — 화면이 다시 필요로 하면
-// `breakdown: 'industry'/'C'` 와 `breakdown: 'scope'/'services'` 로 여기 있다.
+// 제조업·서비스업 열은 수집기에서도 걷어냈다(2026-09-22) — check_coverage 가
+// 아무 화면도 안 쓰는 열 때문에 수집 전체를 실패시키는 상태였다. 다시
+// 필요해지면 domains/employment/pipeline/collectors/ei.py 에 그 두 열을
+// 읽는 코드를 새로 얹어야 한다.
 const EI_SCOPES = [
   { key: 'total', label: '전산업', tab: '전체', sub: '전 산업' },
 ];
