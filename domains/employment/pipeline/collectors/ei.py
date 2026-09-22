@@ -501,15 +501,35 @@ def industry_pairs(tables) -> list[tuple[list, list]]:
 
 
 def manufacturing_records(tables, totals: dict[str, tuple[float, float | None]],
-                          **meta) -> list[SeriesRecord]:
+                          newest: str, **meta) -> list[SeriesRecord]:
     """산업별 표에서 **제조업 열 하나만** 읽는다.
+
+    산업별 표는 여섯 장이 헤더가 완전히 같다(신규신청 수준/증감, 지급자수
+    수준/증감, 신규구인 수준/증감) — 표 순서가 흔들리면 조용히 다른 지표를
+    읽는다. 그래서 각 짝을 쓰기 전에 전산업 열을 요약표 값과 맞춰 그 자리가
+    맞는지 검증한다.
+
+    실측(2026-07): 신규신청 109, 지급자수 643, 신규구인 177 이 각각 산업별
+    표의 전산업 열과 같다. 표 순서가 흔들려 지급자수 표를 신규신청 자리에서
+    읽으면 109 대신 643 이 나와 곧바로 어긋난다.
 
     19개 대분류를 다 읽으면 28개월 × 19분류 × 3지표 ≈ 1,600건이 쌓이는데
     그릴 화면이 없다. 전산업 열은 저장하지 않고 대조에만 쓴다 — 그 값은
     요약표에서 이미 읽었다.
+
+    `totals` 는 구직급여·고용24 두 요약표에서 **각각 따로** 읽은 최신월
+    값이다. 두 표가 서로 다른 최신월을 냈다면(한쪽이 뒤처진 달을 냈다면)
+    `totals` 에 `INDUSTRY_SERIES` 세 지표 중 하나가 아예 빠질 수 있다 —
+    이때 `totals[series]` 를 그대로 찍으면 맥락 없는 `KeyError` 로 죽는다.
+    무엇이 어긋났는지 말해주는 `ValueError` 로 먼저 막는다.
     """
     out: list[SeriesRecord] = []
     for series, (level, delta) in zip(INDUSTRY_SERIES, industry_pairs(tables)):
+        if series not in totals:
+            raise ValueError(
+                f"{series} 지표의 전산업 대조값이 {newest} 요약표에 없다 — "
+                "구직급여·고용24 요약표가 최신월을 서로 다르게 냈을 수 있다"
+                "(한쪽 표가 뒤처졌을 수 있다) — 어느 표가 뒤처졌는지 확인한다")
         want_level, want_delta = totals[series]
         for table, want, what in ((level, want_level, "수준"),
                                   (delta, want_delta, "증감")):
@@ -663,7 +683,7 @@ def parse(data: bytes, *, released_at: date, release_url: str,
     newest = max(r.period for r in summary)
     totals = {r.series: (r.value, r.yoy) for r in summary
               if r.period == newest and r.breakdown == "total"}
-    records += manufacturing_records(tables, totals, **meta)
+    records += manufacturing_records(tables, totals, newest, **meta)
     records += services_records(level_a, delta_a, **meta)
     return records
 

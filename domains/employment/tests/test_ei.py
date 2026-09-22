@@ -434,6 +434,19 @@ def test_parse_fails_when_an_industry_table_disagrees_with_the_summary(data, mon
                  collected_at=datetime(2026, 8, 30, 9, 0))
 
 
+def test_manufacturing_records_fails_when_a_summary_total_is_missing(data):
+    # 구직급여·고용24 요약표가 서로 다른 최신월을 낸 모양을 흉내낸다(한쪽
+    # 표가 뒤처지면 totals 에 INDUSTRY_SERIES 세 지표 중 하나가 아예 빠진다).
+    # 맥락 없는 KeyError 대신, 어느 지표가 빠졌는지 말하는 ValueError 여야 한다.
+    tables = hwpx.tables(data)
+    totals = {"benefit_new": (109.0, -2.0), "benefit_paid": (643.0, -31.0)}
+    with pytest.raises(ValueError, match="job_openings"):
+        ei.manufacturing_records(
+            tables, totals, "2026-07",
+            released_at=date(2026, 8, 11), release_url="https://x/view",
+            attachments=[], collected_at=datetime(2026, 8, 30, 9, 0))
+
+
 def test_services_is_an_aggregate_on_the_scope_axis_not_an_industry(records):
     services = [r for r in records if r.breakdown == "scope" and r.category == "services"]
     latest = max(services, key=lambda r: r.period)
