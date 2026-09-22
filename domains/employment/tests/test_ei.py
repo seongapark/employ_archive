@@ -479,3 +479,29 @@ def test_services_is_an_aggregate_on_the_scope_axis_not_an_industry(records):
     codes = {r.category for r in records if r.breakdown == "industry"
              and r.series == "headcount"}
     assert codes == set("ACDEFGHIJKLMNOPQRS")
+
+
+# ── 세 회차 통째 검증 ────────────────────────────────────────────────────
+
+RELEASES = Path(__file__).parents[3] / "domains" / "press" / "sources" / "releases"
+
+
+@pytest.mark.parametrize("name", ["ei_2026-06", "ei_2026-07", "ei_2026-08"])
+def test_every_stored_issue_parses_with_all_nine_indicators(name):
+    # 한 회차만 통과하는 파서는 다음 달에 깨진다. 표 번호가 회차마다 밀리므로
+    # 헤더로 찾는 것이 실제로 되는지는 여러 회차로만 확인된다.
+    path = RELEASES / f"{name}.hwpx"
+    if not path.exists():
+        pytest.skip(f"{name} 회차가 저장소에 없다")
+    parsed = ei.parse(path.read_bytes(), released_at=date(2026, 9, 7),
+                      release_url="https://x/view", attachments=[],
+                      collected_at=datetime(2026, 9, 21, 9, 0))
+    ei.check_coverage(parsed)
+    latest = max(r.period for r in parsed)
+    got = {r.series for r in parsed if r.period == latest and r.breakdown == "total"}
+    assert got == set(ei.EXPECTED_SERIES)
+    # 25개월 연속 구간이 다 차야 그래프가 첫 수집만으로 가득 찬다.
+    for series in ei.EXPECTED_SERIES:
+        periods = {r.period for r in parsed
+                   if r.series == series and r.breakdown == "total"}
+        assert len(periods) >= 25, f"{series} 가 {len(periods)}개월뿐이다"
