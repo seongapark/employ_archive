@@ -266,6 +266,73 @@ def flow_records(table, **meta) -> list[SeriesRecord]:
     return out
 
 
+BENEFIT_HEADER_KEYS = ("신규신청자수", "지급자수", "지급건수", "지급액", "1인당지급액")
+
+# 0=월 1=신규신청 2=지급자수 3=지급건수 4=지급액 5=1인당지급액 6=지급건수당지급액
+#
+# 지급건수(천건)·1인당 지급액(천원)·지급건수당 지급액(천원)은 저장하지 않는다.
+# 그릴 화면이 없다. 다만 1인당 지급액은 **수준 표를 가려내는 대조점**이라
+# 읽기는 한다.
+BENEFIT_COLUMNS = {"benefit_new": 1, "benefit_paid": 2, "benefit_amount": 4}
+BENEFIT_UNITS = {"benefit_new": "천명", "benefit_paid": "천명", "benefit_amount": "억원"}
+BENEFIT_PAID_COLUMN = 2
+BENEFIT_AMOUNT_COLUMN = 4
+BENEFIT_PER_PERSON_COLUMN = 5
+
+
+def _is_benefit_level(table) -> bool:
+    """문서가 가진 항등식으로 수준 표를 가린다: 지급액 ÷ 지급자수 = 1인당 지급액.
+
+    억원 ÷ 천명 을 천원으로 옮기려면 100을 곱한다(1억원 = 100,000천원,
+    1천명으로 나누므로 100천원).
+
+    실측(2026-07) 수준 10,904 × 100 ÷ 643 = 1,695.8 vs 표 1,696 — 맞는다.
+    증감 -218 × 100 ÷ -31 = 703 vs 45, 증감률 -2.0 × 100 ÷ -4.5 = 44.4 vs 2.7
+    — 둘 다 크게 어긋난다. 크기 비교로는 못 가르는 것을 이 식이 가른다.
+    """
+    rows = month_rows(table)
+    if not rows:
+        return False
+    _, row = rows[-1]
+    paid, amount, per = (_num(row[c]) if c < len(row) else None
+                         for c in (BENEFIT_PAID_COLUMN, BENEFIT_AMOUNT_COLUMN,
+                                   BENEFIT_PER_PERSON_COLUMN))
+    if not paid or amount is None or not per:
+        return False
+    return abs(amount * 100 / paid - per) <= abs(per) * 0.02
+
+
+def find_benefit_tables(tables) -> tuple[list, list]:
+    cand = [g for g in tables
+            if g and len(g[0]) > 5 and all(k in _flat(g[0]) for k in BENEFIT_HEADER_KEYS)]
+    if len(cand) < 2:
+        raise ValueError(f"구직급여 표를 찾지 못했다 (후보 {len(cand)}개)")
+    if not _is_benefit_level(cand[0]):
+        raise ValueError(
+            "구직급여 표의 첫 장이 수준 표가 아니다(지급액÷지급자수가 "
+            "1인당 지급액과 맞지 않는다) — 표 순서나 서식이 바뀌었을 수 있다")
+    return cand[0], cand[1]
+
+
+def benefit_records(level, delta, **meta) -> list[SeriesRecord]:
+    deltas = {period: row for period, row in month_rows(delta)}
+    out: list[SeriesRecord] = []
+    for period, row in month_rows(level):
+        drow = deltas.get(period, [])
+        for series, col in BENEFIT_COLUMNS.items():
+            value = _num(row[col]) if col < len(row) else None
+            if value is None:
+                continue
+            out.append(SeriesRecord(
+                id=make_id("ei", period, "total", None, series=series),
+                source="ei", series=series, breakdown="total", category=None,
+                period=period, value=value, unit=BENEFIT_UNITS[series],
+                yoy=_num(drow[col]) if col < len(drow) else None,
+                **meta,
+            ))
+    return out
+
+
 def parse(data: bytes, *, released_at: date, release_url: str,
           attachments: list[Attachment], collected_at: datetime) -> list[SeriesRecord]:
     tables = hwpx.tables(data)
@@ -359,6 +426,11 @@ def parse(data: bytes, *, released_at: date, release_url: str,
     check_flow(flow)
     records += flow_records(flow, released_at=released_at, release_url=release_url,
                             attachments=attachments, collected_at=collected_at)
+
+    benefit_level, benefit_delta = find_benefit_tables(tables)
+    records += benefit_records(benefit_level, benefit_delta,
+                               released_at=released_at, release_url=release_url,
+                               attachments=attachments, collected_at=collected_at)
     return records
 
 

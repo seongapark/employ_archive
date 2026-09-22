@@ -77,7 +77,9 @@ def test_layout_check_rejects_a_changed_header(data):
 
 def test_every_record_is_ei_in_thousands(records):
     assert {r.source for r in records} == {"ei"}
-    assert {r.unit for r in records} == {"천명"}
+    # benefit_amount(구직급여 지급액)만 억원이다 — 사람 머릿수가 아니라 돈이라
+    # 단위가 다르다. 그 편은 test_the_payout_is_money_not_people 가 따로 본다.
+    assert {r.unit for r in records if r.series != "benefit_amount"} == {"천명"}
 
 
 def test_ids_are_unique(records):
@@ -281,3 +283,46 @@ def test_flow_covers_every_month_not_just_the_latest(data, records):
     periods = {r.period for r in records if r.series == "acquired"}
     assert "2026-07" in periods
     assert len(periods) >= 25
+
+
+# ── 총괄 지표: 구직급여 ────────────────────────────────────────────────
+
+def test_finds_the_benefit_level_table_by_an_identity_not_by_size(data):
+    # 헤더가 같은 표가 셋(수준·증감·증감률) 잇따른다. 지급액÷지급자수가
+    # 1인당 지급액과 맞는 것은 수준 표뿐이다.
+    level, delta = ei.find_benefit_tables(hwpx.tables(data))
+    rows = dict(ei.month_rows(level))
+    assert float(rows["2026-07"][4].replace(",", "")) == 10904.0
+    assert float(dict(ei.month_rows(delta))["2026-07"][4].replace(",", "")) == -218.0
+
+
+def test_benefit_records_carry_level_and_change(records):
+    latest = {r.series: r for r in records
+              if r.period == "2026-07" and r.breakdown == "total"}
+    assert (latest["benefit_new"].value, latest["benefit_new"].yoy) == (109.0, -2.0)
+    assert (latest["benefit_paid"].value, latest["benefit_paid"].yoy) == (643.0, -31.0)
+    assert (latest["benefit_amount"].value, latest["benefit_amount"].yoy) == (10904.0, -218.0)
+
+
+def test_the_payout_is_money_not_people(records):
+    amount = next(r for r in records
+                  if r.series == "benefit_amount" and r.period == "2026-07")
+    assert amount.unit == "억원"
+    paid = next(r for r in records
+                if r.series == "benefit_paid" and r.period == "2026-07")
+    assert paid.unit == "천명"
+
+
+def test_is_benefit_level_rejects_the_change_and_rate_tables(data):
+    # 증감률 표를 수준 표로 집으면 지급액이 100배 작아지는데 조용히 그럴듯해
+    # 보인다. 크기로는 못 가르므로 항등식이 유일한 방패다.
+    level, delta = ei.find_benefit_tables(hwpx.tables(data))
+    assert ei._is_benefit_level(level) is True
+    assert ei._is_benefit_level(delta) is False
+
+
+def test_find_benefit_tables_fails_when_the_level_table_moves(data, monkeypatch):
+    # 수준 표가 첫 장이 아니게 되면(표 순서가 바뀌면) 조용히 넘어가지 않는다.
+    monkeypatch.setattr(ei, "_is_benefit_level", lambda table: False)
+    with pytest.raises(ValueError, match="수준 표가 아니다"):
+        ei.find_benefit_tables(hwpx.tables(data))
