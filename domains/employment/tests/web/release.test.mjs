@@ -186,22 +186,26 @@ const EI_TRENDS = ['2026-06', '2026-07'].flatMap(period => [
   ei({ period, series: 'headcount', value: 11139.0, breakdown: 'scope', category: 'services' }),
 ]);
 
-test('the administrative tabs are the whole economy, manufacturing and services', () => {
+test('the administrative screen draws no range tabs at all', () => {
+  // 범위가 전산업 하나뿐이다(2026-09-22 사용자 판단). 누를 데가 없는 탭 줄은
+  // 눌러도 아무 일이 없는 버튼이라 아예 그리지 않는다.
   const { html } = trendSection(EI_TRENDS, { source: 'ei', scope: 'total' });
-  for (const label of ['전체', '제조업', '서비스업']) assert.ok(html.includes(label));
+  assert.ok(!html.includes('scopes__tab'), '탭 줄이 없어야 한다');
+  for (const label of ['제조업', '서비스업']) {
+    assert.ok(!html.includes(label), `${label} 탭이 남아 있다`);
+  }
 });
 
-test('each tab draws only the indicators that tab actually publishes', () => {
-  // 보도자료가 산업을 가르는 범위가 지표마다 다르다. 빈 그림을 그리면
-  // "안 낸다" 는 사실이 "0 이다" 처럼 보인다.
-  const counts = ['total', 'C', 'services'].map(scope =>
-    trendSection(EI_TRENDS, { source: 'ei', scope }).byIndicator.size);
-  assert.deepEqual(counts, [9, 4, 1]);
+test('the administrative screen draws all nine indicators', () => {
+  const { byIndicator } = trendSection(EI_TRENDS, { source: 'ei', scope: 'total' });
+  assert.equal(byIndicator.size, 9);
 });
 
-test('a thin tab says why it is thin', () => {
-  const { html } = trendSection(EI_TRENDS, { source: 'ei', scope: 'services' });
-  assert.ok(html.includes('서비스업 집계를 가입자수에만'));
+test('a stale range key from another source falls back to the whole economy', () => {
+  // 경활에서 `15-64` 를 들고 넘어와도 행정통계에는 그 범위가 없다.
+  const { byIndicator } = trendSection(EI_TRENDS, { source: 'ei', scope: '15-64' });
+  assert.equal(byIndicator.size, 9);
+  assert.equal(byIndicator.get('headcount').at(-1).value, 15877.0);
 });
 
 test('the ratio keeps its own unit in the trend head', () => {

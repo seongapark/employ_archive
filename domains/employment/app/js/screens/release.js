@@ -33,26 +33,18 @@ const EAPS_SCOPES = [
     breakdown: 'scope', category: '15-29' },
 ];
 
-// 행정통계의 범위 축은 연령이 아니라 산업이다.
+// 행정통계는 전산업 하나만 본다.
 //
-// 제조업은 실제 표준산업분류 대분류라 산업 축(`industry`/`C`)에 그대로 있다.
-// 서비스업은 대분류가 아니라 여러 대분류를 묶은 집계여서, 산업 축에 넣으면
-// 속성별 매트릭스에서 대분류들과 나란히 서서 이중 계상으로 읽힌다 —
-// 경활의 15~64세와 같은 이유로 `scope` 축에 싣는다.
+// 산업별로 나눠 보는 탭(제조업·서비스업)을 만들었다가 뺐다(2026-09-22 사용자
+// 판단). 보도자료가 산업을 가르는 범위가 지표마다 달라서 탭마다 그림 수가
+// 9·4·1 로 들쭉날쭉했고, 서비스업은 가입자수 한 장뿐이라 누를 보람이 없었다.
+//
+// 범위가 하나뿐이므로 trendSection 이 탭 줄 자체를 그리지 않는다.
+// 제조업·서비스업 열은 수집기가 계속 모은다 — 화면이 다시 필요로 하면
+// `breakdown: 'industry'/'C'` 와 `breakdown: 'scope'/'services'` 로 여기 있다.
 const EI_SCOPES = [
   { key: 'total', label: '전산업', tab: '전체', sub: '전 산업' },
-  { key: 'C', label: '제조업', tab: '제조업', sub: '대분류 C',
-    breakdown: 'industry', category: 'C' },
-  { key: 'services', label: '서비스업', tab: '서비스업', sub: '집계',
-    breakdown: 'scope', category: 'services' },
 ];
-
-// 탭이 왜 얇은지를 화면이 말한다. 그림이 줄어든 것만 보이면 수집이 고장난
-// 것처럼 읽힌다 — 실제로는 보도자료가 그 산업 구분을 안 내는 것이다.
-const SCOPE_NOTE = {
-  services: '고용행정통계는 서비스업 집계를 가입자수에만 냅니다.',
-  C: '취득·상실과 지급액·구직인원·구인배수는 산업별로 내지 않습니다.',
-};
 
 // 경활의 KPI 열은 연령 기준 셋이다. 지표 하나를 세 범위로 펼쳐 한 행을 만든다.
 // 이 헬퍼가 있어서 kpiRows 는 출처를 가리지 않는 한 가지 모양
@@ -248,13 +240,11 @@ export function trendSection(series, { source, scope = DEFAULT_SCOPE } = {}) {
   // 범위가 하나뿐인 출처에는 탭을 그리지 않는다 — 누를 데가 없는 탭은
   // 눌러도 아무 일이 없는 버튼이다.
   const tabs = scopes.length > 1 ? scopeTabs(scopes, picked.key) : '';
-  const note = SCOPE_NOTE[picked.key]
-    ? `<p class="note">${esc(SCOPE_NOTE[picked.key])}</p>` : '';
   return {
     html: `<div class="section__head">
         <h2 class="section__title section__title--inline">추이</h2>
         ${tabs}
-      </div><div class="trends">${drawn}</div>${note}`,
+      </div><div class="trends">${drawn}</div>`,
     byIndicator,
   };
 }
