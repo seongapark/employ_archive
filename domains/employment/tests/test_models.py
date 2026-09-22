@@ -120,3 +120,22 @@ def test_an_unknown_indicator_is_refused():
     # 오타가 조용히 새 계열을 만들면 화면이 그 계열을 영영 못 찾는다.
     with pytest.raises(ValidationError):
         rec(series="emploment_rate")
+
+
+def test_administrative_indicators_are_accepted():
+    # 고용행정통계가 내는 여덟 지표. 리터럴에 없으면 pydantic 이 막는다.
+    for series in ("acquired", "separated", "benefit_new", "benefit_paid",
+                   "benefit_amount", "job_openings", "job_seekers", "openings_ratio"):
+        assert rec(id=f"ei-2026-07-{series}-total", series=series).series == series
+
+
+def test_money_and_ratio_units_are_accepted():
+    # 구직급여 지급액은 억원, 구인배수는 배다. 천명 규칙으로 그리면
+    # 10,904억원이 `1,090.4만명` 이 된다.
+    assert rec(series="benefit_amount", unit="억원", value=10904.0).unit == "억원"
+    assert rec(series="openings_ratio", unit="배", value=0.44, yoy=0.04).unit == "배"
+
+
+def test_an_unknown_unit_is_still_refused():
+    with pytest.raises(ValidationError):
+        rec(unit="천건")

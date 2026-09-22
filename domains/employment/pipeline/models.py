@@ -19,9 +19,9 @@ Source = Literal["eaps", "est", "ei"]
 Breakdown = Literal["total", "industry", "sex", "age", "scope"]
 
 # 지표 축. 오래도록 `headcount` 하나뿐이었다(취업자수·종사자수·상시가입자수).
-# 새로 받는 것은 전부 경제활동인구조사의 총괄 지표다.
+# 경활의 총괄 지표가 먼저 들어왔고, 그다음이 고용행정통계다.
 Series = Literal[
-    "headcount",            # 취업자수
+    "headcount",            # 취업자수 · 종사자수 · 상시가입자수
     "unemployed",           # 실업자수
     "labor_force",          # 경제활동인구
     "inactive",             # 비경제활동인구
@@ -29,11 +29,24 @@ Series = Literal[
     "employment_rate",      # 고용률
     "unemployment_rate",    # 실업률
     "participation_rate",   # 경제활동참가율
+    # 고용행정통계(ei)가 내는 것들. 고용보험 자격의 드나듦과 구직급여,
+    # 그리고 고용24 구인·구직이다.
+    "acquired",             # 피보험자격 취득자수
+    "separated",            # 피보험자격 상실자수
+    "benefit_new",          # 구직급여 신규신청자수
+    "benefit_paid",         # 구직급여 지급자수
+    "benefit_amount",       # 구직급여 지급액
+    "job_openings",         # 고용24 신규구인인원
+    "job_seekers",          # 고용24 신규구직인원
+    "openings_ratio",       # 구인배수 = 신규구인 ÷ 신규구직
 ]
 
 # 비율 지표의 yoy 는 증감량이 아니라 **%p 차이**다. 화면 포맷터가 unit 으로
 # 갈라진다 — 천명 규칙으로 그리면 고용률 63.3 이 `6.3만명` 이 된다.
-Unit = Literal["천명", "%"]
+#
+# 지급건수(천건)·1인당 지급액(천원)은 저장하지 않으므로 그 단위도 만들지
+# 않는다. 쓰지 않는 단위를 열어 두면 열이 밀려 들어온 값이 그럴듯하게 통과한다.
+Unit = Literal["천명", "%", "억원", "배"]
 
 Status = Literal["잠정", "확정"]
 
