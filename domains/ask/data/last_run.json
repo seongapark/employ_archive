@@ -1,16 +1,16 @@
 {
- "run_at": "2026-09-23T08:53:23+09:00",
+ "run_at": "2026-09-23T11:09:42+09:00",
  "catalog": {
   "ok": true,
   "rows": 31
  },
  "fts": {
-  "rows": 6733,
+  "rows": 6736,
   "도메인": {
    "catalog": 31,
    "forecast": 166,
-   "press": 367,
-   "reports": 6169
+   "press": 368,
+   "reports": 6171
   }
  }
 }
