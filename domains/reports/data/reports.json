@@ -16,6 +16,25 @@
   ]
  },
  {
+  "id": "kiet-is868",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "지방대학의 인력 양성 경쟁력 현황과 정책 방향 - 권역별 인력 양성 거점 조성을 중심으로",
+  "authors": [
+   "서성민"
+  ],
+  "published": "2026-09-22",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=868&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
   "id": "bok-11064898",
   "org": "bok",
   "board": "bok-research",

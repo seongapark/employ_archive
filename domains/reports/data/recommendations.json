@@ -33569,5 +33569,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-09-22T11:32:37+09:00"
+ },
+ "kiet-is868": {
+  "pick": false,
+  "axis": "",
+  "why": "지방대 인력양성 경쟁력·거점국립대 정책방향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-23T11:02:51+09:00"
  }
 }
