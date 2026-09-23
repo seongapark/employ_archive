@@ -6,9 +6,9 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-23 16:57",
+ "collected_at": "2026-09-24 08:58",
  "volume": {
-  "collected": 250,
+  "collected": 255,
   "articles": 60,
   "press": 53,
   "queries": 11
@@ -26,12 +26,12 @@
   },
   {
    "query": "구직급여",
-   "api_total": 94410,
+   "api_total": 94414,
    "fetched": 200,
    "truncated": false,
-   "in_window": 157,
+   "in_window": 161,
    "relevant": 3,
-   "new": 142
+   "new": 146
   },
   {
    "query": "구인배수",
@@ -44,12 +44,12 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18520,
+   "api_total": 18521,
    "fetched": 100,
    "truncated": false,
-   "in_window": 31,
+   "in_window": 32,
    "relevant": 12,
-   "new": 15
+   "new": 16
   },
   {
    "query": "건설업 고용보험",
@@ -2009,21 +2009,21 @@
    "rel": false
   },
   {
-   "title": "브로커 동원해 57명 허위 근로자 모아 총 5억8000여 만원 고용보험 부정...",
-   "desc": "수사를 통해 확인된 구체적 부정수급 규모는 각각 구직급여 5억4000여 만원, 고용유지지원금 2000여 만원, 청년채용특별장려금 2000여 만원이다. 노동 당국 조사 결과 A씨는 수사망이 좁혀오자 텔레그램과 시그널 등...",
-   "link": "https://www.hidomin.com/news/articleView.html?idxno=721684",
-   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=721684",
-   "press": "hidomin.com",
-   "pub": "2026-09-17 16:22",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "[PICK! 이 안건] 정동만 등 11인 \"반복적인 구직급여 부정수급 효과적으...",
    "desc": "정 의원 등은 제안이유에 대해 \"현행법은 거짓이나 그 밖의 부정한 방법으로 구직급여를 받은 사람이 최근 10년간 3회 이상 지급제한을 받은 경우 최대 3년간 새로운 수급자격에 따른 구직급여를 지급하지 않도록 하고...",
    "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
    "originallink": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
    "press": "jeonmae.co.kr",
+   "pub": "2026-09-17 16:22",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "브로커 동원해 57명 허위 근로자 모아 총 5억8000여 만원 고용보험 부정...",
+   "desc": "수사를 통해 확인된 구체적 부정수급 규모는 각각 구직급여 5억4000여 만원, 고용유지지원금 2000여 만원, 청년채용특별장려금 2000여 만원이다. 노동 당국 조사 결과 A씨는 수사망이 좁혀오자 텔레그램과 시그널 등...",
+   "link": "https://www.hidomin.com/news/articleView.html?idxno=721684",
+   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=721684",
+   "press": "hidomin.com",
    "pub": "2026-09-17 16:22",
    "q": "구직급여",
    "rel": false
@@ -2615,6 +2615,56 @@
    "originallink": "https://news.einfomax.co.kr/news/articleView.html?idxno=4436329",
    "press": "news.einfomax.co.kr",
    "pub": "2026-09-23 15:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "음성군, '미니 채용박람회' 개최",
+   "desc": "실업급여 상담, 노인·중장년 일자리 상담을 펼쳤다. 또한 타로카드 취업상담과 지문 적성 검사 이벤트도 진행해 참여자들의 만족도를 높였다. 양신우 일자리경제과장은 \"구직자들에게 취업 기회를 제공하고 기업에는...",
+   "link": "https://www.ccreview.co.kr/news/articleView.html?idxno=358480",
+   "originallink": "https://www.ccreview.co.kr/news/articleView.html?idxno=358480",
+   "press": "ccreview.co.kr",
+   "pub": "2026-09-23 19:22",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "음성군, 제3차 미니 채용박람회 성황리 개최···10개 기업 참여",
+   "desc": "실업급여 상담, 연령별 맞춤형 일자리 컨설팅을 제공했다. 특히 타로카드 취업상담과 지문 적성 검사 등 부대행사도 마련돼 참여자들의 호응을 얻었다. 음성군은 분기별 미니 채용박람회를 통해 기업에는 인재를, 구직...",
+   "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2474160",
+   "originallink": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2474160",
+   "press": "enewstoday.co.kr",
+   "pub": "2026-09-23 20:15",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "국민내일배움카드 발급 뒤 훈련과정은 따로 신청",
+   "desc": "실업 상태라면 구직 신청을 먼저 해야 하며, 이미 실업급여나 국민취업지원제도 신청 과정에서 구직 등록을 했다면 다시 신청하지 않아도 된다. 재직자와 자영업자 등은 원칙적으로 구직 등록이 필요 없지만, 일부...",
+   "link": "https://www.vegannews.co.kr/news/article.html?no=386873",
+   "originallink": "https://www.vegannews.co.kr/news/article.html?no=386873",
+   "press": "vegannews.co.kr",
+   "pub": "2026-09-24 01:54",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "청년 울리는 '가짜 3.3' 위장고용···10곳 중 8곳은 영세사업장, 대구...",
+   "desc": "업종별로는 청년들의 첫 일자리 진입이 많은 숙박 및 음식점업에서 367명, 제조업에서 337명의 위장 고용이... 이는 임금과 수당, 휴가를 비롯해 산재·고용보험 등 노동자로서 누려야 할 권리와 사회안전망을...",
+   "link": "https://n.news.naver.com/mnews/article/657/0000055646?sid=102",
+   "originallink": "https://dgmbc.com/NewsArticle/863723",
+   "press": "dgmbc.com",
+   "pub": "2026-09-24 07:42",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "반려동물 돌보고, 판매 행사하고…추석 ‘단기알바’ 위한 노동법",
+   "desc": "특히 기존 아르바이트 공고 사이트 외에도 지역 플랫폼 등을 통해 구인·구직이 가능해졌고, 개인이 일할... 내용이었는데, 급여는 10만원이었다. 총 16시간을 일하는 셈인데 이는 올해 최저임금(16만5120원)보다 낮다....",
+   "link": "https://n.news.naver.com/mnews/article/028/0002824519?sid=102",
+   "originallink": "https://www.hani.co.kr/arti/society/labor/1279362.html",
+   "press": "한겨레",
+   "pub": "2026-09-24 08:02",
    "q": "구직급여",
    "rel": false
   }
