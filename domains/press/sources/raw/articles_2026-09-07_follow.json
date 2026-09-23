@@ -6,32 +6,32 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-23 08:49",
+ "collected_at": "2026-09-23 16:57",
  "volume": {
-  "collected": 244,
-  "articles": 58,
-  "press": 51,
+  "collected": 250,
+  "articles": 60,
+  "press": 53,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29293,
+   "api_total": 29295,
    "fetched": 100,
    "truncated": false,
-   "in_window": 68,
-   "relevant": 58,
-   "new": 67
+   "in_window": 70,
+   "relevant": 60,
+   "new": 69
   },
   {
    "query": "구직급여",
-   "api_total": 94406,
+   "api_total": 94410,
    "fetched": 200,
    "truncated": false,
-   "in_window": 153,
+   "in_window": 157,
    "relevant": 3,
-   "new": 138
+   "new": 142
   },
   {
    "query": "구인배수",
@@ -44,20 +44,20 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18519,
+   "api_total": 18520,
    "fetched": 100,
    "truncated": false,
-   "in_window": 30,
-   "relevant": 11,
+   "in_window": 31,
+   "relevant": 12,
    "new": 15
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8377,
+   "api_total": 8378,
    "fetched": 100,
    "truncated": false,
-   "in_window": 14,
-   "relevant": 6,
+   "in_window": 15,
+   "relevant": 7,
    "new": 4
   },
   {
@@ -694,6 +694,26 @@
    "press": "뉴스1",
    "pub": "2026-09-23 08:27",
    "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "건설업계 채용문 활짝…신사업 인재 확보도 속도",
+   "desc": "고용노동부에 따르면 지난 8월 건설업 고용보험 상시가입자는 전년 동월보다 7000명 줄었다. 한국건설산업연구원에 따르면 7월 건설공사비지수는 전년 동월보다 5.8% 상승했다. 고용감소와 비용 부담이 이어지고 있는...",
+   "link": "https://www.g-enews.com/view.php?ud=20260923101224878814b1077807_1",
+   "originallink": "https://www.g-enews.com/view.php?ud=20260923101224878814b1077807_1",
+   "press": "g-enews.com",
+   "pub": "2026-09-23 11:02",
+   "q": "고용보험 가입자, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "국민연금 이어 실업급여도…외국인 사회보험 쏠림 논란 재점화",
+   "desc": "이런 쏠림은 외국인 고용보험 가입자 전체가 늘어나는 속도와도 맞물려 있다. 2021년 17만명 수준이던 외국인 고용보험 가입자는 매년 증가해 올해 7월 말 47만3593명까지 불었는데, 불과 4년 새 2.6배로 커진 규모다....",
+   "link": "http://www.dailypop.kr/news/articleView.html?idxno=102836",
+   "originallink": "http://www.dailypop.kr/news/articleView.html?idxno=102836",
+   "press": "dailypop.kr",
+   "pub": "2026-09-23 15:56",
+   "q": "고용보험 가입자, 제조업 고용보험",
    "rel": true
   }
  ],
@@ -1989,21 +2009,21 @@
    "rel": false
   },
   {
-   "title": "[PICK! 이 안건] 정동만 등 11인 \"반복적인 구직급여 부정수급 효과적으...",
-   "desc": "정 의원 등은 제안이유에 대해 \"현행법은 거짓이나 그 밖의 부정한 방법으로 구직급여를 받은 사람이 최근 10년간 3회 이상 지급제한을 받은 경우 최대 3년간 새로운 수급자격에 따른 구직급여를 지급하지 않도록 하고...",
-   "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
-   "originallink": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
-   "press": "jeonmae.co.kr",
-   "pub": "2026-09-17 16:22",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "브로커 동원해 57명 허위 근로자 모아 총 5억8000여 만원 고용보험 부정...",
    "desc": "수사를 통해 확인된 구체적 부정수급 규모는 각각 구직급여 5억4000여 만원, 고용유지지원금 2000여 만원, 청년채용특별장려금 2000여 만원이다. 노동 당국 조사 결과 A씨는 수사망이 좁혀오자 텔레그램과 시그널 등...",
    "link": "https://www.hidomin.com/news/articleView.html?idxno=721684",
    "originallink": "https://www.hidomin.com/news/articleView.html?idxno=721684",
    "press": "hidomin.com",
+   "pub": "2026-09-17 16:22",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[PICK! 이 안건] 정동만 등 11인 \"반복적인 구직급여 부정수급 효과적으...",
+   "desc": "정 의원 등은 제안이유에 대해 \"현행법은 거짓이나 그 밖의 부정한 방법으로 구직급여를 받은 사람이 최근 10년간 3회 이상 지급제한을 받은 경우 최대 3년간 새로운 수급자격에 따른 구직급여를 지급하지 않도록 하고...",
+   "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
+   "originallink": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
+   "press": "jeonmae.co.kr",
    "pub": "2026-09-17 16:22",
    "q": "구직급여",
    "rel": false
@@ -2555,6 +2575,46 @@
    "originallink": "https://www.gukjenews.com/news/articleView.html?idxno=3703999",
    "press": "gukjenews.com",
    "pub": "2026-09-23 08:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "음성군, 3차 일자리 잡(JOB)는 미니 채용박람회' 성료",
+   "desc": "구직자 150여 명에 대한 현장 면접을 실시했다. 행사장에는 음성고용센터, 대한노인회음성군지회, 중장년내일센터, 음성여성취업지원센터 등 유관 기관이 함께 참여해 맞춤형 취업 컨설팅, 이력서 작성 코칭, 실업급여...",
+   "link": "https://www.inews365.com/news/article.html?no=937044",
+   "originallink": "https://www.inews365.com/news/article.html?no=937044",
+   "press": "inews365.com",
+   "pub": "2026-09-23 08:52",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "주식시장 꽉 잡은 K뷰티, 채용시장도 '활짝'",
+   "desc": "일감이 늘면서 K뷰티 기업들이 적극적인 채용 확대에 나섰고, 구직자들도 두 팔 벌려 환영하는 분위기다.... 한편 HR테크 기업 인크루트가 대학생 1811명을 대상으로 한 취업 선호도 조사에서 CJ올리브영은 높은 급여...",
+   "link": "https://news.mtn.co.kr/news-detail/2026092312094422265",
+   "originallink": "https://news.mtn.co.kr/news-detail/2026092312094422265",
+   "press": "news.mtn.co.kr",
+   "pub": "2026-09-23 12:28",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "미유펫, 명절 계기 강아지 고양이 분양 할인 프로모션 실시",
+   "desc": "이번 행사는 명절 연휴 기간 반려동물 입양을 검토 중인 구직 및 가계 보호자의 초기 제반 비용 부담을 줄이기... 입양 수속 전에는 품종별 특성, 급여 방식, 위생 관리, 예방접종 정보를 전달하며, 입양 후에도 초기 적응...",
+   "link": "https://www.woodkorea.co.kr/news/articleView.html?idxno=91536",
+   "originallink": "https://www.woodkorea.co.kr/news/articleView.html?idxno=91536",
+   "press": "woodkorea.co.kr",
+   "pub": "2026-09-23 12:28",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[월가 톡톡] 포브스 '영앤리치'에 AI 창업자 대거 포진",
+   "desc": "(이재헌 기자) ◇ 아이스커피 들고 면접 가면 탈락?…美 직장가 '커피 논쟁' 미국 구직자들에게 새로운... 삼성전자에 입사할 예정인 박승윤 군은 \"삼성에서 받게 될 급여를 생각하면 전혀 걱정되지 않는다\"며 삼성의...",
+   "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4436329",
+   "originallink": "https://news.einfomax.co.kr/news/articleView.html?idxno=4436329",
+   "press": "news.einfomax.co.kr",
+   "pub": "2026-09-23 15:36",
    "q": "구직급여",
    "rel": false
   }
