@@ -6,32 +6,32 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-24 08:58",
+ "collected_at": "2026-09-24 16:48",
  "volume": {
-  "collected": 255,
-  "articles": 60,
-  "press": 53,
+  "collected": 260,
+  "articles": 61,
+  "press": 54,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29295,
+   "api_total": 29296,
    "fetched": 100,
    "truncated": false,
-   "in_window": 70,
-   "relevant": 60,
-   "new": 69
+   "in_window": 71,
+   "relevant": 61,
+   "new": 70
   },
   {
    "query": "구직급여",
-   "api_total": 94414,
+   "api_total": 94418,
    "fetched": 200,
    "truncated": false,
-   "in_window": 161,
+   "in_window": 165,
    "relevant": 3,
-   "new": 146
+   "new": 150
   },
   {
    "query": "구인배수",
@@ -44,20 +44,20 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18521,
+   "api_total": 18522,
    "fetched": 100,
    "truncated": false,
-   "in_window": 32,
-   "relevant": 12,
+   "in_window": 33,
+   "relevant": 13,
    "new": 16
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8378,
+   "api_total": 8379,
    "fetched": 100,
    "truncated": false,
-   "in_window": 15,
-   "relevant": 7,
+   "in_window": 16,
+   "relevant": 8,
    "new": 4
   },
   {
@@ -715,6 +715,16 @@
    "pub": "2026-09-23 15:56",
    "q": "고용보험 가입자, 제조업 고용보험",
    "rel": true
+  },
+  {
+   "title": "\"아빠 월급은 왜 안 올라?\"…물가도 못 따라간 건설근로자 임금",
+   "desc": "고용보험 통계에서도 지난 7월 건설업 가입자는 전년 동월보다 7000명 줄어 제조업과 함께 감소세를 이어갔다. 특히 건설근로자에게는 '하루에 얼마를 받느냐' 못지않게 '한 달에 며칠을 일하느냐'가 실제 소득을...",
+   "link": "https://www.asiatime.co.kr/article/20260922500302",
+   "originallink": "https://www.asiatime.co.kr/article/20260922500302",
+   "press": "asiatime.co.kr",
+   "pub": "2026-09-24 13:02",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
+   "rel": true
   }
  ],
  "excluded": [
@@ -769,21 +779,21 @@
    "rel": false
   },
   {
-   "title": "잡플래닛, 하반기 '일하기 좋은 기업' 59곳 선정…대상 SK하이닉스",
-   "desc": "기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO 지지율 등을 종합... 이번 개편은 회사 전체 평점만 보는 방식에서 한발 더 나아가 구직자가 실제 지원하려는 산업과 직무 기준으로...",
-   "link": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
-   "originallink": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
-   "press": "kdfnews.com",
-   "pub": "2026-09-08 09:06",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "올 하반기 일하기 좋은 기업 59곳..1위 SK하이닉스",
    "desc": "잡플래닛은 매년 일하기 좋은 회사를 발표해왔으며, 지난해부터 구직자들에게... 기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO...",
    "link": "http://www.breaknews.com/1234816",
    "originallink": "http://www.breaknews.com/1234816",
    "press": "breaknews.com",
+   "pub": "2026-09-08 09:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "잡플래닛, 하반기 '일하기 좋은 기업' 59곳 선정…대상 SK하이닉스",
+   "desc": "기업 평가는 급여·복지, 승진 기회, 워라밸, 사내문화, 기업 추천율, 성장 가능성, CEO 지지율 등을 종합... 이번 개편은 회사 전체 평점만 보는 방식에서 한발 더 나아가 구직자가 실제 지원하려는 산업과 직무 기준으로...",
+   "link": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
+   "originallink": "http://www.kdfnews.com/news/articleView.html?idxno=187659",
+   "press": "kdfnews.com",
    "pub": "2026-09-08 09:06",
    "q": "구직급여",
    "rel": false
@@ -2009,21 +2019,21 @@
    "rel": false
   },
   {
-   "title": "[PICK! 이 안건] 정동만 등 11인 \"반복적인 구직급여 부정수급 효과적으...",
-   "desc": "정 의원 등은 제안이유에 대해 \"현행법은 거짓이나 그 밖의 부정한 방법으로 구직급여를 받은 사람이 최근 10년간 3회 이상 지급제한을 받은 경우 최대 3년간 새로운 수급자격에 따른 구직급여를 지급하지 않도록 하고...",
-   "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
-   "originallink": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
-   "press": "jeonmae.co.kr",
-   "pub": "2026-09-17 16:22",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "브로커 동원해 57명 허위 근로자 모아 총 5억8000여 만원 고용보험 부정...",
    "desc": "수사를 통해 확인된 구체적 부정수급 규모는 각각 구직급여 5억4000여 만원, 고용유지지원금 2000여 만원, 청년채용특별장려금 2000여 만원이다. 노동 당국 조사 결과 A씨는 수사망이 좁혀오자 텔레그램과 시그널 등...",
    "link": "https://www.hidomin.com/news/articleView.html?idxno=721684",
    "originallink": "https://www.hidomin.com/news/articleView.html?idxno=721684",
    "press": "hidomin.com",
+   "pub": "2026-09-17 16:22",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[PICK! 이 안건] 정동만 등 11인 \"반복적인 구직급여 부정수급 효과적으...",
+   "desc": "정 의원 등은 제안이유에 대해 \"현행법은 거짓이나 그 밖의 부정한 방법으로 구직급여를 받은 사람이 최근 10년간 3회 이상 지급제한을 받은 경우 최대 3년간 새로운 수급자격에 따른 구직급여를 지급하지 않도록 하고...",
+   "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
+   "originallink": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
+   "press": "jeonmae.co.kr",
    "pub": "2026-09-17 16:22",
    "q": "구직급여",
    "rel": false
@@ -2665,6 +2675,46 @@
    "originallink": "https://www.hani.co.kr/arti/society/labor/1279362.html",
    "press": "한겨레",
    "pub": "2026-09-24 08:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "음성군, 우수기업과 구직자 잇는 맞춤형 현장 채용박람회 성료",
+   "desc": "음성군이 지역 내 구직자들에게 실질적인 취업 기회를 제공하고 구인 난을 겪는... 실업급여 안내, 연령별 맞춤 일자리 상담 등을 일괄 지원했다. 아울러 타로카드를...",
+   "link": "http://www.breaknews.com/1238992",
+   "originallink": "http://www.breaknews.com/1238992",
+   "press": "breaknews.com",
+   "pub": "2026-09-24 10:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[서울&] “청년은 경험 기회, 강소기업은 인재 확보”",
+   "desc": "청년 구직자를 중소기업이나 사회연대경제기업과 직접 연결하는 현장 채용 행사를 열었다. 이번 행사는... 청년을 채용하는 기업에는 월 급여 234만원, 4대 보험 기업부담분, 운영비 월 20만원, 멘토수당 월 15만원을...",
+   "link": "https://n.news.naver.com/mnews/article/028/0002824538?sid=102",
+   "originallink": "http://www.seouland.com/arti/society/society_general/24348.html",
+   "press": "seouland.com",
+   "pub": "2026-09-24 10:48",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "고용24 구직신청, 이력서 등록 뒤 제출해야 완료",
+   "desc": "뒤에는 마이페이지의 구직신청 관련 메뉴에서 신청 내역과 인증 상태를 확인할 수 있다. 구직신청은 실업급여 수급자격 신청과 별개다. 고용24도 구직신청과 실업급여 수급자격 관련 서비스를 서로 다른 메뉴로 제공한다.",
+   "link": "https://www.vegannews.co.kr/news/article.html?no=387111",
+   "originallink": "https://www.vegannews.co.kr/news/article.html?no=387111",
+   "press": "vegannews.co.kr",
+   "pub": "2026-09-24 13:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“아무 생각 없이 쉬지 않습니다”…청년들의 `한숨` [난 괜찮아요]",
+   "desc": "응답자 대부분이 만 27~28세인 이 조사에서 선호한 일자리는 급여가 높은 회사(21.5%), 적성에 맞는 회사(21.1... 일을 해본 뒤에야 자신에게 맞는 조건을 깨닫고 다시 구직에 나서는 청년들도 있다. 반년간 다니던 화장품...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006375324?sid=102",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=02076246645583400&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-09-24 14:02",
    "q": "구직급여",
    "rel": false
   }
