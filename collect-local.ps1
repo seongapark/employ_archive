@@ -10,9 +10,25 @@
 #
 # 수집이 실패해도 push 까지 간다. 한 게시판이 죽은 날에도 나머지 기관의
 # 그날치는 남겨야 하기 때문이다. 무엇이 실패했는지는 마지막 줄과 logs\ 에 남는다.
+#
+# -Catchup 은 작업 스케줄러 전용이다. 11:00 말고도 로그온·잠금 해제·절전 복귀 때
+# 불리는데, 그때는 "11시가 지났고 오늘 아직 안 돌았을 때"만 돈다.
+# 2026-09-24 에 PC 가 05:52~19:31 최대절전이라 11:00 을 놓쳤고, StartWhenAvailable
+# 이 켜져 있었는데도 복귀 뒤 따라잡지 않았다. 그래서 복귀 신호를 직접 잡는다.
+# 손으로 돌릴 때는 이 스위치 없이 부르면 언제든 돈다.
+param([switch]$Catchup)
 
 $repo = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location $repo
+
+# 오늘 돈 날짜는 logs\ 에 둔다(저장소에 안 올라간다). last_run.json 은 --dry-run
+# 도 오늘로 찍으므로 판단 근거로 못 쓴다.
+$doneFile = Join-Path $repo "logs\last-run-date.txt"
+$today = Get-Date -Format "yyyy-MM-dd"
+if ($Catchup) {
+    if ((Get-Date).Hour -lt 11) { exit 0 }
+    if ((Test-Path $doneFile) -and ((Get-Content $doneFile -Raw).Trim() -eq $today)) { exit 0 }
+}
 
 # 파이썬은 실측한 경로를 먼저 본다. 스토어 스텁(WindowsApps)이 가로채면
 # 패키지가 하나도 안 보이기 때문이다. 그 경로가 없어지면 PATH 로 물러선다.
@@ -133,6 +149,10 @@ if ($failed.Count -eq 0) {
     Write-Host ("실패한 단계: " + ($failed -join ", "))
 }
 Write-Host ("로그: " + $log)
+
+# 끝까지 온 회차만 오늘 돈 것으로 친다. 실패가 있어도 찍는다 — 안 그러면 잠금을
+# 풀 때마다 같은 날 회차가 되풀이된다. 도중에 끊긴 회차는 여기까지 못 와서 안 찍힌다.
+Set-Content -Path $doneFile -Value $today -Encoding ascii
 
 # 로그는 30회분만 둔다.
 Get-ChildItem $logDir -Filter "collect-*.log" |
