@@ -33578,5 +33578,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-09-23T11:02:51+09:00"
+ },
+ "bok-11065027": {
+  "pick": true,
+  "axis": "외국인력",
+  "why": "경남 외국인 근로자 증가의 지역경제 영향 실증",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-25T10:33:06+09:00"
  }
 }

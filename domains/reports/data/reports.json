@@ -16,6 +16,24 @@
   ]
  },
  {
+  "id": "bok-11065027",
+  "org": "bok",
+  "board": "bok-research",
+  "series": "조사연구자료",
+  "title": "경남지역 외국인 근로자의 증가가 지역경제에 미치는 영향",
+  "authors": [
+   "경남본부"
+  ],
+  "published": "2026-09-23",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11065027&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/ab9e047ff0b44d769b0af681dfe76f24/1/f62c8d8552e44b5184d22e163bdec2a1.pdf",
+  "matched": [
+   "외국인력"
+  ]
+ },
+ {
   "id": "kiet-is868",
   "org": "kiet",
   "board": "kiet-issue",
@@ -22627,7 +22645,12 @@
   "pages": null,
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=10093823&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/8004b28210e544cabcba1d8d79138b16/1/47735f8f2f254a388f2790fc92c7ec5a.pdf",
-  "matched": []
+  "matched": [
+   "고령자",
+   "임금",
+   "지역고용",
+   "일자리정책"
+  ]
  },
  {
   "id": "kli-10231",
