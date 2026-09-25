@@ -574,5 +574,23 @@
   "focus": "",
   "title": "\"아빠 월급은 왜 안 올라?\"…물가도 못 따라간 건설근로자 임금",
   "press": "asiatime.co.kr"
+ },
+ {
+  "n": 1,
+  "cites": false,
+  "why": "AI와 청년 취업난 논쟁, 한은·예정처 분석 비교",
+  "tone": "부정",
+  "focus": "",
+  "title": "추석 밥상 오른 청년 취업난…\"AI 탓\"이라 할 수 있을까",
+  "press": "nocutnews.co.kr"
+ },
+ {
+  "n": 2,
+  "cites": true,
+  "why": "건설업 가입자 37개월 연속 감소 인용",
+  "tone": "부정",
+  "focus": "주제",
+  "title": "체불 줄었다던 건설업…\"일 없어 명절 기름값도 못 내\"",
+  "press": "nocutnews.co.kr"
  }
 ]

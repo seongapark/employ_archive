@@ -7247,28 +7247,6 @@
     ]
    },
    {
-    "title": "국민이 AI 고용서비스 직접 만든다…고용24 해커톤 참가자 모집",
-    "url": "https://idsn.co.kr/news/view/1065594655306882",
-    "press": "idsn.co.kr",
-    "pub": "2026-09-21 15:44",
-    "cites": false,
-    "judged": true,
-    "why": "고용24 해커톤 참가자 모집",
-    "hits": [],
-    "tone": [],
-    "stance": "중립",
-    "focus": "",
-    "kw": [
-     "AI",
-     "국민",
-     "만든",
-     "모집",
-     "직접",
-     "참가자",
-     "해커톤"
-    ]
-   },
-   {
     "title": "[단독] 유산·사산해도 ‘쉬겠다’ 말 못 해…휴가급여 수급자 연 2000명...",
     "url": "https://www.seoul.co.kr/news/society/2026/09/21/20260921500257?wlog_tag3=naver",
     "press": "서울신문",
@@ -7425,6 +7403,51 @@
      "아빠",
      "올라",
      "월급"
+    ]
+   },
+   {
+    "title": "추석 밥상 오른 청년 취업난…\"AI 탓\"이라 할 수 있을까",
+    "url": "https://www.nocutnews.co.kr/news/6582845?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
+    "press": "nocutnews.co.kr",
+    "pub": "2026-09-25 05:01",
+    "cites": false,
+    "judged": true,
+    "why": "AI와 청년 취업난 논쟁, 한은·예정처 분석 비교",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "AI",
+     "밥상",
+     "오른",
+     "이라",
+     "있을까",
+     "추석",
+     "취업난"
+    ]
+   },
+   {
+    "title": "체불 줄었다던 건설업…\"일 없어 명절 기름값도 못 내\"",
+    "url": "https://www.nocutnews.co.kr/news/6582631?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
+    "press": "nocutnews.co.kr",
+    "pub": "2026-09-25 05:01",
+    "cites": true,
+    "judged": true,
+    "why": "건설업 가입자 37개월 연속 감소 인용",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "기름값",
+     "명절",
+     "줄었다던",
+     "체불"
     ]
    }
   ]
