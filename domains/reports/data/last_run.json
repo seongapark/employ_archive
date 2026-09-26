@@ -1,5 +1,5 @@
 {
-  "at": "2026-09-25T10:30:26+09:00",
+  "at": "2026-09-26T11:00:51+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -323,9 +323,9 @@
     },
     "bok-research": {
       "ok": true,
-      "parsed": 200,
-      "added": 1,
-      "details": 1,
+      "parsed": 100,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -365,8 +365,8 @@
     "bok": {
       "조사연구자료": {
         "total": 398,
-        "missing": 389,
-        "rate": 0.977
+        "missing": 388,
+        "rate": 0.975
       },
       "BOK 이슈노트": {
         "total": 213,
@@ -512,21 +512,22 @@
     }
   },
   "abstract_missing_why": {
-    "요약 섹션 없음": 537,
-    "텍스트가 없는 스캔본": 290,
+    "요약 섹션 없음": 547,
+    "텍스트가 없는 스캔본": 308,
     "원문 없음": 46,
-    "요약 없음": 32,
     "내려받기 실패: Failed to perform, curl: (6) Could not resolve host: www.bok.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.": 13,
     "PDF 를 열 수 없음: list index out of range": 4,
+    "요약 없음": 2,
+    "내려받기 실패: HTTP Error 410: Gone": 1,
     "파일이 너무 큼(67MB)": 1,
     "파일이 너무 큼(79MB)": 1,
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
     "reports_gzip": 303983,
-    "abstracts_gzip": 3461292,
+    "abstracts_gzip": 3463562,
     "abstracts_shards_gzip": {
-      "bok": 290141,
+      "bok": 292411,
       "kdi": 889333,
       "keis": 256203,
       "kiet": 708527,
