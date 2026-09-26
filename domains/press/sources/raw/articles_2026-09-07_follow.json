@@ -6,32 +6,32 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-25 17:09",
+ "collected_at": "2026-09-26 09:09",
  "volume": {
-  "collected": 268,
-  "articles": 63,
-  "press": 55,
+  "collected": 274,
+  "articles": 66,
+  "press": 57,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29298,
+   "api_total": 29301,
    "fetched": 100,
    "truncated": false,
-   "in_window": 73,
-   "relevant": 63,
-   "new": 72
+   "in_window": 76,
+   "relevant": 66,
+   "new": 75
   },
   {
    "query": "구직급여",
-   "api_total": 94422,
+   "api_total": 94425,
    "fetched": 200,
    "truncated": false,
-   "in_window": 169,
+   "in_window": 172,
    "relevant": 3,
-   "new": 154
+   "new": 157
   },
   {
    "query": "구인배수",
@@ -44,20 +44,20 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18523,
+   "api_total": 18525,
    "fetched": 100,
    "truncated": false,
-   "in_window": 34,
-   "relevant": 13,
+   "in_window": 36,
+   "relevant": 15,
    "new": 17
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8380,
+   "api_total": 8381,
    "fetched": 100,
    "truncated": false,
-   "in_window": 17,
-   "relevant": 9,
+   "in_window": 18,
+   "relevant": 10,
    "new": 4
   },
   {
@@ -89,11 +89,11 @@
   },
   {
    "query": "자동차 고용보험",
-   "api_total": 13963,
+   "api_total": 13964,
    "fetched": 100,
    "truncated": false,
-   "in_window": 13,
-   "relevant": 3,
+   "in_window": 14,
+   "relevant": 4,
    "new": 8
   },
   {
@@ -727,6 +727,16 @@
    "rel": true
   },
   {
+   "title": "추석 밥상 오른 청년 취업난…\"AI 탓\"이라 할 수 있을까",
+   "desc": "한은 연구진은 국민연금 가입자 행정통계를 75개 '업종' 단위로 분석했다. 반면 예정처는 고용보험 통계를 '직업' 단위로 살펴봤다. AI 노출도를 측정하는 방법도 달랐다. 한은 연구진이 주지표로 활용한 해외 지수는...",
+   "link": "https://n.news.naver.com/mnews/article/079/0004192808?sid=102",
+   "originallink": "https://www.nocutnews.co.kr/news/6582845?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
+   "press": "nocutnews.co.kr",
+   "pub": "2026-09-25 05:01",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
    "title": "체불 줄었다던 건설업…\"일 없어 명절 기름값도 못 내\"",
    "desc": "지난 7일 발표된 고용노동부의 '고용행정통계로 본 노동시장 동향'에 따르면, 지난달 기준 건설업 고용보험 가입자 수는 37개월 연속 감소세를 보이고 있다. 통계청 경제활동인구조사에 따른 건설업 취업자 수도 28개월...",
    "link": "https://n.news.naver.com/mnews/article/079/0004192807?sid=102",
@@ -737,13 +747,33 @@
    "rel": true
   },
   {
-   "title": "추석 밥상 오른 청년 취업난…\"AI 탓\"이라 할 수 있을까",
-   "desc": "한은 연구진은 국민연금 가입자 행정통계를 75개 '업종' 단위로 분석했다. 반면 예정처는 고용보험 통계를 '직업' 단위로 살펴봤다. AI 노출도를 측정하는 방법도 달랐다. 한은 연구진이 주지표로 활용한 해외 지수는...",
-   "link": "https://n.news.naver.com/mnews/article/079/0004192808?sid=102",
-   "originallink": "https://www.nocutnews.co.kr/news/6582845?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
-   "press": "nocutnews.co.kr",
-   "pub": "2026-09-25 05:01",
+   "title": "실업급여도 중국인이 다 싹쓸이?...얼마나 받아갔길래",
+   "desc": "전체 외국인 고용보험 가입자 가운데 중국 국적자와 중국동포가 차지하는 비중은 26%에 불과했지만, 실업급여 지급액에서는 79%를 차지했습니다. 김위상 국민의힘 의원실이 고용노동부에서 받은 자료에 따르면...",
+   "link": "https://n.news.naver.com/mnews/article/374/0000534806?sid=101",
+   "originallink": "https://biz.sbs.co.kr/article_hub/20000336283?division=NAVER",
+   "press": "biz.sbs.co.kr",
+   "pub": "2026-09-26 04:00",
    "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "'쉬었음' 청년 7개월째 줄었는데 취업자는 46개월째↓…청년 고용 착시...",
+   "desc": "고용보험 가입자도 48개월째 감소…\"괜찮은 일자리 많지 않아\" 청년 고용지표는 일제히 악화했다. 8월 청년 취업자는 342만 8000명으로 14만 3000명 줄어 46개월 연속 감소했다. 청년 고용률은 44.1%로 1.0%포인트(p) 떨어졌고...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009191981?sid=101",
+   "originallink": "https://www.news1.kr/economy/employment-labor/6300682",
+   "press": "뉴스1",
+   "pub": "2026-09-26 07:00",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "수출은 호황인데 일자리는 왜 안 늘까…짙어지는 고용 없는 성장 [4분기...",
+   "desc": "8월 제조업 고용보험 가입자는 384만7000명으로 전년 동월보다 2000명 늘어 15개월 만에 증가 전환했다. 다만 고용허가제 외국인 증가분을 제외하면 제조업 가입자는 오히려 1만명 감소했다. 업종별 격차도 크다....",
+   "link": "https://n.news.naver.com/mnews/article/119/0003136406?sid=101",
+   "originallink": "https://www.dailian.co.kr/news/view/1694382/?sc=Naver",
+   "press": "dailian.co.kr",
+   "pub": "2026-09-26 09:01",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험, 자동차 고용보험",
    "rel": true
   }
  ],
@@ -2039,21 +2069,21 @@
    "rel": false
   },
   {
-   "title": "브로커 동원해 57명 허위 근로자 모아 총 5억8000여 만원 고용보험 부정...",
-   "desc": "수사를 통해 확인된 구체적 부정수급 규모는 각각 구직급여 5억4000여 만원, 고용유지지원금 2000여 만원, 청년채용특별장려금 2000여 만원이다. 노동 당국 조사 결과 A씨는 수사망이 좁혀오자 텔레그램과 시그널 등...",
-   "link": "https://www.hidomin.com/news/articleView.html?idxno=721684",
-   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=721684",
-   "press": "hidomin.com",
-   "pub": "2026-09-17 16:22",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "[PICK! 이 안건] 정동만 등 11인 \"반복적인 구직급여 부정수급 효과적으...",
    "desc": "정 의원 등은 제안이유에 대해 \"현행법은 거짓이나 그 밖의 부정한 방법으로 구직급여를 받은 사람이 최근 10년간 3회 이상 지급제한을 받은 경우 최대 3년간 새로운 수급자격에 따른 구직급여를 지급하지 않도록 하고...",
    "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
    "originallink": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
    "press": "jeonmae.co.kr",
+   "pub": "2026-09-17 16:22",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "브로커 동원해 57명 허위 근로자 모아 총 5억8000여 만원 고용보험 부정...",
+   "desc": "수사를 통해 확인된 구체적 부정수급 규모는 각각 구직급여 5억4000여 만원, 고용유지지원금 2000여 만원, 청년채용특별장려금 2000여 만원이다. 노동 당국 조사 결과 A씨는 수사망이 좁혀오자 텔레그램과 시그널 등...",
+   "link": "https://www.hidomin.com/news/articleView.html?idxno=721684",
+   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=721684",
+   "press": "hidomin.com",
    "pub": "2026-09-17 16:22",
    "q": "구직급여",
    "rel": false
@@ -2795,6 +2825,36 @@
    "originallink": "https://www.ccdailynews.com/news/articleView.html?idxno=2442944",
    "press": "ccdailynews.com",
    "pub": "2026-09-25 11:14",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[청년이 남는 도시의 조건 ②] ‘직무 절벽’에 선 대구, 브르노가 그려...",
+   "desc": "그러나 이들이 대학을 졸업하고 본격적인 구직기에 접어든 8년 뒤인 2024년, 비슷한 연령대인 25~29세... 현재 브르노는 대학교 졸업자에 대한 수요가 매우 높고, 급여 수준 역시 오스트리아와 비교 가능할 정도로 높은...",
+   "link": "https://www.yeongnam.com/web/view.php?key=20260925029288461",
+   "originallink": "https://www.yeongnam.com/web/view.php?key=20260925029288461",
+   "press": "yeongnam.com",
+   "pub": "2026-09-25 17:38",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "미 구직 중 응답자 65% “휘발유값에 일자리 기준 바꿨다”",
+   "desc": "고용 여건이 유지되더라도 구직자가 실제로 부담하는 통근비는 급여의 실질 가치를 낮출 수 있다. 이에 따라 가까운 일자리나 원격근무를 선호하는 응답이 더 높은 급여를 중시한다는 응답보다 많게 나타난 것으로...",
+   "link": "https://www.tokenpost.kr/news/economy/414086",
+   "originallink": "https://www.tokenpost.kr/news/economy/414086",
+   "press": "tokenpost.kr",
+   "pub": "2026-09-25 20:46",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "미 대졸 신입 실업률 7.3%…전국 지표서 AI발 고용 붕괴 근거 제한적",
+   "desc": "공식 실업자로 집계되지 않았지만 일자리를 원한다고 답한 구직 포기·유보 인원을 포함한 분석에서도... ADP의 미국 근로자 수백만 명 급여자료를 활용한 스탠퍼드 연구는 전국 가구조사보다 특정 직군의 변화를...",
+   "link": "https://www.tokenpost.kr/news/economy/414261",
+   "originallink": "https://www.tokenpost.kr/news/economy/414261",
+   "press": "tokenpost.kr",
+   "pub": "2026-09-26 04:50",
    "q": "구직급여",
    "rel": false
   }

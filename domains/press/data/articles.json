@@ -7428,27 +7428,6 @@
     ]
    },
    {
-    "title": "체불 줄었다던 건설업…\"일 없어 명절 기름값도 못 내\"",
-    "url": "https://www.nocutnews.co.kr/news/6582631?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
-    "press": "nocutnews.co.kr",
-    "pub": "2026-09-25 05:01",
-    "cites": true,
-    "judged": true,
-    "why": "건설업 가입자 37개월 연속 감소 인용",
-    "hits": [
-     "산업:건설업"
-    ],
-    "tone": [],
-    "stance": "부정",
-    "focus": "주제",
-    "kw": [
-     "기름값",
-     "명절",
-     "줄었다던",
-     "체불"
-    ]
-   },
-   {
     "title": "추석 밥상 오른 청년 취업난…\"AI 탓\"이라 할 수 있을까",
     "url": "https://www.nocutnews.co.kr/news/6582845?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
     "press": "nocutnews.co.kr",
@@ -7470,6 +7449,86 @@
      "있을까",
      "추석",
      "취업난"
+    ]
+   },
+   {
+    "title": "체불 줄었다던 건설업…\"일 없어 명절 기름값도 못 내\"",
+    "url": "https://www.nocutnews.co.kr/news/6582631?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
+    "press": "nocutnews.co.kr",
+    "pub": "2026-09-25 05:01",
+    "cites": true,
+    "judged": true,
+    "why": "건설업 가입자 37개월 연속 감소 인용",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "기름값",
+     "명절",
+     "줄었다던",
+     "체불"
+    ]
+   },
+   {
+    "title": "실업급여도 중국인이 다 싹쓸이?...얼마나 받아갔길래",
+    "url": "https://biz.sbs.co.kr/article_hub/20000336283?division=NAVER",
+    "press": "biz.sbs.co.kr",
+    "pub": "2026-09-26 04:00",
+    "cites": false,
+    "judged": true,
+    "why": "의원실 입수 외국인 실업급여 지급 자료",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "받아갔길래",
+     "싹쓸",
+     "얼마",
+     "중국인"
+    ]
+   },
+   {
+    "title": "'쉬었음' 청년 7개월째 줄었는데 취업자는 46개월째↓…청년 고용 착시...",
+    "url": "https://www.news1.kr/economy/employment-labor/6300682",
+    "press": "뉴스1",
+    "pub": "2026-09-26 07:00",
+    "cites": true,
+    "judged": true,
+    "why": "청년 고용보험 가입자 48개월째 감소 인용",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "줄었는데",
+     "착시",
+     "취업자"
+    ]
+   },
+   {
+    "title": "수출은 호황인데 일자리는 왜 안 늘까…짙어지는 고용 없는 성장 [4분기...",
+    "url": "https://www.dailian.co.kr/news/view/1694382/?sc=Naver",
+    "press": "dailian.co.kr",
+    "pub": "2026-09-26 09:01",
+    "cites": true,
+    "judged": true,
+    "why": "제조업 가입자 2천명 증가 전환 등 전함",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "늘까",
+     "분기",
+     "성장",
+     "수출",
+     "호황인데"
     ]
    }
   ]
