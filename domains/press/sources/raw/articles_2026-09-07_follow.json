@@ -6,9 +6,9 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-26 16:59",
+ "collected_at": "2026-09-27 08:54",
  "volume": {
-  "collected": 279,
+  "collected": 282,
   "articles": 70,
   "press": 59,
   "queries": 11
@@ -26,12 +26,12 @@
   },
   {
    "query": "구직급여",
-   "api_total": 94427,
+   "api_total": 94429,
    "fetched": 200,
    "truncated": false,
-   "in_window": 174,
+   "in_window": 176,
    "relevant": 3,
-   "new": 158
+   "new": 160
   },
   {
    "query": "구인배수",
@@ -44,12 +44,12 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18525,
+   "api_total": 18526,
    "fetched": 100,
    "truncated": false,
-   "in_window": 36,
+   "in_window": 37,
    "relevant": 15,
-   "new": 17
+   "new": 18
   },
   {
    "query": "건설업 고용보험",
@@ -2689,21 +2689,21 @@
    "rel": false
   },
   {
-   "title": "미유펫, 명절 계기 강아지 고양이 분양 할인 프로모션 실시",
-   "desc": "이번 행사는 명절 연휴 기간 반려동물 입양을 검토 중인 구직 및 가계 보호자의 초기 제반 비용 부담을 줄이기... 입양 수속 전에는 품종별 특성, 급여 방식, 위생 관리, 예방접종 정보를 전달하며, 입양 후에도 초기 적응...",
-   "link": "https://www.woodkorea.co.kr/news/articleView.html?idxno=91536",
-   "originallink": "https://www.woodkorea.co.kr/news/articleView.html?idxno=91536",
-   "press": "woodkorea.co.kr",
-   "pub": "2026-09-23 12:28",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "주식시장 꽉 잡은 K뷰티, 채용시장도 '활짝'",
    "desc": "일감이 늘면서 K뷰티 기업들이 적극적인 채용 확대에 나섰고, 구직자들도 두 팔 벌려 환영하는 분위기다.... 한편 HR테크 기업 인크루트가 대학생 1811명을 대상으로 한 취업 선호도 조사에서 CJ올리브영은 높은 급여...",
    "link": "https://news.mtn.co.kr/news-detail/2026092312094422265",
    "originallink": "https://news.mtn.co.kr/news-detail/2026092312094422265",
    "press": "news.mtn.co.kr",
+   "pub": "2026-09-23 12:28",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "미유펫, 명절 계기 강아지 고양이 분양 할인 프로모션 실시",
+   "desc": "이번 행사는 명절 연휴 기간 반려동물 입양을 검토 중인 구직 및 가계 보호자의 초기 제반 비용 부담을 줄이기... 입양 수속 전에는 품종별 특성, 급여 방식, 위생 관리, 예방접종 정보를 전달하며, 입양 후에도 초기 적응...",
+   "link": "https://www.woodkorea.co.kr/news/articleView.html?idxno=91536",
+   "originallink": "https://www.woodkorea.co.kr/news/articleView.html?idxno=91536",
+   "press": "woodkorea.co.kr",
    "pub": "2026-09-23 12:28",
    "q": "구직급여",
    "rel": false
@@ -2905,6 +2905,36 @@
    "originallink": "http://www.kwangju.co.kr/article.php?aid=1790391600803639028",
    "press": "kwangju.co.kr",
    "pub": "2026-09-26 12:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "외국인력 유입, 내국인 고용 영향 제한적…단순노무직은 5.3% 감소",
+   "desc": "제조업에서는 외국인력 유입 초기 내국인 고용이 함께 증가했지만 일정 기간이 지나면서 일부 내국인... 26일 한국고용정보원의 '특성별 이민자 노동시장 심층분석' 보고서에 따르면 연구진은 고용보험 데이터베이스(DB)를...",
+   "link": "https://www.ajunews.com/view/20260923153833068",
+   "originallink": "https://www.ajunews.com/view/20260923153833068",
+   "press": "아주경제",
+   "pub": "2026-09-26 18:02",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "구직급여 수급자 국민연금 실업크레딧 별도 신청",
+   "desc": "보험료 75% 지원…생애 최대 12개월 가입기간 인정 구직급여를 받는다고 실업크레딧이 자동 적용되는 것은 아니다. 국민연금 보험료 지원을 받으려면 별도로 신청하고 본인 부담 보험료를 납부해야 해당 기간을...",
+   "link": "https://www.vegannews.co.kr/news/article.html?no=388224",
+   "originallink": "https://www.vegannews.co.kr/news/article.html?no=388224",
+   "press": "vegannews.co.kr",
+   "pub": "2026-09-27 00:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "외국인 혼자서 '실업급여 4500만원'…같은 회사 14번 오갔다 [곽용희의 ...",
+   "desc": "27일 김위상 국민의힘 의원실이 고용노동부로부터 제출받은 자료에 따르면 2021년부터 2026년 7월까지 외국인 근로자 가운데 '동일 사업장'에서 구직급여를 3회 이상 반복 수급한 사람은 매년 증가세다. 3회 이상...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005336196?sid=102",
+   "originallink": "https://www.hankyung.com/article/202609234460i",
+   "press": "한국경제",
+   "pub": "2026-09-27 07:01",
    "q": "구직급여",
    "rel": false
   }
