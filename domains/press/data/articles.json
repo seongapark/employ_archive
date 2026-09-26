@@ -7428,6 +7428,27 @@
     ]
    },
    {
+    "title": "체불 줄었다던 건설업…\"일 없어 명절 기름값도 못 내\"",
+    "url": "https://www.nocutnews.co.kr/news/6582631?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
+    "press": "nocutnews.co.kr",
+    "pub": "2026-09-25 05:01",
+    "cites": true,
+    "judged": true,
+    "why": "건설업 가입자 37개월 연속 감소 인용",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "기름값",
+     "명절",
+     "줄었다던",
+     "체불"
+    ]
+   },
+   {
     "title": "추석 밥상 오른 청년 취업난…\"AI 탓\"이라 할 수 있을까",
     "url": "https://www.nocutnews.co.kr/news/6582845?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
     "press": "nocutnews.co.kr",
@@ -7452,37 +7473,16 @@
     ]
    },
    {
-    "title": "체불 줄었다던 건설업…\"일 없어 명절 기름값도 못 내\"",
-    "url": "https://www.nocutnews.co.kr/news/6582631?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
-    "press": "nocutnews.co.kr",
-    "pub": "2026-09-25 05:01",
-    "cites": true,
-    "judged": true,
-    "why": "건설업 가입자 37개월 연속 감소 인용",
-    "hits": [
-     "산업:건설업"
-    ],
-    "tone": [],
-    "stance": "부정",
-    "focus": "주제",
-    "kw": [
-     "기름값",
-     "명절",
-     "줄었다던",
-     "체불"
-    ]
-   },
-   {
-    "title": "실업급여도 중국인이 다 싹쓸이?...얼마나 받아갔길래",
+    "title": "실업급여도 중국인이 다 싹쓸이?…얼마나 받아갔길래",
     "url": "https://biz.sbs.co.kr/article_hub/20000336283?division=NAVER",
     "press": "biz.sbs.co.kr",
     "pub": "2026-09-26 04:00",
     "cites": false,
     "judged": true,
-    "why": "의원실 입수 외국인 실업급여 지급 자료",
+    "why": "의원실 자료 기반 외국인 실업급여 지급 현황",
     "hits": [],
     "tone": [],
-    "stance": "중립",
+    "stance": "부정",
     "focus": "",
     "kw": [
      "받아갔길래",
@@ -7529,6 +7529,85 @@
      "성장",
      "수출",
      "호황인데"
+    ]
+   },
+   {
+    "title": "외국인 실업급여 지급액 1133억 중 894억 중국계가 타갔다…수급자 10명...",
+    "url": "https://www.fnnews.com/news/202609261020579733",
+    "press": "파이낸셜뉴스",
+    "pub": "2026-09-26 11:03",
+    "cites": false,
+    "judged": true,
+    "why": "의원실 자료 기반 중국계 실업급여 수급액",
+    "hits": [
+     "지표:지급액"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "중국계",
+     "타갔"
+    ]
+   },
+   {
+    "title": "외국인 실업급여 ‘열에 여덟’ 중국계… 가입자는 4명 중 1명",
+    "url": "https://www.jibs.co.kr/news/articles/articlesDetail/65869?feed=na",
+    "press": "jibs.co.kr",
+    "pub": "2026-09-26 13:35",
+    "cites": false,
+    "judged": true,
+    "why": "의원실 자료 기반 외국인 실업급여 비중",
+    "hits": [
+     "지표:가입자"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "여덟",
+     "중국계"
+    ]
+   },
+   {
+    "title": "실업급여 ‘먹튀’ 논란과 달랐다...中 수급자 83%는 장기 정주자",
+    "url": "https://www.sedaily.com/article/20094711?ref=naver",
+    "press": "서울경제",
+    "pub": "2026-09-26 14:01",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 실업급여 논란 검증 기사",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "논란",
+     "먹튀",
+     "장기",
+     "정주자"
+    ]
+   },
+   {
+    "title": "청년들 3년만에 2500만원 목돈 만들기…정부 '기여금 더 쏜다'",
+    "url": "https://news.bizwatch.co.kr/article/finance/2026/09/11/0033",
+    "press": "news.bizwatch.co.kr",
+    "pub": "2026-09-26 15:30",
+    "cites": false,
+    "judged": true,
+    "why": "청년 목돈마련 지원제도 개편 소개",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "기여금",
+     "년만",
+     "만들기",
+     "목돈",
+     "청년들"
     ]
    }
   ]
