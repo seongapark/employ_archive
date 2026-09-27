@@ -7428,27 +7428,6 @@
     ]
    },
    {
-    "title": "체불 줄었다던 건설업…\"일 없어 명절 기름값도 못 내\"",
-    "url": "https://www.nocutnews.co.kr/news/6582631?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
-    "press": "nocutnews.co.kr",
-    "pub": "2026-09-25 05:01",
-    "cites": true,
-    "judged": true,
-    "why": "건설업 가입자 37개월 연속 감소 인용",
-    "hits": [
-     "산업:건설업"
-    ],
-    "tone": [],
-    "stance": "부정",
-    "focus": "주제",
-    "kw": [
-     "기름값",
-     "명절",
-     "줄었다던",
-     "체불"
-    ]
-   },
-   {
     "title": "추석 밥상 오른 청년 취업난…\"AI 탓\"이라 할 수 있을까",
     "url": "https://www.nocutnews.co.kr/news/6582845?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
     "press": "nocutnews.co.kr",
@@ -7470,6 +7449,27 @@
      "있을까",
      "추석",
      "취업난"
+    ]
+   },
+   {
+    "title": "체불 줄었다던 건설업…\"일 없어 명절 기름값도 못 내\"",
+    "url": "https://www.nocutnews.co.kr/news/6582631?utm_source=naver&utm_medium=article&utm_campaign=20260925050055",
+    "press": "nocutnews.co.kr",
+    "pub": "2026-09-25 05:01",
+    "cites": true,
+    "judged": true,
+    "why": "건설업 가입자 37개월 연속 감소 인용",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "기름값",
+     "명절",
+     "줄었다던",
+     "체불"
     ]
    },
    {
@@ -7608,6 +7608,73 @@
      "만들기",
      "목돈",
      "청년들"
+    ]
+   },
+   {
+    "title": "'가능한 사랑'이 들여다본 40대의 삶…통계도 다르지 않았다 [세쓸통]",
+    "url": "https://www.newsis.com/view/NISX20260926_0003803894",
+    "press": "뉴시스",
+    "pub": "2026-09-27 09:00",
+    "cites": true,
+    "judged": true,
+    "why": "40대 가입자 32개월 연속 감소 인용",
+    "hits": [
+     "연령:40대"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "다르",
+     "들여다본",
+     "사랑",
+     "세쓸통"
+    ]
+   },
+   {
+    "title": "건설업 종사자 두 달째 늘었지만…업황 부담에 상시 채용은 ‘한파’",
+    "url": "https://www.viva100.com/article/20260927500540",
+    "press": "viva100.com",
+    "pub": "2026-09-27 15:56",
+    "cites": true,
+    "judged": true,
+    "why": "건설업 가입자 37개월째 감소 전함",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [
+     "한파"
+    ],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "부담",
+     "업황",
+     "채용"
+    ]
+   },
+   {
+    "title": "건설불황에도 다시 열린 공채…대형 건설사 하반기 채용 '원전·AI·안전...",
+    "url": "https://www.ajunews.com/view/20260927141605926",
+    "press": "아주경제",
+    "pub": "2026-09-27 16:00",
+    "cites": true,
+    "judged": true,
+    "why": "건설업 가입자 감소를 배경으로만 언급",
+    "hits": [],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "언급",
+    "kw": [
+     "AI",
+     "건설불황",
+     "건설사",
+     "공채",
+     "다시",
+     "대형",
+     "안전",
+     "채용",
+     "하반기"
     ]
    }
   ]
