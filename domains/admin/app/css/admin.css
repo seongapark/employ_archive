@@ -178,3 +178,4 @@
 /* 도는 동안 눌린 것이 보여야 한다. 단추가 그대로면 사람이 두 번 세 번 누르고,
    그때마다 D1 조회가 늘어난다. */
 .header__refresh[disabled] { opacity: 0.5; cursor: default; }
+.summary__note { display: block; font-size: 12px; margin-top: 2px; }

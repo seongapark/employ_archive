@@ -21,7 +21,8 @@ export function 요약HTML(s) {
       ${델타(v, 전)}
     </div>`).join('')}</section>
     <p class="summary__new">신규 <b class="num">${수(s.요약.신규)}</b> ·
-      재방문 <b class="num">${수(s.요약.재방문)}</b></p>`;
+      재방문 <b class="num">${수(s.요약.재방문)}</b>
+      <span class="summary__note">기간 안에 처음 와서 또 온 사람은 양쪽에 다 센다</span></p>`;
 }
 
 export function 도메인HTML(s) {

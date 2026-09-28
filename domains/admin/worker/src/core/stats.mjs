@@ -39,12 +39,19 @@ export function 질의목록(창) {
   const 목록 = [
     { 키: '요약', sql: `SELECT COUNT(DISTINCT visitor) 방문자, COUNT(DISTINCT session) 세션,
         COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}`, params: p },
-    // 주인빼기는 안쪽 DISTINCT visitor 하위질의에 붙인다 — 바깥 JOIN 은 visitor
-    // 표 전체를 보므로 거기 붙이면 주인의 다른 방문자 행까지 걸러 버릴 수 있다.
+    // 방문 한 번 = 세션 하나(탭의 sessionStorage 가 사는 동안). 신규는 첫 방문이
+    // 기간 안인 사람, 재방문은 기간 안에 **첫 방문이 아닌 세션**이 있는 사람이다 —
+    // 같은 날 다시 와도 재방문이다. 기간 안 세션 수가 "첫 방문이 기간 안이면 1, 아니면 0"
+    // 보다 많으면 그런 세션이 있다. 그래서 둘은 겹친다(이번 주 처음 와서 또 온 사람).
+    // 예전엔 재방문을 "첫 방문일이 기간 시작 전" 으로 셌다 — 기간 안에서 처음 오고
+    // 다시 온 사람이 신규로만 잡혀, 수집 첫 30일과 전 기간 창에서 재방문이 늘 0 이었다.
+    // 주인빼기는 안쪽 하위질의에 붙인다 — 바깥 JOIN 은 visitor 표 전체를 본다.
     { 키: '신규', sql: `SELECT
         SUM(CASE WHEN v.first_day >= ?1 THEN 1 ELSE 0 END) 신규,
-        SUM(CASE WHEN v.first_day <  ?1 THEN 1 ELSE 0 END) 재방문
-      FROM (SELECT DISTINCT visitor FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}) h
+        SUM(CASE WHEN h.세션수 > (CASE WHEN v.first_day >= ?1 THEN 1 ELSE 0 END)
+          THEN 1 ELSE 0 END) 재방문
+      FROM (SELECT visitor, COUNT(DISTINCT session) 세션수 FROM hit
+            WHERE day BETWEEN ?1 AND ?2 ${주인빼기} GROUP BY visitor) h
       JOIN visitor v ON v.id = h.visitor`, params: p },
     // 마지막 `domain` 은 동점을 깨는 기준이다. 없으면 방문자·조회가 같은 도메인의
     // 순서가 미정이라 테스트가 운에 기댄다(실제로 실행해 보니 우연히 맞았다).
