@@ -53,6 +53,12 @@ def test_mods_takes_only_the_monthly_고용동향_posts(mods):
     assert "446465" in mods["2026-07"]["url"]
 
 
+def test_mods_reads_the_posted_date(mods):
+    """게시일은 목록 행에 있다. 관리자 화면이 방문 추이에 발표일로 찍는다."""
+    for post in mods.values():
+        assert post["posted_at"][:4] == "2026", post
+
+
 def test_mods_carries_attachments_from_the_list_page(mods):
     """국가데이터처는 첨부가 목록에 있다 — 상세를 두드릴 필요가 없다."""
     kinds = [a["type"] for a in mods["2026-07"]["attachments"]]

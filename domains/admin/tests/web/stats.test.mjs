@@ -63,6 +63,20 @@ test('기간 안에서 처음 와 다시 온 사람은 신규이자 재방문이
   assert.equal(전체.요약.재방문, 3); // v1 도 s0·s2 두 세션
 });
 
+// 도메인별 재방문은 첫 세션이 아닌 세션에서 그 도메인을 본 사람이다. v1 은 8/20
+// 첫 세션 뒤 9/06 에 employment·press 를 봤다. v3 는 첫 세션에 employment, 다시 와서
+// press 를 봤다 — employment 는 첫 세션에서만 봤으므로 v3 몫으로 안 센다.
+test('도메인별 재방문은 다시 와서 본 도메인만 센다', async () => {
+  const { db } = await 채운DB();
+  for (const [s, day, domain] of [['s4', '2026-09-10', 'employment'], ['s5', '2026-09-12', 'press']]) {
+    await 기록(db, 줄({ visitor: 'v3', session: s, day, ts: `${day}T01:00:00Z`,
+      domain, path: '/', ref: null, ref_kind: 'direct' }));
+  }
+  const s = await 통계(db, 30, '2026-09-30');
+  const 재방문 = Object.fromEntries(s.도메인.map((d) => [d.도메인, d.재방문]));
+  assert.deepEqual(재방문, { employment: 1, press: 2, forecast: 0 });
+});
+
 test('직전 기간이 따로 나온다', async () => {
   const { db } = await 채운DB();
   const s = await 통계(db, 30, '2026-09-30');
@@ -154,7 +168,7 @@ test('주인으로 등록한 방문자는 모든 지표에서 빠진다', async 
   assert.deepEqual(s.요약, { 방문자: 1, 세션: 1, 조회: 1, 신규: 1, 재방문: 0 });
   assert.deepEqual(s.직전, { 방문자: 0, 세션: 0, 조회: 0 });
   assert.deepEqual(s.도메인, [
-    { 도메인: 'forecast', 방문자: 1, 세션: 1, 조회: 1, 직전방문자: 0 },
+    { 도메인: 'forecast', 방문자: 1, 세션: 1, 조회: 1, 재방문: 0, 직전방문자: 0 },
   ]);
   assert.deepEqual(s.일별, [
     { 날짜: '2026-09-07', 방문자: 1, 도메인별: { forecast: 1 } },

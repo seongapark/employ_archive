@@ -1,8 +1,8 @@
-import { 기간선택, 순서, 이름, 도메인현황 } from './model.js';
+import { 기간선택, 순서, 이름, 도메인현황, 날짜채우기, 발표일, esc } from './model.js';
 import { 요약HTML, 도메인HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML, 현황HTML }
   from './render.js';
 import { 막대SVG } from './chart.js';
-import { 불러오기, 토큰쓰기, 토큰지우기, 주인등록, 주인상태, 현황불러오기 } from './api.js';
+import { 불러오기, 토큰쓰기, 토큰지우기, 주인등록, 주인상태, 현황불러오기, 발표불러오기 } from './api.js';
 
 const 화면 = () => document.getElementById('screen');
 const 탭바 = () => document.getElementById('tabs');
@@ -12,7 +12,7 @@ let 현재탭 = '현황';
 // 마지막으로 받은 것을 들고 있는다. **탭을 옮길 때 다시 받지 않기 위해서다** —
 // 두 화면은 서로 다른 곳(워커 / 정적 JSON)에서 오는데, 탭을 누를 때마다 둘 다
 // 다시 부르면 누를 때마다 기다려야 하고 D1 조회도 두 배가 된다.
-let 마지막 = { 통계: null, 현황: [], 오류: null };
+let 마지막 = { 통계: null, 현황: [], 오류: null, 발표: {} };
 
 const 안내 = {
   미배포: '워커가 아직 배포되지 않았다 — domains/admin/DEPLOY.md 의 절차를 끝내야 한다.',
@@ -33,6 +33,9 @@ function 방문화면() {
     return `<p class="empty">${안내[마지막.오류]}</p>${도구HTML(주인상태(localStorage))}`;
   }
   const s = 마지막.통계;
+  const 일별 = 날짜채우기(s.일별, s.기간.시작, s.기간.끝);
+  const 발표 = 일별.length
+    ? 발표일(마지막.발표.releases, 마지막.발표.sources, 일별[0].날짜, s.기간.끝) : [];
   return `
     <nav class="periods">${기간선택.map((p) => `
       <button class="period${p.days === 현재일수 ? ' period--on' : ''}"
@@ -40,9 +43,11 @@ function 방문화면() {
     ${요약HTML(s)}
     <h2 class="sec">도메인별</h2>${도메인HTML(s)}
     <h2 class="sec">일별 추이</h2>
-    <div class="trend">${막대SVG(s.일별, 순서, { width: 320, height: 120 })}</div>
+    <div class="trend">${막대SVG(일별, 순서, { width: 320, height: 120, 표시: 발표 })}</div>
     <div class="legend">${순서.map((k) => `
       <span class="legend__i"><i style="background:var(--dom-${k})"></i>${이름[k] ?? k}</span>`).join('')}</div>
+    ${발표.length ? `<p class="note">점선은 발표일 — ${발표.map((m) =>
+      `${Number(m.날짜.slice(5, 7))}/${Number(m.날짜.slice(8))} ${esc(m.이름)}`).join(' · ')}</p>` : ''}
     <h2 class="sec">화면</h2>${화면HTML(s)}
     <h2 class="sec">유입</h2>${유입HTML(s)}
     <h2 class="sec">방문자</h2>${분포HTML(s)}
@@ -76,7 +81,9 @@ async function 새로고침() {
 
   // 도메인 현황은 정적 JSON 만 읽으므로 워커가 죽어 있어도(미배포·연결실패)
   // 봐야 한다 — 그래서 r.상태 분기 밖에서, 잠금 화면이 아닌 한 항상 부른다.
-  마지막.현황 = 도메인현황(await 현황불러오기({ fetch: fetch1 }));
+  const [현황, 발표] = await Promise.all([현황불러오기({ fetch: fetch1 }), 발표불러오기({ fetch: fetch1 })]);
+  마지막.현황 = 도메인현황(현황);
+  마지막.발표 = 발표;
 
   if (r.상태 === 'ok') {
     // 집계를 성공적으로 받은 뒤에만 등록을 시도한다 — 인증 실패·미배포·연결실패

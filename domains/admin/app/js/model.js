@@ -39,6 +39,41 @@ export function esc(s) {
     { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+// ── 일별 추이 ────────────────────────────────────────────────────────
+// 집계는 방문이 있던 날만 돌려준다. 그대로 그리면 빈 날이 사라져 막대 간격이
+// 날짜와 안 맞고, 발표일이 방문 없는 날이면 표시할 자리도 없다. 전 기간 창은
+// 시작이 '0000-01-01' 이라 첫 방문일부터 채운다.
+const 다음날 = (day) => {
+  const d = new Date(`${day}T00:00:00Z`);
+  d.setUTCDate(d.getUTCDate() + 1);
+  return d.toISOString().slice(0, 10);
+};
+
+export function 날짜채우기(일별, 시작, 끝) {
+  if (!일별.length) return [];
+  const 있음 = new Map(일별.map((d) => [d.날짜, d]));
+  const out = [];
+  for (let day = 시작 > 일별[0].날짜 ? 시작 : 일별[0].날짜; day <= 끝; day = 다음날(day)) {
+    out.push(있음.get(day) ?? { 날짜: day, 방문자: 0, 도메인별: {} });
+  }
+  return out;
+}
+
+// 고용동향 도메인의 releases.json({출처: {기간: {posted_at}}})에서 창 안의 발표일을
+// 뽑는다. 출처 이름은 sources.json 의 short_ko 를 쓴다 — 화면이 짓지 않는다.
+// posted_at 이 없는 회차는 건너뛴다(날짜를 지어내지 않는다).
+export function 발표일(releases, sources, 시작, 끝) {
+  const 약칭 = Object.fromEntries((sources ?? []).map((x) => [x.code, x.short_ko]));
+  const out = [];
+  for (const [출처, 회차] of Object.entries(releases ?? {})) {
+    for (const post of Object.values(회차)) {
+      const d = post.posted_at;
+      if (d && d >= 시작 && d <= 끝) out.push({ 날짜: d, 이름: 약칭[출처] ?? 출처 });
+    }
+  }
+  return out.sort((a, b) => a.날짜.localeCompare(b.날짜) || a.이름.localeCompare(b.이름));
+}
+
 // ── 도메인 현황 ──────────────────────────────────────────────────────
 // 다섯 도메인이 매일 last_run.json 을 쓴다. 형식이 저마다 다르고(reports 만
 // `at`, 나머지는 `run_at`), 판정 실패처럼 조용히 멈춰도 워크플로는 성공으로

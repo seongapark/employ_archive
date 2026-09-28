@@ -42,3 +42,12 @@ test('빈 목록도 유효한 SVG 를 낸다', () => {
 test('DOM 없이 문자열만 만든다', () => {
   assert.equal(typeof 막대SVG(일별, 순서, {}), 'string');
 });
+
+test('발표일은 그날 막대 가운데에 점선으로, 없는 날은 긋지 않는다', () => {
+  const svg = 막대SVG(일별, 순서, { width: 320, height: 120,
+    표시: [{ 날짜: '2026-09-02', 이름: '경활' }, { 날짜: '2026-09-05', 이름: '행정통계' }] });
+  const 선 = [...svg.matchAll(/<line class="mark" x1="([\d.]+)"/g)];
+  assert.equal(선.length, 1);
+  assert.equal(Number(선[0][1]), BAR_PAD.l + 1.5 * ((320 - BAR_PAD.l - BAR_PAD.r) / 2));
+  assert.ok(svg.includes('2026-09-02 경활 발표'));
+});

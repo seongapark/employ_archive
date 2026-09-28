@@ -92,18 +92,26 @@ def mods_list(html: str, *, must_contain: str = "고용동향") -> dict[str, dic
     files = mods_attachments(body)
 
     out: dict[str, dict] = {}
-    for m in re.finditer(r'<a class="board_link"[^>]*list_no=(\d+)[^>]*>(.*?)</a>', body, re.S):
+    links = list(re.finditer(r'<a class="board_link"[^>]*list_no=(\d+)[^>]*>(.*?)</a>', body, re.S))
+    for m, nxt in zip(links, links[1:] + [None]):
         list_no, title = m.group(1), _strip(m.group(2))
+        rest = body[m.end():nxt.start() if nxt else None]
         if not title.replace(" ", "").endswith(must_contain):
             continue
         period = period_of(title)
         if period is None:
             continue
-        out.setdefault(period, {
+        post = {
             "url": mods_view_url(list_no),
             "title": title,
             "attachments": files.get(list_no, []),
-        })
+        }
+        # 게시일. 관리자 화면의 방문 추이가 발표일 표시에 쓴다 — 고용노동부 쪽과
+        # 같은 키로 둔다.
+        posted = re.search(r"게시일</strong>\s*<span>\s*(20\d{2})-(\d{2})-(\d{2})", rest)
+        if posted:
+            post["posted_at"] = f"{posted.group(1)}-{posted.group(2)}-{posted.group(3)}"
+        out.setdefault(period, post)
     return out
 
 

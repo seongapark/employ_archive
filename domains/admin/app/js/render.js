@@ -39,9 +39,10 @@ export function 도메인HTML(s) {
       </div>
       <div class="dom__bar"><i style="width:${퍼센트(d.조회, 전체)}%;
         background:var(--dom-${esc(d.도메인)})"></i></div>
-      <div class="dom__meta num">조회 ${수(d.조회)} · 세션 ${수(d.세션)}</div>
+      <div class="dom__meta num">조회 ${수(d.조회)} · 세션 ${수(d.세션)} · 재방문 ${수(d.재방문)}</div>
     </div>`).join('')}</section>
-    <p class="note">한 사람이 두 도메인을 보면 양쪽에 세어진다 — 합계가 전체 방문자보다 크다.</p>`;
+    <p class="note">한 사람이 두 도메인을 보면 양쪽에 세어진다 — 합계가 전체 방문자보다 크다.
+      재방문은 첫 방문 뒤 다시 와서 그 도메인을 본 사람이다.</p>`;
 }
 
 // 마지막 실행이 24시간 넘었거나, 형식오류거나, 도메인이 스스로 경고를 냈으면

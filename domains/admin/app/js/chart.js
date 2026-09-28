@@ -5,7 +5,9 @@ export const BAR_PAD = { l: 4, r: 4, t: 8, b: 14 };
 
 // 막대 높이는 **조회수**로 그린다. 일별 방문자는 도메인별 최댓값이라 하한이고
 // (설계 Task 4 주석), 누적 막대의 조각 합과 어긋나면 그림이 거짓말을 한다.
-export function 막대SVG(일별, 순서, { width = 320, height = 120 } = {}) {
+// `표시` 는 발표일 [{날짜, 이름}] 이다. 막대 뒤에 점선으로 긋는다 — 막대를 가리면
+// 그날 방문이 안 보인다. 일별에 없는 날은 자리가 없으므로 긋지 않는다.
+export function 막대SVG(일별, 순서, { width = 320, height = 120, 표시 = [] } = {}) {
   const W = width - BAR_PAD.l - BAR_PAD.r;
   const H = height - BAR_PAD.t - BAR_PAD.b;
   const 합 = (d) => 순서.reduce((a, s) => a + (d.도메인별[s] ?? 0), 0);
@@ -27,9 +29,17 @@ export function 막대SVG(일별, 순서, { width = 320, height = 120 } = {}) {
     return `<g class="bar" data-day="${d.날짜}">${조각.join('')}</g>`;
   });
 
+  const 자리 = new Map(일별.map((d, i) => [d.날짜, i]));
+  const 선 = 표시.filter((m) => 자리.has(m.날짜)).map((m) => {
+    const x = (BAR_PAD.l + (자리.get(m.날짜) + 0.5) * 칸).toFixed(1);
+    return `<line class="mark" x1="${x}" y1="${BAR_PAD.t}" x2="${x}" y2="${BAR_PAD.t + H}"`
+      + ` stroke="var(--text-muted)" stroke-width="1" stroke-dasharray="2 2">`
+      + `<title>${m.날짜} ${m.이름} 발표</title></line>`;
+  });
+
   const 축 = `<line x1="${BAR_PAD.l}" y1="${BAR_PAD.t + H}" x2="${width - BAR_PAD.r}"`
     + ` y2="${BAR_PAD.t + H}" stroke="var(--border)" stroke-width="1"></line>`;
 
   return `<svg viewBox="0 0 ${width} ${height}" width="100%" height="${height}"`
-    + ` role="img" aria-label="일별 조회수 추이">${축}${묶음.join('')}</svg>`;
+    + ` role="img" aria-label="일별 조회수 추이">${축}${선.join('')}${묶음.join('')}</svg>`;
 }

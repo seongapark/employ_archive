@@ -58,6 +58,17 @@ export function 질의목록(창) {
     { 키: '도메인', sql: `SELECT domain 도메인, COUNT(DISTINCT visitor) 방문자,
         COUNT(DISTINCT session) 세션, COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}
       GROUP BY domain ORDER BY 방문자 DESC, 조회 DESC, domain`, params: p },
+    // 도메인별 재방문: 그 도메인에서 **그 사람의 첫 방문이 아닌 세션**이 있는 방문자.
+    // 사이트 첫 방문에 본 도메인은 그 세션으론 안 세고, 다시 와서 본 도메인만 센다 —
+    // "어느 도메인이 사람을 다시 부르나" 에 답하려는 숫자다. 첫 세션은 첫 방문일의
+    // 가장 이른 줄로 찾는다(hit_day 인덱스를 탄다).
+    { 키: '도메인재방문', sql: `SELECT h.domain 도메인, COUNT(DISTINCT h.visitor) 재방문
+      FROM hit h JOIN visitor v ON v.id = h.visitor
+      WHERE h.day BETWEEN ?1 AND ?2
+        AND h.visitor NOT IN (SELECT o.visitor FROM owner o)
+        AND h.session <> (SELECT f.session FROM hit f
+          WHERE f.day = v.first_day AND f.visitor = v.id ORDER BY f.id LIMIT 1)
+      GROUP BY h.domain`, params: p },
     { 키: '일별', sql: `SELECT day 날짜, domain 도메인, COUNT(DISTINCT visitor) 방문자,
         COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}
       GROUP BY day, domain ORDER BY day`, params: p },
@@ -102,9 +113,11 @@ export function 조립(창, r) {
   const 직전도메인맵 = r.직전도메인
     ? new Map(r.직전도메인.map((row) => [row.도메인, 수(row.방문자)]))
     : null;
-  const 도메인 = (r.도메인 ?? []).map((d) => (
-    직전도메인맵 ? { ...d, 직전방문자: 직전도메인맵.get(d.도메인) ?? 0 } : d
-  ));
+  const 재방문맵 = new Map((r.도메인재방문 ?? []).map((row) => [row.도메인, 수(row.재방문)]));
+  const 도메인 = (r.도메인 ?? []).map((d) => {
+    const 붙임 = { ...d, 재방문: 재방문맵.get(d.도메인) ?? 0 };
+    return 직전도메인맵 ? { ...붙임, 직전방문자: 직전도메인맵.get(d.도메인) ?? 0 } : 붙임;
+  });
 
   // 일별은 (날짜, 도메인) 쌍으로 오므로 날짜로 접는다. 그날 0 인 도메인은 아예
   // 행이 없다 — 화면이 0 으로 채운다.

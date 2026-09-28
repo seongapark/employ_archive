@@ -30,6 +30,22 @@ export async function 현황불러오기({ fetch, 목록 = 도메인목록 } = {
   return 결과;
 }
 
+// 방문 추이에 찍을 발표일. 고용동향 도메인의 정적 JSON 두 개다. 못 받아도 추이는
+// 그려야 하므로 실패는 빈 값으로 접는다.
+export async function 발표불러오기({ fetch } = {}) {
+  const f = fetch || globalThis.fetch.bind(globalThis);
+  const 받기 = async (이름) => {
+    try {
+      const res = await f(`../employment/data/${이름}.json`, { cache: 'no-cache' });
+      return res.ok ? await res.json() : null;
+    } catch {
+      return null;
+    }
+  };
+  const [releases, sources] = await Promise.all([받기('releases'), 받기('sources')]);
+  return { releases, sources };
+}
+
 const 키 = 'ea:token';
 const 등록키 = 'ea:owner';
 
