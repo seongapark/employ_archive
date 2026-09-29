@@ -33587,5 +33587,23 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-09-25T10:33:06+09:00"
+ },
+ "kli-10306": {
+  "pick": false,
+  "axis": "",
+  "why": "국제노동브리프 통상호, 해외사례 소개",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-29T11:01:15+09:00"
+ },
+ "kli-10307": {
+  "pick": false,
+  "axis": "",
+  "why": "퇴직소득세 개편, 세제·노후소득 연구",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-29T11:01:15+09:00"
  }
 }

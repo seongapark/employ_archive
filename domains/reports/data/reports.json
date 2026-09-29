@@ -69,6 +69,24 @@
   "matched": []
  },
  {
+  "id": "kli-10306",
+  "org": "kli",
+  "board": "kli-intl",
+  "series": "국제노동브리프",
+  "title": "국제노동브리프 2026년 9월호(Vol.24. No.6)",
+  "authors": [
+   "국제협력실"
+  ],
+  "published": "2026-09-15",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/prdclView.es?pblct_sn=10306&mid=a10103030000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=국제노동브리프",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=CD80CA1B1B51E37049258E80003FA274_1.pdf&fileNameOrg=국제노동브리프 2026년 9월호.pdf&filePath1=jsphome/DATA/pblctList/issue/CD80CA1B1B51E37049258E80003FA274",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kiet-is867",
   "org": "kiet",
   "board": "kiet-issue",
@@ -1906,6 +1924,25 @@
   "file_url": null,
   "matched": [
    "노사관계"
+  ]
+ },
+ {
+  "id": "kli-10307",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "퇴직급여의 연금화를 위한 제도 개선 연구",
+  "authors": [
+   "김동진",
+   "양승엽"
+  ],
+  "published": "2026-07-02",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=10307&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=21650A8D2691417749258E80004075A4_2.pdf&fileNameOrg=퇴직급여의 연금화를 위한 제도 개선 연구.pdf&filePath1=jsphome/DATA/pblctList/issue/21650A8D2691417749258E80004075A4",
+  "matched": [
+   "임금"
   ]
  },
  {
