@@ -6,7 +6,7 @@
   "2026-09-08",
   "2026-09-28"
  ],
- "collected_at": "2026-09-29 10:16",
+ "collected_at": "2026-09-29 18:00",
  "volume": {
   "collected": 294,
   "articles": 73,
@@ -17,8 +17,8 @@
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29324,
-   "fetched": 100,
+   "api_total": 29327,
+   "fetched": 200,
    "truncated": false,
    "in_window": 84,
    "relevant": 73,
@@ -26,7 +26,7 @@
   },
   {
    "query": "구직급여",
-   "api_total": 94482,
+   "api_total": 94537,
    "fetched": 300,
    "truncated": false,
    "in_window": 183,
@@ -107,7 +107,7 @@
   },
   {
    "query": "공공행정 고용보험",
-   "api_total": 11175,
+   "api_total": 11177,
    "fetched": 100,
    "truncated": false,
    "in_window": 22,
@@ -2139,21 +2139,21 @@
    "rel": false
   },
   {
-   "title": "[PICK! 이 안건] 정동만 등 11인 \"반복적인 구직급여 부정수급 효과적으...",
-   "desc": "정 의원 등은 제안이유에 대해 \"현행법은 거짓이나 그 밖의 부정한 방법으로 구직급여를 받은 사람이 최근 10년간 3회 이상 지급제한을 받은 경우 최대 3년간 새로운 수급자격에 따른 구직급여를 지급하지 않도록 하고...",
-   "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
-   "originallink": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
-   "press": "jeonmae.co.kr",
-   "pub": "2026-09-17 16:22",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "브로커 동원해 57명 허위 근로자 모아 총 5억8000여 만원 고용보험 부정...",
    "desc": "수사를 통해 확인된 구체적 부정수급 규모는 각각 구직급여 5억4000여 만원, 고용유지지원금 2000여 만원, 청년채용특별장려금 2000여 만원이다. 노동 당국 조사 결과 A씨는 수사망이 좁혀오자 텔레그램과 시그널 등...",
    "link": "https://www.hidomin.com/news/articleView.html?idxno=721684",
    "originallink": "https://www.hidomin.com/news/articleView.html?idxno=721684",
    "press": "hidomin.com",
+   "pub": "2026-09-17 16:22",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[PICK! 이 안건] 정동만 등 11인 \"반복적인 구직급여 부정수급 효과적으...",
+   "desc": "정 의원 등은 제안이유에 대해 \"현행법은 거짓이나 그 밖의 부정한 방법으로 구직급여를 받은 사람이 최근 10년간 3회 이상 지급제한을 받은 경우 최대 3년간 새로운 수급자격에 따른 구직급여를 지급하지 않도록 하고...",
+   "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
+   "originallink": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1292026",
+   "press": "jeonmae.co.kr",
    "pub": "2026-09-17 16:22",
    "q": "구직급여",
    "rel": false
