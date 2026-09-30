@@ -1,6 +1,7 @@
 from datetime import date
 from pathlib import Path
 
+from domains.forecast.pipeline import pdf
 from domains.forecast.pipeline.collectors import bok
 
 FIXTURES = Path(__file__).parent / "fixtures"
@@ -143,3 +144,44 @@ def test_collect_uses_the_newest_round(monkeypatch):
 
     bok.collect(date(2026, 8, 30))
     assert [i.url for i in seen] == ["u-new"]
+
+
+# ── 행 이름이 그림인 요약표(2025년 11월판) ─────────────────────────────────
+class _Crop:
+    def __init__(self, top):
+        self.top = top
+
+
+class _Page:
+    """pdfplumber 쪽의 흉내 — 숫자 줄과 행 이름 그림의 세로 위치만 있다."""
+    def __init__(self, lines, images):
+        self._lines, self.images = lines, images
+
+    def extract_text_lines(self):
+        return self._lines
+
+    def crop(self, bbox):
+        return _Crop(bbox[1] + 1)
+
+
+def test_image_labels_are_attached_to_the_row_at_the_same_height():
+    lines = [{"text": "2024 2025 2026e) 2027e)", "top": 80, "bottom": 90},
+             {"text": "2.0 0.3 1.8 1.0 [+0.1] 2.2 1.5 1.8 [+0.2] 1.9", "top": 369, "bottom": 378},
+             {"text": "2.8 3.1 2.5 2.8 [ - ] 3.1 2.6 2.8 [-0.1] 2.8", "top": 685, "bottom": 694}]
+    images = [{"x0": 0, "x1": 50, "top": 683, "bottom": 695}, {"x0": 0, "x1": 50, "top": 367, "bottom": 380}]
+    images += [{"x0": 0, "x1": 1, "top": 900 + i, "bottom": 901 + i} for i in range(20)]
+    names = {683: "실업률(%)", 367: "GDP 성장률(%)4"}  # OCR 은 각주 번호를 괄호 없이 붙인다
+    text = bok.label_image_rows(_Page(lines, images), lambda crop: names[crop.top])
+    assert text.split("\n") == ["2024 2025 2026e) 2027e)",
+                                "GDP 성장률(%) 2.0 0.3 1.8 1.0 [+0.1] 2.2 1.5 1.8 [+0.2] 1.9",
+                                "실업률(%) 2.8 3.1 2.5 2.8 [ - ] 3.1 2.6 2.8 [-0.1] 2.8"]
+
+
+def test_ocr_labeled_table_of_2025_11_reads_like_a_normal_table():
+    text = (FIXTURES / "bok_2025-11_p11_ocr.txt").read_text(encoding="utf-8")
+    values = pdf.parse_summary_table(text, bok.LABEL_TO_INDICATOR)
+    # 본문 서술과 같다: 성장률 금년 1.0%·내년 1.8%, 물가 금년·내년 2.1%
+    assert values[("gdp_growth", 2025, "annual")] == 1.0
+    assert values[("gdp_growth", 2026, "annual")] == 1.8
+    assert values[("cpi", 2026, "annual")] == 2.1
+    assert values[("emp_change", 2026, "annual")] == 15.0

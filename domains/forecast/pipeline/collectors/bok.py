@@ -81,12 +81,65 @@ def list_issues() -> list[Issue]:
     return issues
 
 
+# 이미지로 박힌 행 이름 끝에 각주 번호가 괄호 없이 붙어 읽힌다('GDP 성장률(%)4').
+_OCR_FOOTNOTE = re.compile(r"(?<=\))\d+$")
+_OCR_BULLET = re.compile(r"^[*•·ㆍ⋅©\s]+")
+# 행 이름이 이미지인 쪽으로 볼 최소 이미지 수(요약표 행이 20개 남짓이다)
+_MIN_LABEL_IMAGES = 15
+
+
+def label_image_rows(page, read_label) -> str | None:
+    """행 이름이 이미지로 박힌 요약표를, 행 이름을 붙인 텍스트로 되살린다.
+
+    2025년 11월판은 요약표의 행 이름 23개가 전부 그림이라 텍스트로 뽑으면 숫자
+    줄만 남는다. 순서로 짐작하지 않는다 — 그림마다 OCR 로 이름을 읽고, 세로
+    위치가 겹치는 숫자 줄 앞에 붙인다. 이름을 못 읽은 줄은 그대로 두므로
+    parse_summary_table 이 모르는 행으로 버린다.
+    """
+    if len(page.images) < _MIN_LABEL_IMAGES:
+        return None
+    lines = page.extract_text_lines()
+    out = []
+    for line in lines:
+        middle = (line["top"] + line["bottom"]) / 2
+        image = next((im for im in page.images if im["top"] - 2 <= middle <= im["bottom"] + 2), None)
+        if image is None:
+            out.append(line["text"])
+            continue
+        label = read_label(page.crop((image["x0"] - 1, image["top"] - 1,
+                                      image["x1"] + 1, image["bottom"] + 1)))
+        label = _OCR_FOOTNOTE.sub("", _OCR_BULLET.sub("", label.strip()))
+        out.append(f"{label} {line['text']}")
+    return "\n".join(out)
+
+
+def _ocr_label(cropped) -> str:
+    import pytesseract
+    image = cropped.to_image(resolution=400).original
+    return pytesseract.image_to_string(image, lang="kor+eng", config="--psm 7")
+
+
+def find_image_labeled_table(data: bytes, read_label=_ocr_label) -> tuple[int, str] | None:
+    import io
+    import pdfplumber
+
+    with pdfplumber.open(io.BytesIO(data)) as doc:
+        for page_no, page in enumerate(doc.pages, start=1):
+            if len(page.images) < _MIN_LABEL_IMAGES or "[" not in (page.extract_text() or ""):
+                continue
+            text = label_image_rows(page, read_label)
+            if text and pdf.find_summary_table([text], LABEL_TO_INDICATOR, REQUIRED_INDICATORS):
+                return page_no, text
+    return None
+
+
 def collect_issue(issue: Issue) -> list[ForecastRecord]:
     """회차 하나의 본문에서 PDF를 받아 요약표를 읽는다."""
     pdf_url = parse_pdf_link(http.get(issue.url).text)
-    found = pdf.find_summary_table(
-        pdf.page_texts(http.get(pdf_url).content), LABEL_TO_INDICATOR, REQUIRED_INDICATORS
-    )
+    data = http.get(pdf_url).content
+    found = pdf.find_summary_table(pdf.page_texts(data), LABEL_TO_INDICATOR, REQUIRED_INDICATORS)
+    if found is None:
+        found = find_image_labeled_table(data)
     if found is None:
         raise ValueError(f"{issue.title}: 요약표 페이지를 찾지 못했다")
     page_no, text = found
