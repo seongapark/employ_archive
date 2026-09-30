@@ -104,3 +104,29 @@ def test_relink_keeps_skipped_and_unresolved_counts_separate():
     assert result.unresolved[0][0] == fail_rec.id
     assert result.records[0].source_url == skip_rec.source_url
     assert result.records[1].source_url == fail_rec.source_url
+
+
+def test_relink_can_set_source_and_landing_separately():
+    rec = _rec("IMF", "https://www.imf.org/old")
+    result = relink.relink([rec], {"IMF": lambda r: ("https://pdf", "https://page")})
+    got = result.records[0]
+    assert (got.source_url, got.landing_url) == ("https://pdf", "https://page")
+
+
+def test_imf_resolver_links_the_checked_pdf_and_the_report_page(monkeypatch):
+    # 수집기와 같은 규칙이어야 한다 — 예전엔 둘 다 보고서 페이지로 덮어써서
+    # 수집기가 검증해 넣은 PDF 링크를 되돌렸다
+    from domains.forecast.pipeline.collectors import imf
+    covers = []
+    monkeypatch.setattr(imf, "report_cover", lambda url: covers.append(url) or "WORLD ECONOMIC OUTLOOK 2026 APR")
+    rec = _rec("IMF", "https://www.imf.org/old")
+    assert relink.imf_resolver(rec) == (
+        imf.pdf_url("April 2026"), imf.report_url("April 2026", date(2026, 4, 14)))
+    assert covers == [imf.pdf_url("April 2026")]
+
+
+def test_imf_resolver_refuses_a_pdf_of_another_edition(monkeypatch):
+    from domains.forecast.pipeline.collectors import imf
+    monkeypatch.setattr(imf, "report_cover", lambda url: "WORLD ECONOMIC OUTLOOK 2025 OCT")
+    with pytest.raises(ValueError):
+        relink.imf_resolver(_rec("IMF", "https://www.imf.org/old"))

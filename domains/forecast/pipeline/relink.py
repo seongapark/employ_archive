@@ -27,12 +27,15 @@ class RelinkResult:
 
 
 def relink(records: list[ForecastRecord],
-           resolvers: dict[str, Callable[[ForecastRecord], str | None]]) -> RelinkResult:
+           resolvers: dict[str, Callable[[ForecastRecord], str | tuple[str, str] | None]]
+           ) -> RelinkResult:
     """기관별 해결자로 원문 주소를 구해 링크만 바꾼다.
 
     수치·식별자·수정폭은 건드리지 않는다. 해결자는 세 가지 중 하나로 답한다.
 
-    - URL 문자열: 링크를 바꾼다(changed).
+    - URL 문자열: 두 링크를 그 주소로 바꾼다(changed).
+    - (원문, 보고서 페이지) 짝: 두 링크를 따로 바꾼다 — IMF 처럼 원문 PDF 와
+      사람이 여는 페이지가 다른 기관.
     - None: 애초에 대상이 아니다(skipped) — 예를 들어 OECD Interim 은 이미
       보고서를 가리키므로 손댈 필요가 없다. 이건 실패가 아니다.
     - 예외: 정말로 주소를 못 구했다(unresolved). 원본은 그대로 두고 사유를 남긴다.
@@ -42,7 +45,7 @@ def relink(records: list[ForecastRecord],
     배운다 — 그러면 진짜 실패가 그 사이에 숨는다.
     """
     result = RelinkResult(records=[])
-    cache: dict[tuple[str, str], str | None] = {}
+    cache: dict[tuple[str, str], str | tuple[str, str] | None] = {}
     for rec in records:
         resolve = resolvers.get(rec.org)
         if resolve is None:
@@ -60,7 +63,8 @@ def relink(records: list[ForecastRecord],
             result.skipped += 1
             result.records.append(rec)
             continue
-        result.records.append(rec.model_copy(update={"source_url": url, "landing_url": url}))
+        source, landing = url if isinstance(url, tuple) else (url, url)
+        result.records.append(rec.model_copy(update={"source_url": source, "landing_url": landing}))
         result.changed += 1
     return result
 
@@ -83,6 +87,15 @@ def _imf_label(report_title: str) -> str:
     return f"{prefix}{m.group(1)} {m.group(2)}"
 
 
+def imf_resolver(rec: ForecastRecord) -> tuple[str, str]:
+    """수집기(imf.collect)와 같은 규칙: 표지로 확인한 원문 PDF + 보고서 페이지."""
+    from .collectors import imf
+    label = _imf_label(rec.report_title)
+    url = imf.pdf_url(label)
+    imf.check_cover(imf.report_cover(url), label)
+    return url, imf.report_url(label, rec.published_at)
+
+
 def _oecd_resolver(rec: ForecastRecord) -> str | None:
     """OECD Interim 은 이미 보고서 PDF 를 가리키므로 대상에서 제외한다.
 
@@ -98,13 +111,12 @@ def _oecd_resolver(rec: ForecastRecord) -> str | None:
 
 
 def main(data_dir: Path = DATA_DIR) -> int:
-    from .collectors import imf
     from . import store
 
     path = Path(data_dir) / "forecasts.json"
     before = store.load_forecasts(path)
     resolvers = {
-        "IMF": lambda r: imf.report_url(_imf_label(r.report_title), r.published_at),
+        "IMF": imf_resolver,
         "OECD": _oecd_resolver,
     }
     result = relink(before, resolvers)
