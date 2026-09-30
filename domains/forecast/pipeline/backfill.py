@@ -96,6 +96,15 @@ def imf_rounds() -> list[Round]:
     return rounds
 
 
+def imf_update_rounds() -> list[Round]:
+    """1·7월 업데이트. 회차와 발표일은 기재부 보도참고에서 온다(imf.update_rounds)."""
+    from .watch import moef_notices
+    return [
+        Round(label, pub, lambda label=label, pub=pub: imf.collect_update_round(label, pub))
+        for label, pub in imf.update_rounds(moef_notices(pages=3))
+    ]
+
+
 def kiet_rounds() -> list[Round]:
     return [
         Round(issue.title, issue.published_at, lambda issue=issue: kiet.collect_issue(issue))
@@ -148,6 +157,7 @@ SOURCES: dict[str, Callable[[], list[Round]]] = {
     "kdi": kdi_rounds,
     "kiet": kiet_rounds,
     "imf": imf_rounds,
+    "imf_update": imf_update_rounds,
     "keis": keis_rounds,
     "moef": moef_rounds,
 }

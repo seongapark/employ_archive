@@ -30,24 +30,24 @@ RECENT_GAPS = 4
 NOTICE_KEYWORDS = {"경제협력개발기구": "OECD", "국제통화기금": "IMF"}
 # 전망 발표 보도참고만. 한국경제보고서·연례협의·부채 동향은 전망 회차가 아니다.
 _FORECAST_NOTICE = re.compile(r"^\[보도참고\].*경제전망")
-# IMF 1·7월 업데이트는 수집 대상이 아니다(Historical DB 에 없어 값을 못 읽는다 —
-# imf.py). 되살리면 이 줄을 지운다.
-_SKIPPED_NOTICE = {"IMF": re.compile(r"업데이트|Update")}
 
 Notice = tuple[str, date, str]  # (기관, 날짜, 제목)
 
 
-def moef_notices() -> list[Notice]:
+def moef_notices(pages: int = 1) -> list[Notice]:
+    """매일은 1쪽(약 1년치)이면 된다. 백필은 더 넘긴다."""
     from .collectors import moef
     from . import http
 
     notices = []
     for keyword, org in NOTICE_KEYWORDS.items():
-        page = http.get(moef.LIST_URL.format(keyword=keyword, page=1)).text
-        rows = moef.parse_list(page)
-        if not rows:
-            raise ValueError(f"기재부 보도참고 목록이 비었다({keyword}) — 게시판 구조를 확인할 것")
-        notices.extend((org, published, title) for _, published, title in rows)
+        for page_no in range(1, pages + 1):
+            rows = moef.parse_list(http.get(moef.LIST_URL.format(keyword=keyword, page=page_no)).text)
+            if not rows:
+                if page_no == 1:
+                    raise ValueError(f"기재부 보도참고 목록이 비었다({keyword}) — 게시판 구조를 확인할 것")
+                break
+            notices.extend((org, published, title) for _, published, title in rows)
     return notices
 
 
@@ -64,9 +64,6 @@ def missing_announced(records: list[ForecastRecord], notices: list[Notice],
     out = []
     for org, published, title in notices:
         if not _FORECAST_NOTICE.search(title):
-            continue
-        skip = _SKIPPED_NOTICE.get(org)
-        if skip and skip.search(title):
             continue
         if published > latest.get(org, date.min) and today - published > timedelta(days=GRACE_DAYS):
             out.append(f"{org} {published} 회차가 없다 — 기재부 보도참고 「{title}」")

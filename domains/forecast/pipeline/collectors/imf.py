@@ -1,8 +1,33 @@
+"""IMF World Economic Outlook 수집기.
+
+## 정규 회차(4·10월): SDMX `IMF.RES:WEO`
+
+값과 **발표일**을 같은 곳에서 받는다. 데이터셋 속성 `PUBLICATION_DATE` 가 그
+회차의 발표일이다(2026-04-14T13:00Z, 지난 판 WEO_2025_OCT_VINTAGE 는 2025-10-14 —
+둘 다 기재부 보도참고 날짜와 일치). 예전에는 DataMapper 가 회차를 안 밝혀서
+전망 지평(마지막 연도)으로 회차를 추정했는데, **10월판은 지평을 늘리지 않아**
+4월판과 구별되지 않는다 — 2026년 10월판이 4월판 날짜로 조용히 저장될 뻔했다.
+시계열 속성 `COUNTRY_UPDATE_DATE` 는 쓰지 않는다. 현행 판에서도 9/26/2025 로 낡아 있다.
+
+## 업데이트(1·7월): 업데이트 PDF 부록표 1
+
+WEO 데이터셋은 업데이트를 싣지 않는다(7/8 업데이트 뒤에도 PUBLICATION_DATE 가
+4/14 였다). 업데이트 PDF 의 Annex Table 1 에 한국 성장률 행이 있다 — **성장률만**
+있고 물가·실업률은 없다. 발표일은 기재부 보도참고에서 온다(PDF 가 안 밝힌다).
+
+## 원문 링크
+
+보고서 페이지(`/en/publications/weo/issues/…`)는 코드로 열면 403(Akamai)이라
+확인할 수 없다. 원문 PDF(`/-/media/…/text.ashx`)는 열린다. 그래서 **PDF 를 받아
+표지가 그 회차인지 확인한 뒤** source_url 로 싣고, 사람이 여는 보고서 페이지는
+landing_url 로 싣는다.
+"""
 from __future__ import annotations
 
 import io
 import re
 from datetime import date, datetime, timedelta, timezone
+from typing import Callable
 
 from curl_cffi import requests as cf_requests
 
@@ -10,49 +35,16 @@ from ..models import ForecastRecord, INDICATOR_META, make_id
 
 KST = timezone(timedelta(hours=9))
 
-API_BASE = "https://www.imf.org/external/datamapper/api/v1"
-# report_url() 로 대체된 뒤로 쓰는 곳이 없다 — source_url·landing_url 의
-# 폴백으로 되살리지 말 것(기계용 주소를 절대 남기지 않는다는 이 파일의 원칙에
-# 어긋난다). 정리는 imf.py 전체를 다시 볼 다른 작업에서 한다.
-LANDING_URL = "https://www.imf.org/external/datamapper/profile/KOR"
+SDMX_BASE = "https://api.imf.org/external/sdmx/3.0/data/dataflow/IMF.RES"
+WEO_URL = SDMX_BASE + "/WEO/+/KOR.{code}.A?attributes=all&measures=all"
+MEDIA_BASE = "https://www.imf.org/-/media/Files/Publications/WEO"
 
-# IMF DataMapper 코드 → 내부 지표코드
-# 회차 → (표제, 발표일, 전망 지평 마지막 연도).
-#
-# DataMapper 도 SDMX 도 현재 데이터가 어느 회차인지 밝히지 않는다. 다만 WEO 는
-# 4월판마다 전망 지평을 한 해 늘린다(2025년 10월판은 2030년까지, 현행은 2031년까지).
-# 그래서 마지막 연도로 회차를 특정하고, 모르는 지평이 오면 실패시킨다 —
-# 조용히 틀린 발표일을 붙이느니 멈추는 편이 낫다.
-# 이 특정 방식이 성립하려면 항목마다 마지막 연도가 서로 달라야 한다 — 10월판처럼
-# 지평을 늘리지 않는 회차가 늘어나면 두 회차가 같은 지평을 가질 수 있는데, 그때
-# 고르는 기준이 없다. edition_with_label() 이 이를 검사해 조용히 하나를 고르는
-# 대신 실패한다.
-#
-# Update 회차를 추가할 때는 키(라벨)에 반드시 "Update" 를 넣을 것 — report_url()
-# 은 라벨에 "update" 가 있는지만 보고 슬러그에 -update- 를 넣을지 정한다.
-# 예: 다음에 나올 2026년 7월판은 "April 2026" 과 같은 모양으로 "July 2026" 이라
-# 적으면 world-economic-outlook-july-2026(오답, 실제로는 존재하지 않는 주소)이
-# 만들어진다. 반드시 "Update July 2026" 으로 적어야 한다.
-#   April 2026  https://www.imf.org/en/publications/weo/issues/2026/04/14/world-economic-outlook-april-2026
-EDITIONS: dict[str, tuple[str, date, int]] = {
-    "April 2026": ("IMF World Economic Outlook, April 2026", date(2026, 4, 14), 2031),
-}
-
+# IMF 지표코드 → 내부 지표코드
 IMF_CODE_TO_INDICATOR = {
     "NGDP_RPCH": "gdp_growth",
     "PCPIPCH": "cpi",
     "LUR": "unemp_rate",
 }
-
-
-def fetch_raw(imf_code: str) -> dict:
-    # www.imf.org는 Akamai가 일반 HTTP 클라이언트를 403 차단하므로
-    # 브라우저 TLS 핑거프린트로 위장해야 한다
-    resp = cf_requests.get(
-        f"{API_BASE}/{imf_code}/KOR", impersonate="chrome", timeout=60
-    )
-    resp.raise_for_status()
-    return resp.json()
 
 
 WEO_ISSUE_BASE = "https://www.imf.org/en/publications/weo/issues"
@@ -87,76 +79,180 @@ def report_url(label: str, published_at: date) -> str:
             f"{kind}-{month}-{published_at:%Y}")
 
 
-def edition_with_label(last_year: int) -> tuple[str, tuple[str, date, int]]:
-    """전망 지평(마지막 연도)으로 회차를 찾아 라벨과 함께 돌려준다.
-
-    라벨과 회차 정보를 한 번의 조회로 같이 얻는다 — 따로 찾으면 두 조회가
-    서로 다른 답을 줄 수 있다(EDITIONS 를 두 번 훑는 사이에 바뀌지는 않더라도,
-    "값으로 역매칭" 같은 코드가 원래 찾은 것과 다른 항목에 우연히 매치될 수
-    있다). 지평이 EDITIONS 항목 여럿과 맞으면 — 위 EDITIONS 주석대로 설계가
-    깨진 상황이라 — 조용히 하나를 고르지 않고 실패시킨다.
-    """
-    matches = [(label, edition) for label, edition in EDITIONS.items()
-               if edition[2] == last_year]
-    if not matches:
-        raise ValueError(
-            f"전망 지평이 {last_year}년인 WEO 회차를 모른다 — imf.EDITIONS 에 추가할 것"
-        )
-    if len(matches) > 1:
-        labels = [label for label, _ in matches]
-        raise ValueError(
-            f"전망 지평이 {last_year}년인 WEO 회차가 {labels} 로 여럿이다 — "
-            "EDITIONS 항목은 last_year 가 서로 달라야 회차를 특정할 수 있다"
-        )
-    return matches[0]
+def _label_parts(label: str) -> tuple[bool, str, int]:
+    """'Update July 2026' → (True, 'July', 2026)."""
+    m = re.fullmatch(r"(Update )?([A-Z][a-z]+) (\d{4})", label)
+    if not m or m.group(2).lower() not in _MONTHS:
+        raise ValueError(f"회차 라벨을 읽지 못했다: {label!r}")
+    return bool(m.group(1)), m.group(2), int(m.group(3))
 
 
-def edition_for_horizon(last_year: int) -> tuple[str, date, int]:
-    return edition_with_label(last_year)[1]
+def regular_label(published_at: date) -> str:
+    if published_at.month not in (4, 10):
+        raise ValueError(f"WEO 데이터셋의 발표일이 {published_at} 이다 — 4·10월판만 "
+                         "실린다는 가정이 깨졌다. 업데이트가 데이터셋에 들어왔는지 확인할 것")
+    return f"{_MONTHS[published_at.month - 1].capitalize()} {published_at.year}"
 
 
-def parse(imf_code: str, payload: dict, today: date) -> list[ForecastRecord]:
-    indicator = IMF_CODE_TO_INDICATOR[imf_code]
+def pdf_url(label: str) -> str:
+    update, month, year = _label_parts(label)
+    return f"{MEDIA_BASE}/{year}/{'Update/' if update else ''}{month}/English/text.ashx"
+
+
+def report_pages(url: str) -> list[str]:
+    from .. import http, pdf
+
+    data = http.get(url).content
+    if data[:4] != b"%PDF":
+        raise ValueError(f"원문이 PDF 가 아니다: {url}")
+    return pdf.page_texts(data)
+
+
+def report_cover(url: str) -> str:
+    return report_pages(url)[0]
+
+
+def check_cover(cover: str, label: str) -> None:
+    """표지가 그 회차인지 본다. 표지에는 '2026 APR', '2025 O C T' 처럼 연도와
+    달 약자가 찍혀 있고, 업데이트면 'WORLD ECONOMIC OUTLOOK UPDATE' 다."""
+    update, month, year = _label_parts(label)
+    flat = re.sub(r"\s+", "", cover).upper()
+    if f"{year}{month[:3].upper()}" not in flat or ("OUTLOOKUPDATE" in flat) != update:
+        raise ValueError(f"원문 PDF 의 표지가 {label} 회차가 아니다: {flat[:80]!r}")
+
+
+def fetch_weo(imf_code: str) -> dict:
+    resp = cf_requests.get(WEO_URL.format(code=imf_code), impersonate="chrome",
+                           timeout=90, headers={"Accept": "application/json"})
+    resp.raise_for_status()
+    return resp.json()
+
+
+def parse_weo(payload: dict) -> tuple[date, dict[int, float]]:
+    """SDMX JSON 에서 (발표일, {연도: 값}) 을 꺼낸다."""
+    structure = payload["data"]["structures"][0]
+    dataset = payload["data"]["dataSets"][0]
+    names = [a["id"] for a in structure["attributes"]["dataSet"]]
+    attrs = dict(zip(names, dataset.get("attributes") or []))
+    stamp = attrs.get("PUBLICATION_DATE")
+    if not stamp:
+        raise ValueError("WEO 데이터셋에 PUBLICATION_DATE 가 없다 — 회차를 정할 수 없다")
+    published_at = date.fromisoformat(stamp[0][:10])
+
+    periods = [v["value"] for v in structure["dimensions"]["observation"][0]["values"]]
+    if len(dataset["series"]) != 1:
+        raise ValueError(f"한국 시계열이 {len(dataset['series'])}개다 — 하나여야 한다")
+    (series,) = dataset["series"].values()
+    values = {int(periods[int(k)]): float(obs[0]) for k, obs in series["observations"].items()
+              if obs[0] is not None}
+    return published_at, values
+
+
+def _records(label: str, title: str, published_at: date, indicator: str,
+             series: dict[int, float], source_url: str) -> list[ForecastRecord]:
     meta = INDICATOR_META[indicator]
-    series = payload.get("values", {}).get(imf_code, {}).get("KOR", {})
-    if not series:
-        return []
-    label, (title, published_at, _) = edition_with_label(max(int(y) for y in series))
-    url = report_url(label, published_at)
-    records: list[ForecastRecord] = []
-    for year in (published_at.year, published_at.year + 1):
-        val = series.get(str(year))
-        if val is None:
-            continue
-        records.append(ForecastRecord(
+    landing = report_url(label, published_at)
+    return [
+        ForecastRecord(
             id=make_id("IMF", published_at, indicator, year),
-            org="IMF",
-            org_name_ko="IMF",
-            report_title=title,
-            published_at=published_at,
-            target_year=year,
-            indicator=indicator,
-            value=round(float(val), meta["decimals"]),
-            unit=meta["unit"],
-            source_url=url,
-            landing_url=url,
-            confidence="verified",
+            org="IMF", org_name_ko="IMF", report_title=title,
+            published_at=published_at, target_year=year, indicator=indicator,
+            value=round(series[year], meta["decimals"]), unit=meta["unit"],
+            source_url=source_url, landing_url=landing, confidence="verified",
             collected_at=datetime.now(KST),
-        ))
-    return records
+        )
+        for year in (published_at.year, published_at.year + 1) if year in series
+    ]
 
 
 def collect(today: date) -> list[ForecastRecord]:
+    parsed = {code: parse_weo(fetch_weo(code)) for code in IMF_CODE_TO_INDICATOR}
+    dates = {published_at for published_at, _ in parsed.values()}
+    if len(dates) != 1:
+        raise ValueError(f"지표마다 회차가 다르다: {sorted(dates)} — 갱신 도중일 수 있다")
+    (published_at,) = dates
+    label = regular_label(published_at)
+    url = pdf_url(label)
+    check_cover(report_cover(url), label)
+
+    title = f"IMF World Economic Outlook, {label}"
     records: list[ForecastRecord] = []
-    for code in IMF_CODE_TO_INDICATOR:
-        records.extend(parse(code, fetch_raw(code), today))
+    for code, (_, series) in parsed.items():
+        records.extend(_records(label, title, published_at,
+                                IMF_CODE_TO_INDICATOR[code], series, url))
+    if not records:
+        raise ValueError(f"{label}: 레코드가 하나도 안 나왔다")
     return records
+
+
+# ── 업데이트 회차 ────────────────────────────────────────────────────────
+
+_UPDATE_MONTHS = (1, 7)
+_WEO_NOTICE = re.compile(r"(\d{1,2})월\s*세계경제전망")
+_YEARS = re.compile(r"^(?:\d{4}\s+){5}\d{4}$", re.M)
+_KOREA_ROW = re.compile(r"^Korea((?:\s+-?\d+\.\d+){6})\s*$", re.M)
+
+
+def update_growth(annex_text: str, year: int) -> dict[int, float]:
+    """부록표 1(Real GDP Growth)의 한국 행에서 {year, year+1} 성장률을 읽는다.
+
+    머리는 '2024 2025 2026 2027 2026 2027' 이다 — 앞 넷이 값, 뒤 둘이 직전 WEO
+    대비 차이다. 머리의 앞 네 해로 열을 찾는다(회차마다 첫 해가 다르다).
+    """
+    text = annex_text.replace("–", "-").replace("−", "-")
+    head = _YEARS.search(text)
+    row = _KOREA_ROW.search(text)
+    if not head or not row:
+        raise ValueError("업데이트 부록표 1 에서 연도 머리나 Korea 행을 찾지 못했다")
+    years = [int(y) for y in head.group(0).split()]
+    values = [float(v) for v in row.group(1).split()]
+    if years[4:] != [year, year + 1]:
+        raise ValueError(f"부록표의 전망 연도가 {years[4:]} 다 — {year} 회차가 아니다")
+    return {y: values[years[:4].index(y)] for y in (year, year + 1)}
+
+
+def update_rounds(notices) -> list[tuple[str, date]]:
+    """기재부 보도참고에서 업데이트 회차를 (라벨, 발표일) 로, 최근 것부터 뽑는다.
+
+    2025년 보도참고는 제목에 '업데이트' 가 없다('7월 세계경제전망 발표') —
+    제목 낱말이 아니라 **몇 월 전망인지**로 가른다.
+    """
+    out = {}
+    for org, published, title in notices:
+        m = _WEO_NOTICE.search(title)
+        if org != "IMF" or not title.startswith("[보도참고]") or not m:
+            continue
+        month = int(m.group(1))
+        if month in _UPDATE_MONTHS and month == published.month:
+            label = f"Update {_MONTHS[month - 1].capitalize()} {published.year}"
+            out[label] = published
+    return sorted(out.items(), key=lambda kv: kv[1], reverse=True)
+
+
+def collect_update_round(label: str, published_at: date) -> list[ForecastRecord]:
+    url = pdf_url(label)
+    pages = report_pages(url)
+    check_cover(pages[0], label)
+    annex = [t for t in pages if "Annex Table 1" in t and "Real GDP Growth" in t]
+    if not annex:
+        raise ValueError(f"{label}: 부록표 1(Real GDP Growth)을 찾지 못했다")
+    series = update_growth(annex[0], published_at.year)
+    title = f"IMF World Economic Outlook Update, {label.removeprefix('Update ')}"
+    return _records(label, title, published_at, "gdp_growth", series, url)
+
+
+def collect_update(today: date, notices: Callable[[], list] | None = None) -> list[ForecastRecord]:
+    if notices is None:
+        from ..watch import moef_notices as notices
+    rounds = update_rounds(notices())
+    if not rounds:
+        raise ValueError("기재부 보도참고에서 IMF 업데이트 회차를 찾지 못했다")
+    return collect_update_round(*rounds[0])
 
 
 # 보관된 지난 회차. IMF SDMX 에는 아카이브된 vintage 가 이것 하나뿐이다
 # (WEO_2026_APR_VINTAGE 등은 204 로 비어 있다).
 #   October 2025  https://www.imf.org/en/publications/weo/issues/2025/10/14/world-economic-outlook-october-2025
-SDMX_BASE = "https://api.imf.org/external/sdmx/3.0/data/dataflow/IMF.RES"
 VINTAGES: dict[str, tuple[str, str, date]] = {
     "October 2025": ("WEO_2025_OCT_VINTAGE/1.0.0",
                      "IMF World Economic Outlook, October 2025", date(2025, 10, 14)),

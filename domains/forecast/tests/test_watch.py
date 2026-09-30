@@ -33,11 +33,14 @@ def test_notices_that_are_not_forecast_rounds_are_ignored():
     notices = [
         ("OECD", date(2026, 7, 2), "[보도참고] 경제협력개발기구(OECD) 2026 한국경제보고서 발표"),
         ("OECD", date(2026, 6, 2), "허장 2차관, 경제협력개발기구(OECD) 각료이사회 참석 위해 프랑스로 출국"),
-        # IMF 업데이트는 수집 대상이 아니다
-        ("IMF", date(2026, 7, 8), "[보도참고] 2026년 국제통화기금(IMF) 7월 세계경제전망(WEO) 업데이트"),
     ]
     records = [rec("OECD", date(2026, 6, 3)), rec("IMF", date(2026, 4, 14))]
     assert watch.missing_announced(records, notices, date(2026, 9, 30)) == []
+
+
+def test_imf_update_round_is_watched_too():
+    notice = ("IMF", date(2026, 7, 8), "[보도참고] 2026년 국제통화기금(IMF) 7월 세계경제전망(WEO) 업데이트")
+    assert len(watch.missing_announced([rec("IMF", date(2026, 4, 14))], [notice], date(2026, 9, 30))) == 1
 
 
 def test_imf_regular_round_is_watched():

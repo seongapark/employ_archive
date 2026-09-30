@@ -2,77 +2,6 @@ import pytest
 from datetime import date
 from domains.forecast.pipeline.collectors import imf
 
-TODAY = date(2026, 8, 29)
-
-PAYLOAD = {
-    "values": {
-        "NGDP_RPCH": {
-            # 전망 지평(마지막 연도)이 회차를 특정한다 — 2031 = April 2026
-            "KOR": {"2024": 2.0, "2025": 0.9, "2026": 1.8, "2027": 2.1, "2028": 2.2,
-                    "2029": 2.2, "2030": 2.1, "2031": 2.1}
-        }
-    }
-}
-
-
-def test_parse_picks_current_and_next_year():
-    records = imf.parse("NGDP_RPCH", PAYLOAD, TODAY)
-    got = {r.target_year: r for r in records}
-    assert set(got) == {2026, 2027}
-    assert got[2026].value == 1.8
-    assert got[2027].value == 2.1
-
-
-def test_parse_record_fields():
-    r = imf.parse("NGDP_RPCH", PAYLOAD, TODAY)[0]
-    assert r.org == "IMF"
-    assert r.indicator == "gdp_growth"
-    assert r.id.startswith("imf-2026-04-gdp_growth-")  # 수집일이 아니라 발표일
-    assert r.confidence == "verified"
-    assert r.unit == "%"
-
-
-def test_parse_missing_years_returns_partial():
-    series = {str(y): 3.1 for y in range(2024, 2032)}
-    del series["2027"]
-    records = imf.parse("LUR", {"values": {"LUR": {"KOR": series}}}, TODAY)
-    assert [r.target_year for r in records] == [2026]
-    assert records[0].indicator == "unemp_rate"
-
-
-def test_parse_empty_payload_returns_nothing():
-    assert imf.parse("PCPIPCH", {"values": {}}, TODAY) == []
-
-
-def payload(values):
-    return {"values": {"NGDP_RPCH": {"KOR": values}}}
-
-
-def test_edition_is_identified_by_the_forecast_horizon():
-    # DataMapper 도 SDMX 도 어느 회차인지 밝히지 않는다. WEO 는 4월판마다 전망
-    # 지평을 한 해 늘리므로, 마지막 연도로 회차를 특정한다.
-    assert imf.edition_for_horizon(2031) == imf.EDITIONS["April 2026"]
-
-
-def test_an_unknown_horizon_fails_loudly_instead_of_guessing_a_date():
-    with pytest.raises(ValueError, match="EDITIONS"):
-        imf.edition_for_horizon(2032)
-
-
-def test_parse_stamps_the_edition_publication_date():
-    data = payload({str(y): 1.0 for y in range(2000, 2032)})
-    records = imf.parse("NGDP_RPCH", data, date(2026, 8, 30))
-    assert records
-    assert all(r.published_at == date(2026, 4, 14) for r in records)
-    assert records[0].id.startswith("imf-2026-04-")
-    assert records[0].report_title == "IMF World Economic Outlook, April 2026"
-
-
-def test_parse_target_years_come_from_the_edition_not_from_today():
-    data = payload({str(y): 1.0 for y in range(2000, 2032)})
-    years = {r.target_year for r in imf.parse("NGDP_RPCH", data, date(2026, 8, 30))}
-    assert years == {2026, 2027}
-
 
 def test_report_url_builds_the_weo_issue_address():
     # 실제로 200 을 확인한 주소다(설계 3.2)
@@ -105,31 +34,6 @@ def test_report_url_rejects_a_label_whose_month_disagrees_with_published_at():
     # 값처럼 어긋난다 — 조용히 4월 주소를 만들지 않고 멈춰야 한다
     with pytest.raises(ValueError, match="어긋난다"):
         imf.report_url("April 2026", date(2026, 10, 14))
-
-
-def test_no_record_points_at_a_machine_endpoint():
-    # 설계 3.0 — 원문 보기가 JSON 을 띄우면 안 된다
-    records = imf.parse("NGDP_RPCH", PAYLOAD, TODAY)
-    assert records
-    for r in records:
-        for url in (r.source_url, r.landing_url):
-            assert "api." not in url and "/api/" not in url and "sdmx" not in url
-            assert url.startswith("https://www.imf.org/en/publications/weo/issues/")
-
-
-def test_edition_with_label_returns_the_label_next_to_its_edition():
-    assert imf.edition_with_label(2031) == ("April 2026", imf.EDITIONS["April 2026"])
-
-
-def test_edition_with_label_refuses_to_pick_between_two_matches(monkeypatch):
-    # 두 회차가 같은 전망 지평을 가지면(예: 지평을 늘리지 않는 10월판이 늘어나면)
-    # 어느 쪽인지 고를 근거가 없다 — 조용히 하나를 고르지 않고 실패해야 한다.
-    monkeypatch.setitem(
-        imf.EDITIONS, "October 2026",
-        ("IMF World Economic Outlook, October 2026", date(2026, 10, 13), 2031),
-    )
-    with pytest.raises(ValueError, match="여럿"):
-        imf.edition_with_label(2031)
 
 
 def test_parse_vintage_does_not_confuse_the_label_with_the_title():
@@ -179,3 +83,140 @@ def test_collect_vintage_passes_label_and_title_to_the_right_slot(monkeypatch):
         for url in (r.source_url, r.landing_url):
             assert "api." not in url and "/api/" not in url and "sdmx" not in url
             assert url.startswith("https://www.imf.org/en/publications/weo/issues/")
+
+
+# ── 매일 수집: SDMX WEO + 원문 PDF 검증 ──────────────────────────────────
+import json
+from pathlib import Path
+
+FIXTURES = Path(__file__).parent / "fixtures"
+COVERS = json.loads((FIXTURES / "imf_weo_covers.json").read_text(encoding="utf-8"))
+
+
+def sdmx(code):
+    return json.loads((FIXTURES / f"imf_weo_sdmx_{code}.json").read_text(encoding="utf-8"))
+
+
+def test_weo_gives_the_edition_date_and_the_series():
+    # 회차는 전망 지평이 아니라 데이터셋의 PUBLICATION_DATE 로 정한다.
+    # 지평으로 정하면 지평을 안 늘리는 10월판이 4월판 날짜로 저장된다.
+    published_at, series = imf.parse_weo(sdmx("NGDP_RPCH"))
+    assert published_at == date(2026, 4, 14)
+    assert round(series[2026], 1) == 1.9 and round(series[2027], 1) == 2.1
+
+
+def test_weo_without_publication_date_fails():
+    payload = sdmx("NGDP_RPCH")
+    payload["data"]["dataSets"][0]["attributes"] = []
+    with pytest.raises(ValueError, match="PUBLICATION_DATE"):
+        imf.parse_weo(payload)
+
+
+def test_regular_edition_label_comes_from_its_month():
+    assert imf.regular_label(date(2026, 4, 14)) == "April 2026"
+    assert imf.regular_label(date(2026, 10, 13)) == "October 2026"
+    # WEO 데이터셋은 4·10월판만 싣는다 — 다른 달이면 가정이 깨진 것이다
+    with pytest.raises(ValueError):
+        imf.regular_label(date(2026, 7, 8))
+
+
+def test_report_pdf_address_follows_the_media_path():
+    assert imf.pdf_url("April 2026") == \
+        "https://www.imf.org/-/media/Files/Publications/WEO/2026/April/English/text.ashx"
+    assert imf.pdf_url("Update July 2026") == \
+        "https://www.imf.org/-/media/Files/Publications/WEO/2026/Update/July/English/text.ashx"
+
+
+@pytest.mark.parametrize("key,label", [
+    ("2026-04", "April 2026"), ("2025-10", "October 2025"),
+    ("2026-July-update", "Update July 2026"), ("2025-January-update", "Update January 2025"),
+])
+def test_cover_confirms_its_own_edition(key, label):
+    imf.check_cover(COVERS[key], label)
+
+
+@pytest.mark.parametrize("key,label", [
+    ("2026-04", "October 2026"),          # 10월판 주소에 4월판이 걸려 있으면
+    ("2026-July-update", "July 2026"),    # 업데이트를 정규 회차로 착각하면
+    ("2026-04", "Update April 2026"),
+])
+def test_cover_of_another_edition_is_refused(key, label):
+    with pytest.raises(ValueError):
+        imf.check_cover(COVERS[key], label)
+
+
+def test_collect_builds_records_from_weo_and_links_the_checked_pdf(monkeypatch):
+    monkeypatch.setattr(imf, "fetch_weo", sdmx)
+    fetched = []
+    monkeypatch.setattr(imf, "report_cover", lambda url: fetched.append(url) or COVERS["2026-04"])
+    records = imf.collect(date(2026, 9, 30))
+    got = {(r.indicator, r.target_year): r.value for r in records}
+    assert got == {("gdp_growth", 2026): 1.9, ("gdp_growth", 2027): 2.1,
+                   ("cpi", 2026): 2.5, ("cpi", 2027): 1.9,
+                   ("unemp_rate", 2026): 2.8, ("unemp_rate", 2027): 2.9}
+    assert fetched == [imf.pdf_url("April 2026")]
+    r = records[0]
+    assert r.published_at == date(2026, 4, 14)
+    assert r.report_title == "IMF World Economic Outlook, April 2026"
+    assert r.source_url == imf.pdf_url("April 2026")
+    assert r.landing_url == imf.report_url("April 2026", date(2026, 4, 14))
+
+
+def test_collect_refuses_indicators_from_different_editions(monkeypatch):
+    def mixed(code):
+        payload = sdmx(code)
+        if code == "LUR":
+            attrs = payload["data"]["dataSets"][0]["attributes"]
+            names = [a["id"] for a in payload["data"]["structures"][0]["attributes"]["dataSet"]]
+            attrs[names.index("PUBLICATION_DATE")] = ["2025-10-14T13:00:00Z"]
+        return payload
+    monkeypatch.setattr(imf, "fetch_weo", mixed)
+    monkeypatch.setattr(imf, "report_cover", lambda url: COVERS["2026-04"])
+    with pytest.raises(ValueError, match="회차"):
+        imf.collect(date(2026, 9, 30))
+
+
+# ── 업데이트(1·7월): 기재부 보도참고 + 업데이트 PDF 부록표 1 ─────────────────
+
+@pytest.mark.parametrize("name,published,want", [
+    ("2026_july", date(2026, 7, 8), {2026: 2.6, 2027: 2.5}),
+    ("2026_january", date(2026, 1, 19), {2026: 1.9, 2027: 2.1}),
+    ("2025_july", date(2025, 7, 29), {2025: 0.8, 2026: 1.8}),
+    ("2025_january", date(2025, 1, 17), {2025: 2.0, 2026: 2.1}),
+])
+def test_update_annex_gives_korea_growth(name, published, want):
+    text = (FIXTURES / f"imf_update_{name}_annex.txt").read_text(encoding="utf-8")
+    assert imf.update_growth(text, published.year) == want
+
+
+def test_update_annex_without_korea_fails():
+    text = (FIXTURES / "imf_update_2026_july_annex.txt").read_text(encoding="utf-8")
+    with pytest.raises(ValueError):
+        imf.update_growth(text.replace("Korea", "Kore"), 2026)
+
+
+def test_update_rounds_come_from_moef_notices():
+    notices = [
+        ("IMF", date(2026, 7, 8), "[보도참고] 2026년 국제통화기금(IMF) 7월 세계경제전망(WEO) 업데이트"),
+        ("IMF", date(2026, 4, 14), "[보도참고] 국제통화기금(IMF), 4월 세계경제전망 발표"),
+        # 2025년 보도참고는 제목에 '업데이트' 가 없다 — 달로 가른다
+        ("IMF", date(2025, 7, 29), "[보도참고] 국제통화기금(IMF) 7월 세계경제전망 발표"),
+        ("IMF", date(2025, 11, 24), "[보도참고] 국제통화기금(IMF) 2025년 한국 연례협의 보고서 발표"),
+        ("OECD", date(2026, 7, 2), "[보도참고] 경제협력개발기구, 7월 경제전망 발표"),
+    ]
+    assert imf.update_rounds(notices) == [("Update July 2026", date(2026, 7, 8)),
+                                          ("Update July 2025", date(2025, 7, 29))]
+
+
+def test_collect_update_reads_the_latest_update(monkeypatch):
+    annex = (FIXTURES / "imf_update_2026_july_annex.txt").read_text(encoding="utf-8")
+    monkeypatch.setattr(imf, "report_pages", lambda url: [COVERS["2026-July-update"], annex])
+    notices = lambda: [("IMF", date(2026, 7, 8), "[보도참고] 2026년 국제통화기금(IMF) 7월 세계경제전망(WEO) 업데이트")]
+    records = imf.collect_update(date(2026, 9, 30), notices=notices)
+    assert {(r.indicator, r.target_year): r.value for r in records} == \
+        {("gdp_growth", 2026): 2.6, ("gdp_growth", 2027): 2.5}
+    r = records[0]
+    assert r.report_title == "IMF World Economic Outlook Update, July 2026"
+    assert r.published_at == date(2026, 7, 8)
+    assert r.source_url == imf.pdf_url("Update July 2026")
+    assert r.landing_url.endswith("/2026/07/08/world-economic-outlook-update-july-2026")

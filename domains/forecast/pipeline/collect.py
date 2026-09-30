@@ -16,6 +16,7 @@ COLLECTORS: dict[str, Callable[[date], list[ForecastRecord]]] = {
     "oecd": oecd.collect,
     "oecd_interim": oecd_interim.collect,
     "imf": imf.collect,
+    "imf_update": imf.collect_update,
     "bok": bok.collect,
     "kdi": kdi.collect,
     "kli": kli.collect,
