@@ -61,7 +61,7 @@ function 인증됨(request, env) {
 // **숫자 모양인지 먼저 본다.** `Number(null)` 도 `Number('')` 도 0 인데 0 은
 // 허용 목록의 유효값(전 기간)이라, 그냥 Number() 로 접으면 days 를 아예 안 보낸
 // 요청과 `?days=` 빈 값이 전 기간으로 잘못 해석된다.
-const 허용일수 = new Set([0, 7, 30, 90]);
+const 허용일수 = new Set([0, 1, 7, 30, 90]);
 const 일수읽기 = (v) => {
   if (typeof v !== 'string' || !/^\d+$/.test(v)) return 30;
   const n = Number(v);
