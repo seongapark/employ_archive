@@ -22,8 +22,9 @@ from ..models import ForecastRecord
 BASE = "https://www.oecd.org"
 LANDING_URL = f"{BASE}/en/topics/sub-issues/economic-outlook.html"
 
-# 회차 → (발표일, 보고서 PDF). SDMX 가 없어 손으로 관리한다.
-# 새 회차(3월·9월)가 나오면 여기에 추가한다.
+# 지난 회차 → (발표일, 보고서 PDF). **백필 전용이다.** 매일 수집(collect)은
+# 이 목록을 안 보고 LANDING_URL 에서 최신 회차를 찾는다 — 손으로 적는 목록만
+# 있을 때 2026년 9월판이 일주일 빠졌다.
 EDITIONS: dict[str, tuple[date, str]] = {
     "March 2025": (date(2025, 3, 17), f"{BASE}/content/dam/oecd/en/publications/reports/"
                    "2025/03/oecd-economic-outlook-interim-report-march-2025_47a36021/89af4857-en.pdf"),
@@ -160,3 +161,46 @@ def collect_edition(label: str) -> list[ForecastRecord]:
     wanted = {n: t for n, t in enumerate(pages, 1) if table_indicator(t) is not None}
     return parse(wanted, label, published_at, url)
 
+
+
+# 발간 페이지 주소. 해시는 회차마다 달라 목록 페이지에서 읽을 수밖에 없다.
+_EDITION_PAGE = re.compile(
+    r"/en/publications/oecd-economic-outlook-interim-report-"
+    r"(?P<month>march|september)-(?P<year>\d{4})_[0-9a-f]{8}-en\.html"
+)
+_PDF = re.compile(r"/content/dam/oecd/en/publications/reports/[^\"\s]+?\.pdf")
+_PUBLISHED = re.compile(r'"datePublished"\s*:\s*"(\d{4})-(\d{2})-(\d{2})')
+_MONTH_NO = {"march": 3, "september": 9}
+
+
+def latest_edition(landing_html: str) -> tuple[str, str]:
+    """목록 페이지에서 가장 최근 회차의 (라벨, 발간 페이지 주소) 를 고른다."""
+    found = {(int(m["year"]), _MONTH_NO[m["month"]]): m for m in _EDITION_PAGE.finditer(landing_html)}
+    if not found:
+        raise ValueError("OECD 경제전망 페이지에서 중간전망 회차 링크를 찾지 못했다 — 주소 형식을 확인할 것")
+    m = found[max(found)]
+    return f"{m['month'].capitalize()} {m['year']}", BASE + m.group(0)
+
+
+def edition_meta(page_html: str, label: str) -> tuple[date, str]:
+    """발간 페이지에서 (발표일, PDF 주소) 를 읽는다.
+
+    발표일이 라벨의 달과 다르면 멈춘다 — 틀린 발표일은 수정폭 이력을 통째로 어긋낸다.
+    """
+    published = _PUBLISHED.search(page_html)
+    pdf_link = _PDF.search(page_html)
+    if not published or not pdf_link:
+        raise ValueError(f"{label}: 발간 페이지에서 발표일이나 PDF 를 찾지 못했다")
+    day = date(*map(int, published.groups()))
+    month, year = label.split()
+    if (day.year, day.month) != (int(year), _MONTH_NO[month.lower()]):
+        raise ValueError(f"{label}: 발간 페이지의 발표일 {day} 이 회차와 맞지 않는다")
+    return day, BASE + pdf_link.group(0)
+
+
+def collect(today: date) -> list[ForecastRecord]:
+    label, page_url = latest_edition(http.get(LANDING_URL).text)
+    published_at, url = edition_meta(http.get(page_url).text, label)
+    pages = pdf.page_texts(http.get(url).content)
+    wanted = {n: t for n, t in enumerate(pages, 1) if table_indicator(t) is not None}
+    return parse(wanted, label, published_at, url)

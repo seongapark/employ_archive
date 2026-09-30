@@ -5,8 +5,8 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable
 
-from . import store
-from .collectors import bok, imf, kdi, keis, kiet, kli, moef, oecd
+from . import store, watch
+from .collectors import bok, imf, kdi, keis, kiet, kli, moef, oecd, oecd_interim
 from .models import ForecastRecord
 
 KST = timezone(timedelta(hours=9))
@@ -14,6 +14,7 @@ DATA_DIR = Path(__file__).resolve().parent.parent / "data"
 
 COLLECTORS: dict[str, Callable[[date], list[ForecastRecord]]] = {
     "oecd": oecd.collect,
+    "oecd_interim": oecd_interim.collect,
     "imf": imf.collect,
     "bok": bok.collect,
     "kdi": kdi.collect,
@@ -26,6 +27,7 @@ COLLECTORS: dict[str, Callable[[date], list[ForecastRecord]]] = {
 
 def main(data_dir: Path = DATA_DIR,
          collectors: dict[str, Callable[[date], list[ForecastRecord]]] = COLLECTORS,
+         check: Callable[[list[ForecastRecord], date], list[str]] | None = None,
          ) -> int:
     forecasts_path = data_dir / "forecasts.json"
     last_run_path = data_dir / "last_run.json"
@@ -59,6 +61,18 @@ def main(data_dir: Path = DATA_DIR,
             # 절대경로까지 함께 실린다. 무엇이 왜 실패했는지만 한 줄로 남긴다.
             summary["collectors"][name] = {"ok": False, "fetched": 0, "added": 0}
             summary["errors"].append(f"{name}: {type(exc).__name__}: {exc}")
+
+    # 감시는 수집기를 주입한 시험에서는 꺼진다 — 시험이 네트워크에 나가면 안 된다.
+    if check is None and collectors is COLLECTORS:
+        check = watch.check
+    if check is not None:
+        try:
+            missing = check(merged, today)
+            summary["collectors"]["watch"] = {"ok": not missing, "fetched": 0, "added": 0}
+            summary["errors"].extend(f"watch: {m}" for m in missing)
+        except Exception as exc:
+            summary["collectors"]["watch"] = {"ok": False, "fetched": 0, "added": 0}
+            summary["errors"].append(f"watch: {type(exc).__name__}: {exc}")
 
     if len(merged) != len(existing):
         store.save_forecasts(forecasts_path, merged)

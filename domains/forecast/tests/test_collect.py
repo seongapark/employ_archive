@@ -54,7 +54,7 @@ def test_main_records_collector_failure_and_continues(tmp_path):
 
 
 def test_collectors_registry_covers_all_registered_orgs():
-    assert set(collect.COLLECTORS) == {"oecd", "imf", "bok", "kdi", "kli", "kiet", "keis", "moef"}
+    assert set(collect.COLLECTORS) == {"oecd", "oecd_interim", "imf", "bok", "kdi", "kli", "kiet", "keis", "moef"}
 
 
 def test_main_records_a_compact_error_without_local_paths(tmp_path):
@@ -116,3 +116,21 @@ def test_a_malformed_forecasts_file_still_stops_the_run(tmp_path):
             data_dir=tmp_path,
             collectors={"kdi": lambda today: [_one_record()]},
         )
+
+
+def test_watch_findings_become_errors_in_last_run(tmp_path):
+    collectors = {"fake": lambda today: [fake_record(2.0, today)]}
+    collect.main(data_dir=tmp_path, collectors=collectors,
+                 check=lambda records, today: ["OECD 2026-09-23 회차가 없다"])
+    summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
+    assert summary["collectors"]["watch"]["ok"] is False
+    assert summary["errors"] == ["watch: OECD 2026-09-23 회차가 없다"]
+
+
+def test_watch_is_off_when_collectors_are_injected(tmp_path, monkeypatch):
+    def boom(*a, **k):
+        raise AssertionError("시험이 감시를 돌렸다(네트워크)")
+    monkeypatch.setattr(collect.watch, "check", boom)
+    collect.main(data_dir=tmp_path, collectors={"fake": lambda today: []})
+    summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
+    assert "watch" not in summary["collectors"]

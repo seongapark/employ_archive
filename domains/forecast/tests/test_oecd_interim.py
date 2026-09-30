@@ -91,3 +91,26 @@ def test_reads_a_first_value_glued_to_the_column_header():
     cpi = oi.korea_values(load("oecd_interim_2026-09_p9.txt"), date(2026, 9, 23))
     assert growth == {2026: 3.7, 2027: 2.6}
     assert cpi == {2026: 3.0, 2027: 2.7}
+
+
+def test_finds_the_newest_edition_on_the_landing_page():
+    # 매일 수집은 손 목록(EDITIONS)을 안 본다 — 그 목록만 있을 때 9월판이 빠졌다
+    label, url = oi.latest_edition(load("oecd_interim_landing.html"))
+    assert label == "September 2026"
+    assert url.endswith("interim-report-september-2026_f751d02b-en.html")
+
+
+def test_landing_page_without_edition_links_fails_loudly():
+    with pytest.raises(ValueError):
+        oi.latest_edition("<html>개편된 페이지</html>")
+
+
+def test_edition_page_gives_date_and_pdf():
+    published, url = oi.edition_meta(load("oecd_interim_2026-09_page.html"), "September 2026")
+    assert published == date(2026, 9, 23)
+    assert (published, url) == oi.EDITIONS["September 2026"]
+
+
+def test_edition_page_with_a_mismatched_date_is_refused():
+    with pytest.raises(ValueError):
+        oi.edition_meta(load("oecd_interim_2026-09_page.html"), "March 2026")
