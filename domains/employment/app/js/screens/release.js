@@ -72,9 +72,8 @@ function scopeOf(source, key) {
   return list.find(s => s.key === key) || list[0];
 }
 
-// 출처마다 발표하는 지표가 다르다. 지금은 경활만 총괄 지표를 읽는다 —
-// 사업체·행정통계는 이 화면을 보고 넓히기로 했다(2026-09-11 사용자 판단).
-// 여기 없는 출처는 지표 구역 자체가 뜨지 않는다.
+// 출처마다 발표하는 지표가 다르다. 경활(2026-09-11) → 행정통계(09-22) →
+// 사업체(09-30) 순으로 넓혔다. 여기 없는 출처는 지표 구역 자체가 뜨지 않는다.
 const INDICATORS = {
   eaps: {
     scopes: EAPS_SCOPES,
@@ -121,6 +120,33 @@ const INDICATORS = {
       { name: '신규구인인원', indicator: 'job_openings' },
       { name: '신규구직인원', indicator: 'job_seekers' },
       { name: '구인배수', indicator: 'openings_ratio' },
+    ],
+  },
+  est: {
+    // 전체 산업 하나만 본다(산업별은 속성별 화면이 맡는다).
+    scopes: [{ key: 'total', label: '전체', tab: '전체', sub: '전 산업' }],
+    // 종사자수는 KPI 에 넣지 않는다 — 맨 위 카드가 이미 그 숫자를 말한다(행정통계와 같다).
+    // 빈일자리는 월 보도자료에 없어 최신월이 늘 '미발표' 가 되므로 추이에만 둔다.
+    kpiRows: [
+      { name: '근로자', tiles: [
+        { label: '상용', sub: '종사상지위', indicator: 'regular' },
+        { label: '임시일용', sub: '종사상지위', indicator: 'temporary' },
+      ] },
+      { name: '노동이동', tiles: [
+        { label: '입직률', sub: '당월', indicator: 'entry_rate' },
+        { label: '이직률', sub: '당월', indicator: 'exit_rate' },
+      ] },
+    ],
+    trends: [
+      { name: '종사자', indicator: 'headcount' },
+      { name: '상용근로자', indicator: 'regular' },
+      { name: '임시일용근로자', indicator: 'temporary' },
+      { name: '입직자', indicator: 'entered' },
+      { name: '이직자', indicator: 'exited' },
+      { name: '입직률', indicator: 'entry_rate' },
+      { name: '이직률', indicator: 'exit_rate' },
+      { name: '빈일자리', indicator: 'vacancies' },
+      { name: '빈일자리율', indicator: 'vacancy_rate' },
     ],
   },
 };

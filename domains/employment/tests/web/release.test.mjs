@@ -63,7 +63,8 @@ test('a month the survey has not published yet shows no invented numbers', () =>
 });
 
 test('a source with no indicators of its own gets no grid at all', () => {
-  assert.equal(kpiBlockHtml(SERIES, { source: 'est', period: '2026-08' }), '');
+  // 세 출처 모두 지표 판이 생겼다(사업체 2026-09-30). 설정이 없는 출처는 판을 안 그린다.
+  assert.equal(kpiBlockHtml(SERIES, { source: 'nope', period: '2026-08' }), '');
 });
 
 // ── 행정통계 KPI ──────────────────────────────────────────────────────
@@ -160,8 +161,7 @@ test('an indicator the age range never publishes is simply absent', () => {
 });
 
 test('a source with no indicators of its own gets no trend section', () => {
-  // ei 는 이제 아홉 지표를 갖는다. 아직 넓히지 않은 출처는 사업체노동력조사다.
-  const { html, byIndicator } = trendSection(TRENDS, { source: 'est', scope: 'total' });
+  const { html, byIndicator } = trendSection(TRENDS, { source: 'nope', scope: 'total' });
   assert.equal(html, '');
   assert.equal(byIndicator.size, 0);
 });
@@ -212,4 +212,43 @@ test('the ratio keeps its own unit in the trend head', () => {
   const { html } = trendSection(EI_TRENDS, { source: 'ei', scope: 'total' });
   assert.ok(html.includes('0.44배'));
   assert.ok(html.includes('+0.04배'));
+});
+
+// ── 사업체노동력조사 ───────────────────────────────────────────────────
+
+function est(over = {}) {
+  return {
+    id: 'x', source: 'est', series: 'regular', breakdown: 'total',
+    category: null, period: '2026-08', value: 17281.0, unit: '천명', yoy: 92.0,
+    released_at: '2026-09-30', release_url: 'https://www.moel.go.kr/x',
+    attachments: [], collected_at: '2026-09-30T19:00:00+09:00', ...over,
+  };
+}
+
+// 2026년 8월 보도자료 실측값. 빈일자리는 월 보도자료에 없어 7월까지만 있다.
+const EST_SERIES = [
+  est(),
+  est({ series: 'temporary', value: 2043.0, yoy: 141.0 }),
+  est({ series: 'entry_rate', value: 5.2, unit: '%', yoy: 0.7 }),
+  est({ series: 'exit_rate', value: 5.4, unit: '%', yoy: 0.7 }),
+  est({ series: 'entered', value: 1008.0, yoy: 154.0 }),
+  est({ series: 'exited', value: 1036.0, yoy: 147.0 }),
+  est({ series: 'headcount', value: 20690.0, yoy: 233.0 }),
+  est({ series: 'vacancies', period: '2026-07', value: 157.6, yoy: 1.0 }),
+  est({ series: 'vacancy_rate', period: '2026-07', value: 0.8, unit: '%', yoy: 0.0 }),
+];
+
+test('the establishment grid is workers by status and turnover rates', () => {
+  const html = kpiBlockHtml(EST_SERIES, { source: 'est', period: '2026-08' });
+  assert.deepEqual(values(html), ['1,728.1만명', '204.3만명', '5.2%', '5.4%']);
+  assert.ok(html.includes('+0.7%p'));
+  // 종사자수는 맨 위 카드가 이미 말한다
+  assert.ok(!html.includes('2,069.0만명'));
+});
+
+test('the establishment screen draws nine indicators, vacancies ending a month earlier', () => {
+  const { html, byIndicator } = trendSection(EST_SERIES, { source: 'est', scope: 'total' });
+  assert.equal(byIndicator.size, 9);
+  assert.equal(byIndicator.get('vacancy_rate').at(-1).period, '2026-07');
+  assert.ok(!html.includes('scopes__tab'), '범위가 하나라 탭 줄이 없다');
 });

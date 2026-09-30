@@ -82,6 +82,86 @@ def parse(rows: list[dict], *, released_at: date, release_url: str,
     return records
 
 
+# ── 총괄 지표(전체 산업·전체 규모) ─────────────────────────────────────────
+#
+# 종사자수만 산업별로 받고, 나머지는 전체 한 줄만 받는다. 코드와 함께 KOSIS
+# 항목 이름도 맞춰 본다 — 개편으로 코드는 그대로인데 항목이 바뀌면 조용히 다른
+# 숫자를 싣게 된다.
+TOTAL_ITEMS = {
+    "16118MF_2": ("근로자_상용", "regular", "천명"),
+    "16118MF_3": ("근로자_임시일용", "temporary", "천명"),
+    "16118MF_8": ("입직자_전체", "entered", "천명"),
+    "16118MF_17": ("이직자_전체", "exited", "천명"),
+    "16118MP_4": ("입직률_전체", "entry_rate", "%"),
+    "16118MP_13": ("이직률_전체", "exit_rate", "%"),
+    "16118MF_5": ("빈일자리_전체", "vacancies", "천명"),
+    "16118MP_1": ("빈일자리율_전체", "vacancy_rate", "%"),
+}
+TOTAL_ITEMS_SERIES = tuple(series for _, series, _ in TOTAL_ITEMS.values())
+
+
+def fetch_totals(api_key: str, total_code: str, months: int = 36) -> list[dict]:
+    """전체 산업 한 줄의 총괄 항목 여덟. 31개월이면 250행 남짓이다."""
+    params = {"method": "getList", "apiKey": api_key, "orgId": ORG_ID,
+              "tblId": TBL_ID, "itmId": " ".join(TOTAL_ITEMS), "objL1": total_code,
+              "objL2": SIZE_TOTAL_CODE, "prdSe": "M", "newEstPrdCnt": str(months),
+              "format": "json", "jsonVD": "Y"}
+    payload = SESSION.get(API, params=params, timeout=120).json()
+    if isinstance(payload, dict):
+        raise ValueError(f"KOSIS 오류(총괄 지표): {payload.get('errMsg', payload)}")
+    return payload
+
+
+def parse_totals(rows: list[dict], *, released_at: date, release_url: str,
+                 collected_at: datetime) -> list[SeriesRecord]:
+    by_series: dict[str, dict[str, float]] = {}
+    units: dict[str, str] = {}
+    for row in rows:
+        item = TOTAL_ITEMS.get(str(row.get("ITM_ID")))
+        if item is None:
+            continue
+        name, series, unit = item
+        if row.get("ITM_NM") != name:
+            raise ValueError(f"KOSIS 항목 {row.get('ITM_ID')} 이름이 '{row.get('ITM_NM')}' 이다 "
+                             f"— '{name}' 이어야 한다(항목 개편 여부 확인)")
+        try:
+            raw = float(str(row.get("DT")).replace(",", ""))
+        except (TypeError, ValueError):
+            continue
+        value = round(raw / 1000, 1) if unit == "천명" else round(raw, 1)
+        by_series.setdefault(series, {})[_period(str(row.get("PRD_DE", "")))] = value
+        units[series] = unit
+
+    records: list[SeriesRecord] = []
+    for series, values in by_series.items():
+        for period, value in values.items():
+            year, month = period.split("-")
+            prior = values.get(f"{int(year) - 1}-{month}")
+            # 비율의 증감은 %p 다. KOSIS 는 반올림된 비율만 주므로 원문 증감과
+            # 0.1 어긋날 수 있다(2026-07 입직률: 원문 0.9, 여기 0.8). 최신월은
+            # 보도자료 증감을 먼저 싣고, 값이 같으면 store.upsert 가 그대로 둔다.
+            records.append(SeriesRecord(
+                id=make_id("est", period, "total", None, series=series), source="est",
+                series=series, breakdown="total", category=None, period=period,
+                value=value, unit=units[series],
+                yoy=None if prior is None else round(value - prior, 1),
+                released_at=released_at, release_url=release_url,
+                attachments=[], collected_at=collected_at,
+            ))
+    return records
+
+
+def check_totals(records: list[SeriesRecord]) -> None:
+    """KOSIS 최신월에 총괄 지표 여덟이 다 왔는지 본다."""
+    if not records:
+        raise ValueError("총괄 지표가 하나도 없다")
+    latest = max(r.period for r in records)
+    got = {r.series for r in records if r.period == latest}
+    missing = [s for s in TOTAL_ITEMS_SERIES if s not in got]
+    if missing:
+        raise ValueError(f"{latest} 에 빠진 총괄 지표: {missing}")
+
+
 # 36 을 요청하지만 KOSIS 는 있는 만큼만 준다. 이 표는 2024-01 부터다 —
 # 그 이전은 다른 산업분류 체계의 별도 표(DT_118N_MON056)에 있고 이어붙이지
 # 않는다. 이어붙이면 전년동월대비가 재분류 효과를 고용 변화로 둔갑시킨다.
@@ -172,6 +252,14 @@ def collect(today: date, *, releases_index: dict | None = None,
     check_coverage(records)
     check_freshness(records, today)
 
+    total_code = next((str(r.get("C1")) for r in rows if r.get("C1_NM") == TOTAL_NAME), None)
+    if total_code is None:
+        raise ValueError("KOSIS 응답에 전체 산업 행이 없다 — 총괄 지표를 받을 수 없다")
+    totals = parse_totals(fetch_totals(api_key, total_code), released_at=_published_at(latest),
+                          release_url=STAT_URL, collected_at=datetime.now(KST))
+    check_totals(totals)
+    records += totals
+
     # KOSIS 가 아직 담지 못한 달을 보도자료에서 보충한다. 실패해도 KOSIS 결과는
     # 그대로 돌려준다 — 있으면 좋은 것이지 이 수집기의 전제가 아니다.
     extra = _from_release(latest, releases_index, industries, fetch_file)
@@ -199,15 +287,11 @@ def _from_release(kosis_latest, index, industries, fetch_file):
     data = getter(files[0]["url"])
     if not data:
         return []
-    return parse_release(
-        data,
-        released_at=released,
-        release_url=post["url"],
-        attachments=[Attachment(type="hwpx", url=files[0]["url"])],
-        collected_at=datetime.now(KST),
-        industries=industries,
-        expect_period=period,
-    )
+    meta = dict(released_at=released, release_url=post["url"],
+                attachments=[Attachment(type="hwpx", url=files[0]["url"])],
+                collected_at=datetime.now(KST))
+    return (parse_release(data, industries=industries, expect_period=period, **meta)
+            + parse_release_totals(data, period=period, **meta))
 
 
 def _release_date(post) -> date | None:
@@ -351,3 +435,63 @@ def parse_release(data: bytes, *, released_at: date, release_url: str,
     records = [build("total", None, total)]
     records += [build("industry", code, pair) for code, pair in sorted(found.items())]
     return records
+
+
+# 보도자료의 총괄 지표. 빈일자리는 월 보도자료에 없다 — KOSIS 가 실을 때까지
+# 그 달은 비어 있다(화면은 '미발표').
+#
+# 표 둘을 내용으로 찾는다: 종사상지위별 종사자 표(상용·임시일용 행)와 입·이직
+# 표(입직자·입직률·이직자·이직률 행). 최신월은 늘 맨 오른쪽 세 칸이고, 비율
+# 행은 끝에 빈 칸이 하나 더 붙어 역시 끝에서 세 번째가 값이다.
+RELEASE_ROWS = {
+    "상용": ("regular", "천명"),
+    "임시일용": ("temporary", "천명"),
+    "입직자": ("entered", "천명"),
+    "이직자": ("exited", "천명"),
+    "입직률": ("entry_rate", "%"),
+    "이직률": ("exit_rate", "%"),
+}
+_FOOTNOTE_TAIL = re.compile(r"\d+\)$")
+
+
+def parse_release_totals(data: bytes, *, period: str, released_at: date, release_url: str,
+                         attachments: list[Attachment],
+                         collected_at: datetime) -> list[SeriesRecord]:
+    found: dict[str, tuple[float, float | None, str]] = {}
+    for grid in hwpx.tables(data):
+        if len(grid) < 3 or len(grid) > 12:
+            continue
+        flat = squash(" ".join(" ".join(r) for r in grid))
+        if not (("상용" in flat and "임시일용" in flat) or ("입직률" in flat and "이직률" in flat)):
+            continue
+        # 기준월이 없는 것(유의사항 상자)과 다른 달의 표(임금은 한 달 전 기준이라
+        # 같은 보도자료에 7월 표와 8월 표가 섞인다)는 건너뛴다. 필요한 행을 끝내
+        # 못 찾으면 아래에서 실패한다.
+        if release_period(grid[0]) != period:
+            continue
+        for row in grid[2:]:
+            head = next((_FOOTNOTE_TAIL.sub("", squash(c)) for c in row[:2] if squash(c)), "")
+            if head not in RELEASE_ROWS or len(row) < 4:
+                continue
+            series, unit = RELEASE_ROWS[head]
+            value, delta = _num(row[len(row) - 3]), _num(row[len(row) - 2])
+            if value is None or series in found:
+                continue
+            found[series] = (value, delta, unit)
+
+    missing = [s for s, _ in RELEASE_ROWS.values() if s not in found]
+    if missing:
+        raise ValueError(f"보도자료에서 총괄 지표를 못 읽었다: {missing}")
+    for series in ("entry_rate", "exit_rate"):
+        if not 0 < found[series][0] < 100:
+            raise ValueError(f"보도자료 {series} 가 이상하다: {found[series][0]} (열을 잘못 집었을 수 있다)")
+
+    return [
+        SeriesRecord(
+            id=make_id("est", period, "total", None, series=series), source="est",
+            series=series, breakdown="total", category=None, period=period,
+            value=value, unit=unit, yoy=delta, released_at=released_at,
+            release_url=release_url, attachments=attachments, collected_at=collected_at,
+        )
+        for series, (value, delta, unit) in found.items()
+    ]

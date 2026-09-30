@@ -39,6 +39,16 @@ Series = Literal[
     "job_openings",         # 고용24 신규구인인원
     "job_seekers",          # 고용24 신규구직인원
     "openings_ratio",       # 구인배수 = 신규구인 ÷ 신규구직
+    # 사업체노동력조사(est)가 내는 것들. 종사상지위별 근로자와 노동이동(입·이직),
+    # 빈일자리. 전체 산업·전체 규모만 싣는다(종사자수만 산업별이다).
+    "regular",              # 상용근로자수
+    "temporary",            # 임시일용근로자수
+    "entered",              # 입직자수
+    "exited",               # 이직자수
+    "entry_rate",           # 입직률
+    "exit_rate",            # 이직률
+    "vacancies",            # 빈일자리수
+    "vacancy_rate",         # 빈일자리율
 ]
 
 # 비율 지표의 yoy 는 증감량이 아니라 **%p 차이**다. 화면 포맷터가 unit 으로
