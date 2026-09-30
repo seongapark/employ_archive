@@ -8098,5 +8098,25 @@
     "abstract_tried": true,
     "abstract_note": "요약 섹션 없음",
     "collected_at": "2026-09-26T11:03:05+09:00"
+  },
+  {
+    "id": "bok-11065179",
+    "org": "bok",
+    "board": "bok-research",
+    "series": "조사연구자료",
+    "title": "K-스틸법과 포항지역 철강산업의 전환과제",
+    "authors": [
+      "포항본부"
+    ],
+    "published": "2026-09-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11065179&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/243b897699d54c59bd1079e3b580b3b0/1/035ad70a2d2240508fd8d457ee654629.hwp",
+    "abstract": null,
+    "toc": [],
+    "abstract_tried": true,
+    "abstract_note": "텍스트가 없는 스캔본",
+    "collected_at": "2026-09-30T11:00:57+09:00"
   }
 ]

@@ -1,9 +1,14 @@
 {
-  "run_at": "2026-09-29T11:01:17.918191+09:00",
+  "run_at": "2026-09-30T11:01:19.472632+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
       "fetched": 8,
+      "added": 0
+    },
+    "oecd_interim": {
+      "ok": true,
+      "fetched": 4,
       "added": 0
     },
     "imf": {
@@ -11,9 +16,14 @@
       "fetched": 6,
       "added": 0
     },
+    "imf_update": {
+      "ok": true,
+      "fetched": 2,
+      "added": 0
+    },
     "bok": {
       "ok": true,
-      "fetched": 30,
+      "fetched": 0,
       "added": 0
     },
     "kdi": {
@@ -23,12 +33,12 @@
     },
     "kli": {
       "ok": true,
-      "fetched": 9,
+      "fetched": 0,
       "added": 0
     },
     "kiet": {
       "ok": true,
-      "fetched": 3,
+      "fetched": 0,
       "added": 0
     },
     "keis": {
@@ -38,7 +48,12 @@
     },
     "moef": {
       "ok": true,
-      "fetched": 8,
+      "fetched": 0,
+      "added": 0
+    },
+    "watch": {
+      "ok": true,
+      "fetched": 0,
       "added": 0
     }
   },

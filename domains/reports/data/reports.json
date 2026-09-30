@@ -1,5 +1,23 @@
 [
  {
+  "id": "kli-10308",
+  "org": "kli",
+  "board": "kli-eia",
+  "series": "고용영향평가브리프",
+  "title": "KLI 고용영향평가브리프 2026년 제3호(통권 제53호)_R&D에서 일자리까지 : 첨단의료복합단지 15년의 고용 성과와 과제",
+  "authors": [
+   "이정민"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10308&mid=a10104040000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=고용영향평가브리프",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=64E8AB90E539509C49258E800041155A_1.pdf&fileNameOrg=KLI 고용영향평가브리프 2026년 제3호_통권 제53호.pdf&filePath1=jsphome/DATA/pblctList/issue/64E8AB90E539509C49258E800041155A",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kdi-19271",
   "org": "kdi",
   "board": "kdi-trends",
@@ -14,6 +32,22 @@
   "matched": [
    "임금"
   ]
+ },
+ {
+  "id": "bok-11065179",
+  "org": "bok",
+  "board": "bok-research",
+  "series": "조사연구자료",
+  "title": "K-스틸법과 포항지역 철강산업의 전환과제",
+  "authors": [
+   "포항본부"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11065179&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/243b897699d54c59bd1079e3b580b3b0/1/035ad70a2d2240508fd8d457ee654629.hwp",
+  "matched": []
  },
  {
   "id": "bok-11065027",
@@ -139,6 +173,24 @@
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?nttId=11064677&searchCnd=1&searchKwd=&depth2=201157&depth3=200433&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200433&pageIndex=1&programType=newsData&menuNo=200433&oldMenuNo=200433",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/6cfda60ec1e545e59f32d23eddfc745c/1/6e0381d0135b4d88b54639c2cc7000e5.pdf",
   "matched": []
+ },
+ {
+  "id": "kli-10309",
+  "org": "kli",
+  "board": "kli-wage",
+  "series": "임금정보브리프",
+  "title": "임금정보브리프 2026년 제4호(통권 제105호)",
+  "authors": [
+   "임금직무혁신센터"
+  ],
+  "published": "2026-09-10",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10309&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=CB7D7EF8D3C5CD0949258E8200030678_1.pdf&fileNameOrg=임금정보브리프 2026년 제4호(통권 제105호).pdf&filePath1=jsphome/DATA/pblctList/issue/CB7D7EF8D3C5CD0949258E8200030678",
+  "matched": [
+   "임금"
+  ]
  },
  {
   "id": "bok-11064644",

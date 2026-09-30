@@ -33605,5 +33605,32 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-09-29T11:01:15+09:00"
+ },
+ "kli-10308": {
+  "pick": true,
+  "axis": "지역 노동시장",
+  "why": "첨복단지 15년 지역 고용성과 직접 평가",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-30T11:01:18+09:00"
+ },
+ "bok-11065179": {
+  "pick": false,
+  "axis": "",
+  "why": "포항 철강산업 전환 과제, 고용 아닌 산업정책 중심",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-30T11:01:18+09:00"
+ },
+ "kli-10309": {
+  "pick": false,
+  "axis": "",
+  "why": "임금 정기 브리프 통상호, 초록 없음",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-30T11:01:18+09:00"
  }
 }
