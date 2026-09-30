@@ -82,3 +82,12 @@ def test_a_page_that_only_mentions_a_table_is_skipped():
 def test_parse_fails_when_no_page_yields_a_table():
     with pytest.raises(ValueError, match="전망표"):
         oi.parse({5: "Table 1. Global growth 6\n"}, "March 2026", date(2026, 3, 26), "u")
+
+
+def test_reads_a_first_value_glued_to_the_column_header():
+    # 2026년 9월판은 '차이' 열의 첫 값이 머리글 끝에 붙어 나온다('u n e E O0' / '.1').
+    # 버리면 값이 하나 모자라 표 전체가 거부되고, 그 회차가 통째로 빠졌다.
+    growth = oi.korea_values(load("oecd_interim_2026-09_p8.txt"), date(2026, 9, 23))
+    cpi = oi.korea_values(load("oecd_interim_2026-09_p9.txt"), date(2026, 9, 23))
+    assert growth == {2026: 3.7, 2027: 2.6}
+    assert cpi == {2026: 3.0, 2027: 2.7}

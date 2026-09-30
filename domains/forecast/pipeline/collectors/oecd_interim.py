@@ -31,6 +31,8 @@ EDITIONS: dict[str, tuple[date, str]] = {
                        "2025/09/oecd-economic-outlook-interim-report-september-2025_ae3d418b/67b10c01-en.pdf"),
     "March 2026": (date(2026, 3, 26), f"{BASE}/content/dam/oecd/en/publications/reports/"
                    "2026/03/oecd-economic-outlook-interim-report-march-2026_254a8d56/d4623013-en.pdf"),
+    "September 2026": (date(2026, 9, 23), f"{BASE}/content/dam/oecd/en/publications/reports/"
+                       "2026/09/oecd-economic-outlook-interim-report-september-2026_8312492f/f751d02b-en.pdf"),
 }
 
 # 열 머리글 낱말. 여기서부터는 행 이름이 아니다.
@@ -40,6 +42,7 @@ _NOT_A_ROW = ("Table", "Note", "TESTING", "STEERING", "FINDING", "Source", "Base
 _CAPTION = re.compile(r"^(Table \d+\.[^\n]*)", re.M)
 _ROW_NAME = re.compile(r"[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ0-9¹²³]{1,29}")
 _VALUE = re.compile(r"-?\d+\.\d+")
+_GLUED_HEAD = re.compile(r"(.*[A-Za-z])(-?\d+)")
 
 
 def table_indicator(text: str) -> str | None:
@@ -64,6 +67,12 @@ def parse_rotated_table(text: str) -> tuple[list[str], list[list[float]]]:
     정수와 소수가 다른 줄로 쪼개져 나오는데, 발표연도보다 이전이라 쓰지 않으므로 버린다.
     """
     lines = [re.sub(r"\s+", "", line) for line in text.split("\n") if line.strip()]
+    # 2026년 9월판부터 열의 첫 값이 머리글 끝에 붙는다: 'uneEO0' + '.1' = 0.1.
+    # 이걸 버리면 값이 하나 모자라 표가 통째로 거부된다.
+    for i in range(len(lines) - 1):
+        glued = _GLUED_HEAD.fullmatch(lines[i])
+        if glued and re.fullmatch(r"\.\d+", lines[i + 1]):
+            lines[i], lines[i + 1] = glued.group(1), glued.group(2) + lines[i + 1]
     values = [float(line) for line in lines if _VALUE.fullmatch(line)]
 
     rows: list[str] = []
