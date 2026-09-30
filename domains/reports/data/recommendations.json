@@ -33632,5 +33632,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-09-30T11:01:18+09:00"
+ },
+ "kli-10310": {
+  "pick": false,
+  "axis": "",
+  "why": "정기 월간 노동리뷰 통상호, 새 분석 확인 불가",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-09-30T19:10:55+09:00"
  }
 }

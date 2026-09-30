@@ -1,5 +1,5 @@
 {
-  "at": "2026-09-30T11:00:47+09:00",
+  "at": "2026-09-30T19:10:42+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -13,13 +13,13 @@
     },
     "kli-review": {
       "ok": true,
-      "parsed": 10,
-      "added": 0,
-      "details": 0,
+      "parsed": 20,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 68
+      "total": 69
     },
     "kli-policy": {
       "ok": true,
@@ -53,9 +53,9 @@
     },
     "kli-wage": {
       "ok": true,
-      "parsed": 20,
-      "added": 1,
-      "details": 1,
+      "parsed": 10,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -73,9 +73,9 @@
     },
     "kli-eia": {
       "ok": true,
-      "parsed": 20,
-      "added": 1,
-      "details": 1,
+      "parsed": 10,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -323,9 +323,9 @@
     },
     "bok-research": {
       "ok": true,
-      "parsed": 200,
-      "added": 1,
-      "details": 1,
+      "parsed": 100,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3451,
+  "reports": 3452,
   "abstract_missing": {
     "kli": {
       "고용영향평가브리프": {
@@ -346,6 +346,11 @@
         "missing": 51,
         "rate": 1.0
       },
+      "노동리뷰": {
+        "total": 69,
+        "missing": 69,
+        "rate": 1.0
+      },
       "임금정보브리프": {
         "total": 48,
         "missing": 48,
@@ -355,11 +360,6 @@
         "total": 306,
         "missing": 67,
         "rate": 0.219
-      },
-      "노동리뷰": {
-        "total": 68,
-        "missing": 68,
-        "rate": 1.0
       },
       "고용노동브리프": {
         "total": 11,
@@ -512,7 +512,7 @@
     }
   },
   "abstract_missing_why": {
-    "요약 섹션 없음": 550,
+    "요약 섹션 없음": 551,
     "텍스트가 없는 스캔본": 309,
     "원문 없음": 46,
     "내려받기 실패: Failed to perform, curl: (6) Could not resolve host: www.bok.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.": 13,
@@ -524,22 +524,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 304504,
-    "abstracts_gzip": 3466998,
+    "reports_gzip": 304570,
+    "abstracts_gzip": 3467245,
     "abstracts_shards_gzip": {
       "bok": 292419,
       "kdi": 889333,
       "keis": 256203,
       "kiet": 708527,
-      "kli": 1320516
+      "kli": 1320763
     }
   },
   "recommend": {
-    "judged": 3451,
+    "judged": 3452,
     "picked": 368,
     "unjudged": 0,
     "profile_version": "5a624049",
-    "title_only": 939,
-    "at": "2026-09-30T11:01:18+09:00"
+    "title_only": 940,
+    "at": "2026-09-30T19:10:55+09:00"
   }
 }

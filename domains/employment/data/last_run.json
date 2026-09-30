@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-09-30T11:03:04.880789+09:00",
+  "run_at": "2026-09-30T19:13:24.698471+09:00",
   "collectors": {
     "eaps": {
       "ok": true,
@@ -10,8 +10,8 @@
     },
     "est": {
       "ok": true,
-      "fetched": 589,
-      "added": 0,
+      "fetched": 608,
+      "added": 19,
       "updated": 0,
       "rejected": 0
     },
@@ -36,11 +36,11 @@
       "summaries_pending": 0
     },
     "est": {
-      "months": 51,
-      "added": 0,
-      "attachments_filled": 0,
+      "months": 52,
+      "added": 1,
+      "attachments_filled": 1,
       "pending": 0,
-      "summaries_filled": 0,
+      "summaries_filled": 1,
       "summaries_empty": 0,
       "summaries_pending": 0
     },

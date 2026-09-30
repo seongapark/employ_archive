@@ -175,6 +175,26 @@
   "matched": []
  },
  {
+  "id": "kli-10310",
+  "org": "kli",
+  "board": "kli-review",
+  "series": "노동리뷰",
+  "title": "노동리뷰 2026년 9월호(통권 제258호)",
+  "authors": [
+   "동향분석실"
+  ],
+  "published": "2026-09-10",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/prdclView.es?pblct_sn=10310&mid=a10103010000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=노동리뷰",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=A8517067997A795E49258E82001A9AED_0.pdf&fileNameOrg=노동리뷰_2026년 9월호.pdf&filePath1=jsphome/DATA/pblctList/issue/A8517067997A795E49258E82001A9AED",
+  "matched": [
+   "임금",
+   "고용형태",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-10309",
   "org": "kli",
   "board": "kli-wage",

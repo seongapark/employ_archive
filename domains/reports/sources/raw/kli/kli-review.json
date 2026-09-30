@@ -1026,6 +1026,38 @@
     "collected_at": "2026-09-10T10:15:44+09:00"
   },
   {
+    "id": "kli-10310",
+    "org": "kli",
+    "board": "kli-review",
+    "series": "노동리뷰",
+    "title": "노동리뷰 2026년 9월호(통권 제258호)",
+    "authors": [
+      "동향분석실"
+    ],
+    "published": "2026-09-10",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/prdclView.es?pblct_sn=10310&mid=a10103010000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=노동리뷰",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=A8517067997A795E49258E82001A9AED_0.pdf&fileNameOrg=노동리뷰_2026년 9월호.pdf&filePath1=jsphome/DATA/pblctList/issue/A8517067997A795E49258E82001A9AED",
+    "abstract": null,
+    "toc": [
+      "■ 노동포커스",
+      "일하는 사람의 권리에 관한 기본법의 쟁점 (남궁준) / 3",
+      "■ 특집 : 일하는 사람의 권리에 관한 기본법의 쟁점과 과제",
+      "‘일하는 사람 기본법’ 제정의 필요성과 입법ㆍ추진체계의 구체화 과제 (이준희) / 9",
+      "플랫폼 노동에 관한 최초의 ILO 협약 채택과 함의 (남궁준) / 23",
+      "고용관계 추정에 관한 비교법적 검토 : 플랫폼 노동 EU 지침과 회원국 입법을 중심으로 (권오성) / 44",
+      "■ 통계프리즘",
+      "일자리이동통계로 본 노동이동의 둔화와 임금 상승 이동의 감소 (김종욱) / 59",
+      "■ 노동판례리뷰 / 69",
+      "■ 주요 노동동향 / 91",
+      "■ 노동리뷰 목차 색인 / 117"
+    ],
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-09-30T19:10:46+09:00"
+  },
+  {
     "id": "kli-9474",
     "org": "kli",
     "board": "kli-review",

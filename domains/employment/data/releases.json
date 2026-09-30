@@ -2957,6 +2957,7 @@
           "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20240702943&bbs_seq=16889&bbs_id=12&file_ext=pdf"
         }
       ],
+      "posted_at": "2024-07-30",
       "title": "2024년 6월 사업체노동력조사 결과",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=16889"
     },
@@ -3345,6 +3346,32 @@
       },
       "title": "2026년 7월 사업체노동력조사 및 2026년 4월 지역별사업체노동력조사 결과",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19832"
+    },
+    "2026-08": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260901821&bbs_seq=20022&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20260901822&bbs_seq=20022&bbs_id=12&file_ext=pdf"
+        }
+      ],
+      "posted_at": "2026-09-30",
+      "summary": {
+        "lines": [
+          "□ (총괄) ’26.8월 마지막 영업일 현재, 종사자 1인 이상 사업체 종사자 수의 잠정 결과는 20,690천명으로 전년동월(20,457천명)대비 233천명(+1.1%) 증가",
+          "□ 주요 특성별",
+          "ㅇ (종사상지위별) 상용근로자는 전년동월대비 92천명(+0.5%) 증가, 임시일용근로자는 141천명(+7.4%) 증가, 기타종사자는 전년동월과 유사",
+          "ㅇ (규모별) 상용 300인 미만은 16,996천명으로 160천명(+1.0%) 증가, 300인 이상은 3,694천명으로 73천명(+2.0%) 증가",
+          "ㅇ (산업별) 증가한 산업은 보건업 및 사회복지 서비스업(+122천명, +4.7%), 전문,과학 및 기술서비스업(+28천명, +2.1%), 금융 및 보험업(+28천명, +3.3%) 순",
+          "ㅇ (제조업) 제조업 산업중분류(25개) 중 종사자 수가 증가한 산업은 전자부품,컴퓨터,영상,음향 및 통신장비 제조업(+8천명), 기타 운송장비 제조업(+6천명), 산업용 기계 및 장비 수리업(+5천명) 순",
+          "ㅇ (비제조업) 비제조업 산업중분류(46개) 중 종사자 수가 증가한 산업은 사회복지 서비스업(+78천명), 보건업(+44천명), 보험업(+19천명) 순"
+        ]
+      },
+      "title": "2026년 8월 사업체노동력조사 및 2026년 4월 시도별 임금·근로시간조사 결과",
+      "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20022"
     }
   }
 }

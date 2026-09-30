@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-09-30T11:01:19.472632+09:00",
+  "run_at": "2026-09-30T19:10:55.904229+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -47,6 +47,11 @@
       "added": 0
     },
     "moef": {
+      "ok": true,
+      "fetched": 0,
+      "added": 0
+    },
+    "announce": {
       "ok": true,
       "fetched": 0,
       "added": 0
