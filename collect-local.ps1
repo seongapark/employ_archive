@@ -11,28 +11,36 @@
 # 수집이 실패해도 push 까지 간다. 한 게시판이 죽은 날에도 나머지 기관의
 # 그날치는 남겨야 하기 때문이다. 무엇이 실패했는지는 마지막 줄과 logs\ 에 남는다.
 #
-# -Catchup 은 작업 스케줄러 전용이다. 11:00 말고도 로그온·잠금 해제·절전 복귀 때
-# 불리는데, 그때는 "11시가 지났고 오늘 아직 안 돌았을 때"만 돈다.
+# 하루 두 번(10시·15시) 돈다(2026-09-30 사용자 결정, 전에는 11시 한 번). 15시 회차는
+# 정오에 나오는 고용행정통계·사업체노동력조사·KDI 전망을 그날 받으려는 것이다.
+#
+# -Catchup 은 작업 스케줄러 전용이다. 10:00·15:00 말고도 로그온·잠금 해제·절전 복귀
+# 때 불리는데, 그때는 "지금 시각의 회차(10시 또는 15시)를 아직 안 돌았을 때"만 돈다.
 # 2026-09-24 에 PC 가 05:52~19:31 최대절전이라 11:00 을 놓쳤고, StartWhenAvailable
 # 이 켜져 있었는데도 복귀 뒤 따라잡지 않았다. 그래서 복귀 신호를 직접 잡는다.
 # 손으로 돌릴 때는 이 스위치 없이 부르면 언제든 돈다.
 #
 # -Due 는 '발표일 재수집' 작업 전용이다(10~23시 매시간). 고용전망 기관 중 지금이
 # 발표 시각을 지난 발표일인 곳만 다시 수집한다 — OECD 는 17시, IMF 는 22시에
-# 내므로 11시 수집으로는 그날 반영이 안 된다. 어느 기관이 언제인지는
+# 내므로 정기 수집으로는 그날 반영이 안 된다. 어느 기관이 언제인지는
 # domains/forecast/pipeline/calendar.py 가 정한다. 볼 기관이 없으면 로그도 안 남긴다.
 param([switch]$Catchup, [switch]$Due)
 
 $repo = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location $repo
 
-# 오늘 돈 날짜는 logs\ 에 둔다(저장소에 안 올라간다). last_run.json 은 --dry-run
-# 도 오늘로 찍으므로 판단 근거로 못 쓴다.
+# 마지막으로 돈 회차("2026-09-30 15")는 logs\ 에 둔다(저장소에 안 올라간다).
+# last_run.json 은 --dry-run 도 오늘로 찍으므로 판단 근거로 못 쓴다.
+# 문자열 비교로 순서가 맞다: "2026-09-30 10" < "2026-09-30 15" < "2026-10-01 10".
+# 예전 형식("2026-09-30")도 그날 두 회차보다 앞으로 읽혀 문제없다.
 $doneFile = Join-Path $repo "logs\last-run-date.txt"
 $today = Get-Date -Format "yyyy-MM-dd"
+$slotHours = @(10, 15)
+$slotHour = @($slotHours | Where-Object { $_ -le (Get-Date).Hour } | Select-Object -Last 1)
+$slot = if ($slotHour.Count) { "{0} {1:D2}" -f $today, $slotHour[0] } else { "$today 00" }
 if ($Catchup) {
-    if ((Get-Date).Hour -lt 11) { exit 0 }
-    if ((Test-Path $doneFile) -and ((Get-Content $doneFile -Raw).Trim() -eq $today)) { exit 0 }
+    if (-not $slotHour.Count) { exit 0 }
+    if ((Test-Path $doneFile) -and ((Get-Content $doneFile -Raw).Trim() -ge $slot)) { exit 0 }
 }
 
 # 파이썬은 실측한 경로를 먼저 본다. 스토어 스텁(WindowsApps)이 가로채면
@@ -240,7 +248,7 @@ Update-Alert $failed -MayClose
 
 # 끝까지 온 회차만 오늘 돈 것으로 친다. 실패가 있어도 찍는다 — 안 그러면 잠금을
 # 풀 때마다 같은 날 회차가 되풀이된다. 도중에 끊긴 회차는 여기까지 못 와서 안 찍힌다.
-Set-Content -Path $doneFile -Value $today -Encoding ascii
+Set-Content -Path $doneFile -Value $slot -Encoding ascii
 
 # 로그는 30회분만 둔다.
 Get-ChildItem $logDir -Filter "collect-*.log" |
