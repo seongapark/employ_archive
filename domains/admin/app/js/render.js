@@ -81,6 +81,27 @@ export function 현황HTML(목록) {
     </div>`).join('')}</div>`;
 }
 
+// 그날 하루의 방문자. 최신 날이 위다 — 오늘 몇 명 왔나가 제일 먼저 궁금하다.
+// 방문이 없는 날은 뺀다(그림이 이미 빈 날을 보여 준다).
+const 요일 = '일월화수목금토';
+export function 일별HTML(s) {
+  const 날들 = [...s.일별].sort((a, b) => (a.날짜 < b.날짜 ? 1 : -1));
+  if (!날들.length) return 없음('일별 방문');
+  const max = Math.max(...날들.map((d) => d.방문자), 1);
+  const 조회 = (d) => Object.values(d.도메인별).reduce((a, v) => a + v, 0);
+  return `<table class="rows"><tr class="rows__head"><td>날짜</td><td></td>
+      <td class="rows__num">방문자</td><td class="rows__num">조회</td></tr>${날들.map((d) => {
+    const 날 = new Date(`${d.날짜}T00:00:00Z`);
+    return `
+    <tr>
+      <td class="rows__key num">${날.getUTCMonth() + 1}/${날.getUTCDate()} (${요일[날.getUTCDay()]})</td>
+      <td class="rows__bar"><i style="width:${퍼센트(d.방문자, max)}%"></i></td>
+      <td class="rows__num num">${수(d.방문자)}</td>
+      <td class="rows__num num">${수(조회(d))}</td>
+    </tr>`;
+  }).join('')}</table>`;
+}
+
 export function 화면HTML(s) {
   if (!s.화면.length) return 없음('화면별 조회');
   const max = Math.max(...s.화면.map((r) => r.조회), 1);

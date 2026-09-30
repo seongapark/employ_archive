@@ -1,5 +1,5 @@
 import { 기간선택, 순서, 이름, 도메인현황, 날짜채우기, 발표일, esc } from './model.js';
-import { 요약HTML, 도메인HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML, 현황HTML }
+import { 요약HTML, 도메인HTML, 일별HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML, 현황HTML }
   from './render.js';
 import { 막대SVG } from './chart.js';
 import { 불러오기, 토큰쓰기, 토큰지우기, 주인등록, 주인상태, 현황불러오기, 발표불러오기 } from './api.js';
@@ -48,6 +48,7 @@ function 방문화면() {
       <span class="legend__i"><i style="background:var(--dom-${k})"></i>${이름[k] ?? k}</span>`).join('')}</div>
     ${발표.length ? `<p class="note">점선은 발표일 — ${발표.map((m) =>
       `${Number(m.날짜.slice(5, 7))}/${Number(m.날짜.slice(8))} ${esc(m.이름)}`).join(' · ')}</p>` : ''}
+    <h2 class="sec">날짜별 방문자</h2>${일별HTML(s)}
     <h2 class="sec">화면</h2>${화면HTML(s)}
     <h2 class="sec">유입</h2>${유입HTML(s)}
     <h2 class="sec">방문자</h2>${분포HTML(s)}

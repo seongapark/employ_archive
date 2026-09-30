@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { 요약HTML, 도메인HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML, 현황HTML }
+import { 요약HTML, 도메인HTML, 일별HTML, 화면HTML, 유입HTML, 분포HTML, 잠금HTML, 도구HTML, 현황HTML }
   from '../../app/js/render.js';
 
 const 통계 = {
@@ -167,4 +167,14 @@ test('경고 목록은 한 줄씩 이스케이프해서 낸다', () => {
 
 test('빈 목록이면 안내 문구를 낸다', () => {
   assert.match(현황HTML([]), /아직 기록이 없다/);
+});
+
+test('날짜별 방문자는 최신 날이 위이고 요일과 조회 합을 보인다', () => {
+  const h = 일별HTML({ 일별: [
+    { 날짜: '2026-09-29', 방문자: 1, 도메인별: { press: 1 } },
+    { 날짜: '2026-09-30', 방문자: 2, 도메인별: { employment: 1, press: 2 } },
+  ] });
+  assert.ok(h.indexOf('9/30 (수)') < h.indexOf('9/29 (화)'));
+  assert.match(h, /9\/30 \(수\)[\s\S]*?>2<[\s\S]*?>3</);
+  assert.match(일별HTML({ 일별: [] }), /아직 기록이 없다/);
 });

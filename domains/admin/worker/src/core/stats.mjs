@@ -72,6 +72,10 @@ export function 질의목록(창) {
     { 키: '일별', sql: `SELECT day 날짜, domain 도메인, COUNT(DISTINCT visitor) 방문자,
         COUNT(*) 조회 FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}
       GROUP BY day, domain ORDER BY day`, params: p },
+    // 그날의 정확한 순방문자. 위 `일별` 은 도메인별로 쪼개져 있어 거기서 사람 수를
+    // 합치면 두 도메인을 본 사람이 두 번 세어진다 — 날짜로만 묶어 따로 묻는다.
+    { 키: '일별방문자', sql: `SELECT day 날짜, COUNT(DISTINCT visitor) 방문자
+      FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기} GROUP BY day`, params: p },
     { 키: '화면', sql: `SELECT domain 도메인, path 경로, COUNT(*) 조회,
         COUNT(DISTINCT visitor) 방문자 FROM hit WHERE day BETWEEN ?1 AND ?2 ${주인빼기}
       GROUP BY domain, path ORDER BY 조회 DESC, 도메인, 경로 LIMIT 20`, params: p },
@@ -120,20 +124,14 @@ export function 조립(창, r) {
   });
 
   // 일별은 (날짜, 도메인) 쌍으로 오므로 날짜로 접는다. 그날 0 인 도메인은 아예
-  // 행이 없다 — 화면이 0 으로 채운다.
-  //
-  // `방문자` 는 도메인별 값의 최댓값을 취한 것이라 **하한**이다 — 그날의 정확한
-  // 순방문자 수가 아니다. 한 사람이 두 도메인을 보면 도메인별로 1씩 잡히고
-  // 최댓값은 1 이 된다(실제로는 1명인데 도메인별 합은 2). 날짜마다
-  // `COUNT(DISTINCT visitor)` 를 따로 물으면 정확해지지만 질의가 날짜 수만큼
-  // 는다 — 그 비용을 안 치르려고 근사치로 남겨 둔 것이다. 그래서 이 값은 추이
-  // 그림의 보조 라벨로만 쓰고, **막대 높이는 조회수로 그린다.**
+  // 행이 없다 — 화면이 0 으로 채운다. 방문자는 `일별방문자` 의 정확한 값을 붙인다.
+  const 일방문자 = new Map((r.일별방문자 ?? []).map((row) => [row.날짜, 수(row.방문자)]));
   const 날짜별 = new Map();
   for (const row of r.일별 ?? []) {
-    if (!날짜별.has(row.날짜)) 날짜별.set(row.날짜, { 날짜: row.날짜, 방문자: 0, 도메인별: {} });
-    const d = 날짜별.get(row.날짜);
-    d.도메인별[row.도메인] = 수(row.조회);
-    d.방문자 = Math.max(d.방문자, 수(row.방문자));
+    if (!날짜별.has(row.날짜)) {
+      날짜별.set(row.날짜, { 날짜: row.날짜, 방문자: 일방문자.get(row.날짜) ?? 0, 도메인별: {} });
+    }
+    날짜별.get(row.날짜).도메인별[row.도메인] = 수(row.조회);
   }
 
   return {
