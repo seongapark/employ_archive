@@ -98,6 +98,50 @@ if (-not $owned) {
 $logDir = Join-Path $repo "logs"
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
 
+# 네이티브 명령(파이썬·git)의 출력을 기록에 남긴다. Start-Transcript 는 PowerShell 이
+# 화면에 쓰는 것만 담아서, `& $python ...` 를 그대로 부르면 로그에 단계 제목만 남고
+# 무엇이 왜 실패했는지가 빠졌다(2026-09-30 까지의 로그가 전부 그랬다). 파이프라인으로
+# 한 번 받아 Out-Host 로 다시 쓰면 기록된다. 알림에 실을 오류 줄도 여기서 모은다.
+$script:errorLines = @()
+function Native([scriptblock]$command) {
+    $lines = & $command 2>&1 | ForEach-Object { "$_" }
+    $code = $LASTEXITCODE
+    $lines | Out-Host
+    $script:errorLines += @($lines | Where-Object { $_ -match '^(::error::|!! )' })
+    return $code
+}
+
+# 실패하면 GitHub 이슈로 알린다(작업 스케줄러의 종료 코드는 아무도 안 본다 —
+# BOK 2025년 11월판이 그렇게 넉 달 빠져 있었다). 열린 알림이 있으면 댓글을 달고,
+# 매일 수집이 전부 성공하면 닫는다. 저장소가 공개라 로컬 경로는 싣지 않는다 —
+# 오류 줄은 어차피 공개로 커밋되는 last_run.json 과 같은 내용이다.
+function Update-Alert([string[]]$problems, [switch]$MayClose) {
+    if (-not (Get-Command gh -ErrorAction SilentlyContinue)) {
+        Write-Host "!! gh 가 없어 실패 알림을 못 보낸다"
+        return
+    }
+    $label = "collect-alert"
+    $open = gh issue list --label $label --state open --json number --jq ".[0].number" 2>$null
+    if ($problems.Count -gt 0) {
+        $details = @($script:errorLines | Select-Object -Unique | Select-Object -First 30)
+        $body = "**" + (Get-Date -Format "yyyy-MM-dd HH:mm") + " 로컬 수집에서 실패한 단계**`n`n" +
+                (($problems | ForEach-Object { "- $_" }) -join "`n") + "`n`n" +
+                $(if ($details.Count) { "``````text`n" + ($details -join "`n") + "`n``````" } else { "" })
+        $tmp = [IO.Path]::GetTempFileName()
+        [IO.File]::WriteAllText($tmp, $body, (New-Object Text.UTF8Encoding $false))
+        if ($open) {
+            gh issue comment $open --body-file $tmp *> $null
+        } else {
+            gh label create $label --color d73a4a --description "로컬 수집이 실패하면 자동으로 열리고, 전부 성공하면 닫힌다" *> $null
+            gh issue create --title "로컬 수집 실패" --label $label --body-file $tmp *> $null
+        }
+        if ($LASTEXITCODE -ne 0) { Write-Host "!! 실패 알림 이슈를 올리지 못했다" }
+        Remove-Item $tmp -ErrorAction SilentlyContinue
+    } elseif ($open -and $MayClose) {
+        gh issue close $open --comment ((Get-Date -Format "yyyy-MM-dd HH:mm") + " 매일 수집이 전부 성공했다 — 자동으로 닫는다.") *> $null
+    }
+}
+
 if ($Due) {
     git pull --rebase --autostash origin main *> $null
     $out = & $python -m domains.forecast.pipeline.collect --due 2>&1 | Out-String
@@ -113,6 +157,10 @@ if ($Due) {
         }
         $out += "`n" + (& $python -m domains.forecast.pipeline.check_run 2>&1 | Out-String)
         if ($LASTEXITCODE -ne 0) { $code = 1 }
+        if ($code -ne 0) {
+            $script:errorLines = @($out -split "`r?`n" | Where-Object { $_ -match '^(::error::|!! )' })
+            Update-Alert @("발표일 재수집")
+        }
         Set-Content -Path (Join-Path $logDir ("due-" + (Get-Date -Format "yyyyMMdd-HHmm") + ".log")) -Value $out -Encoding utf8
         Get-ChildItem $logDir -Filter "due-*.log" | Sort-Object LastWriteTime -Descending |
             Select-Object -Skip 60 | Remove-Item -Force -ErrorAction SilentlyContinue
@@ -131,17 +179,17 @@ $failed = @()
 function Step($name, $argv) {
     Write-Host ""
     Write-Host ("=== " + $name + " ===")
-    & $python @argv
-    if ($LASTEXITCODE -ne 0) {
+    $code = Native { & $python @argv }
+    if ($code -ne 0) {
         $script:failed += $name
-        Write-Host ("!! " + $name + " 실패 (exit " + $LASTEXITCODE + ")")
+        Write-Host ("!! " + $name + " 실패 (exit " + $code + ")")
     }
 }
 
 # 남이(=GitHub 워크플로나 다른 PC) 올린 것을 먼저 받는다. --autostash 는
 # 작업 중이던 수정을 잠시 치워 뒀다 되돌린다 — 저장소가 지저분해도 멈추지 않는다.
 Write-Host "=== git pull ==="
-git pull --rebase --autostash origin main
+[void](Native { git pull --rebase --autostash origin main })
 
 Step "reports 수집"     @("-m", "domains.reports.pipeline.collect")
 Step "reports 초록"     @("-m", "domains.reports.pipeline.enrich")
@@ -156,13 +204,12 @@ Write-Host "=== push ==="
 git add domains/reports/data/ domains/reports/sources/ domains/forecast/data/ domains/employment/data/
 git diff --cached --quiet
 if ($LASTEXITCODE -ne 0) {
-    git commit -m ("data: local collect " + (Get-Date -Format "yyyy-MM-dd"))
+    [void](Native { git commit -m ("data: local collect " + (Get-Date -Format "yyyy-MM-dd")) })
     # 커밋 뒤에 다시 받는다. 수집이 도는 사이 GitHub 쪽(보도자료·고용동향)이
     # 올렸을 수 있다. 충돌하면 방금 수집한 쪽을 쓴다 — 담기는 폴더가 서로 달라
     # 남의 것을 덮지 않는다.
-    git pull --rebase -X theirs --autostash origin main
-    git push
-    if ($LASTEXITCODE -ne 0) { $failed += "push" }
+    [void](Native { git pull --rebase -X theirs --autostash origin main })
+    if ((Native { git push }) -ne 0) { $failed += "push" }
 } else {
     Write-Host "올릴 변경 없음"
 }
@@ -178,12 +225,9 @@ if ($LASTEXITCODE -ne 0) {
 # 오래 가는 장애는 KNOWN_DOWN 으로 기한을 붙여 유예한다.
 Write-Host ""
 Write-Host "=== 회차 판정 ==="
-& $python -m domains.reports.pipeline.check_run
-if ($LASTEXITCODE -ne 0) { $failed += "reports 회차 판정" }
-& $python -m domains.forecast.pipeline.check_run
-if ($LASTEXITCODE -ne 0) { $failed += "forecast 회차 판정" }
-& $python -m domains.employment.pipeline.check_run
-if ($LASTEXITCODE -ne 0) { $failed += "employment 회차 판정" }
+if ((Native { & $python -m domains.reports.pipeline.check_run }) -ne 0) { $failed += "reports 회차 판정" }
+if ((Native { & $python -m domains.forecast.pipeline.check_run }) -ne 0) { $failed += "forecast 회차 판정" }
+if ((Native { & $python -m domains.employment.pipeline.check_run }) -ne 0) { $failed += "employment 회차 판정" }
 
 Write-Host ""
 if ($failed.Count -eq 0) {
@@ -192,6 +236,7 @@ if ($failed.Count -eq 0) {
     Write-Host ("실패한 단계: " + ($failed -join ", "))
 }
 Write-Host ("로그: " + $log)
+Update-Alert $failed -MayClose
 
 # 끝까지 온 회차만 오늘 돈 것으로 친다. 실패가 있어도 찍는다 — 안 그러면 잠금을
 # 풀 때마다 같은 날 회차가 되풀이된다. 도중에 끊긴 회차는 여기까지 못 와서 안 찍힌다.
