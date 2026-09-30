@@ -16,7 +16,12 @@
 # 2026-09-24 에 PC 가 05:52~19:31 최대절전이라 11:00 을 놓쳤고, StartWhenAvailable
 # 이 켜져 있었는데도 복귀 뒤 따라잡지 않았다. 그래서 복귀 신호를 직접 잡는다.
 # 손으로 돌릴 때는 이 스위치 없이 부르면 언제든 돈다.
-param([switch]$Catchup)
+#
+# -Due 는 '발표일 재수집' 작업 전용이다(10~23시 매시간). 고용전망 기관 중 지금이
+# 발표 시각을 지난 발표일인 곳만 다시 수집한다 — OECD 는 17시, IMF 는 22시에
+# 내므로 11시 수집으로는 그날 반영이 안 된다. 어느 기관이 언제인지는
+# domains/forecast/pipeline/calendar.py 가 정한다. 볼 기관이 없으면 로그도 안 남긴다.
+param([switch]$Catchup, [switch]$Due)
 
 $repo = Split-Path -Parent $MyInvocation.MyCommand.Definition
 Set-Location $repo
@@ -77,8 +82,46 @@ if ([Win32.Power]::SetThreadExecutionState([uint32]($ES_CONTINUOUS -bor $ES_SYST
     Write-Host "!! 깨어 있기 요청 실패 — 이 회차는 잠자기에 끊길 수 있다"
 }
 
+# 매일 수집과 발표일 재수집이 같은 저장소를 동시에 만지지 않게 한다. 재수집은
+# 자리가 차 있으면 이번 시각을 건너뛰고(한 시간 뒤 또 온다), 매일 수집은 기다린다.
+$mutex = New-Object System.Threading.Mutex($false, "Local\employ-archive-collect")
+try {
+    $owned = $mutex.WaitOne($(if ($Due) { 0 } else { [TimeSpan]::FromMinutes(30) }))
+} catch [System.Threading.AbandonedMutexException] {
+    $owned = $true  # 앞 회차가 도중에 죽었다 — 넘겨받는다
+}
+if (-not $owned) {
+    [void][Win32.Power]::SetThreadExecutionState($ES_CONTINUOUS)
+    exit 0
+}
+
 $logDir = Join-Path $repo "logs"
 New-Item -ItemType Directory -Force -Path $logDir | Out-Null
+
+if ($Due) {
+    git pull --rebase --autostash origin main *> $null
+    $out = & $python -m domains.forecast.pipeline.collect --due 2>&1 | Out-String
+    $code = $LASTEXITCODE
+    if ($out -notmatch "지금 볼 기관 없음") {
+        git add domains/forecast/data/
+        git diff --cached --quiet
+        if ($LASTEXITCODE -ne 0) {
+            git commit -m ("data: release-day collect " + (Get-Date -Format "yyyy-MM-dd HH:mm")) | Out-Null
+            git pull --rebase -X theirs --autostash origin main *> $null
+            git push *> $null
+            if ($LASTEXITCODE -ne 0) { $out += "`n!! push 실패"; $code = 1 }
+        }
+        $out += "`n" + (& $python -m domains.forecast.pipeline.check_run 2>&1 | Out-String)
+        if ($LASTEXITCODE -ne 0) { $code = 1 }
+        Set-Content -Path (Join-Path $logDir ("due-" + (Get-Date -Format "yyyyMMdd-HHmm") + ".log")) -Value $out -Encoding utf8
+        Get-ChildItem $logDir -Filter "due-*.log" | Sort-Object LastWriteTime -Descending |
+            Select-Object -Skip 60 | Remove-Item -Force -ErrorAction SilentlyContinue
+    }
+    [void][Win32.Power]::SetThreadExecutionState($ES_CONTINUOUS)
+    $mutex.ReleaseMutex()
+    exit $code
+}
+
 $log = Join-Path $logDir ("collect-" + (Get-Date -Format "yyyyMMdd-HHmm") + ".log")
 Start-Transcript -Path $log | Out-Null
 Write-Host ("시작 " + (Get-Date -Format "yyyy-MM-dd HH:mm:ss"))
@@ -164,4 +207,5 @@ Get-ChildItem $logDir -Filter "collect-*.log" |
 [void][Win32.Power]::SetThreadExecutionState($ES_CONTINUOUS)
 
 Stop-Transcript | Out-Null
+$mutex.ReleaseMutex()
 exit $failed.Count

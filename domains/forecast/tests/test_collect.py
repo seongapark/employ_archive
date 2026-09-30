@@ -134,3 +134,30 @@ def test_watch_is_off_when_collectors_are_injected(tmp_path, monkeypatch):
     collect.main(data_dir=tmp_path, collectors={"fake": lambda today: []})
     summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
     assert "watch" not in summary["collectors"]
+
+
+def test_partial_run_keeps_other_collectors_in_last_run(tmp_path):
+    # 발표일 재수집은 한두 기관만 돈다 — 그날 다른 기관의 실패가 지워지면 안 된다
+    def boom(today):
+        raise RuntimeError("HTTP Error 502")
+    collect.main(data_dir=tmp_path, collectors={"kdi": boom, "oecd": lambda today: []})
+    collect.main(data_dir=tmp_path, collectors={"oecd": lambda today: [fake_record(2.0, today)]},
+                 partial=True)
+    summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
+    assert summary["collectors"]["kdi"]["ok"] is False
+    assert summary["collectors"]["oecd"]["added"] == 1
+    assert summary["errors"] == ["kdi: RuntimeError: HTTP Error 502"]
+
+
+def test_due_runs_only_the_due_orgs(tmp_path, monkeypatch):
+    from domains.forecast.pipeline.calendar import KST
+    store.save_forecasts(tmp_path / "forecasts.json", [fake_record(2.0, date(2025, 9, 23))])
+    ran = []
+    monkeypatch.setattr(collect, "COLLECTORS", {
+        name: (lambda name: lambda today: ran.append(name) or [])(name)
+        for name in ("oecd", "oecd_interim", "kdi")})
+    collect.due_main(tmp_path, now=datetime(2026, 9, 23, 17, tzinfo=KST))
+    assert ran == ["oecd", "oecd_interim"]
+    ran.clear()
+    collect.due_main(tmp_path, now=datetime(2026, 9, 23, 11, tzinfo=KST))
+    assert ran == []

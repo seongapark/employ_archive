@@ -5,7 +5,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable
 
-from . import store, watch
+from . import calendar, store, watch
 from .collectors import bok, imf, kdi, keis, kiet, kli, moef, oecd, oecd_interim
 from .models import ForecastRecord
 
@@ -29,6 +29,7 @@ COLLECTORS: dict[str, Callable[[date], list[ForecastRecord]]] = {
 def main(data_dir: Path = DATA_DIR,
          collectors: dict[str, Callable[[date], list[ForecastRecord]]] = COLLECTORS,
          check: Callable[[list[ForecastRecord], date], list[str]] | None = None,
+         partial: bool = False,
          ) -> int:
     forecasts_path = data_dir / "forecasts.json"
     last_run_path = data_dir / "last_run.json"
@@ -75,6 +76,16 @@ def main(data_dir: Path = DATA_DIR,
             summary["collectors"]["watch"] = {"ok": False, "fetched": 0, "added": 0}
             summary["errors"].append(f"watch: {type(exc).__name__}: {exc}")
 
+    # 발표일 재수집(--due)은 몇 기관만 돈다. 나머지 기관의 그날 기록(오류 포함)을
+    # 지우면 check_run 과 관리자 화면이 실패를 못 본다 — 돈 것만 갈아 끼운다.
+    if partial and last_run_path.exists():
+        previous = json.loads(last_run_path.read_text(encoding="utf-8"))
+        ran = set(summary["collectors"])
+        summary["collectors"] = {**previous["collectors"], **summary["collectors"]}
+        summary["errors"] = [e for e in previous["errors"]
+                             if e.split(":", 1)[0].strip() not in ran] + summary["errors"]
+        summary["conflicts"] = previous["conflicts"] + summary["conflicts"]
+
     if len(merged) != len(existing):
         store.save_forecasts(forecasts_path, merged)
     last_run_path.write_text(
@@ -84,5 +95,19 @@ def main(data_dir: Path = DATA_DIR,
     return 0
 
 
+def due_main(data_dir: Path = DATA_DIR, now: datetime | None = None) -> int:
+    """발표 시각이 지난 기관만 다시 수집한다(작업 스케줄러가 매시간 부른다)."""
+    now = now or datetime.now(KST)
+    records = store.load_forecasts(data_dir / "forecasts.json")
+    orgs = calendar.due(records, calendar.load_schedule(data_dir), now)
+    if not orgs:
+        print(f"{now:%H:%M} 지금 볼 기관 없음")
+        return 0
+    names = calendar.collectors_for(orgs)
+    print(f"{now:%H:%M} 발표일 재수집: {', '.join(orgs)} ({', '.join(names)})")
+    return main(data_dir, {name: COLLECTORS[name] for name in names}, partial=True)
+
+
 if __name__ == "__main__":
-    raise SystemExit(main())
+    import sys
+    raise SystemExit(due_main() if "--due" in sys.argv[1:] else main())
