@@ -159,7 +159,7 @@ test('맞는 토큰이면 집계를 낸다', async () => {
 // days 를 그대로 믿으면 음수·NaN 이 창 계산을 뒤집는다.
 test('days 를 허용 목록으로 접는다', async () => {
   const { env } = 환경();
-  for (const [qs, 일수] of [['?days=7', 7], ['?days=0', 0], ['', 30],
+  for (const [qs, 일수] of [['?days=1', 1], ['?days=7', 7], ['?days=0', 0], ['', 30],
     ['?days=-5', 30], ['?days=abc', 30], ['?days=9999', 30], ['?days=', 30]]) {
     const res = await worker.fetch(통계요청('secret', qs), env);
     assert.equal((await res.json()).기간.일수, 일수, qs);

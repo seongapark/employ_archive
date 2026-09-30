@@ -12,8 +12,8 @@ test('여섯 도메인의 한글 이름을 자기가 들고 있다', () => {
   assert.equal(이름.hub, '허브');
 });
 
-test('기간은 넷이고 기본이 30일이다', () => {
-  assert.deepEqual(기간선택.map((x) => x.days), [7, 30, 90, 0]);
+test('기간은 다섯이고 기본이 30일이다', () => {
+  assert.deepEqual(기간선택.map((x) => x.days), [1, 7, 30, 90, 0]);
   assert.equal(기간선택.find((x) => x.기본).days, 30);
 });
 

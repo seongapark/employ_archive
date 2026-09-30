@@ -17,6 +17,7 @@ export const 이름 = {
 export const 순서 = ['employment', 'press', 'forecast', 'reports', 'ask', 'hub'];
 
 export const 기간선택 = [
+  { days: 1, label: '오늘' },
   { days: 7, label: '7일' },
   { days: 30, label: '30일', 기본: true },
   { days: 90, label: '90일' },
