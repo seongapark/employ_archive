@@ -6,7 +6,7 @@
 from __future__ import annotations
 
 from datetime import date, datetime, timedelta, timezone
-from typing import Mapping, NamedTuple
+from typing import Callable, Collection, Mapping, NamedTuple, Sequence
 
 from . import pdf
 from .models import ForecastRecord, INDICATOR_META, make_id
@@ -18,6 +18,41 @@ class Issue(NamedTuple):
     title: str
     published_at: date
     url: str
+
+
+# 매일 최근 몇 회차까지 다시 보는가. 최신 한 회차만 보면, 어떤 회차가 실패한 채로
+# 다음 회차가 나오는 순간 그 회차는 다시 시도되지 않고 영영 빠진다 — BOK 2025년
+# 11월판이 그렇게 넉 달 비어 있었다.
+RECENT_ROUNDS = 3
+
+
+class PartialFailure(Exception):
+    """몇 회차는 받았고 몇 회차는 실패했다. 받은 것은 버리지 않는다(collect.main)."""
+
+    def __init__(self, records: list[ForecastRecord], message: str):
+        super().__init__(message)
+        self.records = records
+
+
+def collect_recent(issues: Sequence, collect_issue: Callable[..., list[ForecastRecord]],
+                   known: Collection[date]) -> list[ForecastRecord]:
+    """최근 RECENT_ROUNDS 회차 중 아직 없는 것(발표일 기준)만 받는다.
+
+    이미 있는 회차는 요청도 안 한다 — 평소에는 최신 회차 하나를 보던 때와
+    비용이 같다.
+    """
+    records: list[ForecastRecord] = []
+    failures = []
+    for issue in issues[:RECENT_ROUNDS]:
+        if issue.published_at in known:
+            continue
+        try:
+            records.extend(collect_issue(issue))
+        except Exception as exc:
+            failures.append(f"{issue.published_at} {type(exc).__name__}: {exc}")
+    if failures:
+        raise PartialFailure(records, " / ".join(failures))
+    return records
 
 
 def records_from_table(

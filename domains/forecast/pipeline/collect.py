@@ -5,7 +5,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable
 
-from . import calendar, store, watch
+from . import calendar, report, store, watch
 from .collectors import bok, imf, kdi, keis, kiet, kli, moef, oecd, oecd_interim
 from .models import ForecastRecord
 
@@ -58,6 +58,14 @@ def main(data_dir: Path = DATA_DIR,
             summary["collectors"][name] = {
                 "ok": True, "fetched": len(candidates), "added": len(result.added),
             }
+        except report.PartialFailure as exc:
+            # 옛 회차 하나가 실패해도 새로 받은 회차는 저장한다.
+            result = store.merge(merged, exc.records)
+            merged = result.records
+            summary["collectors"][name] = {
+                "ok": False, "fetched": len(exc.records), "added": len(result.added),
+            }
+            summary["errors"].append(f"{name}: {exc}")
         except Exception as exc:
             # last_run.json 은 저장소에 커밋된다 — 트레이스백을 담으면 돌린 사람의
             # 절대경로까지 함께 실린다. 무엇이 왜 실패했는지만 한 줄로 남긴다.

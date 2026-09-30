@@ -34,6 +34,9 @@ _PUBLISHED = re.compile(r'"datePublished"\s*:\s*"(20\d{2})\.(\d{2})\.(\d{2})"')
 _TABLE_CAPTION = re.compile(r"<표\s*[\d-]+>\s*[^\n]*거시경제지표\s*전망")
 _TABLE_END = re.compile(r"^\s*(?:주\s*[:：]|자료\s*[:：])")
 _DOWNLOAD = re.compile(r'href="(/common/file/userDownload\?atch_no=[^"]+)"')
+# 링크 없이 버튼만 있는 회차(2025년 하반기호)는 filedownload(fno, menu, lang, no) 호출뿐이다.
+# common.js 의 그 함수가 같은 userDownload 주소를 연다.
+_DOWNLOAD_CALL = re.compile(r"filedownload\('([^']+)',\s*'([^']+)',\s*'([^']+)',\s*'([^']+)'\)")
 
 
 def macro_table(page_text: str) -> str:
@@ -81,6 +84,10 @@ def issue_date(view_html: str) -> date:
 def parse_pdf_link(view_html: str) -> str:
     match = _DOWNLOAD.search(view_html)
     if not match:
+        call = _DOWNLOAD_CALL.search(view_html)
+        if call:
+            fno, menu, lang, no = call.groups()
+            return f"{BASE}/common/file/userDownload?atch_no={fno}&menu_cd={menu}&lang={lang}&no={no}"
         raise ValueError("상세 페이지에서 첨부를 찾지 못했다")
     return BASE + html_lib.unescape(match.group(1))
 
@@ -107,5 +114,7 @@ def collect_issue(issue: Issue) -> list[ForecastRecord]:
     raise ValueError(f"{issue.title}: 거시경제지표 전망 표를 실은 쪽을 찾지 못했다")
 
 
-def collect(today: date) -> list[ForecastRecord]:
-    return collect_issue(list_issues()[0])
+def collect(today: date, known=None) -> list[ForecastRecord]:
+    from .. import store
+    known = store.known_dates("KIET") if known is None else known
+    return report.collect_recent(list_issues(), collect_issue, known)

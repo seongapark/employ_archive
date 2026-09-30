@@ -133,6 +133,20 @@ def test_collect_issue_reads_one_named_round(monkeypatch):
     assert got[("emp_change", 2026, "annual")].published_at == date(2026, 8, 27)
 
 
+def test_collect_retries_recent_rounds_that_are_missing(monkeypatch):
+    # 2025년 11월판처럼 실패한 채 다음 회차가 나와도 다시 시도한다
+    seen = []
+    monkeypatch.setattr(bok, "list_issues", lambda: [
+        bok.Issue("경제전망보고서(2026년 2월)", date(2026, 2, 26), "u-new"),
+        bok.Issue("경제전망보고서(2025년 11월)", date(2025, 11, 27), "u-missing"),
+        bok.Issue("경제전망보고서(2025년 8월)", date(2025, 8, 28), "u-have"),
+        bok.Issue("경제전망보고서(2025년 5월)", date(2025, 5, 29), "u-too-old"),
+    ])
+    monkeypatch.setattr(bok, "collect_issue", lambda issue: seen.append(issue.url) or [])
+    bok.collect(date(2026, 3, 1), known={date(2025, 8, 28)})
+    assert seen == ["u-new", "u-missing"]
+
+
 def test_collect_uses_the_newest_round(monkeypatch):
     seen = []
 
@@ -142,7 +156,7 @@ def test_collect_uses_the_newest_round(monkeypatch):
     ])
     monkeypatch.setattr(bok, "collect_issue", lambda issue: seen.append(issue) or [])
 
-    bok.collect(date(2026, 8, 30))
+    bok.collect(date(2026, 8, 30), known={date(2026, 5, 28)})
     assert [i.url for i in seen] == ["u-new"]
 
 

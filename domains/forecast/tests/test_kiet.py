@@ -82,3 +82,11 @@ def test_collect_issue_skips_the_table_of_contents(monkeypatch):
     assert records[0].source_page == 2
 
 
+
+
+def test_pdf_link_from_a_download_button_without_href():
+    # 2025년 하반기호는 첨부가 링크 없이 filedownload() 버튼으로만 걸려 있어 빠져 있었다
+    html = """<a onclick="filedownload('Rdfl8Xgyo3LDHvCxlE6TLA%3D%3D', '003002001', 'KR', '52');">받기</a>"""
+    assert kiet.parse_pdf_link(html) == (
+        "https://www.kiet.re.kr/common/file/userDownload"
+        "?atch_no=Rdfl8Xgyo3LDHvCxlE6TLA%3D%3D&menu_cd=003002001&lang=KR&no=52")

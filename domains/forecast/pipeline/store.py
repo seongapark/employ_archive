@@ -15,6 +15,14 @@ class MergeResult:
     conflicts: list[str] = field(default_factory=list)
 
 
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+
+
+def known_dates(org: str, path: Path | str = DATA_DIR / "forecasts.json") -> set:
+    """그 기관의 이미 받은 회차 발표일들."""
+    return {r.published_at for r in load_forecasts(path) if r.org == org}
+
+
 def load_forecasts(path: Path | str) -> list[ForecastRecord]:
     p = Path(path)
     if not p.exists():

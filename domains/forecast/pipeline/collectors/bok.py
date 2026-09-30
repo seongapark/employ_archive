@@ -146,5 +146,7 @@ def collect_issue(issue: Issue) -> list[ForecastRecord]:
     return parse(text, issue, pdf_url, page_no)
 
 
-def collect(today: date) -> list[ForecastRecord]:
-    return collect_issue(list_issues()[0])
+def collect(today: date, known=None) -> list[ForecastRecord]:
+    from .. import store
+    known = store.known_dates("BOK") if known is None else known
+    return report.collect_recent(list_issues(), collect_issue, known)

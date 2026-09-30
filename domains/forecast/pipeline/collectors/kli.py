@@ -153,5 +153,7 @@ def collect_issue(issue: Issue) -> list[ForecastRecord]:
     raise ValueError(f"{issue.title}: 고용 전망 표를 실은 쪽을 찾지 못했다")
 
 
-def collect(today: date) -> list[ForecastRecord]:
-    return collect_issue(list_issues()[0])
+def collect(today: date, known=None) -> list[ForecastRecord]:
+    from .. import store
+    known = store.known_dates("KLI") if known is None else known
+    return report.collect_recent(list_issues(), collect_issue, known)

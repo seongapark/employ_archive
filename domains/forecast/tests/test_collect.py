@@ -161,3 +161,15 @@ def test_due_runs_only_the_due_orgs(tmp_path, monkeypatch):
     ran.clear()
     collect.due_main(tmp_path, now=datetime(2026, 9, 23, 11, tzinfo=KST))
     assert ran == []
+
+
+def test_partial_failure_keeps_the_rounds_that_arrived(tmp_path):
+    from domains.forecast.pipeline import report
+    def partly(today):
+        raise report.PartialFailure([fake_record(2.0, date(2026, 2, 26))],
+                                    "2025-11-27 ValueError: 요약표 페이지를 찾지 못했다")
+    collect.main(data_dir=tmp_path, collectors={"bok": partly})
+    assert len(store.load_forecasts(tmp_path / "forecasts.json")) == 1
+    summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
+    assert summary["collectors"]["bok"] == {"ok": False, "fetched": 1, "added": 1}
+    assert summary["errors"] == ["bok: 2025-11-27 ValueError: 요약표 페이지를 찾지 못했다"]
