@@ -5,7 +5,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable
 
-from . import calendar, report, store, watch
+from . import announce, calendar, report, store, watch
 from .collectors import bok, imf, kdi, keis, kiet, kli, moef, oecd, oecd_interim
 from .models import ForecastRecord
 
@@ -72,7 +72,15 @@ def main(data_dir: Path = DATA_DIR,
             summary["collectors"][name] = {"ok": False, "fetched": 0, "added": 0}
             summary["errors"].append(f"{name}: {type(exc).__name__}: {exc}")
 
-    # 감시는 수집기를 주입한 시험에서는 꺼진다 — 시험이 네트워크에 나가면 안 된다.
+    # 감시와 공지일 갱신은 수집기를 주입한 시험에서는 꺼진다 — 시험이 네트워크에 나가면 안 된다.
+    if collectors is COLLECTORS:
+        try:
+            from . import http
+            added = announce.refresh(data_dir / "schedule.json", today, lambda url: http.get(url).text)
+            summary["collectors"]["announce"] = {"ok": True, "fetched": 0, "added": added}
+        except Exception as exc:
+            summary["collectors"]["announce"] = {"ok": False, "fetched": 0, "added": 0}
+            summary["errors"].append(f"announce: {type(exc).__name__}: {exc}")
     if check is None and collectors is COLLECTORS:
         check = watch.check
     if check is not None:

@@ -292,7 +292,10 @@ export function render(el, ctx) {
   const currentYear = state.year;
 
   const latestRec = orgRecords.reduce((a, b) => (b.published_at > a.published_at ? b : a));
-  const scheduleEntry = ctx.schedule.find(s => s.org === orgCode) || null;
+  // 공지일이 여럿 쌓인다(announce.py) — 지난 날을 '다음 예정' 으로 보이면 안 된다
+  const scheduleEntry = ctx.schedule
+    .filter(s => s.org === orgCode && s.date >= ctx.today)
+    .sort((a, b) => a.date.localeCompare(b.date))[0] || null;
 
   const seriesCurrent = currentIndicator
     ? seriesFor(records, { org: orgCode, indicator: currentIndicator, targetYear: currentYear })
