@@ -1474,6 +1474,46 @@
     "warnings": []
   },
   {
+    "org": "BOK",
+    "published_at": "2025-11-27",
+    "indicator": "cpi",
+    "text": "소비자물가는 국제유가 하락 등 하방요인에도 높아진 환율, 내수부진 완화 등의 영향으로 금년과 내년 모두 당초 예상을 다소 상회하는 2.1%의 상승률을 나타낼 전망이다.",
+    "tags": [
+      "환율",
+      "내수",
+      "유가"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/2d0d7d85a73244d1aca9059f02f47aa0/1/2a02451c23404621af8522b49636443a.pdf",
+    "source_page": 5,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2025-11-27",
+    "indicator": "emp_change",
+    "text": "금년 취업자수는 건설‧제조업이 건설투자 부진, 통상환경 불확실성 등으로 감소하겠으나, 서비스업이 정부 일자리 정책과 소비 개선에 힘입어 증가세를 지속함에 따라 추세 수준에 근접할 전망이다.",
+    "tags": [
+      "통상정책",
+      "건설투자",
+      "제조업고용"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/2d0d7d85a73244d1aca9059f02f47aa0/1/2a02451c23404621af8522b49636443a.pdf",
+    "source_page": 8,
+    "warnings": []
+  },
+  {
+    "org": "BOK",
+    "published_at": "2025-11-27",
+    "indicator": "gdp_growth",
+    "text": "26년에는 소비 회복세가 지속되고 건설 부진이 완화되면서 내수를 중심으로 성장세가 확대될 것이다.",
+    "tags": [
+      "내수"
+    ],
+    "source_url": "https://www.bok.or.kr/fileSrc/portal/2d0d7d85a73244d1aca9059f02f47aa0/1/2a02451c23404621af8522b49636443a.pdf",
+    "source_page": 34,
+    "warnings": []
+  },
+  {
     "org": "OECD",
     "published_at": "2025-12-02",
     "indicator": "cpi",
