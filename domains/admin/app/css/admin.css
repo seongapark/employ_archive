@@ -91,6 +91,7 @@
 .rows__bar { width: 68px; }
 .rows__bar i { display: block; height: 5px; border-radius: 3px; background: var(--accent); min-width: 2px; }
 .rows__num { width: 56px; text-align: right; color: var(--text-secondary); }
+.rows__head td { font-size: 11px; color: var(--text-muted); }
 
 /* ── 유입 종류 ── */
 .kinds { display: flex; gap: 6px; margin-bottom: 8px; }

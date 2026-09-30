@@ -180,3 +180,17 @@ test('주인으로 등록한 방문자는 모든 지표에서 빠진다', async 
   assert.deepEqual(s.표시모드, [{ 값: 'browser', 방문자: 1 }]);
   assert.deepEqual(s.국가, [{ 값: 'KR', 방문자: 1 }]);
 });
+
+// 일별 방문자는 그날의 정확한 순방문자다. 도메인별 최댓값으로 셌을 때는 두 사람이
+// 서로 다른 도메인만 보면 1 로 나왔다.
+test('일별 방문자는 도메인이 달라도 그날 사람 수를 정확히 센다', async () => {
+  const { db } = 열린DB();
+  for (const [v, s, domain] of [['a', 'sa', 'employment'], ['b', 'sb', 'press'], ['b', 'sb', 'press']]) {
+    await 기록(db, 줄({ visitor: v, session: s, day: '2026-09-30', ts: '2026-09-30T01:00:00Z',
+      domain, path: '/', ref: null, ref_kind: 'direct' }));
+  }
+  const s = await 통계(db, 7, '2026-09-30');
+  assert.deepEqual(s.일별, [
+    { 날짜: '2026-09-30', 방문자: 2, 도메인별: { employment: 1, press: 2 } },
+  ]);
+});
