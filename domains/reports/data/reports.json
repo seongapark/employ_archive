@@ -1,5 +1,35 @@
 [
  {
+  "id": "kli-10311",
+  "org": "kli",
+  "board": "kli-policy",
+  "series": "노동정책연구",
+  "title": "노동정책연구(2026년 제26권 제3호)",
+  "authors": [
+   "신원철",
+   "김상환",
+   "서성우",
+   "전봉걸",
+   "고재현",
+   "김경래",
+   "박정우",
+   "신정민",
+   "최은영",
+   "김상배",
+   "조성재"
+  ],
+  "published": "2026-10-01",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/prdclView.es?pblct_sn=10311&mid=a10103020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=노동정책연구",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=F00C9477E61715B049258E83000A2979_20.pdf&fileNameOrg=노동정책연구_제26권 제3호_web.pdf&filePath1=jsphome/DATA/pblctList/issue/F00C9477E61715B049258E83000A2979",
+  "matched": [
+   "임금",
+   "근로시간",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-10308",
   "org": "kli",
   "board": "kli-eia",

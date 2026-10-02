@@ -33641,5 +33641,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-09-30T19:10:55+09:00"
+ },
+ "kli-10311": {
+  "pick": false,
+  "axis": "",
+  "why": "학술지 통상 호수, 개별 논문 초록 없음",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-02T10:05:50+09:00"
  }
 }
