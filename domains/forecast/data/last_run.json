@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-02T10:05:51.377515+09:00",
+  "run_at": "2026-10-02T15:01:49.191173+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -47,7 +47,7 @@
       "added": 0
     },
     "moef": {
-      "ok": true,
+      "ok": false,
       "fetched": 0,
       "added": 0
     },
@@ -63,5 +63,7 @@
     }
   },
   "conflicts": [],
-  "errors": []
+  "errors": [
+    "moef: Timeout: Failed to perform, curl: (28) Failed to connect to www.moef.go.kr:443 after 21049 ms: Could not connect to server. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
+  ]
 }
