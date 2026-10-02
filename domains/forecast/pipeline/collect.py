@@ -81,6 +81,12 @@ def main(data_dir: Path = DATA_DIR,
         except Exception as exc:
             summary["collectors"]["announce"] = {"ok": False, "fetched": 0, "added": 0}
             summary["errors"].append(f"announce: {type(exc).__name__}: {exc}")
+    if collectors is COLLECTORS:
+        try:
+            # 공지일 갱신 뒤에 만든다 — 그날 새로 공지된 날짜가 일정표에 바로 붙게.
+            calendar.write_upcoming(data_dir, merged, today)
+        except Exception as exc:
+            summary["errors"].append(f"upcoming: {type(exc).__name__}: {exc}")
     if check is None and collectors is COLLECTORS:
         check = watch.check
     if check is not None:

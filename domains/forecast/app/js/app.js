@@ -2,10 +2,11 @@ import { render as home } from './screens/home.js';
 import { render as org } from './screens/org.js';
 import { render as compare } from './screens/compare.js';
 import { render as timeline } from './screens/timeline.js';
+import { render as upcoming } from './screens/upcoming.js';
 import { loadJson } from '../core/shell.js';
 import { defaultYear } from './data.js';
 
-const screens = { home, org, compare, timeline };
+const screens = { home, org, compare, timeline, upcoming };
 
 // 헤더 날짜는 '수집기가 마지막으로 돈 날'(last_run.json 의 run_at)이다.
 // 레코드의 collected_at 최댓값이 아니다 — 그것은 '데이터가 마지막으로 바뀐 날'
@@ -33,11 +34,13 @@ function parseRoute(hash) {
   if (h === '/org') return { name: 'org-redirect', params: {} };
   if (h === '/compare') return { name: 'compare', params: {} };
   if (h === '/timeline') return { name: 'timeline', params: {} };
+  if (h === '/upcoming') return { name: 'upcoming', params: {} };
   return { name: 'home', params: {} };
 }
 
 function setActiveTab(tabbarEl, routeName) {
-  const tabName = routeName === 'org-redirect' ? 'org' : routeName;
+  // 발표 예정 일정표는 타임라인의 아래층이다 — 거기서 타임라인 탭이 꺼지면 나가는 길을 잃는다.
+  const tabName = routeName === 'org-redirect' ? 'org' : routeName === 'upcoming' ? 'timeline' : routeName;
   tabbarEl.querySelectorAll('.tab').forEach(tab => {
     tab.classList.toggle('tab--active', tab.dataset.route === tabName);
   });
@@ -47,7 +50,9 @@ function setActiveTab(tabbarEl, routeName) {
 // 표시한다. org 화면은 자체 뒤로가기 헤더를 화면 안에서 그리므로(org.js) 전역
 // 타이틀은 건드리지 않고 기본값 '고용전망'을 유지한다.
 export function headerTitleFor(routeName) {
-  return routeName === 'timeline' ? '최근 발표' : '고용전망';
+  if (routeName === 'timeline') return '최근 발표';
+  if (routeName === 'upcoming') return '발표 예정';
+  return '고용전망';
 }
 
 async function boot() {
@@ -57,7 +62,7 @@ async function boot() {
   const headerDateEl = document.getElementById('headerDate');
   const headerTitleEl = document.getElementById('headerTitle');
 
-  const [records, orgs, indicators, schedule, lastRun, rationales] = await Promise.all([
+  const [records, orgs, indicators, schedule, lastRun, rationales, upcomingData] = await Promise.all([
     loadJson('./data/forecasts.json'),
     loadJson('./data/orgs.json'),
     loadJson('./data/indicators.json'),
@@ -67,6 +72,8 @@ async function boot() {
     // 실패를 null로 흡수하므로, 없어도 배너를 띄우지 않고 빈 배열로 내려간다
     // (anyMissing 판정에도 넣지 않는다: 근거 없음은 오프라인이 아니라 정상 상태다).
     loadJson('./data/rationales.json'),
+    // 일정표도 없으면 빈 일정으로 내려간다 — 띠는 schedule.json 공지일로 물러선다.
+    loadJson('./data/upcoming.json'),
   ]);
 
   const anyMissing = records === null || orgs === null || indicators === null || schedule === null;
@@ -115,6 +122,7 @@ async function boot() {
     indicatorMeta: Object.fromEntries(safeIndicators.map(i => [i.code, i])),
     schedule: safeSchedule,
     rationales: safeRationales,
+    upcoming: upcomingData,
     today,
     state,
     params: {},

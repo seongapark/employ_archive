@@ -64,3 +64,47 @@ def test_imf_is_due_late_at_night():
 def test_collectors_for_orgs():
     assert calendar.collectors_for(["OECD", "BOK"]) == ["oecd", "oecd_interim", "bok"]
     assert calendar.collectors_for(["IMF"]) == ["imf", "imf_update"]
+
+
+# ── 향후 6개월 일정표(upcoming.json) ───────────────────────────────────
+
+def _rec(org, d, title="t"):
+    r = rec(org, d)
+    return r.model_copy(update={"report_title": title})
+
+
+def test_upcoming_lists_every_expected_round_within_six_months():
+    records = OECD + [rec("OECD", date(2026, 9, 23))]
+    got = calendar.upcoming(records, [], date(2026, 10, 2))
+    assert [(e["org"], e["start"], e["end"]) for e in got] == [
+        ("OECD", "2026-11-29", "2026-12-07"), ("OECD", "2027-03-14", "2027-03-29")]
+    assert [e["report"] for e in got] == ["경제전망", "중간 경제전망"]
+    assert all(e["basis"] == "예상" and e["date"] is None for e in got)
+
+
+def test_announced_date_marks_its_round():
+    records = [rec("BOK", date(*d)) for d in [(2025, 11, 27), (2026, 2, 26), (2026, 5, 28), (2026, 8, 27)]]
+    got = calendar.upcoming(records, [{"org": "BOK", "date": "2026-11-26"}], date(2026, 10, 2))
+    nov = got[0]
+    assert (nov["date"], nov["basis"], nov["report"]) == ("2026-11-26", "공지", "경제전망보고서")
+    assert [e["start"][:7] for e in got] == ["2026-11", "2027-02"]
+
+
+def test_a_round_already_in_is_not_listed():
+    records = OECD + [rec("OECD", date(2026, 9, 23))]
+    got = calendar.upcoming(records, [], date(2026, 9, 24))
+    assert all(e["start"] > "2026-09-30" for e in got)
+
+
+def test_adjacent_months_of_the_same_report_become_one_window():
+    # 재정부 하반기 전략: 2025년엔 8/22, 2026년엔 7/14 — 같은 보고서가 달을 옮겼다
+    records = [rec("MOEF", date(2025, 8, 22)), rec("MOEF", date(2026, 1, 9)), rec("MOEF", date(2026, 7, 14))]
+    got = calendar.upcoming(records, [], date(2027, 3, 1), months=6)
+    july = [e for e in got if e["report"] == "하반기 경제성장전략"]
+    assert len(july) == 1 and (july[0]["start"], july[0]["end"]) == ("2027-07-11", "2027-08-25")
+
+
+def test_unknown_month_falls_back_to_the_latest_title():
+    records = [_rec("ZZZ", date(2025, 11, 3), "어느 보고서 2025"), _rec("ZZZ", date(2026, 11, 2), "어느 보고서 2026")]
+    got = calendar.upcoming(records, [], date(2026, 12, 1), months=12)
+    assert got[0]["report"] == "어느 보고서 2026"

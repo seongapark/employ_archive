@@ -1,4 +1,5 @@
 import { timelineGroups, fmtValue, fmtDelta, isNew, esc, SHORT_LABELS } from '../data.js';
+import { nextEntry, whenText } from './upcoming.js';
 
 // 요약 줄 전용 소형 삼각형 (org.js/home.js의 10x9 배지형보다 작은 8x7 인라인 아이콘)
 const DELTA_SVG_SMALL = {
@@ -18,14 +19,18 @@ function findNextSchedule(schedule, today) {
   return upcoming[0] || null;
 }
 
+// 누르면 향후 6개월 일정표(#/upcoming)가 열린다. 일정표(upcoming.json)가 없으면
+// 예전처럼 공지일(schedule.json)만으로 띠를 그린다.
 function renderBanner(entry) {
   if (!entry) return '';
-  const text = `다음 발표 예정 — ${entry.org_name_ko} ${entry.report} ${mmdd(entry.date)}`;
+  const when = entry.start ? whenText(entry) : mmdd(entry.date);
+  const text = `다음 발표 예정 — ${entry.org_name_ko} ${entry.report} ${when}`;
   return `
-    <div style="margin:12px 16px 0 16px;padding:10px 14px;background:var(--accent-light);border-radius:10px;display:flex;align-items:center;gap:8px;">
+    <button type="button" data-upcoming style="margin:12px 16px 0 16px;padding:10px 14px;background:var(--accent-light);border:0;border-radius:10px;display:flex;align-items:center;gap:8px;text-align:left;cursor:pointer;min-height:44px;width:calc(100% - 32px);font:inherit;">
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#23508f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="1"></rect><line x1="3" y1="10" x2="21" y2="10"></line><line x1="8" y1="3" x2="8" y2="7"></line><line x1="16" y1="3" x2="16" y2="7"></line></svg>
-      <div class="num" style="font-size:13px;font-weight:600;color:var(--accent);">${esc(text)}</div>
-    </div>`;
+      <div class="num" style="flex:1;font-size:13px;font-weight:600;color:var(--accent);">${esc(text)}</div>
+      <span aria-hidden="true" style="font-size:13px;font-weight:700;color:var(--accent);">일정 ›</span>
+    </button>`;
 }
 
 // 이벤트 안에는 같은 지표가 여러 target_year로 중복 존재할 수 있다
@@ -87,7 +92,8 @@ function renderMonthGroup(group, today, isFirst) {
 export function render(el, ctx) {
   const { records, schedule, today } = ctx;
   const groups = timelineGroups(records);
-  const nextEntry = findNextSchedule(schedule, today);
+  const entries = ctx.upcoming && ctx.upcoming.entries;
+  const banner = entries ? nextEntry(entries, today) : findNextSchedule(schedule, today);
 
   let body;
   if (groups.length === 0) {
@@ -101,9 +107,11 @@ export function render(el, ctx) {
   }
 
   el.innerHTML = `
-    ${renderBanner(nextEntry)}
+    ${renderBanner(banner)}
     ${body}
   `;
+
+  el.querySelector('[data-upcoming]')?.addEventListener('click', () => ctx.navigate('#/upcoming'));
 
   el.querySelectorAll('[data-org]').forEach(card => {
     card.addEventListener('click', () => {

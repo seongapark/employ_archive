@@ -1,0 +1,114 @@
+{
+  "generated": "2026-10-02",
+  "months": 6,
+  "entries": [
+    {
+      "org": "IMF",
+      "org_name_ko": "IMF",
+      "report": "세계경제전망",
+      "start": "2026-10-11",
+      "end": "2026-10-25",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "KDI",
+      "org_name_ko": "KDI",
+      "report": "경제전망(하반기)",
+      "start": "2026-11-08",
+      "end": "2026-11-15",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "KIET",
+      "org_name_ko": "산업연",
+      "report": "내년 경제·산업 전망",
+      "start": "2026-11-21",
+      "end": "2026-11-28",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "BOK",
+      "org_name_ko": "BOK",
+      "report": "경제전망보고서",
+      "start": "2026-11-24",
+      "end": "2026-12-01",
+      "date": "2026-11-26",
+      "basis": "공지"
+    },
+    {
+      "org": "OECD",
+      "org_name_ko": "OECD",
+      "report": "경제전망",
+      "start": "2026-11-29",
+      "end": "2026-12-07",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "KLI",
+      "org_name_ko": "KLI",
+      "report": "노동시장 평가와 내년 전망",
+      "start": "2026-12-17",
+      "end": "2027-01-02",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "KEIS",
+      "org_name_ko": "KEIS",
+      "report": "고용동향브리프(전망 수록호)",
+      "start": "2026-12-28",
+      "end": "2027-01-03",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "MOEF",
+      "org_name_ko": "재정부",
+      "report": "경제성장전략",
+      "start": "2026-12-30",
+      "end": "2027-01-12",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "IMF",
+      "org_name_ko": "IMF",
+      "report": "세계경제전망 수정",
+      "start": "2027-01-14",
+      "end": "2027-01-22",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "KDI",
+      "org_name_ko": "KDI",
+      "report": "경제전망 수정",
+      "start": "2027-02-08",
+      "end": "2027-02-14",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "BOK",
+      "org_name_ko": "BOK",
+      "report": "경제전망보고서",
+      "start": "2027-02-22",
+      "end": "2027-03-01",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "OECD",
+      "org_name_ko": "OECD",
+      "report": "중간 경제전망",
+      "start": "2027-03-14",
+      "end": "2027-03-29",
+      "date": null,
+      "basis": "예상"
+    }
+  ]
+}

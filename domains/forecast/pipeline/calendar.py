@@ -101,6 +101,104 @@ def due(records: list[ForecastRecord], schedule: list[dict], now: datetime) -> l
     return out
 
 
+# ── 향후 일정표 ─────────────────────────────────────────────────────────
+#
+# 타임라인의 '다음 발표 예정' 을 누르면 뜨는 표. 위 예상 구간과 같은 규칙(최근
+# 24개월 같은 달 발표일 ±PAD_DAYS)으로 앞으로 몇 달의 회차를 모두 늘어놓고,
+# 공지일이 있으면 그 날짜를 붙인다. 회차 제목은 회차마다 표기가 흔들려(「…」
+# 발표·제113호(2025-01)·No 117) 그대로 쓰면 같은 보고서가 다른 것처럼 보인다 —
+# 기관·달별로 짧은 이름을 둔다. 없는 달은 가장 최근 제목으로 물러선다.
+REPORT_NAMES: dict[str, dict[int, str]] = {
+    "BOK": {2: "경제전망보고서", 5: "경제전망보고서", 8: "경제전망보고서", 11: "경제전망보고서"},
+    "KDI": {2: "경제전망 수정", 5: "경제전망(상반기)", 8: "경제전망 수정", 11: "경제전망(하반기)"},
+    "KLI": {8: "상반기 평가·하반기 노동시장 전망", 12: "노동시장 평가와 내년 전망"},
+    "MOEF": {1: "경제성장전략", 6: "하반기 경제성장전략", 7: "하반기 경제성장전략",
+             8: "하반기 경제성장전략", 12: "경제성장전략"},
+    "IMF": {1: "세계경제전망 수정", 4: "세계경제전망", 7: "세계경제전망 수정", 10: "세계경제전망"},
+    "OECD": {3: "중간 경제전망", 6: "경제전망", 9: "중간 경제전망", 12: "경제전망"},
+    "KIET": {5: "하반기 경제·산업 전망", 6: "하반기 경제·산업 전망", 11: "내년 경제·산업 전망"},
+}
+# 달과 상관없이 같은 이름. KEIS 는 전망을 싣는 호가 불규칙해 제목이 특정 호(… 제5호)다.
+REPORT_DEFAULT = {"KEIS": "고용동향브리프(전망 수록호)"}
+UPCOMING_MONTHS = 6
+
+
+def _add_months(day: date, months: int) -> date:
+    year, month = divmod(day.month - 1 + months, 12)
+    year, month = day.year + year, month + 1
+    for d in (day.day, 30, 29, 28):
+        try:
+            return date(year, month, d)
+        except ValueError:
+            continue
+    raise AssertionError("unreachable")
+
+
+def _report_name(records: list[ForecastRecord], org: str, month: int) -> str:
+    name = REPORT_NAMES.get(org, {}).get(month) or REPORT_DEFAULT.get(org)
+    if name:
+        return name
+    same = [r for r in records if r.org == org and r.published_at.month == month]
+    return max(same, key=lambda r: r.published_at).report_title if same else ""
+
+
+def upcoming(records: list[ForecastRecord], schedule: list[dict], today: date,
+             months: int = UPCOMING_MONTHS, names: dict[str, str] | None = None) -> list[dict]:
+    """앞으로 `months` 달 안에 나올 회차들. 이미 들어온 회차는 뺀다."""
+    until = _add_months(today, months)
+    names = names or {}
+    out = []
+    for org in sorted({r.org for r in records}):
+        days = _release_days(records, org)
+        latest = days[-1]
+        by_month: dict[int, list[int]] = {}
+        for d in days:
+            if (today - d).days <= LOOKBACK_DAYS:
+                by_month.setdefault(d.month, []).append(d.day)
+
+        windows = []
+        for month, month_days in by_month.items():
+            for year in (today.year - 1, today.year, today.year + 1, today.year + 2):
+                start = date(year, month, min(month_days)) - timedelta(days=PAD_DAYS)
+                end = date(year, month, max(month_days)) + timedelta(days=PAD_DAYS)
+                if end >= today and start <= until and start > latest:
+                    windows.append([start, end, _report_name(records, org, month), month])
+        windows.sort()
+
+        # 같은 보고서가 해마다 이웃 달을 오가면(재정부 하반기 전략 7월↔8월) 한 구간으로 잇는다.
+        merged = []
+        for w in windows:
+            prev = merged[-1] if merged else None
+            if prev and prev[2] == w[2] and (w[3] - prev[3]) % 12 == 1 and (w[0] - prev[1]).days < 45:
+                prev[1], prev[3] = max(prev[1], w[1]), w[3]
+            else:
+                merged.append(w)
+
+        announced = sorted(date.fromisoformat(s["date"]) for s in schedule if s["org"] == org)
+        for start, end, report, _ in merged:
+            day = next((d for d in announced
+                        if start - timedelta(days=14) <= d <= end + timedelta(days=14)), None)
+            out.append({
+                "org": org, "org_name_ko": names.get(org, org), "report": report,
+                "start": start.isoformat(), "end": end.isoformat(),
+                "date": day.isoformat() if day else None,
+                "basis": "공지" if day else "예상",
+            })
+    return sorted(out, key=lambda e: (e["date"] or e["start"], e["org"]))
+
+
+def write_upcoming(data_dir: Path, records: list[ForecastRecord], today: date) -> list[dict]:
+    """data/upcoming.json 을 다시 쓴다(매일 수집이 부른다)."""
+    orgs_path = Path(data_dir) / "orgs.json"
+    orgs = json.loads(orgs_path.read_text(encoding="utf-8")) if orgs_path.exists() else []
+    entries = upcoming(records, load_schedule(data_dir), today,
+                       names={o["org"]: o.get("short_ko") or o["org"] for o in orgs})
+    (Path(data_dir) / "upcoming.json").write_text(
+        json.dumps({"generated": today.isoformat(), "months": UPCOMING_MONTHS, "entries": entries},
+                   ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    return entries
+
+
 def load_schedule(data_dir: Path = DATA_DIR) -> list[dict]:
     path = Path(data_dir) / "schedule.json"
     return json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
