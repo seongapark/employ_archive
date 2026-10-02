@@ -1,20 +1,33 @@
 // 발표 예정 일정표. 타임라인의 '다음 발표 예정' 띠를 누르면 온다.
 //
 // 데이터는 data/upcoming.json(pipeline/calendar.write_upcoming, 매일 수집이 다시 쓴다).
-// 기관이 미리 알린 날은 그 날짜를(공지), 나머지는 최근 2년 같은 달 발표일에
-// 앞뒤 사흘을 붙인 구간을(예상) 보인다. 예상을 하루로 찍지 않는다 — 찍으면
-// 그날 안 나왔을 때 화면이 틀린 말을 한 셈이 된다.
+// 기관이 미리 알린 날은 그 날짜를(공지), 나머지는 'N월 초·중순·말' 만(예상) 보인다.
+// 예상 구간(최근 2년 같은 달 발표일 ±3일)의 가운데 날로 정한다. 날짜를 찍지 않는다
+// — 찍으면 그날 안 나왔을 때 화면이 틀린 말을 한 셈이 된다(2026-10-02 사용자 판단).
 import { esc } from '../data.js';
 
 function mmdd(day) {
   return `${day.slice(5, 7)}.${day.slice(8, 10)}`;
 }
 
-export function whenText(entry) {
-  return entry.date ? mmdd(entry.date) : `${mmdd(entry.start)}~${mmdd(entry.end)}`;
+// 예상 구간의 가운데 날(YYYY-MM-DD). 묶음·정렬·표기가 모두 이 날을 본다.
+function middleOf(entry) {
+  const a = Date.parse(entry.start + 'T00:00:00Z');
+  const b = Date.parse(entry.end + 'T00:00:00Z');
+  return new Date((a + b) / 2).toISOString().slice(0, 10);
 }
 
-const keyOf = entry => entry.date || entry.start;
+function partOfMonth(day) {
+  const d = Number(day.slice(8, 10));
+  const part = d <= 10 ? '초' : d <= 20 ? '중순' : '말';
+  return `${Number(day.slice(5, 7))}월 ${part}`;
+}
+
+export function whenText(entry) {
+  return entry.date ? mmdd(entry.date) : partOfMonth(middleOf(entry));
+}
+
+const keyOf = entry => entry.date || middleOf(entry);
 const sorted = entries => [...entries].sort((a, b) => keyOf(a).localeCompare(keyOf(b)));
 
 export function upcomingGroups(entries) {
@@ -70,8 +83,8 @@ export function render(el, ctx) {
       <div style="font-size:13px;color:var(--text-secondary);">앞으로 ${esc(String(months))}개월 동안 나올 전망 보고서입니다.</div>
       ${list}
       <p style="margin:8px 0 0;font-size:12px;line-height:1.6;color:var(--text-secondary);">
-        <b>공지</b>는 기관이 미리 알린 발표일입니다. <b>예상</b>은 최근 2년 같은 달 발표일에
-        앞뒤 사흘을 더한 구간으로, 실제 날짜는 달라질 수 있습니다.</p>
+        <b>공지</b>는 기관이 미리 알린 발표일입니다. <b>예상</b>은 최근 2년 같은 달 발표일로
+        짐작한 시기로, 실제 날짜는 달라질 수 있습니다.</p>
     </div>`;
   el.querySelectorAll('[data-org]').forEach(card => {
     card.addEventListener('click', () => ctx.navigate('#/org/' + encodeURIComponent(card.dataset.org)));

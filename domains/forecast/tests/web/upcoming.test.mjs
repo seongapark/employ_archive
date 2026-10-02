@@ -9,15 +9,19 @@ const ENTRIES = [
   { org: 'OECD', org_name_ko: 'OECD', report: '경제전망', start: '2026-11-29', end: '2026-12-07', date: null, basis: '예상' },
 ];
 
-test('a dated round shows its day, an expected one its window', () => {
+test('a dated round shows its day, an expected one only the part of the month', () => {
   assert.equal(whenText(ENTRIES[1]), '11.26');
-  assert.equal(whenText(ENTRIES[0]), '10.11~10.25');
+  // 구간의 가운데 날로 초(1~10일)·중순(11~20일)·말(21일~)을 정한다
+  assert.equal(whenText(ENTRIES[0]), '10월 중순');                 // 10.11~10.25 → 18일
+  assert.equal(whenText(ENTRIES[3]), '12월 초');                   // 11.29~12.07 → 3일
+  assert.equal(whenText({ start: '2027-02-22', end: '2027-03-01' }), '2월 말');
 });
 
 test('rounds are grouped by month in order of their day or window start', () => {
   const groups = upcomingGroups(ENTRIES);
-  assert.deepEqual(groups.map(g => g.month), ['2026년 10월', '2026년 11월']);
-  assert.deepEqual(groups[1].entries.map(e => e.org), ['KDI', 'BOK', 'OECD']);
+  // OECD(11.29~12.07)는 가운데 날이 12월이라 12월에 묶인다
+  assert.deepEqual(groups.map(g => g.month), ['2026년 10월', '2026년 11월', '2026년 12월']);
+  assert.deepEqual(groups[1].entries.map(e => e.org), ['KDI', 'BOK']);
 });
 
 test('the banner points at the nearest round that has not passed', () => {
