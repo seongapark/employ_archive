@@ -1,11 +1,11 @@
 {
-  "at": "2026-10-03T10:02:06+09:00",
+  "at": "2026-10-03T18:01:32+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
-      "parsed": 20,
-      "added": 1,
-      "details": 1,
+      "parsed": 10,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
