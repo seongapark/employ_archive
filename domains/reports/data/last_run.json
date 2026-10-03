@@ -1,15 +1,15 @@
 {
-  "at": "2026-10-02T15:01:42+09:00",
+  "at": "2026-10-03T10:02:06+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
-      "parsed": 10,
-      "added": 0,
-      "details": 0,
+      "parsed": 20,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 306
+      "total": 307
     },
     "kli-review": {
       "ok": true,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3453,
+  "reports": 3454,
   "abstract_missing": {
     "kli": {
       "노동정책연구": {
@@ -362,9 +362,9 @@
         "rate": 1.0
       },
       "연구보고서": {
-        "total": 306,
+        "total": 307,
         "missing": 67,
-        "rate": 0.219
+        "rate": 0.218
       },
       "고용노동브리프": {
         "total": 11,
@@ -524,22 +524,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 304727,
-    "abstracts_gzip": 3467743,
+    "reports_gzip": 304841,
+    "abstracts_gzip": 3476197,
     "abstracts_shards_gzip": {
       "bok": 292419,
       "kdi": 889333,
       "keis": 256203,
       "kiet": 708527,
-      "kli": 1321261
+      "kli": 1329715
     }
   },
   "recommend": {
-    "judged": 3453,
-    "picked": 368,
+    "judged": 3454,
+    "picked": 369,
     "unjudged": 0,
     "profile_version": "5a624049",
     "title_only": 941,
-    "at": "2026-10-02T10:05:50+09:00"
+    "at": "2026-10-03T10:02:44+09:00"
   }
 }

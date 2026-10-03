@@ -786,6 +786,31 @@
   ]
  },
  {
+  "id": "kli-10312",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "대학일자리플러스센터 적정 재정수요 파악 및 대학 책임성 강화 방안 연구",
+  "authors": [
+   "이정민",
+   "김동진",
+   "김유빈"
+  ],
+  "published": "2026-08-16",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=10312&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=AC3790556A52C0C049258E840019DAD1_1.pdf&fileNameOrg=대학일자리플러스센터 적정 재정수요 파악 및 대학 책임성 강화 방안 연구.pdf&filePath1=jsphome/DATA/pblctList/issue/AC3790556A52C0C049258E840019DAD1",
+  "matched": [
+   "청년고용",
+   "임금",
+   "고용형태",
+   "고용서비스",
+   "일자리정책",
+   "인력수급"
+  ]
+ },
+ {
   "id": "kli-10298",
   "org": "kli",
   "board": "kli-intl",
