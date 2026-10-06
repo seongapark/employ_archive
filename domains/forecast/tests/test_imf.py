@@ -122,9 +122,9 @@ def test_regular_edition_label_comes_from_its_month():
 
 def test_report_pdf_address_follows_the_media_path():
     assert imf.pdf_url("April 2026") == \
-        "https://www.imf.org/-/media/Files/Publications/WEO/2026/April/English/text.ashx"
+        "https://www.imf.org/-/media/files/publications/weo/2026/april/english/text.pdf"
     assert imf.pdf_url("Update July 2026") == \
-        "https://www.imf.org/-/media/Files/Publications/WEO/2026/Update/July/English/text.ashx"
+        "https://www.imf.org/-/media/files/publications/weo/2026/update/july/english/text.pdf"
 
 
 @pytest.mark.parametrize("key,label", [
