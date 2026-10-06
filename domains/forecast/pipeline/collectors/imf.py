@@ -17,10 +17,13 @@ WEO 데이터셋은 업데이트를 싣지 않는다(7/8 업데이트 뒤에도 
 
 ## 원문 링크
 
-보고서 페이지(`/en/publications/weo/issues/…`)는 코드로 열면 403(Akamai)이라
-확인할 수 없다. 원문 PDF(`/-/media/…/text.ashx`)는 열린다. 그래서 **PDF 를 받아
-표지가 그 회차인지 확인한 뒤** source_url 로 싣고, 사람이 여는 보고서 페이지는
-landing_url 로 싣는다.
+원문 PDF(`/-/media/files/…/english/text.pdf`)를 받아 **표지가 그 회차인지
+확인한 뒤** source_url 로 싣고, 사람이 여는 보고서 페이지는 landing_url 로 싣는다.
+
+2026-10-06 사이트 개편: 옛 `/-/media/Files/…/English/text.ashx` 는 404
+(`Blob not found`)가 됐고, Akamai 가 **브라우저 지문(curl_cffi impersonate)을
+403 으로 막는다.** 지문 없는 표준 라이브러리 요청은 통과한다 — 그래서 PDF 만
+urllib 로 받는다(SDMX api.imf.org 는 그대로 열린다).
 """
 from __future__ import annotations
 
@@ -37,7 +40,7 @@ KST = timezone(timedelta(hours=9))
 
 SDMX_BASE = "https://api.imf.org/external/sdmx/3.0/data/dataflow/IMF.RES"
 WEO_URL = SDMX_BASE + "/WEO/+/KOR.{code}.A?attributes=all&measures=all"
-MEDIA_BASE = "https://www.imf.org/-/media/Files/Publications/WEO"
+MEDIA_BASE = "https://www.imf.org/-/media/files/publications/weo"
 
 # IMF 지표코드 → 내부 지표코드
 IMF_CODE_TO_INDICATOR = {
@@ -96,13 +99,19 @@ def regular_label(published_at: date) -> str:
 
 def pdf_url(label: str) -> str:
     update, month, year = _label_parts(label)
-    return f"{MEDIA_BASE}/{year}/{'Update/' if update else ''}{month}/English/text.ashx"
+    return f"{MEDIA_BASE}/{year}/{'update/' if update else ''}{month.lower()}/english/text.pdf"
+
+
+def _fetch_plain(url: str) -> bytes:
+    import urllib.request
+    with urllib.request.urlopen(url, timeout=120) as resp:
+        return resp.read()
 
 
 def report_pages(url: str) -> list[str]:
     from .. import http, pdf
 
-    data = http.get(url).content
+    data = http.retrying(lambda: _fetch_plain(url))
     if data[:4] != b"%PDF":
         raise ValueError(f"원문이 PDF 가 아니다: {url}")
     return pdf.page_texts(data)
