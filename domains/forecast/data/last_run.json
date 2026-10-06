@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-06T10:38:03.443089+09:00",
+  "run_at": "2026-10-06T10:53:24.548099+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -12,13 +12,13 @@
       "added": 0
     },
     "imf": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 6,
       "added": 0
     },
     "imf_update": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 2,
       "added": 0
     },
     "bok": {
@@ -63,8 +63,5 @@
     }
   },
   "conflicts": [],
-  "errors": [
-    "imf: HTTPError: HTTP Error 403: ",
-    "imf_update: HTTPError: HTTP Error 403: "
-  ]
+  "errors": []
 }
