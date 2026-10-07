@@ -1,9 +1,9 @@
 {
-  "run_at": "2026-10-06T10:53:24.548099+09:00",
+  "run_at": "2026-10-07T09:08:12.345410+09:00",
   "collectors": {
     "oecd": {
-      "ok": true,
-      "fetched": 8,
+      "ok": false,
+      "fetched": 0,
       "added": 0
     },
     "oecd_interim": {
@@ -43,7 +43,7 @@
     },
     "keis": {
       "ok": true,
-      "fetched": 9,
+      "fetched": 0,
       "added": 0
     },
     "moef": {
@@ -63,5 +63,7 @@
     }
   },
   "conflicts": [],
-  "errors": []
+  "errors": [
+    "oecd: Timeout: Failed to perform, curl: (28) Connection timed out after 120014 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
+  ]
 }

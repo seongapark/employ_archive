@@ -1,5 +1,23 @@
 [
  {
+  "id": "bok-11065326",
+  "org": "bok",
+  "board": "bok-note",
+  "series": "BOK 이슈노트",
+  "title": "[제2026-26호] IMF EBA 모형 개편이 우리나라 경상수지 평가에 미치는 영향",
+  "authors": [
+   "국제금융연구팀"
+  ],
+  "published": "2026-10-06",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?nttId=11065326&searchCnd=1&searchKwd=&depth2=201157&depth3=200433&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200433&pageIndex=1&programType=newsData&menuNo=200433&oldMenuNo=200433",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/b314b478222e4481a161ed0db293210a/1/e06ecfdbf5c443b2bb069abd83c9736b.pdf",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-10311",
   "org": "kli",
   "board": "kli-policy",
@@ -2015,6 +2033,26 @@
   "matched": [
    "임금",
    "노동전환"
+  ]
+ },
+ {
+  "id": "kli-10313",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "국립대병원 사례 비교로 살펴본 공공부문 정규직 전환 과정과 오늘날의 과제",
+  "authors": [
+   "전유섭"
+  ],
+  "published": "2026-07-09",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=10313&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=A841A70CAD85CF3B49258E8800296B28_3.pdf&fileNameOrg=국립대병원 사례 비교로 살펴본 공공부문 정규직 전환 과정과 오늘날의 과제_web.pdf&filePath1=jsphome/DATA/pblctList/issue/A841A70CAD85CF3B49258E8800296B28",
+  "matched": [
+   "임금",
+   "고용형태",
+   "노사관계"
   ]
  },
  {
