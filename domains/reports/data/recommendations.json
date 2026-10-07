@@ -33677,5 +33677,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-10-07T09:08:11+09:00"
+ },
+ "keis-11366": {
+  "pick": true,
+  "axis": "청년 고용",
+  "why": "청년 취업자 생성형 AI 활용 실태 패널 분석",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-07T10:01:28+09:00"
  }
 }

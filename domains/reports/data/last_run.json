@@ -1,11 +1,11 @@
 {
-  "at": "2026-10-07T09:02:57+09:00",
+  "at": "2026-10-07T10:01:13+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
-      "parsed": 20,
-      "added": 1,
-      "details": 1,
+      "parsed": 10,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -112,23 +112,23 @@
       "total": 21
     },
     "keis-trend": {
-      "ok": false,
-      "parsed": 0,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": false,
+      "ok": true,
+      "parsed": 100,
+      "added": 1,
+      "details": 1,
+      "reached_cutoff": true,
       "skipped_old": 0,
-      "error": "Failed to perform, curl: (6) Could not resolve host: www.keis.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-      "total": 50
+      "error": null,
+      "total": 51
     },
     "keis-region": {
-      "ok": false,
-      "parsed": 0,
+      "ok": true,
+      "parsed": 20,
       "added": 0,
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": "Failed to perform, curl: (6) Could not resolve host: www.keis.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
+      "error": null,
       "total": 20
     },
     "keis-transition": {
@@ -303,9 +303,9 @@
     },
     "bok-note": {
       "ok": true,
-      "parsed": 200,
-      "added": 1,
-      "details": 1,
+      "parsed": 100,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -333,8 +333,40 @@
     }
   },
   "unregistered": [],
-  "reports": 3456,
+  "reports": 3457,
   "abstract_missing": {
+    "keis": {
+      "고용동향브리프": {
+        "total": 51,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "고용이슈": {
+        "total": 21,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구사업보고서": {
+        "total": 316,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "지역산업과 고용": {
+        "total": 20,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "산업일자리 전환 지도": {
+        "total": 5,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "인력수급전망": {
+        "total": 38,
+        "missing": 38,
+        "rate": 1.0
+      }
+    },
     "bok": {
       "BOK 이슈노트": {
         "total": 214,
@@ -477,38 +509,6 @@
         "missing": 7,
         "rate": 0.044
       }
-    },
-    "keis": {
-      "고용이슈": {
-        "total": 21,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "연구사업보고서": {
-        "total": 316,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "고용동향브리프": {
-        "total": 50,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "지역산업과 고용": {
-        "total": 20,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "산업일자리 전환 지도": {
-        "total": 5,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "인력수급전망": {
-        "total": 38,
-        "missing": 38,
-        "rate": 1.0
-      }
     }
   },
   "abstract_missing_why": {
@@ -524,22 +524,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 305094,
-    "abstracts_gzip": 3480878,
+    "reports_gzip": 305251,
+    "abstracts_gzip": 3481022,
     "abstracts_shards_gzip": {
       "bok": 295152,
       "kdi": 889333,
-      "keis": 256203,
+      "keis": 256347,
       "kiet": 708527,
       "kli": 1331663
     }
   },
   "recommend": {
-    "judged": 3456,
-    "picked": 370,
+    "judged": 3457,
+    "picked": 371,
     "unjudged": 0,
     "profile_version": "5a624049",
     "title_only": 941,
-    "at": "2026-10-07T09:08:11+09:00"
+    "at": "2026-10-07T10:01:28+09:00"
   }
 }

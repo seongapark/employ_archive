@@ -1,5 +1,21 @@
 [
  {
+  "id": "keis-11366",
+  "org": "keis",
+  "board": "keis-trend",
+  "series": "고용동향브리프",
+  "title": "고용동향브리프 2026년 제6호",
+  "authors": [],
+  "published": "2026-10-06",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/118/pblc/detail.do?categoryIdx=126&pubIdx=11366",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20261006025200215.pdf&path=pblc&fn=2026%EB%85%84+%EC%A0%9C6%ED%98%B8+%EA%B3%A0%EC%9A%A9%EB%8F%99%ED%96%A5%EB%B8%8C%EB%A6%AC%ED%94%84.pdf&sn=11366&fsn=22728&ty=P",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "bok-11065326",
   "org": "bok",
   "board": "bok-note",
