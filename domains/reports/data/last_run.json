@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-08T10:00:45+09:00",
+  "at": "2026-10-08T15:00:38+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -203,9 +203,9 @@
     },
     "kdi-report": {
       "ok": true,
-      "parsed": 30,
-      "added": 2,
-      "details": 2,
+      "parsed": 10,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
