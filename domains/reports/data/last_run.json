@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-07T15:00:42+09:00",
+  "at": "2026-10-08T10:00:45+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -203,13 +203,13 @@
     },
     "kdi-report": {
       "ok": true,
-      "parsed": 10,
-      "added": 0,
-      "details": 0,
+      "parsed": 30,
+      "added": 2,
+      "details": 2,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 400
+      "total": 402
     },
     "kdi-analysis": {
       "ok": true,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3457,
+  "reports": 3459,
   "abstract_missing": {
     "keis": {
       "고용동향브리프": {
@@ -457,6 +457,11 @@
         "missing": 0,
         "rate": 0.0
       },
+      "연구보고서": {
+        "total": 402,
+        "missing": 13,
+        "rate": 0.032
+      },
       "기타보고서": {
         "total": 3,
         "missing": 0,
@@ -466,11 +471,6 @@
         "total": 343,
         "missing": 45,
         "rate": 0.131
-      },
-      "연구보고서": {
-        "total": 400,
-        "missing": 13,
-        "rate": 0.033
       },
       "현안분석": {
         "total": 31,
@@ -524,22 +524,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 305251,
-    "abstracts_gzip": 3481022,
+    "reports_gzip": 305448,
+    "abstracts_gzip": 3483077,
     "abstracts_shards_gzip": {
       "bok": 295152,
-      "kdi": 889333,
+      "kdi": 891388,
       "keis": 256347,
       "kiet": 708527,
       "kli": 1331663
     }
   },
   "recommend": {
-    "judged": 3457,
-    "picked": 371,
+    "judged": 3459,
+    "picked": 372,
     "unjudged": 0,
     "profile_version": "5a624049",
     "title_only": 941,
-    "at": "2026-10-07T10:01:28+09:00"
+    "at": "2026-10-08T10:01:03+09:00"
   }
 }

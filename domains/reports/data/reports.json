@@ -151,6 +151,40 @@
   ]
  },
  {
+  "id": "kdi-19282",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "실업률의 구조적 변화에 대한 연구: 매칭효율성을 중심으로",
+  "authors": [
+   "김지연"
+  ],
+  "published": "2026-09-21",
+  "date_precision": "day",
+  "pages": 67,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=19282",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=HHz2H3BbZzAKLwRmkzwZ4Q%3D%3D",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-19125",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "제약 산업에서의 정부 정책 효과 분석과 시사점",
+  "authors": [
+   "김형진"
+  ],
+  "published": "2026-09-21",
+  "date_precision": "day",
+  "pages": 84,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=19125",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=zIqk%2Bq05PPb75rGFR31evA%3D%3D",
+  "matched": []
+ },
+ {
   "id": "bok-11064898",
   "org": "bok",
   "board": "bok-research",

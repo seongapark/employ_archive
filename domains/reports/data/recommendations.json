@@ -33686,5 +33686,23 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-10-07T10:01:28+09:00"
+ },
+ "kdi-19282": {
+  "pick": true,
+  "axis": "고용행정데이터와 방법론",
+  "why": "매칭함수 추정으로 매칭효율성 분해",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-08T10:01:03+09:00"
+ },
+ "kdi-19125": {
+  "pick": false,
+  "axis": "",
+  "why": "모태펀드가 바이오벤처 혁신·IPO에 준 효과",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-08T10:01:03+09:00"
  }
 }
