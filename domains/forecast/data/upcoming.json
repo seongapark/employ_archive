@@ -1,5 +1,5 @@
 {
-  "generated": "2026-10-08",
+  "generated": "2026-10-11",
   "months": 6,
   "entries": [
     {
@@ -107,6 +107,15 @@
       "report": "중간 경제전망",
       "start": "2027-03-14",
       "end": "2027-03-29",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "IMF",
+      "org_name_ko": "IMF",
+      "report": "세계경제전망",
+      "start": "2027-04-11",
+      "end": "2027-04-25",
       "date": null,
       "basis": "예상"
     }
