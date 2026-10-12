@@ -407,6 +407,25 @@
   "matched": []
  },
  {
+  "id": "kli-10314",
+  "org": "kli",
+  "board": "kli-panel",
+  "series": "패널브리프",
+  "title": "[KLI 패널브리프 제37호(2026-04)] 청년층의 학교-노동시장 이행과 첫 일자리 특성",
+  "authors": [
+   "김홍준"
+  ],
+  "published": "2026-08-31",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/panelBriefView.es?pblct_sn=10314&mid=a10104030000",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=604333BFEA7C9EE049258E8E00039EC6_1.pdf&fileNameOrg=KLI 패널브리프 제37호(2026-04).pdf&filePath1=jsphome/DATA/pblctList/issue/604333BFEA7C9EE049258E8E00039EC6",
+  "matched": [
+   "청년고용",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "kli-10299",
   "org": "kli",
   "board": "kli-research",

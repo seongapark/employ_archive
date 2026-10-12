@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-11T21:08:31+09:00",
+  "at": "2026-10-12T10:00:44+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -64,12 +64,12 @@
     "kli-panel": {
       "ok": true,
       "parsed": 10,
-      "added": 0,
-      "details": 0,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 10
+      "total": 11
     },
     "kli-eia": {
       "ok": true,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3459,
+  "reports": 3460,
   "abstract_missing": {
     "keis": {
       "고용동향브리프": {
@@ -435,6 +435,11 @@
         "missing": 48,
         "rate": 1.0
       },
+      "패널브리프": {
+        "total": 11,
+        "missing": 11,
+        "rate": 1.0
+      },
       "연구보고서": {
         "total": 308,
         "missing": 67,
@@ -443,11 +448,6 @@
       "고용노동브리프": {
         "total": 11,
         "missing": 11,
-        "rate": 1.0
-      },
-      "패널브리프": {
-        "total": 10,
-        "missing": 10,
         "rate": 1.0
       }
     },
@@ -512,7 +512,7 @@
     }
   },
   "abstract_missing_why": {
-    "요약 섹션 없음": 552,
+    "요약 섹션 없음": 553,
     "텍스트가 없는 스캔본": 309,
     "원문 없음": 46,
     "내려받기 실패: Failed to perform, curl: (6) Could not resolve host: www.bok.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.": 13,
@@ -524,22 +524,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 305448,
-    "abstracts_gzip": 3483077,
+    "reports_gzip": 305572,
+    "abstracts_gzip": 3483194,
     "abstracts_shards_gzip": {
       "bok": 295152,
       "kdi": 891388,
       "keis": 256347,
       "kiet": 708527,
-      "kli": 1331663
+      "kli": 1331780
     }
   },
   "recommend": {
-    "judged": 3459,
-    "picked": 372,
+    "judged": 3460,
+    "picked": 373,
     "unjudged": 0,
     "profile_version": "5a624049",
-    "title_only": 941,
-    "at": "2026-10-08T10:01:03+09:00"
+    "title_only": 942,
+    "at": "2026-10-12T10:01:04+09:00"
   }
 }
