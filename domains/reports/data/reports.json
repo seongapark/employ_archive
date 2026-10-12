@@ -1,5 +1,21 @@
 [
  {
+  "id": "kdi-19304",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2026년 10월",
+  "authors": [],
+  "published": "2026-10-31",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=19304",
+  "file_url": null,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
   "id": "keis-11366",
   "org": "keis",
   "board": "keis-trend",

@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-12T10:00:44+09:00",
+  "at": "2026-10-12T15:00:54+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -64,8 +64,8 @@
     "kli-panel": {
       "ok": true,
       "parsed": 10,
-      "added": 1,
-      "details": 1,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -233,13 +233,13 @@
     },
     "kdi-trends": {
       "ok": true,
-      "parsed": 9,
-      "added": 0,
-      "details": 0,
+      "parsed": 22,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 69
+      "total": 70
     },
     "kdi-etc": {
       "ok": true,
@@ -333,8 +333,35 @@
     }
   },
   "unregistered": [],
-  "reports": 3460,
+  "reports": 3461,
   "abstract_missing": {
+    "kdi": {
+      "경제동향": {
+        "total": 70,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구보고서": {
+        "total": 402,
+        "missing": 13,
+        "rate": 0.032
+      },
+      "기타보고서": {
+        "total": 3,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "KDI FOCUS": {
+        "total": 343,
+        "missing": 45,
+        "rate": 0.131
+      },
+      "현안분석": {
+        "total": 31,
+        "missing": 12,
+        "rate": 0.387
+      }
+    },
     "keis": {
       "고용동향브리프": {
         "total": 51,
@@ -451,33 +478,6 @@
         "rate": 1.0
       }
     },
-    "kdi": {
-      "경제동향": {
-        "total": 69,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "연구보고서": {
-        "total": 402,
-        "missing": 13,
-        "rate": 0.032
-      },
-      "기타보고서": {
-        "total": 3,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "KDI FOCUS": {
-        "total": 343,
-        "missing": 45,
-        "rate": 0.131
-      },
-      "현안분석": {
-        "total": 31,
-        "missing": 12,
-        "rate": 0.387
-      }
-    },
     "kiet": {
       "i-KIET": {
         "total": 122,
@@ -524,22 +524,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 305572,
-    "abstracts_gzip": 3483194,
+    "reports_gzip": 305601,
+    "abstracts_gzip": 3483438,
     "abstracts_shards_gzip": {
       "bok": 295152,
-      "kdi": 891388,
+      "kdi": 891632,
       "keis": 256347,
       "kiet": 708527,
       "kli": 1331780
     }
   },
   "recommend": {
-    "judged": 3460,
+    "judged": 3461,
     "picked": 373,
     "unjudged": 0,
     "profile_version": "5a624049",
     "title_only": 942,
-    "at": "2026-10-12T10:01:04+09:00"
+    "at": "2026-10-12T15:01:10+09:00"
   }
 }
