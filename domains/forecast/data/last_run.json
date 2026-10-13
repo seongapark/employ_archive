@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-13T10:00:44.399234+09:00",
+  "run_at": "2026-10-13T15:00:47.841894+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -12,8 +12,8 @@
       "added": 0
     },
     "imf": {
-      "ok": true,
-      "fetched": 6,
+      "ok": false,
+      "fetched": 0,
       "added": 0
     },
     "imf_update": {
@@ -63,5 +63,7 @@
     }
   },
   "conflicts": [],
-  "errors": []
+  "errors": [
+    "imf: HTTPError: HTTP Error 404: Not Found"
+  ]
 }
