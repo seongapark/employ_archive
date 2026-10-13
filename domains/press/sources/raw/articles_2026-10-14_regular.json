@@ -1,0 +1,90 @@
+{
+ "round_release": "2026-10-14",
+ "mode": "regular",
+ "auth": "HUB",
+ "window": [
+  "2026-10-14",
+  "2026-10-15"
+ ],
+ "collected_at": "2026-10-14 08:12",
+ "volume": {
+  "collected": 4,
+  "articles": 3,
+  "press": 3,
+  "queries": 3
+ },
+ "truncated_queries": [],
+ "queries": [
+  {
+   "query": "고용보험 가입자",
+   "api_total": 29395,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 3,
+   "relevant": 3,
+   "new": 3
+  },
+  {
+   "query": "구직급여",
+   "api_total": 94667,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 1,
+   "relevant": 0,
+   "new": 1
+  },
+  {
+   "query": "구인배수",
+   "api_total": 2642,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 0,
+   "relevant": 0,
+   "new": 0
+  }
+ ],
+ "articles": [
+  {
+   "title": "외국인 실업급여 77% 중국계 독식…나경원 \"비정상 구조 방치\"",
+   "desc": "외국인 고용보험 가입자의 26%에 불과한 중국인과 중국 동포가 전체 외국인 실업급여의 77%를 수령하고 있음에도, 정부는 이들의 출국이나 재취업 여부조차 파악하지 못하고 있다는 지적이 나왔다. 나경원 국민의힘 의원....",
+   "link": "https://n.news.naver.com/mnews/article/018/0006387472?sid=100",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=02171366645612920&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-10-14 06:28",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[더벨]오픈트레이드, AI로 비상장기업 위험 신호 잡는다",
+   "desc": "공시가 없는 비상장기업도 국민연금·고용보험·산재보험 가입자 추이, 국세청 휴폐업 상태, 법원 회생·파산 공고, DART·금융위원회의 재무·주주·등기 정보로 인력과 재무, 존속 상태를 확인한다. 각 리포트는...",
+   "link": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202610130852353800105779",
+   "originallink": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202610130852353800105779",
+   "press": "thebell.co.kr",
+   "pub": "2026-10-14 07:02",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "데이원컴퍼니 제로베이스, 대·중견기업 진출 비중 절반 넘어.. 청년 고...",
+   "desc": "고용노동부 집계에서도 29세 이하 고용보험 가입자가 48개월 연속 감소하는 등 청년층의 고용 시장 진입 문턱이 점차 높아지는 양상이다. 이러한 고용 한파 속에서도 취업 및 이직을 준비하는 구직자들의 성과...",
+   "link": "https://www.discoverynews.kr/news/articleView.html?idxno=1103998",
+   "originallink": "https://www.discoverynews.kr/news/articleView.html?idxno=1103998",
+   "press": "discoverynews.kr",
+   "pub": "2026-10-14 08:10",
+   "q": "고용보험 가입자",
+   "rel": true
+  }
+ ],
+ "excluded": [
+  {
+   "title": "“근데 월급은 얼마예요?” 물어볼 수도 없고…요즘 취준생들 지원 포기...",
+   "desc": "나머지 약 59%의 공고에서는 구직자가 지원 단계에서 받을 수 있는 급여 수준을 확인하기 어려웠던 셈이다. 한 업체의 경우 채용공고 가운데 ‘회사 내규에 따름’이나 ‘면접 후 결정’ 등 임금을 표시하지 않은...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004670947?sid=102",
+   "originallink": "https://www.sedaily.com/article/20101252?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-10-14 05:55",
+   "q": "구직급여",
+   "rel": false
+  }
+ ]
+}
