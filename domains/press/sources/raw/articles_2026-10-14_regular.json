@@ -6,32 +6,32 @@
   "2026-10-14",
   "2026-10-15"
  ],
- "collected_at": "2026-10-14 08:12",
+ "collected_at": "2026-10-14 09:36",
  "volume": {
-  "collected": 4,
-  "articles": 3,
-  "press": 3,
+  "collected": 6,
+  "articles": 5,
+  "press": 5,
   "queries": 3
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29395,
+   "api_total": 29396,
    "fetched": 100,
    "truncated": false,
-   "in_window": 3,
-   "relevant": 3,
-   "new": 3
+   "in_window": 4,
+   "relevant": 4,
+   "new": 4
   },
   {
    "query": "구직급여",
-   "api_total": 94667,
+   "api_total": 94668,
    "fetched": 100,
    "truncated": false,
-   "in_window": 1,
-   "relevant": 0,
-   "new": 1
+   "in_window": 2,
+   "relevant": 1,
+   "new": 2
   },
   {
    "query": "구인배수",
@@ -66,12 +66,32 @@
   },
   {
    "title": "데이원컴퍼니 제로베이스, 대·중견기업 진출 비중 절반 넘어.. 청년 고...",
-   "desc": "고용노동부 집계에서도 29세 이하 고용보험 가입자가 48개월 연속 감소하는 등 청년층의 고용 시장 진입 문턱이 점차 높아지는 양상이다. 이러한 고용 한파 속에서도 취업 및 이직을 준비하는 구직자들의 성과...",
+   "desc": "고용노동부 집계에서도 29세 이하 고용보험 가입자가 48개월 연속 감소하는 등 청년층의 고용 시장 진입 문턱이 점차 높아지는 양상이다. 이러한 고용 한파 속에서도 취업 및 이직을 준비하는 구직자들의 성과 데이터를...",
    "link": "https://www.discoverynews.kr/news/articleView.html?idxno=1103998",
    "originallink": "https://www.discoverynews.kr/news/articleView.html?idxno=1103998",
    "press": "discoverynews.kr",
    "pub": "2026-10-14 08:10",
    "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[이슈국감] 14만명 연금 사각지대…월 200만원 미만은 후순위",
+   "desc": "두루누리 사회보험료 지원사업은 일반 근로자의 경우 일정 요건을 충족하면 고용보험료와 국민연금 보험료를 지원하지만, 노무제공자에게는 고용보험료만 지원한다. 다만 2026년부터 저소득 지역가입자에 대한...",
+   "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=872531",
+   "originallink": "http://www.hansbiz.co.kr/news/articleView.html?idxno=872531",
+   "press": "hansbiz.co.kr",
+   "pub": "2026-10-14 08:20",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "정년 앞둔 50대, 직장 잃으면 국민연금도 끊길판…年 6만명",
+   "desc": "실업급여(구직급여)를 받는 기간 보험료 일부를 지원하는 실업크레딧 제도가 있지만 2025년 기준 50대 실업크레딧 지원 인원은 22만3676명인데 실업급여 종료 후 이듬해 6개월 안에 지역가입자로 보험료를 한 달 이상...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014251461?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261013_0003824709",
+   "press": "뉴시스",
+   "pub": "2026-10-14 08:33",
+   "q": "구직급여",
    "rel": true
   }
  ],
