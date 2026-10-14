@@ -33722,5 +33722,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-10-12T15:01:10+09:00"
+ },
+ "kiet-is869": {
+  "pick": false,
+  "axis": "",
+  "why": "CPTPP 역내 수출경쟁력 RSCA 분석, 고용 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-14T10:01:07+09:00"
  }
 }

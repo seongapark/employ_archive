@@ -16,6 +16,24 @@
   ]
  },
  {
+  "id": "kiet-is869",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "CPTPP 발효 전후 우리나라의 경쟁력 분석",
+  "authors": [
+   "김지현",
+   "김정현",
+   "천가현"
+  ],
+  "published": "2026-10-13",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=869&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
   "id": "keis-11366",
   "org": "keis",
   "board": "keis-trend",

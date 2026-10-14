@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-13T15:00:42+09:00",
+  "at": "2026-10-14T10:00:45+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -183,13 +183,13 @@
     },
     "kiet-issue": {
       "ok": true,
-      "parsed": 30,
-      "added": 0,
-      "details": 0,
+      "parsed": 60,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 122
+      "total": 123
     },
     "kiet-economy": {
       "ok": true,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3461,
+  "reports": 3462,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -360,6 +360,38 @@
         "total": 31,
         "missing": 12,
         "rate": 0.387
+      }
+    },
+    "kiet": {
+      "i-KIET": {
+        "total": 123,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "월간 산업경제": {
+        "total": 415,
+        "missing": 37,
+        "rate": 0.089
+      },
+      "정책자료": {
+        "total": 37,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구자료": {
+        "total": 82,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "이슈페이퍼": {
+        "total": 82,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구보고서": {
+        "total": 159,
+        "missing": 7,
+        "rate": 0.044
       }
     },
     "keis": {
@@ -477,38 +509,6 @@
         "missing": 11,
         "rate": 1.0
       }
-    },
-    "kiet": {
-      "i-KIET": {
-        "total": 122,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "월간 산업경제": {
-        "total": 415,
-        "missing": 37,
-        "rate": 0.089
-      },
-      "정책자료": {
-        "total": 37,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "연구자료": {
-        "total": 82,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "이슈페이퍼": {
-        "total": 82,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "연구보고서": {
-        "total": 159,
-        "missing": 7,
-        "rate": 0.044
-      }
     }
   },
   "abstract_missing_why": {
@@ -524,22 +524,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 305601,
-    "abstracts_gzip": 3483438,
+    "reports_gzip": 305660,
+    "abstracts_gzip": 3484350,
     "abstracts_shards_gzip": {
       "bok": 295152,
       "kdi": 891632,
       "keis": 256347,
-      "kiet": 708527,
+      "kiet": 709439,
       "kli": 1331780
     }
   },
   "recommend": {
-    "judged": 3461,
+    "judged": 3462,
     "picked": 373,
     "unjudged": 0,
     "profile_version": "5a624049",
     "title_only": 942,
-    "at": "2026-10-12T15:01:10+09:00"
+    "at": "2026-10-14T10:01:07+09:00"
   }
 }
