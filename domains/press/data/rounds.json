@@ -1,5 +1,646 @@
 [
  {
+  "release": "2026-10-14",
+  "month": "2026-09",
+  "label": "'26.9월분",
+  "title": "2026년 9월 고용행정 통계로 본 노동시장 동향",
+  "regular": {
+   "collected": 57,
+   "kept": 50,
+   "cited": 27,
+   "press": 26,
+   "window": [
+    "2026-10-14",
+    "2026-10-15"
+   ],
+   "at": "2026-10-14 16:59",
+   "mentioned": 2,
+   "queries": [
+    "고용보험 가입자",
+    "구직급여",
+    "구인배수",
+    "제조업 고용보험",
+    "건설업 고용보험",
+    "전문과학기술업 고용보험",
+    "비금속광물 고용보험",
+    "전자·통신 고용보험",
+    "기계장비 고용보험",
+    "자동차 고용보험",
+    "기타운송장비 고용보험"
+   ],
+   "anchors": [
+    "고용보험",
+    "피보험자",
+    "구직급여",
+    "구인배수",
+    "고용행정"
+   ]
+  },
+  "follow": null,
+  "coverage": {
+   "section": [
+    {
+     "name": "가입자수 현황",
+     "n": 19
+    },
+    {
+     "name": "구직급여",
+     "n": 3
+    },
+    {
+     "name": "구인·구직",
+     "n": 0
+    }
+   ],
+   "age": [
+    {
+     "name": "29세이하·청년",
+     "n": 14
+    },
+    {
+     "name": "30대",
+     "n": 0
+    },
+    {
+     "name": "40대",
+     "n": 0
+    },
+    {
+     "name": "50대",
+     "n": 0
+    },
+    {
+     "name": "60세이상",
+     "n": 2
+    }
+   ],
+   "industry": [
+    {
+     "name": "제조업",
+     "n": 15
+    },
+    {
+     "name": "건설업",
+     "n": 2
+    },
+    {
+     "name": "반도체",
+     "n": 9
+    },
+    {
+     "name": "조선",
+     "n": 3
+    },
+    {
+     "name": "서비스업",
+     "n": 0
+    },
+    {
+     "name": "도소매업",
+     "n": 0
+    },
+    {
+     "name": "보건복지업",
+     "n": 0
+    }
+   ]
+  },
+  "outside": [
+   {
+    "w": "호황",
+    "n": 3
+   },
+   {
+    "w": "예산",
+    "n": 2
+   }
+  ],
+  "tone": [
+   {
+    "w": "한파",
+    "n": 3
+   },
+   {
+    "w": "회복",
+    "n": 2
+   },
+   {
+    "w": "빨간불",
+    "n": 1
+   },
+   {
+    "w": "훈풍",
+    "n": 1
+   }
+  ],
+  "stance": {
+   "pos": 8,
+   "neg": 9,
+   "neu": 10,
+   "judged": 27,
+   "total": 27,
+   "label": "부정 우세"
+  },
+  "issues": [
+   {
+    "key": "청년",
+    "n": 12,
+    "kw": [
+     "예산",
+     "AI",
+     "견인",
+     "내리막"
+    ],
+    "heads": [
+     {
+      "title": "청년 고용보험 가입자 5만5천명↓…구직급여 年예산 81% 소진",
+      "url": "https://www.yna.co.kr/view/AKR20261014084400530?input=1195m",
+      "press": "연합뉴스"
+     },
+     {
+      "title": "9월 제조업 고용보험 가입자 증가폭 확대…건설·청년은 감소 지속",
+      "url": "https://www.news1.kr/economy/employment-labor/6319431",
+      "press": "뉴스1"
+     },
+     {
+      "title": "반도체 견인 제조업 고용 2개월째 증가…청년 고용 49개월째 역주행",
+      "url": "https://view.asiae.co.kr/article/2026101411115729467",
+      "press": "아시아경제"
+     },
+     {
+      "title": "AI 시대 반도체 고용 7% 뛰었는데…청년 일자리는 5.5만명 줄었다",
+      "url": "https://www.etnews.com/20261014000150",
+      "press": "전자신문"
+     },
+     {
+      "title": "9월 고용보험 가입자 28.8만명↑…제조업 회복에도 청년 고용 한파는 여...",
+      "url": "https://www.ajunews.com/view/20261014112926078",
+      "press": "아주경제"
+     }
+    ]
+   },
+   {
+    "key": "제조업",
+    "n": 7,
+    "kw": [
+     "호황",
+     "두달째"
+    ],
+    "heads": [
+     {
+      "title": "제조업 고용보험 가입자 두달째↑…'반도체 호황' 증가폭 확대",
+      "url": "https://www.newsis.com/view/NISX20261014_0003825490",
+      "press": "뉴시스"
+     },
+     {
+      "title": "9월 고용보험 가입자 28.8만↑…제조업 두 달째 증가",
+      "url": "https://biz.heraldcorp.com/article/10902094?ref=naver",
+      "press": "헤럴드경제"
+     },
+     {
+      "title": "'반도체·조선 밀고 끌어'…제조업 고용 두 달째 증가",
+      "url": "https://www.nocutnews.co.kr/news/6591237?utm_source=naver&utm_medium=article&utm_campaign=20261014120048",
+      "press": "nocutnews.co.kr"
+     },
+     {
+      "title": "반도체 호황에 제조업 고용보험 가입자 2달째 증가",
+      "url": "https://news.tf.co.kr/read/life/2376132.htm",
+      "press": "news.tf.co.kr"
+     },
+     {
+      "title": "지난달 제조업 고용, 2개월 연속 증가",
+      "url": "https://www.viva100.com/article/20261014500710",
+      "press": "viva100.com"
+     }
+    ]
+   },
+   {
+    "key": "전체 가입자",
+    "n": 4,
+    "kw": [],
+    "heads": [
+     {
+      "title": "9월 고용보험 가입자 1593만명…전년 대비 1.8% 증가",
+      "url": "https://www.newspim.com/news/view/20261014000489",
+      "press": "뉴스핌"
+     },
+     {
+      "title": "고용보험 상시가입자 9개월 연속 20만명대 증가…구직급여 신청·지급액...",
+      "url": "https://www.mt.co.kr/economy/2026/10/14/2026101409460773024",
+      "press": "머니투데이"
+     },
+     {
+      "title": "9월 고용보험 가입자 28만8000명↑",
+      "url": "https://www.thereport.co.kr/news/articleView.html?idxno=92259",
+      "press": "thereport.co.kr"
+     },
+     {
+      "title": "9월 고용보험 가입자 29만명↑…9개월째 20만명 후반 증가",
+      "url": "https://www.womennews.co.kr/news/articleView.html?idxno=283299",
+      "press": "여성신문"
+     }
+    ]
+   },
+   {
+    "key": "건설업",
+    "n": 2,
+    "kw": [
+     "반등",
+     "호황"
+    ],
+    "heads": [
+     {
+      "title": "제조업 고용 두 달째 반등⋯건설업 38개월째 한파 지속",
+      "url": "https://www.etoday.co.kr/news/view/2635550",
+      "press": "이투데이"
+     },
+     {
+      "title": "반도체 호황에 제조업 고용 2개월 연속 증가…건설업 38개월째 감소",
+      "url": "https://biz.chosun.com/topics/topics_social/2026/10/14/47XQXG5PEZCTJJQJLRN4EAPNTM/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+      "press": "조선일보"
+     }
+    ]
+   },
+   {
+    "key": "60세이상",
+    "n": 1,
+    "kw": [],
+    "heads": [
+     {
+      "title": "60세 이상 20만명 늘 때 청년은 5만5천명 줄었다…왜?",
+      "url": "https://biz.sbs.co.kr/article_hub/20000339907?division=NAVER",
+      "press": "biz.sbs.co.kr"
+     }
+    ]
+   },
+   {
+    "key": "고령",
+    "n": 1,
+    "kw": [
+     "고령층",
+     "이끌"
+    ],
+    "heads": [
+     {
+      "title": "청년 고용 49개월째 감소…고령층이 고용보험 증가 이끌어",
+      "url": "https://dealsite.co.kr/articles/170652",
+      "press": "dealsite.co.kr"
+     }
+    ]
+   }
+  ],
+  "rivals": [
+   {
+    "topic": "국감",
+    "n": 7,
+    "heads": [
+     {
+      "title": "외국인 실업급여 77% 중국계 독식…나경원 \"비정상 구조 방치\"",
+      "url": "https://www.edaily.co.kr/News/Read?newsId=02171366645612920&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+      "press": "이데일리",
+      "why": "국감 외국인 실업급여 수급 구조 지적"
+     },
+     {
+      "title": "[이슈국감] 14만명 연금 사각지대…월 200만원 미만은 후순위",
+      "url": "http://www.hansbiz.co.kr/news/articleView.html?idxno=872531",
+      "press": "hansbiz.co.kr",
+      "why": "두루누리 보험료 지원 국감 지적"
+     },
+     {
+      "title": "특수고용 노동자 연금 사각지대 14만명…소병훈 \"가입 전환 10.9% 그쳐\"",
+      "url": "https://www.betanews.net/article/view/beta202610140030",
+      "press": "betanews.net",
+      "why": "국감 노무제공자 연금 사각지대 지적"
+     },
+     {
+      "title": "[2026 국감] 특고·플랫폼 14.5만명 연금 미가입 정황…실제 가입률 10.9...",
+      "url": "https://www.newspim.com/news/view/20261014000513",
+      "press": "뉴스핌",
+      "why": "국감 특고 연금 미가입 지적"
+     }
+    ]
+   },
+   {
+    "topic": "국민연금",
+    "n": 4,
+    "heads": [
+     {
+      "title": "정년 앞둔 50대, 실직하면 국민연금 가입 공백…매년 6만명 안팎",
+      "url": "https://www.namdonews.com/news/articleView.html?idxno=926091",
+      "press": "남도일보",
+      "why": "실업크레딧·국민연금 공백 분석"
+     },
+     {
+      "title": "50대 국민연금 공백 매년 6만명 안팎…노후 연금 줄어",
+      "url": "https://news.ifm.kr/news/articleView.html?idxno=481622",
+      "press": "news.ifm.kr",
+      "why": "50대 국민연금 공백 분석"
+     },
+     {
+      "title": "국민연금, 일찍 가입하면 무조건 이득일까…시작하기 전 꼭 알아야 할 ...",
+      "url": "https://www.wikitree.co.kr/articles/1166197",
+      "press": "wikitree.co.kr",
+      "why": "국민연금 가입 안내 해설"
+     },
+     {
+      "title": "특수형태·플랫폼 노동자 83만 명, 국민연금 사각지대 방치",
+      "url": "http://www.jeollailbo.com/news/articleView.html?idxno=813673",
+      "press": "jeollailbo.com",
+      "why": "특고 국민연금 사각지대 지적"
+     }
+    ]
+   },
+   {
+    "topic": "기업",
+    "n": 3,
+    "heads": [
+     {
+      "title": "데이원컴퍼니 제로베이스, 합격 회원 56% 대·중견기업行",
+      "url": "http://www.inews24.com/view/2014922",
+      "press": "아이뉴스24",
+      "why": "기업 수강생 취업실적 홍보"
+     },
+     {
+      "title": "데이원컴퍼니 제로베이스, 청년 취업난 속 합격 데이터 공개…대기업 취...",
+      "url": "https://www.itbiznews.com/news/articleView.html?idxno=227884",
+      "press": "itbiznews.com",
+      "why": "기업 수강생 취업실적 홍보"
+     },
+     {
+      "title": "데이원컴퍼니 제로베이스, 합격자 56% 대·중견기업 취업",
+      "url": "https://www.newspim.com/news/view/20261014000974",
+      "press": "뉴스핌",
+      "why": "기업 수강생 취업실적 홍보"
+     }
+    ]
+   },
+   {
+    "topic": "사각지대",
+    "n": 2,
+    "heads": [
+     {
+      "title": "정년 앞둔 50대, 직장 잃으면 국민연금도 끊길판…年 6만명",
+      "url": "https://www.newsis.com/view/NISX20261013_0003824709",
+      "press": "뉴시스",
+      "why": "실업크레딧 연금 사각지대 분석"
+     },
+     {
+      "title": "특수형태·플랫폼 노동자 83만명, 국민연금 사각지대에 방치",
+      "url": "https://www.news1.kr/bio/welfare-medical/6319947",
+      "press": "뉴스1",
+      "why": "플랫폼 노동자 연금 사각지대"
+     }
+    ]
+   },
+   {
+    "topic": "그 밖",
+    "n": 5,
+    "heads": [
+     {
+      "title": "[더벨]오픈트레이드, AI로 비상장기업 위험 신호 잡는다",
+      "url": "https://www.thebell.co.kr/free/content/ArticleView.asp?key=202610130852353800105779",
+      "press": "thebell.co.kr",
+      "why": "비상장기업 분석 AI 서비스 소개"
+     },
+     {
+      "title": "데이원컴퍼니 제로베이스, 취업 데이터 분석 발표",
+      "url": "http://www.hansbiz.co.kr/news/articleView.html?idxno=872551",
+      "press": "hansbiz.co.kr",
+      "why": "제로베이스 회원 분석, 8월 기준 48개월 수치 인용"
+     },
+     {
+      "title": "탐정업에서의 보험사기 탐지 실적 O건(?), 하지만 실력이 없어 못 잡은 ...",
+      "url": "https://www.siminilbo.co.kr/news/newsview.php?ncode=1160275693777335",
+      "press": "siminilbo.co.kr",
+      "why": "탐정업·보험사기 제도 해설"
+     },
+     {
+      "title": "알바로 내몰리는 청년…고용보험 가입 10년래 최저 [양종곤의 노동 톺아...",
+      "url": "https://www.sedaily.com/article/20101506?ref=naver",
+      "press": "서울경제",
+      "why": "청년 연간 가입자 추세 분석"
+     }
+    ]
+   }
+  ],
+  "graph": {
+   "nodes": [
+    {
+     "id": "고용보험",
+     "axis": "지표",
+     "n": 19
+    },
+    {
+     "id": "가입자",
+     "axis": "지표",
+     "n": 17
+    },
+    {
+     "id": "청년",
+     "axis": "연령",
+     "n": 14
+    },
+    {
+     "id": "제조업",
+     "axis": "산업",
+     "n": 13
+    },
+    {
+     "id": "반도체(전자·통신)",
+     "axis": "산업",
+     "n": 9
+    },
+    {
+     "id": "구직급여",
+     "axis": "지표",
+     "n": 3
+    },
+    {
+     "id": "한파",
+     "axis": "논조",
+     "n": 3
+    },
+    {
+     "id": "호황",
+     "axis": "밖",
+     "n": 3
+    },
+    {
+     "id": "건설업",
+     "axis": "산업",
+     "n": 2
+    },
+    {
+     "id": "예산",
+     "axis": "밖",
+     "n": 2
+    },
+    {
+     "id": "조선(기타운송장비)",
+     "axis": "산업",
+     "n": 2
+    },
+    {
+     "id": "회복",
+     "axis": "논조",
+     "n": 2
+    }
+   ],
+   "edges": [
+    [
+     1,
+     0,
+     17
+    ],
+    [
+     0,
+     2,
+     10
+    ],
+    [
+     1,
+     2,
+     8
+    ],
+    [
+     0,
+     3,
+     7
+    ],
+    [
+     1,
+     3,
+     7
+    ],
+    [
+     4,
+     3,
+     7
+    ],
+    [
+     0,
+     4,
+     4
+    ],
+    [
+     1,
+     4,
+     4
+    ],
+    [
+     3,
+     2,
+     4
+    ],
+    [
+     4,
+     2,
+     4
+    ],
+    [
+     0,
+     5,
+     3
+    ],
+    [
+     3,
+     7,
+     3
+    ],
+    [
+     4,
+     7,
+     3
+    ],
+    [
+     0,
+     6,
+     2
+    ],
+    [
+     0,
+     7,
+     2
+    ],
+    [
+     0,
+     9,
+     2
+    ],
+    [
+     1,
+     5,
+     2
+    ],
+    [
+     1,
+     6,
+     2
+    ],
+    [
+     1,
+     7,
+     2
+    ],
+    [
+     2,
+     6,
+     2
+    ],
+    [
+     2,
+     11,
+     2
+    ],
+    [
+     3,
+     6,
+     2
+    ],
+    [
+     3,
+     10,
+     2
+    ],
+    [
+     3,
+     11,
+     2
+    ],
+    [
+     4,
+     10,
+     2
+    ],
+    [
+     5,
+     2,
+     2
+    ],
+    [
+     5,
+     9,
+     2
+    ],
+    [
+     8,
+     3,
+     2
+    ],
+    [
+     9,
+     2,
+     2
+    ]
+   ],
+   "trimmed": 0
+  },
+  "frames": [],
+  "truncated": [],
+  "unjudged": 0,
+  "judged": true
+ },
+ {
   "release": "2026-09-07",
   "month": "2026-08",
   "label": "'26.8월분",
