@@ -5,15 +5,15 @@
   "label": "'26.9월분",
   "title": "2026년 9월 고용행정 통계로 본 노동시장 동향",
   "regular": {
-   "collected": 57,
-   "kept": 50,
-   "cited": 27,
-   "press": 26,
+   "collected": 59,
+   "kept": 51,
+   "cited": 28,
+   "press": 27,
    "window": [
     "2026-10-14",
     "2026-10-15"
    ],
-   "at": "2026-10-14 16:59",
+   "at": "2026-10-14 18:21",
    "mentioned": 2,
    "queries": [
     "고용보험 가입자",
@@ -41,7 +41,7 @@
    "section": [
     {
      "name": "가입자수 현황",
-     "n": 19
+     "n": 20
     },
     {
      "name": "구직급여",
@@ -49,7 +49,7 @@
     },
     {
      "name": "구인·구직",
-     "n": 0
+     "n": 1
     }
    ],
    "age": [
@@ -136,9 +136,9 @@
   "stance": {
    "pos": 8,
    "neg": 9,
-   "neu": 10,
-   "judged": 27,
-   "total": 27,
+   "neu": 11,
+   "judged": 28,
+   "total": 28,
    "label": "부정 우세"
   },
   "issues": [
@@ -158,14 +158,14 @@
       "press": "연합뉴스"
      },
      {
-      "title": "9월 제조업 고용보험 가입자 증가폭 확대…건설·청년은 감소 지속",
-      "url": "https://www.news1.kr/economy/employment-labor/6319431",
-      "press": "뉴스1"
-     },
-     {
       "title": "반도체 견인 제조업 고용 2개월째 증가…청년 고용 49개월째 역주행",
       "url": "https://view.asiae.co.kr/article/2026101411115729467",
       "press": "아시아경제"
+     },
+     {
+      "title": "9월 제조업 고용보험 가입자 증가폭 확대…건설·청년은 감소 지속",
+      "url": "https://www.news1.kr/economy/employment-labor/6319431",
+      "press": "뉴스1"
      },
      {
       "title": "AI 시대 반도체 고용 7% 뛰었는데…청년 일자리는 5.5만명 줄었다",
@@ -216,7 +216,7 @@
    },
    {
     "key": "전체 가입자",
-    "n": 4,
+    "n": 5,
     "kw": [],
     "heads": [
      {
@@ -238,6 +238,11 @@
       "title": "9월 고용보험 가입자 29만명↑…9개월째 20만명 후반 증가",
       "url": "https://www.womennews.co.kr/news/articleView.html?idxno=283299",
       "press": "여성신문"
+     },
+     {
+      "title": "고용보험 가입자 9개월째 20만명대 후반 증가…구인배수 상승에도 고용...",
+      "url": "https://www.news2day.co.kr/article/20261014500257",
+      "press": "news2day.co.kr"
      }
     ]
    },
@@ -428,12 +433,12 @@
     {
      "id": "고용보험",
      "axis": "지표",
-     "n": 19
+     "n": 20
     },
     {
      "id": "가입자",
      "axis": "지표",
-     "n": 17
+     "n": 18
     },
     {
      "id": "청년",
@@ -490,7 +495,7 @@
     [
      1,
      0,
-     17
+     18
     ],
     [
      0,

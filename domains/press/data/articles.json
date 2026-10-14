@@ -7899,27 +7899,6 @@
     "kw": []
    },
    {
-    "title": "제조업 고용 두 달째 반등⋯건설업 38개월째 한파 지속",
-    "url": "https://www.etoday.co.kr/news/view/2635550",
-    "press": "이투데이",
-    "pub": "2026-10-14 12:00",
-    "cites": true,
-    "judged": true,
-    "why": "9월 가입자 28.8만명 증가 전함",
-    "hits": [
-     "산업:건설업",
-     "산업:제조업"
-    ],
-    "tone": [
-     "한파"
-    ],
-    "stance": "중립",
-    "focus": "주제",
-    "kw": [
-     "반등"
-    ]
-   },
-   {
     "title": "청년 고용보험 가입자 5만5천명↓…구직급여 年예산 81% 소진",
     "url": "https://www.yna.co.kr/view/AKR20261014084400530?input=1195m",
     "press": "연합뉴스",
@@ -7964,6 +7943,27 @@
     ]
    },
    {
+    "title": "제조업 고용 두 달째 반등⋯건설업 38개월째 한파 지속",
+    "url": "https://www.etoday.co.kr/news/view/2635550",
+    "press": "이투데이",
+    "pub": "2026-10-14 12:00",
+    "cites": true,
+    "judged": true,
+    "why": "9월 가입자 28.8만명 증가 전함",
+    "hits": [
+     "산업:건설업",
+     "산업:제조업"
+    ],
+    "tone": [
+     "한파"
+    ],
+    "stance": "중립",
+    "focus": "주제",
+    "kw": [
+     "반등"
+    ]
+   },
+   {
     "title": "고용보험 상시가입자 9개월 연속 20만명대 증가…구직급여 신청·지급액...",
     "url": "https://www.mt.co.kr/economy/2026/10/14/2026101409460773024",
     "press": "머니투데이",
@@ -7976,25 +7976,6 @@
      "지표:고용보험",
      "지표:구직급여",
      "지표:지급액"
-    ],
-    "tone": [],
-    "stance": "중립",
-    "focus": "주제",
-    "kw": []
-   },
-   {
-    "title": "9월 제조업 고용보험 가입자 증가폭 확대…건설·청년은 감소 지속",
-    "url": "https://www.news1.kr/economy/employment-labor/6319431",
-    "press": "뉴스1",
-    "pub": "2026-10-14 12:00",
-    "cites": true,
-    "judged": true,
-    "why": "제조업 증가폭·건설 청년 감소 전함",
-    "hits": [
-     "산업:제조업",
-     "연령:청년",
-     "지표:가입자",
-     "지표:고용보험"
     ],
     "tone": [],
     "stance": "중립",
@@ -8023,23 +8004,46 @@
     ]
    },
    {
-    "title": "반도체 호황에 제조업 고용 2개월 연속 증가…건설업 38개월째 감소",
-    "url": "https://biz.chosun.com/topics/topics_social/2026/10/14/47XQXG5PEZCTJJQJLRN4EAPNTM/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-    "press": "조선일보",
-    "pub": "2026-10-14 12:01",
+    "title": "9월 제조업 고용보험 가입자 증가폭 확대…건설·청년은 감소 지속",
+    "url": "https://www.news1.kr/economy/employment-labor/6319431",
+    "press": "뉴스1",
+    "pub": "2026-10-14 12:00",
     "cites": true,
     "judged": true,
-    "why": "9월 동향 제조업·건설업 증감 전함",
+    "why": "제조업 증가폭·건설 청년 감소 전함",
     "hits": [
-     "산업:건설업",
-     "산업:반도체(전자·통신)",
-     "산업:제조업"
+     "산업:제조업",
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
     ],
     "tone": [],
     "stance": "중립",
     "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "명암 갈리는 경제성장…수출은 반도체, 일자리는 고령층 '쏠림'",
+    "url": "https://www.etnews.com/20261014000157",
+    "press": "전자신문",
+    "pub": "2026-10-14 12:01",
+    "cites": true,
+    "judged": true,
+    "why": "수출 기사에 가입자 증감 끌어 씀",
+    "hits": [
+     "산업:반도체(전자·통신)",
+     "연령:고령"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
     "kw": [
-     "호황"
+     "갈리",
+     "경제성장",
+     "고령층",
+     "명암",
+     "수출",
+     "쏠림"
     ]
    },
    {
@@ -8082,27 +8086,23 @@
     ]
    },
    {
-    "title": "명암 갈리는 경제성장…수출은 반도체, 일자리는 고령층 '쏠림'",
-    "url": "https://www.etnews.com/20261014000157",
-    "press": "전자신문",
+    "title": "반도체 호황에 제조업 고용 2개월 연속 증가…건설업 38개월째 감소",
+    "url": "https://biz.chosun.com/topics/topics_social/2026/10/14/47XQXG5PEZCTJJQJLRN4EAPNTM/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+    "press": "조선일보",
     "pub": "2026-10-14 12:01",
     "cites": true,
     "judged": true,
-    "why": "수출 기사에 가입자 증감 끌어 씀",
+    "why": "9월 동향 제조업·건설업 증감 전함",
     "hits": [
+     "산업:건설업",
      "산업:반도체(전자·통신)",
-     "연령:고령"
+     "산업:제조업"
     ],
     "tone": [],
-    "stance": "부정",
-    "focus": "언급",
+    "stance": "중립",
+    "focus": "주제",
     "kw": [
-     "갈리",
-     "경제성장",
-     "고령층",
-     "명암",
-     "수출",
-     "쏠림"
+     "호황"
     ]
    },
    {
@@ -8306,23 +8306,6 @@
     "kw": []
    },
    {
-    "title": "60세 이상 20만명 늘 때 청년은 5만5천명 줄었다…왜?",
-    "url": "https://biz.sbs.co.kr/article_hub/20000339907?division=NAVER",
-    "press": "biz.sbs.co.kr",
-    "pub": "2026-10-14 14:30",
-    "cites": true,
-    "judged": true,
-    "why": "60세이상 증가·청년 감소 전함",
-    "hits": [
-     "연령:60세이상",
-     "연령:청년"
-    ],
-    "tone": [],
-    "stance": "부정",
-    "focus": "주제",
-    "kw": []
-   },
-   {
     "title": "데이원컴퍼니 제로베이스, 합격자 56% 대·중견기업 취업",
     "url": "https://www.newspim.com/news/view/20261014000974",
     "press": "뉴스핌",
@@ -8340,6 +8323,23 @@
      "중견기업",
      "합격자"
     ]
+   },
+   {
+    "title": "60세 이상 20만명 늘 때 청년은 5만5천명 줄었다…왜?",
+    "url": "https://biz.sbs.co.kr/article_hub/20000339907?division=NAVER",
+    "press": "biz.sbs.co.kr",
+    "pub": "2026-10-14 14:30",
+    "cites": true,
+    "judged": true,
+    "why": "60세이상 증가·청년 감소 전함",
+    "hits": [
+     "연령:60세이상",
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": []
    },
    {
     "title": "지난달 제조업 고용, 2개월 연속 증가",
@@ -8690,6 +8690,24 @@
      "고령층",
      "이끌"
     ]
+   },
+   {
+    "title": "고용보험 가입자 9개월째 20만명대 후반 증가…구인배수 상승에도 고용...",
+    "url": "https://www.news2day.co.kr/article/20261014500257",
+    "press": "news2day.co.kr",
+    "pub": "2026-10-14 17:00",
+    "cites": true,
+    "judged": true,
+    "why": "가입자 28만8천명 증가, 구인배수 0.48 전함",
+    "hits": [
+     "지표:가입자",
+     "지표:고용보험",
+     "지표:구인배수"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "주제",
+    "kw": []
    }
   ],
   "follow": []
