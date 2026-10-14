@@ -2568,6 +2568,32 @@
       },
       "title": "2026년 8월 고용행정 통계로 본 노동시장 동향",
       "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=19896"
+    },
+    "2026-09": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261000796&bbs_seq=20083&bbs_id=12&file_ext=hwpx"
+        },
+        {
+          "type": "pdf",
+          "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261000797&bbs_seq=20083&bbs_id=12&file_ext=pdf"
+        }
+      ],
+      "posted_at": "2026-10-14",
+      "summary": {
+        "lines": [
+          "▣ 고용보험 상시가입자수는 9개월 연속 20만명 후반대 증가",
+          "○ ‘26.9월 고용보험 가입자는 28만 8천명 증가",
+          "○ 보건복지, 숙박음식, 사업서비스 등 서비스업 중심 증가, 제조업은 2개월 연속 증가, 건설업 감소폭은 축소",
+          "○ 청년층 어려움은 지속되나 가입자 감소폭은 축소 경향",
+          "▣ 구직급여 신규신청자, 지급자, 지급액 모두 감소",
+          "▣ 신규구인 증가·신규구직 감소, 구인배수(0.48) 7개월 연속 상승",
+          "* 고용24를 통한 구인동향 해석 시, 미이용 기업의 동향을 함께 고려할 필요"
+        ]
+      },
+      "title": "2026년 9월 고용행정 통계로 본 노동시장 동향",
+      "url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20083"
     }
   },
   "est": {
