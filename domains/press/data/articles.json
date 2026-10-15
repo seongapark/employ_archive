@@ -8726,6 +8726,346 @@
     "kw": []
    }
   ],
-  "follow": []
+  "follow": [
+   {
+    "title": "9월 고용보험 가입자 28만 8000명 늘었지만",
+    "url": "http://www.gjdream.com/news/articleView.html?idxno=673449",
+    "press": "gjdream.com",
+    "pub": "2026-10-15 00:00",
+    "cites": true,
+    "judged": true,
+    "why": "9월 가입자 28만8천명 증가·청년 감소 전함",
+    "hits": [
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "60대 일자리 20만개 늘 때, 20대는 5만개 줄었다",
+    "url": "https://www.chosun.com/national/labor/2026/10/15/KPLSBSCTG5DUJL7ZVXRNKSMIFM/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+    "press": "조선일보",
+    "pub": "2026-10-15 00:46",
+    "cites": true,
+    "judged": true,
+    "why": "가입자 1593만명·28만8천명 증가 전함",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "만개"
+    ]
+   },
+   {
+    "title": "'쉬었음' 줄어든 청년, 고용보험 가입자 감소폭도 '축소'",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237207",
+    "press": "labortoday.co.kr",
+    "pub": "2026-10-15 06:34",
+    "cites": true,
+    "judged": true,
+    "why": "9월 동향의 청년 가입자 감소폭 분석",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "주제",
+    "kw": [
+     "줄어든"
+    ]
+   },
+   {
+    "title": "고용률 전국 1위 제주… 구직 7.5% 늘 때 구인 0.6% 그쳐",
+    "url": "https://www.fnnews.com/news/202610150855434732",
+    "press": "파이낸셜뉴스",
+    "pub": "2026-10-15 08:59",
+    "cites": true,
+    "judged": true,
+    "why": "9월 동향 전국·제주 가입자 수치 전함",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "고용률",
+     "그쳐",
+     "전국",
+     "제주"
+    ]
+   },
+   {
+    "title": "'오늘 광남' 10월 15일 카드뉴스",
+    "url": "http://www.gjdream.com/news/articleView.html?idxno=673461",
+    "press": "gjdream.com",
+    "pub": "2026-10-15 10:12",
+    "cites": false,
+    "judged": true,
+    "why": "지역 뉴스 헤드라인 카드뉴스 모음",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "광남",
+     "카드뉴스"
+    ]
+   },
+   {
+    "title": "육아휴직 18만명 시대… 동료 지원금 못 쓰는 장벽 걷어야",
+    "url": "https://www.womennews.co.kr/news/articleView.html?idxno=283276",
+    "press": "여성신문",
+    "pub": "2026-10-15 11:11",
+    "cites": false,
+    "judged": true,
+    "why": "육아휴직 동료지원금 제도 문제",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "걷어야",
+     "동료",
+     "시대",
+     "육아휴직",
+     "장벽",
+     "지원금"
+    ]
+   },
+   {
+    "title": "[금융家] 보험 ⑨ㅣ 가입자는 늘고 건보 재정은 흔들…보험제도 개선 분...",
+    "url": "https://www.cbci.co.kr/news/articleView.html?idxno=615745",
+    "press": "cbci.co.kr",
+    "pub": "2026-10-15 11:22",
+    "cites": false,
+    "judged": true,
+    "why": "보험권 뉴스 헤드라인 묶음",
+    "hits": [
+     "지표:가입자"
+    ],
+    "tone": [
+     "개선"
+    ],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "건보",
+     "보험제",
+     "재정",
+     "흔들"
+    ]
+   },
+   {
+    "title": "[사설] 고용노동부, 사상 최악 청년 고용 외면해서야",
+    "url": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4087336",
+    "press": "kyongbuk.co.kr",
+    "pub": "2026-10-15 16:06",
+    "cites": true,
+    "judged": true,
+    "why": "9월 가입자·60세이상 20만7천명 인용 사설",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "고용노동부",
+     "사상",
+     "사설",
+     "외면해서야",
+     "최악"
+    ]
+   },
+   {
+    "title": "2030세대 ‘생존형 절약’에 드리운 경제 그늘",
+    "url": "https://www.kukinews.com/article/view/kuk202610150202",
+    "press": "kukinews.com",
+    "pub": "2026-10-15 17:08",
+    "cites": true,
+    "judged": true,
+    "why": "2030 소비 기사에 가입자 수치 인용",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "그늘",
+     "드리운",
+     "생존형",
+     "세대",
+     "절약"
+    ]
+   },
+   {
+    "title": "‘젊은 산업’ ICT 업계도 고령화…45세 이상 급증",
+    "url": "https://www.seoul.co.kr/news/economy/2026/10/15/20261015500288?wlog_tag3=naver",
+    "press": "서울신문",
+    "pub": "2026-10-15 17:24",
+    "cites": true,
+    "judged": true,
+    "why": "고용행정통계 정보통신업 연령별 가입자",
+    "hits": [
+     "연령:고령"
+    ],
+    "tone": [
+     "급증"
+    ],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "ICT",
+     "고령화",
+     "업계"
+    ]
+   },
+   {
+    "title": "‘고용보험 가입자’ 29세 이하 청년층만 줄었다…노동부가 밝힌 이유는",
+    "url": "https://www.nongmin.com/article/20261015500226",
+    "press": "nongmin.com",
+    "pub": "2026-10-15 19:11",
+    "cites": true,
+    "judged": true,
+    "why": "청년 5만5천명 감소 원인 보도",
+    "hits": [
+     "연령:29세이하",
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "이유"
+    ]
+   },
+   {
+    "title": "법정 정년 65세 추진에 강원 노동시장 촉각",
+    "url": "https://www.kado.net/news/articleView.html?idxno=2078502",
+    "press": "kado.net",
+    "pub": "2026-10-16 00:09",
+    "cites": false,
+    "judged": true,
+    "why": "정년 65세 추진과 강원 노동시장 전망",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "강원",
+     "법정",
+     "정년",
+     "촉각",
+     "추진"
+    ]
+   },
+   {
+    "title": "[사설]청년 고용 49개월 연속 감소, 성장 연결 고리 끊겼나",
+    "url": "https://www.edaily.co.kr/News/Read?newsId=01672806645613576&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+    "press": "이데일리",
+    "pub": "2026-10-16 05:02",
+    "cites": true,
+    "judged": true,
+    "why": "제조업 8천명 증가·청년 49개월 감소 사설",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "고리",
+     "끊겼",
+     "사설",
+     "성장",
+     "연결"
+    ]
+   },
+   {
+    "title": "늙어가는 ICT 산업",
+    "url": "https://www.seoul.co.kr/news/economy/industry/2026/10/16/20261016031004?wlog_tag3=naver",
+    "press": "서울신문",
+    "pub": "2026-10-16 05:06",
+    "cites": true,
+    "judged": true,
+    "why": "정보통신업 연령별 가입자 증감 전함",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "ICT",
+     "늙어가"
+    ]
+   },
+   {
+    "title": "(취임 500일)청년 일자리부터 구조개혁까지…집권 2년차 '거센 도전'",
+    "url": "http://www.newstomato.com/ReadNews.aspx?no=1316898&inflow=N",
+    "press": "뉴스토마토",
+    "pub": "2026-10-16 06:02",
+    "cites": true,
+    "judged": true,
+    "why": "취임 500일 평가에 청년 감소 인용",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "거센",
+     "구조개혁",
+     "년차",
+     "집권",
+     "취임"
+    ]
+   },
+   {
+    "title": "전국 감소세 속 대구만 ‘역주행’…지난해 건설업 사고사망자 10년 만...",
+    "url": "https://www.kukinews.com/article/view/kuk202610160010",
+    "press": "kukinews.com",
+    "pub": "2026-10-16 08:24",
+    "cites": false,
+    "judged": true,
+    "why": "건설업 사고사망자 통계가 본론",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "감소세",
+     "대구",
+     "사고사망자",
+     "역주행",
+     "전국",
+     "지난해"
+    ]
+   },
+   {
+    "title": "제조업 고용 27개월만 증가 전환…청년 취업 47개월 연속 감소",
+    "url": "https://www.fnnews.com/news/202610160840205713",
+    "press": "파이낸셜뉴스",
+    "pub": "2026-10-16 08:47",
+    "cites": false,
+    "judged": true,
+    "why": "국가데이터처 경제활동인구조사 기사",
+    "hits": [
+     "산업:제조업",
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": []
+   }
+  ]
  }
 }

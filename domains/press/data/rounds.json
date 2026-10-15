@@ -36,7 +36,18 @@
     "고용행정"
    ]
   },
-  "follow": null,
+  "follow": {
+   "collected": 39,
+   "kept": 17,
+   "cited": 9,
+   "press": 8,
+   "mentioned": 2,
+   "window": [
+    "2026-10-15",
+    "2026-11-04"
+   ],
+   "at": "2026-10-16 08:51"
+  },
   "coverage": {
    "section": [
     {
@@ -640,7 +651,99 @@
    ],
    "trimmed": 0
   },
-  "frames": [],
+  "frames": [
+   {
+    "kw": "청년",
+    "d0": 14,
+    "later": 4,
+    "first": "2026-10-15",
+    "last": "2026-10-16",
+    "state": "유지",
+    "series": [
+     14,
+     3,
+     1
+    ]
+   },
+   {
+    "kw": "제조업",
+    "d0": 13,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸",
+    "series": [
+     13,
+     0,
+     0
+    ]
+   },
+   {
+    "kw": "반도체",
+    "d0": 8,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸",
+    "series": [
+     8,
+     0,
+     0
+    ]
+   },
+   {
+    "kw": "호황",
+    "d0": 3,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸",
+    "series": [
+     3,
+     0,
+     0
+    ]
+   },
+   {
+    "kw": "건설업",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸",
+    "series": [
+     2,
+     0,
+     0
+    ]
+   },
+   {
+    "kw": "예산",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸",
+    "series": [
+     2,
+     0,
+     0
+    ]
+   },
+   {
+    "kw": "조선",
+    "d0": 2,
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸",
+    "series": [
+     2,
+     0,
+     0
+    ]
+   }
+  ],
   "truncated": [],
   "unjudged": 0,
   "judged": true

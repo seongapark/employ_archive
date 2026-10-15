@@ -1,0 +1,512 @@
+{
+ "round_release": "2026-10-14",
+ "mode": "follow",
+ "auth": "HUB",
+ "window": [
+  "2026-10-15",
+  "2026-11-04"
+ ],
+ "collected_at": "2026-10-16 08:51",
+ "volume": {
+  "collected": 39,
+  "articles": 17,
+  "press": 13,
+  "queries": 11
+ },
+ "truncated_queries": [],
+ "queries": [
+  {
+   "query": "고용보험 가입자",
+   "api_total": 29455,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 17,
+   "relevant": 16,
+   "new": 17
+  },
+  {
+   "query": "구직급여",
+   "api_total": 94723,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 21,
+   "relevant": 1,
+   "new": 19
+  },
+  {
+   "query": "구인배수",
+   "api_total": 2661,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 2,
+   "relevant": 1,
+   "new": 0
+  },
+  {
+   "query": "제조업 고용보험",
+   "api_total": 18608,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 10,
+   "relevant": 8,
+   "new": 3
+  },
+  {
+   "query": "건설업 고용보험",
+   "api_total": 8433,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 6,
+   "relevant": 6,
+   "new": 0
+  },
+  {
+   "query": "전문과학기술업 고용보험",
+   "api_total": 311,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 4,
+   "relevant": 4,
+   "new": 0
+  },
+  {
+   "query": "비금속광물 고용보험",
+   "api_total": 125,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 3,
+   "relevant": 3,
+   "new": 0
+  },
+  {
+   "query": "전자·통신 고용보험",
+   "api_total": 3676,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 4,
+   "relevant": 4,
+   "new": 0
+  },
+  {
+   "query": "기계장비 고용보험",
+   "api_total": 1822,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 4,
+   "relevant": 4,
+   "new": 0
+  },
+  {
+   "query": "자동차 고용보험",
+   "api_total": 14001,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 4,
+   "relevant": 4,
+   "new": 0
+  },
+  {
+   "query": "기타운송장비 고용보험",
+   "api_total": 2519,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 4,
+   "relevant": 4,
+   "new": 0
+  }
+ ],
+ "articles": [
+  {
+   "title": "9월 고용보험 가입자 28만 8000명 늘었지만",
+   "desc": "9월 고용보험 가입자가 1년 전보다 28만 8000명(1.8%) 늘었지만, 증가분의 절반 이상을 보건복지업과 숙박음식업이 채운 것으로 나타났다. 연령별로는 60세 이상이 약 72%를 차지했고, 29세 이하는 5만 5000명...",
+   "link": "http://www.gjdream.com/news/articleView.html?idxno=673449",
+   "originallink": "http://www.gjdream.com/news/articleView.html?idxno=673449",
+   "press": "gjdream.com",
+   "pub": "2026-10-15 00:00",
+   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "60대 일자리 20만개 늘 때, 20대는 5만개 줄었다",
+   "desc": "14일 고용노동부가 발표한 ‘고용행정 통계로 본 노동시장 동향’ 자료에 따르면 지난달 고용보험 가입자는 1593만명으로, 지난해 같은 달보다 28만8000명(1.8%) 증가했다. 고용보험이 사업장에 채용된 근로자가...",
+   "link": "https://n.news.naver.com/mnews/article/023/0004003914?sid=102",
+   "originallink": "https://www.chosun.com/national/labor/2026/10/15/KPLSBSCTG5DUJL7ZVXRNKSMIFM/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+   "press": "조선일보",
+   "pub": "2026-10-15 00:46",
+   "q": "고용보험 가입자, 제조업 고용보험, 전문과학기술업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "'쉬었음' 줄어든 청년, 고용보험 가입자 감소폭도 '축소'",
+   "desc": "▲ 편집 김효정 기자 청년층 고용보험 가입자수가 감소세를 벗어나지 못하고 있다. 다만 감소폭은 축소하고 있어 그 원인에 관심이 모아진다. 고용노동부가 14일 발표한 2026년 9월 고용행정 통계로 본 노동시장...",
+   "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237207",
+   "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=237207",
+   "press": "labortoday.co.kr",
+   "pub": "2026-10-15 06:34",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "고용률 전국 1위 제주… 구직 7.5% 늘 때 구인 0.6% 그쳐",
+   "desc": "고용노동부가 14일 발표한 '2026년 9월 고용행정 통계로 본 노동시장 동향'에 따르면 전국 고용보험 가입자는 1593만명으로 전년 동월보다 28만8000명 증가했다. 반면 숙박·음식점업에서는 고용보험 가입자가 5만5800명...",
+   "link": "https://n.news.naver.com/mnews/article/014/0005589489?sid=102",
+   "originallink": "https://www.fnnews.com/news/202610150855434732",
+   "press": "파이낸셜뉴스",
+   "pub": "2026-10-15 08:59",
+   "q": "고용보험 가입자, 구인배수, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "'오늘 광남' 10월 15일 카드뉴스",
+   "desc": "\"진짜야, 그림이야?\" 국제 하이퍼리얼리즘 특별전 전남광주 '첫' 자전거 전담과, 생색만 냈나 고용보험 가입자 28만 8000명 늘었지만 오늘의 날씨 광주·전남 제보를 받습니다",
+   "link": "http://www.gjdream.com/news/articleView.html?idxno=673461",
+   "originallink": "http://www.gjdream.com/news/articleView.html?idxno=673461",
+   "press": "gjdream.com",
+   "pub": "2026-10-15 10:12",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "육아휴직 18만명 시대… 동료 지원금 못 쓰는 장벽 걷어야",
+   "desc": "노동조합 가입자와 30인 이상 사업장 노동자일수록 보상 경험이 많은 것으로 조사됐다. 정부 지원제도의... 지원액은 고용보험 피보험자 수 30인 미만 사업장이 월 최대 60만원, 30인 이상 사업장이 최대 40만원이다. 육아기...",
+   "link": "https://n.news.naver.com/mnews/article/310/0000140839?sid=101",
+   "originallink": "https://www.womennews.co.kr/news/articleView.html?idxno=283276",
+   "press": "여성신문",
+   "pub": "2026-10-15 11:11",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[금융家] 보험 ⑨ㅣ 가입자는 늘고 건보 재정은 흔들…보험제도 개선 분...",
+   "desc": "● 2026-10-14 고용보험 가입자 1,593만명↑…청년층 5만5천명 감소 '이중 흐름' 8월 노동시장 동향 발표 (사진=연합뉴스) 고용보험 상시 가입자 수가 전년 동월 대비 28만8000명 증가했으나, 29세 이하 청년층에서는...",
+   "link": "https://www.cbci.co.kr/news/articleView.html?idxno=615745",
+   "originallink": "https://www.cbci.co.kr/news/articleView.html?idxno=615745",
+   "press": "cbci.co.kr",
+   "pub": "2026-10-15 11:22",
+   "q": "고용보험 가입자, 구직급여, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "[사설] 고용노동부, 사상 최악 청년 고용 외면해서야",
+   "desc": "고용노동부가 발표한 9월 고용행정 통계에 따르면 고용보험 가입자가 1년 새 28만8000명 증가했다. 그러나 증가분의 72%인 20만7000명이 60세 이상이다. 반면 29세 이하 가입자는 5만5000명 줄어 49개월 연속 감소했다. 청년...",
+   "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4087336",
+   "originallink": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4087336",
+   "press": "kyongbuk.co.kr",
+   "pub": "2026-10-15 16:06",
+   "q": "고용보험 가입자, 제조업 고용보험, 전문과학기술업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "2030세대 ‘생존형 절약’에 드리운 경제 그늘",
+   "desc": "고용 한파 속 통계로 드러난 소비 단절 15일 고용노동부의 ‘2026년 9월 고용행정 통계로 본 노동시장 동향’에 따르면 전체 고용보험 상시가입자는 전년 동월 대비 28만8000명 증가하며 완만한 증가세를 보였다. 반면 29세...",
+   "link": "https://www.kukinews.com/article/view/kuk202610150202",
+   "originallink": "https://www.kukinews.com/article/view/kuk202610150202",
+   "press": "kukinews.com",
+   "pub": "2026-10-15 17:08",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "‘젊은 산업’ ICT 업계도 고령화…45세 이상 급증",
+   "desc": "고용노동부의 고용행정 통계에 따르면 정보통신업의 50~59세 고용보험 가입자는 지난달 기준 전년 동월 대비 7238명 늘었다. 60세 이상은 2311명, 40~49세는 226명, 30~39세는 5281명 증가했다. 반면 29세 이하는 1만...",
+   "link": "https://n.news.naver.com/mnews/article/081/0003689384?sid=101",
+   "originallink": "https://www.seoul.co.kr/news/economy/2026/10/15/20261015500288?wlog_tag3=naver",
+   "press": "서울신문",
+   "pub": "2026-10-15 17:24",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "‘고용보험 가입자’ 29세 이하 청년층만 줄었다…노동부가 밝힌 이유는",
+   "desc": "고용보험 상시 가입자 수가 1년 전보다 28만8000명이나 증가했음에도 전 연령층 중 유일하게 29세 이하 청년층만 5만5000명이나 감소한 것으로 나타났다. 청년 취업난이 여전히 심각하다는 사실이 다시 확인되고...",
+   "link": "https://n.news.naver.com/mnews/article/662/0000106186?sid=102",
+   "originallink": "https://www.nongmin.com/article/20261015500226",
+   "press": "nongmin.com",
+   "pub": "2026-10-15 19:11",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "법정 정년 65세 추진에 강원 노동시장 촉각",
+   "desc": "청년 고용보험 가입자는 37개월 연속 감소한 반면 최근 1년간 전체 가입자 증가분의 97.5%를 60세 이상이 차지하면서 정년연장에 따른 기업의 인건비 부담과 청년 신규채용에 대한 우려도 제기되고 있다. 15일 본지...",
+   "link": "https://n.news.naver.com/mnews/article/654/0000205751?sid=101",
+   "originallink": "https://www.kado.net/news/articleView.html?idxno=2078502",
+   "press": "kado.net",
+   "pub": "2026-10-16 00:09",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "[사설]청년 고용 49개월 연속 감소, 성장 연결 고리 끊겼나",
+   "desc": "9월 제조업 고용보험 가입자는 전년보다 8000명 늘며 두 달 연속 증가했다. 반도체가 포함된 전자·통신과 기계장비 업종의 증가세가 두드러졌다. 수출과 설비투자가 늘어난 긍정적 효과가 반영됐다. 산업 활력이 일자리...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006389019?sid=110",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=01672806645613576&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-10-16 05:02",
+   "q": "고용보험 가입자, 제조업 고용보험, 전자·통신 고용보험, 기계장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "늙어가는 ICT 산업",
+   "desc": "고용노동부의 고용행정 통계에 따르면 정보통신업의 50~59세 고용보험 가입자는 지난달 기준 전년 동월 대비 7238명 늘었다. 60세 이상은 2311명, 40~49세는 226명, 30~39세는 5281명 증가했다. 반면 29세 이하는 1만...",
+   "link": "https://n.news.naver.com/mnews/article/081/0003689515?sid=101",
+   "originallink": "https://www.seoul.co.kr/news/economy/industry/2026/10/16/20261016031004?wlog_tag3=naver",
+   "press": "서울신문",
+   "pub": "2026-10-16 05:06",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "(취임 500일)청년 일자리부터 구조개혁까지…집권 2년차 '거센 도전'",
+   "desc": "같은 날 노동부가 발표한 '9월 고용행정 통계로 본 노동시장 동향'에 따르면 전 연령층에서 고용보험 가입자가 증가한 가운데 29세 이하 청년층만 전년 동월 대비 5만5000명 감소해 유일하게 감소세를 보였습니다. 멈춰 선...",
+   "link": "http://www.newstomato.com/ReadNews.aspx?no=1316898&inflow=N",
+   "originallink": "http://www.newstomato.com/ReadNews.aspx?no=1316898&inflow=N",
+   "press": "뉴스토마토",
+   "pub": "2026-10-16 06:02",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "전국 감소세 속 대구만 ‘역주행’…지난해 건설업 사고사망자 10년 만...",
+   "desc": "전국 건설업 고용보험 가입자 수가 37개월 연속 감소하는 등 장기화된 건설 불황의 영향으로 전국의 연간 사고사망자는 2021년 417명, 2022년 402명, 2023년 356명, 2024년 328명으로 전반적인 감소세를 보였다. 지난해 소폭...",
+   "link": "https://www.kukinews.com/article/view/kuk202610160010",
+   "originallink": "https://www.kukinews.com/article/view/kuk202610160010",
+   "press": "kukinews.com",
+   "pub": "2026-10-16 08:24",
+   "q": "고용보험 가입자, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "제조업 고용 27개월만 증가 전환…청년 취업 47개월 연속 감소",
+   "desc": "제조업 취업자 수가 올해 9월 1만6000명 증가하면서 27개월 만에 증가 전환했다. 화학물질·금속가공... 국가데이터처 관계자는 \"청년층 고용률은 금융보험업, 운수창고업 등 일부에서 증가했지만, 정보통신...",
+   "link": "https://n.news.naver.com/mnews/article/014/0005590111?sid=101",
+   "originallink": "https://www.fnnews.com/news/202610160840205713",
+   "press": "파이낸셜뉴스",
+   "pub": "2026-10-16 08:47",
+   "q": "제조업 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  }
+ ],
+ "excluded": [
+  {
+   "title": "“K뷰티-AI테크 새 일자리 정보 가득”… 현장서 채용 상담도",
+   "desc": "● K뷰티 세계적 인기에 외국인 구직자도 발길 올해 행사에서 뜨거운 관심을 받은 곳은 처음으로 마련된... 김 씨는 “60세가 넘으니 취업이 쉽지 않다”며 “급여가 적더라도 오래 일할 수 있는 일자리를 찾고 싶다”고...",
+   "link": "https://n.news.naver.com/mnews/article/020/0003755061?sid=101",
+   "originallink": "https://www.donga.com/news/Economy/article/all/20261015/134843936/2",
+   "press": "동아일보",
+   "pub": "2026-10-15 04:32",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "정년 앞둔 50대, 직장 잃으면 국민연금도 끊겨",
+   "desc": "실업급여(구직급여)를 받는 동안 보험료 일부를 지원하는 실업크레딧도 끝나고 나면 공백이 컸다. 지난해 50대 실업크레딧 지원 인원은 22만3676명이었는데, 구직급여가 끝난 뒤 이듬해 6개월 안에 지역가입자로...",
+   "link": "https://n.news.naver.com/mnews/article/022/0004166841?sid=101",
+   "originallink": "https://www.segye.com/newsView/20261014521775?OutUrl=naver",
+   "press": "세계일보",
+   "pub": "2026-10-15 07:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"은행원 수천 명을 AI 개발자로\"…日, 사무·영업직 대전환",
+   "desc": "직무 전환에 따른 급여 체계는 추후 결정할 예정이다. 전환 대상자는 3개월간 전문 교육을 받은 뒤 곧바로 AI... 구직자 1명당 10개 이상의 일자리가 있다는 의미다. 생성형 AI 개발과 사이버 보안 분야를 중심으로 수요가...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005342706?sid=104",
+   "originallink": "https://www.hankyung.com/article/202610152884i",
+   "press": "한국경제",
+   "pub": "2026-10-15 08:13",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "美 유나이티드헬스, 3분기 영업이익 53% 껑충…악재 딛고 크게 반등",
+   "desc": "고용주 지원 건강보험 가입자는 16만 5000명 줄었고, 메디케이드 가입자도 자격 기준 변경으로 8만 5000명이 이탈했다. 지난해 말 이후 메디케어 어드밴티지 고객 93만 5000명도 빠져나갔다. 회사는 기술 투자가 전체...",
+   "link": "https://www.g-enews.com/view.php?ud=202610141055466383fda4f5ab74_1",
+   "originallink": "https://www.g-enews.com/view.php?ud=202610141055466383fda4f5ab74_1",
+   "press": "g-enews.com",
+   "pub": "2026-10-15 08:16",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "FBI, 北 위장 취업망 적발…노트북 팜 대거 해체",
+   "desc": "이 과정에서 기업 내부망과 민감한 정보에 접근했으며, 급여로 확보한 자금은 북한으로 송금됐다. FBI는... 구직자에게도 면접 대행이나 노트북 보관을 요구하는 허위 구인 광고를 경계하라고 당부했다.",
+   "link": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=707249",
+   "originallink": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=707249",
+   "press": "digitaltoday.co.kr",
+   "pub": "2026-10-15 08:54",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“입소문 탔다”···‘서울 프리랜서 온’ 출시 8개월만 누적회원 3천...",
+   "desc": "그러던 중 프리랜서의 포트폴리오 관리부터 급여 관리까지 지원하는 ‘서울 프리랜서 온’이 사업자에게도... 서울 프리랜서 온은 안심결제뿐 아니라 구인·구직에 필요한 프리랜서 프로필과 일거리 정보, 프리랜서 경력...",
+   "link": "https://n.news.naver.com/mnews/article/032/0003476435?sid=102",
+   "originallink": "https://www.khan.co.kr/article/202610151116001",
+   "press": "경향신문",
+   "pub": "2026-10-15 11:16",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "1178만명의 절실한 바람…하나금융이 인천서 마련한 '뜻밖의 기회'",
+   "desc": "구직자를 위한 재도약 프로그램 등을 운영한다.퇴직 직후 새로운 직장을 찾는 사람뿐 아니라 현재 직장에 다니면서 향후 경력 전환을 준비하는 중장년도 상담을 받을 수 있다. 재취업을 준비할 때는 직무와 급여 외에도...",
+   "link": "https://www.wikitree.co.kr/articles/1166440",
+   "originallink": "https://www.wikitree.co.kr/articles/1166440",
+   "press": "wikitree.co.kr",
+   "pub": "2026-10-15 12:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "인천 영종구, 첫 일자리 박람회 개최…20개 기업 현장 채용 나서",
+   "desc": "현장 면접에 참여한 실업급여 수급자에게는 구직활동인증 확인서를 발급하며, 국민취업지원제도에 대한 안내도 진행한다. 부대행사로는 이력서 사진 촬영과 퍼스널컬러 진단이 마련된다. 영종구자원봉사센터가...",
+   "link": "https://www.m-i.kr/news/articleView.html?idxno=2006320",
+   "originallink": "https://www.m-i.kr/news/articleView.html?idxno=2006320",
+   "press": "m-i.kr",
+   "pub": "2026-10-15 13:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "전남광주 북구, '200여 개 기업 집결'... 온라인 채용관 본격 가동",
+   "desc": "구직자는 기업들이 등록한 모집 요강을 원하는 직종과 근무 지역, 급여 및 복리후생 등 다채로운 근무 조건에 따라 체계적으로 비교 분석할 수 있어 개인의 적성과 역량에 부합하는 일자리를 맞춤형으로 탐색할 수 있다....",
+   "link": "https://www.newsworker.co.kr/news/articleView.html?idxno=508784",
+   "originallink": "https://www.newsworker.co.kr/news/articleView.html?idxno=508784",
+   "press": "newsworker.co.kr",
+   "pub": "2026-10-15 14:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "영종구, 출범 첫 일자리 박람회 29일 개최",
+   "desc": "특히 현장 면접에 참여한 실업급여 수급자에게는 '구직활동인증 확인서'를 발급하고, 국민취업지원제도에 대한 안내와 홍보도 진행한다. 취업 준비에 도움을 주는 다양한 부대행사도 마련된다. 행사장에서는 이력서용...",
+   "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5072283",
+   "originallink": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5072283",
+   "press": "shinailbo.co.kr",
+   "pub": "2026-10-15 15:08",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "영종구, 구직자와 함께하는‘일자리박람회’ 29일 열린다.",
+   "desc": "특히 현장 면접에 참여한 실업급여 수급자에게 ‘구직활동인증 확인서’를 발급하고, 국민취업지원제도와 관련한 안내·홍보도 진행하며 구직자들의 원활한 취업...",
+   "link": "http://www.breaknews.com/1243269",
+   "originallink": "http://www.breaknews.com/1243269",
+   "press": "breaknews.com",
+   "pub": "2026-10-15 15:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“연봉도 중요하지만 성장할 수 있어야죠”⋯SEDEX 달군 반도체 취업 열...",
+   "desc": "이투데이=손희정 기자 | 10개 기업 현장 면접…구직자 약 300명 신청 교복 차림 고교생부터 대학생... 기준으로 급여뿐 아니라 입사 후 교육과 성장 환경을 꼽았다. 한국공학대학교 나노반도체공학전공 4학년에 재학 중인...",
+   "link": "https://www.etoday.co.kr/news/view/2636280",
+   "originallink": "https://www.etoday.co.kr/news/view/2636280",
+   "press": "이투데이",
+   "pub": "2026-10-15 16:22",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "영종구, 출범 후 첫 일자리박람회…29일 기업 20곳 현장면접",
+   "desc": "현장 면접에 참여한 실업급여 수급자에게는 취업활동 실적으로 활용할 수 있는 ‘구직활동인증 확인서’를 발급하고, 국민취업지원제도에 대한 안내와 상담도 진행한다. 취업 준비를 돕기 위한 부대 프로그램으로는...",
+   "link": "https://www.thepowernews.co.kr/view.php?ud=202610151645153323dfcd109a8_7",
+   "originallink": "https://www.thepowernews.co.kr/view.php?ud=202610151645153323dfcd109a8_7",
+   "press": "thepowernews.co.kr",
+   "pub": "2026-10-15 16:56",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[딜 인사이드] 비급여 의약품 중심 성장…흑자전환은 과제 I 블루엠텍③",
+   "desc": "산은인베스트먼트에 경영권 매각을 추진 중인 블루엠텍이 비급여 의약품을 중심으로 외형 성장을... 블루엠텍은 약국 대상 플랫폼 '쿨팜'과 의료진 구인·구직 플랫폼 '블루닥'도 운영하고 있다. 제약사 광고·마케팅...",
+   "link": "https://n.news.naver.com/mnews/article/293/0000091655?sid=101",
+   "originallink": "https://www.bloter.net/news/articleView.html?idxno=675804",
+   "press": "bloter.net",
+   "pub": "2026-10-15 17:11",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "8월 중 영동지역 실물경제…소비, 서비스업 생산, 고용은 개선",
+   "desc": "8월 중 영동지역 실물경제는 투자, 제조업 생산이 둔화됐으나 소비, 서비스업 생산, 고용은 개선된 것으로... 고용보험 피보험자는 서비스업(+2.5%)을 중심으로 전년동월대비 증가(+1.6%)했다. 실물경제 동향 조사 대상...",
+   "link": "https://n.news.naver.com/mnews/article/087/0001224083?sid=102",
+   "originallink": "https://www.kwnews.co.kr/article/20261015501379",
+   "press": "kwnews.co.kr",
+   "pub": "2026-10-15 17:36",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "실업급여 받을 수 있을까?…수급 조건은",
+   "desc": "실업급여 가운데 구직급여를 받기 위해서는 우선 퇴사 사유를 살펴볼 필요가 있다. 일반적으로 회사의 경영상 어려움에 따른 권고사직이나 계약기간 만료, 정리해고 등 본인의 의사와 관계없이 직장을 떠난 경우가 주요...",
+   "link": "https://www.cbci.co.kr/news/articleView.html?idxno=615968",
+   "originallink": "https://www.cbci.co.kr/news/articleView.html?idxno=615968",
+   "press": "cbci.co.kr",
+   "pub": "2026-10-15 18:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "실업급여 신청 후 베니스 여우주연상 거머쥔 배우",
+   "desc": "그 안에 들어가면 마치 무대에 오른 기분이 들었다.\" 한편 아르셀은 베니스영화제에서 작품을 선보인 뒤, 여우주연상을 받기 전 덴마크로 돌아가 구직센터 면담에 참석한 사실로도 화제를 모았다. 실업급여를 받기...",
+   "link": "https://n.news.naver.com/mnews/article/047/0002532359?sid=103",
+   "originallink": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003275585&CMPT_CD=P0010&utm_source=naver&utm_medium=newsearch&utm_campaign=naver_news",
+   "press": "ohmynews.com",
+   "pub": "2026-10-15 18:21",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“AI 대체 직무 재교육 지원 강화하고, 새 기술 배워 생산성 높인 만큼...",
+   "desc": "일자리를 잃거나 불안정한 고용으로 밀려나는 계층을 보호할 고용보험 등 사회안전망 보강도 과제로 들었다. 김영문 전북대 명예교수는 AI와 로봇이 결합한 제조업 자동화가 근로자에게 미치는 영향도 살펴야 한다고...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006388925?sid=102",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=05494006645613248&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-10-15 18:34",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "영종구 첫 일자리박람회 29일 운서역 광장서 개최…20개 기업 현장 채용",
+   "desc": "현장 면접에 참여한 실업급여 수급자에게는 ‘구직활동인증 확인서’를 발급해 구직활동 증빙을 지원할 예정이다. 이와 함께 국민취업지원제도에 대한 안내와 홍보도 진행해 구직자들이 활용할 수 있는 취업 지원 정책을...",
+   "link": "https://www.livesnews.com/news/article.html?no=65015",
+   "originallink": "https://www.livesnews.com/news/article.html?no=65015",
+   "press": "livesnews.com",
+   "pub": "2026-10-15 20:04",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "프리랜서 수급·급여 관리 플랫폼 ‘서울 프리랜서 온’ 입소문 탔다",
+   "desc": "그러던 중 프리랜서의 포트폴리오부터 급여 관리까지 지원하는 서울 프리랜서 온이 사업자에게도... 서울 프리랜서 온은 안심결제뿐 아니라 구인·구직에 필요한 프리랜서 프로필과 일거리 정보, 프리랜서 경력 관리...",
+   "link": "https://n.news.naver.com/mnews/article/032/0003476606?sid=102",
+   "originallink": "https://www.khan.co.kr/article/202610152132035",
+   "press": "경향신문",
+   "pub": "2026-10-15 21:32",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "'인천 영종구' 첫 발걸음… 구직자와 함께하는 '일자리박람회' 운서역 ...",
+   "desc": "특히 현장 면접에 참여한 실업급여 수급자에게 '구직활동인증 확인서'를 발급하고, 국민취업지원제도와 관련한 안내·홍보도 진행하며 구직자들의 원활한 취업 활동을 도울 방침이다. 손화정 구청장은 \"이번 일자리...",
+   "link": "https://www.cnbnews.com/news/articleView.html?idxno=1019578",
+   "originallink": "https://www.cnbnews.com/news/articleView.html?idxno=1019578",
+   "press": "cnbnews.com",
+   "pub": "2026-10-15 21:52",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "노동자 신고사건 586일 넘게 방치…노동부 지방관서 부실행정 적발",
+   "desc": "구직자가 소득 발생 사실을 신고하지 않거나 거짓으로 신고한 채 국민취업지원제도 구직촉진수당과 실업급여 등을 받은 사례도 드러났다. 의원실은 수백만원에서 수천만원 규모의 부적정 지급 사례가 확인됐다고...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002710036?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10904348?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-10-16 07:20",
+   "q": "구직급여",
+   "rel": false
+  }
+ ]
+}
