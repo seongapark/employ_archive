@@ -1015,6 +1015,25 @@
   ]
  },
  {
+  "id": "kiet-pp836",
+  "org": "kiet",
+  "board": "kiet-paper",
+  "series": "이슈페이퍼",
+  "title": "순환경제 전환요인 분석과 국제협력 방안 - 아세안을 중심으로",
+  "authors": [
+   "이상원"
+  ],
+  "published": "2026-08-07",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/paperView?paper_no=836&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "고용형태",
+   "노동전환"
+  ]
+ },
+ {
   "id": "kiet-is864",
   "org": "kiet",
   "board": "kiet-issue",

@@ -33731,5 +33731,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-10-14T10:01:07+09:00"
+ },
+ "kiet-pp836": {
+  "pick": false,
+  "axis": "",
+  "why": "아세안 순환경제 전환요인 패널분석, 고용 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-15T15:00:54+09:00"
  }
 }
