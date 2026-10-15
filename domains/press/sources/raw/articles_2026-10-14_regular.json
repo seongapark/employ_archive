@@ -6,99 +6,36 @@
   "2026-10-14",
   "2026-10-15"
  ],
- "collected_at": "2026-10-14 18:21",
+ "collected_at": "2026-10-15 09:06",
  "volume": {
-  "collected": 59,
-  "articles": 51,
-  "press": 39,
+  "collected": 61,
+  "articles": 52,
+  "press": 40,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29438,
+   "api_total": 29443,
    "fetched": 100,
    "truncated": false,
-   "in_window": 46,
-   "relevant": 46,
-   "new": 46
+   "in_window": 47,
+   "relevant": 47,
+   "new": 47
   },
   {
    "query": "구직급여",
-   "api_total": 94701,
+   "api_total": 94707,
    "fetched": 100,
    "truncated": false,
-   "in_window": 35,
-   "relevant": 27,
-   "new": 13
+   "in_window": 37,
+   "relevant": 28,
+   "new": 14
   },
   {
    "query": "구인배수",
-   "api_total": 2659,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 17,
-   "relevant": 17,
-   "new": 0
-  },
-  {
-   "query": "제조업 고용보험",
-   "api_total": 18598,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 31,
-   "relevant": 31,
-   "new": 0
-  },
-  {
-   "query": "건설업 고용보험",
-   "api_total": 8427,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 24,
-   "relevant": 24,
-   "new": 0
-  },
-  {
-   "query": "전문과학기술업 고용보험",
-   "api_total": 307,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 14,
-   "relevant": 14,
-   "new": 0
-  },
-  {
-   "query": "비금속광물 고용보험",
-   "api_total": 122,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 15,
-   "relevant": 12,
-   "new": 0
-  },
-  {
-   "query": "전자·통신 고용보험",
-   "api_total": 3672,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 20,
-   "relevant": 18,
-   "new": 0
-  },
-  {
-   "query": "기계장비 고용보험",
-   "api_total": 1818,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 21,
-   "relevant": 20,
-   "new": 0
-  },
-  {
-   "query": "자동차 고용보험",
-   "api_total": 13997,
+   "api_total": 2661,
    "fetched": 100,
    "truncated": false,
    "in_window": 18,
@@ -106,12 +43,75 @@
    "new": 0
   },
   {
-   "query": "기타운송장비 고용보험",
-   "api_total": 2515,
+   "query": "제조업 고용보험",
+   "api_total": 18600,
    "fetched": 100,
    "truncated": false,
-   "in_window": 23,
-   "relevant": 23,
+   "in_window": 32,
+   "relevant": 32,
+   "new": 0
+  },
+  {
+   "query": "건설업 고용보험",
+   "api_total": 8429,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 25,
+   "relevant": 25,
+   "new": 0
+  },
+  {
+   "query": "전문과학기술업 고용보험",
+   "api_total": 309,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 15,
+   "relevant": 15,
+   "new": 0
+  },
+  {
+   "query": "비금속광물 고용보험",
+   "api_total": 123,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 16,
+   "relevant": 13,
+   "new": 0
+  },
+  {
+   "query": "전자·통신 고용보험",
+   "api_total": 3673,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 21,
+   "relevant": 19,
+   "new": 0
+  },
+  {
+   "query": "기계장비 고용보험",
+   "api_total": 1819,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 22,
+   "relevant": 21,
+   "new": 0
+  },
+  {
+   "query": "자동차 고용보험",
+   "api_total": 13998,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 19,
+   "relevant": 19,
+   "new": 0
+  },
+  {
+   "query": "기타운송장비 고용보험",
+   "api_total": 2516,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 24,
+   "relevant": 24,
    "new": 0
   }
  ],
@@ -217,6 +217,36 @@
    "rel": true
   },
   {
+   "title": "반도체 견인 제조업 고용 2개월째 증가…청년 고용 49개월째 역주행",
+   "desc": "반도체·조선업 고용이 호조를 보이면서 제조업 고용보험 가입자가 2개월 연속 증가했다. 제조업 전체 증가 폭도 확대됐지만, 고용허가제 외국인 가입자를 제외하면 여전히 감소세를 보여 업황 개선이 고용...",
+   "link": "https://n.news.naver.com/mnews/article/277/0005828375?sid=101",
+   "originallink": "https://view.asiae.co.kr/article/2026101411115729467",
+   "press": "아시아경제",
+   "pub": "2026-10-14 12:00",
+   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "9월 제조업 고용보험 가입자 증가폭 확대…건설·청년은 감소 지속",
+   "desc": "지난달 제조업 고용보험 가입자가 2개월 연속 증가하며 증가폭도 확대됐다. 반도체와 선박 건조업의 증가세가 이어졌지만 고용허가제 외국인을 제외한 제조업 가입자는 여전히 감소했다. 건설업은...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009226888?sid=101",
+   "originallink": "https://www.news1.kr/economy/employment-labor/6319431",
+   "press": "뉴스1",
+   "pub": "2026-10-14 12:00",
+   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "고용보험 상시가입자 9개월 연속 20만명대 증가…구직급여 신청·지급액...",
+   "desc": "9월 고용보험 상시가입자가 전년 대비 28만8000명 늘어나며 9개월 연속 20만명 후반대 증가세를 이어갔다. 구직급여 신규 신청자와 지급자, 지급액은 모두 감소했다. 14일 고용노동부가 발표한 2026년 9월...",
+   "link": "https://n.news.naver.com/mnews/article/008/0005426139?sid=101",
+   "originallink": "https://www.mt.co.kr/economy/2026/10/14/2026101409460773024",
+   "press": "머니투데이",
+   "pub": "2026-10-14 12:00",
+   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
    "title": "9월 고용보험 가입자 1593만명…전년 대비 1.8% 증가",
    "desc": "고용보험 가입자 증가 폭이 올해 들어 9개월 연속 20만명대를 기록한 것으로 나타났다. 고용보험 가입자는 29세 이하를 제외한 모든 연령대에서 늘어났다. 구직자 1인당 일자리 수를 나타내는 구인배수는 7개월...",
    "link": "https://www.newspim.com/news/view/20261014000489",
@@ -257,46 +287,6 @@
    "rel": true
   },
   {
-   "title": "고용보험 상시가입자 9개월 연속 20만명대 증가…구직급여 신청·지급액...",
-   "desc": "9월 고용보험 상시가입자가 전년 대비 28만8000명 늘어나며 9개월 연속 20만명 후반대 증가세를 이어갔다. 구직급여 신규 신청자와 지급자, 지급액은 모두 감소했다. 14일 고용노동부가 발표한 2026년 9월...",
-   "link": "https://n.news.naver.com/mnews/article/008/0005426139?sid=101",
-   "originallink": "https://www.mt.co.kr/economy/2026/10/14/2026101409460773024",
-   "press": "머니투데이",
-   "pub": "2026-10-14 12:00",
-   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
-   "rel": true
-  },
-  {
-   "title": "반도체 견인 제조업 고용 2개월째 증가…청년 고용 49개월째 역주행",
-   "desc": "반도체·조선업 고용이 호조를 보이면서 제조업 고용보험 가입자가 2개월 연속 증가했다. 제조업 전체 증가 폭도 확대됐지만, 고용허가제 외국인 가입자를 제외하면 여전히 감소세를 보여 업황 개선이 고용...",
-   "link": "https://n.news.naver.com/mnews/article/277/0005828375?sid=101",
-   "originallink": "https://view.asiae.co.kr/article/2026101411115729467",
-   "press": "아시아경제",
-   "pub": "2026-10-14 12:00",
-   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
-   "rel": true
-  },
-  {
-   "title": "9월 제조업 고용보험 가입자 증가폭 확대…건설·청년은 감소 지속",
-   "desc": "지난달 제조업 고용보험 가입자가 2개월 연속 증가하며 증가폭도 확대됐다. 반도체와 선박 건조업의 증가세가 이어졌지만 고용허가제 외국인을 제외한 제조업 가입자는 여전히 감소했다. 건설업은...",
-   "link": "https://n.news.naver.com/mnews/article/421/0009226888?sid=101",
-   "originallink": "https://www.news1.kr/economy/employment-labor/6319431",
-   "press": "뉴스1",
-   "pub": "2026-10-14 12:00",
-   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
-   "rel": true
-  },
-  {
-   "title": "명암 갈리는 경제성장…수출은 반도체, 일자리는 고령층 '쏠림'",
-   "desc": "정보통신산업(ICT) 수출의 80% 이상을 반도체가 차지했고, 고용보험 가입자 증가분의 약 72%는 60세 이상이었다. 반면 29세 이하 청년 가입자는 5만5000명 줄었다. 14일 산업통상부와 과학기술정보통신부에 따르면...",
-   "link": "https://n.news.naver.com/mnews/article/030/0003474894?sid=100",
-   "originallink": "https://www.etnews.com/20261014000157",
-   "press": "전자신문",
-   "pub": "2026-10-14 12:01",
-   "q": "고용보험 가입자, 제조업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
-   "rel": true
-  },
-  {
    "title": "9월 고용보험 가입자 28.8만↑…제조업 두 달째 증가",
    "desc": "반도체와 조선, 기계장비 업종의 고용이 늘면서 제조업 고용보험 가입자가 두 달 연속 증가했다. 증가 폭도 지난달보다 커졌다. 다만 고용허가제 외국인 근로자를 제외하면 제조업 가입자는 여전히...",
    "link": "https://n.news.naver.com/mnews/article/016/0002709198?sid=101",
@@ -327,13 +317,13 @@
    "rel": true
   },
   {
-   "title": "'반도체·조선 밀고 끌어'…제조업 고용 두 달째 증가",
-   "desc": "제조업 고용보험 가입자가 두 달 연속 늘었다. 증가 폭도 8천 명으로 커졌다. 고용노동부가 14일 발표한 '2026년 9월 고용행정 통계로 본 노동시장 동향'에 따르면, 지난달 말 기준 제조업 고용보험 상시가입자는...",
-   "link": "https://n.news.naver.com/mnews/article/079/0004198607?sid=102",
-   "originallink": "https://www.nocutnews.co.kr/news/6591237?utm_source=naver&utm_medium=article&utm_campaign=20261014120048",
-   "press": "nocutnews.co.kr",
-   "pub": "2026-10-14 12:02",
-   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "title": "명암 갈리는 경제성장…수출은 반도체, 일자리는 고령층 '쏠림'",
+   "desc": "정보통신산업(ICT) 수출의 80% 이상을 반도체가 차지했고, 고용보험 가입자 증가분의 약 72%는 60세 이상이었다. 반면 29세 이하 청년 가입자는 5만5000명 줄었다. 14일 산업통상부와 과학기술정보통신부에 따르면...",
+   "link": "https://n.news.naver.com/mnews/article/030/0003474894?sid=100",
+   "originallink": "https://www.etnews.com/20261014000157",
+   "press": "전자신문",
+   "pub": "2026-10-14 12:01",
+   "q": "고용보험 가입자, 제조업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
    "rel": true
   },
   {
@@ -344,6 +334,16 @@
    "press": "아주경제",
    "pub": "2026-10-14 12:02",
    "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 비금속광물 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "'반도체·조선 밀고 끌어'…제조업 고용 두 달째 증가",
+   "desc": "제조업 고용보험 가입자가 두 달 연속 늘었다. 증가 폭도 8천 명으로 커졌다. 고용노동부가 14일 발표한 '2026년 9월 고용행정 통계로 본 노동시장 동향'에 따르면, 지난달 말 기준 제조업 고용보험 상시가입자는...",
+   "link": "https://n.news.naver.com/mnews/article/079/0004198607?sid=102",
+   "originallink": "https://www.nocutnews.co.kr/news/6591237?utm_source=naver&utm_medium=article&utm_campaign=20261014120048",
+   "press": "nocutnews.co.kr",
+   "pub": "2026-10-14 12:02",
+   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
    "rel": true
   },
   {
@@ -427,16 +427,6 @@
    "rel": true
   },
   {
-   "title": "데이원컴퍼니 제로베이스, 합격자 56% 대·중견기업 취업",
-   "desc": "고용노동부 집계에서도 29세 이하 고용보험 가입자가 48개월 연속 감소했다. 이러한 상황에서 제베 이용자는 20대 후반과 30대 초중반에 집중됐다. 연령별 회원 비중은 26~29세가 44%로 가장 높았으며 30~35세가 33%로 뒤를...",
-   "link": "https://www.newspim.com/news/view/20261014000974",
-   "originallink": "https://www.newspim.com/news/view/20261014000974",
-   "press": "뉴스핌",
-   "pub": "2026-10-14 14:30",
-   "q": "고용보험 가입자",
-   "rel": true
-  },
-  {
    "title": "60세 이상 20만명 늘 때 청년은 5만5천명 줄었다…왜?",
    "desc": "전체 고용보험 가입자는 1년 전보다 29만명 가까이 늘었지만 29세 이하 청년층에서는 오히려 5만5000명 줄어든 것으로 나타났습니다. 구직급여 지급액은 7개월 연속 월 1조원을 넘으면서 올해 연간 예산의 81%가...",
    "link": "https://n.news.naver.com/mnews/article/374/0000537754?sid=101",
@@ -444,6 +434,16 @@
    "press": "biz.sbs.co.kr",
    "pub": "2026-10-14 14:30",
    "q": "고용보험 가입자, 구직급여, 제조업 고용보험, 건설업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "데이원컴퍼니 제로베이스, 합격자 56% 대·중견기업 취업",
+   "desc": "고용노동부 집계에서도 29세 이하 고용보험 가입자가 48개월 연속 감소했다. 이러한 상황에서 제베 이용자는 20대 후반과 30대 초중반에 집중됐다. 연령별 회원 비중은 26~29세가 44%로 가장 높았으며 30~35세가 33%로 뒤를...",
+   "link": "https://www.newspim.com/news/view/20261014000974",
+   "originallink": "https://www.newspim.com/news/view/20261014000974",
+   "press": "뉴스핌",
+   "pub": "2026-10-14 14:30",
+   "q": "고용보험 가입자",
    "rel": true
   },
   {
@@ -567,7 +567,7 @@
    "rel": true
   },
   {
-   "title": "반도체 고용 늘며 제조업 회복…청년은 여전히 ‘찬바람’",
+   "title": "제조업 고용 회복…청년은 여전히 '찬바람'",
    "desc": "(사진=이데일리 이영훈 기자) 고용노동부가 14일 발표한 ‘9월 고용행정통계로 본 노동시장 동향’에 따르면 지난달 제조업 고용보험 상시가입자는 385만 3000명으로 전년 동월 대비 8000명(0.2%) 증가했다. 지난 8월...",
    "link": "https://n.news.naver.com/mnews/article/018/0006387967?sid=102",
    "originallink": "https://www.edaily.co.kr/News/Read?newsId=04401766645612920&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
@@ -624,6 +624,16 @@
    "press": "news2day.co.kr",
    "pub": "2026-10-14 17:00",
    "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "9월 고용보험 가입자 28만 8000명 늘었지만",
+   "desc": "9월 고용보험 가입자가 1년 전보다 28만 8000명(1.8%) 늘었지만, 증가분의 절반 이상을 보건복지업과 숙박음식업이 채운 것으로 나타났다. 연령별로는 60세 이상이 약 72%를 차지했고, 29세 이하는 5만 5000명...",
+   "link": "http://www.gjdream.com/news/articleView.html?idxno=673449",
+   "originallink": "http://www.gjdream.com/news/articleView.html?idxno=673449",
+   "press": "gjdream.com",
+   "pub": "2026-10-15 00:00",
+   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
    "rel": true
   }
  ],
@@ -705,6 +715,16 @@
    "originallink": "https://www.cctoday.co.kr/news/articleView.html?idxno=2238339",
    "press": "cctoday.co.kr",
    "pub": "2026-10-14 18:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "서류 말고 내 열정을 보라…광양 달군 1500명 구직 열기",
+   "desc": "입구에 설치된 ‘종합 현황판(현장참여기업 구인정보 게시판)’ 앞부터 구직자들로 빼곡했다. 수첩이나 스마트폰을 꺼내 들고 채용 직렬과 급여, 지원 자격 요건 등을 꼼꼼히 메모하는 참가자들 모습이 쉽게 눈에 띄었다....",
+   "link": "http://www.kwangju.co.kr/article.php?aid=1791976200804287006",
+   "originallink": "http://www.kwangju.co.kr/article.php?aid=1791976200804287006",
+   "press": "kwangju.co.kr",
+   "pub": "2026-10-14 20:16",
    "q": "구직급여",
    "rel": false
   }
