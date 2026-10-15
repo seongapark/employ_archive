@@ -1,14 +1,14 @@
 {
-  "run_at": "2026-10-14T15:00:46.505517+09:00",
+  "run_at": "2026-10-15T10:00:47.402922+09:00",
   "collectors": {
     "oecd": {
-      "ok": true,
-      "fetched": 8,
+      "ok": false,
+      "fetched": 0,
       "added": 0
     },
     "oecd_interim": {
-      "ok": true,
-      "fetched": 4,
+      "ok": false,
+      "fetched": 0,
       "added": 0
     },
     "imf": {
@@ -52,7 +52,7 @@
       "added": 0
     },
     "announce": {
-      "ok": true,
+      "ok": false,
       "fetched": 0,
       "added": 0
     },
@@ -63,5 +63,9 @@
     }
   },
   "conflicts": [],
-  "errors": []
+  "errors": [
+    "oecd: HTTPError: HTTP Error 403: ",
+    "oecd_interim: HTTPError: HTTP Error 403: ",
+    "announce: HTTPError: HTTP Error 403: "
+  ]
 }
