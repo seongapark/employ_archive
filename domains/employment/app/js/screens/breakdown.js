@@ -76,11 +76,12 @@ export function render(el, ctx) {
 
   el.innerHTML = switcherHtml(ctx) + tabs(segments, current) + note + `
     <div class="sortbar">
-      <div class="sortbar__group" role="group" aria-label="보기">
-        ${btn('view', 'delta', '증감', view)}${btn('view', 'level', '규모', view)}
+      <div class="scopes" role="group" aria-label="보기">
+        ${viewTab('delta', '증감', view)}${viewTab('level', '규모', view)}
       </div>
-      <div class="sortbar__group" role="group" aria-label="정렬">
-        ${btn('order', 'code', '분류순', order)}${btn('order', 'size', view === 'level' ? '규모순' : '증감순', order)}
+      <div class="sortbar__order" role="group" aria-label="정렬">
+        <span class="sortbar__label">정렬</span>
+        ${orderBtn('code', '분류순', order)}${orderBtn('size', view === 'level' ? '규모순' : '증감순', order)}
       </div>
       ${view === 'level' ? '<span class="sortbar__unit">단위: 만명</span>' : ''}
     </div>
@@ -94,7 +95,7 @@ export function render(el, ctx) {
 
   bindSwitcher(el, ctx);
 
-  el.querySelectorAll('.sortbtn').forEach(b => b.addEventListener('click', () => {
+  el.querySelectorAll('.sortbar [data-key]').forEach(b => b.addEventListener('click', () => {
     ctx.state[b.dataset.key] = b.dataset.value;
     ctx.rerender();
   }));
@@ -104,8 +105,15 @@ export function render(el, ctx) {
   }));
 }
 
-function btn(key, value, label, current) {
-  return `<button type="button" class="sortbtn${value === current ? ' is-on' : ''}" data-key="${key}" data-value="${value}" aria-pressed="${value === current}">${label}</button>`;
+// 보기와 정렬은 모양부터 다르다. 보기는 추이의 연령 범위 스위치와 같은 붙은
+// 탭(무엇을 보나), 정렬은 테두리 없는 글자 버튼(어떤 순서로 보나). 같은 알약
+// 넷이 나란히 서면 어디까지가 한 묶음인지 안 읽힌다 — 사용자가 짚었다.
+function viewTab(value, label, current) {
+  return `<button type="button" class="scopes__tab${value === current ? ' scopes__tab--active' : ''}" data-key="view" data-value="${value}" aria-pressed="${value === current}">${label}</button>`;
+}
+
+function orderBtn(value, label, current) {
+  return `<button type="button" class="sortlink${value === current ? ' is-on' : ''}" data-key="order" data-value="${value}" aria-pressed="${value === current}">${label}</button>`;
 }
 
 function expanded(ctx, row) {
