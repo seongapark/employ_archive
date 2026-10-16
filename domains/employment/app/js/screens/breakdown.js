@@ -1,6 +1,6 @@
 import { switcherHtml, bindSwitcher } from '../switcher.js';
 import {
-  segmentsOf, breakdownMatrix, fmtLevel, fmtDelta, deltaTone, monthLabel,
+  segmentsOf, breakdownMatrix, fmtLevel, fmtMan, fmtDelta, deltaTone, monthLabel,
   EMPTY_LABEL, emptyLabel, esc, shortOf, totalRow, SOURCE_ORDER, SOURCE_COLORS,
 } from '../data.js';
 
@@ -18,10 +18,14 @@ function tabs(segments, current) {
   ).join('')}</div>`;
 }
 
-// 칸은 증감만 쓴다. 좁은 화면에서 한 칸에 두 숫자를 넣으면 21행이 다시 길어진다 —
-// 수준은 행을 탭했을 때 펼침에서 보여준다.
-function cell({ state, yoy }) {
-  if (state === 'value') {
+// 칸에는 숫자 하나만 쓴다 — 증감 아니면 규모. 좁은 화면에서 한 칸에 두 숫자를
+// 넣으면 21행이 다시 길어진다. 둘을 함께 보려면 행을 탭해 펼친다.
+// 규모 칸은 단위를 빼고 정렬줄에 `단위: 만명` 을 한 번 적는다.
+function cell({ state, yoy, value }, view) {
+  if (view === 'level' && value !== null && value !== undefined) {
+    return `<td class="num">${esc(fmtMan(value))}</td>`;
+  }
+  if (view !== 'level' && state === 'value') {
     return `<td class="num ${deltaTone(yoy)}">${esc(fmtDelta(yoy))}</td>`;
   }
   // 매트릭스 칸은 좁으므로 `― ` 없이 문구만 쓴다. 문구 자체는 data.js 가 갖는다.
@@ -32,7 +36,12 @@ export function render(el, ctx) {
   const segments = segmentsOf(ctx.industries, ctx.segments);
   const current = ctx.state.breakdown || 'industry';
   const segment = segments.find(s => s.breakdown === current) || segments[0];
-  const sort = ctx.state.sort || 'delta';
+  // 보기(증감·규모)와 정렬(분류순·크기순)은 따로 고르지만, 크기순은 늘 지금
+  // 보이는 숫자로 센다. 규모를 보면서 증감순으로 세우면 화면에 없는 숫자로 줄을
+  // 세운 셈이라 순서가 뒤죽박죽으로 보인다.
+  const view = ctx.state.view || 'delta';
+  const order = ctx.state.order || 'size';
+  const sort = order === 'code' ? 'code' : view;
   // breakdown 은 필수 인자다 — 산업 F(건설업)와 성별 F(여자)처럼 분류 코드가
   // 속성을 넘어 충돌하므로, 어느 속성인지를 매트릭스 조회 키에 반드시 실어야 한다.
   const rows = breakdownMatrix(ctx.series, segment.categories, ctx.state.period, { sort, breakdown: current });
@@ -55,39 +64,48 @@ export function render(el, ctx) {
   const totalHtml = `
     <tr class="matrix__total">
       <th scope="row">${esc(total.short_ko)}</th>
-      ${SOURCE_ORDER.map(s => cell(total.cells[s])).join('')}
+      ${SOURCE_ORDER.map(s => cell(total.cells[s], view)).join('')}
     </tr>`;
 
   const body = rows.map(row => `
     <tr class="row" data-code="${esc(row.code)}">
       <th scope="row" title="${esc(row.name_ko)}">${esc(shortOf(row))}</th>
-      ${SOURCE_ORDER.map(s => cell(row.cells[s])).join('')}
+      ${SOURCE_ORDER.map(s => cell(row.cells[s], view)).join('')}
     </tr>
     ${ctx.state.category === row.code ? expanded(ctx, row) : ''}`).join('');
 
   el.innerHTML = switcherHtml(ctx) + tabs(segments, current) + note + `
     <div class="sortbar">
-      <button type="button" class="sortbtn${sort === 'delta' ? ' is-on' : ''}" data-sort="delta">증감순</button>
-      <button type="button" class="sortbtn${sort === 'code' ? ' is-on' : ''}" data-sort="code">분류순</button>
+      <div class="sortbar__group" role="group" aria-label="보기">
+        ${btn('view', 'delta', '증감', view)}${btn('view', 'level', '규모', view)}
+      </div>
+      <div class="sortbar__group" role="group" aria-label="정렬">
+        ${btn('order', 'code', '분류순', order)}${btn('order', 'size', view === 'level' ? '규모순' : '증감순', order)}
+      </div>
+      ${view === 'level' ? '<span class="sortbar__unit">단위: 만명</span>' : ''}
     </div>
     <table class="matrix">${head}<tbody>${totalHtml}${body}</tbody></table>
     <ul class="legend">
       <li>미제공 = 그 출처가 공표하지 않는 분류</li>
       <li>미발표 = 아직 그 달을 내지 않음</li>
-      <li>증감없음 = 전년동월대비를 낼 수 없음</li>
+      ${view === 'level' ? '' : '<li>증감없음 = 전년동월대비를 낼 수 없음</li>'}
       ${current === 'age' ? `<li>${esc(AGE_NOTE)}</li>` : ''}
     </ul>`;
 
   bindSwitcher(el, ctx);
 
-  el.querySelectorAll('.sortbtn').forEach(btn => btn.addEventListener('click', () => {
-    ctx.state.sort = btn.dataset.sort;
+  el.querySelectorAll('.sortbtn').forEach(b => b.addEventListener('click', () => {
+    ctx.state[b.dataset.key] = b.dataset.value;
     ctx.rerender();
   }));
   el.querySelectorAll('.row').forEach(tr => tr.addEventListener('click', () => {
     const code = tr.dataset.code;
     location.hash = ctx.state.category === code ? `#/b/${current}` : `#/b/${current}/${encodeURIComponent(code)}`;
   }));
+}
+
+function btn(key, value, label, current) {
+  return `<button type="button" class="sortbtn${value === current ? ' is-on' : ''}" data-key="${key}" data-value="${value}" aria-pressed="${value === current}">${label}</button>`;
 }
 
 function expanded(ctx, row) {

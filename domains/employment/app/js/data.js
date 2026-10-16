@@ -28,9 +28,13 @@ function toMan(cheon) {
   return Math.round(cheon) / 10;
 }
 
+// 단위 없는 만명 수. 속성별 규모 보기는 세 열이 좁아 단위를 머리에 한 번만 적는다.
+export function fmtMan(cheon) {
+  return toMan(cheon).toLocaleString('ko-KR', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+}
+
 export function fmtLevel(cheon) {
-  const man = toMan(cheon);
-  return `${man.toLocaleString('ko-KR', { minimumFractionDigits: 1, maximumFractionDigits: 1 })}만명`;
+  return `${fmtMan(cheon)}만명`;
 }
 
 export function fmtDelta(cheon) {
@@ -222,9 +226,12 @@ export function breakdownMatrix(series, categories, period, { sort = 'delta', br
 
   if (sort === 'code') return rows;
 
+  // 규모순도 증감순과 같은 규칙(세 출처 중 최댓값)이다. 경활이 자영업자까지 잡아
+  // 가장 크므로 사실상 경활 기준 순서가 된다.
+  const field = sort === 'level' ? 'value' : 'yoy';
   const magnitude = row => {
     const values = SOURCE_ORDER
-      .map(s => row.cells[s].yoy)
+      .map(s => row.cells[s][field])
       .filter(v => v !== null);
     return values.length ? Math.max(...values.map(Math.abs)) : -1;
   };

@@ -377,8 +377,21 @@
 
 .sortbar {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
   padding: 10px 16px 4px 16px;
+}
+
+.sortbar__group {
+  display: flex;
+  gap: 6px;
+}
+
+.sortbar__unit {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--text-secondary);
 }
 
 .sortbtn {

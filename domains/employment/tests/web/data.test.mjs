@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { originOf, monthOptions, overviewCards, fmtLevel, fmtDelta, deltaTone, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData, topMovers, totalRow, indicatorSeries, fmtValue, fmtChange, EMPTY_LABEL, emptyLabel } from '../../app/js/data.js';
+import { originOf, monthOptions, overviewCards, fmtLevel, fmtMan, fmtDelta, deltaTone, monthLabel, esc, segmentsOf, breakdownMatrix, categoryTimeline, sheetData, topMovers, totalRow, indicatorSeries, fmtValue, fmtChange, EMPTY_LABEL, emptyLabel } from '../../app/js/data.js';
 
 function rec(over = {}) {
   return {
@@ -150,6 +150,20 @@ test('breakdownMatrix sorts by delta magnitude, empty rows last', () => {
   ];
   const rows = breakdownMatrix(series, INDUSTRIES, '2026-07', { sort: 'delta', breakdown: 'industry' });
   assert.deepEqual(rows.map(r => r.code), ['C', 'A']);
+});
+
+test('breakdownMatrix level sort ranks by size, not by delta', () => {
+  const series = [
+    rec({ source: 'eaps', breakdown: 'industry', category: 'A', period: '2026-07', value: 1400.2, yoy: 11.5 }),
+    rec({ source: 'eaps', breakdown: 'industry', category: 'C', period: '2026-07', value: 4400.9, yoy: -2.3 }),
+  ];
+  const rows = breakdownMatrix(series, INDUSTRIES, '2026-07', { sort: 'level', breakdown: 'industry' });
+  assert.deepEqual(rows.map(r => r.code), ['C', 'A']);
+});
+
+test('fmtMan drops the unit that fmtLevel adds', () => {
+  assert.equal(fmtMan(29136.1), '2,913.6');
+  assert.equal(fmtLevel(29136.1), '2,913.6만명');
 });
 
 test('breakdownMatrix works unchanged for sex', () => {
