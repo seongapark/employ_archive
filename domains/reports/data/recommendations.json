@@ -33740,5 +33740,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-10-15T15:00:54+09:00"
+ },
+ "keis-11368": {
+  "pick": false,
+  "axis": "",
+  "why": "고용동향브리프 통상호, 농림어업 취업자 통계 요약",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-16T10:09:02+09:00"
  }
 }
