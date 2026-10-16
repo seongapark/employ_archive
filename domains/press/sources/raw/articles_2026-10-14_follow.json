@@ -6,12 +6,12 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-16 16:42",
+ "collected_at": "2026-10-17 08:52",
  "volume": {
-  "collected": 54,
-  "articles": 21,
+  "collected": 59,
+  "articles": 22,
   "press": 18,
-  "queries": 3
+  "queries": 11
  },
  "truncated_queries": [],
  "queries": [
@@ -26,12 +26,12 @@
   },
   {
    "query": "구직급여",
-   "api_total": 94736,
+   "api_total": 94738,
    "fetched": 100,
    "truncated": false,
-   "in_window": 34,
+   "in_window": 36,
    "relevant": 1,
-   "new": 32
+   "new": 34
   },
   {
    "query": "구인배수",
@@ -40,6 +40,78 @@
    "truncated": false,
    "in_window": 2,
    "relevant": 1,
+   "new": 0
+  },
+  {
+   "query": "제조업 고용보험",
+   "api_total": 18610,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 12,
+   "relevant": 10,
+   "new": 3
+  },
+  {
+   "query": "건설업 고용보험",
+   "api_total": 8437,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 10,
+   "relevant": 10,
+   "new": 0
+  },
+  {
+   "query": "전문과학기술업 고용보험",
+   "api_total": 311,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 4,
+   "relevant": 4,
+   "new": 0
+  },
+  {
+   "query": "비금속광물 고용보험",
+   "api_total": 125,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 3,
+   "relevant": 3,
+   "new": 0
+  },
+  {
+   "query": "전자·통신 고용보험",
+   "api_total": 3676,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 4,
+   "relevant": 4,
+   "new": 0
+  },
+  {
+   "query": "기계장비 고용보험",
+   "api_total": 1823,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 5,
+   "relevant": 5,
+   "new": 0
+  },
+  {
+   "query": "자동차 고용보험",
+   "api_total": 14002,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 5,
+   "relevant": 5,
+   "new": 0
+  },
+  {
+   "query": "기타운송장비 고용보험",
+   "api_total": 2519,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 4,
+   "relevant": 4,
    "new": 0
   }
  ],
@@ -51,7 +123,7 @@
    "originallink": "http://www.gjdream.com/news/articleView.html?idxno=673449",
    "press": "gjdream.com",
    "pub": "2026-10-15 00:00",
-   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
    "rel": true
   },
   {
@@ -61,7 +133,7 @@
    "originallink": "https://www.chosun.com/national/labor/2026/10/15/KPLSBSCTG5DUJL7ZVXRNKSMIFM/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
    "press": "조선일보",
    "pub": "2026-10-15 00:46",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험, 전문과학기술업 고용보험",
    "rel": true
   },
   {
@@ -81,7 +153,7 @@
    "originallink": "https://www.fnnews.com/news/202610150855434732",
    "press": "파이낸셜뉴스",
    "pub": "2026-10-15 08:59",
-   "q": "고용보험 가입자, 구인배수",
+   "q": "고용보험 가입자, 구인배수, 건설업 고용보험",
    "rel": true
   },
   {
@@ -111,7 +183,7 @@
    "originallink": "https://www.cbci.co.kr/news/articleView.html?idxno=615745",
    "press": "cbci.co.kr",
    "pub": "2026-10-15 11:22",
-   "q": "고용보험 가입자, 구직급여",
+   "q": "고용보험 가입자, 구직급여, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
    "rel": true
   },
   {
@@ -121,7 +193,7 @@
    "originallink": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4087336",
    "press": "kyongbuk.co.kr",
    "pub": "2026-10-15 16:06",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험, 전문과학기술업 고용보험",
    "rel": true
   },
   {
@@ -151,7 +223,7 @@
    "originallink": "https://www.nongmin.com/article/20261015500226",
    "press": "nongmin.com",
    "pub": "2026-10-15 19:11",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
    "rel": true
   },
   {
@@ -161,7 +233,7 @@
    "originallink": "https://www.kado.net/news/articleView.html?idxno=2078502",
    "press": "kado.net",
    "pub": "2026-10-16 00:09",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
    "rel": true
   },
   {
@@ -171,7 +243,7 @@
    "originallink": "https://www.edaily.co.kr/News/Read?newsId=01672806645613576&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
    "press": "이데일리",
    "pub": "2026-10-16 05:02",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험, 전자·통신 고용보험, 기계장비 고용보험",
    "rel": true
   },
   {
@@ -201,7 +273,17 @@
    "originallink": "https://www.kukinews.com/article/view/kuk202610160010",
    "press": "kukinews.com",
    "pub": "2026-10-16 08:24",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "제조업 고용 27개월만 증가 전환…청년 취업 47개월 연속 감소",
+   "desc": "제조업 취업자 수가 올해 9월 1만6000명 증가하면서 27개월 만에 증가 전환했다. 화학물질·금속가공... 국가데이터처 관계자는 \"청년층 고용률은 금융보험업, 운수창고업 등 일부에서 증가했지만 정보통신...",
+   "link": "https://n.news.naver.com/mnews/article/014/0005590111?sid=101",
+   "originallink": "https://www.fnnews.com/news/202610160840205713",
+   "press": "파이낸셜뉴스",
+   "pub": "2026-10-16 08:47",
+   "q": "제조업 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
    "rel": true
   },
   {
@@ -211,7 +293,7 @@
    "originallink": "https://www.asiatime.co.kr/article/20261016500042",
    "press": "asiatime.co.kr",
    "pub": "2026-10-16 08:56",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 건설업 고용보험",
    "rel": true
   },
   {
@@ -221,7 +303,7 @@
    "originallink": "https://www.smartbizn.com/news/articleView.html?idxno=156608",
    "press": "smartbizn.com",
    "pub": "2026-10-16 09:30",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험, 기계장비 고용보험, 자동차 고용보험",
    "rel": true
   },
   {
@@ -231,7 +313,7 @@
    "originallink": "https://www.datasom.co.kr/news/articleView.html?idxno=210362",
    "press": "데이터솜",
    "pub": "2026-10-16 09:34",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 제조업 고용보험",
    "rel": true
   },
   {
@@ -241,7 +323,7 @@
    "originallink": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3078852",
    "press": "newsclaim.co.kr",
    "pub": "2026-10-16 11:18",
-   "q": "고용보험 가입자",
+   "q": "고용보험 가입자, 건설업 고용보험",
    "rel": true
   },
   {
@@ -251,7 +333,7 @@
    "originallink": "https://news.skbroadband.com/news/articleView.html?idxno=240506",
    "press": "news.skbroadband.com",
    "pub": "2026-10-16 16:40",
-   "q": "고용보험 가입자, 고용보험 가입자",
+   "q": "고용보험 가입자, 고용보험 가입자, 건설업 고용보험, 건설업 고용보험",
    "rel": true
   }
  ],
@@ -397,6 +479,16 @@
    "rel": false
   },
   {
+   "title": "8월 중 영동지역 실물경제…소비, 서비스업 생산, 고용은 개선",
+   "desc": "8월 중 영동지역 실물경제는 투자, 제조업 생산이 둔화됐으나 소비, 서비스업 생산, 고용은 개선된 것으로... 고용보험 피보험자는 서비스업(+2.5%)을 중심으로 전년동월대비 증가(+1.6%)했다. 실물경제 동향 조사 대상...",
+   "link": "https://n.news.naver.com/mnews/article/087/0001224083?sid=102",
+   "originallink": "https://www.kwnews.co.kr/article/20261015501379",
+   "press": "kwnews.co.kr",
+   "pub": "2026-10-15 17:36",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
    "title": "실업급여 받을 수 있을까?…수급 조건은",
    "desc": "실업급여 가운데 구직급여를 받기 위해서는 우선 퇴사 사유를 살펴볼 필요가 있다. 일반적으로 회사의 경영상 어려움에 따른 권고사직이나 계약기간 만료, 정리해고 등 본인의 의사와 관계없이 직장을 떠난 경우가 주요...",
    "link": "https://www.cbci.co.kr/news/articleView.html?idxno=615968",
@@ -414,6 +506,16 @@
    "press": "ohmynews.com",
    "pub": "2026-10-15 18:21",
    "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“AI 대체 직무 재교육 지원 강화하고, 새 기술 배워 생산성 높인 만큼...",
+   "desc": "일자리를 잃거나 불안정한 고용으로 밀려나는 계층을 보호할 고용보험 등 사회안전망 보강도 과제로 들었다. 김영문 전북대 명예교수는 AI와 로봇이 결합한 제조업 자동화가 근로자에게 미치는 영향도 살펴야 한다고...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006388925?sid=102",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=05494006645613248&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-10-15 18:34",
+   "q": "제조업 고용보험",
    "rel": false
   },
   {
@@ -583,6 +685,26 @@
    "originallink": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5072651",
    "press": "shinailbo.co.kr",
    "pub": "2026-10-16 16:10",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[퇴근길머니] 20대 개미, 가장 많이 떠났다…\"SK하이닉스 가고 싶어요\"",
+   "desc": "[기자] 네, 취업 플랫폼 인크루트가 최근 1년간 구직자들의 관심 기업 등록 데이터를 분석했더니... 가장 큰 이유로 꼽힌 건 역시 급여와 보상이었습니다. SK하이닉스의 올해 영업이익이 250조 원에 이르면 직원 1인당...",
+   "link": "https://n.news.naver.com/mnews/article/422/0000916419?sid=101",
+   "originallink": "http://www.yonhapnewstv.co.kr/news/MYH20261016171937SHh",
+   "press": "yonhapnewstv.co.kr",
+   "pub": "2026-10-16 17:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[김근식 칼럼] ‘쉬었음 청년’ 시대, 과연 그들의 눈이 높아진 것뿐일...",
+   "desc": "주변을 둘러보면 취업을 준비하다 잠시 쉬어가거나 아예 구직 활동을 중단한 청년들을 어렵지 않게 볼 수... 대기업이나 공공기관과 달리 높은 급여와 다양한 복지혜택, 성과급을 제공하기 어려운 중소기업은 상대적으로...",
+   "link": "https://www.cfnews.kr/news/article.html?no=112912",
+   "originallink": "https://www.cfnews.kr/news/article.html?no=112912",
+   "press": "cfnews.kr",
+   "pub": "2026-10-16 20:04",
    "q": "구직급여",
    "rel": false
   }
