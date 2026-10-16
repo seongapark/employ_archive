@@ -6,32 +6,32 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-16 08:51",
+ "collected_at": "2026-10-16 16:42",
  "volume": {
-  "collected": 39,
-  "articles": 17,
-  "press": 13,
-  "queries": 11
+  "collected": 54,
+  "articles": 21,
+  "press": 18,
+  "queries": 3
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29455,
+   "api_total": 29461,
    "fetched": 100,
    "truncated": false,
-   "in_window": 17,
-   "relevant": 16,
-   "new": 17
+   "in_window": 23,
+   "relevant": 22,
+   "new": 22
   },
   {
    "query": "구직급여",
-   "api_total": 94723,
+   "api_total": 94736,
    "fetched": 100,
    "truncated": false,
-   "in_window": 21,
+   "in_window": 34,
    "relevant": 1,
-   "new": 19
+   "new": 32
   },
   {
    "query": "구인배수",
@@ -40,78 +40,6 @@
    "truncated": false,
    "in_window": 2,
    "relevant": 1,
-   "new": 0
-  },
-  {
-   "query": "제조업 고용보험",
-   "api_total": 18608,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 10,
-   "relevant": 8,
-   "new": 3
-  },
-  {
-   "query": "건설업 고용보험",
-   "api_total": 8433,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 6,
-   "relevant": 6,
-   "new": 0
-  },
-  {
-   "query": "전문과학기술업 고용보험",
-   "api_total": 311,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 4,
-   "relevant": 4,
-   "new": 0
-  },
-  {
-   "query": "비금속광물 고용보험",
-   "api_total": 125,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 3,
-   "relevant": 3,
-   "new": 0
-  },
-  {
-   "query": "전자·통신 고용보험",
-   "api_total": 3676,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 4,
-   "relevant": 4,
-   "new": 0
-  },
-  {
-   "query": "기계장비 고용보험",
-   "api_total": 1822,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 4,
-   "relevant": 4,
-   "new": 0
-  },
-  {
-   "query": "자동차 고용보험",
-   "api_total": 14001,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 4,
-   "relevant": 4,
-   "new": 0
-  },
-  {
-   "query": "기타운송장비 고용보험",
-   "api_total": 2519,
-   "fetched": 100,
-   "truncated": false,
-   "in_window": 4,
-   "relevant": 4,
    "new": 0
   }
  ],
@@ -123,7 +51,7 @@
    "originallink": "http://www.gjdream.com/news/articleView.html?idxno=673449",
    "press": "gjdream.com",
    "pub": "2026-10-15 00:00",
-   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
    "rel": true
   },
   {
@@ -133,7 +61,7 @@
    "originallink": "https://www.chosun.com/national/labor/2026/10/15/KPLSBSCTG5DUJL7ZVXRNKSMIFM/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
    "press": "조선일보",
    "pub": "2026-10-15 00:46",
-   "q": "고용보험 가입자, 제조업 고용보험, 전문과학기술업 고용보험",
+   "q": "고용보험 가입자",
    "rel": true
   },
   {
@@ -153,7 +81,7 @@
    "originallink": "https://www.fnnews.com/news/202610150855434732",
    "press": "파이낸셜뉴스",
    "pub": "2026-10-15 08:59",
-   "q": "고용보험 가입자, 구인배수, 건설업 고용보험",
+   "q": "고용보험 가입자, 구인배수",
    "rel": true
   },
   {
@@ -183,7 +111,7 @@
    "originallink": "https://www.cbci.co.kr/news/articleView.html?idxno=615745",
    "press": "cbci.co.kr",
    "pub": "2026-10-15 11:22",
-   "q": "고용보험 가입자, 구직급여, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "q": "고용보험 가입자, 구직급여",
    "rel": true
   },
   {
@@ -193,7 +121,7 @@
    "originallink": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4087336",
    "press": "kyongbuk.co.kr",
    "pub": "2026-10-15 16:06",
-   "q": "고용보험 가입자, 제조업 고용보험, 전문과학기술업 고용보험",
+   "q": "고용보험 가입자",
    "rel": true
   },
   {
@@ -223,7 +151,7 @@
    "originallink": "https://www.nongmin.com/article/20261015500226",
    "press": "nongmin.com",
    "pub": "2026-10-15 19:11",
-   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "q": "고용보험 가입자",
    "rel": true
   },
   {
@@ -233,7 +161,7 @@
    "originallink": "https://www.kado.net/news/articleView.html?idxno=2078502",
    "press": "kado.net",
    "pub": "2026-10-16 00:09",
-   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
+   "q": "고용보험 가입자",
    "rel": true
   },
   {
@@ -243,7 +171,7 @@
    "originallink": "https://www.edaily.co.kr/News/Read?newsId=01672806645613576&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
    "press": "이데일리",
    "pub": "2026-10-16 05:02",
-   "q": "고용보험 가입자, 제조업 고용보험, 전자·통신 고용보험, 기계장비 고용보험",
+   "q": "고용보험 가입자",
    "rel": true
   },
   {
@@ -273,17 +201,57 @@
    "originallink": "https://www.kukinews.com/article/view/kuk202610160010",
    "press": "kukinews.com",
    "pub": "2026-10-16 08:24",
-   "q": "고용보험 가입자, 건설업 고용보험",
+   "q": "고용보험 가입자",
    "rel": true
   },
   {
-   "title": "제조업 고용 27개월만 증가 전환…청년 취업 47개월 연속 감소",
-   "desc": "제조업 취업자 수가 올해 9월 1만6000명 증가하면서 27개월 만에 증가 전환했다. 화학물질·금속가공... 국가데이터처 관계자는 \"청년층 고용률은 금융보험업, 운수창고업 등 일부에서 증가했지만, 정보통신...",
-   "link": "https://n.news.naver.com/mnews/article/014/0005590111?sid=101",
-   "originallink": "https://www.fnnews.com/news/202610160840205713",
-   "press": "파이낸셜뉴스",
-   "pub": "2026-10-16 08:47",
-   "q": "제조업 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "title": "울산 건설업 사망 20명 '10년 내 최다'…안전관리 '구멍'",
+   "desc": "고용노동부에 따르면 지난달 건설업 고용보험 가입자는 전년 동월보다 6000명 줄며 38개월 연속 감소했다. 건설경기 침체로 일자리와 공사물량이 줄어드는 상황에서도 현장 안전사고가 이어지고 있는 셈이다....",
+   "link": "https://www.asiatime.co.kr/article/20261016500042",
+   "originallink": "https://www.asiatime.co.kr/article/20261016500042",
+   "press": "asiatime.co.kr",
+   "pub": "2026-10-16 08:56",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "제조업 취업자 436만명···27개월 만에 증가 전환",
+   "desc": "고용노동부가 지난 14일 발표한 '9월 고용행정 통계로 본 노동시장 동향'에서 제조업 고용보험 가입자는 385만3000명으로 지난해 같은 달보다 8000여명 늘었다. 반도체 제조업 가입자는 7300명, 선박·보트 건조업은...",
+   "link": "https://www.smartbizn.com/news/articleView.html?idxno=156608",
+   "originallink": "https://www.smartbizn.com/news/articleView.html?idxno=156608",
+   "press": "smartbizn.com",
+   "pub": "2026-10-16 09:30",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "SK하이닉스, 제조업 고용 감소기에도 1년 새 2525명 증가",
+   "desc": "지난해 6월 말부터 올해 6월 말까지 1년 동안  제조업 고용보험 가입자는 13개월 연속 줄고 국내 전체 사업체 종사자는 1.2% 증가에 그치는 등 전반적인 고용 약세에도 불구하고 SK하이닉스 직원 수는 같은...",
+   "link": "https://www.datasom.co.kr/news/articleView.html?idxno=210362",
+   "originallink": "https://www.datasom.co.kr/news/articleView.html?idxno=210362",
+   "press": "데이터솜",
+   "pub": "2026-10-16 09:34",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "지난해 울산 건설업 사고사망자 2016년 집계 이래 최대",
+   "desc": "이는 건설업 고용보험 가입자 수가 37개월 연속 감소하고 있는 등 경기 불황으로 사고사망자가 줄고 있는 전국적 추세와 대비된다. 전국의 건설업 사고사망자는 연도별로 △2021년 417명 △2022년 402명 △2023년...",
+   "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3078852",
+   "originallink": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3078852",
+   "press": "newsclaim.co.kr",
+   "pub": "2026-10-16 11:18",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "대구 건설업 사고사망자 10년만 최대",
+   "desc": "대구 건설업 사고 사망자는 47명으로, 2016년 59명 이후 10년 만에 가장 많았습니다. 이는 건설업 고용보험 가입자 수가 37개월 연속 감소하고 있는 등 경기 불황으로 사고 사망자가 줄고 있는 전국 추세와 대비됩니다.",
+   "link": "https://news.skbroadband.com/news/articleView.html?idxno=240506",
+   "originallink": "https://news.skbroadband.com/news/articleView.html?idxno=240506",
+   "press": "news.skbroadband.com",
+   "pub": "2026-10-16 16:40",
+   "q": "고용보험 가입자, 고용보험 가입자",
    "rel": true
   }
  ],
@@ -429,16 +397,6 @@
    "rel": false
   },
   {
-   "title": "8월 중 영동지역 실물경제…소비, 서비스업 생산, 고용은 개선",
-   "desc": "8월 중 영동지역 실물경제는 투자, 제조업 생산이 둔화됐으나 소비, 서비스업 생산, 고용은 개선된 것으로... 고용보험 피보험자는 서비스업(+2.5%)을 중심으로 전년동월대비 증가(+1.6%)했다. 실물경제 동향 조사 대상...",
-   "link": "https://n.news.naver.com/mnews/article/087/0001224083?sid=102",
-   "originallink": "https://www.kwnews.co.kr/article/20261015501379",
-   "press": "kwnews.co.kr",
-   "pub": "2026-10-15 17:36",
-   "q": "제조업 고용보험",
-   "rel": false
-  },
-  {
    "title": "실업급여 받을 수 있을까?…수급 조건은",
    "desc": "실업급여 가운데 구직급여를 받기 위해서는 우선 퇴사 사유를 살펴볼 필요가 있다. 일반적으로 회사의 경영상 어려움에 따른 권고사직이나 계약기간 만료, 정리해고 등 본인의 의사와 관계없이 직장을 떠난 경우가 주요...",
    "link": "https://www.cbci.co.kr/news/articleView.html?idxno=615968",
@@ -456,16 +414,6 @@
    "press": "ohmynews.com",
    "pub": "2026-10-15 18:21",
    "q": "구직급여",
-   "rel": false
-  },
-  {
-   "title": "“AI 대체 직무 재교육 지원 강화하고, 새 기술 배워 생산성 높인 만큼...",
-   "desc": "일자리를 잃거나 불안정한 고용으로 밀려나는 계층을 보호할 고용보험 등 사회안전망 보강도 과제로 들었다. 김영문 전북대 명예교수는 AI와 로봇이 결합한 제조업 자동화가 근로자에게 미치는 영향도 살펴야 한다고...",
-   "link": "https://n.news.naver.com/mnews/article/018/0006388925?sid=102",
-   "originallink": "https://www.edaily.co.kr/News/Read?newsId=05494006645613248&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-   "press": "이데일리",
-   "pub": "2026-10-15 18:34",
-   "q": "제조업 고용보험",
    "rel": false
   },
   {
@@ -505,6 +453,136 @@
    "originallink": "https://biz.heraldcorp.com/article/10904348?ref=naver",
    "press": "헤럴드경제",
    "pub": "2026-10-16 07:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“나도 중산층 한번 돼 볼까”…구직 관심기업 삼성전자 5위, 1위는 어디...",
+   "desc": "SK하이닉스 1위에 올라 대학생들 “급여 만족스러워” 상위 10곳 중 공공기관 2곳 구직자들이 가장 관심을 갖는 기업으로 SK하이닉스가 1위에 올랐다. 현대자동차가 2위를 차지했으며 삼성전자는 5위에 이름을...",
+   "link": "https://n.news.naver.com/mnews/article/009/0005749413?sid=102",
+   "originallink": "https://www.mk.co.kr/article/12177442",
+   "press": "매일경제",
+   "pub": "2026-10-16 08:56",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "SK하이닉스, 구직자 관심기업 1위…삼성전자는 5위",
+   "desc": "취업 플랫폼 인크루트가 최근 1년간 구직자 관심기업 등록 데이터를 분석한 결과, SK하이닉스가 전체의 1.... SK하이닉스가 1위를 차지했다. SK하이닉스를 선정한 이유로는 57.0%가 '만족스러운 급여와 보상 제도'를 꼽았다.",
+   "link": "https://n.news.naver.com/mnews/article/088/0001034740?sid=101",
+   "originallink": "https://www.imaeil.com/page/view/2026101608583010749",
+   "press": "imaeil.com",
+   "pub": "2026-10-16 09:03",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "구직자 뽑은 관심기업, SK하이닉스·삼성전자 '1·2위가 아니네'",
+   "desc": "SK하이닉스가 구직자가 뽑은 관심기업 1위로 꼽혔다. 2위는 SK하이닉스와 양대산맥을 이루는 삼성전자가... SK하이닉스를 선택한 이유로는 '만족스러운 급여와 보상 제도'(57.0%)가 가장 많았다. 2위는 삼성전자(8.0...",
+   "link": "https://n.news.naver.com/mnews/article/243/0000104282?sid=101",
+   "originallink": "https://economist.co.kr/article/view/ecn202610160003",
+   "press": "economist.co.kr",
+   "pub": "2026-10-16 09:19",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[위클리오늘] 삼성전자 제쳤다…구직자들이 가장 관심 둔 기업 1위는",
+   "desc": "SK하이닉스를 선택한 대학생 응답자 가운데 57.0%는 '만족스러운 급여와 보상 제도'를 주요 이유로 꼽았다. 이는 구직자들이 기업을 선택할 때 보상 수준과 근무 조건 등을 중요하게 고려한다는 점을 보여준다. 기업들의...",
+   "link": "http://www.weeklytoday.com/news/articleView.html?idxno=798316",
+   "originallink": "http://www.weeklytoday.com/news/articleView.html?idxno=798316",
+   "press": "weeklytoday.com",
+   "pub": "2026-10-16 09:42",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[기업들] 한미사이언스·하나금융·현대퓨처넷 外...취약계층 상생부터...",
+   "desc": "중장년 구직자의 재취업을 돕고 지역 강소기업의 인재 확보를 지원하기 위한 \"2026 하나 JOB매칭 페스타 in... 선수들이 경제적 부담을 덜고 훈련에 매진할 수 있도록 매월 급여를 지급하고 있으며, 매년 운동복과 훈련...",
+   "link": "http://www.dailypop.kr/news/articleView.html?idxno=103452",
+   "originallink": "http://www.dailypop.kr/news/articleView.html?idxno=103452",
+   "press": "dailypop.kr",
+   "pub": "2026-10-16 10:10",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "영종구, 29일 운서역 광장에서 '일자리박람회' 연다",
+   "desc": "현장 면접에 참여한 실업급여 수급자에게는 '구직활동인증 확인서'를 발급할 예정이다. 국민취업지원제도와 관련한 안내·홍보도 진행하며 구직자들의 원활한 취업 활동을 도울 방침이다. '이력서 사진 촬영'과...",
+   "link": "http://www.incheonin.com/news/articleView.html?idxno=121513",
+   "originallink": "http://www.incheonin.com/news/articleView.html?idxno=121513",
+   "press": "incheonin.com",
+   "pub": "2026-10-16 10:14",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "구직자 관심 기업 1위에 SK하이닉스…2위는 현대차",
+   "desc": "인더스트리뉴스 한원석 기자  구직자들이 채용정보를 정기적으로 수신하기 위해 설정한 관심기업 분석... 해당 조사에서 SK하이닉스를 선택한 응답자의 57.0%는 '만족스러운 급여와 보상 제도'를 주요 사유로 꼽았다.",
+   "link": "https://www.industrynews.co.kr/news/articleView.html?idxno=87666",
+   "originallink": "https://www.industrynews.co.kr/news/articleView.html?idxno=87666",
+   "press": "industrynews.co.kr",
+   "pub": "2026-10-16 10:32",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "일본 HR기업 75%가 생성형 AI 사용…한중일, ‘사람 대체’보다 업무 재...",
+   "desc": "한국 측은 상담·영업·관리 업무와 구직자의 상담·진단·교육·취업 기록을 하나의 데이터 체계로 연결한... 중국대외서비스협회는 채용뿐 아니라 인사관리, 급여·사회보험 정산 등 HR서비스 전반으로 AI 활용 범위가...",
+   "link": "https://n.news.naver.com/mnews/article/020/0003755470?sid=101",
+   "originallink": "https://www.donga.com/news/Economy/article/all/20261016/134853297/2",
+   "press": "동아일보",
+   "pub": "2026-10-16 10:56",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"나랏돈은 새고 민원은 방치하고 출퇴근 기록의무 소홀\"",
+   "desc": "또한 구직자가 소득 발생 사실을 미신고하거나 거짓으로 신고하고, 국민취업지원제도 구직촉진수당과 실업급여 등을 지급받는 등 수백만원에서 수천만원에 이르는 국고 누수가 전국적으로 발생한 사실도 확인됐다....",
+   "link": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3078847",
+   "originallink": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3078847",
+   "press": "newsclaim.co.kr",
+   "pub": "2026-10-16 11:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "SK하이닉스 1위, 현대차 2위… 구직자 관심기업 판도",
+   "desc": "하반기 공채를 앞둔 구직자들이 가장 많이 등록한 기업은 SK하이닉스였다. 최근 1년간 구직자 관심기업... 대학생 1811명이 참여한 이번 조사에서 응답자의 57.0%가 SK하이닉스를 선택한 이유로 '만족스러운 급여와 보상...",
+   "link": "https://www.globalepic.co.kr/view.php?ud=20261016113437164448439a4874_29",
+   "originallink": "https://www.globalepic.co.kr/view.php?ud=20261016113437164448439a4874_29",
+   "press": "globalepic.co.kr",
+   "pub": "2026-10-16 11:38",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[청년금융③] 하나금융지주, 창업부터 일자리까지…청년 자립 지원 전방...",
+   "desc": "창업 아이디어 발굴부터 사업화와 판로 개척, 투자유치까지 지원하는 한편 사회혁신기업과 청년 구직자를... 인턴 급여도 10만원 인상해 월 최대 230만원을 지원하고 AI 플랫폼 구독료와 자격증 취득 등에 활용할 수 있는...",
+   "link": "http://www.press9.kr/news/articleView.html?idxno=84392",
+   "originallink": "http://www.press9.kr/news/articleView.html?idxno=84392",
+   "press": "press9.kr",
+   "pub": "2026-10-16 13:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "60세 이상 실업급여 4년 새 27% 급증···\"고용 연장 제도 미룬 탓\"",
+   "desc": "국회 기후에너지환경노동위원회 김위상 국민의힘 의원이 고용노동부로부터 제출받은 자료에 따르면, 60세 이상 구직급여 수급자는 2021년 40만 3,000명에서 2025년 48만 4,000명으로 20.1% 증가했습니다. 지급액은 3조...",
+   "link": "https://n.news.naver.com/mnews/article/657/0000056365?sid=102",
+   "originallink": "https://dgmbc.com/NewsArticle/867282",
+   "press": "dgmbc.com",
+   "pub": "2026-10-16 15:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "고용노동부 지방관서 감사서 부실 행정 적발…임금체불 사건 최장 586일...",
+   "desc": "구직자가 소득 발생 사실을 신고하지 않거나 허위 신고해 국민취업지원제도 구직촉진수당과 실업급여 등을 지급받은 사례도 확인됐다. 부적정 지급 규모는 사례별로 수백만원에서 수천만원에 달했다. 노동자 권리구제...",
+   "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5072651",
+   "originallink": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5072651",
+   "press": "shinailbo.co.kr",
+   "pub": "2026-10-16 16:10",
    "q": "구직급여",
    "rel": false
   }

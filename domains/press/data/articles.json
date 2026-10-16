@@ -9050,21 +9050,104 @@
     ]
    },
    {
-    "title": "제조업 고용 27개월만 증가 전환…청년 취업 47개월 연속 감소",
-    "url": "https://www.fnnews.com/news/202610160840205713",
-    "press": "파이낸셜뉴스",
-    "pub": "2026-10-16 08:47",
-    "cites": false,
+    "title": "울산 건설업 사망 20명 '10년 내 최다'…안전관리 '구멍'",
+    "url": "https://www.asiatime.co.kr/article/20261016500042",
+    "press": "asiatime.co.kr",
+    "pub": "2026-10-16 08:56",
+    "cites": true,
     "judged": true,
-    "why": "국가데이터처 경제활동인구조사 기사",
+    "why": "건설업 가입자 6천명 감소·38개월 연속 전함",
     "hits": [
-     "산업:제조업",
-     "연령:청년"
+     "산업:건설업"
     ],
     "tone": [],
-    "stance": "중립",
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "구멍",
+     "사망",
+     "안전관리",
+     "울산"
+    ]
+   },
+   {
+    "title": "제조업 취업자 436만명···27개월 만에 증가 전환",
+    "url": "https://www.smartbizn.com/news/articleView.html?idxno=156608",
+    "press": "smartbizn.com",
+    "pub": "2026-10-16 09:30",
+    "cites": true,
+    "judged": true,
+    "why": "9월 제조업 가입자 8천명 증가 전환 전함",
+    "hits": [
+     "산업:제조업"
+    ],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "주제",
+    "kw": [
+     "취업자"
+    ]
+   },
+   {
+    "title": "SK하이닉스, 제조업 고용 감소기에도 1년 새 2525명 증가",
+    "url": "https://www.datasom.co.kr/news/articleView.html?idxno=210362",
+    "press": "데이터솜",
+    "pub": "2026-10-16 09:34",
+    "cites": false,
+    "judged": true,
+    "why": "6월 기준 수치로 SK하이닉스 직원수 분석",
+    "hits": [
+     "산업:제조업"
+    ],
+    "tone": [],
+    "stance": "부정",
     "focus": "",
-    "kw": []
+    "kw": [
+     "SK",
+     "하이닉스"
+    ]
+   },
+   {
+    "title": "지난해 울산 건설업 사고사망자 2016년 집계 이래 최대",
+    "url": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3078852",
+    "press": "newsclaim.co.kr",
+    "pub": "2026-10-16 11:18",
+    "cites": false,
+    "judged": true,
+    "why": "37개월 연속(8월치) 인용, 산재 사망 기사",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사고사망자",
+     "울산",
+     "이래",
+     "지난해",
+     "최대"
+    ]
+   },
+   {
+    "title": "대구 건설업 사고사망자 10년만 최대",
+    "url": "https://news.skbroadband.com/news/articleView.html?idxno=240506",
+    "press": "news.skbroadband.com",
+    "pub": "2026-10-16 16:40",
+    "cites": false,
+    "judged": true,
+    "why": "37개월 연속(8월치) 인용, 대구 산재 기사",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "대구",
+     "사고사망자",
+     "최대"
+    ]
    }
   ]
  }
