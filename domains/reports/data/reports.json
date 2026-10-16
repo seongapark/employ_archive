@@ -33,6 +33,26 @@
   ]
  },
  {
+  "id": "kiet-is870",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "메가 프로젝트의 전략적 함의와 산업정책 과제",
+  "authors": [
+   "이준",
+   "김태영",
+   "김지현"
+  ],
+  "published": "2026-10-15",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=870&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "노동전환"
+  ]
+ },
+ {
   "id": "kiet-is869",
   "org": "kiet",
   "board": "kiet-issue",
