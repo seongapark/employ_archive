@@ -6,9 +6,9 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-17 08:52",
+ "collected_at": "2026-10-17 16:10",
  "volume": {
-  "collected": 59,
+  "collected": 61,
   "articles": 22,
   "press": 18,
   "queries": 11
@@ -26,12 +26,12 @@
   },
   {
    "query": "구직급여",
-   "api_total": 94738,
+   "api_total": 94740,
    "fetched": 100,
    "truncated": false,
-   "in_window": 36,
+   "in_window": 38,
    "relevant": 1,
-   "new": 34
+   "new": 36
   },
   {
    "query": "구인배수",
@@ -705,6 +705,26 @@
    "originallink": "https://www.cfnews.kr/news/article.html?no=112912",
    "press": "cfnews.kr",
    "pub": "2026-10-16 20:04",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“남 좋은 일은 그만할래”…증시 호황에 줄퇴사하는 대만 펀드매니저...",
+   "desc": "젊은 구직자들이 상대적으로 자유로운 투자 환경과 높은 수익을 기대할 수 있는 민간 투자회사로 몰리고... 급여 격차도 인재 이탈을 부추기는 요인이다. 대만 뮤추얼펀드 매니저들의 초임은 일반적으로 홍콩 동종 업계...",
+   "link": "https://n.news.naver.com/mnews/article/009/0005749920?sid=101",
+   "originallink": "https://www.mk.co.kr/article/12178406",
+   "press": "매일경제",
+   "pub": "2026-10-17 10:53",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[패트롤] 고양시-김포시-남양주시-양주시-파주시",
+   "desc": "복지급여를 받지 못하는 어려움을 겪었다. 이후 대한법률구조공단 지원으로 '친생자관계부존재확인... 이번 행사에는 35개 기업이 참여해 현장 채용 면접을 진행하며, 생산-물류-서비스직을 비롯해 관리직, 연구직, 영업직...",
+   "link": "https://www.ekn.kr/web/view.php?key=20261017026447531",
+   "originallink": "https://www.ekn.kr/web/view.php?key=20261017026447531",
+   "press": "ekn.kr",
+   "pub": "2026-10-17 11:42",
    "q": "구직급여",
    "rel": false
   }
