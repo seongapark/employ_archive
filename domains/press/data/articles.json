@@ -9165,6 +9165,70 @@
      "사고사망자",
      "최대"
     ]
+   },
+   {
+    "title": "대구 건설업 사고 사망자 10년 만에 최대...안전수칙 미준수 도마 위",
+    "url": "https://www.hidomin.com/news/articleView.html?idxno=725249",
+    "press": "hidomin.com",
+    "pub": "2026-10-18 10:24",
+    "cites": true,
+    "judged": true,
+    "why": "건설업 가입자 37개월 연속 감소를 근거로 인용",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "대구",
+     "도마",
+     "미준수",
+     "사망자",
+     "안전수칙",
+     "최대"
+    ]
+   },
+   {
+    "title": "고령자 계속고용장려금 지방 40만원·수도권 30만원, 받는 쪽은 근로자...",
+    "url": "https://www.imaeil.com/page/view/2026101609343584560",
+    "press": "imaeil.com",
+    "pub": "2026-10-18 13:28",
+    "cites": false,
+    "judged": true,
+    "why": "계속고용장려금 요건 해설",
+    "hits": [
+     "연령:고령"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "계속고용장려금",
+     "고령자",
+     "수도권"
+    ]
+   },
+   {
+    "title": "두루누리 사회보험료, 월급 270만원 미만이면 연금·고용보험 80% 대납",
+    "url": "https://www.imaeil.com/page/view/2026101600125624703",
+    "press": "imaeil.com",
+    "pub": "2026-10-18 13:29",
+    "cites": false,
+    "judged": true,
+    "why": "두루누리 보험료 지원 제도 해설",
+    "hits": [
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "대납",
+     "두루누리",
+     "사회보험료",
+     "월급"
+    ]
    }
   ]
  }

@@ -6,23 +6,23 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-18 08:25",
+ "collected_at": "2026-10-18 16:25",
  "volume": {
-  "collected": 63,
-  "articles": 22,
-  "press": 18,
+  "collected": 66,
+  "articles": 25,
+  "press": 20,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29461,
+   "api_total": 29464,
    "fetched": 100,
    "truncated": false,
-   "in_window": 23,
-   "relevant": 22,
-   "new": 22
+   "in_window": 26,
+   "relevant": 25,
+   "new": 25
   },
   {
    "query": "구직급여",
@@ -44,20 +44,20 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18610,
+   "api_total": 18611,
    "fetched": 100,
    "truncated": false,
-   "in_window": 12,
-   "relevant": 10,
+   "in_window": 13,
+   "relevant": 11,
    "new": 3
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8437,
+   "api_total": 8438,
    "fetched": 100,
    "truncated": false,
-   "in_window": 10,
-   "relevant": 10,
+   "in_window": 11,
+   "relevant": 11,
    "new": 0
   },
   {
@@ -334,6 +334,36 @@
    "press": "news.skbroadband.com",
    "pub": "2026-10-16 16:40",
    "q": "고용보험 가입자, 고용보험 가입자, 건설업 고용보험, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "대구 건설업 사고 사망자 10년 만에 최대...안전수칙 미준수 도마 위",
+   "desc": "이는 전국 건설업 고용보험 가입자 수가 37개월 연속 감소하는 등 건설 불황이 장기화되고 있기 때문이다. 김위상 의원은 \"정부는 단순한 전국 지표 하락을 이유로 성과를 자축할 때가 아니다\"라고 지적하며...",
+   "link": "https://www.hidomin.com/news/articleView.html?idxno=725249",
+   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=725249",
+   "press": "hidomin.com",
+   "pub": "2026-10-18 10:24",
+   "q": "고용보험 가입자, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "고령자 계속고용장려금 지방 40만원·수도권 30만원, 받는 쪽은 근로자...",
+   "desc": "사업장의 60세 이상 고용보험 가입자가 열에 셋을 넘으면 안 된다. 그 회사에서 고용보험 가입 기간이 2년이 안 되거나 월 보수가 115만원에 못 미치는 근로자도 제외된다. 지원 인원에는 상한이 있다. 피보험자의 30%와...",
+   "link": "https://n.news.naver.com/mnews/article/088/0001035000?sid=101",
+   "originallink": "https://www.imaeil.com/page/view/2026101609343584560",
+   "press": "imaeil.com",
+   "pub": "2026-10-18 13:28",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "두루누리 사회보험료, 월급 270만원 미만이면 연금·고용보험 80% 대납",
+   "desc": "신청일 직전 1년 동안 고용보험이나 국민연금에 가입한 이력이 없어야 한다. 이 '신규가입자' 조건은 2021년부터 적용됐다. 직장을 옮겨 온 경력자는 월급이 낮아도 대상이 아니다. 여기에 재산과 소득 컷오프가 붙는다....",
+   "link": "https://n.news.naver.com/mnews/article/088/0001035006?sid=101",
+   "originallink": "https://www.imaeil.com/page/view/2026101600125624703",
+   "press": "imaeil.com",
+   "pub": "2026-10-18 13:29",
+   "q": "고용보험 가입자",
    "rel": true
   }
  ],

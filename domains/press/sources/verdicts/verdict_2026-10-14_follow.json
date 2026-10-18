@@ -196,5 +196,32 @@
   "focus": "",
   "title": "대구 건설업 사고사망자 10년만 최대",
   "press": "news.skbroadband.com"
+ },
+ {
+  "n": 1,
+  "cites": true,
+  "why": "건설업 가입자 37개월 연속 감소를 근거로 인용",
+  "tone": "부정",
+  "focus": "언급",
+  "title": "대구 건설업 사고 사망자 10년 만에 최대...안전수칙 미준수 도마 위",
+  "press": "hidomin.com"
+ },
+ {
+  "n": 2,
+  "cites": false,
+  "why": "계속고용장려금 요건 해설",
+  "tone": "중립",
+  "focus": "",
+  "title": "고령자 계속고용장려금 지방 40만원·수도권 30만원, 받는 쪽은 근로자...",
+  "press": "imaeil.com"
+ },
+ {
+  "n": 3,
+  "cites": false,
+  "why": "두루누리 보험료 지원 제도 해설",
+  "tone": "중립",
+  "focus": "",
+  "title": "두루누리 사회보험료, 월급 270만원 미만이면 연금·고용보험 80% 대납",
+  "press": "imaeil.com"
  }
 ]
