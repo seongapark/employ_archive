@@ -140,9 +140,11 @@ def test_old_editions_have_a_pinned_report_url():
     # 연재 목록은 최근 네 권만 싣는다 — 그보다 옛 회차는 주소를 박아 둔다.
     # 박아 둔 주소는 iLibrary 의 그 권호 페이지여야 하고, 중간전망이 아니어야
     # 한다(OECD 는 중간보고서를 직전 권의 호 번호 아래 끼워 넣는다).
-    assert set(oecd.REPORT_URLS) == {114, 115}
+    # 119 는 2026-10-20 Cloudflare 차단으로 목록을 못 읽어 박았다.
+    assert set(oecd.REPORT_URLS) == {114, 115, 119}
     assert "volume-2023/issue-2" in oecd.REPORT_URLS[114]
     assert "volume-2024/issue-1" in oecd.REPORT_URLS[115]
+    assert "volume-2026-issue-1" in oecd.REPORT_URLS[119]
 
 
 def test_volume_issue_raises_when_arithmetic_disagrees_with_editions(monkeypatch):

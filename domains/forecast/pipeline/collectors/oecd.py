@@ -109,6 +109,9 @@ _ILIBRARY = "https://www.oecd-ilibrary.org/economics/oecd-economic-outlook"
 REPORT_URLS: dict[int, str] = {
     114: f"{_ILIBRARY}/volume-2023/issue-2_7a5f73ce-en",
     115: f"{_ILIBRARY}/volume-2024/issue-1_69a0c310-en",
+    # 2026-10-20 www.oecd.org 가 Cloudflare 챌린지로 모든 비브라우저 요청을 403 으로
+    # 막아 연재 목록을 못 읽게 됐다. 이미 저장된 레코드의 주소(목록에서 확인된 값)를 박는다.
+    119: f"{BASE}/en/publications/oecd-economic-outlook-volume-2026-issue-1_2d1956f0-en.html",
 }
 
 
