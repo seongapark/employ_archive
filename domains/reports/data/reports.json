@@ -16,6 +16,22 @@
   ]
  },
  {
+  "id": "bok-11065717",
+  "org": "bok",
+  "board": "bok-research",
+  "series": "조사연구자료",
+  "title": "탄소규제 강화가 부산지역 경제에 미치는 영향 : 해양 산업을 중심으로",
+  "authors": [
+   "부산본부"
+  ],
+  "published": "2026-10-20",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11065717&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/49fb16a4e4e84c7891d08b46d5f1de9a/1/5e803d623a794e029a3cd1d6a40c1aa6.pdf",
+  "matched": []
+ },
+ {
   "id": "keis-11368",
   "org": "keis",
   "board": "keis-trend",
