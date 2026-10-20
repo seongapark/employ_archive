@@ -6,32 +6,32 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-19 17:04",
+ "collected_at": "2026-10-20 09:39",
  "volume": {
-  "collected": 86,
-  "articles": 27,
-  "press": 22,
+  "collected": 94,
+  "articles": 29,
+  "press": 23,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29466,
+   "api_total": 29469,
    "fetched": 100,
    "truncated": false,
-   "in_window": 28,
-   "relevant": 27,
-   "new": 27
+   "in_window": 31,
+   "relevant": 29,
+   "new": 30
   },
   {
    "query": "구직급여",
-   "api_total": 94755,
+   "api_total": 94759,
    "fetched": 100,
    "truncated": false,
-   "in_window": 53,
+   "in_window": 57,
    "relevant": 1,
-   "new": 51
+   "new": 55
   },
   {
    "query": "구인배수",
@@ -44,12 +44,12 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18614,
+   "api_total": 18617,
    "fetched": 100,
    "truncated": false,
-   "in_window": 16,
-   "relevant": 13,
-   "new": 4
+   "in_window": 19,
+   "relevant": 14,
+   "new": 5
   },
   {
    "query": "건설업 고용보험",
@@ -383,6 +383,26 @@
    "originallink": "http://www.the-biz.co.kr/news/articleView.html?idxno=729505",
    "press": "THE Biz",
    "pub": "2026-10-19 16:22",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "자동화에 ‘사람 손’ 더해 ‘고용 있는 성장’ K뷰티",
+   "desc": "한국고용정보원의 고용보험 자료를 한국보건산업진흥원이 분석한 결과, 화장품 제조업의 월평균 가입자는 올해 1분기와 2분기에 전년 동기보다 각각 9.1%, 8.8% 증가했다. 전체 제조업 가입자가 1·2분기에 소폭 감소한...",
+   "link": "https://n.news.naver.com/mnews/article/032/0003477263?sid=101",
+   "originallink": "https://www.khan.co.kr/article/202610192041025",
+   "press": "경향신문",
+   "pub": "2026-10-19 20:41",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "\"충남 공짜, 세종선 자부담\"…소상공인 고용보험도 지역 '격차'",
+   "desc": "소상공인의 사회안전망으로 꼽히는 고용보험료 지원 사업이 지역에 따라 큰 격차를 보이면서 대전·세종... 충남에서는 보험료를 내지 않는 반면, 세종에서는 상당 부분을 본인이 부담해야 한다. 실제 5~7등급 가입자의...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014264583?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261020_0003832761",
+   "press": "뉴시스",
+   "pub": "2026-10-20 09:21",
    "q": "고용보험 가입자, 제조업 고용보험",
    "rel": true
   }
@@ -975,6 +995,66 @@
    "originallink": "https://bravo.etoday.co.kr/view/atc_view/20273",
    "press": "이투데이",
    "pub": "2026-10-19 16:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "온라인 스포츠 도박 합법화 후, 항우울제 처방 늘었다",
+   "desc": "또 고용주 제공 건강보험 가입자를 대상으로 했기 때문에 결과를 미국 전체 인구에 그대로 적용하기는 어렵다. 연구 결과는 2026년 10월 14일 국제 학술지 '자마 정신의학(JAMA Psychiatry)에 발표됐다.",
+   "link": "https://n.news.naver.com/mnews/article/346/0000117547?sid=004",
+   "originallink": "https://health.chosun.com/site/data/html_dir/2026/10/19/2026101902882.html",
+   "press": "조선일보",
+   "pub": "2026-10-19 18:07",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "‘산업위기선제대응’ 정부 실사단 제물포구 방문",
+   "desc": "국가데이터처 광업제조업조사(2024년)에 따르면 제물포구 철강산업 생산액은 3조3천791억원으로 전국... 인천시에 따르면 제물포구에서 철강산업 고용보험 피보험자수가 5% 이상 감소했을 정도로 고용 불안이 커지고 있다....",
+   "link": "https://www.kyeongin.com/article/1772948",
+   "originallink": "https://www.kyeongin.com/article/1772948",
+   "press": "kyeongin.com",
+   "pub": "2026-10-19 20:50",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "자발적으로 퇴사해도 실업급여 준다더니…정부, 또 말 바꿨다",
+   "desc": "청년층이 스스로 직장을 그만두더라도 일정한 요건을 충족하면 구직급여를 지급하는 방안이 2027년도 정부 예산안에 반영되지 않으면서 제도 도입에 제동이 걸렸다.첫 직장에서 적응하지 못하거나 직무가 맞지 않아...",
+   "link": "https://www.wikitree.co.kr/articles/1167453",
+   "originallink": "https://www.wikitree.co.kr/articles/1167453",
+   "press": "wikitree.co.kr",
+   "pub": "2026-10-19 21:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[청년이 희망이다]일자리·주거 개선 '청년이 살기 좋은 도시' 청년 삶 ...",
+   "desc": "일자리 분야는 '쉬었음·구직·재직'으로 이어지는 체계적인 발굴·지원과 지역 및 중소기업 일자리 지원에... 청년 월세지원, 미혼청년 주거급여 분리지급, 주거안정장학금 등으로 청년 주거비 부담도 완화한다. 청년전용...",
+   "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1069971",
+   "originallink": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1069971",
+   "press": "ksilbo.co.kr",
+   "pub": "2026-10-20 00:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[이동근 칼럼] 유연안정성, 노동 시장이 가야할 길",
+   "desc": "실업급여로 실직 기간의 소득을 보전하고 급변하는 산업 수요를 반영한 직업훈련으로 새 일자리에 필요한 역량을 키우는 것이 핵심이다. 여기에 구직자와 기업을 잇는 고용서비스가 더해질 때 안전망은 비로소 재취업의...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004672926?sid=110",
+   "originallink": "https://www.sedaily.com/article/20103378?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-10-20 05:01",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "니더 ‘급구’, 등록 일자리 53%·거래액 91% 급증…연간 거래액 200억원...",
+   "desc": "기업과 구직자를 실시간 매칭하고 출퇴근 인증, 근로계약, 임금 결제·정산까지 원스톱으로 지원한다. 특히 사업자 간편결제와 근무 종료 후 빠른 급여 지급 체계를 통해 단기 채용 과정의 번거로움을 줄이고...",
+   "link": "https://n.news.naver.com/mnews/article/092/0002441544?sid=103",
+   "originallink": "https://zdnet.co.kr/view/?no=20261020085604",
+   "press": "zdnet.co.kr",
+   "pub": "2026-10-20 09:02",
    "q": "구직급여",
    "rel": false
   }
