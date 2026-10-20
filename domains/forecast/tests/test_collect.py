@@ -173,3 +173,45 @@ def test_partial_failure_keeps_the_rounds_that_arrived(tmp_path):
     summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
     assert summary["collectors"]["bok"] == {"ok": False, "fetched": 1, "added": 1}
     assert summary["errors"] == ["bok: 2025-11-27 ValueError: 요약표 페이지를 찾지 못했다"]
+
+
+def _blocked(today):
+    from domains.forecast.pipeline import http
+    raise http.Blocked("봇 차단(Cloudflare 챌린지): https://www.oecd.org/x")
+
+
+def test_a_bot_block_is_a_warning_not_an_error_within_the_grace(tmp_path):
+    collect.main(data_dir=tmp_path, collectors={"oecd": _blocked})
+    summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
+    assert summary["errors"] == []
+    assert summary["collectors"]["oecd"] == {"ok": False, "fetched": 0, "added": 0, "blocked": True}
+    assert list(summary["blocked"]) == ["oecd"]
+    assert summary["warnings"][0].startswith("oecd: 봇 차단 0일째")
+
+
+def test_a_bot_block_becomes_an_error_after_the_grace(tmp_path):
+    from datetime import timedelta
+    since = (collect.datetime.now(collect.KST).date()
+             - timedelta(days=collect.BLOCKED_GRACE_DAYS)).isoformat()
+    (tmp_path / "last_run.json").write_text(json.dumps(
+        {"collectors": {}, "errors": [], "conflicts": [], "blocked": {"oecd": since}}), encoding="utf-8")
+    collect.main(data_dir=tmp_path, collectors={"oecd": _blocked})
+    summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
+    assert summary["blocked"] == {"oecd": since}  # 처음 막힌 날을 물려받는다
+    assert len(summary["errors"]) == 1 and summary["errors"][0].startswith(f"oecd: {since} 부터")
+
+
+def test_the_block_clock_restarts_once_the_site_answers(tmp_path):
+    (tmp_path / "last_run.json").write_text(json.dumps(
+        {"collectors": {}, "errors": [], "conflicts": [], "blocked": {"oecd": "2026-01-01"}}), encoding="utf-8")
+    collect.main(data_dir=tmp_path, collectors={"oecd": lambda today: []})
+    summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
+    assert summary["blocked"] == {}
+
+
+def test_partial_run_keeps_the_block_of_collectors_it_did_not_run(tmp_path):
+    collect.main(data_dir=tmp_path, collectors={"oecd_interim": _blocked, "kdi": lambda today: []})
+    collect.main(data_dir=tmp_path, collectors={"kdi": lambda today: []}, partial=True)
+    summary = json.loads((tmp_path / "last_run.json").read_text(encoding="utf-8"))
+    assert list(summary["blocked"]) == ["oecd_interim"]
+    assert len(summary["warnings"]) == 1

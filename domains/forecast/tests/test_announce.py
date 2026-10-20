@@ -50,3 +50,14 @@ def test_merge_keeps_a_day_just_passed_while_it_may_still_be_collected():
     schedule = [{"org": "OECD", "org_name_ko": "OECD", "report": "x", "date": "2026-09-23"}]
     assert announce.merge(schedule, [], date(2026, 9, 25)) == schedule
     assert announce.merge(schedule, [], date(2026, 9, 30)) == []
+
+
+def test_an_unreadable_oecd_news_page_is_only_a_warning():
+    def fetch(url):
+        if "oecd" in url:
+            raise RuntimeError("HTTP Error 403")
+        return load("bok_meetings_2026.html") if "2026" in url else ""
+    warnings = []
+    found = announce.discover(date(2026, 10, 20), fetch, warnings)
+    assert found and all(e["org"] == "BOK" for e in found)
+    assert warnings == ["announce: OECD 공지일 못 읽음 — RuntimeError: HTTP Error 403"]

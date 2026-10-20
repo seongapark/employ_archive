@@ -46,3 +46,12 @@ def test_waits_longer_between_later_attempts():
     with pytest.raises(ConnectionError):
         http.retrying(call, tries=3, wait=2.0, sleep=waits.append)
     assert waits == [2.0, 4.0]  # 마지막 시도 뒤에는 기다리지 않는다
+
+
+def test_a_cloudflare_challenge_raises_blocked(monkeypatch):
+    class Resp:
+        status_code = 403
+        headers = {"cf-mitigated": "challenge"}
+    monkeypatch.setattr(http.cf_requests, "get", lambda *a, **k: Resp())
+    with pytest.raises(http.Blocked):
+        http.get("https://www.oecd.org/x", tries=1)

@@ -5,12 +5,15 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from typing import Callable
 
-from . import announce, calendar, report, store, watch
+from . import announce, calendar, http, report, store, watch
 from .collectors import bok, imf, kdi, keis, kiet, kli, moef, oecd, oecd_interim
 from .models import ForecastRecord
 
 KST = timezone(timedelta(hours=9))
 DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+# 봇 차단(http.Blocked)은 이 날수까지 오류로 올리지 않는다. 그동안 발표가 나와
+# 회차가 빠지면 watch 가 따로 오류를 낸다 — 유예가 누락을 가리지는 않는다.
+BLOCKED_GRACE_DAYS = 7
 
 COLLECTORS: dict[str, Callable[[date], list[ForecastRecord]]] = {
     "oecd": oecd.collect,
@@ -39,11 +42,17 @@ def main(data_dir: Path = DATA_DIR,
     # 여기서 감싸지 않는다.
     existing = store.load_forecasts(forecasts_path)
     merged = existing
+    previous = (json.loads(last_run_path.read_text(encoding="utf-8"))
+                if last_run_path.exists() else {})
+    # 수집기마다 차단이 처음 보인 날. 차단이 이어지는 동안 지난 실행에서 물려받는다.
+    blocked_since: dict[str, str] = previous.get("blocked", {})
     summary = {
         "run_at": datetime.now(KST).isoformat(),
         "collectors": {},
         "conflicts": [],
         "errors": [],
+        "warnings": [],
+        "blocked": {},
     }
 
     for name, collect_fn in collectors.items():
@@ -58,6 +67,15 @@ def main(data_dir: Path = DATA_DIR,
             summary["collectors"][name] = {
                 "ok": True, "fetched": len(candidates), "added": len(result.added),
             }
+        except http.Blocked as exc:
+            since = blocked_since.get(name, today.isoformat())
+            summary["blocked"][name] = since
+            summary["collectors"][name] = {"ok": False, "fetched": 0, "added": 0, "blocked": True}
+            days = (today - date.fromisoformat(since)).days
+            if days >= BLOCKED_GRACE_DAYS:
+                summary["errors"].append(f"{name}: {since} 부터 {days}일째 봇 차단 — {exc}")
+            else:
+                summary["warnings"].append(f"{name}: 봇 차단 {days}일째(유예 {BLOCKED_GRACE_DAYS}일) — {exc}")
         except report.PartialFailure as exc:
             # 옛 회차 하나가 실패해도 새로 받은 회차는 저장한다.
             result = store.merge(merged, exc.records)
@@ -75,8 +93,8 @@ def main(data_dir: Path = DATA_DIR,
     # 감시와 공지일 갱신은 수집기를 주입한 시험에서는 꺼진다 — 시험이 네트워크에 나가면 안 된다.
     if collectors is COLLECTORS:
         try:
-            from . import http
-            added = announce.refresh(data_dir / "schedule.json", today, lambda url: http.get(url).text)
+            added = announce.refresh(data_dir / "schedule.json", today, lambda url: http.get(url).text,
+                                     summary["warnings"])
             summary["collectors"]["announce"] = {"ok": True, "fetched": 0, "added": added}
         except Exception as exc:
             summary["collectors"]["announce"] = {"ok": False, "fetched": 0, "added": 0}
@@ -100,12 +118,15 @@ def main(data_dir: Path = DATA_DIR,
 
     # 발표일 재수집(--due)은 몇 기관만 돈다. 나머지 기관의 그날 기록(오류 포함)을
     # 지우면 check_run 과 관리자 화면이 실패를 못 본다 — 돈 것만 갈아 끼운다.
-    if partial and last_run_path.exists():
-        previous = json.loads(last_run_path.read_text(encoding="utf-8"))
+    if partial and previous:
         ran = set(summary["collectors"])
+        def others(entries):
+            return [e for e in entries if e.split(":", 1)[0].strip() not in ran]
         summary["collectors"] = {**previous["collectors"], **summary["collectors"]}
-        summary["errors"] = [e for e in previous["errors"]
-                             if e.split(":", 1)[0].strip() not in ran] + summary["errors"]
+        summary["errors"] = others(previous["errors"]) + summary["errors"]
+        summary["warnings"] = others(previous.get("warnings", [])) + summary["warnings"]
+        summary["blocked"] = {**{k: v for k, v in blocked_since.items() if k not in ran},
+                              **summary["blocked"]}
         summary["conflicts"] = previous["conflicts"] + summary["conflicts"]
 
     if len(merged) != len(existing):
@@ -114,6 +135,8 @@ def main(data_dir: Path = DATA_DIR,
         json.dumps(summary, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
     )
     print(json.dumps(summary["collectors"], ensure_ascii=False))
+    for warning in summary["warnings"]:
+        print(f"경고: {warning}")
     return 0
 
 

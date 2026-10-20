@@ -54,7 +54,7 @@ def oecd_outlook_days(page_html: str) -> list[tuple[date, str]]:
     return sorted(out)
 
 
-def discover(today: date, fetch) -> list[dict]:
+def discover(today: date, fetch, warnings: list[str] | None = None) -> list[dict]:
     found = []
     for year in (today.year, today.year + 1):
         days = bok_meeting_days(fetch(BOK_MEETINGS_URL.format(year=year)), year)
@@ -63,20 +63,29 @@ def discover(today: date, fetch) -> list[dict]:
             raise ValueError("한국은행 금통위 일정에서 올해 경제전망 회의일을 찾지 못했다")
         found += [{"org": "BOK", "org_name_ko": "BOK", "report": "경제전망",
                    "date": day.isoformat()} for day in days]
-    for day, report in oecd_outlook_days(fetch(OECD_NEWS_URL)):
+    # OECD 공지일은 일정표를 앞당길 뿐이다 — 못 읽어도 예상 구간과 watch 가 맡으니
+    # 실패로 치지 않고 경고만 남긴다(2026-10-20 www.oecd.org 봇 차단). 이미 적힌
+    # OECD 공지일은 merge 가 그대로 둔다.
+    try:
+        oecd_days = oecd_outlook_days(fetch(OECD_NEWS_URL))
+    except Exception as exc:
+        if warnings is not None:
+            warnings.append(f"announce: OECD 공지일 못 읽음 — {type(exc).__name__}: {exc}")
+        oecd_days = []
+    for day, report in oecd_days:
         found.append({"org": "OECD", "org_name_ko": "OECD", "report": report,
                       "date": day.isoformat()})
     return found
 
 
-def refresh(schedule_path, today: date, fetch) -> int:
+def refresh(schedule_path, today: date, fetch, warnings: list[str] | None = None) -> int:
     """schedule.json 을 갱신하고 새로 더한 공지일 수를 준다."""
     import json
     from pathlib import Path
 
     path = Path(schedule_path)
     old = json.loads(path.read_text(encoding="utf-8")) if path.exists() else []
-    new = merge(old, discover(today, fetch), today)
+    new = merge(old, discover(today, fetch, warnings), today)
     if new != old:
         path.write_text(json.dumps(new, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     return len({(e["org"], e["date"]) for e in new} - {(e["org"], e["date"]) for e in old})
