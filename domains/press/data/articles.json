@@ -9314,6 +9314,69 @@
      "지역",
      "충남"
     ]
+   },
+   {
+    "title": "3분기 누적 산재 사망자 처음으로 300명대… 지난해 대비 20% 감소",
+    "url": "https://www.segye.com/newsView/20261020505824?OutUrl=naver",
+    "press": "세계일보",
+    "pub": "2026-10-20 10:03",
+    "cites": true,
+    "judged": true,
+    "why": "건설업 가입자 38개월 연속 감소를 인용",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "분기",
+     "사망자",
+     "산재",
+     "지난해"
+    ]
+   },
+   {
+    "title": "“강원은 100%, 세종은 최대 60%”…소상공인 고용보험료 지원, 지역별 ...",
+    "url": "https://www.sportsseoul.com/news/read/1642624?ref=naver",
+    "press": "sportsseoul.com",
+    "pub": "2026-10-20 11:14",
+    "cites": false,
+    "judged": true,
+    "why": "소상공인 고용보험료 지원 지역 격차 지적",
+    "hits": [
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "강원",
+     "고용보험료",
+     "세종",
+     "소상공인",
+     "지역별",
+     "최대"
+    ]
+   },
+   {
+    "title": "울산 소상공인 고용보험료 지원 '5% 부족'…기간도 3년",
+    "url": "https://www.iusm.co.kr/news/articleView.html?idxno=1069377",
+    "press": "iusm.co.kr",
+    "pub": "2026-10-20 16:46",
+    "cites": false,
+    "judged": true,
+    "why": "울산 소상공인 보험료 지원 실태",
+    "hits": [
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "고용보험료",
+     "부족",
+     "소상공인",
+     "울산"
+    ]
    }
   ]
  }
