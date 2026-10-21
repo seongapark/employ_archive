@@ -33767,5 +33767,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-10-20T10:01:05+09:00"
+ },
+ "keis-11369": {
+  "pick": false,
+  "axis": "",
+  "why": "공공기관 청년고용의무제 제도 평가·연장 제언",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-21T10:01:21+09:00"
  }
 }
