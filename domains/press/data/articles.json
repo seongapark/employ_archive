@@ -9050,23 +9050,6 @@
     ]
    },
    {
-    "title": "제조업 고용 27개월만 증가 전환…청년 취업 47개월 연속 감소",
-    "url": "https://www.fnnews.com/news/202610160840205713",
-    "press": "파이낸셜뉴스",
-    "pub": "2026-10-16 08:47",
-    "cites": false,
-    "judged": true,
-    "why": "국가데이터처 경제활동인구조사 기사",
-    "hits": [
-     "산업:제조업",
-     "연령:청년"
-    ],
-    "tone": [],
-    "stance": "중립",
-    "focus": "",
-    "kw": []
-   },
-   {
     "title": "울산 건설업 사망 20명 '10년 내 최다'…안전관리 '구멍'",
     "url": "https://www.asiatime.co.kr/article/20261016500042",
     "press": "asiatime.co.kr",
@@ -9394,6 +9377,89 @@
      "강력규제",
      "사망",
      "산재"
+    ]
+   },
+   {
+    "title": "비정규직 10만명 늘 때 정규직 1만명 증가…월급 격차 194만원",
+    "url": "https://www.newspim.com/news/view/20261021000339",
+    "press": "뉴스핌",
+    "pub": "2026-10-21 12:00",
+    "cites": false,
+    "judged": true,
+    "why": "통계청 비정규직 부가조사 기사",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "격차",
+     "비정규직",
+     "월급",
+     "정규직"
+    ]
+   },
+   {
+    "title": "정규직보다 월194만원 덜 받는다…비정규직 867만명 '사상 최대'",
+    "url": "https://www.news1.kr/economy/trend/6326972",
+    "press": "뉴스1",
+    "pub": "2026-10-21 12:04",
+    "cites": false,
+    "judged": true,
+    "why": "통계청 비정규직 부가조사 기사",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "비정규직",
+     "사상",
+     "정규직",
+     "최대"
+    ]
+   },
+   {
+    "title": "대구 취업자 늘어도 제조업은 감소…고용 회복 온도차",
+    "url": "https://www.idaegu.com/news/articleView.html?idxno=666420",
+    "press": "idaegu.com",
+    "pub": "2026-10-21 14:40",
+    "cites": false,
+    "judged": true,
+    "why": "동북지방데이터청 대구 고용동향",
+    "hits": [
+     "산업:제조업"
+    ],
+    "tone": [
+     "회복"
+    ],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "대구",
+     "온도차",
+     "취업자"
+    ]
+   },
+   {
+    "title": "[선임기자 칼럼]건설산업의 위기, 공사비 현실화와 합리적 제도 개선이...",
+    "url": "https://news.bbsi.co.kr/news/articleView.html?idxno=4113819",
+    "press": "news.bbsi.co.kr",
+    "pub": "2026-10-21 16:00",
+    "cites": false,
+    "judged": true,
+    "why": "건설업 제도개선 칼럼, 10월 수치",
+    "hits": [],
+    "tone": [
+     "개선"
+    ],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "건설산업",
+     "공사비",
+     "선임기자",
+     "위기",
+     "칼럼",
+     "현실화"
     ]
    }
   ]
