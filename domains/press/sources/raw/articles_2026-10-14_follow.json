@@ -6,10 +6,10 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-20 16:55",
+ "collected_at": "2026-10-21 09:08",
  "volume": {
-  "collected": 111,
-  "articles": 32,
+  "collected": 122,
+  "articles": 33,
   "press": 26,
   "queries": 11
  },
@@ -17,21 +17,21 @@
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29472,
+   "api_total": 29473,
    "fetched": 100,
    "truncated": false,
-   "in_window": 34,
-   "relevant": 32,
-   "new": 33
+   "in_window": 35,
+   "relevant": 33,
+   "new": 34
   },
   {
    "query": "구직급여",
-   "api_total": 94764,
+   "api_total": 94774,
    "fetched": 100,
    "truncated": false,
-   "in_window": 62,
+   "in_window": 72,
    "relevant": 1,
-   "new": 60
+   "new": 70
   },
   {
    "query": "구인배수",
@@ -44,20 +44,20 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18620,
+   "api_total": 18621,
    "fetched": 100,
    "truncated": false,
-   "in_window": 22,
+   "in_window": 23,
    "relevant": 15,
    "new": 7
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8439,
+   "api_total": 8440,
    "fetched": 100,
    "truncated": false,
-   "in_window": 12,
-   "relevant": 12,
+   "in_window": 13,
+   "relevant": 13,
    "new": 0
   },
   {
@@ -434,6 +434,16 @@
    "press": "iusm.co.kr",
    "pub": "2026-10-20 16:46",
    "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "산재 사망 첫 300명대… 강력규제 통했나",
+   "desc": "건설업 고용보험 가입자는 지난달까지 38개월 연속 감소했다. 김성희 고려대 노동대학원 교수는 “정책 효과도 있겠지만, 건설업 부진이 함께 작용한 것이기 때문에 안심할 수 없는 수준”이라고 했다. 다만 노동부는...",
+   "link": "https://n.news.naver.com/mnews/article/022/0004168244?sid=102",
+   "originallink": "https://www.segye.com/newsView/20261020518856?OutUrl=naver",
+   "press": "세계일보",
+   "pub": "2026-10-20 18:42",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
    "rel": true
   }
  ],
@@ -1199,7 +1209,7 @@
    "rel": false
   },
   {
-   "title": "부산서 막힌 배수관 뚫었더니 유심이 우수수… 15억대 피싱 조직 적발",
+   "title": "[영상] 부산서 막힌 배수관 뚫었더니 유심이 우수수… 15억대 피싱 조직...",
    "desc": "부산의 한 원룸 건물 배수구에서 발견된 수많은 유심 조각이 15억 원대 전화금융사기 조직을 적발하는... 러시아와 벨라루스, 카자흐스탄, 우즈베키스탄 출신 외국인들이 주축으로, 텔레그램 러시아어 구인·구직...",
    "link": "https://n.news.naver.com/mnews/article/082/0001403240?sid=102",
    "originallink": "https://www.busan.com/view/busan/view.php?code=2026102014005137912",
@@ -1225,6 +1235,106 @@
    "originallink": "http://www.dailypop.kr/news/articleView.html?idxno=103445",
    "press": "dailypop.kr",
    "pub": "2026-10-20 16:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "문재인 '뇌물' 국민참여재판, 내년 1월 열흘간 진행…증인 18명",
+   "desc": "전(前) 사위의 취업과 급여 관련 뇌물수수 혐의로 기소된 문재인 전 대통령의 국민참여재판이 내년 1월... 이어 \"정당한 구직 활동\"이라며 취업기회 제공을 뇌물로 보는 것은 기존 업무상 배임 구성과도 모순된다는 취지로...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009239604?sid=102",
+   "originallink": "https://www.news1.kr/society/court-prosecution/6326238",
+   "press": "뉴스1",
+   "pub": "2026-10-20 16:56",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[단독]챗GPT 등장 3년…IT 구직급여 수급자 59% 증가",
+   "desc": "챗GPT 등 생성형 인공지능(AI)이 등장한 이후 3년 만에 소프트웨어 개발자 등 정보통신업 분야에서 구직급여를 수급한 사람이 59% 증가한 것으로 나타났다. 반면 자발적으로 이직하는 사람들의 비중은 25% 가량...",
+   "link": "https://n.news.naver.com/mnews/article/020/0003756317?sid=100",
+   "originallink": "https://www.donga.com/news/Politics/article/all/20261020/134876263/1",
+   "press": "동아일보",
+   "pub": "2026-10-20 17:15",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "'급구', 임금 거래액 91% 급증…연간 200억 원 돌파 전망",
+   "desc": "사업자에게는 간편결제와 근로 종료 후 빠른 급여 지급 기능을 제공해 단기 채용 과정의 불편을 줄이고 거래 신뢰도를 높이고 있다. 신현식 대표는 장기 채용이 어려운 사업자와 구직자 모두에게 실시간 매칭과...",
+   "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=874594",
+   "originallink": "http://www.hansbiz.co.kr/news/articleView.html?idxno=874594",
+   "press": "hansbiz.co.kr",
+   "pub": "2026-10-20 21:08",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"100만원 벌어봤자 74만원 사라진다\"…'그냥 쉼' 번진 유럽",
+   "desc": "명은 구직 활동을 전혀 하지 않았다. 재취업 비율이 36.9%에 그친 이유다. 이는 대다수 실업자에게... ◇실업자에게 유리한 유럽 EU에서 실업 상태에 있던 사람이 일자리를 얻으면 실업급여는 물론 주거 지원 등 각종...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005344716?sid=104",
+   "originallink": "https://www.hankyung.com/article/2026102041421",
+   "press": "한국경제",
+   "pub": "2026-10-21 06:01",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
+   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
+   "press": "연합뉴스",
+   "pub": "2026-10-21 07:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
+   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
+   "press": "연합뉴스",
+   "pub": "2026-10-21 07:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"한국 기업서 일하고 싶어요\"…일본 구직자 절반 관심",
+   "desc": "일본 대학생과 구직자 절반 이상이 일본에 진출한 한국 기업에 취업할 의향이 있는 것으로 나타났다. 한국... 기업 선택 시 고려하는 요소는 업무 내용(73.1%), 급여·처우(72.1%), 휴일·휴가(62.3%) 순이었다. 관련 문항은...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005344740?sid=104",
+   "originallink": "https://www.hankyung.com/article/202610214654i",
+   "press": "한국경제",
+   "pub": "2026-10-21 07:37",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "일본 청년들 \"한국 기업에서 일하고 싶다\"…하지만 수직 문화는 부담",
+   "desc": "일본 대학생과 구직자 2명 중 1명가량이 한국 기업에 취업할 의향이 있는 것으로 나타났다. 한국 경제의... 복수응답 조사에서 '업무 내용'을 고려한다는 응답이 73.1%로 가장 높았고, '급여·처우'가 72.1%로 뒤를 이었다....",
+   "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=497037",
+   "originallink": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=497037",
+   "press": "pinpointnews.co.kr",
+   "pub": "2026-10-21 08:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "日구직자 절반 “한국 기업서 일하고 싶다”…74%는 이것 걱정",
+   "desc": "알리고 급여 등 근로 조건과 채용 절차도 상세히 안내해야 한다는 것이다. 일본 대학 졸업 예정자들의 채용 일정에 맞춰 구인 시기를 조정할 필요성도 제기했다. 이번 조사는 일본 구인·구직 사이트 ‘잡재팬’과...",
+   "link": "https://n.news.naver.com/mnews/article/025/0003559379?sid=104",
+   "originallink": "https://www.joongang.co.kr/article/25471494",
+   "press": "중앙일보",
+   "pub": "2026-10-21 08:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"한국 회사 가고 싶은데 상사는…\" 일본 취준생들 우려한 韓 직장문화",
+   "desc": "한국 기업에 취업하고 싶어 하는 일본 구직자가 상당수로 나타났다. 한류 확산과 한국 기업의 성장세가... 기업 선택 기준(복수응답 가능)으로 업무 내용을 꼽은 비율이 73.1%로 가장 높았고, 급여와 처우(72.1%)가 근소한...",
+   "link": "https://n.news.naver.com/mnews/article/277/0005831232?sid=104",
+   "originallink": "https://view.asiae.co.kr/article/2026102108364089475",
+   "press": "아시아경제",
+   "pub": "2026-10-21 08:41",
    "q": "구직급여",
    "rel": false
   }
