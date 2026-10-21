@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-21T10:01:22.414805+09:00",
+  "run_at": "2026-10-21T15:00:47.819740+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -7,10 +7,9 @@
       "added": 0
     },
     "oecd_interim": {
-      "ok": false,
-      "fetched": 0,
-      "added": 0,
-      "blocked": true
+      "ok": true,
+      "fetched": 4,
+      "added": 0
     },
     "imf": {
       "ok": true,
@@ -65,10 +64,6 @@
   },
   "conflicts": [],
   "errors": [],
-  "warnings": [
-    "oecd_interim: 봇 차단 1일째(유예 7일) — 봇 차단(Cloudflare 챌린지): https://www.oecd.org/content/dam/oecd/en/publications/reports/2026/09/oecd-economic-outlook-interim-report-september-2026_8312492f/f751d02b-en.pdf"
-  ],
-  "blocked": {
-    "oecd_interim": "2026-10-20"
-  }
+  "warnings": [],
+  "blocked": {}
 }
