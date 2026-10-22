@@ -9050,6 +9050,23 @@
     ]
    },
    {
+    "title": "제조업 고용 27개월만 증가 전환…청년 취업 47개월 연속 감소",
+    "url": "https://www.fnnews.com/news/202610160840205713",
+    "press": "파이낸셜뉴스",
+    "pub": "2026-10-16 08:47",
+    "cites": false,
+    "judged": true,
+    "why": "국가데이터처 경제활동인구조사 기사",
+    "hits": [
+     "산업:제조업",
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": []
+   },
+   {
     "title": "울산 건설업 사망 20명 '10년 내 최다'…안전관리 '구멍'",
     "url": "https://www.asiatime.co.kr/article/20261016500042",
     "press": "asiatime.co.kr",
@@ -9460,6 +9477,27 @@
      "위기",
      "칼럼",
      "현실화"
+    ]
+   },
+   {
+    "title": "미래에셋증권, 제3회 고용보험기금 파트너스 데이 진행",
+    "url": "https://www.cnbnews.com/news/articleView.html?idxno=1020415",
+    "press": "cnbnews.com",
+    "pub": "2026-10-21 19:14",
+    "cites": false,
+    "judged": true,
+    "why": "고용보험기금 운용사 행사 소식",
+    "hits": [
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "고용보험기금",
+     "미래에셋증권",
+     "진행",
+     "파트너스"
     ]
    }
   ]
