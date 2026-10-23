@@ -33803,5 +33803,131 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-10-23T10:07:33+09:00"
+ },
+ "bok-11065882": {
+  "pick": false,
+  "axis": "",
+  "why": "성장·물가 전망, 고용 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3387": {
+  "pick": false,
+  "axis": "",
+  "why": "월간지 통합본, 새 분석 없음",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3386": {
+  "pick": false,
+  "axis": "",
+  "why": "정기 경기지표 공표",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3385": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 AI 산업협력 외교 동향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3384": {
+  "pick": false,
+  "axis": "",
+  "why": "미국 반도체·AI 기술외교 동향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3383": {
+  "pick": false,
+  "axis": "",
+  "why": "충청권 초광역 성장전략, 고용분석 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3382": {
+  "pick": false,
+  "axis": "",
+  "why": "가계 소득·소비 양극화, 고용 결과변수 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3381": {
+  "pick": false,
+  "axis": "",
+  "why": "산업정책 지출 비교, 고용 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3380": {
+  "pick": false,
+  "axis": "",
+  "why": "호르무즈 공급망 충격 산업영향",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3379": {
+  "pick": true,
+  "axis": "청년 고용",
+  "why": "대-중소 임금격차가 첫 일자리 진입 지연에 미친 효과 추정",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3378": {
+  "pick": false,
+  "axis": "",
+  "why": "재생에너지 공급망·자원안보",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3377": {
+  "pick": false,
+  "axis": "",
+  "why": "ODA 축소와 개발협력 재편",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3376": {
+  "pick": false,
+  "axis": "",
+  "why": "무역구조 재편과 디지털 통상",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "kiet-ec3375": {
+  "pick": false,
+  "axis": "",
+  "why": "산업정책론 기고, 저자 측정 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-23T15:01:14+09:00"
  }
 }

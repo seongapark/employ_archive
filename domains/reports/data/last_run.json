@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-23T10:07:01+09:00",
+  "at": "2026-10-23T15:00:53+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -183,9 +183,9 @@
     },
     "kiet-issue": {
       "ok": true,
-      "parsed": 60,
-      "added": 1,
-      "details": 1,
+      "parsed": 30,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -193,13 +193,13 @@
     },
     "kiet-economy": {
       "ok": true,
-      "parsed": 30,
-      "added": 0,
-      "details": 0,
+      "parsed": 60,
+      "added": 13,
+      "details": 13,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 415
+      "total": 428
     },
     "kdi-report": {
       "ok": true,
@@ -274,12 +274,12 @@
     "bok-assess": {
       "ok": true,
       "parsed": 100,
-      "added": 0,
-      "details": 0,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": true,
       "skipped_old": 0,
       "error": null,
-      "total": 23
+      "total": 24
     },
     "bok-region": {
       "ok": true,
@@ -323,9 +323,9 @@
     },
     "bok-research": {
       "ok": true,
-      "parsed": 200,
-      "added": 1,
-      "details": 1,
+      "parsed": 100,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3470,
+  "reports": 3484,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -362,39 +362,12 @@
         "rate": 0.387
       }
     },
-    "kiet": {
-      "i-KIET": {
-        "total": 125,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "월간 산업경제": {
-        "total": 415,
-        "missing": 37,
-        "rate": 0.089
-      },
-      "이슈페이퍼": {
-        "total": 83,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "정책자료": {
-        "total": 37,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "연구자료": {
-        "total": 82,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "연구보고서": {
-        "total": 159,
-        "missing": 7,
-        "rate": 0.044
-      }
-    },
     "bok": {
+      "경제상황 평가": {
+        "total": 24,
+        "missing": 0,
+        "rate": 0.0
+      },
       "조사연구자료": {
         "total": 401,
         "missing": 391,
@@ -425,15 +398,42 @@
         "missing": 19,
         "rate": 1.0
       },
-      "경제상황 평가": {
-        "total": 23,
-        "missing": 0,
-        "rate": 0.0
-      },
       "주력산업 모니터링 보고서": {
         "total": 8,
         "missing": 8,
         "rate": 1.0
+      }
+    },
+    "kiet": {
+      "i-KIET": {
+        "total": 125,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "월간 산업경제": {
+        "total": 428,
+        "missing": 39,
+        "rate": 0.091
+      },
+      "이슈페이퍼": {
+        "total": 83,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "정책자료": {
+        "total": 37,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구자료": {
+        "total": 82,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구보고서": {
+        "total": 159,
+        "missing": 7,
+        "rate": 0.044
       }
     },
     "keis": {
@@ -514,7 +514,7 @@
   "abstract_missing_why": {
     "요약 섹션 없음": 554,
     "텍스트가 없는 스캔본": 311,
-    "원문 없음": 46,
+    "원문 없음": 48,
     "내려받기 실패: Failed to perform, curl: (6) Could not resolve host: www.bok.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.": 13,
     "PDF 를 열 수 없음: list index out of range": 4,
     "요약 없음": 2,
@@ -524,22 +524,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 306369,
-    "abstracts_gzip": 3489098,
+    "reports_gzip": 307188,
+    "abstracts_gzip": 3496773,
     "abstracts_shards_gzip": {
-      "bok": 295168,
+      "bok": 295381,
       "kdi": 891632,
       "keis": 256899,
-      "kiet": 713619,
+      "kiet": 721081,
       "kli": 1331780
     }
   },
   "recommend": {
-    "judged": 3470,
-    "picked": 373,
+    "judged": 3484,
+    "picked": 374,
     "unjudged": 0,
     "profile_version": "5a624049",
-    "title_only": 945,
-    "at": "2026-10-23T10:07:33+09:00"
+    "title_only": 947,
+    "at": "2026-10-23T15:01:14+09:00"
   }
 }

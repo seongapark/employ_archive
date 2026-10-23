@@ -458,5 +458,25 @@
     "abstract_tried": false,
     "abstract_note": null,
     "collected_at": "2026-09-11T23:24:59+09:00"
+  },
+  {
+    "id": "bok-11065882",
+    "org": "bok",
+    "board": "bok-assess",
+    "series": "경제상황 평가",
+    "title": "경제상황 평가(2026.10월)",
+    "authors": [
+      "조사총괄팀"
+    ],
+    "published": "2026-10-23",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=11065882&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/9be349dd8fad4199bdeabb9411ebce13/1/a8efb75641d0476fb96dcf17a5bcc429.hwp",
+    "abstract": "□ 국내경제는 중동지역 불확실성 확대에도 반도체 경기의 강한 호조세와 여타부문으로의 파급 확산 등으로 기존 전망경로를 상회하는 높은 성장세 전망\n□ 물가상승률은 누적된 비용압력이 전이되고 수요압력도 점차 확대됨에 따라 높은 수준 지속 예상\n□ 전망경로에는 반도체 경기, 중동상황 등과 관련한 불확실성이 큰 상황\n※ 자세한 내용은 <붙임> 경제상황 평가(2026년 10월) 참조",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-10-23T15:00:45+09:00"
   }
 ]

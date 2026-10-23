@@ -16,6 +16,22 @@
   ]
  },
  {
+  "id": "bok-11065882",
+  "org": "bok",
+  "board": "bok-assess",
+  "series": "경제상황 평가",
+  "title": "경제상황 평가(2026.10월)",
+  "authors": [
+   "조사총괄팀"
+  ],
+  "published": "2026-10-23",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0002105/view.do?nttId=11065882&searchCnd=1&searchKwd=&depth2=201157&depth3=200439&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200439&pageIndex=1&programType=newsData&menuNo=200439&oldMenuNo=200439",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/9be349dd8fad4199bdeabb9411ebce13/1/a8efb75641d0476fb96dcf17a5bcc429.hwp",
+  "matched": []
+ },
+ {
   "id": "kiet-is871",
   "org": "kiet",
   "board": "kiet-issue",
@@ -231,6 +247,218 @@
   "pages": null,
   "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10308&mid=a10104040000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=고용영향평가브리프",
   "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=64E8AB90E539509C49258E800041155A_1.pdf&fileNameOrg=KLI 고용영향평가브리프 2026년 제3호_통권 제53호.pdf&filePath1=jsphome/DATA/pblctList/issue/64E8AB90E539509C49258E800041155A",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-ec3387",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "2026년 9월호 통합본",
+  "authors": [],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3387&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3386",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "실물경제 주요지표 & 업종별 경기지수",
+  "authors": [],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3386&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3385",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "BRICS 정상회의로 본 중국의 AI 산업협력",
+  "authors": [
+   "박소희"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3385&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3384",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "미국의 ‘실리콘 외교’ - AI·반도체·컴퓨팅 인프라 협력의 확대",
+  "authors": [
+   "박소희"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3384&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3383",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "충청권 초광역화와 5극3특 성공 조건",
+  "authors": [
+   "안기돈"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3383&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3382",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "우리 경제 가계 양극화의 실태와 파급 영향",
+  "authors": [
+   "이재호"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3382&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3381",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "OECD QuIS 데이터로 본 한국 산업정책의 현주소와 전환 과제",
+  "authors": [
+   "차민영"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3381&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3380",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "호르무즈 사태 장기화에 따른 한국 산업의 영향 및 대응 방향",
+  "authors": [
+   "빙현지"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3380&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3379",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "노동시장 이중구조와 청년 취업 - 대기업과 중소기업을 중심으로",
+  "authors": [
+   "민순홍"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3379&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "청년고용",
+   "임금",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-ec3378",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "재생에너지 보급 확대와 국내 산업 육성 - 자원안보 관점에서 본 최근 정책 변화와 과제",
+  "authors": [
+   "이슬기"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3378&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3377",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "공적개발원조(ODA) 축소 동향과 개발협력 재편 과제",
+  "authors": [
+   "임소영"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3377&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3376",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "국제무역구조 변화 동향과 한국 산업의 대응 방향",
+  "authors": [
+   "경희권",
+   "이준",
+   "김상훈"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3376&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3375",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "[KIET 50주년 해외석학 특별기고] 산업 발전의 세 가지 쟁점과 정책 방향 - 지속가능성, 글로벌 가치사슬, 지역 간 격차를 중심으로",
+  "authors": [
+   "이근"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3375&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
   "matched": [
    "일자리정책"
   ]
