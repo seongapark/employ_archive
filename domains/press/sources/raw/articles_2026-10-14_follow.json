@@ -6,32 +6,32 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-22 16:56",
+ "collected_at": "2026-10-23 09:10",
  "volume": {
-  "collected": 165,
-  "articles": 39,
-  "press": 31,
+  "collected": 176,
+  "articles": 41,
+  "press": 33,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29480,
+   "api_total": 29482,
    "fetched": 100,
    "truncated": false,
-   "in_window": 42,
-   "relevant": 39,
-   "new": 41
+   "in_window": 44,
+   "relevant": 41,
+   "new": 43
   },
   {
    "query": "구직급여",
-   "api_total": 94804,
+   "api_total": 94812,
    "fetched": 200,
    "truncated": false,
-   "in_window": 102,
+   "in_window": 110,
    "relevant": 1,
-   "new": 99
+   "new": 107
   },
   {
    "query": "구인배수",
@@ -80,10 +80,10 @@
   },
   {
    "query": "전자·통신 고용보험",
-   "api_total": 3679,
+   "api_total": 3680,
    "fetched": 100,
    "truncated": false,
-   "in_window": 7,
+   "in_window": 8,
    "relevant": 4,
    "new": 2
   },
@@ -98,12 +98,12 @@
   },
   {
    "query": "자동차 고용보험",
-   "api_total": 14005,
+   "api_total": 14006,
    "fetched": 100,
    "truncated": false,
-   "in_window": 8,
+   "in_window": 9,
    "relevant": 6,
-   "new": 0
+   "new": 1
   },
   {
    "query": "기타운송장비 고용보험",
@@ -504,6 +504,26 @@
    "press": "kyongbuk.co.kr",
    "pub": "2026-10-22 16:36",
    "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "조달청, '페이퍼컴퍼니 의심업체' 입찰보증금 징구···11월16일 공고분...",
+   "desc": "종업원 수는 입찰공고일 전월 기준으로 국민건강보험공단이 제공하는 건강보험 가입자 수로 확인하며, 대표자는 빠진다. 종업원이 0명으로 나온 업체는 낙찰자로 선정될 때 국민연금·고용보험 등 증빙자료를 내 추가...",
+   "link": "https://www.koscaj.com/news/articleView.html?idxno=327069",
+   "originallink": "https://www.koscaj.com/news/articleView.html?idxno=327069",
+   "press": "대한전문건설신문",
+   "pub": "2026-10-22 17:04",
+   "q": "고용보험 가입자, 전자·통신 고용보험",
+   "rel": true
+  },
+  {
+   "title": "[신진영 칼럼]  'OCIO 제도'의 새로운 도약, 퇴직연금서 길을 찾아야",
+   "desc": "2010년대 들어서는 주택도시기금, 고용보험기금, 산재보험기금 등 개별 공적기금으로 확대되었고... 확정기여형(DC)과 개인형퇴직연금(IRP)에서는 가입자의 장기 목표에 맞춘 전문 운용체계가 필요하다. 근로자...",
+   "link": "https://www.ajunews.com/view/20261021195053561",
+   "originallink": "https://www.ajunews.com/view/20261021195053561",
+   "press": "아주경제",
+   "pub": "2026-10-23 06:02",
+   "q": "고용보험 가입자",
    "rel": true
   }
  ],
@@ -1339,20 +1359,20 @@
    "rel": false
   },
   {
-   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
-   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
+   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
+   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
-   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
+   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
+   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
@@ -1765,6 +1785,96 @@
    "originallink": "https://www.woodkorea.co.kr/news/articleView.html?idxno=92035",
    "press": "woodkorea.co.kr",
    "pub": "2026-10-22 15:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "비수도권 청년, 더 일하고 월 63만원 덜 번다",
+   "desc": "선호하는 일자리로 수도권 청년은 ‘급여가 높은 회사’(25.3%)를 1순위로 꼽았지만, 비수도권 청년은... 대학에 진학한 응답자 1011명 중 75명(7.4%)이 졸업을 미룬 경험이 있었고, 이 가운데 76.0%는 취업 준비와 구직...",
+   "link": "https://n.news.naver.com/mnews/article/081/0003691617?sid=102",
+   "originallink": "https://www.seoul.co.kr/news/society/2026/10/22/20261022500285?wlog_tag3=naver",
+   "press": "서울신문",
+   "pub": "2026-10-22 17:29",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "전방·일신방직, 지역성장 이끈 생산·소비의 두축",
+   "desc": "고정급여를 받는 일터여서 입사경쟁률은 치열했다. 1975년 당시 광주 섬유업체 중 100명 이상 고용한 곳은 일신방직, 전방전남지사, 광주직물, 광주어망, 무등양말 등 6곳에 불과했다. 이들 업체는 최고의 호황으로 구직자...",
+   "link": "http://www.mdilbo.com/detail/EHdc4G/759912",
+   "originallink": "http://www.mdilbo.com/detail/EHdc4G/759912",
+   "press": "mdilbo.com",
+   "pub": "2026-10-22 17:58",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "북한 IT 인력, 국내 기업에 위장 취업…실제로 '이 업무'까지 했다",
+   "desc": "인력이 구직 플랫폼을 통해 프리랜서 업무를 찾거나 제3자를 내세워 기업에 지원하는 수법을 사용한다고 설명했다. 채용 과정에서 신분 확인을 통과한 뒤 회사 내부 시스템에 접근할 수 있게 되면, 단순히 급여를 받는 데...",
+   "link": "https://www.wikitree.co.kr/articles/1168423",
+   "originallink": "https://www.wikitree.co.kr/articles/1168423",
+   "press": "wikitree.co.kr",
+   "pub": "2026-10-22 21:56",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[단독] 북한 IT 인력 위장취업 실태를 추적하다",
+   "desc": "합격 뒤에는 미국 내 중개인이 노트북을 받아 원격 접속을 열어주고, 급여는 북한 당국이 통제하는 계좌로... # 미국의 한 블록체인 전문 구직 사이트. 분명 이름도 얼굴도 다른 지원서들인데 직무, 경력, 기술, 자기소개...",
+   "link": "https://n.news.naver.com/mnews/article/053/0000062496?sid=102",
+   "originallink": "http://weekly.chosun.com/news/articleView.html?idxno=56441",
+   "press": "조선일보",
+   "pub": "2026-10-23 04:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "청년들 지방 떠나는 이유 있었네… 더 일하고 월 63만원 덜 받는다",
+   "desc": "선호하는 일자리로 수도권 청년은 ‘급여가 높은 회사’(25.3%)를 1순위로 꼽았지만, 비수도권 청년은... 대학에 진학한 응답자 1011명 중 75명(7.4%)이 졸업을 미룬 경험이 있었고, 이 가운데 76.0%는 취업 준비와 구직...",
+   "link": "https://n.news.naver.com/mnews/article/081/0003691690?sid=102",
+   "originallink": "https://www.seoul.co.kr/news/society/2026/10/23/20261023010007?wlog_tag3=naver",
+   "press": "서울신문",
+   "pub": "2026-10-23 05:03",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "‘정년 60세, 국민연금 수령 65세’ 5년 공백 생활비 어떻게 마련할까",
+   "desc": "정년퇴직 예정이라면 실업급여부터 확인하자 정년퇴직 후 국민연금을 받기까지 소득이 끊긴다면 실업급여(구직급여) 수급 여부부터 확인해보자. 정년퇴직도 구직급여를 받을 수 있는 퇴직 사유에 해당한다. 다만 퇴직...",
+   "link": "https://bravo.etoday.co.kr/view/atc_view/20303",
+   "originallink": "https://bravo.etoday.co.kr/view/atc_view/20303",
+   "press": "이투데이",
+   "pub": "2026-10-23 06:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[KBS 열린토론] 박홍근 “미래대응기금, 정권 바뀌어도 휴지조각 되면 ...",
+   "desc": "그런데 갑자기 자동차를 사야 되거나 새 집을 장만해야 되거나 그럴 때는 목돈이 들어가지 않습니까? 그런... 사회가 크게, 빠르게 바뀌어 가는데 손해 보는 국민들을 위해서 안전망이라든가 고용보험이라든가 이런 것들이...",
+   "link": "https://n.news.naver.com/mnews/article/056/0012279362?sid=100",
+   "originallink": "https://news.kbs.co.kr/news/pc/view/view.do?ncd=8693192&ref=A",
+   "press": "news.kbs.co.kr",
+   "pub": "2026-10-23 07:01",
+   "q": "자동차 고용보험",
+   "rel": false
+  },
+  {
+   "title": "국내 기업 채용망 뚫은 북한 개발자... 원격 근무가 만든 안보 사각지대",
+   "desc": "김 의원실은 실제 채용 여부, 기업 내부 시스템 접속 여부, 정보 유출 여부, 급여 지급 내역 등을 요청했지만... 당시 정부는 구인·구직 플랫폼의 본인 인증 절차를 미리 점검해 본 결과 북한 IT 인력이 신분을 위조해 국내...",
+   "link": "https://www.lawtv.kr/news/articleView.html?idxno=61232",
+   "originallink": "https://www.lawtv.kr/news/articleView.html?idxno=61232",
+   "press": "lawtv.kr",
+   "pub": "2026-10-23 08:50",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[심층기획 : 고용24 사용설명서⑥ AI전략팀 개발자] AI 추천 일자리에 취...",
+   "desc": "실업급여 수급자격과 같은 행정적 판단에는 근로기간, 이직 사유, 관련 법령 등 여러 조건이 적용된다. 따라서 AI가 향후 상담을 지원하더라도 제도 안내와 공식적인 수급자격 판단을 구분해야 한다. 구직자는 현재...",
+   "link": "https://www.news2day.co.kr/article/20261008500132",
+   "originallink": "https://www.news2day.co.kr/article/20261008500132",
+   "press": "news2day.co.kr",
+   "pub": "2026-10-23 09:02",
    "q": "구직급여",
    "rel": false
   }
