@@ -6,32 +6,32 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-23 09:10",
+ "collected_at": "2026-10-23 16:54",
  "volume": {
-  "collected": 176,
-  "articles": 41,
-  "press": 33,
+  "collected": 185,
+  "articles": 43,
+  "press": 34,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29482,
+   "api_total": 29485,
    "fetched": 100,
    "truncated": false,
-   "in_window": 44,
-   "relevant": 41,
-   "new": 43
+   "in_window": 47,
+   "relevant": 43,
+   "new": 46
   },
   {
    "query": "구직급여",
-   "api_total": 94812,
+   "api_total": 94817,
    "fetched": 200,
    "truncated": false,
-   "in_window": 110,
+   "in_window": 115,
    "relevant": 1,
-   "new": 107
+   "new": 111
   },
   {
    "query": "구인배수",
@@ -44,19 +44,19 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18631,
+   "api_total": 18633,
    "fetched": 100,
    "truncated": false,
-   "in_window": 33,
+   "in_window": 35,
    "relevant": 17,
-   "new": 13
+   "new": 15
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8443,
+   "api_total": 8444,
    "fetched": 100,
    "truncated": false,
-   "in_window": 16,
+   "in_window": 17,
    "relevant": 16,
    "new": 0
   },
@@ -523,6 +523,26 @@
    "originallink": "https://www.ajunews.com/view/20261021195053561",
    "press": "아주경제",
    "pub": "2026-10-23 06:02",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "구직급여수급자 연금보험료 75% 지원하는 실업크레딧",
+   "desc": "▶︎이태영: 먼저 고용보험 구직급여를 받아야합니다. 흔히들 실업급여라고 하는데요, 이를 받는 18세 이상... 국민연금 보험료를 1개월 이상 납부한 이력이 있는 가입자(였던 자)라야 합니다. 또한   재산 및 소득기준도...",
+   "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4114199",
+   "originallink": "https://news.bbsi.co.kr/news/articleView.html?idxno=4114199",
+   "press": "news.bbsi.co.kr",
+   "pub": "2026-10-23 11:04",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "우진산전, '2026 대한민국 일자리 으뜸기업' 선정…고용 16.4% 늘렸다",
+   "desc": "이에 따라 고용보험 가입자는 2024년 578명에서 지난해 말 673명으로 95명(16.4%) 증가했다. 지난해 신규 채용자 140명 가운데 34세 이하 청년은 64명으로 45.7%를 차지했다. 고령 근로자의 고용 안정에도 나섰다. 정년 60세를...",
+   "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065593441378435",
+   "originallink": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065593441378435",
+   "press": "megaeconomy.co.kr",
+   "pub": "2026-10-23 15:20",
    "q": "고용보험 가입자",
    "rel": true
   }
@@ -1876,6 +1896,76 @@
    "press": "news2day.co.kr",
    "pub": "2026-10-23 09:02",
    "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[경기도 노동이야기⑮] \"인간답게, 안전하게\" 대중문화와 법으로 풀어낸...",
+   "desc": "폐업 전 가입 기간이 1년 이상이고 비자발적 폐업 등 법정 요건을 충족하면 구직급여를 받을 수 있습니다. 보험료도 지원사업의 요건을 충족하면 최대 80%까지 지원받을 수 있으니 가입과 지원 대상인지 확인해 보시기...",
+   "link": "https://news.ifm.kr/news/articleView.html?idxno=482411",
+   "originallink": "https://news.ifm.kr/news/articleView.html?idxno=482411",
+   "press": "news.ifm.kr",
+   "pub": "2026-10-23 09:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "영남기술직업전문학교, 국비지원 전기기능사·전기(산업)기사 자격취득...",
+   "desc": "국비지원교육의 지원대상은 만 15세 이상 취업 희망자를 비롯해 구직자, 실업자, 실업급여 수급자, 대학교 졸업예정자 및 휴학생 등 누구나 국민내일배움카드만 발급받으면 수강 가능하다. 영남기술직업전문학교에서 매월...",
+   "link": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1070401",
+   "originallink": "https://www.ksilbo.co.kr/news/articleView.html?idxno=1070401",
+   "press": "ksilbo.co.kr",
+   "pub": "2026-10-23 10:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[단독] \"1999년생 남성·55사이즈\" 차별 공고 2만8000건... 통보 뒤 조치...",
+   "desc": "\"급여: 200만5,000원(연차 포함)\", \"1999년생 이후 출생 남성\", \"55사이즈 피팅 가능자\", \"기독교인이거나... 그러나 적발과 통보만 할 뿐 해당 포털의 공고 수정·삭제 여부를 확인하는 절차는 없어 구직자가 부적절한 공고에...",
+   "link": "https://n.news.naver.com/mnews/article/469/0000961209?sid=102",
+   "originallink": "https://www.hankookilbo.com/news/article/A2026102309540005686?did=NA",
+   "press": "한국일보",
+   "pub": "2026-10-23 11:15",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[2026 국감] 산재 보상 속도 높이고 AI부정행위 막고…노동 산하기관 쇄...",
+   "desc": "내년 시행되는 소득 기반 고용·산재보험 적용·부과 체계 개편에 맞춰 청년과 단시간 노동자 등 고용형태와... 현재 가입자는 20만명, 적립금은 1조9000억원이며 연평균 수익률은 8% 안팎이다. 김현중 안전보건공단...",
+   "link": "https://n.news.naver.com/mnews/article/119/0003146306?sid=102",
+   "originallink": "https://www.dailian.co.kr/news/view/1705365/?sc=Naver",
+   "press": "dailian.co.kr",
+   "pub": "2026-10-23 13:54",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "연금 기다리는 취약 중고령가구, 10곳 중 7곳 ‘적자’",
+   "desc": "이에 50세 이후 국민연금 자격 상실이나 구직급여 신청을 계기로 노후준비 상담을 연계하는 방안 등을 제시했다. 연구진은 “정책 논의는 대응 수단의 불형평을 줄이는 방향과, 제도적 공백기 대응의 중심 수단인...",
+   "link": "https://bravo.etoday.co.kr/view/atc_view/20308",
+   "originallink": "https://bravo.etoday.co.kr/view/atc_view/20308",
+   "press": "이투데이",
+   "pub": "2026-10-23 15:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[윤경준의 이슈톡톡] 위기의 소상공인…충남도 지원 대책은?",
+   "desc": "구체적으로는 도·소매업, 숙박·음식점업, 서비스업 등 대부분의 업종은 상시 근로자 5명 미만, 제조업... 국민연금과 고용보험료 사업주 부담금 20% 지원부터, 1인 자영업자 고용보험, 화재보험료 지원, 그리고...",
+   "link": "http://news.lghellovision.net/news/articleView.html?idxno=558305",
+   "originallink": "http://news.lghellovision.net/news/articleView.html?idxno=558305",
+   "press": "news.lghellovision.net",
+   "pub": "2026-10-23 15:30",
+   "q": "제조업 고용보험, 건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "우진산전, '2026 일자리 으뜸기업' 선정 … 지역 고용 1년 새 16.4% 늘려",
+   "desc": "우진산전의 고용보험 피보험자 수는 2024년 578명에서 2025년 말 673명으로 1년 만에 95명 증가했다. 증가율은... 우진산전의 이번 선정은 제조업 경쟁력 확보를 위한 투자가 지역 고용 확대와 근로환경 개선으로 이어진...",
+   "link": "http://www.worktoday.co.kr/news/articleView.html?idxno=90865",
+   "originallink": "http://www.worktoday.co.kr/news/articleView.html?idxno=90865",
+   "press": "worktoday.co.kr",
+   "pub": "2026-10-23 16:00",
+   "q": "제조업 고용보험",
    "rel": false
   }
  ]

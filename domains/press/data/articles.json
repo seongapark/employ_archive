@@ -9565,6 +9565,46 @@
      "칼럼",
      "퇴직연금"
     ]
+   },
+   {
+    "title": "구직급여수급자 연금보험료 75% 지원하는 실업크레딧",
+    "url": "https://news.bbsi.co.kr/news/articleView.html?idxno=4114199",
+    "press": "news.bbsi.co.kr",
+    "pub": "2026-10-23 11:04",
+    "cites": false,
+    "judged": true,
+    "why": "실업크레딧 제도 설명",
+    "hits": [
+     "지표:구직급여"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "실업크레딧",
+     "연금보험료",
+     "지원하"
+    ]
+   },
+   {
+    "title": "우진산전, '2026 대한민국 일자리 으뜸기업' 선정…고용 16.4% 늘렸다",
+    "url": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065593441378435",
+    "press": "megaeconomy.co.kr",
+    "pub": "2026-10-23 15:20",
+    "cites": false,
+    "judged": true,
+    "why": "개별 기업 일자리 으뜸기업 선정",
+    "hits": [],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "",
+    "kw": [
+     "늘렸",
+     "대한민국",
+     "선정",
+     "우진산전",
+     "으뜸기업"
+    ]
    }
   ]
  }
