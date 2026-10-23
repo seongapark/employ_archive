@@ -16,6 +16,38 @@
   ]
  },
  {
+  "id": "kiet-is871",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "석유 최고가격제의 가격안정 효과",
+  "authors": [
+   "이홍"
+  ],
+  "published": "2026-10-22",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=871&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "bok-11065855",
+  "org": "bok",
+  "board": "bok-research",
+  "series": "조사연구자료",
+  "title": "에너지 공급구조 변화가 충남 지역경제에 미치는 영향",
+  "authors": [
+   "대전세종충남본부"
+  ],
+  "published": "2026-10-22",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11065855&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/89324871358941b7834992c249228814/1/655c24eeefd84b62a1010ef9d6f1be95.hwp",
+  "matched": []
+ },
+ {
   "id": "bok-11065840",
   "org": "bok",
   "board": "bok-issue",
