@@ -6,32 +6,32 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-23 16:54",
+ "collected_at": "2026-10-24 09:00",
  "volume": {
-  "collected": 185,
-  "articles": 43,
-  "press": 34,
+  "collected": 190,
+  "articles": 44,
+  "press": 35,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29485,
+   "api_total": 29486,
    "fetched": 100,
    "truncated": false,
-   "in_window": 47,
-   "relevant": 43,
-   "new": 46
+   "in_window": 48,
+   "relevant": 44,
+   "new": 47
   },
   {
    "query": "구직급여",
-   "api_total": 94817,
+   "api_total": 94821,
    "fetched": 200,
    "truncated": false,
-   "in_window": 115,
+   "in_window": 119,
    "relevant": 1,
-   "new": 111
+   "new": 115
   },
   {
    "query": "구인배수",
@@ -543,6 +543,16 @@
    "originallink": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065593441378435",
    "press": "megaeconomy.co.kr",
    "pub": "2026-10-23 15:20",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "우진산전, 고용 16.4% 증가···'일자리 으뜸기업' 선정",
+   "desc": "지난해 고용보험 가입자가 전년보다 16.4% 증가한 가운데 청년 채용과 정년퇴직자 재고용 등 다양한 고용 안정 제도를 운영한 점이 주요 성과로 꼽힌다. 우진산전은 최근 고용노동부가 주관하는 '2026 대한민국 일자리...",
+   "link": "https://www.energy-news.co.kr/news/articleView.html?idxno=229218",
+   "originallink": "https://www.energy-news.co.kr/news/articleView.html?idxno=229218",
+   "press": "energy-news.co.kr",
+   "pub": "2026-10-23 16:58",
    "q": "고용보험 가입자",
    "rel": true
   }
@@ -1966,6 +1976,46 @@
    "press": "worktoday.co.kr",
    "pub": "2026-10-23 16:00",
    "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "\"쉬었음 청년 아니다\"... 간병 떠안은 20대의 절규",
+   "desc": "또한, 이 대표는 ▲ 국가가 최종 고용주로서 AI·녹색·돌봄 분야 정규직을 직접 채용하는 '청년일자리 국가책임제' 도입 ▲ 취업 준비 기간의 생계를 보장하는 '졸업급여' 신설 및 구직수당 확대 ▲ 공짜 야근과 직장 내...",
+   "link": "https://n.news.naver.com/mnews/article/047/0002533295?sid=102",
+   "originallink": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003278034&CMPT_CD=P0010&utm_source=naver&utm_medium=newsearch&utm_campaign=naver_news",
+   "press": "ohmynews.com",
+   "pub": "2026-10-23 17:26",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[기자수첩 ]1,500만 모인 ‘고용24’의 착시… ‘실속 없는 숫자 잔치’...",
+   "desc": "구인 기업은 검증된 인재를 찾지 못해 돌아서고, 구직자는 알맹이 없는 정보에 실망해 민간 플랫폼으로 이탈하는 악순환이다. 실업급여 수급이나 공공 지원금 신청 등 의무 절차로 인해 유입된 ‘허수 트래픽’을...",
+   "link": "https://www.dailyt.co.kr/newsView/dlt202610230019",
+   "originallink": "https://www.dailyt.co.kr/newsView/dlt202610230019",
+   "press": "dailyt.co.kr",
+   "pub": "2026-10-23 20:26",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[Lawyter] 러시아 \"해외 서버에 개인정보 저장 안 된다\"",
+   "desc": "급여계좌를 서울 본사의 글로벌 HR 시스템에 바로 입력할 경우  \"러시아 국민의 개인정보가 어디에서 수집되고 저장되는가\"를 묻는 것이다.  러시아 소비자의 연락처가 한국 본사 CRM에 바로 들어가거나, 러시아 구직자...",
+   "link": "https://www.lawtimes.co.kr/news/articleView.html?idxno=228071",
+   "originallink": "https://www.lawtimes.co.kr/news/articleView.html?idxno=228071",
+   "press": "lawtimes.co.kr",
+   "pub": "2026-10-24 05:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"놀면 말고 빨리 취업하면 주죠\"…'실업급여' 때린 사이다 청원 [곽용희...",
+   "desc": "차라리 빨리 재취업할수록 보상액을 높이고, 새 직장에서 2년 이상 근속하면 목돈을 지급하는 게 낫지 않을까요.” 정부가 35세 미만 청년의 자발적 퇴사에도 생애 한 차례 구직급여를 지급하는 방안을 검토한다는...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005346022?sid=102",
+   "originallink": "https://www.hankyung.com/article/202610190445i",
+   "press": "한국경제",
+   "pub": "2026-10-24 07:01",
+   "q": "구직급여",
    "rel": false
   }
  ]
