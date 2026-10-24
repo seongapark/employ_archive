@@ -6,9 +6,9 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-24 09:00",
+ "collected_at": "2026-10-24 16:35",
  "volume": {
-  "collected": 190,
+  "collected": 194,
   "articles": 44,
   "press": 35,
   "queries": 11
@@ -26,12 +26,12 @@
   },
   {
    "query": "구직급여",
-   "api_total": 94821,
+   "api_total": 94826,
    "fetched": 200,
    "truncated": false,
-   "in_window": 119,
+   "in_window": 124,
    "relevant": 1,
-   "new": 115
+   "new": 119
   },
   {
    "query": "구인배수",
@@ -996,16 +996,6 @@
    "press": "한겨레",
    "pub": "2026-10-19 06:02",
    "q": "전자·통신 고용보험",
-   "rel": false
-  },
-  {
-   "title": "“나라에서 주는 건데 못 타면 바보”…1년도 안 돼 퇴사하는 청년들에...",
-   "desc": "19일 고용노동부에 따르면 35세 미만 청년이 일정 기간 근무 후 자발적으로 이직할 경우 생애 1회 구직급여를 지급하는 방안이 2027년도 예산안에 반영되지 않았다. 검토안에는 이직 전 임금의 60%, 월 최대 100만원...",
-   "link": "https://n.news.naver.com/mnews/article/011/0004672553?sid=101",
-   "originallink": "https://www.sedaily.com/article/20103070?ref=naver",
-   "press": "서울경제",
-   "pub": "2026-10-19 07:44",
-   "q": "구직급여",
    "rel": false
   },
   {
@@ -2016,6 +2006,56 @@
    "press": "한국경제",
    "pub": "2026-10-24 07:01",
    "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "北 IT 인력, 신분 속이고 국내 기업 위장 취업 정황… 경찰 수사 착수",
+   "desc": "주의보는 \"지원 서류만 봐서는 안 된다\"며 구직 계정과 급여 계좌의 명의가 다르거나, 연락처·계좌를 자주 바꾸거나, 신분증 하나로 여러 계정을 만든 경우 등을 주요 점검 항목으로 꼽았다. 제3자가 신분증을 빌려주거나...",
+   "link": "https://www.thepublic.kr/news/articleView.html?idxno=323519",
+   "originallink": "https://www.thepublic.kr/news/articleView.html?idxno=323519",
+   "press": "thepublic.kr",
+   "pub": "2026-10-24 09:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"실업급여, 빨리 취업하고 오래 근속하면 주자\"…'자발적 퇴사' 보상 직...",
+   "desc": "정부가 35세 미만 청년의 자발적 퇴사에도 생애 한 차례 구직급여 지급을 검토한다는 소식이 알려진 가운데 국민신문고에 실업 급여를 지급하는 대신 재취업과 장기근속에 관한 보상을 검토하자는 제안이 올라왔다. 정부...",
+   "link": "https://n.news.naver.com/mnews/article/277/0005832904?sid=102",
+   "originallink": "https://view.asiae.co.kr/article/2026102411045477715",
+   "press": "아시아경제",
+   "pub": "2026-10-24 11:11",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"퍼주기 실업급여 대신 2년 버티면 목돈\"… '일하는 청년' 보상안 터졌다",
+   "desc": "35세 미만 청년이 스스로 직장을 그만둬도 생애 한 번은 구직급여를 주겠다는 정부 구상이 알려지며 논란이 일자, 퍼주기성 복지 대신 조기 재취업과 장기근속에 혜택을 주는 방식으로 제도를 바꿔야 한다는 시민 정책...",
+   "link": "https://n.news.naver.com/mnews/article/243/0000104659?sid=101",
+   "originallink": "https://economist.co.kr/article/view/ecn202610240010",
+   "press": "economist.co.kr",
+   "pub": "2026-10-24 13:33",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“퇴사하면 돈 주고, 버티면 뭐 주나요?”…실업급여 논란에 나온 파격...",
+   "desc": "자발적 퇴사도 월 최대 100만원 검토…내년 예산에는 빠져 이번 청원은 정부가 청년층의 자발적 이직에 대한 구직급여 지급을 추진하면서 등장했다. 고용노동부는 지난 8월 4일 대통령 업무보고에서 35세 미만 청년이 일정...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002713827?sid=102",
+   "originallink": "https://biz.heraldcorp.com/article/10913510?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-10-24 15:37",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“나라에서 주는 건데 못 타면 바보”…1년도 안 돼 퇴사하는 청년들에...",
+   "desc": "청년이 스스로 퇴사해도 구직급여를 주겠다는 정부 구상이 논란을 부르는 가운데, 빨리 취업하고 오래 일할수록 더 많이 보상하자는 시민 청원이 나왔다. 정부 온라인 청원 시스템 ‘청원24’에는 최근 ‘실업급여...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004674741?sid=102",
+   "originallink": "https://www.sedaily.com/article/20105639?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-10-24 15:55",
+   "q": "구직급여, 구직급여",
    "rel": false
   }
  ]
