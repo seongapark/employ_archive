@@ -6,32 +6,32 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-24 16:35",
+ "collected_at": "2026-10-25 08:42",
  "volume": {
-  "collected": 194,
-  "articles": 44,
-  "press": 35,
+  "collected": 197,
+  "articles": 45,
+  "press": 36,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29486,
+   "api_total": 29487,
    "fetched": 100,
    "truncated": false,
-   "in_window": 48,
-   "relevant": 44,
-   "new": 47
+   "in_window": 49,
+   "relevant": 45,
+   "new": 48
   },
   {
    "query": "구직급여",
-   "api_total": 94826,
+   "api_total": 94822,
    "fetched": 200,
    "truncated": false,
-   "in_window": 124,
+   "in_window": 126,
    "relevant": 1,
-   "new": 119
+   "new": 121
   },
   {
    "query": "구인배수",
@@ -47,8 +47,8 @@
    "api_total": 18633,
    "fetched": 100,
    "truncated": false,
-   "in_window": 35,
-   "relevant": 17,
+   "in_window": 36,
+   "relevant": 18,
    "new": 15
   },
   {
@@ -89,11 +89,11 @@
   },
   {
    "query": "기계장비 고용보험",
-   "api_total": 1825,
+   "api_total": 1826,
    "fetched": 100,
    "truncated": false,
-   "in_window": 7,
-   "relevant": 5,
+   "in_window": 8,
+   "relevant": 6,
    "new": 0
   },
   {
@@ -554,6 +554,16 @@
    "press": "energy-news.co.kr",
    "pub": "2026-10-23 16:58",
    "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[동두천 민선 9기 공약 대해부③] 박형덕의 국가산단 100% 분양, 현재 5....",
+   "desc": "실제 일자리는 입주기업이 공장을 가동한 뒤 고용보험 가입자와 상시근로자 수로 확인해야 한다. 지역 주민 채용 비율과 청년 고용, 동두천 소재 기업의 이전·확장 여부까지 공개돼야 국가산업단지가 지역 일자리로...",
+   "link": "http://www.newstown.co.kr/news/articleView.html?idxno=719577",
+   "originallink": "http://www.newstown.co.kr/news/articleView.html?idxno=719577",
+   "press": "newstown.co.kr",
+   "pub": "2026-10-24 23:28",
+   "q": "고용보험 가입자, 제조업 고용보험, 기계장비 고용보험",
    "rel": true
   }
  ],
@@ -1379,20 +1389,20 @@
    "rel": false
   },
   {
-   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
-   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
+   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
+   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
-   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
+   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
+   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
@@ -2056,6 +2066,26 @@
    "press": "서울경제",
    "pub": "2026-10-24 15:55",
    "q": "구직급여, 구직급여",
+   "rel": false
+  },
+  {
+   "title": "35세 미만 자발 퇴사 구직급여 논란…'형평성'·재정난 우려 확산",
+   "desc": "35세 미만 청년이 자발적으로 퇴사해도 한 차례 구직급여를 받을 수 있도록 하는 정부 방침이 알려지면서 논란이 이어지고 있다. 이에 따라 실업급여 제도를 조기 재취업과 장기근속에 유리하게 개편하자는 시민 정책...",
+   "link": "https://www.mdtoday.co.kr/news/articleView.html?idxno=620704",
+   "originallink": "https://www.mdtoday.co.kr/news/articleView.html?idxno=620704",
+   "press": "mdtoday.co.kr",
+   "pub": "2026-10-24 19:50",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"실업급여 받아 日 놀러 왔다는데\"…유명 셰프가 발끈한 이유 [곽용희의...",
+   "desc": "김 의원은 \"고용노동부가 2023년부터 이 같은 문제를 점검해 왔는데도 부정수급 적발이 오히려 늘어난 것은 관리가 제대로 이뤄지지 않고 있다는 의미\"라며 \"실업급여가 꼭 필요한 구직자에게 지급될 수 있도록 해외...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005346114?sid=102",
+   "originallink": "https://www.hankyung.com/article/202610231713i",
+   "press": "한국경제",
+   "pub": "2026-10-25 06:01",
+   "q": "구직급여",
    "rel": false
   }
  ]
