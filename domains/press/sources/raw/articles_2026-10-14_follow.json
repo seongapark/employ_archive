@@ -6,9 +6,9 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-25 08:42",
+ "collected_at": "2026-10-25 16:48",
  "volume": {
-  "collected": 197,
+  "collected": 201,
   "articles": 45,
   "press": 36,
   "queries": 11
@@ -26,12 +26,12 @@
   },
   {
    "query": "구직급여",
-   "api_total": 94822,
+   "api_total": 94826,
    "fetched": 200,
    "truncated": false,
-   "in_window": 126,
+   "in_window": 130,
    "relevant": 1,
-   "new": 121
+   "new": 125
   },
   {
    "query": "구인배수",
@@ -2085,6 +2085,46 @@
    "originallink": "https://www.hankyung.com/article/202610231713i",
    "press": "한국경제",
    "pub": "2026-10-25 06:01",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "강레오 \"실업 급여로 일본 여행 온 청년들, 사진 찍어달라길래 거절했다...",
+   "desc": "구직급여는 원칙적으로 이직 전 평균임금의 60%를 기준으로 산정되지만 하한액은 최저임금과 연동된다. 이 때문에 일부 저임금 근로자는 실직 후 받는 구직급여가 취업했을 때의 소득과 비슷하거나 더 많아지는 상황을...",
+   "link": "https://www.wikitree.co.kr/articles/1168953",
+   "originallink": "https://www.wikitree.co.kr/articles/1168953",
+   "press": "wikitree.co.kr",
+   "pub": "2026-10-25 13:32",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "직장인 절반 가까이 '보복성 퇴사'…사전 통보 없이 회사 떠나",
+   "desc": "구인·구직 플랫폼 몬스터(Monster)가 2025년 3월 발표한 보복성 퇴사 관련 보고서에 따르면, 조사에 참여한... 낮은 급여나 복리후생 부족을 이유로 아무런 통보 없이 회사를 떠난 경우는 전체의 4%에 불과했다. 경력 개발...",
+   "link": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54496",
+   "originallink": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54496",
+   "press": "fortunekorea.co.kr",
+   "pub": "2026-10-25 15:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "해외 나가서 실업급여 '꿀꺽' 57% 급증...\"빨리 취업하고 오래 다니면 주...",
+   "desc": "정부가 35세 미만 청년의 자발적 퇴사에도 생애 한 차례 구직급여 지급을 검토하는 가운데, 실업급여 대신 재취업과 장기근속에 보상하자는 청원도 올라왔다. 25일 김위상 국민의힘 의원이 고용노동부에서 받은 자료를...",
+   "link": "https://www.pennmike.com/news/articleView.html?idxno=130236",
+   "originallink": "https://www.pennmike.com/news/articleView.html?idxno=130236",
+   "press": "pennmike.com",
+   "pub": "2026-10-25 15:16",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "1년도 못 버티고 “퇴사할게여”…요즘 청년들 “대기업이라도 250만원...",
+   "desc": "따르면 구직 시 가장 중요하게 생각하는 조건은 임금 수준(64.7%)이었다. 근로시간(51.9%)과 고용 안정성(50.9... 전체 응답자의 55.3%는 급여와 복지, 담당 업무 등이 만족스럽다면 비수도권 중소기업에 취업할 의향이...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004674878?sid=102",
+   "originallink": "https://www.sedaily.com/article/20105780?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-10-25 16:13",
    "q": "구직급여",
    "rel": false
   }
