@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-23T15:00:53+09:00",
+  "at": "2026-10-25T14:38:00+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -193,9 +193,9 @@
     },
     "kiet-economy": {
       "ok": true,
-      "parsed": 60,
-      "added": 13,
-      "details": 13,
+      "parsed": 30,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -274,8 +274,8 @@
     "bok-assess": {
       "ok": true,
       "parsed": 100,
-      "added": 1,
-      "details": 1,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": true,
       "skipped_old": 0,
       "error": null,
