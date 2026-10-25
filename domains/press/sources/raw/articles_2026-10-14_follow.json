@@ -6,32 +6,32 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-25 16:48",
+ "collected_at": "2026-10-26 08:32",
  "volume": {
-  "collected": 201,
-  "articles": 45,
-  "press": 36,
+  "collected": 205,
+  "articles": 47,
+  "press": 38,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29487,
+   "api_total": 29489,
    "fetched": 100,
    "truncated": false,
-   "in_window": 49,
-   "relevant": 45,
-   "new": 48
+   "in_window": 51,
+   "relevant": 47,
+   "new": 50
   },
   {
    "query": "구직급여",
-   "api_total": 94826,
+   "api_total": 94827,
    "fetched": 200,
    "truncated": false,
-   "in_window": 130,
+   "in_window": 131,
    "relevant": 1,
-   "new": 125
+   "new": 126
   },
   {
    "query": "구인배수",
@@ -98,12 +98,12 @@
   },
   {
    "query": "자동차 고용보험",
-   "api_total": 14006,
+   "api_total": 14007,
    "fetched": 100,
    "truncated": false,
-   "in_window": 9,
+   "in_window": 10,
    "relevant": 6,
-   "new": 1
+   "new": 2
   },
   {
    "query": "기타운송장비 고용보험",
@@ -564,6 +564,26 @@
    "press": "newstown.co.kr",
    "pub": "2026-10-24 23:28",
    "q": "고용보험 가입자, 제조업 고용보험, 기계장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "[단독]외국인 건보 재정 1조원 흑자, 중국인은 다시 400억대 적자로",
+   "desc": "중국인과 중국 동포 가입자들이 낸 건강보험료보다 국민건강보험공단이 부담한 병원 진료비 등 급여액이... 함명일 순천향대 보건행정경영학과 교수는 “건보에만 상호주의를 적용하면 고용보험 등 다른 사회보험...",
+   "link": "https://n.news.naver.com/mnews/article/020/0003757556?sid=102",
+   "originallink": "https://www.donga.com/news/Society/article/all/20261026/134905875/2",
+   "press": "동아일보",
+   "pub": "2026-10-26 04:35",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[손병관의 뉴스프레소] 새 법무장관 후보, '대장동 방어' 의원 2명으로 ...",
+   "desc": "건강보험 재정이 사상 처음 1조원대 흑자를 냈다. 다만 중국 국적 가입자만 1년 만에 적자로 돌아서면서... 함명일 순천향대 보건행정경영학과 교수는 \"건보에만 상호주의를 적용하면 고용보험 등 다른 사회보험...",
+   "link": "https://n.news.naver.com/mnews/article/047/0002533423?sid=102",
+   "originallink": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003278670&CMPT_CD=P0010&utm_source=naver&utm_medium=newsearch&utm_campaign=naver_news",
+   "press": "ohmynews.com",
+   "pub": "2026-10-26 07:56",
+   "q": "고용보험 가입자",
    "rel": true
   }
  ],
@@ -1389,20 +1409,20 @@
    "rel": false
   },
   {
-   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
-   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
+   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
+   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
-   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
+   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
+   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
@@ -2126,6 +2146,26 @@
    "press": "서울경제",
    "pub": "2026-10-25 16:13",
    "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"월급 300만원은 받아야지\"…지방 떠난 청년, 연봉 2166만원→4820만원 껑...",
+   "desc": "중소기업중앙회가 25일 발표한 '청년층 대상 중소기업 일자리 인식조사'에서 구직 시 임금 수준을... 급여와 복지, 담당 업무 등이 만족스럽다면 비수도권 중소기업에 취업할 의향이 있다는 응답은 55.3%였다....",
+   "link": "https://n.news.naver.com/mnews/article/088/0001036439?sid=101",
+   "originallink": "https://www.imaeil.com/page/view/2026102518271797404",
+   "press": "imaeil.com",
+   "pub": "2026-10-25 18:45",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[위니아, 멈춰선 시간] 대유위니아 가전 3사 임금·퇴직금 체불 장기화",
+   "desc": "보험별로는 건강보험 38억 7700만 원, 국민연금 37억 2500만 원, 고용보험 9억 6700만 원, 산재보험 4억 900만... 대유에이텍은 자동차 부품을 생산하는 그룹 계열사로, 가전 계열사들의 회생·파산 절차와는 별도로 사업을...",
+   "link": "http://www.gjdream.com/news/articleView.html?idxno=673703",
+   "originallink": "http://www.gjdream.com/news/articleView.html?idxno=673703",
+   "press": "gjdream.com",
+   "pub": "2026-10-26 00:06",
+   "q": "자동차 고용보험",
    "rel": false
   }
  ]
