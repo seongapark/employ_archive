@@ -1,5 +1,5 @@
 {
-  "at": "2026-10-26T10:04:58+09:00",
+  "at": "2026-10-26T15:00:45+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -243,13 +243,13 @@
     },
     "kdi-etc": {
       "ok": true,
-      "parsed": 3,
-      "added": 0,
-      "details": 0,
+      "parsed": 4,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 3
+      "total": 4
     },
     "bok-intl": {
       "ok": true,
@@ -303,13 +303,13 @@
     },
     "bok-note": {
       "ok": true,
-      "parsed": 100,
-      "added": 0,
-      "details": 0,
+      "parsed": 200,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 214
+      "total": 215
     },
     "bok-issue": {
       "ok": true,
@@ -323,17 +323,17 @@
     },
     "bok-research": {
       "ok": true,
-      "parsed": 100,
-      "added": 0,
-      "details": 0,
+      "parsed": 200,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 408
+      "total": 409
     }
   },
   "unregistered": [],
-  "reports": 3484,
+  "reports": 3487,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -341,15 +341,15 @@
         "missing": 0,
         "rate": 0.0
       },
+      "기타보고서": {
+        "total": 4,
+        "missing": 0,
+        "rate": 0.0
+      },
       "연구보고서": {
         "total": 402,
         "missing": 13,
         "rate": 0.032
-      },
-      "기타보고서": {
-        "total": 3,
-        "missing": 0,
-        "rate": 0.0
       },
       "KDI FOCUS": {
         "total": 343,
@@ -363,25 +363,25 @@
       }
     },
     "bok": {
+      "BOK 이슈노트": {
+        "total": 215,
+        "missing": 23,
+        "rate": 0.107
+      },
+      "조사연구자료": {
+        "total": 402,
+        "missing": 392,
+        "rate": 0.975
+      },
       "경제상황 평가": {
         "total": 24,
         "missing": 0,
         "rate": 0.0
       },
-      "조사연구자료": {
-        "total": 401,
-        "missing": 391,
-        "rate": 0.975
-      },
       "이슈분석·심층연구": {
         "total": 22,
         "missing": 3,
         "rate": 0.136
-      },
-      "BOK 이슈노트": {
-        "total": 214,
-        "missing": 23,
-        "rate": 0.107
       },
       "국제경제이슈": {
         "total": 1,
@@ -512,7 +512,7 @@
     }
   },
   "abstract_missing_why": {
-    "요약 섹션 없음": 554,
+    "요약 섹션 없음": 555,
     "텍스트가 없는 스캔본": 311,
     "원문 없음": 48,
     "내려받기 실패: Failed to perform, curl: (6) Could not resolve host: www.bok.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.": 13,
@@ -524,22 +524,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 307188,
-    "abstracts_gzip": 3496773,
+    "reports_gzip": 307465,
+    "abstracts_gzip": 3499013,
     "abstracts_shards_gzip": {
-      "bok": 295381,
-      "kdi": 891632,
+      "bok": 296722,
+      "kdi": 892531,
       "keis": 256899,
       "kiet": 721081,
       "kli": 1331780
     }
   },
   "recommend": {
-    "judged": 3484,
-    "picked": 374,
+    "judged": 3487,
+    "picked": 377,
     "unjudged": 0,
     "profile_version": "5a624049",
-    "title_only": 947,
-    "at": "2026-10-23T15:01:14+09:00"
+    "title_only": 948,
+    "at": "2026-10-26T15:01:04+09:00"
   }
 }

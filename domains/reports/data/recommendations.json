@@ -33929,5 +33929,32 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-10-23T15:01:14+09:00"
+ },
+ "bok-11065913": {
+  "pick": true,
+  "axis": "청년 고용",
+  "why": "이중구조 하향진입으로 청년 질적 부진 분해",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-26T15:01:04+09:00"
+ },
+ "bok-11065909": {
+  "pick": true,
+  "axis": "AI·기술변화의 직종별 고용영향",
+  "why": "제목에 AI 확산·울산 노동시장·인구이동 분석 대상과 방법 드러남",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-26T15:01:04+09:00"
+ },
+ "kdi-e19310": {
+  "pick": true,
+  "axis": "산업·직종 구조",
+  "why": "직업사전 임베딩으로 O*NET 직무점수·5개 직무군 구축",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-26T15:01:04+09:00"
  }
 }

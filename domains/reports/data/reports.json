@@ -16,6 +16,64 @@
   ]
  },
  {
+  "id": "bok-11065913",
+  "org": "bok",
+  "board": "bok-note",
+  "series": "BOK 이슈노트",
+  "title": "[제2026-27호] 청년고용 부진 및 정책 과제",
+  "authors": [
+   "고용동향팀"
+  ],
+  "published": "2026-10-26",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?nttId=11065913&searchCnd=1&searchKwd=&depth2=201157&depth3=200433&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200433&pageIndex=1&programType=newsData&menuNo=200433&oldMenuNo=200433",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/021257dac6f54b7597bf4217a145a583/1/41851777dada41f08c207ef13800dccf.pdf",
+  "matched": [
+   "청년고용",
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "bok-11065909",
+  "org": "bok",
+  "board": "bok-research",
+  "series": "조사연구자료",
+  "title": "인공지능(AI) 확산이 울산의 노동시장 및 인구이동에 미치는 영향",
+  "authors": [
+   "울산본부"
+  ],
+  "published": "2026-10-26",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11065909&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/55c2587fa791487f96754cfef0ce597a/1/eb6ee0e777174848b9f8b5e68ebdfdf0.pdf",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kdi-e19310",
+  "org": "kdi",
+  "board": "kdi-etc",
+  "series": "기타보고서",
+  "title": "한국형 직무 데이터 구축을 위한 기초 연구",
+  "authors": [
+   "김준형",
+   "김지연",
+   "유택호"
+  ],
+  "published": "2026-10-23",
+  "date_precision": "day",
+  "pages": 52,
+  "landing_url": "https://www.kdi.re.kr/research/reportEtcView?pub_no=19310",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=z6pfSQnw%2B%2B8Xg342g8ElBA%3D%3D",
+  "matched": [
+   "임금",
+   "일자리정책"
+  ]
+ },
+ {
   "id": "bok-11065882",
   "org": "bok",
   "board": "bok-assess",
