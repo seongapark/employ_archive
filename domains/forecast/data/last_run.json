@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-10-27T10:02:33.873714+09:00",
+  "run_at": "2026-10-27T15:01:04.440326+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -7,10 +7,9 @@
       "added": 0
     },
     "oecd_interim": {
-      "ok": false,
-      "fetched": 0,
-      "added": 0,
-      "blocked": true
+      "ok": true,
+      "fetched": 4,
+      "added": 0
     },
     "imf": {
       "ok": true,
@@ -65,11 +64,6 @@
   },
   "conflicts": [],
   "errors": [],
-  "warnings": [
-    "oecd_interim: 봇 차단 0일째(유예 7일) — 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/topics/sub-issues/economic-outlook.html",
-    "announce: OECD 공지일 못 읽음 — Blocked: 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/about/news.html"
-  ],
-  "blocked": {
-    "oecd_interim": "2026-10-27"
-  }
+  "warnings": [],
+  "blocked": {}
 }

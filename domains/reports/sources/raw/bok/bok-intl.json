@@ -25,5 +25,31 @@
     "abstract_tried": true,
     "abstract_note": "요약 섹션 없음",
     "collected_at": "2026-09-15T17:50:55+09:00"
+  },
+  {
+    "id": "bok-11065947",
+    "org": "bok",
+    "board": "bok-intl",
+    "series": "국제경제이슈",
+    "title": "AI 산업 자금조달의 주요 특징과 리스크 평가",
+    "authors": [
+      "국제종합팀"
+    ],
+    "published": "2026-10-27",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/B0000565/view.do?nttId=11065947&searchCnd=1&searchKwd=&depth2=201157&depth3=201757&date=&sdate=&edate=&sort=1&pageUnit=100&depth=201757&pageIndex=1&programType=newsData&menuNo=201757&oldMenuNo=201757",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/fedb6f8ed25e48d2af96b4cafc8ee494/1/c8218bc33bf94aba90736c761d3bcf6e.pdf",
+    "abstract": null,
+    "toc": [
+      "<목차>",
+      "1. 배경",
+      "2. AI 산업 자금조달의 특징 및 리스크 평가",
+      "3. 리스크 파급경로 및 과거사례 비교",
+      "4. 종합평가"
+    ],
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-10-27T15:00:49+09:00"
   }
 ]
