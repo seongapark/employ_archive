@@ -9050,23 +9050,6 @@
     ]
    },
    {
-    "title": "제조업 고용 27개월만 증가 전환…청년 취업 47개월 연속 감소",
-    "url": "https://www.fnnews.com/news/202610160840205713",
-    "press": "파이낸셜뉴스",
-    "pub": "2026-10-16 08:47",
-    "cites": false,
-    "judged": true,
-    "why": "국가데이터처 경제활동인구조사 기사",
-    "hits": [
-     "산업:제조업",
-     "연령:청년"
-    ],
-    "tone": [],
-    "stance": "중립",
-    "focus": "",
-    "kw": []
-   },
-   {
     "title": "울산 건설업 사망 20명 '10년 내 최다'…안전관리 '구멍'",
     "url": "https://www.asiatime.co.kr/article/20261016500042",
     "press": "asiatime.co.kr",
@@ -9758,29 +9741,6 @@
     ]
    },
    {
-    "title": "반도체 호황에도 청년 '좋은 일자리' 멀어져…상용직 진입 15~20% 위축",
-    "url": "https://www.ajunews.com/view/20261026155851603",
-    "press": "아주경제",
-    "pub": "2026-10-26 16:08",
-    "cites": false,
-    "judged": true,
-    "why": "한국은행 청년 일자리 보고서 분석",
-    "hits": [
-     "산업:반도체(전자·통신)",
-     "연령:청년"
-    ],
-    "tone": [
-     "위축"
-    ],
-    "stance": "부정",
-    "focus": "",
-    "kw": [
-     "상용직",
-     "진입",
-     "호황"
-    ]
-   },
-   {
     "title": "강레오, 실업급여로 해외여행 왔다는 청년들에 \"세금으로 놀러온 거 아...",
     "url": "https://www.xportsnews.com/article/2211471",
     "press": "xportsnews.com",
@@ -9861,6 +9821,47 @@
      "아르바이트",
      "평생",
      "하라"
+    ]
+   },
+   {
+    "title": "안성시, 식품산업 맞춤형 전문인력 양성",
+    "url": "http://www.metroseoul.co.kr/article/20261027500557",
+    "press": "metroseoul.co.kr",
+    "pub": "2026-10-27 16:22",
+    "cites": false,
+    "judged": true,
+    "why": "지자체 식품인력 양성 사업",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "맞춤형",
+     "식품산업",
+     "안성시",
+     "양성",
+     "전문인력"
+    ]
+   },
+   {
+    "title": "안성시, 식품산업 맞춤형 인력 양성…취업 연계·재직자 실무교육",
+    "url": "https://www.newsis.com/view/NISX20261027_0003843417",
+    "press": "뉴시스",
+    "pub": "2026-10-27 17:05",
+    "cites": false,
+    "judged": true,
+    "why": "안성시 인력양성·취업연계 사업",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "맞춤형",
+     "식품산업",
+     "실무교육",
+     "안성시",
+     "양성",
+     "재직자"
     ]
    }
   ]
