@@ -16,6 +16,22 @@
   ]
  },
  {
+  "id": "kiet-is872",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "석유 최고가격제의 효과와 정책 대응 - 한국·미국·중국·일본 등 주요국 사례 비교",
+  "authors": [
+   "김수동"
+  ],
+  "published": "2026-10-26",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=872&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
   "id": "bok-11065913",
   "org": "bok",
   "board": "bok-note",
