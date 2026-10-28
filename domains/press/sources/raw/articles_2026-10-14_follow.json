@@ -6,32 +6,32 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-28 09:45",
+ "collected_at": "2026-10-28 17:57",
  "volume": {
-  "collected": 285,
-  "articles": 58,
-  "press": 45,
+  "collected": 301,
+  "articles": 59,
+  "press": 46,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29502,
+   "api_total": 29504,
    "fetched": 100,
    "truncated": false,
-   "in_window": 64,
-   "relevant": 57,
-   "new": 63
+   "in_window": 66,
+   "relevant": 58,
+   "new": 65
   },
   {
    "query": "구직급여",
-   "api_total": 94886,
-   "fetched": 200,
+   "api_total": 94899,
+   "fetched": 300,
    "truncated": false,
-   "in_window": 192,
+   "in_window": 205,
    "relevant": 1,
-   "new": 186
+   "new": 199
   },
   {
    "query": "구인배수",
@@ -44,20 +44,20 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18642,
+   "api_total": 18645,
    "fetched": 100,
    "truncated": false,
-   "in_window": 45,
-   "relevant": 20,
-   "new": 21
+   "in_window": 48,
+   "relevant": 21,
+   "new": 22
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8445,
+   "api_total": 8447,
    "fetched": 100,
    "truncated": false,
-   "in_window": 18,
-   "relevant": 16,
+   "in_window": 20,
+   "relevant": 17,
    "new": 0
   },
   {
@@ -89,10 +89,10 @@
   },
   {
    "query": "기계장비 고용보험",
-   "api_total": 1832,
+   "api_total": 1833,
    "fetched": 100,
    "truncated": false,
-   "in_window": 14,
+   "in_window": 15,
    "relevant": 6,
    "new": 0
   },
@@ -694,6 +694,16 @@
    "press": "getnews.co.kr",
    "pub": "2026-10-27 21:58",
    "q": "고용보험 가입자, 제조업 고용보험, 기계장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "“다 송금해버리니까”… 이 대통령, 외국인 노동자 발언 따져보니 [양...",
+   "desc": "고용노동부의 9월 고용행정 통계로 본 노동시장 동향에 따르면 건설업 고용보험 상시 가입자는 74만 2000명으로 전년 동월 대비 5900명 줄어 38개월 연속 감소세다. 일자리 위기에 직면한 현장 노조는 외국 인력 유입에...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004676034?sid=102",
+   "originallink": "https://www.sedaily.com/article/20107108?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-10-28 12:26",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
    "rel": true
   }
  ],
@@ -1519,20 +1529,20 @@
    "rel": false
   },
   {
-   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
-   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
+   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
+   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
-   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
+   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
+   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
@@ -2359,21 +2369,21 @@
    "rel": false
   },
   {
-   "title": "박홍근 \"재정 관리 '실집행' 중심 전환…민간보조·R&D부터\"",
-   "desc": "박 장관은 정부의 지출효율화 운영 성과와 관련해 \"교육교부금과 구직급여처럼 오랫동안 개선 필요성이 제기돼 온 의무지출 개편 등 총 88개 과제 44조2000억원을 효율화해 내년 예산안에 담았다\"며 \"2027년에는 보다...",
-   "link": "https://n.news.naver.com/mnews/article/003/0014278570?sid=101",
-   "originallink": "https://www.newsis.com/view/NISX20261026_0003841088",
-   "press": "뉴시스",
-   "pub": "2026-10-26 14:00",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "교육교부금·구직급여 손질…기획처, 예산안 44.2조 '지출 효율화'",
    "desc": "정부가 지출효율화 TF(태스크포스)를 가동해 교육교부금과 구직급여 등 총 88개 과제를 정비하고 44조2000억원을 효율화해 내년도 예산안에 담았다. 기획예산처는 26일 오후 정부서울청사에서 제3차...",
    "link": "https://n.news.naver.com/mnews/article/008/0005431646?sid=101",
    "originallink": "https://www.mt.co.kr/economy/2026/10/26/2026102613045015349",
    "press": "머니투데이",
+   "pub": "2026-10-26 14:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "박홍근 \"AI 활용해 재정 비효율 더 빠르고 정밀하게 걷어낼 것\"",
+   "desc": "일 일할 때 받는 최저임금보다 구직급여가 더 많이 나오는 역전 현상을 해소하는 등 실업급여 효율화로 1조4천808억원을 절감하게 될 것이라고 기획처는 전했다. 유사·중복 사업을 정비하고, 현장의 수요를 반영해 재정...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016400576?sid=101",
+   "originallink": "https://www.yna.co.kr/view/AKR20261026094500002?input=1195m",
+   "press": "연합뉴스",
    "pub": "2026-10-26 14:00",
    "q": "구직급여",
    "rel": false
@@ -2389,11 +2399,11 @@
    "rel": false
   },
   {
-   "title": "박홍근 \"AI 활용해 재정 비효율 더 빠르고 정밀하게 걷어낼 것\"",
-   "desc": "일 일할 때 받는 최저임금보다 구직급여가 더 많이 나오는 역전 현상을 해소하는 등 실업급여 효율화로 1조4천808억원을 절감하게 될 것이라고 기획처는 전했다. 유사·중복 사업을 정비하고, 현장의 수요를 반영해 재정...",
-   "link": "https://n.news.naver.com/mnews/article/001/0016400576?sid=101",
-   "originallink": "https://www.yna.co.kr/view/AKR20261026094500002?input=1195m",
-   "press": "연합뉴스",
+   "title": "박홍근 \"재정 관리 '실집행' 중심 전환…민간보조·R&D부터\"",
+   "desc": "박 장관은 정부의 지출효율화 운영 성과와 관련해 \"교육교부금과 구직급여처럼 오랫동안 개선 필요성이 제기돼 온 의무지출 개편 등 총 88개 과제 44조2000억원을 효율화해 내년 예산안에 담았다\"며 \"2027년에는 보다...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014278570?sid=101",
+   "originallink": "https://www.newsis.com/view/NISX20261026_0003841088",
+   "press": "뉴시스",
    "pub": "2026-10-26 14:00",
    "q": "구직급여",
    "rel": false
@@ -2965,6 +2975,156 @@
    "originallink": "https://www.womentimes.co.kr/news/articleView.html?idxno=107354",
    "press": "womentimes.co.kr",
    "pub": "2026-10-28 09:22",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[2026 국감] 어기구 \"고용보험 사각지대 해소해야\"…실업부조 도입·LS전...",
+   "desc": "실업부조는 고용보험 가입을 전제로 하는 실업급여와 달리 조세를 재원으로 일정 요건을 충족하는 구직자의 생계와 취업을 지원하는 제도로, 고용보험 사각지대를 줄이고 고용안전망을 확대키위한 방안이다. 어 의원은...",
+   "link": "https://www.newsian.co.kr/news/articleView.html?idxno=100085",
+   "originallink": "https://www.newsian.co.kr/news/articleView.html?idxno=100085",
+   "press": "newsian.co.kr",
+   "pub": "2026-10-28 09:58",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "김정재, 포항 고용위기 선제대응지역 지정 연장 건의",
+   "desc": "포항의 1차 철강 제조업 고용보험 피보험자는 올해 8월까지 22개월 연속 전년 동월 대비 감소했다. 9월 들어 일부 반등했지만, 2년 전 수준을 회복하지 못한 상태이다. 포항철강산업단지의 수출 실적도 부진하다. 올 7월 기준...",
+   "link": "https://n.news.naver.com/mnews/article/079/0004203727?sid=102",
+   "originallink": "https://www.nocutnews.co.kr/news/6598252?utm_source=naver&utm_medium=article&utm_campaign=20261028101432",
+   "press": "nocutnews.co.kr",
+   "pub": "2026-10-28 10:15",
+   "q": "제조업 고용보험, 기계장비 고용보험",
+   "rel": false
+  },
+  {
+   "title": "스타벅스·JA코리아, 청년 취업 지원 확대…서울·부산서 박람회",
+   "desc": "구직자들이 직무 특성을 이해하고 자신의 진로 방향을 구체적으로 살펴볼 수 있도록 커리어 상담과 멘토링도 병행했다. 취업 준비에 필요한 실무교육과 체험 프로그램도 마련됐다. 현직 노무사가 근로계약서와 급여명...",
+   "link": "https://www.thepowernews.co.kr/view.php?ud=2026102810160568de3f0aa1be_7",
+   "originallink": "https://www.thepowernews.co.kr/view.php?ud=2026102810160568de3f0aa1be_7",
+   "press": "thepowernews.co.kr",
+   "pub": "2026-10-28 10:18",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[단독] 한국서 장사하는 美업체…보험료는 韓중소기업이 낼 판",
+   "desc": "A사는 미국 원청업체가 국내에서 실질적으로 사업을 운영하는 만큼 원청의 보험가입자 지위를 인정해야 한다는 입장이다. 반면 고용·산재보험을 관리·운영하는 근로복지공단은 외국 법인의 국내 영업소 인정 여부를...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006397878?sid=101",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=03958966645617512&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-10-28 10:49",
+   "q": "고용보험 가입자, 건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "[은행가] NH농협은행, '급여ON(온)' 출시 1주년 이벤트 진행 外",
+   "desc": "NH농협은행은 급여이체 고객 멤버십 '급여ON(온)' 출시 1주년 기념 이벤트를 마련했다. 사진=NH농협은행... AI면접 체험관, 군간부 채용관, 직업체험관도 마련해 구직자들의 진로 설계와 취업 역량 강화를 도왔다....",
+   "link": "https://www.slist.kr/news/articleView.html?idxno=777054",
+   "originallink": "https://www.slist.kr/news/articleView.html?idxno=777054",
+   "press": "slist.kr",
+   "pub": "2026-10-28 11:04",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "이주노동자 임금 송금은 '권리'",
+   "desc": "계절노동자들의 경우 급여에서 숙식비 공제가 20%를 차지한다. 급여의 20%를 지역사회에 토해내는 게... 단순히 기존 임금에 몇 십만 원의 보조금을 더해준다고 하여 3D 업종을 기피하는 내국인 구직자들이 장기적이고...",
+   "link": "https://n.news.naver.com/mnews/article/047/0002533764?sid=102",
+   "originallink": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003279509&CMPT_CD=P0010&utm_source=naver&utm_medium=newsearch&utm_campaign=naver_news",
+   "press": "ohmynews.com",
+   "pub": "2026-10-28 11:21",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "스타벅스, 서울·부산서 '2026 스타벅스-JA코리아 JOB 박람회' 개최",
+   "desc": "현직 노무사가 근로계약서와 급여명세서 관련 교육을 진행했고 진로 검사와 퍼스널 컬러 진단, 나만의 음료 만들기 등 체험 활동도 운영했다. 고객 리서치와 자기소개서 작성, 면접 전략을 주제로 한 특강을 통해 구직...",
+   "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=499231",
+   "originallink": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=499231",
+   "press": "pinpointnews.co.kr",
+   "pub": "2026-10-28 13:16",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[오티즘 연대기⑥] '3관왕' 열세 살 수영 꿈나무…졸업 후 홀로서기는 ...",
+   "desc": "기량을 쌓아 성인이 된 후 장애인 수영 실업팀 선수로 선발되면 소속 선수로 활동하며 급여를 받게 된다.... 지원 대상자는 개인별 필요와 지원 요건에 따라 직장 체험과 직무 기술 훈련, 구직 활동 등의 지원을 받을 수...",
+   "link": "https://www.ntoday.co.kr/news/articleView.html?idxno=130356",
+   "originallink": "https://www.ntoday.co.kr/news/articleView.html?idxno=130356",
+   "press": "ntoday.co.kr",
+   "pub": "2026-10-28 14:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "NH증권 \"국민연금, 소득 없어도 가입기간 늘려 수령액 높일 수 있어\"",
+   "desc": "국민연금 보험료를 1개월 이상 낸 이력이 있는 18세 이상 60세 미만 구직급여 수급자가 대상이다. 보험료의 25%를 본인이 내면 국가가 75%를 지원하고, 생애 통산 최대 12개월을 가입기간으로 인정한다. 재산세 과세표준...",
+   "link": "http://www.4th.kr/news/articleView.html?idxno=2120598",
+   "originallink": "http://www.4th.kr/news/articleView.html?idxno=2120598",
+   "press": "4th.kr",
+   "pub": "2026-10-28 15:06",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "스타벅스, 약 1천명 청년 참여 예상 취업 박람회 진행",
+   "desc": "스타벅스 코리아는 청년 구직자들을 위한 취업 박람회를 서울과 부산에서 마련했다고 28일 밝혔다. 이번... 스타벅스 점장과 지역 매니저들이 멘토로 참여해 직무와 채용 절차를 안내했으며, 근로계약서·급여명세서...",
+   "link": "https://www.tournews21.com/news/articleView.html?idxno=146890",
+   "originallink": "https://www.tournews21.com/news/articleView.html?idxno=146890",
+   "press": "tournews21.com",
+   "pub": "2026-10-28 15:38",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "스타벅스 JA 연계 채용 출신 첫 점장 탄생",
+   "desc": "근로계약서와 급여명세서에 관한 교육도 마련됐다. 스타벅스와 JA코리아는 2015년부터 특성화고 학생을... 한편 CJ그룹도 채용 과정에서 구직자에게 직무와 기업 정보를 전달하는 활동을 운영하고 있다. 2026년 하반기...",
+   "link": "https://www.lcnews.co.kr/news/articleView.html?idxno=210443",
+   "originallink": "https://www.lcnews.co.kr/news/articleView.html?idxno=210443",
+   "press": "lcnews.co.kr",
+   "pub": "2026-10-28 16:08",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[양산 24시] 양산시, 돌봄·안전 강화…공무원 33명 증원 추진",
+   "desc": "양산시는 모집 직종과 직무, 급여 수준 등 근무조건을 고려해 참여 기업을 선정했다. 구직자들을 위한 취업 지원 프로그램도 운영된다. 양산상공회의소와 동원과학기술대학교, 영산대학교 등 관계기관이 참여하는 홍보...",
+   "link": "https://n.news.naver.com/mnews/article/586/0000141071?sid=102",
+   "originallink": "https://www.sisajournal.com/news/articleView.html?idxno=391972",
+   "press": "sisajournal.com",
+   "pub": "2026-10-28 16:45",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[뉴스분석] 반도체 호황에 경제지표 호조인데...청년 고용은 '악화'",
+   "desc": "16일 오후 서울 동작구 동작구청에서 열린 2026 동작구 취업박람회에서 청년 구직자들이 직업 상담을 받고... 근무시간과 급여 등 청년들이 원하는 조건을 갖춘 일자리는 상대적으로 적다\"고 말했다. 신입에게도 실무...",
+   "link": "https://www.newspim.com/news/view/20261028001249",
+   "originallink": "https://www.newspim.com/news/view/20261028001249",
+   "press": "뉴스핌",
+   "pub": "2026-10-28 17:13",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "'65세 정년' 논의 속 65세 이상 취업자 400만 명 넘어, '실업급여·퇴직...",
+   "desc": "서울 마포구 서울서부고용복지플러스센터를 찾은 구직자들이 서류를 접수하고 있다. 65세 이상 취업자가 400만 명을 넘어선 가운데 국회에서 고령층의 실업급여·퇴직급여 등 고용안전망 확대를 위한 입법 논의가...",
+   "link": "https://www.businesspost.co.kr/BP?command=article_view&num=450554",
+   "originallink": "https://www.businesspost.co.kr/BP?command=article_view&num=450554",
+   "press": "businesspost.co.kr",
+   "pub": "2026-10-28 17:16",
+   "q": "구직급여, 제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "스타벅스, 청년 취업 지원 확대…JOB 박람회 역대 최대 규모",
+   "desc": "이와 함께 현직 노무사가 근로계약서와 급여명세서 작성·확인 방법을 교육하고, 참가자들이 진로 검사와... 식음료·외식업계에서 직무 체험과 채용 연계를 결합한 프로그램은 구직자가 실제 업무와 근무 환경을...",
+   "link": "https://www.thepublic.kr/news/articleView.html?idxno=324137",
+   "originallink": "https://www.thepublic.kr/news/articleView.html?idxno=324137",
+   "press": "thepublic.kr",
+   "pub": "2026-10-28 17:46",
    "q": "구직급여",
    "rel": false
   }
