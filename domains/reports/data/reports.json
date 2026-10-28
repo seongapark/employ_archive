@@ -16,6 +16,30 @@
   ]
  },
  {
+  "id": "keis-11370",
+  "org": "keis",
+  "board": "keis-research",
+  "series": "연구사업보고서",
+  "title": "직업선호도검사 개정 연구보고서",
+  "authors": [
+   "정명진",
+   "조아름",
+   "고희원",
+   "박세정B",
+   "김유경",
+   "김욱정",
+   "김명섭",
+   "박수원",
+   "길혜지"
+  ],
+  "published": "2026-10-27",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/113/pblc/detail.do?categoryIdx=131&pubIdx=11370",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20261027034214409.pdf&path=pblc&fn=%28%EA%B8%B0%EB%B3%B8%EC%97%B0%EA%B5%AC+2005-08%29+%EC%A7%81%EC%97%85%EC%84%A0%ED%98%B8%EB%8F%84%EA%B2%80%EC%82%AC+%EA%B0%9C%EC%A0%95+%EC%97%B0%EA%B5%AC%EB%B3%B4%EA%B3%A0%EC%84%9C__%EC%9B%B9%EA%B2%8C%EC%8B%9C%EC%9A%A9.pdf&sn=11370&fsn=22742&ty=P",
+  "matched": []
+ },
+ {
   "id": "bok-11065947",
   "org": "bok",
   "board": "bok-intl",
@@ -219,6 +243,25 @@
   "matched": [
    "고용보험",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-10315",
+  "org": "kli",
+  "board": "kli-intl",
+  "series": "국제노동브리프",
+  "title": "국제노동브리프 2026년 10월호(Vol.24. No.7)",
+  "authors": [
+   "국제협력실"
+  ],
+  "published": "2026-10-15",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/prdclView.es?pblct_sn=10315&mid=a10103030000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=국제노동브리프",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=18B349FF9F6E950449258E9E0004E71B_1.pdf&fileNameOrg=국제노동브리프 2026년 10월호.pdf&filePath1=jsphome/DATA/pblctList/issue/18B349FF9F6E950449258E9E0004E71B",
+  "matched": [
+   "근로시간",
+   "노사관계"
   ]
  },
  {
