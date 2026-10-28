@@ -16,6 +16,22 @@
   ]
  },
  {
+  "id": "bok-11065979",
+  "org": "bok",
+  "board": "bok-note",
+  "series": "BOK 이슈노트",
+  "title": "[제2026-28호] 탄소중립 이행경로의 경제적 영향",
+  "authors": [
+   "기후리스크분석팀"
+  ],
+  "published": "2026-10-28",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?nttId=11065979&searchCnd=1&searchKwd=&depth2=201157&depth3=200433&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200433&pageIndex=1&programType=newsData&menuNo=200433&oldMenuNo=200433",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/1e353a659a4c48cfa095e06ecc55689a/1/0a6e49954a4447cca942b9dba4bf413e.pdf",
+  "matched": []
+ },
+ {
   "id": "keis-11370",
   "org": "keis",
   "board": "keis-research",
