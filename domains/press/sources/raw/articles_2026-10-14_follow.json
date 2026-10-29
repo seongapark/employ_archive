@@ -6,41 +6,41 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-29 10:14",
+ "collected_at": "2026-10-29 17:53",
  "volume": {
-  "collected": 310,
-  "articles": 60,
-  "press": 46,
+  "collected": 326,
+  "articles": 65,
+  "press": 49,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29505,
+   "api_total": 29511,
    "fetched": 100,
    "truncated": false,
-   "in_window": 67,
-   "relevant": 59,
-   "new": 66
+   "in_window": 73,
+   "relevant": 64,
+   "new": 72
   },
   {
    "query": "구직급여",
-   "api_total": 94908,
+   "api_total": 94919,
    "fetched": 300,
    "truncated": false,
-   "in_window": 214,
+   "in_window": 225,
    "relevant": 1,
-   "new": 207
+   "new": 216
   },
   {
    "query": "구인배수",
-   "api_total": 2671,
+   "api_total": 2672,
    "fetched": 100,
    "truncated": false,
-   "in_window": 12,
+   "in_window": 13,
    "relevant": 1,
-   "new": 10
+   "new": 11
   },
   {
    "query": "제조업 고용보험",
@@ -714,6 +714,56 @@
    "press": "newsen.com",
    "pub": "2026-10-29 10:09",
    "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "\"일자리 없으면 감자탕집 가라\"…강레오, 실업급여 청년들에 날린 한마...",
+   "desc": "누리꾼들은 \"실업급여는 고용보험 가입자가 요건을 충족하면 받을 수 있는 정당한 권리다\", \"실직했다고 여행도 못 가는 건 아니지 않냐\", \"사진을 요청한 팬에게 굳이 훈계할 필요가 있었나\" 등의 반응을 보였다. 특히...",
+   "link": "https://m.entertain.naver.com/article/117/0004119557",
+   "originallink": "https://www.mydaily.co.kr/page/view/2026102909223737127",
+   "press": "mydaily.co.kr",
+   "pub": "2026-10-29 10:23",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "\"실업급여로 일본 놀러 갔다고?\"…강레오, 사진 요청 거절에 여론 두 쪽...",
+   "desc": "한쪽은 재취업 지원이라는 제도 취지와 사회적 책임을 강조했고, 다른 한쪽은 고용보험 가입자의 정당한 권리와 실직자의 생활을 존중해야 한다고 지적했다. 실제 해외 체류 부정수급 적발 인원이 증가하고 있다는 사실은...",
+   "link": "https://www.ftimes.kr/news/articleView.html?idxno=40733",
+   "originallink": "https://www.ftimes.kr/news/articleView.html?idxno=40733",
+   "press": "ftimes.kr",
+   "pub": "2026-10-29 12:36",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "노동장관 \"프랑스 '분노의가을' 남일 아냐…일터민주주의 필요\"",
+   "desc": "이 가운데 고용보험 가입자는 95만명, 산재보험 가입자는 152만명에 불과하다. 아울러 김 장관은 최근 거듭 난항을 겪어온 사회적 대화와 관련해 \"AI라는 거대한 도전 과제 앞에서 노사정 대화는 선택이 아닌 생존의 문제...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016409117?sid=102",
+   "originallink": "https://www.yna.co.kr/view/AKR20261029134600530?input=1195m",
+   "press": "연합뉴스",
+   "pub": "2026-10-29 14:53",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "노동장관 \"프랑스 '분노의가을' 남일 아냐…일터민주주의 필요\"(종합)",
+   "desc": "이 가운데 고용보험 가입자는 95만명, 산재보험 가입자는 152만명에 불과하다. 아울러 김 장관은 최근 거듭 난항을 겪어온 사회적 대화와 관련해 \"AI라는 거대한 도전 과제 앞에서 노사정 대화는 선택이 아닌 생존의 문제...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016409433?sid=102",
+   "originallink": "https://www.yna.co.kr/view/AKR20261029134651530?input=1195m",
+   "press": "연합뉴스",
+   "pub": "2026-10-29 15:41",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "김영훈 장관 \"프랑스 시위 남일 아냐…기존 노사관계의 틀 넘어서야\"",
+   "desc": "노동부에 따르면 특수고용직·플랫폼 노동자 및 프리랜서 등 비정형 노동자는 869만 명으로 추산되지만, 고용보험 가입자는 95만 명, 산재보험 가입자는 152만 명에 불과하다. 특히 현행 국민연금 제도가 전통적 근로...",
+   "link": "https://www.ajunews.com/view/20261029161338287",
+   "originallink": "https://www.ajunews.com/view/20261029161338287",
+   "press": "아주경제",
+   "pub": "2026-10-29 17:38",
+   "q": "고용보험 가입자",
    "rel": true
   }
  ],
@@ -1539,20 +1589,20 @@
    "rel": false
   },
   {
-   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
-   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
+   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
+   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
-   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
+   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
+   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
@@ -2379,26 +2429,6 @@
    "rel": false
   },
   {
-   "title": "정부, 내년 지출효율화 작업 11월 착수…참여예산 청년 비중 40%로",
-   "desc": "구직급여가 일할 때 받는 소득보다 많아지는 역전 현상을 해소하는 방안도 포함했다. 유사·중복사업도 정비했다. 17개 부처의 중소기업 지원사업 472개를 전면 검토해 232개를 통폐합하거나 축소하고, 정보통신기술(ICT)...",
-   "link": "https://n.news.naver.com/mnews/article/421/0009250017?sid=101",
-   "originallink": "https://www.news1.kr/economy/trend/6331905",
-   "press": "뉴스1",
-   "pub": "2026-10-26 14:00",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
-   "title": "교육교부금 연동 폐지·구직급여 주 7→6일…내년 예산 44.2조 효율화",
-   "desc": "정부가 지방교육재정교부금의 내국세 연동 구조를 폐지하고 구직급여 지급일수를 주 7일에서 6일로 조정하는 등 내년 예산안에 44조2000억원 규모의 지출 효율화 방안을 반영했다. 17개 부처에 흩어진 중소기업...",
-   "link": "https://n.news.naver.com/mnews/article/003/0014278566?sid=101",
-   "originallink": "https://www.newsis.com/view/NISX20261026_0003841069",
-   "press": "뉴시스",
-   "pub": "2026-10-26 14:00",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "박홍근 \"재정 관리 '실집행' 중심 전환…민간보조·R&D부터\"",
    "desc": "박 장관은 정부의 지출효율화 운영 성과와 관련해 \"교육교부금과 구직급여처럼 오랫동안 개선 필요성이 제기돼 온 의무지출 개편 등 총 88개 과제 44조2000억원을 효율화해 내년 예산안에 담았다\"며 \"2027년에는 보다...",
    "link": "https://n.news.naver.com/mnews/article/003/0014278570?sid=101",
@@ -2439,12 +2469,22 @@
    "rel": false
   },
   {
-   "title": "기획처, 내달부터 지출효율화 조기 착수…AI로 예산 낭비 잡는다",
-   "desc": "구직급여는 근로할 때보다 급여 수급액이 더 많아지는 역전 현상을 바로잡았다. 부처별로 분산된 재정사업도 정비했다. 정부는 17개 부처의 중소기업 지원사업 472개를 전면 검토해 232개를 통폐합하거나 축소했다....",
-   "link": "https://n.news.naver.com/mnews/article/016/0002714441?sid=101",
-   "originallink": "https://biz.heraldcorp.com/article/10914903?ref=naver",
-   "press": "헤럴드경제",
-   "pub": "2026-10-26 14:01",
+   "title": "정부, 내년 지출효율화 작업 11월 착수…참여예산 청년 비중 40%로",
+   "desc": "구직급여가 일할 때 받는 소득보다 많아지는 역전 현상을 해소하는 방안도 포함했다. 유사·중복사업도 정비했다. 17개 부처의 중소기업 지원사업 472개를 전면 검토해 232개를 통폐합하거나 축소하고, 정보통신기술(ICT)...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009250017?sid=101",
+   "originallink": "https://www.news1.kr/economy/trend/6331905",
+   "press": "뉴스1",
+   "pub": "2026-10-26 14:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "교육교부금 연동 폐지·구직급여 주 7→6일…내년 예산 44.2조 효율화",
+   "desc": "정부가 지방교육재정교부금의 내국세 연동 구조를 폐지하고 구직급여 지급일수를 주 7일에서 6일로 조정하는 등 내년 예산안에 44조2000억원 규모의 지출 효율화 방안을 반영했다. 17개 부처에 흩어진 중소기업...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014278566?sid=101",
+   "originallink": "https://www.newsis.com/view/NISX20261026_0003841069",
+   "press": "뉴시스",
+   "pub": "2026-10-26 14:00",
    "q": "구직급여",
    "rel": false
   },
@@ -2454,6 +2494,16 @@
    "link": "https://n.news.naver.com/mnews/article/018/0006396321?sid=101",
    "originallink": "https://www.edaily.co.kr/News/Read?newsId=03083206645616856&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
    "press": "이데일리",
+   "pub": "2026-10-26 14:01",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "기획처, 내달부터 지출효율화 조기 착수…AI로 예산 낭비 잡는다",
+   "desc": "구직급여는 근로할 때보다 급여 수급액이 더 많아지는 역전 현상을 바로잡았다. 부처별로 분산된 재정사업도 정비했다. 정부는 17개 부처의 중소기업 지원사업 472개를 전면 검토해 232개를 통폐합하거나 축소했다....",
+   "link": "https://n.news.naver.com/mnews/article/016/0002714441?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10914903?ref=naver",
+   "press": "헤럴드경제",
    "pub": "2026-10-26 14:01",
    "q": "구직급여",
    "rel": false
@@ -2469,21 +2519,21 @@
    "rel": false
   },
   {
-   "title": "정부, 내년 예산 44.2조 지출 효율화",
-   "desc": "정부는 구직급여 지급일수를 주 7일에서 6일로 조정하고 조기 재취업수당 지급 제외 기준을 월 574만원에서 300만원으로 낮추는 방안을 마련했다. 구직급여가 근로소득을 웃도는 역전 현상과 불필요한 재정지출을...",
-   "link": "https://n.news.naver.com/mnews/article/029/0003055233?sid=101",
-   "originallink": "https://www.dt.co.kr/article/12091243?ref=naver",
-   "press": "디지털타임스",
-   "pub": "2026-10-26 14:04",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "내년 예산안에 88개 과제·44.2조원 효율화 방안 반영",
    "desc": "구직급여는 일할 때보다 더 많이 받는 역전 현상을 바로잡았다. 아울러 17개 부처에 흩어진 중소기업 지원사업 472개를 전면 검토해, 이 가운데 232개를 통폐합하거나 줄였다. 정보통신기술(ICT) 기금 간 유사·중복 사업...",
    "link": "https://n.news.naver.com/mnews/article/014/0005594463?sid=101",
    "originallink": "https://www.fnnews.com/news/202610261401248928",
    "press": "파이낸셜뉴스",
+   "pub": "2026-10-26 14:04",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "정부, 내년 예산 44.2조 지출 효율화",
+   "desc": "정부는 구직급여 지급일수를 주 7일에서 6일로 조정하고 조기 재취업수당 지급 제외 기준을 월 574만원에서 300만원으로 낮추는 방안을 마련했다. 구직급여가 근로소득을 웃도는 역전 현상과 불필요한 재정지출을...",
+   "link": "https://n.news.naver.com/mnews/article/029/0003055233?sid=101",
+   "originallink": "https://www.dt.co.kr/article/12091243?ref=naver",
+   "press": "디지털타임스",
    "pub": "2026-10-26 14:04",
    "q": "구직급여",
    "rel": false
@@ -2779,21 +2829,21 @@
    "rel": false
   },
   {
-   "title": "\"실업급여로 여행? 더 싫다\"…강레오 쓴소리 '갑론을박' [포크뉴스]",
-   "desc": "실업급여를 여러 차례 받거나, 수급 기간 중 해외여행을 하는 것 자체가 불법은 아니지만, 실제로 구직 활동을 하지 않았는데도 허위로 신고하거나, 대리 신청 등 부정한 방법으로 급여를 받는 경우가 문제입니다. 누리꾼...",
-   "link": "https://n.news.naver.com/mnews/article/057/0001975316?sid=004",
-   "originallink": "http://www.mbn.co.kr/pages/vod/programContents.php?progCode=683&menuCode=4385&bcastSeqNo=1432208",
-   "press": "mbn.co.kr",
-   "pub": "2026-10-27 14:17",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "강레오, 실업급여로 해외여행 간 청년들 비판에…“놀라고 준 돈 아냐”...",
    "desc": "반면 “실업급여는 구직 기간에 생계를 유지하라고 주는 돈이지 여행 가라고 주는 게 아니다”, “해외여행은 지나치다”, “구직활동하라고 주는 돈 아니냐”며 강레오의 발언에 공감하는 의견도 나왔다. 일부 누리꾼들은...",
    "link": "https://m.entertain.naver.com/article/144/0001146545",
    "originallink": "https://sports.khan.co.kr/article/202610271416003?pt=nv",
    "press": "경향신문",
+   "pub": "2026-10-27 14:17",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"실업급여로 여행? 더 싫다\"…강레오 쓴소리 '갑론을박' [포크뉴스]",
+   "desc": "실업급여를 여러 차례 받거나, 수급 기간 중 해외여행을 하는 것 자체가 불법은 아니지만, 실제로 구직 활동을 하지 않았는데도 허위로 신고하거나, 대리 신청 등 부정한 방법으로 급여를 받는 경우가 문제입니다. 누리꾼...",
+   "link": "https://n.news.naver.com/mnews/article/057/0001975316?sid=004",
+   "originallink": "http://www.mbn.co.kr/pages/vod/programContents.php?progCode=683&menuCode=4385&bcastSeqNo=1432208",
+   "press": "mbn.co.kr",
    "pub": "2026-10-27 14:17",
    "q": "구직급여",
    "rel": false
@@ -2809,20 +2859,20 @@
    "rel": false
   },
   {
-   "title": "근무조건 살펴보는 취준생",
+   "title": "급여는 얼마나?",
    "desc": "27일 대구 남구 영남이공대 천마체육관에서 열린 '2026 쿠팡CFS 대구·경북 채용페스타'를 찾은 구직자가 근무 조건과 급여 등 안내문을 살펴보고 있다. 영남이공대 일자리첫걸음보장센터와 쿠팡풀필먼트서비스가...",
-   "link": "https://n.news.naver.com/mnews/article/421/0009252843?sid=102",
-   "originallink": "https://www.news1.kr/photos/8181520",
+   "link": "https://n.news.naver.com/mnews/article/421/0009252844?sid=102",
+   "originallink": "https://www.news1.kr/photos/8181522",
    "press": "뉴스1",
    "pub": "2026-10-27 14:42",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "급여는 얼마나?",
+   "title": "근무조건 살펴보는 취준생",
    "desc": "27일 대구 남구 영남이공대 천마체육관에서 열린 '2026 쿠팡CFS 대구·경북 채용페스타'를 찾은 구직자가 근무 조건과 급여 등 안내문을 살펴보고 있다. 영남이공대 일자리첫걸음보장센터와 쿠팡풀필먼트서비스가...",
-   "link": "https://n.news.naver.com/mnews/article/421/0009252844?sid=102",
-   "originallink": "https://www.news1.kr/photos/8181522",
+   "link": "https://n.news.naver.com/mnews/article/421/0009252843?sid=102",
+   "originallink": "https://www.news1.kr/photos/8181520",
    "press": "뉴스1",
    "pub": "2026-10-27 14:42",
    "q": "구직급여",
@@ -3215,6 +3265,116 @@
    "originallink": "https://www.gukjenews.com/news/articleView.html?idxno=3736091",
    "press": "gukjenews.com",
    "pub": "2026-10-29 10:10",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "청년 첫 직장 근속기간 70개월→45.6개월…10년 이상 유지 비율도 반토막",
+   "desc": "또 비정규직·실업 이력이 국민연금 가입 공백과 노후소득 격차로 이어지지 않도록 구직급여를 받지 못하는 청년까지 실업크레딧 등 기여 지원을 확대하는 방안도 제시했다. 청년기의 안정적인 경력 형성과 경제적...",
+   "link": "https://www.etoday.co.kr/news/view/2641617",
+   "originallink": "https://www.etoday.co.kr/news/view/2641617",
+   "press": "이투데이",
+   "pub": "2026-10-29 10:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"세금 1원도 안 낸다\"…억만장자들의 5조달러 절세 비법 [밤 사이 해외 ...",
+   "desc": "-공식 9월 실업률은 5.2%지만 칭화대 경제학자는 장기 구직 실패자를 포함한 도시 실업률을 10.2%로추산함.... -체포된 여성은 영주권 약속에 60만달러를 냈다고 진술했으며 자료에는 15만달러 급여 반환이 명시됐고 본인...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005347936?sid=101",
+   "originallink": "https://www.hankyung.com/article/202610292669i",
+   "press": "한국경제",
+   "pub": "2026-10-29 10:49",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[위클리오늘] 의정부시, AI 활용 중장년 취업 특강 참여자 모집",
+   "desc": "실업급여 수급자의 경우 교육 참여가 구직 활동으로 인정될 수 있다. 모집 인원은 의정부시에 거주하는 중장년 15명이다. 참여 희망자는 11월 2일부터 13일까지 의정부시 일자리종합지원센터(노동복지회관 내, 둔야로 10)...",
+   "link": "http://www.weeklytoday.com/news/articleView.html?idxno=800115",
+   "originallink": "http://www.weeklytoday.com/news/articleView.html?idxno=800115",
+   "press": "weeklytoday.com",
+   "pub": "2026-10-29 11:14",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "대통령이 약속한 '억강부약' 바로 지금입니다",
+   "desc": "국가가 최종고용자로 나서 AI 전환(AX)·녹색 전환(GX)·돌봄 3대 분야에서 주 4일제와 생활임금이 보장되는 공공 일자리를 직접 창출하고, 미취업 졸업생에게 6개월간 구직급여를 지급하는 '졸업실업급여'를 전면 도입해야...",
+   "link": "https://n.news.naver.com/mnews/article/047/0002533903?sid=100",
+   "originallink": "https://www.ohmynews.com/NWS_Web/View/at_pg.aspx?CNTN_CD=A0003279799&CMPT_CD=P0010&utm_source=naver&utm_medium=newsearch&utm_campaign=naver_news",
+   "press": "ohmynews.com",
+   "pub": "2026-10-29 11:51",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "LX판토스, 제품 설치 넘어 스마트홈까지…설치 물류 혁신 가속화",
+   "desc": "에어컨 동관 확장 작업에 사용하는 동관 확장 지그와 중량물 운반 보조구인 X밴드 이동 매트, 자석 보호... Built-in Zone에서는 식기세척기와 빌트인 세탁기, 광파오븐, 정수기 등 급·배수 연결이 필요한 제품을 실제...",
+   "link": "https://www.klnews.co.kr/news/articleView.html?idxno=323273",
+   "originallink": "https://www.klnews.co.kr/news/articleView.html?idxno=323273",
+   "press": "klnews.co.kr",
+   "pub": "2026-10-29 12:52",
+   "q": "구인배수",
+   "rel": false
+  },
+  {
+   "title": "강레오, 실업급여로 일본 여행 온 청년들 사진 요청 거절…\"취업하면 찍...",
+   "desc": "해당 영상이 공개된 뒤 시청자 일각은 사회문제가 되고 있는 부정수급과 구직활동 대신 여행비로 쓴 행동을 지적하며 강레오의 의견에 공감했다. 반면 일부 부정수급 사례를 들어 실업급여를 받는 사람을 의심하는 건...",
+   "link": "https://www.topstarnews.net/news/articleView.html?idxno=16261895",
+   "originallink": "https://www.topstarnews.net/news/articleView.html?idxno=16261895",
+   "press": "topstarnews.net",
+   "pub": "2026-10-29 14:54",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "무대 내려와 출근길…권소현·하주연·육지담, 연예인 대신 직장인 택했...",
+   "desc": "구직 플랫폼을 통해 수백 곳에 이력서를 제출했으나 취업 문턱이 꽤 높았다고 했다. 불확실한 수입에 의존해야 하는 연예계와 달리 매달 급여를 받을 수 있다는 점이 취업을 결심한 현실적인 이유였다. 랩 가수 육지담...",
+   "link": "https://m.entertain.naver.com/article/382/0001301852",
+   "originallink": "https://sports.donga.com/ent/article/all/20261029/134929634/1",
+   "press": "동아일보",
+   "pub": "2026-10-29 14:54",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "동물병원 위기는 이미 시작..반려견 출생 감소 충격이 동물병원에 오고...",
+   "desc": "국민연금 가입자 수(없으면 고용·산재보험 가입 인원)로 본 상시 인원, 인허가 자료의 연면적, 네이버 지도와 병원 홈페이지의 24시간 진료 표기, 홈페이지와 블로그의 CT·MRI 표기 등을 함께 따져 영업 중인...",
+   "link": "https://www.dailyvet.co.kr/news/column/302421",
+   "originallink": "https://www.dailyvet.co.kr/news/column/302421",
+   "press": "dailyvet.co.kr",
+   "pub": "2026-10-29 15:52",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "[심층기획 : 청년의 도전은 계속된다 ②] 취업의 첫걸음이 막막할 때…...",
+   "desc": "생활비를 벌기 위한 아르바이트가 구직활동 시간을 줄이기도 하고, 직무 경험이 부족해 자기소개서에... 기업 지원과 청년의 급여는 구분해서 이해해야 한다. 참여기업 모집 공고의 ‘1인당 월 최대 160만원, 최대 3개월...",
+   "link": "https://www.news2day.co.kr/article/20261019500232",
+   "originallink": "https://www.news2day.co.kr/article/20261019500232",
+   "press": "news2day.co.kr",
+   "pub": "2026-10-29 16:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "강레오, 실업급여로 여행 온 청년들에 분노…\"열 받았다\" 발언에 갑론을...",
+   "desc": "실업급여는 실직한 근로자의 생활 안정을 돕고 재취업 활동을 지원하기 위한 제도다. 정해진 구직활동과 실업 인정 절차 등을 지켜야 한다. 다만 강레오가 언급한 청년들의 실제 수급 상황이나 부정수급 여부는 확인되지...",
+   "link": "https://m.entertain.naver.com/article/312/0000782118",
+   "originallink": "https://www.tenasia.co.kr/article/2026102939414",
+   "press": "tenasia.co.kr",
+   "pub": "2026-10-29 16:29",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "강레오 \"실업급여 받고 일본 여행\" 비판…누리꾼 반응 엇갈려",
+   "desc": "일부 누리꾼은 구직자의 생계를 지원하기 위한 급여를 여행에 사용하는 행태에 비판적인 반응을 보이며 강레오의 발언에 공감했다. 실업급여의 반복 수급과 부정수급 문제가 지속적으로 제기돼 왔다는 점도 언급됐다. 반면...",
+   "link": "http://www.starnewsk.com/news/articleView.html?idxno=60452",
+   "originallink": "http://www.starnewsk.com/news/articleView.html?idxno=60452",
+   "press": "starnewsk.com",
+   "pub": "2026-10-29 17:06",
    "q": "구직급여",
    "rel": false
   }
