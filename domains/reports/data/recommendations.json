@@ -34001,5 +34001,32 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-10-28T15:00:54+09:00"
+ },
+ "kli-10317": {
+  "pick": true,
+  "axis": "AI·기술변화의 직종별 고용영향",
+  "why": "사업체패널 2015~2023 자동화 실측",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-30T20:39:58+09:00"
+ },
+ "keis-11371": {
+  "pick": false,
+  "axis": "",
+  "why": "지역산업과 고용 정기 가을호, 틀 동일",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-30T20:39:58+09:00"
+ },
+ "kli-10318": {
+  "pick": false,
+  "axis": "",
+  "why": "노동리뷰 월간 통상호, 새 분석 불명",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-10-30T20:39:58+09:00"
  }
 }

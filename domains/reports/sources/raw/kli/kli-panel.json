@@ -246,6 +246,33 @@
     "collected_at": "2026-10-12T10:00:50+09:00"
   },
   {
+    "id": "kli-10317",
+    "org": "kli",
+    "board": "kli-panel",
+    "series": "패널브리프",
+    "title": "[KLI 패널브리프 제38호(2026-05)] 노동조합 유무별 사업체의 자동화 현황 비교 : 사업체패널조사 2015~2023년 자료를 중심으로",
+    "authors": [
+      "김정우"
+    ],
+    "published": "2026-10-30",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/panelBriefView.es?pblct_sn=10317&mid=a10104030000",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=4484EAC69C23E9E049258EA0000A005B_1.pdf&fileNameOrg=KLI 패널브리프 제38호(2026-05).pdf&filePath1=jsphome/DATA/pblctList/issue/4484EAC69C23E9E049258EA0000A005B",
+    "abstract": null,
+    "toc": [
+      "1. 배경 및 목적",
+      "2. 활용 자료 및 비교 방법",
+      "3. 노조 유무별 자동화의 발생과 수준",
+      "4. 규모별, 근로자대표기구 유형별 자동화 격차",
+      "5. 제조업의 공정별 도입 격차와 로봇 및 정보시스템 도입률",
+      "6. 요약 및 결론"
+    ],
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-10-30T20:39:39+09:00"
+  },
+  {
     "id": "kli-9966",
     "org": "kli",
     "board": "kli-panel",

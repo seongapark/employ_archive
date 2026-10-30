@@ -16,6 +16,45 @@
   ]
  },
  {
+  "id": "kli-10317",
+  "org": "kli",
+  "board": "kli-panel",
+  "series": "패널브리프",
+  "title": "[KLI 패널브리프 제38호(2026-05)] 노동조합 유무별 사업체의 자동화 현황 비교 : 사업체패널조사 2015~2023년 자료를 중심으로",
+  "authors": [
+   "김정우"
+  ],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/panelBriefView.es?pblct_sn=10317&mid=a10104030000",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=4484EAC69C23E9E049258EA0000A005B_1.pdf&fileNameOrg=KLI 패널브리프 제38호(2026-05).pdf&filePath1=jsphome/DATA/pblctList/issue/4484EAC69C23E9E049258EA0000A005B",
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "keis-11371",
+  "org": "keis",
+  "board": "keis-region",
+  "series": "지역산업과 고용",
+  "title": "지역산업과 고용 2026년 가을호",
+  "authors": [],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/proj/119/pblc/detail.do?categoryIdx=262&pubIdx=11371",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20261030094946369.pdf&path=pblc&fn=%EC%A7%80%EC%97%AD%EC%82%B0%EC%97%85%EA%B3%BC%EA%B3%A0%EC%9A%A9-2026%EA%B0%80%EC%9D%84%ED%98%B8%28%EC%B5%9C%EC%A2%85%29.pdf&sn=11371&fsn=22791&ty=P",
+  "matched": [
+   "고용보험",
+   "지역고용",
+   "산업별고용",
+   "일자리정책",
+   "인력수급",
+   "노동전환"
+  ]
+ },
+ {
   "id": "bok-11065979",
   "org": "bok",
   "board": "bok-note",
@@ -317,6 +356,24 @@
   "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=869&skey=&sval=&pg=1&pp=30",
   "file_url": null,
   "matched": []
+ },
+ {
+  "id": "kli-10318",
+  "org": "kli",
+  "board": "kli-review",
+  "series": "노동리뷰",
+  "title": "노동리뷰 2026년 10월호(통권 제259호)",
+  "authors": [
+   "동향분석실"
+  ],
+  "published": "2026-10-10",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/prdclView.es?pblct_sn=10318&mid=a10103010000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=노동리뷰",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=23A97FEE7C2DAF9049258EA0001FA202_16.pdf&fileNameOrg=노동리뷰_2026년 10월호_web.pdf&filePath1=jsphome/DATA/pblctList/issue/23A97FEE7C2DAF9049258EA0001FA202",
+  "matched": [
+   "고령자"
+  ]
  },
  {
   "id": "keis-11366",

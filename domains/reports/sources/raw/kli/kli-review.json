@@ -1058,6 +1058,37 @@
     "collected_at": "2026-09-30T19:10:46+09:00"
   },
   {
+    "id": "kli-10318",
+    "org": "kli",
+    "board": "kli-review",
+    "series": "노동리뷰",
+    "title": "노동리뷰 2026년 10월호(통권 제259호)",
+    "authors": [
+      "동향분석실"
+    ],
+    "published": "2026-10-10",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kli.re.kr/kli/prdclView.es?pblct_sn=10318&mid=a10103010000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=노동리뷰",
+    "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=23A97FEE7C2DAF9049258EA0001FA202_16.pdf&fileNameOrg=노동리뷰_2026년 10월호_web.pdf&filePath1=jsphome/DATA/pblctList/issue/23A97FEE7C2DAF9049258EA0001FA202",
+    "abstract": null,
+    "toc": [
+      "■ 노동포커스",
+      "정년연장, 설계를 시작할 때 (이승호) / 3",
+      "■ 특집 : 정년퇴직자의 고용기간 연장",
+      "소득 크레바스 기간의 고령 노동 (이승호) / 9",
+      "재고용제도 확산의 성과와 한계 (노세리) / 24",
+      "■ 통계프리즘",
+      "「설비투자계획조사」로 본 제조업 : 무엇을 위해, 무엇을 사는가 (이기쁨) / 51",
+      "■ 노동판례리뷰 / 59",
+      "■ 주요 노동동향 / 71",
+      "■ 노동리뷰 목차 색인 / 97"
+    ],
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-10-30T20:39:36+09:00"
+  },
+  {
     "id": "kli-9474",
     "org": "kli",
     "board": "kli-review",
