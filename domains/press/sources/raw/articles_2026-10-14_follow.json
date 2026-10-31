@@ -6,7 +6,7 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-10-31 10:03",
+ "collected_at": "2026-10-31 17:49",
  "volume": {
   "collected": 344,
   "articles": 66,
@@ -26,10 +26,10 @@
   },
   {
    "query": "구직급여",
-   "api_total": 94931,
+   "api_total": 94932,
    "fetched": 300,
    "truncated": false,
-   "in_window": 237,
+   "in_window": 238,
    "relevant": 1,
    "new": 228
   },
@@ -1599,20 +1599,20 @@
    "rel": false
   },
   {
-   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
-   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
+   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
+   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
-   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
+   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
+   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
@@ -2439,11 +2439,11 @@
    "rel": false
   },
   {
-   "title": "박홍근 \"재정 관리 '실집행' 중심 전환…민간보조·R&D부터\"",
-   "desc": "박 장관은 정부의 지출효율화 운영 성과와 관련해 \"교육교부금과 구직급여처럼 오랫동안 개선 필요성이 제기돼 온 의무지출 개편 등 총 88개 과제 44조2000억원을 효율화해 내년 예산안에 담았다\"며 \"2027년에는 보다...",
-   "link": "https://n.news.naver.com/mnews/article/003/0014278570?sid=101",
-   "originallink": "https://www.newsis.com/view/NISX20261026_0003841088",
-   "press": "뉴시스",
+   "title": "교육교부금·구직급여 손질…기획처, 예산안 44.2조 '지출 효율화'",
+   "desc": "정부가 지출효율화 TF(태스크포스)를 가동해 교육교부금과 구직급여 등 총 88개 과제를 정비하고 44조2000억원을 효율화해 내년도 예산안에 담았다. 기획예산처는 26일 오후 정부서울청사에서 제3차...",
+   "link": "https://n.news.naver.com/mnews/article/008/0005431646?sid=101",
+   "originallink": "https://www.mt.co.kr/economy/2026/10/26/2026102613045015349",
+   "press": "머니투데이",
    "pub": "2026-10-26 14:00",
    "q": "구직급여",
    "rel": false
@@ -2455,7 +2455,7 @@
    "originallink": "https://www.yna.co.kr/view/AKR20261026094500002?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-26 14:00",
-   "q": "구직급여",
+   "q": "구직급여, 구직급여",
    "rel": false
   },
   {
@@ -2469,21 +2469,11 @@
    "rel": false
   },
   {
-   "title": "교육교부금·구직급여 손질…기획처, 예산안 44.2조 '지출 효율화'",
-   "desc": "정부가 지출효율화 TF(태스크포스)를 가동해 교육교부금과 구직급여 등 총 88개 과제를 정비하고 44조2000억원을 효율화해 내년도 예산안에 담았다. 기획예산처는 26일 오후 정부서울청사에서 제3차...",
-   "link": "https://n.news.naver.com/mnews/article/008/0005431646?sid=101",
-   "originallink": "https://www.mt.co.kr/economy/2026/10/26/2026102613045015349",
-   "press": "머니투데이",
-   "pub": "2026-10-26 14:00",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
-   "title": "정부, 내년 지출효율화 작업 11월 착수…참여예산 청년 비중 40%로",
-   "desc": "구직급여가 일할 때 받는 소득보다 많아지는 역전 현상을 해소하는 방안도 포함했다. 유사·중복사업도 정비했다. 17개 부처의 중소기업 지원사업 472개를 전면 검토해 232개를 통폐합하거나 축소하고, 정보통신기술(ICT)...",
-   "link": "https://n.news.naver.com/mnews/article/421/0009250017?sid=101",
-   "originallink": "https://www.news1.kr/economy/trend/6331905",
-   "press": "뉴스1",
+   "title": "박홍근 \"재정 관리 '실집행' 중심 전환…민간보조·R&D부터\"",
+   "desc": "박 장관은 정부의 지출효율화 운영 성과와 관련해 \"교육교부금과 구직급여처럼 오랫동안 개선 필요성이 제기돼 온 의무지출 개편 등 총 88개 과제 44조2000억원을 효율화해 내년 예산안에 담았다\"며 \"2027년에는 보다...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014278570?sid=101",
+   "originallink": "https://www.newsis.com/view/NISX20261026_0003841088",
+   "press": "뉴시스",
    "pub": "2026-10-26 14:00",
    "q": "구직급여",
    "rel": false
@@ -3329,21 +3319,21 @@
    "rel": false
   },
   {
-   "title": "강레오, 실업급여로 일본 여행 온 청년들 사진 요청 거절…\"취업하면 찍...",
-   "desc": "해당 영상이 공개된 뒤 시청자 일각은 사회문제가 되고 있는 부정수급과 구직활동 대신 여행비로 쓴 행동을 지적하며 강레오의 의견에 공감했다. 반면 일부 부정수급 사례를 들어 실업급여를 받는 사람을 의심하는 건...",
-   "link": "https://www.topstarnews.net/news/articleView.html?idxno=16261895",
-   "originallink": "https://www.topstarnews.net/news/articleView.html?idxno=16261895",
-   "press": "topstarnews.net",
-   "pub": "2026-10-29 14:54",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "무대 내려와 출근길…권소현·하주연·육지담, 연예인 대신 직장인 택했...",
    "desc": "구직 플랫폼을 통해 수백 곳에 이력서를 제출했으나 취업 문턱이 꽤 높았다고 했다. 불확실한 수입에 의존해야 하는 연예계와 달리 매달 급여를 받을 수 있다는 점이 취업을 결심한 현실적인 이유였다. 랩 가수 육지담...",
    "link": "https://m.entertain.naver.com/article/382/0001301852",
    "originallink": "https://sports.donga.com/ent/article/all/20261029/134929634/1",
    "press": "동아일보",
+   "pub": "2026-10-29 14:54",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "강레오, 실업급여로 일본 여행 온 청년들 사진 요청 거절…\"취업하면 찍...",
+   "desc": "해당 영상이 공개된 뒤 시청자 일각은 사회문제가 되고 있는 부정수급과 구직활동 대신 여행비로 쓴 행동을 지적하며 강레오의 의견에 공감했다. 반면 일부 부정수급 사례를 들어 실업급여를 받는 사람을 의심하는 건...",
+   "link": "https://www.topstarnews.net/news/articleView.html?idxno=16261895",
+   "originallink": "https://www.topstarnews.net/news/articleView.html?idxno=16261895",
+   "press": "topstarnews.net",
    "pub": "2026-10-29 14:54",
    "q": "구직급여",
    "rel": false
@@ -3555,6 +3545,16 @@
    "originallink": "https://www.tokenpost.kr/news/blockchain/429940",
    "press": "tokenpost.kr",
    "pub": "2026-10-30 18:16",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“돈을 벌어야지 저도 사니까…” 걸그룹 떠나 직장인 된 '여자 연예인...",
+   "desc": "하주연은 구직 애플리케이션을 내려받아 여러 기업에 지원했지만 좀처럼 취업의 문이 열리지 않았다고... 연예계에서는 방송이나 공연 등 활동이 없으면 수입도 끊길 수 있지만, 회사원은 일정한 급여를 받을 수 있다는...",
+   "link": "https://www.wikitree.co.kr/articles/1169240",
+   "originallink": "https://www.wikitree.co.kr/articles/1169240",
+   "press": "wikitree.co.kr",
+   "pub": "2026-10-31 14:00",
    "q": "구직급여",
    "rel": false
   }
