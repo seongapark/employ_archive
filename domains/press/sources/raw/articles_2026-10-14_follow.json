@@ -6,32 +6,32 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-11-01 09:26",
+ "collected_at": "2026-11-01 18:40",
  "volume": {
-  "collected": 347,
-  "articles": 66,
-  "press": 50,
+  "collected": 360,
+  "articles": 67,
+  "press": 51,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29513,
+   "api_total": 29514,
    "fetched": 100,
    "truncated": false,
-   "in_window": 75,
-   "relevant": 65,
-   "new": 74
+   "in_window": 76,
+   "relevant": 66,
+   "new": 75
   },
   {
    "query": "구직급여",
-   "api_total": 94934,
+   "api_total": 94946,
    "fetched": 300,
    "truncated": false,
-   "in_window": 240,
+   "in_window": 252,
    "relevant": 1,
-   "new": 231
+   "new": 243
   },
   {
    "query": "구인배수",
@@ -774,6 +774,16 @@
    "press": "naeil.com",
    "pub": "2026-10-30 13:02",
    "q": "고용보험 가입자, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "석화 '고용한파' … 근로자 55%만 재취업",
+   "desc": "주요 석화기업 9곳의 고용보험 가입자는 2024년 말 3만1661명에서 올해 8월 2만7303명으로 4358명(13.8%) 감소한 것으로 나타났다. 롯데케미칼(27.2%), SK지오센트릭(20.1%), 여천NCC(17.7%)는 감소폭이 더 컸다. 석화...",
+   "link": "https://n.news.naver.com/mnews/article/009/0005757244?sid=101",
+   "originallink": "https://www.mk.co.kr/article/12192932",
+   "press": "매일경제",
+   "pub": "2026-11-01 17:37",
+   "q": "고용보험 가입자",
    "rel": true
   }
  ],
@@ -2439,16 +2449,6 @@
    "rel": false
   },
   {
-   "title": "정부, 내년 지출효율화 작업 11월 착수…참여예산 청년 비중 40%로",
-   "desc": "구직급여가 일할 때 받는 소득보다 많아지는 역전 현상을 해소하는 방안도 포함했다. 유사·중복사업도 정비했다. 17개 부처의 중소기업 지원사업 472개를 전면 검토해 232개를 통폐합하거나 축소하고, 정보통신기술(ICT)...",
-   "link": "https://n.news.naver.com/mnews/article/421/0009250017?sid=101",
-   "originallink": "https://www.news1.kr/economy/trend/6331905",
-   "press": "뉴스1",
-   "pub": "2026-10-26 14:00",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "교육교부금 연동 폐지·구직급여 주 7→6일…내년 예산 44.2조 효율화",
    "desc": "정부가 지방교육재정교부금의 내국세 연동 구조를 폐지하고 구직급여 지급일수를 주 7일에서 6일로 조정하는 등 내년 예산안에 44조2000억원 규모의 지출 효율화 방안을 반영했다. 17개 부처에 흩어진 중소기업...",
    "link": "https://n.news.naver.com/mnews/article/003/0014278566?sid=101",
@@ -2459,21 +2459,11 @@
    "rel": false
   },
   {
-   "title": "박홍근 \"재정 관리 '실집행' 중심 전환…민간보조·R&D부터\"",
-   "desc": "박 장관은 정부의 지출효율화 운영 성과와 관련해 \"교육교부금과 구직급여처럼 오랫동안 개선 필요성이 제기돼 온 의무지출 개편 등 총 88개 과제 44조2000억원을 효율화해 내년 예산안에 담았다\"며 \"2027년에는 보다...",
-   "link": "https://n.news.naver.com/mnews/article/003/0014278570?sid=101",
-   "originallink": "https://www.newsis.com/view/NISX20261026_0003841088",
-   "press": "뉴시스",
-   "pub": "2026-10-26 14:00",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
-   "title": "정부, 내년 예산 44.2조 지출효율화…AI로 중복·낭비 찾는다",
-   "desc": "아울러 구직급여 지급방식을 주 7일에서 6일로 조정하고 조기재취업수당 지급 제외 기준을 월 574만원에서 300만원으로 낮춰 1조4808억원을 줄였다. 17개 부처가 운영하는 중소기업 지원사업 472개도 전면 점검했다. 이...",
-   "link": "https://www.newspim.com/news/view/20261026000652",
-   "originallink": "https://www.newspim.com/news/view/20261026000652",
-   "press": "뉴스핌",
+   "title": "정부, 내년 지출효율화 작업 11월 착수…참여예산 청년 비중 40%로",
+   "desc": "구직급여가 일할 때 받는 소득보다 많아지는 역전 현상을 해소하는 방안도 포함했다. 유사·중복사업도 정비했다. 17개 부처의 중소기업 지원사업 472개를 전면 검토해 232개를 통폐합하거나 축소하고, 정보통신기술(ICT)...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009250017?sid=101",
+   "originallink": "https://www.news1.kr/economy/trend/6331905",
+   "press": "뉴스1",
    "pub": "2026-10-26 14:00",
    "q": "구직급여",
    "rel": false
@@ -2494,6 +2484,26 @@
    "link": "https://n.news.naver.com/mnews/article/008/0005431646?sid=101",
    "originallink": "https://www.mt.co.kr/economy/2026/10/26/2026102613045015349",
    "press": "머니투데이",
+   "pub": "2026-10-26 14:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "정부, 내년 예산 44.2조 지출효율화…AI로 중복·낭비 찾는다",
+   "desc": "아울러 구직급여 지급방식을 주 7일에서 6일로 조정하고 조기재취업수당 지급 제외 기준을 월 574만원에서 300만원으로 낮춰 1조4808억원을 줄였다. 17개 부처가 운영하는 중소기업 지원사업 472개도 전면 점검했다. 이...",
+   "link": "https://www.newspim.com/news/view/20261026000652",
+   "originallink": "https://www.newspim.com/news/view/20261026000652",
+   "press": "뉴스핌",
+   "pub": "2026-10-26 14:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "박홍근 \"재정 관리 '실집행' 중심 전환…민간보조·R&D부터\"",
+   "desc": "박 장관은 정부의 지출효율화 운영 성과와 관련해 \"교육교부금과 구직급여처럼 오랫동안 개선 필요성이 제기돼 온 의무지출 개편 등 총 88개 과제 44조2000억원을 효율화해 내년 예산안에 담았다\"며 \"2027년에는 보다...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014278570?sid=101",
+   "originallink": "https://www.newsis.com/view/NISX20261026_0003841088",
+   "press": "뉴시스",
    "pub": "2026-10-26 14:00",
    "q": "구직급여",
    "rel": false
@@ -2839,21 +2849,21 @@
    "rel": false
   },
   {
-   "title": "\"실업급여로 여행? 더 싫다\"…강레오 쓴소리 '갑론을박' [포크뉴스]",
-   "desc": "실업급여를 여러 차례 받거나, 수급 기간 중 해외여행을 하는 것 자체가 불법은 아니지만, 실제로 구직 활동을 하지 않았는데도 허위로 신고하거나, 대리 신청 등 부정한 방법으로 급여를 받는 경우가 문제입니다. 누리꾼...",
-   "link": "https://n.news.naver.com/mnews/article/057/0001975316?sid=004",
-   "originallink": "http://www.mbn.co.kr/pages/vod/programContents.php?progCode=683&menuCode=4385&bcastSeqNo=1432208",
-   "press": "mbn.co.kr",
-   "pub": "2026-10-27 14:17",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "강레오, 실업급여로 해외여행 간 청년들 비판에…“놀라고 준 돈 아냐”...",
    "desc": "반면 “실업급여는 구직 기간에 생계를 유지하라고 주는 돈이지 여행 가라고 주는 게 아니다”, “해외여행은 지나치다”, “구직활동하라고 주는 돈 아니냐”며 강레오의 발언에 공감하는 의견도 나왔다. 일부 누리꾼들은...",
    "link": "https://m.entertain.naver.com/article/144/0001146545",
    "originallink": "https://sports.khan.co.kr/article/202610271416003?pt=nv",
    "press": "경향신문",
+   "pub": "2026-10-27 14:17",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"실업급여로 여행? 더 싫다\"…강레오 쓴소리 '갑론을박' [포크뉴스]",
+   "desc": "실업급여를 여러 차례 받거나, 수급 기간 중 해외여행을 하는 것 자체가 불법은 아니지만, 실제로 구직 활동을 하지 않았는데도 허위로 신고하거나, 대리 신청 등 부정한 방법으로 급여를 받는 경우가 문제입니다. 누리꾼...",
+   "link": "https://n.news.naver.com/mnews/article/057/0001975316?sid=004",
+   "originallink": "http://www.mbn.co.kr/pages/vod/programContents.php?progCode=683&menuCode=4385&bcastSeqNo=1432208",
+   "press": "mbn.co.kr",
    "pub": "2026-10-27 14:17",
    "q": "구직급여",
    "rel": false
@@ -2869,20 +2879,20 @@
    "rel": false
   },
   {
-   "title": "근무조건 살펴보는 취준생",
+   "title": "급여는 얼마나?",
    "desc": "27일 대구 남구 영남이공대 천마체육관에서 열린 '2026 쿠팡CFS 대구·경북 채용페스타'를 찾은 구직자가 근무 조건과 급여 등 안내문을 살펴보고 있다. 영남이공대 일자리첫걸음보장센터와 쿠팡풀필먼트서비스가...",
-   "link": "https://n.news.naver.com/mnews/article/421/0009252843?sid=102",
-   "originallink": "https://www.news1.kr/photos/8181520",
+   "link": "https://n.news.naver.com/mnews/article/421/0009252844?sid=102",
+   "originallink": "https://www.news1.kr/photos/8181522",
    "press": "뉴스1",
    "pub": "2026-10-27 14:42",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "급여는 얼마나?",
+   "title": "근무조건 살펴보는 취준생",
    "desc": "27일 대구 남구 영남이공대 천마체육관에서 열린 '2026 쿠팡CFS 대구·경북 채용페스타'를 찾은 구직자가 근무 조건과 급여 등 안내문을 살펴보고 있다. 영남이공대 일자리첫걸음보장센터와 쿠팡풀필먼트서비스가...",
-   "link": "https://n.news.naver.com/mnews/article/421/0009252844?sid=102",
-   "originallink": "https://www.news1.kr/photos/8181522",
+   "link": "https://n.news.naver.com/mnews/article/421/0009252843?sid=102",
+   "originallink": "https://www.news1.kr/photos/8181520",
    "press": "뉴스1",
    "pub": "2026-10-27 14:42",
    "q": "구직급여",
@@ -3585,6 +3595,126 @@
    "originallink": "https://biz.heraldcorp.com/article/10921502?ref=naver",
    "press": "헤럴드경제",
    "pub": "2026-11-01 08:49",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "5일 '2026 양산시 채용박람회' 개최",
+   "desc": "이 가운데 24개사는 현장 채용 면접을 진행하고, 5개사는 이력서를 접수해 구직자를 모집한다. 참여업체는 모집 직종과 직무, 급여 수준 등 근무조건을 종합적으로 고려해 선정했다. 취업 지원과 정보 제공을 위한 다양한...",
+   "link": "https://www.idomin.com/news/articleView.html?idxno=2018336",
+   "originallink": "https://www.idomin.com/news/articleView.html?idxno=2018336",
+   "press": "idomin.com",
+   "pub": "2026-11-01 10:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "영국도 '북한 IT 위장취업' 비상…\"은행 등 기업 수천곳 표적\"",
+   "desc": "이들은 채용되면 급여의 대부분을 정권에 상납하고 이는 북한의 핵·미사일 개발 자금으로 쓰인다.... 이는 수천건의 지원서를 한꺼번에 내는 상황을 감안할 때 일부 구직자가 하루에 최소 한건의 취업 제안을 받는다는...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016413830?sid=104",
+   "originallink": "https://www.yna.co.kr/view/AKR20261101022400009?input=1195m",
+   "press": "연합뉴스",
+   "pub": "2026-11-01 11:52",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "하루 수천장 이력서 뿌린다…英기업 노리는 北 '위장취업'",
+   "desc": "3% 수준에 불과하지만 수천건의 지원서를 동시에 뿌리는 방식으로 실제 채용까지 이어지고, 벌어들인 급여... 수치만 보면 낮아 보이지만 지원서를 대량으로 제출하기 때문에 일부 구직자는 하루 최소 한 건의 취업 제안을...",
+   "link": "https://www.jnilbo.com/news/articleView.html?idxno=90000078481",
+   "originallink": "https://www.jnilbo.com/news/articleView.html?idxno=90000078481",
+   "press": "jnilbo.com",
+   "pub": "2026-11-01 12:01",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "北 해킹조직, 은행·제약사·공무원직 침투시도…영국도 노렸다",
+   "desc": "대량으로 입사 지원서를 내고, 채용되면 급여 대부분을 북한에 보내는 방식이다. 다국적제재모니터링팀... 구직시장 정보를 얻거나 항공우주·방위산업 등 전략 분야에 접근하려는 목적이다. 미국·한국·영국 등...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002717166?sid=104",
+   "originallink": "https://biz.heraldcorp.com/article/10921669?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-11-01 12:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "영국도 '북한 IT 위장취업' 비상...\"은행 등 기업 수천 곳 표적\"",
+   "desc": "뒤 급여를 정권에 상납하도록 합니다. 다국적제재모니터링팀이 최근 발표한 북한 해외 노동자 실태 보고서에... 이는 수천 건의 지원서를 한꺼번에 내는 상황을 감안할 때 일부 구직자가 하루에 최소 한건의 취업 제안을...",
+   "link": "https://n.news.naver.com/mnews/article/052/0002426787?sid=104",
+   "originallink": "https://www.ytn.co.kr/_ln/0104_202611011252377303",
+   "press": "ytn.co.kr",
+   "pub": "2026-11-01 12:52",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "경남도, 경제지표 진단·민생경제 안정대책 회의 개최",
+   "desc": "곽 실장은 \"고용지표 부진을 경기 침체의 결과로 보기는 어렵지만, 부진이 일부 업종과 계층에 집중되어 있어 정책 보완이 필요하다\"며, \"구직급여 지원과 함께 신속한 일자리 연계가 중요하다\"고 제언했다. 특히, 9월...",
+   "link": "https://www.newsgn.com/news/articleView.html?idxno=582611",
+   "originallink": "https://www.newsgn.com/news/articleView.html?idxno=582611",
+   "press": "newsgn.com",
+   "pub": "2026-11-01 12:56",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "고용지표 5개 중 3개 두 달 악화 땐 ‘전국 고용위기’…지원금 확대",
+   "desc": "1일 한국노동경제학회가 고용노동부 연구용역을 받아 수행한 ‘전국적 고용상황 악화 판단 기준 마련 연구보고서’에 따르면 전국적 고용위기 판단에 활용할 핵심 지표는 고용률, 고용률 3개월 이동평균, 구직급여...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002717183?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10921732?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-11-01 14:21",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "영국도 '북한 IT 위장취업'에 골머리…\"은행 등 기업 수천 곳 표적\"",
+   "desc": "이들은 급여의 대부분을 정권에 상납하며 이는 북한의 핵·미사일 개발 자금으로도 쓰입니다.... 수천 건의 지원서를 한꺼번에 내는 상황을 고려할 때 일부 구직자는 하루에 최소 한 건의 취업 제안을 받는 것입니다....",
+   "link": "https://n.news.naver.com/mnews/article/057/0001976153?sid=104",
+   "originallink": "http://mbn.mk.co.kr/pages/news/newsView.php?category=mbn00008&news_seq_no=5228340",
+   "press": "매일경제",
+   "pub": "2026-11-01 14:46",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“백인 차별마라” 트럼프 일갈에 잘린 흑인 공무원…590번 취업 실패했...",
+   "desc": "그의 구직 활동을 발목 잡은 건 ‘DEI 감시목록(DEI Watchlist)’다. 보수 단체 미국책임재단(AAF)이 만든 해당... 그는 퇴직급여도 받지 못했다. 노동통계국 가계조사를 분석한 결과 지난해 11~12월 흑인 연방 근로자 추정...",
+   "link": "https://n.news.naver.com/mnews/article/009/0005757105?sid=104",
+   "originallink": "https://www.mk.co.kr/article/12192687",
+   "press": "매일경제",
+   "pub": "2026-11-01 14:57",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "영국도 '북한 IT 위장취업' 기승…\"은행 등 기업 수천곳 표적\"",
+   "desc": "이들은 채용되면 인공지능(AI)을 활용해 여러 회사의 업무를 동시에 수행하고, 급여 대부분을 정권에... 지원서 제출 규모가 워낙 크기 때문에 일부 구직자는 하루에 최소 한건의 취업 제안을 받는다는 것이다. 이들은 주로...",
+   "link": "https://n.news.naver.com/mnews/article/277/0005836330?sid=104",
+   "originallink": "https://view.asiae.co.kr/article/2026110116432677716",
+   "press": "아시아경제",
+   "pub": "2026-11-01 16:52",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "‘오각형 실직자’는 없다 [유레카]",
+   "desc": "1996년부터 지급된 구직급여(실업급여)가 노동자와 사업주가 평소 절반씩 낸 고용보험료에서 주로 나온다는 사실이나, 수급 중 해외여행을 금지하는 규정이 없다는 사실은 이번 논쟁에서 그리 중요하게 다뤄지지 않는다....",
+   "link": "https://n.news.naver.com/mnews/article/028/0002830171?sid=110",
+   "originallink": "https://www.hani.co.kr/arti/opinion/column/1285220.html",
+   "press": "한겨레",
+   "pub": "2026-11-01 17:58",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[최고 달성, 민선 9기의 도약] 끝. 청년이 떠나지 않는 역동적 도시",
+   "desc": "주·월차, 급여도 제공한다. 2023년에는 지역 청년 창업가들에게 전 주기적 원스톱 지원이 이뤄지는... 달성군은 매년 기업과 구직자가 직접 만나는 취업박람회를 개최하고 있다. 올해는 ▷4월 현풍읍 달성군민체육관 ▷9월...",
+   "link": "https://n.news.naver.com/mnews/article/088/0001037718?sid=102",
+   "originallink": "https://www.imaeil.com/page/view/2026102814343512670",
+   "press": "imaeil.com",
+   "pub": "2026-11-01 18:30",
    "q": "구직급여",
    "rel": false
   }
