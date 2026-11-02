@@ -34028,5 +34028,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-10-30T20:39:58+09:00"
+ },
+ "kdi-19136": {
+  "pick": false,
+  "axis": "",
+  "why": "재정준칙·고령화 OLG 거시모형, 고용 변수 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-02T10:01:07+09:00"
  }
 }
