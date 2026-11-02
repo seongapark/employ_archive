@@ -805,6 +805,28 @@
   "matched": []
  },
  {
+  "id": "kiet-pd385",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "한-인도 산업협력 전략과 정책과제",
+  "authors": [
+   "박병열",
+   "경희권",
+   "심순형",
+   "이은창",
+   "김지훈"
+  ],
+  "published": "2026-09-18",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=385&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "인력수급"
+  ]
+ },
+ {
   "id": "kli-10306",
   "org": "kli",
   "board": "kli-intl",
