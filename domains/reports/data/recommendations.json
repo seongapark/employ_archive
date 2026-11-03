@@ -34046,5 +34046,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-02T15:01:26+09:00"
+ },
+ "kdi-19320": {
+  "pick": false,
+  "axis": "",
+  "why": "요양시설 간호인력 확충의 입소자 건강성과·정책방향. 고용이 결과·설명변수 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-03T15:00:54+09:00"
  }
 }

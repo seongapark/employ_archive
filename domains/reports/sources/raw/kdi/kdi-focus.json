@@ -8597,6 +8597,26 @@
     "collected_at": "2026-09-10T02:20:03+09:00"
   },
   {
+    "id": "kdi-19320",
+    "org": "kdi",
+    "board": "kdi-focus",
+    "series": "KDI FOCUS",
+    "title": "노인요양시설의 숙련 간호인력 확충 효과와 정책 방향",
+    "authors": [
+      "권정현"
+    ],
+    "published": "2026-10-23",
+    "date_precision": "day",
+    "pages": 8,
+    "landing_url": "https://www.kdi.re.kr/research/focusView?pub_no=19320",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=4S2XKRCMrV0cM31dY0uI7g%3D%3D",
+    "abstract": "노인요양시설의 숙련 간호인력 확충 효과와 정책 방향",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-11-03T15:00:27+09:00"
+  },
+  {
     "id": "kdi-6320",
     "org": "kdi",
     "board": "kdi-focus",
