@@ -34055,5 +34055,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-03T15:00:54+09:00"
+ },
+ "keis-11372": {
+  "pick": true,
+  "axis": "채용수요·구인구직",
+  "why": "고용24 구인·구직 수급 불균형 직종·지역별 직접 분해",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-04T10:01:34+09:00"
  }
 }
