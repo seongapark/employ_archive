@@ -6,9 +6,9 @@
   "2026-10-15",
   "2026-11-04"
  ],
- "collected_at": "2026-11-04 18:48",
+ "collected_at": "2026-11-05 10:48",
  "volume": {
-  "collected": 482,
+  "collected": 483,
   "articles": 74,
   "press": 53,
   "queries": 11
@@ -17,7 +17,7 @@
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29523,
+   "api_total": 29525,
    "fetched": 100,
    "truncated": false,
    "in_window": 83,
@@ -26,12 +26,12 @@
   },
   {
    "query": "구직급여",
-   "api_total": 95071,
+   "api_total": 95077,
    "fetched": 400,
    "truncated": false,
    "in_window": 367,
    "relevant": 1,
-   "new": 355
+   "new": 356
   },
   {
    "query": "구인배수",
@@ -44,7 +44,7 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18651,
+   "api_total": 18654,
    "fetched": 100,
    "truncated": false,
    "in_window": 54,
@@ -1679,20 +1679,20 @@
    "rel": false
   },
   {
-   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
-   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
+   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
+   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "올해 연구직 일자리 회복세 보였다…구직급여 신청 36.8% 감소",
-   "desc": "올해 1~8월 1만1천845명…분야별 전반적 감소 추세 황정아 의원 \"R&D 삭감 연구 현장서 의미 있는 변화\" 연구개발(R&D) 예산 삭감 이후 늘어나던 연구·기술직 구직급여 신청자가 올해 들어 줄어든 것으로 나타났다....",
-   "link": "https://n.news.naver.com/mnews/article/001/0016390168?sid=105",
-   "originallink": "https://www.yna.co.kr/view/AKR20261020148700017?input=1195m",
+   "title": "日구직자 \"韓취업 원하지만 정보부족…글로벌화·빠른성장 강점\"",
+   "desc": "구직자들이 취업을 원하는 한국 기업의 업무 분야로는 예술·스포츠·관광(55.2%) 등 문화·서비스 업종과 마케팅·기획(44.8%) 직군이 선호됐다. 기업 선택 시 고려하는 점(복수응답 가능)은 업무 내용(73.1%)에 이어 급여...",
+   "link": "https://n.news.naver.com/mnews/article/001/0016390169?sid=104",
+   "originallink": "https://www.yna.co.kr/view/AKR20261020119900073?input=1195m",
    "press": "연합뉴스",
    "pub": "2026-10-21 07:00",
    "q": "구직급여",
@@ -2519,16 +2519,6 @@
    "rel": false
   },
   {
-   "title": "박홍근 \"재정 관리 '실집행' 중심 전환…민간보조·R&D부터\"",
-   "desc": "박 장관은 정부의 지출효율화 운영 성과와 관련해 \"교육교부금과 구직급여처럼 오랫동안 개선 필요성이 제기돼 온 의무지출 개편 등 총 88개 과제 44조2000억원을 효율화해 내년 예산안에 담았다\"며 \"2027년에는 보다...",
-   "link": "https://n.news.naver.com/mnews/article/003/0014278570?sid=101",
-   "originallink": "https://www.newsis.com/view/NISX20261026_0003841088",
-   "press": "뉴시스",
-   "pub": "2026-10-26 14:00",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "교육교부금 연동 폐지·구직급여 주 7→6일…내년 예산 44.2조 효율화",
    "desc": "정부가 지방교육재정교부금의 내국세 연동 구조를 폐지하고 구직급여 지급일수를 주 7일에서 6일로 조정하는 등 내년 예산안에 44조2000억원 규모의 지출 효율화 방안을 반영했다. 17개 부처에 흩어진 중소기업...",
    "link": "https://n.news.naver.com/mnews/article/003/0014278566?sid=101",
@@ -2549,11 +2539,11 @@
    "rel": false
   },
   {
-   "title": "정부, 내년 예산 44.2조 지출효율화…AI로 중복·낭비 찾는다",
-   "desc": "아울러 구직급여 지급방식을 주 7일에서 6일로 조정하고 조기재취업수당 지급 제외 기준을 월 574만원에서 300만원으로 낮춰 1조4808억원을 줄였다. 17개 부처가 운영하는 중소기업 지원사업 472개도 전면 점검했다. 이...",
-   "link": "https://www.newspim.com/news/view/20261026000652",
-   "originallink": "https://www.newspim.com/news/view/20261026000652",
-   "press": "뉴스핌",
+   "title": "박홍근 \"재정 관리 '실집행' 중심 전환…민간보조·R&D부터\"",
+   "desc": "박 장관은 정부의 지출효율화 운영 성과와 관련해 \"교육교부금과 구직급여처럼 오랫동안 개선 필요성이 제기돼 온 의무지출 개편 등 총 88개 과제 44조2000억원을 효율화해 내년 예산안에 담았다\"며 \"2027년에는 보다...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014278570?sid=101",
+   "originallink": "https://www.newsis.com/view/NISX20261026_0003841088",
+   "press": "뉴시스",
    "pub": "2026-10-26 14:00",
    "q": "구직급여",
    "rel": false
@@ -2569,6 +2559,16 @@
    "rel": false
   },
   {
+   "title": "정부, 내년 예산 44.2조 지출효율화…AI로 중복·낭비 찾는다",
+   "desc": "아울러 구직급여 지급방식을 주 7일에서 6일로 조정하고 조기재취업수당 지급 제외 기준을 월 574만원에서 300만원으로 낮춰 1조4808억원을 줄였다. 17개 부처가 운영하는 중소기업 지원사업 472개도 전면 점검했다. 이...",
+   "link": "https://www.newspim.com/news/view/20261026000652",
+   "originallink": "https://www.newspim.com/news/view/20261026000652",
+   "press": "뉴스핌",
+   "pub": "2026-10-26 14:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
    "title": "박홍근 \"AI 활용해 재정 비효율 더 빠르고 정밀하게 걷어낼 것\"",
    "desc": "일 일할 때 받는 최저임금보다 구직급여가 더 많이 나오는 역전 현상을 해소하는 등 실업급여 효율화로 1조4천808억원을 절감하게 될 것이라고 기획처는 전했다. 유사·중복 사업을 정비하고, 현장의 수요를 반영해 재정...",
    "link": "https://n.news.naver.com/mnews/article/001/0016400576?sid=101",
@@ -2579,21 +2579,21 @@
    "rel": false
   },
   {
-   "title": "내년 지출 44.2조 효율화한 정부, 2028년 예산 TF 내달 가동",
-   "desc": "구직급여는 지급 기준을 주 7일에서 6일로 바꿨다. 조기재취업수당 지급 제외 기준은 월 574만원에서 300만원으로 낮췄다. 두 조치로 1조 4808억원을 덜어냈다. 일할 때보다 쉴 때 더 받는 역전현상을 바로잡겠다는...",
-   "link": "https://n.news.naver.com/mnews/article/018/0006396321?sid=101",
-   "originallink": "https://www.edaily.co.kr/News/Read?newsId=03083206645616856&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
-   "press": "이데일리",
-   "pub": "2026-10-26 14:01",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "기획처, 내달부터 지출효율화 조기 착수…AI로 예산 낭비 잡는다",
    "desc": "구직급여는 근로할 때보다 급여 수급액이 더 많아지는 역전 현상을 바로잡았다. 부처별로 분산된 재정사업도 정비했다. 정부는 17개 부처의 중소기업 지원사업 472개를 전면 검토해 232개를 통폐합하거나 축소했다....",
    "link": "https://n.news.naver.com/mnews/article/016/0002714441?sid=101",
    "originallink": "https://biz.heraldcorp.com/article/10914903?ref=naver",
    "press": "헤럴드경제",
+   "pub": "2026-10-26 14:01",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "내년 지출 44.2조 효율화한 정부, 2028년 예산 TF 내달 가동",
+   "desc": "구직급여는 지급 기준을 주 7일에서 6일로 바꿨다. 조기재취업수당 지급 제외 기준은 월 574만원에서 300만원으로 낮췄다. 두 조치로 1조 4808억원을 덜어냈다. 일할 때보다 쉴 때 더 받는 역전현상을 바로잡겠다는...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006396321?sid=101",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=03083206645616856&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
    "pub": "2026-10-26 14:01",
    "q": "구직급여",
    "rel": false
@@ -2925,7 +2925,17 @@
    "originallink": "http://www.mbn.co.kr/pages/vod/programContents.php?progCode=683&menuCode=4385&bcastSeqNo=1432208",
    "press": "mbn.co.kr",
    "pub": "2026-10-27 14:17",
-   "q": "구직급여, 구직급여",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "강레오, 실업급여로 해외여행 간 청년들 비판에…“놀라고 준 돈 아냐”...",
+   "desc": "반면 “실업급여는 구직 기간에 생계를 유지하라고 주는 돈이지 여행 가라고 주는 게 아니다”, “해외여행은 지나치다”, “구직활동하라고 주는 돈 아니냐”며 강레오의 발언에 공감하는 의견도 나왔다. 일부 누리꾼들은...",
+   "link": "https://m.entertain.naver.com/article/144/0001146545",
+   "originallink": "https://sports.khan.co.kr/article/202610271416003?pt=nv",
+   "press": "경향신문",
+   "pub": "2026-10-27 14:17",
+   "q": "구직급여",
    "rel": false
   },
   {
@@ -3399,21 +3409,21 @@
    "rel": false
   },
   {
-   "title": "무대 내려와 출근길…권소현·하주연·육지담, 연예인 대신 직장인 택했...",
-   "desc": "구직 플랫폼을 통해 수백 곳에 이력서를 제출했으나 취업 문턱이 꽤 높았다고 했다. 불확실한 수입에 의존해야 하는 연예계와 달리 매달 급여를 받을 수 있다는 점이 취업을 결심한 현실적인 이유였다. 랩 가수 육지담...",
-   "link": "https://m.entertain.naver.com/article/382/0001301852",
-   "originallink": "https://sports.donga.com/ent/article/all/20261029/134929634/1",
-   "press": "동아일보",
-   "pub": "2026-10-29 14:54",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "강레오, 실업급여로 일본 여행 온 청년들 사진 요청 거절…\"취업하면 찍...",
    "desc": "해당 영상이 공개된 뒤 시청자 일각은 사회문제가 되고 있는 부정수급과 구직활동 대신 여행비로 쓴 행동을 지적하며 강레오의 의견에 공감했다. 반면 일부 부정수급 사례를 들어 실업급여를 받는 사람을 의심하는 건...",
    "link": "https://www.topstarnews.net/news/articleView.html?idxno=16261895",
    "originallink": "https://www.topstarnews.net/news/articleView.html?idxno=16261895",
    "press": "topstarnews.net",
+   "pub": "2026-10-29 14:54",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "무대 내려와 출근길…권소현·하주연·육지담, 연예인 대신 직장인 택했...",
+   "desc": "구직 플랫폼을 통해 수백 곳에 이력서를 제출했으나 취업 문턱이 꽤 높았다고 했다. 불확실한 수입에 의존해야 하는 연예계와 달리 매달 급여를 받을 수 있다는 점이 취업을 결심한 현실적인 이유였다. 랩 가수 육지담...",
+   "link": "https://m.entertain.naver.com/article/382/0001301852",
+   "originallink": "https://sports.donga.com/ent/article/all/20261029/134929634/1",
+   "press": "동아일보",
    "pub": "2026-10-29 14:54",
    "q": "구직급여",
    "rel": false
@@ -3809,21 +3819,21 @@
    "rel": false
   },
   {
-   "title": "경남도, 주요 경제·고용지표 점검… 취약계층 지원 논의",
-   "desc": "곽 실장은 일부 업종과 계층에 고용 부진이 집중된 만큼 구직급여 지원과 신속한 일자리 연계가 필요하다고 제안했다. 경남도는 조선·항공우주·기계 등 주력 산업 동향과 농림어업·비임금근로자 등 취약 부문의...",
-   "link": "http://www.metroseoul.co.kr/article/20261101500237",
-   "originallink": "http://www.metroseoul.co.kr/article/20261101500237",
-   "press": "metroseoul.co.kr",
-   "pub": "2026-11-02 09:20",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "켄 그리핀 시타델 CEO \"AI 거품 맞지만...새로운 기업가 황금시대\" [이주...",
    "desc": "36.8% 연구·기술직 구직급여 신청자가 올해 들어 감소세를 보인 것으로 나타났다. 10월 21일 국회 과학기술정보방송통신위원회 소속 황정아 더불어민주당 의원이 고용노동부에서 제출받은 자료에 따르면 올해 1...",
    "link": "https://n.news.naver.com/mnews/article/050/0000112704?sid=101",
    "originallink": "https://magazine.hankyung.com/business/article/202610215644b",
    "press": "한국경제",
+   "pub": "2026-11-02 09:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "경남도, 주요 경제·고용지표 점검… 취약계층 지원 논의",
+   "desc": "곽 실장은 일부 업종과 계층에 고용 부진이 집중된 만큼 구직급여 지원과 신속한 일자리 연계가 필요하다고 제안했다. 경남도는 조선·항공우주·기계 등 주력 산업 동향과 농림어업·비임금근로자 등 취약 부문의...",
+   "link": "http://www.metroseoul.co.kr/article/20261101500237",
+   "originallink": "http://www.metroseoul.co.kr/article/20261101500237",
+   "press": "metroseoul.co.kr",
    "pub": "2026-11-02 09:20",
    "q": "구직급여",
    "rel": false
@@ -3919,21 +3929,21 @@
    "rel": false
   },
   {
-   "title": "李 “세액공제보다 재정지원 우선, 수도권보다 지방 우대”",
-   "desc": "민생·복지 및 청년지원 분야에서 이 대통령이 강조한 건 사회보장급여 신청 방식을 신청주의에서... 이 대통령은 “반도체 설계와 지역 반도체 산업을 이끌 전문인력 2000명을 양성하고 학생부터 구직자와...",
-   "link": "https://n.news.naver.com/mnews/article/020/0003759334?sid=100",
-   "originallink": "https://www.donga.com/news/Politics/article/all/20261102/134948831/1",
-   "press": "동아일보",
-   "pub": "2026-11-02 10:32",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "[종합] 李대통령, 내년도 예산 820조9000억원 제시…\"국민 성장확산 예산...",
    "desc": "기준 중위소득은 6.7% 인상하고, 4인 가구 기준 생계급여는 월 221만8000원으로 높인다. 청년예산은 올해보다 53.5% 늘어난 43조3000억원을 편성했다. 일경험·훈련·구직 지원 대상자를 56만명에서 72만명으로 확대하고...",
    "link": "https://www.ajunews.com/view/20261102101257826",
    "originallink": "https://www.ajunews.com/view/20261102101257826",
    "press": "아주경제",
+   "pub": "2026-11-02 10:32",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "李 “세액공제보다 재정지원 우선, 수도권보다 지방 우대”",
+   "desc": "민생·복지 및 청년지원 분야에서 이 대통령이 강조한 건 사회보장급여 신청 방식을 신청주의에서... 이 대통령은 “반도체 설계와 지역 반도체 산업을 이끌 전문인력 2000명을 양성하고 학생부터 구직자와...",
+   "link": "https://n.news.naver.com/mnews/article/020/0003759334?sid=100",
+   "originallink": "https://www.donga.com/news/Politics/article/all/20261102/134948831/1",
+   "press": "동아일보",
    "pub": "2026-11-02 10:32",
    "q": "구직급여",
    "rel": false
@@ -3949,21 +3959,21 @@
    "rel": false
   },
   {
-   "title": "李대통령 \"821조는 성장확산 예산…추가세수로 성장동력·격차완화 집중...",
-   "desc": "일경험·훈련·구직 지원 대상은 56만명에서 72만명으로 확대한다. 청년 공적임대주택은 10만6천호로 늘리고 중산층을 위한 역세권 보편형 공적임대주택 2만호도 공급한다. 사회보장급여는 신청주의에서 자동주의로...",
-   "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442489",
-   "originallink": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442489",
-   "press": "news.einfomax.co.kr",
-   "pub": "2026-11-02 10:40",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "[이재명 대통령 시정연설] '모두의 성장' 대전환 강조",
    "desc": "특히, 내년부터는 주요 사회보장급여에 대한 신청주의를 자동주의로 개편하여 수급 자격이 있으면 누구나... 대학생 6만 명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하는 등 일경험·훈련·구직 지원 대상자를...",
    "link": "https://www.sisaweek.com/news/articleView.html?idxno=238728",
    "originallink": "https://www.sisaweek.com/news/articleView.html?idxno=238728",
    "press": "sisaweek.com",
+   "pub": "2026-11-02 10:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "李대통령 \"821조는 성장확산 예산…추가세수로 성장동력·격차완화 집중...",
+   "desc": "일경험·훈련·구직 지원 대상은 56만명에서 72만명으로 확대한다. 청년 공적임대주택은 10만6천호로 늘리고 중산층을 위한 역세권 보편형 공적임대주택 2만호도 공급한다. 사회보장급여는 신청주의에서 자동주의로...",
+   "link": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442489",
+   "originallink": "https://news.einfomax.co.kr/news/articleView.html?idxno=4442489",
+   "press": "news.einfomax.co.kr",
    "pub": "2026-11-02 10:40",
    "q": "구직급여",
    "rel": false
@@ -4069,11 +4079,11 @@
    "rel": false
   },
   {
-   "title": "李대통령 \"내년 예산 820.9조…모두의 성장·미래 선점에 집중 투자\" [전...",
-   "desc": "주요 사회보장급여의 '신청주의'를 '자동주의'로 개편해 수급 자격이 있는 국민이 별도 신청 없이... 대학생 6만명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하고, 일경험·훈련·구직 지원 대상을 56만명에서...",
-   "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747425",
-   "originallink": "https://www.polinews.co.kr/news/articleView.html?idxno=747425",
-   "press": "polinews.co.kr",
+   "title": "이 대통령 \"K자 성장 한계 극복, 새로운 성장 공식 적용\"(전문)",
+   "desc": "특히, 내년부터는 주요 사회보장급여에 대한 신청주의를 자동주의로 개편해서 수급 자격이 있으면... 대학생 6만 명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하는 등 일경험·훈련·구직 지원 대상자를 56만...",
+   "link": "http://www.newstomato.com/ReadNews.aspx?no=1318857&inflow=N",
+   "originallink": "http://www.newstomato.com/ReadNews.aspx?no=1318857&inflow=N",
+   "press": "뉴스토마토",
    "pub": "2026-11-02 11:02",
    "q": "구직급여",
    "rel": false
@@ -4089,21 +4099,21 @@
    "rel": false
   },
   {
-   "title": "[李대통령 시정연설 전문] \"모두의 성장으로 대전환\"",
-   "desc": "특히, 내년부터는 주요 사회보장급여에 대한 신청주의를 자동주의로 개편하여 수급 자격이 있으면 누구나... 대학생 6만 명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하는 등 일경험·훈련·구직 지원 대상자를...",
-   "link": "https://www.viewsnnews.com/article?q=239410",
-   "originallink": "https://www.viewsnnews.com/article?q=239410",
-   "press": "viewsnnews.com",
+   "title": "李대통령 \"내년 예산 820.9조…모두의 성장·미래 선점에 집중 투자\" [전...",
+   "desc": "주요 사회보장급여의 '신청주의'를 '자동주의'로 개편해 수급 자격이 있는 국민이 별도 신청 없이... 대학생 6만명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하고, 일경험·훈련·구직 지원 대상을 56만명에서...",
+   "link": "https://www.polinews.co.kr/news/articleView.html?idxno=747425",
+   "originallink": "https://www.polinews.co.kr/news/articleView.html?idxno=747425",
+   "press": "polinews.co.kr",
    "pub": "2026-11-02 11:02",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "이 대통령 \"K자 성장 한계 극복, 새로운 성장 공식 적용\"(전문)",
-   "desc": "특히, 내년부터는 주요 사회보장급여에 대한 신청주의를 자동주의로 개편해서 수급 자격이 있으면... 대학생 6만 명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하는 등 일경험·훈련·구직 지원 대상자를 56만...",
-   "link": "http://www.newstomato.com/ReadNews.aspx?no=1318857&inflow=N",
-   "originallink": "http://www.newstomato.com/ReadNews.aspx?no=1318857&inflow=N",
-   "press": "뉴스토마토",
+   "title": "[李대통령 시정연설 전문] \"모두의 성장으로 대전환\"",
+   "desc": "특히, 내년부터는 주요 사회보장급여에 대한 신청주의를 자동주의로 개편하여 수급 자격이 있으면 누구나... 대학생 6만 명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하는 등 일경험·훈련·구직 지원 대상자를...",
+   "link": "https://www.viewsnnews.com/article?q=239410",
+   "originallink": "https://www.viewsnnews.com/article?q=239410",
+   "press": "viewsnnews.com",
    "pub": "2026-11-02 11:02",
    "q": "구직급여",
    "rel": false
@@ -4159,21 +4169,21 @@
    "rel": false
   },
   {
-   "title": "[전문] 李대통령 \"내년 예산안은 미래선점·성장확산 예산\"",
-   "desc": "특히, 내년부터는 주요 사회보장급여에 대한 신청주의를 자동주의로 개편하여 수급 자격이 있으면 누구나... 대학생 6만 명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하는 등 일경험·훈련·구직 지원 대상자를...",
-   "link": "https://n.news.naver.com/mnews/article/092/0002443405?sid=105",
-   "originallink": "https://zdnet.co.kr/view/?no=20261102110929",
-   "press": "zdnet.co.kr",
-   "pub": "2026-11-02 11:10",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "李대통령 “내년 예산 820.9조원…미래 성장동력·민생 지원 집중 투자...",
    "desc": "주요 사회보장급여의 신청주의를 자동주의로 개편하고, 중위소득은 역대 최대인 6.7% 인상한다. 4인 가구... 대학생 인턴학기를 도입하고 일경험·훈련·구직 지원 대상을 72만 명으로 확대한다. 우리아이자립펀드와...",
    "link": "https://n.news.naver.com/mnews/article/018/0006401981?sid=100",
    "originallink": "https://www.edaily.co.kr/News/Read?newsId=02801126645641784&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
    "press": "이데일리",
+   "pub": "2026-11-02 11:10",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[전문] 李대통령 \"내년 예산안은 미래선점·성장확산 예산\"",
+   "desc": "특히, 내년부터는 주요 사회보장급여에 대한 신청주의를 자동주의로 개편하여 수급 자격이 있으면 누구나... 대학생 6만 명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하는 등 일경험·훈련·구직 지원 대상자를...",
+   "link": "https://n.news.naver.com/mnews/article/092/0002443405?sid=105",
+   "originallink": "https://zdnet.co.kr/view/?no=20261102110929",
+   "press": "zdnet.co.kr",
    "pub": "2026-11-02 11:10",
    "q": "구직급여",
    "rel": false
@@ -4199,21 +4209,21 @@
    "rel": false
   },
   {
-   "title": "[예산 시정연설 전문] 李, 野 반대 의식한 듯 \"관건은 실행과 속도\"",
-   "desc": "특히, 내년부터는 주요 사회보장급여에 대한 신청주의를 자동주의로 개편하여 수급 자격이 있으면 누구나... 대학생 6만 명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하는 등 일경험·훈련·구직 지원 대상자를...",
-   "link": "https://www.pennmike.com/news/articleView.html?idxno=130755",
-   "originallink": "https://www.pennmike.com/news/articleView.html?idxno=130755",
-   "press": "pennmike.com",
-   "pub": "2026-11-02 11:14",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "[전문] 821조 역대 최대 예산안 … \"모두의 성장으로 대전환\" [李 대통령...",
    "desc": "특히, 내년부터는 주요 사회보장급여에 대한 신청주의를 자동주의로 개편하여 수급 자격이 있으면 누구나... 대학생 6만 명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하는 등 일경험·훈련·구직 지원 대상자를...",
    "link": "https://www.newdaily.co.kr/site/data/html/2026/11/02/2026110200158.html",
    "originallink": "https://www.newdaily.co.kr/site/data/html/2026/11/02/2026110200158.html",
    "press": "newdaily.co.kr",
+   "pub": "2026-11-02 11:14",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[예산 시정연설 전문] 李, 野 반대 의식한 듯 \"관건은 실행과 속도\"",
+   "desc": "특히, 내년부터는 주요 사회보장급여에 대한 신청주의를 자동주의로 개편하여 수급 자격이 있으면 누구나... 대학생 6만 명에게 졸업 전 첫 경력을 제공하는 인턴학기를 도입하는 등 일경험·훈련·구직 지원 대상자를...",
+   "link": "https://www.pennmike.com/news/articleView.html?idxno=130755",
+   "originallink": "https://www.pennmike.com/news/articleView.html?idxno=130755",
+   "press": "pennmike.com",
    "pub": "2026-11-02 11:14",
    "q": "구직급여",
    "rel": false
@@ -4359,21 +4369,21 @@
    "rel": false
   },
   {
-   "title": "李대통령 \"내년 예산 821조 편성\"… AI·반도체 등 미래성장동력 집중투...",
-   "desc": "정부는 청년 일 경험과 직업훈련, 구직 지원 대상을 기존 56만명에서 72만명으로 확대한다. 주거 안정을... 아동수당과 부모급여를 통합한 아동기본수당도 도입한다. 취약계층에 대한 복지 지원도 강화한다. 내년부터...",
-   "link": "https://www.newscj.com/news/articleView.html?idxno=3445106",
-   "originallink": "https://www.newscj.com/news/articleView.html?idxno=3445106",
-   "press": "천지일보",
-   "pub": "2026-11-02 11:56",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "李대통령 \"경제 회복에도 양극화 여전\"…'모두의 성장' 강조",
    "desc": "민생 분야에서는 주요 사회보장급여를 별도 신청 없이도 수급 자격에 따라 지급하는 방식으로 개편한다.... 대학생 6만명에게 직무 경험을 제공하는 인턴학기를 도입하고, 일경험·훈련·구직 지원 대상을 72만명으로...",
    "link": "https://daily.hankooki.com/news/articleView.html?idxno=1420625",
    "originallink": "https://daily.hankooki.com/news/articleView.html?idxno=1420625",
    "press": "daily.hankooki.com",
+   "pub": "2026-11-02 11:56",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "李대통령 \"내년 예산 821조 편성\"… AI·반도체 등 미래성장동력 집중투...",
+   "desc": "정부는 청년 일 경험과 직업훈련, 구직 지원 대상을 기존 56만명에서 72만명으로 확대한다. 주거 안정을... 아동수당과 부모급여를 통합한 아동기본수당도 도입한다. 취약계층에 대한 복지 지원도 강화한다. 내년부터...",
+   "link": "https://www.newscj.com/news/articleView.html?idxno=3445106",
+   "originallink": "https://www.newscj.com/news/articleView.html?idxno=3445106",
+   "press": "천지일보",
    "pub": "2026-11-02 11:56",
    "q": "구직급여",
    "rel": false
@@ -4539,21 +4549,21 @@
    "rel": false
   },
   {
-   "title": "교부금·교권 등 시급한데 교육현안 빗겨간 시정연설",
-   "desc": "일경험·훈련·구직 지원 대상을 기존 56만 명에서 72만 명으로 늘리기로 했다. 인턴학기의 학점 인정과 참여... 교육복지 분야에서는 기준 중위소득 인상에 따른 교육급여 확대가 포함됐다. 정부는 기준 중위소득을 6.7...",
-   "link": "https://www.hangyo.com/news/article.html?no=109920",
-   "originallink": "https://www.hangyo.com/news/article.html?no=109920",
-   "press": "hangyo.com",
-   "pub": "2026-11-02 13:44",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "李대통령 \"820.9조 역대 최대 예산…'모두의 성장'으로 대전환\"",
    "desc": "정부는 내년부터 주요 사회보장급여를 신청 없이도 수급 자격에 따라 받을 수 있도록 자동 지급 방식으로... 정부는 대학생 6만명에게 졸업 전 일경험을 제공하는 '인턴학기'를 도입하고, 일경험·직업훈련·구직 지원...",
    "link": "https://www.thepowernews.co.kr/view.php?ud=202611021340576484de3f0aa1be_7",
    "originallink": "https://www.thepowernews.co.kr/view.php?ud=202611021340576484de3f0aa1be_7",
    "press": "thepowernews.co.kr",
+   "pub": "2026-11-02 13:44",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "교부금·교권 등 시급한데 교육현안 빗겨간 시정연설",
+   "desc": "일경험·훈련·구직 지원 대상을 기존 56만 명에서 72만 명으로 늘리기로 했다. 인턴학기의 학점 인정과 참여... 교육복지 분야에서는 기준 중위소득 인상에 따른 교육급여 확대가 포함됐다. 정부는 기준 중위소득을 6.7...",
+   "link": "https://www.hangyo.com/news/article.html?no=109920",
+   "originallink": "https://www.hangyo.com/news/article.html?no=109920",
+   "press": "hangyo.com",
    "pub": "2026-11-02 13:44",
    "q": "구직급여",
    "rel": false
