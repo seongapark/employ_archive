@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-05T10:01:03.558280+09:00",
+  "run_at": "2026-11-05T15:00:48.731393+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -7,18 +7,19 @@
       "added": 0
     },
     "oecd_interim": {
-      "ok": true,
-      "fetched": 4,
-      "added": 0
-    },
-    "imf": {
       "ok": false,
       "fetched": 0,
+      "added": 0,
+      "blocked": true
+    },
+    "imf": {
+      "ok": true,
+      "fetched": 6,
       "added": 0
     },
     "imf_update": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 2,
       "added": 0
     },
     "bok": {
@@ -64,10 +65,13 @@
   },
   "conflicts": [],
   "errors": [
-    "imf: DNSError: Failed to perform, curl: (6) Could not resolve host: api.imf.org. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-    "imf_update: DNSError: Failed to perform, curl: (6) Could not resolve host: www.moef.go.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
     "kdi: ValueError: KDI 경제전망, 2026 하반기: 요약표를 실은 장을 찾지 못했다"
   ],
-  "warnings": [],
-  "blocked": {}
+  "warnings": [
+    "oecd_interim: 봇 차단 0일째(유예 7일) — 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/topics/sub-issues/economic-outlook.html",
+    "announce: OECD 공지일 못 읽음 — Blocked: 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/about/news.html"
+  ],
+  "blocked": {
+    "oecd_interim": "2026-11-05"
+  }
 }
