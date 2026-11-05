@@ -34064,5 +34064,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-04T10:01:34+09:00"
+ },
+ "kdi-19309": {
+  "pick": false,
+  "axis": "",
+  "why": "경제적 선호(시간할인·위험태도·호혜성) 측정, 고용 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-05T10:01:02+09:00"
  }
 }

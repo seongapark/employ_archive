@@ -220,6 +220,23 @@
   ]
  },
  {
+  "id": "kdi-19309",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "한국의 경제적 선호도에 대한 연구",
+  "authors": [
+   "이재준",
+   "최형재"
+  ],
+  "published": "2026-10-23",
+  "date_precision": "day",
+  "pages": 146,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=19309",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=NZhG6tLCmXrFwgOuHLfAxw%3D%3D",
+  "matched": []
+ },
+ {
   "id": "kdi-19136",
   "org": "kdi",
   "board": "kdi-report",
