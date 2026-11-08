@@ -1,0 +1,48 @@
+{
+ "round_release": "2026-11-09",
+ "mode": "regular",
+ "auth": "HUB",
+ "window": [
+  "2026-11-09",
+  "2026-11-10"
+ ],
+ "collected_at": "2026-11-09 07:41",
+ "volume": {
+  "collected": 0,
+  "articles": 0,
+  "press": 0,
+  "queries": 3
+ },
+ "truncated_queries": [],
+ "queries": [
+  {
+   "query": "고용보험 가입자",
+   "api_total": 29555,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 0,
+   "relevant": 0,
+   "new": 0
+  },
+  {
+   "query": "구직급여",
+   "api_total": 95102,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 0,
+   "relevant": 0,
+   "new": 0
+  },
+  {
+   "query": "구인배수",
+   "api_total": 2674,
+   "fetched": 100,
+   "truncated": false,
+   "in_window": 0,
+   "relevant": 0,
+   "new": 0
+  }
+ ],
+ "articles": [],
+ "excluded": []
+}
