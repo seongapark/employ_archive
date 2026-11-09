@@ -10333,27 +10333,6 @@
     ]
    },
    {
-    "title": "[고용동향]10월 고용보험 가입자 28만6천명 증가…청년·건설업 고용은...",
-    "url": "https://www.namdonews.com/news/articleView.html?idxno=928571",
-    "press": "남도일보",
-    "pub": "2026-11-09 10:42",
-    "cites": true,
-    "judged": true,
-    "why": "10월 가입자 28만6천명 증가 전함",
-    "hits": [
-     "산업:건설업",
-     "연령:청년",
-     "지표:가입자",
-     "지표:고용보험"
-    ],
-    "tone": [],
-    "stance": "중립",
-    "focus": "주제",
-    "kw": [
-     "고용동향"
-    ]
-   },
-   {
     "title": "\"자발적 퇴사 청년도 실업급여\"…국회입법조사처 \"도덕적 해이 우려 크...",
     "url": "https://www.siminsori.com/news/articleView.html?idxno=402312",
     "press": "siminsori.com",
@@ -10395,6 +10374,27 @@
      "광주",
      "업종",
      "전남"
+    ]
+   },
+   {
+    "title": "[고용동향]10월 고용보험 가입자 28만6천명 증가…청년·건설업 고용은...",
+    "url": "https://www.namdonews.com/news/articleView.html?idxno=928571",
+    "press": "남도일보",
+    "pub": "2026-11-09 10:42",
+    "cites": true,
+    "judged": true,
+    "why": "10월 가입자 28만6천명 증가 전함",
+    "hits": [
+     "산업:건설업",
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "주제",
+    "kw": [
+     "고용동향"
     ]
    },
    {
@@ -10501,6 +10501,69 @@
     ]
    },
    {
+    "title": "제조업 고용 3개월째 증가…청년층은 50개월 연속 '역대 최장' 감소",
+    "url": "https://www.news1.kr/economy/employment-labor/6347531",
+    "press": "뉴스1",
+    "pub": "2026-11-09 12:00",
+    "cites": true,
+    "judged": true,
+    "why": "제조업 증가·청년 50개월 감소",
+    "hits": [
+     "산업:제조업",
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "고용보험 가입자 10개월째 20만명대 증가…반도체·조선 가입자 확대",
+    "url": "https://www.newspim.com/news/view/20261109000610",
+    "press": "뉴스핌",
+    "pub": "2026-11-09 12:00",
+    "cites": true,
+    "judged": true,
+    "why": "10개월째 20만명대 증가 전함",
+    "hits": [
+     "산업:반도체(전자·통신)",
+     "산업:조선(기타운송장비)",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "반도체·조선업 호황에도 청년층 ‘고용 한파’…증가분 70%이상은 고령...",
+    "url": "https://www.etoday.co.kr/news/view/2645743",
+    "press": "이투데이",
+    "pub": "2026-11-09 12:00",
+    "cites": true,
+    "judged": true,
+    "why": "10월 가입자 28만6천명 증가·60세이상 비중 전함",
+    "hits": [
+     "산업:반도체(전자·통신)",
+     "산업:조선업(기타운송장비)",
+     "연령:고령",
+     "연령:청년"
+    ],
+    "tone": [
+     "한파"
+    ],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "증가분",
+     "호황"
+    ]
+   },
+   {
     "title": "청년 취업 50개월째 감소 '역대 최장'…구직급여 90% 소진",
     "url": "https://biz.sbs.co.kr/article_hub/20000345086?division=NAVER",
     "press": "biz.sbs.co.kr",
@@ -10517,26 +10580,6 @@
     "focus": "주제",
     "kw": [
      "소진",
-     "역대",
-     "최장"
-    ]
-   },
-   {
-    "title": "10월 고용보험 가입 28.6만명↑⋯청년층 '50개월째 감소' 역대 최장 고용...",
-    "url": "https://www.etoday.co.kr/news/view/2645743",
-    "press": "이투데이",
-    "pub": "2026-11-09 12:00",
-    "cites": true,
-    "judged": true,
-    "why": "가입자 28.6만명 증가 전함",
-    "hits": [
-     "연령:청년",
-     "지표:고용보험"
-    ],
-    "tone": [],
-    "stance": "중립",
-    "focus": "주제",
-    "kw": [
      "역대",
      "최장"
     ]
@@ -10603,52 +10646,13 @@
     ]
    },
    {
-    "title": "제조업 고용 3개월째 증가…청년층은 50개월 연속 '역대 최장' 감소",
-    "url": "https://www.news1.kr/economy/employment-labor/6347531",
-    "press": "뉴스1",
-    "pub": "2026-11-09 12:00",
-    "cites": true,
-    "judged": true,
-    "why": "제조업 증가·청년 50개월 감소",
-    "hits": [
-     "산업:제조업",
-     "연령:청년"
-    ],
-    "tone": [],
-    "stance": "중립",
-    "focus": "주제",
-    "kw": [
-     "역대",
-     "최장"
-    ]
-   },
-   {
-    "title": "고용보험 가입자 10개월째 20만명대 증가…반도체·조선 가입자 확대",
-    "url": "https://www.newspim.com/news/view/20261109000610",
-    "press": "뉴스핌",
-    "pub": "2026-11-09 12:00",
-    "cites": true,
-    "judged": true,
-    "why": "10개월째 20만명대 증가 전함",
-    "hits": [
-     "산업:반도체(전자·통신)",
-     "산업:조선(기타운송장비)",
-     "지표:가입자",
-     "지표:고용보험"
-    ],
-    "tone": [],
-    "stance": "긍정",
-    "focus": "주제",
-    "kw": []
-   },
-   {
-    "title": "고용보험 청년 가입자 52개월 연속 줄었다",
+    "title": "고용보험 청년 가입자 50개월 연속 줄었다",
     "url": "https://biz.chosun.com/topics/topics_social/2026/11/09/3OT73PWVUFCFTBZ2XM6WWGS6XI/?utm_source=naver&utm_medium=original&utm_campaign=biz",
     "press": "조선일보",
     "pub": "2026-11-09 12:01",
     "cites": true,
     "judged": true,
-    "why": "60세 20.4만↑·29세 이하 감소",
+    "why": "60세이상 20만4천명·29세이하 감소 전함",
     "hits": [
      "연령:청년",
      "지표:가입자",
@@ -10703,34 +10707,13 @@
     ]
    },
    {
-    "title": "29세 이하 고용보험 가입자 50개월째 감소…역대 최장",
-    "url": "https://biz.heraldcorp.com/article/10930443?ref=naver",
-    "press": "헤럴드경제",
-    "pub": "2026-11-09 12:01",
-    "cites": true,
-    "judged": true,
-    "why": "29세 이하 50개월째 감소",
-    "hits": [
-     "연령:29세이하",
-     "지표:가입자",
-     "지표:고용보험"
-    ],
-    "tone": [],
-    "stance": "부정",
-    "focus": "주제",
-    "kw": [
-     "역대",
-     "최장"
-    ]
-   },
-   {
-    "title": "제조업 무너지자 청년 일자리도↓…건설업 39개월째 마이너스",
+    "title": "제조업 증가세에도 청년 일자리는↓…건설업 39개월째 마이너스",
     "url": "https://www.ajunews.com/view/20261109114807152",
     "press": "아주경제",
     "pub": "2026-11-09 12:02",
     "cites": true,
     "judged": true,
-    "why": "가입자 1597만·구직급여 8.1만",
+    "why": "가입자 1597만명·28만6천명 증가 전함",
     "hits": [
      "산업:건설업",
      "산업:제조업",
@@ -10740,8 +10723,7 @@
     "stance": "부정",
     "focus": "주제",
     "kw": [
-     "마이너스",
-     "무너지자"
+     "마이너스"
     ]
    },
    {
@@ -10763,7 +10745,7 @@
    },
    {
     "title": "고용노동부, 10월 노동시장 동향 발표",
-    "url": "https://www.news1.kr/photos/8204588",
+    "url": "https://www.news1.kr/photos/8204587",
     "press": "뉴스1",
     "pub": "2026-11-09 12:03",
     "cites": true,
@@ -10801,6 +10783,23 @@
     ]
    },
    {
+    "title": "10월 고용보험 가입자 28만6천명↑... 10개월 연속 20만명 후반대 증가",
+    "url": "http://www.efnews.co.kr/news/articleView.html?idxno=133832",
+    "press": "efnews.co.kr",
+    "pub": "2026-11-09 12:10",
+    "cites": true,
+    "judged": true,
+    "why": "가입자 28만6천명 증가 전함",
+    "hits": [
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
     "title": "청년 고용보험 50개월 연속 감소…전체 가입자는 28만6천명 늘어",
     "url": "https://www.youthdaily.co.kr/news/article.html?no=229561",
     "press": "청년일보",
@@ -10815,23 +10814,6 @@
     ],
     "tone": [],
     "stance": "부정",
-    "focus": "주제",
-    "kw": []
-   },
-   {
-    "title": "10월 고용보험 가입자 28만6천명↑... 10개월 연속 20만명 후반대 증가",
-    "url": "http://www.efnews.co.kr/news/articleView.html?idxno=133832",
-    "press": "efnews.co.kr",
-    "pub": "2026-11-09 12:10",
-    "cites": true,
-    "judged": true,
-    "why": "가입자 28만6천명 증가 전함",
-    "hits": [
-     "지표:가입자",
-     "지표:고용보험"
-    ],
-    "tone": [],
-    "stance": "긍정",
     "focus": "주제",
     "kw": []
    },
@@ -10978,6 +10960,66 @@
     "kw": []
    },
    {
+    "title": "29세 이하 고용보험 가입자 50개월째 감소, 역대 최장",
+    "url": "https://www.news1.kr/photos/8204672",
+    "press": "뉴스1",
+    "pub": "2026-11-09 13:49",
+    "cites": true,
+    "judged": true,
+    "why": "청년 50개월 감소 역대 최장 전함",
+    "hits": [
+     "연령:29세이하",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "청년 고용보험 50개월 연속 감소…전체 가입자는 증가",
+    "url": "https://www.news1.kr/photos/8204673",
+    "press": "뉴스1",
+    "pub": "2026-11-09 13:49",
+    "cites": true,
+    "judged": true,
+    "why": "가입자 28.6만명 증가·청년 감소",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "청년 고용보험 가입자 '역대 최장' 감소",
+    "url": "https://www.news1.kr/photos/8204675",
+    "press": "뉴스1",
+    "pub": "2026-11-09 13:49",
+    "cites": true,
+    "judged": true,
+    "why": "청년 가입자 최장 감소 전함",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
     "title": "고용보험 가입자 10개월 연속 증가…청년은 50개월 연속 감소",
     "url": "https://www.news1.kr/photos/8204670",
     "press": "뉴스1",
@@ -11017,66 +11059,6 @@
     ]
    },
    {
-    "title": "29세 이하 고용보험 가입자 50개월째 감소, 역대 최장",
-    "url": "https://www.news1.kr/photos/8204672",
-    "press": "뉴스1",
-    "pub": "2026-11-09 13:49",
-    "cites": true,
-    "judged": true,
-    "why": "청년 50개월 감소 역대 최장 전함",
-    "hits": [
-     "연령:29세이하",
-     "지표:가입자",
-     "지표:고용보험"
-    ],
-    "tone": [],
-    "stance": "부정",
-    "focus": "주제",
-    "kw": [
-     "역대",
-     "최장"
-    ]
-   },
-   {
-    "title": "청년 고용보험 가입자 '역대 최장' 감소",
-    "url": "https://www.news1.kr/photos/8204675",
-    "press": "뉴스1",
-    "pub": "2026-11-09 13:49",
-    "cites": true,
-    "judged": true,
-    "why": "청년 가입자 최장 감소 전함",
-    "hits": [
-     "연령:청년",
-     "지표:가입자",
-     "지표:고용보험"
-    ],
-    "tone": [],
-    "stance": "부정",
-    "focus": "주제",
-    "kw": [
-     "역대",
-     "최장"
-    ]
-   },
-   {
-    "title": "청년 고용보험 50개월 연속 감소…전체 가입자는 증가",
-    "url": "https://www.news1.kr/photos/8204673",
-    "press": "뉴스1",
-    "pub": "2026-11-09 13:49",
-    "cites": true,
-    "judged": true,
-    "why": "가입자 28.6만명 증가·청년 감소",
-    "hits": [
-     "연령:청년",
-     "지표:가입자",
-     "지표:고용보험"
-    ],
-    "tone": [],
-    "stance": "부정",
-    "focus": "주제",
-    "kw": []
-   },
-   {
     "title": "청년 고용보험 50개월 연속 감소…전체 가입자는 28.6만명 증가",
     "url": "https://view.asiae.co.kr/article/2026110913501663829",
     "press": "아시아경제",
@@ -11114,6 +11096,792 @@
     "focus": "주제",
     "kw": [
      "여전"
+    ]
+   },
+   {
+    "title": "지난달 고용보험 가입자 28만 6천명 늘어…보건복지·제조업 회복세 눈...",
+    "url": "https://www.pointe.co.kr/news/articleView.html?idxno=87381",
+    "press": "pointe.co.kr",
+    "pub": "2026-11-09 14:04",
+    "cites": true,
+    "judged": true,
+    "why": "28만6천명 증가·10개월 연속 전함",
+    "hits": [
+     "산업:제조업",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [
+     "회복"
+    ],
+    "stance": "긍정",
+    "focus": "주제",
+    "kw": [
+     "회복세"
+    ]
+   },
+   {
+    "title": "'29세 이하' 고용보험 가입자, 전년동월 대비 50개월째 감소",
+    "url": "https://www.delighti.co.kr/news/articleView.html?idxno=124597",
+    "press": "delighti.co.kr",
+    "pub": "2026-11-09 14:10",
+    "cites": true,
+    "judged": true,
+    "why": "29세이하 50개월 감소 전함",
+    "hits": [
+     "연령:29세이하",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "10월 고용보험 가입자 28만명 늘었는데…청년·제조업 '한파'",
+    "url": "https://www.mediapen.com/news/view/1136208",
+    "press": "mediapen.com",
+    "pub": "2026-11-09 14:12",
+    "cites": true,
+    "judged": true,
+    "why": "28만명 증가·청년 5만4천명 감소 전함",
+    "hits": [
+     "산업:제조업",
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [
+     "한파"
+    ],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "늘었는데"
+    ]
+   },
+   {
+    "title": "청년층 고용 한파…고용보험 가입자 역대 최장 감소세",
+    "url": "http://mbnmoney.mbn.co.kr/news/view?news_no=MM1005958230",
+    "press": "mbnmoney.mbn.co.kr",
+    "pub": "2026-11-09 14:28",
+    "cites": true,
+    "judged": true,
+    "why": "가입자 1597만4천명·청년 감소 전함",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [
+     "한파"
+    ],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "자발적 퇴사 청년에 실업급여 준다는데 '이게 맞나?'",
+    "url": "https://www.mhj21.com/news/articleView.html?idxno=254725",
+    "press": "mhj21.com",
+    "pub": "2026-11-09 14:28",
+    "cites": false,
+    "judged": true,
+    "why": "실업급여 제도 개편 비판 칼럼",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "이게",
+     "준다는데",
+     "퇴사"
+    ]
+   },
+   {
+    "title": "'자발적 퇴사' 청년도 月100만원 실업급여 검토...\"도덕적 해이 우려 적...",
+    "url": "https://www.fnnews.com/news/202611091347222453",
+    "press": "파이낸셜뉴스",
+    "pub": "2026-11-09 14:29",
+    "cites": false,
+    "judged": true,
+    "why": "입법조사처 분석·자발적퇴사 실업급여 검토",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "검토",
+     "우려",
+     "퇴사"
+    ]
+   },
+   {
+    "title": "[연합뉴스 이 시각 헤드라인] - 14:30",
+    "url": "https://www.yna.co.kr/view/AKR20261109097500011?input=1195m",
+    "press": "연합뉴스",
+    "pub": "2026-11-09 14:30",
+    "cites": false,
+    "judged": true,
+    "why": "연합뉴스 시각 헤드라인 모음",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "시각",
+     "연합뉴스",
+     "헤드라인"
+    ]
+   },
+   {
+    "title": "청년 고용보험 가입자 50개월 연속 감소…역대 최장",
+    "url": "https://www.asiatime.co.kr/article/20261109500280",
+    "press": "asiatime.co.kr",
+    "pub": "2026-11-09 14:36",
+    "cites": true,
+    "judged": true,
+    "why": "10월 동향 브리핑·청년 50개월 감소 전함",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "청년 고용보험 가입자 50개월째 감소…역대 최장",
+    "url": "https://www.imaeil.com/page/view/2026110913185593107",
+    "press": "imaeil.com",
+    "pub": "2026-11-09 14:36",
+    "cites": true,
+    "judged": true,
+    "why": "청년 50개월 감소·전체 25만명 증가 전함",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "고용보험 가입자 28만명 늘었지만 청년층은 감소",
+    "url": "https://www.newscj.com/news/articleView.html?idxno=3447165",
+    "press": "천지일보",
+    "pub": "2026-11-09 14:38",
+    "cites": true,
+    "judged": true,
+    "why": "가입자 28만명 증가·청년 감소 전함",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "29세 이하 고용보험 가입자 50개월 연속 감소…역대 최장",
+    "url": "https://news.tvchosun.com/site/data/html_dir/2026/11/09/2026110990157.html",
+    "press": "news.tvchosun.com",
+    "pub": "2026-11-09 14:55",
+    "cites": true,
+    "judged": true,
+    "why": "10월 고용행정 통계 청년 감소 전함",
+    "hits": [
+     "연령:29세이하",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "고용시장 훈풍에도 청년만 '한겨울'…50개월째 내리막",
+    "url": "https://www.namdonews.com/news/articleView.html?idxno=928637",
+    "press": "남도일보",
+    "pub": "2026-11-09 15:00",
+    "cites": true,
+    "judged": true,
+    "why": "전체 25만명 이상 증가·청년 50개월 감소",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [
+     "훈풍"
+    ],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "내리막",
+     "한겨울"
+    ]
+   },
+   {
+    "title": "청년고용 한파 50개월째 지속···29세 이하 고용보험 연속 감소",
+    "url": "http://www.whitepaper.co.kr/news/articleView.html?idxno=268575",
+    "press": "whitepaper.co.kr",
+    "pub": "2026-11-09 15:06",
+    "cites": true,
+    "judged": true,
+    "why": "29세이하 50개월 감소 전함",
+    "hits": [
+     "연령:29세이하",
+     "연령:청년",
+     "지표:고용보험"
+    ],
+    "tone": [
+     "한파"
+    ],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "청년고용"
+    ]
+   },
+   {
+    "title": "건설업 고용보험 가입자 39개월째 감소",
+    "url": "https://www.dnews.co.kr/uhtml/view.jsp?idxno=202611091515017370253",
+    "press": "dnews.co.kr",
+    "pub": "2026-11-09 15:22",
+    "cites": true,
+    "judged": true,
+    "why": "건설업 39개월 감소 전함",
+    "hits": [
+     "산업:건설업",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "청년층 고용보험 가입자 50개월 연속 감소…역대 '최장'",
+    "url": "https://news.bbsi.co.kr/news/articleView.html?idxno=4117472",
+    "press": "news.bbsi.co.kr",
+    "pub": "2026-11-09 15:22",
+    "cites": true,
+    "judged": true,
+    "why": "10월 통계 청년 50개월 감소 전함",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "내 발로 퇴사해도 실업급여… \"도덕적 해이 우려 크지 않아\"",
+    "url": "https://www.newscj.com/news/articleView.html?idxno=3447169",
+    "press": "천지일보",
+    "pub": "2026-11-09 15:28",
+    "cites": false,
+    "judged": true,
+    "why": "자발적퇴사 실업급여 도입 논의",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "우려",
+     "퇴사해"
+    ]
+   },
+   {
+    "title": "청년 고용 50개월째 내리막…대구경북 주력업종도 ‘찬바람’",
+    "url": "https://www.kbmaeil.com/article/20261109500475",
+    "press": "kbmaeil.com",
+    "pub": "2026-11-09 15:32",
+    "cites": true,
+    "judged": true,
+    "why": "청년 50개월 감소·지역 업종 부진 전함",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "내리막",
+     "대구경북",
+     "주력업종",
+     "찬바람"
+    ]
+   },
+   {
+    "title": "29세 이하 고용보험 가입자 50개월째 하락...역대 최장 기록",
+    "url": "http://www.newsfc.co.kr/news/articleView.html?idxno=82338",
+    "press": "newsfc.co.kr",
+    "pub": "2026-11-09 15:34",
+    "cites": true,
+    "judged": true,
+    "why": "29세 이하 50개월 감소 전함",
+    "hits": [
+     "연령:29세이하",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장",
+     "하락"
+    ]
+   },
+   {
+    "title": "제조업 고용보험 석 달째 늘었는데…29세 이하 1만8000명 줄어",
+    "url": "https://www.asiatoday.co.kr/kn/view.php?key=20261109010003353",
+    "press": "아시아투데이",
+    "pub": "2026-11-09 15:36",
+    "cites": true,
+    "judged": true,
+    "why": "제조업 1만4천명·청년 감소 전함",
+    "hits": [
+     "산업:제조업",
+     "연령:29세이하",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "늘었는데"
+    ]
+   },
+   {
+    "title": "청년 고용보험 가입자 50개월째 감소…전체 고용 증가에도 '청년 한파'",
+    "url": "https://www.kizmom.com/news/articleView.html?idxno=113851",
+    "press": "kizmom.com",
+    "pub": "2026-11-09 16:03",
+    "cites": true,
+    "judged": true,
+    "why": "10월 고용행정통계 청년 감소",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [
+     "한파"
+    ],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "일자리는 늘었는데, 청춘은 줄었다",
+    "url": "https://magazine.hankyung.com/job-joy/article/202611095439d",
+    "press": "한국경제",
+    "pub": "2026-11-09 16:04",
+    "cites": true,
+    "judged": true,
+    "why": "25만명 증가·청년 50개월 감소",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "늘었는데",
+     "청춘"
+    ]
+   },
+   {
+    "title": "고용보험 28만명 늘었는데…청년층만 50개월째 감소",
+    "url": "https://www.mediaus.co.kr/news/articleView.html?idxno=318898",
+    "press": "mediaus.co.kr",
+    "pub": "2026-11-09 16:14",
+    "cites": true,
+    "judged": true,
+    "why": "가입자 28만명 증가 수치 전함",
+    "hits": [
+     "연령:청년",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "늘었는데"
+    ]
+   },
+   {
+    "title": "청년 고용보험 50개월 연속 감소 '역대 최장'…전체 고용 증가에도 20대...",
+    "url": "https://www.ppss.kr/news/articleView.html?idxno=319896",
+    "press": "ppss.kr",
+    "pub": "2026-11-09 16:17",
+    "cites": true,
+    "judged": true,
+    "why": "청년 50개월 감소·제조업 회복",
+    "hits": [
+     "연령:청년",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "청년 고용보험 가입자 50개월 연속 감소",
+    "url": "https://www.ktv.go.kr/content/view?content_id=763724",
+    "press": "ktv.go.kr",
+    "pub": "2026-11-09 16:30",
+    "cites": true,
+    "judged": true,
+    "why": "상시가입자·청년 감소 방송",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "채용 개선 '시그널'에도…고용 '불균형' 뚜렷",
+    "url": "http://www.newstomato.com/ReadNews.aspx?no=1319752&inflow=N",
+    "press": "뉴스토마토",
+    "pub": "2026-11-09 16:30",
+    "cites": true,
+    "judged": true,
+    "why": "1597만4천명·28만6천명 인용",
+    "hits": [],
+    "tone": [
+     "개선"
+    ],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "뚜렷",
+     "불균형",
+     "시그널",
+     "채용"
+    ]
+   },
+   {
+    "title": "고용보험 가입자 증가 뒤엔 고령·복지 쏠림",
+    "url": "http://www.gjdream.com/news/articleView.html?idxno=674184",
+    "press": "gjdream.com",
+    "pub": "2026-11-09 16:30",
+    "cites": true,
+    "judged": true,
+    "why": "28만6천명 중 60세이상 20만4천",
+    "hits": [
+     "연령:고령",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "뒤엔",
+     "쏠림"
+    ]
+   },
+   {
+    "title": "청년 고용 한파 지속… 29세 이하 고용보험 50개월째 줄었다",
+    "url": "https://www.fntoday.co.kr/news/articleView.html?idxno=397347",
+    "press": "fntoday.co.kr",
+    "pub": "2026-11-09 16:36",
+    "cites": true,
+    "judged": true,
+    "why": "10개월째 25만명 증가·청년 감소",
+    "hits": [
+     "연령:29세이하",
+     "연령:청년",
+     "지표:고용보험"
+    ],
+    "tone": [
+     "한파"
+    ],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "청년 고용 한파...고용보험 가입자 50개월째 줄었다",
+    "url": "http://www.wowtv.co.kr/NewsCenter/News/Read?articleId=A202611090147&t=NN",
+    "press": "wowtv.co.kr",
+    "pub": "2026-11-09 16:42",
+    "cites": true,
+    "judged": true,
+    "why": "제조업 석달 증가·청년 감소",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [
+     "한파"
+    ],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "[그래픽] 제조업 3개월째 증가…청년 고용은 역대 최장 감소",
+    "url": "https://www.newsis.com/view/NISI20261109_0002286435",
+    "press": "뉴시스",
+    "pub": "2026-11-09 16:50",
+    "cites": true,
+    "judged": true,
+    "why": "제조업·건설업·60세이상 수치",
+    "hits": [
+     "산업:제조업",
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "29세 이하 고용보험 가입자 50개월째 감소…역대 최장",
+    "url": "https://www.kbsm.net/news/view.php?idx=541015",
+    "press": "kbsm.net",
+    "pub": "2026-11-09 16:58",
+    "cites": true,
+    "judged": true,
+    "why": "29세 이하 50개월째 감소",
+    "hits": [
+     "연령:29세이하",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "청년 고용보험 가입자, 50개월 연속 줄었다",
+    "url": "https://www.hankyung.com/article/2026110957681",
+    "press": "한국경제",
+    "pub": "2026-11-09 17:33",
+    "cites": true,
+    "judged": true,
+    "why": "29세이하 220만3천명 감소",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "자발적 퇴사에도 月 100만 원.. 입법조사처 \"도덕적 해이 우려 적다\"",
+    "url": "https://www.jibs.co.kr/news/articles/articlesDetail/67436?feed=na",
+    "press": "jibs.co.kr",
+    "pub": "2026-11-09 17:39",
+    "cites": false,
+    "judged": true,
+    "why": "입법조사처 실업급여 제도 평가",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "우려",
+     "입법조사처",
+     "퇴사"
+    ]
+   },
+   {
+    "title": "제조업 고용보험 가입자 3개월 연속 증가…10월 1만 4천 명 늘며 폭 확대",
+    "url": "https://kidd.co.kr/news/248086",
+    "press": "kidd.co.kr",
+    "pub": "2026-11-09 17:56",
+    "cites": true,
+    "judged": true,
+    "why": "노동부 브리핑 제조업 1만4천명",
+    "hits": [
+     "산업:제조업",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "[더나은미래 경제브리핑] 공정위, 배민·쿠팡이츠 6000억대 과징금 부과...",
+    "url": "https://futurechosun.com/?p=166126",
+    "press": "futurechosun.com",
+    "pub": "2026-11-09 18:02",
+    "cites": false,
+    "judged": true,
+    "why": "경제 헤드라인 브리핑 모음",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "경제브리핑",
+     "공정위",
+     "과징금",
+     "더나은미래",
+     "배민",
+     "억대",
+     "쿠팡이츠"
+    ]
+   },
+   {
+    "title": "[위기의 건설업] “공사비·이자 치솟아 지을수록 손해”…매일 12곳 문...",
+    "url": "https://www.sedaily.com/article/20112148?ref=naver",
+    "press": "서울경제",
+    "pub": "2026-11-09 18:32",
+    "cites": false,
+    "judged": true,
+    "why": "건설업 위기 기획, 38개월 수치로 불일치",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "공사비",
+     "매일",
+     "손해",
+     "위기",
+     "이자",
+     "지을수록",
+     "치솟"
+    ]
+   },
+   {
+    "title": "청년 고용보험 가입 ‘역대 최장’ 50개월째 감소… ‘쉬었음’ 청년 절...",
+    "url": "https://www.kmib.co.kr/article/20261109501712",
+    "press": "국민일보",
+    "pub": "2026-11-09 18:57",
+    "cites": true,
+    "judged": true,
+    "why": "청년 50개월 최장 감소 전함",
+    "hits": [
+     "연령:청년",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "29세 이하 고용보험 가입자 50개월 연속 감소...역대 최장",
+    "url": "https://www.ggilbo.com/news/articleView.html?idxno=1192046",
+    "press": "ggilbo.com",
+    "pub": "2026-11-09 19:04",
+    "cites": true,
+    "judged": true,
+    "why": "서비스업 27만6천·제조업 1만4천",
+    "hits": [
+     "연령:29세이하",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "\"사표 내도 월 최대 100만원\"…청년 실업급여 우려 따져보니",
+    "url": "https://www.edaily.co.kr/News/Read?newsId=04405046645644080&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+    "press": "이데일리",
+    "pub": "2026-11-09 19:06",
+    "cites": false,
+    "judged": true,
+    "why": "청년 실업급여 신설 논쟁",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "따져보니",
+     "사표",
+     "우려",
+     "최대"
+    ]
+   },
+   {
+    "title": "“스스로 퇴사해도, 월 최대 100만 원”…정부가 준다는 청년 실업급여",
+    "url": "https://www.wikitree.co.kr/articles/1173173",
+    "press": "wikitree.co.kr",
+    "pub": "2026-11-09 19:14",
+    "cites": false,
+    "judged": true,
+    "why": "청년 실업급여 제도 검토 소개",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "스스",
+     "최대",
+     "퇴사해"
     ]
    }
   ],
