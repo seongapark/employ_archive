@@ -660,6 +660,26 @@
     "collected_at": "2026-09-10T10:22:45+09:00"
   },
   {
+    "id": "keis-s44",
+    "org": "keis",
+    "board": "keis-supply",
+    "series": "인력수급전망",
+    "title": "중장기 인력수급 전망 2024-2034",
+    "authors": [
+      "한국고용정보원"
+    ],
+    "published": "2026-11-09",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+    "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20261109103216213.xlsx&path=/bbs/1106&fn=%EC%A4%91%EC%9E%A5%EA%B8%B0+%EC%9D%B8%EB%A0%A5%EC%88%98%EA%B8%89+%EC%A0%84%EB%A7%9D_2024_2034_%EC%A0%84%EB%A7%9DDB%28%EA%B3%B5%EA%B8%89%2C%EC%82%B0%EC%97%85%2C%EC%A7%81%EC%97%85%29.xlsx&bbsId=1106&pstSn=44&atchFileSn=2",
+    "abstract": null,
+    "toc": [],
+    "abstract_tried": true,
+    "abstract_note": "텍스트가 없는 스캔본",
+    "collected_at": "2026-11-09T15:01:04+09:00"
+  },
+  {
     "id": "keis-s5",
     "org": "keis",
     "board": "keis-supply",

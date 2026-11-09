@@ -3738,6 +3738,720 @@
     "collected_at": "2026-10-14T15:03:59.558614+09:00"
   },
   {
+    "id": "ei-2021-10-acquired-total",
+    "source": "ei",
+    "series": "acquired",
+    "breakdown": "total",
+    "category": null,
+    "period": "2021-10",
+    "value": 610.0,
+    "unit": "천명",
+    "yoy": 27.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-benefit_amount-total",
+    "source": "ei",
+    "series": "benefit_amount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2021-10",
+    "value": 8877.0,
+    "unit": "억원",
+    "yoy": -1069.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-benefit_new-total",
+    "source": "ei",
+    "series": "benefit_new",
+    "breakdown": "total",
+    "category": null,
+    "period": "2021-10",
+    "value": 78.0,
+    "unit": "천명",
+    "yoy": -10.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-benefit_paid-total",
+    "source": "ei",
+    "series": "benefit_paid",
+    "breakdown": "total",
+    "category": null,
+    "period": "2021-10",
+    "value": 565.0,
+    "unit": "천명",
+    "yoy": -78.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-age-15-29",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "15-29",
+    "period": "2021-10",
+    "value": 2503.0,
+    "unit": "천명",
+    "yoy": 55.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-age-30-39",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "30-39",
+    "period": "2021-10",
+    "value": 3365.0,
+    "unit": "천명",
+    "yoy": 8.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-age-40-49",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "40-49",
+    "period": "2021-10",
+    "value": 3545.0,
+    "unit": "천명",
+    "yoy": 27.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-age-50-59",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "50-59",
+    "period": "2021-10",
+    "value": 3123.0,
+    "unit": "천명",
+    "yoy": 119.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-age-60+",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "60+",
+    "period": "2021-10",
+    "value": 2052.0,
+    "unit": "천명",
+    "yoy": 148.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-A",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "A",
+    "period": "2021-10",
+    "value": 43.0,
+    "unit": "천명",
+    "yoy": 1.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-C",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "C",
+    "period": "2021-10",
+    "value": 3638.0,
+    "unit": "천명",
+    "yoy": 89.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-D",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "D",
+    "period": "2021-10",
+    "value": 81.0,
+    "unit": "천명",
+    "yoy": 2.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-E",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "E",
+    "period": "2021-10",
+    "value": 92.0,
+    "unit": "천명",
+    "yoy": 3.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-F",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "F",
+    "period": "2021-10",
+    "value": 755.0,
+    "unit": "천명",
+    "yoy": 29.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-G",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "G",
+    "period": "2021-10",
+    "value": 1644.0,
+    "unit": "천명",
+    "yoy": 48.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-H",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "H",
+    "period": "2021-10",
+    "value": 634.0,
+    "unit": "천명",
+    "yoy": -4.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-I",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "I",
+    "period": "2021-10",
+    "value": 645.0,
+    "unit": "천명",
+    "yoy": -6.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-J",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "J",
+    "period": "2021-10",
+    "value": 733.0,
+    "unit": "천명",
+    "yoy": 62.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-K",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "K",
+    "period": "2021-10",
+    "value": 495.0,
+    "unit": "천명",
+    "yoy": 5.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-L",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "L",
+    "period": "2021-10",
+    "value": 363.0,
+    "unit": "천명",
+    "yoy": 5.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-M",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "M",
+    "period": "2021-10",
+    "value": 901.0,
+    "unit": "천명",
+    "yoy": 43.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-N",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "N",
+    "period": "2021-10",
+    "value": 1141.0,
+    "unit": "천명",
+    "yoy": 4.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-O",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "O",
+    "period": "2021-10",
+    "value": 465.0,
+    "unit": "천명",
+    "yoy": -111.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-P",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "P",
+    "period": "2021-10",
+    "value": 558.0,
+    "unit": "천명",
+    "yoy": 57.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-Q",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "Q",
+    "period": "2021-10",
+    "value": 1898.0,
+    "unit": "천명",
+    "yoy": 121.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-R",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "R",
+    "period": "2021-10",
+    "value": 156.0,
+    "unit": "천명",
+    "yoy": 5.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-industry-S",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "S",
+    "period": "2021-10",
+    "value": 323.0,
+    "unit": "천명",
+    "yoy": 3.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-sex-F",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "F",
+    "period": "2021-10",
+    "value": 6434.0,
+    "unit": "천명",
+    "yoy": 199.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-sex-M",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "M",
+    "period": "2021-10",
+    "value": 8154.0,
+    "unit": "천명",
+    "yoy": 158.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-headcount-total",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2021-10",
+    "value": 14588.0,
+    "unit": "천명",
+    "yoy": 356.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-job_openings-total",
+    "source": "ei",
+    "series": "job_openings",
+    "breakdown": "total",
+    "category": null,
+    "period": "2021-10",
+    "value": 244.0,
+    "unit": "천명",
+    "yoy": 61.6,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-job_seekers-total",
+    "source": "ei",
+    "series": "job_seekers",
+    "breakdown": "total",
+    "category": null,
+    "period": "2021-10",
+    "value": 386.0,
+    "unit": "천명",
+    "yoy": -0.4,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-openings_ratio-total",
+    "source": "ei",
+    "series": "openings_ratio",
+    "breakdown": "total",
+    "category": null,
+    "period": "2021-10",
+    "value": 0.63,
+    "unit": "배",
+    "yoy": 0.16,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2021-10-separated-total",
+    "source": "ei",
+    "series": "separated",
+    "breakdown": "total",
+    "category": null,
+    "period": "2021-10",
+    "value": 524.0,
+    "unit": "천명",
+    "yoy": 60.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
     "id": "eaps-2022-07-headcount-age-15-29",
     "source": "eaps",
     "series": "headcount",
@@ -7476,6 +8190,720 @@
     "collected_at": "2026-10-14T15:03:59.558614+09:00"
   },
   {
+    "id": "ei-2022-10-acquired-total",
+    "source": "ei",
+    "series": "acquired",
+    "breakdown": "total",
+    "category": null,
+    "period": "2022-10",
+    "value": 581.0,
+    "unit": "천명",
+    "yoy": -29.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-benefit_amount-total",
+    "source": "ei",
+    "series": "benefit_amount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2022-10",
+    "value": 8188.0,
+    "unit": "억원",
+    "yoy": -689.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-benefit_new-total",
+    "source": "ei",
+    "series": "benefit_new",
+    "breakdown": "total",
+    "category": null,
+    "period": "2022-10",
+    "value": 77.0,
+    "unit": "천명",
+    "yoy": -2.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-benefit_paid-total",
+    "source": "ei",
+    "series": "benefit_paid",
+    "breakdown": "total",
+    "category": null,
+    "period": "2022-10",
+    "value": 535.0,
+    "unit": "천명",
+    "yoy": -30.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-age-15-29",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "15-29",
+    "period": "2022-10",
+    "value": 2485.0,
+    "unit": "천명",
+    "yoy": -17.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-age-30-39",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "30-39",
+    "period": "2022-10",
+    "value": 3378.0,
+    "unit": "천명",
+    "yoy": 12.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-age-40-49",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "40-49",
+    "period": "2022-10",
+    "value": 3588.0,
+    "unit": "천명",
+    "yoy": 43.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-age-50-59",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "50-59",
+    "period": "2022-10",
+    "value": 3233.0,
+    "unit": "천명",
+    "yoy": 110.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-age-60+",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "60+",
+    "period": "2022-10",
+    "value": 2256.0,
+    "unit": "천명",
+    "yoy": 204.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-A",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "A",
+    "period": "2022-10",
+    "value": 44.0,
+    "unit": "천명",
+    "yoy": 1.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-C",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "C",
+    "period": "2022-10",
+    "value": 3711.0,
+    "unit": "천명",
+    "yoy": 72.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-D",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "D",
+    "period": "2022-10",
+    "value": 82.0,
+    "unit": "천명",
+    "yoy": 0.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-E",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "E",
+    "period": "2022-10",
+    "value": 94.0,
+    "unit": "천명",
+    "yoy": 2.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-F",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "F",
+    "period": "2022-10",
+    "value": 782.0,
+    "unit": "천명",
+    "yoy": 27.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-G",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "G",
+    "period": "2022-10",
+    "value": 1653.0,
+    "unit": "천명",
+    "yoy": 9.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-H",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "H",
+    "period": "2022-10",
+    "value": 646.0,
+    "unit": "천명",
+    "yoy": 12.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-I",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "I",
+    "period": "2022-10",
+    "value": 691.0,
+    "unit": "천명",
+    "yoy": 46.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-J",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "J",
+    "period": "2022-10",
+    "value": 794.0,
+    "unit": "천명",
+    "yoy": 61.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-K",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "K",
+    "period": "2022-10",
+    "value": 499.0,
+    "unit": "천명",
+    "yoy": 3.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-L",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "L",
+    "period": "2022-10",
+    "value": 369.0,
+    "unit": "천명",
+    "yoy": 6.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-M",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "M",
+    "period": "2022-10",
+    "value": 949.0,
+    "unit": "천명",
+    "yoy": 48.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-N",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "N",
+    "period": "2022-10",
+    "value": 1162.0,
+    "unit": "천명",
+    "yoy": 21.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-O",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "O",
+    "period": "2022-10",
+    "value": 410.0,
+    "unit": "천명",
+    "yoy": -55.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-P",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "P",
+    "period": "2022-10",
+    "value": 571.0,
+    "unit": "천명",
+    "yoy": 13.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-Q",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "Q",
+    "period": "2022-10",
+    "value": 1977.0,
+    "unit": "천명",
+    "yoy": 79.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-R",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "R",
+    "period": "2022-10",
+    "value": 165.0,
+    "unit": "천명",
+    "yoy": 9.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-industry-S",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "S",
+    "period": "2022-10",
+    "value": 321.0,
+    "unit": "천명",
+    "yoy": -2.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-sex-F",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "F",
+    "period": "2022-10",
+    "value": 6621.0,
+    "unit": "천명",
+    "yoy": 187.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-sex-M",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "M",
+    "period": "2022-10",
+    "value": 8318.0,
+    "unit": "천명",
+    "yoy": 164.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-headcount-total",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2022-10",
+    "value": 14939.0,
+    "unit": "천명",
+    "yoy": 352.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-job_openings-total",
+    "source": "ei",
+    "series": "job_openings",
+    "breakdown": "total",
+    "category": null,
+    "period": "2022-10",
+    "value": 255.0,
+    "unit": "천명",
+    "yoy": 10.5,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-job_seekers-total",
+    "source": "ei",
+    "series": "job_seekers",
+    "breakdown": "total",
+    "category": null,
+    "period": "2022-10",
+    "value": 349.0,
+    "unit": "천명",
+    "yoy": -36.7,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-openings_ratio-total",
+    "source": "ei",
+    "series": "openings_ratio",
+    "breakdown": "total",
+    "category": null,
+    "period": "2022-10",
+    "value": 0.73,
+    "unit": "배",
+    "yoy": 0.1,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2022-10-separated-total",
+    "source": "ei",
+    "series": "separated",
+    "breakdown": "total",
+    "category": null,
+    "period": "2022-10",
+    "value": 522.0,
+    "unit": "천명",
+    "yoy": -1.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
     "id": "eaps-2023-07-headcount-age-15-29",
     "source": "eaps",
     "series": "headcount",
@@ -11212,6 +12640,720 @@
       }
     ],
     "collected_at": "2026-10-14T15:03:59.558614+09:00"
+  },
+  {
+    "id": "ei-2023-10-acquired-total",
+    "source": "ei",
+    "series": "acquired",
+    "breakdown": "total",
+    "category": null,
+    "period": "2023-10",
+    "value": 519.0,
+    "unit": "천명",
+    "yoy": -61.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-benefit_amount-total",
+    "source": "ei",
+    "series": "benefit_amount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2023-10",
+    "value": 9104.0,
+    "unit": "억원",
+    "yoy": 915.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-benefit_new-total",
+    "source": "ei",
+    "series": "benefit_new",
+    "breakdown": "total",
+    "category": null,
+    "period": "2023-10",
+    "value": 80.0,
+    "unit": "천명",
+    "yoy": 3.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-benefit_paid-total",
+    "source": "ei",
+    "series": "benefit_paid",
+    "breakdown": "total",
+    "category": null,
+    "period": "2023-10",
+    "value": 566.0,
+    "unit": "천명",
+    "yoy": 31.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-age-15-29",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "15-29",
+    "period": "2023-10",
+    "value": 2453.0,
+    "unit": "천명",
+    "yoy": -32.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-age-30-39",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "30-39",
+    "period": "2023-10",
+    "value": 3450.0,
+    "unit": "천명",
+    "yoy": 73.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-age-40-49",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "40-49",
+    "period": "2023-10",
+    "value": 3589.0,
+    "unit": "천명",
+    "yoy": 2.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-age-50-59",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "50-59",
+    "period": "2023-10",
+    "value": 3333.0,
+    "unit": "천명",
+    "yoy": 100.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-age-60+",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "60+",
+    "period": "2023-10",
+    "value": 2456.0,
+    "unit": "천명",
+    "yoy": 200.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-A",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "A",
+    "period": "2023-10",
+    "value": 55.0,
+    "unit": "천명",
+    "yoy": 12.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-C",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "C",
+    "period": "2023-10",
+    "value": 3828.0,
+    "unit": "천명",
+    "yoy": 117.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-D",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "D",
+    "period": "2023-10",
+    "value": 82.0,
+    "unit": "천명",
+    "yoy": 0.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-E",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "E",
+    "period": "2023-10",
+    "value": 97.0,
+    "unit": "천명",
+    "yoy": 3.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-F",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "F",
+    "period": "2023-10",
+    "value": 780.0,
+    "unit": "천명",
+    "yoy": -3.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-G",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "G",
+    "period": "2023-10",
+    "value": 1636.0,
+    "unit": "천명",
+    "yoy": -17.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-H",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "H",
+    "period": "2023-10",
+    "value": 667.0,
+    "unit": "천명",
+    "yoy": 21.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-I",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "I",
+    "period": "2023-10",
+    "value": 737.0,
+    "unit": "천명",
+    "yoy": 46.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-J",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "J",
+    "period": "2023-10",
+    "value": 806.0,
+    "unit": "천명",
+    "yoy": 12.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-K",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "K",
+    "period": "2023-10",
+    "value": 502.0,
+    "unit": "천명",
+    "yoy": 3.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-L",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "L",
+    "period": "2023-10",
+    "value": 364.0,
+    "unit": "천명",
+    "yoy": -5.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-M",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "M",
+    "period": "2023-10",
+    "value": 974.0,
+    "unit": "천명",
+    "yoy": 25.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-N",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "N",
+    "period": "2023-10",
+    "value": 1193.0,
+    "unit": "천명",
+    "yoy": 32.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-O",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "O",
+    "period": "2023-10",
+    "value": 415.0,
+    "unit": "천명",
+    "yoy": 4.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-P",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "P",
+    "period": "2023-10",
+    "value": 560.0,
+    "unit": "천명",
+    "yoy": -11.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-Q",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "Q",
+    "period": "2023-10",
+    "value": 2080.0,
+    "unit": "천명",
+    "yoy": 103.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-R",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "R",
+    "period": "2023-10",
+    "value": 166.0,
+    "unit": "천명",
+    "yoy": 1.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-industry-S",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "S",
+    "period": "2023-10",
+    "value": 319.0,
+    "unit": "천명",
+    "yoy": -1.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-sex-F",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "F",
+    "period": "2023-10",
+    "value": 6778.0,
+    "unit": "천명",
+    "yoy": 157.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-sex-M",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "M",
+    "period": "2023-10",
+    "value": 8503.0,
+    "unit": "천명",
+    "yoy": 185.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-headcount-total",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2023-10",
+    "value": 15282.0,
+    "unit": "천명",
+    "yoy": 342.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-job_openings-total",
+    "source": "ei",
+    "series": "job_openings",
+    "breakdown": "total",
+    "category": null,
+    "period": "2023-10",
+    "value": 237.0,
+    "unit": "천명",
+    "yoy": -17.2,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-job_seekers-total",
+    "source": "ei",
+    "series": "job_seekers",
+    "breakdown": "total",
+    "category": null,
+    "period": "2023-10",
+    "value": 380.0,
+    "unit": "천명",
+    "yoy": 30.6,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-openings_ratio-total",
+    "source": "ei",
+    "series": "openings_ratio",
+    "breakdown": "total",
+    "category": null,
+    "period": "2023-10",
+    "value": 0.62,
+    "unit": "배",
+    "yoy": -0.1,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2023-10-separated-total",
+    "source": "ei",
+    "series": "separated",
+    "breakdown": "total",
+    "category": null,
+    "period": "2023-10",
+    "value": 479.0,
+    "unit": "천명",
+    "yoy": -43.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
   },
   {
     "id": "est-2024-01-entered-total",
@@ -71991,17 +74133,17 @@
     "period": "2026-09",
     "value": 3659.0,
     "unit": "천명",
-    "yoy": 88.0,
+    "yoy": 89.0,
     "status": "잠정",
-    "released_at": "2026-10-14",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20083",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
     "attachments": [
       {
         "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261000796&bbs_seq=20083&bbs_id=12&file_ext=hwpx"
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
       }
     ],
-    "collected_at": "2026-10-14T15:03:59.558614+09:00"
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
   },
   {
     "id": "ei-2026-09-headcount-age-40-49",
@@ -72537,17 +74679,17 @@
     "period": "2026-09",
     "value": 357.0,
     "unit": "천명",
-    "yoy": -21.0,
+    "yoy": -20.9,
     "status": "잠정",
-    "released_at": "2026-10-14",
-    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20083",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
     "attachments": [
       {
         "type": "hwpx",
-        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261000796&bbs_seq=20083&bbs_id=12&file_ext=hwpx"
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
       }
     ],
-    "collected_at": "2026-10-14T15:03:59.558614+09:00"
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
   },
   {
     "id": "ei-2026-09-openings_ratio-total",
@@ -73032,5 +75174,719 @@
     "release_url": "https://kosis.kr/statHtml/statHtml.do?orgId=118&tblId=DT_118N_MON066",
     "attachments": [],
     "collected_at": "2026-11-02T15:05:17.885940+09:00"
+  },
+  {
+    "id": "ei-2026-10-acquired-total",
+    "source": "ei",
+    "series": "acquired",
+    "breakdown": "total",
+    "category": null,
+    "period": "2026-10",
+    "value": 574.0,
+    "unit": "천명",
+    "yoy": 68.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-benefit_amount-total",
+    "source": "ei",
+    "series": "benefit_amount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2026-10",
+    "value": 10025.0,
+    "unit": "억원",
+    "yoy": -468.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-benefit_new-total",
+    "source": "ei",
+    "series": "benefit_new",
+    "breakdown": "total",
+    "category": null,
+    "period": "2026-10",
+    "value": 81.0,
+    "unit": "천명",
+    "yoy": 6.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-benefit_paid-total",
+    "source": "ei",
+    "series": "benefit_paid",
+    "breakdown": "total",
+    "category": null,
+    "period": "2026-10",
+    "value": 571.0,
+    "unit": "천명",
+    "yoy": -4.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-age-15-29",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "15-29",
+    "period": "2026-10",
+    "value": 2203.0,
+    "unit": "천명",
+    "yoy": -54.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-age-30-39",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "30-39",
+    "period": "2026-10",
+    "value": 3674.0,
+    "unit": "천명",
+    "yoy": 91.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-age-40-49",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "40-49",
+    "period": "2026-10",
+    "value": 3525.0,
+    "unit": "천명",
+    "yoy": 5.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-age-50-59",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "50-59",
+    "period": "2026-10",
+    "value": 3518.0,
+    "unit": "천명",
+    "yoy": 41.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-age-60+",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "age",
+    "category": "60+",
+    "period": "2026-10",
+    "value": 3054.0,
+    "unit": "천명",
+    "yoy": 204.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-A",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "A",
+    "period": "2026-10",
+    "value": 60.0,
+    "unit": "천명",
+    "yoy": 1.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-C",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "C",
+    "period": "2026-10",
+    "value": 3858.0,
+    "unit": "천명",
+    "yoy": 14.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-D",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "D",
+    "period": "2026-10",
+    "value": 84.0,
+    "unit": "천명",
+    "yoy": 1.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-E",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "E",
+    "period": "2026-10",
+    "value": 103.0,
+    "unit": "천명",
+    "yoy": 2.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-F",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "F",
+    "period": "2026-10",
+    "value": 742.0,
+    "unit": "천명",
+    "yoy": -5.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-G",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "G",
+    "period": "2026-10",
+    "value": 1615.0,
+    "unit": "천명",
+    "yoy": 1.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-H",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "H",
+    "period": "2026-10",
+    "value": 701.0,
+    "unit": "천명",
+    "yoy": 8.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-I",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "I",
+    "period": "2026-10",
+    "value": 826.0,
+    "unit": "천명",
+    "yoy": 49.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-J",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "J",
+    "period": "2026-10",
+    "value": 784.0,
+    "unit": "천명",
+    "yoy": -1.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-K",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "K",
+    "period": "2026-10",
+    "value": 511.0,
+    "unit": "천명",
+    "yoy": 3.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-L",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "L",
+    "period": "2026-10",
+    "value": 367.0,
+    "unit": "천명",
+    "yoy": -3.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-M",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "M",
+    "period": "2026-10",
+    "value": 1035.0,
+    "unit": "천명",
+    "yoy": 22.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-N",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "N",
+    "period": "2026-10",
+    "value": 1265.0,
+    "unit": "천명",
+    "yoy": 23.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-O",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "O",
+    "period": "2026-10",
+    "value": 447.0,
+    "unit": "천명",
+    "yoy": 18.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-P",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "P",
+    "period": "2026-10",
+    "value": 603.0,
+    "unit": "천명",
+    "yoy": 21.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-Q",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "Q",
+    "period": "2026-10",
+    "value": 2443.0,
+    "unit": "천명",
+    "yoy": 120.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-R",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "R",
+    "period": "2026-10",
+    "value": 177.0,
+    "unit": "천명",
+    "yoy": 6.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-industry-S",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "industry",
+    "category": "S",
+    "period": "2026-10",
+    "value": 333.0,
+    "unit": "천명",
+    "yoy": 5.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-sex-F",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "F",
+    "period": "2026-10",
+    "value": 7269.0,
+    "unit": "천명",
+    "yoy": 187.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-sex-M",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "sex",
+    "category": "M",
+    "period": "2026-10",
+    "value": 8705.0,
+    "unit": "천명",
+    "yoy": 99.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-headcount-total",
+    "source": "ei",
+    "series": "headcount",
+    "breakdown": "total",
+    "category": null,
+    "period": "2026-10",
+    "value": 15974.0,
+    "unit": "천명",
+    "yoy": 286.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-job_openings-total",
+    "source": "ei",
+    "series": "job_openings",
+    "breakdown": "total",
+    "category": null,
+    "period": "2026-10",
+    "value": 165.0,
+    "unit": "천명",
+    "yoy": 23.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-job_seekers-total",
+    "source": "ei",
+    "series": "job_seekers",
+    "breakdown": "total",
+    "category": null,
+    "period": "2026-10",
+    "value": 360.0,
+    "unit": "천명",
+    "yoy": 24.8,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-openings_ratio-total",
+    "source": "ei",
+    "series": "openings_ratio",
+    "breakdown": "total",
+    "category": null,
+    "period": "2026-10",
+    "value": 0.46,
+    "unit": "배",
+    "yoy": 0.03,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
+  },
+  {
+    "id": "ei-2026-10-separated-total",
+    "source": "ei",
+    "series": "separated",
+    "breakdown": "total",
+    "category": null,
+    "period": "2026-10",
+    "value": 511.0,
+    "unit": "천명",
+    "yoy": 68.0,
+    "status": "잠정",
+    "released_at": "2026-11-09",
+    "release_url": "https://www.moel.go.kr/news/enews/report/enewsView.do?news_seq=20216",
+    "attachments": [
+      {
+        "type": "hwpx",
+        "url": "https://www.moel.go.kr/common/downloadFile.do?file_seq=20261100431&bbs_seq=20216&bbs_id=12&file_ext=hwpx"
+      }
+    ],
+    "collected_at": "2026-11-09T15:04:28.440122+09:00"
   }
 ]

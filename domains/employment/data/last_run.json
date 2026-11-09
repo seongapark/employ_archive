@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-09T10:08:48.015625+09:00",
+  "run_at": "2026-11-09T15:04:01.731676+09:00",
   "collectors": {
     "eaps": {
       "ok": true,
@@ -9,8 +9,8 @@
       "rejected": 0
     },
     "est": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 891,
       "added": 0,
       "updated": 0,
       "rejected": 0
@@ -18,15 +18,13 @@
     "ei": {
       "ok": true,
       "fetched": 952,
-      "added": 0,
-      "updated": 0,
+      "added": 136,
+      "updated": 2,
       "rejected": 0
     }
   },
   "conflicts": [],
-  "errors": [
-    "est: ChunkedEncodingError: (\"Connection broken: ConnectionResetError(10054, '현재 연결은 원격 호스트에 의해 강제로 끊겼습니다', None, 10054, None)\", ConnectionResetError(10054, '현재 연결은 원격 호스트에 의해 강제로 끊겼습니다', None, 10054, None))"
-  ],
+  "errors": [],
   "releases": {
     "eaps": {
       "months": 91,
@@ -47,11 +45,11 @@
       "summaries_pending": 0
     },
     "ei": {
-      "months": 57,
-      "added": 0,
-      "attachments_filled": 0,
+      "months": 58,
+      "added": 1,
+      "attachments_filled": 1,
       "pending": 0,
-      "summaries_filled": 0,
+      "summaries_filled": 1,
       "summaries_empty": 0,
       "summaries_pending": 0
     }

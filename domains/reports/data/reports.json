@@ -1,5 +1,39 @@
 [
  {
+  "id": "kdi-19322",
+  "org": "kdi",
+  "board": "kdi-trends",
+  "series": "경제동향",
+  "title": "경제동향 2026년 11월",
+  "authors": [],
+  "published": "2026-11-30",
+  "date_precision": "month",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/monTrends?pub_no=19322",
+  "file_url": null,
+  "matched": [
+   "임금"
+  ]
+ },
+ {
+  "id": "keis-s44",
+  "org": "keis",
+  "board": "keis-supply",
+  "series": "인력수급전망",
+  "title": "중장기 인력수급 전망 2024-2034",
+  "authors": [
+   "한국고용정보원"
+  ],
+  "published": "2026-11-09",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.keis.or.kr/keis/ko/bbs/115/list.do",
+  "file_url": "https://www.keis.or.kr/keis/ko/cmmn/download.do?dn=20261109103216213.xlsx&path=/bbs/1106&fn=%EC%A4%91%EC%9E%A5%EA%B8%B0+%EC%9D%B8%EB%A0%A5%EC%88%98%EA%B8%89+%EC%A0%84%EB%A7%9D_2024_2034_%EC%A0%84%EB%A7%9DDB%28%EA%B3%B5%EA%B8%89%2C%EC%82%B0%EC%97%85%2C%EC%A7%81%EC%97%85%29.xlsx&bbsId=1106&pstSn=44&atchFileSn=2",
+  "matched": [
+   "인력수급"
+  ]
+ },
+ {
   "id": "kdi-e19324",
   "org": "kdi",
   "board": "kdi-etc",
@@ -527,6 +561,24 @@
    "임금",
    "근로시간",
    "일자리정책"
+  ]
+ },
+ {
+  "id": "kli-10319",
+  "org": "kli",
+  "board": "kli-wage",
+  "series": "임금정보브리프",
+  "title": "임금정보브리프 2026년 제5호(통권 제106호)",
+  "authors": [
+   "임금직무혁신센터"
+  ],
+  "published": "2026-09-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10319&mid=a10104020000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=임금정보브리프",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=014F76FBDA9EBB0849258EAA001E616A_1.pdf&fileNameOrg=임금정보브리프  2026년 제5호(통권 제106호).pdf&filePath1=jsphome/DATA/pblctList/issue/014F76FBDA9EBB0849258EAA001E616A",
+  "matched": [
+   "임금"
   ]
  },
  {
