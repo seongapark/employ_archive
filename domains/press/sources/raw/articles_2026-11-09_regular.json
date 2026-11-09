@@ -6,40 +6,40 @@
   "2026-11-09",
   "2026-11-10"
  ],
- "collected_at": "2026-11-09 10:12",
+ "collected_at": "2026-11-09 11:24",
  "volume": {
-  "collected": 3,
-  "articles": 2,
-  "press": 2,
+  "collected": 8,
+  "articles": 7,
+  "press": 6,
   "queries": 3
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29556,
+   "api_total": 29561,
    "fetched": 100,
    "truncated": false,
-   "in_window": 1,
-   "relevant": 1,
-   "new": 1
+   "in_window": 6,
+   "relevant": 6,
+   "new": 6
   },
   {
    "query": "구직급여",
-   "api_total": 95104,
+   "api_total": 95108,
    "fetched": 100,
    "truncated": false,
-   "in_window": 2,
-   "relevant": 1,
+   "in_window": 6,
+   "relevant": 5,
    "new": 2
   },
   {
    "query": "구인배수",
-   "api_total": 2674,
+   "api_total": 2676,
    "fetched": 100,
    "truncated": false,
-   "in_window": 0,
-   "relevant": 0,
+   "in_window": 2,
+   "relevant": 2,
    "new": 0
   }
  ],
@@ -62,6 +62,56 @@
    "press": "뉴시스",
    "pub": "2026-11-09 09:46",
    "q": "구직급여",
+   "rel": true
+  },
+  {
+   "title": "사장님인가 노동자인가… '근로자 추정제'가 바꾸는 일자리",
+   "desc": "고용보험은 2021년 7월 보험설계사와 학습지 방문강사, 택배기사 등을 시작으로 적용 범위가 확대됐고, 2022년... 보험업계의 가정에 따른 추산이지만 보험설계사의 60%가량을 직장가입자로 전환하는 상황을 가정할 경우 연간...",
+   "link": "https://news.knn.co.kr/news/article_sns/1875",
+   "originallink": "https://news.knn.co.kr/news/article_sns/1875",
+   "press": "KNN",
+   "pub": "2026-11-09 10:16",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[고용동향]10월 고용보험 가입자 28만6천명 증가…청년·건설업 고용은...",
+   "desc": "국내 고용보험 가입자 증가세가 10개월 연속 20만명대 후반을 유지했지만, 청년층과 건설업을 중심으로 한 고용 부진은 여전히 이어지고 있는 것으로 나타났다. 서비스업이 전체 고용 증가를 견인하는 가운데...",
+   "link": "https://www.namdonews.com/news/articleView.html?idxno=928571",
+   "originallink": "https://www.namdonews.com/news/articleView.html?idxno=928571",
+   "press": "남도일보",
+   "pub": "2026-11-09 10:42",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "[고용동향] 조선업 고용 늘고 건설업은 부진…광주·전남 노동시장 업종...",
+   "desc": "연령별로는 60세 이상(+20만 6천 명)과 50대(+10만 8천 명)가 고용보험 가입자 증가를 주도한 반면, 청년층(29세 이하, -9만 9천 명)은 인구 감소와 맞물려 감소세를 이어갔다. 전남광주 년층의 이탈 현상과 장년·고령층...",
+   "link": "https://www.namdonews.com/news/articleView.html?idxno=928572",
+   "originallink": "https://www.namdonews.com/news/articleView.html?idxno=928572",
+   "press": "남도일보",
+   "pub": "2026-11-09 10:42",
+   "q": "고용보험 가입자, 구직급여, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "\"자발적 퇴사 청년도 실업급여\"…국회입법조사처 \"도덕적 해이 우려 크...",
+   "desc": "특히 고용보험 가입자에게만 혜택이 돌아가는 제도의 역진성 문제를 개선해야 한다고 강조했다. 상대적으로 불안정한 일자리에 종사하는 청년들이 지원에서 제외되지 않도록 소득기반 고용보험 도입과 가입 누락자 발굴...",
+   "link": "https://www.siminsori.com/news/articleView.html?idxno=402312",
+   "originallink": "https://www.siminsori.com/news/articleView.html?idxno=402312",
+   "press": "siminsori.com",
+   "pub": "2026-11-09 10:42",
+   "q": "고용보험 가입자, 구직급여",
+   "rel": true
+  },
+  {
+   "title": "자진퇴사 청년에 실업급여 추진…고용보험 밖 청년은 어쩌나",
+   "desc": "가입자의 수급 요건을 완화해도 초단시간 근로자나 프리랜서 등 고용보험 밖 청년은 혜택을 받기 어렵기 때문이다. 취업 후 불필요한 퇴사를 줄이려면 채용 단계에서 임금과 직무 정보를 공개하는 방안도 검토할 필요가...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002720719?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10930417?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-11-09 10:57",
+   "q": "고용보험 가입자, 구직급여",
    "rel": true
   }
  ],
