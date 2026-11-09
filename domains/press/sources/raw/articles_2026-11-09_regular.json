@@ -6,32 +6,32 @@
   "2026-11-09",
   "2026-11-10"
  ],
- "collected_at": "2026-11-09 07:41",
+ "collected_at": "2026-11-09 10:12",
  "volume": {
-  "collected": 0,
-  "articles": 0,
-  "press": 0,
+  "collected": 3,
+  "articles": 2,
+  "press": 2,
   "queries": 3
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29555,
+   "api_total": 29556,
    "fetched": 100,
    "truncated": false,
-   "in_window": 0,
-   "relevant": 0,
-   "new": 0
+   "in_window": 1,
+   "relevant": 1,
+   "new": 1
   },
   {
    "query": "구직급여",
-   "api_total": 95102,
+   "api_total": 95104,
    "fetched": 100,
    "truncated": false,
-   "in_window": 0,
-   "relevant": 0,
-   "new": 0
+   "in_window": 2,
+   "relevant": 1,
+   "new": 2
   },
   {
    "query": "구인배수",
@@ -43,6 +43,38 @@
    "new": 0
   }
  ],
- "articles": [],
- "excluded": []
+ "articles": [
+  {
+   "title": "“아이 맡기고 출근하니 든든”···소방가족이 체감한 통합의 변화",
+   "desc": "소방공무원 자녀뿐 아니라 고용보험 가입자의 자녀도 입소할 수 있다. 10월1일 기준 정원 40명 가운데 31명이 이용하고 있다. 소방공무원 자녀가 14명, 고용보험 가입자 자녀가 17명이다. 보육교사 8명과 원장·조리사 각...",
+   "link": "http://www.mdilbo.com/detail/0kIA7d/760356",
+   "originallink": "http://www.mdilbo.com/detail/0kIA7d/760356",
+   "press": "mdilbo.com",
+   "pub": "2026-11-09 08:04",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "'자발적 퇴사' 청년에 月100만원 검토…\"도덕적 해이 우려 적어\"",
+   "desc": "정부가 자발적으로 퇴사한 청년에게도 월 최대 100만원의 구직급여(실업급여)를 지급하는 방안을 검토하는 가운데, 급여 수준과 지급 횟수를 고려하면 도덕적 해이 우려는 크지 않다는 국회입법조사처의 분석이 나왔다....",
+   "link": "https://n.news.naver.com/mnews/article/003/0014309894?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261109_0003859821",
+   "press": "뉴시스",
+   "pub": "2026-11-09 09:46",
+   "q": "구직급여",
+   "rel": true
+  }
+ ],
+ "excluded": [
+  {
+   "title": "용인시, 내년 장애인 일자리 구직자 299명 뽑는다",
+   "desc": "참여 구직자 299명을 모집한다고 9일 밝혔다. 모집 분야는 일반형 일자리 116명과 복지형 일자리 183명이다.... 일반형 일자리 중 전일제는 주 5일, 하루 8시간씩 주 40시간 근무하며 월 223만 원의 급여를 받는다....",
+   "link": "https://www.jasm.co.kr/news/view/324610/?sc=Naver",
+   "originallink": "https://www.jasm.co.kr/news/view/324610/?sc=Naver",
+   "press": "jasm.co.kr",
+   "pub": "2026-11-09 09:06",
+   "q": "구직급여",
+   "rel": false
+  }
+ ]
 }
