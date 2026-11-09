@@ -1,5 +1,27 @@
 [
  {
+  "id": "kdi-e19324",
+  "org": "kdi",
+  "board": "kdi-etc",
+  "series": "기타보고서",
+  "title": "조건부가치측정법을 활용한 규제의 비용편익분석 연구",
+  "authors": [
+   "이현정",
+   "박진수",
+   "이영아",
+   "이해민",
+   "최수현",
+   "배윤주",
+   "채수복"
+  ],
+  "published": "2026-11-04",
+  "date_precision": "day",
+  "pages": 183,
+  "landing_url": "https://www.kdi.re.kr/research/reportEtcView?pub_no=19324",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=DPh0LKTp92fSS%2F79K2pO4Q%3D%3D",
+  "matched": []
+ },
+ {
   "id": "keis-11372",
   "org": "keis",
   "board": "keis-trend",
@@ -1527,6 +1549,23 @@
   "pages": null,
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11063976&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/60dc37ba6b824b269c471d060ded6b7c/1/1f1a8fdaece14928b79dadfbeef577fe.pdf",
+  "matched": []
+ },
+ {
+  "id": "kiet-pd386",
+  "org": "kiet",
+  "board": "kiet-podata",
+  "series": "정책자료",
+  "title": "제조업의 데이터 기반 서비스화 전략과 정책 시사점",
+  "authors": [
+   "심우중",
+   "김종기"
+  ],
+  "published": "2026-08-18",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/podataView?podata_no=386&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
   "matched": []
  },
  {

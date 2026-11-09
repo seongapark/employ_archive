@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-05T15:00:40+09:00",
+  "at": "2026-11-09T10:01:16+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -163,13 +163,13 @@
     },
     "kiet-podata": {
       "ok": true,
-      "parsed": 30,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": false,
+      "parsed": 60,
+      "added": 1,
+      "details": 1,
+      "reached_cutoff": true,
       "skipped_old": 0,
       "error": null,
-      "total": 38
+      "total": 39
     },
     "kiet-paper": {
       "ok": true,
@@ -243,13 +243,13 @@
     },
     "kdi-etc": {
       "ok": true,
-      "parsed": 2,
-      "added": 0,
-      "details": 0,
+      "parsed": 5,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 4
+      "total": 5
     },
     "bok-intl": {
       "ok": true,
@@ -333,8 +333,35 @@
     }
   },
   "unregistered": [],
-  "reports": 3500,
+  "reports": 3502,
   "abstract_missing": {
+    "kdi": {
+      "기타보고서": {
+        "total": 5,
+        "missing": 1,
+        "rate": 0.2
+      },
+      "경제동향": {
+        "total": 70,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "KDI FOCUS": {
+        "total": 344,
+        "missing": 45,
+        "rate": 0.131
+      },
+      "연구보고서": {
+        "total": 404,
+        "missing": 13,
+        "rate": 0.032
+      },
+      "현안분석": {
+        "total": 31,
+        "missing": 12,
+        "rate": 0.387
+      }
+    },
     "keis": {
       "고용동향브리프": {
         "total": 53,
@@ -365,33 +392,6 @@
         "total": 38,
         "missing": 38,
         "rate": 1.0
-      }
-    },
-    "kdi": {
-      "경제동향": {
-        "total": 70,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "기타보고서": {
-        "total": 4,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "KDI FOCUS": {
-        "total": 344,
-        "missing": 45,
-        "rate": 0.131
-      },
-      "연구보고서": {
-        "total": 404,
-        "missing": 13,
-        "rate": 0.032
-      },
-      "현안분석": {
-        "total": 31,
-        "missing": 12,
-        "rate": 0.387
       }
     },
     "kli": {
@@ -490,7 +490,7 @@
         "rate": 0.091
       },
       "정책자료": {
-        "total": 38,
+        "total": 39,
         "missing": 0,
         "rate": 0.0
       },
@@ -512,7 +512,7 @@
     }
   },
   "abstract_missing_why": {
-    "요약 섹션 없음": 559,
+    "요약 섹션 없음": 560,
     "텍스트가 없는 스캔본": 311,
     "원문 없음": 48,
     "내려받기 실패: Failed to perform, curl: (6) Could not resolve host: www.bok.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.": 13,
@@ -524,22 +524,23 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 308760,
-    "abstracts_gzip": 3507532,
+    "reports_gzip": 308924,
+    "abstracts_gzip": 3512049,
     "abstracts_shards_gzip": {
       "bok": 297892,
-      "kdi": 894401,
+      "kdi": 894649,
       "keis": 257846,
-      "kiet": 724899,
+      "kiet": 729168,
       "kli": 1332494
     }
   },
   "recommend": {
     "judged": 3500,
     "picked": 379,
-    "unjudged": 0,
+    "unjudged": 2,
     "profile_version": "5a624049",
     "title_only": 952,
-    "at": "2026-11-05T10:01:02+09:00"
+    "at": "2026-11-09T10:02:20+09:00",
+    "error": "ValueError: claude -p 가 1 로 끝났다: {\"duration_api_ms\":0,\"stop_reason\":\"stop_sequence\",\"session_id\":\"8e966c57-9238-43ac-8fb2-faca67deaf8a\",\"total_cost_usd\":0,\"usage\":{\"output_tokens_details\":{\"thinking_tokens\":0},\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_token"
   }
 }

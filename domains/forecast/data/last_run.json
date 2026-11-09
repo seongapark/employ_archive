@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-05T15:00:48.731393+09:00",
+  "run_at": "2026-11-09T10:02:24.050959+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -7,10 +7,9 @@
       "added": 0
     },
     "oecd_interim": {
-      "ok": false,
-      "fetched": 0,
-      "added": 0,
-      "blocked": true
+      "ok": true,
+      "fetched": 4,
+      "added": 0
     },
     "imf": {
       "ok": true,
@@ -67,11 +66,6 @@
   "errors": [
     "kdi: ValueError: KDI 경제전망, 2026 하반기: 요약표를 실은 장을 찾지 못했다"
   ],
-  "warnings": [
-    "oecd_interim: 봇 차단 0일째(유예 7일) — 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/topics/sub-issues/economic-outlook.html",
-    "announce: OECD 공지일 못 읽음 — Blocked: 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/about/news.html"
-  ],
-  "blocked": {
-    "oecd_interim": "2026-11-05"
-  }
+  "warnings": [],
+  "blocked": {}
 }
