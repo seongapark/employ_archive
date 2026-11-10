@@ -13,7 +13,7 @@
     "2026-11-09",
     "2026-11-10"
    ],
-   "at": "2026-11-10 12:49",
+   "at": "2026-11-10 19:19",
    "mentioned": 0,
    "queries": [
     "고용보험 가입자",
@@ -186,6 +186,16 @@
       "press": "남도일보"
      },
      {
+      "title": "제조업 고용 3개월째 증가…청년층은 50개월 연속 '역대 최장' 감소",
+      "url": "https://www.news1.kr/economy/employment-labor/6347531",
+      "press": "뉴스1"
+     },
+     {
+      "title": "'반도체 호황' 제조업 고용보험 가입 석달째↑…청년은 50개월째 내리막",
+      "url": "https://www.newsis.com/view/NISX20261109_0003860293",
+      "press": "뉴시스"
+     },
+     {
       "title": "청년 취업 50개월째 감소 '역대 최장'…구직급여 90% 소진",
       "url": "https://biz.sbs.co.kr/article_hub/20000345086?division=NAVER",
       "press": "biz.sbs.co.kr"
@@ -194,16 +204,6 @@
       "title": "10월 고용보험 가입자, 10개월 연속 20만명대 증가…청년 취업 감소는 지...",
       "url": "https://www.mt.co.kr/economy/2026/11/09/2026110911320962826",
       "press": "머니투데이"
-     },
-     {
-      "title": "'반도체 호황' 제조업 고용보험 가입 석달째↑…청년은 50개월째 내리막",
-      "url": "https://www.newsis.com/view/NISX20261109_0003860293",
-      "press": "뉴시스"
-     },
-     {
-      "title": "제조업 고용 3개월째 증가…청년층은 50개월 연속 '역대 최장' 감소",
-      "url": "https://www.news1.kr/economy/employment-labor/6347531",
-      "press": "뉴스1"
      }
     ]
    },
@@ -233,13 +233,13 @@
       "press": "kado.net"
      },
      {
-      "title": "청년 '한숨'…29세 이하 고용보험 가입자 50개월째 감소",
-      "url": "https://www.news1.kr/photos/8204671",
+      "title": "29세 이하 고용보험 가입자 50개월째 감소, 역대 최장",
+      "url": "https://www.news1.kr/photos/8204672",
       "press": "뉴스1"
      },
      {
-      "title": "29세 이하 고용보험 가입자 50개월째 감소, 역대 최장",
-      "url": "https://www.news1.kr/photos/8204672",
+      "title": "청년 '한숨'…29세 이하 고용보험 가입자 50개월째 감소",
+      "url": "https://www.news1.kr/photos/8204671",
       "press": "뉴스1"
      }
     ]
@@ -256,7 +256,7 @@
     "heads": [
      {
       "title": "고용노동부, 10월 노동시장 동향 발표",
-      "url": "https://www.news1.kr/photos/8204588",
+      "url": "https://www.news1.kr/photos/8204587",
       "press": "뉴스1"
      },
      {
@@ -289,14 +289,14 @@
     ],
     "heads": [
      {
-      "title": "10월 제조업 고용보험 가입자 1만 4천 명 증가… 기계·조선·반도체가 ...",
-      "url": "https://www.mtnews.net/news/articleView.html?idxno=26473",
-      "press": "mtnews.net"
-     },
-     {
       "title": "고용보험 가입자 10개월째 20만명대 증가…반도체·조선 가입자 확대",
       "url": "https://www.newspim.com/news/view/20261109000610",
       "press": "뉴스핌"
+     },
+     {
+      "title": "10월 제조업 고용보험 가입자 1만 4천 명 증가… 기계·조선·반도체가 ...",
+      "url": "https://www.mtnews.net/news/articleView.html?idxno=26473",
+      "press": "mtnews.net"
      },
      {
       "title": "지난달 고용보험 가입자 28만 6천명 늘어…보건복지·제조업 회복세 눈...",
