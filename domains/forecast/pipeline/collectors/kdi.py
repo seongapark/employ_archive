@@ -225,4 +225,8 @@ def collect(today: date) -> list[ForecastRecord]:
     # 치를 이유가 없다 — 예전처럼 이 페이지 하나만 보고 바로 회차를 구성한다.
     page_html = http.get(LIST_URL).text
     issue = parse_issue(page_html, LIST_URL)
+    # 발표 열흘쯤 전부터 다음 회차 제목·발표일만 먼저 걸린다(장 PDF 없음).
+    # 발표일 전이면 아직 안 나온 것이지 실패가 아니다.
+    if issue.published_at > today:
+        return []
     return collect_issue(issue, page_html)

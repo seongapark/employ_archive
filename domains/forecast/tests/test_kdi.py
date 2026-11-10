@@ -1,4 +1,4 @@
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 import pytest
@@ -339,3 +339,13 @@ def test_collect_raises_when_every_chapter_fails(monkeypatch):
 
     with pytest.raises(ValueError):
         kdi.collect(date(2026, 8, 30))
+
+
+def test_collect_skips_an_announced_issue_that_is_not_out_yet(monkeypatch):
+    # KDI 는 발표 열흘쯤 전에 다음 회차 제목과 발표일만 먼저 건다(2026-11-09,
+    # 하반기호가 11-18 발표로 걸렸다). 장 PDF 가 없으니 실패로 읽으면 발표일까지
+    # 매 회차 알림이 울린다 — 발표일 전이면 아직 없는 것이다.
+    monkeypatch.setattr(kdi.http, "get", lambda url, **kw: _Resp(text=PAGE))
+    issue = kdi.parse_issue(PAGE, kdi.LIST_URL)
+
+    assert kdi.collect(issue.published_at - timedelta(days=1)) == []
