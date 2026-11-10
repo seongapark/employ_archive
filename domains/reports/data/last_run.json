@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-10T10:00:51+09:00",
+  "at": "2026-11-10T11:28:21+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -193,9 +193,9 @@
     },
     "kiet-economy": {
       "ok": true,
-      "parsed": 60,
-      "added": 11,
-      "details": 11,
+      "parsed": 30,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -535,12 +535,11 @@
     }
   },
   "recommend": {
-    "judged": 3500,
-    "picked": 379,
-    "unjudged": 16,
+    "judged": 3516,
+    "picked": 380,
+    "unjudged": 0,
     "profile_version": "5a624049",
-    "title_only": 952,
-    "at": "2026-11-10T10:00:59+09:00",
-    "error": "ValueError: claude -p 가 1 로 끝났다: {\"duration_api_ms\":0,\"stop_reason\":\"stop_sequence\",\"session_id\":\"ce46ae9a-cb0d-4846-a923-139d96aec211\",\"total_cost_usd\":0,\"usage\":{\"output_tokens_details\":{\"thinking_tokens\":0},\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_token"
+    "title_only": 957,
+    "at": "2026-11-10T11:28:55+09:00"
   }
 }

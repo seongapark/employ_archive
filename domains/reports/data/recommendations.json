@@ -34073,5 +34073,149 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-05T10:01:02+09:00"
+ },
+ "kdi-19322": {
+  "pick": false,
+  "axis": "",
+  "why": "거시 경기동향 정기 공표, AI 투자·수출 중심",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "keis-s44": {
+  "pick": true,
+  "axis": "산업·직종 구조",
+  "why": "산업·직종별 인력수급 10년 자체 추계",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kdi-e19324": {
+  "pick": false,
+  "axis": "",
+  "why": "규제 비용편익 측정법 연구, 고용 무관",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-ec3398": {
+  "pick": false,
+  "axis": "",
+  "why": "실물경제 지표·업종 경기지수 정기 수록",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-ec3397": {
+  "pick": false,
+  "axis": "",
+  "why": "중국 'AI+' 산업정책 동향 소개",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-ec3396": {
+  "pick": false,
+  "axis": "",
+  "why": "미국 SI 행정명령·거버넌스 제도 해설",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-ec3395": {
+  "pick": false,
+  "axis": "",
+  "why": "지역투자 정책 제언, 저자 측정 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-ec3394": {
+  "pick": false,
+  "axis": "",
+  "why": "모바일 소비와 플랫폼 경쟁, 고용 변수 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-ec3393": {
+  "pick": false,
+  "axis": "",
+  "why": "혁신활동 실태 분석, 인력부족은 부수 지표",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-ec3392": {
+  "pick": false,
+  "axis": "",
+  "why": "임차공장 입지·집적 분석, 고용 변수 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-ec3391": {
+  "pick": false,
+  "axis": "",
+  "why": "로봇산업 경쟁력·대응전략",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-ec3390": {
+  "pick": false,
+  "axis": "",
+  "why": "EU 산업가속화법 조항 해설",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-ec3389": {
+  "pick": false,
+  "axis": "",
+  "why": "녹색산업정책 논리 변화 기고",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-ec3388": {
+  "pick": false,
+  "axis": "",
+  "why": "월간지 통합본, 새 분석 아님",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kli-10319": {
+  "pick": false,
+  "axis": "",
+  "why": "정기 임금정보 브리프, 같은 틀 반복",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kiet-pd386": {
+  "pick": false,
+  "axis": "",
+  "why": "제조업 서비스화 전략, 고용 분석 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T11:28:55+09:00"
  }
 }
