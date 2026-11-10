@@ -30,6 +30,16 @@ from pathlib import Path
 KST = timezone(timedelta(hours=9))
 DATA = Path(__file__).resolve().parent.parent / 'data'
 
+# 원문에 초록이 아예 없는 곳. 결측률 경고가 매 회차 같은 줄로 울려 새로 비는
+# 시리즈를 묻어 버렸다(2026-09-10 부터 11줄 그대로). KLI 는 상세에 요약 칸이
+# 없고, BOK 조사연구자료는 본문이 비어 있다. 시리즈 이름 대신 기관만 적으면 그
+# 기관 전체를 뺀다.
+NO_ABSTRACT = {
+    'kli',
+    'bok/경제전망보고서', 'bok/조사연구자료', 'bok/지역경제보고서',
+    'keis/인력수급전망',
+}
+
 
 def _parse_known_down(spec: str) -> dict[str, str]:
     out: dict[str, str] = {}
@@ -74,6 +84,8 @@ def check(last_run: dict, known_down: str = '', today: str = '') -> tuple[int, l
     missing = last_run.get('abstract_missing') or {}
     for org, series in sorted(missing.items()):
         for name, cell in sorted(series.items()):
+            if org in NO_ABSTRACT or f'{org}/{name}' in NO_ABSTRACT:
+                continue
             if cell.get('rate', 0) >= 0.5 and cell.get('total', 0) >= 10:
                 msgs.append(f'초록 결측률 높음: {org}/{name} '
                             f"{cell['missing']}/{cell['total']}")

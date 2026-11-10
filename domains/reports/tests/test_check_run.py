@@ -67,11 +67,21 @@ def test_unregistered_boards_warn_but_do_not_fail():
 
 def test_high_abstract_miss_rate_warns_but_does_not_fail():
     payload = last({'kli-research': {'ok': True, 'parsed': 10, 'added': 1}},
-                   abstract_missing={'keis': {'인력수급전망':
-                                              {'total': 20, 'missing': 18, 'rate': 0.9}}})
+                   abstract_missing={'bok': {'이슈노트':
+                                             {'total': 20, 'missing': 18, 'rate': 0.9}}})
     code, msgs = check_run.check(payload)
     assert code == 0
     assert any('결측률 높음' in m for m in msgs)
+
+
+def test_series_known_to_have_no_abstract_do_not_warn():
+    # 원문에 초록이 없는 곳이 매 회차 같은 경고를 내면 새로 비는 시리즈가 묻힌다.
+    full = {'total': 20, 'missing': 20, 'rate': 1.0}
+    payload = last({'kli-research': {'ok': True, 'parsed': 10, 'added': 1}},
+                   abstract_missing={'kli': {'노동리뷰': full, '새시리즈': full},
+                                     'keis': {'인력수급전망': full}})
+    code, msgs = check_run.check(payload)
+    assert not any('결측률 높음' in m for m in msgs)
 
 
 def test_a_run_with_no_boards_at_all_is_reported():

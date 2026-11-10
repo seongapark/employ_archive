@@ -89,6 +89,21 @@ test('employment·forecast 는 수집기 실패와 오류 수를 센다', () => 
   assert.match(emp.경고[0], /eaps.*est|est.*eaps/);
 });
 
+test('봇 차단 중인 수집기는 실패로 세지 않고 경고로만 남긴다', () => {
+  // www.oecd.org 가 Cloudflare 챌린지로 몇 시간씩 막힌다. 수집은 7일 유예 동안
+  // errors 에 안 넣는데 화면이 ok:false 만 보고 실패로 세면 유예가 무의미해진다.
+  const 원본 = {
+    forecast: {
+      run_at: '2026-11-10T11:28:55+09:00',
+      collectors: { oecd: { ok: true }, oecd_interim: { ok: false, blocked: true } },
+      conflicts: [], errors: [],
+    },
+  };
+  const [, , fc] = 도메인현황(원본, 지금);
+  assert.deepEqual(fc.지표, [{ 라벨: '수집기 실패', 값: 0 }, { 라벨: '오류', 값: 0 }]);
+  assert.deepEqual(fc.경고, ['봇 차단 중: oecd_interim']);
+});
+
 test('forecast 도 같은 어댑터를 쓴다 — 모두 성공이면 경고가 없다', () => {
   const 원본 = {
     forecast: {

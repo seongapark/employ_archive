@@ -98,11 +98,15 @@ function 어댑터_수집기계열(j) {
   if (!j || typeof j.run_at !== 'string' || typeof j.collectors !== 'object'
       || j.collectors === null || Array.isArray(j.collectors)
       || !Array.isArray(j.errors)) return null;
-  const 실패 = Object.entries(j.collectors)
-    .filter(([, v]) => v && v.ok === false).map(([k]) => k);
+  // blocked 는 봇 차단 유예(7일) 중이라는 뜻이다. 수집이 errors 에 안 넣는 것을
+  // 여기서 실패로 세면 유예가 무의미해진다. 유예가 지나면 errors 로 넘어와 오류 수에 잡힌다.
+  const 안됨 = Object.entries(j.collectors).filter(([, v]) => v && v.ok === false);
+  const 실패 = 안됨.filter(([, v]) => !v.blocked).map(([k]) => k);
+  const 차단 = 안됨.filter(([, v]) => v.blocked).map(([k]) => k);
   const 충돌 = Array.isArray(j.conflicts) ? j.conflicts.length : 0;
   const 경고 = [];
   if (실패.length) 경고.push(`수집기 실패: ${실패.join(', ')}`);
+  if (차단.length) 경고.push(`봇 차단 중: ${차단.join(', ')}`);
   if (충돌) 경고.push(`충돌 ${충돌}건`);
   return {
     실행시각: j.run_at,
