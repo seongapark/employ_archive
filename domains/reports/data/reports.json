@@ -107,6 +107,184 @@
   ]
  },
  {
+  "id": "kiet-ec3398",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "실물경제 주요지표 & 업종별 경기지수",
+  "authors": [],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3398&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3397",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "중국, 15·5 시기 산업별 ‘AI+’ 확산 가속화",
+  "authors": [
+   "박소희"
+  ],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3397&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3396",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "미국 AI 정책의 새로운 방향 - ‘슈퍼지능(SI)’의 제도화",
+  "authors": [
+   "박소희"
+  ],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3396&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3395",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "지역의 균형성장, 정부와 기업의 협력으로 완성된다 - 메가프로젝트 시대, 지역 균형성장의 성공 방정식",
+  "authors": [
+   "김학도"
+  ],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3395&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3394",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "모바일 중심 온라인 소비와 플랫폼산업 경쟁력",
+  "authors": [
+   "이홍"
+  ],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3394&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kiet-ec3393",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "지식서비스산업의 구조적 특징과 혁신 활동 실태 - 2025년 서비스 혁신 실태조사로 본 현황과 정책적 시사점",
+  "authors": [
+   "성열용"
+  ],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3393&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "kiet-ec3392",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "제조업 임차공장의 현황과 정책적 시사점",
+  "authors": [
+   "정진영"
+  ],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3392&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3391",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "글로벌 로봇산업의 경쟁 구도 재편과 한국의 대응 전략",
+  "authors": [
+   "박상수"
+  ],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3391&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kiet-ec3390",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "유럽연합 산업가속화법의 주요 내용과 정책 시사점",
+  "authors": [
+   "이주현"
+  ],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3390&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3389",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "[KIET 50주년 해외석학 특별기고] 공공재에서 국가적 우위로 - 녹색산업정책 논리의 변화",
+  "authors": [
+   "조나스 남"
+  ],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3389&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-ec3388",
+  "org": "kiet",
+  "board": "kiet-economy",
+  "series": "월간 산업경제",
+  "title": "2026년 10월호 통합본",
+  "authors": [],
+  "published": "2026-10-30",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/economyDetailView?detail_no=3388&year=&month=&stype=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
   "id": "keis-11371",
   "org": "keis",
   "board": "keis-region",

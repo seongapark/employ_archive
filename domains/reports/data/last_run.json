@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-09T15:00:51+09:00",
+  "at": "2026-11-10T10:00:51+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -53,9 +53,9 @@
     },
     "kli-wage": {
       "ok": true,
-      "parsed": 20,
-      "added": 1,
-      "details": 1,
+      "parsed": 10,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -94,7 +94,7 @@
     "keis-supply": {
       "ok": true,
       "parsed": 39,
-      "added": 1,
+      "added": 0,
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
@@ -193,13 +193,13 @@
     },
     "kiet-economy": {
       "ok": true,
-      "parsed": 30,
-      "added": 0,
-      "details": 0,
+      "parsed": 60,
+      "added": 11,
+      "details": 11,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 428
+      "total": 439
     },
     "kdi-report": {
       "ok": true,
@@ -233,9 +233,9 @@
     },
     "kdi-trends": {
       "ok": true,
-      "parsed": 23,
-      "added": 1,
-      "details": 1,
+      "parsed": 11,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3505,
+  "reports": 3516,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -436,6 +436,38 @@
         "rate": 1.0
       }
     },
+    "kiet": {
+      "월간 산업경제": {
+        "total": 439,
+        "missing": 41,
+        "rate": 0.093
+      },
+      "i-KIET": {
+        "total": 126,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "정책자료": {
+        "total": 39,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "이슈페이퍼": {
+        "total": 83,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구자료": {
+        "total": 82,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구보고서": {
+        "total": 159,
+        "missing": 7,
+        "rate": 0.044
+      }
+    },
     "bok": {
       "BOK 이슈노트": {
         "total": 216,
@@ -477,44 +509,12 @@
         "missing": 8,
         "rate": 1.0
       }
-    },
-    "kiet": {
-      "i-KIET": {
-        "total": 126,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "월간 산업경제": {
-        "total": 428,
-        "missing": 39,
-        "rate": 0.091
-      },
-      "정책자료": {
-        "total": 39,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "이슈페이퍼": {
-        "total": 83,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "연구자료": {
-        "total": 82,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "연구보고서": {
-        "total": 159,
-        "missing": 7,
-        "rate": 0.044
-      }
     }
   },
   "abstract_missing_why": {
     "요약 섹션 없음": 561,
     "텍스트가 없는 스캔본": 312,
-    "원문 없음": 48,
+    "원문 없음": 50,
     "내려받기 실패: Failed to perform, curl: (6) Could not resolve host: www.bok.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.": 13,
     "PDF 를 열 수 없음: list index out of range": 4,
     "요약 없음": 2,
@@ -524,23 +524,23 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 309167,
-    "abstracts_gzip": 3512459,
+    "reports_gzip": 309692,
+    "abstracts_gzip": 3519277,
     "abstracts_shards_gzip": {
       "bok": 297892,
       "kdi": 894978,
       "keis": 257856,
-      "kiet": 729168,
+      "kiet": 735986,
       "kli": 1332565
     }
   },
   "recommend": {
     "judged": 3500,
     "picked": 379,
-    "unjudged": 5,
+    "unjudged": 16,
     "profile_version": "5a624049",
     "title_only": 952,
-    "at": "2026-11-09T15:01:12+09:00",
-    "error": "ValueError: claude -p 가 1 로 끝났다: {\"duration_api_ms\":0,\"stop_reason\":\"stop_sequence\",\"session_id\":\"717e90f7-40cc-4dee-b0d5-5d87740bee20\",\"total_cost_usd\":0,\"usage\":{\"output_tokens_details\":{\"thinking_tokens\":0},\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_token"
+    "at": "2026-11-10T10:00:59+09:00",
+    "error": "ValueError: claude -p 가 1 로 끝났다: {\"duration_api_ms\":0,\"stop_reason\":\"stop_sequence\",\"session_id\":\"ce46ae9a-cb0d-4846-a923-139d96aec211\",\"total_cost_usd\":0,\"usage\":{\"output_tokens_details\":{\"thinking_tokens\":0},\"input_tokens\":0,\"cache_creation_input_tokens\":0,\"cache_read_input_tokens\":0,\"output_token"
   }
 }

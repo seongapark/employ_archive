@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-09",
+  "generated": "2026-11-10",
   "months": 6,
   "entries": [
     {
@@ -107,6 +107,15 @@
       "report": "세계경제전망",
       "start": "2027-04-11",
       "end": "2027-04-25",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "KDI",
+      "org_name_ko": "KDI",
+      "report": "경제전망(상반기)",
+      "start": "2027-05-10",
+      "end": "2027-05-17",
       "date": null,
       "basis": "예상"
     }
