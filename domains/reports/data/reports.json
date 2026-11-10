@@ -16,6 +16,40 @@
   ]
  },
  {
+  "id": "kdi-19298",
+  "org": "kdi",
+  "board": "kdi-report",
+  "series": "연구보고서",
+  "title": "지역의 혁신 주도 성장을 위한 R&D 구조 진단 및 정책과제",
+  "authors": [
+   "구자현"
+  ],
+  "published": "2026-11-30",
+  "date_precision": "month",
+  "pages": 146,
+  "landing_url": "https://www.kdi.re.kr/research/reportView?pub_no=19298",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=IL4qGA6olFauBiZKqxlkeQ%3D%3D",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
+  "id": "bok-11066433",
+  "org": "bok",
+  "board": "bok-research",
+  "series": "조사연구자료",
+  "title": "울산의 인공지능 전환(AX) 대응력 평가",
+  "authors": [
+   "울산본부"
+  ],
+  "published": "2026-11-10",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11066433&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/9788b4c61d05426abd038415c2cff2ee/1/2a233d01dca14a04bce0e09d0f6a866c.pdf",
+  "matched": []
+ },
+ {
   "id": "keis-s44",
   "org": "keis",
   "board": "keis-supply",

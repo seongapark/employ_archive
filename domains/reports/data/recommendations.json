@@ -34217,5 +34217,23 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-10T11:28:55+09:00"
+ },
+ "kdi-19298": {
+  "pick": false,
+  "axis": "",
+  "why": "지역 R&D 투자구조 진단, 고용은 배경",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T15:01:05+09:00"
+ },
+ "bok-11066433": {
+  "pick": false,
+  "axis": "",
+  "why": "울산 AI전환 대응력 평가, 초록 없고 직종별 고용영향 불명",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-10T15:01:05+09:00"
  }
 }
