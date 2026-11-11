@@ -37,16 +37,16 @@
    ]
   },
   "follow": {
-   "collected": 67,
-   "kept": 33,
-   "cited": 6,
-   "press": 6,
-   "mentioned": 6,
+   "collected": 89,
+   "kept": 39,
+   "cited": 9,
+   "press": 9,
+   "mentioned": 7,
    "window": [
     "2026-11-10",
     "2026-11-30"
    ],
-   "at": "2026-11-11 10:29"
+   "at": "2026-11-11 18:49"
   },
   "coverage": {
    "section": [
@@ -793,40 +793,40 @@
    {
     "kw": "청년",
     "d0": 47,
-    "later": 6,
+    "later": 9,
     "first": "2026-11-10",
     "last": "2026-11-11",
     "state": "유지",
     "series": [
      47,
      5,
-     1
+     4
     ]
    },
    {
     "kw": "역대",
     "d0": 18,
-    "later": 0,
-    "first": "",
-    "last": "",
-    "state": "소멸",
+    "later": 1,
+    "first": "2026-11-11",
+    "last": "2026-11-11",
+    "state": "유지",
     "series": [
      18,
      0,
-     0
+     1
     ]
    },
    {
     "kw": "최장",
     "d0": 18,
-    "later": 0,
-    "first": "",
-    "last": "",
-    "state": "소멸",
+    "later": 1,
+    "first": "2026-11-11",
+    "last": "2026-11-11",
+    "state": "유지",
     "series": [
      18,
      0,
-     0
+     1
     ]
    },
    {
@@ -871,14 +871,14 @@
    {
     "kw": "늘었는데",
     "d0": 4,
-    "later": 0,
-    "first": "",
-    "last": "",
-    "state": "소멸",
+    "later": 1,
+    "first": "2026-11-11",
+    "last": "2026-11-11",
+    "state": "유지",
     "series": [
      4,
      0,
-     0
+     1
     ]
    },
    {

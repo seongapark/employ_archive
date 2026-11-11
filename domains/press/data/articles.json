@@ -11906,24 +11906,6 @@
     ]
    },
    {
-    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
-    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
-    "press": "labortoday.co.kr",
-    "pub": "2026-11-10 06:34",
-    "cites": false,
-    "judged": true,
-    "why": "사립대병원 육아휴직급여 차별 실태",
-    "hits": [],
-    "tone": [],
-    "stance": "부정",
-    "focus": "",
-    "kw": [
-     "사립대병원",
-     "육아휴직급여",
-     "제멋대"
-    ]
-   },
-   {
     "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
     "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
     "press": "labortoday.co.kr",
@@ -11943,6 +11925,24 @@
      "암울",
      "청년고용",
      "최장기"
+    ]
+   },
+   {
+    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+    "press": "labortoday.co.kr",
+    "pub": "2026-11-10 06:34",
+    "cites": false,
+    "judged": true,
+    "why": "사립대병원 육아휴직급여 차별 실태",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사립대병원",
+     "육아휴직급여",
+     "제멋대"
     ]
    },
    {
@@ -12569,6 +12569,132 @@
      "전망",
      "청년고용",
      "한국경제"
+    ]
+   },
+   {
+    "title": "[이로운분석] 전체 고용 훈풍에도 청년층은 '한파'…취업자 48개월 연속...",
+    "url": "https://www.eroun.net/news/articleView.html?idxno=95053",
+    "press": "eroun.net",
+    "pub": "2026-11-11 10:44",
+    "cites": true,
+    "judged": true,
+    "why": "청년 고용보험 50개월 감소 인용, 본론은 통계청 취업자",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [
+     "한파",
+     "훈풍"
+    ],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "이로운분석",
+     "취업자"
+    ]
+   },
+   {
+    "title": "포스코 임협 잠정합의 실패에…박성현 광양시장 “재교섭 나서달라”",
+    "url": "https://www.mk.co.kr/article/12205147",
+    "press": "매일경제",
+    "pub": "2026-11-11 11:05",
+    "cites": false,
+    "judged": true,
+    "why": "포스코 임협 결렬, 2월 수치 언급",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "광양시장",
+     "나서달라",
+     "박성현",
+     "실패",
+     "임협",
+     "잠정합",
+     "재교섭",
+     "포스코"
+    ]
+   },
+   {
+    "title": "청년 고용보험 가입자 50개월 연속 감소…역대 최장, 전체는 28만6000명 ...",
+    "url": "https://www.cbci.co.kr/news/articleView.html?idxno=625786",
+    "press": "cbci.co.kr",
+    "pub": "2026-11-11 16:48",
+    "cites": true,
+    "judged": true,
+    "why": "전체 28만6천명 증가·청년 감소 전함",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "역대",
+     "최장"
+    ]
+   },
+   {
+    "title": "고용보험 가입자 28만6000명 늘었는데…청년만 5만4000명 줄었다",
+    "url": "http://www.dailypop.kr/news/articleView.html?idxno=104309",
+    "press": "dailypop.kr",
+    "pub": "2026-11-11 16:56",
+    "cites": true,
+    "judged": true,
+    "why": "가입자 28만6천명 증가, 청년 5만4천명 감소",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "늘었는데"
+    ]
+   },
+   {
+    "title": "청년 고용률, 코로나 이후 최저치…60대 이상도 '비상'",
+    "url": "http://www.newstomato.com/ReadNews.aspx?no=1320128&inflow=N",
+    "press": "뉴스토마토",
+    "pub": "2026-11-11 17:44",
+    "cites": true,
+    "judged": true,
+    "why": "60세 이상 20만4천명 증가 인용",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "고용률",
+     "최저치",
+     "코로"
+    ]
+   },
+   {
+    "title": "포항·서산, 고용위기 선제대응지역 지정 1년 연장",
+    "url": "https://www.newsis.com/view/NISX20261111_0003864384",
+    "press": "뉴시스",
+    "pub": "2026-11-11 18:00",
+    "cites": false,
+    "judged": true,
+    "why": "고용위기 선제대응지역 지정 연장 정책",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "고용위기",
+     "서산",
+     "선제대응지역",
+     "연장",
+     "포항"
     ]
    }
   ]
