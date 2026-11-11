@@ -34235,5 +34235,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-10T15:01:05+09:00"
+ },
+ "bok-11066446": {
+  "pick": false,
+  "axis": "",
+  "why": "지역 혁신의 생산성 파급효과 분석, 고용은 결과변수 아님",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-11T10:00:57+09:00"
  }
 }

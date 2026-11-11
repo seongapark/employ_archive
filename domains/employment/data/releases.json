@@ -1740,6 +1740,31 @@
       },
       "title": "새글 26년 9월 고용동향",
       "url": "https://mods.go.kr/board.es?mid=a10301030200&bid=210&list_no=447479&act=view"
+    },
+    "2026-10": {
+      "attachments": [
+        {
+          "type": "hwpx",
+          "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=447893&seq=2"
+        },
+        {
+          "type": "pdf",
+          "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=447893&seq=1"
+        },
+        {
+          "type": "xlsx",
+          "url": "https://mods.go.kr/boardDownload.es?bid=210&list_no=447893&seq=4"
+        }
+      ],
+      "posted_at": "2026-11-11",
+      "summary": {
+        "lines": [
+          "□ 15~64세 고용률(OECD비교기준)은 70.4%로 전년동월대비 0.3%p 상승",
+          "○ 청년층(15~29세) 고용률은 42.9%로 전년동월대비 1.7%p 하락"
+        ]
+      },
+      "title": "새글 2026년 10월 고용동향",
+      "url": "https://mods.go.kr/board.es?mid=a10301030200&bid=210&list_no=447893&act=view"
     }
   },
   "ei": {
