@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-11T10:00:59.241246+09:00",
+  "run_at": "2026-11-11T12:05:07.117646+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -28,7 +28,7 @@
       "added": 0
     },
     "kdi": {
-      "ok": true,
+      "ok": false,
       "fetched": 0,
       "added": 0
     },
@@ -64,7 +64,9 @@
     }
   },
   "conflicts": [],
-  "errors": [],
+  "errors": [
+    "kdi: DNSError: Failed to perform, curl: (6) Could not resolve host: www.kdi.re.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
+  ],
   "warnings": [
     "oecd_interim: 봇 차단 1일째(유예 7일) — 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/publications/oecd-economic-outlook-interim-report-september-2026_f751d02b-en.html",
     "announce: OECD 공지일 못 읽음 — Blocked: 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/about/news.html"
