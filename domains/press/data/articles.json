@@ -11884,6 +11884,693 @@
     ]
    }
   ],
-  "follow": []
+  "follow": [
+   {
+    "title": "29세 이하 고용보험 가입자, 50개월째 내리막",
+    "url": "https://www.chosun.com/national/labor/2026/11/10/OMCA5ABDAVE3BMBQ7OOETPN2JY/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+    "press": "조선일보",
+    "pub": "2026-11-10 00:43",
+    "cites": true,
+    "judged": true,
+    "why": "29세이하 50개월 감소·60세이상 최대",
+    "hits": [
+     "연령:29세이하",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "내리막"
+    ]
+   },
+   {
+    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+    "press": "labortoday.co.kr",
+    "pub": "2026-11-10 06:34",
+    "cites": false,
+    "judged": true,
+    "why": "사립대병원 육아휴직급여 차별 실태",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사립대병원",
+     "육아휴직급여",
+     "제멋대"
+    ]
+   },
+   {
+    "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
+    "press": "labortoday.co.kr",
+    "pub": "2026-11-10 06:34",
+    "cites": true,
+    "judged": true,
+    "why": "노동부 9일 발표 10월 동향 전함",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "암울",
+     "청년고용",
+     "최장기"
+    ]
+   },
+   {
+    "title": "고용보험 증가분 71%가 60세 이상…청년은 50개월째 감소",
+    "url": "https://www.cwn.kr/news/articleView.html?idxno=61368",
+    "press": "cwn.kr",
+    "pub": "2026-11-10 06:38",
+    "cites": true,
+    "judged": true,
+    "why": "가입자 1597만4천명·증가분 71% 고령",
+    "hits": [
+     "연령:60세이상",
+     "연령:청년",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "증가분"
+    ]
+   },
+   {
+    "title": "작년 청년내일채움공제 예산 64% 미집행…시기 예측 빗나가",
+    "url": "https://www.newsis.com/view/NISX20261109_0003860573",
+    "press": "뉴시스",
+    "pub": "2026-11-10 07:01",
+    "cites": false,
+    "judged": true,
+    "why": "청년내일채움공제 예산 불용 지적",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "미집행",
+     "예산",
+     "예측",
+     "작년",
+     "청년내일채움공제"
+    ]
+   },
+   {
+    "title": "SKAI, 위장 직장가입 ‘연결고리’로 추적..건보공단 탐지 시스템 구축...",
+    "url": "https://kpenews.com/View.aspx?No=4304774",
+    "press": "kpenews.com",
+    "pub": "2026-11-10 08:16",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 허위가입 탐지 시스템",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "SKAI",
+     "건보공단",
+     "구축",
+     "연결고리",
+     "위장",
+     "직장가입"
+    ]
+   },
+   {
+    "title": "SKAI, 건보공단 허위취득 탐지 시스템 구축…그래프DB로 부정가입 잡는...",
+    "url": "https://view.asiae.co.kr/article/2026111008235695684",
+    "press": "아시아경제",
+    "pub": "2026-11-10 08:23",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 그래프DB 구축 소식",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "DB",
+     "SKAI",
+     "건보공단",
+     "구축",
+     "그래프",
+     "부정가입",
+     "허위취득"
+    ]
+   },
+   {
+    "title": "SKAI, 건보공단에 ‘아젠스그래프’ 구축…660억원대 건보료 ‘위장 취...",
+    "url": "https://www.etoday.co.kr/news/view/2646074",
+    "press": "이투데이",
+    "pub": "2026-11-10 08:40",
+    "cites": false,
+    "judged": true,
+    "why": "건보료 위장취득 탐지 시스템",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "SKAI",
+     "건보공단",
+     "건보료",
+     "구축",
+     "아젠스그래프",
+     "위장"
+    ]
+   },
+   {
+    "title": "SKAI, 건보공단 허위 직장가입자 탐지 시스템에 그래프DB 공급",
+    "url": "http://www.beyondpost.co.kr/view.php?ud=20261110084233292946a9e4dd7f_30",
+    "press": "beyondpost.co.kr",
+    "pub": "2026-11-10 08:46",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 그래프DB 공급 소식",
+    "hits": [
+     "지표:가입자"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "DB",
+     "SKAI",
+     "건보공단",
+     "그래프",
+     "직장가입자",
+     "허위"
+    ]
+   },
+   {
+    "title": "[브랜딩연구소 기획기사] 2027년 신청할 수 있는 강사 지원제도를 알아...",
+    "url": "https://www.lecturernews.com/news/articleView.html?idxno=213445",
+    "press": "lecturernews.com",
+    "pub": "2026-11-10 09:00",
+    "cites": false,
+    "judged": true,
+    "why": "강사 지원제도 안내 기획기사",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "강사",
+     "기획기사",
+     "브랜딩연구소",
+     "신청할",
+     "지원제도"
+    ]
+   },
+   {
+    "title": "반도체 호황에도 청년은 소외…‘쉬었음’ 청년 24%는 전공과 다른 일자...",
+    "url": "https://biz.heraldcorp.com/article/10931579?ref=naver",
+    "press": "헤럴드경제",
+    "pub": "2026-11-10 09:18",
+    "cites": true,
+    "judged": true,
+    "why": "29세이하 50개월 감소 인용",
+    "hits": [
+     "산업:반도체(전자·통신)",
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "다른",
+     "소외",
+     "전공",
+     "호황"
+    ]
+   },
+   {
+    "title": "SKAI, 그래프DB 기반 국민건강보험공단 허위취득 탐지 시스템 구축 완료",
+    "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=714070",
+    "press": "digitaltoday.co.kr",
+    "pub": "2026-11-10 09:22",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 탐지 시스템 구축 완료",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "DB",
+     "SKAI",
+     "구축",
+     "국민건강보험공단",
+     "그래프",
+     "기반",
+     "완료",
+     "허위취득"
+    ]
+   },
+   {
+    "title": "SKAI, 건보공단 허위취득 탐지 시스템에 ‘아젠스그래프’ 적용",
+    "url": "https://www.sentv.co.kr/article/view/sentv202611100052",
+    "press": "sentv.co.kr",
+    "pub": "2026-11-10 09:32",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 아젠스그래프 적용",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "SKAI",
+     "건보공단",
+     "아젠스그래프",
+     "허위취득"
+    ]
+   },
+   {
+    "title": "SKAI, 건보공단 허위 직장가입자 탐지 시스템 구축…그래프DB 기술 적용",
+    "url": "https://www.ddaily.co.kr/page/view/2026111009360491560",
+    "press": "ddaily.co.kr",
+    "pub": "2026-11-10 09:39",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 탐지 시스템 구축",
+    "hits": [
+     "지표:가입자"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "DB",
+     "SKAI",
+     "건보공단",
+     "구축",
+     "그래프",
+     "직장가입자",
+     "허위"
+    ]
+   },
+   {
+    "title": "청년내일채움공제 예산 64% 불용…신청 시점 예측 빗나갔다",
+    "url": "https://biz.heraldcorp.com/article/10931839?ref=naver",
+    "press": "헤럴드경제",
+    "pub": "2026-11-10 10:37",
+    "cites": false,
+    "judged": true,
+    "why": "청년내일채움공제 예산 불용",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "불용",
+     "빗나갔",
+     "예산",
+     "예측",
+     "청년내일채움공제"
+    ]
+   },
+   {
+    "title": "[AI 브리프] 크라우드웍스, 산업부 '제조 암묵지 기반 AI 모델 개발' 사...",
+    "url": "https://www.itdaily.kr/news/articleView.html?idxno=242800",
+    "press": "itdaily.kr",
+    "pub": "2026-11-10 11:04",
+    "cites": false,
+    "judged": true,
+    "why": "AI 업계 소식 묶음 브리프",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "AI",
+     "기반",
+     "모델",
+     "브리프",
+     "암묵",
+     "크라우드웍스"
+    ]
+   },
+   {
+    "title": "SKAI, 건보료 회피 꼼수 잡는다…국산 그래프DB 투입",
+    "url": "https://zdnet.co.kr/view/?no=20261110111729",
+    "press": "zdnet.co.kr",
+    "pub": "2026-11-10 11:18",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 국산 그래프DB 투입",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "DB",
+     "SKAI",
+     "건보료",
+     "국산",
+     "그래프",
+     "꼼수",
+     "투입",
+     "회피"
+    ]
+   },
+   {
+    "title": "반도체 호황에도 청년 소외...‘쉬었음’ 24% 비전공 일자리",
+    "url": "https://biz.heraldcorp.com/article/10932019?ref=naver",
+    "press": "헤럴드경제",
+    "pub": "2026-11-10 11:27",
+    "cites": true,
+    "judged": true,
+    "why": "29세이하 50개월 감소 인용",
+    "hits": [
+     "산업:반도체(전자·통신)",
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "비전공",
+     "소외",
+     "호황"
+    ]
+   },
+   {
+    "title": "하동군, 지역 상공인 소통창구 '상공협의회' 구성 본격화",
+    "url": "https://www.idomin.com/news/articleView.html?idxno=2019213",
+    "press": "idomin.com",
+    "pub": "2026-11-10 14:12",
+    "cites": false,
+    "judged": true,
+    "why": "하동군 상공협의회 구성 사업",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "본격화",
+     "상공인",
+     "상공협의회",
+     "소통창구",
+     "지역",
+     "하동군"
+    ]
+   },
+   {
+    "title": "고용보험 가입자 28만6천 명 늘었지만…청년층은 5만4천 명 줄었다",
+    "url": "https://www.dailyt.co.kr/newsView/dlt202611100012",
+    "press": "dailyt.co.kr",
+    "pub": "2026-11-10 15:14",
+    "cites": true,
+    "judged": true,
+    "why": "가입자 28만6천명 증가·청년 감소",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "주제",
+    "kw": []
+   },
+   {
+    "title": "9월 수주 49% 늘었지만…체감경기 악화에 웃지 못한 건설업 [부동산360]",
+    "url": "https://biz.heraldcorp.com/article/10932410?ref=naver",
+    "press": "헤럴드경제",
+    "pub": "2026-11-10 15:30",
+    "cites": true,
+    "judged": true,
+    "why": "건설업 가입자 5천명 감소 인용",
+    "hits": [
+     "산업:건설업"
+    ],
+    "tone": [
+     "악화"
+    ],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "수주",
+     "체감경기"
+    ]
+   },
+   {
+    "title": "[ICT 종합] 로지텍 코리아 및 AMD 소식 외",
+    "url": "https://www.gamevu.co.kr/news/articleView.html?idxno=62147",
+    "press": "gamevu.co.kr",
+    "pub": "2026-11-10 17:46",
+    "cites": false,
+    "judged": true,
+    "why": "ICT 업계 소식 묶음",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "AMD",
+     "ICT",
+     "로지텍",
+     "소식",
+     "코리"
+    ]
+   },
+   {
+    "title": "[JOB리포트] 고용보험 가입자 28만6000명 늘었지만…청년 고용은 여전히...",
+    "url": "https://www.news2day.co.kr/article/20261110500230",
+    "press": "news2day.co.kr",
+    "pub": "2026-11-10 18:14",
+    "cites": true,
+    "judged": true,
+    "why": "가입자 28만6천명 증가 전함",
+    "hits": [
+     "연령:청년",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "주제",
+    "kw": [
+     "JOB",
+     "리포트",
+     "여전히"
+    ]
+   },
+   {
+    "title": "월급 300만원 직장인, 내년 보험료 월 8320원 더 낸다",
+    "url": "https://www.vegannews.co.kr/news/article.html?no=403172",
+    "press": "vegannews.co.kr",
+    "pub": "2026-11-10 18:50",
+    "cites": false,
+    "judged": true,
+    "why": "건보·연금 보험료 인상 계산",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "보험료",
+     "월급",
+     "직장인"
+    ]
+   },
+   {
+    "title": "최저임금보다 낮아질라… 출산휴가 급여 상한 또 ‘땜질 인상’",
+    "url": "https://www.kmib.co.kr/article/20261110502024",
+    "press": "국민일보",
+    "pub": "2026-11-10 19:03",
+    "cites": false,
+    "judged": true,
+    "why": "출산휴가급여 상한 인상 문제",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "낮아질라",
+     "땜질",
+     "인상",
+     "최저임금",
+     "출산휴"
+    ]
+   },
+   {
+    "title": "30인 이상 기업에도 정규직 전환 지원금",
+    "url": "https://www.segye.com/newsView/20261110515847?OutUrl=naver",
+    "press": "세계일보",
+    "pub": "2026-11-10 20:08",
+    "cites": true,
+    "judged": true,
+    "why": "청년 가입자 50개월 감소 인용",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "정규직",
+     "지원금"
+    ]
+   },
+   {
+    "title": "SKAI, 그래프DB로 공공 AX 시장 공략 … 건보공단 허위가입 잡는다",
+    "url": "http://www.worktoday.co.kr/news/articleView.html?idxno=91812",
+    "press": "worktoday.co.kr",
+    "pub": "2026-11-10 22:58",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 시스템 구축 사업",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "AX",
+     "DB",
+     "SKAI",
+     "건보공단",
+     "공략",
+     "그래프",
+     "허위가입"
+    ]
+   },
+   {
+    "title": "[사설] 커지는 일률적 정년 연장 우려…'벼랑 끝 청년' 안 보이나",
+    "url": "https://www.hankyung.com/article/2026111083851",
+    "press": "한국경제",
+    "pub": "2026-11-11 01:18",
+    "cites": true,
+    "judged": true,
+    "why": "28만6천·청년 5만4천 감소 인용",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "벼랑",
+     "보이",
+     "사설",
+     "연장",
+     "우려",
+     "정년"
+    ]
+   },
+   {
+    "title": "실업급여 신청 10명 중 3명은 60세 이상, 새해에 몰린다",
+    "url": "https://www.segye.com/newsView/20261111502673?OutUrl=naver",
+    "press": "세계일보",
+    "pub": "2026-11-11 07:52",
+    "cites": false,
+    "judged": true,
+    "why": "9월 브리핑 인용, 구직급여 연령 분석",
+    "hits": [
+     "연령:60세이상"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "새해"
+    ]
+   },
+   {
+    "title": "[뉴스클레임 사설]여당은 '비거주 종부세 14억' 요구 거둬야",
+    "url": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082120",
+    "press": "newsclaim.co.kr",
+    "pub": "2026-11-11 08:28",
+    "cites": true,
+    "judged": true,
+    "why": "청년 가입자 50개월 감소 인용",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "거둬야",
+     "뉴스클레임",
+     "사설",
+     "여당",
+     "요구",
+     "종부세"
+    ]
+   },
+   {
+    "title": "[기자수첩] 반도체 호황, 청년 몫은 없었다",
+    "url": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082121",
+    "press": "newsclaim.co.kr",
+    "pub": "2026-11-11 08:30",
+    "cites": true,
+    "judged": true,
+    "why": "10월 28만6천·청년 5만4천 감소",
+    "hits": [
+     "산업:반도체(전자·통신)",
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "기자수첩",
+     "호황"
+    ]
+   },
+   {
+    "title": "자진퇴사 청년에게도 '실업급여'?",
+    "url": "https://www.datasom.co.kr/news/articleView.html?idxno=210748",
+    "press": "데이터솜",
+    "pub": "2026-11-11 09:34",
+    "cites": false,
+    "judged": true,
+    "why": "자진퇴사 실업급여 제도 연구",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "자진퇴사",
+     "청년에게"
+    ]
+   },
+   {
+    "title": "[오늘의 신문] 한국경제 내년 3.1% 성장 전망에도 청년고용·자영업 '그...",
+    "url": "http://kor.theasian.asia/archives/421324",
+    "press": "kor.theasian.asia",
+    "pub": "2026-11-11 10:04",
+    "cites": false,
+    "judged": true,
+    "why": "오늘의 신문 헤드라인 모음",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "성장",
+     "신문",
+     "전망",
+     "청년고용",
+     "한국경제"
+    ]
+   }
+  ]
  }
 }
