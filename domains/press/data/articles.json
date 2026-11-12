@@ -12761,6 +12761,129 @@
      "사회보험료",
      "자동이체"
     ]
+   },
+   {
+    "title": "청년 일자리 감소 94%가 AI 업종…고용시장 변화 시작됐나",
+    "url": "https://www.mstoday.co.kr/news/articleView.html?idxno=200462",
+    "press": "mstoday.co.kr",
+    "pub": "2026-11-12 11:38",
+    "cites": false,
+    "judged": true,
+    "why": "한은·노동연구원 청년고용 분석",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "AI",
+     "변화",
+     "시작됐",
+     "업종"
+    ]
+   },
+   {
+    "title": "건보공단, 4대 사회보험료 자동이체 신청·변경·해지 365일 운영",
+    "url": "https://www.financialpost.co.kr/news/articleView.html?idxno=300427",
+    "press": "financialpost.co.kr",
+    "pub": "2026-11-12 12:56",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 보험료 자동이체 운영",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "건보공단",
+     "사회보험료",
+     "자동이체"
+    ]
+   },
+   {
+    "title": "포항시, 고용위기 선제대응지역 지정 연장으로 고용안정망 확보",
+    "url": "https://www.etoday.co.kr/news/view/2647457",
+    "press": "이투데이",
+    "pub": "2026-11-12 14:38",
+    "cites": false,
+    "judged": true,
+    "why": "포항 고용위기지역 지정 연장",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "고용안정망",
+     "고용위기",
+     "선제대응지역",
+     "연장",
+     "포항시",
+     "확보"
+    ]
+   },
+   {
+    "title": "철강 한파 겪는 포항, '고용위기 선제대응지역' 내년 11월까지 1년 더 연...",
+    "url": "https://www.imaeil.com/page/view/2026111214001268007",
+    "press": "imaeil.com",
+    "pub": "2026-11-12 14:48",
+    "cites": false,
+    "judged": true,
+    "why": "포항 철강업 가입자 지역 통계",
+    "hits": [
+     "산업:철강(1차금속)"
+    ],
+    "tone": [
+     "한파"
+    ],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "고용위기",
+     "선제대응지역",
+     "포항"
+    ]
+   },
+   {
+    "title": "포항시, 고용위기 선제대응지역 1년 연장…오는 2027년 11월까지 지원",
+    "url": "https://www.eroun.net/news/articleView.html?idxno=95275",
+    "press": "eroun.net",
+    "pub": "2026-11-12 16:28",
+    "cites": false,
+    "judged": true,
+    "why": "포항 고용위기지역 1년 연장",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "고용위기",
+     "선제대응지역",
+     "연장",
+     "포항시"
+    ]
+   },
+   {
+    "title": "철강 고용보험 가입자 2년 새 1070명 줄어…포항, 고용위기 선제대응지...",
+    "url": "https://www.edaily.co.kr/News/Read?newsId=04723206645645064&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+    "press": "이데일리",
+    "pub": "2026-11-12 18:19",
+    "cites": false,
+    "judged": true,
+    "why": "포항 철강 가입자 감소·지정 연장",
+    "hits": [
+     "산업:철강(1차금속)",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "고용위기",
+     "선제대응",
+     "포항"
+    ]
    }
   ]
  }

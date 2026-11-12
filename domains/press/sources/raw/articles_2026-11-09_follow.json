@@ -6,32 +6,32 @@
   "2026-11-10",
   "2026-11-30"
  ],
- "collected_at": "2026-11-12 11:31",
+ "collected_at": "2026-11-12 19:13",
  "volume": {
-  "collected": 111,
-  "articles": 42,
-  "press": 34,
+  "collected": 145,
+  "articles": 48,
+  "press": 38,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29683,
+   "api_total": 29690,
    "fetched": 100,
    "truncated": false,
-   "in_window": 50,
-   "relevant": 42,
-   "new": 50
+   "in_window": 57,
+   "relevant": 48,
+   "new": 57
   },
   {
    "query": "구직급여",
-   "api_total": 95225,
+   "api_total": 95239,
    "fetched": 100,
    "truncated": false,
-   "in_window": 63,
+   "in_window": 79,
    "relevant": 4,
-   "new": 52
+   "new": 68
   },
   {
    "query": "구인배수",
@@ -44,12 +44,12 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18736,
+   "api_total": 18752,
    "fetched": 100,
    "truncated": false,
-   "in_window": 19,
-   "relevant": 12,
-   "new": 6
+   "in_window": 35,
+   "relevant": 16,
+   "new": 17
   },
   {
    "query": "건설업 고용보험",
@@ -535,6 +535,66 @@
    "pub": "2026-11-12 10:44",
    "q": "고용보험 가입자",
    "rel": true
+  },
+  {
+   "title": "청년 일자리 감소 94%가 AI 업종…고용시장 변화 시작됐나",
+   "desc": "한국은행 조사국의 오삼일 고용연구팀장이 제시한 분석에 따르면 국민연금 가입자를 기준으로 2022년... 한국노동연구원의 방형준 선임연구위원은 2018년부터 2025년까지 고용보험 가입 상용직 자료와 지역별고용조사를...",
+   "link": "https://www.mstoday.co.kr/news/articleView.html?idxno=200462",
+   "originallink": "https://www.mstoday.co.kr/news/articleView.html?idxno=200462",
+   "press": "mstoday.co.kr",
+   "pub": "2026-11-12 11:38",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "건보공단, 4대 사회보험료 자동이체 신청·변경·해지 365일 운영",
+   "desc": "국민연금, 고용보험, 산재보험 등 4대 사회보험료의 자동이체를 주말이나 공휴일에도 신청하고 변경·해지할 수 있다. 금융기관 영업일에 맞춰 처리해야 했던 업무가 연중무휴로 확대되면서 가입자와 사업장의 납부 정보...",
+   "link": "https://www.financialpost.co.kr/news/articleView.html?idxno=300427",
+   "originallink": "https://www.financialpost.co.kr/news/articleView.html?idxno=300427",
+   "press": "financialpost.co.kr",
+   "pub": "2026-11-12 12:56",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "포항시, 고용위기 선제대응지역 지정 연장으로 고용안정망 확보",
+   "desc": "이투데이=대구경북취재본부 최종태 기자 | 내년 11월 20일까지 기한 연장…고용지원금·직업훈련·생계비 융자 등 혜택 지속 철강 불황에 포항 고용보험 가입자 점차 감소…정부 지원 1년 더 이어진다 포항시의 고용위기...",
+   "link": "https://www.etoday.co.kr/news/view/2647457",
+   "originallink": "https://www.etoday.co.kr/news/view/2647457",
+   "press": "이투데이",
+   "pub": "2026-11-12 14:38",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "철강 한파 겪는 포항, '고용위기 선제대응지역' 내년 11월까지 1년 더 연...",
+   "desc": "세계적인 철강 경기 부진 여파로 포항 1차 철강 제조업의 고용보험 가입자는 지난 8월 기준 2만7천445명에 그쳐 지난해 같은달보다 270명(1.0%), 2024년 8월보다는 1천70명(3.8%) 줄었다. 이에 시는 지난달 2일 연장 건의서를...",
+   "link": "https://n.news.naver.com/mnews/article/088/0001039949?sid=102",
+   "originallink": "https://www.imaeil.com/page/view/2026111214001268007",
+   "press": "imaeil.com",
+   "pub": "2026-11-12 14:48",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "포항시, 고용위기 선제대응지역 1년 연장…오는 2027년 11월까지 지원",
+   "desc": "올해 8월 포항지역 1차 철강 제조업 고용보험 가입자는 2만 7445명으로 지난 해 같은 기간보다 270명(1.0%)과 2024년 8월보다 1070명(3.8%) 감소했다. 포항시는 지난 10월 2일 고용동향과 기업 경영여건을 분석한 연장 의견서를...",
+   "link": "https://www.eroun.net/news/articleView.html?idxno=95275",
+   "originallink": "https://www.eroun.net/news/articleView.html?idxno=95275",
+   "press": "eroun.net",
+   "pub": "2026-11-12 16:28",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "철강 고용보험 가입자 2년 새 1070명 줄어…포항, 고용위기 선제대응지...",
+   "desc": "포항의 1차 철강 제조업 고용보험 가입자가 2년 새 1070명 줄어든 가운데 정부가 포항의 고용위기 선제대응지역 지정 기간을 1년 연장했다. 지역 기업과 근로자는 2027년 11월 20일까지 고용유지와 직업훈련 등에 대한 정부...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006409107?sid=100",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=04723206645645064&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-11-12 18:19",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
   }
  ],
  "excluded": [
@@ -679,21 +739,21 @@
    "rel": false
   },
   {
-   "title": "넥슨 3사 대기발령 300명 넘어…'선택과 집중' 뒤 게임업계 고용불안",
-   "desc": "근속연수에 따라 퇴직금 외에 최대 30개월치 급여를 지급하는 조건이다. 회사는 퇴사를 강제하지 않는다는... 넥슨은 그동안 사내 구직과 전환배치 제도를 운영해 왔으며, 2024년에는 신규 채용 수요 일부를...",
-   "link": "http://www.popcornnews.net/news/articleView.html?idxno=139364",
-   "originallink": "http://www.popcornnews.net/news/articleView.html?idxno=139364",
-   "press": "popcornnews.net",
-   "pub": "2026-11-10 11:20",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "“추가근로가 더 큰 경제 보상으로…‘디딤돌소득’ 혁신”",
    "desc": "기본소득은 기존 실업급여에 부과되던 구직활동과 노동시장 서비스 참여 의무에서 벗어나게 했지만 고용에 미친 효과는 크지 않았다. 기존에는 기본소득을 하게 되면 고용 증가가 되고, 이를 통해 비용을 일부 충당할 수...",
    "link": "https://n.news.naver.com/mnews/article/016/0002721360?sid=102",
    "originallink": "https://biz.heraldcorp.com/article/10931969?ref=naver",
    "press": "헤럴드경제",
+   "pub": "2026-11-10 11:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "넥슨 3사 대기발령 300명 넘어…'선택과 집중' 뒤 게임업계 고용불안",
+   "desc": "근속연수에 따라 퇴직금 외에 최대 30개월치 급여를 지급하는 조건이다. 회사는 퇴사를 강제하지 않는다는... 넥슨은 그동안 사내 구직과 전환배치 제도를 운영해 왔으며, 2024년에는 신규 채용 수요 일부를...",
+   "link": "http://www.popcornnews.net/news/articleView.html?idxno=139364",
+   "originallink": "http://www.popcornnews.net/news/articleView.html?idxno=139364",
+   "press": "popcornnews.net",
    "pub": "2026-11-10 11:20",
    "q": "구직급여",
    "rel": false
@@ -1199,21 +1259,21 @@
    "rel": false
   },
   {
-   "title": "철강 불황에 포항 고용위기 선제대응지역 1년 연장…근로자·기업 지원...",
-   "desc": "포항은 철강업계의 어려움과 고용불안이 이어지면서 실제 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만7445명으로, 2년 전보다 1070명(3.8%) 감소했다. 이번 기간 연장으로 경영난으로 휴업이나 휴직을...",
-   "link": "https://www.hidomin.com/news/articleView.html?idxno=729054",
-   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=729054",
-   "press": "hidomin.com",
+   "title": "철강 불황에 흔들린 포항 고용…정부 ‘선제대응지역’ 연장 카드로 방...",
+   "desc": "올해 8월 기준 포항시 1차 철강 제조업 고용보험 피보험자는 2만7445명으로 지난해 같은 달보다 270명(1.0%), 2024년 8월보다는 1070명(3.8%) 줄었다. 포항시는 지난달 2일 이 같은 고용동향과 기업 여건을 담은 의견서를...",
+   "link": "https://www.kbmaeil.com/article/20261112500250",
+   "originallink": "https://www.kbmaeil.com/article/20261112500250",
+   "press": "kbmaeil.com",
    "pub": "2026-11-12 11:24",
    "q": "제조업 고용보험",
    "rel": false
   },
   {
-   "title": "철강 불황에 흔들린 포항 고용…정부 ‘선제대응지역’ 연장 카드로 방...",
-   "desc": "실제로 올해 8월 기준 포항시 1차 철강 제조업 고용보험 피보험자는 2만7445명으로 지난해 같은 달보다 270명(1.0%), 2024년 8월보다는 1070명(3.8%) 줄었다. 포항시는 지난달 2일 이 같은 고용동향과 기업 여건을 담은 의견서를...",
-   "link": "https://www.kbmaeil.com/article/20261112500250",
-   "originallink": "https://www.kbmaeil.com/article/20261112500250",
-   "press": "kbmaeil.com",
+   "title": "철강 불황에 포항 고용위기 선제대응지역 1년 연장…근로자·기업 지원...",
+   "desc": "포항은 철강업계의 어려움과 고용불안이 이어지면서 실제 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만7445명으로, 2년 전보다 1070명(3.8%) 감소했다. 이번 기간 연장으로 경영난으로 휴업이나 휴직을...",
+   "link": "https://www.hidomin.com/news/articleView.html?idxno=729054",
+   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=729054",
+   "press": "hidomin.com",
    "pub": "2026-11-12 11:24",
    "q": "제조업 고용보험",
    "rel": false
@@ -1226,6 +1286,286 @@
    "press": "아시아투데이",
    "pub": "2026-11-12 11:30",
    "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "철강 불황에 흔들리는 포항 일자리…정부 지원 1년 연장",
+   "desc": "포항의 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만7445명이다. 지난해 같은 달보다 270명(1.0%), 2024년 8월보다 1070명(3.8%) 감소했다. 시는 지난달 2일 철강산업의 고용동향과 기업 경영여건을 분석해 지정...",
+   "link": "https://n.news.naver.com/mnews/article/119/0003154378?sid=102",
+   "originallink": "https://www.dailian.co.kr/news/view/1714171/?sc=Naver",
+   "press": "dailian.co.kr",
+   "pub": "2026-11-12 11:53",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "행복주택 공실 4개월 이상이면 입주 문턱 낮아진다...소득·자산기준 완...",
+   "desc": "사회초년생은 소득이 있는 일을 한 기간이 정해진 기간 이내인 혼인 중이 아닌 무주택자로, 현재 일하고 있거나 퇴직 뒤 구직급여 수급자격을 인정받았거나 예술인이면 해당한다. 대학생 계층은 대학에 다니고 있거나...",
+   "link": "http://www.dailypop.kr/news/articleView.html?idxno=104433",
+   "originallink": "http://www.dailypop.kr/news/articleView.html?idxno=104433",
+   "press": "dailypop.kr",
+   "pub": "2026-11-12 13:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "서류 떼던 정부24, 어디까지 똑똑해질까",
+   "desc": "혜택알리미는 지난해 청년·출산·구직·전입 등 4개 분야 1530종에서 올해 전 분야 6000여종으로 안내 범위를... ‘아이가 태어났는데 어떤 지원을 받을 수 있나’라고 물으면 부모급여와 아동수당 등을 안내하는...",
+   "link": "https://www.naeil.com/news/read/608511?ref=naver",
+   "originallink": "https://www.naeil.com/news/read/608511?ref=naver",
+   "press": "naeil.com",
+   "pub": "2026-11-12 13:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "포항시 '고용위기 선제대응지역' 지정 1년 연장···2년간 정부 지원 확...",
+   "desc": "실제로 포항시의 1차 철강 제조업 고용보험 피보험자 수는 올해 8월 기준 2만 7,445명으로 전년 동월 대비 270명(1.0%) 감소했으며, 2년 전인 2024년 8월과 비교하면 1,070명(3.8%)이나 줄어든 상태다. 이에 포항시는 지난달 2일...",
+   "link": "https://www.cnbnews.com/news/articleView.html?idxno=1023467",
+   "originallink": "https://www.cnbnews.com/news/articleView.html?idxno=1023467",
+   "press": "cnbnews.com",
+   "pub": "2026-11-12 13:12",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "철강·이차전지 동반 침체 포항…고용위기 정부 지원 1년 더",
+   "desc": "지난 8월 기준 포항시 1차 철강 제조업의 고용보험 피보험자 수는 2만 7천445명으로, 2년 전보다 1천70명(3.8%) 줄었다. 주요 철강기업의 신규 채용 인원도 2024년 655명에서 지난해 26명으로 96% 이상 급감했다. 이번 고용안정...",
+   "link": "https://www.idaegu.com/news/articleView.html?idxno=666952",
+   "originallink": "https://www.idaegu.com/news/articleView.html?idxno=666952",
+   "press": "idaegu.com",
+   "pub": "2026-11-12 13:50",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "신한은행, 외국인 유학생 국내 취업 돕고 금융 서비스 지원",
+   "desc": "외국인 구직자에게 금융 상담과 서비스를 소개할 예정이다. 취업 준비 단계부터 은행이 함께하면 유학생이 졸업 뒤 급여 계좌와 금융 생활을 자연스럽게 이어 갈 수 있는 셈이다. 신한은행 관계자는 \"외국인 주민과...",
+   "link": "https://www.joongangenews.com/news/articleView.html?idxno=563352",
+   "originallink": "https://www.joongangenews.com/news/articleView.html?idxno=563352",
+   "press": "중앙이코노미뉴스",
+   "pub": "2026-11-12 14:14",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "신한은행, 외국인 유학생 취업부터 금융 정착까지 지원 강화",
+   "desc": "지난해 9월 출시한 전용 신용대출 상품 'SOL 글로벌론'은 국내에서 일정 기간 급여를 수령하고 체류자격 등... 박람회'에 참가해 외국인 구직자를 대상으로 금융 상담을 진행하고 주요 금융서비스를 소개할 예정이다.",
+   "link": "https://www.job-post.co.kr/news/articleView.html?idxno=238045",
+   "originallink": "https://www.job-post.co.kr/news/articleView.html?idxno=238045",
+   "press": "job-post.co.kr",
+   "pub": "2026-11-12 14:16",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "포항시 ‘고용위기 선제대응지역’ 지정 1년 연장 확정",
+   "desc": "실제로 포항시 1차 철강 제조업 고용보험 피보험자는 지난 8월 기준 2만 7445명으로 2024년 동월 대비 1070명(3.8%) 감소하는 등 지역 고용 불안이 지속돼 왔다.이에 포항시는 지난달 2일 철강산업 고용 동향과 기업 경영...",
+   "link": "https://www.kbsm.net/news/view.php?idx=541441",
+   "originallink": "https://www.kbsm.net/news/view.php?idx=541441",
+   "press": "kbsm.net",
+   "pub": "2026-11-12 14:36",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "[금융로드] 신한은행, 서울글로벌센터·오픈놀과 손잡고 외국인 유학생...",
+   "desc": "외국인 구직자를 대상으로 금융 상담과 다양한 금융서비스를 소개할 예정이다. 이번 박람회는 서울시가 주최하고 서울글로벌센터가 주관하며, 신한은행은 현장에서 계좌 개설 안내, 급여 이체 및 환전 관련 상담 등...",
+   "link": "http://www.newsroad.co.kr/news/articleView.html?idxno=67611",
+   "originallink": "http://www.newsroad.co.kr/news/articleView.html?idxno=67611",
+   "press": "newsroad.co.kr",
+   "pub": "2026-11-12 14:50",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[보험家소식] KB손보·NH농협생명·현대해상",
+   "desc": "이번 프로그램에는 자활 의지와 건강 상태 등을 고려해 선발한 노숙인 구직자 20명이 참여했다. 참가자들은... '특정질병 항바이러스제 치료비'는 약관에서 정한 수두 등 질병을 진단받고 급여 항바이러스제를 처방받으면...",
+   "link": "https://www.ezyeconomy.com/news/articleView.html?idxno=241793",
+   "originallink": "https://www.ezyeconomy.com/news/articleView.html?idxno=241793",
+   "press": "ezyeconomy.com",
+   "pub": "2026-11-12 14:54",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[보험업계 동향] 현대해상ㆍNH농협생명ㆍiM라이프(11.12)",
+   "desc": "'특정질병 항바이러스제 치료비'는 수두 등 약관에 정한 질병으로 급여 항바이러스제를 처방받으면... ■ NH농협생명·서울시, 노숙인 자활지원 '같이 일해, 가치 더해' 첫 운영 - 노숙인 구직자 20명 김포 농가서 고추·가지...",
+   "link": "http://www.weeklytoday.com/news/articleView.html?idxno=801870",
+   "originallink": "http://www.weeklytoday.com/news/articleView.html?idxno=801870",
+   "press": "weeklytoday.com",
+   "pub": "2026-11-12 15:28",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "청년 취업자는 줄고 공공임대 자리는 좁아져… “청년·취약계층 예산 ...",
+   "desc": "졸업반 청년의 고용보험료를 국가가 대신 내고, 첫 직장을 못 구하면 구직급여(월 110만원, 6개월)와 상담·훈련을 받게 하는 제도다. “일할 기회가 가장 간절한 사람이 고용안전망에서 가장 멀리 있다”며 1만명...",
+   "link": "https://www.ibabynews.com/news/articleView.html?idxno=156855",
+   "originallink": "https://www.ibabynews.com/news/articleView.html?idxno=156855",
+   "press": "ibabynews.com",
+   "pub": "2026-11-12 15:46",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "포항시 고용위기 선제대응지역 지정 1년 연장…내년 11월까지 지원 지속",
+   "desc": "실제로 포항지역 1차 철강 제조업의 고용보험 피보험자는 올해 8월 기준 2만7,445명으로, 지난해 같은 달보다 270명(1.0%) 줄었다. 2024년 8월과 비교하면 감소 인원은 1...",
+   "link": "http://www.breaknews.com/1250582",
+   "originallink": "http://www.breaknews.com/1250582",
+   "press": "breaknews.com",
+   "pub": "2026-11-12 15:50",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "미래에셋증권, 누적 순익 2조5016억…우리은행, 소부장 기업 금융지원 ...",
+   "desc": "'특정질병 항바이러스제 치료비'는 수두 등 약관에서 정한 질병을 진단받고 급여 항바이러스제를 처방받은... 프로그램에는 자활 의지와 건강 상태 등을 고려해 선발한 노숙인 구직자 20명이 참여했다. 참여자들은...",
+   "link": "https://www.sisaon.co.kr/news/articleView.html?idxno=206023",
+   "originallink": "https://www.sisaon.co.kr/news/articleView.html?idxno=206023",
+   "press": "sisaon.co.kr",
+   "pub": "2026-11-12 15:58",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "청년을 취업 대기실에 가두는 노동시장 이중구조",
+   "desc": "눈높이나 구직 의욕 탓으로 돌릴 수 없다는 것이다. 기업 규모에 따라 보상과 성장 기회가 크게 갈리는... 대신 근로자가 직장을 옮기거나 일자리를 잃었을 때 실업급여와 직업훈련, 재취업 지원을 쉽게 받도록 해주는 게...",
+   "link": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
+   "originallink": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
+   "press": "fntimes.com",
+   "pub": "2026-11-12 16:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[금융권 이모저모]토스뱅크, 펀드 판매 시작…통장 이자로 자동 투자 外",
+   "desc": "지난 11일 경기 김포시 농가에서 NH농협생명과 서울시 관계자들이 노숙인 구직자들과 자활지원 프로그램... 금융투자협회는 2005년 소망의 집과 결연을 맺은 이후 임직원 급여를 모아 정기적인 후원과 봉사활동을...",
+   "link": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
+   "originallink": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
+   "press": "businessplus.kr",
+   "pub": "2026-11-12 16:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "포항시, 고용위기 선제대응지역 지정기간 1년 연장 확정",
+   "desc": "포항시 내 1차 철강 제조업의 고용보험 피보험자 수는 올해 8월 기준 2만 7445명으로 집계되어 2025년 같은 달과 비교해 270명(1.0%) 줄었으며, 2년 전인 2024년 8월과 대비하면 무려 1070명(3.8%)이나 감소한 것으로 나타났다. 이에...",
+   "link": "https://www.getnews.co.kr/news/articleView.html?idxno=886972",
+   "originallink": "https://www.getnews.co.kr/news/articleView.html?idxno=886972",
+   "press": "getnews.co.kr",
+   "pub": "2026-11-12 16:18",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "포항시, 고용위기 선제대응지역 지정기간 1년 연장...내년 11월 20일까지",
+   "desc": "실제로 포항시의 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만 7,445명으로 2025년 동월 대비 270명(1.0%) 감소했으며, 2024년 8월과 비교하면 1,070명(3.8%) 줄었다. 이번 연장으로 기업과 근로자는 정부 지원사업의...",
+   "link": "https://www.wikitree.co.kr/articles/1174136",
+   "originallink": "https://www.wikitree.co.kr/articles/1174136",
+   "press": "wikitree.co.kr",
+   "pub": "2026-11-12 16:22",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "[허프 생각] 넷플릭스 ‘꿀알바’에서 ‘생계 공포’가 공감 받는 이유...",
+   "desc": "거미인력은 최저시급의 50배부터 몇 백배까지 급여를 주는 아르바이트를 주선해준다. 그러나 이... 한국경제인협회가 지난 8월 모노리서치에 의뢰해 만 19~34세 재직자와 구직자 1천 명을 대상으로 실시한 ‘AI 확산에...",
+   "link": "https://www.huffingtonpost.kr/article/262033",
+   "originallink": "https://www.huffingtonpost.kr/article/262033",
+   "press": "huffingtonpost.kr",
+   "pub": "2026-11-12 16:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "철강업 침체 장기화…포항시, 선제대응지역 1년 연장",
+   "desc": "시에 따르면 포항지역 1차 철강 제조업의 고용보험 피보험자는 올해 8월 기준 2만7445명으로, 지난해 같은 달보다 270명(1.0%) 감소했다. 2024년 8월과 비교하면 1070명(3.8%) 줄어드는 등 고용 감소세가 이어지고 있다. 시는...",
+   "link": "https://n.news.naver.com/mnews/article/005/0001884778?sid=102",
+   "originallink": "https://www.kmib.co.kr/article/20261112501645",
+   "press": "국민일보",
+   "pub": "2026-11-12 17:01",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "포항시 고용위기 선제대응지역, 지정기간 1년 연장…2027년 11월까지 정...",
+   "desc": "포항시의 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만 7,445명으로, 2025년 8월 대비 270명(1.0%) 감소했고, 2024년 8월과 비교하면 1,070명(3.8%) 줄어든 것으로 나타났다. 포항시는 지난달 2일 철강산업의 고용동향과...",
+   "link": "https://www.gukjenews.com/news/articleView.html?idxno=3750247",
+   "originallink": "https://www.gukjenews.com/news/articleView.html?idxno=3750247",
+   "press": "gukjenews.com",
+   "pub": "2026-11-12 17:06",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "5인 미만 사업장 떠난 50대, 고용보험 일자리 복귀 더 어렵다",
+   "desc": "사업주를 통한 의무 지원을 받기 어려운 영세사업장 퇴직자에게 고용센터 상담과 취업알선은 구직 초기에... 실업급여 수급 기록이 없는 비율은 72.6%였다. 재취득 기록이 없는 사례에는 자영업 전환과 고용보험 미적용...",
+   "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261112010004993",
+   "originallink": "https://www.asiatoday.co.kr/kn/view.php?key=20261112010004993",
+   "press": "아시아투데이",
+   "pub": "2026-11-12 17:42",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[보험 뉴스브리핑] 현대해상 다이렉트 건강보험 2종 개편·출시",
+   "desc": "현대해상은 수두 등 약관에서 정한 질병을 진단받고 급여 항바이러스제를 처방받으면 치료비를 보장하며... 프로그램에는 자활 의지와 건강 상태 등을 고려해 선발한 노숙인 구직자 20명이 참여해 김포농협 조합원...",
+   "link": "https://www.asiatime.co.kr/article/20261112500472",
+   "originallink": "https://www.asiatime.co.kr/article/20261112500472",
+   "press": "asiatime.co.kr",
+   "pub": "2026-11-12 17:48",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[포항 소식] 박용선 시장 현장 소통·고용위기 선제 대응 지역 지정 1년...",
+   "desc": "실제로 포항시의 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만7445명으로 2025년 동월 대비 270명(1.0%) 감소했으며, 2024년 8월과 비교하면 1070명(3.8%) 줄었다. 이번 연장으로 기업과 근로자는 정부 지원사업의...",
+   "link": "https://www.newsworks.co.kr/news/articleView.html?idxno=902948",
+   "originallink": "https://www.newsworks.co.kr/news/articleView.html?idxno=902948",
+   "press": "newsworks.co.kr",
+   "pub": "2026-11-12 18:00",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "[보험사 풍향계] 교보생명, DC·IRP 수익률 ‘굳건’ 外",
+   "desc": "'특정질병 항바이러스제 치료비'는 수두 등 약관에서 정한 질병 진단을 받고 급여 항바이러스제를... 자활 의지 및 건강 상태 등을 토대로 선정된 노숙인 구직자들은 농협생명·서울시·서울노숙인일자리지원센터...",
+   "link": "https://www.ekn.kr/web/view.php?key=20261112021409040",
+   "originallink": "https://www.ekn.kr/web/view.php?key=20261112021409040",
+   "press": "ekn.kr",
+   "pub": "2026-11-12 18:08",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "행아웃, 행사 인력 구인부터 현장 운영까지 통합 '행인'으로 승부수 [인...",
+   "desc": "이 가운데 단기 인력을 모집하고, 뽑고, 교육하고, 계약서를 쓰고, 출퇴근을 확인하고, 급여를 정산하는 일은... 전시, 박람회, 학회, 팝업 등 행사 종류에 따라 구직자의 선호가 다르기 때문이다. 단기 인력은 자신의...",
+   "link": "https://it.donga.com/109911/",
+   "originallink": "https://it.donga.com/109911/",
+   "press": "동아일보",
+   "pub": "2026-11-12 18:10",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[위클리오늘] 포항시 오늘(11. 12)",
+   "desc": "이번 연장 결정은 글로벌 철강시장 침체와 통상환경 불확실성 등으로 지역 주력산업의 어려움과 고용불안이 이어지고 있는 상황을 종합적으로 반영한 결과로, 실제 포항시의 1차 철강 제조업 고용보험 피보험자는...",
+   "link": "http://www.weeklytoday.com/news/articleView.html?idxno=801903",
+   "originallink": "http://www.weeklytoday.com/news/articleView.html?idxno=801903",
+   "press": "weeklytoday.com",
+   "pub": "2026-11-12 18:10",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "포항 고용위기 선제대응지역 1년 연장…내년 11월까지 지원 이어진다",
+   "desc": "포항시에 따르면 올해 8월 기준 지역 1차 철강 제조업의 고용보험 피보험자는 2만7445명으로, 지난해 같은 달보다 270명(1.0%) 줄었다. 2024년 8월과 비교하면 1070명(3.8%) 감소했다. 지정 연장으로 지역 기업에는...",
+   "link": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4090665",
+   "originallink": "https://www.kyongbuk.co.kr/news/articleView.html?idxno=4090665",
+   "press": "kyongbuk.co.kr",
+   "pub": "2026-11-12 18:28",
+   "q": "제조업 고용보험",
    "rel": false
   }
  ]
