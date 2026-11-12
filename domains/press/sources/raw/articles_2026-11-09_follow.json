@@ -6,32 +6,32 @@
   "2026-11-10",
   "2026-11-30"
  ],
- "collected_at": "2026-11-11 18:49",
+ "collected_at": "2026-11-12 11:31",
  "volume": {
-  "collected": 89,
-  "articles": 39,
-  "press": 32,
+  "collected": 111,
+  "articles": 42,
+  "press": 34,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29677,
+   "api_total": 29683,
    "fetched": 100,
    "truncated": false,
-   "in_window": 44,
-   "relevant": 39,
-   "new": 44
+   "in_window": 50,
+   "relevant": 42,
+   "new": 50
   },
   {
    "query": "구직급여",
-   "api_total": 95217,
+   "api_total": 95225,
    "fetched": 100,
    "truncated": false,
-   "in_window": 54,
+   "in_window": 63,
    "relevant": 4,
-   "new": 43
+   "new": 52
   },
   {
    "query": "구인배수",
@@ -44,12 +44,12 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18729,
+   "api_total": 18736,
    "fetched": 100,
    "truncated": false,
-   "in_window": 12,
+   "in_window": 19,
    "relevant": 12,
-   "new": 0
+   "new": 6
   },
   {
    "query": "건설업 고용보험",
@@ -98,12 +98,12 @@
   },
   {
    "query": "자동차 고용보험",
-   "api_total": 14036,
+   "api_total": 14037,
    "fetched": 100,
    "truncated": false,
-   "in_window": 7,
+   "in_window": 8,
    "relevant": 6,
-   "new": 1
+   "new": 2
   },
   {
    "query": "기타운송장비 고용보험",
@@ -127,16 +127,6 @@
    "rel": true
   },
   {
-   "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
-   "desc": "▲ 자료사진 정기훈 기자 반도체 호황에 따른 고용보험 가입자 증가세가 지속되고 있다. 하지만 청년고용은 역대 최장기 감소세를 보이며 어려움이 계속되는 상황이다. 고용노동부가 9일 발표한 '2026년 10월...",
-   "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
-   "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
-   "press": "labortoday.co.kr",
-   "pub": "2026-11-10 06:34",
-   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
-   "rel": true
-  },
-  {
    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
    "desc": "문제는 고용보험법이 사학연금 적용자를 가입 대상에서 제외한다는 점이다. 사학연금에 가입한 병원... 같은 사학연금 가입자라도 소속 병원에 따라 받는 수당은 크게 다르다. 공공운수노조 의료연대본부에 따르면...",
    "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
@@ -144,6 +134,16 @@
    "press": "labortoday.co.kr",
    "pub": "2026-11-10 06:34",
    "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
+   "desc": "▲ 자료사진 정기훈 기자 반도체 호황에 따른 고용보험 가입자 증가세가 지속되고 있다. 하지만 청년고용은 역대 최장기 감소세를 보이며 어려움이 계속되는 상황이다. 고용노동부가 9일 발표한 '2026년 10월...",
+   "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
+   "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
+   "press": "labortoday.co.kr",
+   "pub": "2026-11-10 06:34",
+   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
    "rel": true
   },
   {
@@ -505,6 +505,36 @@
    "pub": "2026-11-11 18:00",
    "q": "고용보험 가입자",
    "rel": true
+  },
+  {
+   "title": "철강·석유화학 불황에 … 포항·서산 고용위기 선제대응지역 1년 연장",
+   "desc": "노동부는 산업 불황에 따른 고용 충격이 고용보험 가입자 수 등 통계에 반영되기까지 시간이 걸리는 점을 고려해 지난해 7월 이 제도를 신설했다. 지정 연장에 따라 두 지역 사업주가 받는 고용유지지원금은...",
+   "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/11/2026111100342.html",
+   "originallink": "https://biz.newdaily.co.kr/site/data/html/2026/11/11/2026111100342.html",
+   "press": "biz.newdaily.co.kr",
+   "pub": "2026-11-11 18:50",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "사라진 청년 일자리 94%는 AI 업종…빈자리는 50대가 채웠다",
+   "desc": "조사국 고용연구팀장은 청년 취업자 감소가 AI 업종에 몰렸다는 분석을 내놓는다. 국민연금 가입자... 고용보험에 가입한 상용직 전체와 국가데이터처 지역별고용조사로 2018~2025년을 분석해 보니, AI와 겹치는 일이...",
+   "link": "https://n.news.naver.com/mnews/article/023/0004009191?sid=101",
+   "originallink": "https://www.chosun.com/economy/stock-finance/2026/11/12/GLT4VDIHARF4JOJSZZW6XM4VCA/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+   "press": "조선일보",
+   "pub": "2026-11-12 08:20",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "4대 사회보험료 자동이체 신청·변경, 365일 가능해진다",
+   "desc": "지역가입자는 건강보험공단 누리집과 앱을 통해, 직장 가입 사업장은 사회보험통합징수포털에서 365일... 4대 사회보험은 국민연금과 건강보험, 고용보험, 산재보험을 말하며, 자동이체 관련 서비스 제공 시간은 매일...",
+   "link": "https://n.news.naver.com/mnews/article/052/0002431748?sid=102",
+   "originallink": "https://www.ytn.co.kr/_ln/0103_202611121044436860",
+   "press": "ytn.co.kr",
+   "pub": "2026-11-12 10:44",
+   "q": "고용보험 가입자",
+   "rel": true
   }
  ],
  "excluded": [
@@ -599,20 +629,20 @@
    "rel": false
   },
   {
-   "title": "“스쳐가는 월급 통장 잡는다”…청와대, 월세공제·교통비 환급 확대",
-   "desc": "임직원 수도 1228명에서 1907명으로 55% 늘었으며 1인당 평균 급여는 5787만 원에서 7059만 원으로 약 22% 뛰었다.... 개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩이 고용노동부...",
-   "link": "https://n.news.naver.com/mnews/article/011/0004680482?sid=101",
-   "originallink": "https://www.sedaily.com/article/20112279?ref=naver",
+   "title": "엔비디아 ‘깜짝 발표’…한국 AI·로봇 벤처 4곳 직접 투자 유치",
+   "desc": "개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩 ‘AI 네이티브... 임직원 수는 1228명에서 1907명으로 55% 늘었고, 1인당 평균 급여도 5787만 원에서 7059만 원으로 약 22% 뛰었다....",
+   "link": "https://n.news.naver.com/mnews/article/011/0004680479?sid=101",
+   "originallink": "https://www.sedaily.com/article/20112276?ref=naver",
    "press": "서울경제",
    "pub": "2026-11-10 10:01",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "엔비디아 ‘깜짝 발표’…한국 AI·로봇 벤처 4곳 직접 투자 유치",
-   "desc": "개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩 ‘AI 네이티브... 임직원 수는 1228명에서 1907명으로 55% 늘었고, 1인당 평균 급여도 5787만 원에서 7059만 원으로 약 22% 뛰었다....",
-   "link": "https://n.news.naver.com/mnews/article/011/0004680479?sid=101",
-   "originallink": "https://www.sedaily.com/article/20112276?ref=naver",
+   "title": "“스쳐가는 월급 통장 잡는다”…청와대, 월세공제·교통비 환급 확대",
+   "desc": "임직원 수도 1228명에서 1907명으로 55% 늘었으며 1인당 평균 급여는 5787만 원에서 7059만 원으로 약 22% 뛰었다.... 개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩이 고용노동부...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004680482?sid=101",
+   "originallink": "https://www.sedaily.com/article/20112279?ref=naver",
    "press": "서울경제",
    "pub": "2026-11-10 10:01",
    "q": "구직급여",
@@ -1006,6 +1036,196 @@
    "press": "djtimes.co.kr",
    "pub": "2026-11-11 18:32",
    "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "서울시, 동행일자리 6500여 명·서울팅 150명 모집…일급 인상·참가 규...",
+   "desc": "2027년부터는 필수 제출서류였던 '구직등록확인증'을 폐지하고, 18세 미만 또는 65세 이상 동거인을... 생계급여·실업급여 수급자는 참여에 따른 취업 및 소득 발생 사실을 관련 기관에 신고해야 한다. 서울팅...",
+   "link": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2370843",
+   "originallink": "https://www.webeconomy.co.kr/news/articleView.html?idxno=2370843",
+   "press": "webeconomy.co.kr",
+   "pub": "2026-11-11 23:10",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "대한노인회 충남연합회, 2026년 취업지원사업 성과공유 및 발전방안 회...",
+   "desc": "참석자들은 정부지원 노인일자리사업의 확대와 실업급여 및 각종 정부지원제도 등이 민간취업에 대한 구직자의 참여 의사와 구직활동에 영향을 미치면서, 민간기업 취업을 연계하는 취업지원사업의 추진에 어려움이...",
+   "link": "https://www.100ssd.co.kr/news/articleView.html?idxno=214162",
+   "originallink": "https://www.100ssd.co.kr/news/articleView.html?idxno=214162",
+   "press": "100ssd.co.kr",
+   "pub": "2026-11-12 05:50",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "美 민주당 압승에 PBM 개혁 부상…K바이오시밀러 득실은",
+   "desc": "보험 가입자의 의료 접근성이 개선되면 기존에 비용 부담으로 치료를 받지 못했던 환자들의 의약품 사용이... 분리하고, 고용주 건강보험에 대해서는 PBM이 받은 리베이트 등을 보험 운영 주체에 전액 전달하도록 하는...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006408514?sid=105",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=01856486645645064&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-11-12 06:02",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "[韓경제 아킬레스건](50) 정규직 vs 비정규직 : 이중 노동시장이 만든 단...",
+   "desc": "이로 인해 청년 구직자들은 첫 직장의 고용 형태가 평생의 경제적·사회적 계급을 결정한다는 공포감을 갖게... 실업급여와 전직 재교육 인프라를 확충해야 한다. 고용 형태에 상관없이 모든 노동자가 고용보험과 산재보험...",
+   "link": "http://www.newsfc.co.kr/news/articleView.html?idxno=82310",
+   "originallink": "http://www.newsfc.co.kr/news/articleView.html?idxno=82310",
+   "press": "newsfc.co.kr",
+   "pub": "2026-11-12 07:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "주4.5일제 내년 예산 568억 원으로 두 배, 지원법은 제자리",
+   "desc": "핀테크 기업 와이어바알리는 주 38시간제 도입 뒤 퇴사자가 4명에서 1명으로 줄었고, 자동차 부품업체... 결국 올해 주4.5일제 지원은 새 법 없이 기존 고용보험 장려금 체계 위에서 예산 사업으로 집행되고 있다. 사업은...",
+   "link": "https://www.eroun.net/news/articleView.html?idxno=95138",
+   "originallink": "https://www.eroun.net/news/articleView.html?idxno=95138",
+   "press": "eroun.net",
+   "pub": "2026-11-12 08:30",
+   "q": "자동차 고용보험",
+   "rel": false
+  },
+  {
+   "title": "불 꺼진 공장, 다크 시대가 온다",
+   "desc": "이용해 제조업 혁신을 주도하는 공장을 뜻한다. 또한 카이스트는 올해 3월 이기종(異機種) 로봇과 센서... 고용보험 재설계, 취약 노동자 소득 지원, 지역 맞춤형 일자리 전환 프로그램도 필요하다. 여러 가지 시나리오에...",
+   "link": "https://www.kyosu.net/news/articleView.html?idxno=212143",
+   "originallink": "https://www.kyosu.net/news/articleView.html?idxno=212143",
+   "press": "kyosu.net",
+   "pub": "2026-11-12 08:50",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "삼양그룹 4개사, 15만명 개인정보 유출…개인정보위, 과징금 5.5억 부과",
+   "desc": "삼양홀딩스와 삼양패키징은 법령에서 정한 보관 기간이 훌쩍 지난 일용직 근로자의 급여 정보를 제때 파기하지 않고 쥐고 있었다. 삼양홀딩스는 신입사원 채용 과정에서 아무런 법적 근거도 없이 구직자의 주민번호를...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014317508?sid=105",
+   "originallink": "https://www.newsis.com/view/NISX20261112_0003864724",
+   "press": "뉴시스",
+   "pub": "2026-11-12 10:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "신한은행, 외국인 유학생 취업·금융 정착 지원 협약 체결",
+   "desc": "취업 역량 강화 프로그램과 금융서비스를 연계하고 외국인 구직자를 대상으로 금융 상담도 확대할 계획이다.... 외국인 유학생은 국내 체류와 취업 과정에서 계좌 개설, 급여 수령, 금융거래 등 다양한 금융서비스를...",
+   "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065575858052314",
+   "originallink": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065575858052314",
+   "press": "megaeconomy.co.kr",
+   "pub": "2026-11-12 10:22",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"성장의 성과는 위로만\"…정혜경, 청년·서민 예산 삭감 직격",
+   "desc": "국가가 졸업반 청년의 고용보험료를 지원하고 취업하지 못할 경우 월 110만원씩 6개월간 구직급여와 직업훈련을 제공하는 제도다. 정 의원은 시범사업에 720억원의 예산을 반영해야 한다고 주장했다. 국토교통부를...",
+   "link": "https://www.gukjenews.com/news/articleView.html?idxno=3749672",
+   "originallink": "https://www.gukjenews.com/news/articleView.html?idxno=3749672",
+   "press": "gukjenews.com",
+   "pub": "2026-11-12 10:28",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "아자뉴스바이트 20261112",
+   "desc": "고용보험제도법 2017 개정안도 연내 의회에 상정된다. 출산 휴가 수당을 도입하는 내용으로, 13만 2,000명... 뒤를 이어 제조업은 27.9%, 전기·가스 공급은 13.3%, 광업은 3.8% 올랐다. 키르기스스탄은 2026년 1~8월 누계...",
+   "link": "http://kor.theasian.asia/archives/421485",
+   "originallink": "http://kor.theasian.asia/archives/421485",
+   "press": "kor.theasian.asia",
+   "pub": "2026-11-12 10:30",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "[단독] 보험설계사 71만명 넘었는데…'퇴직연금모집인' 고작 3만명",
+   "desc": "[자료=고용노동부]  보험설계사가 70만명을 넘어서는 동안 퇴직연금 모집인은 3만명 문턱도 넘지 못한... 모집인에게 가입자 교육 권한을 주고 판매 수수료 외에 컨설팅 수수료를 받을 수 있게 해 단순 판매인에서...",
+   "link": "https://www.joongangenews.com/news/articleView.html?idxno=563278",
+   "originallink": "https://www.joongangenews.com/news/articleView.html?idxno=563278",
+   "press": "중앙이코노미뉴스",
+   "pub": "2026-11-12 10:36",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "삼양그룹 4개사, 15만명 개인정보 유출···개인정보위, 과징금 5.5억 부...",
+   "desc": "삼양홀딩스와 삼양패키징은 법령에서 정한 보관 기간이 훌쩍 지난 일용직 근로자의 급여 정보를 제때 파기하지 않고 쥐고 있었다. 삼양홀딩스는 신입사원 채용 과정에서 아무런 법적 근거도 없이 구직자의 주민번호를...",
+   "link": "https://www.smartbizn.com/news/articleView.html?idxno=159195",
+   "originallink": "https://www.smartbizn.com/news/articleView.html?idxno=159195",
+   "press": "smartbizn.com",
+   "pub": "2026-11-12 10:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[경제소식] 두나무, 디지털자산 교육 '업클래스 캠퍼스' 성료",
+   "desc": "실무 프로젝트 중심의 직무교육과 기업·구직자 간 채용 연계 서비스를 제공하고 있다. 신한은행은 이번... 수두 등 약관에서 정한 질병을 진단받고 급여 항바이러스제를 처방받은 경우 치료비를 보장한다. 해당 담보를...",
+   "link": "http://www.4th.kr/news/articleView.html?idxno=2121677",
+   "originallink": "http://www.4th.kr/news/articleView.html?idxno=2121677",
+   "press": "4th.kr",
+   "pub": "2026-11-12 10:52",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "실업급여, 사직서에 '개인 사정' 적었다면?…배달기사까지 놓치기 쉬운...",
+   "desc": "근로계약을 체결한 일반 근로자인지, 고용보험법상 노무제공자에 해당하는지에 따라 가입 요건과 구직급여 산정 방식이 달라질 수 있다. 노무제공자에게는 일반 근로자와 다른 피보험기간 요건이 적용된다. 따라서...",
+   "link": "https://www.cbci.co.kr/news/articleView.html?idxno=626091",
+   "originallink": "https://www.cbci.co.kr/news/articleView.html?idxno=626091",
+   "press": "cbci.co.kr",
+   "pub": "2026-11-12 11:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "포항시, 고용위기 선제대응지역 지정기간 1년 연장…내년 11월 20일까지...",
+   "desc": "실제로 포항시의 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만 7,445명으로 2025년 동월 대비 270명(1.0%) 감소했으며, 2024년 8월과 비교하면 1,070명(3.8%) 줄었다. 이번 연장으로 기업과 근로자는 정부...",
+   "link": "https://www.mhns.co.kr/news/articleView.html?idxno=768757",
+   "originallink": "https://www.mhns.co.kr/news/articleView.html?idxno=768757",
+   "press": "mhns.co.kr",
+   "pub": "2026-11-12 11:10",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "포항시, '고용위기 선제대응지역' 기업·근로자 혜택 대폭 확대",
+   "desc": "실제로 포항시의 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만 7,445명으로 2025년 동월 대비 270명(1.0%) 감소했으며, 2024년 8월과 비교하면 1,070명(3.8%) 줄었다. 이에 포항시는 지난달 2일 철강산업의 고용동향과...",
+   "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2491602",
+   "originallink": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2491602",
+   "press": "enewstoday.co.kr",
+   "pub": "2026-11-12 11:17",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "철강 불황에 포항 고용위기 선제대응지역 1년 연장…근로자·기업 지원...",
+   "desc": "포항은 철강업계의 어려움과 고용불안이 이어지면서 실제 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만7445명으로, 2년 전보다 1070명(3.8%) 감소했다. 이번 기간 연장으로 경영난으로 휴업이나 휴직을...",
+   "link": "https://www.hidomin.com/news/articleView.html?idxno=729054",
+   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=729054",
+   "press": "hidomin.com",
+   "pub": "2026-11-12 11:24",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "철강 불황에 흔들린 포항 고용…정부 ‘선제대응지역’ 연장 카드로 방...",
+   "desc": "실제로 올해 8월 기준 포항시 1차 철강 제조업 고용보험 피보험자는 2만7445명으로 지난해 같은 달보다 270명(1.0%), 2024년 8월보다는 1070명(3.8%) 줄었다. 포항시는 지난달 2일 이 같은 고용동향과 기업 여건을 담은 의견서를...",
+   "link": "https://www.kbmaeil.com/article/20261112500250",
+   "originallink": "https://www.kbmaeil.com/article/20261112500250",
+   "press": "kbmaeil.com",
+   "pub": "2026-11-12 11:24",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "포항시, 고용위기 선제대응지역 1년 연장…철강업 고용안정 지원 확대",
+   "desc": "실제 포항지역 1차 철강 제조업의 고용보험 피보험자는 올해 8월 기준 2만 7445명으로 지난해 같은 달보다 270명(1.0%) 감소했다. 2024년 8월과 비교하면 1070명(3.8%)이 줄어 철강산업의 고용 여건이 최근 2년간 악화된 것으로...",
+   "link": "https://www.asiatoday.co.kr/kn/view.php?key=20261112010004705",
+   "originallink": "https://www.asiatoday.co.kr/kn/view.php?key=20261112010004705",
+   "press": "아시아투데이",
+   "pub": "2026-11-12 11:30",
+   "q": "고용보험 가입자, 제조업 고용보험",
    "rel": false
   }
  ]

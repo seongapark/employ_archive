@@ -11906,6 +11906,24 @@
     ]
    },
    {
+    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+    "press": "labortoday.co.kr",
+    "pub": "2026-11-10 06:34",
+    "cites": false,
+    "judged": true,
+    "why": "사립대병원 육아휴직급여 차별 실태",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사립대병원",
+     "육아휴직급여",
+     "제멋대"
+    ]
+   },
+   {
     "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
     "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
     "press": "labortoday.co.kr",
@@ -11925,24 +11943,6 @@
      "암울",
      "청년고용",
      "최장기"
-    ]
-   },
-   {
-    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
-    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
-    "press": "labortoday.co.kr",
-    "pub": "2026-11-10 06:34",
-    "cites": false,
-    "judged": true,
-    "why": "사립대병원 육아휴직급여 차별 실태",
-    "hits": [],
-    "tone": [],
-    "stance": "부정",
-    "focus": "",
-    "kw": [
-     "사립대병원",
-     "육아휴직급여",
-     "제멋대"
     ]
    },
    {
@@ -12695,6 +12695,71 @@
      "선제대응지역",
      "연장",
      "포항"
+    ]
+   },
+   {
+    "title": "철강·석유화학 불황에 … 포항·서산 고용위기 선제대응지역 1년 연장",
+    "url": "https://biz.newdaily.co.kr/site/data/html/2026/11/11/2026111100342.html",
+    "press": "biz.newdaily.co.kr",
+    "pub": "2026-11-11 18:50",
+    "cites": false,
+    "judged": true,
+    "why": "고용위기 선제대응지역 지정 연장 정책",
+    "hits": [
+     "산업:철강(1차금속)"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "고용위기",
+     "불황",
+     "서산",
+     "석유화학",
+     "선제대응지역",
+     "연장",
+     "포항"
+    ]
+   },
+   {
+    "title": "사라진 청년 일자리 94%는 AI 업종…빈자리는 50대가 채웠다",
+    "url": "https://www.chosun.com/economy/stock-finance/2026/11/12/GLT4VDIHARF4JOJSZZW6XM4VCA/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+    "press": "조선일보",
+    "pub": "2026-11-12 08:20",
+    "cites": false,
+    "judged": true,
+    "why": "한국은행 청년 일자리·AI 분석",
+    "hits": [
+     "연령:50대",
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "AI",
+     "빈자리",
+     "사라진",
+     "업종",
+     "채웠"
+    ]
+   },
+   {
+    "title": "4대 사회보험료 자동이체 신청·변경, 365일 가능해진다",
+    "url": "https://www.ytn.co.kr/_ln/0103_202611121044436860",
+    "press": "ytn.co.kr",
+    "pub": "2026-11-12 10:44",
+    "cites": false,
+    "judged": true,
+    "why": "4대 사회보험료 자동이체 서비스 안내",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "가능해진",
+     "사회보험료",
+     "자동이체"
     ]
    }
   ]
