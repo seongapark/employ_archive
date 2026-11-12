@@ -34,6 +34,42 @@
   ]
  },
  {
+  "id": "kdi-an3829",
+  "org": "kdi",
+  "board": "kdi-analysis",
+  "series": "현안분석",
+  "title": "최근 반도체 호황과 유가 상승이 민간소비에 미치는 영향",
+  "authors": [
+   "김지연",
+   "마창석",
+   "이승희"
+  ],
+  "published": "2026-11-12",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kdi.re.kr/research/analysisView?art_no=3829",
+  "file_url": "https://www.kdi.re.kr/file/download?atch_no=OwdUuglJo7%2BcwsJ%2B9zc6xA%3D%3D",
+  "matched": []
+ },
+ {
+  "id": "bok-11066541",
+  "org": "bok",
+  "board": "bok-intl",
+  "series": "국제경제이슈",
+  "title": "대만 반도체 경기 호황의 특징과 우리경제에 대한 시사점",
+  "authors": [
+   "중국경제팀"
+  ],
+  "published": "2026-11-12",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/B0000565/view.do?nttId=11066541&searchCnd=1&searchKwd=&depth2=201157&depth3=201757&date=&sdate=&edate=&sort=1&pageUnit=100&depth=201757&pageIndex=1&programType=newsData&menuNo=201757&oldMenuNo=201757",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/f28f91811ac44660b87e7a022bfb7968/1/e5e26f10196f4c6085ec181360f47ff9.pdf",
+  "matched": [
+   "산업별고용"
+  ]
+ },
+ {
   "id": "bok-11066446",
   "org": "bok",
   "board": "bok-research",

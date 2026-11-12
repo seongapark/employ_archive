@@ -34244,5 +34244,23 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-11T10:00:57+09:00"
+ },
+ "kdi-an3829": {
+  "pick": false,
+  "axis": "",
+  "why": "반도체 호황·유가와 민간소비 분석, 고용 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-12T15:00:59+09:00"
+ },
+ "bok-11066541": {
+  "pick": false,
+  "axis": "",
+  "why": "대만 반도체 경기 동향, 고용 무관",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-12T15:00:59+09:00"
  }
 }
