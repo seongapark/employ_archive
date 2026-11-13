@@ -6,32 +6,32 @@
   "2026-11-10",
   "2026-11-30"
  ],
- "collected_at": "2026-11-12 19:13",
+ "collected_at": "2026-11-13 11:08",
  "volume": {
-  "collected": 145,
-  "articles": 48,
-  "press": 38,
+  "collected": 174,
+  "articles": 50,
+  "press": 40,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29690,
+   "api_total": 29692,
    "fetched": 100,
    "truncated": false,
-   "in_window": 57,
-   "relevant": 48,
-   "new": 57
+   "in_window": 59,
+   "relevant": 50,
+   "new": 59
   },
   {
    "query": "구직급여",
-   "api_total": 95239,
+   "api_total": 95247,
    "fetched": 100,
    "truncated": false,
-   "in_window": 79,
+   "in_window": 87,
    "relevant": 4,
-   "new": 68
+   "new": 76
   },
   {
    "query": "구인배수",
@@ -44,19 +44,19 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18752,
+   "api_total": 18772,
    "fetched": 100,
    "truncated": false,
-   "in_window": 35,
+   "in_window": 55,
    "relevant": 16,
-   "new": 17
+   "new": 36
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8506,
+   "api_total": 8507,
    "fetched": 100,
    "truncated": false,
-   "in_window": 9,
+   "in_window": 10,
    "relevant": 8,
    "new": 1
   },
@@ -127,16 +127,6 @@
    "rel": true
   },
   {
-   "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
-   "desc": "문제는 고용보험법이 사학연금 적용자를 가입 대상에서 제외한다는 점이다. 사학연금에 가입한 병원... 같은 사학연금 가입자라도 소속 병원에 따라 받는 수당은 크게 다르다. 공공운수노조 의료연대본부에 따르면...",
-   "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
-   "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
-   "press": "labortoday.co.kr",
-   "pub": "2026-11-10 06:34",
-   "q": "고용보험 가입자",
-   "rel": true
-  },
-  {
    "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
    "desc": "▲ 자료사진 정기훈 기자 반도체 호황에 따른 고용보험 가입자 증가세가 지속되고 있다. 하지만 청년고용은 역대 최장기 감소세를 보이며 어려움이 계속되는 상황이다. 고용노동부가 9일 발표한 '2026년 10월...",
    "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
@@ -144,6 +134,16 @@
    "press": "labortoday.co.kr",
    "pub": "2026-11-10 06:34",
    "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
+   "rel": true
+  },
+  {
+   "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
+   "desc": "문제는 고용보험법이 사학연금 적용자를 가입 대상에서 제외한다는 점이다. 사학연금에 가입한 병원... 같은 사학연금 가입자라도 소속 병원에 따라 받는 수당은 크게 다르다. 공공운수노조 의료연대본부에 따르면...",
+   "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+   "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+   "press": "labortoday.co.kr",
+   "pub": "2026-11-10 06:34",
+   "q": "고용보험 가입자",
    "rel": true
   },
   {
@@ -595,6 +595,26 @@
    "pub": "2026-11-12 18:19",
    "q": "고용보험 가입자, 제조업 고용보험",
    "rel": true
+  },
+  {
+   "title": "2027 최저임금 시급·월급·연봉 실수령액 얼마?",
+   "desc": "실수령액 계산에서는 국민연금·건강보험·장기요양보험·고용보험의 본인 부담과 소득세·지방소득세... 국민연금공단의 연도별 안내에 따르면 전체 보험료율은 2026년 9.5%에서 2027년 10%로 오른다. 사업장가입자는...",
+   "link": "https://www.bntnews.co.kr/article/view/bnt202611120272",
+   "originallink": "https://www.bntnews.co.kr/article/view/bnt202611120272",
+   "press": "bntnews.co.kr",
+   "pub": "2026-11-13 00:12",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "포항시, 고용위기 선제대응지역 1년 연장…내년 11월까지",
+   "desc": "철강업 고용보험 가입자 2년 새 1070명 감소 고용유지·직업훈련 지원 우대 지속 포항시의 고용위기 선제대응지역 지정이 2027년 11월 20일까지 1년 연장됐다. 철강 경기 침체로 고용 불안이 이어지는 가운데 지역 기업과...",
+   "link": "https://n.news.naver.com/mnews/article/382/0001304565?sid=102",
+   "originallink": "https://sports.donga.com/region/article/all/20261113/135018081/1",
+   "press": "동아일보",
+   "pub": "2026-11-13 07:45",
+   "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
   }
  ],
  "excluded": [
@@ -739,21 +759,21 @@
    "rel": false
   },
   {
-   "title": "“추가근로가 더 큰 경제 보상으로…‘디딤돌소득’ 혁신”",
-   "desc": "기본소득은 기존 실업급여에 부과되던 구직활동과 노동시장 서비스 참여 의무에서 벗어나게 했지만 고용에 미친 효과는 크지 않았다. 기존에는 기본소득을 하게 되면 고용 증가가 되고, 이를 통해 비용을 일부 충당할 수...",
-   "link": "https://n.news.naver.com/mnews/article/016/0002721360?sid=102",
-   "originallink": "https://biz.heraldcorp.com/article/10931969?ref=naver",
-   "press": "헤럴드경제",
-   "pub": "2026-11-10 11:20",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "넥슨 3사 대기발령 300명 넘어…'선택과 집중' 뒤 게임업계 고용불안",
    "desc": "근속연수에 따라 퇴직금 외에 최대 30개월치 급여를 지급하는 조건이다. 회사는 퇴사를 강제하지 않는다는... 넥슨은 그동안 사내 구직과 전환배치 제도를 운영해 왔으며, 2024년에는 신규 채용 수요 일부를...",
    "link": "http://www.popcornnews.net/news/articleView.html?idxno=139364",
    "originallink": "http://www.popcornnews.net/news/articleView.html?idxno=139364",
    "press": "popcornnews.net",
+   "pub": "2026-11-10 11:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“추가근로가 더 큰 경제 보상으로…‘디딤돌소득’ 혁신”",
+   "desc": "기본소득은 기존 실업급여에 부과되던 구직활동과 노동시장 서비스 참여 의무에서 벗어나게 했지만 고용에 미친 효과는 크지 않았다. 기존에는 기본소득을 하게 되면 고용 증가가 되고, 이를 통해 비용을 일부 충당할 수...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002721360?sid=102",
+   "originallink": "https://biz.heraldcorp.com/article/10931969?ref=naver",
+   "press": "헤럴드경제",
    "pub": "2026-11-10 11:20",
    "q": "구직급여",
    "rel": false
@@ -1259,21 +1279,21 @@
    "rel": false
   },
   {
-   "title": "철강 불황에 흔들린 포항 고용…정부 ‘선제대응지역’ 연장 카드로 방...",
-   "desc": "올해 8월 기준 포항시 1차 철강 제조업 고용보험 피보험자는 2만7445명으로 지난해 같은 달보다 270명(1.0%), 2024년 8월보다는 1070명(3.8%) 줄었다. 포항시는 지난달 2일 이 같은 고용동향과 기업 여건을 담은 의견서를...",
-   "link": "https://www.kbmaeil.com/article/20261112500250",
-   "originallink": "https://www.kbmaeil.com/article/20261112500250",
-   "press": "kbmaeil.com",
-   "pub": "2026-11-12 11:24",
-   "q": "제조업 고용보험",
-   "rel": false
-  },
-  {
    "title": "철강 불황에 포항 고용위기 선제대응지역 1년 연장…근로자·기업 지원...",
    "desc": "포항은 철강업계의 어려움과 고용불안이 이어지면서 실제 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만7445명으로, 2년 전보다 1070명(3.8%) 감소했다. 이번 기간 연장으로 경영난으로 휴업이나 휴직을...",
    "link": "https://www.hidomin.com/news/articleView.html?idxno=729054",
    "originallink": "https://www.hidomin.com/news/articleView.html?idxno=729054",
    "press": "hidomin.com",
+   "pub": "2026-11-12 11:24",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "철강 불황에 흔들린 포항 고용…정부 ‘선제대응지역’ 연장 카드로 방...",
+   "desc": "올해 8월 기준 포항시 1차 철강 제조업 고용보험 피보험자는 2만7445명으로 지난해 같은 달보다 270명(1.0%), 2024년 8월보다는 1070명(3.8%) 줄었다. 포항시는 지난달 2일 이 같은 고용동향과 기업 여건을 담은 의견서를...",
+   "link": "https://www.kbmaeil.com/article/20261112500250",
+   "originallink": "https://www.kbmaeil.com/article/20261112500250",
+   "press": "kbmaeil.com",
    "pub": "2026-11-12 11:24",
    "q": "제조업 고용보험",
    "rel": false
@@ -1429,21 +1449,21 @@
    "rel": false
   },
   {
-   "title": "청년을 취업 대기실에 가두는 노동시장 이중구조",
-   "desc": "눈높이나 구직 의욕 탓으로 돌릴 수 없다는 것이다. 기업 규모에 따라 보상과 성장 기회가 크게 갈리는... 대신 근로자가 직장을 옮기거나 일자리를 잃었을 때 실업급여와 직업훈련, 재취업 지원을 쉽게 받도록 해주는 게...",
-   "link": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
-   "originallink": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
-   "press": "fntimes.com",
-   "pub": "2026-11-12 16:12",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "[금융권 이모저모]토스뱅크, 펀드 판매 시작…통장 이자로 자동 투자 外",
    "desc": "지난 11일 경기 김포시 농가에서 NH농협생명과 서울시 관계자들이 노숙인 구직자들과 자활지원 프로그램... 금융투자협회는 2005년 소망의 집과 결연을 맺은 이후 임직원 급여를 모아 정기적인 후원과 봉사활동을...",
    "link": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
    "originallink": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
    "press": "businessplus.kr",
+   "pub": "2026-11-12 16:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "청년을 취업 대기실에 가두는 노동시장 이중구조",
+   "desc": "눈높이나 구직 의욕 탓으로 돌릴 수 없다는 것이다. 기업 규모에 따라 보상과 성장 기회가 크게 갈리는... 대신 근로자가 직장을 옮기거나 일자리를 잃었을 때 실업급여와 직업훈련, 재취업 지원을 쉽게 받도록 해주는 게...",
+   "link": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
+   "originallink": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
+   "press": "fntimes.com",
    "pub": "2026-11-12 16:12",
    "q": "구직급여",
    "rel": false
@@ -1566,6 +1586,276 @@
    "press": "kyongbuk.co.kr",
    "pub": "2026-11-12 18:28",
    "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "포항 고용위기 선제대응지역 1년 연장···철강업계 지원 지속",
+   "desc": "실제 포항지역 1차 철강 제조업의 고용보험 피보험자는 올해 8월 기준 2만7445명으로, 지난해 같은 달보다 270명(1.0%) 감소했다. 2024년 8월과 비교하면 1070명(3.8%) 줄어 고용 감소세가 이어지고 있다. 시는 지정기간 연장을...",
+   "link": "http://www.dtnews24.com/news/articleView.html?idxno=817154",
+   "originallink": "http://www.dtnews24.com/news/articleView.html?idxno=817154",
+   "press": "dtnews24.com",
+   "pub": "2026-11-12 19:28",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "포항시, 고용위기 선제대응지역 지정기간 1년 연장",
+   "desc": "또 생활안정자금 등 각종 융자한도가 상향 적용된다. 포항시의 1차 철강 제조업의 고용보험 피보험자는 2만7,445명(8월 기준)으로 전년 동월대비 270명(1.0%) 감소, 2024년 8월 대비 1,070명(3.8%) 줄었다.",
+   "link": "https://www.betanews.net/article/view/beta202611120224",
+   "originallink": "https://www.betanews.net/article/view/beta202611120224",
+   "press": "betanews.net",
+   "pub": "2026-11-12 19:42",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "포항 고용위기 선제대응지역 1년 연장…철강업 고용불안에 정부 지원 지...",
+   "desc": "포항시에 따르면 올해 8월 기준 지역 1차 철강 제조업의 고용보험 피보험자는 2만 7,445명으로 집계됐다. 이는 2025년 같은 달보다 270명(1.0%) 감소한 수치이며, 2024년 8월과 비교하면 1,070명(3.8%) 줄어든 규모다. 시는 이러한...",
+   "link": "http://www.newstown.co.kr/news/articleView.html?idxno=721752",
+   "originallink": "http://www.newstown.co.kr/news/articleView.html?idxno=721752",
+   "press": "newstown.co.kr",
+   "pub": "2026-11-12 20:46",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "\"실업급여 받게 권고사직 처리해 주세요\"…회사가 거절하는 진짜 이유",
+   "desc": "임 노무사는 \"사업주가 이런 식으로 상실 신고를 사실과 다르게 해 줄 때도 공모에 해당할 수밖에 없다\"며 \"지급받은 구직급여의 5배 이하의 금액을 반환 명령할 수 있는 근거가 있고, 사업주와 근로자가 연대 책임을 질...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014319641?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261112_0003865037",
+   "press": "뉴시스",
+   "pub": "2026-11-13 04:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "포항시, 고용위기 선제대응지역 지정 1년 연장…내년 11월까지 지원",
+   "desc": "실제로 포항 지역 1차 철강 제조업의 고용보험 피보험자는 올해 8월 기준 2만7445명으로, 2025년 같은 달보다 270명(1.0%), 2024년 동월보다 1070명(3.8%) 감소했다. 포항시는 지난달 2일 철강산업 고용동향과 기업 경영여건 등을...",
+   "link": "https://www.ajunews.com/view/20261113010817733",
+   "originallink": "https://www.ajunews.com/view/20261113010817733",
+   "press": "아주경제",
+   "pub": "2026-11-13 05:02",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "코딩 모르던 취준생이 일냈다…AI로 만든 사우나에 6만명",
+   "desc": "이처럼 구직 기간이 길어진 청년들의 취업을 돕기 위해 마련됐다.AI로 직접 서비스를 만들거나 업무 자동화... 최근 이씨는 이 회사 사업팀에 입사해 급여와 정부지원사업 운영을 맡게 됐다.이씨는 “면접에서 AI로...",
+   "link": "https://news.mtn.co.kr/article/2026111214392996468",
+   "originallink": "https://news.mtn.co.kr/article/2026111214392996468",
+   "press": "news.mtn.co.kr",
+   "pub": "2026-11-13 06:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "스스로 퇴사한 청년도 월 100만원…\"도덕적 해이 적다\" vs \"퇴사 부추겨...",
+   "desc": "정부가 스스로 회사를 그만둔 청년에게도 월 최대 100만 원의 구직급여(실업급여)를 주는 방안을 추진하는 가운데, 국회입법조사처는 도덕적 해이 우려가 크지 않다고 봤다. 지급액과 횟수가 제한돼 불필요한 퇴사를...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009286907?sid=101",
+   "originallink": "https://www.news1.kr/economy/employment-labor/6352372",
+   "press": "뉴스1",
+   "pub": "2026-11-13 06:05",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"실업급여 받게 권고사직으로 해주세요\"…회사는 왜 난색 보일까",
+   "desc": "고용보험법에 따르면 사업주와 공모해 구직급여를 부정하게 받은 경우 지급액의 전부 또는 일부를 반환해야 할 수 있다. 이와 별도로 부정수급액의 최대 5배까지 추가 징수할 수 있다. 이 경우 사업주도 근로자와 함께...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006409221?sid=102",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=01968006645645392&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-11-13 06:56",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "한국산업인력공단 브랜드평판 1위…근로복지공단·장애인고용공단 순",
+   "desc": "정책은 제조업과 건설업, 산업 자동화 및 안전관리 관련 기업의 인력 수급과 비용 구조에 영향을 줄 수 있다. 근로복지공단의 산재보험과 고용 관련 제도 역시 기업의 인건비와 보험료 부담, 근로환경 개선 투자와...",
+   "link": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503593",
+   "originallink": "https://www.pinpointnews.co.kr/news/articleView.html?idxno=503593",
+   "press": "pinpointnews.co.kr",
+   "pub": "2026-11-13 07:00",
+   "q": "제조업 고용보험, 건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "자진 퇴사 청년도 월 100만원?…정부, 생애 한 차례 실업급여 검토",
+   "desc": "정부가 스스로 회사를 그만둔 35세 미만 청년에게도 생애 한 차례 구직급여를 지급하는 방안을 검토하고 있다. 국회입법조사처는 지급액과 횟수를 제한하면 급여를 받기 위해 퇴사하는 사례가 크게 늘 가능성은 낮다고...",
+   "link": "https://n.news.naver.com/mnews/article/025/0003564945?sid=101",
+   "originallink": "https://www.joongang.co.kr/article/25478307",
+   "press": "중앙일보",
+   "pub": "2026-11-13 08:08",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "포항시, 고용위기 선제대응지역 지정 1년 연장…고용안정 지원 확대",
+   "desc": "포항의 1차 철강 제조업 고용보험 피보험자는 올해 8월 2만 7,445명으로 지난해 같은 달보다 270명(1.0%), 2024년 8월보다 1,070명(3.8%) 감소했다. 지정 연장에 따라 기업에는 고용유지지원금과 사업주 직업훈련비 지원 비율이...",
+   "link": "http://www.metroseoul.co.kr/article/20261112500510",
+   "originallink": "http://www.metroseoul.co.kr/article/20261112500510",
+   "press": "metroseoul.co.kr",
+   "pub": "2026-11-13 08:52",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "[청년 곁의 금융] KB금융, 주거부터 취업까지 자립 지원",
+   "desc": "급여이체와 카드 결제 등 우대조건을 충족하면 최고 연 8%가 적용되고, 소득 등에 따라 정부기여금과... KB굿잡은 청년을 비롯한 구직자에게 취업박람회와 현장면접, 컨설팅 등을 제공한다. 지난 10월 제30회...",
+   "link": "https://www.businessplus.kr/news/articleView.html?idxno=119601",
+   "originallink": "https://www.businessplus.kr/news/articleView.html?idxno=119601",
+   "press": "businessplus.kr",
+   "pub": "2026-11-13 09:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "가짜 3.3·사업장 쪼개기 잡는다…노동부, 기획감독 착수",
+   "desc": "이상을 고용한 사업장을 중심으로 이뤄진다. 음식·숙박업, 제조업, 도·소매업, 시설관리업, 이동통신업 등... 이후 국세청 소득세 납부 신고 내역과 고용보험 정보, 신고사건 및 감독 이력, 구인광고 등을 종합적으로...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014319897?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261113_0003866539",
+   "press": "뉴시스",
+   "pub": "2026-11-13 09:00",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "노동부, '가짜 3.3' 위장고용, '사업장 쪼개기' 기획감독 나선다",
+   "desc": "중심으로 고용보험 정보, 감독 이력 등을 종합 검토해 최종 대상을 정했다. 감독 대상은 음식·숙박업, 제조업, 도·소매업, 이동통신업 등 사업소득자를 많이 고용하는 업종의 사업장이나, 근로소득자는 5인 미만이지만...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009287061?sid=101",
+   "originallink": "https://www.news1.kr/economy/employment-labor/6352593",
+   "press": "뉴스1",
+   "pub": "2026-11-13 09:00",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "노동부, '가짜 3.3·사업장 쪼개기' 정조준⋯140여 곳 기획감독 실시",
+   "desc": "특히 국세청의 사업소득세 납부(원천징수 이행상황) 신고 내역을 중심으로 고용보험 정보, 과거 감독 이력, 구인광고 모니터링 결과를 종합적으로 교차 검증해 감독 대상을 추렸다. 주요 타깃은 음식·숙박업, 제조업, 도...",
+   "link": "https://www.etoday.co.kr/news/view/2647424",
+   "originallink": "https://www.etoday.co.kr/news/view/2647424",
+   "press": "이투데이",
+   "pub": "2026-11-13 09:00",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "직원인데 프리랜서?…노동부, 가짜 3.3 위장고용 140곳 집중감독",
+   "desc": "이후 국세청의 사업소득세 원천징수 신고 내역과 고용보험 정보, 과거 신고·감독 이력, 구인광고 등을 교차 검토해 최종 감독 대상을 선정할 계획이다. 주요 점검 업종은 음식·숙박업과 제조업, 도·소매업, 시설관리업...",
+   "link": "https://n.news.naver.com/mnews/article/119/0003154686?sid=102",
+   "originallink": "https://www.dailian.co.kr/news/view/1714504/?sc=Naver",
+   "press": "dailian.co.kr",
+   "pub": "2026-11-13 09:01",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "‘가짜 3.3 계약·사업장 쪼개기’ 잡는다…노동부, 꼼수 사업장 기획감...",
+   "desc": "16일부터 2개월간 실시…음식·숙박·제조업 등 집중 점검 4대 보험 미가입·임금체불 등 적발 시 시정 조치 고용노동부가 ‘가짜 3.3 위장고용’과 ‘사업장 쪼개기’ 등 노동법 회피 행위가 의심되는 사업장을 대상으로...",
+   "link": "https://n.news.naver.com/mnews/article/366/0001204498?sid=102",
+   "originallink": "https://biz.chosun.com/topics/topics_social/2026/11/13/XSN4IPTOLZHIJPANPI7IVWTXMQ/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+   "press": "조선일보",
+   "pub": "2026-11-13 09:01",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "노동부, '가짜 3.3·사업장 쪼개기' 의심 140곳 기획감독",
+   "desc": "업종별로는 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업처럼 사업소득자를 많이 고용하는 업종을 주로 들여다본다. 노동부는 재직자 익명 제보와 근로복지공단·국민연금공단의 보험·연금 가입 정보로 의심...",
+   "link": "https://n.news.naver.com/mnews/article/079/0004209382?sid=102",
+   "originallink": "https://www.nocutnews.co.kr/news/6605934?utm_source=naver&utm_medium=article&utm_campaign=20261113090019",
+   "press": "nocutnews.co.kr",
+   "pub": "2026-11-13 09:01",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "노동부, ‘가짜 3.3’·사업장 쪼개기 140여곳 기획감독",
+   "desc": "국세청 소득세 납부 신고 내역을 중심으로 고용보험 정보, 신고사건과 감독 이력, 구인광고 등을 종합 검토해 최종 감독 대상을 선정한다. 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업 등 사업소득자가 다수...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002722915?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10935070?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-11-13 09:01",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "고용노동부, 포항시 '고용위기 선제대응지역' 지정 기간 1년 연장",
+   "desc": "포항시의 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만 7445명으로 2025년 동월 대비 270명(1.0%) 감소했고 2024년 8월 대비 1070명(3.8%) 줄어든 것으로 나타났다. 포항시는 글로벌 철강 경기 침체 등으로 지역...",
+   "link": "https://n.news.naver.com/mnews/article/421/0009287112?sid=102",
+   "originallink": "https://www.news1.kr/local/daegu-gyeongbuk/6352836",
+   "press": "뉴스1",
+   "pub": "2026-11-13 09:13",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "노동부, '가짜 3.3·사업장 쪼개기' 140여 곳 정조준…16일부터 두 달간...",
+   "desc": "고용 인원이 20명을 넘어서는 사업장에 초점을 맞춘다. 주요 점검 대상은 음식·숙박업을 비롯해 제조업, 도... 이어 국세청의 소득세 납부 신고 자료와 고용보험 정보, 신고사건 및 감독 이력, 구인광고 내용까지...",
+   "link": "https://www.widedaily.com/news/articleView.html?idxno=303591",
+   "originallink": "https://www.widedaily.com/news/articleView.html?idxno=303591",
+   "press": "widedaily.com",
+   "pub": "2026-11-13 09:24",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "고용노동부, '가짜 3.3 계약·사업장 쪼개기' 140여 곳 집중 감독",
+   "desc": "분석하고, 고용보험 정보와 기존 신고·감독 이력, 채용공고 내용까지 종합적으로 살펴볼 계획이다. 중점 검토 업종은 음식·숙박업과 제조업, 도소매업, 시설관리업, 이동통신업 등 사업소득자 형태로 인력을 활용하는...",
+   "link": "https://idsn.co.kr/news/view/1065572635094026",
+   "originallink": "https://idsn.co.kr/news/view/1065572635094026",
+   "press": "idsn.co.kr",
+   "pub": "2026-11-13 09:26",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "사업장 쪼개고 가짜 3.3 계약…노동부, 140곳 기획감독",
+   "desc": "여기에 국세청의 소득세 원천징수 신고 내역을 중심으로 고용보험 정보, 신고사건 및 감독 이력, 구인광고 모니터링 결과 등을 종합적으로 검토했다. 특히 음식·숙박업, 제조업, 도·소매업, 시설관리업, 이동통신업 등...",
+   "link": "https://n.news.naver.com/mnews/article/629/0000551540?sid=102",
+   "originallink": "https://news.tf.co.kr/read/life/2388362.htm",
+   "press": "news.tf.co.kr",
+   "pub": "2026-11-13 09:48",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "노동부, 두달간 '가짜 3.3 계약·사업장 쪼개기' 기획감독",
+   "desc": "중심으로 고용보험 정보, 신고사건 및 감독이력, 구인광고 모니터링 등을 종합 검토해 최종 감독대상을 선정한다. 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업 등 사업소득자를 다수 고용하는 업종을...",
+   "link": "https://www.taxtimes.co.kr/news/article.html?no=277720",
+   "originallink": "https://www.taxtimes.co.kr/news/article.html?no=277720",
+   "press": "taxtimes.co.kr",
+   "pub": "2026-11-13 09:58",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "경사노위 청년들 \"채용공고에 임금수준 공개 의무화해야\"",
+   "desc": "채 구직하고 있다고 지적했다. 이에 신입 채용공고에 임금 수준과 직무내용, 근무시간, 근무환경 등을... 한 위원장에 따르면 지난 7월 기준 신입·인턴 채용공고 103건 중 급여를 구체적인 숫자로 제시한 공고는 8건(7.8%)에...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014320093?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261113_0003866555",
+   "press": "뉴시스",
+   "pub": "2026-11-13 10:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "프리랜서 위장·사업장 쪼개기 잡는다 … 노동부, 의심 사업장 140곳 기...",
+   "desc": "음식·숙박업과 제조업, 도·소매업, 시설관리업, 이동통신업 등 사업소득자로 신고된 인원이 많은 업종이... 이후 국세청 소득세 신고 내역과 고용보험 정보, 노동 관련 신고·감독 이력, 구인광고 등을 종합적으로 분석해...",
+   "link": "https://biz.newdaily.co.kr/site/data/html/2026/11/13/2026111300059.html",
+   "originallink": "https://biz.newdaily.co.kr/site/data/html/2026/11/13/2026111300059.html",
+   "press": "biz.newdaily.co.kr",
+   "pub": "2026-11-13 10:16",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "\"실업급여 받게 권고사직 처리해 주세요\"…회사가 난색 표하는 진짜 이...",
+   "desc": "이 경우 부정하게 지급받은 구직급여의 최대 5배 이하 금액에 대한 반환 명령이 내려질 수 있으며, 사업주와 근로자가 연대 책임을 지게 된다. 아울러 형사처벌과 과태료 부과 규정까지 적용될 수 있다. 허위 신고가...",
+   "link": "https://www.widedaily.com/news/articleView.html?idxno=303647",
+   "originallink": "https://www.widedaily.com/news/articleView.html?idxno=303647",
+   "press": "widedaily.com",
+   "pub": "2026-11-13 10:30",
+   "q": "구직급여",
    "rel": false
   }
  ]

@@ -11906,24 +11906,6 @@
     ]
    },
    {
-    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
-    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
-    "press": "labortoday.co.kr",
-    "pub": "2026-11-10 06:34",
-    "cites": false,
-    "judged": true,
-    "why": "사립대병원 육아휴직급여 차별 실태",
-    "hits": [],
-    "tone": [],
-    "stance": "부정",
-    "focus": "",
-    "kw": [
-     "사립대병원",
-     "육아휴직급여",
-     "제멋대"
-    ]
-   },
-   {
     "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
     "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
     "press": "labortoday.co.kr",
@@ -11943,6 +11925,24 @@
      "암울",
      "청년고용",
      "최장기"
+    ]
+   },
+   {
+    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+    "press": "labortoday.co.kr",
+    "pub": "2026-11-10 06:34",
+    "cites": false,
+    "judged": true,
+    "why": "사립대병원 육아휴직급여 차별 실태",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사립대병원",
+     "육아휴직급여",
+     "제멋대"
     ]
    },
    {
@@ -12883,6 +12883,46 @@
      "고용위기",
      "선제대응",
      "포항"
+    ]
+   },
+   {
+    "title": "2027 최저임금 시급·월급·연봉 실수령액 얼마?",
+    "url": "https://www.bntnews.co.kr/article/view/bnt202611120272",
+    "press": "bntnews.co.kr",
+    "pub": "2026-11-13 00:12",
+    "cites": false,
+    "judged": true,
+    "why": "최저임금 실수령액 계산 안내",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "시급",
+     "실수령액",
+     "얼마",
+     "연봉",
+     "월급",
+     "최저임금"
+    ]
+   },
+   {
+    "title": "포항시, 고용위기 선제대응지역 1년 연장…내년 11월까지",
+    "url": "https://sports.donga.com/region/article/all/20261113/135018081/1",
+    "press": "동아일보",
+    "pub": "2026-11-13 07:45",
+    "cites": false,
+    "judged": true,
+    "why": "포항 고용위기 지역 지정 연장",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "고용위기",
+     "선제대응지역",
+     "연장",
+     "포항시"
     ]
    }
   ]
