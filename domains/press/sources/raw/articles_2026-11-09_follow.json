@@ -6,32 +6,32 @@
   "2026-11-10",
   "2026-11-30"
  ],
- "collected_at": "2026-11-13 11:08",
+ "collected_at": "2026-11-13 18:56",
  "volume": {
-  "collected": 174,
-  "articles": 50,
-  "press": 40,
+  "collected": 187,
+  "articles": 51,
+  "press": 41,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29692,
+   "api_total": 29694,
    "fetched": 100,
    "truncated": false,
-   "in_window": 59,
-   "relevant": 50,
-   "new": 59
+   "in_window": 61,
+   "relevant": 51,
+   "new": 61
   },
   {
    "query": "구직급여",
-   "api_total": 95247,
+   "api_total": 95252,
    "fetched": 100,
    "truncated": false,
-   "in_window": 87,
+   "in_window": 92,
    "relevant": 4,
-   "new": 76
+   "new": 81
   },
   {
    "query": "구인배수",
@@ -44,12 +44,12 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18772,
+   "api_total": 18778,
    "fetched": 100,
    "truncated": false,
-   "in_window": 55,
+   "in_window": 61,
    "relevant": 16,
-   "new": 36
+   "new": 42
   },
   {
    "query": "건설업 고용보험",
@@ -127,16 +127,6 @@
    "rel": true
   },
   {
-   "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
-   "desc": "▲ 자료사진 정기훈 기자 반도체 호황에 따른 고용보험 가입자 증가세가 지속되고 있다. 하지만 청년고용은 역대 최장기 감소세를 보이며 어려움이 계속되는 상황이다. 고용노동부가 9일 발표한 '2026년 10월...",
-   "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
-   "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
-   "press": "labortoday.co.kr",
-   "pub": "2026-11-10 06:34",
-   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
-   "rel": true
-  },
-  {
    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
    "desc": "문제는 고용보험법이 사학연금 적용자를 가입 대상에서 제외한다는 점이다. 사학연금에 가입한 병원... 같은 사학연금 가입자라도 소속 병원에 따라 받는 수당은 크게 다르다. 공공운수노조 의료연대본부에 따르면...",
    "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
@@ -144,6 +134,16 @@
    "press": "labortoday.co.kr",
    "pub": "2026-11-10 06:34",
    "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
+   "desc": "▲ 자료사진 정기훈 기자 반도체 호황에 따른 고용보험 가입자 증가세가 지속되고 있다. 하지만 청년고용은 역대 최장기 감소세를 보이며 어려움이 계속되는 상황이다. 고용노동부가 9일 발표한 '2026년 10월...",
+   "link": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
+   "originallink": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
+   "press": "labortoday.co.kr",
+   "pub": "2026-11-10 06:34",
+   "q": "고용보험 가입자, 구직급여, 구인배수, 제조업 고용보험, 건설업 고용보험, 전문과학기술업 고용보험, 비금속광물 고용보험, 전자·통신 고용보험, 기계장비 고용보험, 자동차 고용보험, 기타운송장비 고용보험",
    "rel": true
   },
   {
@@ -614,6 +614,16 @@
    "press": "동아일보",
    "pub": "2026-11-13 07:45",
    "q": "고용보험 가입자, 제조업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "국민연금, 프리랜서 납부예외 신청 간소화…해촉증명서 제출 부담 줄인...",
+   "desc": "취약계층의 고용보험 가입 확대와 복지 사각지대 해소 등을 지원하기 위해 활용되고 있다. 이번 시스템... 국민연금 납부예외는 사업 중단이나 실직 등으로 소득이 없어 보험료 납부가 어려운 가입자가 일정 기간 보험료...",
+   "link": "https://www.polinews.co.kr/news/articleView.html?idxno=748401",
+   "originallink": "https://www.polinews.co.kr/news/articleView.html?idxno=748401",
+   "press": "polinews.co.kr",
+   "pub": "2026-11-13 13:16",
+   "q": "고용보험 가입자",
    "rel": true
   }
  ],
@@ -1679,7 +1689,7 @@
    "rel": false
   },
   {
-   "title": "자진 퇴사 청년도 월 100만원?…정부, 생애 한 차례 실업급여 검토",
+   "title": "자진퇴사 청년도 월100만원 받는다?…생애 한차례 실업급여 검토",
    "desc": "정부가 스스로 회사를 그만둔 35세 미만 청년에게도 생애 한 차례 구직급여를 지급하는 방안을 검토하고 있다. 국회입법조사처는 지급액과 횟수를 제한하면 급여를 받기 위해 퇴사하는 사례가 크게 늘 가능성은 낮다고...",
    "link": "https://n.news.naver.com/mnews/article/025/0003564945?sid=101",
    "originallink": "https://www.joongang.co.kr/article/25478307",
@@ -1709,21 +1719,21 @@
    "rel": false
   },
   {
-   "title": "가짜 3.3·사업장 쪼개기 잡는다…노동부, 기획감독 착수",
-   "desc": "이상을 고용한 사업장을 중심으로 이뤄진다. 음식·숙박업, 제조업, 도·소매업, 시설관리업, 이동통신업 등... 이후 국세청 소득세 납부 신고 내역과 고용보험 정보, 신고사건 및 감독 이력, 구인광고 등을 종합적으로...",
-   "link": "https://n.news.naver.com/mnews/article/003/0014319897?sid=102",
-   "originallink": "https://www.newsis.com/view/NISX20261113_0003866539",
-   "press": "뉴시스",
-   "pub": "2026-11-13 09:00",
-   "q": "제조업 고용보험",
-   "rel": false
-  },
-  {
    "title": "노동부, '가짜 3.3' 위장고용, '사업장 쪼개기' 기획감독 나선다",
    "desc": "중심으로 고용보험 정보, 감독 이력 등을 종합 검토해 최종 대상을 정했다. 감독 대상은 음식·숙박업, 제조업, 도·소매업, 이동통신업 등 사업소득자를 많이 고용하는 업종의 사업장이나, 근로소득자는 5인 미만이지만...",
    "link": "https://n.news.naver.com/mnews/article/421/0009287061?sid=101",
    "originallink": "https://www.news1.kr/economy/employment-labor/6352593",
    "press": "뉴스1",
+   "pub": "2026-11-13 09:00",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "가짜 3.3·사업장 쪼개기 잡는다…노동부, 기획감독 착수",
+   "desc": "이상을 고용한 사업장을 중심으로 이뤄진다. 음식·숙박업, 제조업, 도·소매업, 시설관리업, 이동통신업 등... 이후 국세청 소득세 납부 신고 내역과 고용보험 정보, 신고사건 및 감독 이력, 구인광고 등을 종합적으로...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014319897?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261113_0003866539",
+   "press": "뉴시스",
    "pub": "2026-11-13 09:00",
    "q": "제조업 고용보험",
    "rel": false
@@ -1749,21 +1759,21 @@
    "rel": false
   },
   {
-   "title": "‘가짜 3.3 계약·사업장 쪼개기’ 잡는다…노동부, 꼼수 사업장 기획감...",
-   "desc": "16일부터 2개월간 실시…음식·숙박·제조업 등 집중 점검 4대 보험 미가입·임금체불 등 적발 시 시정 조치 고용노동부가 ‘가짜 3.3 위장고용’과 ‘사업장 쪼개기’ 등 노동법 회피 행위가 의심되는 사업장을 대상으로...",
-   "link": "https://n.news.naver.com/mnews/article/366/0001204498?sid=102",
-   "originallink": "https://biz.chosun.com/topics/topics_social/2026/11/13/XSN4IPTOLZHIJPANPI7IVWTXMQ/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-   "press": "조선일보",
-   "pub": "2026-11-13 09:01",
-   "q": "제조업 고용보험",
-   "rel": false
-  },
-  {
    "title": "노동부, '가짜 3.3·사업장 쪼개기' 의심 140곳 기획감독",
    "desc": "업종별로는 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업처럼 사업소득자를 많이 고용하는 업종을 주로 들여다본다. 노동부는 재직자 익명 제보와 근로복지공단·국민연금공단의 보험·연금 가입 정보로 의심...",
    "link": "https://n.news.naver.com/mnews/article/079/0004209382?sid=102",
    "originallink": "https://www.nocutnews.co.kr/news/6605934?utm_source=naver&utm_medium=article&utm_campaign=20261113090019",
    "press": "nocutnews.co.kr",
+   "pub": "2026-11-13 09:01",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "‘가짜 3.3 계약·사업장 쪼개기’ 잡는다…노동부, 꼼수 사업장 기획감...",
+   "desc": "16일부터 2개월간 실시…음식·숙박·제조업 등 집중 점검 4대 보험 미가입·임금체불 등 적발 시 시정 조치 고용노동부가 ‘가짜 3.3 위장고용’과 ‘사업장 쪼개기’ 등 노동법 회피 행위가 의심되는 사업장을 대상으로...",
+   "link": "https://n.news.naver.com/mnews/article/366/0001204498?sid=102",
+   "originallink": "https://biz.chosun.com/topics/topics_social/2026/11/13/XSN4IPTOLZHIJPANPI7IVWTXMQ/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+   "press": "조선일보",
    "pub": "2026-11-13 09:01",
    "q": "제조업 고용보험",
    "rel": false
@@ -1856,6 +1866,126 @@
    "press": "widedaily.com",
    "pub": "2026-11-13 10:30",
    "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "노동법 사각지대 노린 '가짜 3.3'·'쪼개기' 꼼수, 칼 빼 든 정부",
+   "desc": "내역, 고용보험 정보, 구인광고 모니터링 결과까지 입체적으로 교차 검증해 최종 대상을 추려냈다. 핵심 타깃은 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업 등 사업소득자 고용 비중이 높은 업종이다. 특히...",
+   "link": "http://www.newsprime.co.kr/news/article.html?no=754855",
+   "originallink": "http://www.newsprime.co.kr/news/article.html?no=754855",
+   "press": "newsprime.co.kr",
+   "pub": "2026-11-13 11:18",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "국세청 데이터로 '가짜 3.3 계약·사업장 쪼개기' 잡는다",
+   "desc": "내역과 고용보험 정보, 과거 신고·감독 이력, 구인광고 모니터링 결과까지 입체적으로 교차 검증해 고위험 사업장을 추려냈다. 주요 타깃은 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업 등 사업소득자를...",
+   "link": "https://www.mediapen.com/news/view/1137301",
+   "originallink": "https://www.mediapen.com/news/view/1137301",
+   "press": "mediapen.com",
+   "pub": "2026-11-13 11:20",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "가짜 3.3·사업장 쪼개기 '고용 꼼수'에 칼끝",
+   "desc": "고용보험 자료 등을 대조한다. 여기에 노동 관련 신고·감독 이력과 구인광고 모니터링 결과까지 종합해 실제 고용 형태와 신고 내용이 일치하는지 살펴볼 예정이다. 감독 대상은 음식·숙박업과 제조업, 도·소매업...",
+   "link": "http://www.00news.co.kr/news/articleView.html?idxno=108020",
+   "originallink": "http://www.00news.co.kr/news/articleView.html?idxno=108020",
+   "press": "00news.co.kr",
+   "pub": "2026-11-13 11:56",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "\"고졸이라 잡코리아 못 가\"…청년들 '알바몬' 전전하는 이유(종합)",
+   "desc": "아르바이트 구직 플랫폼을 찾고 있다는 현장의 목소리가 나왔다. 이에 경제사회노동위원회(경사노위)... 한 위원장에 따르면 지난 7월 기준 신입·인턴 채용공고 103건 중 급여를 구체적인 숫자로 제시한 공고는 8건(7.8%)에...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014320631?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261113_0003867031",
+   "press": "뉴시스",
+   "pub": "2026-11-13 12:15",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "보험업계 '보조기기 지원금특약' 배타적사용권 획득·서울시와 체험형 ...",
+   "desc": "이 특약은 보험기간 중 장애가 발생해 장애인으로 등록된 고객이 건강보험 또는 의료급여 보조기기를 이용할... 이 프로그램에는 자활 의지와 건강 상태 등을 고려해 선발한 노숙인 구직자 20명이 참여했다. 이들은...",
+   "link": "http://www.wsobi.com/news/articleView.html?idxno=321706",
+   "originallink": "http://www.wsobi.com/news/articleView.html?idxno=321706",
+   "press": "wsobi.com",
+   "pub": "2026-11-13 12:16",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "한국자격증협회, '병원코디네이터 자격증' 무료 수강생 100명 선착순 모...",
+   "desc": "한국자격증협회가 병원 서비스, 의료행정 분야 취업을 준비하는 구직자와 직장인을 대상으로... 병원행정관리사 자격증 과정에서는 원무행정, 진료비 청구, 건강보험과 의료급여, 의무기록 관리, 의료정보 관리, 병원 조직...",
+   "link": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249677",
+   "originallink": "http://www.sisunnews.co.kr/news/articleView.html?idxno=249677",
+   "press": "sisunnews.co.kr",
+   "pub": "2026-11-13 14:24",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "광명시, 내년 본예산 1조3566억원 편성…민생·청년·미래성장 집중 투자",
+   "desc": "영유아보육료 지원에 약 351억원을 배정하고 장애인 활동지원급여에 약 156억원을 투입해 양육 부담과... 청년인턴 일자리사업에 약 24억원을 반영하고, 구직 의욕을 높이고 취업 준비를 지원하는 청년도전지원사업에는...",
+   "link": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5083136",
+   "originallink": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5083136",
+   "press": "shinailbo.co.kr",
+   "pub": "2026-11-13 14:58",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "미국 부자는 왜 유럽 서민보다 오래 살지 못할까",
+   "desc": "2026년 초 ACA(오바마케어) 마켓플레이스 보험 가입자도 1년 전보다 약 260만 명 줄었다. 마샤도는 \"건강... 셋째, 건강보험이 고용과 밀접하게 묶여 있는 등 사회안전망이 더 얇다. 불평등은 이 문제를 더 키운다....",
+   "link": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54751",
+   "originallink": "https://www.fortunekorea.co.kr/news/articleView.html?idxno=54751",
+   "press": "fortunekorea.co.kr",
+   "pub": "2026-11-13 15:00",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "[그래픽 경제]배달앱 갑질에 철퇴…배민·쿠팡 과징금 6319억",
+   "desc": "'경쟁 앱보다 불리한 조건 금지' 요구…배민·쿠팡에 과징금 6319억 반도체 수출 호황에 10대 기업 무역집중도 60.9%…역대 최고 전체 고용 늘었지만…청년 취업은 4년째 감소 제조업 3개월째 고용보험 증가…청년은...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014321060?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261113_0003866706",
+   "press": "뉴시스",
+   "pub": "2026-11-13 15:07",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "고용부, 가짜 3.3 위장고용 및 사업장 쪼개기 꼼수 140곳 기획감독 착수",
+   "desc": "이후 국세청의 소득세 납부 내역을 중심으로 고용보험 정보와 과거 감독 이력 등을 종합적으로 분석해 최종 단속 대상을 확정했다. 집중 점검 대상은 음식 숙박업과 제조업 그리고 도소매업 등 사업소득자를 다수...",
+   "link": "https://www.pointe.co.kr/news/articleView.html?idxno=87754",
+   "originallink": "https://www.pointe.co.kr/news/articleView.html?idxno=87754",
+   "press": "pointe.co.kr",
+   "pub": "2026-11-13 16:48",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "실직 외국인노동자 실태조사·정책토론회 개최",
+   "desc": "월급 300만원 이상인 노동자는 업무 강도와 작업환경 때문에, 200만원 미만인 노동자는 낮은 급여 때문에... 차비 씨는 야간근무 부담과 건강 문제로 회사를 그만둔 뒤 숙식과 구직 비용 걱정이 컸다고 털어놨다. 차비...",
+   "link": "https://www.idjnews.kr/news/articleView.html?idxno=303954",
+   "originallink": "https://www.idjnews.kr/news/articleView.html?idxno=303954",
+   "press": "idjnews.kr",
+   "pub": "2026-11-13 18:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "포항시, 고용위기 선제대응지역 연장 및 기업·근로자 우대 지속",
+   "desc": "올해 8월 기준 포항시 1차 철강 제조업 고용보험 피보험자는 2만 7,445명으로 2024년 동월 대비 1,070명(3.8%) 감소했다. ◆ 기업 및 근로자 지원 혜택 지속 포항시는 지난달 2일 연장 의견서를 정부에 제출하고 관계기관과...",
+   "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882809",
+   "originallink": "http://www.hansbiz.co.kr/news/articleView.html?idxno=882809",
+   "press": "hansbiz.co.kr",
+   "pub": "2026-11-13 18:50",
+   "q": "제조업 고용보험",
    "rel": false
   }
  ]
