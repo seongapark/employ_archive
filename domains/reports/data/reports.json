@@ -52,6 +52,24 @@
   "matched": []
  },
  {
+  "id": "bok-11066564",
+  "org": "bok",
+  "board": "bok-research",
+  "series": "조사연구자료",
+  "title": "AI 지수 유형별 경남지역 노동 수요 변화 분석과 정책적 시사점",
+  "authors": [
+   "경남본부"
+  ],
+  "published": "2026-11-12",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11066564&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/fc965bbbc279468ab202fa80c6560111/1/4a6c474c71a14824b8335880f1a281f2.pdf",
+  "matched": [
+   "일자리정책"
+  ]
+ },
+ {
   "id": "bok-11066541",
   "org": "bok",
   "board": "bok-intl",

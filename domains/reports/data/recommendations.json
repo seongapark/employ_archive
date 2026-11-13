@@ -34262,5 +34262,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-12T15:00:59+09:00"
+ },
+ "bok-11066564": {
+  "pick": true,
+  "axis": "AI·기술변화의 직종별 고용영향",
+  "why": "AI 지수 유형별 경남 노동수요 직접 분석",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-13T11:01:38+09:00"
  }
 }
