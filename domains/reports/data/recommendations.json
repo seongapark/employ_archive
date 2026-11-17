@@ -34271,5 +34271,23 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-13T11:01:38+09:00"
+ },
+ "kdi-an3830": {
+  "pick": true,
+  "axis": "임금·근로조건",
+  "why": "기업 생산성-인건비 연결로 실질임금 정체 직접 분석",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-17T10:05:12+09:00"
+ },
+ "bok-11066621": {
+  "pick": false,
+  "axis": "",
+  "why": "제주 재정구조·중장기 전망, 고용 무관",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-17T10:05:12+09:00"
  }
 }

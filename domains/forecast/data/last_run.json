@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-14T11:08:35.169609+09:00",
+  "run_at": "2026-11-17T10:05:13.744597+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -7,8 +7,8 @@
       "added": 0
     },
     "oecd_interim": {
-      "ok": true,
-      "fetched": 4,
+      "ok": false,
+      "fetched": 0,
       "added": 0
     },
     "imf": {
@@ -63,7 +63,11 @@
     }
   },
   "conflicts": [],
-  "errors": [],
-  "warnings": [],
+  "errors": [
+    "oecd_interim: Timeout: Failed to perform, curl: (28) Connection timed out after 120003 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
+  ],
+  "warnings": [
+    "announce: OECD 공지일 못 읽음 — Blocked: 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/about/news.html"
+  ],
   "blocked": {}
 }

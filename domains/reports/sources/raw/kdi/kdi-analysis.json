@@ -655,5 +655,26 @@
     "abstract_tried": false,
     "abstract_note": null,
     "collected_at": "2026-11-12T15:00:26+09:00"
+  },
+  {
+    "id": "kdi-an3830",
+    "org": "kdi",
+    "board": "kdi-analysis",
+    "series": "현안분석",
+    "title": "기업 생산성 분석으로 살펴본 실질임금 정체의 배경과 시사점",
+    "authors": [
+      "송호규",
+      "정수환"
+    ],
+    "published": "2026-11-16",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.kdi.re.kr/research/analysisView?art_no=3830",
+    "file_url": "https://www.kdi.re.kr/file/download?atch_no=Ff8QjJ%2BYdf7dtA3V2PHkqA%3D%3D",
+    "abstract": "■ 최근 경제성장률의 반등에도 2021년 이후 실질임금 정체가 광범위하게 이어지는 가운데, 非반도체 부문의 생산성 부진이 중요한 배경으로 나타남. - 기업 수준에서는 생산성 개선이 1인당 인건비 증가를 동반하였으며, 산업 수준에서도 생산성 증가율이 높은 산업일수록 실질..",
+    "toc": [],
+    "abstract_tried": false,
+    "abstract_note": null,
+    "collected_at": "2026-11-17T10:03:22+09:00"
   }
 ]

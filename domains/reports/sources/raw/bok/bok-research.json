@@ -8238,5 +8238,25 @@
     "abstract_tried": true,
     "abstract_note": "요약 섹션 없음",
     "collected_at": "2026-11-13T11:01:18+09:00"
+  },
+  {
+    "id": "bok-11066621",
+    "org": "bok",
+    "board": "bok-research",
+    "series": "조사연구자료",
+    "title": "제주지역 재정의 구조적 변화 식별과 중장기 전망",
+    "authors": [
+      "제주본부"
+    ],
+    "published": "2026-11-16",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11066621&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/7f3e346d5bfd4f0d829af6c18be49d9c/1/a035449ae6544dffb6f8794f47661759.hwp",
+    "abstract": null,
+    "toc": [],
+    "abstract_tried": true,
+    "abstract_note": "텍스트가 없는 스캔본",
+    "collected_at": "2026-11-17T10:04:59+09:00"
   }
 ]

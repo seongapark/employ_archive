@@ -1,16 +1,7 @@
 {
-  "generated": "2026-11-14",
+  "generated": "2026-11-17",
   "months": 6,
   "entries": [
-    {
-      "org": "KDI",
-      "org_name_ko": "KDI",
-      "report": "경제전망(하반기)",
-      "start": "2026-11-08",
-      "end": "2026-11-14",
-      "date": null,
-      "basis": "예상"
-    },
     {
       "org": "KIET",
       "org_name_ko": "산업연",
