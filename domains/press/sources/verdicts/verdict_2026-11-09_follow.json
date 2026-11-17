@@ -574,5 +574,50 @@
   "focus": "",
   "title": "원주 그릭요거트 기업 '요즘', 노사상생 모범기업 선정",
   "press": "shinailbo.co.kr"
+ },
+ {
+  "n": 1,
+  "cites": false,
+  "why": "개별 기업 노사상생 수상 소식",
+  "tone": "긍정",
+  "focus": "",
+  "title": "원주 ㈜요즘, 일터혁신 노사상생 모범기업 선정",
+  "press": "kwnews.co.kr"
+ },
+ {
+  "n": 2,
+  "cites": false,
+  "why": "경기도 1인 소상공인 보험료 지원사업",
+  "tone": "중립",
+  "focus": "",
+  "title": "폐업 후 안전망도 챙긴다… 경상원, 1인 소상공인 보험료 지원",
+  "press": "gg.newdaily.co.kr"
+ },
+ {
+  "n": 3,
+  "cites": false,
+  "why": "청년 취업난 기획, 고용정보원 분석 인용",
+  "tone": "부정",
+  "focus": "",
+  "title": "[JOB리포트]청년들이 직면한 AI 시대, 의심받는 합격증과 좁아진 첫 일자...",
+  "press": "news2day.co.kr"
+ },
+ {
+  "n": 4,
+  "cites": false,
+  "why": "경기도 자영업자 고용보험료 지원 안내",
+  "tone": "중립",
+  "focus": "",
+  "title": "\"혼자 가게 꾸리는 사장님, 보험료 부담 덜어드립니다\"…경기도 연말 지...",
+  "press": "weekly.hankooki.com"
+ },
+ {
+  "n": 5,
+  "cites": false,
+  "why": "개별 기업 고용 확대 수상 소식",
+  "tone": "긍정",
+  "focus": "",
+  "title": "직원 64명에서 111명으로 껑충…원주 ㈜요즘, 노사상생 모범기업 선정",
+  "press": "pressian.com"
  }
 ]

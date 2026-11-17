@@ -6,32 +6,32 @@
   "2026-11-10",
   "2026-11-30"
  ],
- "collected_at": "2026-11-17 13:11",
+ "collected_at": "2026-11-17 20:04",
  "volume": {
-  "collected": 232,
-  "articles": 64,
-  "press": 51,
+  "collected": 249,
+  "articles": 69,
+  "press": 55,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29709,
+   "api_total": 29714,
    "fetched": 100,
    "truncated": false,
-   "in_window": 76,
-   "relevant": 63,
-   "new": 76
+   "in_window": 81,
+   "relevant": 68,
+   "new": 81
   },
   {
    "query": "구직급여",
-   "api_total": 95273,
+   "api_total": 95286,
    "fetched": 200,
    "truncated": false,
-   "in_window": 113,
+   "in_window": 126,
    "relevant": 4,
-   "new": 102
+   "new": 114
   },
   {
    "query": "구인배수",
@@ -755,6 +755,56 @@
    "pub": "2026-11-17 12:34",
    "q": "고용보험 가입자",
    "rel": true
+  },
+  {
+   "title": "원주 ㈜요즘, 일터혁신 노사상생 모범기업 선정",
+   "desc": "요즘은 문막 사업장을 중심으로 직접고용과 신규 채용을 확대해 고용보험 가입자가 지난해 1월 64명에서 올해 111명으로 47명 늘었다. 이성흠 요즘 대표는 “선진 노사문화 조성과 지역 일자리 창출을 통해 지역경제...",
+   "link": "https://n.news.naver.com/mnews/article/087/0001231367?sid=102",
+   "originallink": "https://www.kwnews.co.kr/article/20261117500579",
+   "press": "kwnews.co.kr",
+   "pub": "2026-11-17 13:55",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "폐업 후 안전망도 챙긴다… 경상원, 1인 소상공인 보험료 지원",
+   "desc": "지원 대상은 경기도에 사업자등록을 둔 상시근로자 없는 소상공인으로, 자영업자 고용보험 가입자여야 한다. 공동사업자는 대표자 1명만 신청할 수 있으며, 다른 사업장의 근로자 고용보험에 동시 가입했거나 기존...",
+   "link": "https://gg.newdaily.co.kr/site/data/html/2026/11/17/2026111750252.html",
+   "originallink": "https://gg.newdaily.co.kr/site/data/html/2026/11/17/2026111750252.html",
+   "press": "gg.newdaily.co.kr",
+   "pub": "2026-11-17 16:02",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[JOB리포트]청년들이 직면한 AI 시대, 의심받는 합격증과 좁아진 첫 일자...",
+   "desc": "한국고용정보원도 고용보험 자료를 분석한 결과 청년 인구 감소와 경제활동 참여 축소가 신규 가입자 감소에 크게 작용했다고 설명했다. 기업이 경력직을 선호하는 흐름 속에서 AI가 자료조사나 문서 초안 같은 초급...",
+   "link": "https://www.news2day.co.kr/article/20261117500156",
+   "originallink": "https://www.news2day.co.kr/article/20261117500156",
+   "press": "news2day.co.kr",
+   "pub": "2026-11-17 16:34",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "\"혼자 가게 꾸리는 사장님, 보험료 부담 덜어드립니다\"…경기도 연말 지...",
+   "desc": "소상공인들이 고용보험 가입에 따른 비용 부담을 줄일 수 있는 지원제도가 연말까지 추가 신청을 받는다.... ◇ 보험료 등급에 따라 지원 비율 달라져 지원금은 모든 신청자에게 같은 금액으로 지급되지 않는다. 가입자가...",
+   "link": "https://weekly.hankooki.com/news/articleView.html?idxno=7194384",
+   "originallink": "https://weekly.hankooki.com/news/articleView.html?idxno=7194384",
+   "press": "weekly.hankooki.com",
+   "pub": "2026-11-17 17:24",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "직원 64명에서 111명으로 껑충…원주 ㈜요즘, 노사상생 모범기업 선정",
+   "desc": "지역 일자리 창출 성과도 거뒀다. 원주시 문막읍 사업장을 중심으로 직접 고용을 확대하고 신규 인력을 꾸준히 채용한 결과 고용보험 가입자 수가 2025년 1월 64명에서 2026년 현재 111명으로 47명 증가했다.",
+   "link": "https://n.news.naver.com/mnews/article/002/0002466331?sid=102",
+   "originallink": "https://www.pressian.com/pages/articles/2026111713420992764?utm_source=naver&utm_medium=search",
+   "press": "pressian.com",
+   "pub": "2026-11-17 18:56",
+   "q": "고용보험 가입자",
+   "rel": true
   }
  ],
  "excluded": [
@@ -899,21 +949,21 @@
    "rel": false
   },
   {
-   "title": "넥슨 3사 대기발령 300명 넘어…'선택과 집중' 뒤 게임업계 고용불안",
-   "desc": "근속연수에 따라 퇴직금 외에 최대 30개월치 급여를 지급하는 조건이다. 회사는 퇴사를 강제하지 않는다는... 넥슨은 그동안 사내 구직과 전환배치 제도를 운영해 왔으며, 2024년에는 신규 채용 수요 일부를...",
-   "link": "http://www.popcornnews.net/news/articleView.html?idxno=139364",
-   "originallink": "http://www.popcornnews.net/news/articleView.html?idxno=139364",
-   "press": "popcornnews.net",
-   "pub": "2026-11-10 11:20",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "“추가근로가 더 큰 경제 보상으로…‘디딤돌소득’ 혁신”",
    "desc": "기본소득은 기존 실업급여에 부과되던 구직활동과 노동시장 서비스 참여 의무에서 벗어나게 했지만 고용에 미친 효과는 크지 않았다. 기존에는 기본소득을 하게 되면 고용 증가가 되고, 이를 통해 비용을 일부 충당할 수...",
    "link": "https://n.news.naver.com/mnews/article/016/0002721360?sid=102",
    "originallink": "https://biz.heraldcorp.com/article/10931969?ref=naver",
    "press": "헤럴드경제",
+   "pub": "2026-11-10 11:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "넥슨 3사 대기발령 300명 넘어…'선택과 집중' 뒤 게임업계 고용불안",
+   "desc": "근속연수에 따라 퇴직금 외에 최대 30개월치 급여를 지급하는 조건이다. 회사는 퇴사를 강제하지 않는다는... 넥슨은 그동안 사내 구직과 전환배치 제도를 운영해 왔으며, 2024년에는 신규 채용 수요 일부를...",
+   "link": "http://www.popcornnews.net/news/articleView.html?idxno=139364",
+   "originallink": "http://www.popcornnews.net/news/articleView.html?idxno=139364",
+   "press": "popcornnews.net",
    "pub": "2026-11-10 11:20",
    "q": "구직급여",
    "rel": false
@@ -1849,11 +1899,11 @@
    "rel": false
   },
   {
-   "title": "가짜 3.3·사업장 쪼개기 잡는다…노동부, 기획감독 착수",
-   "desc": "이상을 고용한 사업장을 중심으로 이뤄진다. 음식·숙박업, 제조업, 도·소매업, 시설관리업, 이동통신업 등... 이후 국세청 소득세 납부 신고 내역과 고용보험 정보, 신고사건 및 감독 이력, 구인광고 등을 종합적으로...",
-   "link": "https://n.news.naver.com/mnews/article/003/0014319897?sid=102",
-   "originallink": "https://www.newsis.com/view/NISX20261113_0003866539",
-   "press": "뉴시스",
+   "title": "노동부, '가짜 3.3·사업장 쪼개기' 정조준⋯140여 곳 기획감독 실시",
+   "desc": "특히 국세청의 사업소득세 납부(원천징수 이행상황) 신고 내역을 중심으로 고용보험 정보, 과거 감독 이력, 구인광고 모니터링 결과를 종합적으로 교차 검증해 감독 대상을 추렸다. 주요 타깃은 음식·숙박업, 제조업, 도...",
+   "link": "https://www.etoday.co.kr/news/view/2647424",
+   "originallink": "https://www.etoday.co.kr/news/view/2647424",
+   "press": "이투데이",
    "pub": "2026-11-13 09:00",
    "q": "제조업 고용보험",
    "rel": false
@@ -1869,21 +1919,21 @@
    "rel": false
   },
   {
-   "title": "노동부, '가짜 3.3·사업장 쪼개기' 정조준⋯140여 곳 기획감독 실시",
-   "desc": "특히 국세청의 사업소득세 납부(원천징수 이행상황) 신고 내역을 중심으로 고용보험 정보, 과거 감독 이력, 구인광고 모니터링 결과를 종합적으로 교차 검증해 감독 대상을 추렸다. 주요 타깃은 음식·숙박업, 제조업, 도...",
-   "link": "https://www.etoday.co.kr/news/view/2647424",
-   "originallink": "https://www.etoday.co.kr/news/view/2647424",
-   "press": "이투데이",
+   "title": "가짜 3.3·사업장 쪼개기 잡는다…노동부, 기획감독 착수",
+   "desc": "이상을 고용한 사업장을 중심으로 이뤄진다. 음식·숙박업, 제조업, 도·소매업, 시설관리업, 이동통신업 등... 이후 국세청 소득세 납부 신고 내역과 고용보험 정보, 신고사건 및 감독 이력, 구인광고 등을 종합적으로...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014319897?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261113_0003866539",
+   "press": "뉴시스",
    "pub": "2026-11-13 09:00",
    "q": "제조업 고용보험",
    "rel": false
   },
   {
-   "title": "‘가짜 3.3 계약·사업장 쪼개기’ 잡는다…노동부, 꼼수 사업장 기획감...",
-   "desc": "16일부터 2개월간 실시…음식·숙박·제조업 등 집중 점검 4대 보험 미가입·임금체불 등 적발 시 시정 조치 고용노동부가 ‘가짜 3.3 위장고용’과 ‘사업장 쪼개기’ 등 노동법 회피 행위가 의심되는 사업장을 대상으로...",
-   "link": "https://n.news.naver.com/mnews/article/366/0001204498?sid=102",
-   "originallink": "https://biz.chosun.com/topics/topics_social/2026/11/13/XSN4IPTOLZHIJPANPI7IVWTXMQ/?utm_source=naver&utm_medium=original&utm_campaign=biz",
-   "press": "조선일보",
+   "title": "노동부, ‘가짜 3.3’·사업장 쪼개기 140여곳 기획감독",
+   "desc": "국세청 소득세 납부 신고 내역을 중심으로 고용보험 정보, 신고사건과 감독 이력, 구인광고 등을 종합 검토해 최종 감독 대상을 선정한다. 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업 등 사업소득자가 다수...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002722915?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10935070?ref=naver",
+   "press": "헤럴드경제",
    "pub": "2026-11-13 09:01",
    "q": "제조업 고용보험",
    "rel": false
@@ -1909,11 +1959,11 @@
    "rel": false
   },
   {
-   "title": "노동부, ‘가짜 3.3’·사업장 쪼개기 140여곳 기획감독",
-   "desc": "국세청 소득세 납부 신고 내역을 중심으로 고용보험 정보, 신고사건과 감독 이력, 구인광고 등을 종합 검토해 최종 감독 대상을 선정한다. 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업 등 사업소득자가 다수...",
-   "link": "https://n.news.naver.com/mnews/article/016/0002722915?sid=101",
-   "originallink": "https://biz.heraldcorp.com/article/10935070?ref=naver",
-   "press": "헤럴드경제",
+   "title": "‘가짜 3.3 계약·사업장 쪼개기’ 잡는다…노동부, 꼼수 사업장 기획감...",
+   "desc": "16일부터 2개월간 실시…음식·숙박·제조업 등 집중 점검 4대 보험 미가입·임금체불 등 적발 시 시정 조치 고용노동부가 ‘가짜 3.3 위장고용’과 ‘사업장 쪼개기’ 등 노동법 회피 행위가 의심되는 사업장을 대상으로...",
+   "link": "https://n.news.naver.com/mnews/article/366/0001204498?sid=102",
+   "originallink": "https://biz.chosun.com/topics/topics_social/2026/11/13/XSN4IPTOLZHIJPANPI7IVWTXMQ/?utm_source=naver&utm_medium=original&utm_campaign=biz",
+   "press": "조선일보",
    "pub": "2026-11-13 09:01",
    "q": "제조업 고용보험",
    "rel": false
@@ -2379,16 +2429,6 @@
    "rel": false
   },
   {
-   "title": "강북구, 첫 1조 원 본예산 편성… 구민 체감사업에 집중 투자",
-   "desc": "국·시비 보조금은 전년보다 550억 원(10.3%) 증가한 5,907억 원이며, 기초연금과 생계급여 등 사회보장적... 구직단념청년을 위한 맞춤형 프로그램에 8억 원을 투입하고, 새롭게 도입하는 청년 평생교육이용권에 8천만 원을...",
-   "link": "https://www.m-i.kr/news/articleView.html?idxno=2019419",
-   "originallink": "https://www.m-i.kr/news/articleView.html?idxno=2019419",
-   "press": "m-i.kr",
-   "pub": "2026-11-17 09:28",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "강북구, 내년 예산 첫 1조 원 돌파…복지·생활인프라 투자 확대",
    "desc": "국·시비 보조금은 전년보다 550억 원(10.3%) 증가한 5천907억 원이며, 기초연금과 생계급여 등 사회보장적... 구직단념청년 맞춤형 프로그램에 8억 원을 투입하고, 청년 평생교육이용권 사업을 신설해 1인당 연간 50만 원을...",
    "link": "https://www.jeonmae.co.kr/news/articleView.html?idxno=1312535",
@@ -2435,6 +2475,136 @@
    "originallink": "https://www.hg-times.com/news/articleView.html?idxno=307091",
    "press": "hg-times.com",
    "pub": "2026-11-17 12:50",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "알바몬, 최예나·스윙스 앞세운 겨울 캠페인 공개…첫 알바 구직자 공략",
+   "desc": "안전한 구직 환경과 맞춤형 일자리 탐색 기능을 강조한다. 알바몬 운영사 웍스피어(대표이사 윤현준)는 겨울... 아르바이트 경험이 적은 이용자도 근무 형태와 급여 등 자신의 조건에 맞춰 채용공고를 탐색할 수 있도록...",
+   "link": "https://www.job-post.co.kr/news/articleView.html?idxno=238993",
+   "originallink": "https://www.job-post.co.kr/news/articleView.html?idxno=238993",
+   "press": "job-post.co.kr",
+   "pub": "2026-11-17 14:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "알바몬 '꿀알바' 캠페인 진행…첫알바 '안심' 구직 지원",
+   "desc": "알바몬은 '꿀알바'의 정의를 '일은 편하고 급여는 많은 아르바이트'가 아닌 '내 조건에 맞는 좋은 알바를... 가수 최예나는 알바몬의 브랜드 컬러 오렌지색 의상을 입은 마법소녀 히어로로 분해 구직작에게 꼭 맞는 좋은...",
+   "link": "https://n.news.naver.com/mnews/article/648/0000052704?sid=101",
+   "originallink": "https://news.bizwatch.co.kr/article/industry/2026/11/17/0021",
+   "press": "news.bizwatch.co.kr",
+   "pub": "2026-11-17 14:54",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[JOB리포트] 수능 마친 수험생이 알아야 할 꿀알바 기준 4가지는 ?",
+   "desc": "에는 구직자에게 맞는 일자리를 찾아준다는 의미와 불량 일자리로부터 알바생을 지킨다는 의미를 함께 담았다. ■ '꿀알바' 기준 재정의…편한 일보다 '내 조건에 맞는 안심 일자리' 이번 캠페인은 흔히 일이 편하고 급여...",
+   "link": "https://www.news2day.co.kr/article/20261117500083",
+   "originallink": "https://www.news2day.co.kr/article/20261117500083",
+   "press": "news2day.co.kr",
+   "pub": "2026-11-17 15:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "강북구, 본예산 처음으로 1조 돌파…전년 대비 948억 증가",
+   "desc": "기초 연금과 생계 급여 등 사회 보장적 수혜금은 5286억원이다. 사회 복지 분야 예산은 6764억원으로 일반... 구직 단념 청년을 위한 맞춤형 프로그램에 8억원을 투입하고 새롭게 도입하는 청년 평생교육이용권에...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014327850?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261117_0003871802",
+   "press": "뉴시스",
+   "pub": "2026-11-17 15:45",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "'구직 포기 100만 청년'에... 英 \"청년 복지 줄이고 기업 감세로 해결\"",
+   "desc": "영국 노동당 정부가 일도 구직도 하지 않고 교육이나 직업훈련에도 참여하지 않는 청년층인 '니트(NEET)족... 16일(현지시간) 로이터통신은 영국 정부가 100만 명에 육박하는 니트족 대책의 일환으로 청년층 복지 급여...",
+   "link": "https://n.news.naver.com/mnews/article/469/0000966078?sid=104",
+   "originallink": "https://www.hankookilbo.com/news/article/A2026111709570005040?did=NA",
+   "press": "한국일보",
+   "pub": "2026-11-17 15:51",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "하루 세끼 급식에 높은 노동강도...대구 학교 급식노동자들 \"처우 개선...",
+   "desc": "빼앗았다\"며 \"그럼에도 급여 체계는 일반 학교 급식노동자들과 다르지 않다. 같은 월급을 받으며 새벽... 많다\"면서 \"차라리 아르바이트 구직 사이트를 통해 긴급하게 지원해 줄 수 있는 시스템을 구축했다\"고 덧붙였다.",
+   "link": "https://www.pn.or.kr/news/articleView.html?idxno=34396",
+   "originallink": "https://www.pn.or.kr/news/articleView.html?idxno=34396",
+   "press": "pn.or.kr",
+   "pub": "2026-11-17 16:26",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "강북구, 첫 1조 원 본예산 편성… 구민 체감사업에 집중 투자",
+   "desc": "국·시비 보조금은 전년보다 550억 원(10.3%) 증가한 5,907억 원이며, 기초연금과 생계급여 등 사회보장적... 구직단념청년을 위한 맞춤형 프로그램에 8억 원을 투입하고, 새롭게 도입하는 청년 평생교육이용권에 8천만 원을...",
+   "link": "https://www.cnbizm.com/news/articleView.html?idxno=321832",
+   "originallink": "https://www.cnbizm.com/news/articleView.html?idxno=321832",
+   "press": "cnbizm.com",
+   "pub": "2026-11-17 17:26",
+   "q": "구직급여, 구직급여",
+   "rel": false
+  },
+  {
+   "title": "데려올 땐 숙련공, 내보낼 땐 \"불법 아니면 귀국\" [조선소 이주용접공 ...",
+   "desc": "임금 따져 물었더니 돌아온 해고통지서 응우옌 씨는 10월 21일 받은 9월 급여명세서에서 근무일수가 맞지... 당장 취업이 어렵다면 구직활동(D-10-1) 체류자격으로 변경할 계획이었다. 그러나 회사 측은 다른 사업장에서...",
+   "link": "https://www.idomin.com/news/articleView.html?idxno=2019793",
+   "originallink": "https://www.idomin.com/news/articleView.html?idxno=2019793",
+   "press": "idomin.com",
+   "pub": "2026-11-17 18:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"예나 지금이나 알바 구해줄게\"…최예나·스윙스가 뭉친 이유",
+   "desc": "대학수학능력시험 이후 본격화할 첫 아르바이트 구직 수요를 겨냥해 알바몬이 선보이는 새로운 광고... 급여나 업무 강도만 따지는 대신 자신의 조건에 맞는 좋은 일자리를 안심하고 찾는 것이 중요하다는 메시지를...",
+   "link": "https://n.news.naver.com/mnews/article/015/0005354950?sid=105",
+   "originallink": "https://www.hankyung.com/article/202611172865g",
+   "press": "한국경제",
+   "pub": "2026-11-17 18:14",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“어차피 나라에서 돈 주는데 일을 왜 하냐”…이런 청년 ‘100만명’ 육...",
+   "desc": "청년 100만명 일도 구직도 안 해…복지 개편 추진 16일(현지시간) 로이터통신에 따르면 영국 정부는 100만명에 가까운 청년 니트족(NEET·일하지 않고 교육이나 직업훈련에도 참여하지 않는 청년층)을 대상으로 복지 급여를...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004683257?sid=104",
+   "originallink": "https://www.sedaily.com/article/20115626?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-11-17 19:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "오리어리, 주 80시간 경비원에 '구직 노력 부족'…클립 2200만회 재생",
+   "desc": "△성공하려면 일과 삶의 균형은 뒷순위다 △미국에서는 충분히 노력하면 누구나 부자가 될 수 있다 △일을 잘하는 것이 열정보다 중요하다 △일이 가치관을 반영할 필요는 없고 급여를 주면 된다. 출연자 쪽은...",
+   "link": "https://www.tokenpost.kr/news/general/439727",
+   "originallink": "https://www.tokenpost.kr/news/general/439727",
+   "press": "tokenpost.kr",
+   "pub": "2026-11-17 19:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[인천 청년, 내 일을 찾다] ② 첫 직장, 그 다음은…'재취업·쉬었음' 기...",
+   "desc": "한국고용정보원 안준기·김강호 연구위원의 '쉬었음 청년 실태조사 연구(2024)'에 따르면, 구직급여를 받았거나 직업훈련을 마친 뒤 1년 이상 미취업 상태인 전국 만19~34세 청년 3189명 중 77.2%(약 2462명)가 쉬고 있는 상태에...",
+   "link": "https://www.incheonilbo.com/news/articleView.html?idxno=1337053",
+   "originallink": "https://www.incheonilbo.com/news/articleView.html?idxno=1337053",
+   "press": "incheonilbo.com",
+   "pub": "2026-11-17 19:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[논설위원의 단도직입]“준비 시간 불인정·무급 폐강·아프면 실직…열...",
+   "desc": "55개 대학 강사 임용계약서 아무리 봐도 1년 총급여 알 수 없어…임금 항목·계산법도 안 적혀 강의시간의... 결국 구직 사이트를 뒤지다 요즘 ‘배달 대행’ 아르바이트가 ‘핫’하다는 뉴스가 떠올라 당근마켓에서...",
+   "link": "https://n.news.naver.com/mnews/article/032/0003483255?sid=110",
+   "originallink": "https://www.khan.co.kr/article/202611171957005",
+   "press": "경향신문",
+   "pub": "2026-11-17 19:57",
    "q": "구직급여",
    "rel": false
   }
