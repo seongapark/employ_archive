@@ -21,18 +21,21 @@ const SERIES = [
          breakdown: 'scope', category: '15-64' }),
   rate({ series: 'unemployment_rate', value: 5.4, yoy: 0.5,
          breakdown: 'scope', category: '15-29' }),
+  rate({ value: 56.1, yoy: -0.4, breakdown: 'scope', category: '15-34' }),
+  rate({ series: 'unemployment_rate', value: 4.2, yoy: 0.1,
+         breakdown: 'scope', category: '15-34' }),
 ];
 
 function values(html) {
   return [...html.matchAll(/class="kpi__value num[^"]*">([^<]+)</g)].map(m => m[1]);
 }
 
-test('the grid reads as two rows of three', () => {
+test('the grid reads as two rows of four', () => {
   // 행이 지표, 열이 연령 기준이다. 같은 열끼리 세로로 읽으면 같은 연령대의
   // 고용률과 실업률이 나란히 오고, 같은 행끼리 가로로 읽으면 한 지표가 연령에
   // 따라 어떻게 갈리는지가 보인다.
   const html = kpiBlockHtml(SERIES, { source: 'eaps', period: '2026-08' });
-  assert.deepEqual(values(html), ['63.3%', '70.4%', '44.1%', '2.0%', '2.2%', '5.4%']);
+  assert.deepEqual(values(html), ['63.3%', '70.4%', '44.1%', '56.1%', '2.0%', '2.2%', '5.4%', '4.2%']);
 });
 
 test('each row is named once, not on every tile', () => {
@@ -43,7 +46,7 @@ test('each row is named once, not on every tile', () => {
 
 test('every column says which ages it counts', () => {
   const html = kpiBlockHtml(SERIES, { source: 'eaps', period: '2026-08' });
-  for (const label of ['15세 이상', '15~64세', '15~29세']) {
+  for (const label of ['15세 이상', '15~64세', '15~29세', '15~34세']) {
     assert.equal((html.match(new RegExp(label, 'g')) || []).length, 2,
       `${label} 이 두 행에 한 번씩 나와야 한다`);
   }
@@ -59,7 +62,7 @@ test('the changes keep percentage points and their signs', () => {
 test('a month the survey has not published yet shows no invented numbers', () => {
   const html = kpiBlockHtml(SERIES, { source: 'eaps', period: '2026-09' });
   assert.deepEqual(values(html), []);
-  assert.equal((html.match(/미발표/g) || []).length, 6);
+  assert.equal((html.match(/미발표/g) || []).length, 8);
 });
 
 test('a source with no indicators of its own gets no grid at all', () => {
@@ -128,11 +131,13 @@ const TRENDS = ['2026-07', '2026-08'].flatMap(period => [
   level({ period, series: 'unemployed', value: 588.1 }),
   level({ period, series: 'unemployed', value: 540.9, breakdown: 'scope', category: '15-64' }),
   level({ period, series: 'unemployed', value: 195.0, breakdown: 'scope', category: '15-29' }),
+  level({ period, value: 6322.7, breakdown: 'scope', category: '15-34' }),
+  level({ period, series: 'unemployed', value: 272.8, breakdown: 'scope', category: '15-34' }),
 ]);
 
-test('the switch offers the three age ranges and marks the one in use', () => {
+test('the switch offers the four age ranges and marks the one in use', () => {
   const { html } = trendSection(TRENDS, { source: 'eaps', scope: '15-64' });
-  for (const label of ['15세 이상', '15~64세', '청년']) assert.ok(html.includes(label));
+  for (const label of ['15세 이상', '15~64세', '15~29세', '15~34세']) assert.ok(html.includes(label));
   const active = [...html.matchAll(/data-scope="([^"]+)"[^>]*class="[^"]*scopes__tab--active/g)];
   const marked = [...html.matchAll(/class="[^"]*scopes__tab--active[^"]*"[^>]*data-scope="([^"]+)"/g)];
   assert.equal(active.length + marked.length, 1, '활성 탭은 하나뿐이어야 한다');
@@ -145,12 +150,14 @@ test('picking an age range changes the numbers the charts show', () => {
   assert.equal(young.byIndicator.get('headcount').at(-1).value, 3428.0);
   assert.ok(all.html.includes('2,915.1만명'));
   assert.ok(young.html.includes('342.8만명'));
+  const wide = trendSection(TRENDS, { source: 'eaps', scope: '15-34' });
+  assert.equal(wide.byIndicator.get('headcount').at(-1).value, 6322.7);
 });
 
 test('every age range draws the same set of charts', () => {
-  const counts = ['total', '15-64', '15-29'].map(scope =>
+  const counts = ['total', '15-64', '15-29', '15-34'].map(scope =>
     trendSection(TRENDS, { source: 'eaps', scope }).byIndicator.size);
-  assert.deepEqual(counts, [2, 2, 2]);
+  assert.deepEqual(counts, [2, 2, 2, 2]);
 });
 
 test('an indicator the age range never publishes is simply absent', () => {
