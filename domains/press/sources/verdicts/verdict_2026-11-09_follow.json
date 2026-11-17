@@ -529,5 +529,50 @@
   "focus": "",
   "title": "[단독] “외노자 3년 일해도 이자 0원”...‘짠물’ 출국보험에 고용주...",
   "press": "매일경제"
+ },
+ {
+  "n": 1,
+  "cites": false,
+  "why": "AI 사회계약 녹서 의견접수, 9월 구인배수 인용",
+  "tone": "부정",
+  "focus": "",
+  "title": "신입 자리 삼킨 생성형 AI…고용부, 'AI 사회계약 녹서' 의견 접수",
+  "press": "pointe.co.kr"
+ },
+ {
+  "n": 2,
+  "cites": false,
+  "why": "개별기업 근로환경 우수기업 선정",
+  "tone": "긍정",
+  "focus": "",
+  "title": "원주 요구르트 전문 기업 '㈜요즘' 근로환경 개선 우수기업 호평",
+  "press": "뉴스1"
+ },
+ {
+  "n": 3,
+  "cites": false,
+  "why": "개별기업 노사상생 모범기업 선정",
+  "tone": "긍정",
+  "focus": "",
+  "title": "원주 그릭요거트 전문기업 '요즘' 노사상생 모범기업 선정",
+  "press": "enewstoday.co.kr"
+ },
+ {
+  "n": 4,
+  "cites": false,
+  "why": "개별기업 일터혁신 컨설팅 선정",
+  "tone": "긍정",
+  "focus": "",
+  "title": "원주 ㈜요즘, 일터혁신 상생컨설팅 노사상생 모범기업 선정",
+  "press": "news.bbsi.co.kr"
+ },
+ {
+  "n": 5,
+  "cites": false,
+  "why": "개별기업 모범기업 선정 소식",
+  "tone": "긍정",
+  "focus": "",
+  "title": "원주 그릭요거트 기업 '요즘', 노사상생 모범기업 선정",
+  "press": "shinailbo.co.kr"
  }
 ]
