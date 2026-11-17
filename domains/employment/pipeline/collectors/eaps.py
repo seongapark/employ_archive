@@ -6,6 +6,7 @@
 """
 from __future__ import annotations
 
+import os
 import re
 from datetime import date, datetime, timedelta, timezone
 
@@ -245,6 +246,99 @@ def latest_issue() -> tuple[str, date, str, bytes, list[Attachment]]:
     return title, released_at, view_url, data, attachments
 
 
+# ── 15~34세 (KOSIS) ─────────────────────────────────────────────────────
+#
+# 보도자료 xlsx 에는 15~34세 시트가 없다(1529·3039 뿐이라 합쳐서 만들 수도
+# 없다). KOSIS 의 같은 경활 표(check_kosis 가 대조하는 DT_1DA7002S)에 연령
+# 코드 `1534` 가 있어 여덟 지표를 그대로 받는다. 증감 시트가 없으므로 yoy 는
+# 12개월 전 값과의 차이다 — 비율은 반올림된 값끼리 빼므로 0.1 흔들릴 수 있다.
+KOSIS_API = "https://kosis.kr/openapi/Param/statisticsParameterData.do"
+KOSIS_TABLE = {"orgId": "101", "tblId": "DT_1DA7002S"}
+KOSIS_AGE_1534 = ("1534", "15 - 34세")
+KOSIS_AGE_1529 = ("75", "15 - 29세")
+# 항목 코드 → (KOSIS 항목 이름, 지표). 이름도 맞춘다 — 코드는 그대로인데 항목이
+# 바뀌면 조용히 다른 숫자를 싣게 된다.
+KOSIS_ITEMS = {
+    "T10": ("인구", "population"),
+    "T20": ("경제활동인구", "labor_force"),
+    "T30": ("취업자", "headcount"),
+    "T40": ("실업자", "unemployed"),
+    "T50": ("비경제활동인구", "inactive"),
+    "T60": ("경제활동참가율", "participation_rate"),
+    "T80": ("실업률", "unemployment_rate"),
+    "T90": ("고용률", "employment_rate"),
+}
+
+
+def fetch_kosis_ages(api_key: str, months: int = 40, get=SESSION.get) -> list[dict]:
+    """15~34세와 대조용 15~29세. 25개월 그림의 첫 달까지 yoy 가 붙도록 넉넉히."""
+    params = {"method": "getList", "apiKey": api_key, "format": "json", "jsonVD": "Y",
+              "prdSe": "M", "newEstPrdCnt": str(months), "itmId": " ".join(KOSIS_ITEMS),
+              "objL1": f"{KOSIS_AGE_1534[0]} {KOSIS_AGE_1529[0]}", **KOSIS_TABLE}
+    payload = get(KOSIS_API, params=params, timeout=60).json()
+    if isinstance(payload, dict):
+        raise ValueError(f"KOSIS 오류(15~34세): {payload.get('errMsg', payload)}")
+    return payload
+
+
+def _kosis_levels(rows: list[dict], age: tuple[str, str]) -> dict[str, dict[str, float]]:
+    """{기간: {지표: 값}}."""
+    code, name = age
+    out: dict[str, dict[str, float]] = {}
+    for row in rows:
+        if str(row.get("C1")) != code:
+            continue
+        if str(row.get("C1_NM", "")).strip() != name:
+            raise ValueError(f"KOSIS 연령 {code} 이름이 '{row.get('C1_NM')}' 이다 — '{name}' 이어야 한다")
+        item = KOSIS_ITEMS.get(str(row.get("ITM_ID")))
+        if item is None:
+            continue
+        if row.get("ITM_NM") != item[0]:
+            raise ValueError(f"KOSIS 항목 {row.get('ITM_ID')} 이름이 '{row.get('ITM_NM')}' 이다 "
+                             f"— '{item[0]}' 이어야 한다")
+        try:
+            value = round(float(str(row.get("DT")).replace(",", "")), 1)
+        except (TypeError, ValueError):
+            continue
+        prd = str(row.get("PRD_DE", ""))
+        out.setdefault(f"{prd[:4]}-{prd[4:6]}", {})[item[1]] = value
+    return out
+
+
+def parse_kosis_1534(rows: list[dict], *, xlsx_data: bytes, released_at: date,
+                     release_url: str, attachments: list[Attachment],
+                     collected_at: datetime) -> list[SeriesRecord]:
+    # 15~29세는 xlsx 와 KOSIS 양쪽에 있다. 둘이 같은 달에 같은 값을 말해야
+    # 이 표·코드가 아직 우리가 아는 그 경활 표다. 어긋나면 15~34세를 싣지 않는다.
+    kosis_1529 = _kosis_levels(rows, KOSIS_AGE_1529)
+    xlsx_1529 = _totals_sheet(xlsx_data, "1529")
+    shared = sorted(set(kosis_1529) & set(xlsx_1529))
+    if not shared:
+        raise ValueError("KOSIS 와 xlsx 가 함께 가진 15~29세 달이 없다")
+    period = shared[-1]
+    for series, value in kosis_1529[period].items():
+        if abs(xlsx_1529[period].get(series, value) - value) > 0.2:
+            raise ValueError(f"{period} 15~29세 {series}: KOSIS {value} vs xlsx "
+                             f"{xlsx_1529[period][series]} — 표가 바뀌었는지 확인")
+
+    levels = _kosis_levels(rows, KOSIS_AGE_1534)
+    records: list[SeriesRecord] = []
+    for period in contiguous_tail(levels):
+        year, month = period.split("-")
+        prior = levels.get(f"{int(year) - 1}-{month}", {})
+        for series, value in levels[period].items():
+            before = prior.get(series)
+            records.append(SeriesRecord(
+                id=make_id("eaps", period, "scope", "15-34", series=series),
+                source="eaps", series=series, breakdown="scope", category="15-34",
+                period=period, value=value, unit=TOTAL_UNITS[series],
+                yoy=None if before is None else round(value - before, 1),
+                released_at=released_at, release_url=release_url,
+                attachments=attachments, collected_at=collected_at,
+            ))
+    return records
+
+
 def collect(today: date) -> list[SeriesRecord]:
     title, released_at, view_url, data, attachments = latest_issue()
     now = datetime.now(KST)
@@ -254,8 +348,14 @@ def collect(today: date) -> list[SeriesRecord]:
     # `있어야 할 산업 21개` 같은 셈이 어긋난다 — 그래서 먼저 돌리고 뒤에 얹는다.
     check_coverage(records)
     check_freshness(records, today)
-    return records + parse_totals(data, released_at=released_at, release_url=view_url,
-                                  attachments=attachments, collected_at=now)
+    records += parse_totals(data, released_at=released_at, release_url=view_url,
+                            attachments=attachments, collected_at=now)
+    api_key = os.environ.get("KOSIS_API_KEY", "").strip()
+    if not api_key:
+        raise ValueError("KOSIS_API_KEY 가 없다 — 15~34세를 받을 수 없다")
+    return records + parse_kosis_1534(
+        fetch_kosis_ages(api_key), xlsx_data=data, released_at=released_at,
+        release_url=view_url, attachments=attachments, collected_at=now)
 
 
 # ── 총괄 지표 (1.전체 · 1564 · 1529) ──────────────────────────────────────

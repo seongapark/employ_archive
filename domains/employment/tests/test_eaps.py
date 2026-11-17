@@ -275,3 +275,62 @@ def test_the_view_link_points_at_the_board_we_read_the_list_from():
 
     # 합집합 게시판으로 되돌아가면 링크가 다시 목록으로 떨어진다.
     assert "ref_bid" not in url
+
+
+# ── 15~34세 (KOSIS DT_1DA7002S, 2026-11-17 실측 응답) ─────────────────────
+
+KOSIS_AGES = Path(__file__).parent / "fixtures" / "kosis_ages.json"
+
+
+def _kosis_rows():
+    import json
+    return json.loads(KOSIS_AGES.read_text(encoding="utf-8"))
+
+
+def _parse_1534(rows):
+    return eaps.parse_kosis_1534(
+        rows, xlsx_data=FIXTURE.read_bytes(), released_at=date(2026, 8, 12),
+        release_url="https://mods.go.kr/x", attachments=[],
+        collected_at=datetime(2026, 11, 17, 9, 0))
+
+
+def test_youth_1534_carries_all_eight_indicators_as_a_scope():
+    out = _parse_1534(_kosis_rows())
+    latest = max(r.period for r in out)
+    got = {r.series: r for r in out if r.period == latest}
+    assert set(got) == set(eaps.TOTAL_UNITS)
+    assert all(r.breakdown == "scope" and r.category == "15-34" for r in out)
+    assert got["employment_rate"].unit == "%" and got["headcount"].unit == "천명"
+
+
+def test_youth_1534_change_is_twelve_months_back():
+    out = {(r.period, r.series): r for r in _parse_1534(_kosis_rows())}
+    now, before = out[("2026-08", "employment_rate")], out[("2025-08", "employment_rate")]
+    assert now.value == 56.1 and before.value == 56.5
+    assert now.yoy == -0.4
+
+
+def test_youth_1534_stops_when_kosis_15_29_disagrees_with_the_release():
+    rows = _kosis_rows()
+    for r in rows:
+        if r["C1"] == "75" and r["ITM_ID"] == "T30":
+            r["DT"] = str(float(r["DT"]) + 50)
+    with pytest.raises(ValueError, match="15~29세"):
+        _parse_1534(rows)
+
+
+def test_youth_1534_stops_when_the_kosis_age_code_changes_meaning():
+    rows = _kosis_rows()
+    for r in rows:
+        if r["C1"] == "1534":
+            r["C1_NM"] = "15 - 39세"
+    with pytest.raises(ValueError, match="1534"):
+        _parse_1534(rows)
+
+
+def test_youth_1534_ids_never_collide_with_other_scopes(records):
+    totals = eaps.parse_totals(FIXTURE.read_bytes(), released_at=date(2026, 8, 12),
+                               release_url="https://mods.go.kr/x", attachments=[],
+                               collected_at=datetime(2026, 8, 30, 9, 0))
+    ids = [r.id for r in records + totals + _parse_1534(_kosis_rows())]
+    assert len(ids) == len(set(ids))
