@@ -34,6 +34,24 @@
   ]
  },
  {
+  "id": "bok-11066699",
+  "org": "bok",
+  "board": "bok-note",
+  "series": "BOK 이슈노트",
+  "title": "[제2026-29호] AI 확산과 생산성 효과: 더 널리, 더 효율적으로, 그러나 아직 얕게",
+  "authors": [
+   "고용연구팀"
+  ],
+  "published": "2026-11-17",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0002353/view.do?nttId=11066699&searchCnd=1&searchKwd=&depth2=201157&depth3=200433&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200433&pageIndex=1&programType=newsData&menuNo=200433&oldMenuNo=200433",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/bc2ebe3cc2c04c4aa52c3ca351068a2e/1/5609e24687144279b78d4f2b0bb02ff3.pdf",
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
   "id": "kdi-an3830",
   "org": "kdi",
   "board": "kdi-analysis",

@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-17T10:05:13.744597+09:00",
+  "run_at": "2026-11-17T15:00:53.576117+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -9,7 +9,8 @@
     "oecd_interim": {
       "ok": false,
       "fetched": 0,
-      "added": 0
+      "added": 0,
+      "blocked": true
     },
     "imf": {
       "ok": true,
@@ -63,11 +64,12 @@
     }
   },
   "conflicts": [],
-  "errors": [
-    "oecd_interim: Timeout: Failed to perform, curl: (28) Connection timed out after 120003 milliseconds. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
-  ],
+  "errors": [],
   "warnings": [
+    "oecd_interim: 봇 차단 0일째(유예 7일) — 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/topics/sub-issues/economic-outlook.html",
     "announce: OECD 공지일 못 읽음 — Blocked: 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/about/news.html"
   ],
-  "blocked": {}
+  "blocked": {
+    "oecd_interim": "2026-11-17"
+  }
 }

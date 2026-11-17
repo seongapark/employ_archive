@@ -1,10 +1,10 @@
 {
-  "run_at": "2026-11-17T14:31:50.723575+09:00",
+  "run_at": "2026-11-17T15:02:23.020928+09:00",
   "collectors": {
     "eaps": {
       "ok": true,
       "fetched": 1679,
-      "added": 320,
+      "added": 0,
       "updated": 0,
       "rejected": 0
     },
