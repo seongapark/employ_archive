@@ -6,32 +6,32 @@
   "2026-11-10",
   "2026-11-30"
  ],
- "collected_at": "2026-11-18 12:08",
+ "collected_at": "2026-11-18 19:39",
  "volume": {
-  "collected": 265,
-  "articles": 71,
-  "press": 56,
+  "collected": 280,
+  "articles": 74,
+  "press": 57,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29716,
+   "api_total": 29721,
    "fetched": 100,
    "truncated": false,
-   "in_window": 83,
-   "relevant": 70,
-   "new": 83
+   "in_window": 88,
+   "relevant": 73,
+   "new": 88
   },
   {
    "query": "구직급여",
-   "api_total": 95297,
+   "api_total": 95299,
    "fetched": 200,
    "truncated": false,
-   "in_window": 137,
+   "in_window": 139,
    "relevant": 4,
-   "new": 125
+   "new": 127
   },
   {
    "query": "구인배수",
@@ -44,21 +44,21 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18783,
+   "api_total": 18784,
    "fetched": 100,
    "truncated": false,
-   "in_window": 66,
+   "in_window": 67,
    "relevant": 16,
-   "new": 47
+   "new": 48
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8508,
+   "api_total": 8513,
    "fetched": 100,
    "truncated": false,
-   "in_window": 11,
+   "in_window": 16,
    "relevant": 8,
-   "new": 2
+   "new": 7
   },
   {
    "query": "전문과학기술업 고용보험",
@@ -89,12 +89,12 @@
   },
   {
    "query": "기계장비 고용보험",
-   "api_total": 1883,
+   "api_total": 1885,
    "fetched": 100,
    "truncated": false,
-   "in_window": 3,
+   "in_window": 5,
    "relevant": 3,
-   "new": 0
+   "new": 2
   },
   {
    "query": "자동차 고용보험",
@@ -107,10 +107,10 @@
   },
   {
    "query": "기타운송장비 고용보험",
-   "api_total": 2559,
+   "api_total": 2560,
    "fetched": 100,
    "truncated": false,
-   "in_window": 4,
+   "in_window": 5,
    "relevant": 4,
    "new": 0
   }
@@ -824,6 +824,36 @@
    "press": "news2day.co.kr",
    "pub": "2026-11-18 07:28",
    "q": "고용보험 가입자, 구인배수",
+   "rel": true
+  },
+  {
+   "title": "‘안 뽑는’ AI 채용시장…2030년 유망 일자리는 ‘빅데이터·핀테크’",
+   "desc": "이투데이=박민석 기자 | 30대 이상 고용보험 가입자 늘었는데…29세 이하는 5만4000명 감소 한은 \"줄어든 청년 일자리 94% AI 노출 업종\"… 'AI가 기존 변화 가속\" 빅데이터·핀테크 인력 수요 커질 전망…'경력 사다리...",
+   "link": "https://www.etoday.co.kr/news/view/2649704",
+   "originallink": "https://www.etoday.co.kr/news/view/2649704",
+   "press": "이투데이",
+   "pub": "2026-11-18 14:00",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "평균 30점 세무사 시험서 AI는 만점…전문직 ‘첫 사다리’가 사라진다",
+   "desc": "회계·세무·감정 전문가의 고용보험 가입자는 2022년부터 2025년까지 해마다 1000명씩 줄었다. 연구진은 이를 두고 “정형화된 정량 데이터 처리 직무에서 고용 위축 가능성을 시사한다”고 분석했다. 문제는 세무사...",
+   "link": "https://www.etoday.co.kr/news/view/2649699",
+   "originallink": "https://www.etoday.co.kr/news/view/2649699",
+   "press": "이투데이",
+   "pub": "2026-11-18 14:02",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "하이엘 김진욱 대표, 중소기업 혁신 유공 중기부 장관표창",
+   "desc": "청년과 고령자 등 일자리를 구하기 어려운 지역 주민을 꾸준히 채용해 고용보험 가입자가 2024년 13명에서 2025년 22명으로 늘었고 지난해에는 군산시장 표창도 받았다. 김 대표는 \"함께해 준 임직원과 거래처 덕분에...",
+   "link": "https://www.dynews.co.kr/news/articleView.html?idxno=874669",
+   "originallink": "https://www.dynews.co.kr/news/articleView.html?idxno=874669",
+   "press": "dynews.co.kr",
+   "pub": "2026-11-18 18:44",
+   "q": "고용보험 가입자",
    "rel": true
   }
  ],
@@ -1659,21 +1689,21 @@
    "rel": false
   },
   {
-   "title": "청년을 취업 대기실에 가두는 노동시장 이중구조",
-   "desc": "눈높이나 구직 의욕 탓으로 돌릴 수 없다는 것이다. 기업 규모에 따라 보상과 성장 기회가 크게 갈리는... 대신 근로자가 직장을 옮기거나 일자리를 잃었을 때 실업급여와 직업훈련, 재취업 지원을 쉽게 받도록 해주는 게...",
-   "link": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
-   "originallink": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
-   "press": "fntimes.com",
-   "pub": "2026-11-12 16:12",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "[금융권 이모저모]토스뱅크, 펀드 판매 시작…통장 이자로 자동 투자 外",
    "desc": "지난 11일 경기 김포시 농가에서 NH농협생명과 서울시 관계자들이 노숙인 구직자들과 자활지원 프로그램... 금융투자협회는 2005년 소망의 집과 결연을 맺은 이후 임직원 급여를 모아 정기적인 후원과 봉사활동을...",
    "link": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
    "originallink": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
    "press": "businessplus.kr",
+   "pub": "2026-11-12 16:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "청년을 취업 대기실에 가두는 노동시장 이중구조",
+   "desc": "눈높이나 구직 의욕 탓으로 돌릴 수 없다는 것이다. 기업 규모에 따라 보상과 성장 기회가 크게 갈리는... 대신 근로자가 직장을 옮기거나 일자리를 잃었을 때 실업급여와 직업훈련, 재취업 지원을 쉽게 받도록 해주는 게...",
+   "link": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
+   "originallink": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
+   "press": "fntimes.com",
    "pub": "2026-11-12 16:12",
    "q": "구직급여",
    "rel": false
@@ -1929,16 +1959,6 @@
    "rel": false
   },
   {
-   "title": "노동부, '가짜 3.3·사업장 쪼개기' 정조준⋯140여 곳 기획감독 실시",
-   "desc": "특히 국세청의 사업소득세 납부(원천징수 이행상황) 신고 내역을 중심으로 고용보험 정보, 과거 감독 이력, 구인광고 모니터링 결과를 종합적으로 교차 검증해 감독 대상을 추렸다. 주요 타깃은 음식·숙박업, 제조업, 도...",
-   "link": "https://www.etoday.co.kr/news/view/2647424",
-   "originallink": "https://www.etoday.co.kr/news/view/2647424",
-   "press": "이투데이",
-   "pub": "2026-11-13 09:00",
-   "q": "제조업 고용보험",
-   "rel": false
-  },
-  {
    "title": "가짜 3.3·사업장 쪼개기 잡는다…노동부, 기획감독 착수",
    "desc": "이상을 고용한 사업장을 중심으로 이뤄진다. 음식·숙박업, 제조업, 도·소매업, 시설관리업, 이동통신업 등... 이후 국세청 소득세 납부 신고 내역과 고용보험 정보, 신고사건 및 감독 이력, 구인광고 등을 종합적으로...",
    "link": "https://n.news.naver.com/mnews/article/003/0014319897?sid=102",
@@ -1949,12 +1969,12 @@
    "rel": false
   },
   {
-   "title": "노동부, ‘가짜 3.3’·사업장 쪼개기 140여곳 기획감독",
-   "desc": "국세청 소득세 납부 신고 내역을 중심으로 고용보험 정보, 신고사건과 감독 이력, 구인광고 등을 종합 검토해 최종 감독 대상을 선정한다. 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업 등 사업소득자가 다수...",
-   "link": "https://n.news.naver.com/mnews/article/016/0002722915?sid=101",
-   "originallink": "https://biz.heraldcorp.com/article/10935070?ref=naver",
-   "press": "헤럴드경제",
-   "pub": "2026-11-13 09:01",
+   "title": "노동부, '가짜 3.3·사업장 쪼개기' 정조준⋯140여 곳 기획감독 실시",
+   "desc": "특히 국세청의 사업소득세 납부(원천징수 이행상황) 신고 내역을 중심으로 고용보험 정보, 과거 감독 이력, 구인광고 모니터링 결과를 종합적으로 교차 검증해 감독 대상을 추렸다. 주요 타깃은 음식·숙박업, 제조업, 도...",
+   "link": "https://www.etoday.co.kr/news/view/2647424",
+   "originallink": "https://www.etoday.co.kr/news/view/2647424",
+   "press": "이투데이",
+   "pub": "2026-11-13 09:00",
    "q": "제조업 고용보험",
    "rel": false
   },
@@ -1984,6 +2004,16 @@
    "link": "https://n.news.naver.com/mnews/article/079/0004209382?sid=102",
    "originallink": "https://www.nocutnews.co.kr/news/6605934?utm_source=naver&utm_medium=article&utm_campaign=20261113090019",
    "press": "nocutnews.co.kr",
+   "pub": "2026-11-13 09:01",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "노동부, ‘가짜 3.3’·사업장 쪼개기 140여곳 기획감독",
+   "desc": "국세청 소득세 납부 신고 내역을 중심으로 고용보험 정보, 신고사건과 감독 이력, 구인광고 등을 종합 검토해 최종 감독 대상을 선정한다. 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업 등 사업소득자가 다수...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002722915?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10935070?ref=naver",
+   "press": "헤럴드경제",
    "pub": "2026-11-13 09:01",
    "q": "제조업 고용보험",
    "rel": false
@@ -2589,21 +2619,21 @@
    "rel": false
   },
   {
-   "title": "오리어리, 주 80시간 경비원에 '구직 노력 부족'…클립 2200만회 재생",
-   "desc": "△성공하려면 일과 삶의 균형은 뒷순위다 △미국에서는 충분히 노력하면 누구나 부자가 될 수 있다 △일을 잘하는 것이 열정보다 중요하다 △일이 가치관을 반영할 필요는 없고 급여를 주면 된다. 출연자 쪽은...",
-   "link": "https://www.tokenpost.kr/news/general/439727",
-   "originallink": "https://www.tokenpost.kr/news/general/439727",
-   "press": "tokenpost.kr",
-   "pub": "2026-11-17 19:02",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "“어차피 나라에서 돈 주는데 일을 왜 하냐”…이런 청년 ‘100만명’ 육...",
    "desc": "청년 100만명 일도 구직도 안 해…복지 개편 추진 16일(현지시간) 로이터통신에 따르면 영국 정부는 100만명에 가까운 청년 니트족(NEET·일하지 않고 교육이나 직업훈련에도 참여하지 않는 청년층)을 대상으로 복지 급여를...",
    "link": "https://n.news.naver.com/mnews/article/011/0004683257?sid=104",
    "originallink": "https://www.sedaily.com/article/20115626?ref=naver",
    "press": "서울경제",
+   "pub": "2026-11-17 19:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "오리어리, 주 80시간 경비원에 '구직 노력 부족'…클립 2200만회 재생",
+   "desc": "△성공하려면 일과 삶의 균형은 뒷순위다 △미국에서는 충분히 노력하면 누구나 부자가 될 수 있다 △일을 잘하는 것이 열정보다 중요하다 △일이 가치관을 반영할 필요는 없고 급여를 주면 된다. 출연자 쪽은...",
+   "link": "https://www.tokenpost.kr/news/general/439727",
+   "originallink": "https://www.tokenpost.kr/news/general/439727",
+   "press": "tokenpost.kr",
    "pub": "2026-11-17 19:02",
    "q": "구직급여",
    "rel": false
@@ -2766,6 +2796,126 @@
    "press": "hansbiz.co.kr",
    "pub": "2026-11-18 10:50",
    "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "수능 끝나면 알바부터, 고3 절반 스스로 돈 벌고 싶어해",
+   "desc": "수험생 상당수가 첫 급여를 미래 대비나 가족을 위한 용도로 쓰겠다고 답해, 소비와 함께 저축ㆍ보은 심리가 함께 작용하는 것으로 풀이된다. 다만 수능 이후 아르바이트에 대한 기대와 달리 실제 구직 과정은 쉽지...",
+   "link": "http://www.technoa.co.kr/news/articleView.html?idxno=101643",
+   "originallink": "http://www.technoa.co.kr/news/articleView.html?idxno=101643",
+   "press": "technoa.co.kr",
+   "pub": "2026-11-18 12:10",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "조선업 일감 넘치는데 젊은 일손 부족…원청 쏠림에 협력사 구인난",
+   "desc": "조선업만을 따로 집계한 수치가 아니라 외국인을 포함한 기타 운송장비 제조업 통계지만 최근 8년간 인력 이탈이 지속적으로 나타났다. 조선업 밀집지역에서도 인력의 고령화가 뚜렷했다. 고용보험 DB 기준 거제의...",
+   "link": "https://www.kpinews.kr/newsView/1065602435910077",
+   "originallink": "https://www.kpinews.kr/newsView/1065602435910077",
+   "press": "kpinews.kr",
+   "pub": "2026-11-18 13:51",
+   "q": "제조업 고용보험, 기타운송장비 고용보험",
+   "rel": false
+  },
+  {
+   "title": "AI가 바꾸는 고용 지도⋯청년 첫 일자리 줄고 AI 전문인력 수요 커진다",
+   "desc": "고용정보원은 \"고용보험 신규 취득자 감소에 청년 인구 축소와 경제활동참가율 하락이 크게 작용했다\"고... 고용정보원 사업체 조사에서 기계장비·연구개발·정밀기기·정보통신업은 AI 인력과 신규채용 수요가...",
+   "link": "https://www.etoday.co.kr/news/view/2649705",
+   "originallink": "https://www.etoday.co.kr/news/view/2649705",
+   "press": "이투데이",
+   "pub": "2026-11-18 14:00",
+   "q": "기계장비 고용보험",
+   "rel": false
+  },
+  {
+   "title": "AI가 먼저 지운 건 ‘신입 자리’…3~5년 뒤 한국 일자리 지도는",
+   "desc": "한국고용정보원도 2023년 이후 고용보험 신규 취득자 감소의 결정적 원인으로 청년 인구 감소와... 국내에서는 기계장비·연구개발·정밀기기·정보통신업의 채용 수요가 늘고, 사업지원서비스·보건사회·문화예술...",
+   "link": "https://bravo.etoday.co.kr/view/atc_view/20507",
+   "originallink": "https://bravo.etoday.co.kr/view/atc_view/20507",
+   "press": "이투데이",
+   "pub": "2026-11-18 14:00",
+   "q": "기계장비 고용보험",
+   "rel": false
+  },
+  {
+   "title": "\"직원 건강보험 챙겨주세요\"…건보공단, 한 달간 가입 독려",
+   "desc": "국민건강보험법 제7조에 따라 법인의 이사를 포함해 근로자 1명 이상을 고용한 모든 사업장은 건강보험 가입 대상이다. 사용자는 근로자 고용일부터 14일 이내에 공단에 사업장 적용신고서를 제출해야 한다. 직장가입자...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014330626?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261118_0003873442",
+   "press": "뉴시스",
+   "pub": "2026-11-18 15:23",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "시간제보육 2543개반 확대…한국영유아보육교육진흥원, 시간제보육 사업...",
+   "desc": "시간제보육은 가정에서 아이를 키우는 부모가 병원 진료나 구직활동 등으로 잠시 돌봄이 필요할 때 지정된... 어린이집·유치원을 이용하지 않고 부모급여(현금) 또는 양육수당을 받는 영아에게는 월 60시간 한도로...",
+   "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065595013880102",
+   "originallink": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065595013880102",
+   "press": "megaeconomy.co.kr",
+   "pub": "2026-11-18 15:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "건보공단, 건강보험 미가입 사업장 집중 점검",
+   "desc": "직장가입자로서 보장받아야 할 권익을 침해받는 상황을 예방하기 위한 것이다. 현행 국민건강보험법 제7조에 따르면 법인의 이사를 포함해 근로자를 1명 이상 고용한 사업장은 건강보험 적용 대상이다. 사업주는 근로자를...",
+   "link": "https://www.bosa.co.kr/news/articleView.html?idxno=3016767",
+   "originallink": "https://www.bosa.co.kr/news/articleView.html?idxno=3016767",
+   "press": "bosa.co.kr",
+   "pub": "2026-11-18 15:44",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "대구시의회 경제환경위원회, 행정사무감사서 대구농수산물도매시장 운...",
+   "desc": "김기열 위원은 보증채무 이행 심사 지연에 따른 채무자 추가 이자 부담 방지를, 박현규 위원은 소상공인 고용보험 지원사업의 보조금 관리 개선을 각각 촉구했다. 진미숙 위원은 건설업·운송업 특별보증의 저조한 실행...",
+   "link": "https://www.hidomin.com/news/articleView.html?idxno=729973",
+   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=729973",
+   "press": "hidomin.com",
+   "pub": "2026-11-18 16:04",
+   "q": "건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "대구시의회, 공기업 부실경영 정조준…장애인 고용률 0%·취약계층 보증...",
+   "desc": "박현규 의원은 소상공인 고용보험 지원사업의 보조금 집행 문제가 2년 연속 감사에서 지적된 점을 질타했고, 진미숙 의원은 건설업·운송업 특별보증의 저조한 실행 실적을 지적하며 지원체계 개선을 촉구했다. 박종필...",
+   "link": "https://n.news.naver.com/mnews/article/031/0001076252?sid=102",
+   "originallink": "http://www.inews24.com/view/2027707",
+   "press": "아이뉴스24",
+   "pub": "2026-11-18 16:08",
+   "q": "건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "대구시의회 경환위, 농수산물유통관리공사·신용보증재단 행정사무감사...",
+   "desc": "소상공인 고용보험 지원사업의 보조금 관리체계 개선과 신규 가입 확대를 당부했습니다. 진미숙 위원은 건설업·운송업 특별보증의 저조한 실행 실적을 지적하며 업종별 자금 수요를 반영한 심사절차 개선을 촉구했고...",
+   "link": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119450",
+   "originallink": "https://news.bbsi.co.kr/news/articleView.html?idxno=4119450",
+   "press": "news.bbsi.co.kr",
+   "pub": "2026-11-18 16:48",
+   "q": "건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "권오섭·김기열 대구시의원, 유통시장 관리 강화·소상공인 금융지원 개...",
+   "desc": "신용보증재단에는 소상공인 고용보험 지원사업의 보조금 관리체계 개선을 요구했다. 진미숙 의원은 출하장려금과 출하손실보전금의 불명확한 지급 기준을 지적하고 관련 제도와 조례 정비를 촉구했다. 건설업·운송업...",
+   "link": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367771",
+   "originallink": "http://www.sisafocus.co.kr/news/articleView.html?idxno=367771",
+   "press": "sisafocus.co.kr",
+   "pub": "2026-11-18 17:14",
+   "q": "건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "대구시의회 경제환경위원회, 공공기관 경영 부실·민생금융 후퇴 질타",
+   "desc": "박현규 위원은 2년 연속 감사 지적을 받은 소상공인 고용보험 지원사업의 보조금 관리 개선과 신규 가입 확대를 촉구했다. 진미숙 위원은 건설업·운송업 특별보증의 신청 대비 낮은 실행률을 지적하며 업종별 수요를...",
+   "link": "http://www.newsprime.co.kr/news/article.html?no=755540",
+   "originallink": "http://www.newsprime.co.kr/news/article.html?no=755540",
+   "press": "newsprime.co.kr",
+   "pub": "2026-11-18 17:56",
+   "q": "건설업 고용보험",
    "rel": false
   }
  ]
