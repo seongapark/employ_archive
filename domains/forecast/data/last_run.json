@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-18T10:07:54.481968+09:00",
+  "run_at": "2026-11-18T12:05:06.052991+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -27,8 +27,8 @@
       "added": 0
     },
     "kdi": {
-      "ok": true,
-      "fetched": 16,
+      "ok": false,
+      "fetched": 0,
       "added": 0
     },
     "kli": {
@@ -63,7 +63,9 @@
     }
   },
   "conflicts": [],
-  "errors": [],
+  "errors": [
+    "kdi: ValueError: KDI 경제전망, 2026 하반기: 요약표를 실은 장을 찾지 못했다"
+  ],
   "warnings": [
     "announce: OECD 공지일 못 읽음 — Blocked: 봇 차단(Cloudflare 챌린지): https://www.oecd.org/en/about/news.html"
   ],
