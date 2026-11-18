@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-17T15:00:40+09:00",
+  "at": "2026-11-18T10:07:48+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -182,13 +182,13 @@
       "total": 83
     },
     "kiet-issue": {
-      "ok": true,
-      "parsed": 30,
+      "ok": false,
+      "parsed": 0,
       "added": 0,
       "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
-      "error": null,
+      "error": "Failed to perform, curl: (35) Recv failure: Connection was reset. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
       "total": 126
     },
     "kiet-economy": {
@@ -303,9 +303,9 @@
     },
     "bok-note": {
       "ok": true,
-      "parsed": 200,
-      "added": 1,
-      "details": 1,
+      "parsed": 100,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
