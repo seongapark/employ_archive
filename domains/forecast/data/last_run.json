@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-18T15:05:05.205325+09:00",
+  "run_at": "2026-11-18T15:30:47.987628+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -27,9 +27,9 @@
       "added": 0
     },
     "kdi": {
-      "ok": false,
-      "fetched": 0,
-      "added": 0
+      "ok": true,
+      "fetched": 24,
+      "added": 24
     },
     "kli": {
       "ok": true,
@@ -63,9 +63,7 @@
     }
   },
   "conflicts": [],
-  "errors": [
-    "kdi: ValueError: KDI 경제전망, 2026 하반기: 요약표를 실은 장을 찾지 못했다"
-  ],
+  "errors": [],
   "warnings": [],
   "blocked": {}
 }
