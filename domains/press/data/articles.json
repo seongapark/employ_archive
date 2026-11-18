@@ -13334,6 +13334,46 @@
      "요즘",
      "원주"
     ]
+   },
+   {
+    "title": "경상원, 1인 소상공인 보험료 지원…최장 5년 동안 혜택",
+    "url": "http://www.bizwnews.com/news/articleView.html?idxno=152162",
+    "press": "bizwnews.com",
+    "pub": "2026-11-18 07:10",
+    "cites": false,
+    "judged": true,
+    "why": "경기도 1인 소상공인 보험료 지원 사업",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "경상원",
+     "보험료",
+     "소상공인",
+     "최장",
+     "혜택"
+    ]
+   },
+   {
+    "title": "[헬멧 쓴 청년들 ①] 문 닫힌 취업 시장, 청년은 배달앱 문을 두드린다",
+    "url": "https://www.news2day.co.kr/article/20261111500004",
+    "press": "news2day.co.kr",
+    "pub": "2026-11-18 07:28",
+    "cites": false,
+    "judged": true,
+    "why": "구인배수 0.48로 10월(0.46)과 불일치, 청년 배달 기획",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "배달앱",
+     "청년들",
+     "헬멧"
+    ]
    }
   ]
  }
