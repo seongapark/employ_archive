@@ -51,6 +51,14 @@ _CHAPTER = re.compile(
 _ISSUE_SELECT = re.compile(
     r'<select id="yearSelectUpDown"[^>]*>(?P<body>.*?)</select>', re.S,
 )
+# 2026-11 회차부터 장별 목록(li.down)이 사라지고 회차 선택 바로 옆에 통합본
+# 「원문 다운로드」 버튼 하나만 남았다. 페이지 아래 다른 보고서(경제 현안 분석
+# 등)에도 같은 버튼이 있으므로 select 바로 뒤 첫 rpt_link 에만 묶는다.
+_FULL_REPORT = re.compile(
+    r'<select id="yearSelectUpDown".*?</select>\s*</span>\s*<div class="rpt_link">'
+    r"(?:(?!</div>).)*?location\.href='(?P<href>/file/download\?atch_no=[^']+)'",
+    re.S,
+)
 _ISSUE_OPTION = re.compile(r'<option value="(?P<no>\d+)"[^>]*>(?P<label>[^<]*)</option>')
 # 라벨 맨 앞의 4자리가 곧 연도다("2026년 8월", "2026 상반기", "1982年 2/4" 모두 그렇다)
 _LABEL_YEAR = re.compile(r"(\d{4})")
@@ -134,6 +142,12 @@ def parse_chapters(page_html: str) -> list[tuple[str, str]]:
     ]
 
 
+def full_report_url(page_html: str) -> str | None:
+    """회차 통합본 PDF 주소. 없으면 None."""
+    match = _FULL_REPORT.search(page_html)
+    return BASE + html_lib.unescape(match.group("href")) if match else None
+
+
 def parse_issue_list(page_html: str) -> list[tuple[str, str]]:
     """회차 선택 드롭다운에서 (pub_no, 표시 라벨) 을 문서 순서(최신 먼저)대로 돌려준다.
 
@@ -198,7 +212,13 @@ def collect_issue(issue: Issue, page_html: str | None = None) -> list[ForecastRe
     """
     if page_html is None:
         page_html = http.get(issue.url).text
-    for _, url in parse_chapters(page_html):
+    urls = [url for _, url in parse_chapters(page_html)]
+    # 장별 PDF 가 다 실패하거나 아예 없으면(2026-11 개편) 통합본을 마지막에 본다.
+    # 통합본은 20MB·175쪽이라 장이 있을 땐 장부터 본다.
+    full = full_report_url(page_html)
+    if full and full not in urls:
+        urls.append(full)
+    for url in urls:
         # 장은 본문 순서대로 나오지만 표가 어디 실릴지는 회차마다 다르다. 앞 장이
         # 502거나 표 없는 첨부여도 뒷 장을 마저 봐야 하므로 장 단위로 실패를 가둔다.
         try:

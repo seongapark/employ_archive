@@ -349,3 +349,28 @@ def test_collect_skips_an_announced_issue_that_is_not_out_yet(monkeypatch):
     issue = kdi.parse_issue(PAGE, kdi.LIST_URL)
 
     assert kdi.collect(issue.published_at - timedelta(days=1)) == []
+
+
+NOV_2026_PAGE = (FIXTURES / "kdi_economy_2026-11.html").read_text(encoding="utf-8")
+
+
+def test_collect_uses_full_report_when_page_has_no_chapters(monkeypatch):
+    # 2026-11 개편: 장별 목록이 없고 회차 선택 옆 통합본 버튼 하나뿐이다.
+    # 페이지 아래 경제 현안 분석의 같은 버튼을 집으면 안 된다.
+    full = "https://www.kdi.re.kr/file/download?atch_no=eJMEpL5nAOlju19TFAlKJg%3D%3D"
+    assert kdi.parse_chapters(NOV_2026_PAGE) == []
+    assert kdi.full_report_url(NOV_2026_PAGE) == full
+    assert kdi.full_report_url(PAGE) is None
+
+    def fake_get(url, **kwargs):
+        if url == kdi.LIST_URL:
+            return _Resp(text=NOV_2026_PAGE)
+        assert url == full
+        return _Resp(content=b"%PDF")
+
+    monkeypatch.setattr(kdi.http, "get", fake_get)
+    monkeypatch.setattr(kdi.pdf, "page_texts", lambda data: [TABLE])
+
+    records = kdi.collect(date(2026, 11, 18))
+    assert records
+    assert records[0].source_url == full
