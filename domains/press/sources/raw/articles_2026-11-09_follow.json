@@ -6,32 +6,32 @@
   "2026-11-10",
   "2026-11-30"
  ],
- "collected_at": "2026-11-19 11:48",
+ "collected_at": "2026-11-19 19:44",
  "volume": {
-  "collected": 294,
-  "articles": 76,
-  "press": 58,
+  "collected": 300,
+  "articles": 77,
+  "press": 59,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29725,
+   "api_total": 29726,
    "fetched": 100,
    "truncated": false,
-   "in_window": 92,
-   "relevant": 75,
-   "new": 92
+   "in_window": 93,
+   "relevant": 76,
+   "new": 93
   },
   {
    "query": "구직급여",
-   "api_total": 95307,
+   "api_total": 95312,
    "fetched": 200,
    "truncated": false,
-   "in_window": 147,
+   "in_window": 152,
    "relevant": 4,
-   "new": 135
+   "new": 140
   },
   {
    "query": "구인배수",
@@ -875,6 +875,16 @@
    "pub": "2026-11-19 10:52",
    "q": "고용보험 가입자",
    "rel": true
+  },
+  {
+   "title": "하이엘 김진욱 대표, 경영혁신 유공 중기부 장관표창",
+   "desc": "고용보험 가입자 수는 2024년 13명에서 지난해 22명으로 늘었다. 올해 4월에는 고용노동부의 일자리제공형 사회적기업 인증을 받았으며 10월 한국사회적기업진흥원의 사회적가치지표(SVI) 측정에서는 최고 등급인...",
+   "link": "https://www.jbnews.com/news/articleView.html?idxno=1516427",
+   "originallink": "https://www.jbnews.com/news/articleView.html?idxno=1516427",
+   "press": "jbnews.com",
+   "pub": "2026-11-19 15:26",
+   "q": "고용보험 가입자",
+   "rel": true
   }
  ],
  "excluded": [
@@ -969,20 +979,20 @@
    "rel": false
   },
   {
-   "title": "“스쳐가는 월급 통장 잡는다”…청와대, 월세공제·교통비 환급 확대",
-   "desc": "임직원 수도 1228명에서 1907명으로 55% 늘었으며 1인당 평균 급여는 5787만 원에서 7059만 원으로 약 22% 뛰었다.... 개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩이 고용노동부...",
-   "link": "https://n.news.naver.com/mnews/article/011/0004680482?sid=101",
-   "originallink": "https://www.sedaily.com/article/20112279?ref=naver",
+   "title": "엔비디아 ‘깜짝 발표’…한국 AI·로봇 벤처 4곳 직접 투자 유치",
+   "desc": "개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩 ‘AI 네이티브... 임직원 수는 1228명에서 1907명으로 55% 늘었고, 1인당 평균 급여도 5787만 원에서 7059만 원으로 약 22% 뛰었다....",
+   "link": "https://n.news.naver.com/mnews/article/011/0004680479?sid=101",
+   "originallink": "https://www.sedaily.com/article/20112276?ref=naver",
    "press": "서울경제",
    "pub": "2026-11-10 10:01",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "엔비디아 ‘깜짝 발표’…한국 AI·로봇 벤처 4곳 직접 투자 유치",
-   "desc": "개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩 ‘AI 네이티브... 임직원 수는 1228명에서 1907명으로 55% 늘었고, 1인당 평균 급여도 5787만 원에서 7059만 원으로 약 22% 뛰었다....",
-   "link": "https://n.news.naver.com/mnews/article/011/0004680479?sid=101",
-   "originallink": "https://www.sedaily.com/article/20112276?ref=naver",
+   "title": "“스쳐가는 월급 통장 잡는다”…청와대, 월세공제·교통비 환급 확대",
+   "desc": "임직원 수도 1228명에서 1907명으로 55% 늘었으며 1인당 평균 급여는 5787만 원에서 7059만 원으로 약 22% 뛰었다.... 개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩이 고용노동부...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004680482?sid=101",
+   "originallink": "https://www.sedaily.com/article/20112279?ref=naver",
    "press": "서울경제",
    "pub": "2026-11-10 10:01",
    "q": "구직급여",
@@ -1539,21 +1549,21 @@
    "rel": false
   },
   {
-   "title": "철강 불황에 흔들린 포항 고용…정부 ‘선제대응지역’ 연장 카드로 방...",
-   "desc": "올해 8월 기준 포항시 1차 철강 제조업 고용보험 피보험자는 2만7445명으로 지난해 같은 달보다 270명(1.0%), 2024년 8월보다는 1070명(3.8%) 줄었다. 포항시는 지난달 2일 이 같은 고용동향과 기업 여건을 담은 의견서를...",
-   "link": "https://www.kbmaeil.com/article/20261112500250",
-   "originallink": "https://www.kbmaeil.com/article/20261112500250",
-   "press": "kbmaeil.com",
-   "pub": "2026-11-12 11:24",
-   "q": "제조업 고용보험",
-   "rel": false
-  },
-  {
    "title": "철강 불황에 포항 고용위기 선제대응지역 1년 연장…근로자·기업 지원...",
    "desc": "포항은 철강업계의 어려움과 고용불안이 이어지면서 실제 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만7445명으로, 2년 전보다 1070명(3.8%) 감소했다. 이번 기간 연장으로 경영난으로 휴업이나 휴직을...",
    "link": "https://www.hidomin.com/news/articleView.html?idxno=729054",
    "originallink": "https://www.hidomin.com/news/articleView.html?idxno=729054",
    "press": "hidomin.com",
+   "pub": "2026-11-12 11:24",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "철강 불황에 흔들린 포항 고용…정부 ‘선제대응지역’ 연장 카드로 방...",
+   "desc": "올해 8월 기준 포항시 1차 철강 제조업 고용보험 피보험자는 2만7445명으로 지난해 같은 달보다 270명(1.0%), 2024년 8월보다는 1070명(3.8%) 줄었다. 포항시는 지난달 2일 이 같은 고용동향과 기업 여건을 담은 의견서를...",
+   "link": "https://www.kbmaeil.com/article/20261112500250",
+   "originallink": "https://www.kbmaeil.com/article/20261112500250",
+   "press": "kbmaeil.com",
    "pub": "2026-11-12 11:24",
    "q": "제조업 고용보험",
    "rel": false
@@ -1969,21 +1979,21 @@
    "rel": false
   },
   {
-   "title": "노동부, '가짜 3.3·사업장 쪼개기' 정조준⋯140여 곳 기획감독 실시",
-   "desc": "특히 국세청의 사업소득세 납부(원천징수 이행상황) 신고 내역을 중심으로 고용보험 정보, 과거 감독 이력, 구인광고 모니터링 결과를 종합적으로 교차 검증해 감독 대상을 추렸다. 주요 타깃은 음식·숙박업, 제조업, 도...",
-   "link": "https://www.etoday.co.kr/news/view/2647424",
-   "originallink": "https://www.etoday.co.kr/news/view/2647424",
-   "press": "이투데이",
-   "pub": "2026-11-13 09:00",
-   "q": "제조업 고용보험",
-   "rel": false
-  },
-  {
    "title": "노동부, '가짜 3.3' 위장고용, '사업장 쪼개기' 기획감독 나선다",
    "desc": "중심으로 고용보험 정보, 감독 이력 등을 종합 검토해 최종 대상을 정했다. 감독 대상은 음식·숙박업, 제조업, 도·소매업, 이동통신업 등 사업소득자를 많이 고용하는 업종의 사업장이나, 근로소득자는 5인 미만이지만...",
    "link": "https://n.news.naver.com/mnews/article/421/0009287061?sid=101",
    "originallink": "https://www.news1.kr/economy/employment-labor/6352593",
    "press": "뉴스1",
+   "pub": "2026-11-13 09:00",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "노동부, '가짜 3.3·사업장 쪼개기' 정조준⋯140여 곳 기획감독 실시",
+   "desc": "특히 국세청의 사업소득세 납부(원천징수 이행상황) 신고 내역을 중심으로 고용보험 정보, 과거 감독 이력, 구인광고 모니터링 결과를 종합적으로 교차 검증해 감독 대상을 추렸다. 주요 타깃은 음식·숙박업, 제조업, 도...",
+   "link": "https://www.etoday.co.kr/news/view/2647424",
+   "originallink": "https://www.etoday.co.kr/news/view/2647424",
+   "press": "이투데이",
    "pub": "2026-11-13 09:00",
    "q": "제조업 고용보험",
    "rel": false
@@ -2009,6 +2019,16 @@
    "rel": false
   },
   {
+   "title": "직원인데 프리랜서?…노동부, 가짜 3.3 위장고용 140곳 집중감독",
+   "desc": "이후 국세청의 사업소득세 원천징수 신고 내역과 고용보험 정보, 과거 신고·감독 이력, 구인광고 등을 교차 검토해 최종 감독 대상을 선정할 계획이다. 주요 점검 업종은 음식·숙박업과 제조업, 도·소매업, 시설관리업...",
+   "link": "https://n.news.naver.com/mnews/article/119/0003154686?sid=102",
+   "originallink": "https://www.dailian.co.kr/news/view/1714504/?sc=Naver",
+   "press": "dailian.co.kr",
+   "pub": "2026-11-13 09:01",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
    "title": "‘가짜 3.3 계약·사업장 쪼개기’ 잡는다…노동부, 꼼수 사업장 기획감...",
    "desc": "16일부터 2개월간 실시…음식·숙박·제조업 등 집중 점검 4대 보험 미가입·임금체불 등 적발 시 시정 조치 고용노동부가 ‘가짜 3.3 위장고용’과 ‘사업장 쪼개기’ 등 노동법 회피 행위가 의심되는 사업장을 대상으로...",
    "link": "https://n.news.naver.com/mnews/article/366/0001204498?sid=102",
@@ -2024,16 +2044,6 @@
    "link": "https://n.news.naver.com/mnews/article/079/0004209382?sid=102",
    "originallink": "https://www.nocutnews.co.kr/news/6605934?utm_source=naver&utm_medium=article&utm_campaign=20261113090019",
    "press": "nocutnews.co.kr",
-   "pub": "2026-11-13 09:01",
-   "q": "제조업 고용보험",
-   "rel": false
-  },
-  {
-   "title": "직원인데 프리랜서?…노동부, 가짜 3.3 위장고용 140곳 집중감독",
-   "desc": "이후 국세청의 사업소득세 원천징수 신고 내역과 고용보험 정보, 과거 신고·감독 이력, 구인광고 등을 교차 검토해 최종 감독 대상을 선정할 계획이다. 주요 점검 업종은 음식·숙박업과 제조업, 도·소매업, 시설관리업...",
-   "link": "https://n.news.naver.com/mnews/article/119/0003154686?sid=102",
-   "originallink": "https://www.dailian.co.kr/news/view/1714504/?sc=Naver",
-   "press": "dailian.co.kr",
    "pub": "2026-11-13 09:01",
    "q": "제조업 고용보험",
    "rel": false
@@ -3055,6 +3065,56 @@
    "originallink": "http://www.dailypop.kr/news/articleView.html?idxno=104738",
    "press": "dailypop.kr",
    "pub": "2026-11-19 11:10",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "인천 연수구, 원도심 생활환경 개선·송도국제도시 문화인프라 확충에 ...",
+   "desc": "저소득층의 생활 안정을 위한 생계급여에는 604억 원, 주거급여 220억 원, 자활근로 54억 원, 긴급복지 지원... 청년 월세 지원사업에 33억 원, 구직단념 청년의 사회 진입을 돕는 청년도전지원사업에 4억 원을 편성했다....",
+   "link": "https://www.kmaeil.com/news/articleView.html?idxno=658950",
+   "originallink": "https://www.kmaeil.com/news/articleView.html?idxno=658950",
+   "press": "kmaeil.com",
+   "pub": "2026-11-19 12:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "도수치료 수행 물리치료사 68.5% “관리급여 시행 뒤 월급 줄어”",
+   "desc": "도수치료를 해온 물리치료사 10명 중 7명가량이 올해 7월 도수치료 관리급여 시행 이후 월 총급여가... 구인·구직 및 재취업 지원이 255명(11.7%), 공식 통계 및 실태조사 정례화가 201명(9.3%)으로 뒤를 이었다.",
+   "link": "https://www.naeil.com/news/read/609327?ref=naver",
+   "originallink": "https://www.naeil.com/news/read/609327?ref=naver",
+   "press": "naeil.com",
+   "pub": "2026-11-19 13:04",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "2027년 예산, 민생과 양극화 극복 초석 되길",
+   "desc": "찾은 구직자들가 상담을 기다리고 있다. 2026.8.5 (사진=저작권자(c) 연합뉴스, 무단 전재-재배포 금지) 이러한 방향은 내년 예산안 곳곳에서 확인된다. 기초생활보장제도의 기준 중위소득을 크게 인상하고(6.7%), 4대 급여를...",
+   "link": "https://www.korea.kr/news/contributePolicyView.do?newsId=148976060&call_from=naver_news",
+   "originallink": "https://www.korea.kr/news/contributePolicyView.do?newsId=148976060&call_from=naver_news",
+   "press": "korea.kr",
+   "pub": "2026-11-19 13:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[기획⑤] 이정호 금산인삼FC 구단 대표 \"체육회장 아들 위장취업 사실\"...",
+   "desc": "고용보험 신고 이력과 급여 이체·반환 내역, 구직급여 지급 기록으로 가려야 한다. 확인 절차는 다시 '셀프'로 흐를 공산이 크다. 금산군은 \"구단은 별도 법인이어서 보조금은 주지만 군이 근로복지공단에 직접 확인을...",
+   "link": "https://www.goodkyung.com/news/articleView.html?idxno=293615",
+   "originallink": "https://www.goodkyung.com/news/articleView.html?idxno=293615",
+   "press": "goodkyung.com",
+   "pub": "2026-11-19 13:18",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "서성덕 대상 수상자 “수강료 부담 덜고 취업 준비에 전념할 수 있었다...",
+   "desc": "학원 수강료와 교재비, 시험 응시료에 생활비까지 더하면 구직자가 느끼는 부담은 더 커진다. 정부가... 현재 맡은 업무는 급여 정산, 연말정산, 비용 집행처럼 회계·세무와 맞닿는 일이 많다. 직업훈련 과정에서 관련...",
+   "link": "https://it.donga.com/109963/",
+   "originallink": "https://it.donga.com/109963/",
+   "press": "동아일보",
+   "pub": "2026-11-19 15:32",
    "q": "구직급여",
    "rel": false
   }
