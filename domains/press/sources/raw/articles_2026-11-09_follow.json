@@ -6,32 +6,32 @@
   "2026-11-10",
   "2026-11-30"
  ],
- "collected_at": "2026-11-18 19:39",
+ "collected_at": "2026-11-19 11:48",
  "volume": {
-  "collected": 280,
-  "articles": 74,
-  "press": 57,
+  "collected": 294,
+  "articles": 76,
+  "press": 58,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29721,
+   "api_total": 29725,
    "fetched": 100,
    "truncated": false,
-   "in_window": 88,
-   "relevant": 73,
-   "new": 88
+   "in_window": 92,
+   "relevant": 75,
+   "new": 92
   },
   {
    "query": "구직급여",
-   "api_total": 95299,
+   "api_total": 95307,
    "fetched": 200,
    "truncated": false,
-   "in_window": 139,
+   "in_window": 147,
    "relevant": 4,
-   "new": 127
+   "new": 135
   },
   {
    "query": "구인배수",
@@ -53,12 +53,12 @@
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8513,
+   "api_total": 8514,
    "fetched": 100,
    "truncated": false,
-   "in_window": 16,
+   "in_window": 17,
    "relevant": 8,
-   "new": 7
+   "new": 8
   },
   {
    "query": "전문과학기술업 고용보험",
@@ -98,12 +98,12 @@
   },
   {
    "query": "자동차 고용보험",
-   "api_total": 14039,
+   "api_total": 14040,
    "fetched": 100,
    "truncated": false,
-   "in_window": 10,
+   "in_window": 11,
    "relevant": 6,
-   "new": 3
+   "new": 4
   },
   {
    "query": "기타운송장비 고용보험",
@@ -855,6 +855,26 @@
    "pub": "2026-11-18 18:44",
    "q": "고용보험 가입자",
    "rel": true
+  },
+  {
+   "title": "[헬멧 쓴 청년들②] 콜이 마르지 않는 배달 강국, 이제 사다리를 놓을 ...",
+   "desc": "2022년 퀵서비스 기사 고용보험이 시행되자 100일 만에 16만681명이 가입했고, 그중 93.3%가 음식배달 기사였다. 가입자는 지난해 18만5149명으로 늘었다. 배달앱을 경유지로 들어 온 청년이 잠시 일을 쉬어도 버틸 수 있는...",
+   "link": "https://www.news2day.co.kr/article/20261111500007",
+   "originallink": "https://www.news2day.co.kr/article/20261111500007",
+   "press": "news2day.co.kr",
+   "pub": "2026-11-19 07:58",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "수의대 정원 늘려도, 공직수의사 부족 해결 안 된다",
+   "desc": "• 고용보험의 25~34세 수의사 직종 비율은 2020년 이후 오르는 속도가 느려졌습니다. 다만 이 자료는 가입자만 세기 때문에, 해당 연령 구간의 수의사가 실제로 증가한 것인지 가입이 늘어난 것인지 구분하지...",
+   "link": "https://www.dailyvet.co.kr/news/column/304971",
+   "originallink": "https://www.dailyvet.co.kr/news/column/304971",
+   "press": "dailyvet.co.kr",
+   "pub": "2026-11-19 10:52",
+   "q": "고용보험 가입자",
+   "rel": true
   }
  ],
  "excluded": [
@@ -949,20 +969,20 @@
    "rel": false
   },
   {
-   "title": "엔비디아 ‘깜짝 발표’…한국 AI·로봇 벤처 4곳 직접 투자 유치",
-   "desc": "개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩 ‘AI 네이티브... 임직원 수는 1228명에서 1907명으로 55% 늘었고, 1인당 평균 급여도 5787만 원에서 7059만 원으로 약 22% 뛰었다....",
-   "link": "https://n.news.naver.com/mnews/article/011/0004680479?sid=101",
-   "originallink": "https://www.sedaily.com/article/20112276?ref=naver",
+   "title": "“스쳐가는 월급 통장 잡는다”…청와대, 월세공제·교통비 환급 확대",
+   "desc": "임직원 수도 1228명에서 1907명으로 55% 늘었으며 1인당 평균 급여는 5787만 원에서 7059만 원으로 약 22% 뛰었다.... 개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩이 고용노동부...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004680482?sid=101",
+   "originallink": "https://www.sedaily.com/article/20112279?ref=naver",
    "press": "서울경제",
    "pub": "2026-11-10 10:01",
    "q": "구직급여",
    "rel": false
   },
   {
-   "title": "“스쳐가는 월급 통장 잡는다”…청와대, 월세공제·교통비 환급 확대",
-   "desc": "임직원 수도 1228명에서 1907명으로 55% 늘었으며 1인당 평균 급여는 5787만 원에서 7059만 원으로 약 22% 뛰었다.... 개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩이 고용노동부...",
-   "link": "https://n.news.naver.com/mnews/article/011/0004680482?sid=101",
-   "originallink": "https://www.sedaily.com/article/20112279?ref=naver",
+   "title": "엔비디아 ‘깜짝 발표’…한국 AI·로봇 벤처 4곳 직접 투자 유치",
+   "desc": "개발부터 디자인까지 실무 교육…원티드랩 ‘AI캠프’로 구직자 지원 핵심 요약: 원티드랩 ‘AI 네이티브... 임직원 수는 1228명에서 1907명으로 55% 늘었고, 1인당 평균 급여도 5787만 원에서 7059만 원으로 약 22% 뛰었다....",
+   "link": "https://n.news.naver.com/mnews/article/011/0004680479?sid=101",
+   "originallink": "https://www.sedaily.com/article/20112276?ref=naver",
    "press": "서울경제",
    "pub": "2026-11-10 10:01",
    "q": "구직급여",
@@ -1519,21 +1539,21 @@
    "rel": false
   },
   {
-   "title": "철강 불황에 포항 고용위기 선제대응지역 1년 연장…근로자·기업 지원...",
-   "desc": "포항은 철강업계의 어려움과 고용불안이 이어지면서 실제 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만7445명으로, 2년 전보다 1070명(3.8%) 감소했다. 이번 기간 연장으로 경영난으로 휴업이나 휴직을...",
-   "link": "https://www.hidomin.com/news/articleView.html?idxno=729054",
-   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=729054",
-   "press": "hidomin.com",
-   "pub": "2026-11-12 11:24",
-   "q": "제조업 고용보험",
-   "rel": false
-  },
-  {
    "title": "철강 불황에 흔들린 포항 고용…정부 ‘선제대응지역’ 연장 카드로 방...",
    "desc": "올해 8월 기준 포항시 1차 철강 제조업 고용보험 피보험자는 2만7445명으로 지난해 같은 달보다 270명(1.0%), 2024년 8월보다는 1070명(3.8%) 줄었다. 포항시는 지난달 2일 이 같은 고용동향과 기업 여건을 담은 의견서를...",
    "link": "https://www.kbmaeil.com/article/20261112500250",
    "originallink": "https://www.kbmaeil.com/article/20261112500250",
    "press": "kbmaeil.com",
+   "pub": "2026-11-12 11:24",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "철강 불황에 포항 고용위기 선제대응지역 1년 연장…근로자·기업 지원...",
+   "desc": "포항은 철강업계의 어려움과 고용불안이 이어지면서 실제 1차 철강 제조업 고용보험 피보험자는 올해 8월 기준 2만7445명으로, 2년 전보다 1070명(3.8%) 감소했다. 이번 기간 연장으로 경영난으로 휴업이나 휴직을...",
+   "link": "https://www.hidomin.com/news/articleView.html?idxno=729054",
+   "originallink": "https://www.hidomin.com/news/articleView.html?idxno=729054",
+   "press": "hidomin.com",
    "pub": "2026-11-12 11:24",
    "q": "제조업 고용보험",
    "rel": false
@@ -1689,21 +1709,21 @@
    "rel": false
   },
   {
-   "title": "[금융권 이모저모]토스뱅크, 펀드 판매 시작…통장 이자로 자동 투자 外",
-   "desc": "지난 11일 경기 김포시 농가에서 NH농협생명과 서울시 관계자들이 노숙인 구직자들과 자활지원 프로그램... 금융투자협회는 2005년 소망의 집과 결연을 맺은 이후 임직원 급여를 모아 정기적인 후원과 봉사활동을...",
-   "link": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
-   "originallink": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
-   "press": "businessplus.kr",
-   "pub": "2026-11-12 16:12",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "청년을 취업 대기실에 가두는 노동시장 이중구조",
    "desc": "눈높이나 구직 의욕 탓으로 돌릴 수 없다는 것이다. 기업 규모에 따라 보상과 성장 기회가 크게 갈리는... 대신 근로자가 직장을 옮기거나 일자리를 잃었을 때 실업급여와 직업훈련, 재취업 지원을 쉽게 받도록 해주는 게...",
    "link": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
    "originallink": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
    "press": "fntimes.com",
+   "pub": "2026-11-12 16:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[금융권 이모저모]토스뱅크, 펀드 판매 시작…통장 이자로 자동 투자 外",
+   "desc": "지난 11일 경기 김포시 농가에서 NH농협생명과 서울시 관계자들이 노숙인 구직자들과 자활지원 프로그램... 금융투자협회는 2005년 소망의 집과 결연을 맺은 이후 임직원 급여를 모아 정기적인 후원과 봉사활동을...",
+   "link": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
+   "originallink": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
+   "press": "businessplus.kr",
    "pub": "2026-11-12 16:12",
    "q": "구직급여",
    "rel": false
@@ -1949,6 +1969,16 @@
    "rel": false
   },
   {
+   "title": "노동부, '가짜 3.3·사업장 쪼개기' 정조준⋯140여 곳 기획감독 실시",
+   "desc": "특히 국세청의 사업소득세 납부(원천징수 이행상황) 신고 내역을 중심으로 고용보험 정보, 과거 감독 이력, 구인광고 모니터링 결과를 종합적으로 교차 검증해 감독 대상을 추렸다. 주요 타깃은 음식·숙박업, 제조업, 도...",
+   "link": "https://www.etoday.co.kr/news/view/2647424",
+   "originallink": "https://www.etoday.co.kr/news/view/2647424",
+   "press": "이투데이",
+   "pub": "2026-11-13 09:00",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
    "title": "노동부, '가짜 3.3' 위장고용, '사업장 쪼개기' 기획감독 나선다",
    "desc": "중심으로 고용보험 정보, 감독 이력 등을 종합 검토해 최종 대상을 정했다. 감독 대상은 음식·숙박업, 제조업, 도·소매업, 이동통신업 등 사업소득자를 많이 고용하는 업종의 사업장이나, 근로소득자는 5인 미만이지만...",
    "link": "https://n.news.naver.com/mnews/article/421/0009287061?sid=101",
@@ -1969,12 +1999,12 @@
    "rel": false
   },
   {
-   "title": "노동부, '가짜 3.3·사업장 쪼개기' 정조준⋯140여 곳 기획감독 실시",
-   "desc": "특히 국세청의 사업소득세 납부(원천징수 이행상황) 신고 내역을 중심으로 고용보험 정보, 과거 감독 이력, 구인광고 모니터링 결과를 종합적으로 교차 검증해 감독 대상을 추렸다. 주요 타깃은 음식·숙박업, 제조업, 도...",
-   "link": "https://www.etoday.co.kr/news/view/2647424",
-   "originallink": "https://www.etoday.co.kr/news/view/2647424",
-   "press": "이투데이",
-   "pub": "2026-11-13 09:00",
+   "title": "노동부, ‘가짜 3.3’·사업장 쪼개기 140여곳 기획감독",
+   "desc": "국세청 소득세 납부 신고 내역을 중심으로 고용보험 정보, 신고사건과 감독 이력, 구인광고 등을 종합 검토해 최종 감독 대상을 선정한다. 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업 등 사업소득자가 다수...",
+   "link": "https://n.news.naver.com/mnews/article/016/0002722915?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10935070?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-11-13 09:01",
    "q": "제조업 고용보험",
    "rel": false
   },
@@ -1984,16 +2014,6 @@
    "link": "https://n.news.naver.com/mnews/article/366/0001204498?sid=102",
    "originallink": "https://biz.chosun.com/topics/topics_social/2026/11/13/XSN4IPTOLZHIJPANPI7IVWTXMQ/?utm_source=naver&utm_medium=original&utm_campaign=biz",
    "press": "조선일보",
-   "pub": "2026-11-13 09:01",
-   "q": "제조업 고용보험",
-   "rel": false
-  },
-  {
-   "title": "직원인데 프리랜서?…노동부, 가짜 3.3 위장고용 140곳 집중감독",
-   "desc": "이후 국세청의 사업소득세 원천징수 신고 내역과 고용보험 정보, 과거 신고·감독 이력, 구인광고 등을 교차 검토해 최종 감독 대상을 선정할 계획이다. 주요 점검 업종은 음식·숙박업과 제조업, 도·소매업, 시설관리업...",
-   "link": "https://n.news.naver.com/mnews/article/119/0003154686?sid=102",
-   "originallink": "https://www.dailian.co.kr/news/view/1714504/?sc=Naver",
-   "press": "dailian.co.kr",
    "pub": "2026-11-13 09:01",
    "q": "제조업 고용보험",
    "rel": false
@@ -2009,11 +2029,11 @@
    "rel": false
   },
   {
-   "title": "노동부, ‘가짜 3.3’·사업장 쪼개기 140여곳 기획감독",
-   "desc": "국세청 소득세 납부 신고 내역을 중심으로 고용보험 정보, 신고사건과 감독 이력, 구인광고 등을 종합 검토해 최종 감독 대상을 선정한다. 음식·숙박업, 제조업, 도·소매업, 시설관리, 이동통신업 등 사업소득자가 다수...",
-   "link": "https://n.news.naver.com/mnews/article/016/0002722915?sid=101",
-   "originallink": "https://biz.heraldcorp.com/article/10935070?ref=naver",
-   "press": "헤럴드경제",
+   "title": "직원인데 프리랜서?…노동부, 가짜 3.3 위장고용 140곳 집중감독",
+   "desc": "이후 국세청의 사업소득세 원천징수 신고 내역과 고용보험 정보, 과거 신고·감독 이력, 구인광고 등을 교차 검토해 최종 감독 대상을 선정할 계획이다. 주요 점검 업종은 음식·숙박업과 제조업, 도·소매업, 시설관리업...",
+   "link": "https://n.news.naver.com/mnews/article/119/0003154686?sid=102",
+   "originallink": "https://www.dailian.co.kr/news/view/1714504/?sc=Naver",
+   "press": "dailian.co.kr",
    "pub": "2026-11-13 09:01",
    "q": "제조업 고용보험",
    "rel": false
@@ -2916,6 +2936,126 @@
    "press": "newsprime.co.kr",
    "pub": "2026-11-18 17:56",
    "q": "건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "중·저신용 신규보증 비중 46%서 20%로…대구시의회 “금융취약층 지원...",
+   "desc": "진미숙 위원은 건설업·운송업 특별보증이 신청에 비해 실제 실행된 실적이 저조하다며 업종별 자금 수요를... 소상공인 고용보험 보조금 관리 등을 점검했다. 향후 감사 지적사항의 후속 조치 이행 여부를 확인할...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006412118?sid=100",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=04785526645647032&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-11-18 22:35",
+   "q": "건설업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "성남시, '고액 체납자' 110명 공개 및 '겨울방학 행정체험 대학생' 202명...",
+   "desc": "아울러 성남시는 단순한 행정 보조에 그치지 않고 연수 기간 동안 예비 사회초년생들의 실질적인 구직... 의료급여 수급자, 국가유공자 등 관련 법령에 따른 취업 지원 대상자를 우선적으로 고려하며 이와 함께 다자녀...",
+   "link": "https://www.cstimes.com/news/articleView.html?idxno=728498",
+   "originallink": "https://www.cstimes.com/news/articleView.html?idxno=728498",
+   "press": "cstimes.com",
+   "pub": "2026-11-19 05:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "자진퇴사 실업급여 지급 시 이직률 68%↑…취업률은 소폭 하락",
+   "desc": "해고를 기다리던 근로자가 자발적으로 이직하면 기존 실업급여 지출이 감소하고, 노동시장에서 이탈하려던 근로자가 구직활동에 나서면서 재취업이 빨라질 수 있다는 분석이다. 반면 지급 수준이 높아질수록 자발적...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014331534?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261118_0003873421",
+   "press": "뉴시스",
+   "pub": "2026-11-19 07:01",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[기획] 삼성자산운용, 운용보수 늘며 실적 급증",
+   "desc": "삼성자산운용은 고용노동부 산재보험기금 주간운용사에도 세 차례 연속 선정됐다. 산재보험기금은... 퇴직연금은 가입자의 노후소득과 직결되는 장기 운용자금인 만큼 수익률뿐 아니라 자산배분과 위험 관리 역량이...",
+   "link": "https://www.kfenews.co.kr/news/articleView.html?idxno=668355",
+   "originallink": "https://www.kfenews.co.kr/news/articleView.html?idxno=668355",
+   "press": "kfenews.co.kr",
+   "pub": "2026-11-19 07:22",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "[11월 19일 고용24 채용정보] 주식회사 윈테크·(주)서한·산호피엔엘 주...",
+   "desc": "고용형태 : 기간제근로자(12개월, 현장 준공 완료 시까지) ▷근무형태 : 주 5일 근무(주 40시간) ▷복리후생 : 4대 보험, 퇴직금 ■ 산호피엔엘 주식회사 영업팀 영업전략가 모집 ▷지원자격 : 학력·경력 무관/자동차...",
+   "link": "https://www.news2day.co.kr/article/20261119500035",
+   "originallink": "https://www.news2day.co.kr/article/20261119500035",
+   "press": "news2day.co.kr",
+   "pub": "2026-11-19 09:02",
+   "q": "자동차 고용보험",
+   "rel": false
+  },
+  {
+   "title": "환급 동선 1단계로 압축한 삼쩜삼…'월세 사각지대' 정조준",
+   "desc": "또한 단일 간편인증만으로 건강보험료, 국민연금, 지방세, 통신비, 고용·산재보험료 등 5대 영역의 미수령... 2025년 7월 기준 누적 가입자 2400만명, 누적 종합소득세 환급 신고액 2조원을 돌파하며 외형 성장을 이룬...",
+   "link": "https://www.goodkyung.com/news/articleView.html?idxno=293621",
+   "originallink": "https://www.goodkyung.com/news/articleView.html?idxno=293621",
+   "press": "goodkyung.com",
+   "pub": "2026-11-19 09:44",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "“스스로 돈 벌어보고 싶어서”…수능 끝나면 알바부터, 첫 월급 93만원...",
+   "desc": "19일 구인·구직 플랫폼 알바천국에 따르면 이달 초 고3 수험생 471명을 대상으로 설문조사를 진행한 결과... 특히 첫 급여는 절반 넘게(50.8%) 저축하겠다고 답했다. 부모님에게 선물하겠다는 응답도 41.8%였다....",
+   "link": "https://n.news.naver.com/mnews/article/022/0004176430?sid=102",
+   "originallink": "https://www.segye.com/newsView/20261119504912?OutUrl=naver",
+   "press": "세계일보",
+   "pub": "2026-11-19 09:44",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "도수치료 관리급여 후 물리치료사 68.5% 급여 삭감…38.4% “치료실 인원...",
+   "desc": "도수치료를 담당해 온 물리치료사 1,235명 중 68.5%가 7월 1일 이후 월 총급여 감소를 겪었고 38.4%는 근무지... 이어 구인·구직 및 재취업 지원(11.7%), 공식 통계 및 실태조사 정례화(9.3%), 진행상황 정기 안내(5.7...",
+   "link": "https://medicalworldnews.co.kr/news/view.php?idx=1510978527",
+   "originallink": "https://medicalworldnews.co.kr/news/view.php?idx=1510978527",
+   "press": "medicalworldnews.co.kr",
+   "pub": "2026-11-19 10:10",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "금감원, 대학생 대상 금융사기 경고…\"의심하고 끊고 확인하는 습관 중...",
+   "desc": "실제 사례로는 구직 사이트에 이력서를 등록한 한 취업준비생이 '퇴직금·급여 정산 서류 전달 아르바이트'라는 제안을 받고 업무에 참여했다가 보이스피싱 조직의 범행에 연루된 경우가 소개됐다. 해당 구직자는 2개월...",
+   "link": "http://www.queen.co.kr/news/articleView.html?idxno=466577",
+   "originallink": "http://www.queen.co.kr/news/articleView.html?idxno=466577",
+   "press": "queen.co.kr",
+   "pub": "2026-11-19 10:16",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "연수구, 내년 예산안 전년보다 6.55% 늘어난 9천941억 편성",
+   "desc": "취약계층의 생활 안정을 위해 생계급여 604억 원, 주거급여 220억 원, 자활근로 54억 원, 긴급 복지 27억 원을... 청년의 주거 부담 완화를 위한 청년 월세 지원사업에 33억 원, 구직 단념 청년의 사회 진입을 돕는...",
+   "link": "http://www.incheonin.com/news/articleView.html?idxno=122403",
+   "originallink": "http://www.incheonin.com/news/articleView.html?idxno=122403",
+   "press": "incheonin.com",
+   "pub": "2026-11-19 10:34",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "인천 연수구, 9941억 원 예산에 담은 민생 전략…‘원도심·송도 동반성...",
+   "desc": "생계급여 604억 원과 주거급여 220억 원, 자활근로 54억 원, 긴급복지 27억 원도 반영했으며, 기초연금에는 1... 청년과 교육 분야에서는 청년 월세 지원사업에 33억 원, 청년도전지원사업에 4억 원을 편성해 주거와 구직...",
+   "link": "https://n.news.naver.com/mnews/article/382/0001305655?sid=102",
+   "originallink": "https://sports.donga.com/region/article/all/20261119/135052623/1",
+   "press": "동아일보",
+   "pub": "2026-11-19 10:37",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "알바천국 조사 고3 2명 중 1명 수능 뒤 알바 희망...당근 인턴 모집 등 ...",
+   "desc": "첫 급여 사용처는 저축이 50.8%로 가장 많았다. 부모님 선물은 41.8%, 여행은 37.9%를 차지했다. 응답자의 59.2%는 아르바이트 구직이 어려울 것으로 예상했다. 어려울 것으로 예상하는 이유로는 '알바 구직자가 늘어날 것...",
+   "link": "http://www.dailypop.kr/news/articleView.html?idxno=104738",
+   "originallink": "http://www.dailypop.kr/news/articleView.html?idxno=104738",
+   "press": "dailypop.kr",
+   "pub": "2026-11-19 11:10",
+   "q": "구직급여",
    "rel": false
   }
  ]
