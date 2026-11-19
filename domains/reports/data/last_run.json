@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-19T10:46:55+09:00",
+  "at": "2026-11-19T15:00:47+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -303,13 +303,13 @@
     },
     "bok-note": {
       "ok": true,
-      "parsed": 100,
-      "added": 0,
-      "details": 0,
+      "parsed": 200,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 217
+      "total": 218
     },
     "bok-issue": {
       "ok": true,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3525,
+  "reports": 3526,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -364,7 +364,7 @@
     },
     "bok": {
       "BOK 이슈노트": {
-        "total": 217,
+        "total": 218,
         "missing": 23,
         "rate": 0.106
       },
@@ -524,10 +524,10 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 310728,
-    "abstracts_gzip": 3528435,
+    "reports_gzip": 310870,
+    "abstracts_gzip": 3530642,
     "abstracts_shards_gzip": {
-      "bok": 304983,
+      "bok": 307190,
       "kdi": 897045,
       "keis": 257856,
       "kiet": 735986,
@@ -535,11 +535,11 @@
     }
   },
   "recommend": {
-    "judged": 3525,
+    "judged": 3526,
     "picked": 383,
     "unjudged": 0,
     "profile_version": "5a624049",
     "title_only": 962,
-    "at": "2026-11-17T15:00:52+09:00"
+    "at": "2026-11-19T15:01:00+09:00"
   }
 }

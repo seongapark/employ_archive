@@ -34298,5 +34298,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-17T15:00:52+09:00"
+ },
+ "bok-11066803": {
+  "pick": false,
+  "axis": "",
+  "why": "원화절상의 물가·부문별 파급. 환율 거시분석, 고용 아님",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-19T15:01:00+09:00"
  }
 }
