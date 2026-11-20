@@ -34307,5 +34307,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-19T15:01:00+09:00"
+ },
+ "bok-11066841": {
+  "pick": true,
+  "axis": "청년 고용",
+  "why": "청년 직장이동을 지역·산업 간으로 분해",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-20T10:01:50+09:00"
  }
 }

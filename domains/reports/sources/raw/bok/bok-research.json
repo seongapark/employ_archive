@@ -8258,5 +8258,25 @@
     "abstract_tried": true,
     "abstract_note": "텍스트가 없는 스캔본",
     "collected_at": "2026-11-17T10:04:59+09:00"
+  },
+  {
+    "id": "bok-11066841",
+    "org": "bok",
+    "board": "bok-research",
+    "series": "조사연구자료",
+    "title": "지역·산업 간 청년 직장이동 현상과 과제",
+    "authors": [
+      "전북본부"
+    ],
+    "published": "2026-11-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11066841&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/7465895ffe5d402c858cf405939c369b/1/784bcbfecd234453bf6b67745e39f042.hwpx",
+    "abstract": null,
+    "toc": [],
+    "abstract_tried": true,
+    "abstract_note": "내려받기 실패: HTTP Error 410: Gone",
+    "collected_at": "2026-11-20T10:01:26+09:00"
   }
 ]
