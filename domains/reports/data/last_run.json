@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-20T10:01:13+09:00",
+  "at": "2026-11-20T15:00:43+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -329,11 +329,11 @@
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 414
+      "total": 415
     }
   },
   "unregistered": [],
-  "reports": 3527,
+  "reports": 3528,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -364,8 +364,8 @@
     },
     "bok": {
       "조사연구자료": {
-        "total": 407,
-        "missing": 397,
+        "total": 408,
+        "missing": 398,
         "rate": 0.975
       },
       "BOK 이슈노트": {
@@ -513,7 +513,7 @@
   },
   "abstract_missing_why": {
     "요약 섹션 없음": 564,
-    "텍스트가 없는 스캔본": 314,
+    "텍스트가 없는 스캔본": 315,
     "원문 없음": 50,
     "내려받기 실패: Failed to perform, curl: (6) Could not resolve host: www.bok.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.": 13,
     "PDF 를 열 수 없음: list index out of range": 4,
@@ -524,10 +524,10 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 310967,
-    "abstracts_gzip": 3530645,
+    "reports_gzip": 311044,
+    "abstracts_gzip": 3530648,
     "abstracts_shards_gzip": {
-      "bok": 307193,
+      "bok": 307196,
       "kdi": 897045,
       "keis": 257856,
       "kiet": 735986,
@@ -535,11 +535,11 @@
     }
   },
   "recommend": {
-    "judged": 3527,
+    "judged": 3528,
     "picked": 384,
     "unjudged": 0,
     "profile_version": "5a624049",
-    "title_only": 963,
-    "at": "2026-11-20T10:01:50+09:00"
+    "title_only": 964,
+    "at": "2026-11-20T15:01:08+09:00"
   }
 }

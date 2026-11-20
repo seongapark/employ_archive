@@ -8278,5 +8278,25 @@
     "abstract_tried": true,
     "abstract_note": "내려받기 실패: HTTP Error 410: Gone",
     "collected_at": "2026-11-20T10:01:26+09:00"
+  },
+  {
+    "id": "bok-11066861",
+    "org": "bok",
+    "board": "bok-research",
+    "series": "조사연구자료",
+    "title": "지역 산업구조 특성이 경제성장에 미치는 영향",
+    "authors": [
+      "전북본부"
+    ],
+    "published": "2026-11-20",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11066861&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/dccb4e1b09bd4092a52395c177e1e696/1/8891b42e516849c8a820e649ec574016.hwp",
+    "abstract": null,
+    "toc": [],
+    "abstract_tried": true,
+    "abstract_note": "텍스트가 없는 스캔본",
+    "collected_at": "2026-11-20T15:00:56+09:00"
   }
 ]
