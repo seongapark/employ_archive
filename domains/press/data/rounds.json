@@ -37,16 +37,16 @@
    ]
   },
   "follow": {
-   "collected": 309,
-   "kept": 78,
-   "cited": 9,
-   "press": 9,
-   "mentioned": 9,
+   "collected": 255,
+   "kept": 21,
+   "cited": 8,
+   "press": 8,
+   "mentioned": 5,
    "window": [
     "2026-11-10",
     "2026-11-30"
    ],
-   "at": "2026-11-20 11:36"
+   "at": "2026-11-20 19:26"
   },
   "coverage": {
    "section": [
@@ -793,13 +793,13 @@
    {
     "kw": "청년",
     "d0": 47,
-    "later": 9,
+    "later": 8,
     "first": "2026-11-10",
     "last": "2026-11-11",
     "state": "유지",
     "series": [
      47,
-     5,
+     4,
      4,
      0,
      0,
@@ -947,13 +947,13 @@
    {
     "kw": "내리막",
     "d0": 3,
-    "later": 1,
-    "first": "2026-11-10",
-    "last": "2026-11-10",
-    "state": "유지",
+    "later": 0,
+    "first": "",
+    "last": "",
+    "state": "소멸",
     "series": [
      3,
-     1,
+     0,
      0,
      0,
      0,
