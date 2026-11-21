@@ -11886,6 +11886,44 @@
   ],
   "follow": [
    {
+    "title": "29세 이하 고용보험 가입자, 50개월째 내리막",
+    "url": "https://www.chosun.com/national/labor/2026/11/10/OMCA5ABDAVE3BMBQ7OOETPN2JY/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+    "press": "조선일보",
+    "pub": "2026-11-10 00:43",
+    "cites": true,
+    "judged": true,
+    "why": "29세이하 50개월 감소·60세이상 최대",
+    "hits": [
+     "연령:29세이하",
+     "지표:가입자",
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "주제",
+    "kw": [
+     "내리막"
+    ]
+   },
+   {
+    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+    "press": "labortoday.co.kr",
+    "pub": "2026-11-10 06:34",
+    "cites": false,
+    "judged": true,
+    "why": "사립대병원 육아휴직급여 차별 실태",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사립대병원",
+     "육아휴직급여",
+     "제멋대"
+    ]
+   },
+   {
     "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
     "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
     "press": "labortoday.co.kr",
@@ -11950,6 +11988,113 @@
     ]
    },
    {
+    "title": "SKAI, 위장 직장가입 ‘연결고리’로 추적..건보공단 탐지 시스템 구축...",
+    "url": "https://kpenews.com/View.aspx?No=4304774",
+    "press": "kpenews.com",
+    "pub": "2026-11-10 08:16",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 허위가입 탐지 시스템",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "SKAI",
+     "건보공단",
+     "구축",
+     "연결고리",
+     "위장",
+     "직장가입"
+    ]
+   },
+   {
+    "title": "SKAI, 건보공단 허위취득 탐지 시스템 구축…그래프DB로 부정가입 잡는...",
+    "url": "https://view.asiae.co.kr/article/2026111008235695684",
+    "press": "아시아경제",
+    "pub": "2026-11-10 08:23",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 그래프DB 구축 소식",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "DB",
+     "SKAI",
+     "건보공단",
+     "구축",
+     "그래프",
+     "부정가입",
+     "허위취득"
+    ]
+   },
+   {
+    "title": "SKAI, 건보공단에 ‘아젠스그래프’ 구축…660억원대 건보료 ‘위장 취...",
+    "url": "https://www.etoday.co.kr/news/view/2646074",
+    "press": "이투데이",
+    "pub": "2026-11-10 08:40",
+    "cites": false,
+    "judged": true,
+    "why": "건보료 위장취득 탐지 시스템",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "SKAI",
+     "건보공단",
+     "건보료",
+     "구축",
+     "아젠스그래프",
+     "위장"
+    ]
+   },
+   {
+    "title": "SKAI, 건보공단 허위 직장가입자 탐지 시스템에 그래프DB 공급",
+    "url": "http://www.beyondpost.co.kr/view.php?ud=20261110084233292946a9e4dd7f_30",
+    "press": "beyondpost.co.kr",
+    "pub": "2026-11-10 08:46",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 그래프DB 공급 소식",
+    "hits": [
+     "지표:가입자"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "DB",
+     "SKAI",
+     "건보공단",
+     "그래프",
+     "직장가입자",
+     "허위"
+    ]
+   },
+   {
+    "title": "[브랜딩연구소 기획기사] 2027년 신청할 수 있는 강사 지원제도를 알아...",
+    "url": "https://www.lecturernews.com/news/articleView.html?idxno=213445",
+    "press": "lecturernews.com",
+    "pub": "2026-11-10 09:00",
+    "cites": false,
+    "judged": true,
+    "why": "강사 지원제도 안내 기획기사",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "강사",
+     "기획기사",
+     "브랜딩연구소",
+     "신청할",
+     "지원제도"
+    ]
+   },
+   {
     "title": "반도체 호황에도 청년은 소외…‘쉬었음’ 청년 24%는 전공과 다른 일자...",
     "url": "https://biz.heraldcorp.com/article/10931579?ref=naver",
     "press": "헤럴드경제",
@@ -11969,6 +12114,72 @@
      "소외",
      "전공",
      "호황"
+    ]
+   },
+   {
+    "title": "SKAI, 그래프DB 기반 국민건강보험공단 허위취득 탐지 시스템 구축 완료",
+    "url": "https://www.digitaltoday.co.kr/news/articleView.html?idxno=714070",
+    "press": "digitaltoday.co.kr",
+    "pub": "2026-11-10 09:22",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 탐지 시스템 구축 완료",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "DB",
+     "SKAI",
+     "구축",
+     "국민건강보험공단",
+     "그래프",
+     "기반",
+     "완료",
+     "허위취득"
+    ]
+   },
+   {
+    "title": "SKAI, 건보공단 허위취득 탐지 시스템에 ‘아젠스그래프’ 적용",
+    "url": "https://www.sentv.co.kr/article/view/sentv202611100052",
+    "press": "sentv.co.kr",
+    "pub": "2026-11-10 09:32",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 아젠스그래프 적용",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "SKAI",
+     "건보공단",
+     "아젠스그래프",
+     "허위취득"
+    ]
+   },
+   {
+    "title": "SKAI, 건보공단 허위 직장가입자 탐지 시스템 구축…그래프DB 기술 적용",
+    "url": "https://www.ddaily.co.kr/page/view/2026111009360491560",
+    "press": "ddaily.co.kr",
+    "pub": "2026-11-10 09:39",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 탐지 시스템 구축",
+    "hits": [
+     "지표:가입자"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "DB",
+     "SKAI",
+     "건보공단",
+     "구축",
+     "그래프",
+     "직장가입자",
+     "허위"
     ]
    },
    {
@@ -11994,6 +12205,50 @@
     ]
    },
    {
+    "title": "[AI 브리프] 크라우드웍스, 산업부 '제조 암묵지 기반 AI 모델 개발' 사...",
+    "url": "https://www.itdaily.kr/news/articleView.html?idxno=242800",
+    "press": "itdaily.kr",
+    "pub": "2026-11-10 11:04",
+    "cites": false,
+    "judged": true,
+    "why": "AI 업계 소식 묶음 브리프",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "AI",
+     "기반",
+     "모델",
+     "브리프",
+     "암묵",
+     "크라우드웍스"
+    ]
+   },
+   {
+    "title": "SKAI, 건보료 회피 꼼수 잡는다…국산 그래프DB 투입",
+    "url": "https://zdnet.co.kr/view/?no=20261110111729",
+    "press": "zdnet.co.kr",
+    "pub": "2026-11-10 11:18",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 국산 그래프DB 투입",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "DB",
+     "SKAI",
+     "건보료",
+     "국산",
+     "그래프",
+     "꼼수",
+     "투입",
+     "회피"
+    ]
+   },
+   {
     "title": "반도체 호황에도 청년 소외...‘쉬었음’ 24% 비전공 일자리",
     "url": "https://biz.heraldcorp.com/article/10932019?ref=naver",
     "press": "헤럴드경제",
@@ -12012,6 +12267,27 @@
      "비전공",
      "소외",
      "호황"
+    ]
+   },
+   {
+    "title": "하동군, 지역 상공인 소통창구 '상공협의회' 구성 본격화",
+    "url": "https://www.idomin.com/news/articleView.html?idxno=2019213",
+    "press": "idomin.com",
+    "pub": "2026-11-10 14:12",
+    "cites": false,
+    "judged": true,
+    "why": "하동군 상공협의회 구성 사업",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "본격화",
+     "상공인",
+     "상공협의회",
+     "소통창구",
+     "지역",
+     "하동군"
     ]
    },
    {
@@ -12054,6 +12330,26 @@
     ]
    },
    {
+    "title": "[ICT 종합] 로지텍 코리아 및 AMD 소식 외",
+    "url": "https://www.gamevu.co.kr/news/articleView.html?idxno=62147",
+    "press": "gamevu.co.kr",
+    "pub": "2026-11-10 17:46",
+    "cites": false,
+    "judged": true,
+    "why": "ICT 업계 소식 묶음",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "AMD",
+     "ICT",
+     "로지텍",
+     "소식",
+     "코리"
+    ]
+   },
+   {
     "title": "[JOB리포트] 고용보험 가입자 28만6000명 늘었지만…청년 고용은 여전히...",
     "url": "https://www.news2day.co.kr/article/20261110500230",
     "press": "news2day.co.kr",
@@ -12073,6 +12369,83 @@
      "JOB",
      "리포트",
      "여전히"
+    ]
+   },
+   {
+    "title": "월급 300만원 직장인, 내년 보험료 월 8320원 더 낸다",
+    "url": "https://www.vegannews.co.kr/news/article.html?no=403172",
+    "press": "vegannews.co.kr",
+    "pub": "2026-11-10 18:50",
+    "cites": false,
+    "judged": true,
+    "why": "건보·연금 보험료 인상 계산",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "보험료",
+     "월급",
+     "직장인"
+    ]
+   },
+   {
+    "title": "최저임금보다 낮아질라… 출산휴가 급여 상한 또 ‘땜질 인상’",
+    "url": "https://www.kmib.co.kr/article/20261110502024",
+    "press": "국민일보",
+    "pub": "2026-11-10 19:03",
+    "cites": false,
+    "judged": true,
+    "why": "출산휴가급여 상한 인상 문제",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "낮아질라",
+     "땜질",
+     "인상",
+     "최저임금",
+     "출산휴"
+    ]
+   },
+   {
+    "title": "30인 이상 기업에도 정규직 전환 지원금",
+    "url": "https://www.segye.com/newsView/20261110515847?OutUrl=naver",
+    "press": "세계일보",
+    "pub": "2026-11-10 20:08",
+    "cites": true,
+    "judged": true,
+    "why": "청년 가입자 50개월 감소 인용",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "정규직",
+     "지원금"
+    ]
+   },
+   {
+    "title": "SKAI, 그래프DB로 공공 AX 시장 공략 … 건보공단 허위가입 잡는다",
+    "url": "http://www.worktoday.co.kr/news/articleView.html?idxno=91812",
+    "press": "worktoday.co.kr",
+    "pub": "2026-11-10 22:58",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 시스템 구축 사업",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "AX",
+     "DB",
+     "SKAI",
+     "건보공단",
+     "공략",
+     "그래프",
+     "허위가입"
     ]
    },
    {
@@ -12099,6 +12472,45 @@
     ]
    },
    {
+    "title": "실업급여 신청 10명 중 3명은 60세 이상, 새해에 몰린다",
+    "url": "https://www.segye.com/newsView/20261111502673?OutUrl=naver",
+    "press": "세계일보",
+    "pub": "2026-11-11 07:52",
+    "cites": false,
+    "judged": true,
+    "why": "9월 브리핑 인용, 구직급여 연령 분석",
+    "hits": [
+     "연령:60세이상"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "새해"
+    ]
+   },
+   {
+    "title": "[뉴스클레임 사설]여당은 '비거주 종부세 14억' 요구 거둬야",
+    "url": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082120",
+    "press": "newsclaim.co.kr",
+    "pub": "2026-11-11 08:28",
+    "cites": true,
+    "judged": true,
+    "why": "청년 가입자 50개월 감소 인용",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "거둬야",
+     "뉴스클레임",
+     "사설",
+     "여당",
+     "요구",
+     "종부세"
+    ]
+   },
+   {
     "title": "[기자수첩] 반도체 호황, 청년 몫은 없었다",
     "url": "https://www.newsclaim.co.kr/news/articleView.html?idxno=3082121",
     "press": "newsclaim.co.kr",
@@ -12116,6 +12528,25 @@
     "kw": [
      "기자수첩",
      "호황"
+    ]
+   },
+   {
+    "title": "자진퇴사 청년에게도 '실업급여'?",
+    "url": "https://www.datasom.co.kr/news/articleView.html?idxno=210748",
+    "press": "데이터솜",
+    "pub": "2026-11-11 09:34",
+    "cites": false,
+    "judged": true,
+    "why": "자진퇴사 실업급여 제도 연구",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "자진퇴사",
+     "청년에게"
     ]
    },
    {
@@ -12138,6 +12569,51 @@
      "전망",
      "청년고용",
      "한국경제"
+    ]
+   },
+   {
+    "title": "[이로운분석] 전체 고용 훈풍에도 청년층은 '한파'…취업자 48개월 연속...",
+    "url": "https://www.eroun.net/news/articleView.html?idxno=95053",
+    "press": "eroun.net",
+    "pub": "2026-11-11 10:44",
+    "cites": true,
+    "judged": true,
+    "why": "청년 고용보험 50개월 감소 인용, 본론은 통계청 취업자",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [
+     "한파",
+     "훈풍"
+    ],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "이로운분석",
+     "취업자"
+    ]
+   },
+   {
+    "title": "포스코 임협 잠정합의 실패에…박성현 광양시장 “재교섭 나서달라”",
+    "url": "https://www.mk.co.kr/article/12205147",
+    "press": "매일경제",
+    "pub": "2026-11-11 11:05",
+    "cites": false,
+    "judged": true,
+    "why": "포스코 임협 결렬, 2월 수치 언급",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "광양시장",
+     "나서달라",
+     "박성현",
+     "실패",
+     "임협",
+     "잠정합",
+     "재교섭",
+     "포스코"
     ]
    },
    {
@@ -12199,6 +12675,130 @@
      "고용률",
      "최저치",
      "코로"
+    ]
+   },
+   {
+    "title": "포항·서산, 고용위기 선제대응지역 지정 1년 연장",
+    "url": "https://www.newsis.com/view/NISX20261111_0003864384",
+    "press": "뉴시스",
+    "pub": "2026-11-11 18:00",
+    "cites": false,
+    "judged": true,
+    "why": "고용위기 선제대응지역 지정 연장 정책",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "고용위기",
+     "서산",
+     "선제대응지역",
+     "연장",
+     "포항"
+    ]
+   },
+   {
+    "title": "철강·석유화학 불황에 … 포항·서산 고용위기 선제대응지역 1년 연장",
+    "url": "https://biz.newdaily.co.kr/site/data/html/2026/11/11/2026111100342.html",
+    "press": "biz.newdaily.co.kr",
+    "pub": "2026-11-11 18:50",
+    "cites": false,
+    "judged": true,
+    "why": "고용위기 선제대응지역 지정 연장 정책",
+    "hits": [
+     "산업:철강(1차금속)"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "고용위기",
+     "불황",
+     "서산",
+     "석유화학",
+     "선제대응지역",
+     "연장",
+     "포항"
+    ]
+   },
+   {
+    "title": "사라진 청년 일자리 94%는 AI 업종…빈자리는 50대가 채웠다",
+    "url": "https://www.chosun.com/economy/stock-finance/2026/11/12/GLT4VDIHARF4JOJSZZW6XM4VCA/?utm_source=naver&utm_medium=referral&utm_campaign=naver-news",
+    "press": "조선일보",
+    "pub": "2026-11-12 08:20",
+    "cites": false,
+    "judged": true,
+    "why": "한국은행 청년 일자리·AI 분석",
+    "hits": [
+     "연령:50대",
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "AI",
+     "빈자리",
+     "사라진",
+     "업종",
+     "채웠"
+    ]
+   },
+   {
+    "title": "4대 사회보험료 자동이체 신청·변경, 365일 가능해진다",
+    "url": "https://www.ytn.co.kr/_ln/0103_202611121044436860",
+    "press": "ytn.co.kr",
+    "pub": "2026-11-12 10:44",
+    "cites": false,
+    "judged": true,
+    "why": "4대 사회보험료 자동이체 서비스 안내",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "가능해진",
+     "사회보험료",
+     "자동이체"
+    ]
+   },
+   {
+    "title": "청년 일자리 감소 94%가 AI 업종…고용시장 변화 시작됐나",
+    "url": "https://www.mstoday.co.kr/news/articleView.html?idxno=200462",
+    "press": "mstoday.co.kr",
+    "pub": "2026-11-12 11:38",
+    "cites": false,
+    "judged": true,
+    "why": "한은·노동연구원 청년고용 분석",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "AI",
+     "변화",
+     "시작됐",
+     "업종"
+    ]
+   },
+   {
+    "title": "건보공단, 4대 사회보험료 자동이체 신청·변경·해지 365일 운영",
+    "url": "https://www.financialpost.co.kr/news/articleView.html?idxno=300427",
+    "press": "financialpost.co.kr",
+    "pub": "2026-11-12 12:56",
+    "cites": false,
+    "judged": true,
+    "why": "건보공단 보험료 자동이체 운영",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "건보공단",
+     "사회보험료",
+     "자동이체"
     ]
    },
    {
@@ -12286,6 +12886,235 @@
     ]
    },
    {
+    "title": "2027 최저임금 시급·월급·연봉 실수령액 얼마?",
+    "url": "https://www.bntnews.co.kr/article/view/bnt202611120272",
+    "press": "bntnews.co.kr",
+    "pub": "2026-11-13 00:12",
+    "cites": false,
+    "judged": true,
+    "why": "최저임금 실수령액 계산 안내",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "시급",
+     "실수령액",
+     "얼마",
+     "연봉",
+     "월급",
+     "최저임금"
+    ]
+   },
+   {
+    "title": "포항시, 고용위기 선제대응지역 1년 연장…내년 11월까지",
+    "url": "https://sports.donga.com/region/article/all/20261113/135018081/1",
+    "press": "동아일보",
+    "pub": "2026-11-13 07:45",
+    "cites": false,
+    "judged": true,
+    "why": "포항 고용위기 지역 지정 연장",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "고용위기",
+     "선제대응지역",
+     "연장",
+     "포항시"
+    ]
+   },
+   {
+    "title": "국민연금, 프리랜서 납부예외 신청 간소화…해촉증명서 제출 부담 줄인...",
+    "url": "https://www.polinews.co.kr/news/articleView.html?idxno=748401",
+    "press": "polinews.co.kr",
+    "pub": "2026-11-13 13:16",
+    "cites": false,
+    "judged": true,
+    "why": "국민연금 납부예외 신청 간소화 다룸",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "간소화",
+     "국민연금",
+     "납부예외",
+     "부담",
+     "제출",
+     "줄인",
+     "프리랜",
+     "해촉증명"
+    ]
+   },
+   {
+    "title": "AI엔 수조원 쏟으면서 산재·고용보험 일꾼엔 17억원…정부의 두 얼굴[세...",
+    "url": "https://biz.heraldcorp.com/article/10933218?ref=naver",
+    "press": "헤럴드경제",
+    "pub": "2026-11-15 06:01",
+    "cites": false,
+    "judged": true,
+    "why": "고용보험 부과체계 개편·공단 인력예산 비판",
+    "hits": [
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "AI",
+     "산재",
+     "수조원",
+     "얼굴",
+     "일꾼엔"
+    ]
+   },
+   {
+    "title": "1인 자영업자는 아파도, 아이를 낳아도 출근한다 : 정부, 내년부터 '건강...",
+    "url": "https://www.huffingtonpost.kr/article/262045",
+    "press": "huffingtonpost.kr",
+    "pub": "2026-11-15 07:00",
+    "cites": false,
+    "judged": true,
+    "why": "1인 자영업자 건강·출산급여 제도 공백",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "건강",
+     "아이",
+     "아파"
+    ]
+   },
+   {
+    "title": "국민연금공단, 프리랜서 소득중단 증빙 간소화…\"국세청 소득자료 실시...",
+    "url": "https://www.thepublic.kr/news/articleView.html?idxno=326720",
+    "press": "thepublic.kr",
+    "pub": "2026-11-15 09:04",
+    "cites": false,
+    "judged": true,
+    "why": "국민연금 납부예외 증빙 간소화",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "간소화",
+     "국민연금공단",
+     "국세청",
+     "소득자료",
+     "소득중단",
+     "실시",
+     "증빙",
+     "프리랜"
+    ]
+   },
+   {
+    "title": "최원선 서울시의원 “서울 예술인 절반 이상 연 소득 500만원도 안 돼”",
+    "url": "https://www.munhwa.com/article/11631501?ref=naver",
+    "press": "문화일보",
+    "pub": "2026-11-16 09:13",
+    "cites": false,
+    "judged": true,
+    "why": "서울 예술인 실태조사 결과",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "서울",
+     "서울시의원",
+     "소득",
+     "절반",
+     "최원선"
+    ]
+   },
+   {
+    "title": "최원선 시의원 \"어텀페스타 예술가 몫 8%, 대행사 87%\"",
+    "url": "https://www.newspim.com/news/view/20261116000613",
+    "press": "뉴스핌",
+    "pub": "2026-11-16 11:22",
+    "cites": false,
+    "judged": true,
+    "why": "서울 예술인 실태조사·시의원 지적",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "대행사",
+     "시의원",
+     "어텀페스타",
+     "최원선"
+    ]
+   },
+   {
+    "title": "최원선 서울시의원 “기초예술인 지원 사각지대 해소해야”",
+    "url": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065581183184292",
+    "press": "megaeconomy.co.kr",
+    "pub": "2026-11-16 11:54",
+    "cites": false,
+    "judged": true,
+    "why": "예술인 지원 사각지대 지적",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "기초예술인",
+     "사각지대",
+     "서울시의원",
+     "최원선",
+     "해소해야"
+    ]
+   },
+   {
+    "title": "수능 앞두고 시험장 뚫은 AI…자격 검증 방식 재설계 과제",
+    "url": "https://www.etoday.co.kr/news/view/2648789",
+    "press": "이투데이",
+    "pub": "2026-11-16 17:22",
+    "cites": false,
+    "judged": true,
+    "why": "AI 자격검증·직무 위축 연구",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "AI",
+     "검증",
+     "과제",
+     "방식",
+     "수능",
+     "시험장",
+     "앞두",
+     "재설계"
+    ]
+   },
+   {
+    "title": "[단독] “외노자 3년 일해도 이자 0원”...‘짠물’ 출국보험에 고용주...",
+    "url": "https://www.mk.co.kr/article/12210263",
+    "press": "매일경제",
+    "pub": "2026-11-16 18:50",
+    "cites": false,
+    "judged": true,
+    "why": "외국인 출국만기보험 이자 문제",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "고용주",
+     "외노자",
+     "이자",
+     "일해",
+     "짠물",
+     "출국보험"
+    ]
+   },
+   {
     "title": "신입 자리 삼킨 생성형 AI…고용부, 'AI 사회계약 녹서' 의견 접수",
     "url": "https://www.pointe.co.kr/news/articleView.html?idxno=87883",
     "press": "pointe.co.kr",
@@ -12308,6 +13137,374 @@
     ]
    },
    {
+    "title": "원주 요구르트 전문 기업 '㈜요즘' 근로환경 개선 우수기업 호평",
+    "url": "https://www.news1.kr/local/kangwon/6356354",
+    "press": "뉴스1",
+    "pub": "2026-11-17 10:13",
+    "cites": false,
+    "judged": true,
+    "why": "개별기업 근로환경 우수기업 선정",
+    "hits": [],
+    "tone": [
+     "개선"
+    ],
+    "stance": "긍정",
+    "focus": "",
+    "kw": [
+     "근로환경",
+     "요구르트",
+     "요즘",
+     "우수기업",
+     "원주",
+     "호평"
+    ]
+   },
+   {
+    "title": "원주 그릭요거트 전문기업 '요즘' 노사상생 모범기업 선정",
+    "url": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2493376",
+    "press": "enewstoday.co.kr",
+    "pub": "2026-11-17 10:22",
+    "cites": false,
+    "judged": true,
+    "why": "개별기업 노사상생 모범기업 선정",
+    "hits": [],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "",
+    "kw": [
+     "그릭요거트",
+     "노사상생",
+     "모범기업",
+     "선정",
+     "요즘",
+     "원주",
+     "전문기업"
+    ]
+   },
+   {
+    "title": "원주 ㈜요즘, 일터혁신 상생컨설팅 노사상생 모범기업 선정",
+    "url": "https://news.bbsi.co.kr/news/articleView.html?idxno=4118975",
+    "press": "news.bbsi.co.kr",
+    "pub": "2026-11-17 10:58",
+    "cites": false,
+    "judged": true,
+    "why": "개별기업 일터혁신 컨설팅 선정",
+    "hits": [],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "",
+    "kw": [
+     "노사상생",
+     "모범기업",
+     "상생컨설팅",
+     "선정",
+     "요즘",
+     "원주",
+     "일터혁신"
+    ]
+   },
+   {
+    "title": "원주 그릭요거트 기업 '요즘', 노사상생 모범기업 선정",
+    "url": "https://www.shinailbo.co.kr/news/articleView.html?idxno=5084282",
+    "press": "shinailbo.co.kr",
+    "pub": "2026-11-17 12:34",
+    "cites": false,
+    "judged": true,
+    "why": "개별기업 모범기업 선정 소식",
+    "hits": [],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "",
+    "kw": [
+     "그릭요거트",
+     "노사상생",
+     "모범기업",
+     "선정",
+     "요즘",
+     "원주"
+    ]
+   },
+   {
+    "title": "원주 ㈜요즘, 일터혁신 노사상생 모범기업 선정",
+    "url": "https://www.kwnews.co.kr/article/20261117500579",
+    "press": "kwnews.co.kr",
+    "pub": "2026-11-17 13:55",
+    "cites": false,
+    "judged": true,
+    "why": "개별 기업 노사상생 수상 소식",
+    "hits": [],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "",
+    "kw": [
+     "노사상생",
+     "모범기업",
+     "선정",
+     "요즘",
+     "원주",
+     "일터혁신"
+    ]
+   },
+   {
+    "title": "폐업 후 안전망도 챙긴다… 경상원, 1인 소상공인 보험료 지원",
+    "url": "https://gg.newdaily.co.kr/site/data/html/2026/11/17/2026111750252.html",
+    "press": "gg.newdaily.co.kr",
+    "pub": "2026-11-17 16:02",
+    "cites": false,
+    "judged": true,
+    "why": "경기도 1인 소상공인 보험료 지원사업",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "경상원",
+     "보험료",
+     "소상공인",
+     "안전망",
+     "폐업"
+    ]
+   },
+   {
+    "title": "[JOB리포트]청년들이 직면한 AI 시대, 의심받는 합격증과 좁아진 첫 일자...",
+    "url": "https://www.news2day.co.kr/article/20261117500156",
+    "press": "news2day.co.kr",
+    "pub": "2026-11-17 16:34",
+    "cites": false,
+    "judged": true,
+    "why": "청년 취업난 기획, 고용정보원 분석 인용",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "AI",
+     "JOB",
+     "리포트",
+     "시대",
+     "의심받",
+     "좁아진",
+     "청년들",
+     "합격증"
+    ]
+   },
+   {
+    "title": "\"혼자 가게 꾸리는 사장님, 보험료 부담 덜어드립니다\"…경기도 연말 지...",
+    "url": "https://weekly.hankooki.com/news/articleView.html?idxno=7194384",
+    "press": "weekly.hankooki.com",
+    "pub": "2026-11-17 17:24",
+    "cites": false,
+    "judged": true,
+    "why": "경기도 자영업자 고용보험료 지원 안내",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "가게",
+     "경기",
+     "꾸리",
+     "덜어드립니",
+     "보험료",
+     "부담",
+     "사장님",
+     "연말",
+     "혼자"
+    ]
+   },
+   {
+    "title": "직원 64명에서 111명으로 껑충…원주 ㈜요즘, 노사상생 모범기업 선정",
+    "url": "https://www.pressian.com/pages/articles/2026111713420992764?utm_source=naver&utm_medium=search",
+    "press": "pressian.com",
+    "pub": "2026-11-17 18:56",
+    "cites": false,
+    "judged": true,
+    "why": "개별 기업 고용 확대 수상 소식",
+    "hits": [],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "",
+    "kw": [
+     "껑충",
+     "노사상생",
+     "모범기업",
+     "선정",
+     "요즘",
+     "원주"
+    ]
+   },
+   {
+    "title": "경상원, 1인 소상공인 보험료 지원…최장 5년 동안 혜택",
+    "url": "http://www.bizwnews.com/news/articleView.html?idxno=152162",
+    "press": "bizwnews.com",
+    "pub": "2026-11-18 07:10",
+    "cites": false,
+    "judged": true,
+    "why": "경기도 1인 소상공인 보험료 지원 사업",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "경상원",
+     "보험료",
+     "소상공인",
+     "최장",
+     "혜택"
+    ]
+   },
+   {
+    "title": "[헬멧 쓴 청년들 ①] 문 닫힌 취업 시장, 청년은 배달앱 문을 두드린다",
+    "url": "https://www.news2day.co.kr/article/20261111500004",
+    "press": "news2day.co.kr",
+    "pub": "2026-11-18 07:28",
+    "cites": false,
+    "judged": true,
+    "why": "구인배수 0.48로 10월(0.46)과 불일치, 청년 배달 기획",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "배달앱",
+     "청년들",
+     "헬멧"
+    ]
+   },
+   {
+    "title": "‘안 뽑는’ AI 채용시장…2030년 유망 일자리는 ‘빅데이터·핀테크’",
+    "url": "https://www.etoday.co.kr/news/view/2649704",
+    "press": "이투데이",
+    "pub": "2026-11-18 14:00",
+    "cites": true,
+    "judged": true,
+    "why": "29세 이하 가입자 5만4천명 감소 인용",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "AI",
+     "빅데이터",
+     "유망",
+     "채용시장",
+     "핀테크"
+    ]
+   },
+   {
+    "title": "평균 30점 세무사 시험서 AI는 만점…전문직 ‘첫 사다리’가 사라진다",
+    "url": "https://www.etoday.co.kr/news/view/2649699",
+    "press": "이투데이",
+    "pub": "2026-11-18 14:02",
+    "cites": false,
+    "judged": true,
+    "why": "AI와 전문직 연구보고서, 연간 추세 분석",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "AI",
+     "만점",
+     "사다리",
+     "사라진",
+     "세무사"
+    ]
+   },
+   {
+    "title": "하이엘 김진욱 대표, 중소기업 혁신 유공 중기부 장관표창",
+    "url": "https://www.dynews.co.kr/news/articleView.html?idxno=874669",
+    "press": "dynews.co.kr",
+    "pub": "2026-11-18 18:44",
+    "cites": false,
+    "judged": true,
+    "why": "개별 기업 장관표창 수상 소식",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "김진욱",
+     "대표",
+     "유공",
+     "장관표창",
+     "중기부",
+     "중소기업",
+     "하이엘",
+     "혁신"
+    ]
+   },
+   {
+    "title": "[헬멧 쓴 청년들②] 콜이 마르지 않는 배달 강국, 이제 사다리를 놓을 ...",
+    "url": "https://www.news2day.co.kr/article/20261111500007",
+    "press": "news2day.co.kr",
+    "pub": "2026-11-19 07:58",
+    "cites": false,
+    "judged": true,
+    "why": "퀵서비스 기사 고용보험 가입 추이·청년 배달노동 기획",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "강국",
+     "마르",
+     "배달",
+     "사다리",
+     "청년들",
+     "헬멧"
+    ]
+   },
+   {
+    "title": "수의대 정원 늘려도, 공직수의사 부족 해결 안 된다",
+    "url": "https://www.dailyvet.co.kr/news/column/304971",
+    "press": "dailyvet.co.kr",
+    "pub": "2026-11-19 10:52",
+    "cites": false,
+    "judged": true,
+    "why": "수의사 직종 고용보험 자료로 본 공직수의사 부족",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "공직수의사",
+     "늘려",
+     "부족",
+     "수의대",
+     "정원",
+     "해결"
+    ]
+   },
+   {
+    "title": "하이엘 김진욱 대표, 경영혁신 유공 중기부 장관표창",
+    "url": "https://www.jbnews.com/news/articleView.html?idxno=1516427",
+    "press": "jbnews.com",
+    "pub": "2026-11-19 15:26",
+    "cites": false,
+    "judged": true,
+    "why": "중기부 장관표창 수상 기업 소개",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "경영혁신",
+     "김진욱",
+     "대표",
+     "유공",
+     "장관표창",
+     "중기부",
+     "하이엘"
+    ]
+   },
+   {
     "title": "‘포니’ 첫 수출 50년…20년 새 5배 커진 한국車, 제조업 버팀목",
     "url": "https://biz.heraldcorp.com/article/10943581?ref=naver",
     "press": "헤럴드경제",
@@ -12326,6 +13523,26 @@
      "수출",
      "커진",
      "포니"
+    ]
+   },
+   {
+    "title": "“가게 문 닫아도 기댈 곳 생겼다”…자영업자 고용보험 가입 6만8000명...",
+    "url": "https://biz.heraldcorp.com/article/10943454?ref=naver",
+    "press": "헤럴드경제",
+    "pub": "2026-11-21 08:31",
+    "cites": false,
+    "judged": true,
+    "why": "중기부·소진공 자영업자 고용보험 지원사업",
+    "hits": [
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "",
+    "kw": [
+     "가게",
+     "기댈",
+     "생겼"
     ]
    }
   ]
