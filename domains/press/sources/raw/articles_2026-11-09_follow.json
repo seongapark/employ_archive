@@ -6,32 +6,32 @@
   "2026-11-10",
   "2026-11-30"
  ],
- "collected_at": "2026-11-23 10:58",
+ "collected_at": "2026-11-23 20:11",
  "volume": {
-  "collected": 350,
-  "articles": 80,
-  "press": 60,
+  "collected": 370,
+  "articles": 84,
+  "press": 63,
   "queries": 11
  },
  "truncated_queries": [],
  "queries": [
   {
    "query": "고용보험 가입자",
-   "api_total": 29730,
-   "fetched": 100,
+   "api_total": 29735,
+   "fetched": 200,
    "truncated": false,
-   "in_window": 97,
-   "relevant": 79,
-   "new": 97
+   "in_window": 102,
+   "relevant": 83,
+   "new": 102
   },
   {
    "query": "구직급여",
-   "api_total": 95353,
-   "fetched": 200,
+   "api_total": 95368,
+   "fetched": 300,
    "truncated": false,
-   "in_window": 193,
+   "in_window": 208,
    "relevant": 4,
-   "new": 181
+   "new": 195
   },
   {
    "query": "구인배수",
@@ -44,20 +44,20 @@
   },
   {
    "query": "제조업 고용보험",
-   "api_total": 18787,
+   "api_total": 18790,
    "fetched": 100,
    "truncated": false,
-   "in_window": 70,
-   "relevant": 18,
+   "in_window": 73,
+   "relevant": 21,
    "new": 49
   },
   {
    "query": "건설업 고용보험",
-   "api_total": 8515,
+   "api_total": 8517,
    "fetched": 100,
    "truncated": false,
-   "in_window": 19,
-   "relevant": 9,
+   "in_window": 21,
+   "relevant": 11,
    "new": 9
   },
   {
@@ -98,12 +98,12 @@
   },
   {
    "query": "자동차 고용보험",
-   "api_total": 14042,
+   "api_total": 14044,
    "fetched": 100,
    "truncated": false,
-   "in_window": 13,
-   "relevant": 7,
-   "new": 5
+   "in_window": 15,
+   "relevant": 8,
+   "new": 6
   },
   {
    "query": "기타운송장비 고용보험",
@@ -914,6 +914,46 @@
    "press": "한국일보",
    "pub": "2026-11-23 04:31",
    "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "“폐업해도 실업급여 있으니 든든” 자영업자 고용보험 크게 늘었다",
+   "desc": "중기부와 소진공에 따르면 자영업자 고용보험 가입자는 2017년 말 1만7500명에서 올해 9월 6만8278명으로 3.9배 늘었다. 정부의 고용보험료 지원사업 수혜자는 2018년 2489명에서 올해 10월 4만6767명으로 19배 가까이 증가했다....",
+   "link": "https://n.news.naver.com/mnews/article/016/0002727095?sid=101",
+   "originallink": "https://biz.heraldcorp.com/article/10946024?ref=naver",
+   "press": "헤럴드경제",
+   "pub": "2026-11-23 11:31",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "박승흡 근로복지공단 이사장 “난 3년짜리 고연봉 비정규직...임금체불...",
+   "desc": "고용보험은 1995년 시행돼 올해로 31년째다. 둘 다 산업화 시대의 산물인데, 이제는 전통적인 고용 관계를... 2022년 출범 이후 4년 만에 가입자 19만 명, 적립금 1조9000억원 규모로 성장했다. 올해 6월 기준 누적 수익률은 34....",
+   "link": "https://n.news.naver.com/mnews/article/025/0003567172?sid=101",
+   "originallink": "https://www.joongang.co.kr/article/25481028",
+   "press": "중앙일보",
+   "pub": "2026-11-23 12:00",
+   "q": "고용보험 가입자",
+   "rel": true
+  },
+  {
+   "title": "[숫자와 체감 사이②] 수출은 사상 최대인데 일자리는…'고용 없는 성장...",
+   "desc": "반면 고용노동부 고용보험 가입자 통계에서는 60세 이상이 20만4000명 늘었고 이 가운데 서비스업이 17만3000명을 차지했다. 구직자 1013명을 조사한 진학사 캐치 설문에서는 하반기 지원 예정 기업으로 대기업(52...",
+   "link": "http://www.ftoday.co.kr/news/articleView.html?idxno=370333",
+   "originallink": "http://www.ftoday.co.kr/news/articleView.html?idxno=370333",
+   "press": "ftoday.co.kr",
+   "pub": "2026-11-23 14:06",
+   "q": "고용보험 가입자, 제조업 고용보험, 건설업 고용보험",
+   "rel": true
+  },
+  {
+   "title": "[자치시대] AI가 바꾸는 일자리, 울산은 경력을 잇자",
+   "desc": "올해 10월 전국 고용보험 상시가입자는 전년 같은 달보다 28만6천 명 늘었지만, 정보통신업 가입자는 8개월 연속 감소했다. 이를 모두 AI의 영향으로 설명할 수는 없지만, IT 분야에서도 쌓아 온 경력을 새로운 업무와 채용...",
+   "link": "https://www.iusm.co.kr/news/articleView.html?idxno=1070929",
+   "originallink": "https://www.iusm.co.kr/news/articleView.html?idxno=1070929",
+   "press": "iusm.co.kr",
+   "pub": "2026-11-23 19:12",
+   "q": "고용보험 가입자, 제조업 고용보험, 자동차 고용보험",
    "rel": true
   }
  ],
@@ -1749,21 +1789,21 @@
    "rel": false
   },
   {
-   "title": "[금융권 이모저모]토스뱅크, 펀드 판매 시작…통장 이자로 자동 투자 外",
-   "desc": "지난 11일 경기 김포시 농가에서 NH농협생명과 서울시 관계자들이 노숙인 구직자들과 자활지원 프로그램... 금융투자협회는 2005년 소망의 집과 결연을 맺은 이후 임직원 급여를 모아 정기적인 후원과 봉사활동을...",
-   "link": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
-   "originallink": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
-   "press": "businessplus.kr",
-   "pub": "2026-11-12 16:12",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "청년을 취업 대기실에 가두는 노동시장 이중구조",
    "desc": "눈높이나 구직 의욕 탓으로 돌릴 수 없다는 것이다. 기업 규모에 따라 보상과 성장 기회가 크게 갈리는... 대신 근로자가 직장을 옮기거나 일자리를 잃었을 때 실업급여와 직업훈련, 재취업 지원을 쉽게 받도록 해주는 게...",
    "link": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
    "originallink": "https://www.fntimes.com/html/view.php?ud=2026111216094538719bdb80fab5_18",
    "press": "fntimes.com",
+   "pub": "2026-11-12 16:12",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[금융권 이모저모]토스뱅크, 펀드 판매 시작…통장 이자로 자동 투자 外",
+   "desc": "지난 11일 경기 김포시 농가에서 NH농협생명과 서울시 관계자들이 노숙인 구직자들과 자활지원 프로그램... 금융투자협회는 2005년 소망의 집과 결연을 맺은 이후 임직원 급여를 모아 정기적인 후원과 봉사활동을...",
+   "link": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
+   "originallink": "https://www.businessplus.kr/news/articleView.html?idxno=119786",
+   "press": "businessplus.kr",
    "pub": "2026-11-12 16:12",
    "q": "구직급여",
    "rel": false
@@ -2049,21 +2089,21 @@
    "rel": false
   },
   {
-   "title": "직원인데 프리랜서?…노동부, 가짜 3.3 위장고용 140곳 집중감독",
-   "desc": "이후 국세청의 사업소득세 원천징수 신고 내역과 고용보험 정보, 과거 신고·감독 이력, 구인광고 등을 교차 검토해 최종 감독 대상을 선정할 계획이다. 주요 점검 업종은 음식·숙박업과 제조업, 도·소매업, 시설관리업...",
-   "link": "https://n.news.naver.com/mnews/article/119/0003154686?sid=102",
-   "originallink": "https://www.dailian.co.kr/news/view/1714504/?sc=Naver",
-   "press": "dailian.co.kr",
-   "pub": "2026-11-13 09:01",
-   "q": "제조업 고용보험",
-   "rel": false
-  },
-  {
    "title": "‘가짜 3.3 계약·사업장 쪼개기’ 잡는다…노동부, 꼼수 사업장 기획감...",
    "desc": "16일부터 2개월간 실시…음식·숙박·제조업 등 집중 점검 4대 보험 미가입·임금체불 등 적발 시 시정 조치 고용노동부가 ‘가짜 3.3 위장고용’과 ‘사업장 쪼개기’ 등 노동법 회피 행위가 의심되는 사업장을 대상으로...",
    "link": "https://n.news.naver.com/mnews/article/366/0001204498?sid=102",
    "originallink": "https://biz.chosun.com/topics/topics_social/2026/11/13/XSN4IPTOLZHIJPANPI7IVWTXMQ/?utm_source=naver&utm_medium=original&utm_campaign=biz",
    "press": "조선일보",
+   "pub": "2026-11-13 09:01",
+   "q": "제조업 고용보험",
+   "rel": false
+  },
+  {
+   "title": "직원인데 프리랜서?…노동부, 가짜 3.3 위장고용 140곳 집중감독",
+   "desc": "이후 국세청의 사업소득세 원천징수 신고 내역과 고용보험 정보, 과거 신고·감독 이력, 구인광고 등을 교차 검토해 최종 감독 대상을 선정할 계획이다. 주요 점검 업종은 음식·숙박업과 제조업, 도·소매업, 시설관리업...",
+   "link": "https://n.news.naver.com/mnews/article/119/0003154686?sid=102",
+   "originallink": "https://www.dailian.co.kr/news/view/1714504/?sc=Naver",
+   "press": "dailian.co.kr",
    "pub": "2026-11-13 09:01",
    "q": "제조업 고용보험",
    "rel": false
@@ -2679,21 +2719,21 @@
    "rel": false
   },
   {
-   "title": "“어차피 나라에서 돈 주는데 일을 왜 하냐”…이런 청년 ‘100만명’ 육...",
-   "desc": "청년 100만명 일도 구직도 안 해…복지 개편 추진 16일(현지시간) 로이터통신에 따르면 영국 정부는 100만명에 가까운 청년 니트족(NEET·일하지 않고 교육이나 직업훈련에도 참여하지 않는 청년층)을 대상으로 복지 급여를...",
-   "link": "https://n.news.naver.com/mnews/article/011/0004683257?sid=104",
-   "originallink": "https://www.sedaily.com/article/20115626?ref=naver",
-   "press": "서울경제",
-   "pub": "2026-11-17 19:02",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "오리어리, 주 80시간 경비원에 '구직 노력 부족'…클립 2200만회 재생",
    "desc": "△성공하려면 일과 삶의 균형은 뒷순위다 △미국에서는 충분히 노력하면 누구나 부자가 될 수 있다 △일을 잘하는 것이 열정보다 중요하다 △일이 가치관을 반영할 필요는 없고 급여를 주면 된다. 출연자 쪽은...",
    "link": "https://www.tokenpost.kr/news/general/439727",
    "originallink": "https://www.tokenpost.kr/news/general/439727",
    "press": "tokenpost.kr",
+   "pub": "2026-11-17 19:02",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "“어차피 나라에서 돈 주는데 일을 왜 하냐”…이런 청년 ‘100만명’ 육...",
+   "desc": "청년 100만명 일도 구직도 안 해…복지 개편 추진 16일(현지시간) 로이터통신에 따르면 영국 정부는 100만명에 가까운 청년 니트족(NEET·일하지 않고 교육이나 직업훈련에도 참여하지 않는 청년층)을 대상으로 복지 급여를...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004683257?sid=104",
+   "originallink": "https://www.sedaily.com/article/20115626?ref=naver",
+   "press": "서울경제",
    "pub": "2026-11-17 19:02",
    "q": "구직급여",
    "rel": false
@@ -2879,20 +2919,20 @@
    "rel": false
   },
   {
-   "title": "AI가 바꾸는 고용 지도⋯청년 첫 일자리 줄고 AI 전문인력 수요 커진다",
-   "desc": "고용정보원은 \"고용보험 신규 취득자 감소에 청년 인구 축소와 경제활동참가율 하락이 크게 작용했다\"고... 고용정보원 사업체 조사에서 기계장비·연구개발·정밀기기·정보통신업은 AI 인력과 신규채용 수요가...",
-   "link": "https://www.etoday.co.kr/news/view/2649705",
-   "originallink": "https://www.etoday.co.kr/news/view/2649705",
+   "title": "AI가 먼저 지운 건 ‘신입 자리’…3~5년 뒤 한국 일자리 지도는",
+   "desc": "한국고용정보원도 2023년 이후 고용보험 신규 취득자 감소의 결정적 원인으로 청년 인구 감소와... 국내에서는 기계장비·연구개발·정밀기기·정보통신업의 채용 수요가 늘고, 사업지원서비스·보건사회·문화예술...",
+   "link": "https://bravo.etoday.co.kr/view/atc_view/20507",
+   "originallink": "https://bravo.etoday.co.kr/view/atc_view/20507",
    "press": "이투데이",
    "pub": "2026-11-18 14:00",
    "q": "기계장비 고용보험",
    "rel": false
   },
   {
-   "title": "AI가 먼저 지운 건 ‘신입 자리’…3~5년 뒤 한국 일자리 지도는",
-   "desc": "한국고용정보원도 2023년 이후 고용보험 신규 취득자 감소의 결정적 원인으로 청년 인구 감소와... 국내에서는 기계장비·연구개발·정밀기기·정보통신업의 채용 수요가 늘고, 사업지원서비스·보건사회·문화예술...",
-   "link": "https://bravo.etoday.co.kr/view/atc_view/20507",
-   "originallink": "https://bravo.etoday.co.kr/view/atc_view/20507",
+   "title": "AI가 바꾸는 고용 지도⋯청년 첫 일자리 줄고 AI 전문인력 수요 커진다",
+   "desc": "고용정보원은 \"고용보험 신규 취득자 감소에 청년 인구 축소와 경제활동참가율 하락이 크게 작용했다\"고... 고용정보원 사업체 조사에서 기계장비·연구개발·정밀기기·정보통신업은 AI 인력과 신규채용 수요가...",
+   "link": "https://www.etoday.co.kr/news/view/2649705",
+   "originallink": "https://www.etoday.co.kr/news/view/2649705",
    "press": "이투데이",
    "pub": "2026-11-18 14:00",
    "q": "기계장비 고용보험",
@@ -3509,16 +3549,6 @@
    "rel": false
   },
   {
-   "title": "알바천국, 겨울 브랜드 캠페인 '첫 알바도 알바천국' 공개",
-   "desc": "사진=알바천국 알바천국은 매년 수능 이후 첫 구직에 나서는 청소년을 위한 알바비 지원 프로모션을 진행해... 아르바이트로 받은 실제 급여의 2배를 응원금으로 추가 지급해 총 3배의 알바비를 받을 수 있도록 한 행사다....",
-   "link": "https://www.slist.kr/news/articleView.html?idxno=783912",
-   "originallink": "https://www.slist.kr/news/articleView.html?idxno=783912",
-   "press": "slist.kr",
-   "pub": "2026-11-23 08:20",
-   "q": "구직급여",
-   "rel": false
-  },
-  {
    "title": "장동혁 국민의힘 대표 “대법원장 탄핵, 이재명 재판 지연용 ‘방탄’…...",
    "desc": "기획단은 이번 16개 정책에 ‘2029년 AI 훈련 수료자 고용보험 취득률 60% 이상 달성’ 등... 명시하고,AI·전자통신기기 소지 및 이용을 부정행위 유형으로 규정했다.아울러 감독관의...",
    "link": "http://www.breaknews.com/1252952",
@@ -3615,6 +3645,176 @@
    "originallink": "https://www.news1.kr/local/kangwon/6362595",
    "press": "뉴스1",
    "pub": "2026-11-23 10:44",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[위클리오늘] 강릉시, 경포해변 무장애 관광 확대",
+   "desc": "취업지원은 구직을 희망하는 어르신에게 일자리를 알선한다. 공익활동의 경우 65세 이상 기초연금 또는... 다만 생계급여 수급자나 건강보험 직장가입자, 장기요양 등급자 등 일부 대상자는 참여가 제한된다. 접수는...",
+   "link": "http://www.weeklytoday.com/news/articleView.html?idxno=802948",
+   "originallink": "http://www.weeklytoday.com/news/articleView.html?idxno=802948",
+   "press": "weeklytoday.com",
+   "pub": "2026-11-23 11:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "[똑똑한소비] 롤링파스타, 한솥도시락, 롯데백화점, 교촌치킨, BBQ 서울...",
+   "desc": "◇ 알바천국 '첫 알바도 알바천국' 캠페인 공개…첫 급여 지원 구인·구직 아르바이트 플랫폼 알바천국이 대학수학능력시험을 마친 청소년들의 첫 일 경험을 응원하는 겨울 브랜드 캠페인 '첫 알바도 알바천국'을...",
+   "link": "https://www.ekn.kr/web/view.php?key=20261123022113232",
+   "originallink": "https://www.ekn.kr/web/view.php?key=20261123022113232",
+   "press": "ekn.kr",
+   "pub": "2026-11-23 11:00",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "알바천국, 수능 마친 청소년 겨냥 새 브랜드 캠페인 공개",
+   "desc": "구인·구직 아르바이트 전문 포털 알바천국(대표이사 우태경)이 대학수학능력시험을 마친 청소년들의 첫... 알바천국은 매년 수능 이후 아르바이트 시장에 진입하는 청소년들을 대상으로 첫 급여 지원 프로모션을 진행해...",
+   "link": "https://www.job-post.co.kr/news/articleView.html?idxno=240092",
+   "originallink": "https://www.job-post.co.kr/news/articleView.html?idxno=240092",
+   "press": "job-post.co.kr",
+   "pub": "2026-11-23 11:14",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "알바천국, 겨울 브랜드 캠페인 '첫 알바도 알바천국' 공개",
+   "desc": "알바천국은 매년 대학수학능력시험(수능) 이후 첫 구직에 나서는 청소년을 위해 알바비 지원 행사를 운영해... 3배' 프로모션을 함께 진행한다. 실제 근무 급여의 2배를 응원금으로 추가 지급해 총 3배를 제공하는 방식이다.",
+   "link": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885959",
+   "originallink": "http://www.hansbiz.co.kr/news/articleView.html?idxno=885959",
+   "press": "hansbiz.co.kr",
+   "pub": "2026-11-23 12:16",
+   "q": "구직급여, 구직급여",
+   "rel": false
+  },
+  {
+   "title": "2030년까지 생계급여 기준 32→35%…4인 가구 최대 242만원",
+   "desc": "청년들이 의료비 걱정 때문에 구직을 포기하거나 필요한 치료를 미루지 않도록 하기 위함이다. 현재 취업 후 의료급여 자격을 상실하는 청년은 약 1만7000명이며, 특례는 34세까지 적용을 검토하고 있다. 아울러...",
+   "link": "https://n.news.naver.com/mnews/article/003/0014339732?sid=102",
+   "originallink": "https://www.newsis.com/view/NISX20261122_0003878301",
+   "press": "뉴시스",
+   "pub": "2026-11-23 13:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "토스, 고양시와 수능 마친 고3 경제교육 확대",
+   "desc": "보이스피싱과 구직·알바 사기 등 청년층이 접하기 쉬운 피해 유형과 실제 사례를 들여다보고 AI 딥보이스를... 경기영상과학고등학교에서는 기본 금융 과정에 더해 첫 급여 관리와 개인형 퇴직연금(IRP) 등 직장생활...",
+   "link": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327008",
+   "originallink": "https://www.pointdaily.co.kr/news/articleView.html?idxno=327008",
+   "press": "pointdaily.co.kr",
+   "pub": "2026-11-23 13:40",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"부모님 집 현관 비번까지 털렸다\"…시니어 케어 '케어링' 해킹 파장",
+   "desc": "일부 구직 등록자와 상담 문의자, 문자 수신자, 임직원 정보도 유출됐다. 유출 정보는 대상자별로 다르다.... 보호자는 이름과 연락처, 주소, 어르신과의 관계 등이 유출됐고 요양보호사는 근무 형태와 근무 센터, 급여 수령...",
+   "link": "https://realty.chosun.com/site/data/html_dir/2026/11/23/2026112301555.html",
+   "originallink": "https://realty.chosun.com/site/data/html_dir/2026/11/23/2026112301555.html",
+   "press": "조선일보",
+   "pub": "2026-11-23 13:44",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "미국 '340B 프로그램', 혈우병 환자 치료와 의료서비스에 중요한 이유",
+   "desc": "보험 제도와 관련이 있다. 일부 건강보험은 특정 전문의약품 약국(Specialty Pharmacy)과 계약을 맺고, 가입자들... 또한 치료센터 약국 이용이 비용 측면에서도 합리적인 선택이 될 수 있는지 보험사나 고용주와 논의할 수...",
+   "link": "https://www.hemophilia.co.kr/news/articleView.html?idxno=45717",
+   "originallink": "https://www.hemophilia.co.kr/news/articleView.html?idxno=45717",
+   "press": "hemophilia.co.kr",
+   "pub": "2026-11-23 13:46",
+   "q": "고용보험 가입자",
+   "rel": false
+  },
+  {
+   "title": "“임플란트 공짜로 해드려요”…건보 지급액 3000만원→9억원, 공단 전수...",
+   "desc": "건강보험 급여 청구 내역을 분석해 위법 행위 여부를 점검하겠다고 밝혔다. 앞서 KBS 1TV ‘추적 60분’은... 한 상인은 치과에 환자를 소개하면 5만 원을 받는다고 밝혔고, 단체 관계자는 구직자로 위장한 취재진에게 치아...",
+   "link": "https://n.news.naver.com/mnews/article/020/0003764415?sid=102",
+   "originallink": "https://www.donga.com/news/Society/article/all/20261123/135073789/2",
+   "press": "동아일보",
+   "pub": "2026-11-23 15:05",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "'신청주의' 깬 이재명표 복지…생계급여 수급선 중위소득 35%로 넓히고,...",
+   "desc": "또한 취업으로 소득이 발생해 수급 기준을 넘기더라도 약 3년간 의료급여 자격을 유지해주는 자립이행 특례를 우선 검토해, 의료비 폭탄 우려로 구직을 포기하는 청년들이 제도 밖으로 안전하게 연착륙할 수 있는...",
+   "link": "https://n.news.naver.com/mnews/article/277/0005846507?sid=101",
+   "originallink": "https://view.asiae.co.kr/article/2026112315200900751",
+   "press": "아시아경제",
+   "pub": "2026-11-23 15:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "충남 홍성군 노사민정협의회, 입주기업과 임금체불 예방·인력난 해소 ...",
+   "desc": "또한 기업이 필요로 하는 인력과 구직자가 희망하는 급여·근무 조건 사이에 차이가 있어 채용에 어려움을 겪고 있다는 의견을 제시했다. 군은 이날 청취한 현장 의견을 바탕으로 청년층의 지역 기업 취업 확대와 외국인...",
+   "link": "https://www.ccdn.co.kr/news/articleView.html?idxno=1112901",
+   "originallink": "https://www.ccdn.co.kr/news/articleView.html?idxno=1112901",
+   "press": "충청매일",
+   "pub": "2026-11-23 15:20",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "1인 가구, 수도권 쏠림 여전한데…'청년 주거급여' 예산 38% 감소",
+   "desc": "청년 주거급여 분리지급은 주거급여 수급 가구의 19세 이상 30세 미만 미혼 청년이 학업이나 구직 등을 이유로 부모와 떨어져 거주할 경우 별도의 임차급여를 지급하는 제도다. 특히 독립생활을 하는 저소득 청년의...",
+   "link": "https://www.1conomynews.co.kr/news/articleView.html?idxno=51477",
+   "originallink": "https://www.1conomynews.co.kr/news/articleView.html?idxno=51477",
+   "press": "1conomynews.co.kr",
+   "pub": "2026-11-23 15:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"채용공고에 임금 공개해야\"…경사노위, 정부에 정책 첫 제안",
+   "desc": "지난달 기준 취업포털(사람인·잡코리아·인크루트) 채용공고 512만 건 중 급여가 명시된 공고는 40.9%에 불과하다. 청년 구직자의 64.7%가 일자리를 고를 때 연봉을 가장 중요하게 여기지만, 채용공고 10건 중 6건에는 급여...",
+   "link": "https://n.news.naver.com/mnews/article/018/0006414227?sid=102",
+   "originallink": "https://www.edaily.co.kr/News/Read?newsId=02863446645648672&mediaCodeNo=257&utm_source=naver&utm_medium=referral&utm_campaign=news_syndication&utm_content=original_article",
+   "press": "이데일리",
+   "pub": "2026-11-23 15:41",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "\"집도 직장도 없다\" 부모 집 떠나지 못하는 청년들 급증... 전 세계적 현...",
+   "desc": "아짐 프렘지대학 연구 결과 실업 상태의 대졸자 중 1년 내 정규 급여 일자리를 얻은 비율은 7%에 그쳤다.... 장기화된 취업난 속에서 구직 자체를 포기하는 청년도 늘고 있다. 중국에서는 치열한 경쟁을 피해 최소한의...",
+   "link": "https://www.insight.co.kr/news/583186",
+   "originallink": "https://www.insight.co.kr/news/583186",
+   "press": "insight.co.kr",
+   "pub": "2026-11-23 17:30",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "이재근 KB금융 회장, 취임 첫 대외행보 청년·소상공인 현장…주거비·...",
+   "desc": "기본금리는 연 5.0%이며 급여이체와 금융거래 실적 등 우대조건을 충족하면 최고금리가 적용된다. 취업 지원사업도 운영 중이다. KB국민은행이 진행하는 KB굿잡 취업박람회는 구직자와 중소·중견기업을 연결하는...",
+   "link": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065602083366869",
+   "originallink": "https://www.megaeconomy.co.kr/news/newsview.php?ncode=1065602083366869",
+   "press": "megaeconomy.co.kr",
+   "pub": "2026-11-23 17:36",
+   "q": "구직급여",
+   "rel": false
+  },
+  {
+   "title": "심층상담·직업훈련에 일경험 연계…“공시 낭인이 손해사정사로”",
+   "desc": "전담 상담사의 권유로 자동차정비 학원에 등록한 것이 전환점이었다. 훈련수당을 받으며 자격증을 취득했고... 길현종 한국노동연구원 연구위원은 “국민취업지원제도는 고용보험 사각지대에 놓인 청년들의 노동시장...",
+   "link": "https://n.news.naver.com/mnews/article/011/0004685272?sid=102",
+   "originallink": "https://www.sedaily.com/article/20117924?ref=naver",
+   "press": "서울경제",
+   "pub": "2026-11-23 17:47",
+   "q": "자동차 고용보험",
+   "rel": false
+  },
+  {
+   "title": "강릉시, 노인일자리 사업 참여자 모집···내달 3일부터 '출생연도 5부...",
+   "desc": "취업지원형은 구직을 원하는 어르신에게 적합한 일자리를 연계한다. 신청 자격 경우 공익활동은 65세 이상... 단, 생계급여 수급자, 건강보험 직장가입자, 장기요양 등급 판정자 등 일부 대상자는 신청이 제한된다. 접수...",
+   "link": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2495712",
+   "originallink": "http://www.enewstoday.co.kr/news/articleView.html?idxno=2495712",
+   "press": "enewstoday.co.kr",
+   "pub": "2026-11-23 18:59",
    "q": "구직급여",
    "rel": false
   }

@@ -13569,6 +13569,90 @@
      "저임금",
      "취약"
     ]
+   },
+   {
+    "title": "“폐업해도 실업급여 있으니 든든” 자영업자 고용보험 크게 늘었다",
+    "url": "https://biz.heraldcorp.com/article/10946024?ref=naver",
+    "press": "헤럴드경제",
+    "pub": "2026-11-23 11:31",
+    "cites": false,
+    "judged": true,
+    "why": "중기부·소진공 자영업자 고용보험 가입 통계",
+    "hits": [
+     "지표:고용보험"
+    ],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "",
+    "kw": [
+     "든든",
+     "있으니",
+     "크게",
+     "폐업해"
+    ]
+   },
+   {
+    "title": "박승흡 근로복지공단 이사장 “난 3년짜리 고연봉 비정규직...임금체불...",
+    "url": "https://www.joongang.co.kr/article/25481028",
+    "press": "중앙일보",
+    "pub": "2026-11-23 12:00",
+    "cites": false,
+    "judged": true,
+    "why": "근로복지공단 이사장 인터뷰",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "고연봉",
+     "근로복지공단",
+     "년짜리",
+     "박승흡",
+     "비정규직",
+     "이사장",
+     "임금체불"
+    ]
+   },
+   {
+    "title": "[숫자와 체감 사이②] 수출은 사상 최대인데 일자리는…'고용 없는 성장...",
+    "url": "http://www.ftoday.co.kr/news/articleView.html?idxno=370333",
+    "press": "ftoday.co.kr",
+    "pub": "2026-11-23 14:06",
+    "cites": true,
+    "judged": true,
+    "why": "60세 이상 20만4천명 증가 인용",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "사상",
+     "성장",
+     "수출",
+     "숫자",
+     "체감",
+     "최대인데"
+    ]
+   },
+   {
+    "title": "[자치시대] AI가 바꾸는 일자리, 울산은 경력을 잇자",
+    "url": "https://www.iusm.co.kr/news/articleView.html?idxno=1070929",
+    "press": "iusm.co.kr",
+    "pub": "2026-11-23 19:12",
+    "cites": true,
+    "judged": true,
+    "why": "10월 가입자 28만6천명 증가 인용",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "언급",
+    "kw": [
+     "AI",
+     "바꾸",
+     "울산",
+     "잇자",
+     "자치시대"
+    ]
    }
   ]
  }
