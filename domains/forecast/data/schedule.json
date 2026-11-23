@@ -1,4 +1,8 @@
 [
-  { "org": "KDI", "org_name_ko": "KDI", "report": "경제전망", "date": "2026-11-18" },
-  { "org": "BOK", "org_name_ko": "BOK", "report": "경제전망", "date": "2026-11-26" }
+  {
+    "org": "BOK",
+    "org_name_ko": "BOK",
+    "report": "경제전망",
+    "date": "2026-11-26"
+  }
 ]

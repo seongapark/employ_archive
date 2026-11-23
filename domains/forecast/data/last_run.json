@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-20T15:01:09.727975+09:00",
+  "run_at": "2026-11-23T17:46:17.854748+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -38,8 +38,8 @@
     },
     "kiet": {
       "ok": true,
-      "fetched": 0,
-      "added": 0
+      "fetched": 6,
+      "added": 6
     },
     "keis": {
       "ok": true,

@@ -1,16 +1,7 @@
 {
-  "generated": "2026-11-20",
+  "generated": "2026-11-23",
   "months": 6,
   "entries": [
-    {
-      "org": "KIET",
-      "org_name_ko": "산업연",
-      "report": "내년 경제·산업 전망",
-      "start": "2026-11-21",
-      "end": "2026-11-28",
-      "date": null,
-      "basis": "예상"
-    },
     {
       "org": "BOK",
       "org_name_ko": "BOK",
@@ -107,6 +98,15 @@
       "report": "경제전망(상반기)",
       "start": "2027-05-10",
       "end": "2027-05-17",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "KIET",
+      "org_name_ko": "산업연",
+      "report": "하반기 경제·산업 전망",
+      "start": "2027-05-23",
+      "end": "2027-05-30",
       "date": null,
       "basis": "예상"
     }
