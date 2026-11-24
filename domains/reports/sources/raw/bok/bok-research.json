@@ -8298,5 +8298,45 @@
     "abstract_tried": true,
     "abstract_note": "텍스트가 없는 스캔본",
     "collected_at": "2026-11-20T15:00:56+09:00"
+  },
+  {
+    "id": "bok-11066910",
+    "org": "bok",
+    "board": "bok-research",
+    "series": "조사연구자료",
+    "title": "최근 석유화학 산업 현황 및 산업재편이 울산경제에 미치는 영향",
+    "authors": [
+      "울산본부"
+    ],
+    "published": "2026-11-24",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11066910&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/e7951bc3f7d142de89ef71efbc817dc7/1/c2d6239b60684785ad2257306f0d8c72.pdf",
+    "abstract": null,
+    "toc": [],
+    "abstract_tried": true,
+    "abstract_note": "요약 섹션 없음",
+    "collected_at": "2026-11-24T15:00:54+09:00"
+  },
+  {
+    "id": "bok-11066945",
+    "org": "bok",
+    "board": "bok-research",
+    "series": "조사연구자료",
+    "title": "부산 고부가가치 서비스업 성장 진단 - 팬데믹 이후 생산자서비스업을 중심으로",
+    "authors": [
+      "부산본부"
+    ],
+    "published": "2026-11-24",
+    "date_precision": "day",
+    "pages": null,
+    "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11066945&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+    "file_url": "https://www.bok.or.kr/fileSrc/portal/5038ca3c9b8246e6a3f38da72a0c5154/1/ba96d268c17641c3ab57b5d3ddba7743.hwp",
+    "abstract": null,
+    "toc": [],
+    "abstract_tried": true,
+    "abstract_note": "텍스트가 없는 스캔본",
+    "collected_at": "2026-11-24T15:00:55+09:00"
   }
 ]
