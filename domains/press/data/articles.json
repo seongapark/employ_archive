@@ -13732,6 +13732,66 @@
      "분기",
      "천개"
     ]
+   },
+   {
+    "title": "200만원씩 써도 아깝지 않다?…불황 모르는 '이 업종' 정체",
+    "url": "https://www.hankyung.com/article/2026112476161",
+    "press": "한국경제",
+    "pub": "2026-11-24 17:24",
+    "cites": true,
+    "judged": true,
+    "why": "화학제품 제조업 가입자 증가 수치 인용",
+    "hits": [],
+    "tone": [],
+    "stance": "긍정",
+    "focus": "언급",
+    "kw": [
+     "모르",
+     "불황",
+     "아깝",
+     "업종",
+     "정체"
+    ]
+   },
+   {
+    "title": "고유가에 정유·석화 동반 위기…최고가격제 출구전략 짜나",
+    "url": "https://www.ggilbo.com/news/articleView.html?idxno=1195278",
+    "press": "ggilbo.com",
+    "pub": "2026-11-24 19:04",
+    "cites": false,
+    "judged": true,
+    "why": "지역 석화업종 위기·최고가격제 다룸",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "고유가",
+     "동반",
+     "석화",
+     "위기",
+     "정유",
+     "최고가격제",
+     "출구전략"
+    ]
+   },
+   {
+    "title": "두루누리 보험료 지원, 월 보수 270만원 미만 기준",
+    "url": "https://www.vegannews.co.kr/news/article.html?no=410588",
+    "press": "vegannews.co.kr",
+    "pub": "2026-11-24 19:12",
+    "cites": false,
+    "judged": true,
+    "why": "두루누리 보험료 지원 제도 안내",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "두루누리",
+     "보수",
+     "보험료"
+    ]
    }
   ]
  }
