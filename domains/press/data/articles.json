@@ -11906,24 +11906,6 @@
     ]
    },
    {
-    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
-    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
-    "press": "labortoday.co.kr",
-    "pub": "2026-11-10 06:34",
-    "cites": false,
-    "judged": true,
-    "why": "사립대병원 육아휴직급여 차별 실태",
-    "hits": [],
-    "tone": [],
-    "stance": "부정",
-    "focus": "",
-    "kw": [
-     "사립대병원",
-     "육아휴직급여",
-     "제멋대"
-    ]
-   },
-   {
     "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
     "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
     "press": "labortoday.co.kr",
@@ -11943,6 +11925,24 @@
      "암울",
      "청년고용",
      "최장기"
+    ]
+   },
+   {
+    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+    "press": "labortoday.co.kr",
+    "pub": "2026-11-10 06:34",
+    "cites": false,
+    "judged": true,
+    "why": "사립대병원 육아휴직급여 차별 실태",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사립대병원",
+     "육아휴직급여",
+     "제멋대"
     ]
    },
    {
@@ -13652,6 +13652,85 @@
      "울산",
      "잇자",
      "자치시대"
+    ]
+   },
+   {
+    "title": "“난 3년짜리 고연봉 비정규직, 임금체불 제로 만들 것”",
+    "url": "https://www.joongang.co.kr/article/25481225",
+    "press": "중앙일보",
+    "pub": "2026-11-24 00:01",
+    "cites": false,
+    "judged": true,
+    "why": "근로복지공단 이사장 인터뷰",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "고연봉",
+     "년짜리",
+     "만들",
+     "비정규직",
+     "임금체불"
+    ]
+   },
+   {
+    "title": "[팩트체크] 월급보다 많은 실업급여?…'근로의욕 떨어뜨린다' 논란도",
+    "url": "https://www.yna.co.kr/view/AKR20261118170800518?input=1195m",
+    "press": "연합뉴스",
+    "pub": "2026-11-24 06:30",
+    "cites": false,
+    "judged": true,
+    "why": "실업급여 제도 팩트체크",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "근로의욕",
+     "논란",
+     "월급",
+     "팩트체크"
+    ]
+   },
+   {
+    "title": "정년연장 뒤 숨은 청년들의 불안... \"첫 일자리 줄어드나\"",
+    "url": "https://www.lawtv.kr/news/articleView.html?idxno=61502",
+    "press": "lawtv.kr",
+    "pub": "2026-11-24 10:40",
+    "cites": true,
+    "judged": true,
+    "why": "60세이상 가입자 20만4천명 증가 인용",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "불안",
+     "정년연장",
+     "줄어드",
+     "청년들"
+    ]
+   },
+   {
+    "title": "제조업 일자리 6분기 연속 감소…20대 이하 2만8천개 ↓ 60대 이상 2만1천...",
+    "url": "http://www.inews24.com/view/2029690",
+    "press": "아이뉴스24",
+    "pub": "2026-11-24 12:01",
+    "cites": true,
+    "judged": true,
+    "why": "제조업 가입자 385만8천명·1만4천명 증가",
+    "hits": [
+     "산업:제조업"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "분기",
+     "천개"
     ]
    }
   ]
