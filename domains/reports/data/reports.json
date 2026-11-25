@@ -106,6 +106,38 @@
   ]
  },
  {
+  "id": "bok-11067027",
+  "org": "bok",
+  "board": "bok-research",
+  "series": "조사연구자료",
+  "title": "대전·세종·충남지역 청년층의 취업지역 결정요인에 대한 연구",
+  "authors": [
+   "대전세종충남본부"
+  ],
+  "published": "2026-11-25",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11067027&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/a4fd245d8efd45feac86ce4a370ae26b/1/c551191055254a7188917ec20957686c.hwpx",
+  "matched": []
+ },
+ {
+  "id": "bok-11067013",
+  "org": "bok",
+  "board": "bok-research",
+  "series": "조사연구자료",
+  "title": "부산지역 상업용 부동산 임대시장 부진 배경 및 시사점",
+  "authors": [
+   "부산본부"
+  ],
+  "published": "2026-11-25",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11067013&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/9d00b60b7fe84d6a9d7f9997754d1fe3/1/6252a52a528549f3ad69a4335df8e14e.pdf",
+  "matched": []
+ },
+ {
   "id": "bok-11066945",
   "org": "bok",
   "board": "bok-research",

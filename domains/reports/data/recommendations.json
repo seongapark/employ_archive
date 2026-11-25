@@ -34370,5 +34370,23 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-25T10:01:25+09:00"
+ },
+ "bok-11067027": {
+  "pick": true,
+  "axis": "청년 고용",
+  "why": "청년 취업지역 선택 결정요인 실증분석",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-25T15:01:06+09:00"
+ },
+ "bok-11067013": {
+  "pick": false,
+  "axis": "",
+  "why": "부산 상업용 부동산 임대시장 부진",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-25T15:01:06+09:00"
  }
 }
