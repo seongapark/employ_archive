@@ -11906,24 +11906,6 @@
     ]
    },
    {
-    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
-    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
-    "press": "labortoday.co.kr",
-    "pub": "2026-11-10 06:34",
-    "cites": false,
-    "judged": true,
-    "why": "사립대병원 육아휴직급여 차별 실태",
-    "hits": [],
-    "tone": [],
-    "stance": "부정",
-    "focus": "",
-    "kw": [
-     "사립대병원",
-     "육아휴직급여",
-     "제멋대"
-    ]
-   },
-   {
     "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
     "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
     "press": "labortoday.co.kr",
@@ -11943,6 +11925,24 @@
      "암울",
      "청년고용",
      "최장기"
+    ]
+   },
+   {
+    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+    "press": "labortoday.co.kr",
+    "pub": "2026-11-10 06:34",
+    "cites": false,
+    "judged": true,
+    "why": "사립대병원 육아휴직급여 차별 실태",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사립대병원",
+     "육아휴직급여",
+     "제멋대"
     ]
    },
    {
@@ -13808,6 +13808,28 @@
     "kw": [
      "늘어난",
      "방한객"
+    ]
+   },
+   {
+    "title": "충북 청년 취업대책 시대에 맞게 바꿔라",
+    "url": "http://www.inews365.com/news/article.html?no=945230",
+    "press": "inews365.com",
+    "pub": "2026-11-25 19:30",
+    "cites": true,
+    "judged": true,
+    "why": "60세이상 20만4천명 증가 인용",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "맞게",
+     "바꿔라",
+     "시대",
+     "충북",
+     "취업대책"
     ]
    }
   ]
