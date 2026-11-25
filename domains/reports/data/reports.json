@@ -34,6 +34,78 @@
   ]
  },
  {
+  "id": "kli-10322",
+  "org": "kli",
+  "board": "kli-brief",
+  "series": "고용노동브리프",
+  "title": "KLI Insight 2026-01호 - 노무제공자 정책 현황과 향후 발전 방향 모색",
+  "authors": [
+   "김근주",
+   "남궁준",
+   "박수민"
+  ],
+  "published": "2026-11-25",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10322&mid=a10104010000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=KLI고용노동브리프",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=588A89FDAE0F423F49258EB90026FD03_1.pdf&fileNameOrg=KLI Insight 2026-01호.pdf&filePath1=jsphome/DATA/pblctList/issue/588A89FDAE0F423F49258EB90026FD03",
+  "matched": []
+ },
+ {
+  "id": "kli-10322",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "KLI Insight 2026-01호 - 노무제공자 정책 현황과 향후 발전 방향 모색",
+  "authors": [
+   "김근주",
+   "남궁준",
+   "박수민"
+  ],
+  "published": "2026-11-25",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=10322&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=588A89FDAE0F423F49258EB90026FD03_1.pdf&fileNameOrg=KLI Insight 2026-01호.pdf&filePath1=jsphome/DATA/pblctList/issue/588A89FDAE0F423F49258EB90026FD03",
+  "matched": []
+ },
+ {
+  "id": "kli-10321",
+  "org": "kli",
+  "board": "kli-brief",
+  "series": "고용노동브리프",
+  "title": "KLI Insight 2026-02호 - 양극화 완화, 분배구조 개선에서부터 : 초기업 단체교섭 제언",
+  "authors": [
+   "이정희 외"
+  ],
+  "published": "2026-11-25",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/issuePaperView.es?pblct_sn=10321&mid=a10104010000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=KLI고용노동브리프",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=90F47D62FBC2286649258EB3002EE93A_1.pdf&fileNameOrg=KLI Insight 2026-02호.pdf&filePath1=jsphome/DATA/pblctList/issue/90F47D62FBC2286649258EB3002EE93A",
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
+  "id": "kli-10321",
+  "org": "kli",
+  "board": "kli-research",
+  "series": "연구보고서",
+  "title": "KLI Insight 2026-02호 - 양극화 완화, 분배구조 개선에서부터 : 초기업 단체교섭 제언",
+  "authors": [
+   "이정희 외"
+  ],
+  "published": "2026-11-25",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/rschRptpView.es?pblct_sn=10321&mid=a10102060000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_rsch_fld_no=",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=90F47D62FBC2286649258EB3002EE93A_1.pdf&fileNameOrg=KLI Insight 2026-02호.pdf&filePath1=jsphome/DATA/pblctList/issue/90F47D62FBC2286649258EB3002EE93A",
+  "matched": [
+   "노사관계"
+  ]
+ },
+ {
   "id": "bok-11066945",
   "org": "bok",
   "board": "bok-research",
@@ -165,6 +237,25 @@
   "landing_url": "https://www.bok.or.kr/portal/bbs/P0000800/view.do?nttId=11066621&searchCnd=1&searchKwd=&depth2=201157&depth3=200560&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200560&pageIndex=1&programType=newsData&menuNo=200560&oldMenuNo=200560",
   "file_url": "https://www.bok.or.kr/fileSrc/portal/7f3e346d5bfd4f0d829af6c18be49d9c/1/a035449ae6544dffb6f8794f47661759.hwp",
   "matched": []
+ },
+ {
+  "id": "kli-10323",
+  "org": "kli",
+  "board": "kli-intl",
+  "series": "국제노동브리프",
+  "title": "국제노동브리프 2026년 11월호(Vol.24. No.8)",
+  "authors": [
+   "국제협력실"
+  ],
+  "published": "2026-11-15",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kli.re.kr/kli/prdclView.es?pblct_sn=10323&mid=a10103030000&nPage=1&sch_yr=&sch_type=&sch_keyword=&sch_prdcl=국제노동브리프",
+  "file_url": "https://www.kli.re.kr/kliFileDownload?fileName=D5741623891306B849258EB90029F6D1_1.pdf&fileNameOrg=국제노동브리프 2026년 11월호_web.pdf&filePath1=jsphome/DATA/pblctList/issue/D5741623891306B849258EB90029F6D1",
+  "matched": [
+   "고령자",
+   "일자리정책"
+  ]
  },
  {
   "id": "kdi-an3829",

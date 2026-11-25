@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-24",
+  "generated": "2026-11-25",
   "months": 6,
   "entries": [
     {
@@ -107,6 +107,15 @@
       "report": "하반기 경제·산업 전망",
       "start": "2027-05-23",
       "end": "2027-05-30",
+      "date": null,
+      "basis": "예상"
+    },
+    {
+      "org": "BOK",
+      "org_name_ko": "BOK",
+      "report": "경제전망보고서",
+      "start": "2027-05-25",
+      "end": "2027-06-01",
       "date": null,
       "basis": "예상"
     }

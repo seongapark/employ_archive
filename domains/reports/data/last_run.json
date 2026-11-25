@@ -1,15 +1,15 @@
 {
-  "at": "2026-11-24T15:00:43+09:00",
+  "at": "2026-11-25T10:00:52+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
-      "parsed": 10,
-      "added": 0,
-      "details": 0,
+      "parsed": 20,
+      "added": 2,
+      "details": 2,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 308
+      "total": 310
     },
     "kli-review": {
       "ok": true,
@@ -33,23 +33,23 @@
     },
     "kli-intl": {
       "ok": true,
-      "parsed": 10,
-      "added": 0,
-      "details": 0,
+      "parsed": 20,
+      "added": 1,
+      "details": 1,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 52
+      "total": 53
     },
     "kli-brief": {
       "ok": true,
-      "parsed": 10,
-      "added": 0,
-      "details": 0,
-      "reached_cutoff": false,
+      "parsed": 20,
+      "added": 2,
+      "details": 2,
+      "reached_cutoff": true,
       "skipped_old": 0,
       "error": null,
-      "total": 11
+      "total": 13
     },
     "kli-wage": {
       "ok": true,
@@ -323,9 +323,9 @@
     },
     "bok-research": {
       "ok": true,
-      "parsed": 200,
-      "added": 2,
-      "details": 2,
+      "parsed": 100,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3530,
+  "reports": 3535,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -360,6 +360,48 @@
         "total": 344,
         "missing": 45,
         "rate": 0.131
+      }
+    },
+    "kli": {
+      "고용노동브리프": {
+        "total": 13,
+        "missing": 13,
+        "rate": 1.0
+      },
+      "연구보고서": {
+        "total": 310,
+        "missing": 69,
+        "rate": 0.223
+      },
+      "국제노동브리프": {
+        "total": 53,
+        "missing": 53,
+        "rate": 1.0
+      },
+      "패널브리프": {
+        "total": 12,
+        "missing": 12,
+        "rate": 1.0
+      },
+      "노동리뷰": {
+        "total": 70,
+        "missing": 70,
+        "rate": 1.0
+      },
+      "노동정책연구": {
+        "total": 23,
+        "missing": 23,
+        "rate": 1.0
+      },
+      "임금정보브리프": {
+        "total": 49,
+        "missing": 49,
+        "rate": 1.0
+      },
+      "고용영향평가브리프": {
+        "total": 34,
+        "missing": 34,
+        "rate": 1.0
       }
     },
     "bok": {
@@ -436,48 +478,6 @@
         "rate": 0.0
       }
     },
-    "kli": {
-      "패널브리프": {
-        "total": 12,
-        "missing": 12,
-        "rate": 1.0
-      },
-      "국제노동브리프": {
-        "total": 52,
-        "missing": 52,
-        "rate": 1.0
-      },
-      "노동리뷰": {
-        "total": 70,
-        "missing": 70,
-        "rate": 1.0
-      },
-      "노동정책연구": {
-        "total": 23,
-        "missing": 23,
-        "rate": 1.0
-      },
-      "임금정보브리프": {
-        "total": 49,
-        "missing": 49,
-        "rate": 1.0
-      },
-      "고용영향평가브리프": {
-        "total": 34,
-        "missing": 34,
-        "rate": 1.0
-      },
-      "연구보고서": {
-        "total": 308,
-        "missing": 67,
-        "rate": 0.218
-      },
-      "고용노동브리프": {
-        "total": 11,
-        "missing": 11,
-        "rate": 1.0
-      }
-    },
     "kiet": {
       "월간 산업경제": {
         "total": 439,
@@ -512,7 +512,7 @@
     }
   },
   "abstract_missing_why": {
-    "요약 섹션 없음": 565,
+    "요약 섹션 없음": 570,
     "텍스트가 없는 스캔본": 316,
     "원문 없음": 50,
     "내려받기 실패: Failed to perform, curl: (6) Could not resolve host: www.bok.or.kr. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.": 13,
@@ -524,22 +524,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 311249,
-    "abstracts_gzip": 3530657,
+    "reports_gzip": 311648,
+    "abstracts_gzip": 3531152,
     "abstracts_shards_gzip": {
       "bok": 307205,
       "kdi": 897045,
       "keis": 257856,
       "kiet": 735986,
-      "kli": 1332565
+      "kli": 1333060
     }
   },
   "recommend": {
-    "judged": 3530,
+    "judged": 3533,
     "picked": 384,
-    "unjudged": 0,
+    "unjudged": 2,
     "profile_version": "5a624049",
-    "title_only": 966,
-    "at": "2026-11-24T15:01:13+09:00"
+    "title_only": 969,
+    "at": "2026-11-25T10:01:25+09:00"
   }
 }
