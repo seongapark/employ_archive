@@ -11906,24 +11906,6 @@
     ]
    },
    {
-    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
-    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
-    "press": "labortoday.co.kr",
-    "pub": "2026-11-10 06:34",
-    "cites": false,
-    "judged": true,
-    "why": "사립대병원 육아휴직급여 차별 실태",
-    "hits": [],
-    "tone": [],
-    "stance": "부정",
-    "focus": "",
-    "kw": [
-     "사립대병원",
-     "육아휴직급여",
-     "제멋대"
-    ]
-   },
-   {
     "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
     "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
     "press": "labortoday.co.kr",
@@ -11943,6 +11925,24 @@
      "암울",
      "청년고용",
      "최장기"
+    ]
+   },
+   {
+    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+    "press": "labortoday.co.kr",
+    "pub": "2026-11-10 06:34",
+    "cites": false,
+    "judged": true,
+    "why": "사립대병원 육아휴직급여 차별 실태",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사립대병원",
+     "육아휴직급여",
+     "제멋대"
     ]
    },
    {
@@ -13830,6 +13830,29 @@
      "시대",
      "충북",
      "취업대책"
+    ]
+   },
+   {
+    "title": "최보윤 국민의힘 수석대변인, 청년·주택·사법 탄핵 비판공세",
+    "url": "http://www.breaknews.com/1254164",
+    "press": "breaknews.com",
+    "pub": "2026-11-26 13:20",
+    "cites": true,
+    "judged": true,
+    "why": "29세 이하 가입자 5만4천명 감소 인용",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "국민의힘",
+     "비판공세",
+     "수석대변인",
+     "주택",
+     "최보윤",
+     "탄핵"
     ]
    }
   ]
