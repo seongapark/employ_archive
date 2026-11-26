@@ -34388,5 +34388,23 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-25T15:01:06+09:00"
+ },
+ "bok-11067102": {
+  "pick": false,
+  "axis": "",
+  "why": "AI 반도체 호황 경기·수출 전망, 고용 분석 아님",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-26T14:59:24+09:00"
+ },
+ "bok-11067100": {
+  "pick": false,
+  "axis": "",
+  "why": "정기 경제전망, 성장·물가 중심",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-26T14:59:24+09:00"
  }
 }

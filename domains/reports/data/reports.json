@@ -34,6 +34,38 @@
   ]
  },
  {
+  "id": "bok-11067102",
+  "org": "bok",
+  "board": "bok-issue",
+  "series": "이슈분석·심층연구",
+  "title": "[26.11월 이슈분석] AI가 이끈 반도체 호황: 차별화된 특징과 향후 전망",
+  "authors": [
+   "국제무역팀"
+  ],
+  "published": "2026-11-26",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/B0000368/view.do?nttId=11067102&searchCnd=1&searchKwd=&depth2=201157&depth3=201140&date=&sdate=&edate=&sort=1&pageUnit=100&depth=201140&pageIndex=1&programType=newsData&menuNo=201140&oldMenuNo=201140",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/cb557c08036c43c498f40d32caf9c89b/1/50d82e21bca944d78e7a4c83218df723.pdf",
+  "matched": []
+ },
+ {
+  "id": "bok-11067100",
+  "org": "bok",
+  "board": "bok-outlook",
+  "series": "경제전망보고서",
+  "title": "경제전망보고서(2026년 11월)",
+  "authors": [
+   "조사국, 경제모형실"
+  ],
+  "published": "2026-11-26",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.bok.or.kr/portal/bbs/P0002359/view.do?nttId=11067100&searchCnd=1&searchKwd=&depth2=201157&depth3=200066&date=&sdate=&edate=&sort=1&pageUnit=100&depth=200066&pageIndex=1&programType=newsData&menuNo=200066&oldMenuNo=200066",
+  "file_url": "https://www.bok.or.kr/fileSrc/portal/19fa4013163b4708bcfc115cedc0fc7e/1/60c94546973340c6a68b5a28f32d7c46.pdf",
+  "matched": []
+ },
+ {
   "id": "kli-10322",
   "org": "kli",
   "board": "kli-brief",
