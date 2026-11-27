@@ -34406,5 +34406,14 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-26T14:59:24+09:00"
+ },
+ "kli-10324": {
+  "pick": true,
+  "axis": "청년 고용",
+  "why": "청년 대상 지원사업의 고용영향 직접 추정",
+  "basis": "title",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-27T10:01:07+09:00"
  }
 }
