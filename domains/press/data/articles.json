@@ -11906,24 +11906,6 @@
     ]
    },
    {
-    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
-    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
-    "press": "labortoday.co.kr",
-    "pub": "2026-11-10 06:34",
-    "cites": false,
-    "judged": true,
-    "why": "사립대병원 육아휴직급여 차별 실태",
-    "hits": [],
-    "tone": [],
-    "stance": "부정",
-    "focus": "",
-    "kw": [
-     "사립대병원",
-     "육아휴직급여",
-     "제멋대"
-    ]
-   },
-   {
     "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
     "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
     "press": "labortoday.co.kr",
@@ -11943,6 +11925,24 @@
      "암울",
      "청년고용",
      "최장기"
+    ]
+   },
+   {
+    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+    "press": "labortoday.co.kr",
+    "pub": "2026-11-10 06:34",
+    "cites": false,
+    "judged": true,
+    "why": "사립대병원 육아휴직급여 차별 실태",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사립대병원",
+     "육아휴직급여",
+     "제멋대"
     ]
    },
    {
@@ -14190,24 +14190,88 @@
     ]
    },
    {
-    "title": "회사가 국민연금 보험료 떼먹어…최소 가입 기간 미달 노동자 13만명",
+    "title": "회사가 국민연금 보험료 떼먹어…노동자 13만명 최소 가입기간 못채워",
     "url": "https://www.hani.co.kr/arti/society/rights/1289405.html",
     "press": "한겨레",
     "pub": "2026-11-27 11:46",
     "cites": false,
     "judged": true,
-    "why": "국민연금 체납 가입기간 미달",
+    "why": "국민연금 체납 피해 기사",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "가입기간",
+     "국민연금",
+     "노동자",
+     "떼먹",
+     "못채워",
+     "보험료",
+     "최소"
+    ]
+   },
+   {
+    "title": "회사가 안 낸 국민연금, 피해는 근로자가…연금 10년 못 채운 13만명 넘...",
+    "url": "https://www.segye.com/newsView/20261127507268?OutUrl=naver",
+    "press": "세계일보",
+    "pub": "2026-11-27 12:56",
+    "cites": false,
+    "judged": true,
+    "why": "국민연금 체납 피해 기사",
     "hits": [],
     "tone": [],
     "stance": "부정",
     "focus": "",
     "kw": [
      "국민연금",
-     "노동자",
-     "떼먹",
-     "미달",
-     "보험료",
-     "최소"
+     "채운",
+     "피해"
+    ]
+   },
+   {
+    "title": "월급서 국민연금 떼고도 … 사업주 체납에 13만명 노후 '빨간불'",
+    "url": "https://biz.newdaily.co.kr/site/data/html/2026/11/27/2026112750189.html",
+    "press": "biz.newdaily.co.kr",
+    "pub": "2026-11-27 14:16",
+    "cites": false,
+    "judged": true,
+    "why": "국민연금 체납 피해 기사",
+    "hits": [],
+    "tone": [
+     "빨간불"
+    ],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "국민연금",
+     "노후",
+     "사업주",
+     "월급",
+     "체납"
+    ]
+   },
+   {
+    "title": "'베이비부머' 1973년생부터 정년 65세… 기업 \"청년 채용 위축\"",
+    "url": "https://www.mk.co.kr/article/12220406",
+    "press": "매일경제",
+    "pub": "2026-11-27 17:38",
+    "cites": true,
+    "judged": true,
+    "why": "10월 29세 이하 가입자 220만3천명 감소 인용",
+    "hits": [
+     "연령:청년"
+    ],
+    "tone": [
+     "위축"
+    ],
+    "stance": "부정",
+    "focus": "언급",
+    "kw": [
+     "년생",
+     "베이비부머",
+     "정년",
+     "채용"
     ]
    }
   ]
