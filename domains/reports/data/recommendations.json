@@ -34415,5 +34415,23 @@
   "model": "claude-opus-5",
   "profile_version": "5a624049",
   "judged_at": "2026-11-27T10:01:07+09:00"
+ },
+ "kiet-is874": {
+  "pick": false,
+  "axis": "",
+  "why": "수출 1조 달러 구조·품목집중도 진단, 고용 없음",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-27T15:00:57+09:00"
+ },
+ "kiet-is873": {
+  "pick": true,
+  "axis": "노동전환",
+  "why": "직무거리로 비자발적 이직 후 임금감소 추정",
+  "basis": "abstract",
+  "model": "claude-opus-5",
+  "profile_version": "5a624049",
+  "judged_at": "2026-11-27T15:00:57+09:00"
  }
 }

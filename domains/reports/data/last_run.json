@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-27T10:00:43+09:00",
+  "at": "2026-11-27T15:00:45+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -73,9 +73,9 @@
     },
     "kli-eia": {
       "ok": true,
-      "parsed": 20,
-      "added": 1,
-      "details": 1,
+      "parsed": 10,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
@@ -183,13 +183,13 @@
     },
     "kiet-issue": {
       "ok": true,
-      "parsed": 30,
-      "added": 0,
-      "details": 0,
+      "parsed": 60,
+      "added": 2,
+      "details": 2,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,
-      "total": 126
+      "total": 128
     },
     "kiet-economy": {
       "ok": true,
@@ -333,7 +333,7 @@
     }
   },
   "unregistered": [],
-  "reports": 3540,
+  "reports": 3542,
   "abstract_missing": {
     "kdi": {
       "경제동향": {
@@ -360,6 +360,38 @@
         "total": 344,
         "missing": 45,
         "rate": 0.131
+      }
+    },
+    "kiet": {
+      "i-KIET": {
+        "total": 128,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "월간 산업경제": {
+        "total": 439,
+        "missing": 41,
+        "rate": 0.093
+      },
+      "정책자료": {
+        "total": 39,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "이슈페이퍼": {
+        "total": 83,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구자료": {
+        "total": 82,
+        "missing": 0,
+        "rate": 0.0
+      },
+      "연구보고서": {
+        "total": 159,
+        "missing": 7,
+        "rate": 0.044
       }
     },
     "bok": {
@@ -477,38 +509,6 @@
         "missing": 0,
         "rate": 0.0
       }
-    },
-    "kiet": {
-      "월간 산업경제": {
-        "total": 439,
-        "missing": 41,
-        "rate": 0.093
-      },
-      "i-KIET": {
-        "total": 126,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "정책자료": {
-        "total": 39,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "이슈페이퍼": {
-        "total": 83,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "연구자료": {
-        "total": 82,
-        "missing": 0,
-        "rate": 0.0
-      },
-      "연구보고서": {
-        "total": 159,
-        "missing": 7,
-        "rate": 0.044
-      }
     }
   },
   "abstract_missing_why": {
@@ -524,22 +524,22 @@
     "파일이 너무 큼(72MB)": 1
   },
   "sizes": {
-    "reports_gzip": 312288,
-    "abstracts_gzip": 3531479,
+    "reports_gzip": 312490,
+    "abstracts_gzip": 3533555,
     "abstracts_shards_gzip": {
       "bok": 307484,
       "kdi": 897045,
       "keis": 257856,
-      "kiet": 735986,
+      "kiet": 738062,
       "kli": 1333108
     }
   },
   "recommend": {
-    "judged": 3538,
-    "picked": 386,
+    "judged": 3540,
+    "picked": 387,
     "unjudged": 2,
     "profile_version": "5a624049",
     "title_only": 974,
-    "at": "2026-11-27T10:01:07+09:00"
+    "at": "2026-11-27T15:00:57+09:00"
   }
 }

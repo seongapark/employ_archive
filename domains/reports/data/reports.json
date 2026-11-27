@@ -34,6 +34,45 @@
   ]
  },
  {
+  "id": "kiet-is874",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "한국 수출 1조 달러 시대 - 지속가능성 진단과 정책과제",
+  "authors": [
+   "이원복",
+   "김명호"
+  ],
+  "published": "2026-11-27",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=874&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": []
+ },
+ {
+  "id": "kiet-is873",
+  "org": "kiet",
+  "board": "kiet-issue",
+  "series": "i-KIET",
+  "title": "재취업 일자리의 업무 변화와 경력자의 임금 - 비자발적 이직 후 이전 업무와 멀어질수록 커지는 임금 감소",
+  "authors": [
+   "이주현"
+  ],
+  "published": "2026-11-26",
+  "date_precision": "day",
+  "pages": null,
+  "landing_url": "https://www.kiet.re.kr/research/issueView?issue_no=873&skey=&sval=&pg=1&pp=30",
+  "file_url": null,
+  "matched": [
+   "임금",
+   "고용서비스",
+   "일자리정책",
+   "인력수급",
+   "노동전환"
+  ]
+ },
+ {
   "id": "bok-11067102",
   "org": "bok",
   "board": "bok-issue",
