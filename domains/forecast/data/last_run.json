@@ -1,5 +1,5 @@
 {
-  "run_at": "2026-11-27T15:00:58.859933+09:00",
+  "run_at": "2026-11-28T14:09:49.439079+09:00",
   "collectors": {
     "oecd": {
       "ok": true,
@@ -7,18 +7,18 @@
       "added": 0
     },
     "oecd_interim": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 4,
       "added": 0
     },
     "imf": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 6,
       "added": 0
     },
     "imf_update": {
-      "ok": false,
-      "fetched": 0,
+      "ok": true,
+      "fetched": 2,
       "added": 0
     },
     "bok": {
@@ -54,7 +54,7 @@
     "announce": {
       "ok": true,
       "fetched": 0,
-      "added": 0
+      "added": 1
     },
     "watch": {
       "ok": true,
@@ -63,11 +63,7 @@
     }
   },
   "conflicts": [],
-  "errors": [
-    "oecd_interim: ConnectionError: Failed to perform, curl: (56) Recv failure: Connection was reset. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-    "imf: DNSError: Failed to perform, curl: (6) Could not resolve host: api.imf.org. See https://curl.se/libcurl/c/libcurl-errors.html first for more details.",
-    "imf_update: Timeout: Failed to perform, curl: (28) Operation timed out after 120684 milliseconds with 81170 bytes received. See https://curl.se/libcurl/c/libcurl-errors.html first for more details."
-  ],
+  "errors": [],
   "warnings": [],
   "blocked": {}
 }

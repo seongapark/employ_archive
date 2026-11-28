@@ -4,5 +4,11 @@
     "org_name_ko": "BOK",
     "report": "경제전망",
     "date": "2026-11-26"
+  },
+  {
+    "org": "OECD",
+    "org_name_ko": "OECD",
+    "report": "Economic Outlook",
+    "date": "2026-12-04"
   }
 ]

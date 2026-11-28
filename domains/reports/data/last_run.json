@@ -1,5 +1,5 @@
 {
-  "at": "2026-11-27T15:00:45+09:00",
+  "at": "2026-11-28T14:09:41+09:00",
   "boards": {
     "kli-research": {
       "ok": true,
@@ -183,9 +183,9 @@
     },
     "kiet-issue": {
       "ok": true,
-      "parsed": 60,
-      "added": 2,
-      "details": 2,
+      "parsed": 30,
+      "added": 0,
+      "details": 0,
       "reached_cutoff": false,
       "skipped_old": 0,
       "error": null,

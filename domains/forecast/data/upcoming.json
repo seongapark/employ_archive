@@ -1,5 +1,5 @@
 {
-  "generated": "2026-11-27",
+  "generated": "2026-11-28",
   "months": 6,
   "entries": [
     {
@@ -8,8 +8,8 @@
       "report": "경제전망",
       "start": "2026-11-29",
       "end": "2026-12-07",
-      "date": null,
-      "basis": "예상"
+      "date": "2026-12-04",
+      "basis": "공지"
     },
     {
       "org": "KLI",
