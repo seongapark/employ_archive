@@ -11906,6 +11906,24 @@
     ]
    },
    {
+    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
+    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
+    "press": "labortoday.co.kr",
+    "pub": "2026-11-10 06:34",
+    "cites": false,
+    "judged": true,
+    "why": "사립대병원 육아휴직급여 차별 실태",
+    "hits": [],
+    "tone": [],
+    "stance": "부정",
+    "focus": "",
+    "kw": [
+     "사립대병원",
+     "육아휴직급여",
+     "제멋대"
+    ]
+   },
+   {
     "title": "청년고용 '암울' 고용보험 가입자 '최장기 감소세'",
     "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237643",
     "press": "labortoday.co.kr",
@@ -11925,24 +11943,6 @@
      "암울",
      "청년고용",
      "최장기"
-    ]
-   },
-   {
-    "title": "육아휴직급여 월 50만원 '제멋대로' 사립대병원",
-    "url": "https://www.labortoday.co.kr/news/articleView.html?idxno=237634",
-    "press": "labortoday.co.kr",
-    "pub": "2026-11-10 06:34",
-    "cites": false,
-    "judged": true,
-    "why": "사립대병원 육아휴직급여 차별 실태",
-    "hits": [],
-    "tone": [],
-    "stance": "부정",
-    "focus": "",
-    "kw": [
-     "사립대병원",
-     "육아휴직급여",
-     "제멋대"
     ]
    },
    {
@@ -14272,6 +14272,25 @@
      "베이비부머",
      "정년",
      "채용"
+    ]
+   },
+   {
+    "title": "저소득층 국민연금 보험료 지원 약 25만명 확대… 1인당 지원금은 감소...",
+    "url": "https://www.newscj.com/news/articleView.html?idxno=3452814",
+    "press": "천지일보",
+    "pub": "2026-11-28 07:00",
+    "cites": false,
+    "judged": true,
+    "why": "두루누리 보험료 지원사업 다룸",
+    "hits": [],
+    "tone": [],
+    "stance": "중립",
+    "focus": "",
+    "kw": [
+     "국민연금",
+     "보험료",
+     "저소득층",
+     "지원금"
     ]
    }
   ]
